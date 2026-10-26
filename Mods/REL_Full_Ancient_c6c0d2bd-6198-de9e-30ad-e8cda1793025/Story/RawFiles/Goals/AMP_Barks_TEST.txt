@@ -1,0 +1,73 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// test only: spawn each pool boss at host to check barks. remove after testing
+
+IF
+TextEvent("AMP_TestBoss_Doomflame")
+AND
+GetHostCharacter(_Host)
+AND
+GetPosition(_Host, _X, _Y, _Z)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Host, AMP_ULTRA_Summon_01_6b432bff-5bf9-4295-8c54-faba8515b33f, _X, _Y, _Z);
+
+IF
+TextEvent("AMP_TestBoss_Vasht")
+AND
+GetHostCharacter(_Host)
+AND
+GetPosition(_Host, _X, _Y, _Z)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Host, AMP_Ysatiy_92506335-12dd-4e4b-848c-f33fd8cc39fa, _X, _Y, _Z);
+
+IF
+TextEvent("AMP_TestBoss_Adrienne")
+AND
+GetHostCharacter(_Host)
+AND
+GetPosition(_Host, _X, _Y, _Z)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Host, AMP_ULTRA_Summon_03_3cfb7f5b-8ba4-4e0a-905d-9d19bf84558b, _X, _Y, _Z);
+
+IF
+TextEvent("AMP_TestBoss_Valdryn")
+AND
+GetHostCharacter(_Host)
+AND
+GetPosition(_Host, _X, _Y, _Z)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Host, AMP_ULTRA_Summon_04_4c553ed6-ee7a-4598-9d66-1bc064c83f50, _X, _Y, _Z);
+
+IF
+TextEvent("AMP_TestBoss_Vael")
+AND
+GetHostCharacter(_Host)
+AND
+GetPosition(_Host, _X, _Y, _Z)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Host, AMP_ULTRA_Summon_05_f8560efd-1d3c-4dcc-8b4e-b36f2cc79684, _X, _Y, _Z);
+
+IF
+TextEvent("AMP_TestBoss_Tickhara")
+AND
+GetHostCharacter(_Host)
+AND
+GetPosition(_Host, _X, _Y, _Z)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Host, AMP_ULTRA_Summon_06_171ecf1c-df60-427b-a38b-09607737482d, _X, _Y, _Z);
+
+IF
+TextEvent("AMP_TestBoss_Zephra")
+AND
+GetHostCharacter(_Host)
+AND
+GetPosition(_Host, _X, _Y, _Z)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Host, AMP_ULTRA_Summon_07_07bdf760-ed25-4461-9883-beb4938d4127, _X, _Y, _Z);
+
+EXITSECTION
+
+ENDEXITSECTION

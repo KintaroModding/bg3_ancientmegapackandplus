@@ -1,0 +1,72 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+DB_AMP_AL_ProtectedItem((ITEM)S_CRE_Abbot1_Weapon_fce42526-f518-4727-91f6-c41c234fa053);
+DB_AMP_AL_ProtectedItem((ITEM)S_CRE_Abbot2_Weapon_1edc931d-6471-49c2-b2f4-d3ab0308ac09);
+DB_AMP_AL_ProtectedItem((ITEM)S_CRE_Abbot3_Weapon_4dffb833-a590-47ea-8c80-71a430b5e099);
+DB_AMP_AL_ProtectedItem((ITEM)S_CRE_Abbot4_Weapon_0698b266-b7f8-4593-9063-f1189082c6e1);
+
+KBSECTION
+
+// story-item flag keeps autoloot, autosell and the junk bag off the altar weapons
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_AMP_Plus_CeremonialGuard();
+
+IF
+SavegameLoaded()
+THEN
+PROC_AMP_Plus_CeremonialGuard();
+
+PROC
+PROC_AMP_Plus_CeremonialGuard()
+AND
+Exists(S_CRE_Abbot1_Weapon_fce42526-f518-4727-91f6-c41c234fa053, 1)
+AND
+IsStoryItem(S_CRE_Abbot1_Weapon_fce42526-f518-4727-91f6-c41c234fa053, 0)
+THEN
+SetStoryItem(S_CRE_Abbot1_Weapon_fce42526-f518-4727-91f6-c41c234fa053, 1);
+
+PROC
+PROC_AMP_Plus_CeremonialGuard()
+AND
+Exists(S_CRE_Abbot2_Weapon_1edc931d-6471-49c2-b2f4-d3ab0308ac09, 1)
+AND
+IsStoryItem(S_CRE_Abbot2_Weapon_1edc931d-6471-49c2-b2f4-d3ab0308ac09, 0)
+THEN
+SetStoryItem(S_CRE_Abbot2_Weapon_1edc931d-6471-49c2-b2f4-d3ab0308ac09, 1);
+
+PROC
+PROC_AMP_Plus_CeremonialGuard()
+AND
+Exists(S_CRE_Abbot3_Weapon_4dffb833-a590-47ea-8c80-71a430b5e099, 1)
+AND
+IsStoryItem(S_CRE_Abbot3_Weapon_4dffb833-a590-47ea-8c80-71a430b5e099, 0)
+THEN
+SetStoryItem(S_CRE_Abbot3_Weapon_4dffb833-a590-47ea-8c80-71a430b5e099, 1);
+
+PROC
+PROC_AMP_Plus_CeremonialGuard()
+AND
+Exists(S_CRE_Abbot4_Weapon_0698b266-b7f8-4593-9063-f1189082c6e1, 1)
+AND
+IsStoryItem(S_CRE_Abbot4_Weapon_0698b266-b7f8-4593-9063-f1189082c6e1, 0)
+THEN
+SetStoryItem(S_CRE_Abbot4_Weapon_0698b266-b7f8-4593-9063-f1189082c6e1, 1);
+
+PROC
+PROC_AMP_Plus_CeremonialGuard()
+AND
+NOT DB_AMP_Plus_CeremonialVer(1)
+THEN
+DB_AMP_Plus_CeremonialVer(1);
+DB_AMP_AL_ProtectedItem((ITEM)S_CRE_Abbot1_Weapon_fce42526-f518-4727-91f6-c41c234fa053);
+DB_AMP_AL_ProtectedItem((ITEM)S_CRE_Abbot2_Weapon_1edc931d-6471-49c2-b2f4-d3ab0308ac09);
+DB_AMP_AL_ProtectedItem((ITEM)S_CRE_Abbot3_Weapon_4dffb833-a590-47ea-8c80-71a430b5e099);
+DB_AMP_AL_ProtectedItem((ITEM)S_CRE_Abbot4_Weapon_0698b266-b7f8-4593-9063-f1189082c6e1);
+
+EXITSECTION
+ENDEXITSECTION

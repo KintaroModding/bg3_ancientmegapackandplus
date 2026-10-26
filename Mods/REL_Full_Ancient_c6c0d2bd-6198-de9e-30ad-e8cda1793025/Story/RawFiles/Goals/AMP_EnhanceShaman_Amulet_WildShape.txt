@@ -1,0 +1,103 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+DB_AMP_ESA_Tech("ENHANCESHAMAN_TECH_1", 1);
+DB_AMP_ESA_Tech("ENHANCESHAMAN_TECH_2", 2);
+DB_AMP_ESA_Tech("ENHANCESHAMAN_TECH_3", 3);
+
+DB_AMP_ESA_WSBonus(1, "ENHANCESHAMAN_WS_LIGHTNING_1");
+DB_AMP_ESA_WSBonus(2, "ENHANCESHAMAN_WS_LIGHTNING_2");
+DB_AMP_ESA_WSBonus(3, "ENHANCESHAMAN_WS_LIGHTNING_3");
+
+KBSECTION
+
+// equip
+IF
+StatusApplied(_Char, _Status, _, _)
+AND
+DB_AMP_ESA_Tech(_Status, _Tier)
+THEN
+DB_AMP_ESA_Equipped(_Char, _Tier);
+
+// unequip - delayed check (status removal lags a tick)
+IF
+StatusRemoved(_Char, _Status, _, _)
+AND
+DB_AMP_ESA_Tech(_Status, _Tier)
+THEN
+ObjectTimerLaunch((GUIDSTRING)_Char, "AMP_ESA_Unequip_Check", 1000, 0);
+
+IF
+ObjectTimerFinished(_Char, "AMP_ESA_Unequip_Check")
+AND
+DB_AMP_ESA_Equipped((CHARACTER)_Char, _Tier)
+AND
+HasActiveStatus((CHARACTER)_Char, "WILDSHAPE_ACTIVE", 0)
+AND
+DB_AMP_ESA_Tech(_TechStatus, _Tier)
+AND
+HasActiveStatus((CHARACTER)_Char, _TechStatus, 0)
+THEN
+RemoveStatus((CHARACTER)_Char, "ENHANCESHAMAN_WS_MARKER");
+NOT DB_AMP_ESA_Equipped((CHARACTER)_Char, _Tier);
+
+// ws enter - marker + lightning, skipped in starry forms
+IF
+StatusApplied(_Char, "WILDSHAPE_ACTIVE", _, _)
+AND
+DB_AMP_ESA_Equipped(_Char, _Tier)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_ARCHER_VFX", 0)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_CHALICE_VFX", 0)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_DRAGON_VFX", 0)
+THEN
+ApplyStatus(_Char, "ENHANCESHAMAN_WS_MARKER", -1.0, 1, _Char);
+
+IF
+StatusApplied(_Char, "WILDSHAPE_ACTIVE", _, _)
+AND
+DB_AMP_ESA_Equipped(_Char, _Tier)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_ARCHER_VFX", 0)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_CHALICE_VFX", 0)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_DRAGON_VFX", 0)
+AND
+DB_AMP_ESA_WSBonus(_Tier, _Lightning)
+THEN
+ApplyStatus(_Char, _Lightning, -1.0, 1, _Char);
+
+// ws exit - drop bonuses + delayed check
+IF
+StatusRemoved(_Char, "WILDSHAPE_ACTIVE", _, _)
+AND
+DB_AMP_ESA_Equipped(_Char, _Tier)
+AND
+DB_AMP_ESA_WSBonus(_Tier, _Lightning)
+THEN
+RemoveStatus(_Char, "ENHANCESHAMAN_WS_MARKER");
+RemoveStatus(_Char, _Lightning);
+ObjectTimerLaunch((GUIDSTRING)_Char, "AMP_ESA_WSExit_Check", 1000, 0);
+
+// post-ws check
+IF
+ObjectTimerFinished(_Char, "AMP_ESA_WSExit_Check")
+AND
+DB_AMP_ESA_Equipped((CHARACTER)_Char, _Tier)
+AND
+DB_AMP_ESA_Tech(_TechStatus, _Tier)
+AND
+HasActiveStatus((CHARACTER)_Char, _TechStatus, 0)
+AND
+DB_AMP_ESA_WSBonus(_Tier, _Lightning)
+THEN
+RemoveStatus((CHARACTER)_Char, "ENHANCESHAMAN_WS_MARKER");
+RemoveStatus((CHARACTER)_Char, _Lightning);
+NOT DB_AMP_ESA_Equipped((CHARACTER)_Char, _Tier);
+
+EXITSECTION
+ENDEXITSECTION

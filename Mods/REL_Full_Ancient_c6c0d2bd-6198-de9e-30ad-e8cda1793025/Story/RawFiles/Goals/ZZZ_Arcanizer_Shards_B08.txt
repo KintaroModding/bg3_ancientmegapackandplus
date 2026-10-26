@@ -1,0 +1,56 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// arcanizer shards batch 08
+
+// head stackable: weave tear
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Head_16_4ea35d33-e08e-4a61-8cea-719cc37b3037, "Helmet", "AMP_SHARD_APPLY_HEAD_16", "Helmet");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_WEAVETEAR", "AMP_SHARD_CHAR_WEAVETEAR");
+
+// weapon stackable: honing. generic handler applies it, break check runs after via StatusApplied
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_15_46160140-11f0-42ae-ba1c-ce33c6c67a1b, "AMP_SHARD_APPLY_MELEE_HONING", "AMP_SHARD_APPLY_RANGED_HONING");
+// weapon count tracking
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_HONING");
+
+// gloves nonstack: burning agony
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_12_b3726cc8-074c-4d9f-b5f9-22caac60fcf0, "Gloves", "AMP_SHARD_APPLY_GLOVES_12", "Gloves", "AMP_SHARD_GLOVES_BURNINGAGONY");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_BURNINGAGONY", "AMP_SHARD_CHAR_BURNINGAGONY");
+
+// ring nonstack: mind shackle
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_12_b9c703c8-1efb-47b1-958a-4f0f28b8bdf2, "Ring", "AMP_SHARD_APPLY_RING_12", "Ring", "AMP_SHARD_RING_MINDSHACKLE");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_MINDSHACKLE", "AMP_SHARD_CHAR_MINDSHACKLE");
+
+// gloves stackable: zen fist
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Gloves_13_52142beb-afbe-400f-b876-0e01004be32a, "Gloves", "AMP_SHARD_APPLY_GLOVES_13", "Gloves");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_ZENFIST", "AMP_SHARD_CHAR_ZENFIST");
+
+// recovery map (for ZZZ_Arcanizer_Shards_Recovery)
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_WEAVETEAR", (ITEMROOT)AMP_Arcanizer_Shard_Head_16_4ea35d33-e08e-4a61-8cea-719cc37b3037);
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_HONING", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_15_46160140-11f0-42ae-ba1c-ce33c6c67a1b);
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_BURNINGAGONY", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_12_b3726cc8-074c-4d9f-b5f9-22caac60fcf0);
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_MINDSHACKLE", (ITEMROOT)AMP_Arcanizer_Shard_Ring_12_b9c703c8-1efb-47b1-958a-4f0f28b8bdf2);
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_ZENFIST", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_13_52142beb-afbe-400f-b876-0e01004be32a);
+
+KBSECTION
+
+// honing: after the shard lands, roll to break the weapon. count is already bumped here.
+// break chance = count * 20 (first 20%, second 40%, ...)
+
+IF
+StatusApplied((ITEM)_Item, "AMP_SHARD_WEAPON_HONING", (CHARACTER)_Causee, _)
+AND
+DB_AMP_Shard_Count(_Item, "AMP_SHARD_WEAPON_HONING", _Count)
+AND
+IntegerProduct(_Count, 20, _Threshold)
+AND
+Random(100, (INTEGER)_Roll)
+AND
+_Roll < _Threshold
+THEN
+RemoveStatus(_Item, "AMP_SHARD_WEAPON_HONING");
+RequestDelete(_Item);
+PlaySound(_Causee, "UI_HUD_Combine_Error");
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,207 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// one-time station tutorials.
+
+// seed the shown-db with the right schema (CHARACTER, STRING)
+DB_AMP_Tutorial_Shown(NULL_00000000-0000-0000-0000-000000000000, "SYSTEM_INIT");
+
+KBSECTION
+// salvage station (station 1) first open
+IF
+UseStarted((CHARACTER)_Player, (ITEM)_Station)
+AND
+IsTagged((ITEM)_Station, (TAG)AMP_STATION_1_e39240da-bf08-4793-bd1f-609c93e4fa56, 1)
+AND
+IsTagged((ITEM)_Station, (TAG)AMP_STATION_2_63e37ef0-064c-4065-a939-dc9724b9c85f, 0)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+PROC_AMP_ShowSalvageStationTutorial(_Player);
+
+// mode 0: always show, no flag
+PROC
+PROC_AMP_ShowSalvageStationTutorial((CHARACTER)_Player)
+AND
+DB_AMP_Hints_Mode(0)
+AND
+QRY_AMP_ShouldShowHint(2)
+THEN
+OpenMessageBox(_Player, "AMP_Tutorial_Salvage_Station");
+
+// other modes: show once via flag
+PROC
+PROC_AMP_ShowSalvageStationTutorial((CHARACTER)_Player)
+AND
+NOT DB_AMP_Hints_Mode(0)
+AND
+NOT DB_AMP_Tutorial_Shown(_Player, "SalvageStation")
+AND
+QRY_AMP_ShouldShowHint(2)
+THEN
+OpenMessageBox(_Player, "AMP_Tutorial_Salvage_Station");
+DB_AMP_Tutorial_Shown((CHARACTER)_Player, "SalvageStation");
+
+// generation station (station 2) first open
+IF
+UseStarted((CHARACTER)_Player, (ITEM)_Station)
+AND
+IsTagged((ITEM)_Station, (TAG)AMP_STATION_2_63e37ef0-064c-4065-a939-dc9724b9c85f, 1)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+PROC_AMP_ShowGenerationStationTutorial(_Player);
+
+// mode 0: always show, no flag
+PROC
+PROC_AMP_ShowGenerationStationTutorial((CHARACTER)_Player)
+AND
+DB_AMP_Hints_Mode(0)
+AND
+QRY_AMP_ShouldShowHint(2)
+THEN
+OpenMessageBox(_Player, "AMP_Tutorial_Generation_Station");
+
+// other modes: show once via flag
+PROC
+PROC_AMP_ShowGenerationStationTutorial((CHARACTER)_Player)
+AND
+NOT DB_AMP_Hints_Mode(0)
+AND
+NOT DB_AMP_Tutorial_Shown(_Player, "GenerationStation")
+AND
+QRY_AMP_ShouldShowHint(2)
+THEN
+OpenMessageBox(_Player, "AMP_Tutorial_Generation_Station");
+DB_AMP_Tutorial_Shown((CHARACTER)_Player, "GenerationStation");
+
+// system intro tutorial, disabled (old arcanizer system replaced by voidcapsule)
+/*
+// NEW GAME INTRODUCTION - When player starts any new game (tutorial level)
+PROC
+PROC_LevelLoadedOnce("TUT_Avernus_C")
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+PROC_AMP_ShowArcanizerIntroduction(_Player);
+
+// Mode 0: Show tutorial ALWAYS (repeating, no flag tracking)
+PROC
+PROC_AMP_ShowArcanizerIntroduction((CHARACTER)_Player)
+AND
+DB_AMP_Hints_Mode(0)
+AND
+QRY_AMP_ShouldShowHint(2)
+THEN
+ObjectTimerLaunch(_Player, "AMP_Arcanizer_DelayedIntro", 50000);
+
+// Modes 1, 3, 4: Show tutorial once (use flag tracking)
+PROC
+PROC_AMP_ShowArcanizerIntroduction((CHARACTER)_Player)
+AND
+NOT DB_AMP_Hints_Mode(0)
+AND
+NOT DB_AMP_Tutorial_Shown(_Player, "ArcanizerIntroduction")
+AND
+QRY_AMP_ShouldShowHint(2)
+THEN
+DB_AMP_Tutorial_Shown(_Player, "ArcanizerIntroduction");
+ObjectTimerLaunch(_Player, "AMP_Arcanizer_DelayedIntro", 50000);
+
+IF
+ObjectTimerFinished((CHARACTER)_Player, "AMP_Arcanizer_DelayedIntro")
+THEN
+OpenMessageBox((CHARACTER)_Player, "AMP_General_Mod_Welcome");
+
+// CAMP ENTRY TUTORIAL - When player first enters camp
+IF
+DB_PlayerInCamp((CHARACTER)_Player)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+PROC_AMP_ShowCampEntryTutorial(_Player);
+
+// Mode 0: Show tutorial ALWAYS (repeating, no flag tracking)
+PROC
+PROC_AMP_ShowCampEntryTutorial((CHARACTER)_Player)
+AND
+DB_AMP_Hints_Mode(0)
+AND
+QRY_AMP_ShouldShowHint(2)
+THEN
+ObjectTimerLaunch(_Player, "AMP_Arcanizer_CampIntro", 5000);
+
+// Modes 1, 3, 4: Show tutorial once (use flag tracking)
+PROC
+PROC_AMP_ShowCampEntryTutorial((CHARACTER)_Player)
+AND
+NOT DB_AMP_Hints_Mode(0)
+AND
+NOT DB_AMP_Tutorial_Shown(_Player, "ArcanizerCampEntry")
+AND
+QRY_AMP_ShouldShowHint(2)
+THEN
+DB_AMP_Tutorial_Shown(_Player, "ArcanizerCampEntry");
+ObjectTimerLaunch(_Player, "AMP_Arcanizer_CampIntro", 5000);
+// Show cheat mode settings after camp tutorial
+PROC_AMP_ShowCheatModeSettings(_Player);
+
+IF
+ObjectTimerFinished(_Player, "AMP_Arcanizer_CampIntro")
+AND
+DB_PlayerInCamp((CHARACTER)_Player)
+AND
+NOT DB_DialogPlayers(_,_Player,_)
+THEN
+OpenMessageBox(_Player, "AMP_Tutorial_System_Introduction");
+*/
+
+// astrum crystal tutorials, disabled
+/*
+// ASTRUM ARCANUM TUTORIAL (Uncommon) - First crystal type
+IF
+TemplateAddedTo((ITEMROOT)Enchant_Crystal4_faca0315-cb41-4a63-9b37-9afc6a1d1da4, _, (CHARACTER)_Player, _)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+NOT DB_AMP_Tutorial_Shown(_Player, "AstrumArcanum")
+THEN
+OpenMessageBox(_Player, "AMP_Crystal_Arcanum_Help");
+DB_AMP_Tutorial_Shown((CHARACTER)_Player, "AstrumArcanum");
+
+// ASTRUM EMPYREUM TUTORIAL (Rare) - Second crystal type  
+IF
+TemplateAddedTo((ITEMROOT)Enchant_Crystal2_f90f99ba-d30d-4f05-8cde-b90092f128d8, _, (CHARACTER)_Player, _)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+NOT DB_AMP_Tutorial_Shown(_Player, "AstrumEmpyreum")
+THEN
+OpenMessageBox(_Player, "AMP_Crystal_Empyreum_Help");
+DB_AMP_Tutorial_Shown((CHARACTER)_Player, "AstrumEmpyreum");
+
+// ASTRUM OPUS TUTORIAL (Very Rare) - Third crystal type
+IF
+TemplateAddedTo((ITEMROOT)Enchant_Crystal_d09be0fd-f230-47af-a523-c919e41c1261, _, (CHARACTER)_Player, _)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+NOT DB_AMP_Tutorial_Shown(_Player, "AstrumOpus")
+THEN
+OpenMessageBox(_Player, "AMP_Crystal_Opus_Help");
+DB_AMP_Tutorial_Shown((CHARACTER)_Player, "AstrumOpus");
+
+// ASTRUM IMMORTALIS TUTORIAL (Legendary) - Fourth crystal type
+IF
+TemplateAddedTo((ITEMROOT)Enchant_Crystal3_98f1085c-1a49-474a-875c-cd0f2d9fdff0, _, (CHARACTER)_Player, _)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+NOT DB_AMP_Tutorial_Shown(_Player, "AstrumImmortalis")
+THEN
+OpenMessageBox(_Player, "AMP_Crystal_Immortalis_Help");
+DB_AMP_Tutorial_Shown((CHARACTER)_Player, "AstrumImmortalis");
+*/
+EXITSECTION
+
+ENDEXITSECTION

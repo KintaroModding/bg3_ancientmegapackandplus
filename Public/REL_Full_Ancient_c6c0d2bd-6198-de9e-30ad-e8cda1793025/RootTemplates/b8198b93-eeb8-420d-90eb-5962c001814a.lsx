@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="b8198b93-eeb8-420d-90eb-5962c001814a" />
+					<attribute id="Name" type="LSString" value="AMP_Kyzr_Battleaxe" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="c77553e2-f192-4835-baa9-bdfb63521532" />
+					<attribute id="VisualTemplate" type="FixedString" value="d156eb38-589e-daaf-7b44-d17ca7578945" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="28e2f700-27da-4487-a411-7b39a39b2c69" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h25a5a2a9g7dd1geaabg1c8cg8d0d09616e3a" version="1" />
+					<attribute id="Icon" type="FixedString" value="AMP_Kyzr_Battleaxe" />
+					<attribute id="Stats" type="FixedString" value="AMP_Kyzr_Battleaxe_4" />
+					<attribute id="Description" type="TranslatedString" handle="he3fdb9b4gb61dg4e56ge446g85d48103d934" version="1" />
+					<children>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="AMP_KYZR_VFX" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

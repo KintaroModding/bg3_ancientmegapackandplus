@@ -1,0 +1,87 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// death at zero only reads statuses registered in GLO_CombatNPCs_PostEA.txt
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_Combat_NegativeAbilityScoreStatus("WEAPON40_2")
+THEN
+DB_Combat_NegativeAbilityScoreStatus("WEAPON40_2");
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_Combat_NegativeAbilityScoreStatus("WEAPON24")
+THEN
+DB_Combat_NegativeAbilityScoreStatus("WEAPON24");
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_Combat_NegativeAbilityScoreStatus("ARMOURH117")
+THEN
+DB_Combat_NegativeAbilityScoreStatus("ARMOURH117");
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_Combat_NegativeAbilityScoreStatus("SJ03_02")
+THEN
+DB_Combat_NegativeAbilityScoreStatus("SJ03_02");
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_Combat_NegativeAbilityScoreStatus("AMP_SHARD_CHAR_BARGAIN")
+THEN
+DB_Combat_NegativeAbilityScoreStatus("AMP_SHARD_CHAR_BARGAIN");
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_Combat_NegativeAbilityScoreStatus("AMP_METAMORPH_STACK")
+THEN
+DB_Combat_NegativeAbilityScoreStatus("AMP_METAMORPH_STACK");
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_Combat_NegativeAbilityScoreStatus("AMP_NEVA_DRAIN_STRENGTH")
+THEN
+DB_Combat_NegativeAbilityScoreStatus("AMP_NEVA_DRAIN_STRENGTH");
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_Combat_NegativeAbilityScoreStatus("AMP_NEVA_DRAIN_DEXTERITY")
+THEN
+DB_Combat_NegativeAbilityScoreStatus("AMP_NEVA_DRAIN_DEXTERITY");
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_Combat_NegativeAbilityScoreStatus("AMP_NEVA_DRAIN_INTELLIGENCE")
+THEN
+DB_Combat_NegativeAbilityScoreStatus("AMP_NEVA_DRAIN_INTELLIGENCE");
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_Combat_NegativeAbilityScoreStatus("AMP_NEVA_DRAIN_WISDOM")
+THEN
+DB_Combat_NegativeAbilityScoreStatus("AMP_NEVA_DRAIN_WISDOM");
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_Combat_NegativeAbilityScoreStatus("AMP_NEVA_DRAIN_CHARISMA")
+THEN
+DB_Combat_NegativeAbilityScoreStatus("AMP_NEVA_DRAIN_CHARISMA");
+
+EXITSECTION
+ENDEXITSECTION

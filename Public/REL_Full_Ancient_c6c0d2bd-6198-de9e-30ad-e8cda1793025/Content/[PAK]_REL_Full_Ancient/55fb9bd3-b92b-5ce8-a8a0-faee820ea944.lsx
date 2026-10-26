@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="AnimationBank">
+		<node id="AnimationBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="55fb9bd3-b92b-5ce8-a8a0-faee820ea944" />
+					<attribute id="Name" type="LSString" value="HUM_M_Rig_DFLT_CMBT_Monk_Skill_FlurryOfBlows_01_Attack_000" />
+					<attribute id="SourceFile" type="LSString" value="Public/KickMaster_3e168913-16fd-5c5a-8856-2438d13c12be/Assets/Characters/_Anims/Humans/_Male/HUM_M_Rig/HUM_M_Rig_DFLT_CMBT_Monk_Skill_FlurryOfBlows_01_Attack_000.GR2" />
+					<attribute id="Template" type="FixedString" value="Public/KickMaster_3e168913-16fd-5c5a-8856-2438d13c12be/Assets/Characters/_Anims/Humans/_Male/HUM_M_Rig/HUM_M_Rig_DFLT_CMBT_Monk_Skill_FlurryOfBlows_01_Attack_000.Anim.0" />
+					<attribute id="TimeStep" type="float" value="0.016666668" />
+					<attribute id="Duration" type="float" value="1.9000001" />
+					<attribute id="Offset" type="float" value="0" />
+					<attribute id="Looping" type="bool" value="False" />
+					<attribute id="IsPoseBank" type="bool" value="False" />
+					<attribute id="AnchorHand" type="uint8" value="0" />
+					<attribute id="SupportingLeg" type="uint8" value="0" />
+					<attribute id="LeftTransitionAnimation" type="FixedString" value="" />
+					<attribute id="RightTransitionAnimation" type="FixedString" value="" />
+					<attribute id="PreviewVisualResource" type="FixedString" value="1a1a7099-9c46-4d5f-8f00-a249af1dc519" />
+					<attribute id="AdditiveLoopingAnimationID" type="FixedString" value="" />
+					<attribute id="SkeletonResource" type="FixedString" value="044ab023-7076-77e6-73c2-d0f26fca0776" />
+					<children>
+						<node id="Events">
+							<attribute id="ID" type="FixedString" value="React" />
+							<attribute id="Time" type="float" value="0" />
+							<attribute id="Length" type="float" value="0.1" />
+							<attribute id="Track" type="uint8" value="4" />
+							<attribute id="TextKeyType" type="uint8" value="15" />
+							<children>
+								<node id="Properties" />
+							</children>
+						</node>
+						<node id="Events">
+							<attribute id="ID" type="FixedString" value="Vocal_Attack" />
+							<attribute id="Time" type="float" value="0.018866215" />
+							<attribute id="Length" type="float" value="0.1" />
+							<attribute id="Track" type="uint8" value="3" />
+							<attribute id="TextKeyType" type="uint8" value="13" />
+							<children>
+								<node id="Properties">
+									<attribute id="SoundObjectIndex" type="uint8" value="4" />
+									<attribute id="Resource" type="FixedString" value="" />
+									<attribute id="EVocalType" type="uint8" value="1" />
+								</node>
+							</children>
+						</node>
+						<node id="Events">
+							<attribute id="ID" type="FixedString" value="Cast" />
+							<attribute id="Time" type="float" value="0.0798186" />
+							<attribute id="Length" type="float" value="0.1" />
+							<attribute id="Track" type="uint8" value="0" />
+							<attribute id="TextKeyType" type="uint8" value="8" />
+							<children>
+								<node id="Properties" />
+							</children>
+						</node>
+						<node id="Events">
+							<attribute id="ID" type="FixedString" value="VFX_Cast_01" />
+							<attribute id="Time" type="float" value="0.0798186" />
+							<attribute id="Length" type="float" value="0.1" />
+							<attribute id="Track" type="uint8" value="1" />
+							<attribute id="TextKeyType" type="uint8" value="0" />
+						</node>
+						<node id="Events">
+							<attribute id="ID" type="FixedString" value="React" />
+							<attribute id="Time" type="float" value="0.24526078" />
+							<attribute id="Length" type="float" value="0.1" />
+							<attribute id="Track" type="uint8" value="4" />
+							<attribute id="TextKeyType" type="uint8" value="15" />
+							<children>
+								<node id="Properties" />
+							</children>
+						</node>
+						<node id="Events">
+							<attribute id="ID" type="FixedString" value="Vocal_Attack" />
+							<attribute id="Time" type="float" value="0.27138323" />
+							<attribute id="Length" type="float" value="0.1" />
+							<attribute id="Track" type="uint8" value="3" />
+							<attribute id="TextKeyType" type="uint8" value="13" />
+							<children>
+								<node id="Properties">
+									<attribute id="SoundObjectIndex" type="uint8" value="4" />
+									<attribute id="Resource" type="FixedString" value="" />
+									<attribute id="EVocalType" type="uint8" value="1" />
+								</node>
+							</children>
+						</node>
+						<node id="Events">
+							<attribute id="ID" type="FixedString" value="Cast2" />
+							<attribute id="Time" type="float" value="0.3482993" />
+							<attribute id="Length" type="float" value="0.099999994" />
+							<attribute id="Track" type="uint8" value="1" />
+							<attribute id="TextKeyType" type="uint8" value="8" />
+							<children>
+								<node id="Properties" />
+							</children>
+						</node>
+						<node id="Events">
+							<attribute id="ID" type="FixedString" value="VFX_Cast_02" />
+							<attribute id="Time" type="float" value="0.3482993" />
+							<attribute id="Length" type="float" value="0.1" />
+							<attribute id="Track" type="uint8" value="0" />
+							<attribute id="TextKeyType" type="uint8" value="0" />
+						</node>
+						<node id="Events">
+							<attribute id="ID" type="FixedString" value="FootStep_R" />
+							<attribute id="Time" type="float" value="1.0666667" />
+							<attribute id="Length" type="float" value="0.79999995" />
+							<attribute id="Track" type="uint8" value="0" />
+							<attribute id="TextKeyType" type="uint8" value="3" />
+							<children>
+								<node id="Properties">
+									<attribute id="Slide" type="bool" value="False" />
+									<attribute id="FootID" type="uint8" value="1" />
+									<attribute id="PlaySound" type="bool" value="True" />
+									<attribute id="PlayStepFX" type="bool" value="True" />
+									<attribute id="PlaySlideFX" type="bool" value="False" />
+									<attribute id="PlayHearingFX" type="bool" value="True" />
+								</node>
+							</children>
+						</node>
+						<node id="Events">
+							<attribute id="ID" type="FixedString" value="FootStep_L" />
+							<attribute id="Time" type="float" value="1.6" />
+							<attribute id="Length" type="float" value="0.29999995" />
+							<attribute id="Track" type="uint8" value="1" />
+							<attribute id="TextKeyType" type="uint8" value="3" />
+							<children>
+								<node id="Properties">
+									<attribute id="Slide" type="bool" value="False" />
+									<attribute id="FootID" type="uint8" value="0" />
+									<attribute id="PlaySound" type="bool" value="True" />
+									<attribute id="PlayStepFX" type="bool" value="True" />
+									<attribute id="PlaySlideFX" type="bool" value="False" />
+									<attribute id="PlayHearingFX" type="bool" value="True" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

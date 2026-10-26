@@ -1,0 +1,7 @@
+game.configs.AMP_Boss_CRE_ChainOfCommand_Templar = Config{
+    root=StateRef{game.roots.DefaultCharacter,
+        combat = StateRef{game.states.AMP_BossCombat},
+        idle = StateRef{game.states.CRE_ChainOfCommand_Templar},
+        genericBehaviours = StateRef{game.states.CrimesHumanoid},
+    }
+}

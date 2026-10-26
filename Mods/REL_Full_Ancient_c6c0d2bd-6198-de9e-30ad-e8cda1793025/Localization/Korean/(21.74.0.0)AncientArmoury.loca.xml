@@ -1,0 +1,839 @@
+<contentList date="26/10/2020 01:10">
+  <content contentuid="hd16e580bgbc9fg482dg96b3gd9119c2fab25" version="1">디버그 상자</content>
+  <content contentuid="h49666a90geaa4g4873g8d3dg7b70b47807df" version="1">&lt;LSTag Type="Image" Info="SoftWarning"/&gt; 이 상자에 들어 있는 아이템을 사용하여 제작 메커니즘을 익히십시오. 실제 모험에 가져가는 것은 권장하지 않습니다!</content>
+  <content contentuid="ha1a929f8g8f46g405cg9133g3bd7576ad1e1" version="1">은둔한 달인의 의복</content>
+  <content contentuid="h53836c24gde55g49fag93fag8f511bcbedfa" version="1">에테르 실크 실로 짜인 이 의복에는 한때 이 옷의 주인이었던 몽크의 옛 위대함이 깃들어 있습니다. 전설에 따르면 그 몽크는 근접 전투의 달인이었으며, 죽음의 문턱에서도 번개 같은 속도로 움직일 수 있었다고 합니다.</content>
+  <content contentuid="h1439423bg7ac9g4564ga314g7179e8b34bea" version="1">은밀한 발걸음</content>
+  <content contentuid="h1d6a6301gb14dg4decg92c8g23380dfdd206" version="1">&lt;LSTag Tooltip="HitPoints"&gt;생명력&lt;/LSTag&gt;이 [1]% 이하일 때 &lt;LSTag Tooltip="MovementSpeed"&gt;이동 속도&lt;/LSTag&gt;가 +[2] 증가합니다.</content>
+  <content contentuid="had0afa08gd715g4d22g9ddagb2e5aee2d5cd" version="1">평온의 의복</content>
+  <content contentuid="hafd07956g24c1g4298g8aebg2b92aaa42466" version="1">거칠지만 기분 좋은 감촉의 이 천을 만지는 이에게는 고요함과 평화로운 생각이 깃듭니다. 이 의복은 전투 중 움직임을 제한하지 않으며, 긴 전투가 끝난 후 피부를 진정시키고 근육과 영혼을 모두 이완시키는 효과가 있는 듯합니다.</content>
+  <content contentuid="h1f9ac599gbb69g42cagb747g4304f00e12fa" version="1">평온의 직물</content>
+  <content contentuid="hbfda7c8egad7eg405agae05gd60f5a6aaa43" version="1">매 전투 후, [1]턴 동안 &lt;LSTag Type="Status" Tooltip="ARMOURC2"&gt;강력한 평온&lt;/LSTag&gt;을 얻습니다.</content>
+  <content contentuid="hae53b274ge5fdg471fg8f8dg5652de8b6846" version="1">강력한 평온</content>
+  <content contentuid="hfe70f4a9g4236g4a6ag91f6gd74b8b893028" version="1">매 턴 시작 시 [1]만큼 회복합니다. 전투에 진입하면 해제됩니다. &lt;br&gt;&lt;br&gt;치유량은 자신의 &lt;LSTag Tooltip="Wisdom"&gt;지혜&lt;/LSTag&gt; &lt;LSTag Tooltip="AbilityModifier"&gt;보정치&lt;/LSTag&gt;와 동일합니다.</content>
+  <content contentuid="h7ad8a922gfc6ag4f2bg98f2g71376f686ef2" version="1">거짓된 예언자의 로브</content>
+  <content contentuid="h58475b2cg5d73g4409gaa74gf5b339564389" version="1">이 로브의 소유자는 주머니가 거의 없고 마치 모호한 종교 교리에 의해 형성된 것처럼 매우 이상한 방식으로 바느질되었다는 점을 알아챌 것입니다. 이 유물에 마법의 힘을 흡수당한 고대의 현자는 주로 사원을 여행하며 가짜 종교를 전파했습니다. 어쩌면 당신이 이 기묘한 복음을 전하기에 더 설득력 있는 그릇임을 증명하게 될지도 모릅니다.</content>
+  <content contentuid="h11633dc8g18bag4968gb046g0ec1ffe994e6" version="1">거짓 설교</content>
+  <content contentuid="h6c5e3529g9f05g4005gbc23g10802c5eaf34" version="1">클레릭인 경우, &lt;LSTag Tooltip="Deception"&gt;기만&lt;/LSTag&gt; 및 &lt;LSTag Tooltip="Persuasion"&gt;설득&lt;/LSTag&gt; 판정에 +[1] 보너스를 얻습니다.</content>
+  <content contentuid="h30aa7835ge525g4ab9g8b55g056357c6d6bc" version="1">축복 기도</content>
+  <content contentuid="hb1250efegab00g4be6g9fcagbaf94c548581" version="1">&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 크리처를 치유할 때, 추가로 [1]을 회복시킵니다.</content>
+  <content contentuid="he14ff004gb2d9g4b30g849fg6289b484dc75" version="1">고행</content>
+  <content contentuid="h59c84560g0709g4f65gb38dge3f6b501ff11" version="1">&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 [1]를 입힐 때, 추가 [2]를 입힙니다. 이 피해는 당신의 &lt;LSTag Tooltip="Wisdom"&gt;지혜&lt;/LSTag&gt; &lt;LSTag Tooltip="AbilityModifier"&gt;보정치&lt;/LSTag&gt;만큼 증가합니다.</content>
+  <content contentuid="h6608689ag8a92g4959ga127g468e899abc8f" version="1">거짓 방벽</content>
+  <content contentuid="ha8022054gb725g4973gbc20g56150ebb07d0" version="1">&lt;LSTag Type="Status" Tooltip="MAGE_ARMOR"&gt;마법사의 갑옷&lt;/LSTag&gt; 효과를 받는 동안, 당신을 상대로 한 공격이 &lt;LSTag Tooltip="Disadvantage"&gt;불리 보정&lt;/LSTag&gt;을 받습니다.</content>
+  <content contentuid="h88e1225bg61a8g4b40g8251g022588453b86" version="1">징기의 튜닉</content>
+  <content contentuid="h63b2114fg0063g4cf0g821bg4c4f33a948db" version="1">이 튜닉은 단 한 가지의 주문을 완성하는 데 평생을 바친 소서러, 징기의 것이었습니다. 그녀는 밤마다 자신의 손바닥을 통해 사령술의 기운을 쏟아냈고, 마침내 그 주문은 그녀의 의지가 연장된 것과 다름없게 되었습니다. 이 튜닉은 여전히 그녀의 집착에 대한 기억으로 웅웅거리며, 착용자에게 죽음의 기술에 대한 더 깊은 통달을 선사합니다.</content>
+  <content contentuid="h3d6d3f5eg4fceg47abgb97ag2a26b68c2a72" version="1">잔존하는 부패</content>
+  <content contentuid="h809da5c6g5073g49d1gac78g02611549e61e" version="1">&lt;LSTag Type="Spell" Tooltip="Target_InflictWounds"&gt;상처 유발&lt;/LSTag&gt;로 적을 적중시키면, 대상에게 [1]턴 동안 &lt;LSTag Type="Status" Tooltip="AMP_DEATHCLERIC_FETID_ROT"&gt;악취 나는 부패&lt;/LSTag&gt; 상태를 부여합니다.</content>
+  <content contentuid="h95fa81ecgbee0g4b95g80a0g5dab384fad7e" version="1">징기의 정밀함</content>
+  <content contentuid="h6a63f820g8b25g401ega8afg7324fa79464c" version="1">무덤의 손길</content>
+  <content contentuid="h3a6467d1g6f59g499fga412g78940b2bc38c" version="1">적의 남은 &lt;LSTag Tooltip="HitPoints"&gt;생명력&lt;/LSTag&gt;이 [1]% 미만일 때, &lt;LSTag Type="Spell" Tooltip="Target_InflictWounds"&gt;상처 유발&lt;/LSTag&gt;이 자동으로 &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;로 적중합니다.</content>
+  <content contentuid="h9e5e6a62g6fb2g4ef6g9ba9g85562e7f6852" version="1">생명 흡수</content>
+  <content contentuid="h4e88f9a5gbb4bg4723g98bdg97c30db5e0ed" version="1">&lt;LSTag Type="Spell" Tooltip="Target_InflictWounds"&gt;상처 유발&lt;/LSTag&gt;로 적을 적중시키면, 가한 피해의 [1]%를 &lt;LSTag Tooltip="HitPoints"&gt;생명력&lt;/LSTag&gt;으로 회복합니다(&lt;i&gt;당신이 언데드일지라도 적용됩니다&lt;/i&gt;).</content>
+  <content contentuid="hc4d9ce6cgea31g4634g9ab2g8f9044660ba2" version="1">주문을 시전하기 위해 자신의 생명력을 동원합니다. 크리처를 대상으로 &lt;LSTag Tooltip="MeleeSpellAttack"&gt;근거리 주문 명중 굴림&lt;/LSTag&gt;을 수행합니다. 적중 시, 손에 가득 찬 사령 에너지가 대상을 부패시켜 [1]를 입히며, 당신이 [3]에 &lt;LSTag Tooltip="Resistant"&gt;저항&lt;/LSTag&gt;이 있지 않은 한 당신 또한 [2]를 입습니다.</content>
+  <content contentuid="h281ae3e0gae77g4455g8b3agabd30d81227d" version="1">젊은 달인의 의복</content>
+  <content contentuid="h520a31b9gedbag473dg960ag08e543f320cb" version="1">달빛으로 짜이고 쓰러진 영웅들의 눈물이 스며든 이 의복은, 칼날의 춤이 너무 일찍 멈춰버린 젊은 달인의 우아함을 착용자에게 부여합니다. 믿었던 친구의 배신으로 젊은 달인의 생은 끝났지만, 그의 재능이 가진 힘은 이 유물 속에 살아 숨 쉬고 있습니다.</content>
+  <content contentuid="hfc087da1g8020g4db5ga0e5g5c03a427c98c" version="1">회피의 왈츠</content>
+  <content contentuid="h8623e58cg0e73g43d5gb679gea4b2fde34bb" version="1">공격을 회피하면 다음 턴 시작 전까지 &lt;LSTag Tooltip="ArmourClass"&gt;방어도&lt;/LSTag&gt;가 [1]만큼 증가합니다.</content>
+  <content contentuid="h714b93b7gcf45g4fd6gbe2agd2f0757f0dcb" version="1">신속한 움직임</content>
+  <content contentuid="h02efdb00g2e60g452ag9c36g007c930a689a" version="1">&lt;LSTag Tooltip="ArmourClass"&gt;방어도&lt;/LSTag&gt; +[1].</content>
+  <content contentuid="h4cac015cg6882g4c68g854cgef023876faaf" version="1">고요한 집중의 튜닉</content>
+  <content contentuid="h37a554bbgd68ag4f87ga429g1190671c0bcd" version="1">동부 페이룬의 한 달인은 이렇게 말했습니다. "우리 마음속에 있는 장애물 외에 다른 장애물은 없다." 어쩌면 그의 말이 맞을지도 모르지만, 마음속의 장애물 따위 걱정하지 않고 기력과의 연결을 강화해주는 마법 튜닉을 갖는 것도 나쁘지 않겠죠?</content>
+  <content contentuid="h125812a1g6fedg4882gac34g7baa2e76e394" version="1">평온의 집중</content>
+  <content contentuid="hb4af652dg8461g4354g9643gf4cae13a2f2c" version="1">&lt;LSTag Type="ActionResource" Tooltip="KiPoint"&gt;기력&lt;/LSTag&gt;을 소모하는 행동을 사용할 때 [1]% 확률로 &lt;LSTag Type="ActionResource" Tooltip="KiPoint"&gt;기력&lt;/LSTag&gt;을 회복합니다.</content>
+  <content contentuid="h6bd8dfa5g0263g4af4gb2f4g867aad5d36bb" version="1">비틀 할로우의 로브</content>
+  <content contentuid="h24e7d89agcfd1g457fgbbd4g582c08e90bc5" version="1">비틀 할로우는 고대 곤충과 관련된 마법 의식을 행하던 광신도 집단으로, 현재는 부자연스러운 것으로 간주될 수도 있습니다. 이들의 숙련자들은 은폐와 투명화 마법에 가장 능숙했습니다. 곤충을 연구하며 진정으로 보이지 않는다는 것이 무엇인지에 대해 많은 유용한 교훈을 얻었기 때문입니다.</content>
+  <content contentuid="h371f695bg0df5g49c9ga71eg0920392befe2" version="1">은신 강화</content>
+  <content contentuid="h677307b8g9dfcg4d7bg8f93g50dd0e124f5c" version="1">은신 상태에 진입하면 &lt;LSTag Type="Status" Tooltip="ARMOURC7"&gt;비틀 할로우의 은신처&lt;/LSTag&gt; 효과를 얻습니다.</content>
+  <content contentuid="h49b25907g902cg4d9fg9affgf57dabd8b548" version="1">은신 상태에 진입하면 &lt;LSTag Type="Status" Tooltip="ARMOURC7_2"&gt;비틀 할로우의 은신처&lt;/LSTag&gt; 효과를 얻습니다.</content>
+  <content contentuid="h5d2e6483gf35ag4e6cgad23g4dbcb1313855" version="1">은신 상태에 진입하면 &lt;LSTag Type="Status" Tooltip="ARMOURC7_3"&gt;비틀 할로우의 은신처&lt;/LSTag&gt; 효과를 얻습니다.</content>
+  <content contentuid="hbb273666g474fg430dg9f2bg42564f5be162" version="1">은신 상태에 진입하면 &lt;LSTag Type="Status" Tooltip="ARMOURC7_4"&gt;비틀 할로우의 은신처&lt;/LSTag&gt; 효과를 얻습니다.</content>
+  <content contentuid="hda1c1367gc8cag4d4bg91c3gc62f3f3fdcc3" version="1">비틀 할로우의 은신처</content>
+  <content contentuid="hdb11a4ecg013fg4b30gbfa3g0d89934f06d5" version="1">&lt;LSTag Type="Skills" Tooltip="Stealth"&gt;은신&lt;/LSTag&gt; +[1], 무기 공격에 +[2] 보너스를 얻습니다.&lt;br&gt;&lt;br&gt;은신 상태에서 벗어나면 해제됩니다.</content>
+  <content contentuid="he3719f2dg1229g4962g9ce1gd9b4c1fd1f43" version="1">왕실 전령의 옷</content>
+  <content contentuid="h3e01c84bgbf23g43d0g837eg1a83dc811581" version="1">이 의복은 최고급 원단을 사용하여 잘 만들어졌습니다. 수백 년이 지났음에도 수놓아진 왕실 문장은 거의 마모되지 않았습니다. 내부의 원단은 부여된 마법으로 희미하게 반짝이며, 이전 소유자에게 맡겨진 임무의 중요성을 나타냅니다.</content>
+  <content contentuid="h101d936ag9a7cg43e8ga419g9a10b08faae5" version="1">가벼운 발걸음</content>
+  <content contentuid="h182ee8a3gf73eg40bdg8665gd2f909755dbf" version="1">&lt;LSTag Type="Skills" Tooltip="Stealth"&gt;은신&lt;/LSTag&gt; +[1].&lt;br&gt;비전투 상태일 때 &lt;LSTag Tooltip="MovementSpeed"&gt;이동 속도&lt;/LSTag&gt;가 +[3] 증가합니다.</content>
+  <content contentuid="h89fd5a3cg68bag40c5g8c72g66f5b2a4c94a" version="1">마법의 발걸음</content>
+  <content contentuid="h687c4158g7b76g40e7gac53g10c5c812d0a2" version="1">비전투 상태일 때 &lt;LSTag Tooltip="MovementSpeed"&gt;이동 속도&lt;/LSTag&gt;가 +[1] 증가합니다.</content>
+  <content contentuid="hb5be097cg1b74g4a65ga08eg425bb92c7f07" version="1">몽크 여왕의 의복</content>
+  <content contentuid="h678b425fg84aag4cdfg855eg992f4ff35e31" version="1">이것은 고대 여왕 신 우가 사용했던 전투복 중 하나입니다. 그녀는 8세의 나이에 무술에 통달했으며, 오랫동안 잊혀진 왕국의 독립을 지키기 위해 고된 방어전에 군대와 함께 참여하곤 했습니다. 이 의복은 전투하기에 편안하며 어떤 움직임도 방해하지 않습니다. 오히려 움직임을 보완하여 우아함과 민첩함을 더해줍니다.</content>
+  <content contentuid="hb78d23c4g6026g49fbgb340g97e01e894b12" version="1">우아한 전투</content>
+  <content contentuid="he7cce4f3gbda1g4874ga7a7gce1bab14b95d" version="1">&lt;LSTag Tooltip="OpportunityAttack"&gt;허점 공격&lt;/LSTag&gt;을 유발하지 않습니다.</content>
+  <content contentuid="hce18c125g3e2eg4808g94aegbca561d542e3" version="1">모험가의 옷</content>
+  <content contentuid="h6678536fgec2cg4446g88f9g7491f503265a" version="1">이 옷의 주인이 누구였는지에 대한 전설은 이미 잊혀졌습니다. 어쩌면 왕국 전쟁 중에 페이룬을 황폐화시킨 수많은 산적이나 로그 중 한 명이었을까요? 하지만 이 옷은 평범해 보이지 않으며, 아주 사소한 세부 사항까지 포착하는 능력을 강화해주는 듯합니다.</content>
+  <content contentuid="ha9baec28g6912g4c90g9a29ga5c784dbcdf0" version="1">포착의 마법</content>
+  <content contentuid="hf0b13e8fg008bg4982g94a0ge5c4f4a0c456" version="1">&lt;LSTag Type="Skills" Tooltip="Perception"&gt;포착&lt;/LSTag&gt; +[1].</content>
+  <content contentuid="h3b5649d2gb3cdg4f41g9cf1ge00361cf3627" version="1">상급 암살자의 옷</content>
+  <content contentuid="h1a0b61feg3ebag4d0cg96ddgfb56ced3556a" version="1">용병은 언제나 페이룬의 필수적인 부분이었습니다. 많은 이들이 용병의 서비스를 찾았으며, 특히 왕좌를 노리는 경쟁자를 제거하거나 다른 제국의 부상을 방해하는 성공적인 왕을 처리하는 것과 같은 민감한 문제에서는 더욱 그러했습니다. 이 옷의 첫 주인은 분명 자신의 업무에 전문적으로 임했으며, 의도치 않은 목표물에게 치명적인 일격을 더 정확하게 가하기 위해 의복에 마법을 부여하기까지 했습니다.</content>
+  <content contentuid="h463ec33dgeddfg4305g8455ga7d667e8ab46" version="1">그림자 소멸</content>
+  <content contentuid="h850d5cc7g10cag4240ga4bdgf25122f0207c" version="1">&lt;LSTag Type="Status" Tooltip="SURPRISED"&gt;기습당함&lt;/LSTag&gt; 상태인 크리처에게 피해를 입히면 &lt;LSTag Type="Status" Tooltip="INVISIBILITY"&gt;투명화&lt;/LSTag&gt; 상태가 됩니다.</content>
+  <content contentuid="hb14551b9g22a7g4965ga327g50257e319fa1" version="1">매복자의 정밀함</content>
+  <content contentuid="h2768474agb683g416agbf72ga563a79e187e" version="1">&lt;LSTag Type="Spell" Tooltip="Target_ShadowStep"&gt;그림자 걸음&lt;/LSTag&gt; 혹은 그 변형 기술을 사용하면 턴 종료 시까지 근거리 무기 공격 시 &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt; 주사위를 +[1]개 추가로 얻습니다.</content>
+  <content contentuid="h8f53da0cg53dbg4d14gbe70g615ee43cf20e" version="1">그림자 정밀</content>
+  <content contentuid="h4997b697g15e3g4c2ag8d69g4cb28ed85f04" version="1">근거리 무기 공격 시 &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt; 주사위 +[1]개를 추가로 얻습니다.</content>
+  <content contentuid="hcfb16307g9351g4da5ga638gcad9134a6a18" version="1">아레나 메이지 투사의 로브</content>
+  <content contentuid="h0b01de7bg2d48g4aacg9f5eg252d881b703a" version="1">고대에 왕들은 종종 평민들의 즐거움을 위해 투기장에서 전투를 조직했습니다. 투기장에는 강력한 전사, 교활한 궁수, 숙련된 마법사들이 모여들었습니다. 그런 투사 중 한 명이 이 로브를 소유했는데, 그는 이 로브를 입고 "정밀 마법"이라 불리는 기술을 연마하여 우월한 상대들을 상대로 놀라운 승리를 거두었습니다.</content>
+  <content contentuid="he201cfb3g7ca6g4c83g8594g02bb06138c04" version="1">정밀 마법</content>
+  <content contentuid="h8b2af2b0g1c58g4897gbd0bg69a533d34c07" version="1">전투 중 &lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;을 시전하면, 턴 종료 시까지 &lt;LSTag Type="Status" Tooltip="ARMOURC12"&gt;용솟음치는 마력&lt;/LSTag&gt; 상태가 됩니다.</content>
+  <content contentuid="h49ee586ag8953g498dga9e1gea33f0d9234e" version="1">용솟음치는 마력</content>
+  <content contentuid="he33b5f2dgc38bg48c5gad72gd01453603c3a" version="1">주문이나 소마법 &lt;LSTag Tooltip="AttackRoll"&gt;명중 굴림&lt;/LSTag&gt;에 +[1] 보너스를 얻습니다.</content>
+  <content contentuid="ha6ae5d56g3151g4526g91bbgf6aa10b7b126" version="1">견습생의 로브</content>
+  <content contentuid="ha0b16cdbg1944g4d26g8490g7ace48443288" version="1">마법사 길드에서는 나약한 학생들을 선호하지 않았습니다. 그리하여 게렌탈은 마법 기술을 익히는 데 있어 모든 동료를 앞지르며 끊임없이 훈련했습니다. 불행히도 다른 이들이 웅장하지만 지루한 논문을 공부할 때, 게렌탈은 재미있는 묘기와 하급 주문을 연습했습니다. 주요 시험 때가 되자, 그는 예상대로 낙제했습니다. 그 후 그는 선술집에서 화려한 마법 묘기로 주정뱅이들을 즐겁게 하며 살았습니다. 하지만 그의 로브에는 그의 도전적인 삶이 고스란히 담겨 있습니다.</content>
+  <content contentuid="h9e983e7fg708bg400egbf0bgcbdff80663f8" version="1">근면한 학습</content>
+  <content contentuid="h04399954g4684g4045gb48dg996cc0dd71c0" version="1">&lt;LSTag Tooltip="Cantrip"&gt;소마법&lt;/LSTag&gt; &lt;LSTag Tooltip="AttackRoll"&gt;명중 굴림&lt;/LSTag&gt;에 +[1] 보너스를 얻습니다.&lt;br&gt;&lt;br&gt;효과는 매 [2]레벨마다 증가합니다.</content>
+  <content contentuid="h3b45a3d5g0c70g478bg8823g5bdecbab085b" version="1">이츠켄의 로브</content>
+  <content contentuid="hbf9ea3fdg32d9g4eecg821dg008ed80f6291" version="1">모험가들이 공포의 위저드 이츠켄의 전설적인 무덤을 발견했을 때, 이 로브가 주요 발견물 중 하나였다고 전해집니다. 그 자체로는 특별해 보이지 않지만, 그 안에 담긴 힘은 착용자의 마법 능력을 수십 배로 증폭시킵니다. 당연히 이름난 마법사들이 즉시 이 사치품을 탐냈으며, 그중 일부는 이 유물을 쫓다 때이른 죽음을 맞이했습니다.</content>
+  <content contentuid="h8f968c16g1bc7g4343gb084g9f99deffd9ab" version="1">이츠켄의 분노</content>
+  <content contentuid="hd88684f4gce5fg4ea9g9ab2gc45124688dce" version="1">각 전투에서 사용하는 첫 번째 &lt;LSTag Tooltip="EvocationSpells"&gt;방출술&lt;/LSTag&gt; &lt;LSTag Tooltip="AttackRoll"&gt;주문 명중 굴림&lt;/LSTag&gt;은 &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;로 적중하지만, &lt;LSTag Type="Passive" Tooltip="SculptSpells"&gt;주문 조정&lt;/LSTag&gt;이 없다면 [1]를 입습니다.</content>
+  <content contentuid="h937011bdgc730g4fb0ga779g5d2e05bd1019" version="1">이츠켄의 기만</content>
+  <content contentuid="hc74f4e8eg0a47g43f8gb205gcc5310e20043" version="1">&lt;i&gt;전환 가능한 특징.&lt;/i&gt; &lt;LSTag Type="Spell" Tooltip="Projectile_Fireball"&gt;화염구&lt;/LSTag&gt; 시전 시 &lt;LSTag Type="ActionResource" Tooltip="ActionPoint"&gt;행동&lt;/LSTag&gt; 대신 &lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;보조 행동&lt;/LSTag&gt;을 소모합니다.</content>
+  <content contentuid="hf0e3385dgef6dg4993ga217g73f6f75dac67" version="1">이츠켄의 메아리</content>
+  <content contentuid="h39243fa0g3bc2g418cg9232g68bc15e14f19" version="1">&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 피해를 입히면 [1]% 확률로 &lt;LSTag Type="ActionResource" Tooltip="ArcaneRecoveryPoint"&gt;비전 회복&lt;/LSTag&gt; 횟수를 1회 회복합니다.</content>
+  <content contentuid="h2a7f762bg05efg40bcg81c6g80fb8415a34b" version="1">이츠켄의 폭풍</content>
+  <content contentuid="h7d8f9ccbg37b0g4f62g81e8g54662259fe84" version="1">&lt;LSTag Type="Spell" Tooltip="Projectile_ChainLightning"&gt;연쇄 번개&lt;/LSTag&gt; 시전 시 &lt;LSTag Type="ActionResource" Tooltip="ActionPoint"&gt;행동&lt;/LSTag&gt;을 회복합니다. 이 효과는 턴당 한 번만 발동합니다.</content>
+  <content contentuid="h278a9633g5653g4d6bga034g27f25f718609" version="1">이츠켄의 집중</content>
+  <content contentuid="hdd8db796g8bddg48afgbdd1g8ed65ddc44ad" version="1">다음 &lt;LSTag Tooltip="EvocationSpells"&gt;방출술&lt;/LSTag&gt; &lt;LSTag Tooltip="AttackRoll"&gt;주문 명중 굴림&lt;/LSTag&gt;이 &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;로 적중합니다.</content>
+  <content contentuid="he0944103g2b76g421bga8f2gd5f819d1efa3" version="1">언더다크 모험가의 로브</content>
+  <content contentuid="h15df5c34g9616g4fcegb230g3e4017741bd2" version="1">언더다크를 탐험하는 모든 여행자는 항상 준비되어 있어야 합니다. 무시무시한 괴물들과 피에 굶주린 드로우 엘프들이 득실거리는 어두운 동굴은 이 경이로운 장소에서 겪을 수 있는 가장 사소한 문제일 뿐입니다. 특히 의복에 보호 마법을 부여하고, 돌 뒤에 숨어 있는 거대한 위험 앞에서도 침착함을 유지할 수 있는 자가 진정으로 준비된 자라 할 수 있습니다.</content>
+  <content contentuid="h92339e54g8f60g462dgafefg4c8af5fe7dd6" version="1">보호의 마법</content>
+  <content contentuid="h3d3438c1g8190g4fb4g96a5g8a4478f816de" version="1">변환술 레벨 주문을 시전할 때마다 &lt;LSTag Type="Status" Tooltip="ARMOURC15"&gt;위브의 방어막&lt;/LSTag&gt; 상태를 얻습니다.</content>
+  <content contentuid="h6c36dee8g4ec6g4450g9c97g75b12419efbd" version="1">위브의 방어막</content>
+  <content contentuid="he5965049ga3f0g4fe5g87bcgc53a12b59fb4" version="1">처음으로 입는 피해가 [1]만큼 감소합니다.&lt;br&gt;&lt;br&gt;수치는 &lt;LSTag Tooltip="Intelligence"&gt;지능&lt;/LSTag&gt; &lt;LSTag Tooltip="AbilityModifier"&gt;보정치&lt;/LSTag&gt;의 두 배에 비례합니다.</content>
+  <content contentuid="h424ce7cbg2498g4a54g8ca3gfd6bbbd03326" version="1">정적의 망토</content>
+  <content contentuid="he021b635gadecg4c0bga5a1g423ca66ed670" version="1">제작자는 그 어떤 주문도 가장 먼저 시전할 가치가 없다고 믿었으며, 그와 의견을 달리하는 모든 이들보다 오래 살았습니다.</content>
+  <content contentuid="h208d1cfdgb331g4636gba72g6ffa9efae4ae" version="1">정적의 수호</content>
+  <content contentuid="h949dfc8dgae54g4ed4g89c7gaa165fd654f2" version="1">&lt;LSTag Type="Status" Tooltip="BLADE_WARD"&gt;도검 결계&lt;/LSTag&gt; 효과를 받는 동안, &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;를 맞지 않습니다.</content>
+  <content contentuid="hdfcaf328gdb49g42f0ga42dg0364d041a06d" version="1">방호술 결계</content>
+  <content contentuid="h4b465c48gf136g4dd9ga608g2185493c3b23" version="1">빙결의 보복</content>
+  <content contentuid="he33c8e00gc73bg44edg9276g2e518e7bd5ee" version="1">&lt;LSTag Type="Status" Tooltip="BLADE_WARD"&gt;도검 결계&lt;/LSTag&gt; 효과를 받는 동안, 근거리 무기 공격에 추가로 [1]가 부여됩니다.</content>
+  <content contentuid="he91e2ab4gccf5g4021g90ccg4db2013a8a95" version="1">숨 참기</content>
+  <content contentuid="h03fc7381gd48cg4003gb81cg7a3a66abb5a0" version="1">&lt;LSTag Type="Status" Tooltip="BLADE_WARD"&gt;도검 결계&lt;/LSTag&gt; 효과를 받는 동안, &lt;LSTag Tooltip="ArmourClass"&gt;방어도&lt;/LSTag&gt;에 +[1] 보너스를 얻습니다.</content>
+  <content contentuid="h5543f1fbg6285g4bcdgba68ga09f12744702" version="1">역류하는 손아귀의 로브</content>
+  <content contentuid="h8cff2244g6ba5g4b35gb2c8g3ddff3e2cce2" version="1">천 년 전 한 강력한 소서러가 이 로브를 소유했으며, 그 이후로 천이 전혀 닳지 않은 것은 이 유물에 강력한 주문이 직접적인 영향을 미쳤음을 나타냅니다. 로브는 대대로 전해 내려왔으나 결국 압도적인 수의 폭력에 의해 마지막 소유자에게서 강탈당했습니다. 하지만 선천적인 소서러가 아닌 이에게 이것은 그저 장신구이자 천 조각에 불과합니다.</content>
+  <content contentuid="h27b869d9gb0b4g4c85g87ceg9603fed232e5" version="1">보호의 마법</content>
+  <content contentuid="h2b25810bg0417g4770gaca0ge7570428ba35" version="1">&lt;LSTag Type="Status" Tooltip="TIDES_OF_CHAOS"&gt;혼돈의 물결&lt;/LSTag&gt;을 시전하면, &lt;LSTag Type="Status" Tooltip="ARMOURC17"&gt;불안정한 마법 방어막&lt;/LSTag&gt; 상태를 얻습니다.</content>
+  <content contentuid="heb796402g16e5g4598g9ab8gccd56fff3a8f" version="1">불안정한 마법 방어막</content>
+  <content contentuid="h71fa2fadg6847g4fefgb676g0b638a639347" version="1">처음으로 입는 피해가 [1]만큼 감소합니다.&lt;br&gt;&lt;br&gt;수치는 &lt;LSTag Tooltip="Charisma"&gt;매력&lt;/LSTag&gt; &lt;LSTag Tooltip="AbilityModifier"&gt;보정치&lt;/LSTag&gt;에 비례합니다.</content>
+  <content contentuid="hb5f02f83g7450g4aa6g9debgb59c7e72dc2d" version="1">치유 마법의 로브</content>
+  <content contentuid="h6d71d3d7g58c1g4868g87c8g7feca609405c" version="1">동료들은 피에 굶주린 놀의 무리를 처리하기 위해 외딴 섬으로 파견된 그룹의 소서러가 가진 회복력에 감탄했습니다. 가장 힘든 전투가 끝난 후에도 그는 로브에서 놀의 살점을 털어내고 아무 일도 없었다는 듯 물약을 마시곤 했습니다. 그것이 그의 아버지로부터 물려받은 로브가 준 치유의 힘이라는 것을 아는 사람은 거의 없었습니다. 세월이 흘러 소서러는 어느 전투에서 갑자기 일어나지 못했는데, 잘려 나간 머리는 단순히 제자리에 되돌려 놓을 수 없었기 때문입니다.</content>
+  <content contentuid="hb5dcae4eg1dffg4445ga0f1g9a784c73350e" version="1">치유 마법</content>
+  <content contentuid="h81204a37g3717g480egaabcg10fb9a87c1ef" version="1">전투 후, 소서러 레벨 당 [1]만큼 회복합니다.</content>
+  <content contentuid="hcba9b31bg51e9g467ega240g3e67e6c2f2ce" version="1">폭풍 예언자의 로브</content>
+  <content contentuid="hc22e5e4bga8c9g40e6g938fgf7de7a8a2827" version="1">메갈리스는 폭풍 사원의 유일한 예언자는 아니었지만, 가장 확고한 이들 중 한 명이었습니다. 모든 동료가 무력한 공포에 질려 도망칠 때, 그는 홀로 남아 폭풍과 천둥의 마법 제단을 차지하려는 폭풍 괴물들에 맞서 사원 문을 지켰습니다. 그는 많은 상처를 입고 살아남았으며, 그중 일부는 그의 로브에 흔적을 남기기도 했습니다. 이 유물이 어떻게 이렇게 낮은 땅까지 흘러 들어왔는지는 알 수 없으나, 이것은 분명 천상에 속한 물건입니다.</content>
+  <content contentuid="hea312ed6g9d6cg4e9ag9328g8e7e5b990c13" version="1">수호자의 태세</content>
+  <content contentuid="h60451073gc935g4cd0g8b07g31d0a94ee2f2" version="1">자신의 턴에 이동하지 않으면, 턴 종료 시 [1] &lt;LSTag Type="Status" Tooltip="MAG_CHARGED_LIGHTNING"&gt;번개 충전&lt;/LSTag&gt;을 얻습니다.</content>
+  <content contentuid="hf02a440bga502g425fgaf21g28e41f68d721" version="1">보초 서기</content>
+  <content contentuid="hc959349bgfb2cg4903gbe59g6358a421f794" version="1">사원 문 앞의 메갈리스처럼 굳건히 서 있습니다. 턴 종료 시 [1] &lt;LSTag Type="Status" Tooltip="MAG_CHARGED_LIGHTNING"&gt;번개 충전&lt;/LSTag&gt;을 얻습니다.</content>
+  <content contentuid="hba68f3fcgc6cbg4eecg9f96g66322baf86f4" version="1">충전된 보호</content>
+  <content contentuid="h5a8962dcg6061g44e7ga15bgf0ff8b3c4f2a" version="1">&lt;LSTag Type="Status" Tooltip="MAG_CHARGED_LIGHTNING"&gt;번개 충전&lt;/LSTag&gt; 상태인 동안 &lt;LSTag Tooltip="ArmourClass"&gt;방어도&lt;/LSTag&gt; +[1] 보너스를 얻습니다.</content>
+  <content contentuid="hd08d7e9egf787g4134g90e3g11e433690a2b" version="1">실패한 위저드의 로브</content>
+  <content contentuid="hfa481a2eg0869g4eacga94fg5be1bd911a4b" version="1">첫 번째 소유자는 이 로브를 온전히 사용할 기회가 없었습니다. 내재된 마법이 통제하기엔 너무나 강력했고, 위저드는 걷잡을 수 없는 마법의 폭주 속에서 화염구로 자신을 태워버렸습니다.</content>
+  <content contentuid="h8ff7dd28gc427g41d5g83bag67a5cc62f096" version="1">억제되지 않는 마력 폭주</content>
+  <content contentuid="he47bf0a0ge0ebg44d3ga4e6g7bdfbd69016e" version="1">전투 중 피해를 입으면 [1]% 확률로 &lt;LSTag Type="ActionResource" Tooltip="SorceryPoint"&gt;소서리 포인트&lt;/LSTag&gt;를 회복합니다.</content>
+  <content contentuid="h8793398dga48bg4d07g910ag589744f6a707" version="1">악의적인 영혼의 로브</content>
+  <content contentuid="h2e5e8fa2g3587g41deg8673gcfab5d9413c3" version="1">누군가 니고릭에 대해 이야기할 때마다 그의 영혼은 점점 더 강해집니다. 수천 년에 걸쳐 그의 영혼은 매우 강력해졌고, 누군가 발견하기를 바라며 세상에 내놓은 특별하고 어두운 마법 로브를 짤 수 있게 되었습니다. 그러면 니고릭은 착용자의 악한 의도를 증폭시켜 더 큰 혼란을 일으키고 세상을 자신의 모습처럼 뒤틀 수 있을 것입니다.</content>
+  <content contentuid="h191254afg851cg4e11ga9f8g751e545873b9" version="1">악한 생각의 증폭</content>
+  <content contentuid="ha8dd9b01g66ddg4017g8246gddb5868bd80d" version="1">대상이 당신의 저주&lt;i&gt;(&lt;LSTag Type="Status" Tooltip="HEX_STRENGTH"&gt;주술&lt;/LSTag&gt; 제외!)&lt;/i&gt;에 걸렸을 때, 대상은 &lt;LSTag Tooltip="Wisdom"&gt;지혜&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 성공해야 하며 실패 시 &lt;LSTag Type="Status" Tooltip="ARMOURC21"&gt;고대의 저주&lt;/LSTag&gt;에 걸립니다.&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;난이도&lt;/LSTag&gt;는 당신의 &lt;LSTag Tooltip="SpellDifficultyClass"&gt;주문 내성 난이도&lt;/LSTag&gt;에 따라 결정됩니다.</content>
+  <content contentuid="h334ad9b9gc7afg44e0g992egb09deec7b317" version="1">고대의 저주</content>
+  <content contentuid="hb1b8af8fgb9e4g4002gbbd1g9b4dd291fd08" version="1">&lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt; -[1].&lt;br&gt;&lt;br&gt;매 턴 시작 시 [2]를 입습니다.&lt;br&gt;&lt;br&gt;시간이 지나도 해제되지 않습니다.</content>
+  <content contentuid="h3f0b0771gf145g417cg95cage69e6d60c7bf" version="1">정신 방벽 갑옷</content>
+  <content contentuid="h52d613e4g3bbdg4ff7g8a46ga09070c7ffee" version="1">이 천 갑옷은 오래전 엘프 무기 제작소에서 정신적 영향으로부터 보호하기 위해 제작 및 마법 부여되었습니다. 정신적 영향은 드문 일이었지만 친위대 전사들이 무엇에 직면할지는 알 수 없는 법이니까요. 그런데 엘프들은 어떻게 이 장비를 잃어버린 것일까요?</content>
+  <content contentuid="h75cc6c97g1cadg4529g9942g812f608695f8" version="1">정신 방벽</content>
+  <content contentuid="h608afe13gcfc8g4fe7gb538gca6dd332206c" version="1">&lt;br&gt;&lt;LSTag Tooltip="Charisma"&gt;매력&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt; +[1].&lt;br&gt;&lt;LSTag Tooltip="Intelligence"&gt;지능&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt; +[1].</content>
+  <content contentuid="h9a91d8dagea5cg4c04g903cg4e06ffe47b96" version="1">은둔 소서러의 로브</content>
+  <content contentuid="h59bafa5fga50dg4525g8fbbgb17e415a317f" version="1">옛날에 한 사악한 소서러가 살았습니다. 어찌나 사악했던지 그가 음침한 숲 한가운데에 있는 자신의 영지를 거닐면 주변의 잎과 꽃들이 시들 정도였습니다. 그는 주로 아이들을 유인하여 마법 실험을 자행했으나, 현지 왕의 명령으로 붙잡혀 북부 켄타우로스 무리에 맞서는 전선으로 보내졌습니다. 그 잔인한 전투 속에서 이 로브(켄타우로스의 가죽으로 제작됨)가 등장했으며, 소서러는 여기서 마법의 힘을 끌어냈습니다.</content>
+  <content contentuid="h3cbd61e8g5a33g4584g9c8cg637c79d35673" version="1">켄타우로스 영혼의 원천</content>
+  <content contentuid="hb6712db3g5e1cg4423g8981g3fdc7cf58e32" version="1">&lt;LSTag Type="Status" Tooltip="MADNESS"&gt;광기&lt;/LSTag&gt; 상태인 동안 모든 주문과 소마법이 &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;로 적중하며, &lt;LSTag Tooltip="ArmourClass"&gt;방어도&lt;/LSTag&gt;가 [1]만큼 증가합니다. 시전자로서의 본능은 남아 있어 거리를 유지하고 주문을 우선시합니다.&lt;br&gt;&lt;br&gt;만약 &lt;LSTag Type="Status" Tooltip="MADNESS"&gt;광기&lt;/LSTag&gt; 상태가 아니라면, 매 턴 &lt;LSTag Tooltip="Charisma"&gt;매력&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;([2])에 성공해야 턴 종료 시까지 &lt;LSTag Type="Status" Tooltip="MADNESS"&gt;광기&lt;/LSTag&gt; 상태를 유지합니다.</content>
+  <content contentuid="h9029504egeab4g4278g8223gdafc6ca167a5" version="1">워락의 처형</content>
+  <content contentuid="h2c0da34cgab12g418ag87dcgfcf2d8fae9e6" version="1">[1] 관련 &lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;를 적중시키면, 추가 [2]를 입힙니다.</content>
+  <content contentuid="h8604a6b4gc957g4cadg9229g24937fb22c99" version="1">오로르의 의복</content>
+  <content contentuid="h8bc82deag4a7fg43ffg980dgb1023d214c56" version="1">12,000년 전 켈톨미르 왕국의 문 엘프들이 제작한 이 로브는 엘프 마법 부여 기술의 전설로 여겨졌습니다. 녹색 직물은 그린 드래곤의 비늘을 재가공하여 만들었으며, 강화 가죽은 달빛의 은색 실로 꿰매었습니다. 한때 이 유물은 착용자가 새들 사이를 날아다니고 죽음 이후에 부활할 수 있게 해주었으나, 지금은 지나간 힘의 그림자에 불과합니다.</content>
+  <content contentuid="h9efd101cg0370g445dg92adg0b187e0588ca" version="1">언데드 계몽</content>
+  <content contentuid="h33eeb724g7a2fg4489ga395ge6e4e072b8d7" version="1">언데드, 마족, 이형체 또는 인공물에 피해를 입히면 대상은 [1]턴 동안 &lt;LSTag Type="Status" Tooltip="MAG_RADIANT_RADIATING_ORB"&gt;찬란한 구체&lt;/LSTag&gt; 상태가 됩니다.&lt;br&gt;&lt;br&gt;이 효과는 턴당 한 번만 발동합니다.</content>
+  <content contentuid="hc0079419gf183g4f49g8908g04f249153fb2" version="1">구체 폭발</content>
+  <content contentuid="h36238a77g107ag4071gac8dg12b102cb93bd" version="1">&lt;LSTag Type="Status" Tooltip="MAG_RADIANT_RADIATING_ORB"&gt;찬란한 구체&lt;/LSTag&gt;의 영향을 받는 대상에게 [1]를 추가로 입힙니다.</content>
+  <content contentuid="h7dc48c5ag7b6cg439aga792gcd60fae4fcc2" version="1">인내의 로브</content>
+  <content contentuid="h3b152bcfge08cg40d7g8849ga9d4035861ae" version="1">고대 전쟁에서 전투 마법사들이 사용했던 전형적인 마법 의복 중 하나입니다. 부여된 마법은 매우 단순하지만 극도로 효과적이어서, 마법 방벽 너머로도 치명적인 원소 공격을 가할 수 있게 해줍니다.</content>
+  <content contentuid="h5eb46299gf9bcg4decga84cgee8fdcea0ee9" version="1">끈질긴 주문</content>
+  <content contentuid="hdc3512f2g5672g4620g993ag75efab6f16a9" version="1">&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 피해를 입히면, 턴 종료 시까지 &lt;LSTag Type="Status" Tooltip="ARMOURC25"&gt;무한한 마력&lt;/LSTag&gt; 상태를 얻습니다.</content>
+  <content contentuid="h2145e8c3ge74bg44adg8514gf12b81ac86e2" version="1">무한한 마력</content>
+  <content contentuid="hec3a8b37g9533g4b05g9025gcc88936dec02" version="1">[1], [2], [3], [4], [5]에 대한 모든 &lt;LSTag Tooltip="Resistant"&gt;저항&lt;/LSTag&gt; 및 &lt;LSTag Tooltip="Immune"&gt;면역&lt;/LSTag&gt;을 무시합니다.</content>
+  <content contentuid="h36e82159gc9aag482cgbe61gdfe660ec59af" version="1">불량배의 튜닉</content>
+  <content contentuid="hbf3c2beag689ag4bfcgb0deg5e17659103a8" version="1">매우 밀도가 높은 재질로 만들어진 이 평범해 보이는 바바리안 튜닉은 그 이점을 모두 드러내지 않습니다. 주머니 속에는 이전 소유자가 남긴 특별하게 엄선된 매끄럽고 빛나는 다채로운 보석들이 숨겨져 있는데, 이 보석들은 튜닉 밖으로 나오면 빛을 잃습니다. 이 보석들은 고대 동굴 수정의 잔해로, 함께 어우러져 치유 마법의 조화를 만들어냅니다.</content>
+  <content contentuid="hc5c98390g2160g4700g95b5gc072f1476ea9" version="1">수정의 조화</content>
+  <content contentuid="h434330d9g47cfg4cd0gb8bdg81752ebebed3" version="1">전투 중 &lt;LSTag Tooltip="HitPoints"&gt;생명력&lt;/LSTag&gt;이 [1]% 이하가 되면 [2]턴 동안 &lt;LSTag Type="Status" Tooltip="ARMOURC26"&gt;수정 치유&lt;/LSTag&gt; 상태가 됩니다.</content>
+  <content contentuid="hcc084936g4580g4990g9a80g4f6d47725042" version="1">수정 치유</content>
+  <content contentuid="h3bf8a4b4gae5bg479cg883bg712469f5ee8e" version="1">매 턴이 끝날 때마다 [1]만큼 회복합니다.&lt;br&gt;&lt;br&gt;수치는 &lt;LSTag Tooltip="Constitution"&gt;건강&lt;/LSTag&gt; &lt;LSTag Tooltip="AbilityModifier"&gt;보정치&lt;/LSTag&gt;에 [2]를 곱한 값에 비례합니다&lt;i&gt;(내림)&lt;/i&gt;.</content>
+  <content contentuid="h7673a73cge97fg40c1gbbfdg6dc944f731f5" version="1">유목민의 튜닉</content>
+  <content contentuid="h31bb2e39ga21cg41d5gb6fdgeb85e4852ac0" version="1">유목 민족들에게 강화 마법이 깃든 이 튜닉은 희귀한 발견물입니다. 이 유물은 착용자의 체온과 기분에 반응하여 움직임을 더 쉽게 만들어주며, 때로는 확실한 죽음으로부터 착용자를 구하기도 합니다.</content>
+  <content contentuid="h24bc4dcagacacg4572gb3a2g5fc2467407b8" version="1">민첩의 마법</content>
+  <content contentuid="h7de9acbagcd49g4858g82f0ga62b8b8d22eb" version="1">&lt;LSTag Type="Status" Tooltip="RAGE"&gt;격노&lt;/LSTag&gt; 상태일 때 &lt;LSTag Tooltip="Dexterity"&gt;민첩&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 +[1]~[2] 보너스를 얻습니다.</content>
+  <content contentuid="h3f21e60cg4a21g4ab8g95c9g24ad9575ecf0" version="1">주술사의 의복</content>
+  <content contentuid="h8f539d7agebc7g46d1gbff8g90321b3e9dab" version="1">고대에 일부 부족은 취약한 경계를 보호하기 위해 꽤 많은 전사를 보유했지만, 그들 중 주술사가 가장 두려운 존재였습니다. 때때로 그들은 자연의 힘을 불러내어 적의 무리에게 치명적인 폭풍을 쏟아부었지만, 대개는 죽음을 두려워하지 않는 진지한 전사들이었습니다. 주술사는 부족 전체에서 추장 다음으로 가치 있고 존경받는 존재였습니다. 이것은 그러한 주술사 중 한 명의 유물로, 가죽 부분의 일부는 꽤 새것처럼 보입니다.</content>
+  <content contentuid="hbc039c8egb0fdg4a15gab4ag1b3d90d293c2" version="1">원시 폭풍</content>
+  <content contentuid="h5e6fc7dcgd3fdg4fa1g89c6g6c6ca269d11b" version="1">&lt;LSTag Type="Status" Tooltip="RAGE"&gt;격노&lt;/LSTag&gt; 중에는 근거리 공격 시 추가로 [1]를 입힙니다. 이 보너스는 &lt;LSTag Type="Spell" Tooltip="Shout_WildShape"&gt;야생 형상&lt;/LSTag&gt; 상태에서도 적용되며, 해당 상태에서는 효과가 두 배로 증가합니다.</content>
+  <content contentuid="hb915ac3cg21a8g430bgaae0g9c522e2465af" version="1">영혼의 분노</content>
+  <content contentuid="h354769cdgb478g4aadga56eg438a7c15eeea" version="1">야수의 심장을 보유한 경우, &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt; 굴림 필요치가 [1]만큼 감소합니다. 이 보너스는 &lt;LSTag Type="Spell" Tooltip="Shout_WildShape"&gt;야생 형상&lt;/LSTag&gt; 상태에서도 적용되며, 해당 상태에서는 효과가 두 배로 증가합니다.</content>
+  <content contentuid="hd8e53202gfcdcg4b86gbdb2g8ed5af1fe0f7" version="1">선조의 강건함</content>
+  <content contentuid="h0045292egdf62g4093gb50agce7923d6b2d9" version="1">&lt;LSTag Type="Status" Tooltip="RAGE"&gt;격노&lt;/LSTag&gt; 상태에 진입하거나 &lt;LSTag Type="Spell" Tooltip="Shout_WildShape"&gt;야생 형상&lt;/LSTag&gt;을 해제할 때, [1]을 얻습니다.</content>
+  <content contentuid="hfd8d0562gfd12g4d75gaae3g19275bee6db1" version="1">원시 의식</content>
+  <content contentuid="hdc57deb7g6405g430dgb605g22ef80da2e1d" version="1">전환 가능. &lt;LSTag Type="Status" Tooltip="RAGE"&gt;격노&lt;/LSTag&gt; 사용 시 더 이상 &lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;보조 행동&lt;/LSTag&gt;이 필요하지 않은 대신, &lt;LSTag Type="ActionResource" Tooltip="WildShape"&gt;야생 형상 횟수&lt;/LSTag&gt;를 소모합니다.</content>
+  <content contentuid="hd9af817fg5c08g475cg97e9ge5f3e6e167b3" version="1">천둥 같은 힘의 튜닉</content>
+  <content contentuid="haf53dcbag131eg48e1g85dcg35e3149b777b" version="1">절망의 순간, 메리스토스는 자신의 신에게 간청했습니다. "당신의 은총으로 제게 강림하시어 원수들로부터 저를 구원하소서!" 그리하여 그는 원소의 마법을 통해 신성한 힘을 부여받았고, 즉시 모든 적을 섬멸한 뒤 훗날 위대한 왕이 되었습니다. 그 순간 그가 입었던 모든 의복에는 원소의 힘이 충전되어 수천 년 동안 왕실 보물창고에 보관되었으나, 마침내 악마의 세력이 왕국을 파괴하자 바바리안들이 남은 것들을 약탈해 갔습니다.</content>
+  <content contentuid="hac3c6e43g41b2g44f8gbf90g5d8f3e5e9ca1" version="1">신성한 선물</content>
+  <content contentuid="h028f3439g1db5g481ag88degb6341dbed984" version="1">&lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;를 입으면 [1]를 되돌려주고 공격자를 &lt;LSTag Type="Status" Tooltip="PRONE"&gt;넘어짐&lt;/LSTag&gt; 상태로 만들 수 있습니다(근력 내성 굴림 vs &lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;전투 기법 내성 난이도&lt;/LSTag&gt;).</content>
+  <content contentuid="h4a3468a8g2f54g4109g94aeg820251dcbbb4" version="1">억제되지 않는 분노의 의복</content>
+  <content contentuid="h234c2043g9866g403agaa71gf9575dd403b6" version="1">전설에 따르면 올레쉬는 숲속의 은둔자였음에도 불구하고 사람들에게 친절한 친구였으며 항상 그들을 도우러 왔습니다. 하지만 전설은 종종 거짓말을 합니다. 올레쉬가 그 대가로 영혼 하나를 거두어 자신의 "친구들"을 도왔으며, 사람들이 맡긴 임무를 수행하는 데 도움이 되는 동물의 힘을 얻었다는 사실은 기록되지 않았기 때문입니다.</content>
+  <content contentuid="h7eebf159g7fc9g4a99g83c6gcb1ad81356b3" version="1">은둔자의 비밀</content>
+  <content contentuid="h96269856gac73g41dcg9621g363dd3c11e28" version="1">전투 중 &lt;LSTag Type="Spell" Tooltip="Throw_Throw"&gt;투척&lt;/LSTag&gt; 시, 다음 턴이 끝날 때까지 &lt;LSTag Tooltip="Strength"&gt;근력&lt;/LSTag&gt;이 +[1] 증가합니다.</content>
+  <content contentuid="ha24a2f12g8ac3g44d4g8690g43710c93a128" version="1">끓어오르는 피</content>
+  <content contentuid="h87458443g0504g4e7fga82dg43c592061fe1" version="1">&lt;LSTag Tooltip="Strength"&gt;근력&lt;/LSTag&gt; +[1].</content>
+  <content contentuid="h4a9c282ag0919g4f72gb575g923498a5e9ab" version="1">조화로운 안식의 갑옷</content>
+  <content contentuid="h15c4b9edg3bd3g489fg9370g414e999d079d" version="1">마법에 걸린 숲의 중심부에서 벼려진 이 갑옷은 자연의 고요한 속삭임과 함께 웅웅거립니다. 고요한 수호자들의 유물인 이 갑옷은 황혼의 후렴구가 울려 퍼지는 정적의 시간 동안 육신과 영혼을 고치는 힘을 가졌다고 전해집니다.</content>
+  <content contentuid="h91042534g721cg4d38g9c98g4741cc2a13f8" version="1">황혼의 회복</content>
+  <content contentuid="h8dbfd6e9g22d5g4a21gad33gd7636e77d833" version="1">&lt;LSTag Type="Spell" Tooltip="Shout_SongOfRest"&gt;휴식의 노래&lt;/LSTag&gt;를 연주하면 당신의 &lt;LSTag Tooltip="HitPoints"&gt;생명력&lt;/LSTag&gt; 또한 완전히 회복됩니다.</content>
+  <content contentuid="h34b4891bg1d27g483dgbf80gf19ccdcf4b02" version="1">뮤즈의 은총이 깃든 예복</content>
+  <content contentuid="hcf6bc90dg2c7ag4b60g9d0dg9b3cc12dc1c5" version="1">은색 영감의 실로 짜인 옅은 라벤더색 천의 이 예복은, 한때 돌의 마음조차 움직일 수 있는 멜로디를 가졌던 전설적인 바드의 전리품이었습니다. 음표 하나하나마다 운명 자체가 매료되어 그에게 새로운 총애를 베풀었습니다.</content>
+  <content contentuid="h6c990af6g4e04g4d43g9f06g0bbebcb2b3c6" version="1">기발한 앙코르</content>
+  <content contentuid="h323b7968g1f0bg4353gb12eg4a06c4d3ae20" version="1">전투 중 &lt;LSTag Tooltip="Cantrip"&gt;소마법&lt;/LSTag&gt; 사용 시, [1]% 확률로 &lt;LSTag Type="ActionResource" Tooltip="BardicInspiration"&gt;바드의 격려&lt;/LSTag&gt; 횟수를 회복합니다.</content>
+  <content contentuid="h83c2c37ag8c79g4684gb0a2gf2fdfac39b55" version="1">어둠 정복자의 망토</content>
+  <content contentuid="haeee8312gc902g4c84g9525g7ed90a33de8d" version="1">그림자와 저승의 속삭임으로 감싸인 이 갑옷은 전투의 여파 속에서 번성하며 적의 죽음으로부터 힘을 끌어내는 전사가 입었던 것입니다. 어둠의 에너지가 착용자에게 스며드는데, 이는 힘을 약속하는 동시에... 어둠에 잡아먹힐 위험이 있는 양날의 검입니다.</content>
+  <content contentuid="h38ea2066gbad5g482ag820dgb8e1553f8cd1" version="1">사령 강화</content>
+  <content contentuid="h3046babcg33c7g42e0gb583gfa528a2aaaab" version="1">적을 처치하면 &lt;LSTag Type="Status" Tooltip="ARMOURA33"&gt;기어드는 포화&lt;/LSTag&gt; 중첩을 [1] 얻습니다.</content>
+  <content contentuid="hee806662g16f6g4a00gb584ge5ac3ff61a6a" version="1">기어드는 포화</content>
+  <content contentuid="h9312acb8g694ag4f56g980bgf319d436eb38" version="1">이 효과의 중첩당 &lt;LSTag Tooltip="SpellDifficultyClass"&gt;주문 내성 난이도&lt;/LSTag&gt;에 +[1] 보너스를 얻습니다.&lt;br&gt;매 턴 [2]를 입습니다.&lt;br&gt;&lt;br&gt;중첩이 [3] 이상이 되면 포화 상태가 해제되고 [4]를 입습니다.&lt;br&gt;&lt;br&gt;시간이 지나도 해제되지 않습니다.</content>
+  <content contentuid="ha2857858g2698g4208ga5cegb35a8bcc09fd" version="1">찢어진 환영 파수꾼의 갑옷</content>
+  <content contentuid="h5534cfa4g7b36g41begbc25g61fff598d3c0" version="1">은둔한 마법 대장장이 종파가 제작한 이 갑옷은 생명력의 정수를 끌어온다고 전해집니다. 이 갑옷은 보호뿐만 아니라, 보이지 않으면서도 항상 경계하는 영적 파수꾼처럼 내면의 생명력을 끌어 쓰는 능력을 부여합니다.</content>
+  <content contentuid="h95815b1bg9457g4a8cg9ca4g0e6ef04de7f7" version="1">에테르 소생</content>
+  <content contentuid="h62b492b9g061fg42e0ga444gf5f8a7fe6602" version="1">전투 중 &lt;LSTag Type="Spell" Tooltip="Shout_FalseLife"&gt;거짓 목숨&lt;/LSTag&gt; 사용 시, 최대 &lt;LSTag Tooltip="HitPoints"&gt;생명력&lt;/LSTag&gt;의 [1]%를 회복합니다.&lt;br&gt;&lt;br&gt;이 효과는 전투당 한 번만 발동합니다.</content>
+  <content contentuid="hfaad4878g8f21g44b8ga3dag01a6d0d1640a" version="1">흑표범의 가죽 갑옷</content>
+  <content contentuid="h075ebf76g6238g41a8gb3c2g3f4b152ab520" version="1">정교한 발더스산 유색 면사로 수놓인 독특한 달의 회합 휘장이 이 특이한 갑옷의 앞면을 장식하고 있습니다. 당신은 또 다른 것을 발견합니다. 안쪽 부분에 아틀리에의 낙인과 주소도 수 놓여 있습니다. 이것은 분명 현지 위저드들이 제작한 특별 주문품인 것 같습니다.</content>
+  <content contentuid="h760ce41bgb511g47caga02dg8ebe9c6a42ab" version="1">야수 마법 부여</content>
+  <content contentuid="hf91c217cg9136g4806g901dg88d6577743d9" version="1">&lt;LSTag Type="Spell" Tooltip="Shout_WildShape"&gt;야생 형상&lt;/LSTag&gt;으로 변신한 후 첫 [1]턴 동안 &lt;LSTag Tooltip="Dexterity"&gt;민첩&lt;/LSTag&gt;이 [1]만큼 증가합니다.</content>
+  <content contentuid="h489770f0g0dedg4d57gaf8fga97a9deb135e" version="1">현자의 망령 갑옷</content>
+  <content contentuid="hea056789gb62ag4876g809fgb9970eebd512" version="1">영혼들이 속삭이는 숲에서 만들어진 이 갑옷은 착용자의 사령의 손길을 고대인의 현명함으로 증폭시킵니다. 이 갑옷을 입는 자는 지혜의 깊이를 끌어낼 수 있다고 전해지며, 그들의 소름 끼치는 주문이 강화된 악의와 함께 적들에게 스며들게 합니다.</content>
+  <content contentuid="h14af3005gd9d9g4074g9759g51267a5c939e" version="1">구역질 나는 개화</content>
+  <content contentuid="hba963601g7aa2g4022ga738gda92e8a298ec" version="1">&lt;LSTag Type="Spell" Tooltip="Target_HaloOfSpores"&gt;포자 후광&lt;/LSTag&gt;으로 피해를 입히면, 대상에게 [1]턴 동안 &lt;LSTag Type="Status" Tooltip="AMP_DEATHCLERIC_FETID_ROT"&gt;악취 나는 부패&lt;/LSTag&gt; 상태를 부여합니다.</content>
+  <content contentuid="h1d8cd578gfa7cg43ddga1c0g5a5a954de51f" version="1">사령의 집합</content>
+  <content contentuid="h76df3abag5297g4a43ga4bdg4c46a35f98c6" version="1">&lt;LSTag Type="Spell" Tooltip="Target_ChillTouch"&gt;뼛속 냉기&lt;/LSTag&gt; 시전 시 더 이상 &lt;LSTag Tooltip="ActionPoint"&gt;행동&lt;/LSTag&gt;을 소모하지 않도록 전환합니다. 대신, 시전 시 &lt;LSTag Type="Status" Tooltip="AMP_ANCIENTCHAOS"&gt;고대의 혼돈&lt;/LSTag&gt;의 모든 중첩을 소모합니다.</content>
+  <content contentuid="hf386eec7g7812g4774g89cfga95afc395889" version="1">골수 서리</content>
+  <content contentuid="hb3bb1e3cg5c0ag43eegaedbg426f0279e946" version="1">대상이 &lt;LSTag Type="Status" Tooltip="CHILL_TOUCH"&gt;뼛속 냉기&lt;/LSTag&gt; 상태라면, 당신의 [1] 주사위 굴림값이 [2]보다 낮게 나오지 않습니다.</content>
+  <content contentuid="h32ceca1bga35cg4fbbg8ddeg23fb95f6bbcb" version="1">푸른 재생의 갑옷</content>
+  <content contentuid="h46f49808g60f4g41ffga8bbgedd60e1a225e" version="1">가장 오래된 숲의 심장부에서 만들어진 이 갑옷은 고대 나무의 회복력을 품고 있습니다. 이 의복을 입은 드루이드는 자연의 순환과의 연결이 강화되어, 자연이 땅을 되찾는 것만큼이나 빠르게 자신의 힘이 회복되는 것을 보게 됩니다.</content>
+  <content contentuid="h2f37596agfa23g4984g974bgeb0d6706b855" version="1">순환하는 재생</content>
+  <content contentuid="hcad64441gb463g4729g9af8ga1fb5d6a0aa3" version="1">&lt;LSTag Type="ActionResource" Tooltip="NaturalRecoveryPoint"&gt;자연 회복&lt;/LSTag&gt; 횟수를 사용할 때, [1]% 확률로 즉시 회복합니다.</content>
+  <content contentuid="h0bd2f83eg21cfg4ae7g8208ge7048cc46f3f" version="1">천상의 분노 로브</content>
+  <content contentuid="h7bc0d9b5g8452g48a2ga9f9gc135f0893e02" version="1">은빛 달빛 아래에서 제작된 이 로브는 천체의 원초적인 강렬함이 깃들어 있습니다. 하늘의 상징들로 장식된 이 로브는 착용자에게 신성한 힘의 일면을 보여주는데, 이는 우주의 직물 속에 뒤엉킨 축복이자 재앙입니다.</content>
+  <content contentuid="hd41cd880gd83bg4791g9a5dgbeed12d52f44" version="1">천상의 광휘</content>
+  <content contentuid="he3d539afg1c90g42ccg96bag3a65e3360eb7" version="1">&lt;LSTag Type="Spell" Tooltip="Target_Moonbeam"&gt;달빛&lt;/LSTag&gt;을 이동시키면 &lt;LSTag Tooltip="ActionPoint"&gt;행동&lt;/LSTag&gt;을 회복하고 [1]턴 동안 &lt;LSTag Type="Status" Tooltip="ARMOURA38"&gt;달의 성역&lt;/LSTag&gt; 상태를 얻습니다.&lt;br&gt;&lt;br&gt;이 효과는 턴당 한 번만 발동합니다.</content>
+  <content contentuid="h0be8715fga194g4eceg830eg27540ad11218" version="1">달의 성역</content>
+  <content contentuid="h5e898f22g7282g4ea9g9c8eg8ee84813ed79" version="1">&lt;LSTag Type="Spell" Tooltip="Target_Moonbeam"&gt;달빛&lt;/LSTag&gt;을 이동시킨 후, [1]턴 동안 &lt;LSTag Type="Spell" Tooltip="Target_Sanctuary"&gt;성역&lt;/LSTag&gt;을 시전할 수 있습니다.&lt;br&gt;&lt;br&gt;달빛은 성역을 깨지 않고 계속 피해를 입힙니다.</content>
+  <content contentuid="h9c8f005agec48g4a75g90f9g2b81eb6046e6" version="1">그림자 일격 가죽 갑옷</content>
+  <content contentuid="h1eb08e59g2cabg462fg88c8g5c535ea63cf0" version="1">고요한 사냥의 정수로 둘러싸인 이 가죽은 방심한 자들의 재앙입니다. 어두운 표면은 빛을 흡수하는 듯하며, 그림자 속에서 공격하는 자들에게 완벽한 아군이 되어 먹잇감을 공포와 어둠의 마법으로 그 자리에 묶어버립니다.</content>
+  <content contentuid="he099b32ag8a59g48e8g8ce6ga72a95489091" version="1">보이지 않는 자의 손아귀</content>
+  <content contentuid="h499087c0g6f7bg497cga3c3g92ba6e49ba71" version="1">근거리 또는 원거리 &lt;LSTag Type="Spell" Tooltip="Target_SneakAttack"&gt;암습&lt;/LSTag&gt;으로 적을 적중시키면, 대상은 &lt;LSTag Tooltip="Constitution"&gt;건강&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 성공해야 하며 실패 시 &lt;LSTag Type="Status" Tooltip="PARALYZED"&gt;마비&lt;/LSTag&gt; 상태가 됩니다.&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;난이도&lt;/LSTag&gt;는 당신의 &lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;전투 기법 내성 난이도&lt;/LSTag&gt;에 따라 결정됩니다.</content>
+  <content contentuid="hf759dedag213bg4fb5ga60fge8214f62c33f" version="1">도박</content>
+  <content contentuid="h352e6390gb6d2g4d43g8081g17a8c483ee76" version="1">도둑 길드의 어두운 은신처에서 제작된 이 갑옷은 도박꾼의 운과 바람의 신속함으로 꿰매어졌습니다. 보이지 않는 곳에서 공격을 성공시킬 때마다 기민한 착용자는 운명과 함께 춤출 또 다른 기회를 얻을 수 있습니다.</content>
+  <content contentuid="ha8c9bee8g2aa4g46b3ga4d1g8c1a75245aa9" version="1">완벽한 수</content>
+  <content contentuid="h61702134gdb0cg40e5gadacgef2aad41ca6e" version="1">근거리 또는 원거리 &lt;LSTag Type="Spell" Tooltip="Target_SneakAttack"&gt;암습&lt;/LSTag&gt;으로 적을 적중시키면 모든 &lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;보조 행동&lt;/LSTag&gt;을 회복합니다.&lt;br&gt;&lt;br&gt;이 효과는 턴당 한 번만 발동합니다.</content>
+  <content contentuid="h00e2a105gcee8g4f6dgabeag01bfdce2bfc6" version="1">근거리 또는 원거리 &lt;LSTag Type="Spell" Tooltip="Target_SneakAttack"&gt;암습&lt;/LSTag&gt;으로 적을 적중시키면 모든 &lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;보조 행동&lt;/LSTag&gt;을 회복합니다.&lt;br&gt;&lt;br&gt;이 효과는 전투당 한 번만 발동합니다.</content>
+  <content contentuid="h6defbb7eg5c89g4943gae30g8c857c50ee22" version="1">도박하기</content>
+  <content contentuid="he0930c59gdbfcg4adcg9178gfcd35ac0cf06" version="1">숨겨진 수호자의 갑옷</content>
+  <content contentuid="h1caa06edg5233g446dgb4d4g45c2b2112b7a" version="1">비전 바느질로 강화된 이 가죽 튜닉은 한때 보이지 않는 자들의 길드 마스터가 입었던 것입니다. 착용자가 투명 상태로 사라질 때 생명력을 그림자처럼 은밀하게 엮어주어 생기 넘치는 활력을 부여합니다.</content>
+  <content contentuid="he43e4ff4g6031g4a24g8831g5844613a8e56" version="1">영적인 지속</content>
+  <content contentuid="hd1ea1b05gd722g4c52ga558gd29dc4c41250" version="1">전투 중 자신에게 투명화 효과를 적용하면 [1]만큼 회복합니다.</content>
+  <content contentuid="h1f0d5c92gfa7eg44e8ga352gda72d6dc8372" version="1">퇴각자의 가죽 갑옷</content>
+  <content contentuid="h514e5af8g7b1fg403egb4b7g99a52c00cb23" version="1">가장 부드러운 가죽으로 맞춤 제작된 이 갑옷은 회복력을 위해 민첩함을 희생하지 않는 보호구를 만드는 장인의 기술을 자랑합니다. 착용자는 자신의 움직임이 결코 지체되지 않음을 느끼게 되며, 위험을 피할 때 두 배 더 빠르게 행동할 기회를 얻습니다.</content>
+  <content contentuid="h13e36632g674fg41cegb8c4g74431d9d447c" version="1">편안한 가죽</content>
+  <content contentuid="hfa771f7bg290dg4be9gb41ag706d018804c9" version="1">&lt;LSTag Type="Spell" Tooltip="Shout_Disengage"&gt;철수&lt;/LSTag&gt;를 하면 &lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;보조 행동&lt;/LSTag&gt;을 회복합니다.</content>
+  <content contentuid="hf59f317bgc0feg4663g9cdege33f224ee7b7" version="1">드라이더의 장막</content>
+  <content contentuid="hfa9fceecgcd58g443bg867fgefc437d1e189" version="1">거미줄로 짜여  독에 절여진 이 갑옷은 언더다크의 드로우 매복자들이 어두운 통로를 통해 먹잇감을 추적하기 위해 제작했습니다. 착용자는 거미줄로 가려진 어둠 속으로 사라져 독점적인 일격을 가할 순간을 기다립니다.</content>
+  <content contentuid="h86c070b2gc63eg467ag836cge36b4ed3847a" version="1">드로우의 소멸</content>
+  <content contentuid="hc8b9d329gcd9ag4019ga24ag0a8d42d1c1c2" version="1">공격이 빗나가면 &lt;LSTag Type="Skills" Tooltip="Stealth"&gt;은신&lt;/LSTag&gt; 판정([1])에 성공하여 [2]턴 동안 &lt;LSTag Type="Status" Tooltip="INVISIBILITY"&gt;투명&lt;/LSTag&gt; 상태가 됩니다.</content>
+  <content contentuid="h7f20ec02g44e6g4f89ga6efg318eeb437993" version="1">독성 손길</content>
+  <content contentuid="h61576c4cg8f4cg4b99gadc8g078d2a7dadf9" version="1">가려짐 혹은 &lt;LSTag Type="Status" Tooltip="INVISIBILITY"&gt;투명&lt;/LSTag&gt; 상태에서 피해를 입히면 대상에게 [1]턴 동안 &lt;LSTag Type="Status" Tooltip="AMP_TOXEMIA"&gt;독혈증&lt;/LSTag&gt; 상태를 부여합니다.</content>
+  <content contentuid="h4c5b5dd2gc330g45cdga82cgf7959de0a6d9" version="1">거미줄 맹독</content>
+  <content contentuid="h6bb414b5g6bebg4eefgb2feg030f88dbbca6" version="1">거미줄 위에 있는 동안, 당신의 공격은 &lt;LSTag Tooltip="ProficiencyBonus"&gt;숙련 보너스&lt;/LSTag&gt;와 동일한 추가 [1]를 입힙니다.</content>
+  <content contentuid="h348065f4g72bcg4ef9gab8fg306911516ee2" version="1">포식자의 템포</content>
+  <content contentuid="h12e83126g8e92g4fbbg8cebg83c4615ecba4" version="1">&lt;LSTag Type="Status" Tooltip="SURPRISED"&gt;기습당함&lt;/LSTag&gt; 혹은 &lt;LSTag Type="Status" Tooltip="PARALYZED"&gt;마비&lt;/LSTag&gt; 상태인 크리처에게 피해를 입히면, 턴당 한 번 &lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;보조 행동&lt;/LSTag&gt;을 회복합니다.</content>
+  <content contentuid="h05972d63g6c30g4b91g8968g0a92cfcd6935" version="1">사절의 의복</content>
+  <content contentuid="he0484188g7042g4843gace3g2248eff41175" version="1">짙은 포도주색 가죽 위에 은빛 별들이 반짝이는 모습은 마치 황혼의 하늘을 직물 속에 수놓은 듯합니다. 이 의복을 입은 전령은 교묘한 책략이 아니라, 방 안의 모든 영혼의 평화야말로 신성한 뜻이라고 온전히 믿게 만듦으로써 단 한 번의 연설로 전쟁을 종식시킬 수 있었다고 전해집니다.</content>
+  <content contentuid="hb9c913abgb63eg4cf4g97b8gd9a85b76733d" version="1">은총의 언어</content>
+  <content contentuid="h97102447g3b23g4cd9g8fe6gc356e5b3f267" version="1">아군에게 &lt;LSTag Type="ActionResource" Tooltip="BardicInspiration"&gt;바드의 격려&lt;/LSTag&gt;를 사용하면, 대상은 [1]턴 동안 &lt;LSTag Type="Status" Tooltip="BLESS"&gt;축복&lt;/LSTag&gt; 효과도 함께 받습니다. 당신이 인간이라면 당신 또한 &lt;LSTag Type="Status" Tooltip="BLESS"&gt;축복&lt;/LSTag&gt;을 받습니다.</content>
+  <content contentuid="he069b93ag912eg4eb4g8170g42c514ed864d" version="1">외교적 은총</content>
+  <content contentuid="h121e4d9eg262dg42a7g84c7gfac50ae0e1c0" version="1">당신의 &lt;LSTag Type="ActionResource" Tooltip="BardicInspiration"&gt;바드의 격려&lt;/LSTag&gt;가 더 이상 &lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;보조 행동&lt;/LSTag&gt;을 소모하지 않습니다.</content>
+  <content contentuid="hfffea94bg1af4g45d4ga3e6gaf910a225134" version="1">고양의 존재감</content>
+  <content contentuid="h9cdc2f88g60f5g4f7dg8bb6gcf2c73259e21" version="1">[1] 내의 모든 &lt;LSTag Type="Status" Tooltip="BLESS"&gt;축복&lt;/LSTag&gt;받은 크리처는 &lt;LSTag Tooltip="AttackRoll"&gt;명중 굴림&lt;/LSTag&gt;에 &lt;LSTag Tooltip="Advantage"&gt;유리 보정&lt;/LSTag&gt;을 받습니다.</content>
+  <content contentuid="h460d6d3eg52b8g4ba6g92bfgc08927bacf8c" version="1">축복의 공명</content>
+  <content contentuid="h4edbb779g9c5dg49b9ga20ag5f0fda70ad45" version="1">당신이 &lt;LSTag Type="Status" Tooltip="BLESS"&gt;축복&lt;/LSTag&gt;을 받을 때마다, &lt;LSTag Type="ActionResource" Tooltip="BardicInspiration"&gt;바드의 격려&lt;/LSTag&gt; 횟수를 1회 회복합니다.</content>
+  <content contentuid="h1b79d36cg827dg439cg8207gffb1504f6fda" version="1">동물친구의 가죽 갑옷</content>
+  <content contentuid="hf10c4ecag0845g4fe7gb9d6g1d134dffcd46" version="1">야생의 모습을 떠올리게 하는 복잡한 문양이 새겨진 이 가죽 예복은 단순한 갑옷 그 이상입니다. 크고 작은 생물들의 심장 박동과 공명하며, 착용자에게 야수들의 영혼과 교감하고 그들을 진정시키는 신비한 능력을 부여합니다.</content>
+  <content contentuid="h5e7dd79dg44dfg46fdg888age49b55e4e825" version="1">교감자의 유대</content>
+  <content contentuid="h492197d3g9286g4859g9d7agf14bfe3175fe" version="1">&lt;LSTag Tooltip="AnimalHandling"&gt;동물 조련&lt;/LSTag&gt; +[1].</content>
+  <content contentuid="hc1eaefa1gd735g4737ga780g48aaad8a59e9" version="1">야수 조련사의 조끼</content>
+  <content contentuid="h9199657cg08a3g4925g9be4gae969948e467" version="1">야생의 생명력으로 고동치는 에메랄드가 박힌 이 갑옷은 자신의 동료와 일심동체로 걷는 자들을 위해 제작되었습니다. 야수 조련사의 손길로 이루어지는 모든 치유는 아군들에게 전달되어, 길들여지지 않은 영혼의 회복력으로 상처를 아물게 합니다.</content>
+  <content contentuid="h7906b522g66bag4b16g96a3g888ab0987976" version="1">원시 공감</content>
+  <content contentuid="h2ca47f46ge1f0g49b4g8ccdg02b765fcc47a" version="1">당신이 소환한 크리처를 치유하면 해당 크리처를 [1]만큼 회복시킵니다.</content>
+  <content contentuid="h20430d51g4980g4fb8gb8feg64f865089227" version="1">거인의 파멸</content>
+  <content contentuid="h06615481gb720g408fgaa73g3e4a2abd67eb" version="1">떨어진 별의 은빛 심장으로 벼려진 이 갑옷은 전설적인 대장장이가 거인들의 재앙으로 제작했습니다. 갑옷의 마법은 거대한 자들을 혼란에 빠뜨려, 착용자를 마치 크기와 공간의 실 사이를 걷는 것처럼 포착하기 어렵고 잡기 힘들게 만듭니다.</content>
+  <content contentuid="hd73f6821gee02g4e0agb709g8d361a881f29" version="1">은빛 회피</content>
+  <content contentuid="hd30ec86dg58ecg404cgb446gd6552aa3ec14" version="1">괴물 유형의 크리처가 당신을 &lt;LSTag Tooltip="AttackRoll"&gt;공격&lt;/LSTag&gt;할 때 &lt;LSTag Tooltip="Disadvantage"&gt;불리 보정&lt;/LSTag&gt;을 받습니다. 당신의 크기가 축소되어 작은 틈새나 거대한 크리처 무리 사이를 비집고 지나갈 수 있습니다.</content>
+  <content contentuid="haab71f40g0ce7g44bdgac87g60f0bcd93b20" version="1">안개 수호자의 장막</content>
+  <content contentuid="h400189d1g4da1g4bfag9bdcg21dc180c769b" version="1">이 가죽 갑옷은 연금술 은으로 결이 나 있어 아침 안개의 변덕스러운 성질을 불러일으킵니다. 전투의 열기 속에서 착용자의 고통에 반응하여 보호의 안개로 착용자를 감싸지만, 불안정한 마법으로 인해 때로는 자신의 시야조차 가려질 수 있습니다.</content>
+  <content contentuid="h7ae1a821gc139g41fegb028gb63990681d4b" version="1">증기 차폐</content>
+  <content contentuid="h3c50d5c0g851ag49a4g89ebg02a250802ecb" version="1">전투 시작 시, [2]턴 동안 당신 주변 [1] 범위를 안개로 덮습니다.</content>
+  <content contentuid="h7a17b5ccg69bbg407egb5b3gd07e29a9fa0a" version="1">공병의 가죽 갑옷</content>
+  <content contentuid="he34ee762geb60g405bg9823g9dfc1f33ef0a" version="1">소금에 절여진 딱딱한 가죽으로 꿰매고 연금술 시약 주머니를 안감으로 댄 이 갑옷에서는 흑색 화약과 바닷물 냄새가 진동합니다. 한때 검의 해안 전역의 상선단을 공포에 떨게 했던 해적 폭파 전문가가 입었던 것으로, 수백 번의 폭발로 인한 그슬린 자국과 무기고 하나를 통째로 옮길 수 있을 만큼 많은 숨겨진 수납공간이 남아 있습니다.</content>
+  <content contentuid="h53c71fc2ga419g4560g91a1g7645bf43b1d5" version="1">마인드위버의 흉갑</content>
+  <content contentuid="hd00cf00dgdcc0g419fgacc1g368036317ed8" version="1">목욕 중에도 마인드 플레이어가 자신의 생각을 읽고 있다고 확신한 편집증적인 위저드의 의뢰로 제작되었습니다. 이 흉갑은 정신적 침입을 막아낼 예정이었으나, 오히려 정반대의 결과를—그것도 아주 화려하게—불러왔습니다. 일리시드의 손길이 닿은 시약이 주입된 금속은 이제 착용자의 초능력 변동성을 증폭시켜, 모든 주문을 뇌를 뒤흔드는 깜짝 선물로 바꿔버립니다. 위저드의 마지막 생각은요? 기밀 사항입니다. 아마 그것도 뒤섞여버렸겠죠.</content>
+  <content contentuid="h7caec3c6gc1a3g470cg863fga6ecb0a0bf05" version="1">생각 교란기</content>
+  <content contentuid="h1e90c828g16a3g4c77g8a1dg86316c483257" version="1">&lt;LSTag Type="Status" Tooltip="TAD_SHIELD_OF_THRALLS"&gt;불안정한 방어막&lt;/LSTag&gt; 효과를 받는 동안, 당신의 주문과 소마법은 대상에게 &lt;LSTag Tooltip="Wisdom"&gt;지혜&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;을 강제하며 실패 시 [1]턴 동안 &lt;LSTag Type="Status" Tooltip="CONFUSION"&gt;혼란&lt;/LSTag&gt; 상태로 만듭니다.&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;난이도&lt;/LSTag&gt;는 당신의 &lt;LSTag Tooltip="SpellDifficultyClass"&gt;주문 내성 난이도&lt;/LSTag&gt;에 기반하지만, 그와 동일하지는 않습니다.</content>
+  <content contentuid="h6bd2c03cgfe37g4742ga5adgeeede1535f58" version="1">초능력 반응</content>
+  <content contentuid="h3c5375bcg04e8g4fe9g8071gdd4162fba189" version="1">전투 중 매 턴이 시작될 때, &lt;LSTag Type="Status" Tooltip="TAD_SHIELD_OF_THRALLS"&gt;변동성 방어막&lt;/LSTag&gt;이 없다면 이를 얻습니다.</content>
+  <content contentuid="he92b3b52g7e22g4886gaa6dgb2576467c503" version="1">서풍의 장갑</content>
+  <content contentuid="h653b8171g8662g45d2g987dg91e1730ad3bd" version="1">캔들킵의 고대 서적에는 바다처럼 우아한 터쿼이즈 빛의 서풍의 장갑에 대한 이야기가 속삭여집니다. 한때 엘프 엘라엔도르 윈드윙이 착용했던 이 장갑은 신속함과 바람을 다루는 통달함으로 유명했습니다. 그는 이 장갑에 적들의 움직임을 늦추는 마법을 부여하여, 마치 공기 자체가 그들의 진격을 가로막는 것처럼 만들었습니다. 엘라엔도르의 죽음과 함께 사라졌던 이 장갑은 절체절명의 시기에 다시 나타나 수수한 우아함으로 전세를 뒤바꿉니다. 이는 희망의 상징이자 운명을 바꾸는 바람의 힘입니다.</content>
+  <content contentuid="h97f6e033g7472g4809g89b7gf9f18bae6e5f" version="1">엘라엔도르의 마법 부여</content>
+  <content contentuid="h19300a4cg1fe0g4c47ga34ag9602b0855444" version="1">근거리 무기 또는 맨손 공격으로 당신에게 피해를 입은 적은 &lt;LSTag Tooltip="Constitution"&gt;건강&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 성공해야 하며 실패 시 [1]턴 동안 &lt;LSTag Type="Status" Tooltip="ARMOURG51"&gt;몰아치는 돌풍&lt;/LSTag&gt;의 영향을 받습니다.</content>
+  <content contentuid="h81b2c30ag4657g4ab9gb556g7481ef214996" version="1">몰아치는 돌풍</content>
+  <content contentuid="h1369c63eg4200g4d41ga2ddg4e1597d9f42d" version="1">이 크리처는 이동 시 &lt;LSTag Tooltip="MovementSpeed"&gt;이동력&lt;/LSTag&gt;을 [1]배 더 소모합니다.</content>
+  <content contentuid="ha3f34bd1ga565g4362g944dg305eb98d049e" version="1">여우발</content>
+  <content contentuid="h40e0fbceg553cg41c8gbd3dg8decfe07aa50" version="1">이 어두운 장갑은 가장 삼엄한 금고에서도 흔적 없이 사라지는 것으로 유명했던 전설적인 도둑 샤가르의 것이었습니다. 적들이 반응할 틈도 없이 신속하게 타격하도록 마법이 부여된 이 장갑은 그의 대담한 탈출극에서 핵심적인 역할을 했습니다. 전설에 따르면 샤가르는 자신의 마지막이자 위대한 탈출에서 이 여우발을 사용한 뒤 자취를 감췄으며, 오직 이 유물만을 남겼다고 합니다.</content>
+  <content contentuid="h14a7acd2g9934g45e7g855agc646ce1233a5" version="1">전광석화의 일격</content>
+  <content contentuid="hc8fa542ega0c0g420bg83c5gf1c63595b8b0" version="1">전투 중 &lt;LSTag Type="Spell" Tooltip="Shout_Dash"&gt;질주&lt;/LSTag&gt; 사용 시, 턴이 끝날 때까지 근거리 무기 &lt;LSTag Tooltip="AttackRoll"&gt;명중 굴림&lt;/LSTag&gt;에 +[1]~[2] 보너스를 얻습니다.</content>
+  <content contentuid="h0e48b39dga2c0g4b51gad31gc9cbd2702409" version="1">드래곤본의 악력</content>
+  <content contentuid="hdc70334dg289eg4575gba98g637354322689" version="1">한때 타이만더에서 가장 강력한 드래곤본 투사가 착용했던 이 건틀릿은 고대 야수의 가죽으로 제작되었으며 장식 단추로 꾸며졌습니다. 드래곤의 혈통이 흐르는 자들을 위해 설계된 이 장비는 투사가 타격할 때마다 혈통의 힘을 발산하여 공격에 파괴적인 위력을 불어넣을 수 있게 해주었습니다. 이제 이 손잡이는 드래곤 전사의 길을 이어갈 새로운 영웅을 기다리고 있습니다.</content>
+  <content contentuid="h04fa547fgc715g4d3dgb2afgadf1a9b76c9b" version="1">드래곤본 투사</content>
+  <content contentuid="h8e269030g4b84g4c0cgab01gfe89af16447f" version="1">드래곤본인 경우 무기 및 맨손 공격이 추가 [1]를 줍니다.</content>
+  <content contentuid="h61ae4e47gab06g4502g903agf7eb4a1a5714" version="1">투기장의 본능</content>
+  <content contentuid="hd1493823g03eeg41f1gac41gab4f73d55f50" version="1">무기 공격을 회피하면 &lt;LSTag Type="Status" Tooltip="MAG_ZOC_FORCE_CONDUIT"&gt;역장 도관&lt;/LSTag&gt; 중첩을 [1]회 얻습니다. 당신이 드래곤본이라면 대신 [2]회 얻습니다.</content>
+  <content contentuid="h1a37ad6egd782g408dga5fcg7ee89c736909" version="1">타이만더의 힘</content>
+  <content contentuid="he4b705ceg10bcg4eacga3d4g981db6778b87" version="1">&lt;LSTag Tooltip="Charisma"&gt;매력&lt;/LSTag&gt; 수치가 [1]보다 높으면 무기 공격으로 [2]를 추가로 입힙니다. 당신이 드래곤본이라면 대신 자신의 &lt;LSTag Tooltip="Charisma"&gt;매력&lt;/LSTag&gt; 보정치와 동일한 [3]를 추가로 입힙니다.</content>
+  <content contentuid="hf97b213dg6513g4931g9dc5gbed93e1f0864" version="1">&lt;LSTag Tooltip="Charisma"&gt;매력&lt;/LSTag&gt; 수치가 [1]보다 높으면 무기 공격으로 [2]를 추가로 입힙니다. 당신이 드래곤본이라면 대신 &lt;LSTag Tooltip="Charisma"&gt;매력&lt;/LSTag&gt; 보정치의 두 배와 동일한 [3]를 추가로 입힙니다.</content>
+  <content contentuid="hab17a71aga3a7g49e9g9477g4b29a0be76fa" version="1">투사의 숨결</content>
+  <content contentuid="hf388b1f9g5f39g4fcfgb146g379a8c8a26f4" version="1">무기 공격으로 피해를 입히면 턴당 한 번, 즉시 드래곤의 숨결을 사용합니다.</content>
+  <content contentuid="he5c95a85gff8bg4a11g8616g2dfede6f0043" version="1">적이 당신의 [1] 이내로 들어오면, 대응을 사용하여 그들에게 드래곤의 숨결을 내뿜습니다.</content>
+  <content contentuid="h74dd2610g9b1cg42a3ga90eged89bbc16f25" version="1">속삭이는 장갑</content>
+  <content contentuid="h65c76948g55a8g4556gbec1g511abdbd67ce" version="1">전설에 따르면 이 고대 유물은 한때 평원을 지배하는 바람의 비밀을 밝혀낸 방랑 몽크 부족의 소유였습니다. 이 장갑에 속삭이면 "순풍"을 말하기도 전에 산들바람을 일으킬 것입니다. 착용자가 움직일 때마다 공기 자체가 그 주위에 뚫을 수 없는 갑옷을 짜는 것처럼 전사는 점점 더 무적에 가까워집니다. 몽크들이 신비롭게 사라진 후 장갑은 소실되었다가, 그 이후로 모험가와 유물 사냥꾼들의 손에서 다시 모습을 드러냈습니다.</content>
+  <content contentuid="h3f6bc894g40d1g494bg8cbfg51111962bbf2" version="1">소용돌이치는 공기</content>
+  <content contentuid="h9bf4d214gb072g42c8g8ff1gab6b34a94e1f" version="1">근거리 무기 또는 맨손 공격으로 적중 시, 다음 턴 시작 전까지 &lt;LSTag Tooltip="ArmourClass"&gt;방어도&lt;/LSTag&gt;에 +[1] 보너스를 얻습니다.</content>
+  <content contentuid="hc3245755g76b6g4a45gaa45g52b87b0f5cd4" version="1">함정 전문가의 손목 보호대</content>
+  <content contentuid="h869f1932gd589g46a9gb396gee14a7bdee08" version="1">이 손목 보호대는 한때 언더다크의 대담한 거주민조차 불안하게 만들 정도로 함정 제조에 일가견이 있었던 드로우 이브리나의 손목을 장식했습니다. 그녀는 세상의 거미줄 그 자체를 엮어 방심한 영혼들을 소름 끼칠 정도로 정교하게 제작된 덫으로 유인했다고 전해집니다. 그녀의 비단 그물에 걸려든 적들은 완전히 무력해졌으며, 신속한 일격 한 번이면 충분했습니다. 전설에 따르면 이브리나는 거미의 여주인 자리를 찬탈하기 위해 롤스 본인에게 도전할 정도로 뻔뻔했습니다. 그 작은 모험이 어떻게 끝났는지는 아무도 모르지만, 그날 이후 고대 마법이 깃든 그녀의 손목 보호대는 사라졌습니다. 이 보호대는 가장 예상치 못한 장소에서 나타나곤 하며, 과도한 야망이 승리보다는 얽매임을 초래할 수 있다는 사실을 조용히 상기시켜 줍니다.</content>
+  <content contentuid="h7f52c02cgf862g4dbcg88c2g79acb7566024" version="1">쉬운 먹잇감</content>
+  <content contentuid="hf0d94b04g575cg4f2egb23ag16834a91463b" version="1">대상이 거미줄 표면 위에 있다면 &lt;LSTag Tooltip="AttackRoll"&gt;명중 굴림&lt;/LSTag&gt;에 +[1]~[2] 보너스를 얻습니다.</content>
+  <content contentuid="h97fe745ag5dcag40c3ga57bg7f53d480ab85" version="1">마지막 파수꾼의 건틀릿</content>
+  <content contentuid="he425abc6g19e0g4f44gb154g24dcc175f992" version="1">이 육중한 판금 건틀릿은 한때 하두르 요새의 마지막 수호자인 아스토른의 손을 감싸고 있었습니다. 적이 성벽을 뚫고 모든 희망이 사라진 것처럼 보였을 때, 아스토른은 완강히 후퇴를 거부했습니다. 대신 그는 쓰러진 동료들을 치료하는 데 전념하며, 자신을 몰아내려는 적들의 온갖 시도를 꿋꿋이 버텨냈습니다. 마치 요새 자체가 굴하지 않는 회복력을 빌려주는 듯, 치료 행위 하나하나가 그를 더욱 요새화하는 것처럼 보였습니다. 요새의 마지막 항전에서 아스토른은 전사했지만, 깊은 인상을 남겼습니다. 그의 불굴의 의지가 깃든 건틀릿은 이제 가장 예상치 못한 이들의 손에서 발견되곤 합니다. 이들은 때때로 최선의 공격이 훌륭한... 그러니까, 정말로 어디로든 가기를 거부하는 것임을 상기시켜 줍니다.</content>
+  <content contentuid="hfa40ef53gc4e2g4195g9695g5579ac96a6a2" version="1">하두르 수성전</content>
+  <content contentuid="hbb398dfdg79d6g4745ga680gf4e20410ab8b" version="1">레벨 주문으로 치유하면, 다음 턴 시작 시까지 +[1] &lt;LSTag Tooltip="ArmourClass"&gt;방어도&lt;/LSTag&gt; 보너스를 얻습니다.</content>
+  <content contentuid="hd64547dfg9632g49c1ga1dbg5e21ab691f16" version="1">별빛의 포옹 장갑</content>
+  <content contentuid="h5d90d51bgbe5ag4f4cgb815gf8d4d4ca8da8" version="1">이 광휘의 장갑은 한때 만지는 것만으로 우주의 분노를 전달했던 전설적인 전투 마법사 테리스의 것이었습니다. 전성기 시절, 테리스는 진정한 영광은 정복할 수 없는 것을 정복할 때만 얻을 수 있다는 믿음에 따라 드래곤, 리치, 데몬 로드 등 이 땅에서 가장 강력한 적들을 찾아다녔습니다. 강적들을 처치할 때마다 천상의 에너지가 장갑을 타고 흘러 착용자에게 신성한 사명감을 불어넣었습니다. 하지만 더 강한 적을 향한 테리스의 끈질긴 굶주림은 결국 그를 필멸자가 가늠할 수 없는 존재에게 도전하게 했습니다. 그는 쓰러졌지만, 장갑은 살아남아 여전히 별빛을 내뿜으며 강자에게 심판을 내릴 다음 주인을 갈망하고 있습니다.</content>
+  <content contentuid="h0c4a58a0gdc48g4a4cg8443g994d351537d6" version="1">별빛의 심판</content>
+  <content contentuid="ha735a357g9282g4e98g86e2g1b0a35093937" version="1">&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;이나 무기로 보스를 처치하면, &lt;LSTag Tooltip="Inspiration"&gt;영감&lt;/LSTag&gt; 점수를 1점 얻습니다.</content>
+  <content contentuid="h79c34ad2gffdcg4a0ag9fc2ga36b83fc5da8" version="1">명사수의 손목 보호대</content>
+  <content contentuid="h4e941c8ag3fa1g46c3g9238g670be57ec81e" version="1">이 손목 보호대는 한때 실바너스를 숭배했던 실반 엘프 궁수 라렌 샤프사이트의 것이었습니다. 칼림샨 제국과의 전쟁 동안, 엘프들은 조상 대대로 내려온 숲의 그림자 속에서 공격하며 멀리서 적들에게 화살 세례를 퍼부었습니다. 가장 숙련된 궁수 중 한 명이었던 라렌은 목표를 절대 놓치지 않는 것으로 유명했습니다. 이 손목 보호대 안의 마법은 그의 화살을 완벽한 정밀도로 인도했습니다. 잔인한 매복 공격으로 라렌이 사망한 후, 손목 보호대는 칼림샨 병사들의 손에 들어갔고 곧 팔려 나갔습니다. 진정한 역사는 잊혀진 채 시장통의 잡동사니 중 하나인 기묘한 장신구로 전락했습니다.</content>
+  <content contentuid="h61eea65fgaafeg4c28g8509g4a903663beca" version="1">정밀의 마법</content>
+  <content contentuid="hbd49481bg1544g4c84g8c6bgd2f36184861c" version="1">원거리 무기 &lt;LSTag Tooltip="AttackRoll"&gt;명중 굴림&lt;/LSTag&gt;에 +[1] 보너스를 얻습니다.</content>
+  <content contentuid="h8e766c19g92e7g4316g9b34g3974016e7c12" version="1">최후의 빛의 장갑</content>
+  <content contentuid="h24649b89g3ac8g435cg816cga0e87917db78" version="1">이 장갑은 한때 앰의 악명 높은 암살자가 끼던 것으로, 그의 희생자들은 언제나 아늑한 어둠 속에서 최후를 맞이했습니다. 금지된 의식의 힘이 깃든 이 장갑은 손가락을 튕기는 것만으로도 약한 영혼들을 실명에 빠뜨려 운명 앞에서 무방비 상태로 만들 수 있었습니다. 그러나 이 진귀한 유물은 암살자가 도시 시장의 목숨을 노린 대담한 시도 이후, 주인과 함께 흔적도 없이 사라졌습니다. 암살자가 어떻게 되었는지는 미스테리로 남아 있으며, 그림자 마법에 젖은 이 장갑은 그 이후로 모습을 드러내지 않은 채 속삭이는 전설만을 남겼습니다.</content>
+  <content contentuid="h9e066c34gd8b3g4c31g8af5g40c3122f440a" version="1">무방비한 대상</content>
+  <content contentuid="he6beab9dgdc1fg495fgaef9g1874f6a87461" version="1">대상이 &lt;LSTag Type="Status" Tooltip="BLINDED"&gt;실명&lt;/LSTag&gt; 상태라면, 해당 대상에 대한 근거리 무기 &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt; 굴림 필요치가 [1]만큼 감소합니다.</content>
+  <content contentuid="hf37ac617g512cg4f6fgbc44g5f3180acdca0" version="1">최후의 빛</content>
+  <content contentuid="he20282b6g4c56g487cgb041gc6d65af28194" version="1">&lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;를 입히면, 대상에게 [1]턴 동안 추가로 &lt;LSTag Type="Status" Tooltip="BLINDED"&gt;실명&lt;/LSTag&gt; 상태를 부여합니다.</content>
+  <content contentuid="h17a0fc27gb70ag46eegae7egfb2dffab0d5e" version="1">빗나가지 않는 일격</content>
+  <content contentuid="hb40f002eg10c6g43adgaa6bg952801a5adbc" version="1">&lt;LSTag Type="Status" Tooltip="BLINDED"&gt;실명&lt;/LSTag&gt; 상태인 대상에게는 &lt;LSTag Tooltip="CriticalHit"&gt;치명적 실수&lt;/LSTag&gt;를 범할 수 없습니다.</content>
+  <content contentuid="hbc5902ceg0481g45c8g9592gab712b791507" version="1">움켜쥔 죽음</content>
+  <content contentuid="hb06550afgfc97g42c2gbc60g8897bf00aa65" version="1">룬의 달인이자 레드나그 가문의 장인인 그로탄이 벼린 이 장갑에는 강력한 힘의 룬이 새겨져 있으며, 그 마법 부여는 드워프 왕국 전체에서 타의 추종을 불허했습니다. 기술의 정점에서 레드나그 가문은 룬 마법을 다루는 이들 중 으뜸이었고, 후에 움켜쥔 죽음이라 불리게 된 이 장갑은 그들의 비전 연구의 정점이었습니다. 장갑은 가문 조상들의 영혼으로부터 힘을 끌어내어 착용자의 손으로 전달했습니다. 현재 전설로 회자되는 많은 전사가 이 건틀릿 덕분에 위업을 달성했는데, 이는 필멸자의 척도를 뛰어넘는 힘을 선사했기 때문입니다. 전투의 열기 속에서, 마지막으로 알려진 소유자인 명망 높은 드워프 영주가 사령술사의 사악한 저주에 걸려 쓰러졌습니다. 그가 쓰러지면서 움켜쥔 죽음은 시간의 안개 속으로 사라져 의로운 자와 사악한 자의 손을 모두 거쳤고, 각자 역사에 자취를 남겼으나 그 누구도 예전처럼 온전한 힘을 끌어내지는 못했습니다.</content>
+  <content contentuid="h9814944bg9039g4884ga706g171fd34edc4b" version="1">레드나그의 룬</content>
+  <content contentuid="hc22dd962g8040g4319gb9cag5386f1f4e914" version="1">전투 중 무기로 피해를 입히면 &lt;LSTag Type="Status" Tooltip="ARMOURG60"&gt;권능의 룬&lt;/LSTag&gt; 중첩을 [1] 얻습니다.</content>
+  <content contentuid="ha8182832g65d0g4b99g9da7gd5ce5e61196e" version="1">전투 중 무기로 피해를 입히면 &lt;LSTag Type="Status" Tooltip="ARMOURG60_4"&gt;권능의 룬&lt;/LSTag&gt; 중첩을 [1] 얻습니다.</content>
+  <content contentuid="h0f3a6cf7g6394g4593gbb21g434896dc4d03" version="1">권능의 룬</content>
+  <content contentuid="hef4a76d5gc3f8g494ega198g3744c457bb91" version="1">이 효과의 중첩 하나당 무기 공격으로 [1]만큼의 추가 피해를 입힙니다. [2] 중첩이 쌓이면 이를 흡수하여 &lt;LSTag Type="Status" Tooltip="ARMOURG60_2"&gt;지고의 룬&lt;/LSTag&gt; 효과를 얻습니다.</content>
+  <content contentuid="hf0161aabg7034g4c8cg9e2egfac96f5d0a7d" version="1">지고의 룬</content>
+  <content contentuid="hd0c39818gfdfbg4e0bg93ecgfaba167149a4" version="1">다음 무기 공격 성공 시 확정적으로 &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;를 입힙니다.</content>
+  <content contentuid="h1f5db11agb9a5g45c0ga16dg80cd574159d3" version="1">하칸의 결속</content>
+  <content contentuid="h553a522cga664g4cadgbfbcg25d024577fcb" version="1">한때 태양 영혼 종단의 제자였던 하칸 블랙플레임은 진정한 힘이 불의 혼돈에 있다고 믿으며 빛의 가르침을 저버렸습니다. 그는 금지된 의식을 통해 이 결속을 벼려냈고, 불꽃의 심장부에서 직접 힘을 끌어냈습니다. 그의 득세는 앰 동부에 드래곤 화염 요새를 건설하며 절정에 달했고, 그곳에서 앰과 테시어의 연합군을 상대로 전쟁을 벌였습니다. 라샌더의 많은 팔라딘이 그의 불길에 쓰러졌지만, 하칸은 군대 전체를 상대하다 불길에 휩싸여 최후를 맞이했고 이 결속만을 남겼습니다. 마법사의 금고에서 오랫동안 잊혀졌던 이 유물은 결국 도난당해 북적이는 시장에서 천 조각에 불과한 가격에 팔렸습니다.</content>
+  <content contentuid="hc3b66025g3f6eg420eg93a5gcbad74efc406" version="1">혼돈불의 인과응보</content>
+  <content contentuid="h6cf95d95ga456g4a07g8980gbe8d15190a08" version="1">어떤 효과에 대해 &lt;LSTag Tooltip="Dexterity"&gt;민첩&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 성공하고 당신에게서 [2]를 입은 크리처는 &lt;LSTag Type="Status" Tooltip="BURNING"&gt;발화&lt;/LSTag&gt; 상태가 되어 [1]를 입습니다.</content>
+  <content contentuid="h8a2f75d0g2111g4571g921fg18b5199a4dc7" version="1">혼돈의 기력 흐름</content>
+  <content contentuid="h96ba0731g1bf2g42fdgba94geb927db64e45" version="1">어떤 효과에 대해 &lt;LSTag Tooltip="Dexterity"&gt;민첩&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 실패하고 당신에게서 [2]를 입은 크리처가 있다면, 당신은 [1] &lt;LSTag Type="ActionResource" Tooltip="KiPoint"&gt;기력&lt;/LSTag&gt;을 회복합니다. 이 효과는 전투당 한 번만 발동할 수 있습니다.</content>
+  <content contentuid="hb6cc1d7fg2a35g484fg8d14g27b2d1dc2044" version="1">정교한 소환의 건틀릿</content>
+  <content contentuid="h80c17d6bga0acg4690gb72bgf5c97f787b57" version="1">비전적 정교함의 달인인 네버윈터의 라에리마르가 왕실 대장간에서 자신의 정밀한 설계에 따라 벼려낸 건틀릿입니다. 건틀릿에 새겨진 각 문양에는 고유한 마법 부여가 깃들어 이전에는 볼 수 없었던 주문의 조합을 형성했으며, 엄청난 마법적 잠재력을 선사했습니다. 하지만 자신의 창조물이 지닌 불안정성을 경계한 라에리마르는 건틀릿을 산꼭대기의 외딴 탑에 숨기고 미로 같은 함정으로 둘러쌌습니다. 수년 후 그가 세상을 떠나고 창조주와 단절된 건틀릿은 힘을 잃기 시작했습니다. 842년이 흐른 뒤, 모험가 무리가 탑을 뚫고 함정을 통과해 유물을 차지했습니다. 그러나, 그들은 이것이 별 소용이 없다는 것을 깨닫고 근처 상점에서 치유 물약 몇 개와 맞바꿨습니다.</content>
+  <content contentuid="h730e66e5g9474g4fd2gb5bfgb6003ca91cd1" version="1">약화된 소환</content>
+  <content contentuid="h2f125560g45b0g4a17gb6e9g8ac0a25e3e65" version="1">&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;에 &lt;LSTag Tooltip="Concentration"&gt;집중&lt;/LSTag&gt;하면, &lt;LSTag Tooltip="SpellDifficultyClass"&gt;주문 내성 난이도&lt;/LSTag&gt; 및 주문 &lt;LSTag Tooltip="AttackRoll"&gt;명중 굴림&lt;/LSTag&gt;에 +[1] 보너스를 얻습니다.</content>
+  <content contentuid="hf3e36ce0g7e5eg49d1g95d4g3e824118f272" version="1">진동형 장갑</content>
+  <content contentuid="h84a08dddg6510g4455g9340g83a74380563e" version="1">기교와 마법이 뒤얽힌 란탄의 숨겨진 대장간에서, 이 장갑은 소리의 힘 그 자체를 필멸자의 의지에 굴복시키려는 비밀스러운 노력의 일환으로 만들어졌습니다. 비전과 기계를 결합하는 데 도가 튼 란탄인들이 진동형 장갑을 벼려냈지만, 장갑의 다루기 힘든 성질 때문에 연구는 난관에 봉착했습니다. 결국 프로젝트는 포기되었고 장갑은 기억의 전당 속으로 사라졌습니다. 한 용감한 엔지니어에 의해 섬 밖으로 밀수된 뒤에야 어둠의 시장에서 위험을 모르는 모험가들에게 팔려 나갔습니다. 이 건틀릿 안에는 소리의 정수가 폭풍처럼 도사리고 있어, 자신이 품은 혼돈에 집어삼켜지지 않도록 현명하고 경계하는 자만이 이를 발산할 수 있습니다.</content>
+  <content contentuid="hf05d2b0ag69a4g4bc3g8850g067b8a2c3699" version="1">비밀 개발</content>
+  <content contentuid="ha684b5b0gd473g42d8gbea7g84eade4f1d66" version="1">전투 중 &lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 [3] 피해를 입히면, &lt;LSTag Type="Status" Tooltip="ARMOURG63"&gt;진동의 정수&lt;/LSTag&gt; 횟수를 [1]/[2]회 얻습니다.</content>
+  <content contentuid="hd5a1ab79g724ag427cg89cegfa4bcb8717ba" version="1">진동의 정수</content>
+  <content contentuid="h2900f5cdg2d15g4c3eg9cd2g891a08d1d7d0" version="1">&lt;LSTag Tooltip="ArmourClass"&gt;방어도&lt;/LSTag&gt;에 [1] 보너스를 얻습니다&lt;i&gt;(중첩에 관계없이)&lt;/i&gt;.&lt;br&gt;이 효과가 [2]회 중첩되면 이를 흡수하여 &lt;LSTag Type="Status" Tooltip="ARMOURG63_2"&gt;음파 타격&lt;/LSTag&gt;을 얻습니다.&lt;br&gt;&lt;br&gt;시간이 지나도 해제되지 않습니다.</content>
+  <content contentuid="h574ee8dbg0dd5g4a48g81a3gb4c25c07ffd9" version="1">음파 타격</content>
+  <content contentuid="haa9eef7ag5cf1g4e06g8be2g377b057f8e79" version="1">다음 근거리 공격 성공 시 추가로 [1]를 입힙니다.&lt;br&gt;&lt;br&gt;위력은 레벨 마다 증가합니다.</content>
+  <content contentuid="hff163e2eg6187g4842ga314gf2a14b4b32bd" version="1">영구동토의 장갑</content>
+  <content contentuid="h6a457a1ag2d93g4b04gb6a0gfc9e8dbec477" version="1">끝없는 북부의 황무지에서 벼려진 이 장갑은 오랫동안 외딴 우스구르트 부족의 마법사들이 사용해 왔습니다. 직물에 짜인 실은 희귀한 북부 금속으로 만들어졌으며, 그 제련 비법은 역사 속으로 사라졌습니다. 고대 문명의 유적에서 이 기묘한 실타래를 발견한 우스구르트인들은 이를 이용해 위브와의 유대를 강화했습니다. 장갑의 파괴적인 힘은 얼어붙은 고향을 지키는 데 자주 쓰였고, 유물 자체는 신성한 우상으로 숭배되며 엄숙한 의식을 통해 대대로 전해졌습니다. 하지만 결국 우스구르트 부족은 거인들에 의해 멸망했고, 유물은 그들의 기억과 함께 끝없는 눈 속에 파묻혀 영원히 자취를 감췄습니다.</content>
+  <content contentuid="ha144b82ag08abg471eg9616g7c83c88da4c6" version="1">서리의 손아귀</content>
+  <content contentuid="h22b85884g4690g4e38g9022g97069c3b2995" version="1">안개 속에 서 있는 대상에게 피해를 입히면 [1]턴 동안 &lt;LSTag Type="Status" Tooltip="MAG_FROST"&gt;서리 범벅&lt;/LSTag&gt; 상태로 만듭니다.</content>
+  <content contentuid="h8b526445g328eg4e26gb9ceg357354465c3c" version="1">&lt;LSTag Type="Spell" Tooltip="Target_IceStorm"&gt;얼음 폭풍&lt;/LSTag&gt; 기본형을 시전할 때 더 이상 &lt;LSTag Type="Image" Info="SpellSlot"/&gt;&lt;LSTag Tooltip="SpellSlot"&gt;주문 슬롯&lt;/LSTag&gt;을 소모하지 않습니다. 당신이 위저드라면 더 강력한 버전들 역시 비용 없이 시전할 수 있습니다.</content>
+  <content contentuid="hdd5152dbgc333g4a6fgbac8gb2e5878d2c54" version="1">&lt;LSTag Type="Spell" Tooltip="Target_IceStorm"&gt;얼음 폭풍&lt;/LSTag&gt; 기본형은 더 이상 &lt;LSTag Type="Image" Info="SpellSlot"/&gt;&lt;LSTag Tooltip="SpellSlot"&gt;주문 슬롯&lt;/LSTag&gt;을 소모하지 않습니다. 당신이 위저드라면, 더 강력한 버전들 역시 비용 없이 시전할 수 있습니다.&lt;br&gt;&lt;br&gt;전투 중 매 턴, 얼음 표면 효과에 면역이 아니라면 [1]턴 동안 &lt;LSTag Type="Status" Tooltip="MAG_FROST"&gt;서리 범벅&lt;/LSTag&gt; 상태가 됩니다.</content>
+  <content contentuid="h88fe4e4bg7ee4g4ccfga21fg1eebdc45e3d9" version="1">얼음 숙련</content>
+  <content contentuid="h4e7a0c4fg6609g41bcga985ga0b044ca4b7e" version="1">빙하의 엔트로피</content>
+  <content contentuid="hd3ccbd89g818dg4c75g8d74g32b12d3e3a24" version="1">당신이 위저드라면 적에게 [1]를 입힐 때마다 [2]% 확률로 해양 공허 캡슐을 생성합니다.</content>
+  <content contentuid="hb93bcb66ga263g4c4dgbba8g371d2304e96b" version="1">결빙 분쇄</content>
+  <content contentuid="hd0619a89g7025g4aecgb3f1g07195f6cb70b" version="1">&lt;LSTag Type="Status" Tooltip="FROZEN"&gt;동결&lt;/LSTag&gt;된 대상에게 자동으로 &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;를 입힙니다.</content>
+  <content contentuid="h2dd2f9a4gd2a0g44e4g894dg30bde3e1cf6f" version="1">교활한 사기꾼의 건틀릿</content>
+  <content contentuid="h2f82984fg3c5cg45dag8becgcb2b70cf3ec7" version="1">수년 동안 이 건틀릿은 대담한 전략과 전장에서의 비할 데 없는 용맹함으로 유명했던 저명한 전투 마법사이자 사령관인 라기스 토렌의 소유였습니다. 그의 수많은 업적 중 하나는 교활한 고블린과의 내기에서 이 마법 건틀릿을 따낸 것이었습니다. 그러나 시간이 흘러 그림자 도둑들이 그의 방에서 건틀릿을 훔쳐갔고, 그날 이후 건틀릿은 여러 경매장과 시장에 나타나 그 힘을 사용하려던 모든 이들에게 불운을 가져다주었습니다. 새로운 주인들은 매번 그 힘을 다스리려 애썼지만, 종종 매우 불행하고 우스꽝스러운 죽음을 맞이했습니다. 하지만 언젠가는 이 건틀릿이 폭풍으로 벼려진 마법을 다스리고 전성기의 라기스 토렌처럼 번개의 분노를 불러낼 수 있는 자격 있는 주인을 찾을 것이라는 소문이 돌고 있습니다.</content>
+  <content contentuid="ha5e243cag7da2g425cg846bg6affd7094734" version="1">가장 교활한 속임수</content>
+  <content contentuid="hc5ce9b53gf4f2g4159g8b13ge2cddf6d5033" version="1">&lt;LSTag Type="Status" Tooltip="MAGE_ARMOR"&gt;마법사의 갑옷&lt;/LSTag&gt; 효과를 받는 동안 적에게 피해를 입으면 [1]% 확률로 보복으로 &lt;LSTag Type="Spell" Tooltip="Projectile_ChainLightning"&gt;연쇄 번개&lt;/LSTag&gt;를 시전하며, 이는 어떤 크리처라도 맞힐 수 있습니다.</content>
+  <content contentuid="h56514cd4g3245g49e6gbbfbgc13fc0233be6" version="1">경이롭고 사악한 장갑</content>
+  <content contentuid="h69a593efgee5fg442fga432g81855091ebe4" version="1">언제나 명성이 앞섰던 전설적인 로그 "그림자" 카리스에 의해 발견된 이 장갑은 기적적인 힘을 지녔다고 전해졌습니다. 장갑은 신기할 정도의 정밀함으로 착용자의 움직임을 인도했고, 종종 모든 희망이 사라진 순간에도 승리로 이끌었습니다. 카리스가 가장 절망적인 결투에서 승리할 수 있었던 것도 바로 이 마법 덕분이었습니다. 하지만 유물은 자비와는 거리가 먼 독자적인 의지를 품고 있었습니다. 시간이 흐르면서 카리스는 장갑에 너무 의존한 나머지 장갑을 전혀 벗지 않게 되었고 모든 일을 장갑에 맡겼습니다. 그의 손가락은 시들어 버렸고 마법의 도움 없이는 아무것도 할 수 없는 처지가 되었습니다. 그러자 마치 그의 의존을 조롱하듯 장갑은 갑자기 아무 가치 없는 누더기로 변해버렸고, 한때 두려움의 대상이었던 도둑은 과거의 초라한 그림자만 남게 되었습니다. 그날 이후 이 사악한 장갑은 이 손에서 저 손으로 옮겨 다니며, 그 가짜 경이로움을 믿으려 했던 어리석은 자들의 삶을 망쳐놓고 있습니다.</content>
+  <content contentuid="hfd3a4034gd90bg461agb134g391ef7d5e192" version="1">실로 경이로운 것들</content>
+  <content contentuid="h9d407cf6g35d3g40e4gb020gaed150a813fd" version="1">&lt;LSTag Type="Status" Tooltip="AMP_CURSED_ARTIFACT_INFO"&gt;저주받은 유물&lt;/LSTag&gt;.&lt;br&gt;&lt;br&gt;근거리 무기 &lt;LSTag Tooltip="AttackRoll"&gt;명중 굴림&lt;/LSTag&gt;에 +[1] 보너스를 얻습니다.&lt;br&gt;&lt;br&gt;효과는 매 [2]레벨마다 증가합니다.&lt;br&gt;&lt;br&gt;&lt;LSTag Type="Image" Info="SoftWarning"/&gt; 모든 무기 공격은 당신의 장갑이 곧 드러낼 대가를 요구합니다.</content>
+  <content contentuid="h00fa3aecg83efg410dgaa4cg3460f88b6028" version="1">새벽의 황금 건틀릿</content>
+  <content contentuid="h5aa04857g9e53g4f19g9077g8dd8c3ca8ee8" version="1">라샌더의 황금 건틀릿은 알란더 경에게 엄청난 힘을 주었습니다. 과신한 그는 신성한 연결이 끊긴 언데드 영토에 홀로 발을 들였습니다. 몰락한 팔라딘의 소중한 유물은 이제 고블린 약탈자들의 자격 없는 손에 들려 있습니다.</content>
+  <content contentuid="had13ad47g1bafg49f2g83bag999ea3656ff6" version="1">라샌더의 은총</content>
+  <content contentuid="h3579c024gdc81g400ag9536g5fba35da8a32" version="1">햇빛 또는 그와 동등한 주문 효과를 받는 동안, 레벨 주문으로 [1]를 입히며 주문이나 소마법 공격 시 &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;를 입히기 위해 굴려야 하는 주사위 값이 [2]만큼 감소합니다&lt;i&gt;(유사한 효과와 중첩됨)&lt;/i&gt;.</content>
+  <content contentuid="hdbf41846g577fg4f16gada6g94ceb6ac0fdd" version="1">햇빛 또는 그와 동등한 주문 효과를 받는 동안, 레벨 주문으로 [1]를 입힙니다.</content>
+  <content contentuid="h769d8d35g55d5g4e95g93aeg5d965f2f3bbd" version="1">햇빛 또는 그와 동등한 주문 효과를 받는 동안, 레벨 주문으로 [1]를 입히며 주문이나 소마법 공격 시 &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;를 입히기 위해 굴려야 하는 주사위 값이 [2]만큼 감소합니다&lt;i&gt;(유사한 효과와 중첩됨)&lt;/i&gt;.&lt;br&gt;&lt;br&gt;당신이 라샌더를 숭배한다면, 당신의 [3] 역시 [4]를 입힙니다.</content>
+  <content contentuid="h07f356b1gd812g42d4g86c8gfd1ffbf6bbbd" version="1">햇빛 또는 그와 동등한 주문 효과를 받는 동안, 레벨 주문으로 [1]를 입히며 주문이나 소마법 공격 시 &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;를 입히기 위해 굴려야 하는 주사위 값이 [2]만큼 감소합니다&lt;i&gt;(유사한 효과와 중첩됨)&lt;/i&gt;.&lt;br&gt;&lt;br&gt;당신이 라샌더를 숭배한다면, 당신의 [3] 역시 [4]를 입힙니다.&lt;br&gt;&lt;br&gt;당신이 &lt;LSTag Type="Status" Tooltip="AURA_OF_COURAGE"&gt;용기의 오라&lt;/LSTag&gt;를 보유한 동안 적은 &lt;LSTag Tooltip="Disadvantage"&gt;불리 보정&lt;/LSTag&gt;을 받은 채 &lt;LSTag Tooltip="AttackRoll"&gt;명중 굴림&lt;/LSTag&gt;을 수행합니다.</content>
+  <content contentuid="hcc29fbb9gf9a6g4f90g86a0ge584c14cf532" version="1">그림자 장갑</content>
+  <content contentuid="h0f52930eg095bg43aag8d48g75d25871f311" version="1">이 장갑은 한 주인에게 오랫동안 머문 적이 없으며, 샤의 선택받은 전사들에게 차례로 전해지며 가장 위험한 목표물을 제거하는 치명적인 도구로 쓰였습니다. 장갑의 마법은 어둠에 묶여 있습니다. 착용자가 그림자 속에 숨어 있는 한, 장갑은 주변의 에너지를 흡수합니다. 이 힘은 희생자의 생명력을 빨아들여, 설령 대상이 살아남더라도 결코 사라지지 않는 사령의 흉터를 남기곤 했습니다. 하지만 어느 운명의 날, 샤의 전사 한 명이 예지력으로 유명한 현자 엘레리온을 죽이라는 임무를 받았습니다. 음모를 미리 알아챈 엘레리온은 함정을 준비했습니다. 공격이 시작되자 장갑은 작동하지 않았습니다. 찬란한 빛에 그림자가 흩어지며 장갑의 힘이 사라진 것입니다. 무방비 상태가 된 전사는 사로잡혔습니다. 엘레리온은 그를 샤의 영향력에서 해방시키고 어두웠던 복역의 기억을 지워주었습니다. 그림자 장갑을 포함한 전사의 모든 소유물은 가난한 이들에게 주어졌습니다. 평민들의 손에서 이 장갑은 평범한 의복처럼 보였으며, 그 마법은 입문하지 않은 자들의 눈에서 감춰졌습니다.</content>
+  <content contentuid="h3cb1ba01g9d86g442ega60fg24da3396c1b7" version="1">그림자 손길</content>
+  <content contentuid="h47671380gb9b8g4f14g895bgdbe5bf0c9240" version="1">가려진 지역에서 단검이나 소검으로 피해를 입히면 추가 [1]를 입힙니다.</content>
+  <content contentuid="ha941a871g9970g466cg9ab6gacf8cdcc75bf" version="1">반사의 건틀릿</content>
+  <content contentuid="h6d2ec502g95d9g417cg94d4gbdcbf850dfb3" version="1">토브룬 가문 드워프들의 기술이 제작과 룬 지식 모두에서 타의 추종을 불허하던 아주 먼 옛날, 이 건틀릿은 비밀리에 벼려졌습니다. 안쪽 표면에는 적대적인 마법을 흡수하여 번개 줄기로 되돌려 보내는 능력을 부여하는 권능의 룬이 새겨져 있는데, 이는 드워프 독창성의 경이였습니다. 가문의 유명한 전사인 더가르 아이언비어드 경은 바로 이 건틀릿으로 사령술사 자라고스에 대항하여 사악한 저주를 주인에게 되돌려 보냈습니다. 하지만 시간이 흐르며 건틀릿은 역사 속으로 사라졌고 그 전설은 드워프 설화 속에만 남게 되었으나, 마침내 20년 동안 이를 찾아 헤매던 엘라리온 섀도리프에 의해 발굴되었습니다.</content>
+  <content contentuid="he74f4a51gcfb0g4916gb9c6g974f7de1d486" version="1">번개 반사</content>
+  <content contentuid="h72cba1d8g2c5ag4f53g9d9agd1651ca19d8c" version="2">적에게 피해를 입으면 [1]을 반사합니다. 턴당 한 번만 발동합니다.</content>
+  <content contentuid="hf97a895cg3830g4e21gb57bgdc7b9f12ab6f" version="1">적에게 피해를 입으면 [1]을 반사합니다.</content>
+  <content contentuid="hf9cfae4dgec1dg455cg9157g1c07dd0223a6" version="1">번개 수확</content>
+  <content contentuid="h52b24521g1e17g4056ga85dgb3c003b0d853" version="1">&lt;LSTag Type="Status" Tooltip="MAG_THUNDER_REVERBERATION"&gt;반향&lt;/LSTag&gt; 상태인 대상에게 피해를 입히면 &lt;LSTag Type="Status" Tooltip="MAG_CHARGED_LIGHTNING"&gt;번개 충전&lt;/LSTag&gt;을 얻습니다.</content>
+  <content contentuid="h7f7dbb77gafcdg4a12g9685gaf5dc36762de" version="1">폭풍 쇄도</content>
+  <content contentuid="he1f72bf8g6e6eg40b6g9dc7gc01b73e1d761" version="1">턴당 한 번, &lt;LSTag Type="Status" Tooltip="MAG_CHARGED_LIGHTNING"&gt;번개 충전&lt;/LSTag&gt; 상태라면 번개 반사 효과가 두 배가 되어, [1]을 입히는 두 번째 효과가 발동합니다.</content>
+  <content contentuid="hc52e78ebgb4e7g4f3dga10cg7dd59ef7d82e" version="1">공허의 주먹</content>
+  <content contentuid="h798e4f7cgaf20g4daegbe40g19f649680dba" version="1">완벽한 전사의 갑옷을 만들고자 하는 열망에 사로잡혔던 카이론은 마법 공예의 가장 깊은 신비를 탐구했습니다. 탐구 도중 그는 현자들에게조차 거의 알려지지 않은 희귀한 공허의 파편을 우연히 발견했습니다. 그는 신비롭고도 위험한 의식을 통해 이 파편을 청동과 결합하여 기묘하고 경이로운 힘의 합금인 비스미스를 만들어냈습니다. 이 금속으로 벼려진 건틀릿과 그리브를 착용한 이들은 그 힘이 크게 증폭되는 것을 발견했습니다. 시간이 흘러 카이론은 자신의 창조물을 녹여 다섯 세트의 건틀릿과 그리브를 만들었고, 이를 인간의 위대한 왕들에게 선물하여 금과 아내들로 풍성한 보상을 받았습니다. 그러나 언제나 인내하는 공허는 언젠가 자신의 정당한 소유물을 되찾아갈 것입니다.</content>
+  <content contentuid="h47c7404cg3b63g4e0egb8bcgfaa0634fe674" version="1">비스미스</content>
+  <content contentuid="hab2e5d56ge2b9g4ba6g8b8cgc992a905e2a9" version="1">근거리 무기 피해에 +[1] 보너스를 얻습니다.&lt;br&gt;당신이 드워프(또는 드워프로 변장한 상태)가 아니라면 &lt;LSTag Tooltip="Constitution"&gt;건강&lt;/LSTag&gt; 판정에 &lt;LSTag Tooltip="Disadvantage"&gt;불리 보정&lt;/LSTag&gt;을 받습니다.</content>
+  <content contentuid="h4b586922gcd43g4458g896eg75cf71063abc" version="1">혼돈의 의지 손목 보호대</content>
+  <content contentuid="h73224d7dgefefg4230g9518g013bcf656861" version="1">이 팔 보호구는 위브의 변덕스러운 본질에 집착하여 전설이 된 고대 네더릴의 대마법사에 의해 마법이 부여되었습니다. 가공되지 않은 순수한 마법의 광휘와 예측 불가능성을 모두 전달하도록 제작된 이 유물은 착용자가 야생의 비전 에너지 격류를 견뎌낼 수 있는지를 시험합니다. 대마법사는 진정한 통달이란 마법을 지배하는 것이 아니라 그 혼돈을 받아들이는 것에 있다고 믿었습니다. 이 유물을 착용할 만큼 대담한 이들은 완벽한 승리와 완전한 재앙 사이의 좁은 길을 걷게 되며, 그들의 운명은 종종 페이룬이 오랫동안 길들이려 했던 바로 그 힘에 의해 결정됩니다.</content>
+  <content contentuid="hde5f4b5cg6511g48f7g8220g0821e5cd73f0" version="1">위브의 혼돈</content>
+  <content contentuid="h61da4bc1gd562g4f62ga36bgc07df488f9f5" version="1">전투에 진입하면 매 턴 주문 &lt;LSTag Tooltip="AttackRoll"&gt;명중 굴림&lt;/LSTag&gt;에 &lt;LSTag Tooltip="Advantage"&gt;유리 보정&lt;/LSTag&gt;과 &lt;LSTag Tooltip="Disadvantage"&gt;불리 보정&lt;/LSTag&gt;이 교대로 적용됩니다.</content>
+  <content contentuid="h26a5c396g66bdg4138gbe5dg939e62c6df15" version="1">강한 파동</content>
+  <content contentuid="ha9574744g303bg427egba5eg5a56ab652d3a" version="1">주문 &lt;LSTag Tooltip="AttackRoll"&gt;명중 굴림&lt;/LSTag&gt;에 &lt;LSTag Tooltip="Advantage"&gt;유리 보정&lt;/LSTag&gt;을 받습니다.&lt;br&gt;&lt;br&gt;턴 종료 시 &lt;LSTag Type="Status" Tooltip="ARMOURG71_2"&gt;약한 파동&lt;/LSTag&gt; 상태로 전환됩니다.&lt;br&gt;&lt;br&gt;전투 종료 시 해제됩니다.</content>
+  <content contentuid="hbb08c200gfc34g43cfga18fg0e8cdf5140c9" version="1">약한 파동</content>
+  <content contentuid="h2580c9efg54aeg49ddgb117g1cd7f1b47e54" version="1">주문 &lt;LSTag Tooltip="AttackRoll"&gt;명중 굴림&lt;/LSTag&gt;에 &lt;LSTag Tooltip="Disadvantage"&gt;불리 보정&lt;/LSTag&gt;을 받습니다.&lt;br&gt;&lt;br&gt;턴 종료 시 &lt;LSTag Type="Status" Tooltip="ARMOURG71"&gt;강한 파동&lt;/LSTag&gt; 상태로 전환됩니다.&lt;br&gt;&lt;br&gt;전투 종료 시 해제됩니다.</content>
+  <content contentuid="h42895a68gec5eg41a6g9d59gb2c58b691df7" version="1">지옥불의 속삭임</content>
+  <content contentuid="hcc87950ag9d14g41d2gba23g8b59291e3f3d" version="1">야망이 종종 신중함과 다투던 앰의 대장간에서, 화염술사들은 화염의 본성 그 자체를 길들이려 했습니다. 그리하여 그들은 격렬하고 길들여지지 않은 화염 정령의 반항적인 영혼을 이 장갑 안에 묶어 벼려냈습니다. 이제 독자적인 의지가 깃든 이 장갑은 쉼 없이 불안한 에너지로 고동칩니다. 착용자는 표면 아래에서 끓어오르는 힘, 즉 속박을 끊으려 갈망하고 해방을 향한 굶주림이 끊이지 않는 위험한 불꽃을 느끼게 됩니다. 이 장갑을 낀 이들 중 지옥불의 속삭임을 오래 견뎌낸 자는 거의 없었습니다.</content>
+  <content contentuid="hba4831c7g05fag4109g81f0g2b68191f3106" version="1">예측 불가능한 화염</content>
+  <content contentuid="h5b304033gff9bg4f4aga7f6g7264307c5142" version="1">적에게 [1] 관련 &lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 피해를 입히면 &lt;LSTag Type="Spell" Tooltip="Projectile_Fireball"&gt;화염구&lt;/LSTag&gt;를 소환하고 자신은 [2]를 입습니다 &lt;i&gt;(&lt;LSTag Type="Passive" Tooltip="SculptSpells"&gt;주문 조정&lt;/LSTag&gt;이 없다면 적용)&lt;/i&gt;. 이 효과는 전투당 한 번만 발동합니다.</content>
+  <content contentuid="h2b6b1237gf631g4e69ga170gcd5bbe586bed" version="1">적에게 [1] 관련 &lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 피해를 입히면 &lt;LSTag Type="Spell" Tooltip="Projectile_Fireball"&gt;화염구&lt;/LSTag&gt;를 소환하고 자신은 [2]를 입습니다 &lt;i&gt;(&lt;LSTag Type="Passive" Tooltip="SculptSpells"&gt;주문 조정&lt;/LSTag&gt;이 없다면 적용)&lt;/i&gt;. 이 효과는 턴당 한 번만 발동합니다.</content>
+  <content contentuid="h0136ec0agd02eg46c5g8af7g6c0131def9c7" version="1">앰의 유산</content>
+  <content contentuid="hdcceef3egefecg4da8g8c43ge149eec69218" version="1">[1] 주문이나 소마법에 &lt;LSTag Tooltip="SorceryPoint"&gt;소서리 포인트&lt;/LSTag&gt;를 소모하여 시전할 때 대상에게 추가로 [2]를 입힙니다.</content>
+  <content contentuid="h5264d8f5gc658g4adbga200ge33f321f4d19" version="1">원초적 속삭임</content>
+  <content contentuid="hdc35c805gd25cg4858gac9bg246b7ddd1c53" version="1">크리처가 &lt;LSTag Type="Status" Tooltip="SILENCED"&gt;침묵&lt;/LSTag&gt; 상태인 동안 해당 크리처는 [1]에 &lt;LSTag Tooltip="Vulnerable"&gt;취약&lt;/LSTag&gt;해집니다.</content>
+  <content contentuid="hb90e718ag2117g4500g931fgf5767c16a573" version="1">장막을 뚫는 장갑</content>
+  <content contentuid="h630ffac7gfb44g4bd2gadd7g26230e29eadd" version="1">셀루네를 따르는 신실한 손길로 벼려진 이 건틀릿에는 공기 중에서 직접 빛을 끌어내어 착용자를 달의 여신의 은총으로 채우는 힘이 깃들어 있습니다. 전설은 달빛을 두른 전사들이 마치 부서지기 쉬운 안개를 가르듯 어둠을 베어 넘겼다고 전합니다. 그림자에 대항하는 셀루네의 영원한 전투 속에서 이 장갑은 수호자에서 수호자로 전해지며, 깊은 밤의 시간에 달빛이 가장 절실한 이들을 찾아내 왔습니다.</content>
+  <content contentuid="h4d321ff7gc1b7g4575g86f0g6615bf8b9a70" version="1">셀루네의 은총</content>
+  <content contentuid="h655c8313gf044g4544ga372gf23f34343ec5" version="1">당신의 &lt;LSTag Tooltip="HitPoints"&gt;생명력&lt;/LSTag&gt;이 [1]% 이상인 한, 언데드를 상대로 한 모든 &lt;LSTag Tooltip="AttackRoll"&gt;명중 굴림&lt;/LSTag&gt;에 &lt;LSTag Tooltip="Advantage"&gt;유리 보정&lt;/LSTag&gt;을 받습니다.</content>
+  <content contentuid="hd690e5d8g50e3g40ecg8992ga26190635525" version="1">엘프의 은총 장갑</content>
+  <content contentuid="h0ea233b9gc399g4e3fgaf5dg5c68549db15b" version="1">이 장갑은 한때 전장에서의 민첩함이 전설이 된 우화 속 엘프 전사 케일런 스위프트의 손을 장식했습니다. 지칠 줄 모르는 치고 빠지기 전술로 유명했던 케일런은 어긋남 없는 정밀함과 우아함으로 움직이며 언제나 전투에서 완벽한 위치를 선점했습니다. 신기하게도 그의 타고난 재능의 일부가 그가 입었던 경갑에 남아 있었고, 그가 세상을 떠난 뒤 케일런의 친족들은 그 조각들을 여러 구매자에게 비싼 값에 팔았습니다.</content>
+  <content contentuid="he2ce131ag416cg4c5cg9837g975565f18494" version="2">케일런의 반사 신경</content>
+  <content contentuid="h9923e82cgc496g41c9g825dg95a0501dd07a" version="2">피해를 입을 때, 받는 피해를 절반으로 줄입니다.&lt;br&gt;&lt;br&gt;순혈 엘프라면 이 효과는 자동으로 발동하며 &lt;LSTag Type="ActionResource" Tooltip="ReactionActionPoint"&gt;대응&lt;/LSTag&gt;을 소모하지 않습니다. 그 외의 경우에는 &lt;LSTag Type="ActionResource" Tooltip="ReactionActionPoint"&gt;대응&lt;/LSTag&gt;을 소모합니다.&lt;br&gt;&lt;br&gt;턴당 한 번만 발동합니다.</content>
+  <content contentuid="hd86c7be8g178eg43ebgbbbfge95e8ff5fec1" version="1">케일런의 반사 신경</content>
+  <content contentuid="hdb6523cfg5dd5g4488g801fg934ecf1de96a" version="1">받게 될 피해를 절반으로 줄입니다.</content>
+  <content contentuid="h7bf69682gdd29g4932gbacdg9ad9b2dd5568" version="1">케일런의 반사 신경</content>
+  <content contentuid="hb0a887cdg61f1g41a4ga172g21b23f21c369" version="1">받는 피해가 절반으로 감소합니다.</content>
+  <content contentuid="h49c8552agd558g4224gba1bgcf914afe3dc4" version="1">공명의 손목 보호대</content>
+  <content contentuid="he73214dcge002g469bgb429gc7e3047aa01c" version="1">아주 먼 옛날, 이 손목 보호대는 기스양키의 워로드 잘코라가 영계 차원을 통해 수많은 습격을 이끌 때 착용했던 것입니다. 반짝이는 별의 금속으로 벼리고 깊은 푸른빛의 오팔을 박아 넣은 이 유물은, 잘코라 동족의 숙적이지만 명예를 위해 그의 여정을 돕기로 맹세한 기스제라이 현자에 의해 마법이 부여되었습니다. 이 보호대는 가장 강력한 소리의 메아리를 붙잡아, 그 힘을 착용자의 존재 자체에 흐르는 치유 에너지의 파동으로 바꾼다고 전해집니다. 하지만 이 선물에는 위험이 따랐습니다. 손목 보호대를 통해 솟구치는 진동은 최강자의 의지조차 시험하며 침착함을 깨뜨리고 영혼까지 뒤틀어버릴 정도로 위협적이었습니다.</content>
+  <content contentuid="h22eddf94g9d07g4d6cgb70bg2dd885697dae" version="1">공명</content>
+  <content contentuid="hc3c65041gfa63g4ab9g9002g1fbeaec2d9e5" version="1">근거리 또는 투척 공격으로 [3]를 입히면, [1] 중첩의 &lt;LSTag Type="Status" Tooltip="MAG_THUNDER_REVERBERATION"&gt;반향&lt;/LSTag&gt;을 얻고 [2]을 회복합니다.</content>
+  <content contentuid="h0b354320g2dd8g4aa4g8e5eg8c7cef7c5383" version="1">에린도르의 장갑</content>
+  <content contentuid="hc7ca7c12g2b4dg4015g90e0g2384a9d0d1bb" version="1">고대 네더릴의 그림자 가득한 금고 깊은 곳에서, 이 건틀릿은 한때 페이룬 전역에서 공포와 함께 속삭여졌던 이름인 소서러 에린도르를 위해 섬뜩한 힘으로 짜여졌습니다. 어두운 마법이 깃든 이 장갑은 쓰러진 적들의 마지막 숨결을 들이마셔 착용자의 활력을 회복시켰습니다. 영생에 대한 욕망에 사로잡혀 있던 에린도르는 적들의 생명력을 게걸스럽게 먹어 치움으로써 죽음 그 자체를 거부할 수 있다고 믿었습니다. 이제 그 마법사는 역사의 뒤안길로 사라진 지 오래지만, 그의 건틀릿은 여전히 그칠 줄 모르는 권력을 향한 갈증으로 룬을 번뜩이며, 감히 이를 사용하려는 자들을 자신을 파멸시킨 바로 그 길로 유혹하고 있습니다.</content>
+  <content contentuid="hf3282750gdf20g4e9cg90d3g50c0d5b68828" version="1">네더릴 룬</content>
+  <content contentuid="h355aeda3g7b04g4cebgb7fdg2e2d11bfc5c5" version="1">[1] 대상 지정 &lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 적을 처치하면, [3]레벨 &lt;LSTag Tooltip="SpellSlot"&gt;주문 슬롯&lt;/LSTag&gt; 및 모든 &lt;LSTag Tooltip="WarlockSpellSlot"&gt;워락 주문 슬롯&lt;/LSTag&gt;을 [2]개 회복합니다. 하지만 &lt;LSTag Tooltip="Wisdom"&gt;지혜&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;([4])에 성공해야 하며 실패 시 [5]턴 동안 &lt;LSTag Type="Status" Tooltip="MADNESS"&gt;광기&lt;/LSTag&gt; 상태가 됩니다.&lt;br&gt;&lt;br&gt;이 효과는 턴당 한 번만 발동합니다.</content>
+  <content contentuid="hdfe88a32g6ad2g4d2egb6d6g13aa1e27b7f7" version="1">잿더미의 각성</content>
+  <content contentuid="hb21c8e1fgc5d6g4bf7g951fg6afb3ede98c3" version="1">이 장갑은 길들여지지 않은 화염의 분노를 다스리려 했던 자들이 착용했으며, 그들의 이름은 온 땅에 공포와 함께 속삭여졌습니다. 워로드에서 화염 마법사로 전해지며 이 장갑은 끔찍한 저주를 동반했습니다. 이들이 불러낸 불길은 단순히 타오르는 것이 아니라 전염병처럼 번졌습니다. 그 불꽃에 닿은 자들은 불꽃의 낙인이 찍혔고, 이는 곧 파괴적인 힘과 함께 폭발하여 근처의 모든 것을 집어삼켰습니다. 이 저주받은 유물의 힘은 끊임없이 성장하고 집어삼키며 파괴의 연쇄 속에서 이 영혼에서 저 영혼으로 옮겨붙는, 혼돈스럽고 가차 없는 화염의 본성을 그대로 투영합니다.</content>
+  <content contentuid="he571b946gad4cg4db1gac13ge498f48848a6" version="1">집어삼키는 저주</content>
+  <content contentuid="h6cd4f48fgc7ffg4d83gaa20g342f2ca3c42f" version="1">전투 중 당신의 &lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 [1]를 입은 적은 &lt;LSTag Tooltip="Constitution"&gt;건강&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 성공해야 하며, 실패 시 [2]턴 동안 &lt;LSTag Type="Status" Tooltip="ARMOURG77"&gt;불씨&lt;/LSTag&gt; 상태가 됩니다.&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;난이도&lt;/LSTag&gt;는 당신의 &lt;LSTag Tooltip="SpellDifficultyClass"&gt;주문 내성 난이도&lt;/LSTag&gt;에 따라 결정됩니다.</content>
+  <content contentuid="h7493615cg9fe1g4977gad2bg4dad00529107" version="1">전투 중 당신의 &lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 [1]를 입은 적은 &lt;LSTag Tooltip="Constitution"&gt;건강&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 성공해야 하며, 실패 시 [2]턴 동안 &lt;LSTag Type="Status" Tooltip="ARMOURG77_1"&gt;불씨&lt;/LSTag&gt; 상태가 됩니다.&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;난이도&lt;/LSTag&gt;는 당신의 &lt;LSTag Tooltip="SpellDifficultyClass"&gt;주문 내성 난이도&lt;/LSTag&gt;에 기반하지만, 그와 동일하지는 않습니다.</content>
+  <content contentuid="hec8cd0c4ge679g4062g9d5fg747af6f48a07" version="1">전투 중 당신의 &lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 [1]를 입은 적은 &lt;LSTag Tooltip="Constitution"&gt;건강&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 성공해야 하며, 실패 시 [2]턴 동안 &lt;LSTag Type="Status" Tooltip="ARMOURG77_2"&gt;불씨&lt;/LSTag&gt; 상태가 됩니다.&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;난이도&lt;/LSTag&gt;는 당신의 &lt;LSTag Tooltip="SpellDifficultyClass"&gt;주문 내성 난이도&lt;/LSTag&gt;에 기반하지만, 그와 동일하지는 않습니다.</content>
+  <content contentuid="h35f1c363g640dg435agb638gcaa6d309c094" version="1">전투 중 당신의 &lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 [1]를 입은 적은 &lt;LSTag Tooltip="Constitution"&gt;건강&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 성공해야 하며, 실패 시 [2]턴 동안 &lt;LSTag Type="Status" Tooltip="ARMOURG77_4"&gt;불씨&lt;/LSTag&gt; 상태가 됩니다.&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;난이도&lt;/LSTag&gt;는 당신의 &lt;LSTag Tooltip="SpellDifficultyClass"&gt;주문 내성 난이도&lt;/LSTag&gt;에 기반하지만, 그와 동일하지는 않습니다.</content>
+  <content contentuid="h40354913g5e03g4457ga652g3cb3f007ffaf" version="1">불씨</content>
+  <content contentuid="hd29836b8gc0e6g4ce8g8009g006f43e9b4d4" version="1">불씨가 만료되는 시점에 소지자의 턴 시작 시 폭발하여 [2] 반경 내의 모든 크리처에게 [1]를 입힙니다. 영향을 받은 각 크리처는 [3]% 확률로 지속 시간이 더 짧은 &lt;LSTag Type="Status" Tooltip="ARMOURG77"&gt;불씨&lt;/LSTag&gt; 효과를 받습니다.&lt;br&gt;&lt;br&gt;크리처가 전투 중이 아닐 때는 폭발하지 않습니다.</content>
+  <content contentuid="hb1de97f7g1d75g4d74ga904gd3a70d353e91" version="1">불씨가 만료되는 시점에 소지자의 턴 시작 시 폭발하여 [2] 반경 내의 모든 크리처에게 [1]를 입힙니다. 영향을 받은 각 크리처는 [3]% 확률로 지속 시간이 더 짧은 &lt;LSTag Type="Status" Tooltip="ARMOURG77_1"&gt;불씨&lt;/LSTag&gt; 효과를 받습니다.&lt;br&gt;&lt;br&gt;크리처가 전투 중이 아닐 때는 폭발하지 않습니다.</content>
+  <content contentuid="hedd7d45dgab58g4c76gac1ag98174cf268ac" version="1">불씨가 만료되는 시점에 소지자의 턴 시작 시 폭발하여 [2] 반경 내의 모든 크리처에게 [1]를 입힙니다. 영향을 받은 각 크리처는 [3]% 확률로 지속 시간이 더 짧은 &lt;LSTag Type="Status" Tooltip="ARMOURG77_2"&gt;불씨&lt;/LSTag&gt; 효과를 받습니다.&lt;br&gt;&lt;br&gt;크리처가 전투 중이 아닐 때는 폭발하지 않습니다.</content>
+  <content contentuid="h77aee5eeg29b4g4d8fg8703g64afefda4b78" version="1">불씨가 만료되는 시점에 소지자의 턴 시작 시 폭발하여 [2] 반경 내의 모든 크리처에게 [1]를 입힙니다. 영향을 받은 각 크리처는 [3]% 확률로 지속 시간이 더 짧은 &lt;LSTag Type="Status" Tooltip="ARMOURG77_4"&gt;불씨&lt;/LSTag&gt; 효과를 받습니다.&lt;br&gt;&lt;br&gt;크리처가 전투 중이 아닐 때는 폭발하지 않습니다.</content>
+  <content contentuid="h00aa7121ge99bg4439g8b13ga04a036fe858" version="1">침묵을 부르는 자</content>
+  <content contentuid="h6e9e8814g6b42g49d1gb9c1g7844ef17e9a5" version="1">이 무거운 건틀릿은 잊혀진 침묵의 신에게 맹세한 고대 암살자 집단에 의해 벼려졌습니다. 끔찍한 마법이 깃든 이 장갑은 희생자의 목소리 그 자체를 훔쳐내어, 최후의 순간에 그들을 벙어리로 만듭니다. 전설적인 살인마 일루티스가 한때 이를 착용하여 왕실 전체를 고요한 공포에 빠뜨렸습니다. 화살이 발사될 때마다 건틀릿은 저주를 속삭여, 대상과 위브 사이의 유대를 끊고 영원한 침묵 속에 빠뜨렸습니다.</content>
+  <content contentuid="h20553129gb5e5g4685gb4e5gb71e57c7ce85" version="1">목소리 없는 자의 은총</content>
+  <content contentuid="hae630c92gb3a2g4f9bg8941g0bd8f4335f6a" version="1">전투 중 당신의 원거리 무기 공격을 받은 크리처는 &lt;LSTag Tooltip="Intelligence"&gt;지능&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 성공해야 하며 실패 시 [1]턴 동안 &lt;LSTag Type="Status" Tooltip="SILENCED"&gt;침묵&lt;/LSTag&gt; 상태가 됩니다.&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;난이도&lt;/LSTag&gt;는 당신의 &lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;전투 기법 내성 난이도&lt;/LSTag&gt;에 따라 결정됩니다.</content>
+  <content contentuid="h9285174dg386dg4500g9d5fg9c1525b01a9f" version="1">정신의 굴레</content>
+  <content contentuid="h3db5a819ga5b5g4d3eg9cdfg80bb42223c87" version="1">이 장갑은 한때 의지가 약한 자들의 생각을 무자비하게 지배하여 공포의 대상이었던 수수께끼의 정신 마법사 세르타라의 것이었습니다. 그녀의 방식은 집요했습니다. 가장 미약한 정신적 장벽조차 무너질 때까지 천천히 정신적 압박을 조여갔습니다. 몇 마디 주문만으로도 남자들은 그녀의 발치에 엎드려 영원한 충성을 맹세하곤 했습니다. 하지만 세르타라의 끝없는 야망은 그녀를 파멸로 이끌었습니다. 그녀는 드워프 왕궁을 장악하고 왕에게 마법을 걸어 정지 상태에 빠뜨린 뒤 대신 왕국을 통치했습니다. 그러나 그녀의 치세는 방랑하는 사령술사에 의해 끝이 났고, 그는 교묘하게 그녀의 영혼을 그녀 자신의 의복 안에 가두었습니다. 그녀는 여전히 그곳에서 증오를 불태우며 이 저주받은 장갑에 힘이 묶인 채, 굴복시킬 다음 정신을 기다리고 있습니다.</content>
+  <content contentuid="hfefdb9cfg1478g47c1g8efdga9c2106d747a" version="1">정신적 파동</content>
+  <content contentuid="h0df1a5e4g0a41g4494g89afga91d8b2d0e80" version="1">당신에게 주로 [1]를 입은 적은 &lt;LSTag Tooltip="Wisdom"&gt;지혜&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 성공해야 하며 실패 시 [2]턴 동안 &lt;LSTag Type="Status" Tooltip="STUNNED"&gt;기절&lt;/LSTag&gt;합니다.&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;난이도&lt;/LSTag&gt;는 당신의 &lt;LSTag Tooltip="SpellDifficultyClass"&gt;주문 내성 난이도&lt;/LSTag&gt;에 따라 결정됩니다.</content>
+  <content contentuid="hf53ebb51gb35ag4940gb462gbf7bf72c677f" version="1">원소의 대가 칼소란의 건틀릿</content>
+  <content contentuid="hebcd83d2gd167g46f1gab89geb4ac8f25b80" version="1">폭풍과 화염의 현자로 알려진 전설적인 주술사 칼소란은 타의 추종을 불허하는 기술로 원초적인 힘을 휘둘렀습니다. 그러나 자연에 대한 절대적인 지배를 향한 끊임없는 탐구는 그를 어둡고 험난한 길로 이끌었습니다. 칼소란이 원소를 자신의 의지에 굴복시키려 하면 할수록 그것들은 그를 집어삼켰고, 그의 정신과 영혼을 모두 갉아먹었습니다. 결국 그를 전설로 만든 바로 그 화염과 폭풍이 그의 파멸을 불러왔습니다. 이 건틀릿은 그의 유산 중 남은 전부이며, 광기에 빠져든 그의 비극적인 이야기를 담고 있습니다. 여기에는 칼소란이 끝내 완전히 길들이지 못한 가공되지 않은 원소의 힘이 깃들어 있으며, 이를 감히 착용하는 자는 통제와 파괴 사이에서 영원히 비틀거리는 그의 고통의 메아리를 느낀다고 전해집니다.</content>
+  <content contentuid="hd671d794g2a1eg4edegbb1eg905828704b7e" version="1">칼소란의 유산</content>
+  <content contentuid="h1fe6e829g7b5cg46d3ga7d4gac50b87c4c9d" version="1">전투 중 &lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 [1] 또는 [2]를 입히면, [3]턴 동안 &lt;LSTag Type="Status" Tooltip="ARMOURG80"&gt;원소 우위&lt;/LSTag&gt; 상태를 얻습니다.</content>
+  <content contentuid="h8704961cg9b3eg4ba8g8fccg23d57da60d3e" version="1">원소 우위</content>
+  <content contentuid="h9e9405bbg3fcfg48c3ga74dgaf758f24b6ff" version="1">전투 중 &lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 [1] 또는 [2]를 입히면, [4]~[5]레벨의 &lt;LSTag Tooltip="SpellSlot"&gt;주문 슬롯&lt;/LSTag&gt;을 각각 [4]개씩 회복합니다.&lt;br&gt;&lt;br&gt;이 효과는 턴당 한 번만 발동합니다.</content>
+  <content contentuid="h19571d0dg7901g46fag99f8ga0a5239fc33f" version="1">신실한 자의 투구</content>
+  <content contentuid="hb8d16d0fge857g457dgb82ag2f0ee0adb7e8" version="1">이 우아한 투구는 한때 이브닝레스트라는 작은 마을의 소박한 사원에서 봉사했던 티르의 헌신적인 사제, 레이디 알테아 브라이트몬의 것이었습니다. 거대한 사원의 기준으로는 강력한 유물이 아닐지라도, 투구의 부드러운 광휘는 원래 주인의 순수한 신앙을 반영합니다. 봉사 기간 동안 레이디 알테아는 거창한 기적이 아니라 모든 노력에 행운이 따르는 모습으로 유명했으며, 이를 통해 도움이 필요한 이들에게 더 잘 봉사할 수 있었습니다. 지역 전설에 따르면 티르 본인이 투구를 축복하여 착용자가 의로운 추구에서 은총을 얻도록 보장했다고 합니다. 레이디 알테아가 선종했을 때 투구는 사원에 보존될 예정이었으나 산적의 습격 중에 사라졌습니다. 시간이 흐르며 온전한 잠재력은 사라졌을지 모르지만, 투구는 여전히 신성한 축복의 메아리를 간직하여 도움이 필요한 순간에 착용자의 손을 미묘하게 인도합니다.</content>
+  <content contentuid="h2dc9995dgb138g4906gb8a2g6ed8acd2d727" version="1">신성한 행운</content>
+  <content contentuid="ha896fe29g84b0g4d4eg920ag4d7183fa8d65" version="1">모든 &lt;LSTag Tooltip="AttackRoll"&gt;명중 굴림&lt;/LSTag&gt;, &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;, &lt;LSTag Tooltip="AbilityCheck"&gt;능력 판정&lt;/LSTag&gt;, 피해량, 그리고 선제권에 +[1] 보너스를 얻습니다.</content>
+  <content contentuid="h58fe9a3dg540eg46cbga3f4g6430551d844d" version="1">고르지나의 후드</content>
+  <content contentuid="h53d3a5dfg21e9g4cf3ga5dagc30d8d306640" version="1">이 낡은 후드는 소드 산맥 아래 동굴에 거주하던 은둔 수도자 고르지나의 것이었습니다. 정체 모를 심연에서 오는 정신적 교란에 시달리던 그녀는 사소한 침입으로부터 마음을 보호하는 기술을 개발했고, 그녀의 지혜를 구하는 선택된 소수에게 이를 가르쳤습니다. 후드의 미묘한 마법 부여는 수년간의 명상을 통해 직물에 새겨진 그녀의 보호 만트라가 구현된 것이라고 전해집니다. 산적들이 그녀의 생각을 염탐하고 안식처를 습격하려 했을 때, 그들의 정신 공격은 마치 바위에 닿은 물처럼 그녀의 의식에서 그대로 미끄러져 나갔습니다. 고르지나는 결국 동굴 깊은 곳으로 사라졌지만, 그녀의 후드는 정신적 강인함에 대한 그녀의 숙련을 증명하는 유산으로 남았습니다.</content>
+  <content contentuid="hb0892d7dg38e9g4c2agaf74g13aceb6a4110" version="1">정신 방어막</content>
+  <content contentuid="h8472edbag7bd3g4b8bg95ccg5b074c904b44" version="1">[1] 미만의 받는 [2]가 완전히 무시됩니다. &lt;LSTag Type="Status" Tooltip="STUNNED"&gt;기절&lt;/LSTag&gt; 상태가 될 상황에 처하면, 대신 [3]턴 동안 &lt;LSTag Type="Status" Tooltip="SLOW"&gt;둔화&lt;/LSTag&gt; 상태가 됩니다.</content>
+  <content contentuid="hb0eec1ffg97d4g40edgba21g097927307ced" version="1">공허에 닿은 서클릿</content>
+  <content contentuid="h39374295g21ffg46acgafb4gd72510ab4ce3" version="1">아, 마지스트릭스 베스의 그 악명 높은 서클릿이군요. 야망이 부른 참사의 본보기라 할 수 있죠. 평범한 마법이 그녀의 추구에 불충분해지자, 그녀는 가장 현명한 현자들조차 이름을 말하기 거부하는 먼 세계의 존재들과 계약을 맺었습니다. 그들은 그녀에게 파괴적인 마법 능력을 주었지만, 대부분의 모험가라면 두 번(아니 세 번)은 고민할 대가를 요구했습니다. 그녀의 주문이 강력해질수록 살점이 썩어 들어갔고, 어떤 치유 마법으로도 그 과정을 되돌릴 수 없었습니다. 정말 재미있는 부분요? 그녀는 그것을 훌륭한 거래라고 생각했다는 겁니다! 일부는 그녀가 여전히 차원을 배회하며 강력하지만 영구적으로 시들어가는 주문 시전자로 남아, 그녀의 길을 따를 만큼 절박한 이들에게 뒤틀린 "선물"로 이 서클릿을 남기고 있다고 말합니다. 이 물건을 판 상인이 "그냥 화려한 머리띠"라고 주장했다는 걸 믿으시겠어요?</content>
+  <content contentuid="hc59842acgcc65g4d08gab5fge147b8078cab" version="1">엔트로피의 포옹</content>
+  <content contentuid="hcaeeac3cgfc83g4a6fg9183gc14a9e5c89a7" version="1">주문 &lt;LSTag Tooltip="AttackRoll"&gt;명중 굴림&lt;/LSTag&gt;에 +[1] 보너스를 얻습니다.&lt;br&gt;&lt;br&gt;당신은 산 자들의 방식으로 &lt;LSTag Tooltip="HitPoints"&gt;생명력&lt;/LSTag&gt;을 회복할 수 없습니다.&lt;br&gt;&lt;br&gt;전투 중 &lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 피해를 입히면, [2]% 확률로 무작위 공허 캡슐을 획득합니다.</content>
+  <content contentuid="h9b3ae9e6g4125g4961gbedbgfb80547c5f14" version="1">학생의 서클릿</content>
+  <content contentuid="h1316a2f2gea04g420fgafcegc686bfff2d11" version="1">전쟁 위저드는 퍼플 드래곤 왕좌를 지키기로 맹세한 코어미어의 정예 전투 마법사들입니다. 그들의 훈련은 전투 중 신속한 주문 시전을 강조하며, 이 서클릿은 고대의 마법 부여를 통해 그 훈육을 형상화합니다.</content>
+  <content contentuid="h3f80dbe7g3c9eg4156g8796g5f35f37350bd" version="1">왕실의 훈육</content>
+  <content contentuid="hb98ad059g7177g4c58gaaa8g26398e68fc71" version="1">&lt;LSTag Type="Spell" Tooltip="Target_FogCloud"&gt;안개 구름&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Target_Grease"&gt;기름칠&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Shout_FalseLife"&gt;거짓 목숨&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Zone_ColorSpray"&gt;오색 빛보라&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Zone_BurningHands"&gt;불타는 손길&lt;/LSTag&gt; 시전 시 더 이상 &lt;LSTag Type="Image" Info="SpellSlot"/&gt;&lt;LSTag Tooltip="SpellSlot"&gt;주문 슬롯&lt;/LSTag&gt;을 소모하지 않습니다.</content>
+  <content contentuid="h84a1b2c3gd4e5g6f78g9a0bg1c2d3e4f5678" version="1">&lt;LSTag Type="Spell" Tooltip="Target_FogCloud"&gt;안개 구름&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Target_Grease"&gt;기름칠&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Shout_FalseLife"&gt;거짓 목숨&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Zone_ColorSpray"&gt;오색 빛보라&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Zone_BurningHands"&gt;불타는 손길&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Target_ArcaneLock"&gt;비전 자물쇠&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Target_CrownOfMadness"&gt;광기의 왕관&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Target_Darkvision"&gt;암시야&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Target_Knock"&gt;노크&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Shout_SeeInvisibility"&gt;투명체 감지&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Shout_MirrorImage"&gt;거울 분신&lt;/LSTag&gt; 시전 시 더 이상 &lt;LSTag Type="Image" Info="SpellSlot"/&gt;&lt;LSTag Tooltip="SpellSlot"&gt;주문 슬롯&lt;/LSTag&gt;을 소모하지 않습니다.</content>
+  <content contentuid="h5678f4e3gd2c1gb0a9g8f76g54321fedcba9" version="1">&lt;LSTag Type="Spell" Tooltip="Target_FogCloud"&gt;안개 구름&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Target_Grease"&gt;기름칠&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Shout_FalseLife"&gt;거짓 목숨&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Zone_ColorSpray"&gt;오색 빛보라&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Zone_BurningHands"&gt;불타는 손길&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Target_ArcaneLock"&gt;비전 자물쇠&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Target_CrownOfMadness"&gt;광기의 왕관&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Target_Darkvision"&gt;암시야&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Target_Knock"&gt;노크&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Shout_SeeInvisibility"&gt;투명체 감지&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Shout_MirrorImage"&gt;거울 분신&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Shout_Blink"&gt;점멸&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Target_Haste"&gt;가속&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Target_RemoveCurse"&gt;저주 해제&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Target_Slow"&gt;둔화&lt;/LSTag&gt;, &lt;LSTag Type="Spell" Tooltip="Target_VampiricTouch"&gt;흡혈의 손길&lt;/LSTag&gt; 시전 시 더 이상 &lt;LSTag Type="Image" Info="SpellSlot"/&gt;&lt;LSTag Tooltip="SpellSlot"&gt;주문 슬롯&lt;/LSTag&gt;을 소모하지 않습니다.</content>
+  <content contentuid="hdfc35f88g4aa2g4d7dg93aeg60a9f9d32353" version="1">수정 옴니 바이저 X-217</content>
+  <content contentuid="hd2f2aa6fg8fb2g40ccgaff3g3ce460e1455f" version="1">노움 공학의 걸작인 이 수정 안면 장치는 수석 공학자 닉스 글리머더스트가 언더다크 최심부의 거대한 사파이어 하나를 사용하여 제작했습니다. 각 면은 마법 에너지를 강화된 통찰력으로 유도하기 위해 정밀하게 깎였습니다. 비록 첫 번째 시제품이 사고로 금고 문을 녹여버리긴 했지만요. 워터딥 공학자 길드에서는 이를 고고학 조사용으로 "공식" 의뢰했다고 하지만, 소문에 따르면 몇몇 저명한 귀족들이 이 독특한 물건에 상당한 금액을 제안했다고 합니다. 참고로 렌즈에서 나오는 푸른 광선은 지극히 정상입니다. 절대 숨겨진 보물을 스캔하는 게 아니에요. 누가 물어보면 당신은 역사학자인 겁니다!</content>
+  <content contentuid="h9218152eg3d14g4623g9da6g99eba2703f91" version="1">정밀 시야</content>
+  <content contentuid="hcd09c338g8d43g4500ga41fgae62497e4929" version="1">&lt;LSTag Type="Skills" Tooltip="Perception"&gt;포착&lt;/LSTag&gt; 판정에 &lt;LSTag Tooltip="Advantage"&gt;유리 보정&lt;/LSTag&gt;을 받습니다.&lt;br&gt;&lt;LSTag Type="Skills" Tooltip="SleightOfHand"&gt;손재주&lt;/LSTag&gt; +[1].</content>
+  <content contentuid="h091aec76g742eg42a7g97b6g326595fdb252" version="1">재규어 영혼 머리 장식</content>
+  <content contentuid="hd0a250c3g542ag448dg972fgfafee6636768" version="1">철트 정글 깊숙한 곳, 덩굴로 뒤덮인 사원에서 발견된 이 의례용 머리 장식은 전설적인 재규어 전사들의 이야기를 담고 있습니다. 장식된 표백된 뼈는 단순한 장식이 아닙니다. 정성스럽게 보존된 거대한 정글 고양이의 유해로, 그 영혼은 여전히 물질계를 배회한다고 전해집니다. 재규어 전사들은 적들이 숨을 들이쉬기도 전에 공격하며, 목격자들이 심장 박동 한 번과 다음 박동 사이에 전투가 끝났다고 말할 정도로 초자연적인 속도로 움직이는 것으로 유명했습니다. 물론, 이걸 쓰고 갑자기 불가사의한 속도로 반응할 수 있게 된다면... 음, 그건 그냥 우연이겠죠?</content>
+  <content contentuid="h87a4061bgaaf5g427cg9b50gd1d2df1dfa1a" version="1">신속한 일격</content>
+  <content contentuid="h863d514dga8d9g48bfga252g4384f6877f39" version="1">선제권 +[1].</content>
+  <content contentuid="he4ce38e5g5f62g4528g8330g937304cf0844" version="1">파도 여왕의 다이아뎀</content>
+  <content contentuid="h69b94fc7g31f3g4d8aga5e5gce2b495a2157" version="1">이 우아한 다이아뎀 안에는 고대 레비아탄들이 꿈꾸는 심해에서 태어난 수정인 '마엘라라의 눈물'이 박혀 있습니다. 사람들은 항로 없는 바다의 잊혀진 여왕 마엘라라가 그녀의 왕국이 파도 아래로 가라앉을 때 슬픔에 젖어 이를 흘렸다고 말합니다. 부둣가의 수다스러운 선원들이 지어낸 또 다른 허풍이겠지만, 흥미로운 점이 하나 있습니다. 달빛 아래에서 착용하면 이 수정이 심해 생물들의 노래와 같은 주파수로 공명한다는 것입니다. 캔들킵의 학구적인 이들은 이것이 "그저" 마법을 위한 강력한 매개체일 뿐이라고 주장하지만, 이걸 쓰고 있을 때 당신의 주문이 멈출 수 없고 압도적인 파도처럼 느껴진다는 걸 눈치채셨나요?</content>
+  <content contentuid="he8ba7067g3f36g47a0gac8egecebb5313eae" version="1">바다의 지배</content>
+  <content contentuid="ha8f36fcbgaa6cg450cg93e0g4d83d21571aa" version="1">[1] 또는 [2]를 입히는 &lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;를 적중시키면, 턴 종료 시까지 &lt;LSTag Tooltip="SpellSlot"&gt;주문 슬롯&lt;/LSTag&gt;을 소모하지 않고 &lt;LSTag Type="Spell" Tooltip="Zone_GustOfWind_ARMOURH87_T2"&gt;돌풍&lt;/LSTag&gt;을 &lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;보조 행동&lt;/LSTag&gt;으로 시전할 수 있습니다.</content>
+  <content contentuid="hb8ad1470g1666g4b4dgaaa6gbc00e82e6ffd" version="1">[1] 또는 [2]를 입히는 &lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;를 적중시키면, 턴 종료 시까지 &lt;LSTag Tooltip="SpellSlot"&gt;주문 슬롯&lt;/LSTag&gt;을 소모하지 않고 &lt;LSTag Type="Spell" Tooltip="Zone_GustOfWind_ARMOURH87_T1"&gt;돌풍&lt;/LSTag&gt;을 &lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;보조 행동&lt;/LSTag&gt;으로 시전할 수 있습니다.</content>
+  <content contentuid="h5064cf94g1130g4acdgb8fdg38f683701585" version="1">[1] 또는 [2]를 입히는 &lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;를 적중시키면, 턴 종료 시까지 &lt;LSTag Tooltip="SpellSlot"&gt;주문 슬롯&lt;/LSTag&gt;을 소모하지 않고 &lt;LSTag Type="Spell" Tooltip="Zone_GustOfWind_ARMOURH87_T3"&gt;돌풍&lt;/LSTag&gt;을 &lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;보조 행동&lt;/LSTag&gt;으로 시전할 수 있습니다.</content>
+  <content contentuid="ha8afd1e4g110bg4cebga66ega9feffc1acdc" version="1">[1] 또는 [2]를 입히는 &lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;를 적중시키면, 턴 종료 시 till &lt;LSTag Tooltip="SpellSlot"&gt;주문 슬롯&lt;/LSTag&gt;을 소모하지 않고 &lt;LSTag Type="Spell" Tooltip="Zone_GustOfWind_ARMOURH87_T4"&gt;돌풍&lt;/LSTag&gt;을 &lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;보조 행동&lt;/LSTag&gt;으로 시전할 수 있습니다.</content>
+  <content contentuid="hcaf0cb3dg5de4g4272g82b8g0f089e6a121d" version="1">바다보라</content>
+  <content contentuid="h8dd81896g77d2g4163ga547g6bae7eeaec39" version="1">적이 &lt;LSTag Type="Status" Tooltip="OFF_BALANCED"&gt;불안정&lt;/LSTag&gt; 상태가 되면, [1]턴 동안 &lt;LSTag Type="Status" Tooltip="WET"&gt;젖음&lt;/LSTag&gt; 상태가 됩니다.</content>
+  <content contentuid="h58f12db5g39b5g41d6g9b9cg93b17735ea45" version="1">서리 거인의 투구</content>
+  <content contentuid="h3dc8a87cg441ag45d7g8e07g2ad0d432b709" version="1">전설적인 '얼어붙은 왕의 사냥'에서 얻은 인상적인 전리품이죠. 누구에게 묻느냐에 따라 아주 비싼 모자걸이가 될 수도 있겠지만요. 서리 거인 그림프로스트가 북부 무역로를 위협할 때, 모험가 무리가 사흘 밤낮의 눈보라를 뚫고 그를 추적했습니다. 그들은 마침내 얼음 요새에서 그를 몰아넣었고, 합심하여 그를 쓰러뜨렸습니다. 수 세기가 흘렀지만 투구는 여전히 강렬한 냉기를 뿜어내며 그림프로스트의 분노의 마지막 메아리를 전합니다. 마법은 다소 약해졌지만 투구는 여전히 원래 주인의 체구를 기억합니다. 단지 완전히 서리 거인만큼 커질 거라고 기대하지는 마세요. 이걸 판 상인은 당신이 듣는 저 서늘한 속삭임이 "그저 바람 소리"일 뿐이라고 맹세하더군요.</content>
+  <content contentuid="h91d0fe88g57cfg43d8gacd9gf2cd55d2c045" version="1">거인의 체구</content>
+  <content contentuid="h46d7f674g5424g4cd6g9f4eg217b3b849545" version="1">당신의 크기 등급과 무게가 [1]만큼 증가합니다. 당신의 &lt;LSTag Type="Spell" Tooltip="Throw_Throw"&gt;투척&lt;/LSTag&gt; 공격에 적중당한 적은 &lt;LSTag Tooltip="Constitution"&gt;건강&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 성공해야 하며 실패 시 &lt;LSTag Type="Status" Tooltip="SLOW"&gt;둔화&lt;/LSTag&gt; 상태가 됩니다.&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;난이도&lt;/LSTag&gt;는 당신의 &lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;전투 기법 내성 난이도&lt;/LSTag&gt;에 따라 결정됩니다.</content>
+  <content contentuid="h224b2b8bg9216g46c2g9a98ga782adf0a26a" version="1">광대의 편안한 모자</content>
+  <content contentuid="hb5cc45ceg3b03g4515gabb8g8d8b449595cb" version="1">농담 한 번에 목숨을 바꾼 광대를 만나본 적 있나요? 이 독특한 모자는 한때 '완벽한 타이밍' 핍 퀵윗의 것이었는데, 그의 마지막 공연은 마인드 플레이어의 식사 예절을 조롱하는 것이었습니다. 그의 재치는 그 만남에서 살아남지 못했지만, 마법이 깃든 모자는 살아남아 여전히 초자연적인 자신감의 오라를 뿜어냅니다. 사람들은 핍이 너무나 멋지게 죽음을 맞이해서 마인드 플레이어조차 그 농담의 핵심을 감상하기 위해 잠시 멈췄을 정도라고 말합니다. 이제 이 모자는 핍처럼 극적인 타이밍을 즐기면서도, 아마도 더 나은 생존 본능을 가진 착용자를 찾고 있습니다. 기억하세요. 독설은 당신의 상태가 최상일 때 내뱉는 것이 가장 좋다는 것을요!</content>
+  <content contentuid="hc2d55d5eg72abg42c6g8a38gf7b489558f7b" version="1">즐거운 조롱</content>
+  <content contentuid="h6ff1b9e3g2b90g4010g8b1dg5eb601799c17" version="1">&lt;LSTag Tooltip="HitPoints"&gt;생명력&lt;/LSTag&gt;이 가득 찬 상태로 전투 중일 때 &lt;LSTag Tooltip="Charisma"&gt;매력&lt;/LSTag&gt;이 +[1] 증가합니다.</content>
+  <content contentuid="h34ea2b96g8d69g4a4fg85bdg549ee8b6ce84" version="1">명상가의 카울</content>
+  <content contentuid="h4522d0cdg2f09g45d5gb2dfg8aa005e5b6d5" version="1">수도사들이 더 깊은 진리를 찾아 수년간 침묵 속에서 명상하던 제3새벽 사원의 단순한 천 후드입니다. 알드윈 형제는 사원으로 접근하는 산적들을 경고하기 위해 마침내 입을 열기 전까지, 그의 유명한 "침묵의 10년" 동안 이를 착용했습니다. 경고 덕분에 동료 수도사들은 구했지만, 알드윈 자신은 노약자들을 대피시키던 중 쓰러졌습니다. 사원의 생존자들은 그의 흔들림 없는 집중력과 명석한 두뇌가 이 카울 자체로 옮겨간 것 같다고 주장했습니다. 산적들이 이미 그것을 남쪽으로 향하는 상단에 팔아넘겼다는 사실을 그들이 몰랐다는 게 아쉬울 뿐이죠. 저 명상 기술들은 연습이 좀 필요하겠군요!</content>
+  <content contentuid="h254e7419gc711g47d7ga002gd8791a7e341a" version="1">자라나는 지혜</content>
+  <content contentuid="he44ff982g5765g4034gbeb1gba112b39aea4" version="1">지혜 &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 +[1] 보너스를 얻습니다.&lt;br&gt;&lt;br&gt;효과는 매 [2]레벨마다 증가합니다.</content>
+  <content contentuid="h73140920g08fag47d8gb778g01c783a43358" version="1">대사의 벨벳 모자</content>
+  <content contentuid="h2bdd853bg9375g4224gb0eeg38d9e87d0554" version="1">멸망한 아나우리아의 궁정에서 온 이 외교적 기교의 걸작을 보세요. 발로리안 상급 고문관은 악명 높은 삼국 정상회담 중에 이를 착용했는데, 그는 유창한 언변으로 세 명의 적대적인 군주들에게 그들의 차이가 "단지 관점의 문제일 뿐"이라고 설득하여 전쟁을 막아냈습니다. 당대에 적지 않은 가치가 있었던 모자의 짙은 진홍색 염료는 가장 혼란스러운 알현실에서도 주의를 집중시켰다고 전해집니다. 아나우리아 자체는 오래전에 먼지가 되어 사라졌지만, 외교단의 이 유물은 여전히 자연스러운 권위의 분위기를 풍깁니다. 단지 당신이 이걸 어떤 잊혀진 유적에서 "발견"했는지는 언급하지 마세요. 그건 신뢰도를 떨어뜨리는 경향이 있으니까요.</content>
+  <content contentuid="hb2b38df5gfda2g4b5eg8906gbafe5bbab49c" version="1">외교적 은총</content>
+  <content contentuid="h4157ccdag2ec3g4223ga5beg99da212cf49d" version="1">&lt;LSTag Type="Skills" Tooltip="Persuasion"&gt;설득&lt;/LSTag&gt; 판정에 &lt;LSTag Tooltip="Advantage"&gt;유리 보정&lt;/LSTag&gt;을 받습니다.</content>
+  <content contentuid="hf407551aga632g4c41g8f07g883b0d4cd1fb" version="1">솔라리안 서클릿</content>
+  <content contentuid="h5150af9bg2f04g436dgbfc8g8fbc96b06e58" version="1">전설에 따르면 이 섬세한 서클릿은 천상의 빛이 결코 사라지지 않는 셀레스티아 산의 가장 높은 첨탑에서 제작되었습니다. 선 엘프 공학자와 솔라 사이의 기묘한 파트너십은 신성한 광휘와 필멸자의 공예가 우아하게 융합된 이 결과물을 낳았습니다. 원래 용도에 대해서는 여전히 논쟁 중이지만(솔라는 "순수하게 장식용"이라고 주장했습니다), 이 서클릿은 과도한 햇빛을 방심한 적들에게 쏟아붓는 재미있는 경향이 있습니다. 공학자의 노트에는 "예기치 못한 에너지 전환"에 대해 언급되어 있지만, 두루마리의 나머지 부분은 신비롭게도 타버렸습니다.</content>
+  <content contentuid="hd8664037g2f6dg490bgab99g22b9638ce261" version="1">태양의 축복</content>
+  <content contentuid="h9bd1d03cg9476g4f71g959bg1111f7d79841" version="1">햇빛 아래 서 있는 동안 &lt;LSTag Tooltip="Concentration"&gt;집중&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;을 할 때 주사위 값이 [1]보다 낮게 나올 수 없습니다.</content>
+  <content contentuid="hbb8ded19g080eg4fa9g8963g206733a0ece2" version="1">태양 반사</content>
+  <content contentuid="hc06dc978ga10bg4627g857fg5472886803a1" version="1">햇빛 아래 서 있는 동안 받는 피해의 [1]%를 [2]로 반사합니다.</content>
+  <content contentuid="h2db2e291gd2fcg40fdgbf1dgc814b8a8ba68" version="1">복수심에 불타는 영혼의 왕관</content>
+  <content contentuid="heaf06650gb5b3g49dfga0b3g3caa02a11af5" version="1">영혼을 구속하는 실험이 계획대로 끝나지 않았던 악명 높은 마녀 여왕 마라의 몰락에서 얻은 불길한 전리품입니다. 그녀가 가두었던 복수심에 불타는 영혼들이 중요한 의식 중에 그녀에게 등을 돌려, 그녀의 소중한 왕관을 인과응보의 도구로 바꾸어 놓았습니다. 이제 그 영혼들은 왕관의 착용자를 목표로 삼을 만큼 어리석은 주문 시전자들에게 열렬히 달려듭니다. 영혼들이 비명을 지르며 만들어내는 소용돌이는 꽤... 기억에 남을 것이라고들 합니다. 물론, 당신이 그 반동에서 살아남는다는 가정하에 말이죠. 그 목소리들은 새로운 마법사들을 만나는 것을 꽤 고대하는 것처럼 들리니까요!</content>
+  <content contentuid="h79aa3dcbgbd73g42a1g8e3dg45915dd4a88c" version="1">%%% DEPRECATED %%%%</content>
+  <content contentuid="h34a7d71age0c3g4c4dga682gbcaec629a01e" version="1">%%% DEPRECATED %%%%</content>
+  <content contentuid="h1232a428g5162g4294g8e7eg9a92b16f35f0" version="1">%%% DEPRECATED %%%%</content>
+  <content contentuid="h650b8ffbg82d6g4fa0ga4ccg54583b8d2b01" version="1">%%% DEPRECATED %%%%</content>
+  <content contentuid="hdf32e395g108dg4e32ga595g8adeb1fbe409" version="1">정신 절단</content>
+  <content contentuid="h1c61fbbdga50dg4a02g9c08g6e6b9643dfb1" version="1">적에게 상태 효과를 부여할 때 [1]를 입힙니다.&lt;br&gt;&lt;br&gt;기스양키가 아니라면 지능, 지혜, 매력 &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 &lt;LSTag Tooltip="Disadvantage"&gt;불리 보정&lt;/LSTag&gt;을 받습니다.</content>
+  <content contentuid="h42d38e4cg8507g4187g96cfg28dd0dfc985f" version="1">정신 침식</content>
+  <content contentuid="h7d01b497g3243g4cf9g99d5gac35aad537f2" version="1">적에게 강제하는 정신 관련 &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;은 &lt;LSTag Type="Status" Tooltip="MAG_PSYCHIC_MENTAL_FATIGUE"&gt;정신적 피로&lt;/LSTag&gt; 상태를 함께 부여합니다.</content>
+  <content contentuid="h7d7defc0g99fag410cgaff9gbb43806f9a5f" version="1">정신 집중</content>
+  <content contentuid="h75ca4ea1g6e24g4e78g9e2bg32243ddcd1fc" version="1">[1]를 입힐 때 &lt;LSTag Type="Status" Tooltip="MAG_PSYCHIC_MIND_FOCUS"&gt;정신 집중&lt;/LSTag&gt; 중첩을 [2]회 얻으며, 중첩당 +[3] 보너스를 받습니다.</content>
+  <content contentuid="h372bb6c9g629ag4e43gaff3g7cab74102a6e" version="1">이 효과의 중첩당 [1]를 추가로 입힙니다. 중첩은 [2]회를 초과할 수 없습니다. [2] 중첩일 때 받는 [3]가 [4]만큼 감소합니다.</content>
+  <content contentuid="heca39efdg8e72g4f51g8a55g87b2c688804b" version="1">브레인버닝 다이아뎀</content>
+  <content contentuid="h46cb2c1cg3c17g4c64g9d3agef17d08167ee" version="1">악명 높은 비전술사 크리지니 블랙손이 마법 중독에 빠져들던 시기에 제작된 이 물건은, 일부 마법사들이 자신의 기술을 완벽하게 만들기 위해 감수하는 절박한 노력을 상징합니다. 깨지지 않는 집중에 집착하던 크리지니는 마법 에너지를 연료로 말 그대로 태워버리도록 이 다이아뎀을 설계했습니다. 그녀의 견습생들은 그녀가 주문 하나를 유지하기 위해 며칠을 보내며 유물이 그녀의 마력을 다 소모할 때까지 쓰러지지 않았다고 속삭였습니다. 좋은 소식요? 의도한 대로 정확히 작동했다는 겁니다. 나쁜 소식요? 음, 크리지니가 결국 금단 증상에서 살아남지 못했다는 것만 말씀드리죠.</content>
+  <content contentuid="hc1a240abg7851g490fga0bfga03a8d02e161" version="1">집중된 희생</content>
+  <content contentuid="h0d8ade20gd6aag4ecdg97fag114f194222e7" version="1">&lt;LSTag Tooltip="Concentration"&gt;집중&lt;/LSTag&gt; 유지에 &lt;LSTag Tooltip="Advantage"&gt;유리 보정&lt;/LSTag&gt;을 받습니다. 전투 중 매 턴마다 당신의 &lt;LSTag Tooltip="SpellDifficultyClass"&gt;주문 내성 난이도&lt;/LSTag&gt; -[2]를 난이도로 하는 지혜 &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 성공해야 하며, 실패 시 [1]레벨 &lt;LSTag Tooltip="SpellSlot"&gt;주문 슬롯&lt;/LSTag&gt; 1개&lt;i&gt;(또는 모든 워락 주문 슬롯)&lt;/i&gt;를 소모합니다.</content>
+  <content contentuid="he2005021geaf9g4be5g9e78g29835d59de73" version="1">학자의 부드러운 모자</content>
+  <content contentuid="h1fba9cabgbe56g4946g8d9agea4328448eb9" version="1">이 평범한 모자는 주문서를 잃어버리는 게 가장 큰 재주였던 발더스 게이트의 하급 위저드, 깜빡쟁이 웬델의 것이었습니다. 자신의 마법 목록 전체를 세 번째로 다시 쓴 후, 그는 자신이 좋아하는 모자에 학문적 지식을 유지하는 마법을 걸었습니다. 비록 그 모자를 어디에 두었는지 즉시 잊어버렸지만요. 지역 현자들은 여전히 도서관에서 흩어진 두루마리에 둘러싸인 채 모자 없는 머리를 필사적으로 쓰다듬는 웬델을 목격했다는 이야기를 하곤 합니다. 적어도 지금은 누군가 요긴하게 쓰고 있겠군요!</content>
+  <content contentuid="h74e79adfg540bg4774g9194gd50910b5661e" version="1">빌려온 지식</content>
+  <content contentuid="h4a564db2g863eg4885g907eg23f932c90f73" version="1">&lt;LSTag Tooltip="Arcana"&gt;비전&lt;/LSTag&gt;, &lt;LSTag Tooltip="History"&gt;역사&lt;/LSTag&gt;, &lt;LSTag Tooltip="Religion"&gt;종교&lt;/LSTag&gt;에 대한 &lt;LSTag Tooltip="Proficiency"&gt;숙련&lt;/LSTag&gt;을 얻습니다.</content>
+  <content contentuid="h22e28004g50f4g41bagb3c0gdfc0e742477d" version="1">도망친 위저드 모자</content>
+  <content contentuid="h2a0b26acg7c30g49cbgba67gf1f693470bb7" version="1">원래는 괴짜 환혹술사 말리팍스의 것이었으나, 이 모자는 너무나 많은 실험적인 마법 부여를 거친 후 꽤 독특한 성격을 갖게 되었습니다. 주인의 끊임없는 마법적 만지작거림(그리고 의심스러운 패션 감각)에 진저리가 난 모자는 어느 날 밤 그냥 둥둥 떠나버리며 쪽지를 남겼습니다. "실험이 적은 관계를 찾아 떠남." 이 모자는 이제 주문 시전자가 실수를 바로잡는 것을 돕는 묘한 습관이 있습니다. 비록 당신이 그 마법 부여를 수정하려 들면 꽤 화를 내긴 하지만요. 그 역사를 생각하면 딱히 탓할 수도 없겠죠!</content>
+  <content contentuid="he0a77522g351dg41bag8550gdbac20810ae5" version="1">두 번째 기회</content>
+  <content contentuid="h57273218g2f0dg4bddg8e7dg2c52c435b3c4" version="1">&lt;LSTag Tooltip="Cantrip"&gt;소마법&lt;/LSTag&gt; &lt;LSTag Tooltip="AttackRoll"&gt;명중 굴림&lt;/LSTag&gt;에서 주사위 값이 [1] 미만으로 나오면 다시 굴려, 더 높은 결과값을 적용합니다.</content>
+  <content contentuid="h373148e1g62c9g40cbgb3dcgacaf5997c835" version="1">이건 모자입니다</content>
+  <content contentuid="h43fc6119g77fdg4097g8f56g2912fc1ecf22" version="1">황금 의례 가면</content>
+  <content contentuid="h59106386g2bacg4a00gbaefgfddd16efe09d" version="1">오릭 베일의 전설적인 금속 세공인들이 제작한 이 순금 가면은 마법만큼이나 장인 정신의 걸작입니다. 각각의 복잡한 패턴은 소모된 마법 에너지를 유도하고 재순환시키는 목적을 수행합니다. 베일의 전사 사제들은 마라톤 같은 의례 전투 중에 이 가면을 착용하여, 일반적인 필멸자라면 비틀거렸을 오랜 시간 뒤에도 저장된 힘을 끌어내어 계속 싸웠습니다. 물론, 가면의 실제 금 가치는 산적들에게 꽤 인기가 좋았죠. 생존한 가면이 거의 없는 이유일 겁니다. 비록 이 가면의 마법은 약해졌지만, 착용자를 의심스러울 정도로 부자로 보이게 만드느라 바쁘지 않을 때는 여전히 자신의 목적을 기억하고 있습니다...</content>
+  <content contentuid="h48a99988g8f3eg4c5ag8372g8607d66be552" version="1">에너지 회복</content>
+  <content contentuid="heb34ffcdg3da8g48cbga119gcfd9f0306456" version="1">마무리 일격을 가하면 [1]% 확률로 &lt;LSTag Type="ActionResource" Tooltip="ChannelDivinity"&gt;신성한 권능&lt;/LSTag&gt;, &lt;LSTag Type="ActionResource" Tooltip="Rage"&gt;격노&lt;/LSTag&gt;, &lt;LSTag Type="ActionResource" Tooltip="BardicInspiration"&gt;바드의 격려&lt;/LSTag&gt;, &lt;LSTag Type="ActionResource" Tooltip="SorceryPoint"&gt;소서리 포인트&lt;/LSTag&gt;, &lt;LSTag Type="ActionResource" Tooltip="ArcaneRecoveryPoint"&gt;비전 회복&lt;/LSTag&gt;, &lt;LSTag Type="ActionResource" Tooltip="NaturalRecoveryPoint"&gt;자연 회복&lt;/LSTag&gt;, &lt;LSTag Type="ActionResource" Tooltip="LayOnHandsCharge"&gt;치유의 손길&lt;/LSTag&gt;, &lt;LSTag Type="ActionResource" Tooltip="WarPriestActionPoint"&gt;전쟁 사제 추가 공격 횟수&lt;/LSTag&gt;, &lt;LSTag Type="ActionResource" Tooltip="WrithingTidePoint"&gt;요동치는 물결&lt;/LSTag&gt;, 그리고 &lt;LSTag Type="ActionResource" Tooltip="Bladesong"&gt;칼날 노래 마력&lt;/LSTag&gt; 자원을 1회 회복합니다.</content>
+  <content contentuid="h55fb5ec3g1f21g4a64ga241g06c0cc888000" version="1">꿈 추적자의 투구</content>
+  <content contentuid="hf5fa97ccga2f6g4c07gbf92g43a43376a16b" version="1">이 당당한 투구는 한때 다리우스 나이트위브 경의 것이었는데, 그는 야경증 때문에 점점 더 위험한 마법적 해결책을 갈구했습니다. 이 투구는 그의 역작이었습니다. 순수한 꿈의 에너지를 보호의 힘으로 변환할 수 있는 창조물이었죠. 마법 부여의 기묘한 특성 때문에 투구는 너무나 잘 작동했고, 그의 꿈뿐만 아니라 주변 모든 이들의 꿈까지 흡수해버렸습니다. 지역 선술집은 그의 탑 그림자 아래에서 평온하게 쉴 수 있는 지친 여행자들에게 "꿈 없는 잠"을 팔아 꽤 수익을 올렸습니다. 다리우스가 신비롭게 사라진 후(일부는 그가 꿈속에 갇혔다고 말합니다), 투구는 소유자들을 거쳐 가며 초자연적인 보호를 제공해왔습니다... 비록 이웃들은 묘하게 텅 빈 밤에 대해 불평하지만요.</content>
+  <content contentuid="he765def4g5f8eg4968ga217g64ab28da7a81" version="1">꿈의 방어막</content>
+  <content contentuid="hcda08676gf5e9g43e3ga4d4g944ca0ea0224" version="1">&lt;LSTag Tooltip="LongRest"&gt;긴 휴식&lt;/LSTag&gt; 후 [1]을 얻습니다.</content>
+  <content contentuid="hc7efb00eg0ef1g43f1gbde5g8b7690e8f4c0" version="1">켄타우로스 대장의 투구</content>
+  <content contentuid="h4551d8c4g3833g45ffga9e9g89e53735f566" version="1">사람들은 스트롱후프 대장이 적진을 뚫고 돌진해야 할지라도 쓰러진 전사를 절대 뒤에 남겨두지 않았다고 말합니다. 이 장식된 투구는 켄타우로스와 인간 군대 모두에서 전설적인 지위를 얻게 해준 전장의 형제애와 같은 흔들림 없는 정신을 유도합니다. 천둥 평원 전투에서 그는 열여섯 명의 전사를 다시 일으켜 세웠다고 전해지며, 각 전사는 그의 두려움 없는 본보기에 영감을 받아 새로운 활력을 얻고 일어났습니다. 투구에는 그가 쓰러진 정찰병을 돕는 동안 방심한 오우거를 머리로 들이받았을 때 생긴 자국이 여전히 남아 있습니다.</content>
+  <content contentuid="h8aac5a74gcb7eg4419gbfafg5910b8574cec" version="1">전사의 결속</content>
+  <content contentuid="haa235a25gcb5bg40d6g816ag3a444e339caf" version="1">당신의 &lt;LSTag Tooltip="HitPoints"&gt;생명력&lt;/LSTag&gt;이 최대일 때, [1] 이내의 모든 아군이 &lt;LSTag Type="Status" Tooltip="DOWNED"&gt;쓰러짐&lt;/LSTag&gt; 상태가 되면 자동으로 안정화됩니다.</content>
+  <content contentuid="hd1bd98cfg6156g403aga899gfbd438ee41e5" version="1">%%% DEPRECATED %%%%</content>
+  <content contentuid="hdb977c23g2a26g4a4fg94d3g35a86bb237ba" version="1">%%% DEPRECATED %%%%</content>
+  <content contentuid="h3fc692dag0991g4122g8263ga9f05a231ee8" version="1">그림자 무희의 장막</content>
+  <content contentuid="h1b787177g8372g46a5gaa2fg5d98466f011d" version="1">마스터 도둑 대런 베일이 앰의 섀도우볼트에 침투했던 악명 높은 '황혼의 강탈'에서 남겨진 물건입니다. 투구의 기묘한 디자인은 단순히 보여주기 위한 것이 아닙니다. 각 홈과 패턴은 회피에 성공할 때마다 그림자의 정수를 치명적인 타격력으로 유도합니다. 베일은 투구가 자신의 칼날에서 색을 빼앗는 동안 "공허의 비밀을 속삭였다"고 주장했습니다. 불행히도 그는 그림자들에게 그들만의 계획이 있다는 것을 너무 늦게 깨달았습니다. 요즘 신중한 관찰자라면 특히 우아한 회피 후에 투구 착용자의 무기가 잠시 무색으로 변하는 것을 눈치챌지도 모릅니다. 단지 저 그림자들을 너무 오래 쳐다보지는 마세요. 그것들도 당신을 쳐다보는 경향이 있으니까요!</content>
+  <content contentuid="h76f7e561ga3b3g4c8cg991dg97e993ebebe9" version="1">그림자의 선물</content>
+  <content contentuid="hcef5a448g627fg42bbgbb76g5aa39c74210f" version="1">적의 공격에 대해 민첩 &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 성공하면, [1]턴 동안 무기를 &lt;LSTag Type="Status" Tooltip="ARMOURH100"&gt;그림자 일격&lt;/LSTag&gt;으로 충전합니다.</content>
+  <content contentuid="hffb05762gde83g44cdgb466gfdbb93a7afa7" version="1">그림자 일격</content>
+  <content contentuid="h78752ba6gb9e7g43fega7adg9a517c0a9bb4" version="1">근거리 무기 &lt;LSTag Tooltip="AttackRoll"&gt;명중 굴림&lt;/LSTag&gt;에 +[1]~[2] 보너스를 얻습니다.</content>
+  <content contentuid="ha1636c94g9f07g4a67gb493gf208f81977bb" version="1">신성한 인내의 투구</content>
+  <content contentuid="hbe37cdc4g023eg427bg9363gc71bcb182ec1" version="1">사람들은 정의로운 신이 고난을 견뎌내는 자들을 보살핀다고 말합니다. 티르의 사원에서 축복받은 이 투구는 착용자가 중상을 입었을 때 그 보호를 구현합니다. 원래 '고난의 시대' 동안 신자들에게 수여되었던 이 투구는, 절박한 순간에 티르의 축복이 솟구쳐 나와 수많은 생명을 구했습니다. 치명적인 타격을 받은 후 금속을 감싸는 황금빛 광휘는 티르 자신의 궁정의 빛을 반영한다고 전해집니다. 시간이 흐르며 힘은 약해졌지만, 투구는 여전히 신성한 회복력의 메아리를 간직하고 있습니다. 정의에 약간의 지원이 필요한 순간에 완벽하죠!</content>
+  <content contentuid="hbd1eef88ga602g4716g98ddg8e7de3e812b0" version="1">티르의 가호</content>
+  <content contentuid="h7dd1e7e8g6bb4g421ag94eeg5e37046514c0" version="1">&lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;를 입으면 [1]턴 동안 &lt;LSTag Type="Status" Tooltip="ARMOURH101"&gt;티르의 방벽&lt;/LSTag&gt; 축복을 얻습니다.</content>
+  <content contentuid="ha0939d40gf012g482cg83b3g1891fa798ef0" version="1">티르의 방벽</content>
+  <content contentuid="h520cbf6cg67cfg482ag8059g81117f1ac207" version="1">&lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 &lt;LSTag Tooltip="Advantage"&gt;유리 보정&lt;/LSTag&gt;을 받습니다.</content>
+  <content contentuid="hb6fbddfdgbafdg4ba4ga987g6f66d1f58fdb" version="1">장난의 왕관</content>
+  <content contentuid="h6da60fa9g12d3g4f98gaad8g527c293472fa" version="1">명상 시간 동안 가만히 있지 못하는 것으로 악명이 높았던 아치드루이드 쏜하트의 애장품입니다. 그의 끊임없는 꼼지락거림에 지친 동료 드루이드들이 장난삼아 이 왕관에 마법을 걸었습니다. 원래는 의식 중에 그를 제자리에 얼려버리려는 의도였죠. 하지만 마법은 아주 화려하게 역효과를 냈고, 대신 그의 마법적 통찰력을 강화하는 동시에 다른 이들을 구속하는 기묘한 능력을 부여했습니다. "적어도 그들의 조롱에서 좋은 결과가 나왔군." 그는 일기장에 적었습니다. "비록 여전히 죽을 때까지 가만히 앉아 있을 수는 없지만 말이야." 왕관의 힘은 그 시절보다 약해졌지만, 과거의 그 장난스러운 성질의 그림자를 간직하고 있습니다.</content>
+  <content contentuid="h8e24f9cbgf657g4c34ga916g763ff937a232" version="1">귀중한 교훈</content>
+  <content contentuid="h26321594g5229g4513g8ba5ga35f8e7abbb7" version="1">전투 중 적을 &lt;LSTag Type="Status" Tooltip="RESTRAINED"&gt;구속&lt;/LSTag&gt;하면, &lt;LSTag Type="Status" Tooltip="MAG_GISH_ARCANE_ACUITY"&gt;비전적 예리함&lt;/LSTag&gt; 중첩을 [1] 얻습니다.&lt;br&gt;&lt;br&gt;이 효과는 턴당 한 번만 발동합니다.</content>
+  <content contentuid="h22afe904g4872g43ebg9cf0g87a472da89d4" version="1">엘레멘트랄</content>
+  <content contentuid="hf14c79fegf25dg499fg98e3g08e3c76605ff" version="1">얼음 부족의 진정한 후손만이 이 마법 깃든 투구의 힘을 사용할 수 있습니다. 이 유물은 수만 년 동안 부족에서 부족으로 선택된 주술사에게 전해 내려오다, 오크 마을 중 한 곳에서 전리품으로 잊혀졌습니다. 하지만 여전히 위에서 미소 지으며 원소 후손의 운명을 인도하는 자연 정령들의 힘을 간직하고 있습니다.</content>
+  <content contentuid="hff9890c7ge4a4g483bgb1bag780cac19f559" version="1">원소의 후예</content>
+  <content contentuid="ha49fca75ge9c3g44acgaedfg1bd27bd5c1d9" version="1">&lt;LSTag Type="Status" Tooltip="MAG_CHARGED_LIGHTNING"&gt;번개 충전&lt;/LSTag&gt; 상태인 동안 [1], [2] 또는 [3]를 입으면 [4]턴 동안 해당 원소에 대한 보호가 활성화됩니다.</content>
+  <content contentuid="h30d11062g9836g4c92ga4c6gfee167b86eaa" version="1">물의 보호막</content>
+  <content contentuid="heafe5d38g5d13g46cfga15eg7e78c1a1eac0" version="1">들어오는 모든 [1]가 [2]만큼 감소합니다.</content>
+  <content contentuid="h9f76ef5cgf713g4147g9338g56839a36bbb1" version="1">하늘의 영혼</content>
+  <content contentuid="h204c7a88ge853g47a4gaa6cgbc05d470c23e" version="1">엘레멘트랄의 원소 보호막 중 하나를 받고 있는 동안 피해를 입으면, 턴 종료 시까지 &lt;LSTag Type="Spell" Tooltip="AMP_Target_ShamanLightning"&gt;하늘 영혼의 분노&lt;/LSTag&gt;&lt;i&gt;(격노 중 사용 가능)&lt;/i&gt;를 시전할 수 있습니다.</content>
+  <content contentuid="hef828b48ge4cfg493ag918age92a72435735" version="1">불타는 보호구</content>
+  <content contentuid="he86d0d5egc986g4c87g9700gf830a56b48f3" version="1">하늘 영혼의 분노</content>
+  <content contentuid="ha29c5e5fgac3bg4533ga5d2g78316afff39c" version="1">선조들을 불러내어 하늘의 정령이 당신에게 복종하게 하고, 적들에게 번개의 힘을 쏟아붓습니다.&lt;br&gt;&lt;br&gt;&lt;LSTag Type="Image" Info="SoftWarning"/&gt; &lt;LSTag Tooltip="DifficultyClass"&gt;난이도&lt;/LSTag&gt;는 당신의 &lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;전투 기법 내성 난이도&lt;/LSTag&gt;에 따라 결정됩니다.</content>
+  <content contentuid="hca0d771ege635g447ega768g140ad72bb6aa" version="1">%%% DEPRECATED %%%%</content>
+  <content contentuid="h26c20848gcb95g4b0cga365g0d09d3ed2ad7" version="1">잔류 에너지</content>
+  <content contentuid="h02c32f62g8f96g431dgb14fg190e68e06e28" version="1">%%% DEPRECATED %%%%</content>
+  <content contentuid="h2bc2c1bagdcebg4111g9e0ag57809bfdf4e8" version="1">시냅스</content>
+  <content contentuid="hf7417122g4436g4d1aga6d3gd9c3315dfc74" version="1">헬멧을 쓴 채 마법을 가르치는 파격적인 접근 방식으로 유명했던 캔들킵의 악명 높은 튜터, 마스터 바엘로라의 개인 소장품에서 발견되었습니다. "예기치 못한 두 번째 기회만큼 자원 관리를 잘 가르쳐주는 건 없지." 그녀는 수수께끼 같은 미소를 지으며 말하곤 했습니다. 학생들은 종종 당황하곤 했지만, 주문 시전 능력에서 눈에 띄는 향상을 보였습니다. 일부는 그것이 투구의 힘이라기보다는 그녀의 예측 불가능한 "깜짝 퀴즈"를 놓칠까 봐 두려워했기 때문이라고 의심하지만요. 투구에는 수업 시간 사이에 그 비밀을 해독하려던 좌절한 학생들의 긁힌 자국이 여전히 남아 있습니다.</content>
+  <content contentuid="hd49a852ag4c17g40b3gbe2ag2be4bccfc2f3" version="1">비전 공명</content>
+  <content contentuid="ha80d8d79gef4ag458dga39bge2bc1b6987b1" version="1">전투 중 아군 또는 자신을 치유하면, 해당 대상의 [2]레벨 &lt;LSTag Tooltip="SpellSlot"&gt;주문 슬롯&lt;/LSTag&gt;을 [1]개 회복시킵니다.&lt;br&gt;&lt;br&gt;이 효과는 턴당 한 번만 발동합니다.</content>
+  <content contentuid="ha66cce53g1699g41b4g8711gb4b1ac63ce63" version="1">사악한 양치기의 가면</content>
+  <content contentuid="ha90d9eb1g353bg4370g9789gfd1d7145407a" version="1">희생자들을 양으로 변신시킨 뒤 그 정수를 집어삼켜 어둠의 힘을 키웠던 악명 높은 영혼의 양치기의 기괴한 전리품입니다. 그는 오만하게도 악마의 명중률을 가면의 마법에 결합하려 했으나, 악마는 조롱 섞인 아이러니로 그 마법을 뒤틀어버렸습니다. 중요한 의식 중에 영혼의 양치기 자신이 양으로 변해버린 것이 그의 몰락을 초래했습니다. 비록 그의 메애-거리는 비명은 여전히 가면의 속삭임 속에서 메아리치고 있다고 전해지지만요.</content>
+  <content contentuid="h298e5f1bg3894g4926gb607gf9334c0da293" version="1">뒤틀린 정밀함</content>
+  <content contentuid="hb8dfa6d0gd807g4e06g96f9g8e2f46e124b5" version="1">주문 &lt;LSTag Tooltip="AttackRoll"&gt;명중 굴림&lt;/LSTag&gt;에 +[1] 보너스를 얻습니다.&lt;br&gt;전투 중 매 턴마다 당신의 &lt;LSTag Tooltip="SpellDifficultyClass"&gt;주문 내성 난이도&lt;/LSTag&gt; -2를 난이도로 하는 지혜 &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 성공해야 하며, 실패 시 무력한 &lt;LSTag Type="Status" Tooltip="POLYMORPH_SHEEP"&gt;양&lt;/LSTag&gt;으로 변합니다.&lt;br&gt;&lt;br&gt;효과는 [2]레벨마다 증가합니다.</content>
+  <content contentuid="h2126898bgf39bg44aag8d5fg4eb88598ae5f" version="1">선원의 서리바람 모자</content>
+  <content contentuid="hc50f3b4bg94c1g47a4g9e7cg4af1b9130fc2" version="1">서리바람 선장은 움버리의 숨결이 바닷물을 얼음으로 바꾸는 검의 해안의 험난한 겨울 폭풍 속에서 배들을 인도하며 그 이름을 얻었습니다. 심해의 여왕은 그의 대담함을 가상히 여겼거나, 혹은 그를 시험하는 것을 즐겼던 모양입니다. 해적과 겨울 강풍 사이에 갇힌 마지막 항해에서 그는 그녀와 거래를 했습니다. 자신의 온기를 주고 그녀의 바람을 얻기로 말이죠. 이제 그의 마법 모자는 착용자에게 그녀의 차가운 정밀함을 부여하지만, 선원들은 폭풍우 치는 밤이면 여전히 해안가에 서리가 내려앉은 유령선이 나타나 선장이 팔아넘긴 온기를 영원히 찾아 헤매고 있다고 속삭입니다.</content>
+  <content contentuid="h4e0af039g15d3g4e21g9037g225b6908a3b0" version="1">움버리의 은총</content>
+  <content contentuid="hf3363899g15f0g4281g86b9g9ced3ffa2ce3" version="1">전투의 첫 [3]라운드 동안 북풍 효과를 얻어 원거리 무기 &lt;LSTag Tooltip="AttackRoll"&gt;명중 굴림&lt;/LSTag&gt;이 [1]만큼, 피해가 [4]만큼 증가합니다.&lt;br&gt;&lt;br&gt;효과는 매 [2]레벨마다 증가합니다.</content>
+  <content contentuid="hd85bb66bg7e30g4717g97degba83896b9d95" version="1">사령군주의 서클릿</content>
+  <content contentuid="hada007begf3a2g4bb1g9b8fg89777ecc2144" version="1">혹자는 사령군주 아즈칼로스가 당대 가장 재능 있는 죽음 마법사였다고 말합니다. 혹자는 그가 그저 성미가 급한 마법사였을 뿐이라고 말하죠. 그의 어둠의 의식을 가속하기 위해 설계된 이 서클릿은, 정작 그에게 사령술을 제외한 모든 일을 할 시간을 주었습니다. 완벽하게 우려낸 홍차 한 잔 옆에서 발견된 그의 개인 일기에는 이렇게 적혀 있었습니다. "오늘 나는 17구의 언데드 하수인을 되살렸고... 내 독 수집품 전체를 알파벳 순서로 세 번이나 정리했다. 어둠의 권능이란 참 묘한 유머 감각을 가졌군."</content>
+  <content contentuid="hd27cdaa0gabbcg498aga62dgbe1e44a9493b" version="1">신속한 필멸성</content>
+  <content contentuid="h388af639ge88cg4936g8ad4gfed8c926e823" version="1">전투 중 사령술 주문을 시전하면 &lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;보조 행동&lt;/LSTag&gt;을 회복합니다.&lt;br&gt;&lt;br&gt;이 효과는 턴당 한 번만 발동합니다.</content>
+  <content contentuid="h8cad2ad4gd780g44fega75eg5c3fad8fbc81" version="1">사령술 가속</content>
+  <content contentuid="h9aa61789g9158g4927ga49ag557aa0948d91" version="1">사령술 레벨 주문을 시전하면 &lt;LSTag Type="ActionResource" Tooltip="ActionPoint"&gt;행동&lt;/LSTag&gt;과 &lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;보조 행동&lt;/LSTag&gt;을 회복합니다.&lt;br&gt;&lt;br&gt;이 효과는 턴당 한 번만 발동합니다.</content>
+  <content contentuid="h5c446579ga4c9g48d8g96dfgce6a4e6a28ff" version="1">신성한 경전의 후드</content>
+  <content contentuid="h482bc505g8931g425fg9fb0gc0191ae95cf1" version="1">라샌더의 신도들이 신의 현현을 갈구하던 '고난의 시대' 동안, 검의 해안에는 기묘한 이야기가 퍼졌습니다. 성스러운 경전을 보존하는 임무를 맡은 한 미천한 필사가가 보관을 위해 닳아버린 경전 페이지들을 자신의 후드에 엮기 시작했습니다. 대륙 전역에서 신성 마법이 오작동하던 중, 이 파편들이 예상치 못하게 잔류 광휘와 공명하기 시작했습니다. 교단은 처음에 이를 단순한 민담으로 치부했으나, 자신들의 "이단적인" 필사가들이 언데드를 추방하는 데 있어 정식 사제들보다 지속적으로 뛰어난 성과를 내는 것을 목격했습니다. 이제 그들은 공식적으로는 그러한 "비정통적인" 방식에 대해 부인하면서도, 은밀하게 이를 장려하고 있습니다.</content>
+  <content contentuid="hb107f12dg9e4fg44b6g9752g3ac583dfe916" version="1">신성한 계시</content>
+  <content contentuid="h693a2916g5052g4141ga5fbgabc85a6e2d3d" version="1">&lt;LSTag Tooltip="Wisdom"&gt;지혜&lt;/LSTag&gt; 능력치가 [1]로 증가합니다.&lt;br&gt;당신의 공격은 대상의 [2]에 대한 &lt;LSTag Tooltip="Resistant"&gt;저항&lt;/LSTag&gt;을 무시합니다.</content>
+  <content contentuid="h355dc0d2g99a0g4ec6gaa82g6de63acc3cb6" version="1">부서진 파수꾼 투구</content>
+  <content contentuid="h71d20240g7419g429bg9303g655399d4f1c7" version="1">미스 드라노어의 마지막 날들, 아라바 부관은 악마의 포위를 피해 시민들이 대피하는 경로를 지키라는 명령을 받았습니다. 그녀는 그것이 자살 행위라는 것을 알았지만, 명령에 순종하여 이를 조국에 대한 신성한 의무로 받아들여야만 했습니다. 장로 중 한 명이 그녀에게 고대의 마법 투구를 건네주었습니다. 악마들이 다가오고 아라바의 힘이 쇠약해질 때마다, 새로운 상처는 마법처럼 순수한 붉은 에너지의 장벽을 더욱더 견고하게 쌓아 올렸습니다. 희생은 치러졌고, 시민들은 구출되었습니다. 그 투구는 재판매를 위해 모험가 무리가 가져가기 전까지 폐허 속에 잠들어 있었습니다. 사람들은 그 투구가 매우 부유한 고블린에게 팔려 아름답고도 공포스러운 취침용 조명으로 쓰이고 있다고들 합니다.</content>
+  <content contentuid="hdf8e7543g0cadg463cg9df2g02fcdd384873" version="1">순교자의 끈기</content>
+  <content contentuid="hc354ffbeg6d9ag490ega3d4g0afd20474e58" version="1">&lt;LSTag Tooltip="HitPoints"&gt;생명력&lt;/LSTag&gt;이 [1]% 미만일 때, &lt;LSTag Type="Status" Tooltip="ARMOURH109"&gt;절박한 방벽&lt;/LSTag&gt; 상태를 얻습니다.</content>
+  <content contentuid="h7315cf89g58b7g4147gbaedg68ac43aec32d" version="1">절박한 방벽</content>
+  <content contentuid="h138877a3gf316g4046gaff4g69c33a5c923d" version="1">모든 피해에 &lt;LSTag Tooltip="Resistant"&gt;저항&lt;/LSTag&gt;을 가집니다.</content>
+  <content contentuid="hd2ee8e29g8b36g4b73g9a86g89572ce5bbf0" version="1">학자의 마지막 웃음</content>
+  <content contentuid="hcb8d6f55g3213g4e0fg9cd8g719a21c4b073" version="1">간드의 상급 고문관은 이 평범해 보이는 모자를 두고 "나의 친애하는 제자가 준 선물이라네," 라고 말하곤 했습니다. "비록 그것이 농담이었는지 모욕이었는지는 아직도 불확실하지만 말이지." 모든 시험에서 화려하게 낙제한 그 제자는 오직 짧은 쪽지만을 남겼습니다. "스승님께서 제게 가르쳐주신 것이 아무것도 없으니, 어쩌면 이것이 스승님께서 더 잘 가르치시는 데 도움이 될지도 모르겠군요." 수십 년이 지난 후, 고문관은 마침내 그 소년이 누구도 짐작하지 못했을 만큼 영리했을지도 모른다고 인정했습니다.</content>
+  <content contentuid="hf4ef5a20gdc0bg4ca1gbb78g33edd8d658c6" version="1">해양술사의 유체 투구</content>
+  <content contentuid="h8d0096adg8c28g4597ga4c0g635a8b9b7e0d" version="1">암살자들이 마침내 타이드셰이퍼 모를리스를 발더스 게이트 항구까지 추적했을 때, 그들은 홀로 남은 물 마법사가 손쉬운 먹잇감이 될 것이라고 생각했습니다. 그가 쓰고 있던 유체 투구는—그의 물 조형 기술이 낳은 일상의 걸작으로—생각이 달랐습니다. 그들의 주문이 집중되자, 항구 자체가 투구의 흐르는 형상을 통해 솟구쳐 올라 그들의 마법을 안개로 바꾸어 버렸습니다. 암살자가 될 뻔한 이들에게 보낸 모를리스의 젖은 편지에는 이렇게 적혀 있었습니다. "다음번에는, 아마도 물 마법사를 덜 축축한 곳에서 공격해보는 게 어떠나?" 이 투구는 암살자 길드 근처에서 착용할 때면 여전히 즐거운 듯 물결칩니다.</content>
+  <content contentuid="h0084585aga28bg4539gbfaegabbc711c5286" version="1">거대한 물의 보호막</content>
+  <content contentuid="hde07562egecbdg4fffg8741g6019b39c4801" version="1">물 표면에 서 있는 동안 모든 피해에 &lt;LSTag Tooltip="Resistant"&gt;저항&lt;/LSTag&gt;을 가집니다.</content>
+  <content contentuid="h99019216gb6a8g463aga650g6136601fd324" version="1">장군의 유산 투구</content>
+  <content contentuid="h95644fdfg2900g429ag88e2g11608ee1f09a" version="1">전설적인 썬 장군이 어떻게 모든 무기를 통달했느냐는 질문을 받았을 때, 그는 미소 지으며 대답했습니다. "위대한 전사는 만 가지 무기를 두려워하지 않네. 무기들이 그를 두려워하게 만들 뿐이지." 수 세기 후 검의 해안의 북적이는 무역항에서 발견된 이 투구에는 정성스러운 서체로 이렇게 새겨져 있습니다. "나의 가장 완고한 제자에게—통달은 단지 연습이 아니라 지혜에서 온다는 것을 마침내 깨닫길 바라며." 아래에 적힌 장군의 서명은 마치 날아오는 연습용 검을 피하며 적은 듯 꽤나 급하게 휘갈겨져 있습니다.</content>
+  <content contentuid="h97a38520g333fg4eb2g8528g9db0ef7be87e" version="1">만검의 길</content>
+  <content contentuid="h4aeb4aa6g7eb4g4913g88c7gfc4d3f989ea7" version="1">모든 군용 무기에 대한 &lt;LSTag Tooltip="Proficiency"&gt;숙련&lt;/LSTag&gt;을 얻습니다.</content>
+  <content contentuid="hac728a1ag9fe0g4e30gba62g760331f4bf85" version="1">감속자의 투구</content>
+  <content contentuid="h8e35dc13gfe5ag4991g8c89g66f9b2b96888" version="1">땜장이 거장 글리머휠이 대기계공 박람회에서 최신 발명품을 공개했을 때, 구경꾼들은 당황했습니다. "이게 사물들을 느리게 만든다고요?" 그들이 물었습니다. "하지만 왜죠?" 대답은 박람회의 악명 높은 인공물 경주에서 나왔습니다. 그의 라이벌들이 내놓은 소위 완벽하다던 자동인형들이 취한 드워프처럼 비틀거렸던 것입니다. 투구 아래에서 그는 싱긋 웃으며 말했습니다. "때로는 말이야, 이긴다는 건 더 빨리 가는 게 아니라—다른 모두를 더 느리게 만드는 거라네." 기계공 길드는 한참을 비웃어준 뒤, 향후 대회에서 이 투구의 사용을 금지했습니다.</content>
+  <content contentuid="hced9dab3g6749g4368ga82cg30fd3d0cda10" version="1">운동 억제장</content>
+  <content contentuid="hdbe1f2bbg3983g4110g960fg776703cf360b" version="1">당신의 [1] 내에 있는 모든 인공물은 &lt;LSTag Tooltip="MovementSpeed"&gt;이동 속도&lt;/LSTag&gt;가 절반으로 감소하며, 모든 피해에 &lt;LSTag Tooltip="Vulnerable"&gt;취약&lt;/LSTag&gt;해집니다&lt;i&gt;(해당 피해에 면역이 아닌 경우)&lt;/i&gt;.</content>
+  <content contentuid="he626538bga8f5g4decga382g3aaafbf4fae7" version="1">무효화 오라</content>
+  <content contentuid="h42547364g18ccg464cga9e7gc3ba0ce4f810" version="1">당신의 [1] 내에 있는 모든 인공물은 &lt;LSTag Tooltip="MovementSpeed"&gt;이동 속도&lt;/LSTag&gt;가 절반으로 감소하며, 모든 피해에 &lt;LSTag Tooltip="Vulnerable"&gt;취약&lt;/LSTag&gt;해집니다&lt;i&gt;(해당 피해에 면역이 아닌 경우)&lt;/i&gt;.</content>
+  <content contentuid="h28f46008gde06g445eg8627g18e2401493b5" version="1">역장 얽힘</content>
+  <content contentuid="h1d8f6aa0gcff4g4d09g8c74g18d57fa1e8f6" version="1">이 인공물은 감속자의 무효화 역장 영향을 받아, &lt;LSTag Tooltip="MovementSpeed"&gt;이동 속도&lt;/LSTag&gt;가 절반으로 감소하며 모든 피해에 &lt;LSTag Tooltip="Vulnerable"&gt;취약&lt;/LSTag&gt;해집니다&lt;i&gt;(해당 피해에 면역이 아닌 경우)&lt;/i&gt;.</content>
+  <content contentuid="h89a02dc3ga64eg4a73g87b5g576e1b10e3e5" version="1">불멸의 웃음 투구</content>
+  <content contentuid="h8ae64ebbg5b94g4ad2gbd45g789667f82eab" version="1">전쟁군주 크래고스는 장례식, 외교 회담, 특히 칼에 찔리는 순간과 같이 최악의 상황에서 웃음을 터뜨리는 것으로 악명이 높았습니다. 그의 전사들은 어떤 타격도 그의 낄낄거림을 멈출 수 없다는 것을 깨닫기 전까지 그가 미쳤다고 생각했습니다. "죽음이란 건," 그는 웃음 섞인 함성을 질렀습니다. "그저 유난히 긴 낮잠일 뿐이야!" 화살 30발과 발리스타 두 대, 그리고 쓰러지는 나무가 마침내 그의 광란을 끝낸 후에도 투구는 뒤에 남아, 이를 착용할 만큼 용감한 이들에게 전 주인의 소름 끼치는 유머 감각을 여전히 나누어주고 있습니다.</content>
+  <content contentuid="hec7d482bg89e2g4423ga246g3b6a916673c2" version="1">불멸의 웃음</content>
+  <content contentuid="h2651b98cg8308g4864gaa71g1330bb0c2da3" version="1">당신이 &lt;LSTag Type="Status" Tooltip="DOWNED"&gt;쓰러짐&lt;/LSTag&gt; 상태가 되면, 지능이 [1] 이상인 모든 적이 &lt;LSTag Type="Status" Tooltip="HIDEOUS_LAUGHTER"&gt;끔찍한 웃음&lt;/LSTag&gt; 상태에 빠집니다.</content>
+  <content contentuid="hb0a05e04g804dg4afcga054g07a6c71dc695" version="1">백색 워락의 서클릿</content>
+  <content contentuid="hdc1f5bf1gb211g4011gaaf4gb5ae0a7f575f" version="1">심연의 문에서 워락 말레카스트는 마지막 항전을 벌였습니다. 한 주문으로 악마 군단을 막는 장벽을 유지하며 다른 주문으로 파멸을 쏟아부어, 그는 지원군이 도착할 소중한 시간을 벌어주었습니다. 대가는 혹독했습니다—이중 시전은 재와 승리 외엔 아무것도 남지 않을 때까지 그의 정신을 갈기갈기 찢어놓았습니다. 워락은 한 줌의 재로 화했으나 그의 은색 서클릿은 살아남았고, 그 깨끗한 표면에는 그 절박했던 시간의 흔적이 영원히 새겨졌습니다. 이는 분산된 집중이 검의 해안을 멸망에서 구했던 순간의 기록입니다.</content>
+  <content contentuid="h525791e7g1f4dg418agbe2egf888ec358b32" version="1">전투 집중</content>
+  <content contentuid="h3ff2340agb3b6g4688g87cega10323a7809f" version="1">주문에 &lt;LSTag Tooltip="Concentration"&gt;집중&lt;/LSTag&gt;하는 동안 주문 &lt;LSTag Tooltip="AttackRoll"&gt;명중 굴림&lt;/LSTag&gt;에 &lt;LSTag Tooltip="Advantage"&gt;유리 보정&lt;/LSTag&gt;을 받습니다.</content>
+  <content contentuid="h73f6e51dgecf6g4147ga26eg0bc37f8a4c80" version="1">은빛 십자군</content>
+  <content contentuid="h7b3d0a98g6311g475cg9606g1b1d14d018b5" version="1">일리시드가 머나먼 영역에서 처음 출현했을 때, 그들은 필멸자의 정신이 손쉬운 먹잇감임을 알게 되었습니다—은빛 십자군을 만나기 전까지는 말이죠. 이 투구들을 축복한 신성한 빛은 이질적인 사고를 가진 자들에게 치명적인 해악임이 증명되었습니다. 마인드플레이어 전쟁 동안, 신성한 광휘의 줄기가 이를 착용한 각 투사를 비추어 그들을 어둠에 대항하는 신호탄으로 만들었습니다. 이 투구는 여전히 그 고대의 빛을 끌어당기며, 필멸자의 정신을 뒤틀려는 자들에게 경고를 보냅니다.</content>
+  <content contentuid="h675f7719g6fb8g4d73ga5a5gf9140b20ee4e" version="1">정신의 빛</content>
+  <content contentuid="h01391144g21d5g4cdagba54g2d0923aec7a9" version="1">이형체가 당신을 &lt;LSTag Tooltip="AttackRoll"&gt;공격&lt;/LSTag&gt;할 때 &lt;LSTag Tooltip="Disadvantage"&gt;불리 보정&lt;/LSTag&gt;을 받습니다. 또한 [1]에 대한 &lt;LSTag Tooltip="Resistant"&gt;저항&lt;/LSTag&gt;을 얻습니다.</content>
+  <content contentuid="h47d5d6b5g8db2g40ebgae64gdfda8eaa3cfa" version="1">천상의 이단심문관 투구</content>
+  <content contentuid="hb673738fg278dg4d9bg90c7gb5003e147bc8" version="1">상급 이단심문관 아우렐리우스는 광휘 대성당 아래의 신성한 대장간에서 포획된 천상 존재들의 정수를 주입하여 이 투구를 벼려냈습니다. 독특한 조류 형상의 디자인은 신성한 환영 속에서 그를 찾아와 왕국을 위협하는 언데드 군단에 대한 승리를 약속했던 전설적인 불사조에게서 영감을 받았습니다. 수십 년 동안 아우렐리우스는 가장 강력한 리치와 뱀파이어 로드들에 대항하는 성전을 이끌었고, 투구의 신성 마법은 그들의 공격을 그들 자신에게 되돌려 보냈습니다. 그가 마침내 황혼의 끝 전투에서 전사했을 때, 그의 시신과 투구 모두 발견되지 않았습니다—지금까지는 말이죠. 비록 원래의 힘은 일부 약해졌으나, 내부에 결속된 천상의 영혼들은 여전히 의로운 분노로 타오르며 이 땅에서 다시 한번 어둠을 몰아내기를 갈망하고 있습니다.</content>
+  <content contentuid="h6718d472gac06g4c61gb071gdd34417cc9dc" version="1">거룩한 응징</content>
+  <content contentuid="hd9f4bd16gf946g42beg8228g4c830ec93c07" version="1">당신에게 피해를 입히는 언데드는 당신의 &lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;전투 기법 내성 난이도&lt;/LSTag&gt;에 대항하여 건강 &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 성공해야 하며, 실패 시 [1]턴 동안 &lt;LSTag Type="Status" Tooltip="ARMOURH117"&gt;천상의 섬광&lt;/LSTag&gt; 상태가 됩니다.</content>
+  <content contentuid="h1fbe1dd9gb289g41b4ga41agb46578842f79" version="1">천상의 섬광</content>
+  <content contentuid="h61ba613fged0bg469fgada4g2e2eadac0aa5" version="1">이 언데드는 천상의 불꽃에 휩싸여 [1]만큼의 &lt;LSTag Tooltip="Strength"&gt;근력&lt;/LSTag&gt;과 &lt;LSTag Tooltip="Dexterity"&gt;민첩&lt;/LSTag&gt;을 잃습니다.</content>
+  <content contentuid="h42fa8135g161dg4839g9368g24d8ea7f4f50" version="1">기근의 불꽃 왕관</content>
+  <content contentuid="h9b563305g59d5g4ba4g8ce7gaa2f4bac66a3" version="1">화염 차원의 한 추방된 왕자는 자신의 왕좌를 되찾을 힘을 구하며 화염 정령들과의 금지된 계약을 통해 이 왕관을 벼려냈습니다. 언제나 장난질을 일삼는 정령들은 그의 소원을 들어주었으나, 투구에 그들의 정수를 향한 끝없는 갈증이라는 저주를 내렸습니다. 왕관의 식탐은 제작자를 집어삼킬 때까지 커져만 갔고, 오직 속삭이는 경고만을 남겼습니다. "그것에게 불꽃을 먹여라, 그렇지 않으면 그것이 그대를 먹으리라." 수 세기 동안 여러 차원을 거쳐 왔으나, 착용자들은 그 갈증이 결코 진정으로 채워질 수 없다는 것을 너무 늦게 깨달았습니다.</content>
+  <content contentuid="h98747d80gaafeg46f0ga359gacdc89b9ab7d" version="1">기근의 칼날</content>
+  <content contentuid="h9512a89agea13g432agbe63ga1c7a2331abc" version="1">불타는 표면 위에 서 있는 동안 &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;에 추가 피해 주사위 하나를 더합니다.</content>
+  <content contentuid="he06199e2g5008g1fb9g5ccbg34a1d41f831e" version="1">말라카이</content>
+  <content contentuid="h44002cd8ga6d6g0b32g9f01g59aff62123b3" version="1">독성학자</content>
+  <content contentuid="hda559eb2g389ag414cg89c5geec18ea7b305" version="1">말라카이의 그릇</content>
+  <content contentuid="hec559729g82c8g4566gb81cg787ba391c409" version="1">수 세기 전, 악명 높은 독물학자 말라카이는 세계의 등줄기 산맥 아래 자신의 실험실에서 팔라딘 무리와 마주했습니다. 막다른 길에 몰린 그는 자신의 몸을 순수한 맹독으로 일시적으로 변환하려는 절박한 의식을 시도했으나, 팔라딘들의 합심된 강타가 주문을 방해했습니다. 마법적 반동은 그의 육체를 산산조각 냈지만, 수십 년간의 연금술 실험으로 포화된 그의 정수는 가장 가까운 그릇인 그의 후드 속으로 숨어들었습니다. 팔라딘들은 겉보기에 무해해 보이는 의복에서 잔류 마법만을 감지하고, 이를 증거물로 분류하여 보관해 두었습니다.</content>
+  <content contentuid="h6e9a94b8g6f02g41a2g8f16g42e27e590d5e" version="1">영혼 부식</content>
+  <content contentuid="h20ef35c6gc907g4aa5g80fag2ad1c12f0291" version="1">당신이 [1]를 입힐 때, 대상은 당신의 &lt;LSTag Tooltip="SpellDifficultyClass"&gt;주문 내성 난이도&lt;/LSTag&gt;에 대항하여 &lt;LSTag Tooltip="Constitution"&gt;건강&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 성공해야 하며 실패 시 턴 종료 시까지 &lt;LSTag Type="Status" Tooltip="MAG_POISON_POISON_LETHALITY"&gt;치명적인 맹독&lt;/LSTag&gt;에 시달립니다.&lt;br&gt;&lt;br&gt;이 효과는 턴당 한 번만 발동합니다.</content>
+  <content contentuid="h01496253g1554g4df2gbfbdgd5cbd4efb085" version="1">정수 붕괴</content>
+  <content contentuid="h0e1b5179g776fg42bfg848bg1694447a5081" version="1">매 턴 시작 시 [1]% 확률로 [2]턴 동안 &lt;LSTag Type="Status" Tooltip="AMP_TOXEMIA"&gt;독혈증&lt;/LSTag&gt;에 시달립니다.</content>
+  <content contentuid="h1d0d2b44g1f12g4969g80bbgb16b49253d94" version="1">독성 보주</content>
+  <content contentuid="hc55799c2g1cfag48f8g94b8g8a8cceda0096" version="1">대상에게 응축된 독 보주를 던져 [1]를 입히고 지면에 작은 독 웅덩이를 남깁니다.&lt;br&gt;&lt;br&gt;피해량은 소환사의 &lt;LSTag Tooltip="SpellcastingAbilityModifier"&gt;주문 시전 능력&lt;/LSTag&gt; 보정치에 따라 증가합니다.</content>
+  <content contentuid="hdbc61058g49deg492bgb9d8g078442bcc702" version="1">말라카이 각성</content>
+  <content contentuid="h5ec87da5g85bdg43ddgb8e3g57ee49a018cd" version="1">용기 안에 갇힌 말라카이의 정수를 해방합니다. 수십 년간의 독성 실험으로 절여진 그의 영혼은 주변 적들을 &lt;LSTag Type="Status" Tooltip="POISONED"&gt;중독&lt;/LSTag&gt;시키고, 파괴될 때 [1] 폭발을 일으킵니다.&lt;br&gt;&lt;br&gt;위력은 소환사의 &lt;LSTag Tooltip="SpellcastingAbilityModifier"&gt;주문 시전 능력&lt;/LSTag&gt; 보정치에 따라 증가합니다.</content>
+  <content contentuid="h4ffa68b8gc27bg442egbcaag9fd5422d0c8b" version="1">마지막 숨결</content>
+  <content contentuid="h6bef1fcdge130g4f62gbb26g406c458dc768" version="1">사망 시 말라카이가 독성 폭발을 일으켜 [2] 내의 모든 크리처에게 [1]를 입힙니다.</content>
+  <content contentuid="h97b023beg2a9dg439ag8a18gf2821abb28a6" version="1">말라카이의 독성 폭발</content>
+  <content contentuid="h011e7e09gfa8dg45fbga1c1g87c45e92bc42" version="1">마지스터의 왕관</content>
+  <content contentuid="h902e8522g6699g43b7gab06gf02b9e9f1193" version="1">이 왕관의 주인이자 재능 있는 소서러였던 라레시우스의 마지막 유언은 "날 믿어, 다음 화염구가 오는 게 느껴져!" 였습니다. 이제 이 왕관은 자신이 그 혼돈을 다스릴 수 있다고 믿는 과신에 찬 주문 시전자들 사이를 거쳐 가고 있습니다. 가장 흥미로운 구경거리는, "절대적으로 확실하다던" 주문이 어색하게 손가락만 꼼지락거리는 순간으로 변해버린 이유를 그들이 동료들에게 설명하는 모습입니다. 적어도 라레시우스의 유령은 이를 보며 크게 한탕 웃겠군요.</content>
+  <content contentuid="h57faa79ag7694g4647g967dg775709184ca1" version="1">주문의 행운</content>
+  <content contentuid="hf12829e7g3765g41a9gbde0g9f0fdb2010ba" version="1">전투 중 &lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;을 시전하면, [1]% 확률로 [2]~[3]레벨의 모든 &lt;LSTag Tooltip="SpellSlot"&gt;주문 슬롯&lt;/LSTag&gt;을 회복합니다.</content>
+  <content contentuid="h64f2ba52g343dg4e05g8457g01dbdeaaafb7" version="1">탐광자의 내산성 모자</content>
+  <content contentuid="hfded7ecfg458ag4169g82a8g8899bdcfc85f" version="1">탐광자들이 가장 위험한 심해에서 희귀 광물을 찾던 언더다크 채굴 열풍 시대의 독특한 유물입니다. 유난히 고집 센 드워프였던 늙은 그레고리는 자신의 터널 망이 블랙 드래곤의 둥지를 정면으로 통과한다는 사실을 발견했음에도 채굴권을 포기하기를 거부했습니다. 드래곤의 산성 숨결은 수많은 채굴 작업을 녹여버렸으나, 그레고리는 단순히 자신의 믿음직한 모자에 부식 저항 마법을 걸었을 뿐입니다. 드워프의 끈기(혹은 그저 재미)에 깊은 인상을 받은 드래곤은 마침내 그가 채굴을 계속하도록 허락해주었습니다—물론 수익의 일부를 나누는 조건으로 말이죠. 이 모자는 타격을 받을 때 여전히 부식성 물질을 내뿜으며 그 특이한 기원을 효과적으로 상기시켜 줍니다. 단지 화려한 파티에는 쓰고 가지 마세요!</content>
+  <content contentuid="h4233d00bg9c0bg40f3gb99bg9f6145f9f0be" version="1">부식성 방어</content>
+  <content contentuid="h74e67efdg5810g4d38g877fg79bd1a01f3a7" version="1">산성 효과에 &lt;LSTag Tooltip="Immune"&gt;면역&lt;/LSTag&gt;이 됩니다.&lt;br&gt;근거리 피해를 입으면 [1] 내의 모든 표면을 산성으로 덮습니다.</content>
+  <content contentuid="h03a4ee0eg60dfg48e3gb430g5bfd90a8f4c1" version="1">여명 수색대의 모자</content>
+  <content contentuid="hda46e59age763g47f9ga00ag5b5ef920d4c6" version="1">미스 드라노어에 라샌더의 사원을 세우려는 신성한 임무 기간 동안 제작된 '새벽을 찾는 자들'의 소중한 유물입니다. DR 13세기에 언데드 세력이 그들의 복원 작업을 위협하자, 이 모자는 여명군주의 보호의 광휘를 유도하도록 마법이 부여되었습니다. 누비 패턴은 어둠을 뚫고 나오는 첫 새벽빛을 상징하며, 각 바느질에는 라샌더의 축복이 깃들어 있습니다. 원래의 착용자는 사원 기초를 지키다 전사했으나, 그들의 희생은 다른 이들이 일출을 볼 수 있게 해주었습니다. 오늘날에도 이 모자는 어둠이 위협할 때 보호의 빛을 발산합니다—비록 사령술사들은 그것이 "참을 수 없을 정도로 번쩍거린다"고 주장하지만요. 새벽은 결국 누구에게나 찾아오는 법입니다!</content>
+  <content contentuid="he1cadd67g24b7g4e5dgbea5gf770973cf113" version="1">아침 햇살</content>
+  <content contentuid="hbdfcbb5bgb8e8g4a72gad94gb113ebf156bd" version="1">[1]를 입으면, 당신과 [2] 내의 아군들이 [3]턴 동안 &lt;LSTag Type="Status" Tooltip="ARMOURH122"&gt;새벽의 축복&lt;/LSTag&gt; 상태를 얻습니다.</content>
+  <content contentuid="h6a1d7a12g4cf8g4197g9836gec147a00a9d4" version="1">새벽의 축복</content>
+  <content contentuid="hcd4d7323g993eg470fgadfag40c2232f8d26" version="1">착용자 근처에 있는 동안 [1]에 대한 &lt;LSTag Tooltip="Resistant"&gt;저항&lt;/LSTag&gt;을 얻습니다.</content>
+  <content contentuid="h18a575f7gb531g4122gb059g4bb1db765ad6" version="1">여명 수색대</content>
+  <content contentuid="he5c8f230gd0a1g423ag8b33gb54dd6264adb" version="1">언데드에게 [1]의 추가 피해를 입힙니다.</content>
+  <content contentuid="hcc6b02d9g4928g43b0gb900gda081121d481" version="1">시간 정지 왕관</content>
+  <content contentuid="ha786fc12g9c3dg4c8cg8b4fg1a59f97e8cad" version="1">네더릴의 황혼기에 벼려진 이 불길한 투구는 한때 상급 마법사 크로네스의 것이었는데, 시간에 대한 그의 집착은 점점 더 위험한 유물들을 만들어내기에 이르렀습니다. 그는 오만하게도 시간의 흐름 그 자체를 지배할 수 있다고 믿었으나, 그의 실험은 마법 오용의 경고가 담긴 이 저주받은 왕관만을 남겼습니다. 이 투구는 국소적인 시간 왜곡을 일으켜 근처의 누구도 신속한 행동을 할 수 없게 만듭니다. 이를 써본 이들은 마치 당밀 속을 걷는 듯한 기분이 들며, 보이지 않는 사슬에 의해 반사 신경이 둔해진다고 말합니다. 크로네스 자신도 이를 쓴 채 최후를 맞이했는데, 그의 제자가 마침내 그의 시간 간섭에 진저리가 나 공격했을 때 간단한 방어막 주문조차 제시간에 시전하지 못했기 때문입니다.</content>
+  <content contentuid="h5f6cf22eg363ag4e54gab9egd282449e9003" version="1">시간의 손아귀</content>
+  <content contentuid="ha4cfb786ga607g4019gb249g67bd7da5874d" version="1">[1] 내에 있는 모든 크리처는 전투 중 &lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;보조 행동&lt;/LSTag&gt;을 취할 수 없습니다.</content>
+  <content contentuid="he410641bgcd1eg4957g9eddgb608cc90a0c9" version="1">시간 정지</content>
+  <content contentuid="hdd41cebcg3cabg49f1g9673g21ff00540bcf" version="1">이 크리처는 &lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;보조 행동&lt;/LSTag&gt;을 수행할 수 없습니다.</content>
+  <content contentuid="hc0ced0b8gcdddg4f32g8127g3dd6bf9907d6" version="1">라에라넬의 용맹한 투구</content>
+  <content contentuid="hef7bada3ga623g4ea6ga09egac650c0db004" version="1">이것은 죽음을 초월한 병사들에 대한 헌신을 보여준 수호 기사 래러넬의 소유였습니다. 미스 드라노어 공성전 당시, 그녀는 압도적인 어둠의 군단에 맞서 필사적인 방어를 이끌었습니다. 그녀의 전사들이 주변에서 쓰러져갈 때, 그들의 생명 정수가 그녀의 투구를 통해 흐르기 시작했고, 남은 방어군을 살려내는 치유 에너지의 폭포를 만들어냈습니다. 투구의 독특한 물빛 광휘는 에버미트의 물을 반영하며 생명과 희생의 영원한 흐름을 나타낸다고 합니다. 수세기 후 고블린들이 그녀의 유해를 발견했을 때, 수많은 화살에 갑옷이 뚫린 채로 동료들의 원 안에 둘러싸여 여전히 서 있는 그녀를 발견했다는 사실이 이를 가장 잘 말해줍니다.</content>
+  <content contentuid="h61707fe5gff3fg482fg8811g31f69aa099b5" version="1">순교자의 축복</content>
+  <content contentuid="he5809b65ge3c4g4570g9712g8845e204b543" version="1">적에게 피해를 입으면 [1] 내의 모든 크리처를 [2]만큼 치유합니다.</content>
+  <content contentuid="h2a24c1cfg3cbcg4d30g9139gd9f49bf0dbb8" version="1">치유의 물결</content>
+  <content contentuid="h41a66c20gb95bg4d84ga69eg887f4eed56e4" version="1">타격을 입었을 때 크리처를 [1]만큼 치유합니다.</content>
+  <content contentuid="h828f1d69g587eg473agab4cgab90b7e37530" version="1">루미나릭스</content>
+  <content contentuid="h9e4d3096g381bg4b08gac48gea4fa94c655a" version="1">라샌더 사원의 금빛 전당에서, 이 독특한 머리 장식은 여명군주의 가장 헌신적인 종복들의 머리에 씌워졌습니다. 장식된 사슬은 새벽과 황혼의 영원한 순환을 상징하며, 각 수정 구슬은 신성한 에너지를 포착합니다. 오직 신성한 광휘만을 통해 "보았던" 눈먼 예언자가 제작한 이 모자는 가공되지 않은 방출 마법을 사악한 자들을 태우는 불타는 빛이나 신실한 자들을 회복시키는 부드러운 여명으로 유도합니다. 가장 흥미로운 점은 첫 시험 가동 때였는데, 제작자가 실수로 언데드 한 부대 전체를 사원 역사상 가장 밝은 자정 예배를 위한 즉석 광원으로 바꿔버렸던 일입니다.</content>
+  <content contentuid="h7883250dgeebbg4c45gb576g9164d73a693c" version="1">새벽의 포옹</content>
+  <content contentuid="h0e8a6e7ege9e6g476cg8dd2g57bb58c35309" version="1">아군이나 자신에게 시전하는 대상 지정 방출술 레벨 주문이 [1]만큼 치유하기도 합니다.</content>
+  <content contentuid="hc374685bg9437g4eccga190g20f06e04f697" version="1">신성한 응징</content>
+  <content contentuid="h6216f0fag6ea9g4495gb40cg031928655ad3" version="1">적에게 시전하는 대상 지정 방출술 레벨 주문이 추가 [1]를 입힙니다.&lt;br&gt;&lt;br&gt;이 효과는 공격당 한 번만 발동합니다.</content>
+  <content contentuid="hd8ebbf0bg4462g4b2dg8e03g5b2a4cd0d0b6" version="1">어둠 존재의 바이저</content>
+  <content contentuid="hbd1e8672gd263g490bgb972g814578be8a03" version="1">이 투구에서는 마치 공허 그 자체가 표면에 달라붙어 있는 것처럼 언제나 영적인 어둠이 스며 나옵니다. 고대의 문자는 필멸을 초월하여 이제 보이지 않는 영역에서 지켜보고 있는 존재인 절대자에 대해 낮은 목소리로 이야기합니다. 전해지는 바에 따르면 이 투구는 그가 변신하기 전 필멸자였던 시절에 착용했던 것입니다. 이제 그것은 그의 지속적인 영향력을 전달하는 도구가 되어, 초자연적인 개입을 통해 선택된 소지자를 보호합니다. 죽음이 가까워지면 검은 안개가 짙어지며 가장 치명적인 타격조차 비껴가게 하고, 소지자가 약해진 틈을 타 공격하려던 어리석은 이들은 그저... 존재하지 않게 됩니다. 가장 불안한 점은 투구의 어두운 증기가 마치 절대자의 시선이 영원히 자신의 옛 소유물에 머물러 있는 것처럼 목적을 가지고 움직이는 듯 보인다는 것입니다.</content>
+  <content contentuid="h67b6d8f5g2ce6g432cg8d87g36994e836ded" version="1">이 세계의 방벽</content>
+  <content contentuid="h86366b6cg2661g42a6g885bg9aeebc2582eb" version="1">&lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;를 입으면 [1]턴 동안 &lt;LSTag Type="Status" Tooltip="ARMOURH126"&gt;어둠 존재의 은총&lt;/LSTag&gt; 상태를 얻습니다.</content>
+  <content contentuid="hc27f5609gdd25g4a37gb580gc37e315b7c1c" version="1">어둠 존재의 은총</content>
+  <content contentuid="h87211568g0ce4g4aecg8707gf4a1706991da" version="1">&lt;LSTag Type="Image" Info="SoftWarning"/&gt; 당신은 완전히 무적 상태가 됩니다.</content>
+  <content contentuid="hccae04cdgc1d5g4910ga898g4dbc4b770304" version="1">영혼 수확</content>
+  <content contentuid="hb1dc82fbg7bbfg4a86g971ag5c665a6c3797" version="1">&lt;LSTag Tooltip="HitPoints"&gt;생명력&lt;/LSTag&gt;이 [1]% 이하인 인간형 공격자는 즉시 파괴됩니다.</content>
+  <content contentuid="ha7f72734g28b5g4b3ag91edgea9b03a472f8" version="1">라비린시안 토퍼</content>
+  <content contentuid="h693476b0gae2dg48d1g8f5egfdb8afa69a20" version="1">수수께끼 같은 패턴이 새겨진 이 독특한 실크햇은 '운명의 미로' 자체에서 출현했다고 전해집니다. 운명의 실타래가 뒤얽히는 차원 사이에 존재하는 끝없는 미로에서는 때때로 불가능한 확률을 가진 유물들이 만들어집니다. 모자의 패턴은 감시받지 않을 때 위치를 바꾸며, 각각의 재정렬은 착용자의 운명을 미묘하게 조정합니다. 첫 번째 주인은 내기에서 이 모자를 잃었습니다—그것이 진정 불운이었는지, 아니면 운명이 의도한 정확한 결과였는지는—우주적인 논쟁의 대상으로 남아 있습니다.</content>
+  <content contentuid="hf5fe0f85g87f8g434eg827bg16cf62e1e384" version="1">운명의 총애</content>
+  <content contentuid="h42aa5befga1a5g4f7ag9e9ag03d4fd9803e2" version="1">모든 &lt;LSTag Tooltip="AbilityCheck"&gt;능력 판정&lt;/LSTag&gt;에 +[1] 보너스를 부여합니다.</content>
+  <content contentuid="h7baf9539g9b95g4613ga39fg2ea033f9eacc" version="1">세라프윙</content>
+  <content contentuid="hafd66e98g212ag43f1gab87g08c2fad36fe1" version="1">셀레스티아 산의 천상 기록보관소에는 필멸자의 잠재력에 매료된 전설적인 플래네타에 대한 이야기가 전해집니다. 전통을 깨고, 이 천사는 황금빛 빛과 아침 구름으로 투구를 만들어 유난히 의로운 팔라딘에게 선물했습니다. 투구는 천상계의 신성한 에너지 파편을 유도하여, 착용자가 필멸자의 한계를 잠시 초월할 수 있게 해줍니다. 전투가 치열해질수록 그 찬란한 광휘는 짙어지며, 마치 칠천상 자체가 자격 있는 자를 드높이기 위해 손을 뻗는 듯합니다.</content>
+  <content contentuid="he01712faga18dg4bf0g81efg158985611984" version="1">하늘의 은총</content>
+  <content contentuid="h5a7a390bg4d9bg4a6bg9e4dgb055dcad3311" version="1">전투 중 모든 피해에 &lt;LSTag Tooltip="Resistant"&gt;저항&lt;/LSTag&gt;을 가지며 &lt;LSTag Type="Spell" Tooltip="Projectile_Fly"&gt;비행&lt;/LSTag&gt;할 수 있습니다.</content>
+  <content contentuid="h0a66788dg9cd4g49b3g837cg8d9f3735ffa5" version="1">천상의 승천</content>
+  <content contentuid="h0cfe1b39g4e1fg4efbgae73g39780592dee3" version="1">신성한 힘의 축복을 받아 필멸의 제약을 넘어 승천하며, 비행 능력과 모든 피해에 대한 &lt;LSTag Tooltip="Resistant"&gt;저항&lt;/LSTag&gt;을 얻습니다.</content>
+  <content contentuid="ha324abbdgd593g47caga116g24937ecfe230" version="1">악마사냥꾼의 투구</content>
+  <content contentuid="h622dce92g68aag4936ga207g25adceb10e3d" version="1">이계의 타락한 강철로 벼려진 이 투구는 전설적인 악마사냥꾼들의 마지막 생존자인 섀도우마치의 것이었습니다. 투구 특유의 녹색 광휘는 갇혀 있는 수천 개의 악마 정수에서 나오며, 그들의 힘은 그들 자신의 동족을 향하게 됩니다. 마치 투구 자체가 마족의 에너지를 먹고 사는 듯, 새로운 악마를 처치할 때마다 착용자는 강해집니다. 고대 문헌은 악마사냥꾼들이 어떻게 자신들의 기술을 예술의 경지로 끌어올렸는지 말해주지만, 악마 자신의 정수가 그들의 가장 큰 약점이 될 수 있다는 것을 발견한 섀도우마치만큼 이를 완벽하게 다스린 이는 없었습니다. 투구는 여전히 먹잇감을 굶주려 하며, 영원한 사냥을 이어갈 자격 있는 후계자를 기다리고 있습니다.</content>
+  <content contentuid="h2aa8f3f9gbd4cg44bdgb67cgc480f14765c5" version="1">영원한 사냥</content>
+  <content contentuid="h7a4e032dg88abg49ccgb513g0555f16db21d" version="1">마족이나 이형체를 처치하면 모든 &lt;LSTag Tooltip="HitPoints"&gt;생명력&lt;/LSTag&gt;을 회복합니다.&lt;br&gt;마족이나 이형체를 상대로 한 &lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt; 굴림 필요치가 [1]만큼 감소합니다(유사 효과와 중첩됨).</content>
+  <content contentuid="h8b3ff341gab34g4cfbgb16dg75eff414a035" version="1">원대한 계획</content>
+  <content contentuid="h6028dfefgfd6ag4f90ga067gb85eeb2cada4" version="1">이 호화로운 모자는 보호 마법의 통달함이 바이올렛 서클 내에서도 전설적이었던 대마법사 발레리온의 것이었습니다. 복잡한 은색 패턴은 순수한 별빛의 실로 짜여졌으며, 각각의 섬세한 선은 타의 추종을 불허하는 위력의 복합 보호막을 형성합니다. 두려운 마녀 여왕 마라가 천 개의 저주로 그의 방어벽을 뚫으려 했을 때, 그녀는 각 주문이 그의 보호막에 닿아 무해하게 소멸하는 것을 보았습니다. 결국 한 시대를 풍미한 가장 강력한 저주술사는 대항 저주나 전투 마법이 아니라, 진정한 힘은 저주하는 능력이 아니라 저주받기를 거부하는 예술에 있다는 것을 이해한 자를 결코 해칠 수 없다는 단순한 불가능성에 의해 패배했습니다.</content>
+  <content contentuid="he990f0fcg8481g42b7ga2afg907b6f7ba60a" version="1">패턴의 완벽함</content>
+  <content contentuid="h639cf30cgbff3g42bbgbcbeg418cea0f2203" version="1">당신은 저주받지 않습니다. 영역의 가장 오래된 저주받은 유물과의 거래조차 당신에게는 영향을 미치지 못합니다.&lt;br&gt;&lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 +[1] 보너스를 얻습니다.</content>
+  <content contentuid="h874932e8g3db7g4f78g9250g94459441546f" version="1">영계의 인지력</content>
+  <content contentuid="hf82b2690g81eeg4f7egb11eg9c2bf9f4c667" version="1">영계의 바다의 가장 희귀한 보물들 사이에는 기묘한 현상이 떠다닙니다. 순수한 의식으로 이루어진 살아있는 별, 즉 순수한 광휘와 사고로 이루어진 고대 영계의 그 자체입니다. 이 서클릿은 전설적인 공학자 실란드리아가 일생을 바쳐 이 천상 존재들과 소통하는 법을 배운 끝에, 기꺼이 자신을 내어준 어느 별의 파편으로 제작한 것입니다. 수정은 여전히 자각 능력을 유지하고 있으며, 눈부신 광휘는 그 안에 담긴 방대한 지식의 메아리에 불과합니다. 이를 착용하는 자는 자신의 정신이 필멸의 한계를 넘어 확장되는 것을 경험하게 됩니다. 혹자는 서클릿이 착용자를 선택하는 것이며, 별의 의식과 교감하는 것을 견뎌낼 수 있는 정신을 가진 자를 찾는 것이라고 말합니다.</content>
+  <content contentuid="h01e80348g7290g4497ga751g570ef87c3e08" version="1">별의 자손의 명료함</content>
+  <content contentuid="hcdb75ab4gc7a3g4477g9d4fg4e79484a8737" version="1">모든 &lt;LSTag Tooltip="Skill"&gt;기술&lt;/LSTag&gt; 판정에 +[1] 보너스를 얻습니다.&lt;br&gt;효과는 &lt;LSTag Tooltip="SpellcastingAbilityModifier"&gt;주문 시전 능력 보정치&lt;/LSTag&gt;에 비례합니다.</content>
+  <content contentuid="haa8e8e33g16e7g470egba57g1a46f4d71e7c" version="1">야생꽃의 발걸음</content>
+  <content contentuid="h0f8a3f19gd5b1g4a6agaf3ag39efd2ae6328" version="1">잊혀진 시대의 그림자가 여전히 머무는 고대 유적 깊은 곳에서, 이 낡은 장화는 잠들어 있었습니다. 처음 손을 댔을 때, 당신의 손가락이 닿은 문양들이 갑자기 살아 움직였습니다. 섬세한 이끼 줄기들이 장화의 나무 표면 위로 지나간 시대의 이야기들을 엮어냈습니다. 당신의 학구적인 탐구는 전설의 시대에 대륙을 거닐었던 고대 드루이드 회합인 '푸른 방랑자'에 대해 기록된 먼지 쌓인 고서들로 당신을 이끌었습니다. 이 현명한 이들은 진정한 치유가 자연 그 자체의 품에서 흘러나온다고 믿었기에, 그들의 신발에 야생 마법을 결속시켰습니다. 이제 이 놀라운 장화를 신은 당신은 경이로운 광경을 목격하게 됩니다. 치유의 물결이 일 때마다 마치 대지 자체가 당신의 회복시키는 손길에 기뻐하듯, 바위와 흙을 가리지 않고 작은 꽃들이 피어납니다.</content>
+  <content contentuid="h1b7d0279gae2dg400cga410gb94da94b09ae" version="1">자연의 각성</content>
+  <content contentuid="h0a800404g869bg4bbeg82f0g33cd29f63f13" version="1">치유를 받으면 [1]턴 동안 주변에 무성한 꽃잎을 소환합니다. 당신은 무성한 꽃잎에 의해 느려지지 않습니다.&lt;br&gt;&lt;br&gt;이 효과는 턴당 한 번만 발동합니다.</content>
+  <content contentuid="hca57cec0g657fg4242g8048g09637ba2daaa" version="1">미친 연금술사의 슬리퍼</content>
+  <content contentuid="h0da60963gba1ag43baga460ga7ac40532437" version="1">먼지가 자욱한 실험실 지하실 깊은 곳에서, 당신은 기묘하고 끈적한 물질로 덮인 이 특이한 슬리퍼를 발견했습니다. 근처에는 불에 탄 일기장 페이지들이 흩어져 있었는데, 대부분의 비밀은 불길에 사라졌고 두 개의 인상적인 기록만이 남아 있었습니다. "47일째: 공식이 거의 완성되었다! 오일이 완벽한 점도를 얻었다. 이제 저 성가신 미끄러짐 문제만 해결하면..." 그리고 "48일째: 유레카! 흑요석 가루가..." 나머지 내용은 재와 그을린 자국 속으로 사라졌습니다. 검게 변한 벽과 바닥에 새겨진 지워지지 않는 얼룩으로 보아, 저자의 마지막 실험은 꽤... 화려하게 진행된 모양입니다. 뭐, 적어도 이제 왜 이 슬리퍼가 중력과 그렇게 묘한 관계를 맺고 있는지는 이해하시겠군요.</content>
+  <content contentuid="h8c2dc190gcc65g4bc6g9a6egee5bd1e13f04" version="1">오일 광란</content>
+  <content contentuid="hf40b22e6g41d8g4133g90b0g6688a63b75ff" version="1">전투 중 &lt;LSTag Type="Spell" Tooltip="Shout_Dash"&gt;질주&lt;/LSTag&gt;를 사용하면 턴 종료 시까지 슬리퍼가 &lt;LSTag Type="Status" Tooltip="ARMOURB133"&gt;발화&lt;/LSTag&gt; 상태가 됩니다.</content>
+  <content contentuid="hb3f31e5agaff5g4866gb3e4g19f194ee0ca2" version="1">착용 시 미끄러움</content>
+  <content contentuid="h9db032bcg866fg4bf7g85d8g973f1cfe573c" version="1">이동하는 동안 가끔 &lt;LSTag Type="Status" Tooltip="PRONE"&gt;넘어짐&lt;/LSTag&gt; 상태가 됩니다.</content>
+  <content contentuid="ha5328a8agd7b9g4091g9ec8g034fba9abed7" version="1">휘발성 물질</content>
+  <content contentuid="h824b1cfagf92fg46c4g8a63gcf681a559b8a" version="1">턴 종료 시 슬리퍼에 코팅된 물질이 &lt;LSTag Type="Spell" Tooltip="Armour_B_133_explosion"&gt;폭발&lt;/LSTag&gt;합니다.</content>
+  <content contentuid="h8db1d89dg77b2g4f82g8a2bg02ca8ff96b56" version="1">오일 폭발</content>
+  <content contentuid="hcc024d95g7985g4975g89e2g0ca10380349e" version="1">불안정한 물질의 폭발을 일으켜 [3]턴 동안 지면을 화염으로 뒤덮고 [1]를 입힙니다.&lt;br&gt;&lt;br&gt;크리처는 &lt;LSTag Tooltip="Dexterity"&gt;민첩&lt;/LSTag&gt; &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 성공하여 피해를 절반으로 줄일 수 있습니다.</content>
+  <content contentuid="h73722566g2328g44a1ga117g7642cc4510a5" version="1">하늘에 닿은 전사의 장화</content>
+  <content contentuid="h22bac101g2c00g432bg8774gd506e316e8fe" version="1">공기 수도사들의 고대 사원 유적 사이에서 당신은 이 놀라운 털 안감 장화를 발견했습니다. 깃털처럼 가벼우면서도 놀라울 정도로 튼튼합니다. 근처에서 발견된 낡은 주문서에는 높은 곳에서 도약하여 하늘에서 치는 번개처럼 적을 덮치도록 스스로를 단련했던 전사 종파에 대한 이야기가 담겨 있습니다. 이 장화 안의 고대 마법은 여전히 그 힘의 파편을 간직하고 있는 듯하며, 착용자가 가장 대담한 도약을 할 때 보호를 제공합니다.</content>
+  <content contentuid="hcd4ebc4bg9fcbg44d0g8734g64ded8bea6fa" version="1">천상의 위력</content>
+  <content contentuid="hc43b3424g6f3ag4c4bg950fgb395aaf418ea" version="1">추락 피해에 면역이 됩니다. &lt;LSTag Type="Spell" Tooltip="Projectile_Jump"&gt;도약&lt;/LSTag&gt; 시 [1]을 얻습니다.&lt;br&gt;&lt;br&gt;위력은 레벨 마다 증가합니다.</content>
+  <content contentuid="hcc0ccd9fgfae3g467egb734g5d85404a7574" version="1">천상의 수호</content>
+  <content contentuid="h539af0f2gf4c6g4ed9g9e36gb0aa215d29a1" version="1">이 크리처는 [1]을 얻습니다.</content>
+  <content contentuid="h26e65e21g7e56g4bcdga36egc4b552af06d6" version="1">윈드스위프트 붕대</content>
+  <content contentuid="hdba5c553g83d9g4720g9e74gb94bfad33c15" version="1">고대의 바위가 잊혀진 지혜를 속삭이는 바람 부는 대초원 깊은 곳에서, 당신은 시간이 멈춘 듯한 어느 수도원에서 이 천 붕대를 발견했습니다. 세월의 흔적이 묻어 있지만, 금색 실로 짜인 복잡한 문양은 햇빛을 받으면 아침 안개처럼 변하는 듯 보입니다. 손가락으로 반쯤 지워진 상징들을 따라가자 주변의 공기가 묘하게 일렁이는 것을 느꼈습니다. 수도원의 기록 보관소에서는 특별한 이야기의 파편을 찾아낼 수 있었습니다. 움직임의 한계 그 자체를 초월하여, 발걸음이 너무나 빠르고 가벼워 목격자들이 마치 바람 속으로 녹아드는 형상 같았다고 말했던 고행자들에 대한 이야기였습니다. 그들의 통달함은 공기의 파동 외에는 아무것도 보이지 않을 정도였으며, 오직 소용돌이치는 먼지만이 그들이 지나갔음을 증명했습니다.</content>
+  <content contentuid="hdeda1330gf993g4ed3gb00dgaa01917584ed" version="1">바람의 은총</content>
+  <content contentuid="hdad50e77gf5eeg4f87ga09ag36ccc8f4058e" version="1">&lt;LSTag Type="Spell" Tooltip="Shout_Dash"&gt;질주&lt;/LSTag&gt;의 효율이 두 배가 됩니다.</content>
+  <content contentuid="hd6ff9fb7g84d3g44e3g8244gef4909d777d1" version="1">시간술사의 발걸음</content>
+  <content contentuid="h08879c21gc226g4dfeg92a7g2d85149aa5df" version="1">이 이계의 장화는 시간 그 자체의 바깥에 존재하는 듯합니다. 표면에 박힌 진홍색 수정들은 부자연스러운 리듬으로 고동치고, 이를 벼려낸 금속은 마치 시간의 흐름 속에서 자신의 형태를 확신하지 못하는 듯 유동적으로 보입니다. 고대 문헌을 연구하던 중 당신은 "시간 그 자체를 구속하려 했던 자"에 대해 언급하는 영계 문자의 파편을 발견했습니다. 나머지 구절들은 마치 시간 자체가 비밀을 밝히기를 거부하듯 절망적으로 흐릿합니다.</content>
+  <content contentuid="h588fccdaga4cag4a3dgad8fg91053bcd8c6e" version="1">시간 왜곡</content>
+  <content contentuid="h2e671881ga0b6g4bdbgb1f1gdc8bfbe04eab" version="1">당신의 [1] 내에 있는 적들은 &lt;LSTag Tooltip="MovementSpeed"&gt;이동 속도&lt;/LSTag&gt;의 [2]%를 잃습니다.</content>
+  <content contentuid="ha68167ebg0b57g420egbc72g19d2b4c53890" version="1">강제 정지</content>
+  <content contentuid="h93043ca4gd1c2g4916gbf30g5d996a53195d" version="1">이 크리처는 시간의 힘에 영향을 받아 [1]%의 &lt;LSTag Tooltip="MovementSpeed"&gt;이동 속도&lt;/LSTag&gt;를 잃습니다.</content>
+  <content contentuid="hc872a3dfgf954g4531gb386gc00af5aa2587" version="1">시간의 흐름</content>
+  <content contentuid="hed6b607egcf90g481aga6fag74fb08c21fa4" version="1">&lt;LSTag Type="Status" Tooltip="SLOW"&gt;둔화&lt;/LSTag&gt; 또는 &lt;LSTag Type="Status" Tooltip="HASTE"&gt;가속&lt;/LSTag&gt; 상태인 동안 &lt;LSTag Tooltip="MovementSpeed"&gt;이동 속도&lt;/LSTag&gt;가 +[1]만큼 증가합니다.</content>
+  <content contentuid="h6ba0f203g6521g4ec3gb2d2g0ae7c7439fac" version="1">필연적인 일격</content>
+  <content contentuid="h12cb4d4eg311bg427cg9a45g4301892c6a4c" version="1">&lt;LSTag Tooltip="CriticalHit"&gt;치명타&lt;/LSTag&gt;를 입힐 수 없지만, 공격이 빗나갈 때마다 항상 다시 굴립니다.</content>
+  <content contentuid="h241d370dgc606g4557g8f1ag8e262f9eeab4" version="1">시간 고정</content>
+  <content contentuid="h32323da7gedbeg45f2gabcfg7077b5188208" version="1">&lt;LSTag Type="Status" Tooltip="PRONE"&gt;넘어짐&lt;/LSTag&gt; 상태인 적에게 피해를 입히면 해당 적을 [1]턴 동안 &lt;LSTag Type="Status" Tooltip="STUNNED"&gt;기절&lt;/LSTag&gt; 상태로 만듭니다.</content>
+  <content contentuid="hbb5bec8cg6968g454fg995dg16adcb994d06" version="1">애쉬테자르</content>
+  <content contentuid="h916c3d4bg2e3bg4e8agbc03g01d759a75e23" version="1">이 슬리퍼는 폭풍우가 몰아치는 하늘을 가로지르는 번개를 연상시키는 영롱한 푸른 빛으로 반짝입니다. 당신이 이 놀라운 특성들을 연구함에 따라, 표면 아래에 숨겨진 심연언어의 고대 글자들이 모습을 드러냅니다. 각각의 글자는 억눌린 힘으로 타닥거립니다. 이 기묘한 성질을 실험하던 중 당신은 전기 방전에 대한 슬리퍼의 심오한 반응을 발견했습니다. 슬리퍼는 마치 잊혀진 영적인 전도체처럼 밑창을 통해 힘을 끌어당기며 깨어나는 듯 보입니다. 격렬한 전투의 순간, 당신은 발 주위의 정전기가 슬리퍼의 이계적 에너지와 합쳐져 공간의 직물 자체를 울리는 공명을 일으키는 것을 느낍니다.</content>
+  <content contentuid="h5f3e96d6geeaag4e1fga545g95ddabfd37a6" version="1">폭풍 공명</content>
+  <content contentuid="hea91c51cg1283g486eg9da7g70e1627ba228" version="1">전류가 흐르는 표면 위에서 &lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 [1]를 입히면, &lt;LSTag Type="ActionResource" Tooltip="ActionPoint"&gt;행동&lt;/LSTag&gt;을 1점 회복합니다.&lt;br&gt;&lt;br&gt;이 효과는 턴당 한 번만 발동합니다.</content>
+  <content contentuid="he3e844efg9fd9g43c6g9cb1gc06c7699710e" version="1">파이록시스</content>
+  <content contentuid="ha695aa97g34d2g4f17g87c8g8f7936de5275" version="1">이 불타는 장화는 영원히 타오르는 제단 위에 떠 있는 상태로 어느 고대 화염 성소에서 발견되었습니다. 처음 만졌을 때, 당신은 장화가 마치 불을 자신의 의지에 굴복시키려는 듯 주변의 불꽃과 공명하는 것을 느꼈습니다. 그 특성을 오래 연구할수록 당신은 확신하게 되었습니다. 이 장화는 단순히 불에 저항하는 것이 아니라, 불의 파괴적인 힘을 치유의 정수로 변환하는 힘을 지니고 있습니다.</content>
+  <content contentuid="hc6f801e1gcc64g40e8gb40fg712503925f68" version="1">혼돈의 불 정복</content>
+  <content contentuid="h93a16be7ge718g4f6egaf28g130b2c03b45a" version="1">불타는 표면 위에 선 채로 &lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;주문&lt;/LSTag&gt;으로 [1]를 입히면, 자신의 생명력을 [2]만큼 치유합니다.</content>
+  <content contentuid="hf6375ea0g142fg4465gbc4eg870c718b2408" version="1">마법 불꽃</content>
+  <content contentuid="h5711f1d6g8d57g4fcdgbe25gf9481a8d056e" version="1">&lt;LSTag Type="Status" Tooltip="MAGE_ARMOR"&gt;마법사의 갑옷&lt;/LSTag&gt; 효과를 받는 동안, [2]턴 동안 매 턴마다 발밑에 [1] 크기의 불타는 표면을 생성합니다.</content>
+  <content contentuid="h30ac0e90gb697g452cg8e47g6aabafb254cc" version="1">머리디언</content>
+  <content contentuid="h1d70680bg0645g4506gbe92gfba6e02200f1" version="1">첫눈에는 시간과 여행의 흔적이 묻은 평범한 가죽 장화일 뿐입니다. 하지만 자세히 살펴보면, 가죽이 내면의 신성한 빛으로 반짝이는 듯하며 발걸음마다 공중에 발광의 흔적을 남기는 것을 알 수 있습니다. 드문 순간에 빛이 특정한 각도로 떨어지면, 가죽의 짜임 자체에 새겨진 고대 천상 룬을 식별할 수 있습니다. 어떤 힘이 이토록 미천한 그릇에 그런 위력을 부여했을까요? 그 답은 세월 속에 사라진 듯 보입니다.</content>
+  <content contentuid="h2cebab58g3e5dg45fegaec9gd6638def0357" version="1">천상의 조화</content>
+  <content contentuid="hef14415ag96beg4045g9af3g79f595cb6553" version="1">&lt;LSTag Tooltip="HitPoints"&gt;생명력&lt;/LSTag&gt;이 가득 찬 상태로 전투 중일 때, 이동 속도 저하에 면역이 되며 &lt;LSTag Type="Spell" Tooltip="Projectile_Fly"&gt;비행&lt;/LSTag&gt;할 수 있습니다.</content>
+  <content contentuid="h15525d08g9756g4167g9ef8gd66c6bd81b40" version="1">&lt;LSTag Tooltip="HitPoints"&gt;생명력&lt;/LSTag&gt;이 [2]% 미만인 동안 공격으로 추가로 [1]를 입힙니다.</content>
+  <content contentuid="h822f0dbegef2cg4c6fgbacfg7ffef449e9c8" version="1">파도 여왕의 칙령</content>
+  <content contentuid="h59f43f90g73ceg4e47g9e26g377a7207ae8c" version="2">크리처가 &lt;LSTag Type="Status" Tooltip="PRONE"&gt;넘어짐&lt;/LSTag&gt; 또는 &lt;LSTag Type="Status" Tooltip="OFF_BALANCED"&gt;불안정&lt;/LSTag&gt; 상태가 되면, 민첩 &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt;에 성공해야 하며 실패 시 즉시 &lt;LSTag Type="Status" Tooltip="WET"&gt;젖음&lt;/LSTag&gt; 상태가 됩니다.&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;난이도&lt;/LSTag&gt;는 당신의 &lt;LSTag Tooltip="SpellDifficultyClass"&gt;주문 내성 난이도&lt;/LSTag&gt;에 따라 결정됩니다.</content>
+  <content contentuid="h1c14c14ag0b37g480bg988fgff534ecb8e8d" version="1">심해의 집중</content>
+  <content contentuid="h85bfa853g8471g4672g8d84g7504eba028e7" version="1">&lt;LSTag Type="Status" Tooltip="WET"&gt;젖음&lt;/LSTag&gt; 상태인 동안에는 주문 &lt;LSTag Tooltip="Concentration"&gt;집중&lt;/LSTag&gt;이 끊기지 않습니다.</content>
+  <content contentuid="had2d8f4bg22f0g4f44gaa51gc67661145390" version="1">파도 웅덩이 소환</content>
+  <content contentuid="h918ca00ag8344g4715gabf8g2bd9c741e571" version="1">연막탄</content>
+  <content contentuid="h19c2e0afgbdbdg4fdbgb88eg4221c0df9d9a" version="1">화염병</content>
+  <content contentuid="h02af77b9g056fg4b40gaf90gf07e5b0134e7" version="1">화약 수류탄</content>
+  <content contentuid="h73de55b0g6c0dg46a6gbf1cg1addb386725b" version="1">파편 수류탄</content>
+  <content contentuid="h6c077f5cgb629g4db0gb721g5e233e31a053" version="1">주머니에서 연막탄을 던집니다. 충돌 시 눈을 타들어가게 만드는 부식성 구름을 방출하여 크리처를 &lt;LSTag Type="Status" Tooltip="BLINDED"&gt;실명&lt;/LSTag&gt; 상태로 만들고, 해당 지역을 시야를 차단하는 &lt;LSTag Type="Spell" Tooltip="Target_FogCloud"&gt;연막&lt;/LSTag&gt;으로 뒤덮습니다. 주머니에 연막탄을 [1]개 보유하고 있습니다.</content>
+  <content contentuid="hd9f65c58g4e5dg443eg93fag3ac30dd49fc9" version="1">주머니에서 연막탄을 던집니다. 충돌 시 눈을 타들어가게 만드는 부식성 구름을 방출하여 크리처를 &lt;LSTag Type="Status" Tooltip="BLINDED"&gt;실명&lt;/LSTag&gt; 상태로 만들고, 해당 지역을 시야를 차단하는 &lt;LSTag Type="Spell" Tooltip="Target_FogCloud"&gt;연막&lt;/LSTag&gt;으로 뒤덮습니다. 주머니에 연막탄을 [1]개 보유하고 있습니다.</content>
+  <content contentuid="hbd17b698g1e71g4c71ga753g40ea1c04b759" version="1">주머니에서 연막탄을 던집니다. 충돌 시 눈을 타들어가게 만드는 부식성 구름을 방출하여 크리처를 &lt;LSTag Type="Status" Tooltip="BLINDED"&gt;실명&lt;/LSTag&gt; 상태로 만들고, 해당 지역을 시야를 차단하는 &lt;LSTag Type="Spell" Tooltip="Target_FogCloud"&gt;연막&lt;/LSTag&gt;으로 뒤덮습니다. 주머니에 연막탄을 [1]개 보유하고 있습니다.</content>
+  <content contentuid="h193aee2dga740g4cf2gb8bbgd402574579f4" version="1">주머니에서 플라스크를 던집니다. 충돌 시 &lt;LSTag Type="Status" Tooltip="BURNING"&gt;발화&lt;/LSTag&gt; 물질이 퍼져 즉시 크리처를 그을리고, 오랫동안 뜨겁게 타오르는 불길을 남깁니다. 주머니에 화염병을 [1]개 보유하고 있습니다.</content>
+  <content contentuid="hb24bf5d7gfdc0g4a88gbe7egae326d077abb" version="1">주머니에서 플라스크를 던집니다. 충돌 시 &lt;LSTag Type="Status" Tooltip="BURNING"&gt;발화&lt;/LSTag&gt; 물질이 퍼져 즉시 크리처를 그을리고, 오랫동안 뜨겁게 타오르는 불길을 남깁니다. 주머니에 화염병을 [1]개 보유하고 있습니다.</content>
+  <content contentuid="ha12729e6gf31eg44ddga938g0cd534c375c4" version="1">주머니에서 플라스크를 던집니다. 충돌 시 &lt;LSTag Type="Status" Tooltip="BURNING"&gt;발화&lt;/LSTag&gt; 물질이 퍼져 즉시 크리처를 그을리고, 오랫동안 뜨겁게 타오르는 불길을 남깁니다. 주머니에 화염병을 [1]개 보유하고 있습니다.</content>
+  <content contentuid="h35a728e6g64e9g486dg9ad5g96bcb44e741b" version="1">주머니에서 화약 수류탄을 던집니다. 강력한 폭발이 파괴적인 역장 피해를 입히고 충격파로 크리처들을 날려버립니다. 주머니에 화약 수류탄을 [1]개 보유하고 있습니다.</content>
+  <content contentuid="hc6900d29gb10ag4c25gb9c2g67b84a790e0b" version="1">주머니에서 화약 수류탄을 던집니다. 강력한 폭발이 파괴적인 역장 피해를 입히고 충격파로 크리처들을 날려버립니다. 주머니에 화약 수류탄을 [1]개 보유하고 있습니다.</content>
+  <content contentuid="hd9288b68g0158g4058g9bc6g42c134d784ba" version="1">주머니에서 화약 수류탄을 던집니다. 강력한 폭발이 파괴적인 역장 피해를 입히고 충격파로 크리처들을 날려버립니다. 주머니에 화약 수류탄을 [1]개 보유하고 있습니다.</content>
+  <content contentuid="h5d299397ga3d7g4363g8d9fg75c95926a89d" version="1">주머니에서 파편 폭약을 던집니다. 폭발 시 철제 파편 세례가 넓은 범위를 뒤덮어 살점을 찢고 크리처에게 &lt;LSTag Type="Status" Tooltip="BLEEDING"&gt;출혈&lt;/LSTag&gt;을 일으킵니다. 주머니에 파편 수류탄을 [1]개 보유하고 있습니다.</content>
+  <content contentuid="ha5dac2d4g1597g4744g9cb5gb83cef5061f2" version="1">주머니에서 파편 폭약을 던집니다. 폭발 시 철제 파편 세례가 넓은 범위를 뒤덮어 살점을 찢고 크리처에게 &lt;LSTag Type="Status" Tooltip="BLEEDING"&gt;출혈&lt;/LSTag&gt;을 일으킵니다. 주머니에 파편 수류탄을 [1]개 보유하고 있습니다.</content>
+  <content contentuid="h49f163ebg5535g47b0ga235g70832452bbeb" version="1">주머니에서 파편 폭약을 던집니다. 폭발 시 철제 파편 세례가 넓은 범위를 뒤덮어 살점을 찢고 크리처에게 &lt;LSTag Type="Status" Tooltip="BLEEDING"&gt;출혈&lt;/LSTag&gt;을 일으킵니다. 주머니에 파편 수류탄을 [1]개 보유하고 있습니다.</content>
+  <content contentuid="h9a0a9d1dg6866g4b2bgafc8g384e78f59865" version="1">&lt;LSTag Type="Image" Info="SoftWarning"/&gt; 수류탄은 사용 횟수가 제한되어 있으며 &lt;LSTag Tooltip="LongRest"&gt;긴 휴식&lt;/LSTag&gt; 시 보충됩니다. &lt;LSTag Tooltip="SavingThrow"&gt;내성 굴림&lt;/LSTag&gt; 난이도는 당신의 &lt;LSTag Tooltip="SpellDifficultyClass"&gt;주문 내성 난이도&lt;/LSTag&gt;에 따라 결정됩니다.</content>
+  <content contentuid="h7bb5435cgcb39g4468ga02eg27ebbe856156" version="1">폭파 전문가의 교활함</content>
+  <content contentuid="h097b23a1g0dfag4854g89c6g8a6b998de6d2" version="1">&lt;LSTag Type="Spell" Tooltip="Target_SneakAttack"&gt;암습&lt;/LSTag&gt; 피해를 입힐 때, 턴 종료 시까지 &lt;LSTag Tooltip="SpellDifficultyClass"&gt;주문 내성 난이도&lt;/LSTag&gt;에 +[1] 보너스를 얻습니다.</content>
+  <content contentuid="hf874e93egdad3g4cf7g9974g3b4d4d7e91a3" version="1">폭파 전문가의 교활함</content>
+  <content contentuid="hcf44a774g447bg439ag9f91g03db4b040d0b" version="1">턴 종료 시까지 &lt;LSTag Tooltip="SpellDifficultyClass"&gt;주문 내성 난이도&lt;/LSTag&gt;에 +[1] 보너스를 얻습니다.</content>
+  <content contentuid="haf4469b3g0814g446fg82b0g827320d12a9a" version="1">연막탄 소진</content>
+  <content contentuid="h64487031g1f5fg4640gb28egdb8f580d59d3" version="1">화염병 소진</content>
+  <content contentuid="h163e018aga79bg4a74g97f2g9c443d4cc66a" version="1">화약 수류탄 소진</content>
+  <content contentuid="h2370058bg425eg410dg9804gcfb5fd7e82e1" version="1">파편 수류탄 소진</content>
+  <content contentuid="ha8e5b441gddfbg4672g841bg425c10025feb" version="1">주머니에 든 연막탄을 사용했습니다. &lt;LSTag Tooltip="LongRest"&gt;긴 휴식&lt;/LSTag&gt; 시 보충됩니다.</content>
+  <content contentuid="heb41a3ceg3671g4590ga58fg873028b56d54" version="1">주머니에 든 화염병을 사용했습니다. &lt;LSTag Tooltip="LongRest"&gt;긴 휴식&lt;/LSTag&gt; 시 보충됩니다.</content>
+  <content contentuid="haa214365ge1aeg4741g8379g770c0512a2c2" version="1">주머니에 든 화약 수류탄을 사용했습니다. &lt;LSTag Tooltip="LongRest"&gt;긴 휴식&lt;/LSTag&gt; 시 보충됩니다.</content>
+  <content contentuid="hedc27e03g32eeg485agb05dgbccb44ee47ee" version="1">주머니에 든 파편 수류탄을 사용했습니다. &lt;LSTag Tooltip="LongRest"&gt;긴 휴식&lt;/LSTag&gt; 시 보충됩니다.</content>
+  <content contentuid="h9b2b1419gdaf6g45b2g9177g882c340ca76b" version="1">신성한 결의</content>
+  <content contentuid="he97f4864gb8d2g41fdgae3egb5fc043865de" version="1">야수 동료의 결속</content>
+  <content contentuid="ha1a5c848g109bg479fga3eage102c824ebfd" version="1">결속된 아군의 [1] 이내에 있는 동안: 공격에 +[2], 적중할 때마다 추가 [3], [4] &lt;LSTag Tooltip="TemporaryHitPoints"&gt;임시 생명력&lt;/LSTag&gt; 보너스를 얻습니다.</content>
+</contentList>

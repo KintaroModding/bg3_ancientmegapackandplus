@@ -1,0 +1,54 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+/*
+// prevent arcanizer chest from being dropped or transferred
+DB_AMP_Arcanizer_DropBlocked(0);
+*/
+KBSECTION
+/*
+// keys on the ARCANIZER_MAIN tag, not every dropper is in DB_AMP_Arcanizer_Owner
+IF
+DroppedBy((ITEM)_Item, (CHARACTER)_Character) 
+AND
+IsTagged(_Item, (TAG)ARCANIZER_MAIN_c4302d38-d7a9-4522-8912-e8c3f53766f5, 1)
+THEN
+// show message
+OpenMessageBox(_Character, "The Arcanizer refuses to leave your possession.");
+// return to inventory - unconditional
+Pickup(_Character, _Item, "", 1);
+
+// transfer prevention - separate from drop handling
+// this handles player-to-player transfers with proper ownership checking
+IF
+AddedTo((ITEM)_Item, (CHARACTER)_NewOwner, _)
+AND
+IsTagged(_Item, (TAG)ARCANIZER_MAIN_c4302d38-d7a9-4522-8912-e8c3f53766f5, 1)
+AND
+DB_AMP_Arcanizer_Owner((CHARACTER)_RightfulOwner)
+AND
+_NewOwner != _RightfulOwner
+AND
+_RightfulOwner != NULL_00000000-0000-0000-0000-000000000000
+AND
+DB_AMP_Arcanizer_DropBlocked(0)
+THEN
+// set flag to prevent recursive handling
+NOT DB_AMP_Arcanizer_DropBlocked(0);
+DB_AMP_Arcanizer_DropBlocked(1);
+// show message to new owner
+OpenMessageBox(_NewOwner, "The Arcanizer cannot be transferred to anyone else.");
+// return to rightful owner
+ToInventory(_Item, _RightfulOwner, 1, 1, 0);
+// reset flag after a delay to prevent recursion
+TimerLaunch("AMP_ResetDropBlockFlag", 300);
+
+// reset flag handler - kept separate and simple
+IF
+TimerFinished("AMP_ResetDropBlockFlag")
+THEN
+NOT DB_AMP_Arcanizer_DropBlocked(1);
+DB_AMP_Arcanizer_DropBlocked(0);
+*/
+EXITSECTION
+ENDEXITSECTION

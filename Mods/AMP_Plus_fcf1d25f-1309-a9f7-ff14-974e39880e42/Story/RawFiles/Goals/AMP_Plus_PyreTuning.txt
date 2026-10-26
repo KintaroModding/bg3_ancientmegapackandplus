@@ -1,0 +1,144 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// every number the Pyre runs on. Rewritten whole when the version fact changes, bump it after editing a figure
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_Pyre2_CfgVer(7)
+THEN
+PROC_AMP_Plus_Pyre2_Reseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_Pyre2_CfgVer(7)
+THEN
+PROC_AMP_Plus_Pyre2_Reseed();
+
+PROC
+PROC_AMP_Plus_Pyre2_Reseed()
+AND
+DB_AMP_Plus_Pyre2_CfgVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre2_CfgVer(_Old);
+
+PROC
+PROC_AMP_Plus_Pyre2_Reseed()
+THEN
+PROC_AMP_Plus_Pyre2_DrainCfgModeBase();
+
+PROC
+PROC_AMP_Plus_Pyre2_Reseed()
+THEN
+PROC_AMP_Plus_Pyre2_DrainCfgKillWeight();
+
+PROC
+PROC_AMP_Plus_Pyre2_Reseed()
+THEN
+PROC_AMP_Plus_Pyre2_DrainCfgTempoBand();
+
+PROC
+PROC_AMP_Plus_Pyre2_Reseed()
+THEN
+PROC_AMP_Plus_Pyre2_DrainCfgCrowd();
+
+PROC
+PROC_AMP_Plus_Pyre2_Reseed()
+THEN
+PROC_AMP_Plus_Pyre2_DrainCfgValues();
+
+PROC
+PROC_AMP_Plus_Pyre2_Reseed()
+THEN
+PROC_AMP_Plus_Pyre2_DrainCfgCal();
+
+PROC
+PROC_AMP_Plus_Pyre2_Reseed()
+THEN
+DB_AMP_Plus_Pyre2_CfgVer(7);
+DB_AMP_Plus_Pyre_ModeBase("CASUAL", 1);
+DB_AMP_Plus_Pyre_ModeBase("NORMAL", 3);
+DB_AMP_Plus_Pyre_ModeBase("HARD", 5);
+DB_AMP_Plus_Pyre_TempoBand(0, 5, 12);
+DB_AMP_Plus_Pyre_TempoBand(6, 11, 20);
+DB_AMP_Plus_Pyre_TempoBand(12, 16, 28);
+DB_AMP_Plus_Pyre_TempoBand(17, 99, 40);
+DB_AMP_Plus_Pyre_Crowd(1, 1, 0);
+DB_AMP_Plus_Pyre_Crowd(2, 2, 1);
+DB_AMP_Plus_Pyre_Crowd(3, 4, 2);
+DB_AMP_Plus_Pyre_Crowd(5, 7, 3);
+DB_AMP_Plus_Pyre_Crowd(8, 11, 4);
+DB_AMP_Plus_Pyre_Crowd(12, 999, 5);
+DB_AMP_Plus_Pyre2_Cfg("RATE", 20);
+DB_AMP_Plus_Pyre2_Cfg("MAXSTAGE", 10);
+DB_AMP_Plus_Pyre2_Cfg("CASUALSTAGE", 8);
+DB_AMP_Plus_Pyre2_Cfg("SOLOHP", 25);
+DB_AMP_Plus_Pyre2_Cfg("BOSSHP", 75);
+DB_AMP_Plus_Pyre2_Cfg("MEMSTEP", 180000);
+DB_AMP_Plus_Pyre2_Cfg("TEMPOFLOOR", 120);
+DB_AMP_Plus_Pyre2_Cfg("TEMPOCEIL", 260);
+DB_AMP_Plus_Pyre2_Cfg("PUSHGAIN", 400);
+DB_AMP_Plus_Pyre2_Cfg("PUSHMAX", 100);
+DB_AMP_Plus_Pyre2_Cfg("STALLFREE", 5);
+DB_AMP_Plus_Pyre2_Cfg("STALLSTEP", 10);
+DB_AMP_Plus_Pyre2_Cfg("STALLMAX", 80);
+DB_AMP_Plus_Pyre_Cal(0, 5, 1);
+DB_AMP_Plus_Pyre_Cal(6, 11, 2);
+DB_AMP_Plus_Pyre_Cal(12, 16, 3);
+DB_AMP_Plus_Pyre_Cal(17, 99, 4);
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainCfgModeBase()
+AND
+DB_AMP_Plus_Pyre_ModeBase((STRING)_M, (INTEGER)_B)
+THEN
+NOT DB_AMP_Plus_Pyre_ModeBase(_M, _B);
+PROC_AMP_Plus_Pyre2_DrainCfgModeBase();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainCfgKillWeight()
+AND
+DB_AMP_Plus_Pyre_KillWeight((INTEGER)_Min, (INTEGER)_Max, (INTEGER)_W)
+THEN
+NOT DB_AMP_Plus_Pyre_KillWeight(_Min, _Max, _W);
+PROC_AMP_Plus_Pyre2_DrainCfgKillWeight();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainCfgTempoBand()
+AND
+DB_AMP_Plus_Pyre_TempoBand((INTEGER)_Min, (INTEGER)_Max, (INTEGER)_T)
+THEN
+NOT DB_AMP_Plus_Pyre_TempoBand(_Min, _Max, _T);
+PROC_AMP_Plus_Pyre2_DrainCfgTempoBand();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainCfgCrowd()
+AND
+DB_AMP_Plus_Pyre_Crowd((INTEGER)_Min, (INTEGER)_Max, (INTEGER)_P)
+THEN
+NOT DB_AMP_Plus_Pyre_Crowd(_Min, _Max, _P);
+PROC_AMP_Plus_Pyre2_DrainCfgCrowd();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainCfgValues()
+AND
+DB_AMP_Plus_Pyre2_Cfg((STRING)_K, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_Pyre2_Cfg(_K, _V);
+PROC_AMP_Plus_Pyre2_DrainCfgValues();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainCfgCal()
+AND
+DB_AMP_Plus_Pyre_Cal((INTEGER)_Min, (INTEGER)_Max, (INTEGER)_B)
+THEN
+NOT DB_AMP_Plus_Pyre_Cal(_Min, _Max, _B);
+PROC_AMP_Plus_Pyre2_DrainCfgCal();
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,86 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// tutorial chest spell: summon to player, auto-delete when dropped
+DB_AMP_TutorialChest_Template((ITEMROOT)AMP_Tutorial_Chest_6258293a-ddcc-4710-8e0b-7e80b1f105d8);
+DB_AMP_TutorialChest_SpellID("Shout_AMP_Tutorial_Chest");
+KBSECTION
+// chest spell cast
+IF
+UsingSpell((CHARACTER)_Caster, (STRING)_SpellID, _, _, _)
+AND
+DB_AMP_TutorialChest_SpellID(_SpellID)
+AND
+IsPlayer(_Caster, 1)
+THEN
+PROC_AMP_TutorialChest_SummonChest(_Caster);
+
+// summon chest to caster inventory
+PROC
+PROC_AMP_TutorialChest_SummonChest((CHARACTER)_Caster)
+AND
+DB_AMP_TutorialChest_Template(_ChestTemplate)
+THEN
+TemplateAddTo(_ChestTemplate, _Caster, 1, 1);
+PROC_AMP_PlayModeEffect(_Caster);
+
+// track the new chest
+IF
+TemplateAddedTo((ITEMROOT)_ChestTemplate, (ITEM)_CreatedChest, (CHARACTER)_Caster, _)
+AND
+DB_AMP_TutorialChest_Template(_ChestTemplate)
+THEN
+DB_AMP_TutorialChest_Summoned(_CreatedChest, _Caster);
+
+// chest removed from any inventory
+IF
+RemovedFrom((ITEM)_Chest, (GUIDSTRING)_Container)
+AND
+DB_AMP_TutorialChest_Summoned(_Chest, _)
+THEN
+PROC_AMP_TutorialChest_CheckAndDelete(_Chest);
+
+// delete if not in any player inventory
+PROC
+PROC_AMP_TutorialChest_CheckAndDelete((ITEM)_Chest)
+AND
+NOT QRY_AMP_TutorialChest_IsInAnyPlayerInventory(_Chest)
+AND
+GetPosition(_Chest, _X, _Y, _Z)
+AND
+RealSubtract(_Y, 1.0, _YLow)
+THEN
+PROC_AMP_PlayModeEffectAtPos(_X, _YLow, _Z);
+ObjectTimerLaunch(_Chest, "AMP_TutorialChest_Delete", 500, 0);
+
+// is the chest in any player inventory
+QRY
+QRY_AMP_TutorialChest_IsInAnyPlayerInventory((ITEM)_Chest)
+AND
+DB_Players(_Player)
+AND
+IsInInventoryOf(_Chest, _Player, 1)
+THEN
+DB_NOOP(1);
+
+// delete timer done
+IF
+ObjectTimerFinished((ITEM)_Chest, "AMP_TutorialChest_Delete")
+AND
+DB_AMP_TutorialChest_Summoned(_Chest, _Summoner)
+AND
+Exists(_Chest, 1)
+THEN
+NOT DB_AMP_TutorialChest_Summoned(_Chest, _Summoner);
+RequestDelete(_Chest);
+
+// untrack if destroyed some other way
+IF
+DestroyedBy((ITEM)_Chest, _, _, _)
+AND
+DB_AMP_TutorialChest_Summoned(_Chest, _Summoner)
+THEN
+NOT DB_AMP_TutorialChest_Summoned(_Chest, _Summoner);
+EXITSECTION
+
+ENDEXITSECTION

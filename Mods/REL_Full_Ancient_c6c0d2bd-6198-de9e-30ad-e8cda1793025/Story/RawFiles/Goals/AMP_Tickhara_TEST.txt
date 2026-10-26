@@ -1,0 +1,34 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// tickhara debug spawn helper, remove before release.
+// SE console: oe AMP_TestSpawnTickhara / oe AMP_TestKillTickhara
+
+KBSECTION
+
+IF
+TextEvent("AMP_TestSpawnTickhara")
+AND
+GetHostCharacter(_Host)
+AND
+GetPosition(_Host, _X, _Y, _Z)
+AND
+RealSum(_Z, 3.0, _SZ)
+AND
+CreateAt((GUIDSTRING)AMP_ULTRA_Summon_06_171ecf1c-df60-427b-a38b-09607737482d, _X, _Y, _SZ, 0, 1, "", (GUIDSTRING)_Mob)
+THEN
+DB_AMP_Tickhara_TestSpawn((CHARACTER)_Mob);
+SetRelationTemporaryHostile((CHARACTER)_Mob, _Host);
+EnterCombat(_Mob, _Host);
+
+IF
+TextEvent("AMP_TestKillTickhara")
+AND
+DB_AMP_Tickhara_TestSpawn((CHARACTER)_Mob)
+THEN
+NOT DB_AMP_Tickhara_TestSpawn(_Mob);
+RequestDeleteTemporary(_Mob);
+
+EXITSECTION
+
+ENDEXITSECTION

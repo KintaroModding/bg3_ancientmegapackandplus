@@ -1,0 +1,67 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// auto-extract only ejects to a player owner, so cubes stay sellable containers in a merchant
+
+// act 1 -> tier-1 cubes
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+DB_AMP_TraderAct((CHARACTER)_Trader, 1)
+AND
+Exists(_Trader, 1)
+AND
+NOT DB_AMP_GenMerchantStocked(_Trader)
+AND
+Random(6, (INTEGER)_R)
+AND
+IntegerSum(_R, 5, (INTEGER)_Count)
+THEN
+DB_AMP_GenMerchantStocked(_Trader);
+TemplateAddTo(AMP_Capsule_Reward_Generic_1_bc44d261-edfb-424e-ab61-98d16899ab7b, _Trader, _Count, 0);
+
+// act 2 -> tier-2 cubes
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+DB_AMP_TraderAct((CHARACTER)_Trader, 2)
+AND
+Exists(_Trader, 1)
+AND
+NOT DB_AMP_GenMerchantStocked(_Trader)
+AND
+Random(6, (INTEGER)_R)
+AND
+IntegerSum(_R, 5, (INTEGER)_Count)
+THEN
+DB_AMP_GenMerchantStocked(_Trader);
+TemplateAddTo(AMP_Capsule_Reward_Generic_2_7a85cccb-48ed-4948-9d25-03a4b0a79114, _Trader, _Count, 0);
+
+// act 3 -> tier-3 cubes
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+DB_AMP_TraderAct((CHARACTER)_Trader, 3)
+AND
+Exists(_Trader, 1)
+AND
+NOT DB_AMP_GenMerchantStocked(_Trader)
+AND
+Random(3, (INTEGER)_R)
+AND
+IntegerSum(_R, 2, (INTEGER)_Count)
+THEN
+DB_AMP_GenMerchantStocked(_Trader);
+TemplateAddTo(AMP_Capsule_Reward_Generic_3_007e6a6b-4d51-4a7f-b03a-560e06edd5f6, _Trader, _Count, 0);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="b878a854-f790-4999-95c4-3f20f00f65ac" />
+					<attribute id="Name" type="LSString" value="S_GLO_Gortash" />
+					<attribute id="LevelName" type="FixedString" value="SCL_Main_A" />
+					<attribute id="IsGlobal" type="bool" value="True" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="TemplateName" type="FixedString" value="2071fae1-d2d2-48bd-aa44-bda0b554ca76" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h8170474agd8d1g45ddg8be1gcb5c06591092" version="2" />
+					<attribute id="Icon" type="FixedString" value="d11015b6-0734-9300-993c-9e5968680128-EQP_WYR_HeavyCrossbow_Dagger_Gortash_(Icon_Gortash)" />
+					<attribute id="Stats" type="FixedString" value="WYR_Gortash" />
+					<attribute id="SpellSet" type="FixedString" value="WYR_Gortash" />
+					<attribute id="Equipment" type="FixedString" value="EQP_WYR_HeavyCrossbow_Dagger_Gortash" />
+					<attribute id="LevelOverride" type="int32" value="14" />
+					<attribute id="CharacterVisualResourceID" type="FixedString" value="d11015b6-0734-9300-993c-9e5968680128" />
+					<attribute id="IsEquipmentLootable" type="bool" value="False" />
+					<attribute id="AnubisConfigName" type="FixedString" value="SCL_Gortash" />
+					<attribute id="GeneratePortrait" type="LSString" value="Icon_Gortash" />
+					<attribute id="Title" type="TranslatedString" handle="h2982a7c5g917bg47c0gb49cg61718c422684" version="2" />
+					<attribute id="Archetype" type="FixedString" value="act3_WYR_Gortash_ranged" />
+					<attribute id="IsBoss" type="bool" value="True" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="859.5815 -49.553616 -23.91847" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0.74706805 0 0.6647476" />
+						</node>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="ece30580-7788-4488-955d-7ee0a32322ed" />
+								</node>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="53c3304c-032d-4c49-86df-00b3b03a6b13" />
+								</node>
+							</children>
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="SCL_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="9cc8e46a-cf37-55e5-8323-ea1670d977c3" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="dfc9bfa1-f16a-0f1d-353a-eae09776bb33" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="0be16a55-888c-a329-ef71-a982b6248d5d" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="SkillList" />
+						<node id="ItemList">
+							<children>
+								<node id="Item">
+									<attribute id="ScoreModifier" type="float" value="1" />
+									<attribute id="StartRound" type="int32" value="0" />
+									<attribute id="FallbackStartRound" type="int32" value="-1" />
+									<attribute id="MinimumImpact" type="int32" value="0" />
+									<attribute id="OnlyCastOnSelf" type="bool" value="False" />
+									<attribute id="AIFlags" type="uint16" value="0" />
+									<attribute id="ItemName" type="LSString" value="PUZ_Trap_Gortash_Reflectoguard" />
+									<attribute id="LevelName" type="LSString" value="" />
+									<attribute id="UUID" type="FixedString" value="" />
+									<attribute id="TemplateID" type="FixedString" value="e5544395-3752-463c-80a8-e9b9b7ed1263" />
+									<attribute id="Amount" type="int32" value="2" />
+									<attribute id="IsTradable" type="uint8" value="0" />
+									<attribute id="Type" type="uint8" value="1" />
+									<attribute id="CanBePickpocketed" type="bool" value="True" />
+									<attribute id="IsDroppedOnDeath" type="bool" value="True" />
+									<children>
+										<node id="SourceConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+										<node id="TargetConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Item">
+									<attribute id="ScoreModifier" type="float" value="1" />
+									<attribute id="StartRound" type="int32" value="0" />
+									<attribute id="FallbackStartRound" type="int32" value="-1" />
+									<attribute id="MinimumImpact" type="int32" value="0" />
+									<attribute id="OnlyCastOnSelf" type="bool" value="False" />
+									<attribute id="AIFlags" type="uint16" value="0" />
+									<attribute id="ItemName" type="LSString" value="PUZ_Trap_Gortash_PhaseOptimizer" />
+									<attribute id="LevelName" type="LSString" value="" />
+									<attribute id="UUID" type="FixedString" value="" />
+									<attribute id="TemplateID" type="FixedString" value="f36d0687-46e4-4899-930e-8f635e50948e" />
+									<attribute id="Amount" type="int32" value="4" />
+									<attribute id="IsTradable" type="uint8" value="0" />
+									<attribute id="Type" type="uint8" value="1" />
+									<attribute id="CanBePickpocketed" type="bool" value="True" />
+									<attribute id="IsDroppedOnDeath" type="bool" value="True" />
+									<children>
+										<node id="SourceConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+										<node id="TargetConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="WYR_GORTASH_OVERRIDE_MHA" />
+								</node>
+							</children>
+						</node>
+						<node id="Treasures">
+							<children>
+								<node id="TreasureItem">
+									<attribute id="Object" type="FixedString" value="Gold_Pocket_Wealthy" />
+								</node>
+								<node id="TreasureItem">
+									<attribute id="Object" type="FixedString" value="Gortash_Loot" />
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

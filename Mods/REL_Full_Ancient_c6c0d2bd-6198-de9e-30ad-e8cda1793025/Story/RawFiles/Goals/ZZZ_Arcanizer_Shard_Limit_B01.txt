@@ -1,0 +1,14 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+NOT DB_AMP_Shard_SlotLimit("Common", 8);
+DB_AMP_Shard_SlotLimit("Common", 6);
+
+NOT DB_AMP_Shard_SlotLimit("Legendary", 1);
+DB_AMP_Shard_SlotLimit("Legendary", 2);
+
+KBSECTION
+
+EXITSECTION
+ENDEXITSECTION

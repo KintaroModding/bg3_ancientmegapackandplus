@@ -1,0 +1,148 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// blood summon: tech status -> summon status pairs
+DB_AMP_BloodSummon_Statuses("N_BLOOD_TECH", "N_BLOOD_SUMMON_1");
+DB_AMP_BloodSummon_Statuses("N_BLOOD2_TECH", "N_BLOOD_SUMMON_2");
+DB_AMP_BloodSummon_Statuses("N_BLOOD3_TECH", "N_BLOOD_SUMMON_3");
+DB_AMP_BloodSummon_Statuses("N_BLOOD4_TECH", "N_BLOOD_SUMMON_4");
+
+KBSECTION
+
+// n_blood amulets: keep N_BLOOD statuses through slayer form
+
+// slayer entry -> apply protection lock
+
+IF
+StatusApplied(_Character, "SLAYER_PLAYER", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+THEN
+ApplyStatus(_Character, "N_BLOOD_SLAYER_LOCK", -1.0, 1, _Character);
+
+IF
+StatusApplied(_Character, "SLAYER_PLAYER_10", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+THEN
+ApplyStatus(_Character, "N_BLOOD_SLAYER_LOCK", -1.0, 1, _Character);
+
+// slayer exit -> delayed cleanup
+
+IF
+StatusRemoved(_Character, "SLAYER_PLAYER", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasAppliedStatus(_Character, "SLAYER_PLAYER_10", 0)
+THEN
+ObjectTimerLaunch((GUIDSTRING)_Character, "AMP_NBlood_SlayerExit_Check", 1000, 0);
+
+IF
+StatusRemoved(_Character, "SLAYER_PLAYER_10", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasAppliedStatus(_Character, "SLAYER_PLAYER", 0)
+THEN
+ObjectTimerLaunch((GUIDSTRING)_Character, "AMP_NBlood_SlayerExit_Check", 1000, 0);
+
+// drop the lock
+IF
+ObjectTimerFinished(_Character, "AMP_NBlood_SlayerExit_Check")
+AND
+DB_Players((CHARACTER)_Character)
+THEN
+RemoveStatus(_Character, "N_BLOOD_SLAYER_LOCK", _Character);
+
+// no tech status after exit -> remove combat statuses
+IF
+ObjectTimerFinished(_Character, "AMP_NBlood_SlayerExit_Check")
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasActiveStatus(_Character, "N_BLOOD_TECH", 0)
+AND
+HasActiveStatus(_Character, "N_BLOOD2_TECH", 0)
+AND
+HasActiveStatus(_Character, "N_BLOOD3_TECH", 0)
+AND
+HasActiveStatus(_Character, "N_BLOOD4_TECH", 0)
+THEN
+RemoveStatus(_Character, "N_BLOOD1", _Character);
+RemoveStatus(_Character, "N_BLOOD2", _Character);
+RemoveStatus(_Character, "N_BLOOD3", _Character);
+RemoveStatus(_Character, "N_BLOOD4", _Character);
+
+// blood summons: unsummon system, slayer-safe
+
+// unsummon on tech status removed (skip if in slayer form)
+
+IF
+StatusRemoved(_Character, _TechStatus, _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+DB_AMP_BloodSummon_Statuses(_TechStatus, _SummonStatus)
+AND
+HasAppliedStatus(_Character, "SLAYER_PLAYER", 0)
+AND
+HasAppliedStatus(_Character, "SLAYER_PLAYER_10", 0)
+AND
+DB_PlayerSummons(_Summon)
+AND
+HasActiveStatus(_Summon, _SummonStatus, 1)
+AND
+CharacterGetOwner(_Summon, _Character)
+THEN
+Die(_Summon, DEATHTYPE.Lifetime, _Summon, 0, 0);
+
+// summon slayer-exit check
+
+// delayed check on SLAYER_PLAYER exit
+IF
+StatusRemoved(_Character, "SLAYER_PLAYER", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasAppliedStatus(_Character, "SLAYER_PLAYER_10", 0)
+THEN
+ObjectTimerLaunch((GUIDSTRING)_Character, "AMP_BloodSummon_SlayerExit_Check", 1000, 0);
+
+// delayed check on SLAYER_PLAYER_10 exit
+IF
+StatusRemoved(_Character, "SLAYER_PLAYER_10", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasAppliedStatus(_Character, "SLAYER_PLAYER", 0)
+THEN
+ObjectTimerLaunch((GUIDSTRING)_Character, "AMP_BloodSummon_SlayerExit_Check", 1000, 0);
+
+// no tech status after exit -> kill summon
+IF
+ObjectTimerFinished(_Character, "AMP_BloodSummon_SlayerExit_Check")
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasActiveStatus(_Character, "N_BLOOD_TECH", 0)
+AND
+HasActiveStatus(_Character, "N_BLOOD2_TECH", 0)
+AND
+HasActiveStatus(_Character, "N_BLOOD3_TECH", 0)
+AND
+HasActiveStatus(_Character, "N_BLOOD4_TECH", 0)
+AND
+DB_PlayerSummons(_Summon)
+AND
+DB_AMP_BloodSummon_Statuses(_TechStatus, _SummonStatus)
+AND
+HasActiveStatus(_Summon, _SummonStatus, 1)
+AND
+CharacterGetOwner(_Summon, _Character)
+THEN
+Die(_Summon, DEATHTYPE.Lifetime, _Summon, 0, 0);
+
+EXITSECTION
+
+ENDEXITSECTION

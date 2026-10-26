@@ -1,0 +1,770 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+DB_AMP_Ultra_Active(1)
+AND
+NOT DB_AMP_Plus_Ultra_Disabled(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+ApplyStatus(_Host, "AMP_PLUS_ULTRAOFF_UNLOCK", -1.0, 1, _Host);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Ultra_Active(1)
+AND
+NOT DB_AMP_Plus_Ultra_Disabled(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+ApplyStatus(_Host, "AMP_PLUS_ULTRAOFF_UNLOCK", -1.0, 1, _Host);
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_Ultra_Unlock", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+THEN
+PROC_AMP_Plus_UltraSettings_Unlock(_Caster);
+
+PROC
+PROC_AMP_Plus_UltraSettings_Unlock((CHARACTER)_Host)
+AND
+DB_AMP_Plus_Ultra_Disabled(1)
+THEN
+OpenMessageBox(_Host, "AMP_Settings_Ultra_Unavailable");
+
+PROC
+PROC_AMP_Plus_UltraSettings_Unlock((CHARACTER)_Host)
+AND
+NOT DB_AMP_Plus_Ultra_Disabled(1)
+AND
+DB_AMP_Ultra_Active(1)
+THEN
+OpenMessageBox(_Host, "AMP_Plus_Ultra_AlreadyOn");
+
+PROC
+PROC_AMP_Plus_UltraSettings_Unlock((CHARACTER)_Host)
+AND
+NOT DB_AMP_Plus_Ultra_Disabled(1)
+AND
+NOT DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_GameMode("CASUAL")
+THEN
+OpenMessageBox(_Host, "AMP_Settings_Ultra_Unavailable");
+
+PROC
+PROC_AMP_Plus_UltraSettings_Unlock((CHARACTER)_Host)
+AND
+NOT DB_AMP_Plus_Ultra_Disabled(1)
+AND
+NOT DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_GameMode("STOCK")
+THEN
+OpenMessageBox(_Host, "AMP_Settings_Ultra_Unavailable");
+
+PROC
+PROC_AMP_Plus_UltraSettings_Unlock((CHARACTER)_Host)
+AND
+NOT DB_AMP_Plus_Ultra_Disabled(1)
+AND
+NOT DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_GameMode("NORMAL")
+THEN
+DB_AMP_SettingsUltra_Pending(_Host);
+PROC_AMP_Ultra_PlayOfferFanfare(_Host);
+OpenMessageBoxYesNo(_Host, "AMP_Settings_Ultra_Offer");
+
+PROC
+PROC_AMP_Plus_UltraSettings_Unlock((CHARACTER)_Host)
+AND
+NOT DB_AMP_Plus_Ultra_Disabled(1)
+AND
+NOT DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_GameMode("HARD")
+THEN
+DB_AMP_SettingsUltra_Pending(_Host);
+PROC_AMP_Ultra_PlayOfferFanfare(_Host);
+OpenMessageBoxYesNo(_Host, "AMP_Settings_Ultra_Offer");
+
+// rule order per spell matters: ask-disable needs another enabled pool entry to exist
+// the fallback after it fires when it could not (last enabled boss), via the pending flag
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_01", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(0)
+AND
+DB_AMP_MirrorPool((INTEGER)_Other, _, _)
+AND
+NOT _Other == 0
+AND
+NOT DB_AMP_MirrorBoss_Disabled(_Other)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 0);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskDisable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_01", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(0)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_UltraBoss_CantAll");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_01", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+DB_AMP_MirrorBoss_Disabled(0)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 0);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskEnable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_02", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(1)
+AND
+DB_AMP_MirrorPool((INTEGER)_Other, _, _)
+AND
+NOT _Other == 1
+AND
+NOT DB_AMP_MirrorBoss_Disabled(_Other)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 1);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskDisable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_02", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(1)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_UltraBoss_CantAll");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_02", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+DB_AMP_MirrorBoss_Disabled(1)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 1);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskEnable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_03", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(2)
+AND
+DB_AMP_MirrorPool((INTEGER)_Other, _, _)
+AND
+NOT _Other == 2
+AND
+NOT DB_AMP_MirrorBoss_Disabled(_Other)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 2);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskDisable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_03", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(2)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_UltraBoss_CantAll");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_03", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+DB_AMP_MirrorBoss_Disabled(2)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 2);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskEnable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_04", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(3)
+AND
+DB_AMP_MirrorPool((INTEGER)_Other, _, _)
+AND
+NOT _Other == 3
+AND
+NOT DB_AMP_MirrorBoss_Disabled(_Other)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 3);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskDisable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_04", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(3)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_UltraBoss_CantAll");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_04", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+DB_AMP_MirrorBoss_Disabled(3)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 3);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskEnable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_05", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(4)
+AND
+DB_AMP_MirrorPool((INTEGER)_Other, _, _)
+AND
+NOT _Other == 4
+AND
+NOT DB_AMP_MirrorBoss_Disabled(_Other)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 4);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskDisable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_05", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(4)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_UltraBoss_CantAll");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_05", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+DB_AMP_MirrorBoss_Disabled(4)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 4);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskEnable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_06", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(5)
+AND
+DB_AMP_MirrorPool((INTEGER)_Other, _, _)
+AND
+NOT _Other == 5
+AND
+NOT DB_AMP_MirrorBoss_Disabled(_Other)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 5);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskDisable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_06", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(5)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_UltraBoss_CantAll");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_06", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+DB_AMP_MirrorBoss_Disabled(5)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 5);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskEnable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_07", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(6)
+AND
+DB_AMP_MirrorPool((INTEGER)_Other, _, _)
+AND
+NOT _Other == 6
+AND
+NOT DB_AMP_MirrorBoss_Disabled(_Other)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 6);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskDisable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_07", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(6)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_UltraBoss_CantAll");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_07", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+DB_AMP_MirrorBoss_Disabled(6)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 6);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskEnable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_08", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(7)
+AND
+DB_AMP_MirrorPool((INTEGER)_Other, _, _)
+AND
+NOT _Other == 7
+AND
+NOT DB_AMP_MirrorBoss_Disabled(_Other)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 7);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskDisable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_08", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(7)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_UltraBoss_CantAll");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_08", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+DB_AMP_MirrorBoss_Disabled(7)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 7);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskEnable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_09", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(8)
+AND
+DB_AMP_MirrorPool((INTEGER)_Other, _, _)
+AND
+NOT _Other == 8
+AND
+NOT DB_AMP_MirrorBoss_Disabled(_Other)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 8);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskDisable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_09", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(8)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_UltraBoss_CantAll");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_09", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+DB_AMP_MirrorBoss_Disabled(8)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 8);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskEnable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_10", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(9)
+AND
+DB_AMP_MirrorPool((INTEGER)_Other, _, _)
+AND
+NOT _Other == 9
+AND
+NOT DB_AMP_MirrorBoss_Disabled(_Other)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 9);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskDisable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_10", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(9)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_UltraBoss_CantAll");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_10", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+DB_AMP_MirrorBoss_Disabled(9)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 9);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskEnable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_11", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(10)
+AND
+DB_AMP_MirrorPool((INTEGER)_Other, _, _)
+AND
+NOT _Other == 10
+AND
+NOT DB_AMP_MirrorBoss_Disabled(_Other)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 10);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskDisable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_11", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(10)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_UltraBoss_CantAll");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_11", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+DB_AMP_MirrorBoss_Disabled(10)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 10);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskEnable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_12", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(11)
+AND
+DB_AMP_MirrorPool((INTEGER)_Other, _, _)
+AND
+NOT _Other == 11
+AND
+NOT DB_AMP_MirrorBoss_Disabled(_Other)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 11);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskDisable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_12", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(11)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_UltraBoss_CantAll");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraBoss_12", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+DB_AMP_MirrorBoss_Disabled(11)
+AND
+NOT DB_AMP_Plus_UltraBossPending(_, _)
+THEN
+DB_AMP_Plus_UltraBossPending(_Caster, 11);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraBoss_AskEnable");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Plus_UltraBoss_AskDisable", 1)
+AND
+DB_AMP_Plus_UltraBossPending(_Player, (INTEGER)_Idx)
+THEN
+NOT DB_AMP_Plus_UltraBossPending(_Player, _Idx);
+DB_AMP_MirrorBoss_Disabled(_Idx);
+PROC_AMP_PlayModeEffect(_Player);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Plus_UltraBoss_AskDisable", 0)
+AND
+DB_AMP_Plus_UltraBossPending(_Player, (INTEGER)_Idx)
+THEN
+NOT DB_AMP_Plus_UltraBossPending(_Player, _Idx);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Plus_UltraBoss_AskEnable", 1)
+AND
+DB_AMP_Plus_UltraBossPending(_Player, (INTEGER)_Idx)
+THEN
+NOT DB_AMP_Plus_UltraBossPending(_Player, _Idx);
+NOT DB_AMP_MirrorBoss_Disabled(_Idx);
+PROC_AMP_PlayModeEffect(_Player);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Plus_UltraBoss_AskEnable", 0)
+AND
+DB_AMP_Plus_UltraBossPending(_Player, (INTEGER)_Idx)
+THEN
+NOT DB_AMP_Plus_UltraBossPending(_Player, _Idx);
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraOff", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+DB_AMP_Ultra_Active(1)
+THEN
+DB_AMP_Plus_UltraOffPending(_Caster);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_UltraOff_Ask");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Plus_UltraOff_Ask", 1)
+AND
+DB_AMP_Plus_UltraOffPending(_Player)
+THEN
+NOT DB_AMP_Plus_UltraOffPending(_Player);
+DB_AMP_Plus_UltraOffPending2(_Player);
+OpenMessageBoxYesNo(_Player, "AMP_Plus_UltraOff_Ask2");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Plus_UltraOff_Ask", 0)
+AND
+DB_AMP_Plus_UltraOffPending(_Player)
+THEN
+NOT DB_AMP_Plus_UltraOffPending(_Player);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Plus_UltraOff_Ask2", 1)
+AND
+DB_AMP_Plus_UltraOffPending2(_Player)
+THEN
+NOT DB_AMP_Plus_UltraOffPending2(_Player);
+PROC_AMP_Plus_UltraOff_Execute();
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Plus_UltraOff_Ask2", 0)
+AND
+DB_AMP_Plus_UltraOffPending2(_Player)
+THEN
+NOT DB_AMP_Plus_UltraOffPending2(_Player);
+
+// active flag drops first so the failsafe below does not recurse
+
+PROC
+PROC_AMP_Plus_UltraOff_Execute()
+THEN
+NOT DB_AMP_Ultra_Active(1);
+DB_AMP_Plus_Ultra_Disabled(1);
+DB_AMP_Ultra_Offered1(1);
+DB_AMP_Ultra_Offered2(1);
+
+PROC
+PROC_AMP_Plus_UltraOff_Execute()
+AND
+DB_Players((CHARACTER)_P)
+THEN
+RemoveStatus(_P, "AMP_ULTRA_PLAYER_DEBUFF", NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_UltraOff_Execute()
+AND
+DB_AMP_DiffV3_Tracked((CHARACTER)_C, _)
+THEN
+RemoveStatus(_C, "AMP_ULTRA_BOSS_OVERLAY", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_ULTRA_NPC_OVERLAY", NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_UltraOff_Execute()
+THEN
+PROC_AMP_Plus_UltraOff_DrainChasePending();
+
+PROC
+PROC_AMP_Plus_UltraOff_Execute()
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+RemoveStatus(_Host, "AMP_PLUS_ULTRAOFF_UNLOCK", NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_UltraOff_Execute()
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+RemoveStatus(_Player, "AMP_PLUS_CHASE_MARK", NULL_00000000-0000-0000-0000-000000000000);
+
+// failsafe for re-activation paths, delayed so base activation finishes first
+IF
+DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_Plus_Ultra_Disabled(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+RealtimeObjectTimerLaunch(_Host, "AMP_Plus_UltraOff_ReKill", 500);
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_Plus_UltraOff_ReKill")
+THEN
+PROC_AMP_Plus_UltraOff_Execute();
+
+IF
+SavegameLoaded()
+AND
+DB_AMP_Plus_UltraBossPending((CHARACTER)_P, (INTEGER)_Idx)
+THEN
+NOT DB_AMP_Plus_UltraBossPending(_P, _Idx);
+
+IF
+SavegameLoaded()
+THEN
+PROC_AMP_Plus_UltraOff_DrainPending();
+
+IF
+SavegameLoaded()
+THEN
+PROC_AMP_Plus_UltraOff_DrainPending2();
+
+PROC
+PROC_AMP_Plus_UltraOff_DrainChasePending()
+AND
+DB_AMP_Plus_ChasePending((GUIDSTRING)_T)
+THEN
+NOT DB_AMP_Plus_ChasePending(_T);
+PROC_AMP_Plus_UltraOff_DrainChasePending();
+
+PROC
+PROC_AMP_Plus_UltraOff_DrainPending()
+AND
+DB_AMP_Plus_UltraOffPending((CHARACTER)_P)
+THEN
+NOT DB_AMP_Plus_UltraOffPending(_P);
+PROC_AMP_Plus_UltraOff_DrainPending();
+
+PROC
+PROC_AMP_Plus_UltraOff_DrainPending2()
+AND
+DB_AMP_Plus_UltraOffPending2((CHARACTER)_P)
+THEN
+NOT DB_AMP_Plus_UltraOffPending2(_P);
+PROC_AMP_Plus_UltraOff_DrainPending2();
+
+EXITSECTION
+
+ENDEXITSECTION

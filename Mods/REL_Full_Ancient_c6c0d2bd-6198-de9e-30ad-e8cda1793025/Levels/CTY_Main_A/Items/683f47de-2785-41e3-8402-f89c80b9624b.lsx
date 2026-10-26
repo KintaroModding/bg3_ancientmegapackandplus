@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="683f47de-2785-41e3-8402-f89c80b9624b" />
+					<attribute id="Name" type="LSString" value="AMP_Button_Coin_000" />
+					<attribute id="LevelName" type="FixedString" value="CTY_Main_A" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="b9071190-0c48-430d-9ee4-aaab5e87c716" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h293ddd00g3d89g860fgd049g7333db151725" version="1" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="116.55783 45.05655 -27.457731" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0 0.7071068 0.7071068" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="CTY_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="1a970f04-21a4-8210-17be-eb5ae7c87f7f" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="Scripts">
+							<children>
+								<node id="Script">
+									<attribute id="UUID" type="FixedString" value="68f5f134-8507-4b42-812b-cc444732141f" />
+									<children>
+										<node id="Parameters" key="MapKey">
+											<children>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="DC" />
+													<attribute id="Type" type="int32" value="1" />
+													<attribute id="Value" type="LSString" value="20" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="HardcoreOnly" />
+													<attribute id="Type" type="int32" value="1" />
+													<attribute id="Value" type="LSString" value="0" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="IsInvestigation" />
+													<attribute id="Type" type="int32" value="1" />
+													<attribute id="Value" type="LSString" value="0" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="MinDistance" />
+													<attribute id="Type" type="int32" value="2" />
+													<attribute id="Value" type="LSString" value="3" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="RevealOnlyInTrigger" />
+													<attribute id="Type" type="int32" value="7" />
+													<attribute id="Value" type="LSString" value="0xbaadf00d" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Script">
+									<attribute id="UUID" type="FixedString" value="c8255af5-98a7-4514-ad68-7dfba1164d97" />
+									<children>
+										<node id="Parameters" key="MapKey">
+											<children>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="AppearEffect" />
+													<attribute id="Type" type="int32" value="3" />
+													<attribute id="Value" type="LSString" value="VFX_Script_Perception_Default_01" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="AppearEffectTrap" />
+													<attribute id="Type" type="int32" value="3" />
+													<attribute id="Value" type="LSString" value="VFX_Script_Perception_Danger_01" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="DC" />
+													<attribute id="Type" type="int32" value="1" />
+													<attribute id="Value" type="LSString" value="10" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="HardcoreOnly" />
+													<attribute id="Type" type="int32" value="1" />
+													<attribute id="Value" type="LSString" value="0" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="HighlightTimer" />
+													<attribute id="Type" type="int32" value="2" />
+													<attribute id="Value" type="LSString" value="18" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="InteractFromStart" />
+													<attribute id="Type" type="int32" value="1" />
+													<attribute id="Value" type="LSString" value="0" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="IsInvestigation" />
+													<attribute id="Type" type="int32" value="1" />
+													<attribute id="Value" type="LSString" value="0" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="MinDistance" />
+													<attribute id="Type" type="int32" value="2" />
+													<attribute id="Value" type="LSString" value="3" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="RevealOnlyInTrigger" />
+													<attribute id="Type" type="int32" value="7" />
+													<attribute id="Value" type="LSString" value="0xbaadf00d" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

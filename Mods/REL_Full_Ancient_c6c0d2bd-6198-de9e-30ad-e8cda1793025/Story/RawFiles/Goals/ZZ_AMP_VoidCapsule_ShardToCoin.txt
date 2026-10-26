@@ -1,0 +1,92 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+// rarity comes from the DB_ToT_ShardReg tier, not gold value, some shards cost 1g
+// unregistered shards fall back to the fey coin, a failed roll destroys the shard
+
+// entry: registered shard -> chance by tot tier
+PROC
+PROC_AMP_VoidCapsule_ShardStart((ITEM)_Shard, (ITEM)_Capsule, (CHARACTER)_Owner)
+AND
+GetTemplate(_Shard, (ITEMROOT)_Template)
+AND
+DB_ToT_ShardReg(_Template, (STRING)_Tier)
+AND
+DB_AMP_VoidCapsule_ShardCoinChanceByTier(_Tier, (INTEGER)_Chance)
+AND
+Random(100, (INTEGER)_Roll)
+THEN
+PROC_AMP_VoidCapsule_InitCharges(_Capsule);
+PROC_AMP_VoidCapsule_ShardApply(_Shard, _Capsule, _Owner, _Roll, _Chance);
+
+// entry: unregistered shard -> fallback chance
+PROC
+PROC_AMP_VoidCapsule_ShardStart((ITEM)_Shard, (ITEM)_Capsule, (CHARACTER)_Owner)
+AND
+GetTemplate(_Shard, (ITEMROOT)_Template)
+AND
+NOT DB_ToT_ShardReg(_Template, _)
+AND
+DB_AMP_VoidCapsule_ShardCoinChanceFallback((INTEGER)_Chance)
+AND
+Random(100, (INTEGER)_Roll)
+THEN
+PROC_AMP_VoidCapsule_InitCharges(_Capsule);
+PROC_AMP_VoidCapsule_ShardApply(_Shard, _Capsule, _Owner, _Roll, _Chance);
+
+// success a: tot tier -> coin
+PROC
+PROC_AMP_VoidCapsule_ShardApply((ITEM)_Shard, (ITEM)_Capsule, (CHARACTER)_Owner, (INTEGER)_Roll, (INTEGER)_Chance)
+AND
+_Roll < _Chance
+AND
+GetTemplate(_Shard, (ITEMROOT)_Template)
+AND
+DB_ToT_ShardReg(_Template, (STRING)_Tier)
+AND
+DB_AMP_VoidCapsule_TierToCoin(_Tier, (ITEMROOT)_CoinTemplate)
+THEN
+NOT DB_AMP_VoidCapsule_ShardProcessing(_Shard);
+RequestDelete(_Shard);
+TemplateAddTo(_CoinTemplate, _Owner, 1, 1);
+PlaySound(_Owner, "EPI_Epilogue_SpectralVoiceGale_GaleProjectionDisappear");
+PROC_AMP_VoidCapsule_Decrement(_Capsule, _Owner);
+PROC_AMP_VoidCapsule_ReleaseBusy(_Capsule);
+
+// success b: not registered -> fallback coin
+PROC
+PROC_AMP_VoidCapsule_ShardApply((ITEM)_Shard, (ITEM)_Capsule, (CHARACTER)_Owner, (INTEGER)_Roll, (INTEGER)_Chance)
+AND
+_Roll < _Chance
+AND
+GetTemplate(_Shard, (ITEMROOT)_Template)
+AND
+NOT DB_ToT_ShardReg(_Template, _)
+AND
+DB_AMP_VoidCapsule_FallbackCoin((ITEMROOT)_CoinTemplate)
+THEN
+NOT DB_AMP_VoidCapsule_ShardProcessing(_Shard);
+RequestDelete(_Shard);
+TemplateAddTo(_CoinTemplate, _Owner, 1, 1);
+PlaySound(_Owner, "EPI_Epilogue_SpectralVoiceGale_GaleProjectionDisappear");
+PROC_AMP_VoidCapsule_Decrement(_Capsule, _Owner);
+PROC_AMP_VoidCapsule_ReleaseBusy(_Capsule);
+
+// fail: roll >= chance, shard destroyed
+PROC
+PROC_AMP_VoidCapsule_ShardApply((ITEM)_Shard, (ITEM)_Capsule, (CHARACTER)_Owner, (INTEGER)_Roll, (INTEGER)_Chance)
+AND
+_Roll >= _Chance
+THEN
+NOT DB_AMP_VoidCapsule_ShardProcessing(_Shard);
+RequestDelete(_Shard);
+PlaySound(_Owner, "UI_HUD_Combine_Error");
+PlaySound(_Owner, "COL_KethericShowdown_CrownController_ShadowVoidSweetener_Intro");
+PROC_AMP_VoidCapsule_Decrement(_Capsule, _Owner);
+PROC_AMP_VoidCapsule_ReleaseBusy(_Capsule);
+
+EXITSECTION
+ENDEXITSECTION
+

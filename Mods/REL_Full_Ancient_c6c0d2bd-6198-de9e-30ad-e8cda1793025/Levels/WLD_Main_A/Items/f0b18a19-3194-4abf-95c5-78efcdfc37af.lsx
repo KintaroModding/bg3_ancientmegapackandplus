@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="f0b18a19-3194-4abf-95c5-78efcdfc37af" />
+					<attribute id="Name" type="LSString" value="S_UND_DuergarCamp_TrappedChest" />
+					<attribute id="LevelName" type="FixedString" value="WLD_Main_A" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="0b90bf9d-66fd-4741-be1f-39181efca97a" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="LockDifficultyClassID" type="guid" value="831e1fbe-428d-4f4d-bd17-4206d6efea35" />
+					<attribute id="DisarmDifficultyClassID" type="guid" value="831e1fbe-428d-4f4d-bd17-4206d6efea35" />
+					<attribute id="Key" type="FixedString" value="S_UND_DuergarCamp_TrappedChest" />
+					<attribute id="IsTrap" type="bool" value="True" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="-694.25507 2.9006634 420.09763" />
+							<attribute id="RotationQuat" type="fvec4" value="-0.05124509 0.09233543 -0.071186714 0.9918572" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="WLD_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="53403475-3141-4317-fa26-9f114ae0c2d9" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="1186705f-c239-e022-e3de-26132f651a17" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="d5ad2f68-ee00-fc12-2ab6-cf82f031b4ee" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="UND_KC_TrappedChasmChest" />
+								</node>
+							</children>
+						</node>
+						<node id="Scripts">
+							<children>
+								<node id="Script">
+									<attribute id="UUID" type="FixedString" value="2c5f9a87-60d0-c006-2b9e-946c2e36742b" />
+									<children>
+										<node id="Parameters" key="MapKey">
+											<children>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="DC" />
+													<attribute id="Type" type="int32" value="1" />
+													<attribute id="Value" type="LSString" value="15" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="HardcoreOnly" />
+													<attribute id="Type" type="int32" value="1" />
+													<attribute id="Value" type="LSString" value="0" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="IsInvestigation" />
+													<attribute id="Type" type="int32" value="1" />
+													<attribute id="Value" type="LSString" value="0" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="IsOneShot" />
+													<attribute id="Type" type="int32" value="1" />
+													<attribute id="Value" type="LSString" value="1" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="MinDistance" />
+													<attribute id="Type" type="int32" value="2" />
+													<attribute id="Value" type="LSString" value="5" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="RevealOnlyInTrigger" />
+													<attribute id="Type" type="int32" value="7" />
+													<attribute id="Value" type="LSString" value="0xbaadf00d" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="TrapProjectile" />
+													<attribute id="Type" type="int32" value="9" />
+													<attribute id="Value" type="LSString" value="Projectile_UND_ZhentChest_Trap" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

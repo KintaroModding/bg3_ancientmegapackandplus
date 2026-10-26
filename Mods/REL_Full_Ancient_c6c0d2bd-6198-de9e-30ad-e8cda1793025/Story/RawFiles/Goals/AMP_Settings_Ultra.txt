@@ -1,0 +1,162 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// training ring button to unlock the ultra overlay early. reuses the ultra
+// activation pipeline (fanfare/guitar/apply). own file so it applies on old saves.
+
+// settings ring cast (host only) -> route to the right box
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Settings_Ultra", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+THEN
+PROC_AMP_SettingsUltra_ShowOffer(_Caster);
+
+// dispatch by game mode / active state
+
+// ultra on, valdryn still in the pool - offer to hold him back
+PROC
+PROC_AMP_SettingsUltra_ShowOffer((CHARACTER)_Host)
+AND
+DB_AMP_Ultra_Active(1)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(3)
+THEN
+DB_AMP_SettingsUltra_ValdrynPending(_Host);
+OpenMessageBoxYesNo(_Host, "AMP_Ultra_Valdryn_AskDisable");
+
+// ultra on, valdryn already held back - offer to return him
+PROC
+PROC_AMP_SettingsUltra_ShowOffer((CHARACTER)_Host)
+AND
+DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_MirrorBoss_Disabled(3)
+THEN
+DB_AMP_SettingsUltra_ValdrynPending(_Host);
+OpenMessageBoxYesNo(_Host, "AMP_Ultra_Valdryn_AskEnable");
+
+// casual - unavailable
+PROC
+PROC_AMP_SettingsUltra_ShowOffer((CHARACTER)_Host)
+AND
+NOT DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_GameMode("CASUAL")
+THEN
+OpenMessageBox(_Host, "AMP_Settings_Ultra_Unavailable");
+
+// stock - unavailable
+PROC
+PROC_AMP_SettingsUltra_ShowOffer((CHARACTER)_Host)
+AND
+NOT DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_GameMode("STOCK")
+THEN
+OpenMessageBox(_Host, "AMP_Settings_Ultra_Unavailable");
+
+// normal - offer
+PROC
+PROC_AMP_SettingsUltra_ShowOffer((CHARACTER)_Host)
+AND
+NOT DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_GameMode("NORMAL")
+THEN
+DB_AMP_SettingsUltra_Pending(_Host);
+PROC_AMP_Ultra_PlayOfferFanfare(_Host);
+OpenMessageBoxYesNo(_Host, "AMP_Settings_Ultra_Offer");
+
+// hard - offer
+PROC
+PROC_AMP_SettingsUltra_ShowOffer((CHARACTER)_Host)
+AND
+NOT DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_GameMode("HARD")
+THEN
+DB_AMP_SettingsUltra_Pending(_Host);
+PROC_AMP_Ultra_PlayOfferFanfare(_Host);
+OpenMessageBoxYesNo(_Host, "AMP_Settings_Ultra_Offer");
+
+// yes - activate ultra permanently (same pipeline as the lvl 8/12 offer)
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings_Ultra_Offer", 1)
+AND
+DB_AMP_SettingsUltra_Pending(_Host)
+THEN
+NOT DB_AMP_SettingsUltra_Pending(_Host);
+RealtimeObjectTimerLaunch(_Host, "AMP_Ultra_Guitar", 100);
+PROC_AMP_Ultra_Activate();
+
+// no - decline
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings_Ultra_Offer", 0)
+AND
+DB_AMP_SettingsUltra_Pending(_Host)
+THEN
+NOT DB_AMP_SettingsUltra_Pending(_Host);
+
+// valdryn pool toggle answers
+
+// yes on hold-back - pull the out-of-place champions from the pool
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Ultra_Valdryn_AskDisable", 1)
+AND
+DB_AMP_SettingsUltra_ValdrynPending(_Host)
+THEN
+NOT DB_AMP_SettingsUltra_ValdrynPending(_Host);
+DB_AMP_MirrorBoss_Disabled(3);
+DB_AMP_MirrorBoss_Disabled(7);
+
+// no on hold-back - nothing changes
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Ultra_Valdryn_AskDisable", 0)
+AND
+DB_AMP_SettingsUltra_ValdrynPending(_Host)
+THEN
+NOT DB_AMP_SettingsUltra_ValdrynPending(_Host);
+
+// yes on return - put the champions back in the pool
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Ultra_Valdryn_AskEnable", 1)
+AND
+DB_AMP_SettingsUltra_ValdrynPending(_Host)
+THEN
+NOT DB_AMP_SettingsUltra_ValdrynPending(_Host);
+NOT DB_AMP_MirrorBoss_Disabled(3);
+NOT DB_AMP_MirrorBoss_Disabled(7);
+
+// no on return - nothing changes
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Ultra_Valdryn_AskEnable", 0)
+AND
+DB_AMP_SettingsUltra_ValdrynPending(_Host)
+THEN
+NOT DB_AMP_SettingsUltra_ValdrynPending(_Host);
+
+// clear stale pending flags on save load
+
+IF
+SavegameLoaded()
+AND
+DB_AMP_SettingsUltra_Pending(_Host)
+THEN
+NOT DB_AMP_SettingsUltra_Pending(_Host);
+
+IF
+SavegameLoaded()
+AND
+DB_AMP_SettingsUltra_ValdrynPending(_Host)
+THEN
+NOT DB_AMP_SettingsUltra_ValdrynPending(_Host);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,86 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// counting rule first, or the rule that opens the count is counted on the same event
+IF
+TurnStarted((CHARACTER)_Boss)
+AND
+CombatGetGuidFor(_Boss, (GUIDSTRING)_C)
+AND
+DB_AMP_Plus_UnbWave_Turn(_C, (INTEGER)_N)
+AND
+DB_AMP_TurtleCombatBoss(_C, _Boss)
+AND
+IntegerSum(_N, 1, (INTEGER)_N2)
+THEN
+NOT DB_AMP_Plus_UnbWave_Turn(_C, _N);
+DB_AMP_Plus_UnbWave_Turn(_C, _N2);
+PROC_AMP_Plus_UnbWave_Check(_C, _Boss, _N2);
+
+IF
+TurnStarted((CHARACTER)_Boss)
+AND
+CombatGetGuidFor(_Boss, (GUIDSTRING)_C)
+AND
+DB_AMP_TurtleCombatBoss(_C, _Boss)
+AND
+NOT DB_AMP_Plus_UnbWave_Turn(_C, _)
+AND
+DB_AMP_Plus_SpawnIntensity_Freq(3)
+AND
+DB_AMP_Ultra_Active(1)
+AND
+Random(3, (INTEGER)_R)
+AND
+IntegerSum(_R, 2, (INTEGER)_At)
+THEN
+DB_AMP_Plus_UnbWave_Turn(_C, 1);
+DB_AMP_Plus_UnbWave_At(_C, _At);
+
+PROC
+PROC_AMP_Plus_UnbWave_Check((GUIDSTRING)_C, (CHARACTER)_Boss, (INTEGER)_N)
+AND
+DB_AMP_Plus_UnbWave_At(_C, _N)
+AND
+DB_AMP_Plus_SpawnIntensity_Freq(3)
+AND
+DB_AMP_Ultra_Active(1)
+AND
+NOT DB_AMP_Plus_MirrorFiredCombat(_C)
+AND
+NOT DB_AMP_Plus_ChaseActive(_, _)
+AND
+NOT DB_AMP_Plus_UltraAlly(_Boss)
+AND
+IsDead(_Boss, 0)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_Boss, _Host, 1)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_PoolSize)
+AND
+_PoolSize > 0
+THEN
+DB_AMP_Plus_MirrorFiredCombat(_C);
+PROC_AMP_Plus_MirrorSpawnSized(_Boss);
+
+IF
+CombatEnded((GUIDSTRING)_C)
+AND
+DB_AMP_Plus_UnbWave_Turn(_C, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_UnbWave_Turn(_C, _N);
+
+IF
+CombatEnded((GUIDSTRING)_C)
+AND
+DB_AMP_Plus_UnbWave_At(_C, (INTEGER)_At)
+THEN
+NOT DB_AMP_Plus_UnbWave_At(_C, _At);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,14 @@
+game.configs.AMP_Boss_MOO_Ketheric = Config{
+    root=StateRef{game.roots.DefaultCharacter,
+        combat = StateRef{game.states.AMP_BossCombat},
+        genericBehaviours = StateRef{game.states.CrimesHumanoid},
+        idle = StateRef{game.states.GLO_RegionProxies_Act2,
+            COL = StateRef{game.states.COL_Showdown_Ketheric},
+            MOO = StateRef{game.states.MOO_StateProxies,
+                AssaultMoonrise = StateRef{game.states.MOO_Assault_CombatReadyIdle},
+                Default = StateRef{game.states.MOO_Audience_Ketheric},
+                ExecutionOngoing = StateRef{game.states.MOO_Execution_Ketheric},
+            },
+        },
+    }
+}

@@ -1,0 +1,120 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+DB_AMP_Chauntean_Tech("AMP_CHAUNTEAN_TECH_1", 1);
+DB_AMP_Chauntean_Tech("AMP_CHAUNTEAN_TECH_2", 2);
+DB_AMP_Chauntean_Tech("AMP_CHAUNTEAN_TECH_3", 3);
+DB_AMP_Chauntean_Tech("AMP_CHAUNTEAN_TECH_4", 4);
+
+DB_AMP_Chauntean_WSBonus(1, "AMP_CHAUNTEAN_WS_HEAL_1");
+DB_AMP_Chauntean_WSBonus(2, "AMP_CHAUNTEAN_WS_HEAL_2");
+DB_AMP_Chauntean_WSBonus(3, "AMP_CHAUNTEAN_WS_HEAL_3");
+DB_AMP_Chauntean_WSBonus(4, "AMP_CHAUNTEAN_WS_HEAL_4");
+
+DB_AMP_Chauntean_WSGrasp(3);
+DB_AMP_Chauntean_WSGrasp(4);
+
+KBSECTION
+
+// equip
+IF
+StatusApplied(_Char, _Status, _, _)
+AND
+DB_AMP_Chauntean_Tech(_Status, _Tier)
+THEN
+DB_AMP_Chauntean_Equipped(_Char, _Tier);
+
+// unequip - delayed check
+IF
+StatusRemoved(_Char, _Status, _, _)
+AND
+DB_AMP_Chauntean_Tech(_Status, _Tier)
+THEN
+ObjectTimerLaunch((GUIDSTRING)_Char, "AMP_Chauntean_Unequip_Check", 1000, 0);
+
+IF
+ObjectTimerFinished(_Char, "AMP_Chauntean_Unequip_Check")
+AND
+DB_AMP_Chauntean_Equipped((CHARACTER)_Char, _Tier)
+AND
+HasActiveStatus((CHARACTER)_Char, "WILDSHAPE_ACTIVE", 0)
+AND
+DB_AMP_Chauntean_Tech(_TechStatus, _Tier)
+AND
+HasActiveStatus((CHARACTER)_Char, _TechStatus, 0)
+THEN
+RemoveStatus((CHARACTER)_Char, "AMP_CHAUNTEAN_WS_MARKER");
+NOT DB_AMP_Chauntean_Equipped((CHARACTER)_Char, _Tier);
+
+// ws enter: marker + heal (not starry forms)
+IF
+StatusApplied(_Char, "WILDSHAPE_ACTIVE", _, _)
+AND
+DB_AMP_Chauntean_Equipped(_Char, _Tier)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_ARCHER_VFX", 0)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_CHALICE_VFX", 0)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_DRAGON_VFX", 0)
+THEN
+ApplyStatus(_Char, "AMP_CHAUNTEAN_WS_MARKER", -1.0, 1, _Char);
+
+IF
+StatusApplied(_Char, "WILDSHAPE_ACTIVE", _, _)
+AND
+DB_AMP_Chauntean_Equipped(_Char, _Tier)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_ARCHER_VFX", 0)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_CHALICE_VFX", 0)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_DRAGON_VFX", 0)
+AND
+DB_AMP_Chauntean_WSBonus(_Tier, _Heal)
+THEN
+ApplyStatus(_Char, _Heal, -1.0, 1, _Char);
+
+// ws enter: grasp (all forms incl starry)
+IF
+StatusApplied(_Char, "WILDSHAPE_ACTIVE", _, _)
+AND
+DB_AMP_Chauntean_Equipped(_Char, _Tier)
+AND
+DB_AMP_Chauntean_WSGrasp(_Tier)
+THEN
+ApplyStatus(_Char, "AMP_CHAUNTEAN_WS_GRASP", -1.0, 1, _Char);
+
+// ws exit: drop bonuses + delayed check
+IF
+StatusRemoved(_Char, "WILDSHAPE_ACTIVE", _, _)
+AND
+DB_AMP_Chauntean_Equipped(_Char, _Tier)
+AND
+DB_AMP_Chauntean_WSBonus(_Tier, _Heal)
+THEN
+RemoveStatus(_Char, "AMP_CHAUNTEAN_WS_MARKER");
+RemoveStatus(_Char, "AMP_CHAUNTEAN_WS_GRASP");
+RemoveStatus(_Char, _Heal);
+ObjectTimerLaunch((GUIDSTRING)_Char, "AMP_Chauntean_WSExit_Check", 1000, 0);
+
+// post-ws check: tech gone -> clear db
+IF
+ObjectTimerFinished(_Char, "AMP_Chauntean_WSExit_Check")
+AND
+DB_AMP_Chauntean_Equipped((CHARACTER)_Char, _Tier)
+AND
+DB_AMP_Chauntean_Tech(_TechStatus, _Tier)
+AND
+HasActiveStatus((CHARACTER)_Char, _TechStatus, 0)
+AND
+DB_AMP_Chauntean_WSBonus(_Tier, _Heal)
+THEN
+RemoveStatus((CHARACTER)_Char, "AMP_CHAUNTEAN_WS_MARKER");
+RemoveStatus((CHARACTER)_Char, "AMP_CHAUNTEAN_WS_GRASP");
+RemoveStatus((CHARACTER)_Char, _Heal);
+NOT DB_AMP_Chauntean_Equipped((CHARACTER)_Char, _Tier);
+
+EXITSECTION
+ENDEXITSECTION

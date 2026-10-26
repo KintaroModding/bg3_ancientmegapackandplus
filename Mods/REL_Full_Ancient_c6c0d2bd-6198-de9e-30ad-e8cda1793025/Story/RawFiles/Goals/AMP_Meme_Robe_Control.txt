@@ -1,0 +1,84 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// robe equipped -> apply permanent visible curse
+IF
+StatusApplied(_Player, "AMP_MEME_ROBE_TECHNICAL", _, _)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+HasActiveStatus(_Player, "AMP_MEME_ROBE_CURSE_DISPLAY", 0)
+THEN
+ApplyStatus(_Player, "AMP_MEME_ROBE_CURSE_DISPLAY", -1.0, 1, _Player);
+DB_NOOP(1);
+
+// curse removed -> destroy all meme robes
+IF
+StatusRemoved(_Player, "AMP_MEME_ROBE_CURSE_DISPLAY", _, _)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+QRY_RemoveLocalItemsByTemplateFromMagicPockets(_Player, (ITEMROOT)AMP_Meme_Robe_4d6af33b-4727-40e0-9bb5-4376a3496b5a, 99)
+AND
+TemplateGetCountInMagicPockets((ITEMROOT)AMP_Meme_Robe_4d6af33b-4727-40e0-9bb5-4376a3496b5a, _Player, _Count)
+THEN
+MagicPocketsDestroyLocalItemsByTemplate(_Player, (ITEMROOT)AMP_Meme_Robe_4d6af33b-4727-40e0-9bb5-4376a3496b5a, _Count);
+DB_NOOP(1);
+
+// robe unequipped (tech gone) -> force re-equip
+IF
+StatusRemoved(_Player, "AMP_MEME_ROBE_TECHNICAL", _, _)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+HasActiveStatus(_Player, "AMP_MEME_ROBE_CURSE_DISPLAY", 1)
+THEN
+RealtimeObjectTimerLaunch(_Player, "AMP_MEME_ROBE_FORCE_EQUIP", 50);
+
+// timer: find a robe in inventory and equip it
+IF
+ObjectTimerFinished(_Player, "AMP_MEME_ROBE_FORCE_EQUIP")
+AND
+DB_Players((CHARACTER)_Player)
+AND
+HasActiveStatus(_Player, "AMP_MEME_ROBE_CURSE_DISPLAY", 1)
+AND
+GetItemByTemplateInInventory((ITEMROOT)AMP_Meme_Robe_4d6af33b-4727-40e0-9bb5-4376a3496b5a, _Player, _MemeRobe)
+AND
+NOT IsEquipped(_MemeRobe, 1)
+THEN
+Equip((CHARACTER)_Player, _MemeRobe, 1, 0, 0);
+
+// no robe in inventory -> make one and retry equip
+IF
+ObjectTimerFinished(_Player, "AMP_MEME_ROBE_FORCE_EQUIP")
+AND
+DB_Players((CHARACTER)_Player)
+AND
+HasActiveStatus(_Player, "AMP_MEME_ROBE_CURSE_DISPLAY", 1)
+AND
+NOT GetItemByTemplateInInventory((ITEMROOT)AMP_Meme_Robe_4d6af33b-4727-40e0-9bb5-4376a3496b5a, _Player, _)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Meme_Robe_4d6af33b-4727-40e0-9bb5-4376a3496b5a, _Player, 1, 0);
+RealtimeObjectTimerLaunch(_Player, "AMP_MEME_ROBE_FORCE_EQUIP", 50);
+
+// backup: re-equip robe + force normal armour set after combat
+IF
+CombatEnded(_CombatGuid)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+HasActiveStatus(_Player, "AMP_MEME_ROBE_CURSE_DISPLAY", 1)
+AND
+HasActiveStatus(_Player, "AMP_MEME_ROBE_TECHNICAL", 0)
+AND
+GetItemByTemplateInInventory((ITEMROOT)AMP_Meme_Robe_4d6af33b-4727-40e0-9bb5-4376a3496b5a, _Player, _MemeRobe)
+THEN
+Equip((CHARACTER)_Player, _MemeRobe, 1, 0, 0);
+SetArmourSet(_Player, ARMOURSET.Normal);
+
+EXITSECTION
+
+ENDEXITSECTION

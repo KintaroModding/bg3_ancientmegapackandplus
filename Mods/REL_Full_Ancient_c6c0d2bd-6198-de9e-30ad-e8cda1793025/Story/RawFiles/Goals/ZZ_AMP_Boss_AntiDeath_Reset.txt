@@ -1,0 +1,57 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_AMP_AntiDeath_Excluded((CHARACTER)S_MOO_Ketheric_e9918f3e-5b87-40a3-a9bd-61545151573f);
+DB_AMP_AntiDeath_Excluded((CHARACTER)S_GLO_Cazador_2f1880e6-1297-4ca3-a79c-9fabc7f179d3);
+DB_AMP_AntiDeath_Excluded((CHARACTER)S_GLO_Orin_bf24e0ec-a3a6-4905-bd2d-45dc8edf8101);
+
+KBSECTION
+
+// scripted multi-phase bosses skip the revive charge or the downed override hijacks their death
+// ketheric keeps one guid across forms. Inserted lazily, init does not rerun on updated saves
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_AntiDeath_Excluded((CHARACTER)S_MOO_Ketheric_e9918f3e-5b87-40a3-a9bd-61545151573f)
+THEN
+DB_AMP_AntiDeath_Excluded((CHARACTER)S_MOO_Ketheric_e9918f3e-5b87-40a3-a9bd-61545151573f);
+DB_AMP_AntiDeath_Excluded((CHARACTER)S_GLO_Cazador_2f1880e6-1297-4ca3-a79c-9fabc7f179d3);
+DB_AMP_AntiDeath_Excluded((CHARACTER)S_GLO_Orin_bf24e0ec-a3a6-4905-bd2d-45dc8edf8101);
+
+// arm: tracked hard boss (t3+) entering combat gets the revive charge if it lacks one.
+// custom downed eats the charge on revive so it rises once; next fight re-applies.
+IF
+EnteredCombat((CHARACTER)_Boss, _)
+AND
+NOT DB_AMP_AntiDeath_Excluded(_Boss)
+AND
+HasActiveStatus(_Boss, "AMP_BOSS_IMPOSSIBLE_T3_V4", 1)
+AND
+HasActiveStatus(_Boss, "AMP_BOSS_ANTIDEATH_CHARGE", 0)
+THEN
+ApplyStatus(_Boss, "AMP_BOSS_ANTIDEATH_CHARGE", -1.0, 1, _Boss);
+
+IF
+EnteredCombat((CHARACTER)_Boss, _)
+AND
+NOT DB_AMP_AntiDeath_Excluded(_Boss)
+AND
+HasActiveStatus(_Boss, "AMP_BOSS_IMPOSSIBLE_T4_V4", 1)
+AND
+HasActiveStatus(_Boss, "AMP_BOSS_ANTIDEATH_CHARGE", 0)
+THEN
+ApplyStatus(_Boss, "AMP_BOSS_ANTIDEATH_CHARGE", -1.0, 1, _Boss);
+
+IF
+EnteredCombat((CHARACTER)_Boss, _)
+AND
+NOT DB_AMP_AntiDeath_Excluded(_Boss)
+AND
+HasActiveStatus(_Boss, "AMP_BOSS_IMPOSSIBLE_T5_V4", 1)
+AND
+HasActiveStatus(_Boss, "AMP_BOSS_ANTIDEATH_CHARGE", 0)
+THEN
+ApplyStatus(_Boss, "AMP_BOSS_ANTIDEATH_CHARGE", -1.0, 1, _Boss);
+
+EXITSECTION
+ENDEXITSECTION

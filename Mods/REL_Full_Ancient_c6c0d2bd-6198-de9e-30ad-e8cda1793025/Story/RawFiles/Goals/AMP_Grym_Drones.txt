@@ -1,0 +1,205 @@
+Version 1
+SubGoalCombiner SGC_AND
+
+INITSECTION
+DB_AMP_Drone_Template((CHARACTERROOT)AMP_Drone_430bfbc1-dd56-483c-98e0-6524dbef855b);
+DB_AMP_Drone_SpawnPos(1, -578.253, 5.11, 255.039);
+DB_AMP_Drone_SpawnPos(2, -583.703, -6.657, 225.393);
+
+KBSECTION
+
+// spawn
+
+// grym casts summon drones -> kill old, spawn new
+IF
+CastedSpell((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255, "Shout_AMP_Grym_SummonDrones", _, _, _)
+AND
+NOT DB_AMP_GameMode("STOCK")
+THEN
+PROC_AMP_Drone_KillAll();
+PROC_AMP_Drone_SpawnAll();
+
+// Spawn on all slots
+PROC
+PROC_AMP_Drone_SpawnAll()
+THEN
+PROC_AMP_Drone_SpawnSlot(1);
+PROC_AMP_Drone_SpawnSlot(2);
+
+// Spawn drone on a specific slot (skip if already occupied)
+PROC
+PROC_AMP_Drone_SpawnSlot((INTEGER)_Index)
+AND
+NOT DB_AMP_Drone_SlotOccupied(_Index, _)
+AND
+DB_AMP_Drone_SpawnPos(_Index, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+DB_AMP_Drone_Template((CHARACTERROOT)_Template)
+AND
+CreateAt(_Template, _X, _Y, _Z, 0, 0, "AMP_Drone_Spawned", (CHARACTER)_Drone)
+THEN
+DB_AMP_Drone_Active(_Drone);
+DB_AMP_Drone_SlotOccupied(_Index, _Drone);
+
+// after entity appears: faction + combat group + see invisibility
+IF
+EntityEvent((CHARACTER)_Drone, "AMP_Drone_Spawned")
+AND
+DB_AMP_Drone_Active(_Drone)
+AND
+GetCombatGroupID((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255, (STRING)_GroupID)
+THEN
+SetFaction(_Drone, (FACTION)40a90873-e3f0-478c-99f9-11e71f068f55);
+SetCombatGroupID(_Drone, _GroupID);
+ApplyStatus(_Drone, "SEE_INVISIBILITY", -1.0, 1, _Drone);
+EnterCombat(_Drone, (CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255);
+
+// death + delayed respawn
+
+// grym dies -> kill all drones
+IF
+Died((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255)
+THEN
+PROC_AMP_Drone_KillAll();
+
+// Drone died, Grym alive and in combat -> schedule respawn on same slot (300s)
+IF
+Died((CHARACTER)_Drone)
+AND
+DB_AMP_Drone_SlotOccupied((INTEGER)_Index, _Drone)
+AND
+IsDead((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255, 0)
+AND
+IsInCombat((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255, 1)
+THEN
+DB_AMP_Drone_RespawnSlot(_Index);
+ObjectTimerLaunch((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255, "AMP_Drone_Respawn", 300000, 1);
+
+// Drone died -> cleanup tracking (runs after respawn scheduling above)
+IF
+Died((CHARACTER)_Drone)
+AND
+DB_AMP_Drone_SlotOccupied((INTEGER)_Index, _Drone)
+THEN
+NOT DB_AMP_Drone_Active(_Drone);
+NOT DB_AMP_Drone_SlotOccupied(_Index, _Drone);
+
+// Respawn timer fired, Grym alive and in combat -> respawn pending slots
+IF
+ObjectTimerFinished((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255, "AMP_Drone_Respawn")
+AND
+IsDead((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255, 0)
+AND
+IsInCombat((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255, 1)
+THEN
+PROC_AMP_Drone_RespawnPending();
+
+// Respawn timer fired, Grym dead -> discard pending
+IF
+ObjectTimerFinished((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255, "AMP_Drone_Respawn")
+AND
+IsDead((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255, 1)
+THEN
+PROC_AMP_Drone_ClearRespawn();
+
+// Respawn timer fired, combat over -> discard pending
+IF
+ObjectTimerFinished((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255, "AMP_Drone_Respawn")
+AND
+IsInCombat((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255, 0)
+THEN
+PROC_AMP_Drone_ClearRespawn();
+
+PROC
+PROC_AMP_Drone_RespawnPending()
+AND
+DB_AMP_Drone_RespawnSlot((INTEGER)_Index)
+THEN
+NOT DB_AMP_Drone_RespawnSlot(_Index);
+PROC_AMP_Drone_SpawnSlot(_Index);
+
+PROC
+PROC_AMP_Drone_ClearRespawn()
+AND
+DB_AMP_Drone_RespawnSlot((INTEGER)_Index)
+THEN
+NOT DB_AMP_Drone_RespawnSlot(_Index);
+
+// cleanup
+
+// kill all drones (grym death / re-summon). clear tracking first so Die() events don't schedule respawns
+PROC
+PROC_AMP_Drone_KillAll()
+THEN
+ObjectTimerCancel((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255, "AMP_Drone_Respawn");
+
+PROC
+PROC_AMP_Drone_KillAll()
+AND
+DB_AMP_Drone_RespawnSlot((INTEGER)_Index)
+THEN
+NOT DB_AMP_Drone_RespawnSlot(_Index);
+
+PROC
+PROC_AMP_Drone_KillAll()
+AND
+DB_AMP_Drone_SlotOccupied((INTEGER)_Index, (CHARACTER)_Drone)
+THEN
+NOT DB_AMP_Drone_SlotOccupied(_Index, _Drone);
+
+PROC
+PROC_AMP_Drone_KillAll()
+AND
+DB_AMP_Drone_Active((CHARACTER)_Drone)
+THEN
+Die(_Drone, DEATHTYPE.Lifetime, NULL_00000000-0000-0000-0000-000000000000, 0, 1, 0.0);
+NOT DB_AMP_Drone_Active(_Drone);
+
+// despawn all drones (combat end)
+PROC
+PROC_AMP_Drone_DespawnAll()
+THEN
+ObjectTimerCancel((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255, "AMP_Drone_Respawn");
+
+PROC
+PROC_AMP_Drone_DespawnAll()
+AND
+DB_AMP_Drone_RespawnSlot((INTEGER)_Index)
+THEN
+NOT DB_AMP_Drone_RespawnSlot(_Index);
+
+PROC
+PROC_AMP_Drone_DespawnAll()
+AND
+DB_AMP_Drone_SlotOccupied((INTEGER)_Index, (CHARACTER)_Drone)
+THEN
+NOT DB_AMP_Drone_SlotOccupied(_Index, _Drone);
+
+PROC
+PROC_AMP_Drone_DespawnAll()
+AND
+DB_AMP_Drone_Active((CHARACTER)_Drone)
+THEN
+SetOnStage(_Drone, 0);
+RequestDeleteTemporary(_Drone);
+NOT DB_AMP_Drone_Active(_Drone);
+
+// Grym leaves combat -> despawn all drones
+IF
+LeftCombat((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255, _)
+THEN
+PROC_AMP_Drone_DespawnAll();
+
+// Drone leaves combat -> despawn it
+IF
+LeftCombat((CHARACTER)_Drone, _)
+AND
+DB_AMP_Drone_SlotOccupied((INTEGER)_Index, _Drone)
+THEN
+SetOnStage(_Drone, 0);
+RequestDeleteTemporary(_Drone);
+NOT DB_AMP_Drone_Active(_Drone);
+NOT DB_AMP_Drone_SlotOccupied(_Index, _Drone);
+
+EXITSECTION
+ENDEXITSECTION

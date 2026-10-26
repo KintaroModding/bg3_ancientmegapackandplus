@@ -1,0 +1,28 @@
+USING rogue_smart
+
+// --- Open with setup (Mirror Image / Invisibility) before committing ---
+MULTIPLIER_FIRST_ACTION_BUFF                    3.00
+MULTIPLIER_FIRST_ACTION_INVISIBILITY            0.60
+MULTIPLIER_INVISIBLE                            0.45
+
+// --- Hit-and-run: prefers not to end her turn glued to enemies, dances back out ---
+MULTIPLIER_ENDPOS_ENEMIES_NEARBY               -0.25
+ENABLE_MOVEMENT_AVOID_AOO                       1.00
+
+// --- Control/disruption is her wrench: scatter (Gust), prone (Sleet), debuffs ---
+MULTIPLIER_CONTROL_ENEMY_POS                    1.20
+MULTIPLIER_BOOST_ENEMY_POS                      1.15
+MODIFIER_CONCENTRATION_REMOVE_TARGET            0.40
+
+// --- Lethal target selection: finish the weakened with a sneak crit (smart reasoning inherited at 0.85) ---
+MULTIPLIER_KILL_ENEMY                           1.50
+
+// --- Glass cannon: very protective of her own skin, avoids danger surfaces (her own Sleet) ---
+MULTIPLIER_DAMAGE_SELF_NEG                      3.00
+MULTIPLIER_ENDPOS_NOT_IN_DANGEROUS_SURFACE      0.30
+
+// --- A precise duelist: drinks her own potions, but NEVER throws (no bomb-kiting, no chucking daggers/loot) ---
+USE_INVENTORY_ITEMS_ENABLED                     1
+THROW_INVENTORY_ITEM_LIMIT                       0
+MULTIPLIER_USABLE_ITEM                          0.00
+WEAPON_PICKUP_MODIFIER                          0.00

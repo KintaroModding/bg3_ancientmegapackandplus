@@ -1,0 +1,1689 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// reforged Pyre: GROW, QUENCH and BROKEN phases in one table, numbers in AMP_Plus_PyreTuning.txt
+// integer arithmetic only, Osiris has no operators and a negative comes from IntegerSubtract
+
+// level band is global, not per fight: a party does not level mid-fight
+// unknown level reads as the middle band, never the first
+
+PROC
+PROC_AMP_Plus_Pyre2_SetBand()
+AND
+DB_AMP_Plus_Pyre2_BandNow((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre2_BandNow(_Old);
+
+PROC
+PROC_AMP_Plus_Pyre2_SetBand()
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+DB_AMP_Plus_Pyre_Cal((INTEGER)_Min, (INTEGER)_Max, (INTEGER)_B)
+AND
+_Lvl >= _Min
+AND
+_Lvl <= _Max
+THEN
+DB_AMP_Plus_Pyre2_BandNow(_B);
+
+PROC
+PROC_AMP_Plus_Pyre2_SetBand()
+AND
+NOT DB_AMP_AvgPartyLevel(_)
+THEN
+DB_AMP_Plus_Pyre2_BandNow(2);
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_AMP_Plus_Pyre2_SetBand();
+
+IF
+SavegameLoaded()
+THEN
+PROC_AMP_Plus_Pyre2_SetBand();
+
+// member table is shared with the former core, which fills it under its own switch. the two affixes exclude each other
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+QRY_AMP_Plus_Pyre_Hostile(_Char)
+AND
+NOT DB_AMP_Plus_Pyre_Member(_Char, _CombatID)
+THEN
+DB_AMP_Plus_Pyre_Member(_Char, _CombatID);
+
+// three gates on purpose: IsBoss alone passes dominated, summoned and allied bosses
+
+QRY
+QRY_AMP_Plus_Pyre2_EnemyBoss((CHARACTER)_Char)
+AND
+IsBoss(_Char, 1)
+AND
+IsPlayer(_Char, 0)
+AND
+QRY_AMP_Plus_Pyre_Hostile(_Char)
+THEN
+DB_NOOP(1);
+
+// every enemy boss registers, not only the arming one: turn hook, return check and brood passage need whoever still stands
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+QRY_AMP_Plus_Pyre2_EnemyBoss(_Char)
+AND
+NOT DB_AMP_Plus_Pyre2_Boss(_Char, _CombatID)
+THEN
+DB_AMP_Plus_Pyre2_Boss(_Char, _CombatID);
+DB_AMP_Plus_Pyre2_Anchor(_Char, _CombatID);
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+QRY_AMP_Plus_Pyre2_EnemyBoss(_Char)
+AND
+NOT DB_AMP_Plus_Pyre2_Armed(_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_ArmFight(_CombatID);
+
+// a punitive batch is a boss fight that lost its boss, a new fight the boss test does not recognise
+// mini-bosses stay out of the boss table yet anchor the fight, using the dead-boss branch at round start
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+DB_AMP_MirrorSupport_Spawned(_Char, _)
+AND
+IsPlayer(_Char, 0)
+AND
+QRY_AMP_Plus_Pyre_Hostile(_Char)
+AND
+NOT DB_AMP_Plus_Pyre2_Anchor(_Char, _CombatID)
+THEN
+DB_AMP_Plus_Pyre2_Anchor(_Char, _CombatID);
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+DB_AMP_MirrorSupport_Spawned(_Char, _)
+AND
+IsPlayer(_Char, 0)
+AND
+QRY_AMP_Plus_Pyre_Hostile(_Char)
+AND
+NOT DB_AMP_Plus_Pyre2_Armed(_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_ArmFight(_CombatID);
+
+// a fight can be armed mid-round, and the boss turn reads the round to stay at one tick
+
+PROC
+PROC_AMP_Plus_Pyre2_ArmFight((GUIDSTRING)_CombatID)
+THEN
+DB_AMP_Plus_Pyre2_Armed(_CombatID);
+DB_AMP_Plus_Pyre2_Round(_CombatID, 0);
+DB_AMP_Plus_Pyre_Stage(_CombatID, 0);
+DB_AMP_Plus_Pyre_Prog(_CombatID, 0);
+PROC_AMP_Plus_Pyre2_SeedMod(_CombatID);
+PROC_AMP_Plus_Pyre2_SetBand();
+PROC_AMP_Plus_Pyre2_SetPhase(_CombatID, "RAMP");
+PROC_AMP_Plus_Pyre2_SeedCap(_CombatID);
+PROC_AMP_Plus_Pyre2_Rebase(_CombatID);
+PROC_AMP_Plus_PyreTools_Arm(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_SeedCap((GUIDSTRING)_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre_Cap(_CombatID, _)
+AND
+DB_AMP_GameMode("CASUAL")
+AND
+DB_AMP_Plus_Pyre2_Cfg("CASUALSTAGE", (INTEGER)_V)
+THEN
+DB_AMP_Plus_Pyre_Cap(_CombatID, _V);
+
+PROC
+PROC_AMP_Plus_Pyre2_SeedCap((GUIDSTRING)_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre_Cap(_CombatID, _)
+AND
+NOT DB_AMP_GameMode("CASUAL")
+AND
+DB_AMP_Plus_Pyre2_Cfg("MAXSTAGE", (INTEGER)_V)
+THEN
+DB_AMP_Plus_Pyre_Cap(_CombatID, _V);
+
+// recomputed each round: gear score is stored on CombatStarted, this core arms on EnteredCombat, and order across two events is not reliable
+// bodies the mod adds, brood and punitive spawns, are not counted or a harder fight starts the fire lower
+
+// crowd is a high-water mark. EnteredCombat arrives one body at a time, so arming sees a single boss
+// reinforcements raise it, deaths never lower it
+
+PROC
+PROC_AMP_Plus_Pyre2_Rebase((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_CrowdAcc(_CombatID, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre2_CrowdAcc(_CombatID, _Old);
+
+PROC
+PROC_AMP_Plus_Pyre2_Rebase((GUIDSTRING)_CombatID)
+THEN
+DB_AMP_Plus_Pyre2_CrowdAcc(_CombatID, 0);
+
+// walk and tally in separate bodies: one body doing both resolves every match against the tally as it stood before its first write
+
+PROC
+PROC_AMP_Plus_Pyre2_Rebase((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, _CombatID)
+AND
+NOT DB_AMP_Plus_Pyre2_Brood(_Char, _, _)
+AND
+NOT DB_AMP_MirrorSupport_Spawned(_Char, _)
+AND
+IsDead(_Char, 0)
+THEN
+PROC_AMP_Plus_Pyre2_CountCrowd(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_CountCrowd((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_CrowdAcc(_CombatID, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Plus_Pyre2_CrowdAcc(_CombatID, _N);
+DB_AMP_Plus_Pyre2_CrowdAcc(_CombatID, _Next);
+
+PROC
+PROC_AMP_Plus_Pyre2_PromoteCrowd((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_CrowdAcc(_CombatID, (INTEGER)_New)
+AND
+NOT DB_AMP_Plus_Pyre2_Crowd(_CombatID, _)
+THEN
+DB_AMP_Plus_Pyre2_Crowd(_CombatID, _New);
+
+PROC
+PROC_AMP_Plus_Pyre2_PromoteCrowd((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_CrowdAcc(_CombatID, (INTEGER)_New)
+AND
+DB_AMP_Plus_Pyre2_Crowd(_CombatID, (INTEGER)_Old)
+AND
+_New > _Old
+THEN
+NOT DB_AMP_Plus_Pyre2_Crowd(_CombatID, _Old);
+DB_AMP_Plus_Pyre2_Crowd(_CombatID, _New);
+
+PROC
+PROC_AMP_Plus_Pyre2_Rebase((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_PromoteCrowd(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_Rebase((GUIDSTRING)_CombatID)
+AND
+DB_AMP_GameMode((STRING)_Mode)
+AND
+DB_AMP_Plus_Pyre_ModeBase(_Mode, (INTEGER)_ModeBase)
+AND
+DB_AMP_Plus_GS_Bonus(_CombatID, (INTEGER)_Gs)
+AND
+IntegerSum(_ModeBase, _Gs, (INTEGER)_Raw)
+THEN
+PROC_AMP_Plus_Pyre2_ClampBase(_CombatID, _Raw);
+
+PROC
+PROC_AMP_Plus_Pyre2_Rebase((GUIDSTRING)_CombatID)
+AND
+DB_AMP_GameMode((STRING)_Mode)
+AND
+DB_AMP_Plus_Pyre_ModeBase(_Mode, (INTEGER)_ModeBase)
+AND
+NOT DB_AMP_Plus_GS_Bonus(_CombatID, _)
+THEN
+PROC_AMP_Plus_Pyre2_ClampBase(_CombatID, _ModeBase);
+
+PROC
+PROC_AMP_Plus_Pyre2_ClampBase((GUIDSTRING)_CombatID, (INTEGER)_Raw)
+AND
+DB_AMP_Plus_Pyre_Cap(_CombatID, (INTEGER)_Cap)
+AND
+_Raw > _Cap
+THEN
+PROC_AMP_Plus_Pyre2_WriteBase(_CombatID, _Cap);
+
+PROC
+PROC_AMP_Plus_Pyre2_ClampBase((GUIDSTRING)_CombatID, (INTEGER)_Raw)
+AND
+DB_AMP_Plus_Pyre_Cap(_CombatID, (INTEGER)_Cap)
+AND
+_Raw <= _Cap
+THEN
+PROC_AMP_Plus_Pyre2_WriteBase(_CombatID, _Raw);
+
+PROC
+PROC_AMP_Plus_Pyre2_WriteBase((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre_Base(_CombatID, (INTEGER)_Old)
+AND
+_Old < _N
+THEN
+NOT DB_AMP_Plus_Pyre_Base(_CombatID, _Old);
+DB_AMP_Plus_Pyre_Base(_CombatID, _N);
+PROC_AMP_Plus_Pyre2_ShowEq(_CombatID, _N);
+
+PROC
+PROC_AMP_Plus_Pyre2_WriteBase((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+NOT DB_AMP_Plus_Pyre_Base(_CombatID, _)
+THEN
+DB_AMP_Plus_Pyre_Base(_CombatID, _N);
+PROC_AMP_Plus_Pyre2_ShowEq(_CombatID, _N);
+
+// roster is redressed on the same pass that recounts, else a round passes wearing the share of a vanished crowd
+
+PROC
+PROC_AMP_Plus_Pyre2_Rebase((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre_Phase(_CombatID, "BROKEN")
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_S)
+AND
+_S > 0
+THEN
+PROC_AMP_Plus_Pyre2_ApplyAll(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_SeedMod((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Cfg("TEMPOFLOOR", (INTEGER)_Floor)
+THEN
+DB_AMP_Plus_Pyre_Mod(_CombatID, _Floor);
+
+PROC
+PROC_AMP_Plus_Pyre2_SetPhase((GUIDSTRING)_CombatID, (STRING)_Phase)
+AND
+DB_AMP_Plus_Pyre_Phase(_CombatID, (STRING)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre_Phase(_CombatID, _Old);
+
+PROC
+PROC_AMP_Plus_Pyre2_SetPhase((GUIDSTRING)_CombatID, (STRING)_Phase)
+THEN
+DB_AMP_Plus_Pyre_Phase(_CombatID, _Phase);
+PROC_AMP_Plus_Pyre2_ShowPhase(_CombatID, _Phase);
+
+PROC
+PROC_AMP_Plus_Pyre2_ShowPhase((GUIDSTRING)_CombatID, "RAMP")
+AND
+DB_AMP_Plus_Pyre2_Boss((CHARACTER)_Boss, _CombatID)
+THEN
+ApplyStatus(_Boss, "AMP_PLUS_PYRE2_PHASE_GROW", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre2_ShowPhase((GUIDSTRING)_CombatID, "GROW")
+AND
+DB_AMP_Plus_Pyre2_Boss((CHARACTER)_Boss, _CombatID)
+THEN
+ApplyStatus(_Boss, "AMP_PLUS_PYRE2_PHASE_GROW", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre2_ShowPhase((GUIDSTRING)_CombatID, "QUENCH")
+AND
+DB_AMP_Plus_Pyre2_Boss((CHARACTER)_Boss, _CombatID)
+THEN
+ApplyStatus(_Boss, "AMP_PLUS_PYRE2_PHASE_QUENCH", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre2_ShowPhase((GUIDSTRING)_CombatID, "BROKEN")
+AND
+DB_AMP_Plus_Pyre2_Boss((CHARACTER)_Boss, _CombatID)
+THEN
+ApplyStatus(_Boss, "AMP_PLUS_PYRE2_PHASE_BROKEN", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre2_SetStage((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre_Stage(_CombatID, _Old);
+
+PROC
+PROC_AMP_Plus_Pyre2_SetStage((GUIDSTRING)_CombatID, (INTEGER)_N)
+THEN
+DB_AMP_Plus_Pyre_Stage(_CombatID, _N);
+PROC_AMP_Plus_Pyre2_ApplyAll(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_SetStage((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatID)
+AND
+NOT DB_AMP_Plus_PyreTools_TameOK(_CombatID)
+AND
+DB_AMP_Plus_Pyre_Base(_CombatID, (INTEGER)_B)
+AND
+_N > 0
+AND
+_N >= _B
+THEN
+PROC_AMP_Plus_PyreTools_TameOpen(_CombatID);
+
+// moves once a round on a boss turn. with two bosses a round guard, not the event, keeps it to one
+// no boss standing means no turn to hang it on, the round start does the work
+
+IF
+CombatRoundStarted((GUIDSTRING)_CombatID, (INTEGER)_Round)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_NoteRound(_CombatID, _Round);
+PROC_AMP_Plus_Pyre2_Rebase(_CombatID);
+PROC_AMP_Plus_Pyre2_TickHeadless(_CombatID, _Round);
+
+QRY
+QRY_AMP_Plus_Pyre2_BossAlive((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Boss((CHARACTER)_Boss, _CombatID)
+AND
+IsDead(_Boss, 0)
+THEN
+DB_NOOP(1);
+
+PROC
+PROC_AMP_Plus_Pyre2_TickHeadless((GUIDSTRING)_CombatID, (INTEGER)_Round)
+AND
+NOT QRY_AMP_Plus_Pyre2_BossAlive(_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_TickOnce(_CombatID, _Round);
+
+IF
+TurnStarted((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_Pyre2_Boss(_Boss, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Round(_CombatID, (INTEGER)_Round)
+THEN
+PROC_AMP_Plus_Pyre2_TickOnce(_CombatID, _Round);
+
+PROC
+PROC_AMP_Plus_Pyre2_TickOnce((GUIDSTRING)_CombatID, (INTEGER)_Round)
+AND
+NOT DB_AMP_Plus_Pyre2_Ticked(_CombatID, _Round)
+THEN
+DB_AMP_Plus_Pyre2_Ticked(_CombatID, _Round);
+PROC_AMP_Plus_Pyre2_Round(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_NoteRound((GUIDSTRING)_CombatID, (INTEGER)_Round)
+AND
+DB_AMP_Plus_Pyre2_Round(_CombatID, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre2_Round(_CombatID, _Old);
+
+PROC
+PROC_AMP_Plus_Pyre2_NoteRound((GUIDSTRING)_CombatID, (INTEGER)_Round)
+AND
+DB_AMP_Plus_Pyre2_Ticked(_CombatID, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre2_Ticked(_CombatID, _Old);
+
+PROC
+PROC_AMP_Plus_Pyre2_NoteRound((GUIDSTRING)_CombatID, (INTEGER)_Round)
+THEN
+DB_AMP_Plus_Pyre2_Round(_CombatID, _Round);
+
+// read on the round tick, not the round event: the headless tick answers that event too and same-event rule order is unreliable
+
+PROC
+PROC_AMP_Plus_Pyre2_Round((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_SetMod(_CombatID);
+
+// ramp-over test stands before the step that completes it, so the round the base is reached ends the ramp
+// reversed, ramp and growth would both move the step on one tick
+
+PROC
+PROC_AMP_Plus_Pyre2_Round((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Phase(_CombatID, "RAMP")
+AND
+DB_AMP_Plus_Pyre_Base(_CombatID, (INTEGER)_B)
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_S)
+AND
+_S >= _B
+THEN
+PROC_AMP_Plus_Pyre2_SetPhase(_CombatID, "GROW");
+
+PROC
+PROC_AMP_Plus_Pyre2_Round((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Phase(_CombatID, "RAMP")
+AND
+DB_AMP_Plus_Pyre_Base(_CombatID, (INTEGER)_B)
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_S)
+AND
+_S < _B
+AND
+IntegerSum(_S, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_Pyre2_SetStage(_CombatID, _Next);
+
+// equilibrium is claimed once per value, not held as a floor, which would undo the quench and the buttons next tick
+
+PROC
+PROC_AMP_Plus_Pyre2_Round((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Phase(_CombatID, "GROW")
+AND
+DB_AMP_Plus_Pyre_Base(_CombatID, (INTEGER)_B)
+AND
+NOT DB_AMP_Plus_Pyre2_Floored(_CombatID, _)
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_S)
+AND
+_S < _B
+AND
+IntegerSum(_S, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_Pyre2_SetPhase(_CombatID, "RAMP");
+PROC_AMP_Plus_Pyre2_SetStage(_CombatID, _Next);
+
+PROC
+PROC_AMP_Plus_Pyre2_Round((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Phase(_CombatID, "GROW")
+AND
+DB_AMP_Plus_Pyre_Base(_CombatID, (INTEGER)_B)
+AND
+DB_AMP_Plus_Pyre2_Floored(_CombatID, (INTEGER)_Done)
+AND
+_B > _Done
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_S)
+AND
+_S < _B
+AND
+IntegerSum(_S, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_Pyre2_SetPhase(_CombatID, "RAMP");
+PROC_AMP_Plus_Pyre2_SetStage(_CombatID, _Next);
+
+PROC
+PROC_AMP_Plus_Pyre2_Round((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Phase(_CombatID, "GROW")
+AND
+DB_AMP_Plus_Pyre_Base(_CombatID, (INTEGER)_B)
+AND
+DB_AMP_Plus_Pyre2_Floored(_CombatID, (INTEGER)_Done)
+THEN
+NOT DB_AMP_Plus_Pyre2_Floored(_CombatID, _Done);
+DB_AMP_Plus_Pyre2_Floored(_CombatID, _B);
+
+PROC
+PROC_AMP_Plus_Pyre2_Round((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Phase(_CombatID, "GROW")
+AND
+DB_AMP_Plus_Pyre_Base(_CombatID, (INTEGER)_B)
+AND
+NOT DB_AMP_Plus_Pyre2_Floored(_CombatID, _)
+THEN
+DB_AMP_Plus_Pyre2_Floored(_CombatID, _B);
+
+PROC
+PROC_AMP_Plus_Pyre2_Round((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Phase(_CombatID, "GROW")
+THEN
+PROC_AMP_Plus_Pyre2_Grow(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_Round((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Phase(_CombatID, "QUENCH")
+THEN
+PROC_AMP_Plus_Pyre2_Cool(_CombatID);
+PROC_AMP_Plus_Pyre2_CheckReturn(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_Grow((GUIDSTRING)_CombatID)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+DB_AMP_Plus_Pyre_TempoBand((INTEGER)_Min, (INTEGER)_Max, (INTEGER)_Rate)
+AND
+_Lvl >= _Min
+AND
+_Lvl <= _Max
+THEN
+PROC_AMP_Plus_Pyre2_Pour(_CombatID, _Rate);
+
+PROC
+PROC_AMP_Plus_Pyre2_Grow((GUIDSTRING)_CombatID)
+AND
+NOT DB_AMP_AvgPartyLevel(_)
+AND
+DB_AMP_Plus_Pyre2_Cfg("RATE", (INTEGER)_Rate)
+THEN
+PROC_AMP_Plus_Pyre2_Pour(_CombatID, _Rate);
+
+PROC
+PROC_AMP_Plus_Pyre2_Pour((GUIDSTRING)_CombatID, (INTEGER)_Rate)
+AND
+DB_AMP_Plus_Pyre_Mod(_CombatID, (INTEGER)_Mod)
+AND
+IntegerProduct(_Rate, _Mod, (INTEGER)_Scaled)
+AND
+IntegerDivide(_Scaled, 100, (INTEGER)_Tempo)
+AND
+DB_AMP_Plus_Pyre_Prog(_CombatID, (INTEGER)_P)
+AND
+IntegerSum(_P, _Tempo, (INTEGER)_New)
+THEN
+NOT DB_AMP_Plus_Pyre_Prog(_CombatID, _P);
+DB_AMP_Plus_Pyre_Prog(_CombatID, _New);
+PROC_AMP_Plus_Pyre2_Spill(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_Spill((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Prog(_CombatID, (INTEGER)_P)
+AND
+_P >= 100
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_S)
+AND
+DB_AMP_Plus_Pyre_Cap(_CombatID, (INTEGER)_Cap)
+AND
+_S < _Cap
+AND
+IntegerSubtract(_P, 100, (INTEGER)_Rest)
+AND
+IntegerSum(_S, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Plus_Pyre_Prog(_CombatID, _P);
+DB_AMP_Plus_Pyre_Prog(_CombatID, _Rest);
+PROC_AMP_Plus_Pyre2_SetStage(_CombatID, _Next);
+
+// at the ceiling the counter parks just short of rolling over, so a raised ceiling is one tick from the next step
+PROC
+PROC_AMP_Plus_Pyre2_Spill((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Prog(_CombatID, (INTEGER)_P)
+AND
+_P >= 100
+THEN
+NOT DB_AMP_Plus_Pyre_Prog(_CombatID, _P);
+DB_AMP_Plus_Pyre_Prog(_CombatID, 99);
+
+// a death recounts the crowd at once, counting only at round start lets the last of a pack die unburned
+
+IF
+Died((CHARACTER)_Char)
+AND
+DB_AMP_Plus_Pyre_Member(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_Rebase(_CombatID);
+
+IF
+Died((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_Pyre2_Boss(_Boss, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatID)
+AND
+DB_AMP_Plus_Pyre_Phase(_CombatID, "RAMP")
+AND
+DB_AMP_Plus_Pyre_Base(_CombatID, (INTEGER)_B)
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_S)
+AND
+_S < _B
+THEN
+PROC_AMP_Plus_Pyre2_SetStage(_CombatID, _B);
+PROC_AMP_Plus_Pyre2_SetPhase(_CombatID, "GROW");
+
+// engine gives a downed event but no query, so who is down is tracked
+// the step drops once on entering the phase, not per body on the floor
+
+IF
+DownedChanged((CHARACTER)_Char, 1)
+AND
+DB_Players(_Char)
+AND
+CombatGetGuidFor(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre2_Down(_Char, _CombatID)
+THEN
+DB_AMP_Plus_Pyre2_Down(_Char, _CombatID);
+
+IF
+DownedChanged((CHARACTER)_Char, 1)
+AND
+DB_Players(_Char)
+AND
+CombatGetGuidFor(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre_Phase(_CombatID, "BROKEN")
+AND
+NOT DB_AMP_Plus_Pyre_Phase(_CombatID, "QUENCH")
+THEN
+PROC_AMP_Plus_Pyre2_SetPhase(_CombatID, "QUENCH");
+PROC_AMP_Plus_Pyre2_Cool(_CombatID);
+
+IF
+Died((CHARACTER)_Char)
+AND
+DB_Players(_Char)
+AND
+CombatGetGuidFor(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre2_Down(_Char, _CombatID)
+THEN
+DB_AMP_Plus_Pyre2_Down(_Char, _CombatID);
+
+QRY
+QRY_AMP_Plus_Pyre2_AnyDown((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Down((CHARACTER)_Char, _CombatID)
+THEN
+DB_NOOP(1);
+
+IF
+DownedChanged((CHARACTER)_Char, 0)
+AND
+DB_Players(_Char)
+AND
+IsDead(_Char, 0)
+AND
+DB_AMP_Plus_Pyre2_Down(_Char, (GUIDSTRING)_CombatID)
+THEN
+NOT DB_AMP_Plus_Pyre2_Down(_Char, _CombatID);
+PROC_AMP_Plus_Pyre2_CheckUp(_CombatID);
+
+// a resurrected body never sends the downed event that clears its record, left alone it holds the quench
+
+IF
+Resurrected((CHARACTER)_Char)
+AND
+DB_AMP_Plus_Pyre2_Down(_Char, (GUIDSTRING)_CombatID)
+THEN
+NOT DB_AMP_Plus_Pyre2_Down(_Char, _CombatID);
+PROC_AMP_Plus_Pyre2_CheckUp(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_CheckUp((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatID)
+AND
+DB_AMP_Plus_Pyre_Phase(_CombatID, "QUENCH")
+AND
+NOT QRY_AMP_Plus_Pyre2_AnyDown(_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_SetPhase(_CombatID, "GROW");
+
+// alone, nobody is downed before you, so the fall is read off the health bar at turn start
+
+IF
+TurnStarted((CHARACTER)_Char)
+AND
+DB_Players(_Char)
+AND
+CombatGetGuidFor(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatID)
+AND
+DB_AMP_Plus_Pyre_Phase(_CombatID, "GROW")
+AND
+CombatGetInvolvedPartyMembersCount(_CombatID, 1)
+AND
+GetHitpoints(_Char, (INTEGER)_Hp)
+AND
+GetMaxHitpoints(_Char, (INTEGER)_Max)
+AND
+_Max > 0
+AND
+IntegerProduct(_Hp, 100, (INTEGER)_Scaled)
+AND
+IntegerDivide(_Scaled, _Max, (INTEGER)_Pct)
+AND
+DB_AMP_Plus_Pyre2_Cfg("SOLOHP", (INTEGER)_Thr)
+AND
+_Pct < _Thr
+THEN
+PROC_AMP_Plus_Pyre2_SetPhase(_CombatID, "QUENCH");
+PROC_AMP_Plus_Pyre2_Cool(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_Cool((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_S)
+AND
+_S > 0
+AND
+IntegerSubtract(_S, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_Pyre2_SetStage(_CombatID, _Next);
+
+PROC
+PROC_AMP_Plus_Pyre2_CheckReturn((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Alive(_CombatID, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre2_Alive(_CombatID, _Old);
+
+PROC
+PROC_AMP_Plus_Pyre2_CheckReturn((GUIDSTRING)_CombatID)
+THEN
+DB_AMP_Plus_Pyre2_Alive(_CombatID, 0);
+
+PROC
+PROC_AMP_Plus_Pyre2_CheckReturn((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, _CombatID)
+AND
+NOT DB_AMP_Plus_Pyre2_Brood(_Char, _, _)
+AND
+IsDead(_Char, 0)
+THEN
+PROC_AMP_Plus_Pyre2_CountAlive(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_CountAlive((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Alive(_CombatID, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Plus_Pyre2_Alive(_CombatID, _N);
+DB_AMP_Plus_Pyre2_Alive(_CombatID, _Next);
+
+PROC
+PROC_AMP_Plus_Pyre2_CheckReturn((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Alive(_CombatID, (INTEGER)_N)
+AND
+_N <= 2
+AND
+DB_AMP_Plus_Pyre2_Anchor((CHARACTER)_Boss, _CombatID)
+AND
+IsDead(_Boss, 0)
+AND
+GetHitpoints(_Boss, (INTEGER)_Hp)
+AND
+GetMaxHitpoints(_Boss, (INTEGER)_Max)
+AND
+_Max > 0
+AND
+IntegerProduct(_Hp, 100, (INTEGER)_Scaled)
+AND
+IntegerDivide(_Scaled, _Max, (INTEGER)_Pct)
+AND
+DB_AMP_Plus_Pyre2_Cfg("BOSSHP", (INTEGER)_Thr)
+AND
+_Pct < _Thr
+THEN
+PROC_AMP_Plus_Pyre2_SetPhase(_CombatID, "GROW");
+
+// the family shares one stack id with a priority per step, so the next step evicts the last. only step zero strips
+
+PROC
+PROC_AMP_Plus_Pyre2_ApplyAll((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, _CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_ApplyOne(_Char, _CombatID);
+
+// order is fixed: the body's own ceiling, then the crowd, then the ray on the rest
+// ceiling is measured against the equilibrium, the fight's own ceiling would sit above the field and never be reached
+
+PROC
+PROC_AMP_Plus_Pyre2_ApplyOne((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, 0)
+THEN
+PROC_AMP_Plus_Pyre2_Wear(_Char, 0);
+
+PROC
+PROC_AMP_Plus_Pyre2_ApplyOne((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_S)
+AND
+_S > 0
+THEN
+PROC_AMP_Plus_Pyre2_Ceil(_Char, _CombatID, _S);
+
+// values travel as parameters down the chain, no link reads back the write of the one above
+
+PROC
+PROC_AMP_Plus_Pyre2_Ceil((CHARACTER)_Char, (GUIDSTRING)_CombatID, (INTEGER)_S)
+AND
+DB_AMP_Plus_Pyre2_CapCut(_Char, _CombatID, (INTEGER)_M)
+AND
+DB_AMP_Plus_Pyre_Base(_CombatID, (INTEGER)_B)
+AND
+IntegerSubtract(_B, _M, (INTEGER)_Own)
+AND
+_Own > 0
+AND
+_S > _Own
+THEN
+PROC_AMP_Plus_Pyre2_Thin(_Char, _CombatID, _Own);
+
+PROC
+PROC_AMP_Plus_Pyre2_Ceil((CHARACTER)_Char, (GUIDSTRING)_CombatID, (INTEGER)_S)
+AND
+DB_AMP_Plus_Pyre2_CapCut(_Char, _CombatID, (INTEGER)_M)
+AND
+DB_AMP_Plus_Pyre_Base(_CombatID, (INTEGER)_B)
+AND
+IntegerSubtract(_B, _M, (INTEGER)_Own)
+AND
+_Own > 0
+AND
+_S <= _Own
+THEN
+PROC_AMP_Plus_Pyre2_Thin(_Char, _CombatID, _S);
+
+PROC
+PROC_AMP_Plus_Pyre2_Ceil((CHARACTER)_Char, (GUIDSTRING)_CombatID, (INTEGER)_S)
+AND
+DB_AMP_Plus_Pyre2_CapCut(_Char, _CombatID, (INTEGER)_M)
+AND
+DB_AMP_Plus_Pyre_Base(_CombatID, (INTEGER)_B)
+AND
+IntegerSubtract(_B, _M, (INTEGER)_Own)
+AND
+_Own <= 0
+THEN
+PROC_AMP_Plus_Pyre2_Wear(_Char, 0);
+
+PROC
+PROC_AMP_Plus_Pyre2_Ceil((CHARACTER)_Char, (GUIDSTRING)_CombatID, (INTEGER)_S)
+AND
+NOT DB_AMP_Plus_Pyre2_CapCut(_Char, _CombatID, _)
+THEN
+PROC_AMP_Plus_Pyre2_Thin(_Char, _CombatID, _S);
+
+PROC
+PROC_AMP_Plus_Pyre2_Ceil((CHARACTER)_Char, (GUIDSTRING)_CombatID, (INTEGER)_S)
+AND
+DB_AMP_Plus_Pyre2_CapCut(_Char, _CombatID, _)
+AND
+NOT DB_AMP_Plus_Pyre_Base(_CombatID, _)
+THEN
+PROC_AMP_Plus_Pyre2_Thin(_Char, _CombatID, _S);
+
+PROC
+PROC_AMP_Plus_Pyre2_Thin((CHARACTER)_Char, (GUIDSTRING)_CombatID, (INTEGER)_S)
+AND
+DB_AMP_Plus_Pyre2_Anchor(_Char, _CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_Personal(_Char, _CombatID, _S);
+
+PROC
+PROC_AMP_Plus_Pyre2_Thin((CHARACTER)_Char, (GUIDSTRING)_CombatID, (INTEGER)_S)
+AND
+NOT DB_AMP_Plus_Pyre2_Anchor(_Char, _CombatID)
+AND
+DB_AMP_Plus_Pyre2_Crowd(_CombatID, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre_Crowd((INTEGER)_Min, (INTEGER)_Max, (INTEGER)_Cut)
+AND
+_N >= _Min
+AND
+_N <= _Max
+AND
+IntegerSubtract(_S, _Cut, (INTEGER)_Left)
+AND
+_Left >= 1
+THEN
+PROC_AMP_Plus_Pyre2_Personal(_Char, _CombatID, _Left);
+
+PROC
+PROC_AMP_Plus_Pyre2_Thin((CHARACTER)_Char, (GUIDSTRING)_CombatID, (INTEGER)_S)
+AND
+NOT DB_AMP_Plus_Pyre2_Anchor(_Char, _CombatID)
+AND
+DB_AMP_Plus_Pyre2_Crowd(_CombatID, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre_Crowd((INTEGER)_Min, (INTEGER)_Max, (INTEGER)_Cut)
+AND
+_N >= _Min
+AND
+_N <= _Max
+AND
+IntegerSubtract(_S, _Cut, (INTEGER)_Left)
+AND
+_Left <= 0
+THEN
+PROC_AMP_Plus_Pyre2_Personal(_Char, _CombatID, 1);
+
+// an empty roster reads as no crowd, not the largest
+PROC
+PROC_AMP_Plus_Pyre2_Thin((CHARACTER)_Char, (GUIDSTRING)_CombatID, (INTEGER)_S)
+AND
+NOT DB_AMP_Plus_Pyre2_Anchor(_Char, _CombatID)
+AND
+DB_AMP_Plus_Pyre2_Crowd(_CombatID, 0)
+THEN
+PROC_AMP_Plus_Pyre2_Personal(_Char, _CombatID, _S);
+
+PROC
+PROC_AMP_Plus_Pyre2_Personal((CHARACTER)_Char, (GUIDSTRING)_CombatID, (INTEGER)_Raw)
+AND
+DB_AMP_Plus_Pyre2_StepCut(_Char, _CombatID, (INTEGER)_K)
+AND
+IntegerSubtract(_Raw, _K, (INTEGER)_Left)
+AND
+_Left > 0
+THEN
+PROC_AMP_Plus_Pyre2_Final(_Char, _CombatID, _Left);
+
+PROC
+PROC_AMP_Plus_Pyre2_Personal((CHARACTER)_Char, (GUIDSTRING)_CombatID, (INTEGER)_Raw)
+AND
+DB_AMP_Plus_Pyre2_StepCut(_Char, _CombatID, (INTEGER)_K)
+AND
+IntegerSubtract(_Raw, _K, (INTEGER)_Left)
+AND
+_Left <= 0
+THEN
+PROC_AMP_Plus_Pyre2_Final(_Char, _CombatID, 0);
+
+PROC
+PROC_AMP_Plus_Pyre2_Personal((CHARACTER)_Char, (GUIDSTRING)_CombatID, (INTEGER)_Raw)
+AND
+NOT DB_AMP_Plus_Pyre2_StepCut(_Char, _CombatID, _)
+THEN
+PROC_AMP_Plus_Pyre2_Final(_Char, _CombatID, _Raw);
+
+// halving comes last, on what the creature wears: thinning and the ray ceiling are already in it
+// it reads a fact instead of applying once, so later dressings come out halved and a second press does nothing
+
+PROC
+PROC_AMP_Plus_Pyre2_Final((CHARACTER)_Char, (GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre2_Tamed(_CombatID)
+AND
+IntegerDivide(_N, 2, (INTEGER)_Half)
+AND
+_Half > 0
+THEN
+PROC_AMP_Plus_Pyre2_Wear(_Char, _Half);
+
+PROC
+PROC_AMP_Plus_Pyre2_Final((CHARACTER)_Char, (GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre2_Tamed(_CombatID)
+AND
+_N > 0
+AND
+IntegerDivide(_N, 2, (INTEGER)_Half)
+AND
+_Half <= 0
+THEN
+PROC_AMP_Plus_Pyre2_Wear(_Char, 0);
+
+PROC
+PROC_AMP_Plus_Pyre2_Final((CHARACTER)_Char, (GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+NOT DB_AMP_Plus_Pyre2_Tamed(_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_Wear(_Char, _N);
+
+// the body that finds a count must come before the one that starts it, or a creature gets a second
+
+PROC
+PROC_AMP_Plus_Pyre2_AddCapCut((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_CapCut(_Char, _CombatID, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Plus_Pyre2_CapCut(_Char, _CombatID, _N);
+DB_AMP_Plus_Pyre2_CapCut(_Char, _CombatID, _Next);
+
+PROC
+PROC_AMP_Plus_Pyre2_AddCapCut((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre2_CapCut(_Char, _CombatID, _)
+THEN
+DB_AMP_Plus_Pyre2_CapCut(_Char, _CombatID, 1);
+
+PROC
+PROC_AMP_Plus_Pyre2_AddStepCut((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_StepCut(_Char, _CombatID, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Plus_Pyre2_StepCut(_Char, _CombatID, _N);
+DB_AMP_Plus_Pyre2_StepCut(_Char, _CombatID, _Next);
+
+PROC
+PROC_AMP_Plus_Pyre2_AddStepCut((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre2_StepCut(_Char, _CombatID, _)
+THEN
+DB_AMP_Plus_Pyre2_StepCut(_Char, _CombatID, 1);
+
+// one stack id and priority across the ladder, so a fall needs no removal. removing first would show the body losing the fire for good
+
+PROC
+PROC_AMP_Plus_Pyre2_Redress((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_ApplyAll(_CombatID);
+
+// re-dressing the same step replays the effect and flickers the icon every turn
+// a matching record is trusted only while the step is on the body, resurrect and form change eat the status
+
+PROC
+PROC_AMP_Plus_Pyre2_Wear((CHARACTER)_Char, (INTEGER)_N)
+AND
+NOT DB_AMP_Plus_Pyre2_Worn(_Char, _N)
+THEN
+PROC_AMP_Plus_Pyre2_Put(_Char, _N);
+
+PROC
+PROC_AMP_Plus_Pyre2_Wear((CHARACTER)_Char, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre2_Worn(_Char, _N)
+AND
+_N > 0
+AND
+QRY_AMP_Plus_Pyre2_StepGone(_Char, _N)
+THEN
+PROC_AMP_Plus_Pyre2_Put(_Char, _N);
+
+PROC
+PROC_AMP_Plus_Pyre2_Put((CHARACTER)_Char, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre2_Worn(_Char, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre2_Worn(_Char, _Old);
+
+PROC
+PROC_AMP_Plus_Pyre2_Put((CHARACTER)_Char, (INTEGER)_N)
+THEN
+DB_AMP_Plus_Pyre2_Worn(_Char, _N);
+
+PROC
+PROC_AMP_Plus_Pyre2_Put((CHARACTER)_Char, 0)
+THEN
+PROC_AMP_Plus_Pyre2_Strip(_Char);
+
+// status name is built, not matched. ApplyStatus takes a string and forty near-identical bodies are not a table
+
+PROC
+PROC_AMP_Plus_Pyre2_Put((CHARACTER)_Char, (INTEGER)_N)
+AND
+_N > 0
+AND
+DB_AMP_Plus_Pyre2_BandNow((INTEGER)_B)
+AND
+IntegerToString(_N, (STRING)_NStr)
+AND
+IntegerToString(_B, (STRING)_BStr)
+AND
+Concatenate("AMP_PLUS_PYRE2_G", _NStr, (STRING)_Head)
+AND
+Concatenate(_Head, "_B", (STRING)_Mid)
+AND
+Concatenate(_Mid, _BStr, (STRING)_Status)
+THEN
+ApplyStatus(_Char, _Status, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// no band row means a save not yet reseeded, the bare ladder answers until it runs
+
+PROC
+PROC_AMP_Plus_Pyre2_Put((CHARACTER)_Char, (INTEGER)_N)
+AND
+_N > 0
+AND
+NOT DB_AMP_Plus_Pyre2_BandNow(_)
+AND
+IntegerToString(_N, (STRING)_NStr)
+AND
+Concatenate("AMP_PLUS_PYRE2_G", _NStr, (STRING)_Status)
+THEN
+ApplyStatus(_Char, _Status, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+QRY
+QRY_AMP_Plus_Pyre2_StepGone((CHARACTER)_Char, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre2_BandNow((INTEGER)_B)
+AND
+IntegerToString(_N, (STRING)_NStr)
+AND
+IntegerToString(_B, (STRING)_BStr)
+AND
+Concatenate("AMP_PLUS_PYRE2_G", _NStr, (STRING)_Head)
+AND
+Concatenate(_Head, "_B", (STRING)_Mid)
+AND
+Concatenate(_Mid, _BStr, (STRING)_Status)
+AND
+HasActiveStatus(_Char, _Status, 0)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Plus_Pyre2_StepGone((CHARACTER)_Char, (INTEGER)_N)
+AND
+NOT DB_AMP_Plus_Pyre2_BandNow(_)
+AND
+IntegerToString(_N, (STRING)_NStr)
+AND
+Concatenate("AMP_PLUS_PYRE2_G", _NStr, (STRING)_Status)
+AND
+HasActiveStatus(_Char, _Status, 0)
+THEN
+DB_NOOP(1);
+
+// second firing on the creature's own turn is the net for bosses that swap bodies, resurrect and polymorph eat fresh statuses
+
+IF
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_Rebase(_CombatID);
+
+IF
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatID)
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_S)
+AND
+_S > 0
+THEN
+PROC_AMP_Plus_Pyre2_Join(_Char, _CombatID);
+
+IF
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatID)
+AND
+DB_AMP_Plus_Pyre_Base(_CombatID, (INTEGER)_B)
+THEN
+PROC_AMP_Plus_Pyre2_ShowEqOn(_Char, _CombatID, _B);
+
+// a change of form drops boost statuses, the line is one
+
+IF
+ObjectTransformed((CHARACTER)_Char, _)
+AND
+QRY_AMP_Plus_Pyre2_Burning(_Char)
+AND
+CombatGetGuidFor(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Base(_CombatID, (INTEGER)_B)
+THEN
+PROC_AMP_Plus_Pyre2_ShowEqOn(_Char, _CombatID, _B);
+
+IF
+ShapeshiftChanged((CHARACTER)_Char, _, _, _)
+AND
+QRY_AMP_Plus_Pyre2_Burning(_Char)
+AND
+CombatGetGuidFor(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Base(_CombatID, (INTEGER)_B)
+THEN
+PROC_AMP_Plus_Pyre2_ShowEqOn(_Char, _CombatID, _B);
+
+QRY
+QRY_AMP_Plus_Pyre2_Burning((CHARACTER)_Char)
+AND
+CombatGetGuidFor(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatID)
+AND
+DB_AMP_Plus_Pyre_Member(_Char, _CombatID)
+THEN
+DB_NOOP(1);
+
+// a latecomer gets the average of what the roster wears, rounded up, since douse, ray and subdual leave different steps
+// nothing worn yet falls back to the ordinary share-out
+
+PROC
+PROC_AMP_Plus_Pyre2_Join((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_AvgReset(_CombatID);
+PROC_AMP_Plus_Pyre2_AvgCollect(_Char, _CombatID);
+PROC_AMP_Plus_Pyre2_Dress(_Char, _CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_AvgReset((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Avg(_CombatID, (INTEGER)_Sum, (INTEGER)_Cnt)
+THEN
+NOT DB_AMP_Plus_Pyre2_Avg(_CombatID, _Sum, _Cnt);
+
+PROC
+PROC_AMP_Plus_Pyre2_AvgReset((GUIDSTRING)_CombatID)
+THEN
+DB_AMP_Plus_Pyre2_Avg(_CombatID, 0, 0);
+
+PROC
+PROC_AMP_Plus_Pyre2_AvgCollect((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Other, _CombatID)
+AND
+NOT _Other == _Char
+AND
+DB_AMP_Plus_Pyre2_Worn(_Other, (INTEGER)_W)
+AND
+_W > 0
+THEN
+PROC_AMP_Plus_Pyre2_AvgAdd(_CombatID, _W);
+
+PROC
+PROC_AMP_Plus_Pyre2_AvgAdd((GUIDSTRING)_CombatID, (INTEGER)_W)
+AND
+DB_AMP_Plus_Pyre2_Avg(_CombatID, (INTEGER)_Sum, (INTEGER)_Cnt)
+AND
+IntegerSum(_Sum, _W, (INTEGER)_NextSum)
+AND
+IntegerSum(_Cnt, 1, (INTEGER)_NextCnt)
+THEN
+NOT DB_AMP_Plus_Pyre2_Avg(_CombatID, _Sum, _Cnt);
+DB_AMP_Plus_Pyre2_Avg(_CombatID, _NextSum, _NextCnt);
+
+PROC
+PROC_AMP_Plus_Pyre2_Dress((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Avg(_CombatID, (INTEGER)_Sum, (INTEGER)_Cnt)
+AND
+_Cnt > 0
+AND
+IntegerSubtract(_Cnt, 1, (INTEGER)_Short)
+AND
+IntegerSum(_Sum, _Short, (INTEGER)_Raised)
+AND
+IntegerDivide(_Raised, _Cnt, (INTEGER)_Avg)
+THEN
+PROC_AMP_Plus_Pyre2_Wear(_Char, _Avg);
+
+PROC
+PROC_AMP_Plus_Pyre2_Dress((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Avg(_CombatID, (INTEGER)_Sum, 0)
+THEN
+PROC_AMP_Plus_Pyre2_ApplyOne(_Char, _CombatID);
+
+IF
+TurnStarted((CHARACTER)_Char)
+AND
+DB_AMP_Plus_Pyre_Member(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatID)
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_S)
+AND
+_S > 0
+THEN
+PROC_AMP_Plus_Pyre2_ApplyOne(_Char, _CombatID);
+
+// persist and teardown share one rule, as two rules on this event their order is open and cleanup could wipe the step first
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_Persist(_CombatID);
+PROC_AMP_Plus_Pyre2_Teardown(_CombatID);
+
+// step comes off before the roster that names the bodies is dropped
+// the family has no removal event, a fight ending with enemies standing would leave it burning
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Avg(_CombatID, (INTEGER)_Sum, (INTEGER)_Cnt)
+THEN
+NOT DB_AMP_Plus_Pyre2_Avg(_CombatID, _Sum, _Cnt);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, _CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_Strip(_Char);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, _CombatID)
+AND
+DB_AMP_Plus_Pyre2_Worn(_Char, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Pyre2_Worn(_Char, _N);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, _CombatID)
+AND
+NOT DB_AMP_Plus_PyreEq_Known(_Char)
+THEN
+PROC_AMP_Plus_Pyre2_HideEq(_Char);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_DrainTeardownMember(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Crowd(_CombatID, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Pyre2_Crowd(_CombatID, _N);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Tamed(_CombatID)
+THEN
+NOT DB_AMP_Plus_Pyre2_Tamed(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_DrainTeardownCapCut(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_DrainTeardownStepCut(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_DrainTeardownBoss(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_DrainTeardownAnchor(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_DrainTeardownDown(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Floored(_CombatID, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Pyre2_Floored(_CombatID, _N);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Ticked(_CombatID, (INTEGER)_R)
+THEN
+NOT DB_AMP_Plus_Pyre2_Ticked(_CombatID, _R);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_Pyre_Stage(_CombatID, _V);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Prog(_CombatID, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_Pyre_Prog(_CombatID, _V);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Mod(_CombatID, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_Pyre_Mod(_CombatID, _V);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Base(_CombatID, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_Pyre_Base(_CombatID, _V);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Cap(_CombatID, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_Pyre_Cap(_CombatID, _V);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Phase(_CombatID, (STRING)_V)
+THEN
+NOT DB_AMP_Plus_Pyre_Phase(_CombatID, _V);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Round(_CombatID, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_Pyre2_Round(_CombatID, _V);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Alive(_CombatID, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_Pyre2_Alive(_CombatID, _V);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_CrowdAcc(_CombatID, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_Pyre2_CrowdAcc(_CombatID, _V);
+
+PROC
+PROC_AMP_Plus_Pyre2_Teardown((GUIDSTRING)_CombatID)
+THEN
+NOT DB_AMP_Plus_Pyre2_Armed(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainTeardownMember((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, _CombatID)
+THEN
+NOT DB_AMP_Plus_Pyre_Member(_Char, _CombatID);
+PROC_AMP_Plus_Pyre2_DrainTeardownMember(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainTeardownCapCut((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_CapCut((CHARACTER)_Char, _CombatID, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Pyre2_CapCut(_Char, _CombatID, _N);
+PROC_AMP_Plus_Pyre2_DrainTeardownCapCut(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainTeardownStepCut((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_StepCut((CHARACTER)_Char, _CombatID, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Pyre2_StepCut(_Char, _CombatID, _N);
+PROC_AMP_Plus_Pyre2_DrainTeardownStepCut(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainTeardownBoss((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Boss((CHARACTER)_Boss, _CombatID)
+THEN
+NOT DB_AMP_Plus_Pyre2_Boss(_Boss, _CombatID);
+PROC_AMP_Plus_Pyre2_DrainTeardownBoss(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainTeardownAnchor((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Anchor((CHARACTER)_Boss, _CombatID)
+THEN
+NOT DB_AMP_Plus_Pyre2_Anchor(_Boss, _CombatID);
+PROC_AMP_Plus_Pyre2_DrainTeardownAnchor(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainTeardownDown((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Down((CHARACTER)_Char, _CombatID)
+THEN
+NOT DB_AMP_Plus_Pyre2_Down(_Char, _CombatID);
+PROC_AMP_Plus_Pyre2_DrainTeardownDown(_CombatID);
+
+
+// refreshed on every base write, the base is recomputed each round because gear score lands on another event
+// figure is the fight's own less what the ray took off this body, so the douse shows on the line
+
+PROC
+PROC_AMP_Plus_Pyre2_ShowEq((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, _CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_ShowEqOn(_Char, _CombatID, _N);
+
+// figure passed as a parameter, the write that raises the base sits in the same body
+
+PROC
+PROC_AMP_Plus_Pyre2_ShowEqOn((CHARACTER)_Char, (GUIDSTRING)_CombatID, (INTEGER)_B)
+AND
+DB_AMP_Plus_Pyre2_CapCut(_Char, _CombatID, (INTEGER)_M)
+AND
+IntegerSubtract(_B, _M, (INTEGER)_Own)
+AND
+_Own > 0
+THEN
+PROC_AMP_Plus_Pyre2_PutEq(_Char, _Own);
+
+PROC
+PROC_AMP_Plus_Pyre2_ShowEqOn((CHARACTER)_Char, (GUIDSTRING)_CombatID, (INTEGER)_B)
+AND
+DB_AMP_Plus_Pyre2_CapCut(_Char, _CombatID, (INTEGER)_M)
+AND
+IntegerSubtract(_B, _M, (INTEGER)_Own)
+AND
+_Own <= 0
+THEN
+PROC_AMP_Plus_Pyre2_HideEq(_Char);
+
+PROC
+PROC_AMP_Plus_Pyre2_ShowEqOn((CHARACTER)_Char, (GUIDSTRING)_CombatID, (INTEGER)_B)
+AND
+NOT DB_AMP_Plus_Pyre2_CapCut(_Char, _CombatID, _)
+THEN
+PROC_AMP_Plus_Pyre2_PutEq(_Char, _B);
+
+PROC
+PROC_AMP_Plus_Pyre2_PutEq((CHARACTER)_Char, 1)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE2_EQ1", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre2_PutEq((CHARACTER)_Char, 2)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE2_EQ2", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre2_PutEq((CHARACTER)_Char, 3)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE2_EQ3", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre2_PutEq((CHARACTER)_Char, 4)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE2_EQ4", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre2_PutEq((CHARACTER)_Char, 5)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE2_EQ5", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre2_PutEq((CHARACTER)_Char, 6)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE2_EQ6", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre2_PutEq((CHARACTER)_Char, 7)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE2_EQ7", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre2_PutEq((CHARACTER)_Char, 8)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE2_EQ8", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre2_PutEq((CHARACTER)_Char, 9)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE2_EQ9", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre2_PutEq((CHARACTER)_Char, 10)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE2_EQ10", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre2_HideEq((CHARACTER)_Char)
+THEN
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_EQ1", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_EQ2", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_EQ3", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_EQ4", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_EQ5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_EQ6", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_EQ7", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_EQ8", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_EQ9", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_EQ10", NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+ENDEXITSECTION

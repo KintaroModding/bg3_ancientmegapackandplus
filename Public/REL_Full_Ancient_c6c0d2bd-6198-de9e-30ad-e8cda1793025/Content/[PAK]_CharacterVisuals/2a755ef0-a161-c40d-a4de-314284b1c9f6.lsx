@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="2a755ef0-a161-c40d-a4de-314284b1c9f6" />
+					<attribute id="Name" type="LSString" value="AMP_Rainbow_Outline" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/AMP_Rainbow_Outline.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="AMP_Rainbow_Outline" />
+					<attribute id="BoundsMin" type="fvec3" value="-2.309401 -2.309401 -2.309401" />
+					<attribute id="BoundsMax" type="fvec3" value="2.309401 2.309401 2.309401" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="5" />
+					<attribute id="Looping" type="bool" value="True" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="e8b12044-55f0-25f0-01de-1233c929f40a" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="4d8add74-7657-5f9d-b198-a68311d6f3e9" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

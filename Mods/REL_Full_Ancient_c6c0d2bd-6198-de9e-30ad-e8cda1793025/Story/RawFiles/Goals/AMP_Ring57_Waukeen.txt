@@ -1,0 +1,177 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// ring57 waukeen - gold on loot. 4 tiers: 5%/10g, 40%/30g, 60%/60g, 90%/200g
+
+// special trait: gold dwarf, lightfoot halfling, gold dragonborn, rogue, bard
+
+QRY
+QRY_AMP_Ring57_HasSpecialTrait((CHARACTER)_Player)
+AND
+IsTagged(_Player, REALLY_HILLDWARF_9a92ac6d-b7cc-4ccb-8965-074c6b36a342, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Ring57_HasSpecialTrait((CHARACTER)_Player)
+AND
+IsTagged(_Player, REALLY_LIGHTFOOTHALFLING_da1d4f47-8583-49a1-b262-d77d361b2e09, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Ring57_HasSpecialTrait((CHARACTER)_Player)
+AND
+HasPassive(_Player, "DraconicAncestry_Gold", 1)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Ring57_HasSpecialTrait((CHARACTER)_Player)
+AND
+IsTagged(_Player, ROGUE_f8a0608b-666c-4be6-a49c-03b369c10bd2, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Ring57_HasSpecialTrait((CHARACTER)_Player)
+AND
+IsTagged(_Player, BARD_d93434bd-6b71-4789-b128-ee24156057cc, 1)
+THEN
+DB_NOOP(1);
+
+// looted a humanoid corpse in combat
+
+IF
+CharacterLootedCharacter((CHARACTER)_Player, (CHARACTER)_Corpse)
+AND
+IsTagged(_Corpse, HUMANOID_7fbed0d4-cabc-4a9d-804e-12ca6088a0a8, 1)
+AND
+IsTagged(_Corpse, TRAINING_BOY_543e1847-1692-4945-bd4c-124a007ba21b, 0)
+AND
+IsInCombat(_Player, 1)
+AND
+NOT DB_AMP_Ring57_Looted(_Corpse)
+THEN
+DB_AMP_Ring57_Looted(_Corpse);
+PROC_AMP_Ring57_CheckPassive(_Player);
+
+// pick tier by passive, highest first
+
+PROC
+PROC_AMP_Ring57_CheckPassive((CHARACTER)_Player)
+AND
+HasPassive(_Player, "MAG_Ring57_3_bonus", 1)
+THEN
+PROC_AMP_Ring57_TryGold(_Player, 90, 200, 2);
+
+PROC
+PROC_AMP_Ring57_CheckPassive((CHARACTER)_Player)
+AND
+NOT HasPassive(_Player, "MAG_Ring57_3_bonus", 1)
+AND
+HasPassive(_Player, "MAG_Ring57_bonus", 1)
+THEN
+PROC_AMP_Ring57_TryGold(_Player, 60, 60, 2);
+
+PROC
+PROC_AMP_Ring57_CheckPassive((CHARACTER)_Player)
+AND
+NOT HasPassive(_Player, "MAG_Ring57_3_bonus", 1)
+AND
+NOT HasPassive(_Player, "MAG_Ring57_bonus", 1)
+AND
+HasPassive(_Player, "MAG_Ring57_2_bonus", 1)
+THEN
+PROC_AMP_Ring57_TryGold(_Player, 40, 30, 1);
+
+PROC
+PROC_AMP_Ring57_CheckPassive((CHARACTER)_Player)
+AND
+NOT HasPassive(_Player, "MAG_Ring57_3_bonus", 1)
+AND
+NOT HasPassive(_Player, "MAG_Ring57_bonus", 1)
+AND
+NOT HasPassive(_Player, "MAG_Ring57_2_bonus", 1)
+AND
+HasPassive(_Player, "MAG_Ring57_1_bonus", 1)
+THEN
+PROC_AMP_Ring57_TryGold(_Player, 5, 10, 1);
+
+// trygold - bonustype 1 = double chance, 2 = double gold (special trait only)
+
+PROC
+PROC_AMP_Ring57_TryGold((CHARACTER)_Player, (INTEGER)_Chance, (INTEGER)_BaseGold, 1)
+AND
+QRY_AMP_Ring57_HasSpecialTrait(_Player)
+AND
+IntegerProduct(_Chance, 2, (INTEGER)_DoubledChance)
+THEN
+PROC_AMP_Ring57_DoRoll(_Player, _DoubledChance, _BaseGold);
+
+PROC
+PROC_AMP_Ring57_TryGold((CHARACTER)_Player, (INTEGER)_Chance, (INTEGER)_BaseGold, 2)
+AND
+QRY_AMP_Ring57_HasSpecialTrait(_Player)
+AND
+IntegerProduct(_BaseGold, 2, (INTEGER)_DoubledGold)
+THEN
+PROC_AMP_Ring57_DoRoll(_Player, _Chance, _DoubledGold);
+
+PROC
+PROC_AMP_Ring57_TryGold((CHARACTER)_Player, (INTEGER)_Chance, (INTEGER)_BaseGold, (INTEGER)_BonusType)
+AND
+NOT QRY_AMP_Ring57_HasSpecialTrait(_Player)
+THEN
+PROC_AMP_Ring57_DoRoll(_Player, _Chance, _BaseGold);
+
+// roll chance
+
+PROC
+PROC_AMP_Ring57_DoRoll((CHARACTER)_Player, (INTEGER)_Chance, (INTEGER)_BaseGold)
+AND
+Random(100, (INTEGER)_Roll)
+AND
+_Roll < _Chance
+THEN
+PROC_AMP_Ring57_GiveGold(_Player, _BaseGold);
+
+// give gold, +-25% spread, with vfx
+
+PROC
+PROC_AMP_Ring57_GiveGold((CHARACTER)_Player, (INTEGER)_BaseGold)
+AND
+IntegerProduct(_BaseGold, 3, (INTEGER)_MinX)
+AND
+IntegerDivide(_MinX, 4, (INTEGER)_Min)
+AND
+IntegerProduct(_BaseGold, 5, (INTEGER)_MaxX)
+AND
+IntegerDivide(_MaxX, 4, (INTEGER)_Max)
+AND
+IntegerSubtract(_Max, _Min, (INTEGER)_Range)
+AND
+IntegerSum(_Range, 1, (INTEGER)_RangeInclusive)
+AND
+Random(_RangeInclusive, (INTEGER)_RandOffset)
+AND
+IntegerSum(_Min, _RandOffset, (INTEGER)_FinalGold)
+THEN
+PlayEffect(_Player, (EFFECTRESOURCE)AMP_Waukeen_Gold_Apply_6e92de3c-f028-5e5d-72e2-c7ba28896a9c, "Dummy_Root", 1.0);
+TemplateAddTo(LOOT_Gold_A_1c3c9c74-34a1-4685-989e-410dc080be6f, _Player, _FinalGold, 1);
+
+// clear looted markers on level load
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Ring57_Looted((CHARACTER)_Corpse)
+THEN
+NOT DB_AMP_Ring57_Looted(_Corpse);
+
+EXITSECTION
+
+ENDEXITSECTION

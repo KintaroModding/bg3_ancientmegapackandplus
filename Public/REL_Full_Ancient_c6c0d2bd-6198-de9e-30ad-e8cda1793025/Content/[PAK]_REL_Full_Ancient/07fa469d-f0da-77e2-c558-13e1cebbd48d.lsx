@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="07fa469d-f0da-77e2-c558-13e1cebbd48d" />
+					<attribute id="Name" type="LSString" value="AquamantHelmet" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/AquamantHelmet.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="AquamantHelmet" />
+					<attribute id="BoundsMin" type="fvec3" value="-4 -4 -4" />
+					<attribute id="BoundsMax" type="fvec3" value="4 4 4" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="3" />
+					<attribute id="Looping" type="bool" value="True" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="91d89725-983a-7fef-ef5e-67ada69e3b05" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="ba38d44c-e461-0eaa-55a1-b34945a53342" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="a31d60cc-5e03-b988-e8de-ec58cc037373" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="7169d2dc-77db-8b03-5b10-562df81e59a7" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

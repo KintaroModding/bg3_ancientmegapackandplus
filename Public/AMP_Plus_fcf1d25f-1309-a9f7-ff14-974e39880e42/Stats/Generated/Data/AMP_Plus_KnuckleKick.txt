@@ -1,0 +1,8 @@
+// kick inherits Target_Shove, so the knuckle die replacement never reaches it and the die is restated
+// tiers cascade, two knuckles can be worn at once
+
+new entry "Target_BootOfTheGiants"
+type "SpellData"
+data "SpellType" "Target"
+using "Target_BootOfTheGiants"
+data "SpellSuccess" "IF(not Ally()):Force(ShoveDistance,OriginToEntity,Aggressive);IF(Ally()):Force(ShoveDistance,OriginToEntity,Friendly);DealDamage(UnarmedDamage , Bludgeoning);IF(not ClassLevelHigherOrEqualThan(1,'Monk',context.Source) and HasStatus('AMP_KNUCKLE4_OVERRIDE',context.Source)):DealDamage(1d12,Bludgeoning,Magical,,0,,true,false);IF(not ClassLevelHigherOrEqualThan(1,'Monk',context.Source) and HasStatus('AMP_KNUCKLE3_OVERRIDE',context.Source) and not HasStatus('AMP_KNUCKLE4_OVERRIDE',context.Source)):DealDamage(1d10,Bludgeoning,Magical,,0,,true,false);IF(not ClassLevelHigherOrEqualThan(1,'Monk',context.Source) and HasStatus('AMP_KNUCKLE2_OVERRIDE',context.Source) and not HasStatus('AMP_KNUCKLE3_OVERRIDE',context.Source) and not HasStatus('AMP_KNUCKLE4_OVERRIDE',context.Source)):DealDamage(1d8,Bludgeoning,Magical,,0,,true,false);IF(not ClassLevelHigherOrEqualThan(1,'Monk',context.Source) and HasStatus('AMP_KNUCKLE1_OVERRIDE',context.Source) and not HasStatus('AMP_KNUCKLE2_OVERRIDE',context.Source) and not HasStatus('AMP_KNUCKLE3_OVERRIDE',context.Source) and not HasStatus('AMP_KNUCKLE4_OVERRIDE',context.Source)):DealDamage(1d6,Bludgeoning,Magical,,0,,true,false)"

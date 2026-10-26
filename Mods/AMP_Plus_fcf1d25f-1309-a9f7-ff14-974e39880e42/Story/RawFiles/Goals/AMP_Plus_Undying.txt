@@ -1,0 +1,606 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// Tesshin (idx 11): pool registration, form chain, reward gate
+
+KBSECTION
+
+// needs Neva's idx 10 first so the size chains 11 -> 12
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_MirrorPool(11, _, _)
+AND
+DB_AMP_MirrorPool(10, _, _)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_OldSize)
+THEN
+DB_AMP_MirrorPool(11, AMP_ULTRA_Summon_12_Ronin_7b08f7b1-414b-4c8e-a593-13fb7f1c9939, 1);
+NOT DB_AMP_MirrorPool_Size(_OldSize);
+DB_AMP_MirrorPool_Size(12);
+
+IF
+DB_AMP_MirrorChase_Mob((CHARACTER)_Ronin, AMP_ULTRA_Summon_12_Ronin_7b08f7b1-414b-4c8e-a593-13fb7f1c9939)
+THEN
+DB_AMP_Plus_Undying_Shell(_Ronin);
+PROC_AMP_Plus_Undying_EarlyScale(_Ronin);
+
+IF
+StatusApplied((CHARACTER)_Shell, "AMP_UNDYING_DOWNED", _, _)
+AND
+DB_AMP_Plus_Undying_Shell(_Shell)
+AND
+NOT DB_AMP_Plus_Undying_Rising(_Shell)
+THEN
+DB_AMP_Plus_Undying_Rising(_Shell);
+
+IF
+TurnEnded((CHARACTER)_Shell)
+AND
+DB_AMP_Plus_Undying_Rising(_Shell)
+THEN
+PROC_AMP_Plus_Undying_SwapShell(_Shell);
+
+// check rule sits above the marking rule so a mark set this turn is not seen yet
+// swap retracts the Rising record this rule reads, shells are queued first
+IF
+TurnEnded((CHARACTER)_Any)
+AND
+DB_Players(_Any)
+AND
+DB_AMP_Plus_Undying_Rising((CHARACTER)_Shell)
+AND
+DB_AMP_Plus_Undying_Waited(_Shell)
+THEN
+DB_AMP_Plus_Undying_SwapQ(_Shell);
+
+IF
+TurnEnded((CHARACTER)_Any)
+AND
+DB_Players(_Any)
+THEN
+PROC_AMP_Plus_Undying_DrainSwapQ();
+
+PROC
+PROC_AMP_Plus_Undying_DrainSwapQ()
+AND
+DB_AMP_Plus_Undying_SwapQ((CHARACTER)_Shell)
+THEN
+NOT DB_AMP_Plus_Undying_SwapQ(_Shell);
+PROC_AMP_Plus_Undying_SwapShell(_Shell);
+PROC_AMP_Plus_Undying_DrainSwapQ();
+
+IF
+TurnEnded((CHARACTER)_Any)
+AND
+DB_Players(_Any)
+AND
+DB_AMP_Plus_Undying_Rising((CHARACTER)_Shell)
+AND
+NOT DB_AMP_Plus_Undying_Waited(_Shell)
+THEN
+DB_AMP_Plus_Undying_Waited(_Shell);
+
+PROC
+PROC_AMP_Plus_Undying_SwapShell((CHARACTER)_Shell)
+AND
+DB_AMP_Plus_Undying_Rising(_Shell)
+AND
+GetPosition(_Shell, (REAL)_X, (REAL)_Y, (REAL)_Z)
+THEN
+NOT DB_AMP_Plus_Undying_Rising(_Shell);
+NOT DB_AMP_Plus_Undying_Shell(_Shell);
+PROC_AMP_Plus_Undying_ClearWait(_Shell);
+NOT DB_AMP_MirrorChase_Mob(_Shell, AMP_ULTRA_Summon_12_Ronin_7b08f7b1-414b-4c8e-a593-13fb7f1c9939);
+NOT DB_AMP_Plus_Chase(_Shell, AMP_ULTRA_Summon_12_Ronin_7b08f7b1-414b-4c8e-a593-13fb7f1c9939);
+NOT DB_AMP_Plus_ChaseActive(_Shell, AMP_ULTRA_Summon_12_Ronin_7b08f7b1-414b-4c8e-a593-13fb7f1c9939);
+LeaveCombat(_Shell);
+SetOnStage(_Shell, 0);
+RemoveStatus((CHARACTER)_Shell, "AMP_UNDYING_DOWNED");
+RequestDeleteTemporary(_Shell);
+PROC_AMP_Plus_Undying_RaiseBlade(_X, _Y, _Z, 100.0);
+
+// kept off the chase tables, his death is a step and must not reach the loot roll
+PROC
+PROC_AMP_Plus_Undying_RaiseBlade((REAL)_X, (REAL)_Y, (REAL)_Z, (REAL)_HP)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+CreateAt(AMP_ULTRA_Summon_12_b415c998-a00b-406f-85b8-76c9caa82ed1, _X, _Y, _Z, 0, 1, "", (GUIDSTRING)_Blade)
+THEN
+DB_AMP_Plus_Undying_Blade((CHARACTER)_Blade);
+DB_AMP_Plus_Undying_PendingHP((CHARACTER)_Blade, _HP);
+PROC_AMP_Plus_Undying_EarlyScale((CHARACTER)_Blade);
+PROC_AMP_Plus_ApplyPursuerFaction((CHARACTER)_Blade);
+ApplyStatus((CHARACTER)_Blade, "AMP_UNDYING_SHIFT_VFX", 1.0, 1, (CHARACTER)_Blade);
+SetRelationTemporaryHostile((CHARACTER)_Blade, _Host);
+EnterCombat((CHARACTER)_Blade, _Host);
+RealtimeObjectTimerLaunch((CHARACTER)_Blade, "AMP_Undying_SetHP", 500);
+
+// fresh body isn't ready for writes, health lands on a timer
+IF
+ObjectTimerFinished((CHARACTER)_Blade, "AMP_Undying_SetHP")
+AND
+DB_AMP_Plus_Undying_PendingHP(_Blade, (REAL)_HP)
+THEN
+NOT DB_AMP_Plus_Undying_PendingHP(_Blade, _HP);
+SetHitpointsPercentage((CHARACTER)_Blade, _HP, "");
+
+IF
+StatusApplied((CHARACTER)_Blade, "AMP_UNDYING_DOWNED", _, _)
+AND
+GetTemplate(_Blade, AMP_ULTRA_Summon_12_b415c998-a00b-406f-85b8-76c9caa82ed1)
+AND
+NOT DB_AMP_Plus_Undying_BladeDown(_Blade)
+THEN
+DB_AMP_Plus_Undying_BladeDown(_Blade);
+RealtimeObjectTimerLaunch(_Blade, "AMP_Undying_BladeRise", 20000);
+
+// fallback clock for a dropped fight, the downed status has no duration
+IF
+ObjectTimerFinished((CHARACTER)_Blade, "AMP_Undying_BladeRise")
+AND
+DB_AMP_Plus_Undying_BladeDown(_Blade)
+AND
+IsInCombat(_Blade, 1)
+THEN
+RealtimeObjectTimerLaunch(_Blade, "AMP_Undying_BladeRise", 20000);
+
+IF
+ObjectTimerFinished((CHARACTER)_Blade, "AMP_Undying_BladeRise")
+AND
+DB_AMP_Plus_Undying_BladeDown(_Blade)
+AND
+NOT DB_AMP_Plus_Undying_Crab(_, _Blade)
+AND
+IsInCombat(_Blade, 0)
+THEN
+NOT DB_AMP_Plus_Undying_BladeDown(_Blade);
+NOT DB_AMP_Plus_Undying_BladeWaited(_Blade);
+RemoveStatus((CHARACTER)_Blade, "AMP_UNDYING_DOWNED");
+SetHitpointsPercentage((CHARACTER)_Blade, 100.0, "");
+RealtimeObjectTimerLaunch(_Blade, "AMP_Undying_BladeCheck", 6000);
+
+IF
+TurnStarted((CHARACTER)_Blade)
+AND
+DB_AMP_Plus_Undying_BladeDown(_Blade)
+AND
+NOT DB_AMP_Plus_Undying_Crab(_, _Blade)
+THEN
+NOT DB_AMP_Plus_Undying_BladeDown(_Blade);
+RemoveStatus((CHARACTER)_Blade, "AMP_UNDYING_DOWNED");
+SetHitpointsPercentage((CHARACTER)_Blade, 100.0, "");
+
+IF
+TurnEnded((CHARACTER)_Any)
+AND
+DB_Players(_Any)
+AND
+DB_AMP_Plus_Undying_BladeDown((CHARACTER)_Blade)
+AND
+DB_AMP_Plus_Undying_BladeWaited(_Blade)
+AND
+NOT DB_AMP_Plus_Undying_Crab(_, _Blade)
+THEN
+NOT DB_AMP_Plus_Undying_BladeDown(_Blade);
+NOT DB_AMP_Plus_Undying_BladeWaited(_Blade);
+RemoveStatus((CHARACTER)_Blade, "AMP_UNDYING_DOWNED");
+SetHitpointsPercentage((CHARACTER)_Blade, 100.0, "");
+
+IF
+TurnEnded((CHARACTER)_Any)
+AND
+DB_Players(_Any)
+AND
+DB_AMP_Plus_Undying_BladeDown((CHARACTER)_Blade)
+AND
+NOT DB_AMP_Plus_Undying_BladeWaited(_Blade)
+THEN
+DB_AMP_Plus_Undying_BladeWaited(_Blade);
+
+IF
+StatusApplied((CHARACTER)_Blade, "AMP_UNDYING_DOWNED", _, _)
+AND
+DB_AMP_Plus_Undying_Blade(_Blade)
+AND
+NOT DB_AMP_Plus_Undying_Crab(_, _Blade)
+AND
+GetPosition(_Blade, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+CreateAt(AMP_ULTRA_Summon_12_Crab_b2829dff-1e45-4a02-8b2a-8694d544f4dc, _X, _Y, _Z, 0, 1, "", (GUIDSTRING)_Crab)
+THEN
+DB_AMP_Plus_Undying_Crab((CHARACTER)_Crab, _Blade);
+DB_AMP_Plus_Chase((CHARACTER)_Crab, AMP_ULTRA_Summon_12_Crab_b2829dff-1e45-4a02-8b2a-8694d544f4dc);
+PROC_AMP_Plus_Undying_EarlyScale((CHARACTER)_Crab);
+CreateSurfaceAtPosition(_X, _Y, _Z, "SurfacePoisonCloud", 2.0, 12.0, NULL_00000000-0000-0000-0000-000000000000);
+PROC_AMP_Plus_ApplyPursuerFaction((CHARACTER)_Crab);
+ApplyStatus((CHARACTER)_Crab, "AMP_UNDYING_SHIFT_VFX", 1.0, 1, (CHARACTER)_Crab);
+ApplyStatus((CHARACTER)_Crab, "AMP_UNDYING_RETURNING", 12.0, 1, (CHARACTER)_Crab);
+RealtimeObjectTimerLaunch((CHARACTER)_Crab, "AMP_Undying_CrabCombat", 500);
+
+IF
+StatusRemoved((CHARACTER)_Crab, "AMP_UNDYING_RETURNING", _, _)
+AND
+DB_AMP_Plus_Undying_Crab(_Crab, _)
+THEN
+PROC_AMP_Plus_Undying_PullCrab(_Crab);
+
+IF
+StatusRemoved((CHARACTER)_Blade, "AMP_UNDYING_DOWNED", _, _)
+AND
+DB_AMP_Plus_Undying_Crab((CHARACTER)_Crab, _Blade)
+THEN
+PROC_AMP_Plus_Undying_PullCrab(_Crab);
+
+IF
+TurnEnded((CHARACTER)_Any)
+AND
+DB_Players(_Any)
+AND
+DB_AMP_Plus_Undying_Crab((CHARACTER)_Crab, (CHARACTER)_Blade)
+AND
+HasActiveStatus(_Blade, "AMP_UNDYING_DOWNED", 0)
+THEN
+PROC_AMP_Plus_Undying_PullCrab(_Crab);
+
+PROC
+PROC_AMP_Plus_Undying_PullCrab((CHARACTER)_Crab)
+AND
+DB_AMP_Plus_Undying_Crab(_Crab, _)
+THEN
+RealtimeObjectTimerLaunch(_Crab, "AMP_Undying_CrabPull", 300);
+
+// killed crab loses the window status too, so the pull waits a beat
+IF
+ObjectTimerFinished((CHARACTER)_Crab, "AMP_Undying_CrabPull")
+AND
+DB_AMP_Plus_Undying_Crab(_Crab, (CHARACTER)_Blade)
+AND
+IsDead(_Crab, 0)
+THEN
+NOT DB_AMP_Plus_Undying_Crab(_Crab, _Blade);
+NOT DB_AMP_Plus_Chase(_Crab, AMP_ULTRA_Summon_12_Crab_b2829dff-1e45-4a02-8b2a-8694d544f4dc);
+PROC_AMP_Plus_Undying_ClearKiller(_Crab);
+PROC_AMP_Plus_Undying_ClearCrabLive(_Crab);
+RemoveStatus(_Crab, "AMP_UNDYING_RETURNING");
+LeaveCombat(_Crab);
+SetOnStage(_Crab, 0);
+RequestDeleteTemporary(_Crab);
+RealtimeObjectTimerLaunch(_Blade, "AMP_Undying_BladeRise", 6000);
+
+IF
+TurnEnded((CHARACTER)_Any)
+AND
+DB_Players(_Any)
+AND
+DB_AMP_Plus_Undying_Crab((CHARACTER)_Crab, (CHARACTER)_Blade)
+AND
+IsDead(_Crab, 1)
+THEN
+NOT DB_AMP_Plus_Undying_Crab(_Crab, _Blade);
+NOT DB_AMP_Plus_Chase(_Crab, AMP_ULTRA_Summon_12_Crab_b2829dff-1e45-4a02-8b2a-8694d544f4dc);
+PROC_AMP_Plus_Undying_ClearKiller(_Crab);
+PROC_AMP_Plus_Undying_ClearCrabLive(_Crab);
+PROC_AMP_Plus_Undying_FinishBlade(_Blade);
+
+IF
+TurnEnded((CHARACTER)_Any)
+AND
+DB_Players(_Any)
+AND
+DB_AMP_Plus_Undying_Crab((CHARACTER)_Crab, _)
+AND
+DB_AMP_Plus_Undying_CrabLive(_Crab)
+AND
+IsDead(_Crab, 0)
+AND
+HasActiveStatus(_Crab, "AMP_UNDYING_RETURNING", 0)
+THEN
+PROC_AMP_Plus_Undying_PullCrab(_Crab);
+
+// own attacker record, so the second roll doesn't depend on PROC body order
+IF
+AttackedBy((CHARACTER)_Crab, (CHARACTER)_Owner, _, _, _, _, _)
+AND
+DB_AMP_Plus_Undying_Crab(_Crab, _)
+AND
+DB_AMP_Plus_Undying_Killer(_Crab, (CHARACTER)_Old)
+THEN
+NOT DB_AMP_Plus_Undying_Killer(_Crab, _Old);
+DB_AMP_Plus_Undying_Killer(_Crab, _Owner);
+
+IF
+AttackedBy((CHARACTER)_Crab, (CHARACTER)_Owner, _, _, _, _, _)
+AND
+DB_AMP_Plus_Undying_Crab(_Crab, _)
+AND
+NOT DB_AMP_Plus_Undying_Killer(_Crab, _)
+THEN
+DB_AMP_Plus_Undying_Killer(_Crab, _Owner);
+
+IF
+Died((CHARACTER)_Crab)
+AND
+DB_AMP_Plus_Undying_Crab(_Crab, _)
+AND
+DB_AMP_Plus_Undying_Killer(_Crab, (CHARACTER)_Killer)
+AND
+DB_Players(_Killer)
+THEN
+PROC_AMP_Plus_MirrorLoot_Roll(_Crab);
+
+IF
+Died((CHARACTER)_Crab)
+AND
+DB_AMP_Plus_Undying_Crab(_Crab, _)
+AND
+DB_AMP_Plus_Undying_Killer(_Crab, (CHARACTER)_Killer)
+AND
+DB_PartOfTheTeam(_Killer)
+AND
+NOT DB_Players(_Killer)
+THEN
+PROC_AMP_Plus_MirrorLoot_Roll(_Crab);
+
+IF
+Died((CHARACTER)_Crab)
+AND
+DB_AMP_Plus_Undying_Crab(_Crab, _)
+AND
+NOT DB_AMP_Plus_Undying_Killer(_Crab, _)
+THEN
+PROC_AMP_Plus_MirrorLoot_Roll(_Crab);
+
+IF
+Died((CHARACTER)_Crab)
+AND
+DB_AMP_Plus_Undying_Crab(_Crab, (CHARACTER)_Blade)
+THEN
+NOT DB_AMP_Plus_Undying_Crab(_Crab, _Blade);
+NOT DB_AMP_Plus_Chase(_Crab, AMP_ULTRA_Summon_12_Crab_b2829dff-1e45-4a02-8b2a-8694d544f4dc);
+PROC_AMP_Plus_Undying_ClearKiller(_Crab);
+PROC_AMP_Plus_Undying_ClearCrabLive(_Crab);
+PROC_AMP_Plus_Undying_FinishBlade(_Blade);
+
+// crab with no pair record still takes the blade
+IF
+Died((CHARACTER)_Crab)
+AND
+GetTemplate(_Crab, AMP_ULTRA_Summon_12_Crab_b2829dff-1e45-4a02-8b2a-8694d544f4dc)
+AND
+DB_AMP_Plus_Undying_Blade((CHARACTER)_Blade)
+AND
+NOT DB_AMP_Plus_Undying_Crab(_, _Blade)
+THEN
+PROC_AMP_Plus_Undying_FinishBlade(_Blade);
+
+// kill waits, passive and downed status are still live in the tick that removes them
+PROC
+PROC_AMP_Plus_Undying_FinishBlade((CHARACTER)_Blade)
+AND
+DB_AMP_Plus_Undying_Blade(_Blade)
+THEN
+NOT DB_AMP_Plus_Undying_Blade(_Blade);
+NOT DB_AMP_Plus_Undying_BladeDown(_Blade);
+NOT DB_AMP_Plus_Undying_BladeWaited(_Blade);
+PROC_AMP_Plus_Undying_ClearPendingHP(_Blade);
+RemovePassive(_Blade, "AMP_Undying_PoorCut");
+RemoveStatus(_Blade, "AMP_UNDYING_DOWNED");
+RealtimeObjectTimerLaunch(_Blade, "AMP_Undying_BladeKill", 500);
+
+IF
+ObjectTimerFinished((CHARACTER)_Blade, "AMP_Undying_BladeKill")
+AND
+IsDead(_Blade, 0)
+THEN
+ApplyStatus(_Blade, "AMP_UNDYING_FINALCUT", 1.0, 1, _Blade);
+RealtimeObjectTimerLaunch(_Blade, "AMP_Undying_BladeKill2", 1500);
+
+IF
+ObjectTimerFinished((CHARACTER)_Blade, "AMP_Undying_BladeKill2")
+AND
+IsDead(_Blade, 0)
+THEN
+RemovePassive(_Blade, "AMP_Undying_PoorCut");
+RemoveStatus(_Blade, "AMP_UNDYING_DOWNED");
+Die(_Blade, DEATHTYPE.DoT, NULL_00000000-0000-0000-0000-000000000000, 1, 1);
+RealtimeObjectTimerLaunch(_Blade, "AMP_Undying_BladeKill3", 1500);
+
+IF
+ObjectTimerFinished((CHARACTER)_Blade, "AMP_Undying_BladeKill3")
+AND
+IsDead(_Blade, 0)
+THEN
+ApplyStatus(_Blade, "AMP_UNDYING_FINALCUT", 1.0, 1, _Blade);
+Die(_Blade, DEATHTYPE.DoT, NULL_00000000-0000-0000-0000-000000000000, 1, 1);
+
+IF
+Died((CHARACTER)_Crab)
+AND
+GetTemplate(_Crab, AMP_ULTRA_Summon_12_Crab_b2829dff-1e45-4a02-8b2a-8694d544f4dc)
+THEN
+RealtimeObjectTimerLaunch(_Crab, "AMP_Undying_CrabOffstage", 3000);
+
+IF
+Died((CHARACTER)_Blade)
+AND
+GetTemplate(_Blade, AMP_ULTRA_Summon_12_b415c998-a00b-406f-85b8-76c9caa82ed1)
+THEN
+NOT DB_AMP_Plus_Undying_Blade(_Blade);
+NOT DB_AMP_Plus_Undying_BladeDown(_Blade);
+NOT DB_AMP_Plus_Undying_BladeWaited(_Blade);
+PROC_AMP_Plus_Undying_ClearPendingHP(_Blade);
+RealtimeObjectTimerLaunch(_Blade, "AMP_Undying_BladeOffstage", 3000);
+
+IF
+ObjectTimerFinished((CHARACTER)_Crab, "AMP_Undying_CrabOffstage")
+THEN
+SetOnStage(_Crab, 0);
+RequestDeleteTemporary(_Crab);
+
+IF
+ObjectTimerFinished((CHARACTER)_Blade, "AMP_Undying_BladeOffstage")
+THEN
+SetOnStage(_Blade, 0);
+RequestDeleteTemporary(_Blade);
+
+PROC
+PROC_AMP_Plus_Undying_EarlyScale((CHARACTER)_Mob)
+AND
+NOT DB_AMP_Ultra_HPScaled(_Mob)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+DB_AMP_Ultra_HPScaleMap(_Lvl, (STRING)_Status)
+THEN
+DB_AMP_Ultra_HPScaled((CHARACTER)_Mob);
+ApplyStatus(_Mob, _Status, -1.0, 1, _Mob);
+
+PROC
+PROC_AMP_Plus_Undying_ClearWait((CHARACTER)_Shell)
+AND
+DB_AMP_Plus_Undying_Waited(_Shell)
+THEN
+NOT DB_AMP_Plus_Undying_Waited(_Shell);
+
+PROC
+PROC_AMP_Plus_Undying_ClearKiller((CHARACTER)_Crab)
+AND
+DB_AMP_Plus_Undying_Killer(_Crab, (CHARACTER)_Killer)
+THEN
+NOT DB_AMP_Plus_Undying_Killer(_Crab, _Killer);
+
+PROC
+PROC_AMP_Plus_Undying_ClearCrabLive((CHARACTER)_Crab)
+AND
+DB_AMP_Plus_Undying_CrabLive(_Crab)
+THEN
+NOT DB_AMP_Plus_Undying_CrabLive(_Crab);
+
+// EnterCombat right after creation fails as EnterCombatFailed, hence the half second wait
+IF
+ObjectTimerFinished((CHARACTER)_Crab, "AMP_Undying_CrabCombat")
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+DB_AMP_Plus_Undying_CrabLive(_Crab);
+SetRelationTemporaryHostile(_Crab, _Host);
+EnterCombat(_Crab, _Host);
+
+IF
+LeftCombat((CHARACTER)_Crab, _)
+AND
+DB_AMP_Plus_Undying_Crab(_Crab, _)
+AND
+IsDead(_Crab, 0)
+THEN
+RealtimeObjectTimerLaunch(_Crab, "AMP_Undying_CrabGlue", 2000);
+
+IF
+ObjectTimerFinished((CHARACTER)_Crab, "AMP_Undying_CrabGlue")
+AND
+DB_AMP_Plus_Undying_Crab(_Crab, _)
+AND
+IsDead(_Crab, 0)
+AND
+IsInCombat(_Crab, 0)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsInCombat(_Host, 1)
+THEN
+SetRelationTemporaryHostile(_Crab, _Host);
+EnterCombat(_Crab, _Host);
+
+IF
+CombatEnded((GUIDSTRING)_Combat)
+AND
+DB_AMP_Plus_Undying_Blade((CHARACTER)_Blade)
+THEN
+RealtimeObjectTimerLaunch(_Blade, "AMP_Undying_BladeCheck", 6000);
+
+IF
+ObjectTimerFinished((CHARACTER)_Blade, "AMP_Undying_BladeCheck")
+AND
+DB_AMP_Plus_Undying_Blade(_Blade)
+AND
+NOT DB_AMP_Plus_Undying_BladeDown(_Blade)
+AND
+NOT DB_AMP_Plus_Undying_Crab(_, _Blade)
+AND
+IsInCombat(_Blade, 0)
+THEN
+NOT DB_AMP_Plus_Undying_Blade(_Blade);
+PROC_AMP_Plus_Undying_ClearPendingHP(_Blade);
+LeaveCombat(_Blade);
+SetOnStage(_Blade, 0);
+RequestDeleteTemporary(_Blade);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Plus_Undying_BladeDown((CHARACTER)_Blade)
+THEN
+RealtimeObjectTimerLaunch(_Blade, "AMP_Undying_BladeRise", 20000);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Plus_Undying_Crab((CHARACTER)_Crab, _)
+THEN
+RealtimeObjectTimerLaunch(_Crab, "AMP_Undying_CrabReload", 3000);
+
+IF
+ObjectTimerFinished((CHARACTER)_Crab, "AMP_Undying_CrabReload")
+AND
+DB_AMP_Plus_Undying_Crab(_Crab, _)
+AND
+DB_AMP_Plus_Undying_CrabLive(_Crab)
+AND
+HasActiveStatus(_Crab, "AMP_UNDYING_RETURNING", 0)
+THEN
+PROC_AMP_Plus_Undying_PullCrab(_Crab);
+
+PROC
+PROC_AMP_Plus_Undying_ClearPendingHP((CHARACTER)_Blade)
+AND
+DB_AMP_Plus_Undying_PendingHP(_Blade, (REAL)_HP)
+THEN
+NOT DB_AMP_Plus_Undying_PendingHP(_Blade, _HP);
+
+// a pulled shell never dies, so disengage rules re-owe it as an escaped pursuer
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_AMP_Plus_Undying_DrainStaleChaseActive();
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_AMP_Plus_Undying_DrainStaleChase();
+
+PROC
+PROC_AMP_Plus_Undying_DrainStaleChaseActive()
+AND
+DB_AMP_Plus_ChaseActive((CHARACTER)_Mob, AMP_ULTRA_Summon_12_Ronin_7b08f7b1-414b-4c8e-a593-13fb7f1c9939)
+AND
+NOT DB_AMP_Plus_Undying_Shell(_Mob)
+THEN
+NOT DB_AMP_Plus_ChaseActive(_Mob, AMP_ULTRA_Summon_12_Ronin_7b08f7b1-414b-4c8e-a593-13fb7f1c9939);
+PROC_AMP_Plus_Undying_DrainStaleChaseActive();
+
+// single pass. the chaser gets its chase row back at once, a recursive drain never empties
+PROC
+PROC_AMP_Plus_Undying_DrainStaleChase()
+AND
+DB_AMP_Plus_Chase((CHARACTER)_Mob, AMP_ULTRA_Summon_12_Ronin_7b08f7b1-414b-4c8e-a593-13fb7f1c9939)
+AND
+NOT DB_AMP_Plus_Undying_Shell(_Mob)
+THEN
+NOT DB_AMP_Plus_Chase(_Mob, AMP_ULTRA_Summon_12_Ronin_7b08f7b1-414b-4c8e-a593-13fb7f1c9939);
+
+EXITSECTION
+
+ENDEXITSECTION

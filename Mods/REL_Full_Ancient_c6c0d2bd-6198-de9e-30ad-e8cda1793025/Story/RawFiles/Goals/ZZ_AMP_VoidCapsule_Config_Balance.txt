@@ -1,0 +1,60 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// void capsule per-mode balance. keyed by difficulty:
+// none=casual, standard=normal, impossible=hard.
+
+// charges max per mode
+DB_AMP_VoidCapsule_ChargesMaxByMode("NONE",       16);
+DB_AMP_VoidCapsule_ChargesMaxByMode("STANDARD",    8);
+DB_AMP_VoidCapsule_ChargesMaxByMode("IMPOSSIBLE", 10);
+
+// reroll window duration (seconds)
+DB_AMP_VoidCapsule_RerollWindowByMode("NONE",       60);
+DB_AMP_VoidCapsule_RerollWindowByMode("STANDARD",   60);
+DB_AMP_VoidCapsule_RerollWindowByMode("IMPOSSIBLE", 30);
+
+// reroll cost (charges)
+DB_AMP_VoidCapsule_RerollCostByMode("NONE",       1);
+DB_AMP_VoidCapsule_RerollCostByMode("STANDARD",   2);
+DB_AMP_VoidCapsule_RerollCostByMode("IMPOSSIBLE", 2);
+
+// salvage chance per rarity per mode. standard is baseline; none is generous,
+// impossible runs higher to offset no pity + the short reroll window. legendary always 100.
+DB_AMP_VoidCapsule_SalvageChanceByMode("NONE",       "Uncommon",    5);
+DB_AMP_VoidCapsule_SalvageChanceByMode("NONE",       "Rare",       25);
+DB_AMP_VoidCapsule_SalvageChanceByMode("NONE",       "VeryRare",   50);
+DB_AMP_VoidCapsule_SalvageChanceByMode("NONE",       "Legendary", 100);
+
+DB_AMP_VoidCapsule_SalvageChanceByMode("STANDARD",   "Uncommon",   20);
+DB_AMP_VoidCapsule_SalvageChanceByMode("STANDARD",   "Rare",       45);
+DB_AMP_VoidCapsule_SalvageChanceByMode("STANDARD",   "VeryRare",   70);
+DB_AMP_VoidCapsule_SalvageChanceByMode("STANDARD",   "Legendary", 100);
+
+DB_AMP_VoidCapsule_SalvageChanceByMode("IMPOSSIBLE", "Uncommon",   25);
+DB_AMP_VoidCapsule_SalvageChanceByMode("IMPOSSIBLE", "Rare",       50);
+DB_AMP_VoidCapsule_SalvageChanceByMode("IMPOSSIBLE", "VeryRare",   75);
+DB_AMP_VoidCapsule_SalvageChanceByMode("IMPOSSIBLE", "Legendary", 100);
+
+// shard -> coin chance is rarity-based now, lives in config_registry (mode-independent).
+
+// pity threshold per mode (0 = off).
+// none=0: pity off in stock so salvage rewards always match the item's own tier.
+DB_AMP_VoidCapsule_PityThresholdByMode("NONE",       0);
+DB_AMP_VoidCapsule_PityThresholdByMode("STANDARD",   6);
+DB_AMP_VoidCapsule_PityThresholdByMode("IMPOSSIBLE", 0);
+
+// pity reward count per mode
+DB_AMP_VoidCapsule_PityRewardCountByMode("NONE",       0);
+DB_AMP_VoidCapsule_PityRewardCountByMode("STANDARD",   1);
+DB_AMP_VoidCapsule_PityRewardCountByMode("IMPOSSIBLE", 0);
+
+// pity reward rarity per mode (which shard tier pity grants)
+DB_AMP_VoidCapsule_PityRewardRarityByMode("NONE",       "VeryRare");
+DB_AMP_VoidCapsule_PityRewardRarityByMode("STANDARD",   "Rare");
+DB_AMP_VoidCapsule_PityRewardRarityByMode("IMPOSSIBLE", "Uncommon");
+
+KBSECTION
+
+EXITSECTION
+ENDEXITSECTION

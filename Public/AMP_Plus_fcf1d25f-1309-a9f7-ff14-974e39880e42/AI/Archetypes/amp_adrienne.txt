@@ -1,0 +1,11 @@
+USING bandit_mage
+
+// Frostsoul rewards every damaging cast - push damage priority further
++ MULTIPLIER_DAMAGE_ENEMY_POS                    0.20
+
+// Strip enemy concentration so her ice control survives
++ MODIFIER_CONCENTRATION_REMOVE_TARGET           0.15
+
+// Her own blizzard covers the floor she fights on, and cold cannot touch her.
+MULTIPLIER_MOVEMENT_SURFACE                      0.00
+MULTIPLIER_ENDPOS_NOT_IN_DANGEROUS_SURFACE       0.00

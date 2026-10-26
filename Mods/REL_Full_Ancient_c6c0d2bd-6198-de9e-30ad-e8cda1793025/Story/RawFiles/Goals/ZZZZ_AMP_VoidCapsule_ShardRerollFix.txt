@@ -1,0 +1,42 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// a shard carrying reroll_window has no reward map and dead-ends, so it is stripped from registered shards
+
+// level load cleanup: strip reroll_window from every registered shard
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Reroll_ItemInfo((ITEM)_Item, (STRING)_CT, (STRING)_CN)
+AND
+QRY_AMP_VoidCapsule_IsShard(_Item)
+THEN
+RemoveStatus(_Item, "AMP_REROLL_WINDOW", _Item);
+NOT DB_AMP_Reroll_ItemInfo(_Item, _CT, _CN);
+
+// live guard: strip reroll_window the moment it lands on a shard
+IF
+StatusApplied((GUIDSTRING)_Item, "AMP_REROLL_WINDOW", _, _)
+AND
+IsItem(_Item, 1)
+AND
+QRY_AMP_VoidCapsule_IsShard((ITEM)_Item)
+THEN
+RemoveStatus(_Item, "AMP_REROLL_WINDOW", _Item);
+
+IF
+StatusApplied((GUIDSTRING)_Item, "AMP_REROLL_WINDOW", _, _)
+AND
+IsItem(_Item, 1)
+AND
+QRY_AMP_VoidCapsule_IsShard((ITEM)_Item)
+AND
+DB_AMP_Reroll_ItemInfo((ITEM)_Item, (STRING)_CT, (STRING)_CN)
+THEN
+NOT DB_AMP_Reroll_ItemInfo(_Item, _CT, _CN);
+
+EXITSECTION
+ENDEXITSECTION

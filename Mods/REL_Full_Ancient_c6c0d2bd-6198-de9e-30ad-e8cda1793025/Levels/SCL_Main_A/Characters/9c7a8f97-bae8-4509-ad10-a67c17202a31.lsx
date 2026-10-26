@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="9c7a8f97-bae8-4509-ad10-a67c17202a31" />
+					<attribute id="Name" type="LSString" value="S_MOO_KethericHound" />
+					<attribute id="LevelName" type="FixedString" value="SCL_Main_A" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="TemplateName" type="FixedString" value="1d7a1689-9707-4358-bc2b-075e8520cef8" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h59543fd3gf786g4bd7g94a2g9e1c7f8cc14b" version="2" />
+					<attribute id="DefaultDialog" type="FixedString" value="704a223e-657a-9170-7458-5bcd493c6bce" />
+					<attribute id="LevelOverride" type="int32" value="10" />
+					<attribute id="AnubisConfigName" type="FixedString" value="MOO_KethericHound" />
+					<attribute id="Title" type="TranslatedString" handle="hec6320a5gdf6bg4bf6g92e8g8601c0dc3567" version="2" />
+					<attribute id="Faction" type="guid" value="4755ac62-a42c-491c-b11c-7791f2a35297" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="-153.78387 24.495462 -204.24387" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0.9993224 0 0.036804188" />
+						</node>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="3806477c-65a7-4100-9f92-be4c12c4fa4f" />
+								</node>
+							</children>
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="SCL_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="eb3fa5f9-f73d-24a5-c27a-506ccc571403" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="3ac0cd7b-cd49-6cb5-925f-ed8d243d1138" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="bba840bb-df67-f46d-4360-6291546d196c" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

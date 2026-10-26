@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="2f236ed7-a2af-40f4-b4d1-e7e23a50b519" />
+					<attribute id="Name" type="LSString" value="AMP_Sack_017" />
+					<attribute id="LevelName" type="FixedString" value="WLD_Main_A" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="f66cb66e-8a34-4921-87a3-66e668805205" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="119.84055 16.895437 376.83694" />
+							<attribute id="RotationQuat" type="fvec4" value="0.5308076 0 0 0.84749234" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="WLD_Main_A" />
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="Scripts">
+							<children>
+								<node id="Script">
+									<attribute id="UUID" type="FixedString" value="68f5f134-8507-4b42-812b-cc444732141f" />
+									<children>
+										<node id="Parameters" key="MapKey">
+											<children>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="DC" />
+													<attribute id="Type" type="int32" value="1" />
+													<attribute id="Value" type="LSString" value="25" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="HardcoreOnly" />
+													<attribute id="Type" type="int32" value="1" />
+													<attribute id="Value" type="LSString" value="0" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="IsInvestigation" />
+													<attribute id="Type" type="int32" value="1" />
+													<attribute id="Value" type="LSString" value="0" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="MinDistance" />
+													<attribute id="Type" type="int32" value="2" />
+													<attribute id="Value" type="LSString" value="5" />
+												</node>
+												<node id="Parameter" key="MapKey">
+													<attribute id="MapKey" type="FixedString" value="RevealOnlyInTrigger" />
+													<attribute id="Type" type="int32" value="7" />
+													<attribute id="Value" type="LSString" value="0xbaadf00d" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

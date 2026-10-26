@@ -1,0 +1,1020 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// Glory belongs to the character, not the ring. tier only caps the rank
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_WarRank_Ver(3)
+THEN
+PROC_AMP_WarRank_Reseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_WarRank_Ver(3)
+THEN
+PROC_AMP_WarRank_Reseed();
+
+PROC
+PROC_AMP_WarRank_Reseed()
+AND
+DB_AMP_WarRank_Ver((INTEGER)_Old)
+THEN
+NOT DB_AMP_WarRank_Ver(_Old);
+
+PROC
+PROC_AMP_WarRank_Reseed()
+THEN
+PROC_AMP_WarRank_DrainThreshold();
+
+PROC
+PROC_AMP_WarRank_Reseed()
+THEN
+PROC_AMP_WarRank_DrainTierCap();
+
+PROC
+PROC_AMP_WarRank_Reseed()
+AND
+DB_AMP_WarRank_Doctrine((CHARACTER)_P, (STRING)_D)
+AND
+DB_AMP_WarRank_Top(_P, (INTEGER)_Top)
+AND
+_Top >= 5
+THEN
+DB_AMP_WarRank_DoctrineTier(_P, _D, 3);
+DB_AMP_WarRank_ChoiceTaken(_P, 3);
+
+PROC
+PROC_AMP_WarRank_Reseed()
+AND
+DB_AMP_WarRank_Doctrine((CHARACTER)_P, (STRING)_D)
+AND
+DB_AMP_WarRank_Top(_P, (INTEGER)_Top)
+AND
+_Top >= 3
+AND
+_Top < 5
+THEN
+DB_AMP_WarRank_DoctrineTier(_P, _D, 2);
+DB_AMP_WarRank_ChoiceTaken(_P, 2);
+
+PROC
+PROC_AMP_WarRank_Reseed()
+AND
+DB_AMP_WarRank_Doctrine((CHARACTER)_P, (STRING)_D)
+AND
+DB_AMP_WarRank_Top(_P, (INTEGER)_Top)
+AND
+_Top < 3
+THEN
+DB_AMP_WarRank_DoctrineTier(_P, _D, 1);
+DB_AMP_WarRank_ChoiceTaken(_P, 1);
+
+PROC
+PROC_AMP_WarRank_Reseed()
+THEN
+PROC_AMP_WarRank_DrainDoctrine();
+
+PROC
+PROC_AMP_WarRank_Reseed()
+THEN
+PROC_AMP_WarRank_DrainChoiceOpen();
+
+PROC
+PROC_AMP_WarRank_Reseed()
+THEN
+DB_AMP_WarRank_Ver(3);
+DB_AMP_WarRank_Threshold(1, 2);
+DB_AMP_WarRank_Threshold(2, 6);
+DB_AMP_WarRank_Threshold(3, 12);
+DB_AMP_WarRank_Threshold(4, 20);
+DB_AMP_WarRank_Threshold(5, 30);
+DB_AMP_WarRank_Threshold(6, 42);
+DB_AMP_WarRank_TierCap(1, 2);
+DB_AMP_WarRank_TierCap(2, 3);
+DB_AMP_WarRank_TierCap(3, 5);
+DB_AMP_WarRank_TierCap(4, 6);
+
+PROC
+PROC_AMP_WarRank_DrainThreshold()
+AND
+DB_AMP_WarRank_Threshold((INTEGER)_R, (INTEGER)_N)
+THEN
+NOT DB_AMP_WarRank_Threshold(_R, _N);
+PROC_AMP_WarRank_DrainThreshold();
+
+PROC
+PROC_AMP_WarRank_DrainTierCap()
+AND
+DB_AMP_WarRank_TierCap((INTEGER)_T, (INTEGER)_C)
+THEN
+NOT DB_AMP_WarRank_TierCap(_T, _C);
+PROC_AMP_WarRank_DrainTierCap();
+
+PROC
+PROC_AMP_WarRank_DrainDoctrine()
+AND
+DB_AMP_WarRank_Doctrine((CHARACTER)_P, (STRING)_D)
+THEN
+NOT DB_AMP_WarRank_Doctrine(_P, _D);
+PROC_AMP_WarRank_DrainDoctrine();
+
+// single pass. retract re-opens the choice for an earned rank, recursive drain never empties
+PROC
+PROC_AMP_WarRank_DrainChoiceOpen()
+AND
+DB_AMP_WarRank_ChoiceOpen((CHARACTER)_P, (STRING)_Key)
+THEN
+NOT DB_AMP_WarRank_ChoiceOpen(_P, _Key);
+
+IF
+EnteredCombat((CHARACTER)_Boss, _)
+AND
+IsBoss(_Boss, 1)
+AND
+NOT DB_AMP_WarRank_SawCombat(_Boss)
+THEN
+DB_AMP_WarRank_SawCombat(_Boss);
+
+IF
+KilledBy((CHARACTER)_Boss, (GUIDSTRING)_Owner, _, _)
+AND
+IsBoss(_Boss, 1)
+AND
+DB_Players((CHARACTER)_Owner)
+AND
+DB_AMP_WarRank_SawCombat(_Boss)
+AND
+NOT DB_AMP_WarRank_Counted(_Boss)
+THEN
+DB_AMP_WarRank_Counted(_Boss);
+PROC_AMP_WarRank_Award();
+
+PROC
+PROC_AMP_WarRank_Award()
+AND
+DB_Players((CHARACTER)_P)
+AND
+HasActiveStatus(_P, "AMP_WARRING_EQUIPPED", 1)
+THEN
+PROC_AMP_WarRank_AddGlory(_P);
+
+// counting body first, or it re-reads the row the seeding body writes
+PROC
+PROC_AMP_WarRank_AddGlory((CHARACTER)_P)
+AND
+DB_AMP_WarRank_Glory(_P, (INTEGER)_Old)
+AND
+IntegerSum(_Old, 1, (INTEGER)_New)
+THEN
+NOT DB_AMP_WarRank_Glory(_P, _Old);
+DB_AMP_WarRank_Glory(_P, _New);
+PROC_AMP_WarRank_CheckPromote(_P);
+PROC_AMP_WarRank_Sync(_P);
+
+PROC
+PROC_AMP_WarRank_AddGlory((CHARACTER)_P)
+AND
+NOT DB_AMP_WarRank_Glory(_P, _)
+THEN
+DB_AMP_WarRank_Glory(_P, 1);
+PROC_AMP_WarRank_CheckPromote(_P);
+PROC_AMP_WarRank_Sync(_P);
+
+PROC
+PROC_AMP_WarRank_CheckPromote((CHARACTER)_P)
+AND
+DB_AMP_WarRank_Glory(_P, (INTEGER)_Glory)
+AND
+DB_AMP_WarRank_Threshold((INTEGER)_Rank, (INTEGER)_Need)
+AND
+_Glory >= _Need
+AND
+NOT DB_AMP_WarRank_Earned(_P, _Rank)
+THEN
+DB_AMP_WarRank_Earned(_P, _Rank);
+PROC_AMP_WarRank_RaiseTop(_P, _Rank);
+
+PROC
+PROC_AMP_WarRank_RaiseTop((CHARACTER)_P, (INTEGER)_Rank)
+AND
+NOT DB_AMP_WarRank_Top(_P, _)
+THEN
+DB_AMP_WarRank_Top(_P, _Rank);
+PlayEffect(_P, VFX_UI_LevelUp_01_453e009e-aed7-8ef0-d2bc-8e9ba79065df, "", 1.0);
+PROC_AMP_WarRank_Sync(_P);
+
+PROC
+PROC_AMP_WarRank_RaiseTop((CHARACTER)_P, (INTEGER)_Rank)
+AND
+DB_AMP_WarRank_Top(_P, (INTEGER)_Old)
+AND
+_Rank > _Old
+THEN
+NOT DB_AMP_WarRank_Top(_P, _Old);
+DB_AMP_WarRank_Top(_P, _Rank);
+PlayEffect(_P, VFX_UI_LevelUp_01_453e009e-aed7-8ef0-d2bc-8e9ba79065df, "", 1.0);
+PROC_AMP_WarRank_Sync(_P);
+
+IF
+DB_AMP_WarRank_Earned((CHARACTER)_P, 2)
+AND
+NOT DB_AMP_WarRank_ChoiceTaken(_P, 1)
+AND
+NOT DB_AMP_WarRank_ChoiceOpen(_P, "D1")
+THEN
+DB_AMP_WarRank_ChoiceOpen(_P, "D1");
+AddSpell(_P, "Shout_AMP_WarRank_DoctrineChoice", 0, 1);
+
+IF
+DB_AMP_WarRank_Earned((CHARACTER)_P, 3)
+AND
+NOT DB_AMP_WarRank_ChoiceTaken(_P, 2)
+AND
+NOT DB_AMP_WarRank_ChoiceOpen(_P, "D2")
+THEN
+DB_AMP_WarRank_ChoiceOpen(_P, "D2");
+AddSpell(_P, "Shout_AMP_WarRank_DoctrineChoice_T2", 0, 1);
+
+IF
+DB_AMP_WarRank_Earned((CHARACTER)_P, 5)
+AND
+NOT DB_AMP_WarRank_ChoiceTaken(_P, 3)
+AND
+NOT DB_AMP_WarRank_ChoiceOpen(_P, "D3")
+THEN
+DB_AMP_WarRank_ChoiceOpen(_P, "D3");
+AddSpell(_P, "Shout_AMP_WarRank_DoctrineChoice_T3", 0, 1);
+
+IF
+DB_AMP_WarRank_Earned((CHARACTER)_P, 6)
+AND
+NOT DB_AMP_WarRank_Capstone(_P, _)
+AND
+NOT DB_AMP_WarRank_ChoiceOpen(_P, "CAPSTONE")
+THEN
+DB_AMP_WarRank_ChoiceOpen(_P, "CAPSTONE");
+AddSpell(_P, "Shout_AMP_WarRank_CapstoneChoice", 0, 1);
+
+IF
+StatusApplied((CHARACTER)_P, "AMP_WARRING_EQUIPPED", _, _)
+THEN
+PROC_AMP_WarRank_Sync(_P);
+
+IF
+SavegameLoaded()
+AND
+DB_Players((CHARACTER)_P)
+AND
+HasActiveStatus(_P, "AMP_WARRING_EQUIPPED", 1)
+THEN
+PROC_AMP_WarRank_Sync(_P);
+
+PROC
+PROC_AMP_WarRank_Sync((CHARACTER)_P)
+AND
+HasActiveStatus(_P, "AMP_WARRING_EQUIPPED_T1", 1)
+AND
+DB_AMP_WarRank_TierCap(1, (INTEGER)_Cap)
+AND
+DB_AMP_WarRank_Top(_P, (INTEGER)_Top)
+AND
+_Top <= _Cap
+THEN
+PROC_AMP_WarRank_ApplyRank(_P, _Top);
+
+PROC
+PROC_AMP_WarRank_Sync((CHARACTER)_P)
+AND
+HasActiveStatus(_P, "AMP_WARRING_EQUIPPED_T1", 1)
+AND
+DB_AMP_WarRank_TierCap(1, (INTEGER)_Cap)
+AND
+DB_AMP_WarRank_Top(_P, (INTEGER)_Top)
+AND
+_Top > _Cap
+THEN
+PROC_AMP_WarRank_ApplyRank(_P, _Cap);
+
+PROC
+PROC_AMP_WarRank_Sync((CHARACTER)_P)
+AND
+HasActiveStatus(_P, "AMP_WARRING_EQUIPPED_T2", 1)
+AND
+DB_AMP_WarRank_TierCap(2, (INTEGER)_Cap)
+AND
+DB_AMP_WarRank_Top(_P, (INTEGER)_Top)
+AND
+_Top <= _Cap
+THEN
+PROC_AMP_WarRank_ApplyRank(_P, _Top);
+
+PROC
+PROC_AMP_WarRank_Sync((CHARACTER)_P)
+AND
+HasActiveStatus(_P, "AMP_WARRING_EQUIPPED_T2", 1)
+AND
+DB_AMP_WarRank_TierCap(2, (INTEGER)_Cap)
+AND
+DB_AMP_WarRank_Top(_P, (INTEGER)_Top)
+AND
+_Top > _Cap
+THEN
+PROC_AMP_WarRank_ApplyRank(_P, _Cap);
+
+PROC
+PROC_AMP_WarRank_Sync((CHARACTER)_P)
+AND
+HasActiveStatus(_P, "AMP_WARRING_EQUIPPED_T3", 1)
+AND
+DB_AMP_WarRank_TierCap(3, (INTEGER)_Cap)
+AND
+DB_AMP_WarRank_Top(_P, (INTEGER)_Top)
+AND
+_Top <= _Cap
+THEN
+PROC_AMP_WarRank_ApplyRank(_P, _Top);
+
+PROC
+PROC_AMP_WarRank_Sync((CHARACTER)_P)
+AND
+HasActiveStatus(_P, "AMP_WARRING_EQUIPPED_T3", 1)
+AND
+DB_AMP_WarRank_TierCap(3, (INTEGER)_Cap)
+AND
+DB_AMP_WarRank_Top(_P, (INTEGER)_Top)
+AND
+_Top > _Cap
+THEN
+PROC_AMP_WarRank_ApplyRank(_P, _Cap);
+
+PROC
+PROC_AMP_WarRank_Sync((CHARACTER)_P)
+AND
+HasActiveStatus(_P, "AMP_WARRING_EQUIPPED_T4", 1)
+AND
+DB_AMP_WarRank_TierCap(4, (INTEGER)_Cap)
+AND
+DB_AMP_WarRank_Top(_P, (INTEGER)_Top)
+AND
+_Top <= _Cap
+THEN
+PROC_AMP_WarRank_ApplyRank(_P, _Top);
+
+PROC
+PROC_AMP_WarRank_Sync((CHARACTER)_P)
+AND
+HasActiveStatus(_P, "AMP_WARRING_EQUIPPED_T4", 1)
+AND
+DB_AMP_WarRank_TierCap(4, (INTEGER)_Cap)
+AND
+DB_AMP_WarRank_Top(_P, (INTEGER)_Top)
+AND
+_Top > _Cap
+THEN
+PROC_AMP_WarRank_ApplyRank(_P, _Cap);
+
+// Glory is the status's frozen duration. each rank has its own stack, so ranks never evict each other
+// standing status grows only via its tick marker. Shown record stops the award chain's second pass adding
+
+PROC
+PROC_AMP_WarRank_ApplyRank((CHARACTER)_P, (INTEGER)_R)
+AND
+DB_AMP_WarRank_Active(_P, (INTEGER)_Old)
+THEN
+NOT DB_AMP_WarRank_Active(_P, _Old);
+
+PROC
+PROC_AMP_WarRank_ApplyRank((CHARACTER)_P, (INTEGER)_R)
+THEN
+PROC_AMP_WarRank_DrainShownOther(_P, _R);
+
+PROC
+PROC_AMP_WarRank_DrainShownOther((CHARACTER)_P, (INTEGER)_R)
+AND
+DB_AMP_WarRank_Shown(_P, (INTEGER)_Other, (INTEGER)_N)
+AND
+_Other != _R
+AND
+IntegerToString(_Other, (STRING)_OtherStr)
+AND
+Concatenate("AMP_WARRANK_R", _OtherStr, (STRING)_OtherStatus)
+THEN
+NOT DB_AMP_WarRank_Shown(_P, _Other, _N);
+RemoveStatus(_P, _OtherStatus, NULL_00000000-0000-0000-0000-000000000000);
+PROC_AMP_WarRank_DrainShownOther(_P, _R);
+
+PROC
+PROC_AMP_WarRank_ApplyRank((CHARACTER)_P, (INTEGER)_R)
+AND
+NOT DB_AMP_WarRank_Shown(_P, _R, _)
+AND
+IntegerToString(_R, (STRING)_RStr)
+AND
+Concatenate("AMP_WARRANK_R", _RStr, (STRING)_Status)
+AND
+HasActiveStatus(_P, _Status, 1)
+AND
+GetStatusTurns(_P, _Status, (INTEGER)_Turns)
+THEN
+DB_AMP_WarRank_Shown(_P, _R, _Turns);
+
+PROC
+PROC_AMP_WarRank_ApplyRank((CHARACTER)_P, (INTEGER)_R)
+AND
+_R >= 1
+AND
+NOT DB_AMP_WarRank_Shown(_P, _R, _)
+AND
+DB_AMP_WarRank_Glory(_P, (INTEGER)_Glory)
+AND
+_Glory > 0
+AND
+IntegerToString(_R, (STRING)_RStr)
+AND
+Concatenate("AMP_WARRANK_R", _RStr, (STRING)_Status)
+AND
+HasActiveStatus(_P, _Status, 0)
+AND
+IntegerProduct(_Glory, 6, (INTEGER)_Secs)
+AND
+IntegerToReal(_Secs, (REAL)_Dur)
+THEN
+DB_AMP_WarRank_Shown(_P, _R, _Glory);
+ApplyStatus(_P, _Status, _Dur, 1, _P);
+
+PROC
+PROC_AMP_WarRank_ApplyRank((CHARACTER)_P, (INTEGER)_R)
+AND
+DB_AMP_WarRank_Shown(_P, _R, (INTEGER)_N)
+AND
+DB_AMP_WarRank_Glory(_P, (INTEGER)_Glory)
+AND
+_Glory > _N
+AND
+IntegerSum(_N, 1, (INTEGER)_Next)
+AND
+IntegerToString(_R, (STRING)_RStr)
+AND
+Concatenate("AMP_WARRANK_TICK_R", _RStr, (STRING)_Tick)
+THEN
+NOT DB_AMP_WarRank_Shown(_P, _R, _N);
+DB_AMP_WarRank_Shown(_P, _R, _Next);
+ApplyStatus(_P, _Tick, 0.0, 1, _P);
+
+PROC
+PROC_AMP_WarRank_ApplyRank((CHARACTER)_P, (INTEGER)_R)
+AND
+_R >= 1
+THEN
+DB_AMP_WarRank_Active(_P, _R);
+
+IF
+StatusRemoved((CHARACTER)_P, (STRING)_Status, _, _)
+AND
+DB_AMP_WarRank_Shown(_P, (INTEGER)_R, (INTEGER)_N)
+AND
+IntegerToString(_R, (STRING)_RStr)
+AND
+Concatenate("AMP_WARRANK_R", _RStr, (STRING)_Name)
+AND
+_Name == _Status
+AND
+HasActiveStatus(_P, _Status, 0)
+THEN
+NOT DB_AMP_WarRank_Shown(_P, _R, _N);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_Assault", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "Assault", 1);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_IronLine", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "IronLine", 1);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_Maneuver", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "Maneuver", 1);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_VitalForce", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "VitalForce", 1);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_Attrition", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "Attrition", 1);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_Quartermaster", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "Quartermaster", 1);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_Dominion", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "Dominion", 1);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_Assault_T2", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "Assault", 2);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_IronLine_T2", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "IronLine", 2);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_Maneuver_T2", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "Maneuver", 2);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_VitalForce_T2", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "VitalForce", 2);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_Attrition_T2", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "Attrition", 2);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_Quartermaster_T2", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "Quartermaster", 2);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_Dominion_T2", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "Dominion", 2);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_Assault_T3", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "Assault", 3);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_IronLine_T3", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "IronLine", 3);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_Maneuver_T3", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "Maneuver", 3);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_VitalForce_T3", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "VitalForce", 3);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_Attrition_T3", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "Attrition", 3);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_Quartermaster_T3", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "Quartermaster", 3);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_Dominion_T3", _, _, _)
+THEN
+PROC_AMP_WarRank_TakeDoctrine(_P, "Dominion", 3);
+
+PROC
+PROC_AMP_WarRank_TakeDoctrine((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+NOT DB_AMP_WarRank_ChoiceTaken(_P, _T)
+AND
+NOT DB_AMP_WarRank_DoctrineTier(_P, _D, _)
+THEN
+DB_AMP_WarRank_DoctrineTier(_P, _D, _T);
+PROC_AMP_WarRank_SetTier(_P, _D, _T);
+
+PROC
+PROC_AMP_WarRank_TakeDoctrine((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+NOT DB_AMP_WarRank_ChoiceTaken(_P, _T)
+AND
+DB_AMP_WarRank_DoctrineTier(_P, _D, (INTEGER)_Old)
+AND
+_T > _Old
+THEN
+NOT DB_AMP_WarRank_DoctrineTier(_P, _D, _Old);
+DB_AMP_WarRank_DoctrineTier(_P, _D, _T);
+PROC_AMP_WarRank_SetTier(_P, _D, _T);
+
+// mid-shout removal cancels the cast, withdraw after the animation. recorded step blocks a second press
+
+PROC
+PROC_AMP_WarRank_TakeDoctrine((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+NOT DB_AMP_WarRank_ChoiceTaken(_P, _T)
+THEN
+DB_AMP_WarRank_ChoiceTaken(_P, _T);
+ObjectTimerLaunch(_P, "AMP_WarRank_CloseDoctrine", 3000);
+
+IF
+ObjectTimerFinished((CHARACTER)_P, "AMP_WarRank_CloseDoctrine")
+THEN
+RemoveSpell(_P, "Shout_AMP_WarRank_DoctrineChoice", 1);
+RemoveSpell(_P, "Shout_AMP_WarRank_DoctrineChoice_T2", 1);
+RemoveSpell(_P, "Shout_AMP_WarRank_DoctrineChoice_T3", 1);
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "Assault"
+AND
+_T == 1
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_Assault_2");
+RemovePassive(_P, "AMP_WarDoctrine_Assault_3");
+AddPassive(_P, "AMP_WarDoctrine_Assault_1");
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "Assault"
+AND
+_T == 2
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_Assault_1");
+RemovePassive(_P, "AMP_WarDoctrine_Assault_3");
+AddPassive(_P, "AMP_WarDoctrine_Assault_2");
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "Assault"
+AND
+_T == 3
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_Assault_1");
+RemovePassive(_P, "AMP_WarDoctrine_Assault_2");
+AddPassive(_P, "AMP_WarDoctrine_Assault_3");
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "IronLine"
+AND
+_T == 1
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_IronLine_2");
+RemovePassive(_P, "AMP_WarDoctrine_IronLine_3");
+AddPassive(_P, "AMP_WarDoctrine_IronLine_1");
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "IronLine"
+AND
+_T == 2
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_IronLine_1");
+RemovePassive(_P, "AMP_WarDoctrine_IronLine_3");
+AddPassive(_P, "AMP_WarDoctrine_IronLine_2");
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "IronLine"
+AND
+_T == 3
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_IronLine_1");
+RemovePassive(_P, "AMP_WarDoctrine_IronLine_2");
+AddPassive(_P, "AMP_WarDoctrine_IronLine_3");
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "Maneuver"
+AND
+_T == 1
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_Maneuver_2");
+RemovePassive(_P, "AMP_WarDoctrine_Maneuver_3");
+AddPassive(_P, "AMP_WarDoctrine_Maneuver_1");
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "Maneuver"
+AND
+_T == 2
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_Maneuver_1");
+RemovePassive(_P, "AMP_WarDoctrine_Maneuver_3");
+AddPassive(_P, "AMP_WarDoctrine_Maneuver_2");
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "Maneuver"
+AND
+_T == 3
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_Maneuver_1");
+RemovePassive(_P, "AMP_WarDoctrine_Maneuver_2");
+AddPassive(_P, "AMP_WarDoctrine_Maneuver_3");
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "VitalForce"
+AND
+_T == 1
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_VitalForce_2");
+RemovePassive(_P, "AMP_WarDoctrine_VitalForce_3");
+AddPassive(_P, "AMP_WarDoctrine_VitalForce_1");
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "VitalForce"
+AND
+_T == 2
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_VitalForce_1");
+RemovePassive(_P, "AMP_WarDoctrine_VitalForce_3");
+AddPassive(_P, "AMP_WarDoctrine_VitalForce_2");
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "VitalForce"
+AND
+_T == 3
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_VitalForce_1");
+RemovePassive(_P, "AMP_WarDoctrine_VitalForce_2");
+AddPassive(_P, "AMP_WarDoctrine_VitalForce_3");
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "Attrition"
+AND
+_T == 1
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_Attrition_2");
+RemovePassive(_P, "AMP_WarDoctrine_Attrition_3");
+AddPassive(_P, "AMP_WarDoctrine_Attrition_1");
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "Attrition"
+AND
+_T == 2
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_Attrition_1");
+RemovePassive(_P, "AMP_WarDoctrine_Attrition_3");
+AddPassive(_P, "AMP_WarDoctrine_Attrition_2");
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "Attrition"
+AND
+_T == 3
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_Attrition_1");
+RemovePassive(_P, "AMP_WarDoctrine_Attrition_2");
+AddPassive(_P, "AMP_WarDoctrine_Attrition_3");
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "Quartermaster"
+AND
+_T == 1
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_Quartermaster_2");
+RemovePassive(_P, "AMP_WarDoctrine_Quartermaster_3");
+AddPassive(_P, "AMP_WarDoctrine_Quartermaster_1");
+AddPassive(_P, "AMP_WarDoctrine_Quartermaster_Mark");
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "Quartermaster"
+AND
+_T == 2
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_Quartermaster_1");
+RemovePassive(_P, "AMP_WarDoctrine_Quartermaster_3");
+AddPassive(_P, "AMP_WarDoctrine_Quartermaster_2");
+AddPassive(_P, "AMP_WarDoctrine_Quartermaster_Mark");
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "Quartermaster"
+AND
+_T == 3
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_Quartermaster_1");
+RemovePassive(_P, "AMP_WarDoctrine_Quartermaster_2");
+AddPassive(_P, "AMP_WarDoctrine_Quartermaster_3");
+AddPassive(_P, "AMP_WarDoctrine_Quartermaster_Mark");
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "Dominion"
+AND
+_T == 1
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_Dominion_2");
+RemovePassive(_P, "AMP_WarDoctrine_Dominion_3");
+AddPassive(_P, "AMP_WarDoctrine_Dominion_1");
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "Dominion"
+AND
+_T == 2
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_Dominion_1");
+RemovePassive(_P, "AMP_WarDoctrine_Dominion_3");
+AddPassive(_P, "AMP_WarDoctrine_Dominion_2");
+
+PROC
+PROC_AMP_WarRank_SetTier((CHARACTER)_P, (STRING)_D, (INTEGER)_T)
+AND
+_D == "Dominion"
+AND
+_T == 3
+THEN
+RemovePassive(_P, "AMP_WarDoctrine_Dominion_1");
+RemovePassive(_P, "AMP_WarDoctrine_Dominion_2");
+AddPassive(_P, "AMP_WarDoctrine_Dominion_3");
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_Strategist", _, _, _)
+AND
+NOT DB_AMP_WarRank_Capstone(_P, _)
+THEN
+DB_AMP_WarRank_Capstone(_P, "Strategist");
+NOT DB_AMP_WarRank_ChoiceOpen(_P, "CAPSTONE");
+ObjectTimerLaunch(_P, "AMP_WarRank_CloseCapstone", 3000);
+AddPassive(_P, "AMP_WarCapstone_Strategist");
+ApplyStatus(_P, "AMP_WARCAPSTONE_STRATEGIST_AURA", -1.0, 1, _P);
+
+IF
+UsingSpell((CHARACTER)_P, "Shout_AMP_WarRank_Pick_Champion", _, _, _)
+AND
+NOT DB_AMP_WarRank_Capstone(_P, _)
+THEN
+DB_AMP_WarRank_Capstone(_P, "Champion");
+NOT DB_AMP_WarRank_ChoiceOpen(_P, "CAPSTONE");
+ObjectTimerLaunch(_P, "AMP_WarRank_CloseCapstone", 3000);
+AddPassive(_P, "AMP_WarCapstone_Champion");
+
+IF
+ObjectTimerFinished((CHARACTER)_P, "AMP_WarRank_CloseCapstone")
+THEN
+RemoveSpell(_P, "Shout_AMP_WarRank_CapstoneChoice", 1);
+
+IF
+StatusApplied((CHARACTER)_P, "AMP_WARRING_EQUIPPED", _, _)
+AND
+DB_AMP_WarRank_Capstone(_P, "Strategist")
+THEN
+ApplyStatus(_P, "AMP_WARCAPSTONE_STRATEGIST_AURA", -1.0, 1, _P);
+
+IF
+StatusApplied((CHARACTER)_Target, "AMP_WARDOCTRINE_ATTRITION_MARK_2", (GUIDSTRING)_Source, _)
+AND
+Random(11, (INTEGER)_Roll)
+THEN
+PROC_AMP_WarRank_Affliction(_Target, _Source, _Roll, 12.0);
+
+IF
+StatusApplied((CHARACTER)_Target, "AMP_WARDOCTRINE_ATTRITION_MARK_4", (GUIDSTRING)_Source, _)
+AND
+Random(11, (INTEGER)_Roll)
+THEN
+PROC_AMP_WarRank_Affliction(_Target, _Source, _Roll, 24.0);
+
+PROC
+PROC_AMP_WarRank_Affliction((CHARACTER)_Target, (GUIDSTRING)_Source, (INTEGER)_Roll, (REAL)_Duration)
+AND
+_Roll == 0
+THEN
+ApplyStatus(_Target, "STUNNED", _Duration, 1, _Source);
+
+PROC
+PROC_AMP_WarRank_Affliction((CHARACTER)_Target, (GUIDSTRING)_Source, (INTEGER)_Roll, (REAL)_Duration)
+AND
+_Roll == 1
+THEN
+ApplyStatus(_Target, "FRIGHTENED", _Duration, 1, _Source);
+
+PROC
+PROC_AMP_WarRank_Affliction((CHARACTER)_Target, (GUIDSTRING)_Source, (INTEGER)_Roll, (REAL)_Duration)
+AND
+_Roll == 2
+THEN
+ApplyStatus(_Target, "CRIPPLED", _Duration, 1, _Source);
+
+PROC
+PROC_AMP_WarRank_Affliction((CHARACTER)_Target, (GUIDSTRING)_Source, (INTEGER)_Roll, (REAL)_Duration)
+AND
+_Roll == 3
+THEN
+ApplyStatus(_Target, "BLEEDING", _Duration, 1, _Source);
+
+PROC
+PROC_AMP_WarRank_Affliction((CHARACTER)_Target, (GUIDSTRING)_Source, (INTEGER)_Roll, (REAL)_Duration)
+AND
+_Roll == 4
+THEN
+ApplyStatus(_Target, "CHEST_TRAUMA", _Duration, 1, _Source);
+
+PROC
+PROC_AMP_WarRank_Affliction((CHARACTER)_Target, (GUIDSTRING)_Source, (INTEGER)_Roll, (REAL)_Duration)
+AND
+_Roll == 5
+THEN
+ApplyStatus(_Target, "DAZED", _Duration, 1, _Source);
+
+PROC
+PROC_AMP_WarRank_Affliction((CHARACTER)_Target, (GUIDSTRING)_Source, (INTEGER)_Roll, (REAL)_Duration)
+AND
+_Roll == 6
+THEN
+ApplyStatus(_Target, "GAPING_WOUND", _Duration, 1, _Source);
+
+PROC
+PROC_AMP_WarRank_Affliction((CHARACTER)_Target, (GUIDSTRING)_Source, (INTEGER)_Roll, (REAL)_Duration)
+AND
+_Roll == 7
+THEN
+ApplyStatus(_Target, "HAMSTRING", _Duration, 1, _Source);
+
+PROC
+PROC_AMP_WarRank_Affliction((CHARACTER)_Target, (GUIDSTRING)_Source, (INTEGER)_Roll, (REAL)_Duration)
+AND
+_Roll == 8
+THEN
+ApplyStatus(_Target, "OFF_BALANCED", _Duration, 1, _Source);
+
+PROC
+PROC_AMP_WarRank_Affliction((CHARACTER)_Target, (GUIDSTRING)_Source, (INTEGER)_Roll, (REAL)_Duration)
+AND
+_Roll == 9
+THEN
+ApplyStatus(_Target, "PRONE", _Duration, 1, _Source);
+
+PROC
+PROC_AMP_WarRank_Affliction((CHARACTER)_Target, (GUIDSTRING)_Source, (INTEGER)_Roll, (REAL)_Duration)
+AND
+_Roll == 10
+THEN
+ApplyStatus(_Target, "HINDERED", _Duration, 1, _Source);
+
+IF
+StatusApplied((CHARACTER)_P, "AMP_WARRING_EQUIPPED", _, _)
+THEN
+DB_AMP_WarRing_Worn(_P);
+
+IF
+StatusRemoved((CHARACTER)_P, "AMP_WARRING_EQUIPPED", _, _)
+THEN
+NOT DB_AMP_WarRing_Worn(_P);
+
+IF
+EnteredCombat((CHARACTER)_C, _)
+AND
+IsPlayer(_C, 0)
+AND
+DB_AMP_WarRing_Worn(_)
+THEN
+ApplyStatus(_C, "AMP_WARRING_WATCH", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+LeftCombat((CHARACTER)_C, _)
+THEN
+RemoveStatus(_C, "AMP_WARRING_WATCH", NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+ENDEXITSECTION

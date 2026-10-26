@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="ba715946-a66b-4297-91a4-c38b6bd55c5f" />
+					<attribute id="Name" type="LSString" value="S_TWN_FinalFightDarkJusticiar" />
+					<attribute id="LevelName" type="FixedString" value="SCL_Main_A" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="b288a6fa-2b7a-4464-9bca-4e1c317b48e1" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="-250.1824 36.61093 38.59284" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0.3088201 0 0.9511205" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="SCL_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="1afdce5a-4c84-f16d-29c8-faec3ee4f4b3" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="00b8b636-3658-eecd-b363-d6d7b0a870a3" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="Gold_Pocket_Normal" />
+								</node>
+							</children>
+						</node>
+						<node id="ItemList">
+							<children>
+								<node id="Item">
+									<attribute id="ScoreModifier" type="float" value="1" />
+									<attribute id="StartRound" type="int32" value="0" />
+									<attribute id="FallbackStartRound" type="int32" value="-1" />
+									<attribute id="MinimumImpact" type="int32" value="0" />
+									<attribute id="OnlyCastOnSelf" type="bool" value="False" />
+									<attribute id="AIFlags" type="uint16" value="0" />
+									<attribute id="ItemName" type="LSString" value="S_TWN_FinalFightDarkJusticiarsWeapon" />
+									<attribute id="LevelName" type="LSString" value="SCL_Main_A" />
+									<attribute id="UUID" type="FixedString" value="fe94051d-1213-49f4-8ace-7d4893c56e97" />
+									<attribute id="TemplateID" type="FixedString" value="2af7255d-bae1-4d4c-a8ba-4a2b5909a794" />
+									<attribute id="Amount" type="int32" value="1" />
+									<attribute id="IsTradable" type="uint8" value="0" />
+									<attribute id="Type" type="uint8" value="2" />
+									<attribute id="CanBePickpocketed" type="bool" value="True" />
+									<attribute id="IsDroppedOnDeath" type="bool" value="True" />
+									<children>
+										<node id="SourceConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+										<node id="TargetConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

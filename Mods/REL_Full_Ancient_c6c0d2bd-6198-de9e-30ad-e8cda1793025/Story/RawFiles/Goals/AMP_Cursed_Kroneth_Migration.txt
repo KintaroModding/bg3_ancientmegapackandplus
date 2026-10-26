@@ -1,0 +1,35 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// migration: grant judgement to old saves that have the curse but no judgement
+// (predates the trial system). db-gated to run once, not per zone transition.
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Kroneth_MigrationDone(1)
+THEN
+DB_AMP_Kroneth_MigrationDone(1);
+TimerLaunch("AMP_Kroneth_MigrationDelay", 7000);
+
+IF
+TimerFinished("AMP_Kroneth_MigrationDelay")
+THEN
+PROC_AMP_Kroneth_DoMigration();
+
+// party members cursed but missing judgement -> grant it
+PROC
+PROC_AMP_Kroneth_DoMigration()
+AND
+DB_PartyMembers((CHARACTER)_Char)
+AND
+HasActiveStatus(_Char, "AMP_KRONETH_CURSE", 1)
+AND
+NOT HasActiveStatus(_Char, "AMP_KRONETH_JUDGEMENT", 1)
+THEN
+ApplyStatus(_Char, "AMP_KRONETH_JUDGEMENT", -1.0, 1, _Char);
+
+EXITSECTION
+ENDEXITSECTION

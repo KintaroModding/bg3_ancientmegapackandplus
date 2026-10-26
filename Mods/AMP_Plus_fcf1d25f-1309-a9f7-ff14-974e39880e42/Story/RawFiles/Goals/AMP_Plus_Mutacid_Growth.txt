@@ -1,0 +1,224 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+StatusApplied((CHARACTER)_Slime, "AMP_MUTACID_SURVIVED_TICK", _, _)
+AND
+DB_AMP_Mutacid_SlimeOwner(_Slime, (CHARACTER)_Owner)
+AND
+DB_AMP_Mutacid_DraftTarget(_Owner, _Slime)
+THEN
+PROC_AMP_Plus_MutGrow_AutoPick(_Owner);
+PROC_AMP_Plus_MutGrow_ClearOffers(_Owner);
+PROC_AMP_Mutacid_FireDraft(_Owner);
+
+// guard fact blocks a second pick, the tally below can move the draft target mid-rule
+PROC
+PROC_AMP_Plus_MutGrow_AutoPick((CHARACTER)_Owner)
+AND
+DB_AMP_Mutacid_DraftOffered(_Owner, (STRING)_Unlock)
+AND
+NOT DB_AMP_Plus_MutGrow_Picked(_Owner)
+AND
+DB_AMP_Mutacid_Draft(_, _, _Unlock, (STRING)_Mut)
+AND
+DB_AMP_Mutacid_DraftTarget(_Owner, (CHARACTER)_Slime)
+THEN
+DB_AMP_Plus_MutGrow_Picked(_Owner);
+DB_AMP_Plus_MutGrow_Memory(_Owner, _Mut);
+ApplyStatus(_Slime, _Mut, -1.0, 1, _Owner);
+PROC_AMP_Mutacid_OnMutApplied(_Owner, _Mut);
+
+PROC
+PROC_AMP_Plus_MutGrow_AutoPick((CHARACTER)_Owner)
+AND
+DB_AMP_Plus_MutGrow_Picked(_Owner)
+THEN
+NOT DB_AMP_Plus_MutGrow_Picked(_Owner);
+
+PROC
+PROC_AMP_Plus_MutGrow_ClearOffers((CHARACTER)_Owner)
+AND
+DB_AMP_Mutacid_DraftOffered(_Owner, (STRING)_Unlock)
+THEN
+NOT DB_AMP_Mutacid_DraftOffered(_Owner, _Unlock);
+RemoveStatus(_Owner, _Unlock, _Owner);
+PROC_AMP_Plus_MutGrow_ClearOffers(_Owner);
+
+IF
+CastedSpell((CHARACTER)_Owner, (STRING)_Spell, _, _, _)
+AND
+DB_AMP_Mutacid_Draft(_, _Spell, _, (STRING)_Mut)
+THEN
+DB_AMP_Plus_MutGrow_Memory(_Owner, _Mut);
+PROC_AMP_Plus_MutGrow_ClearOffers(_Owner);
+
+// Control lands after the spawn chain, so a mutation picked in that cast is already remembered
+// mutations carry no stack id, a remembered one would stack twice on a body that has it
+IF
+StatusApplied((CHARACTER)_Slime, "AMP_AcidSlime_Control", _, _)
+AND
+DB_AMP_Mutacid_SlimeOwner(_Slime, (CHARACTER)_Owner)
+AND
+DB_AMP_Mutacid_DraftTarget(_Owner, _Slime)
+THEN
+PROC_AMP_Plus_MutGrow_ApplyMemory(_Owner, _Slime);
+PROC_AMP_Plus_MutGrow_Dissolve(_Owner, _Slime);
+
+PROC
+PROC_AMP_Plus_MutGrow_ApplyMemory((CHARACTER)_Owner, (CHARACTER)_Slime)
+AND
+DB_AMP_Plus_MutGrow_Memory(_Owner, (STRING)_Mut)
+AND
+HasActiveStatus(_Slime, _Mut, 0)
+THEN
+ApplyStatus(_Slime, _Mut, -1.0, 1, _Owner);
+
+PROC
+PROC_AMP_Plus_MutGrow_Dissolve((CHARACTER)_Owner, (CHARACTER)_New)
+AND
+DB_AMP_Mutacid_SlimeOwner((CHARACTER)_Old, _Owner)
+AND
+_Old != _New
+THEN
+NOT DB_AMP_Mutacid_SlimeOwner(_Old, _Owner);
+LeaveCombat(_Old);
+SetOnStage(_Old, 0);
+RequestDeleteTemporary(_Old);
+PROC_AMP_Plus_MutGrow_Dissolve(_Owner, _New);
+
+IF
+StatusApplied((CHARACTER)_Slime, "AMP_AcidSlime_Control", _, _)
+AND
+DB_AMP_Mutacid_SlimeOwner(_Slime, (CHARACTER)_Owner)
+AND
+DB_AMP_Mutacid_BroodCount(_Owner, 1)
+THEN
+NOT DB_AMP_Plus_MutGrow_Lost(_Owner);
+DB_AMP_Plus_MutGrow_InFight(_Owner);
+PROC_AMP_Plus_MutGrow_StartStage(_Owner);
+
+IF
+StatusApplied((CHARACTER)_Slime, "AMP_AcidSlime_Control", _, _)
+AND
+DB_AMP_Mutacid_SlimeOwner(_Slime, (CHARACTER)_Owner)
+AND
+DB_AMP_Mutacid_BroodCount(_Owner, 1)
+AND
+HasActiveStatus(_Owner, "AMP_MUTACID_TIER4", 1)
+THEN
+PROC_AMP_Plus_MutGrow_ClearOffers(_Owner);
+PROC_AMP_Mutacid_FireDraft(_Owner);
+
+IF
+StatusApplied((CHARACTER)_Slime, "AMP_AcidSlime_Control", _, _)
+AND
+DB_AMP_Mutacid_SlimeOwner(_Slime, (CHARACTER)_Owner)
+AND
+DB_AMP_Mutacid_BroodCount(_Owner, 1)
+AND
+HasActiveStatus(_Owner, "AMP_MUTACID_TIER3", 1)
+AND
+HasActiveStatus(_Owner, "AMP_MUTACID_TIER4", 0)
+THEN
+PROC_AMP_Plus_MutGrow_ClearOffers(_Owner);
+PROC_AMP_Mutacid_FireDraft(_Owner);
+
+// start stage runs through the base classifier: remembered mutations fill the tally
+// second step waits for the stage-two body's own Control event, behind the start mark
+PROC
+PROC_AMP_Plus_MutGrow_StartStage((CHARACTER)_Owner)
+AND
+DB_AMP_Plus_MutGrow_Fights(_Owner, (INTEGER)_N)
+AND
+_N >= 2
+THEN
+DB_AMP_Plus_MutGrow_Starting(_Owner);
+PROC_AMP_Plus_MutGrow_FillTally(_Owner);
+PROC_AMP_Mutacid_TierUp(_Owner, 1);
+
+IF
+StatusApplied((CHARACTER)_Slime, "AMP_AcidSlime_Control", _, _)
+AND
+DB_AMP_Mutacid_SlimeOwner(_Slime, (CHARACTER)_Owner)
+AND
+DB_AMP_Plus_MutGrow_Starting(_Owner)
+AND
+DB_AMP_Mutacid_BroodCount(_Owner, 2)
+THEN
+NOT DB_AMP_Plus_MutGrow_Starting(_Owner);
+PROC_AMP_Plus_MutGrow_SecondStage(_Owner);
+
+PROC
+PROC_AMP_Plus_MutGrow_SecondStage((CHARACTER)_Owner)
+AND
+DB_AMP_Plus_MutGrow_Fights(_Owner, (INTEGER)_N)
+AND
+_N >= 5
+THEN
+PROC_AMP_Plus_MutGrow_FillTally(_Owner);
+PROC_AMP_Mutacid_TierUp(_Owner, 2);
+
+PROC
+PROC_AMP_Plus_MutGrow_FillTally((CHARACTER)_Owner)
+AND
+DB_AMP_Plus_MutGrow_Memory(_Owner, (STRING)_Mut)
+AND
+DB_AMP_Mutacid_MutCat(_Mut, (STRING)_Cat)
+THEN
+PROC_AMP_Mutacid_IncTally(_Owner, _Cat);
+
+// only the current body counts, older ones dissolve rather than die
+IF
+Died((CHARACTER)_Slime)
+AND
+DB_AMP_Mutacid_DraftTarget((CHARACTER)_Owner, _Slime)
+AND
+DB_AMP_Plus_MutGrow_InFight(_Owner)
+THEN
+DB_AMP_Plus_MutGrow_Lost(_Owner);
+
+IF
+LeftCombat((CHARACTER)_Owner, _)
+AND
+DB_AMP_Plus_MutGrow_InFight(_Owner)
+THEN
+NOT DB_AMP_Plus_MutGrow_InFight(_Owner);
+PROC_AMP_Plus_MutGrow_FightEnd(_Owner);
+
+PROC
+PROC_AMP_Plus_MutGrow_FightEnd((CHARACTER)_Owner)
+AND
+NOT DB_AMP_Plus_MutGrow_Lost(_Owner)
+THEN
+PROC_AMP_Plus_MutGrow_AddFight(_Owner);
+
+PROC
+PROC_AMP_Plus_MutGrow_FightEnd((CHARACTER)_Owner)
+AND
+DB_AMP_Plus_MutGrow_Starting(_Owner)
+THEN
+NOT DB_AMP_Plus_MutGrow_Starting(_Owner);
+
+PROC
+PROC_AMP_Plus_MutGrow_AddFight((CHARACTER)_Owner)
+AND
+DB_AMP_Plus_MutGrow_Fights(_Owner, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_N2)
+THEN
+NOT DB_AMP_Plus_MutGrow_Fights(_Owner, _N);
+DB_AMP_Plus_MutGrow_Fights(_Owner, _N2);
+
+PROC
+PROC_AMP_Plus_MutGrow_AddFight((CHARACTER)_Owner)
+AND
+NOT DB_AMP_Plus_MutGrow_Fights(_Owner, _)
+THEN
+DB_AMP_Plus_MutGrow_Fights(_Owner, 1);
+
+EXITSECTION
+ENDEXITSECTION

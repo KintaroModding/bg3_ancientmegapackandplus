@@ -1,0 +1,50 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// nautiloid starter chest: hidden on tutorial load, shown only in hard mode
+
+// tutorial load, not hard -> hide chest
+IF
+LevelGameplayStarted("TUT_Avernus_C", _)
+AND
+NOT DB_AMP_GameMode("HARD")
+THEN
+SetOnStage(AMP_HardChest_000_709ef1e7-4f8d-4be0-972d-d2a7898fc797, 0);
+
+// tutorial load, hard already active (reload/migration) -> keep chest shown
+IF
+LevelGameplayStarted("TUT_Avernus_C", _)
+AND
+DB_AMP_GameMode("HARD")
+THEN
+SetOnStage(AMP_HardChest_000_709ef1e7-4f8d-4be0-972d-d2a7898fc797, 1);
+
+// picked hard -> show chest
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings025", 1)
+THEN
+SetOnStage(AMP_HardChest_000_709ef1e7-4f8d-4be0-972d-d2a7898fc797, 1);
+
+// switched to normal -> hide chest
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings023", 1)
+THEN
+SetOnStage(AMP_HardChest_000_709ef1e7-4f8d-4be0-972d-d2a7898fc797, 0);
+
+// switched to casual -> hide chest
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings024", 1)
+THEN
+SetOnStage(AMP_HardChest_000_709ef1e7-4f8d-4be0-972d-d2a7898fc797, 0);
+
+// switched to stock -> hide chest
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings026", 1)
+THEN
+SetOnStage(AMP_HardChest_000_709ef1e7-4f8d-4be0-972d-d2a7898fc797, 0);
+
+EXITSECTION
+
+ENDEXITSECTION

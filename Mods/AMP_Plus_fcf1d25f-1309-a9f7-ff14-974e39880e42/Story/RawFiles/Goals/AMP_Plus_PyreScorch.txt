@@ -1,0 +1,98 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// Died carries no killer, so the last hand to land damage is kept during the fight
+
+// one stack id, priority per stage: the next rung evicts the one below
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_PyreScorch_Step(1, _, _)
+THEN
+PROC_AMP_Plus_PyreScorch_Seed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_PyreScorch_Step(1, _, _)
+THEN
+PROC_AMP_Plus_PyreScorch_Seed();
+
+PROC
+PROC_AMP_Plus_PyreScorch_Seed()
+THEN
+DB_AMP_Plus_PyreScorch_Step(1, "AMP_PLUS_PYRE_SCORCH_1", "AMP_PLUS_PYRE_SCORCH_2");
+DB_AMP_Plus_PyreScorch_Step(2, "AMP_PLUS_PYRE_SCORCH_2", "AMP_PLUS_PYRE_SCORCH_3");
+DB_AMP_Plus_PyreScorch_Step(3, "AMP_PLUS_PYRE_SCORCH_3", "AMP_PLUS_PYRE_SCORCH_4");
+DB_AMP_Plus_PyreScorch_Step(4, "AMP_PLUS_PYRE_SCORCH_4", "AMP_PLUS_PYRE_SCORCH_5");
+DB_AMP_Plus_PyreScorch_Step(5, "AMP_PLUS_PYRE_SCORCH_5", "AMP_PLUS_PYRE_SCORCH_6");
+DB_AMP_Plus_PyreScorch_Step(6, "AMP_PLUS_PYRE_SCORCH_6", "AMP_PLUS_PYRE_SCORCH_7");
+DB_AMP_Plus_PyreScorch_Step(7, "AMP_PLUS_PYRE_SCORCH_7", "AMP_PLUS_PYRE_SCORCH_8");
+DB_AMP_Plus_PyreScorch_Step(8, "AMP_PLUS_PYRE_SCORCH_8", "AMP_PLUS_PYRE_SCORCH_9");
+DB_AMP_Plus_PyreScorch_Step(9, "AMP_PLUS_PYRE_SCORCH_9", "AMP_PLUS_PYRE_SCORCH_10");
+
+IF
+AttackedBy((CHARACTER)_Defender, (CHARACTER)_Owner, _, _, (INTEGER)_Amount, _, _)
+AND
+_Amount > 0
+AND
+DB_AMP_Plus_Pyre_Member(_Defender, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatID)
+AND
+IsPlayer(_Owner, 1)
+THEN
+PROC_AMP_Plus_PyreScorch_NoteHit(_Defender, _Owner, _CombatID);
+
+PROC
+PROC_AMP_Plus_PyreScorch_NoteHit((CHARACTER)_Defender, (CHARACTER)_Owner, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_LastHit(_Defender, (CHARACTER)_Old, (GUIDSTRING)_OldCombat)
+THEN
+NOT DB_AMP_Plus_Pyre2_LastHit(_Defender, _Old, _OldCombat);
+
+PROC
+PROC_AMP_Plus_PyreScorch_NoteHit((CHARACTER)_Defender, (CHARACTER)_Owner, (GUIDSTRING)_CombatID)
+THEN
+DB_AMP_Plus_Pyre2_LastHit(_Defender, _Owner, _CombatID);
+
+IF
+Died((CHARACTER)_Char)
+AND
+DB_AMP_Plus_Pyre2_LastHit(_Char, (CHARACTER)_Killer, (GUIDSTRING)_CombatID)
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+NOT DB_AMP_Plus_Pyre2_Brood(_Char, _, _)
+THEN
+NOT DB_AMP_Plus_Pyre2_LastHit(_Char, _Killer, _CombatID);
+PROC_AMP_Plus_PyreScorch_Raise(_Killer);
+
+PROC
+PROC_AMP_Plus_PyreScorch_Raise((CHARACTER)_Killer)
+AND
+DB_AMP_Plus_PyreScorch_Step((INTEGER)_N, (STRING)_Cur, (STRING)_Next)
+AND
+HasActiveStatus(_Killer, _Cur, 1)
+THEN
+ApplyStatus(_Killer, _Next, 18.0, 1, _Killer);
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_PyreScorch_DrainLastHit(_CombatID);
+
+PROC
+PROC_AMP_Plus_PyreScorch_DrainLastHit((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_LastHit((CHARACTER)_Char, (CHARACTER)_Killer, _CombatID)
+THEN
+NOT DB_AMP_Plus_Pyre2_LastHit(_Char, _Killer, _CombatID);
+PROC_AMP_Plus_PyreScorch_DrainLastHit(_CombatID);
+
+EXITSECTION
+ENDEXITSECTION

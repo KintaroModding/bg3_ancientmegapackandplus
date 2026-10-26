@@ -1,0 +1,171 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_ApexTableVer(3)
+THEN
+PROC_AMP_Plus_ApexTableReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_ApexTableVer(3)
+THEN
+PROC_AMP_Plus_ApexTableReseed();
+
+PROC
+PROC_AMP_Plus_ApexTableReseed()
+AND
+DB_AMP_Plus_ApexTableVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_ApexTableVer(_Old);
+
+PROC
+PROC_AMP_Plus_ApexTableReseed()
+THEN
+PROC_AMP_Plus_ApexTableDrainT4Status();
+
+PROC
+PROC_AMP_Plus_ApexTableReseed()
+THEN
+PROC_AMP_Plus_ApexTableDrainTier();
+
+PROC
+PROC_AMP_Plus_ApexTableReseed()
+THEN
+DB_AMP_Plus_ApexTableVer(3);
+DB_AMP_Plus_ApexTier("AMP_NPC_STANDARD_T4_V4");
+DB_AMP_Plus_ApexTier("AMP_NPC_STANDARD_T5_V4");
+DB_AMP_Plus_ApexTier("AMP_BOSS_STANDARD_T4_V4");
+DB_AMP_Plus_ApexTier("AMP_BOSS_STANDARD_T5_V4");
+DB_AMP_Plus_ApexTier("AMP_NPC_IMPOSSIBLE_T3_V4");
+DB_AMP_Plus_ApexTier("AMP_NPC_IMPOSSIBLE_T4_V4");
+DB_AMP_Plus_ApexTier("AMP_NPC_IMPOSSIBLE_T5_V4");
+DB_AMP_Plus_ApexTier("AMP_BOSS_IMPOSSIBLE_T3_V4");
+DB_AMP_Plus_ApexTier("AMP_BOSS_IMPOSSIBLE_T4_V4");
+DB_AMP_Plus_ApexTier("AMP_BOSS_IMPOSSIBLE_T5_V4");
+
+PROC
+PROC_AMP_Plus_ApexTableDrainT4Status()
+AND
+DB_AMP_Plus_ApexT4Status((STRING)_A)
+THEN
+NOT DB_AMP_Plus_ApexT4Status(_A);
+PROC_AMP_Plus_ApexTableDrainT4Status();
+
+PROC
+PROC_AMP_Plus_ApexTableDrainTier()
+AND
+DB_AMP_Plus_ApexTier((STRING)_A)
+THEN
+NOT DB_AMP_Plus_ApexTier(_A);
+PROC_AMP_Plus_ApexTableDrainTier();
+
+// seeding guard only inserts missing rows, so changed defaults get their own version fact
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_ApexDefVer(2)
+THEN
+PROC_AMP_Plus_ApexDefReseed();
+
+PROC
+PROC_AMP_Plus_ApexDefReseed()
+AND
+DB_AMP_Plus_ApexDefVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_ApexDefVer(_Old);
+
+PROC
+PROC_AMP_Plus_ApexDefReseed()
+AND
+DB_AMP_Plus_AffixDef(13, (STRING)_Id, (STRING)_Ask, (INTEGER)_C, (INTEGER)_N, (INTEGER)_H)
+THEN
+NOT DB_AMP_Plus_AffixDef(13, _Id, _Ask, _C, _N, _H);
+
+PROC
+PROC_AMP_Plus_ApexDefReseed()
+THEN
+DB_AMP_Plus_ApexDefVer(2);
+DB_AMP_Plus_AffixDef(13, "APEX", "AMP_Plus_Affix_Apex_Ask", 0, 1, 1);
+
+PROC
+PROC_AMP_Plus_ApexDefReseed()
+AND
+DB_AMP_GameMode((STRING)_Mode)
+THEN
+PROC_AMP_Plus_Affix_ApplyDefaults(_Mode);
+
+IF
+DB_AMP_DiffV3_Tracked((CHARACTER)_Creature, (STRING)_Status)
+AND
+DB_AMP_Plus_ApexTier(_Status)
+AND
+IsPlayer(_Creature, 0)
+AND
+QRY_AMP_Plus_Affix_On("APEX")
+AND
+HasActiveStatus(_Creature, "AMP_ACTION_SURGE_INFO", 0)
+THEN
+ApplyStatus(_Creature, "AMP_ACTION_SURGE_INFO", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// rule above does not re-fire for a fact that already exists
+IF
+SavegameLoaded()
+AND
+DB_AMP_DiffV3_Tracked((CHARACTER)_Creature, (STRING)_Status)
+AND
+DB_AMP_Plus_ApexTier(_Status)
+AND
+IsPlayer(_Creature, 0)
+AND
+QRY_AMP_Plus_Affix_On("APEX")
+AND
+HasActiveStatus(_Creature, "AMP_ACTION_SURGE_INFO", 0)
+THEN
+ApplyStatus(_Creature, "AMP_ACTION_SURGE_INFO", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// base still grants the carrier under ULTRA, strip it back off
+IF
+StatusApplied((CHARACTER)_Creature, "AMP_ACTION_SURGE_INFO", _, _)
+AND
+NOT QRY_AMP_Plus_Affix_On("APEX")
+THEN
+RemoveStatus(_Creature, "AMP_ACTION_SURGE_INFO", NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "APEX"
+AND
+_Val == 0
+AND
+DB_AMP_DiffV3_Tracked((CHARACTER)_E, _)
+THEN
+RemoveStatus(_E, "AMP_ACTION_SURGE_INFO", NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "APEX"
+AND
+_Val == 1
+AND
+DB_AMP_DiffV3_Tracked((CHARACTER)_E, (STRING)_Status)
+AND
+DB_AMP_Plus_ApexTier(_Status)
+AND
+IsPlayer(_E, 0)
+AND
+HasActiveStatus(_E, "AMP_ACTION_SURGE_INFO", 0)
+THEN
+ApplyStatus(_E, "AMP_ACTION_SURGE_INFO", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+
+ENDEXITSECTION

@@ -1,0 +1,63 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// strip ultra overlays when a companion joins the party.
+// own goal so it runs on existing saves too.
+
+IF
+DB_PartOfTheTeam((CHARACTER)_Char)
+AND
+HasActiveStatus(_Char, "AMP_ULTRA_BOSS_OVERLAY", 1)
+THEN
+RemoveStatus(_Char, "AMP_ULTRA_BOSS_OVERLAY", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+DB_PartOfTheTeam((CHARACTER)_Char)
+AND
+HasActiveStatus(_Char, "AMP_ULTRA_NPC_OVERLAY", 1)
+THEN
+RemoveStatus(_Char, "AMP_ULTRA_NPC_OVERLAY", NULL_00000000-0000-0000-0000-000000000000);
+
+// safety net for saves where the companion was already in the party
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_PartOfTheTeam((CHARACTER)_Char)
+AND
+HasActiveStatus(_Char, "AMP_ULTRA_BOSS_OVERLAY", 1)
+THEN
+RemoveStatus(_Char, "AMP_ULTRA_BOSS_OVERLAY", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_PartOfTheTeam((CHARACTER)_Char)
+AND
+HasActiveStatus(_Char, "AMP_ULTRA_NPC_OVERLAY", 1)
+THEN
+RemoveStatus(_Char, "AMP_ULTRA_NPC_OVERLAY", NULL_00000000-0000-0000-0000-000000000000);
+
+// companions sit in DB_Players too, sweep that as well
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+HasActiveStatus(_Player, "AMP_ULTRA_BOSS_OVERLAY", 1)
+THEN
+RemoveStatus(_Player, "AMP_ULTRA_BOSS_OVERLAY", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+HasActiveStatus(_Player, "AMP_ULTRA_NPC_OVERLAY", 1)
+THEN
+RemoveStatus(_Player, "AMP_ULTRA_NPC_OVERLAY", NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+
+ENDEXITSECTION

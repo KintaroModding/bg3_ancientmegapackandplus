@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="a0a59732-eb0c-489c-a8cb-488ab858de28" />
+					<attribute id="Name" type="LSString" value="S_Chest_Secret_Grenades" />
+					<attribute id="LevelName" type="FixedString" value="TUT_Avernus_C" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="813c005f-72ab-4806-ad7e-2e3135e41d27" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="Stats" type="FixedString" value="OBJ_Barrel_Weak" />
+					<attribute id="CanBePickedUp" type="bool" value="False" />
+					<attribute id="CanBeMoved" type="bool" value="False" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="0.9" />
+							<attribute id="Position" type="fvec3" value="34.31714 22.29252 -411.1623" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0.9994204 0 0.03404142" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object">
+											<attribute id="MapKey" type="FixedString" value="TUT_Avernus_C" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="63deda87-5c21-83d2-61d4-8920bda260da" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="Gold_Stash_Poor" />
+								</node>
+							</children>
+						</node>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="DEBRIS_THRESHOLD_LESSER" />
+								</node>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="GROUNDED" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

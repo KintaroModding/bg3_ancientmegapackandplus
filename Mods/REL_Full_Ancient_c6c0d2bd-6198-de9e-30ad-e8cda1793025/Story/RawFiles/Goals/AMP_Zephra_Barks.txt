@@ -1,0 +1,115 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// zephra combat barks (pool boss)
+
+IF
+EnteredCombat((CHARACTER)_Mob, _)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_07_07bdf760-ed25-4461-9883-beb4938d4127)
+AND
+NOT DB_AMP_Zephra_Greeted(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Zephra_Greeting_7d47f480-e597-4480-8868-f9ff1fc5c533, _Mob)
+THEN
+DB_AMP_Zephra_Greeted(_Mob);
+DB_AMP_Zephra_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Zephra_BarkUnlock", 5000);
+
+IF
+TurnStarted((CHARACTER)_Mob)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_07_07bdf760-ed25-4461-9883-beb4938d4127)
+AND
+NOT DB_AMP_Zephra_Greeted(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Zephra_Greeting_7d47f480-e597-4480-8868-f9ff1fc5c533, _Mob)
+THEN
+DB_AMP_Zephra_Greeted(_Mob);
+DB_AMP_Zephra_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Zephra_BarkUnlock", 5000);
+
+IF
+UsingSpell((CHARACTER)_Mob, _, _, _, _)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_07_07bdf760-ed25-4461-9883-beb4938d4127)
+AND
+IsDead(_Mob, 0)
+AND
+NOT DB_AMP_Zephra_BarkLock(_Mob)
+AND
+Random(3, (INTEGER)_Roll)
+AND
+_Roll == 0
+THEN
+DB_AMP_Zephra_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Zephra_BarkDelay", 1500);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Zephra_BarkDelay")
+AND
+DB_AMP_Zephra_BarkLock(_Mob)
+AND
+IsDead(_Mob, 0)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Zephra_SpellCast_7cc7795d-d61e-433c-8c34-9884421c0784, _Mob)
+THEN
+RealtimeObjectTimerLaunch(_Mob, "AMP_Zephra_BarkUnlock", 10000);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Zephra_BarkUnlock")
+AND
+DB_AMP_Zephra_BarkLock(_Mob)
+THEN
+NOT DB_AMP_Zephra_BarkLock(_Mob);
+
+IF
+HitpointsChanged((CHARACTER)_Mob, (REAL)_Pct)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_07_07bdf760-ed25-4461-9883-beb4938d4127)
+AND
+_Pct <= 35.0
+AND
+NOT DB_AMP_Zephra_LowHP(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Zephra_LowHP_f0ff3dac-c93b-4bd7-a90d-f50fbc9466db, _Mob)
+THEN
+DB_AMP_Zephra_LowHP(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_07_07bdf760-ed25-4461-9883-beb4938d4127)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Zephra_Death_fc019101-33c0-4e9f-8116-9b454ad37036, _Mob)
+THEN
+DB_NOOP(1);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Zephra_Greeted(_Mob)
+THEN
+NOT DB_AMP_Zephra_Greeted(_Mob);
+DB_AMP_Zephra_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Zephra_BarkUnlock", 5000);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Zephra_BarkLock(_Mob)
+THEN
+NOT DB_AMP_Zephra_BarkLock(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Zephra_LowHP(_Mob)
+THEN
+NOT DB_AMP_Zephra_LowHP(_Mob);
+
+EXITSECTION
+
+ENDEXITSECTION

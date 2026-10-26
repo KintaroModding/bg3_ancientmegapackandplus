@@ -1,0 +1,22 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// stock mode: ToT economy off, so delete any shop barrels on level load
+
+IF
+LevelGameplayStarted(_Level, _)
+AND
+DB_AMP_GameMode("STOCK")
+AND
+DB_ToT_Shop(_ShopID, (ITEM)_Barrel)
+AND
+Exists(_Barrel, 1)
+THEN
+RequestDelete(_Barrel);
+
+EXITSECTION
+
+ENDEXITSECTION

@@ -1,0 +1,14 @@
+// tesshin, shell form: no tactics, just closes and stays close. the stink aura is two metres,
+// so standing next to someone is the whole job.
+
+USING melee
+MODIFIER_HIT_CHANCE_STUPIDITY                    0.70
+MULTIPLIER_ENDPOS_ENEMIES_NEARBY                 0.40
+MULTIPLIER_KILL_ENEMY                            0.80
+ENABLE_MOVEMENT_AVOID_AOO                        0.00
+MULTIPLIER_ENEMY_HEIGHT_DIFFERENCE               0.00
+USE_INVENTORY_ITEMS_ENABLED                      0
+
+// Walks straight through whatever covers the floor.
+MULTIPLIER_MOVEMENT_SURFACE                      0.00
+MULTIPLIER_ENDPOS_NOT_IN_DANGEROUS_SURFACE       0.00

@@ -1,0 +1,640 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// 300ms timer lets AutoSell go first, CampSend (500ms) is cancelled if we claim
+DB_AMP_LM_Disabled(0);
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_LM_Disabled(_)
+THEN
+DB_AMP_LM_Disabled(0);
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_LM_Disabled(_)
+THEN
+DB_AMP_LM_Disabled(0);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_LMCoinVer(2)
+THEN
+PROC_AMP_Plus_LMCoinReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_LMCoinVer(2)
+THEN
+PROC_AMP_Plus_LMCoinReseed();
+
+PROC
+PROC_AMP_Plus_LMCoinReseed()
+AND
+DB_AMP_Plus_LMCoinVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_LMCoinVer(_Old);
+
+PROC
+PROC_AMP_Plus_LMCoinReseed()
+THEN
+PROC_AMP_Plus_LM_DrainCoinTemplate();
+
+PROC
+PROC_AMP_Plus_LMCoinReseed()
+THEN
+DB_AMP_Plus_LMCoinVer(2);
+DB_AMP_LM_CoinTemplate((ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b);
+DB_AMP_LM_CoinTemplate((ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d);
+DB_AMP_LM_CoinTemplate((ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80);
+DB_AMP_LM_CoinTemplate((ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1);
+
+PROC
+PROC_AMP_Plus_LM_DrainCoinTemplate()
+AND
+DB_AMP_LM_CoinTemplate((ITEMROOT)_A)
+THEN
+NOT DB_AMP_LM_CoinTemplate(_A);
+PROC_AMP_Plus_LM_DrainCoinTemplate();
+
+// bags wait for a chosen game mode, not the raw Nautiloid load
+
+IF
+DB_Players(_P)
+AND
+NOT DB_AMP_LM_ContainersGranted(_P)
+AND
+DB_AMP_GameMode(_)
+AND
+NOT DB_AMP_AutoLoot_Disabled(1)
+AND
+NOT DB_AMP_LM_Disabled(1)
+THEN
+DB_AMP_LM_ContainersGranted(_P);
+PROC_AMP_LM_GrantContainers(_P);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_Players(_P)
+AND
+NOT DB_AMP_LM_ContainersGranted(_P)
+AND
+DB_AMP_GameMode(_)
+AND
+NOT DB_AMP_AutoLoot_Disabled(1)
+AND
+NOT DB_AMP_LM_Disabled(1)
+THEN
+DB_AMP_LM_ContainersGranted(_P);
+PROC_AMP_LM_GrantContainers(_P);
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+SysClear("DB_AMP_LM_Pending", 2);
+
+PROC
+PROC_AMP_LM_GrantContainers((CHARACTER)_P)
+AND
+NOT GetItemByTemplateInInventory((ITEMROOT)AMP_LM_Container_Capsules_290cb815-d369-4f64-9d89-633d2dce257b, _P, _)
+THEN
+TemplateAddTo((ITEMROOT)AMP_LM_Container_Capsules_290cb815-d369-4f64-9d89-633d2dce257b, _P, 1, 0);
+
+PROC
+PROC_AMP_LM_GrantContainers((CHARACTER)_P)
+AND
+NOT GetItemByTemplateInInventory((ITEMROOT)AMP_LM_Container_Shards_8c142ce0-70b0-494f-ae25-226030dd987c, _P, _)
+THEN
+TemplateAddTo((ITEMROOT)AMP_LM_Container_Shards_8c142ce0-70b0-494f-ae25-226030dd987c, _P, 1, 0);
+
+PROC
+PROC_AMP_LM_GrantContainers((CHARACTER)_P)
+AND
+NOT GetItemByTemplateInInventory((ITEMROOT)AMP_LM_Container_Coins_9abc4e7e-e60d-46aa-89b6-48fa82ae43fb, _P, _)
+THEN
+TemplateAddTo((ITEMROOT)AMP_LM_Container_Coins_9abc4e7e-e60d-46aa-89b6-48fa82ae43fb, _P, 1, 0);
+
+PROC
+PROC_AMP_LM_GrantContainers((CHARACTER)_P)
+AND
+NOT GetItemByTemplateInInventory((ITEMROOT)AMP_LM_Container_Artifacts_029abafa-0e83-4637-ab83-f0f1f9638ff8, _P, _)
+THEN
+TemplateAddTo((ITEMROOT)AMP_LM_Container_Artifacts_029abafa-0e83-4637-ab83-f0f1f9638ff8, _P, 1, 0);
+
+// own flag, not ContainersGranted. filing reads the party switch in AMP_Plus_LootManagerSettings.txt
+
+IF
+DB_Players(_P)
+AND
+NOT DB_AMP_LM_PassiveGranted(_P)
+AND
+DB_AMP_GameMode(_)
+AND
+NOT DB_AMP_AutoLoot_Disabled(1)
+AND
+NOT DB_AMP_LM_Disabled(1)
+THEN
+DB_AMP_LM_PassiveGranted(_P);
+AddPassive(_P, "AMP_LM_Toggle");
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_Players(_P)
+AND
+NOT DB_AMP_LM_PassiveGranted(_P)
+AND
+DB_AMP_GameMode(_)
+AND
+NOT DB_AMP_AutoLoot_Disabled(1)
+AND
+NOT DB_AMP_LM_Disabled(1)
+THEN
+DB_AMP_LM_PassiveGranted(_P);
+AddPassive(_P, "AMP_LM_Toggle");
+
+// ingredients and supplies use the vanilla Alchemy Pouch and Camp Supply Sack
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_LM_BagVer(2)
+THEN
+PROC_AMP_Plus_LM_BagReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_LM_BagVer(2)
+THEN
+PROC_AMP_Plus_LM_BagReseed();
+
+PROC
+PROC_AMP_Plus_LM_BagReseed()
+AND
+DB_AMP_Plus_LM_BagVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_LM_BagVer(_Old);
+
+PROC
+PROC_AMP_Plus_LM_BagReseed()
+THEN
+PROC_AMP_Plus_LM_DrainOwnBag();
+
+PROC
+PROC_AMP_Plus_LM_BagReseed()
+THEN
+DB_AMP_Plus_LM_BagVer(2);
+DB_AMP_Plus_LM_OwnBag((ITEMROOT)AMP_LM_Container_Capsules_290cb815-d369-4f64-9d89-633d2dce257b);
+DB_AMP_Plus_LM_OwnBag((ITEMROOT)AMP_LM_Container_Shards_8c142ce0-70b0-494f-ae25-226030dd987c);
+DB_AMP_Plus_LM_OwnBag((ITEMROOT)AMP_LM_Container_Coins_9abc4e7e-e60d-46aa-89b6-48fa82ae43fb);
+DB_AMP_Plus_LM_OwnBag((ITEMROOT)AMP_LM_Container_Artifacts_029abafa-0e83-4637-ab83-f0f1f9638ff8);
+
+PROC
+PROC_AMP_Plus_LM_DrainOwnBag()
+AND
+DB_AMP_Plus_LM_OwnBag((ITEMROOT)_T)
+THEN
+NOT DB_AMP_Plus_LM_OwnBag(_T);
+PROC_AMP_Plus_LM_DrainOwnBag();
+
+IF
+RemovedFrom((ITEM)_Item, (CHARACTER)_P)
+AND
+DB_Players(_P)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+DB_AMP_Plus_LM_OwnBag(_T)
+THEN
+ObjectTimerLaunch(_P, "AMP_Plus_LM_BagRegrant", 500);
+
+// record blocks a re-issue while the old bag exists, sale to a merchant frees it
+IF
+RemovedFrom((ITEM)_Item, (CHARACTER)_P)
+AND
+DB_Players(_P)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+DB_AMP_Plus_LM_OwnBag(_T)
+AND
+NOT DB_AMP_Plus_LM_LostBag(_P, _T, _Item)
+THEN
+DB_AMP_Plus_LM_LostBag(_P, _T, _Item);
+
+IF
+ObjectTimerFinished((CHARACTER)_P, "AMP_Plus_LM_BagRegrant")
+AND
+DB_Players(_P)
+AND
+DB_AMP_LM_ContainersGranted(_P)
+AND
+NOT DB_AMP_AutoLoot_Disabled(1)
+AND
+NOT DB_AMP_LM_Disabled(1)
+THEN
+PROC_AMP_Plus_LM_ReleaseLost(_P);
+PROC_AMP_Plus_LM_ReissueBags(_P);
+
+PROC
+PROC_AMP_Plus_LM_ReleaseLost((CHARACTER)_P)
+THEN
+PROC_AMP_Plus_LM_DrainLostGone(_P);
+
+PROC
+PROC_AMP_Plus_LM_ReleaseLost((CHARACTER)_P)
+THEN
+PROC_AMP_Plus_LM_DrainLostSold(_P);
+
+PROC
+PROC_AMP_Plus_LM_DrainLostGone((CHARACTER)_P)
+AND
+DB_AMP_Plus_LM_LostBag(_P, (ITEMROOT)_T, (ITEM)_Item)
+AND
+Exists(_Item, 0)
+THEN
+NOT DB_AMP_Plus_LM_LostBag(_P, _T, _Item);
+PROC_AMP_Plus_LM_DrainLostGone(_P);
+
+PROC
+PROC_AMP_Plus_LM_DrainLostSold((CHARACTER)_P)
+AND
+DB_AMP_Plus_LM_LostBag(_P, (ITEMROOT)_T, (ITEM)_Item)
+AND
+Exists(_Item, 1)
+AND
+GetInventoryOwner(_Item, (CHARACTER)_Owner)
+AND
+CanTrade(_Owner, 1)
+THEN
+NOT DB_AMP_Plus_LM_LostBag(_P, _T, _Item);
+PROC_AMP_Plus_LM_DrainLostSold(_P);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_Players((CHARACTER)_P)
+AND
+DB_AMP_LM_ContainersGranted(_P)
+THEN
+ObjectTimerLaunch(_P, "AMP_Plus_LM_BagRegrant", 2000);
+
+// junk bag has its own copy in AMP_Plus_LM_JunkBag.txt, two watchers would double-grant
+
+PROC
+PROC_AMP_Plus_LM_ReissueBags((CHARACTER)_P)
+AND
+NOT GetItemByTemplateInInventory((ITEMROOT)AMP_LM_Container_Capsules_290cb815-d369-4f64-9d89-633d2dce257b, _P, _)
+AND
+NOT DB_AMP_Plus_LM_LostBag(_P, (ITEMROOT)AMP_LM_Container_Capsules_290cb815-d369-4f64-9d89-633d2dce257b, _)
+THEN
+TemplateAddTo((ITEMROOT)AMP_LM_Container_Capsules_290cb815-d369-4f64-9d89-633d2dce257b, _P, 1, 0);
+
+PROC
+PROC_AMP_Plus_LM_ReissueBags((CHARACTER)_P)
+AND
+NOT GetItemByTemplateInInventory((ITEMROOT)AMP_LM_Container_Shards_8c142ce0-70b0-494f-ae25-226030dd987c, _P, _)
+AND
+NOT DB_AMP_Plus_LM_LostBag(_P, (ITEMROOT)AMP_LM_Container_Shards_8c142ce0-70b0-494f-ae25-226030dd987c, _)
+THEN
+TemplateAddTo((ITEMROOT)AMP_LM_Container_Shards_8c142ce0-70b0-494f-ae25-226030dd987c, _P, 1, 0);
+
+PROC
+PROC_AMP_Plus_LM_ReissueBags((CHARACTER)_P)
+AND
+NOT GetItemByTemplateInInventory((ITEMROOT)AMP_LM_Container_Coins_9abc4e7e-e60d-46aa-89b6-48fa82ae43fb, _P, _)
+AND
+NOT DB_AMP_Plus_LM_LostBag(_P, (ITEMROOT)AMP_LM_Container_Coins_9abc4e7e-e60d-46aa-89b6-48fa82ae43fb, _)
+THEN
+TemplateAddTo((ITEMROOT)AMP_LM_Container_Coins_9abc4e7e-e60d-46aa-89b6-48fa82ae43fb, _P, 1, 0);
+
+PROC
+PROC_AMP_Plus_LM_ReissueBags((CHARACTER)_P)
+AND
+NOT GetItemByTemplateInInventory((ITEMROOT)AMP_LM_Container_Artifacts_029abafa-0e83-4637-ab83-f0f1f9638ff8, _P, _)
+AND
+NOT DB_AMP_Plus_LM_LostBag(_P, (ITEMROOT)AMP_LM_Container_Artifacts_029abafa-0e83-4637-ab83-f0f1f9638ff8, _)
+THEN
+TemplateAddTo((ITEMROOT)AMP_LM_Container_Artifacts_029abafa-0e83-4637-ab83-f0f1f9638ff8, _P, 1, 0);
+
+// base corpse loot never sets AutoLooted, flagged here so AutoSell sees it
+IF
+RemovedFrom((ITEM)_Item, (CHARACTER)_Corpse)
+AND
+DB_AMP_AL_CampSendCorpse(_Corpse, (CHARACTER)_Player)
+THEN
+DB_AMP_AL_AutoLooted(_Item);
+
+// base AutoSell calls AddGoldToMagicPockets on a container holder bound as player, a CTD
+// strip AutoLooted once an item lands in a non-player holder
+IF
+AddedTo((ITEM)_Item, (CHARACTER)_Holder, _)
+AND
+DB_AMP_AL_AutoLooted(_Item)
+AND
+NOT DB_Players(_Holder)
+THEN
+NOT DB_AMP_AL_AutoLooted(_Item);
+
+// ring test-chest pulls are not sorted, RemovedFrom fires before AddedTo
+IF
+RemovedFrom((ITEM)_Item, (ITEM)_Chest)
+AND
+DB_AMP_Para_Spawned(_Chest)
+THEN
+DB_AMP_LM_NoSort(_Item);
+
+IF
+RemovedFrom((ITEM)_Item, (ITEM)_Chest)
+AND
+DB_AMP_TutorialChest_Summoned(_Chest, _)
+THEN
+DB_AMP_LM_NoSort(_Item);
+
+QRY
+QRY_AMP_LM_IsCoin((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+DB_AMP_LM_CoinTemplate(_T)
+THEN
+DB_NOOP(1);
+
+// Pending guard: one type per item. artifact excludes coin, supply excludes ingredient
+
+IF
+AddedTo((ITEM)_Item, (CHARACTER)_Player, _)
+AND
+DB_Players(_Player)
+AND
+DB_AMP_Plus_LM_Filing(1)
+AND
+NOT DB_AMP_LM_Pending(_Item, _)
+AND
+NOT DB_AMP_LM_Sorted(_Item)
+AND
+NOT DB_AMP_LM_NoSort(_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+DB_AMP_VoidCapsule_Container(_T, _)
+THEN
+DB_AMP_LM_Pending(_Item, 1);
+ObjectTimerLaunch(_Item, "AMP_LM_Route", 300);
+
+IF
+AddedTo((ITEM)_Item, (CHARACTER)_Player, _)
+AND
+DB_Players(_Player)
+AND
+DB_AMP_Plus_LM_Filing(1)
+AND
+NOT DB_AMP_LM_Pending(_Item, _)
+AND
+NOT DB_AMP_LM_Sorted(_Item)
+AND
+NOT DB_AMP_LM_NoSort(_Item)
+AND
+QRY_AMP_VoidCapsule_IsShard(_Item)
+THEN
+DB_AMP_LM_Pending(_Item, 2);
+ObjectTimerLaunch(_Item, "AMP_LM_Route", 300);
+
+IF
+AddedTo((ITEM)_Item, (CHARACTER)_Player, _)
+AND
+DB_Players(_Player)
+AND
+DB_AMP_Plus_LM_Filing(1)
+AND
+NOT DB_AMP_LM_Pending(_Item, _)
+AND
+NOT DB_AMP_LM_Sorted(_Item)
+AND
+NOT DB_AMP_LM_NoSort(_Item)
+AND
+QRY_AMP_LM_IsCoin(_Item)
+THEN
+DB_AMP_LM_Pending(_Item, 3);
+ObjectTimerLaunch(_Item, "AMP_LM_Route", 300);
+
+IF
+AddedTo((ITEM)_Item, (CHARACTER)_Player, _)
+AND
+DB_Players(_Player)
+AND
+DB_AMP_Plus_LM_Filing(1)
+AND
+NOT DB_AMP_LM_Pending(_Item, _)
+AND
+NOT DB_AMP_LM_Sorted(_Item)
+AND
+NOT DB_AMP_LM_NoSort(_Item)
+AND
+QRY_AMP_VoidCapsule_IsValidArtifact(_Item)
+AND
+NOT QRY_AMP_LM_IsCoin(_Item)
+THEN
+DB_AMP_LM_Pending(_Item, 4);
+ObjectTimerLaunch(_Item, "AMP_LM_Route", 300);
+
+IF
+AddedTo((ITEM)_Item, (CHARACTER)_Player, _)
+AND
+DB_Players(_Player)
+AND
+DB_AMP_Plus_LM_Filing(1)
+AND
+NOT DB_AMP_LM_Pending(_Item, _)
+AND
+NOT DB_AMP_LM_Sorted(_Item)
+AND
+NOT DB_AMP_LM_NoSort(_Item)
+AND
+IsTagged(_Item, ALCH_INGREDIENT_64b824e7-50c5-475a-98c2-52026e372d77, 1)
+AND
+NOT QRY_AMP_Plus_LM_IsNamedJunk(_Item)
+THEN
+DB_AMP_LM_Pending(_Item, 5);
+ObjectTimerLaunch(_Item, "AMP_LM_Route", 300);
+
+IF
+AddedTo((ITEM)_Item, (CHARACTER)_Player, _)
+AND
+DB_Players(_Player)
+AND
+DB_AMP_Plus_LM_Filing(1)
+AND
+NOT DB_AMP_LM_Pending(_Item, _)
+AND
+NOT DB_AMP_LM_Sorted(_Item)
+AND
+NOT DB_AMP_LM_NoSort(_Item)
+AND
+IsTagged(_Item, FOOD_c86e0114-a5ab-48f6-b497-de321ebff577, 1)
+AND
+NOT IsTagged(_Item, ALCH_INGREDIENT_64b824e7-50c5-475a-98c2-52026e372d77, 1)
+AND
+NOT QRY_AMP_Plus_LM_IsNamedJunk(_Item)
+THEN
+DB_AMP_LM_Pending(_Item, 6);
+ObjectTimerLaunch(_Item, "AMP_LM_Route", 300);
+
+// cancels CampSend's deferred delivery, or it pulls the item back out of the bag
+
+IF
+ObjectTimerFinished((ITEM)_Item, "AMP_LM_Route")
+AND
+DB_AMP_LM_Pending(_Item, _Type)
+AND
+NOT Exists(_Item, 1)
+THEN
+NOT DB_AMP_LM_Pending(_Item, _Type);
+
+IF
+ObjectTimerFinished((ITEM)_Item, "AMP_LM_Route")
+AND
+DB_AMP_LM_Pending(_Item, 1)
+AND
+Exists(_Item, 1)
+AND
+NOT IsEquipped(_Item, 1)
+AND
+GetFirstInventoryOwnerCharacter(_Item, (CHARACTER)_Owner)
+AND
+DB_Players(_Owner)
+AND
+GetItemByTemplateInInventory((ITEMROOT)AMP_LM_Container_Capsules_290cb815-d369-4f64-9d89-633d2dce257b, _Owner, (ITEM)_Cont)
+AND
+GetStackAmount(_Item, (INTEGER)_Count, _)
+THEN
+NOT DB_AMP_LM_Pending(_Item, 1);
+NOT DB_AMP_AL_CampSend_Pending(_Item, _Owner);
+ObjectTimerCancel(_Item, "AMP_AL_CampSendDefer");
+ToInventory(_Item, _Cont, _Count, 0, 0);
+DB_AMP_LM_Sorted(_Item);
+
+IF
+ObjectTimerFinished((ITEM)_Item, "AMP_LM_Route")
+AND
+DB_AMP_LM_Pending(_Item, 2)
+AND
+Exists(_Item, 1)
+AND
+NOT IsEquipped(_Item, 1)
+AND
+GetFirstInventoryOwnerCharacter(_Item, (CHARACTER)_Owner)
+AND
+DB_Players(_Owner)
+AND
+GetItemByTemplateInInventory((ITEMROOT)AMP_LM_Container_Shards_8c142ce0-70b0-494f-ae25-226030dd987c, _Owner, (ITEM)_Cont)
+AND
+GetStackAmount(_Item, (INTEGER)_Count, _)
+THEN
+NOT DB_AMP_LM_Pending(_Item, 2);
+NOT DB_AMP_AL_CampSend_Pending(_Item, _Owner);
+ObjectTimerCancel(_Item, "AMP_AL_CampSendDefer");
+ToInventory(_Item, _Cont, _Count, 0, 0);
+DB_AMP_LM_Sorted(_Item);
+
+IF
+ObjectTimerFinished((ITEM)_Item, "AMP_LM_Route")
+AND
+DB_AMP_LM_Pending(_Item, 3)
+AND
+Exists(_Item, 1)
+AND
+NOT IsEquipped(_Item, 1)
+AND
+GetFirstInventoryOwnerCharacter(_Item, (CHARACTER)_Owner)
+AND
+DB_Players(_Owner)
+AND
+GetItemByTemplateInInventory((ITEMROOT)AMP_LM_Container_Coins_9abc4e7e-e60d-46aa-89b6-48fa82ae43fb, _Owner, (ITEM)_Cont)
+AND
+GetStackAmount(_Item, (INTEGER)_Count, _)
+THEN
+NOT DB_AMP_LM_Pending(_Item, 3);
+NOT DB_AMP_AL_CampSend_Pending(_Item, _Owner);
+ObjectTimerCancel(_Item, "AMP_AL_CampSendDefer");
+ToInventory(_Item, _Cont, _Count, 0, 0);
+DB_AMP_LM_Sorted(_Item);
+
+IF
+ObjectTimerFinished((ITEM)_Item, "AMP_LM_Route")
+AND
+DB_AMP_LM_Pending(_Item, 4)
+AND
+Exists(_Item, 1)
+AND
+NOT IsEquipped(_Item, 1)
+AND
+GetFirstInventoryOwnerCharacter(_Item, (CHARACTER)_Owner)
+AND
+DB_Players(_Owner)
+AND
+GetItemByTemplateInInventory((ITEMROOT)AMP_LM_Container_Artifacts_029abafa-0e83-4637-ab83-f0f1f9638ff8, _Owner, (ITEM)_Cont)
+AND
+GetStackAmount(_Item, (INTEGER)_Count, _)
+THEN
+NOT DB_AMP_LM_Pending(_Item, 4);
+NOT DB_AMP_AL_CampSend_Pending(_Item, _Owner);
+ObjectTimerCancel(_Item, "AMP_AL_CampSendDefer");
+ToInventory(_Item, _Cont, _Count, 0, 0);
+DB_AMP_LM_Sorted(_Item);
+
+IF
+ObjectTimerFinished((ITEM)_Item, "AMP_LM_Route")
+AND
+DB_AMP_LM_Pending(_Item, 5)
+AND
+Exists(_Item, 1)
+AND
+NOT IsEquipped(_Item, 1)
+AND
+GetFirstInventoryOwnerCharacter(_Item, (CHARACTER)_Owner)
+AND
+DB_Players(_Owner)
+AND
+GetItemByTemplateInInventory((ITEMROOT)CONT_GEN_AlchemyPouch_b7543ff4-5010-4c01-9bcd-4da1047aebfc, _Owner, (ITEM)_Cont)
+AND
+GetStackAmount(_Item, (INTEGER)_Count, _)
+THEN
+NOT DB_AMP_LM_Pending(_Item, 5);
+NOT DB_AMP_AL_CampSend_Pending(_Item, _Owner);
+ObjectTimerCancel(_Item, "AMP_AL_CampSendDefer");
+ToInventory(_Item, _Cont, _Count, 0, 0);
+DB_AMP_LM_Sorted(_Item);
+
+IF
+ObjectTimerFinished((ITEM)_Item, "AMP_LM_Route")
+AND
+DB_AMP_LM_Pending(_Item, 6)
+AND
+Exists(_Item, 1)
+AND
+NOT IsEquipped(_Item, 1)
+AND
+GetFirstInventoryOwnerCharacter(_Item, (CHARACTER)_Owner)
+AND
+DB_Players(_Owner)
+AND
+GetItemByTemplateInInventory((ITEMROOT)CONT_GEN_CampSupplySack_efcb70b7-868b-4214-968a-e23f6ad586bc, _Owner, (ITEM)_Cont)
+AND
+GetStackAmount(_Item, (INTEGER)_Count, _)
+THEN
+NOT DB_AMP_LM_Pending(_Item, 6);
+NOT DB_AMP_AL_CampSend_Pending(_Item, _Owner);
+ObjectTimerCancel(_Item, "AMP_AL_CampSendDefer");
+ToInventory(_Item, _Cont, _Count, 0, 0);
+DB_AMP_LM_Sorted(_Item);
+
+EXITSECTION
+ENDEXITSECTION

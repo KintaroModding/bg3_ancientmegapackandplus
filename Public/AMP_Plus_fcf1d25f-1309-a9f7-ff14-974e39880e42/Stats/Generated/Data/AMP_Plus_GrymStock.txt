@@ -1,0 +1,20 @@
+// the level instance re-seats these spells on every spawn and load, the marker holds them down
+
+new entry "AMP_PLUS_GRYM_STOCK"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_PLUS_GRYM_STOCK"
+data "StackType" "Overwrite"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator;IgnoreResting;ApplyToDead"
+
+new entry "Target_AMP_AdamantineGolem_Pull"
+type "SpellData"
+data "SpellType" "Target"
+using "Target_AMP_AdamantineGolem_Pull"
+data "RequirementConditions" "not HasStatus('AMP_PLUS_GRYM_STOCK')"
+
+new entry "Shout_AMP_Grym_SummonDrones"
+type "SpellData"
+data "SpellType" "Shout"
+using "Shout_AMP_Grym_SummonDrones"
+data "RequirementConditions" "not HasStatus('UND_ADAMANTINEGOLEM_PHASE2') and not HasStatus('AMP_PLUS_GRYM_STOCK')"

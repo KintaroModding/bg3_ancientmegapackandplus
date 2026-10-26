@@ -1,0 +1,15 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+// base sets 5, this rewrites it to 2 once it lands
+// MB text for 2 gold overrides the base handle in AMP_Plus_AutoLootMinValue.loca.xml
+IF
+DB_AMP_AL_MinValue(5)
+THEN
+NOT DB_AMP_AL_MinValue(5);
+DB_AMP_AL_MinValue(2);
+
+EXITSECTION
+ENDEXITSECTION

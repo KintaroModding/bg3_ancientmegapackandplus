@@ -1,0 +1,106 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// base only clears the overlay from recruited companions, story allies read IsBoss too
+// so it follows the current relation: off while not an enemy, back if it turns
+
+PROC
+PROC_AMP_Plus_UltraAllyStrip((CHARACTER)_C)
+THEN
+RemoveStatus(_C, "AMP_ULTRA_BOSS_OVERLAY", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_ULTRA_NPC_OVERLAY", NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_UltraAllyRestore((CHARACTER)_C)
+AND
+DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_DiffV3_Tracked(_C, _)
+AND
+IsBoss(_C, 1)
+THEN
+ApplyStatus(_C, "AMP_ULTRA_BOSS_OVERLAY", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_UltraAllyRestore((CHARACTER)_C)
+AND
+DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_DiffV3_Tracked(_C, _)
+AND
+IsBoss(_C, 0)
+THEN
+ApplyStatus(_C, "AMP_ULTRA_NPC_OVERLAY", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+EnteredCombat((CHARACTER)_C, _)
+AND
+IsPlayer(_C, 0)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_C, _Host, 0)
+AND
+NOT DB_AMP_Plus_UltraAlly(_C)
+THEN
+DB_AMP_Plus_UltraAlly(_C);
+PROC_AMP_Plus_UltraAllyStrip(_C);
+
+IF
+EnteredCombat((CHARACTER)_C, _)
+AND
+DB_AMP_Plus_UltraAlly(_C)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_C, _Host, 1)
+THEN
+NOT DB_AMP_Plus_UltraAlly(_C);
+PROC_AMP_Plus_UltraAllyRestore(_C);
+
+IF
+TurnStarted((CHARACTER)_C)
+AND
+IsPlayer(_C, 0)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_C, _Host, 0)
+AND
+NOT DB_AMP_Plus_UltraAlly(_C)
+THEN
+DB_AMP_Plus_UltraAlly(_C);
+PROC_AMP_Plus_UltraAllyStrip(_C);
+
+IF
+TurnStarted((CHARACTER)_C)
+AND
+DB_AMP_Plus_UltraAlly(_C)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_C, _Host, 1)
+THEN
+NOT DB_AMP_Plus_UltraAlly(_C);
+PROC_AMP_Plus_UltraAllyRestore(_C);
+
+// tracker also grants the overlay to allies on insert, take it off again
+IF
+DB_AMP_DiffV3_Tracked((CHARACTER)_C, _)
+AND
+DB_AMP_Plus_UltraAlly(_C)
+THEN
+PROC_AMP_Plus_UltraAllyStrip(_C);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Plus_UltraAlly((CHARACTER)_C)
+THEN
+PROC_AMP_Plus_UltraAllyStrip(_C);
+
+EXITSECTION
+ENDEXITSECTION

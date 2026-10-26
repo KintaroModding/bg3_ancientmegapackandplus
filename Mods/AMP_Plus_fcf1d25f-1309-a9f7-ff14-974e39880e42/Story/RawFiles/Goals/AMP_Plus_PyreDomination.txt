@@ -1,0 +1,344 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+DB_AMP_Plus_Pyre2_Anchor((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre_AnchorCounted(_Char, _CombatID)
+AND
+GetMaxHitpoints(_Char, (INTEGER)_Max)
+THEN
+DB_AMP_Plus_Pyre_AnchorCounted(_Char, _CombatID);
+PROC_AMP_Plus_Pyre2_OpenAdd(_CombatID, _Max);
+
+PROC
+PROC_AMP_Plus_Pyre2_OpenAdd((GUIDSTRING)_CombatID, (INTEGER)_Max)
+AND
+NOT DB_AMP_Plus_Pyre_AnchorOpen(_CombatID, _)
+THEN
+DB_AMP_Plus_Pyre_AnchorOpen(_CombatID, _Max);
+
+PROC
+PROC_AMP_Plus_Pyre2_OpenAdd((GUIDSTRING)_CombatID, (INTEGER)_Max)
+AND
+DB_AMP_Plus_Pyre_AnchorOpen(_CombatID, (INTEGER)_Old)
+AND
+IntegerSum(_Old, _Max, (INTEGER)_New)
+THEN
+NOT DB_AMP_Plus_Pyre_AnchorOpen(_CombatID, _Old);
+DB_AMP_Plus_Pyre_AnchorOpen(_CombatID, _New);
+
+// run from the round tick: rule order on one event is not fixed
+
+PROC
+PROC_AMP_Plus_Pyre2_SetMod((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_ReadAnchor(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_SetMod((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_Push(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_SetMod((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_RollLast(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_SetMod((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_Stall(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_SetMod((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_Combine(_CombatID);
+
+// walk and tally in separate bodies. A dead anchor counts as zero
+
+PROC
+PROC_AMP_Plus_Pyre2_ReadAnchor((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_AnchorHP(_CombatID, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre_AnchorHP(_CombatID, _Old);
+
+PROC
+PROC_AMP_Plus_Pyre2_ReadAnchor((GUIDSTRING)_CombatID)
+THEN
+DB_AMP_Plus_Pyre_AnchorHP(_CombatID, 0);
+
+PROC
+PROC_AMP_Plus_Pyre2_ReadAnchor((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Anchor((CHARACTER)_Char, _CombatID)
+AND
+IsDead(_Char, 0)
+AND
+GetHitpoints(_Char, (INTEGER)_Hp)
+THEN
+PROC_AMP_Plus_Pyre2_AnchorAdd(_CombatID, _Hp);
+
+PROC
+PROC_AMP_Plus_Pyre2_AnchorAdd((GUIDSTRING)_CombatID, (INTEGER)_Hp)
+AND
+DB_AMP_Plus_Pyre_AnchorHP(_CombatID, (INTEGER)_C)
+AND
+IntegerSum(_C, _Hp, (INTEGER)_New)
+THEN
+NOT DB_AMP_Plus_Pyre_AnchorHP(_CombatID, _C);
+DB_AMP_Plus_Pyre_AnchorHP(_CombatID, _New);
+
+PROC
+PROC_AMP_Plus_Pyre2_Push((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Push(_CombatID, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre_Push(_CombatID, _Old);
+
+PROC
+PROC_AMP_Plus_Pyre2_Push((GUIDSTRING)_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre_AnchorLast(_CombatID, _)
+THEN
+DB_AMP_Plus_Pyre_Push(_CombatID, 0);
+
+PROC
+PROC_AMP_Plus_Pyre2_Push((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_AnchorLast(_CombatID, (INTEGER)_Last)
+AND
+DB_AMP_Plus_Pyre_AnchorHP(_CombatID, (INTEGER)_Now)
+AND
+_Last <= _Now
+THEN
+DB_AMP_Plus_Pyre_Push(_CombatID, 0);
+
+PROC
+PROC_AMP_Plus_Pyre2_Push((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_AnchorLast(_CombatID, (INTEGER)_Last)
+AND
+DB_AMP_Plus_Pyre_AnchorHP(_CombatID, (INTEGER)_Now)
+AND
+_Last > _Now
+AND
+DB_AMP_Plus_Pyre_AnchorOpen(_CombatID, (INTEGER)_Open)
+AND
+_Open > 0
+AND
+IntegerSubtract(_Last, _Now, (INTEGER)_Gone)
+AND
+DB_AMP_Plus_Pyre2_Cfg("PUSHGAIN", (INTEGER)_Gain)
+AND
+IntegerProduct(_Gone, _Gain, (INTEGER)_Scaled)
+AND
+IntegerDivide(_Scaled, _Open, (INTEGER)_Raw)
+THEN
+PROC_AMP_Plus_Pyre2_ClampPush(_CombatID, _Raw);
+
+PROC
+PROC_AMP_Plus_Pyre2_ClampPush((GUIDSTRING)_CombatID, (INTEGER)_Raw)
+AND
+DB_AMP_Plus_Pyre2_Cfg("PUSHMAX", (INTEGER)_Max)
+AND
+_Raw > _Max
+THEN
+NOT DB_AMP_Plus_Pyre_Push(_CombatID, 0);
+DB_AMP_Plus_Pyre_Push(_CombatID, _Max);
+
+PROC
+PROC_AMP_Plus_Pyre2_ClampPush((GUIDSTRING)_CombatID, (INTEGER)_Raw)
+AND
+DB_AMP_Plus_Pyre2_Cfg("PUSHMAX", (INTEGER)_Max)
+AND
+_Raw <= _Max
+THEN
+NOT DB_AMP_Plus_Pyre_Push(_CombatID, 0);
+DB_AMP_Plus_Pyre_Push(_CombatID, _Raw);
+
+PROC
+PROC_AMP_Plus_Pyre2_RollLast((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_AnchorLast(_CombatID, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre_AnchorLast(_CombatID, _Old);
+
+PROC
+PROC_AMP_Plus_Pyre2_RollLast((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_AnchorHP(_CombatID, (INTEGER)_Now)
+THEN
+DB_AMP_Plus_Pyre_AnchorLast(_CombatID, _Now);
+
+PROC
+PROC_AMP_Plus_Pyre2_Stall((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Stall(_CombatID, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre_Stall(_CombatID, _Old);
+
+PROC
+PROC_AMP_Plus_Pyre2_Stall((GUIDSTRING)_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre2_Round(_CombatID, _)
+THEN
+DB_AMP_Plus_Pyre_Stall(_CombatID, 0);
+
+PROC
+PROC_AMP_Plus_Pyre2_Stall((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Cfg("STALLFREE", (INTEGER)_Free)
+AND
+DB_AMP_Plus_Pyre2_Round(_CombatID, (INTEGER)_R)
+AND
+_R <= _Free
+THEN
+DB_AMP_Plus_Pyre_Stall(_CombatID, 0);
+
+PROC
+PROC_AMP_Plus_Pyre2_Stall((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Cfg("STALLFREE", (INTEGER)_Free)
+AND
+DB_AMP_Plus_Pyre2_Cfg("STALLSTEP", (INTEGER)_Step)
+AND
+DB_AMP_Plus_Pyre2_Cfg("STALLMAX", (INTEGER)_Max)
+AND
+DB_AMP_Plus_Pyre2_Round(_CombatID, (INTEGER)_R)
+AND
+_R > _Free
+AND
+IntegerSubtract(_R, _Free, (INTEGER)_Over)
+AND
+IntegerProduct(_Over, _Step, (INTEGER)_Raw)
+AND
+_Raw > _Max
+THEN
+DB_AMP_Plus_Pyre_Stall(_CombatID, _Max);
+
+PROC
+PROC_AMP_Plus_Pyre2_Stall((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Cfg("STALLFREE", (INTEGER)_Free)
+AND
+DB_AMP_Plus_Pyre2_Cfg("STALLSTEP", (INTEGER)_Step)
+AND
+DB_AMP_Plus_Pyre2_Cfg("STALLMAX", (INTEGER)_Max)
+AND
+DB_AMP_Plus_Pyre2_Round(_CombatID, (INTEGER)_R)
+AND
+_R > _Free
+AND
+IntegerSubtract(_R, _Free, (INTEGER)_Over)
+AND
+IntegerProduct(_Over, _Step, (INTEGER)_Raw)
+AND
+_Raw <= _Max
+THEN
+DB_AMP_Plus_Pyre_Stall(_CombatID, _Raw);
+
+PROC
+PROC_AMP_Plus_Pyre2_Combine((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Push(_CombatID, (INTEGER)_P)
+AND
+DB_AMP_Plus_Pyre_Stall(_CombatID, (INTEGER)_S)
+AND
+DB_AMP_Plus_Pyre2_Cfg("TEMPOFLOOR", (INTEGER)_Floor)
+AND
+IntegerSum(_Floor, _P, (INTEGER)_Part)
+AND
+IntegerSum(_Part, _S, (INTEGER)_Raw)
+AND
+DB_AMP_Plus_Pyre2_Cfg("TEMPOCEIL", (INTEGER)_Ceil)
+AND
+_Raw > _Ceil
+THEN
+PROC_AMP_Plus_Pyre2_WriteMod(_CombatID, _Ceil);
+
+PROC
+PROC_AMP_Plus_Pyre2_Combine((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Push(_CombatID, (INTEGER)_P)
+AND
+DB_AMP_Plus_Pyre_Stall(_CombatID, (INTEGER)_S)
+AND
+DB_AMP_Plus_Pyre2_Cfg("TEMPOFLOOR", (INTEGER)_Floor)
+AND
+IntegerSum(_Floor, _P, (INTEGER)_Part)
+AND
+IntegerSum(_Part, _S, (INTEGER)_Raw)
+AND
+DB_AMP_Plus_Pyre2_Cfg("TEMPOCEIL", (INTEGER)_Ceil)
+AND
+_Raw <= _Ceil
+THEN
+PROC_AMP_Plus_Pyre2_WriteMod(_CombatID, _Raw);
+
+PROC
+PROC_AMP_Plus_Pyre2_WriteMod((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre_Mod(_CombatID, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre_Mod(_CombatID, _Old);
+
+PROC
+PROC_AMP_Plus_Pyre2_WriteMod((GUIDSTRING)_CombatID, (INTEGER)_N)
+THEN
+DB_AMP_Plus_Pyre_Mod(_CombatID, _N);
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_AnchorHP(_CombatID, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_Pyre_AnchorHP(_CombatID, _V);
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_AnchorLast(_CombatID, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_Pyre_AnchorLast(_CombatID, _V);
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_AnchorOpen(_CombatID, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_Pyre_AnchorOpen(_CombatID, _V);
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_DrainDomCounted(_CombatID);
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Push(_CombatID, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_Pyre_Push(_CombatID, _V);
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Stall(_CombatID, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_Pyre_Stall(_CombatID, _V);
+
+// single pass, a living anchor is re-counted when its mark goes
+PROC
+PROC_AMP_Plus_Pyre2_DrainDomCounted((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_AnchorCounted((CHARACTER)_Char, _CombatID)
+THEN
+NOT DB_AMP_Plus_Pyre_AnchorCounted(_Char, _CombatID);
+
+EXITSECTION
+ENDEXITSECTION

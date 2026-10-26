@@ -1,0 +1,915 @@
+Version 1
+SubGoalCombiner SGC_AND
+
+INITSECTION
+// sovereign scatter slots
+DB_AMP_Sovereign_ScatterSlots("Helmet");
+DB_AMP_Sovereign_ScatterSlots("Breast");
+DB_AMP_Sovereign_ScatterSlots("Cloak");
+DB_AMP_Sovereign_ScatterSlots("Gloves");
+DB_AMP_Sovereign_ScatterSlots("Boots");
+DB_AMP_Sovereign_ScatterSlots("Amulet");
+DB_AMP_Sovereign_ScatterSlots("Ring");
+DB_AMP_Sovereign_ScatterSlots("Ring2");
+DB_AMP_Sovereign_ScatterSlots("Melee Main Weapon");
+DB_AMP_Sovereign_ScatterSlots("Melee Offhand Weapon");
+DB_AMP_Sovereign_ScatterSlots("Ranged Main Weapon");
+
+// spore equip slots
+DB_AMP_Spore_EquipSlots("Breast");
+DB_AMP_Spore_EquipSlots("Helmet");
+DB_AMP_Spore_EquipSlots("Gloves");
+DB_AMP_Spore_EquipSlots("Boots");
+DB_AMP_Spore_EquipSlots("Cloak");
+DB_AMP_Spore_EquipSlots("Amulet");
+DB_AMP_Spore_EquipSlots("Ring");
+DB_AMP_Spore_EquipSlots("Ring2");
+DB_AMP_Spore_EquipSlots("Melee Main Weapon");
+DB_AMP_Spore_EquipSlots("Ranged Main Weapon");
+
+KBSECTION
+
+// elixir of eternity - regen level switching
+
+// re-equip: restore regen to current level
+IF
+StatusApplied(_Char, "AMP_ELIXIR_TECHNICAL", _, _)
+AND
+DB_Players((CHARACTER)_Char)
+AND
+DB_AMP_Elixir_Level(_Char, (INTEGER)_Level)
+AND
+_Level > 0
+THEN
+PROC_AMP_Elixir_SetLevel(_Char, _Level);
+
+// first trigger: init db to 0
+IF
+StatusApplied(_Char, "AMP_ELIXIR_UPGRADE_TRIGGER", _, _)
+AND
+DB_Players((CHARACTER)_Char)
+AND
+NOT DB_AMP_Elixir_Level(_Char, _)
+THEN
+DB_AMP_Elixir_Level(_Char, 0);
+
+// each trigger: bump and set level
+IF
+StatusApplied(_Char, "AMP_ELIXIR_UPGRADE_TRIGGER", _, _)
+AND
+DB_Players((CHARACTER)_Char)
+AND
+DB_AMP_Elixir_Level(_Char, (INTEGER)_Level)
+AND
+_Level < 10
+AND
+IntegerSum(_Level, 1, _NewLevel)
+THEN
+NOT DB_AMP_Elixir_Level(_Char, _Level);
+DB_AMP_Elixir_Level(_Char, _NewLevel);
+PROC_AMP_Elixir_SetLevel(_Char, _NewLevel);
+
+PROC
+PROC_AMP_Elixir_SetLevel((CHARACTER)_Char, 1)
+THEN
+RemoveStatus(_Char, "AMP_ELIXIR_REGEN_2");
+RemoveStatus(_Char, "AMP_ELIXIR_REGEN_3");
+RemoveStatus(_Char, "AMP_ELIXIR_REGEN_4");
+RemoveStatus(_Char, "AMP_ELIXIR_REGEN_5");
+RemoveStatus(_Char, "AMP_ELIXIR_REGEN_6");
+RemoveStatus(_Char, "AMP_ELIXIR_REGEN_7");
+RemoveStatus(_Char, "AMP_ELIXIR_REGEN_8");
+RemoveStatus(_Char, "AMP_ELIXIR_REGEN_9");
+RemoveStatus(_Char, "AMP_ELIXIR_REGEN_10");
+ApplyStatus(_Char, "AMP_ELIXIR_REGEN_1", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Elixir_SetLevel((CHARACTER)_Char, 2)
+THEN
+RemoveStatus(_Char, "AMP_ELIXIR_REGEN_1");
+ApplyStatus(_Char, "AMP_ELIXIR_REGEN_2", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Elixir_SetLevel((CHARACTER)_Char, 3)
+THEN
+RemoveStatus(_Char, "AMP_ELIXIR_REGEN_2");
+ApplyStatus(_Char, "AMP_ELIXIR_REGEN_3", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Elixir_SetLevel((CHARACTER)_Char, 4)
+THEN
+RemoveStatus(_Char, "AMP_ELIXIR_REGEN_3");
+ApplyStatus(_Char, "AMP_ELIXIR_REGEN_4", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Elixir_SetLevel((CHARACTER)_Char, 5)
+THEN
+RemoveStatus(_Char, "AMP_ELIXIR_REGEN_4");
+ApplyStatus(_Char, "AMP_ELIXIR_REGEN_5", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Elixir_SetLevel((CHARACTER)_Char, 6)
+THEN
+RemoveStatus(_Char, "AMP_ELIXIR_REGEN_5");
+ApplyStatus(_Char, "AMP_ELIXIR_REGEN_6", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Elixir_SetLevel((CHARACTER)_Char, 7)
+THEN
+RemoveStatus(_Char, "AMP_ELIXIR_REGEN_6");
+ApplyStatus(_Char, "AMP_ELIXIR_REGEN_7", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Elixir_SetLevel((CHARACTER)_Char, 8)
+THEN
+RemoveStatus(_Char, "AMP_ELIXIR_REGEN_7");
+ApplyStatus(_Char, "AMP_ELIXIR_REGEN_8", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Elixir_SetLevel((CHARACTER)_Char, 9)
+THEN
+RemoveStatus(_Char, "AMP_ELIXIR_REGEN_8");
+ApplyStatus(_Char, "AMP_ELIXIR_REGEN_9", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Elixir_SetLevel((CHARACTER)_Char, 10)
+THEN
+RemoveStatus(_Char, "AMP_ELIXIR_REGEN_9");
+ApplyStatus(_Char, "AMP_ELIXIR_REGEN_10", -1.0, 1, _Char);
+
+// primemother's spore
+
+// tracking
+
+// spore added to player inventory
+IF
+AddedTo((ITEM)_SporeItem, (ITEM)_Container, _)
+AND
+GetInventoryOwner(_Container, (CHARACTER)_Player)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+GetTemplate(_SporeItem, (ITEMROOT)AMP_Cursed_Spore_ec2ffd1d-2f0f-420a-989d-ea6d1c5bfee9)
+THEN
+DB_AMP_Spore_Carrier(_Player, _SporeItem);
+
+// spore added directly to player (not container)
+IF
+AddedTo((ITEM)_SporeItem, (CHARACTER)_Player, _)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+GetTemplate(_SporeItem, (ITEMROOT)AMP_Cursed_Spore_ec2ffd1d-2f0f-420a-989d-ea6d1c5bfee9)
+THEN
+DB_AMP_Spore_Carrier(_Player, _SporeItem);
+
+// spore removed
+IF
+RemovedFrom((ITEM)_SporeItem, _)
+AND
+DB_AMP_Spore_Carrier((CHARACTER)_Player, (ITEM)_SporeItem)
+THEN
+NOT DB_AMP_Spore_Carrier(_Player, _SporeItem);
+
+// infection on long rest
+
+// entry: long rest finished
+IF
+LongRestFinished()
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+DB_AMP_Spore_PassNewInfections(_Player, 0);
+PROC_AMP_Spore_RunInfectionSources(_Player);
+
+// source 1: the spore itself. gettemplate filter drops stale carrier links
+PROC
+PROC_AMP_Spore_RunInfectionSources((CHARACTER)_Player)
+AND
+DB_AMP_Spore_Carrier(_Player, (ITEM)_SporeItem)
+AND
+GetTemplate(_SporeItem, (ITEMROOT)AMP_Cursed_Spore_ec2ffd1d-2f0f-420a-989d-ea6d1c5bfee9)
+THEN
+PROC_AMP_Spore_RunSourcePass(_Player, _SporeItem);
+
+// source 2: each infected item, 1 pass per rest. was 2, cut to curb compounding spread
+PROC
+PROC_AMP_Spore_RunInfectionSources((CHARACTER)_Player)
+AND
+DB_AMP_Spore_ItemInfections((ITEM)_InfectedItem, (INTEGER)_InfCount)
+AND
+_InfCount > 0
+AND
+IsInInventoryOf(_InfectedItem, _Player, _)
+THEN
+PROC_AMP_Spore_RunSourceMulti(_Player, _InfectedItem, 1);
+
+// run passes for one source, lifetime cap 4
+PROC
+PROC_AMP_Spore_RunSourceMulti((CHARACTER)_Player, (ITEM)_Source, (INTEGER)_Remaining)
+AND
+_Remaining > 0
+AND
+DB_AMP_Spore_SourceCap(_Source, (INTEGER)_Used)
+AND
+_Used < 4
+AND
+IntegerSubtract(_Remaining, 1, _NextRemaining)
+THEN
+PROC_AMP_Spore_RunSourcePass(_Player, _Source);
+PROC_AMP_Spore_RunSourceMulti(_Player, _Source, _NextRemaining);
+
+// same, source not tracked yet
+PROC
+PROC_AMP_Spore_RunSourceMulti((CHARACTER)_Player, (ITEM)_Source, (INTEGER)_Remaining)
+AND
+_Remaining > 0
+AND
+NOT DB_AMP_Spore_SourceCap(_Source, _)
+AND
+IntegerSubtract(_Remaining, 1, _NextRemaining)
+THEN
+DB_AMP_Spore_SourceCap(_Source, 0);
+PROC_AMP_Spore_RunSourcePass(_Player, _Source);
+PROC_AMP_Spore_RunSourceMulti(_Player, _Source, _NextRemaining);
+
+// single pass: equipped slots first, then inventory
+PROC
+PROC_AMP_Spore_RunSourcePass((CHARACTER)_Player, (ITEM)_Source)
+THEN
+DB_AMP_Spore_CurrentSource(_Player, _Source);
+// phase 1: equipped slots
+PROC_AMP_Spore_InfectEquippedSlots(_Player, _Source);
+// phase 2: inventory, skip equipped
+IterateInventory(_Player, "AMP_Spore_TryInfect_Inv", "AMP_Spore_PassDone");
+
+// phase 1: equipped slots, 0.5% each, cap 3 per rest, lifetime cap 4
+PROC
+PROC_AMP_Spore_InfectEquippedSlots((CHARACTER)_Player, (ITEM)_Source)
+AND
+NOT HasPassive(_Player, "MAG_Cloak30_bonus", 1)
+AND
+NOT HasActiveStatus(_Player, "AMP_GRAND_DESIGN_WARD", 1)
+AND
+DB_AMP_Spore_EquipSlots((STRING)_Slot)
+AND
+GetEquippedItem(_Player, _Slot, (ITEM)_Item)
+AND
+_Item != _Source
+AND
+DB_AMP_Spore_PassNewInfections(_Player, (INTEGER)_PassCount)
+AND
+_PassCount < 3
+AND
+DB_AMP_Spore_SourceCap(_Source, (INTEGER)_SourceUsed)
+AND
+_SourceUsed < 4
+AND
+NOT GetTemplate(_Item, (ITEMROOT)AMP_Cursed_Spore_ec2ffd1d-2f0f-420a-989d-ea6d1c5bfee9)
+AND
+NOT IsStoryItem(_Item, 1)
+AND
+Random(1000, (INTEGER)_Roll)
+AND
+_Roll < 5
+AND
+IntegerSum(_PassCount, 1, _NewPassCount)
+AND
+IntegerSum(_SourceUsed, 1, _NewSourceUsed)
+THEN
+ApplyStatus(_Item, "AMP_SPORE_INFECTION", -1.0, 1, _Player);
+PROC_AMP_Spore_TrackInfection(_Item);
+NOT DB_AMP_Spore_PassNewInfections(_Player, _PassCount);
+DB_AMP_Spore_PassNewInfections(_Player, _NewPassCount);
+NOT DB_AMP_Spore_SourceCap(_Source, _SourceUsed);
+DB_AMP_Spore_SourceCap(_Source, _NewSourceUsed);
+DB_AMP_Spore_EquippedChecked(_Item);
+
+// mark equipped items so phase 2 skips them
+PROC
+PROC_AMP_Spore_InfectEquippedSlots((CHARACTER)_Player, (ITEM)_Source)
+AND
+DB_AMP_Spore_EquipSlots((STRING)_Slot)
+AND
+GetEquippedItem(_Player, _Slot, (ITEM)_Item)
+AND
+NOT DB_AMP_Spore_EquippedChecked(_Item)
+THEN
+DB_AMP_Spore_EquippedChecked(_Item);
+
+// phase 2: inventory, 1%, skip equipped, same caps as phase 1
+IF
+EntityEvent((ITEM)_Item, "AMP_Spore_TryInfect_Inv")
+AND
+DB_AMP_Spore_CurrentSource((CHARACTER)_Player, (ITEM)_Source)
+AND
+NOT HasPassive(_Player, "MAG_Cloak30_bonus", 1)
+AND
+NOT HasActiveStatus(_Player, "AMP_GRAND_DESIGN_WARD", 1)
+AND
+_Item != _Source
+AND
+NOT DB_AMP_Spore_EquippedChecked(_Item)
+AND
+DB_AMP_Spore_PassNewInfections(_Player, (INTEGER)_PassCount)
+AND
+_PassCount < 3
+AND
+DB_AMP_Spore_SourceCap(_Source, (INTEGER)_SourceUsed)
+AND
+_SourceUsed < 4
+AND
+NOT GetTemplate(_Item, (ITEMROOT)AMP_Cursed_Spore_ec2ffd1d-2f0f-420a-989d-ea6d1c5bfee9)
+AND
+NOT IsStoryItem(_Item, 1)
+AND
+Random(1000, (INTEGER)_Roll)
+AND
+_Roll < 10
+AND
+IntegerSum(_PassCount, 1, _NewPassCount)
+AND
+IntegerSum(_SourceUsed, 1, _NewSourceUsed)
+THEN
+ApplyStatus(_Item, "AMP_SPORE_INFECTION", -1.0, 1, _Player);
+PROC_AMP_Spore_TrackInfection(_Item);
+NOT DB_AMP_Spore_PassNewInfections(_Player, _PassCount);
+DB_AMP_Spore_PassNewInfections(_Player, _NewPassCount);
+NOT DB_AMP_Spore_SourceCap(_Source, _SourceUsed);
+DB_AMP_Spore_SourceCap(_Source, _NewSourceUsed);
+
+// cleanup after pass
+IF
+EntityEvent(_, "AMP_Spore_PassDone")
+AND
+DB_AMP_Spore_CurrentSource((CHARACTER)_Player, (ITEM)_Source)
+THEN
+NOT DB_AMP_Spore_CurrentSource(_Player, _Source);
+
+// clear equipped-checked marks
+IF
+EntityEvent(_, "AMP_Spore_PassDone")
+AND
+DB_AMP_Spore_EquippedChecked((ITEM)_Item)
+THEN
+NOT DB_AMP_Spore_EquippedChecked(_Item);
+
+// track infection count per item
+PROC
+PROC_AMP_Spore_TrackInfection((ITEM)_Item)
+AND
+DB_AMP_Spore_ItemInfections(_Item, (INTEGER)_Count)
+AND
+IntegerSum(_Count, 1, _NewCount)
+THEN
+NOT DB_AMP_Spore_ItemInfections(_Item, _Count);
+DB_AMP_Spore_ItemInfections(_Item, _NewCount);
+
+PROC
+PROC_AMP_Spore_TrackInfection((ITEM)_Item)
+AND
+NOT DB_AMP_Spore_ItemInfections(_Item, _)
+THEN
+DB_AMP_Spore_ItemInfections(_Item, 1);
+
+// regen (turn start, equipped only)
+
+IF
+TurnStarted(_Char)
+AND
+DB_Players((CHARACTER)_Char)
+AND
+DB_AMP_Spore_EquipSlots((STRING)_Slot)
+AND
+GetEquippedItem(_Char, _Slot, (ITEM)_Item)
+AND
+DB_AMP_Spore_ItemInfections(_Item, (INTEGER)_InfCount)
+AND
+_InfCount > 0
+THEN
+PROC_AMP_Spore_HealN(_Char, _InfCount);
+
+// cap 10 heals per slot per turn, avoids deep recursion
+PROC
+PROC_AMP_Spore_HealN((CHARACTER)_Char, (INTEGER)_N)
+AND
+_N > 10
+THEN
+PROC_AMP_Spore_HealLoop(_Char, 10);
+
+PROC
+PROC_AMP_Spore_HealN((CHARACTER)_Char, (INTEGER)_N)
+AND
+_N > 0
+AND
+_N <= 10
+THEN
+PROC_AMP_Spore_HealLoop(_Char, _N);
+
+PROC
+PROC_AMP_Spore_HealLoop((CHARACTER)_Char, (INTEGER)_N)
+AND
+_N > 0
+AND
+IntegerSubtract(_N, 1, _NextN)
+THEN
+ApplyStatus(_Char, "AMP_SPORE_HEAL", 0.0, 1, _Char);
+PROC_AMP_Spore_HealLoop(_Char, _NextN);
+
+PROC
+PROC_AMP_Spore_HealLoop((CHARACTER)_Char, 0)
+THEN
+DB_NOOP(1);
+NOT DB_NOOP(1);
+
+// rot roll: bound to the owner so it fires on their turn only, like the regen gate
+
+IF
+TurnStarted(_Char)
+AND
+DB_Players((CHARACTER)_Char)
+AND
+DB_AMP_Spore_ItemInfections((ITEM)_Item, (INTEGER)_InfCount)
+AND
+_InfCount > 0
+AND
+GetInventoryOwner(_Item, _Char)
+AND
+Random(30000, (INTEGER)_Roll)
+AND
+_Roll < _InfCount
+THEN
+NOT DB_AMP_Spore_ItemInfections(_Item, _InfCount);
+RequestDelete(_Item);
+
+// fire cleansing
+// StatusAttempt, not StatusApplied: fires even where the engine rejects BURNING
+IF
+StatusAttempt((ITEM)_Item, "BURNING", _, _)
+AND
+DB_AMP_Spore_ItemInfections(_Item, (INTEGER)_Count)
+AND
+_Count > 0
+AND
+GetInventoryOwner(_Item, (CHARACTER)_Owner)
+THEN
+RemoveStatus(_Item, "AMP_SPORE_INFECTION", _Owner);
+NOT DB_AMP_Spore_ItemInfections(_Item, _Count);
+
+// fallback: item on ground (no owner), use item as cause
+IF
+StatusAttempt((ITEM)_Item, "BURNING", _, _)
+AND
+DB_AMP_Spore_ItemInfections(_Item, (INTEGER)_Count)
+AND
+_Count > 0
+AND
+NOT GetInventoryOwner(_Item, _)
+THEN
+RemoveStatus(_Item, "AMP_SPORE_INFECTION", _Item);
+NOT DB_AMP_Spore_ItemInfections(_Item, _Count);
+
+// cleanup
+
+// db sync when infection status actually leaves the item.
+// not on removedfrom: dropping on ground fires that, and burning arrives after drop
+IF
+StatusRemoved((ITEM)_Item, "AMP_SPORE_INFECTION", _, _)
+AND
+DB_AMP_Spore_ItemInfections(_Item, (INTEGER)_Count)
+THEN
+NOT DB_AMP_Spore_ItemInfections(_Item, _Count);
+
+// sourcecap NOT cleaned on removedfrom: moving the amulet to chest/companion
+// would reset the lifetime cap. stale entries are harmless db bloat
+
+// two-faced sovereign
+
+// first equip: rig 3 heads
+IF
+StatusApplied(_Char, "AMP_SOVEREIGN_TECHNICAL", _, _)
+AND
+NOT DB_AMP_Sovereign_EverEquipped(_Char, _)
+THEN
+DB_AMP_Sovereign_EverEquipped(_Char, 1);
+DB_AMP_Sovereign_Rigged(_Char, 3);
+
+// re-equip: ensure rigged db exists
+IF
+StatusApplied(_Char, "AMP_SOVEREIGN_TECHNICAL", _, _)
+AND
+DB_AMP_Sovereign_EverEquipped(_Char, _)
+AND
+NOT DB_AMP_Sovereign_Rigged(_Char, _)
+THEN
+DB_AMP_Sovereign_Rigged(_Char, 0);
+
+// flip trigger
+
+IF
+StatusApplied(_Char, "AMP_SOVEREIGN_FLIP_TRIGGER", _, _)
+AND
+DB_Players((CHARACTER)_Char)
+THEN
+PROC_AMP_Sovereign_Resolve(_Char);
+
+// resolve
+
+// guaranteed heads
+PROC
+PROC_AMP_Sovereign_Resolve((CHARACTER)_Char)
+AND
+DB_AMP_Sovereign_Rigged(_Char, (INTEGER)_R)
+AND
+_R > 0
+AND
+IntegerSubtract(_R, 1, _NewR)
+THEN
+NOT DB_AMP_Sovereign_Rigged(_Char, _R);
+DB_AMP_Sovereign_Rigged(_Char, _NewR);
+PROC_AMP_Sovereign_Heads(_Char);
+
+// ward-bearer: forced heads, no roll
+PROC
+PROC_AMP_Sovereign_Resolve((CHARACTER)_Char)
+AND
+DB_AMP_Sovereign_Rigged(_Char, (INTEGER)_R)
+AND
+_R <= 0
+AND
+HasActiveStatus(_Char, "AMP_GRAND_DESIGN_WARD", 1)
+THEN
+PROC_AMP_Sovereign_Heads(_Char);
+
+// random: roll once, store, then route
+PROC
+PROC_AMP_Sovereign_Resolve((CHARACTER)_Char)
+AND
+DB_AMP_Sovereign_Rigged(_Char, (INTEGER)_R)
+AND
+_R <= 0
+AND
+NOT HasActiveStatus(_Char, "AMP_GRAND_DESIGN_WARD", 1)
+AND
+Random(100, (INTEGER)_Roll)
+THEN
+DB_AMP_Sovereign_FlipResult(_Char, _Roll);
+PROC_AMP_Sovereign_RouteFlip(_Char);
+
+// heads (roll < 40)
+PROC
+PROC_AMP_Sovereign_RouteFlip((CHARACTER)_Char)
+AND
+DB_AMP_Sovereign_FlipResult(_Char, (INTEGER)_Roll)
+AND
+_Roll < 40
+THEN
+NOT DB_AMP_Sovereign_FlipResult(_Char, _Roll);
+PROC_AMP_Sovereign_Heads(_Char);
+
+// tails (roll >= 40)
+PROC
+PROC_AMP_Sovereign_RouteFlip((CHARACTER)_Char)
+AND
+DB_AMP_Sovereign_FlipResult(_Char, (INTEGER)_Roll)
+AND
+_Roll >= 40
+THEN
+NOT DB_AMP_Sovereign_FlipResult(_Char, _Roll);
+PROC_AMP_Sovereign_Tails(_Char);
+
+// heads: one random blessing
+
+PROC
+PROC_AMP_Sovereign_Heads((CHARACTER)_Char)
+AND
+Random(9, (INTEGER)_Roll)
+THEN
+PROC_AMP_Sovereign_HeadsPick(_Char, _Roll);
+
+PROC
+PROC_AMP_Sovereign_HeadsPick((CHARACTER)_Char, 0)
+THEN
+ApplyStatus(_Char, "AMP_SOVEREIGN_HEADS_IMMUNE", 6.0, 1, _Char);
+
+PROC
+PROC_AMP_Sovereign_HeadsPick((CHARACTER)_Char, 1)
+THEN
+ApplyStatus(_Char, "AMP_SOVEREIGN_HEADS_AUTOCRIT", 18.0, 1, _Char);
+
+PROC
+PROC_AMP_Sovereign_HeadsPick((CHARACTER)_Char, 2)
+THEN
+ApplyStatus(_Char, "MAG_CELESTIAL_HASTE", 12.0, 1, _Char);
+
+PROC
+PROC_AMP_Sovereign_HeadsPick((CHARACTER)_Char, 3)
+THEN
+ApplyStatus(_Char, "AMP_SOVEREIGN_HEADS_INVIS", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Sovereign_HeadsPick((CHARACTER)_Char, 4)
+THEN
+ApplyStatus(_Char, "AMP_SOVEREIGN_HEADS_REGEN", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Sovereign_HeadsPick((CHARACTER)_Char, 5)
+THEN
+ApplyStatus(_Char, "AMP_SOVEREIGN_HEADS_SHIELD", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Sovereign_HeadsPick((CHARACTER)_Char, 6)
+THEN
+ApplyStatus(_Char, "AMP_SOVEREIGN_HEADS_TEMPHP", 0.0, 1, _Char);
+
+PROC
+PROC_AMP_Sovereign_HeadsPick((CHARACTER)_Char, 7)
+THEN
+ApplyStatus(_Char, "AMP_SOVEREIGN_HEADS_FLY", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Sovereign_HeadsPick((CHARACTER)_Char, 8)
+THEN
+ApplyStatus(_Char, "AMP_SOVEREIGN_HEADS_RESTORE_SLOTS", 0.0, 1, _Char);
+
+// tails: one random curse
+
+PROC
+PROC_AMP_Sovereign_Tails((CHARACTER)_Char)
+AND
+Random(9, (INTEGER)_Roll)
+THEN
+PROC_AMP_Sovereign_TailsPick(_Char, _Roll);
+
+PROC
+PROC_AMP_Sovereign_TailsPick((CHARACTER)_Char, 0)
+THEN
+ApplyStatus(_Char, "AMP_SOVEREIGN_TAILS_AC", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Sovereign_TailsPick((CHARACTER)_Char, 1)
+THEN
+ApplyStatus(_Char, "AMP_SOVEREIGN_TAILS_MENTAL", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Sovereign_TailsPick((CHARACTER)_Char, 2)
+THEN
+ApplyStatus(_Char, "AMP_SOVEREIGN_TAILS_CONSUME", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Sovereign_TailsPick((CHARACTER)_Char, 3)
+THEN
+ApplyStatus(_Char, "AMP_SOVEREIGN_TAILS_BONUS", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Sovereign_TailsPick((CHARACTER)_Char, 4)
+THEN
+ApplyStatus(_Char, "AMP_SOVEREIGN_TAILS_POISONED", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Sovereign_TailsPick((CHARACTER)_Char, 5)
+THEN
+ApplyStatus(_Char, "AMP_SOVEREIGN_TAILS_PRONE", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Sovereign_TailsPick((CHARACTER)_Char, 6)
+THEN
+ApplyStatus(_Char, "AMP_SOVEREIGN_TAILS_REFLECT", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Sovereign_TailsPick((CHARACTER)_Char, 7)
+THEN
+ApplyStatus(_Char, "AMP_SOVEREIGN_TAILS_INIT", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Sovereign_TailsPick((CHARACTER)_Char, 8)
+THEN
+ApplyStatus(_Char, "AMP_SOVEREIGN_TAILS_SCATTER_INFO", 30.0, 1, _Char);
+
+// gate scatter on actual apply, immunity-blocked statuses skip it
+IF
+StatusApplied((CHARACTER)_Char, "AMP_SOVEREIGN_TAILS_SCATTER_INFO", _, _)
+AND
+DB_Players(_Char)
+THEN
+PROC_AMP_Sovereign_ScatterEquipment(_Char);
+
+// scatter
+
+// collect equipped items
+PROC
+PROC_AMP_Sovereign_ScatterEquipment((CHARACTER)_Char)
+AND
+GetPosition(_Char, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+DB_AMP_Sovereign_ScatterSlots((STRING)_Slot)
+AND
+GetEquippedItem(_Char, _Slot, (ITEM)_Item)
+THEN
+DB_AMP_Sovereign_ScatterQueue(_Char, _Item, _X, _Y, _Z);
+RealtimeObjectTimerLaunch(_Char, "AMP_Sovereign_Scatter_Timer", 500);
+
+// timer done: unequip
+IF
+ObjectTimerFinished(_Char, "AMP_Sovereign_Scatter_Timer")
+AND
+DB_AMP_Sovereign_ScatterQueue((CHARACTER)_Char, (ITEM)_Item, (REAL)_X, (REAL)_Y, (REAL)_Z)
+THEN
+Unequip((CHARACTER)_Char, _Item);
+
+// unequipped: scatter + item timer
+IF
+Unequipped(_Item, _Char)
+AND
+DB_AMP_Sovereign_ScatterQueue(_Char, _Item, (REAL)_X, (REAL)_Y, (REAL)_Z)
+THEN
+NOT DB_AMP_Sovereign_ScatterQueue(_Char, _Item, _X, _Y, _Z);
+ScatterAt(_Item, _X, _Y, _Z, 10.0);
+ApplyStatus(_Item, "AMP_SOVEREIGN_SCATTER_ITEM_TIMER", 30.0, 1, _Char);
+DB_AMP_Sovereign_ScatteredItem(_Item, _Char);
+
+// item timer expired: delete if not picked up
+IF
+StatusRemoved(_Item, "AMP_SOVEREIGN_SCATTER_ITEM_TIMER", _, _)
+AND
+DB_AMP_Sovereign_ScatteredItem((ITEM)_Item, (CHARACTER)_Char)
+AND
+NOT IsInInventoryOf(_Item, _Char, _)
+THEN
+RequestDelete(_Item);
+NOT DB_AMP_Sovereign_ScatteredItem(_Item, _Char);
+
+// picked up scattered item: cancel
+IF
+AddedTo(_Item, _Char, _)
+AND
+DB_AMP_Sovereign_ScatteredItem((ITEM)_Item, (CHARACTER)_Char)
+THEN
+RemoveStatus(_Item, "AMP_SOVEREIGN_SCATTER_ITEM_TIMER");
+NOT DB_AMP_Sovereign_ScatteredItem(_Item, _Char);
+
+// debug: infect equipped slots only
+IF
+TextEvent("amp_spore_infect_eq")
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+PROC_AMP_Spore_DebugInfectEquip(_Host);
+
+PROC
+PROC_AMP_Spore_DebugInfectEquip((CHARACTER)_Host)
+AND
+DB_AMP_Spore_EquipSlots((STRING)_Slot)
+AND
+GetEquippedItem(_Host, _Slot, (ITEM)_Item)
+THEN
+ApplyStatus(_Item, "AMP_SPORE_INFECTION", -1.0, 1, _Host);
+PROC_AMP_Spore_TrackInfection(_Item);
+
+// debug: purge spore infection from inventory
+IF
+TextEvent("amp_spore_purge")
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+IterateInventory(_Host, "AMP_Spore_DebugPurge", "AMP_Spore_DebugPurgeDone");
+
+IF
+EntityEvent((ITEM)_Item, "AMP_Spore_DebugPurge")
+AND
+GetInventoryOwner(_Item, (CHARACTER)_Owner)
+AND
+HasActiveStatus(_Item, "AMP_SPORE_INFECTION", 1)
+THEN
+RemoveStatus(_Item, "AMP_SPORE_INFECTION", _Owner);
+
+// force-clean db even if status was already engine-wiped
+IF
+EntityEvent((ITEM)_Item, "AMP_Spore_DebugPurge")
+AND
+DB_AMP_Spore_ItemInfections(_Item, (INTEGER)_Count)
+THEN
+NOT DB_AMP_Spore_ItemInfections(_Item, _Count);
+
+IF
+EntityEvent(_, "AMP_Spore_DebugPurgeDone")
+THEN
+DB_NOOP(1);
+
+// debug: nuke all spores (party + camp chests + dbs)
+IF
+TextEvent("amp_spore_nuke")
+THEN
+PROC_AMP_Spore_NukeAll();
+
+// delete tracked spore items, clear carrier link
+PROC
+PROC_AMP_Spore_NukeAll()
+AND
+DB_AMP_Spore_Carrier((CHARACTER)_Player, (ITEM)_SporeItem)
+THEN
+RequestDelete(_SporeItem);
+NOT DB_AMP_Spore_Carrier(_Player, _SporeItem);
+
+// strip infection status + db from tracked infected items
+PROC
+PROC_AMP_Spore_NukeAll()
+AND
+DB_AMP_Spore_ItemInfections((ITEM)_Item, (INTEGER)_Count)
+THEN
+RemoveStatus(_Item, "AMP_SPORE_INFECTION");
+NOT DB_AMP_Spore_ItemInfections(_Item, _Count);
+
+// sweep party inventories for untracked spores / stale infections
+PROC
+PROC_AMP_Spore_NukeAll()
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+IterateInventory(_Player, "AMP_Spore_Nuke_Inv", "AMP_Spore_Nuke_Done");
+
+// sweep camp chests too
+PROC
+PROC_AMP_Spore_NukeAll()
+AND
+DB_Camp_UserCampChest(_, (ITEM)_Chest)
+THEN
+IterateInventory(_Chest, "AMP_Spore_Nuke_Inv", "AMP_Spore_Nuke_Done");
+
+// wipe leftover spore-side dbs
+PROC
+PROC_AMP_Spore_NukeAll()
+AND
+DB_AMP_Spore_SourceCap((ITEM)_Source, (INTEGER)_Used)
+THEN
+NOT DB_AMP_Spore_SourceCap(_Source, _Used);
+
+PROC
+PROC_AMP_Spore_NukeAll()
+AND
+DB_AMP_Spore_PassNewInfections((CHARACTER)_P, (INTEGER)_C)
+THEN
+NOT DB_AMP_Spore_PassNewInfections(_P, _C);
+
+PROC
+PROC_AMP_Spore_NukeAll()
+AND
+DB_AMP_Spore_CurrentSource((CHARACTER)_P, (ITEM)_S)
+THEN
+NOT DB_AMP_Spore_CurrentSource(_P, _S);
+
+PROC
+PROC_AMP_Spore_NukeAll()
+AND
+DB_AMP_Spore_EquippedChecked((ITEM)_I)
+THEN
+NOT DB_AMP_Spore_EquippedChecked(_I);
+
+// wipe chest-side dbs (declared in AMP_Spore_CampChest.txt, same namespace)
+PROC
+PROC_AMP_Spore_NukeAll()
+AND
+DB_AMP_SporeChest_PassNew((ITEM)_C, (INTEGER)_N)
+THEN
+NOT DB_AMP_SporeChest_PassNew(_C, _N);
+
+PROC
+PROC_AMP_Spore_NukeAll()
+AND
+DB_AMP_SporeChest_Current((ITEM)_C)
+THEN
+NOT DB_AMP_SporeChest_Current(_C);
+
+// per-item nuke: kill spore items + leftover infection
+IF
+EntityEvent((ITEM)_Item, "AMP_Spore_Nuke_Inv")
+AND
+GetTemplate(_Item, (ITEMROOT)AMP_Cursed_Spore_ec2ffd1d-2f0f-420a-989d-ea6d1c5bfee9)
+THEN
+RequestDelete(_Item);
+
+IF
+EntityEvent((ITEM)_Item, "AMP_Spore_Nuke_Inv")
+AND
+HasActiveStatus(_Item, "AMP_SPORE_INFECTION", 1)
+THEN
+RemoveStatus(_Item, "AMP_SPORE_INFECTION");
+
+IF
+EntityEvent((ITEM)_Item, "AMP_Spore_Nuke_Inv")
+AND
+DB_AMP_Spore_ItemInfections(_Item, (INTEGER)_Count)
+THEN
+NOT DB_AMP_Spore_ItemInfections(_Item, _Count);
+
+IF
+EntityEvent(_, "AMP_Spore_Nuke_Done")
+THEN
+DB_NOOP(1);
+
+EXITSECTION
+SysClear("DB_AMP_Spore_PassNewInfections", 2);
+SysClear("DB_AMP_Spore_CurrentSource", 2);
+SysClear("DB_AMP_Sovereign_ScatterQueue", 5);
+
+ENDEXITSECTION

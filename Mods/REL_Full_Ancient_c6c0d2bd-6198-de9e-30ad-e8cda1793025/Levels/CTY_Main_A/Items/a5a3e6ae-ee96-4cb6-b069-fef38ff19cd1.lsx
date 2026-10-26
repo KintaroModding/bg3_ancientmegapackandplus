@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="a5a3e6ae-ee96-4cb6-b069-fef38ff19cd1" />
+					<attribute id="Name" type="LSString" value="S_LOW_JaheirasHouse_JaheiraChest" />
+					<attribute id="LevelName" type="FixedString" value="CTY_Main_A" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="51446e33-fea9-4166-9b7e-74b8e3fc9809" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="owner" type="FixedString" value="91b6b200-7d00-4d62-8dc9-99e8339dfa1a" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="-1571.535 0.8641968 975.5135" />
+							<attribute id="RotationQuat" type="fvec4" value="-0.003341423 0.006894016 -0.01591169 0.9998441" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="CTY_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="57e10301-831b-f6cf-1258-a93ddbdfa8a0" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="71fa0663-a7d1-35e1-196e-a031776f1043" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="a2c8192e-abe2-4c47-b744-e50fe3d5076a" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="100e0b24-9964-a5cb-3431-bccfb523194e" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="LOW_DevilsFee_HelsikChest_Treasure" />
+								</node>
+							</children>
+						</node>
+						<node id="ItemList" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

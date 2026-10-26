@@ -1,0 +1,238 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+// capsule reward: status -> add the matching cube
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_BOOST18_DROP_1", _, _)
+THEN
+RemoveStatus(_Char, "AMP_BOOST18_DROP_1");
+TemplateAddTo((ITEMROOT)AMP_Capsule_Reward_Generic_1_bc44d261-edfb-424e-ab61-98d16899ab7b, _Char, 1, 1);
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_BOOST18_DROP_2", _, _)
+THEN
+RemoveStatus(_Char, "AMP_BOOST18_DROP_2");
+TemplateAddTo((ITEMROOT)AMP_Capsule_Reward_Generic_2_7a85cccb-48ed-4948-9d25-03a4b0a79114, _Char, 1, 1);
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_BOOST18_DROP_3", _, _)
+THEN
+RemoveStatus(_Char, "AMP_BOOST18_DROP_3");
+TemplateAddTo((ITEMROOT)AMP_Capsule_Reward_Generic_3_007e6a6b-4d51-4a7f-b03a-560e06edd5f6, _Char, 1, 1);
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_BOOST18_DROP_4", _, _)
+THEN
+RemoveStatus(_Char, "AMP_BOOST18_DROP_4");
+TemplateAddTo((ITEMROOT)AMP_Capsule_Reward_Generic_4_55bf5412-1ab8-460f-9bbb-e8b860454ad9, _Char, 1, 1);
+
+// chaos equip: destroy a random equipped item
+
+// status -> roll
+IF
+StatusApplied((CHARACTER)_Char, "AMP_BOOST18_CHAOS_EQUIP", _, _)
+THEN
+RemoveStatus(_Char, "AMP_BOOST18_CHAOS_EQUIP");
+PROC_AMP_Boost18_ChanceRoll(_Char);
+
+// 20% chance: random(5)==0, else the and fails and nothing happens
+PROC
+PROC_AMP_Boost18_ChanceRoll((CHARACTER)_Char)
+AND
+Random(5, (INTEGER)_Chance)
+AND
+_Chance == 0
+THEN
+DB_AMP_Boost18_SlotCount(_Char, 0);
+PROC_AMP_Boost18_CollectSlots(_Char);
+PROC_AMP_Boost18_RollAndDestroy(_Char);
+
+// collect equipped items into an indexed db (one proc per slot, runs in sequence)
+
+PROC
+PROC_AMP_Boost18_CollectSlots((CHARACTER)_Char)
+AND
+GetEquippedItem(_Char, "Helmet", (ITEM)_Item)
+AND
+DB_AMP_Boost18_SlotCount(_Char, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Boost18_SlotCount(_Char, _N);
+DB_AMP_Boost18_SlotCount(_Char, _Next);
+DB_AMP_Boost18_Equipped(_Char, _N, _Item);
+
+PROC
+PROC_AMP_Boost18_CollectSlots((CHARACTER)_Char)
+AND
+GetEquippedItem(_Char, "Breast", (ITEM)_Item)
+AND
+DB_AMP_Boost18_SlotCount(_Char, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Boost18_SlotCount(_Char, _N);
+DB_AMP_Boost18_SlotCount(_Char, _Next);
+DB_AMP_Boost18_Equipped(_Char, _N, _Item);
+
+PROC
+PROC_AMP_Boost18_CollectSlots((CHARACTER)_Char)
+AND
+GetEquippedItem(_Char, "Cloak", (ITEM)_Item)
+AND
+DB_AMP_Boost18_SlotCount(_Char, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Boost18_SlotCount(_Char, _N);
+DB_AMP_Boost18_SlotCount(_Char, _Next);
+DB_AMP_Boost18_Equipped(_Char, _N, _Item);
+
+PROC
+PROC_AMP_Boost18_CollectSlots((CHARACTER)_Char)
+AND
+GetEquippedItem(_Char, "Ring", (ITEM)_Item)
+AND
+DB_AMP_Boost18_SlotCount(_Char, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Boost18_SlotCount(_Char, _N);
+DB_AMP_Boost18_SlotCount(_Char, _Next);
+DB_AMP_Boost18_Equipped(_Char, _N, _Item);
+
+PROC
+PROC_AMP_Boost18_CollectSlots((CHARACTER)_Char)
+AND
+GetEquippedItem(_Char, "Ring2", (ITEM)_Item)
+AND
+DB_AMP_Boost18_SlotCount(_Char, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Boost18_SlotCount(_Char, _N);
+DB_AMP_Boost18_SlotCount(_Char, _Next);
+DB_AMP_Boost18_Equipped(_Char, _N, _Item);
+
+PROC
+PROC_AMP_Boost18_CollectSlots((CHARACTER)_Char)
+AND
+GetEquippedItem(_Char, "Gloves", (ITEM)_Item)
+AND
+DB_AMP_Boost18_SlotCount(_Char, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Boost18_SlotCount(_Char, _N);
+DB_AMP_Boost18_SlotCount(_Char, _Next);
+DB_AMP_Boost18_Equipped(_Char, _N, _Item);
+
+PROC
+PROC_AMP_Boost18_CollectSlots((CHARACTER)_Char)
+AND
+GetEquippedItem(_Char, "Boots", (ITEM)_Item)
+AND
+DB_AMP_Boost18_SlotCount(_Char, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Boost18_SlotCount(_Char, _N);
+DB_AMP_Boost18_SlotCount(_Char, _Next);
+DB_AMP_Boost18_Equipped(_Char, _N, _Item);
+
+PROC
+PROC_AMP_Boost18_CollectSlots((CHARACTER)_Char)
+AND
+GetEquippedItem(_Char, "Melee Main Weapon", (ITEM)_Item)
+AND
+DB_AMP_Boost18_SlotCount(_Char, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Boost18_SlotCount(_Char, _N);
+DB_AMP_Boost18_SlotCount(_Char, _Next);
+DB_AMP_Boost18_Equipped(_Char, _N, _Item);
+
+PROC
+PROC_AMP_Boost18_CollectSlots((CHARACTER)_Char)
+AND
+GetEquippedItem(_Char, "Melee Offhand Weapon", (ITEM)_Item)
+AND
+DB_AMP_Boost18_SlotCount(_Char, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Boost18_SlotCount(_Char, _N);
+DB_AMP_Boost18_SlotCount(_Char, _Next);
+DB_AMP_Boost18_Equipped(_Char, _N, _Item);
+
+PROC
+PROC_AMP_Boost18_CollectSlots((CHARACTER)_Char)
+AND
+GetEquippedItem(_Char, "Ranged Main Weapon", (ITEM)_Item)
+AND
+DB_AMP_Boost18_SlotCount(_Char, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Boost18_SlotCount(_Char, _N);
+DB_AMP_Boost18_SlotCount(_Char, _Next);
+DB_AMP_Boost18_Equipped(_Char, _N, _Item);
+
+PROC
+PROC_AMP_Boost18_CollectSlots((CHARACTER)_Char)
+AND
+GetEquippedItem(_Char, "MusicalInstrument", (ITEM)_Item)
+AND
+DB_AMP_Boost18_SlotCount(_Char, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Boost18_SlotCount(_Char, _N);
+DB_AMP_Boost18_SlotCount(_Char, _Next);
+DB_AMP_Boost18_Equipped(_Char, _N, _Item);
+
+// pick a random collected item and destroy it
+PROC
+PROC_AMP_Boost18_RollAndDestroy((CHARACTER)_Char)
+AND
+DB_AMP_Boost18_SlotCount(_Char, (INTEGER)_Count)
+AND
+_Count > 0
+AND
+Random(_Count, (INTEGER)_Roll)
+AND
+DB_AMP_Boost18_Equipped(_Char, _Roll, (ITEM)_Item)
+THEN
+RequestDelete(_Item);
+PROC_AMP_Boost18_Cleanup(_Char);
+
+// nothing equipped (count 0): just cleanup
+PROC
+PROC_AMP_Boost18_RollAndDestroy((CHARACTER)_Char)
+AND
+DB_AMP_Boost18_SlotCount(_Char, 0)
+THEN
+NOT DB_AMP_Boost18_SlotCount(_Char, 0);
+
+// cleanup db entries
+PROC
+PROC_AMP_Boost18_Cleanup((CHARACTER)_Char)
+AND
+DB_AMP_Boost18_Equipped(_Char, (INTEGER)_N, (ITEM)_Item)
+THEN
+NOT DB_AMP_Boost18_Equipped(_Char, _N, _Item);
+
+PROC
+PROC_AMP_Boost18_Cleanup((CHARACTER)_Char)
+AND
+DB_AMP_Boost18_SlotCount(_Char, (INTEGER)_N)
+THEN
+NOT DB_AMP_Boost18_SlotCount(_Char, _N);
+
+EXITSECTION
+
+ENDEXITSECTION

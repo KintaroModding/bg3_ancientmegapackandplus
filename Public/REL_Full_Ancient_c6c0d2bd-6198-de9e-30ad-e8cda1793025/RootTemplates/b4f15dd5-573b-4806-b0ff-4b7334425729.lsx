@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="b4f15dd5-573b-4806-b0ff-4b7334425729" />
+					<attribute id="Name" type="LSString" value="AMP_Battleaxe_Blood" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="1729a4f5-8ae7-467e-a65f-93611cf7a576" />
+					<attribute id="VisualTemplate" type="FixedString" value="1d180e5a-c7c8-20dc-5083-c22c86368513" />
+					<attribute id="DisplayName" type="TranslatedString" handle="hf8c7c4eag2d19ga21dg5ac2g81afa31c36ac" version="1" />
+					<attribute id="Stats" type="FixedString" value="WPN_Battleaxe_Mordak" />
+					<attribute id="Description" type="TranslatedString" handle="h54977784ge42agc2a9g4e09g5ec17bcb87c4" version="1" />
+					<children>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="MAG_WEAPON1_VFX" />
+								</node>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="MAG_WEAPON_BOND" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

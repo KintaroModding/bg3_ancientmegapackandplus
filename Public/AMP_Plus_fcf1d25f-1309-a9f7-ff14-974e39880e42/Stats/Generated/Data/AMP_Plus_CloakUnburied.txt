@@ -1,0 +1,16 @@
+// a one-turn duration refreshes on every damage instance, ticks included, so the gate sits on the combat
+
+new entry "MAG_Cloak70_bonus"
+type "PassiveData"
+using "MAG_Cloak70_bonus"
+data "DescriptionParams" "50;3"
+data "Properties" "OncePerCombat;Highlighted"
+data "TooltipStatusApply" "ApplyStatus(GREATER_INVISIBILITY,100,3)"
+data "StatsFunctors" "ApplyStatus(GREATER_INVISIBILITY,100,3)"
+
+new entry "MAG_Cloak70"
+type "Armor"
+using "MAG_Cloak70"
+data "Rarity" "Rare"
+data "ValueOverride" "400"
+data "ValueLevel" "7"

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="77f581d2-cb24-40b8-9340-8239d0e2ebf2" />
+					<attribute id="Name" type="LSString" value="AMP_Euphorium_Trajectory" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="projectile" />
+					<attribute id="ParentTemplateId" type="FixedString" value="3b753bb2-f59d-42ad-8918-ee03984b7098" />
+					<attribute id="Flag" type="uint8" value="0" />
+					<attribute id="GroupID" type="uint32" value="0" />
+					<attribute id="CastShadow" type="bool" value="False" />
+					<attribute id="LifeTime" type="float" value="20" />
+					<attribute id="CastBone" type="FixedString" value="Dummy_R_HandFX" />
+					<attribute id="ImpactFX" type="FixedString" value="AMP_LaserBeam_Impact" />
+					<attribute id="GroundImpactFX" type="LSString" value="AMP_LaserBeam_Impact_Ground" />
+					<attribute id="BeamFX" type="FixedString" value="AMP_LaserBeam_Beam" />
+					<attribute id="PreviewPathMaterial" type="FixedString" value="312a1494-a0e2-c215-cf51-bda58a6b2341" />
+					<attribute id="PreviewPathImpactFX" type="FixedString" value="VFX_UI_DestinationBeam_Projectile_01" />
+					<attribute id="DetachBeam" type="bool" value="True" />
+					<attribute id="TrajectoryType" type="uint8" value="0" />
+					<attribute id="ShiftBMin_Bezier4" type="float" value="0" />
+					<attribute id="ShiftBMax_Bezier4" type="float" value="0" />
+					<attribute id="VelocityMode" type="uint8" value="0" />
+					<attribute id="InitialSpeed" type="float" value="200" />
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="25c8a063-ebbe-7bcc-5a70-44862277ae6b" />
+					<attribute id="Name" type="LSString" value="CursedHelmet" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/CursedHelmet.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="CursedHelmet" />
+					<attribute id="BoundsMin" type="fvec3" value="-2 -2 -2" />
+					<attribute id="BoundsMax" type="fvec3" value="2 2 2" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="3" />
+					<attribute id="Looping" type="bool" value="True" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="62929f66-fc36-6e62-530d-72f4d3388540" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="d7a250ef-cbc1-1e75-7d66-9d927e05ecd3" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

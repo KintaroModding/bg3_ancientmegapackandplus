@@ -1,0 +1,110 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// worn-gear apply refires on load, zone change and rest and inflates the counters
+// captured before the base counters run (submod rules answer first), restored after
+
+IF
+StatusApplied((ITEM)_Item, (STRING)_Marker, (CHARACTER)_Causee, _)
+AND
+NOT DB_Players(_Causee)
+AND
+DB_AMP_Shard_Transfer(_Marker, _)
+AND
+DB_AMP_Shard_Count(_Item, _Marker, (INTEGER)_Count)
+AND
+NOT DB_AMP_Plus_ShardRefire_Count(_Item, _Marker, _)
+THEN
+DB_AMP_Plus_ShardRefire_Count(_Item, _Marker, _Count);
+PROC_AMP_Plus_ShardRefire_Arm();
+
+IF
+StatusApplied((ITEM)_Item, (STRING)_Marker, (CHARACTER)_Causee, _)
+AND
+NOT DB_Players(_Causee)
+AND
+DB_AMP_Shard_WeaponStackable(_Marker)
+AND
+DB_AMP_Shard_Count(_Item, _Marker, (INTEGER)_Count)
+AND
+NOT DB_AMP_Plus_ShardRefire_Count(_Item, _Marker, _)
+THEN
+DB_AMP_Plus_ShardRefire_Count(_Item, _Marker, _Count);
+PROC_AMP_Plus_ShardRefire_Arm();
+
+IF
+StatusApplied((ITEM)_Weapon, "AMP_SHARD_WEAPON_ARCHITECT", (CHARACTER)_Causee, _)
+AND
+NOT DB_Players(_Causee)
+AND
+DB_AMP_Shard_ItemSlotOverride(_Weapon, (INTEGER)_Bonus)
+AND
+NOT DB_AMP_Plus_ShardRefire_Slots(_Weapon, _)
+THEN
+DB_AMP_Plus_ShardRefire_Slots(_Weapon, _Bonus);
+PROC_AMP_Plus_ShardRefire_Arm();
+
+// window closes before status reconciliation reads the counters
+
+PROC
+PROC_AMP_Plus_ShardRefire_Arm()
+AND
+NOT DB_AMP_Plus_ShardRefire_Armed(1)
+THEN
+DB_AMP_Plus_ShardRefire_Armed(1);
+TimerLaunch("AMP_Plus_ShardRefire", 5000);
+
+IF
+TimerFinished("AMP_Plus_ShardRefire")
+THEN
+NOT DB_AMP_Plus_ShardRefire_Armed(1);
+PROC_AMP_Plus_ShardRefire_PutCount();
+PROC_AMP_Plus_ShardRefire_PutSlots();
+PROC_AMP_Plus_ShardRefire_WipeCount();
+PROC_AMP_Plus_ShardRefire_WipeSlots();
+
+PROC
+PROC_AMP_Plus_ShardRefire_PutCount()
+AND
+DB_AMP_Plus_ShardRefire_Count((ITEM)_Item, (STRING)_Marker, (INTEGER)_Count)
+AND
+DB_AMP_Shard_Count(_Item, _Marker, (INTEGER)_Now)
+AND
+_Now != _Count
+THEN
+NOT DB_AMP_Shard_Count(_Item, _Marker, _Now);
+DB_AMP_Shard_Count(_Item, _Marker, _Count);
+
+PROC
+PROC_AMP_Plus_ShardRefire_PutSlots()
+AND
+DB_AMP_Plus_ShardRefire_Slots((ITEM)_Weapon, (INTEGER)_Bonus)
+AND
+DB_AMP_Shard_ItemSlotOverride(_Weapon, (INTEGER)_Now)
+AND
+_Now != _Bonus
+THEN
+NOT DB_AMP_Shard_ItemSlotOverride(_Weapon, _Now);
+DB_AMP_Shard_ItemSlotOverride(_Weapon, _Bonus);
+
+PROC
+PROC_AMP_Plus_ShardRefire_WipeCount()
+AND
+DB_AMP_Plus_ShardRefire_Count((ITEM)_Item, (STRING)_Marker, (INTEGER)_Count)
+THEN
+NOT DB_AMP_Plus_ShardRefire_Count(_Item, _Marker, _Count);
+PROC_AMP_Plus_ShardRefire_WipeCount();
+
+PROC
+PROC_AMP_Plus_ShardRefire_WipeSlots()
+AND
+DB_AMP_Plus_ShardRefire_Slots((ITEM)_Weapon, (INTEGER)_Bonus)
+THEN
+NOT DB_AMP_Plus_ShardRefire_Slots(_Weapon, _Bonus);
+PROC_AMP_Plus_ShardRefire_WipeSlots();
+
+EXITSECTION
+ENDEXITSECTION

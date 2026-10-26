@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="CharacterVisualBank">
+		<node id="CharacterVisualBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="c12b63bc-f7cd-d5eb-6314-b2222bdf839c" />
+					<attribute id="Name" type="LSString" value="AMP_Koy_SteelWatcher_98526f79-7c97-40e0-9d64-81cfdd70ff71" />
+					<attribute id="BodySetVisual" type="FixedString" value="f8e12f18-c1c1-43e3-c5d3-7ac5210994fb" />
+					<attribute id="ShowEquipmentVisuals" type="bool" value="True" />
+					<attribute id="BaseVisual" type="FixedString" value="9a378c9e-7413-c7a1-43b3-a51da0f435e8" />
+					<children>
+						<node id="Slots">
+							<attribute id="Slot" type="FixedString" value="Cloak" />
+							<attribute id="VisualResource" type="FixedString" value="2f7287d7-0a0a-62fe-7cbd-2be89fa42869" />
+							<attribute id="Bone" type="FixedString" value="" />
+						</node>
+						<node id="MaterialOverrides">
+							<attribute id="MaterialResource" type="FixedString" value="" />
+							<children>
+								<node id="ScalarParameters">
+									<attribute id="Parameter" type="FixedString" value="Reflectance" />
+									<attribute id="Value" type="float" value="1.0000001" />
+									<attribute id="Enabled" type="bool" value="True" />
+									<attribute id="Color" type="bool" value="False" />
+									<attribute id="Custom" type="bool" value="True" />
+								</node>
+								<node id="ScalarParameters">
+									<attribute id="Parameter" type="FixedString" value="Roughness" />
+									<attribute id="Value" type="float" value="0" />
+									<attribute id="Enabled" type="bool" value="True" />
+									<attribute id="Color" type="bool" value="False" />
+									<attribute id="Custom" type="bool" value="True" />
+								</node>
+								<node id="ScalarParameters">
+									<attribute id="Parameter" type="FixedString" value="Blood" />
+									<attribute id="Value" type="float" value="0.9000001" />
+									<attribute id="Enabled" type="bool" value="False" />
+									<attribute id="Color" type="bool" value="False" />
+									<attribute id="Custom" type="bool" value="True" />
+								</node>
+								<node id="ScalarParameters">
+									<attribute id="Parameter" type="FixedString" value="Dirt" />
+									<attribute id="Value" type="float" value="1.0000001" />
+									<attribute id="Enabled" type="bool" value="False" />
+									<attribute id="Color" type="bool" value="False" />
+									<attribute id="Custom" type="bool" value="True" />
+								</node>
+								<node id="Vector3Parameters">
+									<attribute id="Parameter" type="FixedString" value="Color_01" />
+									<attribute id="Value" type="fvec3" value="0.022346377 0.022346377 0.022346377" />
+									<attribute id="Enabled" type="bool" value="True" />
+									<attribute id="Color" type="bool" value="False" />
+									<attribute id="Custom" type="bool" value="True" />
+								</node>
+								<node id="Vector3Parameters">
+									<attribute id="Parameter" type="FixedString" value="Color_02" />
+									<attribute id="Value" type="fvec3" value="0.6802411 0.44957146 0.040349208" />
+									<attribute id="Enabled" type="bool" value="True" />
+									<attribute id="Color" type="bool" value="False" />
+									<attribute id="Custom" type="bool" value="True" />
+								</node>
+								<node id="Vector3Parameters">
+									<attribute id="Parameter" type="FixedString" value="Color_03" />
+									<attribute id="Value" type="fvec3" value="0.1546604 0.07666082 0.07666082" />
+									<attribute id="Enabled" type="bool" value="True" />
+									<attribute id="Color" type="bool" value="False" />
+									<attribute id="Custom" type="bool" value="True" />
+								</node>
+								<node id="Vector3Parameters">
+									<attribute id="Parameter" type="FixedString" value="Hair_Color" />
+									<attribute id="Value" type="fvec3" value="0.29432517 0 0" />
+									<attribute id="Enabled" type="bool" value="True" />
+									<attribute id="Color" type="bool" value="False" />
+									<attribute id="Custom" type="bool" value="True" />
+								</node>
+								<node id="Vector3Parameters">
+									<attribute id="Parameter" type="FixedString" value="Beard_Color" />
+									<attribute id="Value" type="fvec3" value="0.13628346 0.08225837 0.04361792" />
+									<attribute id="Enabled" type="bool" value="False" />
+									<attribute id="Color" type="bool" value="False" />
+									<attribute id="Custom" type="bool" value="True" />
+								</node>
+								<node id="Vector3Parameters">
+									<attribute id="Parameter" type="FixedString" value="Hair_Graying_Color" />
+									<attribute id="Value" type="fvec3" value="0.73169655 0.73169655 0.73169655" />
+									<attribute id="Enabled" type="bool" value="False" />
+									<attribute id="Color" type="bool" value="False" />
+									<attribute id="Custom" type="bool" value="True" />
+								</node>
+								<node id="Vector3Parameters">
+									<attribute id="Parameter" type="FixedString" value="Blood_Color" />
+									<attribute id="Value" type="fvec3" value="0.13035227 0.0077510267 0.0041161766" />
+									<attribute id="Enabled" type="bool" value="False" />
+									<attribute id="Color" type="bool" value="False" />
+									<attribute id="Custom" type="bool" value="True" />
+								</node>
+								<node id="MaterialPresets" />
+							</children>
+						</node>
+						<node id="Materials" key="MapKey">
+							<attribute id="MapKey" type="FixedString" value="b0731af8-4ab5-914e-be30-80c39848603e" />
+							<children>
+								<node id="MaterialOverrides">
+									<attribute id="MaterialResource" type="FixedString" value="b0731af8-4ab5-914e-be30-80c39848603e" />
+									<children>
+										<node id="ScalarParameters">
+											<attribute id="Parameter" type="FixedString" value="Roughness" />
+											<attribute id="Value" type="float" value="0.55" />
+											<attribute id="Enabled" type="bool" value="True" />
+											<attribute id="Color" type="bool" value="False" />
+											<attribute id="Custom" type="bool" value="False" />
+										</node>
+										<node id="MaterialPresets" />
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="Materials" key="MapKey">
+							<attribute id="MapKey" type="FixedString" value="1a45611b-2393-4bc3-2e9a-3783f96e06de" />
+							<children>
+								<node id="MaterialOverrides">
+									<attribute id="MaterialResource" type="FixedString" value="1a45611b-2393-4bc3-2e9a-3783f96e06de" />
+									<children>
+										<node id="ScalarParameters">
+											<attribute id="Parameter" type="FixedString" value="Reflectance" />
+											<attribute id="Value" type="float" value="0" />
+											<attribute id="Enabled" type="bool" value="True" />
+											<attribute id="Color" type="bool" value="False" />
+											<attribute id="Custom" type="bool" value="False" />
+										</node>
+										<node id="MaterialPresets" />
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="Materials" key="MapKey">
+							<attribute id="MapKey" type="FixedString" value="74d9d32e-a23e-fcad-20e6-d7c329cd78fb" />
+							<children>
+								<node id="MaterialOverrides">
+									<attribute id="MaterialResource" type="FixedString" value="74d9d32e-a23e-fcad-20e6-d7c329cd78fb" />
+									<children>
+										<node id="ScalarParameters">
+											<attribute id="Parameter" type="FixedString" value="Reflectance" />
+											<attribute id="Value" type="float" value="0" />
+											<attribute id="Enabled" type="bool" value="True" />
+											<attribute id="Color" type="bool" value="False" />
+											<attribute id="Custom" type="bool" value="False" />
+										</node>
+										<node id="MaterialPresets" />
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="Materials" key="MapKey">
+							<attribute id="MapKey" type="FixedString" value="b6041a63-cb2a-9d5b-5a6b-59793f0bcc62" />
+							<children>
+								<node id="MaterialOverrides">
+									<attribute id="MaterialResource" type="FixedString" value="b6041a63-cb2a-9d5b-5a6b-59793f0bcc62" />
+									<children>
+										<node id="ScalarParameters">
+											<attribute id="Parameter" type="FixedString" value="Reflectance" />
+											<attribute id="Value" type="float" value="0" />
+											<attribute id="Enabled" type="bool" value="True" />
+											<attribute id="Color" type="bool" value="False" />
+											<attribute id="Custom" type="bool" value="False" />
+										</node>
+										<node id="MaterialPresets" />
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="RealMaterialOverrides" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

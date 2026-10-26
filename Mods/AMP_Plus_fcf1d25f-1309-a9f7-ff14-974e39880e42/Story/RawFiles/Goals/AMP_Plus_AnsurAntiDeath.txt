@@ -1,0 +1,52 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// scripted death and rise, excluded so the boss revive override leaves them alone
+DB_AMP_AntiDeath_Excluded((CHARACTER)S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a);
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_AnsurAntiDeathVer(1)
+THEN
+PROC_AMP_Plus_AnsurAntiDeath_Seed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_AnsurAntiDeathVer(1)
+THEN
+PROC_AMP_Plus_AnsurAntiDeath_Seed();
+
+PROC
+PROC_AMP_Plus_AnsurAntiDeath_Seed()
+THEN
+DB_AMP_AntiDeath_Excluded((CHARACTER)S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a);
+DB_AMP_Plus_AnsurAntiDeathVer(1);
+
+PROC
+PROC_AMP_Plus_AnsurAntiDeath_Seed()
+AND
+HasActiveStatus(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a, "AMP_BOSS_ANTIDEATH_CHARGE", 1)
+THEN
+RemoveStatus(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a, "AMP_BOSS_ANTIDEATH_CHARGE");
+
+PROC
+PROC_AMP_Plus_AnsurAntiDeath_Seed()
+AND
+HasActiveStatus(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a, "AMP_Plus_ANTIDEATH_CHARGE_STD", 1)
+THEN
+RemoveStatus(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a, "AMP_Plus_ANTIDEATH_CHARGE_STD");
+
+PROC
+PROC_AMP_Plus_AnsurAntiDeath_Seed()
+AND
+HasActiveStatus(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a, "AMP_Plus_ANTIDEATH_CHARGE_CAS", 1)
+THEN
+RemoveStatus(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a, "AMP_Plus_ANTIDEATH_CHARGE_CAS");
+
+EXITSECTION
+ENDEXITSECTION

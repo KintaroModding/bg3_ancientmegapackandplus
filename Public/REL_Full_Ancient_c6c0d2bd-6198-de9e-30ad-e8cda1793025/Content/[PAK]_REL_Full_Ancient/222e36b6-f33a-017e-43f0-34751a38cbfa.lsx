@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="222e36b6-f33a-017e-43f0-34751a38cbfa" />
+					<attribute id="Name" type="LSString" value="124_Astral_Crossbow_Overlay" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/124_Astral_Crossbow_Overlay.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="124_Astral_Crossbow_Overlay" />
+					<attribute id="BoundsMin" type="fvec3" value="-2 -2 -2" />
+					<attribute id="BoundsMax" type="fvec3" value="2 2 2" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="2.5" />
+					<attribute id="Looping" type="bool" value="True" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="a8640728-7edc-8a40-fefb-c95cb8ad7d87" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="a0ca6c87-2558-8b40-4c47-eb2861e36bee" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

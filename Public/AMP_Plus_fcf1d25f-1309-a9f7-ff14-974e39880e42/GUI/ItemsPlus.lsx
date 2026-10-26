@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<save>
+    <version major="4" minor="8" revision="0" build="500"/>
+    <region id="IconUVList">
+        <node id="root">
+            <children>
+                <node id="IconUV">
+                    <attribute id="MapKey" type="FixedString" value="AMP_CONT_Artifacts"/>
+                    <attribute id="U1" type="float" value="0.42236328"/>
+                    <attribute id="U2" type="float" value="0.56201172"/>
+                    <attribute id="V1" type="float" value="0.00048828125"/>
+                    <attribute id="V2" type="float" value="0.14013672"/>
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" type="FixedString" value="AMP_CONT_Capsules"/>
+                    <attribute id="U1" type="float" value="0.00048828125"/>
+                    <attribute id="U2" type="float" value="0.14013672"/>
+                    <attribute id="V1" type="float" value="0.00048828125"/>
+                    <attribute id="V2" type="float" value="0.14013672"/>
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" type="FixedString" value="AMP_CONT_Coins"/>
+                    <attribute id="U1" type="float" value="0.28173828"/>
+                    <attribute id="U2" type="float" value="0.42138672"/>
+                    <attribute id="V1" type="float" value="0.00048828125"/>
+                    <attribute id="V2" type="float" value="0.14013672"/>
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" type="FixedString" value="AMP_CONT_Shards"/>
+                    <attribute id="U1" type="float" value="0.14111328"/>
+                    <attribute id="U2" type="float" value="0.28076172"/>
+                    <attribute id="V1" type="float" value="0.00048828125"/>
+                    <attribute id="V2" type="float" value="0.14013672"/>
+                </node>
+            </children>
+        </node>
+    </region>
+    <region id="TextureAtlasInfo">
+        <node id="root">
+            <children>
+                <node id="TextureAtlasIconSize">
+                    <attribute id="Height" type="int32" value="144"/>
+                    <attribute id="Width" type="int32" value="144"/>
+                </node>
+                <node id="TextureAtlasPath">
+                    <attribute id="Path" type="string" value="Assets/Textures/Icons/ItemsPlus.dds"/>
+                    <attribute id="UUID" type="FixedString" value="d4da42b5-7261-06b9-97cd-b96786e335e2"/>
+                </node>
+                <node id="TextureAtlasTextureSize">
+                    <attribute id="Height" type="int32" value="1024"/>
+                    <attribute id="Width" type="int32" value="1024"/>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

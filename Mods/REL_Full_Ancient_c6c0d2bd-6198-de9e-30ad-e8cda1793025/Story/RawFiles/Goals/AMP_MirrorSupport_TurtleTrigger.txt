@@ -1,0 +1,132 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// anti-turtle trigger. first boss is cached so the gate is a plain db lookup, no output query
+
+// turns without damage before it fires
+DB_AMP_TurtleThreshold(2);
+
+KBSECTION
+
+// cache first boss of each combat (target + boss-fight marker)
+IF
+EnteredCombat((CHARACTER)_Boss, (GUIDSTRING)_CombatGuid)
+AND
+IsBoss(_Boss, 1)
+AND
+IsPlayer(_Boss, 0)
+AND
+IsDead(_Boss, 0)
+AND
+NOT DB_AMP_TurtleCombatBoss(_CombatGuid, _)
+THEN
+DB_AMP_TurtleCombatBoss(_CombatGuid, _Boss);
+
+// taking damage resets the clean-turn streak
+IF
+AttackedBy((CHARACTER)_Player, _, _, _, (INTEGER)_Amount, _, _)
+AND
+DB_Players(_Player)
+AND
+_Amount > 0
+AND
+DB_AMP_TurtleStreak(_Player, (INTEGER)_C)
+THEN
+NOT DB_AMP_TurtleStreak(_Player, _C);
+DB_AMP_TurtleStreak(_Player, 0);
+
+// fresh streak each combat
+IF
+EnteredCombat((CHARACTER)_Player, _)
+AND
+DB_AMP_TurtleStreak(_Player, (INTEGER)_C)
+THEN
+NOT DB_AMP_TurtleStreak(_Player, _C);
+
+// count player turns, ultra boss fight only
+IF
+TurnEnded((CHARACTER)_Player)
+AND
+DB_Players(_Player)
+AND
+DB_AMP_Ultra_Active(1)
+AND
+CombatGetGuidFor(_Player, (GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_TurtleCombatBoss(_CombatGuid, _)
+THEN
+PROC_AMP_Turtle_Bump(_Player);
+
+// streak++ (init 1 if absent)
+PROC
+PROC_AMP_Turtle_Bump((CHARACTER)_Player)
+AND
+DB_AMP_TurtleStreak(_Player, (INTEGER)_C)
+AND
+IntegerSum(_C, 1, (INTEGER)_N)
+THEN
+NOT DB_AMP_TurtleStreak(_Player, _C);
+DB_AMP_TurtleStreak(_Player, _N);
+PROC_AMP_Turtle_Check(_Player, _N);
+
+PROC
+PROC_AMP_Turtle_Bump((CHARACTER)_Player)
+AND
+NOT DB_AMP_TurtleStreak(_Player, _)
+THEN
+DB_AMP_TurtleStreak(_Player, 1);
+PROC_AMP_Turtle_Check(_Player, 1);
+
+// threshold reached -> spawn cached boss, once per fight
+PROC
+PROC_AMP_Turtle_Check((CHARACTER)_Player, (INTEGER)_N)
+AND
+DB_AMP_TurtleThreshold((INTEGER)_T)
+AND
+_N >= _T
+AND
+DB_AMP_Ultra_Active(1)
+AND
+CombatGetGuidFor(_Player, (GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_TurtleCombatBoss(_CombatGuid, (CHARACTER)_Boss)
+AND
+IsDead(_Boss, 0)
+AND
+NOT DB_AMP_MirrorTurtle_Fired(_CombatGuid)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_PoolSize)
+AND
+_PoolSize > 0
+THEN
+DB_AMP_MirrorTurtle_Fired(_CombatGuid);
+NOT DB_AMP_TurtleStreak(_Player, _N);
+DB_AMP_TurtleStreak(_Player, 0);
+PROC_AMP_MirrorSupport_Spawn(_Boss);
+
+// cleanup on combat end
+
+IF
+LeftCombat(_, (GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_TurtleCombatBoss(_CombatGuid, (CHARACTER)_B)
+THEN
+NOT DB_AMP_TurtleCombatBoss(_CombatGuid, _B);
+
+IF
+LeftCombat(_, (GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_MirrorTurtle_Fired(_CombatGuid)
+THEN
+NOT DB_AMP_MirrorTurtle_Fired(_CombatGuid);
+
+IF
+LeftCombat((CHARACTER)_C, _)
+AND
+DB_AMP_TurtleStreak(_C, (INTEGER)_N)
+THEN
+NOT DB_AMP_TurtleStreak(_C, _N);
+
+EXITSECTION
+ENDEXITSECTION

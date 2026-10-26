@@ -1,0 +1,675 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_LM_JunkVer(7)
+THEN
+PROC_AMP_Plus_LM_JunkReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_LM_JunkVer(7)
+THEN
+PROC_AMP_Plus_LM_JunkReseed();
+
+PROC
+PROC_AMP_Plus_LM_JunkReseed()
+AND
+DB_AMP_Plus_LM_JunkVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_LM_JunkVer(_Old);
+
+PROC
+PROC_AMP_Plus_LM_JunkReseed()
+AND
+DB_AMP_Plus_LM_JunkMaxValue((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_LM_JunkMaxValue(_Old);
+
+PROC
+PROC_AMP_Plus_LM_JunkReseed()
+THEN
+PROC_AMP_Plus_LM_DrainBagTemplate();
+
+PROC
+PROC_AMP_Plus_LM_JunkReseed()
+THEN
+PROC_AMP_Plus_LM_DrainJunkTemplate();
+
+PROC
+PROC_AMP_Plus_LM_JunkReseed()
+THEN
+PROC_AMP_Plus_LM_DrainJunkNever();
+
+PROC
+PROC_AMP_Plus_LM_JunkReseed()
+THEN
+PROC_AMP_Plus_LM_DrainJunkAlways();
+
+PROC
+PROC_AMP_Plus_LM_JunkReseed()
+THEN
+PROC_AMP_Plus_LM_DrainQuestMark();
+
+PROC
+PROC_AMP_Plus_LM_DrainBagTemplate()
+AND
+DB_AMP_Plus_LM_BagTemplate((ITEMROOT)_T)
+THEN
+NOT DB_AMP_Plus_LM_BagTemplate(_T);
+PROC_AMP_Plus_LM_DrainBagTemplate();
+
+PROC
+PROC_AMP_Plus_LM_DrainJunkTemplate()
+AND
+DB_AMP_Plus_LM_JunkTemplate((ITEMROOT)_T)
+THEN
+NOT DB_AMP_Plus_LM_JunkTemplate(_T);
+PROC_AMP_Plus_LM_DrainJunkTemplate();
+
+PROC
+PROC_AMP_Plus_LM_DrainJunkNever()
+AND
+DB_AMP_Plus_LM_JunkNever((STRING)_S)
+THEN
+NOT DB_AMP_Plus_LM_JunkNever(_S);
+PROC_AMP_Plus_LM_DrainJunkNever();
+
+PROC
+PROC_AMP_Plus_LM_DrainJunkAlways()
+AND
+DB_AMP_Plus_LM_JunkAlways((STRING)_S)
+THEN
+NOT DB_AMP_Plus_LM_JunkAlways(_S);
+PROC_AMP_Plus_LM_DrainJunkAlways();
+
+PROC
+PROC_AMP_Plus_LM_DrainQuestMark()
+AND
+DB_AMP_Plus_LM_QuestMark((STRING)_S)
+THEN
+NOT DB_AMP_Plus_LM_QuestMark(_S);
+PROC_AMP_Plus_LM_DrainQuestMark();
+
+PROC
+PROC_AMP_Plus_LM_JunkReseed()
+THEN
+DB_AMP_Plus_LM_JunkVer(7);
+DB_AMP_Plus_LM_JunkMaxValue(20);
+DB_AMP_Plus_LM_JunkTemplate((ITEMROOT)AMP_LM_Container_Junk_f5b4a1bb-bd01-4720-bef5-df1aacf84cb3);
+DB_AMP_Plus_LM_BagTemplate((ITEMROOT)AMP_LM_Container_Junk_f5b4a1bb-bd01-4720-bef5-df1aacf84cb3);
+DB_AMP_Plus_LM_BagTemplate((ITEMROOT)AMP_LM_Container_Capsules_290cb815-d369-4f64-9d89-633d2dce257b);
+DB_AMP_Plus_LM_BagTemplate((ITEMROOT)AMP_LM_Container_Shards_8c142ce0-70b0-494f-ae25-226030dd987c);
+DB_AMP_Plus_LM_BagTemplate((ITEMROOT)AMP_LM_Container_Coins_9abc4e7e-e60d-46aa-89b6-48fa82ae43fb);
+DB_AMP_Plus_LM_BagTemplate((ITEMROOT)AMP_LM_Container_Artifacts_029abafa-0e83-4637-ab83-f0f1f9638ff8);
+DB_AMP_Plus_LM_BagTemplate((ITEMROOT)CONT_GEN_AlchemyPouch_b7543ff4-5010-4c01-9bcd-4da1047aebfc);
+DB_AMP_Plus_LM_BagTemplate((ITEMROOT)CONT_GEN_CampSupplySack_efcb70b7-868b-4214-968a-e23f6ad586bc);
+PROC_AMP_Plus_LM_SeedNeverJunk();
+
+// letters and notes carry the bare OBJ_Scroll stat, so scrolls get their own prefix
+PROC
+PROC_AMP_Plus_LM_SeedNeverJunk()
+THEN
+DB_AMP_Plus_LM_JunkNever("ALCH_");
+DB_AMP_Plus_LM_JunkNever("Arrow");
+DB_AMP_Plus_LM_JunkNever("Scroll_");
+DB_AMP_Plus_LM_JunkNever("OBJ_Scrolls_");
+DB_AMP_Plus_LM_JunkNever("Wand");
+DB_AMP_Plus_LM_JunkNever("Potion");
+DB_AMP_Plus_LM_JunkNever("Elixir");
+DB_AMP_Plus_LM_JunkNever("Oil_Of");
+DB_AMP_Plus_LM_JunkNever("Antitoxin");
+DB_AMP_Plus_LM_JunkNever("CONS_DRINK");
+DB_AMP_Plus_LM_JunkNever("Grenade");
+DB_AMP_Plus_LM_JunkNever("OBJ_AcidBottle");
+DB_AMP_Plus_LM_JunkNever("OBJ_FireBottle");
+DB_AMP_Plus_LM_JunkNever("OBJ_GreaseBottle");
+DB_AMP_Plus_LM_JunkNever("OBJ_OilBottle");
+DB_AMP_Plus_LM_JunkNever("OBJ_HolyWaterFlask");
+DB_AMP_Plus_LM_JunkNever("OBJ_Caltrops");
+DB_AMP_Plus_LM_JunkNever("OBJ_BallBearings");
+DB_AMP_Plus_LM_JunkNever("OBJ_Bag_BlackPowder");
+DB_AMP_Plus_LM_JunkNever("OBJ_Bomb");
+DB_AMP_Plus_LM_JunkNever("OBJ_Net");
+DB_AMP_Plus_LM_JunkNever("OBJ_MindflayerBulb");
+DB_AMP_Plus_LM_JunkNever("OBJ_Fireworks_Rocket");
+DB_AMP_Plus_LM_JunkNever("GRN_Spore");
+PROC_AMP_Plus_LM_SeedAlwaysJunk();
+
+// name outranks the tags, kitchen props are tagged as food
+PROC
+PROC_AMP_Plus_LM_SeedAlwaysJunk()
+THEN
+DB_AMP_Plus_LM_JunkAlways("DiningPlate_");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Chalice_");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Goblet_");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Incense");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Kitchenware");
+DB_AMP_Plus_LM_JunkAlways("OBJ_KitchenInstrument_");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Bowl");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Bucket");
+DB_AMP_Plus_LM_JunkAlways("OBJ_MilkCan");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Laboratory_Glass");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Bottle_Destructible");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Bottle_Potion");
+DB_AMP_Plus_LM_JunkAlways("CONS_DRINK_Oil");
+DB_AMP_Plus_LM_JunkAlways("OBJ_MusicBox");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Painting");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Valuable");
+DB_AMP_Plus_LM_JunkAlways("Painting_");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Plate_");
+DB_AMP_Plus_LM_JunkAlways("Cup_");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Skull");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Bone");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Shell_");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Metalbar_");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Agate");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Amethyst");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Bloodstone");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Diamond");
+DB_AMP_Plus_LM_JunkAlways("OBJ_GemGeneric");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Jacinth");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Jade");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Malachite");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Onyx");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Pearl");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Peridot");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Ruby");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Sapphire");
+DB_AMP_Plus_LM_JunkAlways("OBJ_Topaz");
+DB_AMP_Plus_LM_JunkAlways("Rotten");
+DB_AMP_Plus_LM_JunkAlways("Spoiled");
+PROC_AMP_Plus_LM_SeedQuestMarks();
+
+PROC
+PROC_AMP_Plus_LM_SeedQuestMarks()
+THEN
+DB_AMP_Plus_LM_QuestMark("UNI_");
+DB_AMP_Plus_LM_QuestMark("QUEST");
+DB_AMP_Plus_LM_QuestMark("Quest");
+DB_AMP_Plus_LM_QuestMark("PUZ_");
+
+// extra body of the base grant covers a fresh character
+// timer wait: a handed-over bag shows up late and would be granted twice
+
+PROC
+PROC_AMP_LM_GrantContainers((CHARACTER)_P)
+AND
+NOT GetItemByTemplateInInventory((ITEMROOT)AMP_LM_Container_Junk_f5b4a1bb-bd01-4720-bef5-df1aacf84cb3, _P, _)
+THEN
+DB_AMP_Plus_LM_JunkBagGranted(_P);
+TemplateAddTo((ITEMROOT)AMP_LM_Container_Junk_f5b4a1bb-bd01-4720-bef5-df1aacf84cb3, _P, 1, 0);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_Players((CHARACTER)_P)
+AND
+DB_AMP_LM_ContainersGranted(_P)
+THEN
+ObjectTimerLaunch(_P, "AMP_Plus_LM_JunkRegrant", 2000);
+
+IF
+RemovedFrom((ITEM)_Item, (CHARACTER)_P)
+AND
+DB_Players(_P)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+DB_AMP_Plus_LM_JunkTemplate(_T)
+THEN
+ObjectTimerLaunch(_P, "AMP_Plus_LM_JunkRegrant", 500);
+
+IF
+RemovedFrom((ITEM)_Item, (CHARACTER)_P)
+AND
+DB_Players(_P)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+DB_AMP_Plus_LM_JunkTemplate(_T)
+AND
+NOT DB_AMP_Plus_LM_LostBag(_P, _T, _Item)
+THEN
+DB_AMP_Plus_LM_LostBag(_P, _T, _Item);
+
+// release runs before the grant rule below, which reads the pruned store
+IF
+ObjectTimerFinished((CHARACTER)_P, "AMP_Plus_LM_JunkRegrant")
+AND
+DB_Players(_P)
+THEN
+PROC_AMP_Plus_LM_ReleaseLost(_P);
+
+IF
+ObjectTimerFinished((CHARACTER)_P, "AMP_Plus_LM_JunkRegrant")
+AND
+DB_Players(_P)
+AND
+DB_AMP_LM_ContainersGranted(_P)
+AND
+NOT DB_AMP_AutoLoot_Disabled(1)
+AND
+NOT DB_AMP_LM_Disabled(1)
+AND
+NOT GetItemByTemplateInInventory((ITEMROOT)AMP_LM_Container_Junk_f5b4a1bb-bd01-4720-bef5-df1aacf84cb3, _P, _)
+AND
+NOT DB_AMP_Plus_LM_LostBag(_P, (ITEMROOT)AMP_LM_Container_Junk_f5b4a1bb-bd01-4720-bef5-df1aacf84cb3, _)
+THEN
+DB_AMP_Plus_LM_JunkBagGranted(_P);
+TemplateAddTo((ITEMROOT)AMP_LM_Container_Junk_f5b4a1bb-bd01-4720-bef5-df1aacf84cb3, _P, 1, 0);
+
+// excluded by name, not ordering: classify rules share AddedTo and the engine sets no order
+// a gold pile reads as one gold per unit, cheap by price
+
+QRY
+QRY_AMP_Plus_LM_JunkAllowed((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+NOT DB_AMP_Plus_LM_BagTemplate(_T)
+AND
+NOT DB_AMP_VoidCapsule_Container(_T, _)
+AND
+NOT QRY_AMP_LM_IsCoin(_Item)
+AND
+NOT QRY_AMP_AS_IsGold(_Item)
+AND
+NOT QRY_AMP_VoidCapsule_IsShard(_Item)
+AND
+NOT QRY_AMP_VoidCapsule_IsValidArtifact(_Item)
+AND
+NOT IsStoryItem(_Item, 1)
+AND
+NOT QRY_AMP_Plus_LM_JunkRefused(_Item)
+THEN
+DB_NOOP(1);
+
+// a name on the always-junk list beats its tags
+
+QRY
+QRY_AMP_Plus_LM_JunkRefused((ITEM)_Item)
+AND
+IsTagged(_Item, ALCH_INGREDIENT_64b824e7-50c5-475a-98c2-52026e372d77, 1)
+AND
+NOT QRY_AMP_Plus_LM_IsNamedJunk(_Item)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Plus_LM_JunkRefused((ITEM)_Item)
+AND
+IsTagged(_Item, FOOD_c86e0114-a5ab-48f6-b497-de321ebff577, 1)
+AND
+NOT QRY_AMP_Plus_LM_IsNamedJunk(_Item)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Plus_LM_JunkRefused((ITEM)_Item)
+AND
+IsConsumable(_Item, 1)
+AND
+NOT QRY_AMP_Plus_LM_IsNamedJunk(_Item)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Plus_LM_JunkRefused((ITEM)_Item)
+AND
+GetStatString(_Item, (STRING)_Stat)
+AND
+DB_AMP_Plus_LM_JunkNever((STRING)_Pattern)
+AND
+IsSubstring(_Stat, _Pattern, 1)
+AND
+NOT QRY_AMP_Plus_LM_IsNamedJunk(_Item)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Plus_LM_JunkRefused((ITEM)_Item)
+AND
+QRY_AMP_Plus_LM_IsQuestLike(_Item)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Plus_LM_JunkRefused((ITEM)_Item)
+AND
+GetBookID(_Item, _)
+AND
+NOT DB_AMP_Plus_LM_BookRead(_Item)
+THEN
+DB_NOOP(1);
+
+// keys stay out, the bag is sold as it stands
+
+QRY
+QRY_AMP_Plus_LM_JunkRefused((ITEM)_Item)
+AND
+IsTagged(_Item, KEY_9851fa99-5538-432a-8e77-c90929a88974, 1)
+THEN
+DB_NOOP(1);
+
+// only an emptied crate, its contents would go with it
+
+QRY
+QRY_AMP_Plus_LM_JunkRefused((ITEM)_Item)
+AND
+IsContainer(_Item, 1)
+AND
+NOT IsInventoryEmpty(_Item, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Plus_LM_IsNamedJunk((ITEM)_Item)
+AND
+GetStatString(_Item, (STRING)_Stat)
+AND
+DB_AMP_Plus_LM_JunkAlways((STRING)_Pattern)
+AND
+IsSubstring(_Stat, _Pattern, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Plus_LM_IsQuestLike((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+GUIDToString(_T, (STRING)_Name)
+AND
+DB_AMP_Plus_LM_QuestMark((STRING)_Mark)
+AND
+IsSubstring(_Name, _Mark, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Plus_LM_IsQuestLike((ITEM)_Item)
+AND
+GetStatString(_Item, (STRING)_Stat)
+AND
+DB_AMP_Plus_LM_QuestMark((STRING)_Mark)
+AND
+IsSubstring(_Stat, _Mark, 1)
+THEN
+DB_NOOP(1);
+
+// camp-send wins over this bag until that setting is off
+
+IF
+AddedTo((ITEM)_Item, (CHARACTER)_Player, _)
+AND
+DB_Players(_Player)
+AND
+DB_AMP_Plus_LM_Filing(1)
+AND
+NOT DB_AMP_LM_Pending(_Item, _)
+AND
+NOT DB_AMP_LM_Sorted(_Item)
+AND
+NOT DB_AMP_LM_NoSort(_Item)
+AND
+DB_AMP_AL_CampSend(0)
+AND
+IsJunk(_Item, 1)
+AND
+QRY_AMP_Plus_LM_JunkAllowed(_Item)
+THEN
+DB_AMP_LM_Pending(_Item, 7);
+ObjectTimerLaunch(_Item, "AMP_LM_Route", 300);
+
+IF
+AddedTo((ITEM)_Item, (CHARACTER)_Player, _)
+AND
+DB_Players(_Player)
+AND
+DB_AMP_Plus_LM_Filing(1)
+AND
+NOT DB_AMP_LM_Pending(_Item, _)
+AND
+NOT DB_AMP_LM_Sorted(_Item)
+AND
+NOT DB_AMP_LM_NoSort(_Item)
+AND
+DB_AMP_AL_CampSend(0)
+AND
+NOT IsJunk(_Item, 1)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Total)
+AND
+GetStackAmount(_Item, (INTEGER)_Count, _)
+AND
+_Count > 0
+AND
+IntegerDivide(_Total, _Count, (INTEGER)_PerUnit)
+AND
+DB_AMP_Plus_LM_JunkMaxValue((INTEGER)_Max)
+AND
+_PerUnit < _Max
+AND
+QRY_AMP_Plus_LM_JunkAllowed(_Item)
+THEN
+DB_AMP_LM_Pending(_Item, 7);
+ObjectTimerLaunch(_Item, "AMP_LM_Route", 300);
+
+IF
+AddedTo((ITEM)_Item, (CHARACTER)_Player, _)
+AND
+DB_Players(_Player)
+AND
+DB_AMP_Plus_LM_Filing(1)
+AND
+NOT DB_AMP_LM_Pending(_Item, _)
+AND
+NOT DB_AMP_LM_Sorted(_Item)
+AND
+NOT DB_AMP_LM_NoSort(_Item)
+AND
+DB_AMP_AL_CampSend(0)
+AND
+NOT IsJunk(_Item, 1)
+AND
+IsEquipable(_Item, 1)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+DB_AMP_RarityValueRange("Uncommon", (INTEGER)_MinUncommon, _)
+AND
+_Value < _MinUncommon
+AND
+QRY_AMP_Plus_LM_JunkAllowed(_Item)
+THEN
+DB_AMP_LM_Pending(_Item, 7);
+ObjectTimerLaunch(_Item, "AMP_LM_Route", 300);
+
+IF
+AddedTo((ITEM)_Item, (CHARACTER)_Player, _)
+AND
+DB_Players(_Player)
+AND
+DB_AMP_Plus_LM_Filing(1)
+AND
+NOT DB_AMP_LM_Pending(_Item, _)
+AND
+NOT DB_AMP_LM_Sorted(_Item)
+AND
+NOT DB_AMP_LM_NoSort(_Item)
+AND
+DB_AMP_AL_CampSend(0)
+AND
+IsContainer(_Item, 1)
+AND
+NOT DB_AMP_Para_Spawned(_Item)
+AND
+NOT DB_AMP_TutorialChest_Summoned(_Item, _)
+AND
+QRY_AMP_Plus_LM_JunkAllowed(_Item)
+THEN
+DB_AMP_LM_Pending(_Item, 7);
+ObjectTimerLaunch(_Item, "AMP_LM_Route", 300);
+
+IF
+AddedTo((ITEM)_Item, (CHARACTER)_Player, _)
+AND
+DB_Players(_Player)
+AND
+DB_AMP_Plus_LM_Filing(1)
+AND
+NOT DB_AMP_LM_Pending(_Item, _)
+AND
+NOT DB_AMP_LM_Sorted(_Item)
+AND
+NOT DB_AMP_LM_NoSort(_Item)
+AND
+DB_AMP_AL_CampSend(0)
+AND
+GetStatString(_Item, (STRING)_Stat)
+AND
+DB_AMP_Plus_LM_JunkAlways((STRING)_Pattern)
+AND
+IsSubstring(_Stat, _Pattern, 1)
+AND
+QRY_AMP_Plus_LM_JunkAllowed(_Item)
+THEN
+DB_AMP_LM_Pending(_Item, 7);
+ObjectTimerLaunch(_Item, "AMP_LM_Route", 300);
+
+IF
+GameBookInterfaceClosed((ITEM)_Item, _)
+AND
+NOT DB_AMP_Plus_LM_BookRead(_Item)
+THEN
+DB_AMP_Plus_LM_BookRead(_Item);
+
+IF
+GameBookInterfaceClosed((ITEM)_Item, _)
+AND
+GetFirstInventoryOwnerCharacter(_Item, (CHARACTER)_Owner)
+AND
+DB_Players(_Owner)
+AND
+DB_AMP_Plus_LM_Filing(1)
+AND
+NOT DB_AMP_LM_Pending(_Item, _)
+AND
+NOT DB_AMP_LM_Sorted(_Item)
+AND
+NOT DB_AMP_LM_NoSort(_Item)
+AND
+DB_AMP_AL_CampSend(0)
+AND
+QRY_AMP_Plus_LM_JunkAllowed(_Item)
+THEN
+DB_AMP_LM_Pending(_Item, 7);
+ObjectTimerLaunch(_Item, "AMP_LM_Route", 300);
+
+// stack joins skip the classify rules, hence a second read by name and engine flag
+
+IF
+AddedTo((ITEM)_Added, (CHARACTER)_P, _)
+AND
+DB_Players(_P)
+AND
+DB_AMP_Plus_LM_Filing(1)
+AND
+DB_AMP_AL_CampSend(0)
+THEN
+ObjectTimerLaunch(_P, "AMP_Plus_LM_JunkSweep", 1500);
+
+IF
+ObjectTimerFinished((CHARACTER)_P, "AMP_Plus_LM_JunkSweep")
+AND
+DB_Players(_P)
+AND
+DB_AMP_Plus_LM_Filing(1)
+AND
+GetItemByTemplateInInventory((ITEMROOT)AMP_LM_Container_Junk_f5b4a1bb-bd01-4720-bef5-df1aacf84cb3, _P, _)
+THEN
+IterateInventory(_P, "AMP_Plus_LM_JunkSweepItem", "AMP_Plus_LM_JunkSweepDone");
+
+IF
+EntityEvent((ITEM)_Item, "AMP_Plus_LM_JunkSweepItem")
+AND
+GetDirectInventoryOwner(_Item, (CHARACTER)_Holder)
+AND
+DB_Players(_Holder)
+AND
+DB_AMP_Plus_LM_Filing(1)
+AND
+NOT DB_AMP_LM_Pending(_Item, _)
+AND
+NOT DB_AMP_LM_Sorted(_Item)
+AND
+NOT DB_AMP_LM_NoSort(_Item)
+AND
+DB_AMP_AL_CampSend(0)
+AND
+NOT IsEquipped(_Item, 1)
+AND
+QRY_AMP_Plus_LM_SweepTakes(_Item)
+AND
+QRY_AMP_Plus_LM_JunkAllowed(_Item)
+THEN
+DB_AMP_LM_Pending(_Item, 7);
+ObjectTimerLaunch(_Item, "AMP_LM_Route", 300);
+
+QRY
+QRY_AMP_Plus_LM_SweepTakes((ITEM)_Item)
+AND
+QRY_AMP_Plus_LM_IsNamedJunk(_Item)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Plus_LM_SweepTakes((ITEM)_Item)
+AND
+NOT QRY_AMP_Plus_LM_IsNamedJunk(_Item)
+AND
+IsJunk(_Item, 1)
+THEN
+DB_NOOP(1);
+
+IF
+RemovedFrom((ITEM)_Item, (ITEM)_Bag)
+AND
+GetTemplate(_Bag, (ITEMROOT)_T)
+AND
+DB_AMP_Plus_LM_JunkTemplate(_T)
+AND
+NOT DB_AMP_LM_Sorted(_Item)
+THEN
+DB_AMP_LM_Sorted(_Item);
+
+IF
+ObjectTimerFinished((ITEM)_Item, "AMP_LM_Route")
+AND
+DB_AMP_LM_Pending(_Item, 7)
+AND
+Exists(_Item, 1)
+AND
+NOT IsEquipped(_Item, 1)
+AND
+GetFirstInventoryOwnerCharacter(_Item, (CHARACTER)_Owner)
+AND
+DB_Players(_Owner)
+AND
+GetItemByTemplateInInventory((ITEMROOT)AMP_LM_Container_Junk_f5b4a1bb-bd01-4720-bef5-df1aacf84cb3, _Owner, (ITEM)_Cont)
+AND
+GetStackAmount(_Item, (INTEGER)_Count, _)
+THEN
+NOT DB_AMP_LM_Pending(_Item, 7);
+ToInventory(_Item, _Cont, _Count, 0, 0);
+DB_AMP_LM_Sorted(_Item);
+
+EXITSECTION
+ENDEXITSECTION

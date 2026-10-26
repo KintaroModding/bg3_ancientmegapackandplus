@@ -1,0 +1,346 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// Size = batch size table, Freq = wave cadence, Chase = pursuer return
+// tier 1/2/3 = Casual/Normal/Hard, tables written by PROC_AMP_Plus_TierTableReseed
+DB_AMP_Plus_SpawnIntensity_Freq(2);
+DB_AMP_Plus_SpawnIntensity_Chase(2);
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_SpawnIntensity_Freq(_)
+THEN
+DB_AMP_Plus_SpawnIntensity_Freq(2);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_SpawnIntensity_Chase(_)
+THEN
+DB_AMP_Plus_SpawnIntensity_Chase(2);
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_SpawnIntensity_Freq(_)
+THEN
+DB_AMP_Plus_SpawnIntensity_Freq(2);
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_SpawnIntensity_Chase(_)
+THEN
+DB_AMP_Plus_SpawnIntensity_Chase(2);
+
+// bump the version when the rows change
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_TierTableVer(3)
+THEN
+PROC_AMP_Plus_TierTableReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_TierTableVer(3)
+THEN
+PROC_AMP_Plus_TierTableReseed();
+
+// ordered rules: stamp, rows, then tables
+PROC
+PROC_AMP_Plus_TierTableReseed()
+AND
+DB_AMP_Plus_TierTableVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_TierTableVer(_Old);
+
+PROC
+PROC_AMP_Plus_TierTableReseed()
+THEN
+PROC_AMP_Plus_TierTableDrainRestChance();
+
+PROC
+PROC_AMP_Plus_TierTableReseed()
+THEN
+PROC_AMP_Plus_TierTableDrainTurtleThresh();
+
+PROC
+PROC_AMP_Plus_TierTableReseed()
+THEN
+PROC_AMP_Plus_TierTableDrainQuickWindow();
+
+PROC
+PROC_AMP_Plus_TierTableReseed()
+THEN
+PROC_AMP_Plus_TierTableDrainChaseBreather();
+
+PROC
+PROC_AMP_Plus_TierTableReseed()
+THEN
+PROC_AMP_Plus_TierTableDrainChaseQueue();
+
+PROC
+PROC_AMP_Plus_TierTableReseed()
+THEN
+DB_AMP_Plus_TierTableVer(3);
+// Freq tables, read by the rest, turtle and quick-kill goals
+DB_AMP_Plus_RestChanceByTier(1, 5);
+DB_AMP_Plus_RestChanceByTier(2, 25);
+DB_AMP_Plus_RestChanceByTier(3, 40);
+DB_AMP_Plus_TurtleThreshByTier(1, 3);
+DB_AMP_Plus_TurtleThreshByTier(2, 2);
+DB_AMP_Plus_TurtleThreshByTier(3, 1);
+DB_AMP_Plus_QuickWindowByTier(1, 1);
+DB_AMP_Plus_QuickWindowByTier(2, 2);
+DB_AMP_Plus_QuickWindowByTier(3, 3);
+
+// Chase tables, breather = min ms + random span ms
+DB_AMP_Plus_ChaseBreatherByTier(1, 900000, 900000);
+DB_AMP_Plus_ChaseBreatherByTier(2, 300000, 1500000);
+DB_AMP_Plus_ChaseBreatherByTier(3, 180000, 1620000);
+DB_AMP_Plus_ChaseQueueByTier(1, 180000);
+DB_AMP_Plus_ChaseQueueByTier(2, 120000);
+DB_AMP_Plus_ChaseQueueByTier(3, 60000);
+
+PROC
+PROC_AMP_Plus_TierTableDrainRestChance()
+AND
+DB_AMP_Plus_RestChanceByTier((INTEGER)_T, (INTEGER)_A)
+THEN
+NOT DB_AMP_Plus_RestChanceByTier(_T, _A);
+PROC_AMP_Plus_TierTableDrainRestChance();
+
+PROC
+PROC_AMP_Plus_TierTableDrainTurtleThresh()
+AND
+DB_AMP_Plus_TurtleThreshByTier((INTEGER)_T, (INTEGER)_A)
+THEN
+NOT DB_AMP_Plus_TurtleThreshByTier(_T, _A);
+PROC_AMP_Plus_TierTableDrainTurtleThresh();
+
+PROC
+PROC_AMP_Plus_TierTableDrainQuickWindow()
+AND
+DB_AMP_Plus_QuickWindowByTier((INTEGER)_T, (INTEGER)_A)
+THEN
+NOT DB_AMP_Plus_QuickWindowByTier(_T, _A);
+PROC_AMP_Plus_TierTableDrainQuickWindow();
+
+PROC
+PROC_AMP_Plus_TierTableDrainChaseBreather()
+AND
+DB_AMP_Plus_ChaseBreatherByTier((INTEGER)_T, (INTEGER)_A, (INTEGER)_B)
+THEN
+NOT DB_AMP_Plus_ChaseBreatherByTier(_T, _A, _B);
+PROC_AMP_Plus_TierTableDrainChaseBreather();
+
+PROC
+PROC_AMP_Plus_TierTableDrainChaseQueue()
+AND
+DB_AMP_Plus_ChaseQueueByTier((INTEGER)_T, (INTEGER)_A)
+THEN
+NOT DB_AMP_Plus_ChaseQueueByTier(_T, _A);
+PROC_AMP_Plus_TierTableDrainChaseQueue();
+
+// yes/no breadcrumb: Size, Freq, Chase. a No on a last tier loops that knob
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_UltraSpawnSettings", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+NOT DB_AMP_Plus_USpawnPending(_Caster)
+THEN
+DB_AMP_Plus_USpawnPending(_Caster);
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_USpawn_Size_C");
+
+// Size knob
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, "AMP_Plus_USpawn_Size_C", 1)
+AND
+DB_AMP_Plus_USpawnPending(_C)
+AND
+DB_AMP_Plus_SpawnIntensity_Size((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_SpawnIntensity_Size(_Old);
+DB_AMP_Plus_SpawnIntensity_Size(1);
+OpenMessageBoxYesNo(_C, "AMP_Plus_USpawn_Freq_C");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, "AMP_Plus_USpawn_Size_C", 0)
+AND
+DB_AMP_Plus_USpawnPending(_C)
+THEN
+OpenMessageBoxYesNo(_C, "AMP_Plus_USpawn_Size_N");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, "AMP_Plus_USpawn_Size_N", 1)
+AND
+DB_AMP_Plus_USpawnPending(_C)
+AND
+DB_AMP_Plus_SpawnIntensity_Size((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_SpawnIntensity_Size(_Old);
+DB_AMP_Plus_SpawnIntensity_Size(2);
+OpenMessageBoxYesNo(_C, "AMP_Plus_USpawn_Freq_C");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, "AMP_Plus_USpawn_Size_N", 0)
+AND
+DB_AMP_Plus_USpawnPending(_C)
+THEN
+OpenMessageBoxYesNo(_C, "AMP_Plus_USpawn_Size_H");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, "AMP_Plus_USpawn_Size_H", 1)
+AND
+DB_AMP_Plus_USpawnPending(_C)
+AND
+DB_AMP_Plus_SpawnIntensity_Size((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_SpawnIntensity_Size(_Old);
+DB_AMP_Plus_SpawnIntensity_Size(3);
+OpenMessageBoxYesNo(_C, "AMP_Plus_USpawn_Freq_C");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, "AMP_Plus_USpawn_Size_H", 0)
+AND
+DB_AMP_Plus_USpawnPending(_C)
+THEN
+OpenMessageBoxYesNo(_C, "AMP_Plus_USpawn_Size_C");
+
+// Freq knob
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, "AMP_Plus_USpawn_Freq_C", 1)
+AND
+DB_AMP_Plus_USpawnPending(_C)
+AND
+DB_AMP_Plus_SpawnIntensity_Freq((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_SpawnIntensity_Freq(_Old);
+DB_AMP_Plus_SpawnIntensity_Freq(1);
+OpenMessageBoxYesNo(_C, "AMP_Plus_USpawn_Chase_C");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, "AMP_Plus_USpawn_Freq_C", 0)
+AND
+DB_AMP_Plus_USpawnPending(_C)
+THEN
+OpenMessageBoxYesNo(_C, "AMP_Plus_USpawn_Freq_N");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, "AMP_Plus_USpawn_Freq_N", 1)
+AND
+DB_AMP_Plus_USpawnPending(_C)
+AND
+DB_AMP_Plus_SpawnIntensity_Freq((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_SpawnIntensity_Freq(_Old);
+DB_AMP_Plus_SpawnIntensity_Freq(2);
+OpenMessageBoxYesNo(_C, "AMP_Plus_USpawn_Chase_C");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, "AMP_Plus_USpawn_Freq_N", 0)
+AND
+DB_AMP_Plus_USpawnPending(_C)
+THEN
+OpenMessageBoxYesNo(_C, "AMP_Plus_USpawn_Freq_H");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, "AMP_Plus_USpawn_Freq_H", 1)
+AND
+DB_AMP_Plus_USpawnPending(_C)
+AND
+DB_AMP_Plus_SpawnIntensity_Freq((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_SpawnIntensity_Freq(_Old);
+DB_AMP_Plus_SpawnIntensity_Freq(3);
+OpenMessageBoxYesNo(_C, "AMP_Plus_USpawn_Chase_C");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, "AMP_Plus_USpawn_Freq_H", 0)
+AND
+DB_AMP_Plus_USpawnPending(_C)
+THEN
+OpenMessageBoxYesNo(_C, "AMP_Plus_USpawn_Freq_C");
+
+// Chase knob, last: a pick clears the latch
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, "AMP_Plus_USpawn_Chase_C", 1)
+AND
+DB_AMP_Plus_USpawnPending(_C)
+AND
+DB_AMP_Plus_SpawnIntensity_Chase((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_SpawnIntensity_Chase(_Old);
+DB_AMP_Plus_SpawnIntensity_Chase(1);
+NOT DB_AMP_Plus_USpawnPending(_C);
+PROC_AMP_PlayModeEffect(_C);
+OpenMessageBox(_C, "AMP_Plus_USpawn_Done");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, "AMP_Plus_USpawn_Chase_C", 0)
+AND
+DB_AMP_Plus_USpawnPending(_C)
+THEN
+OpenMessageBoxYesNo(_C, "AMP_Plus_USpawn_Chase_N");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, "AMP_Plus_USpawn_Chase_N", 1)
+AND
+DB_AMP_Plus_USpawnPending(_C)
+AND
+DB_AMP_Plus_SpawnIntensity_Chase((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_SpawnIntensity_Chase(_Old);
+DB_AMP_Plus_SpawnIntensity_Chase(2);
+NOT DB_AMP_Plus_USpawnPending(_C);
+PROC_AMP_PlayModeEffect(_C);
+OpenMessageBox(_C, "AMP_Plus_USpawn_Done");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, "AMP_Plus_USpawn_Chase_N", 0)
+AND
+DB_AMP_Plus_USpawnPending(_C)
+THEN
+OpenMessageBoxYesNo(_C, "AMP_Plus_USpawn_Chase_H");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, "AMP_Plus_USpawn_Chase_H", 1)
+AND
+DB_AMP_Plus_USpawnPending(_C)
+AND
+DB_AMP_Plus_SpawnIntensity_Chase((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_SpawnIntensity_Chase(_Old);
+DB_AMP_Plus_SpawnIntensity_Chase(3);
+NOT DB_AMP_Plus_USpawnPending(_C);
+PROC_AMP_PlayModeEffect(_C);
+OpenMessageBox(_C, "AMP_Plus_USpawn_Done");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, "AMP_Plus_USpawn_Chase_H", 0)
+AND
+DB_AMP_Plus_USpawnPending(_C)
+THEN
+OpenMessageBoxYesNo(_C, "AMP_Plus_USpawn_Chase_C");
+
+// interrupted walk would wedge the spell, so clear the latch on load
+IF
+SavegameLoaded()
+AND
+DB_AMP_Plus_USpawnPending((CHARACTER)_P)
+THEN
+NOT DB_AMP_Plus_USpawnPending(_P);
+
+EXITSECTION
+
+ENDEXITSECTION

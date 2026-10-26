@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="6258293a-ddcc-4710-8e0b-7e80b1f105d8" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h57fa524dg762fg477ega0d1g56f21613648d" version="1" />
+					<attribute id="Name" type="LSString" value="AMP_Tutorial_Chest" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="813c005f-72ab-4806-ad7e-2e3135e41d27" />
+					<children>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="TUT_Chest_Potions" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

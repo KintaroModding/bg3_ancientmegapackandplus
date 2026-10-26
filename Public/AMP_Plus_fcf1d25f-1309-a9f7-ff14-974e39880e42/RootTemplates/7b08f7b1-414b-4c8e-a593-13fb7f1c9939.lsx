@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="7b08f7b1-414b-4c8e-a593-13fb7f1c9939" />
+					<attribute id="Name" type="LSString" value="AMP_ULTRA_Summon_12_Ronin" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="ParentTemplateId" type="FixedString" value="b415c998-a00b-406f-85b8-76c9caa82ed1" />
+					<attribute id="Scale" type="float" value="0.8" />
+					<attribute id="DisplayName" type="TranslatedString" handle="hdcf9a002g703fg43dbg9a85g45f68668ee75" version="2" />
+					<attribute id="Icon" type="FixedString" value="AMP_Ronin" />
+					<attribute id="Stats" type="FixedString" value="AMP_ULTRA_Summon_12_Ronin" />
+					<attribute id="Equipment" type="FixedString" value="EQP_Staff" />
+					<attribute id="ForceLifetimeDeath" type="bool" value="True" />
+					<attribute id="CharacterVisualResourceID" type="FixedString" value="958e055e-59b8-28c2-aac0-3bd7db803728" />
+					<attribute id="AnubisConfigName" type="FixedString" value="AMP_BossCharacter" />
+					<attribute id="VFXScale" type="float" value="0.8" />
+					<attribute id="Title" type="TranslatedString" handle="h0fb4ab2egbca0g4a2ag88d3g8abc5b8dcacf" version="2" />
+					<attribute id="Archetype" type="FixedString" value="amp_undying_ronin" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="4084eade-11b9-44d4-82e9-1d33f2931dee" />
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

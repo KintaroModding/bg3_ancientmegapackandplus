@@ -1,0 +1,97 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// sun pool is Tickhara's alone, removal never hits a party Daylight
+DB_AMP_Plus_EatableLight("AMP_TICKHARA_SUNPOOL");
+DB_AMP_Plus_EatableLight("DAYLIGHT_GROUND");
+
+KBSECTION
+
+IF
+StatusApplied((ITEM)_Obj, _Light, _, _)
+AND
+DB_AMP_Plus_EatableLight(_Light)
+AND
+NOT DB_AMP_Plus_LightObject(_Obj)
+THEN
+DB_AMP_Plus_LightObject(_Obj);
+
+IF
+StatusRemoved((ITEM)_Obj, _Light, _, _)
+AND
+DB_AMP_Plus_EatableLight(_Light)
+AND
+DB_AMP_Plus_LightObject(_Obj)
+THEN
+NOT DB_AMP_Plus_LightObject(_Obj);
+
+IF
+StatusApplied((CHARACTER)_Owner, "AMP_PLUS_EXTINCTION_AURA_T3", _, _)
+AND
+NOT DB_AMP_Plus_Guttering(_Owner)
+THEN
+DB_AMP_Plus_Guttering(_Owner);
+
+IF
+StatusApplied((CHARACTER)_Owner, "AMP_PLUS_EXTINCTION_AURA_T4", _, _)
+AND
+NOT DB_AMP_Plus_Guttering(_Owner)
+THEN
+DB_AMP_Plus_Guttering(_Owner);
+
+IF
+StatusRemoved((CHARACTER)_Owner, "AMP_PLUS_EXTINCTION_AURA_T3", _, _)
+AND
+DB_AMP_Plus_Guttering(_Owner)
+THEN
+NOT DB_AMP_Plus_Guttering(_Owner);
+
+IF
+StatusRemoved((CHARACTER)_Owner, "AMP_PLUS_EXTINCTION_AURA_T4", _, _)
+AND
+DB_AMP_Plus_Guttering(_Owner)
+THEN
+NOT DB_AMP_Plus_Guttering(_Owner);
+
+// one source per turn, or an arena of torches fills the pool at once
+IF
+TurnStarted((CHARACTER)_Owner)
+AND
+DB_AMP_Plus_Guttering(_Owner)
+AND
+DB_AMP_Plus_LightObject((ITEM)_Obj)
+AND
+NOT DB_AMP_Plus_AteThisTurn(_Owner)
+AND
+GetDistanceTo(_Owner, _Obj, (REAL)_Dist)
+AND
+_Dist <= 20.0
+THEN
+DB_AMP_Plus_AteThisTurn(_Owner);
+NOT DB_AMP_Plus_LightObject(_Obj);
+RequestDelete(_Obj);
+ApplyStatus(_Owner, "AMP_ANCIENTCHAOS", 6.0, 1, _Owner);
+
+IF
+TurnEnded((CHARACTER)_Owner)
+AND
+DB_AMP_Plus_AteThisTurn(_Owner)
+THEN
+NOT DB_AMP_Plus_AteThisTurn(_Owner);
+
+IF
+CombatEnded(_)
+THEN
+PROC_AMP_Plus_LightEaterDrainGuttering();
+
+PROC
+PROC_AMP_Plus_LightEaterDrainGuttering()
+AND
+DB_AMP_Plus_Guttering((CHARACTER)_Owner)
+THEN
+NOT DB_AMP_Plus_Guttering(_Owner);
+PROC_AMP_Plus_LightEaterDrainGuttering();
+
+EXITSECTION
+ENDEXITSECTION

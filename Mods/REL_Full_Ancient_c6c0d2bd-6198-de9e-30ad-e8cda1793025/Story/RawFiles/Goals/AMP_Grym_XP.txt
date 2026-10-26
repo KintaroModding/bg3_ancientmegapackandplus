@@ -1,0 +1,32 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+// grym +1000 xp on permadefeat (not first death, he revives). per-player db avoids double-grant
+// and covers hirelings recruited later.
+
+// on permadefeat: grant to all current players
+IF
+DB_PermaDefeated((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+NOT DB_AMP_Grym_XP_GrantedTo(_Player)
+THEN
+DB_AMP_Grym_XP_GrantedTo(_Player);
+AddExplorationExperience(_Player, 1000);
+
+// new player joins after the fight: grant if grym already permadefeated
+IF
+DB_Players((CHARACTER)_Player)
+AND
+DB_PermaDefeated((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255)
+AND
+NOT DB_AMP_Grym_XP_GrantedTo(_Player)
+THEN
+DB_AMP_Grym_XP_GrantedTo(_Player);
+AddExplorationExperience(_Player, 1000);
+
+EXITSECTION
+ENDEXITSECTION

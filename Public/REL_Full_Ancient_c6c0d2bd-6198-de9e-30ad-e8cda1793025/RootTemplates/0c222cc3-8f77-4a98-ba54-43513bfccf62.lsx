@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="0c222cc3-8f77-4a98-ba54-43513bfccf62" />
+					<attribute id="Name" type="LSString" value="AMP_Kyzr_Longsword" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="d116f35c-4399-408c-ba90-b455a5d29a1f" />
+					<attribute id="VisualTemplate" type="FixedString" value="0771b2c1-ff5a-267b-5b94-95d39ba134c3" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="c7c67380-25fe-6814-78fa-2ed1cb511dab" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h408eee22g759fg4d2ag9caege91163fd569b" version="1" />
+					<attribute id="Icon" type="FixedString" value="AMP_Kyzr_Longsword" />
+					<attribute id="Stats" type="FixedString" value="AMP_Kyzr_Longsword_Soul_3" />
+					<attribute id="Description" type="TranslatedString" handle="h3057650fg5ffbg3a67g9d35gd67b1cc47c88" version="1" />
+					<children>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="AMP_KYZR_SWORD_VFX" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

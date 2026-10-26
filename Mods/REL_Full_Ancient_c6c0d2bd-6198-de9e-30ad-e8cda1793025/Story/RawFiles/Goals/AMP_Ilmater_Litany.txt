@@ -1,0 +1,115 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+// echo of the litany: cloak wearer heals a stigma-carrying ally -> every other ally
+// carrying one of the wearer's stigmas also heals. marker per-tier so it scales with the cloak.
+
+IF
+StatusApplied((CHARACTER)_Target, "AMP_ILMATER_LITANY_HEAL_MARKER_T2", (CHARACTER)_Caster, _)
+AND
+DB_AMP_Ilmater_StigmaLink(_Caster, _OtherTarget, _AnyStigma)
+AND
+IsDead(_OtherTarget, 0)
+AND
+_OtherTarget != _Target
+THEN
+ApplyStatus(_OtherTarget, "AMP_ILMATER_ECHO_HEAL_T2", 0.0, 1, _Caster);
+
+IF
+StatusApplied((CHARACTER)_Target, "AMP_ILMATER_LITANY_HEAL_MARKER_T3", (CHARACTER)_Caster, _)
+AND
+DB_AMP_Ilmater_StigmaLink(_Caster, _OtherTarget, _AnyStigma)
+AND
+IsDead(_OtherTarget, 0)
+AND
+_OtherTarget != _Target
+THEN
+ApplyStatus(_OtherTarget, "AMP_ILMATER_ECHO_HEAL_T3", 0.0, 1, _Caster);
+
+IF
+StatusApplied((CHARACTER)_Target, "AMP_ILMATER_LITANY_HEAL_MARKER_T4", (CHARACTER)_Caster, _)
+AND
+DB_AMP_Ilmater_StigmaLink(_Caster, _OtherTarget, _AnyStigma)
+AND
+IsDead(_OtherTarget, 0)
+AND
+_OtherTarget != _Target
+THEN
+ApplyStatus(_OtherTarget, "AMP_ILMATER_ECHO_HEAL_T4", 0.0, 1, _Caster);
+
+// recompense (medium armour t2-t4): wearer self-heal fires locally; this propagates
+// the heal to every ally carrying one of the wearer's stigmas.
+
+IF
+StatusApplied((CHARACTER)_Self, "AMP_ILMATER_RECOMPENSE_MARKER_T2", _, _)
+AND
+DB_AMP_Ilmater_StigmaLink(_Self, _OtherTarget, _AnyStigma)
+AND
+IsDead(_OtherTarget, 0)
+AND
+_OtherTarget != _Self
+THEN
+ApplyStatus(_OtherTarget, "AMP_ILMATER_RECOMPENSE_HEAL_2", 0.0, 1, _Self);
+
+IF
+StatusApplied((CHARACTER)_Self, "AMP_ILMATER_RECOMPENSE_MARKER_T3", _, _)
+AND
+DB_AMP_Ilmater_StigmaLink(_Self, _OtherTarget, _AnyStigma)
+AND
+IsDead(_OtherTarget, 0)
+AND
+_OtherTarget != _Self
+THEN
+ApplyStatus(_OtherTarget, "AMP_ILMATER_RECOMPENSE_HEAL_3", 0.0, 1, _Self);
+
+IF
+StatusApplied((CHARACTER)_Self, "AMP_ILMATER_RECOMPENSE_MARKER_T4", _, _)
+AND
+DB_AMP_Ilmater_StigmaLink(_Self, _OtherTarget, _AnyStigma)
+AND
+IsDead(_OtherTarget, 0)
+AND
+_OtherTarget != _Self
+THEN
+ApplyStatus(_OtherTarget, "AMP_ILMATER_RECOMPENSE_HEAL_4", 0.0, 1, _Self);
+
+// intercession (heavy armour t2-t4): wearer self-heal fires locally on a kill;
+// this also heals every ally carrying one of the wearer's stigmas.
+
+IF
+StatusApplied((CHARACTER)_Self, "AMP_ILMATER_INTERCESSION_MARKER_T2", _, _)
+AND
+DB_AMP_Ilmater_StigmaLink(_Self, _OtherTarget, _AnyStigma)
+AND
+IsDead(_OtherTarget, 0)
+AND
+_OtherTarget != _Self
+THEN
+ApplyStatus(_OtherTarget, "AMP_ILMATER_INTERCESSION_HEAL_2", 0.0, 1, _Self);
+
+IF
+StatusApplied((CHARACTER)_Self, "AMP_ILMATER_INTERCESSION_MARKER_T3", _, _)
+AND
+DB_AMP_Ilmater_StigmaLink(_Self, _OtherTarget, _AnyStigma)
+AND
+IsDead(_OtherTarget, 0)
+AND
+_OtherTarget != _Self
+THEN
+ApplyStatus(_OtherTarget, "AMP_ILMATER_INTERCESSION_HEAL_3", 0.0, 1, _Self);
+
+IF
+StatusApplied((CHARACTER)_Self, "AMP_ILMATER_INTERCESSION_MARKER_T4", _, _)
+AND
+DB_AMP_Ilmater_StigmaLink(_Self, _OtherTarget, _AnyStigma)
+AND
+IsDead(_OtherTarget, 0)
+AND
+_OtherTarget != _Self
+THEN
+ApplyStatus(_OtherTarget, "AMP_ILMATER_INTERCESSION_HEAL_4", 0.0, 1, _Self);
+
+EXITSECTION
+ENDEXITSECTION

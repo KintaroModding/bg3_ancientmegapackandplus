@@ -1,0 +1,229 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// q-marker -> slimeq registry, equip-synced
+DB_AMP_Mutacid_QMarker("AMP_MUTACID_Q_CORRODE_T1", "AMP_MUTACID_SLIMEQ_CORRODE_T1");
+DB_AMP_Mutacid_QMarker("AMP_MUTACID_Q_CORRODE_T2", "AMP_MUTACID_SLIMEQ_CORRODE_T2");
+DB_AMP_Mutacid_QMarker("AMP_MUTACID_Q_CORRODE_T3", "AMP_MUTACID_SLIMEQ_CORRODE_T3");
+DB_AMP_Mutacid_QMarker("AMP_MUTACID_Q_CORRODE_T4", "AMP_MUTACID_SLIMEQ_CORRODE_T4");
+DB_AMP_Mutacid_QMarker("AMP_MUTACID_Q_PIERCE", "AMP_MUTACID_SLIMEQ_PIERCE");
+DB_AMP_Mutacid_QMarker("AMP_MUTACID_Q_SURFACE", "AMP_MUTACID_SLIMEQ_SURFACE");
+
+// q_bath -> slimeq_bath, applied only while owner is in ACID
+DB_AMP_Mutacid_QMarkerBath("AMP_MUTACID_Q_BATH_T1", "AMP_MUTACID_SLIMEQ_BATH_T1");
+DB_AMP_Mutacid_QMarkerBath("AMP_MUTACID_Q_BATH_T2", "AMP_MUTACID_SLIMEQ_BATH_T2");
+DB_AMP_Mutacid_QMarkerBath("AMP_MUTACID_Q_BATH_T3", "AMP_MUTACID_SLIMEQ_BATH_T3");
+DB_AMP_Mutacid_QMarkerBath("AMP_MUTACID_Q_BATH_T4", "AMP_MUTACID_SLIMEQ_BATH_T4");
+
+// amoeba seed RT, must exist with this mapkey
+DB_AMP_Mutacid_AmoebaTemplate(AMP_AcidSlime_Amoeba_f8fa96b3-1c1b-4932-a48b-6c5c91159fe8);
+
+KBSECTION
+
+// spawn seed amoeba on first ACID from a mutacid wearer, once per combat, at target pos
+IF
+StatusApplied((CHARACTER)_Enemy, "ACID", (CHARACTER)_Owner, _)
+AND
+DB_Players(_Owner)
+AND
+IsInCombat(_Owner, 1)
+AND
+HasActiveStatus(_Owner, "AMP_MUTACID_ACTIVE", 1)
+AND
+NOT DB_AMP_Mutacid_Spawned(_Owner)
+AND
+DB_AMP_Mutacid_AmoebaTemplate((GUIDSTRING)_Template)
+AND
+GetPosition(_Enemy, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+CreateAt(_Template, _X, _Y, _Z, 0, 1, "", (GUIDSTRING)_Slime)
+THEN
+DB_AMP_Mutacid_Spawned(_Owner);
+DB_AMP_Mutacid_SlimeOwner((CHARACTER)_Slime, _Owner);
+ApplyStatus(_Slime, "AMP_ACIDSLIME_PARTY_ALLY", -1.0, 1, _Owner);
+ApplyStatus(_Slime, "AMP_AcidSlime_Control", -1.0, 1, _Owner);
+EnterCombat(_Slime, _Owner);
+PROC_AMP_Mutacid_ScaleSlime((CHARACTER)_Slime, _Owner);
+PROC_AMP_Mutacid_SyncQToSlime(_Owner, (CHARACTER)_Slime);
+DB_AMP_Mutacid_DraftTarget(_Owner, (CHARACTER)_Slime);
+DB_AMP_Mutacid_BroodCount(_Owner, 1);
+DB_AMP_Mutacid_Tally(_Owner, "DEF", 0);
+DB_AMP_Mutacid_Tally(_Owner, "OFF", 0);
+DB_AMP_Mutacid_Tally(_Owner, "MOB", 0);
+DB_AMP_Mutacid_PicksSinceTier(_Owner, 0);
+
+// party-scale: pick mid/high level-scale by eff = (slimelvl + party*2)/3
+PROC
+PROC_AMP_Mutacid_ScaleSlime((CHARACTER)_Slime, (CHARACTER)_Owner)
+AND
+GetLevel(_Slime, (INTEGER)_SLvl)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_PLvl)
+AND
+IntegerProduct(_PLvl, 2, (INTEGER)_P2)
+AND
+IntegerSum(_SLvl, _P2, (INTEGER)_Sum)
+AND
+IntegerDivide(_Sum, 3, (INTEGER)_Eff)
+AND
+_Eff >= 8
+THEN
+ApplyStatus(_Slime, "AMP_AcidSlime_LevelScale_High", -1.0, 1, _Slime);
+SetHitpointsPercentage(_Slime, 100.0, "");
+
+PROC
+PROC_AMP_Mutacid_ScaleSlime((CHARACTER)_Slime, (CHARACTER)_Owner)
+AND
+GetLevel(_Slime, (INTEGER)_SLvl)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_PLvl)
+AND
+IntegerProduct(_PLvl, 2, (INTEGER)_P2)
+AND
+IntegerSum(_SLvl, _P2, (INTEGER)_Sum)
+AND
+IntegerDivide(_Sum, 3, (INTEGER)_Eff)
+AND
+_Eff >= 5
+AND
+_Eff < 8
+THEN
+ApplyStatus(_Slime, "AMP_AcidSlime_LevelScale_Mid", -1.0, 1, _Slime);
+SetHitpointsPercentage(_Slime, 100.0, "");
+
+// bridge: owner q-flags -> slimeq on slime
+
+// on spawn: copy all of owner's active q-flags to the new slime
+PROC
+PROC_AMP_Mutacid_SyncQToSlime((CHARACTER)_Owner, (CHARACTER)_Slime)
+AND
+DB_AMP_Mutacid_QMarker((STRING)_Q, (STRING)_SQ)
+AND
+HasActiveStatus(_Owner, _Q, 1)
+THEN
+ApplyStatus(_Slime, _SQ, -1.0, 1, _Owner);
+
+// on spawn: bath only if owner is in ACID
+PROC
+PROC_AMP_Mutacid_SyncQToSlime((CHARACTER)_Owner, (CHARACTER)_Slime)
+AND
+DB_AMP_Mutacid_QMarkerBath((STRING)_Q, (STRING)_SQ)
+AND
+HasActiveStatus(_Owner, _Q, 1)
+AND
+HasActiveStatus(_Owner, "ACID", 1)
+THEN
+ApplyStatus(_Slime, _SQ, -1.0, 1, _Owner);
+
+// equip mid-combat (q-flag applied) -> apply slimeq to all his slimes
+IF
+StatusApplied((CHARACTER)_Owner, (STRING)_Q, _, _)
+AND
+DB_AMP_Mutacid_QMarker(_Q, (STRING)_SQ)
+AND
+DB_AMP_Mutacid_SlimeOwner((CHARACTER)_Slime, _Owner)
+THEN
+ApplyStatus(_Slime, _SQ, -1.0, 1, _Owner);
+
+// unequip mid-combat (q-flag removed) -> remove slimeq from his slimes
+IF
+StatusRemoved((CHARACTER)_Owner, (STRING)_Q, _, _)
+AND
+DB_AMP_Mutacid_QMarker(_Q, (STRING)_SQ)
+AND
+DB_AMP_Mutacid_SlimeOwner((CHARACTER)_Slime, _Owner)
+THEN
+RemoveStatus(_Slime, _SQ, _Owner);
+
+// bath gate on: owner enters ACID with a q_bath flag -> apply slimeq_bath
+IF
+StatusApplied((CHARACTER)_Owner, "ACID", _, _)
+AND
+DB_AMP_Mutacid_SlimeOwner((CHARACTER)_Slime, _Owner)
+AND
+DB_AMP_Mutacid_QMarkerBath((STRING)_Q, (STRING)_SQ)
+AND
+HasActiveStatus(_Owner, _Q, 1)
+THEN
+ApplyStatus(_Slime, _SQ, -1.0, 1, _Owner);
+
+// bath gate off: owner leaves ACID -> remove slimeq_bath
+IF
+StatusRemoved((CHARACTER)_Owner, "ACID", _, _)
+AND
+DB_AMP_Mutacid_SlimeOwner((CHARACTER)_Slime, _Owner)
+AND
+DB_AMP_Mutacid_QMarkerBath((STRING)_Q, (STRING)_SQ)
+THEN
+RemoveStatus(_Slime, _SQ, _Owner);
+
+// desummon on combat end or owner flees to camp (host death does not desummon)
+IF
+LeftCombat((CHARACTER)_Slime, _)
+AND
+DB_AMP_Mutacid_SlimeOwner(_Slime, (CHARACTER)_Owner)
+THEN
+NOT DB_AMP_Mutacid_SlimeOwner(_Slime, _Owner);
+RequestDeleteTemporary(_Slime);
+
+// recursive brood drain: retract before recursion so every row is processed
+PROC
+PROC_AMP_Mutacid_DespawnBrood((CHARACTER)_Owner)
+AND
+DB_AMP_Mutacid_SlimeOwner((CHARACTER)_Slime, _Owner)
+THEN
+NOT DB_AMP_Mutacid_SlimeOwner(_Slime, _Owner);
+RequestDeleteTemporary(_Slime);
+PROC_AMP_Mutacid_DespawnBrood(_Owner);
+
+// owner leaves combat -> force-despawn his whole brood
+IF
+LeftCombat((CHARACTER)_Owner, _)
+AND
+DB_AMP_Mutacid_SlimeOwner(_, _Owner)
+THEN
+PROC_AMP_Mutacid_DespawnBrood(_Owner);
+
+// reset per-combat spawn guard on combat end
+IF
+LeftCombat((CHARACTER)_Owner, _)
+AND
+DB_AMP_Mutacid_Spawned(_Owner)
+THEN
+NOT DB_AMP_Mutacid_Spawned(_Owner);
+
+// owner teleports to camp -> despawn his brood
+IF
+TeleportedToCamp((CHARACTER)_Owner)
+AND
+DB_AMP_Mutacid_SlimeOwner(_, _Owner)
+THEN
+PROC_AMP_Mutacid_DespawnBrood(_Owner);
+
+// safety sweep on load: clear any stale brood left by older versions
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Mutacid_SlimeOwner(_, (CHARACTER)_Owner)
+THEN
+PROC_AMP_Mutacid_DespawnBrood(_Owner);
+
+// slime dies -> clear its link
+IF
+Died((CHARACTER)_Slime)
+AND
+DB_AMP_Mutacid_SlimeOwner(_Slime, (CHARACTER)_Owner)
+THEN
+NOT DB_AMP_Mutacid_SlimeOwner(_Slime, _Owner);
+
+// acid trail: slime leaves surfaceacid as it moves (passive marker -> here)
+IF
+StatusApplied((CHARACTER)_Slime, "AMP_MUTACID_TRAIL_MARK", _, _)
+AND
+DB_AMP_Mutacid_SlimeOwner(_Slime, _)
+THEN
+CreateSurface(_Slime, "SurfaceAcid", 1.0, 2.0);
+
+EXITSECTION
+ENDEXITSECTION

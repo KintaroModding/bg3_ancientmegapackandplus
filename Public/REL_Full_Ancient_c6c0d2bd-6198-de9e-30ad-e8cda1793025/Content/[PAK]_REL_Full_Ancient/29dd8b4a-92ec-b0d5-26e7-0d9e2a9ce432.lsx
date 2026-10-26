@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="29dd8b4a-92ec-b0d5-26e7-0d9e2a9ce432" />
+					<attribute id="Name" type="LSString" value="Astral_Enchantment_Particles" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/Astral_Enchantment_Particles.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="Astral_Enchantment_Particles" />
+					<attribute id="BoundsMin" type="fvec3" value="-3 -3 -3" />
+					<attribute id="BoundsMax" type="fvec3" value="3 3 3" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="5" />
+					<attribute id="Looping" type="bool" value="True" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="26e347e3-ab49-59ba-4b15-70c8a482fc6e" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="0b78ac8d-4ce5-2026-0fe5-8d87da5533cc" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="654bf0db-82bd-64fd-abe0-2b3b8a8d6c6b" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="aaad2d87-1c7a-cc7c-e1a8-f6fa77bf640a" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="e7b55705-01cd-edbd-7a8d-25321c31904d" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

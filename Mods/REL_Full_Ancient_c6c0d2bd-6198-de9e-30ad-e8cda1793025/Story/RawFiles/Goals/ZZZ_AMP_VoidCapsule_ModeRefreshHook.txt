@@ -1,0 +1,20 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// mode change rebuilds the _active cache, deferred 100ms so the parallel SetGameMode bodies finish their db writes first
+
+KBSECTION
+
+// fires for any mode value
+PROC
+PROC_AMP_SetGameMode((CHARACTER)_Host, (STRING)_NewMode)
+THEN
+TimerLaunch("AMP_VoidCapsule_ModeRefresh", 100);
+
+IF
+TimerFinished("AMP_VoidCapsule_ModeRefresh")
+THEN
+PROC_AMP_VoidCapsule_RefreshCache();
+
+EXITSECTION
+ENDEXITSECTION

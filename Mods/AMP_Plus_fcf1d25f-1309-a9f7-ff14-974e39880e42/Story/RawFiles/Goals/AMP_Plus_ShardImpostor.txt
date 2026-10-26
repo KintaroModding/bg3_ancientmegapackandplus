@@ -1,0 +1,484 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+DB_AMP_Plus_ShardImpostor_Marker("AMP_SHARD_AMULET_IMPOSTOR");
+DB_AMP_Plus_ShardImpostor_Marker("AMP_SHARD_ARMOR_IMPOSTOR");
+DB_AMP_Plus_ShardImpostor_Marker("AMP_SHARD_BOOTS_IMPOSTOR");
+DB_AMP_Plus_ShardImpostor_Marker("AMP_SHARD_CLOAK_IMPOSTOR");
+DB_AMP_Plus_ShardImpostor_Marker("AMP_SHARD_GLOVES_IMPOSTOR");
+DB_AMP_Plus_ShardImpostor_Marker("AMP_SHARD_HEAD_IMPOSTOR");
+DB_AMP_Plus_ShardImpostor_Marker("AMP_SHARD_RING_IMPOSTOR");
+DB_AMP_Plus_ShardImpostor_Marker("AMP_SHARD_WEAPON_IMPOSTOR");
+
+DB_AMP_Plus_ShardImpostor_Equip((ITEMROOT)AMP_Arcanizer_Shard_Amulet_38_a08b8a12-ce7b-4115-a16f-3ab8b3c1e976, "Amulet");
+DB_AMP_Plus_ShardImpostor_Equip((ITEMROOT)AMP_Arcanizer_Shard_Armor_43_536da7ed-6809-4a03-98b1-a92148792cf6, "Breast");
+DB_AMP_Plus_ShardImpostor_Equip((ITEMROOT)AMP_Arcanizer_Shard_Boots_31_d278105c-6b1b-472d-b404-bf2740d3e857, "Boots");
+DB_AMP_Plus_ShardImpostor_Equip((ITEMROOT)AMP_Arcanizer_Shard_Cloak_32_96a6997c-0b34-4c7f-989c-ee175cfa7338, "Cloak");
+DB_AMP_Plus_ShardImpostor_Equip((ITEMROOT)AMP_Arcanizer_Shard_Gloves_34_26f3b861-70c0-405d-a219-8082482997be, "Gloves");
+DB_AMP_Plus_ShardImpostor_Equip((ITEMROOT)AMP_Arcanizer_Shard_Head_42_dda0aa1c-08b4-4730-b86c-2f354caca246, "Helmet");
+DB_AMP_Plus_ShardImpostor_Equip((ITEMROOT)AMP_Arcanizer_Shard_Ring_62_655c77ba-660d-4958-b22d-19aa68389261, "Ring");
+DB_AMP_Plus_ShardImpostor_Weapon((ITEMROOT)AMP_Arcanizer_Shard_Weapon_110_780b1440-c604-47b6-8616-f43509127153);
+
+DB_AMP_Plus_ShardImpostor_FreeCopy("AMP_SHARD_WEAPON_ARCHITECT");
+
+KBSECTION
+
+// kept out of the generic enchanting flow, which spends the shard before the copy can be looked at
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Plus_ShardImpostor_Equip((ITEMROOT)_Template, _)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, _Cat, _Tech, _Slot, _Final)
+THEN
+NOT DB_AMP_Shard_Equip_NonStack(_Template, _Cat, _Tech, _Slot, _Final);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Plus_ShardImpostor_Weapon((ITEMROOT)_Template)
+AND
+DB_AMP_Shard_Weapon_NonStack(_Template, _Melee, _Ranged, _Final)
+THEN
+NOT DB_AMP_Shard_Weapon_NonStack(_Template, _Melee, _Ranged, _Final);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_ShardImpostor_FreeCopy("AMP_SHARD_WEAPON_ARCHITECT")
+THEN
+DB_AMP_Plus_ShardImpostor_FreeCopy("AMP_SHARD_WEAPON_ARCHITECT");
+
+QRY
+QRY_AMP_Plus_ShardImpostor_Copyable((STRING)_Marker)
+AND
+DB_AMP_Shard_Transfer(_Marker, _)
+AND
+NOT DB_AMP_Plus_ShardImpostor_Marker(_Marker)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Plus_ShardImpostor_Copyable((STRING)_Marker)
+AND
+DB_AMP_Shard_WeaponStackable(_Marker)
+AND
+NOT DB_AMP_Plus_ShardImpostor_Marker(_Marker)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Plus_ShardImpostor_Copyable((STRING)_Marker)
+AND
+DB_AMP_Shard_Weapon_NonStack(_, _, _, _Marker)
+AND
+NOT DB_AMP_Plus_ShardImpostor_Marker(_Marker)
+THEN
+DB_NOOP(1);
+
+// only a character's application counts, the engine refires apply events on worn gear
+
+IF
+StatusApplied((ITEM)_Item, (STRING)_Marker, (CHARACTER)_Causee, _)
+AND
+DB_Players(_Causee)
+AND
+QRY_AMP_Plus_ShardImpostor_Copyable(_Marker)
+AND
+DB_AMP_Plus_ShardImpostor_Last(_Item, _Old)
+THEN
+NOT DB_AMP_Plus_ShardImpostor_Last(_Item, _Old);
+DB_AMP_Plus_ShardImpostor_Last(_Item, _Marker);
+
+IF
+StatusApplied((ITEM)_Item, (STRING)_Marker, (CHARACTER)_Causee, _)
+AND
+DB_Players(_Causee)
+AND
+QRY_AMP_Plus_ShardImpostor_Copyable(_Marker)
+AND
+NOT DB_AMP_Plus_ShardImpostor_Last(_Item, _)
+THEN
+DB_AMP_Plus_ShardImpostor_Last(_Item, _Marker);
+
+
+// outside the generic tables, so the total migration never runs for it. Run it here, ahead of the apply rules
+
+PROC
+PROC_AMP_Plus_ShardImpostor_Migrate((ITEM)_Item)
+AND
+NOT DB_AMP_Shard_TotalCount(_Item, _)
+AND
+DB_AMP_Shard_Count(_Item, _, _)
+AND
+ItemGetGoldValue(_Item, _Value)
+AND
+DB_AMP_Shard_PriceRange(_Rarity, _Min, _Max)
+AND
+_Value >= _Min
+AND
+_Value <= _Max
+AND
+DB_AMP_Shard_SlotLimit(_Rarity, _Limit)
+THEN
+DB_AMP_Shard_TotalCount(_Item, _Limit);
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Plus_ShardImpostor_Equip(_Template, _Slot)
+AND
+GetEquippedItem(_Char, _Slot, (ITEM)_Item)
+THEN
+PROC_AMP_Plus_ShardImpostor_Migrate(_Item);
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Plus_ShardImpostor_Weapon(_Template)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Melee Main Weapon", (ITEM)_Weapon)
+THEN
+PROC_AMP_Plus_ShardImpostor_Migrate(_Weapon);
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Plus_ShardImpostor_Weapon(_Template)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 0)
+AND
+HasRangedWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Ranged Main Weapon", (ITEM)_Weapon)
+THEN
+PROC_AMP_Plus_ShardImpostor_Migrate(_Weapon);
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Plus_ShardImpostor_Equip(_Template, _Slot)
+AND
+GetEquippedItem(_Char, _Slot, (ITEM)_Item)
+AND
+DB_AMP_Plus_ShardImpostor_Last(_Item, _Marker)
+AND
+NOT DB_AMP_Shard_Equip_NonStack(_, _, _, _, _Marker)
+AND
+NOT DB_AMP_Shard_Weapon_NonStack(_, _, _, _Marker)
+AND
+NOT QRY_AMP_Shard_CanApply(_Item)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+OpenMessageBox(_Char, "AMP_Shard_Limit_Error");
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Plus_ShardImpostor_Weapon(_Template)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Melee Main Weapon", (ITEM)_Weapon)
+AND
+DB_AMP_Plus_ShardImpostor_Last(_Weapon, _Marker)
+AND
+NOT DB_AMP_Shard_Weapon_NonStack(_, _, _, _Marker)
+AND
+NOT DB_AMP_Plus_ShardImpostor_FreeCopy(_Marker)
+AND
+NOT QRY_AMP_Shard_CanApply(_Weapon)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+OpenMessageBox(_Char, "AMP_Shard_Limit_Error");
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Plus_ShardImpostor_Weapon(_Template)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 0)
+AND
+HasRangedWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Ranged Main Weapon", (ITEM)_Weapon)
+AND
+DB_AMP_Plus_ShardImpostor_Last(_Weapon, _Marker)
+AND
+NOT DB_AMP_Shard_Weapon_NonStack(_, _, _, _Marker)
+AND
+NOT DB_AMP_Plus_ShardImpostor_FreeCopy(_Marker)
+AND
+NOT QRY_AMP_Shard_CanApply(_Weapon)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+OpenMessageBox(_Char, "AMP_Shard_Limit_Error");
+
+
+// gear: the copied marker replaces the shard's own, so the piece carries the remembered shard twice
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Plus_ShardImpostor_Equip(_Template, _Slot)
+AND
+GetEquippedItem(_Char, _Slot, (ITEM)_Item)
+AND
+DB_AMP_Plus_ShardImpostor_Last(_Item, _Marker)
+AND
+NOT DB_AMP_Shard_Equip_NonStack(_, _, _, _, _Marker)
+AND
+NOT DB_AMP_Shard_Weapon_NonStack(_, _, _, _Marker)
+AND
+QRY_AMP_Shard_CanApply(_Item)
+THEN
+PROC_AMP_Shard_IncTotal(_Item);
+ApplyStatus(_Item, _Marker, -1.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Plus_ShardImpostor_Equip(_Template, _Slot)
+AND
+GetEquippedItem(_Char, _Slot, (ITEM)_Item)
+AND
+DB_AMP_Plus_ShardImpostor_Last(_Item, _Marker)
+AND
+DB_AMP_Shard_Equip_NonStack(_, _, _, _, _Marker)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Plus_ShardImpostor_Equip(_Template, _Slot)
+AND
+GetEquippedItem(_Char, _Slot, (ITEM)_Item)
+AND
+DB_AMP_Plus_ShardImpostor_Last(_Item, _Marker)
+AND
+DB_AMP_Shard_Weapon_NonStack(_, _, _, _Marker)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Plus_ShardImpostor_Equip(_Template, _Slot)
+AND
+GetEquippedItem(_Char, _Slot, (ITEM)_Item)
+AND
+NOT DB_AMP_Plus_ShardImpostor_Last(_Item, _)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Plus_ShardImpostor_Equip(_Template, _Slot)
+AND
+NOT GetEquippedItem(_Char, _Slot, _)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Plus_ShardImpostor_Weapon(_Template)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Melee Main Weapon", (ITEM)_Weapon)
+AND
+DB_AMP_Plus_ShardImpostor_Last(_Weapon, _Marker)
+AND
+NOT DB_AMP_Shard_Weapon_NonStack(_, _, _, _Marker)
+AND
+NOT DB_AMP_Plus_ShardImpostor_FreeCopy(_Marker)
+AND
+QRY_AMP_Shard_CanApply(_Weapon)
+THEN
+PROC_AMP_Shard_IncTotal(_Weapon);
+ApplyStatus(_Weapon, _Marker, -1.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Plus_ShardImpostor_Weapon(_Template)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Melee Main Weapon", (ITEM)_Weapon)
+AND
+DB_AMP_Plus_ShardImpostor_Last(_Weapon, _Marker)
+AND
+DB_AMP_Shard_Weapon_NonStack(_, _, _, _Marker)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Plus_ShardImpostor_Weapon(_Template)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Melee Main Weapon", (ITEM)_Weapon)
+AND
+NOT DB_AMP_Plus_ShardImpostor_Last(_Weapon, _)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Plus_ShardImpostor_Weapon(_Template)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 0)
+AND
+HasRangedWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Ranged Main Weapon", (ITEM)_Weapon)
+AND
+DB_AMP_Plus_ShardImpostor_Last(_Weapon, _Marker)
+AND
+NOT DB_AMP_Shard_Weapon_NonStack(_, _, _, _Marker)
+AND
+NOT DB_AMP_Plus_ShardImpostor_FreeCopy(_Marker)
+AND
+QRY_AMP_Shard_CanApply(_Weapon)
+THEN
+PROC_AMP_Shard_IncTotal(_Weapon);
+ApplyStatus(_Weapon, _Marker, -1.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Plus_ShardImpostor_Weapon(_Template)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 0)
+AND
+HasRangedWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Ranged Main Weapon", (ITEM)_Weapon)
+AND
+DB_AMP_Plus_ShardImpostor_Last(_Weapon, _Marker)
+AND
+DB_AMP_Shard_Weapon_NonStack(_, _, _, _Marker)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Plus_ShardImpostor_Weapon(_Template)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 0)
+AND
+HasRangedWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Ranged Main Weapon", (ITEM)_Weapon)
+AND
+NOT DB_AMP_Plus_ShardImpostor_Last(_Weapon, _)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Plus_ShardImpostor_Weapon(_Template)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 0)
+AND
+HasRangedWeaponEquipped(_Char, "Mainhand", 0)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Plus_ShardImpostor_Weapon(_Template)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Melee Main Weapon", (ITEM)_Weapon)
+AND
+DB_AMP_Plus_ShardImpostor_Last(_Weapon, _Marker)
+AND
+DB_AMP_Plus_ShardImpostor_FreeCopy(_Marker)
+THEN
+ApplyStatus(_Weapon, _Marker, -1.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Plus_ShardImpostor_Weapon(_Template)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 0)
+AND
+HasRangedWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Ranged Main Weapon", (ITEM)_Weapon)
+AND
+DB_AMP_Plus_ShardImpostor_Last(_Weapon, _Marker)
+AND
+DB_AMP_Plus_ShardImpostor_FreeCopy(_Marker)
+THEN
+ApplyStatus(_Weapon, _Marker, -1.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+EXITSECTION
+ENDEXITSECTION

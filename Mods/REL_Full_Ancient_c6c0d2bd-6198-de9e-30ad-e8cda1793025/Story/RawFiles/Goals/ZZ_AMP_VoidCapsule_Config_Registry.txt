@@ -1,0 +1,231 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// void capsule static registry: coins, containers, reward mappings, ranges, slots.
+// per-mode balance lives in config_balance.
+
+// coin templates (4)
+DB_AMP_VoidCapsule_Coin((ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b, "Fey");
+DB_AMP_VoidCapsule_Coin((ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, "Shadowfell");
+DB_AMP_VoidCapsule_Coin((ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, "Astral");
+DB_AMP_VoidCapsule_Coin((ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1, "Celestial");
+
+// capsule templates (22)
+// slot-based (12)
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_Generic_VoidCapsule_bb84619f-7c56-4a1d-aa8a-d5f0a33ea620, "Generic");
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_Hat_VoidCapsule_98bdbe88-d3ea-493d-a803-9cc6bcf0b200, "Hat");
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_Cloak_VoidCapsule_2e11382e-7156-424f-b6cb-4d856db392b5, "Cloak");
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_Cloth_VoidCapsule_a9b47da1-7857-4a91-bdc0-845ecf092b83, "Cloth");
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_Armor_VoidCapsule_15564fed-94e5-4541-a8d6-0ab7fb588439, "Armor");
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_Shield_VoidCapsule_45538e4d-9d80-42c8-b879-d2aaca220651, "Shield");
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_Glove_VoidCapsule_f6b3a6af-5168-4408-b463-07814f26e3a5, "Glove");
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_Boot_VoidCapsule_3750f2b0-8888-498f-ac15-c71af93f973f, "Boot");
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_Amulet_VoidCapsule_27eeca56-5e80-47b3-8a64-aca99f4e5da4, "Amulet");
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_Ring_VoidCapsule_8ee480e7-b5f2-4c5f-9b22-9a4b1289508a, "Ring");
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_1H_VoidCapsule_0dc57310-fb72-43e5-a61b-caf1a3a8bbd3, "1H");
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_2H_VoidCapsule_dd892a12-a733-49a0-bec5-cac418bafe79, "2H");
+
+// thematic (10)
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_Swamp_VoidCapsule_9cc7c34c-568d-43e3-9032-ff2409d3d1b2, "Swamp");
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_Aquatic_VoidCapsule_ca6c58a9-d0f4-4df4-bdb8-93538a248547, "Aquatic");
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_Shadowfell_VoidCapsule_091d95c0-2bf0-4f6e-9a04-7c49e7fe1bd9, "Shadowfell");
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_Arcane_VoidCapsule_79ecd0e9-e036-46f0-8d3e-2f6f3c30d28c, "Arcane");
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_Celestial_VoidCapsule_9ccff182-c01b-4256-93d8-f0d0e794b02a, "Celestial");
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_Nature_VoidCapsule_86da09ce-d855-47a6-a30e-2d0ced02bb5c, "Nature");
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_Destructive_VoidCapsule_cbd3e5d5-79a3-4e96-8db7-0d59f51e9261, "Destructive");
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_War_VoidCapsule_ec91ffb2-182b-49db-82b6-f311d63d1363, "War");
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_Psionic_VoidCapsule_758e8cab-c712-4068-8fd1-94dbda0f484d, "Psionic");
+DB_AMP_VoidCapsule_Container((ITEMROOT)AMP_Primal_VoidCapsule_d75c3820-2d6b-4355-8e0d-70af3570399c, "Primal");
+
+// reward mappings (88): capsule type + coin type -> reward template
+
+// generic
+DB_AMP_VoidCapsule_Reward("Generic", "Fey", (ITEMROOT)AMP_Capsule_Reward_Generic_1_bc44d261-edfb-424e-ab61-98d16899ab7b);
+DB_AMP_VoidCapsule_Reward("Generic", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_Generic_2_7a85cccb-48ed-4948-9d25-03a4b0a79114);
+DB_AMP_VoidCapsule_Reward("Generic", "Astral", (ITEMROOT)AMP_Capsule_Reward_Generic_3_007e6a6b-4d51-4a7f-b03a-560e06edd5f6);
+DB_AMP_VoidCapsule_Reward("Generic", "Celestial", (ITEMROOT)AMP_Capsule_Reward_Generic_4_55bf5412-1ab8-460f-9bbb-e8b860454ad9);
+
+// hat
+DB_AMP_VoidCapsule_Reward("Hat", "Fey", (ITEMROOT)AMP_Capsule_Reward_Hat_1_c63c201f-253d-4e5f-aeac-b08dda44bf0f);
+DB_AMP_VoidCapsule_Reward("Hat", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_Hat_2_dc88f180-bc0a-466e-a4ad-5299c8c3dd6f);
+DB_AMP_VoidCapsule_Reward("Hat", "Astral", (ITEMROOT)AMP_Capsule_Reward_Hat_3_3664a8fe-c0ae-473b-8635-a3cafa6fe574);
+DB_AMP_VoidCapsule_Reward("Hat", "Celestial", (ITEMROOT)AMP_Capsule_Reward_Hat_4_b5f7ccb7-0373-4135-9cf2-61589384b916);
+
+// cloak
+DB_AMP_VoidCapsule_Reward("Cloak", "Fey", (ITEMROOT)AMP_Capsule_Reward_Cloak_1_eedf82f9-5829-4dd1-9c1b-57fd40d41e91);
+DB_AMP_VoidCapsule_Reward("Cloak", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_Cloak_2_c1e0006e-2f5c-4bc1-bed5-20ab4abc6d93);
+DB_AMP_VoidCapsule_Reward("Cloak", "Astral", (ITEMROOT)AMP_Capsule_Reward_Cloak_3_d675c30d-9886-40ba-9b13-3cf4eb3091b8);
+DB_AMP_VoidCapsule_Reward("Cloak", "Celestial", (ITEMROOT)AMP_Capsule_Reward_Cloak_4_5d065d17-09f5-42dd-9978-4e6731b4fad2);
+
+// cloth
+DB_AMP_VoidCapsule_Reward("Cloth", "Fey", (ITEMROOT)AMP_Capsule_Reward_Cloth_1_2872ecd1-6eb3-4193-af74-7b74d4006959);
+DB_AMP_VoidCapsule_Reward("Cloth", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_Cloth_2_5649264e-c679-47ac-adff-9d24bbe05749);
+DB_AMP_VoidCapsule_Reward("Cloth", "Astral", (ITEMROOT)AMP_Capsule_Reward_Cloth_3_f2ef90a3-485f-41c9-8afa-fcf812b464f1);
+DB_AMP_VoidCapsule_Reward("Cloth", "Celestial", (ITEMROOT)AMP_Capsule_Reward_Cloth_4_86dd5ad8-ef73-41c0-bdb3-733d5ada23fd);
+
+// armor
+DB_AMP_VoidCapsule_Reward("Armor", "Fey", (ITEMROOT)AMP_Capsule_Reward_Armor_1_9b7b8325-d644-404b-9ee7-f9ac3101ecdc);
+DB_AMP_VoidCapsule_Reward("Armor", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_Armor_2_25af9604-8461-407e-b39f-81653cac76e8);
+DB_AMP_VoidCapsule_Reward("Armor", "Astral", (ITEMROOT)AMP_Capsule_Reward_Armor_3_1fc602a6-1571-4531-bbfb-8c67e14ad1d6);
+DB_AMP_VoidCapsule_Reward("Armor", "Celestial", (ITEMROOT)AMP_Capsule_Reward_Armor_4_abb50b72-1bbb-446e-9020-85f52f886137);
+
+// shield
+DB_AMP_VoidCapsule_Reward("Shield", "Fey", (ITEMROOT)AMP_Capsule_Reward_Shield_1_dbdf1736-3f72-405d-a666-01049655d317);
+DB_AMP_VoidCapsule_Reward("Shield", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_Shield_2_def80a0a-bbda-44b8-90d9-3e4af2db8319);
+DB_AMP_VoidCapsule_Reward("Shield", "Astral", (ITEMROOT)AMP_Capsule_Reward_Shield_3_3c3157f1-d486-43f2-8a6a-505b8dec17ba);
+DB_AMP_VoidCapsule_Reward("Shield", "Celestial", (ITEMROOT)AMP_Capsule_Reward_Shield_4_ae40c9d9-314d-4003-9c6c-d1e27f535ca6);
+
+// glove
+DB_AMP_VoidCapsule_Reward("Glove", "Fey", (ITEMROOT)AMP_Capsule_Reward_Glove_1_c1054041-7d02-4d53-8d55-58ea339e24b7);
+DB_AMP_VoidCapsule_Reward("Glove", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_Glove_2_df9d49be-d98b-464c-98c2-e4ad8df7b626);
+DB_AMP_VoidCapsule_Reward("Glove", "Astral", (ITEMROOT)AMP_Capsule_Reward_Glove_3_d4d15fa3-00be-4049-bf97-28508b6e87b6);
+DB_AMP_VoidCapsule_Reward("Glove", "Celestial", (ITEMROOT)AMP_Capsule_Reward_Glove_4_bbf33088-2e2d-402a-8e85-21c00bbc0915);
+
+// boot
+DB_AMP_VoidCapsule_Reward("Boot", "Fey", (ITEMROOT)AMP_Capsule_Reward_Boot_1_599a92eb-8c8a-4cb8-add6-3595d067efb5);
+DB_AMP_VoidCapsule_Reward("Boot", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_Boot_2_3ebf590c-1e50-446f-8492-4d46e3c635f8);
+DB_AMP_VoidCapsule_Reward("Boot", "Astral", (ITEMROOT)AMP_Capsule_Reward_Boot_3_32ae0f82-4737-4016-9820-a860dc36e53e);
+DB_AMP_VoidCapsule_Reward("Boot", "Celestial", (ITEMROOT)AMP_Capsule_Reward_Boot_4_819ee9ca-c1cf-4946-af32-d0086c7dc7dc);
+
+// amulet
+DB_AMP_VoidCapsule_Reward("Amulet", "Fey", (ITEMROOT)AMP_Capsule_Reward_Amulet_1_9934ada8-287b-491e-b944-05ac97eb3bfe);
+DB_AMP_VoidCapsule_Reward("Amulet", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_Amulet_2_b8df49fb-c43b-4b73-8954-3f94a7387435);
+DB_AMP_VoidCapsule_Reward("Amulet", "Astral", (ITEMROOT)AMP_Capsule_Reward_Amulet_3_d6d14e33-8128-49f9-892f-60487808ea2b);
+DB_AMP_VoidCapsule_Reward("Amulet", "Celestial", (ITEMROOT)AMP_Capsule_Reward_Amulet_4_d1a2040e-0ff7-43b5-b909-d64e95c95656);
+
+// ring
+DB_AMP_VoidCapsule_Reward("Ring", "Fey", (ITEMROOT)AMP_Capsule_Reward_Ring_1_b6d58c40-486d-4741-b90e-d77a3d29be55);
+DB_AMP_VoidCapsule_Reward("Ring", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_Ring_2_db0b7532-a00d-4e39-af9a-07b609af1fa6);
+DB_AMP_VoidCapsule_Reward("Ring", "Astral", (ITEMROOT)AMP_Capsule_Reward_Ring_3_35bd0bbb-a4d8-4a8a-b0f2-2e98d9cda623);
+DB_AMP_VoidCapsule_Reward("Ring", "Celestial", (ITEMROOT)AMP_Capsule_Reward_Ring_4_0de682d4-0791-4088-8f45-59d08d5c0f22);
+
+// 1h
+DB_AMP_VoidCapsule_Reward("1H", "Fey", (ITEMROOT)AMP_Capsule_Reward_1H_1_cde75e26-92be-4af9-b7ce-f02a355b70f0);
+DB_AMP_VoidCapsule_Reward("1H", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_1H_2_7bb02ea2-9eac-4c91-8644-f2bdf4101170);
+DB_AMP_VoidCapsule_Reward("1H", "Astral", (ITEMROOT)AMP_Capsule_Reward_1H_3_3e4b0463-53d2-405c-8b9e-80f9a932d5b2);
+DB_AMP_VoidCapsule_Reward("1H", "Celestial", (ITEMROOT)AMP_Capsule_Reward_1H_4_5b065b54-fec7-44f9-9230-21c65a3eb328);
+
+// 2h
+DB_AMP_VoidCapsule_Reward("2H", "Fey", (ITEMROOT)AMP_Capsule_Reward_2H_1_a49a75b4-a203-467a-87e7-5786e8cbf375);
+DB_AMP_VoidCapsule_Reward("2H", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_2H_2_1e9aff45-599e-4693-a32b-b5bee243fb87);
+DB_AMP_VoidCapsule_Reward("2H", "Astral", (ITEMROOT)AMP_Capsule_Reward_2H_3_1e7ff9a8-896c-4fd1-840f-48a0403eaac0);
+DB_AMP_VoidCapsule_Reward("2H", "Celestial", (ITEMROOT)AMP_Capsule_Reward_2H_4_2f90217c-7330-47d8-93f2-7e4bc2413020);
+
+// swamp
+DB_AMP_VoidCapsule_Reward("Swamp", "Fey", (ITEMROOT)AMP_Capsule_Reward_Swamp_1_c45c070f-b2d3-49e8-86fd-187515cc6851);
+DB_AMP_VoidCapsule_Reward("Swamp", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_Swamp_2_46710d75-9fd7-468b-9246-69cc736629f5);
+DB_AMP_VoidCapsule_Reward("Swamp", "Astral", (ITEMROOT)AMP_Capsule_Reward_Swamp_3_3c5a2573-c161-4598-92d0-d084c1541b57);
+DB_AMP_VoidCapsule_Reward("Swamp", "Celestial", (ITEMROOT)AMP_Capsule_Reward_Swamp_4_7bc4d50f-c666-4b5d-8fd3-86f8a73502b6);
+
+// aquatic
+DB_AMP_VoidCapsule_Reward("Aquatic", "Fey", (ITEMROOT)AMP_Capsule_Reward_Aquatic_1_c7bba271-f142-454c-944d-457d82354f3e);
+DB_AMP_VoidCapsule_Reward("Aquatic", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_Aquatic_2_c8b4baf6-23e1-47cf-b62d-b8bf1e5f4277);
+DB_AMP_VoidCapsule_Reward("Aquatic", "Astral", (ITEMROOT)AMP_Capsule_Reward_Aquatic_3_e21b02e2-9293-4f1d-ac07-bb37a1e0c253);
+DB_AMP_VoidCapsule_Reward("Aquatic", "Celestial", (ITEMROOT)AMP_Capsule_Reward_Aquatic_4_1c879144-2d28-4998-928a-593df288c3f6);
+
+// shadowfell
+DB_AMP_VoidCapsule_Reward("Shadowfell", "Fey", (ITEMROOT)AMP_Capsule_Reward_Shadowfell_1_b8bc1620-b83d-44c2-9415-4c8b7ae2c200);
+DB_AMP_VoidCapsule_Reward("Shadowfell", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_Shadowfell_2_ca4859eb-e518-447a-9abe-03461c906ff2);
+DB_AMP_VoidCapsule_Reward("Shadowfell", "Astral", (ITEMROOT)AMP_Capsule_Reward_Shadowfell_3_3bdd3f1f-9a61-4c32-9023-218f30e0856b);
+DB_AMP_VoidCapsule_Reward("Shadowfell", "Celestial", (ITEMROOT)AMP_Capsule_Reward_Shadowfell_4_2489f362-0117-4b96-88be-c45917ee73c2);
+
+// arcane
+DB_AMP_VoidCapsule_Reward("Arcane", "Fey", (ITEMROOT)AMP_Capsule_Reward_Arcane_1_1a3c2ea5-cc3a-4dcf-b06c-bb0360529604);
+DB_AMP_VoidCapsule_Reward("Arcane", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_Arcane_2_bb3a8abe-bf89-4644-90b6-55d427215428);
+DB_AMP_VoidCapsule_Reward("Arcane", "Astral", (ITEMROOT)AMP_Capsule_Reward_Arcane_3_20c89e80-a0d4-45dc-9411-4aff7cb5695b);
+DB_AMP_VoidCapsule_Reward("Arcane", "Celestial", (ITEMROOT)AMP_Capsule_Reward_Arcane_4_f9038798-d54a-406d-92c0-80e986d558ba);
+
+// celestial
+DB_AMP_VoidCapsule_Reward("Celestial", "Fey", (ITEMROOT)AMP_Capsule_Reward_Celestial_1_e7b223f3-53c1-4b84-9fff-19c7de40a475);
+DB_AMP_VoidCapsule_Reward("Celestial", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_Celestial_2_172d4b32-335d-4957-b625-027f7281265e);
+DB_AMP_VoidCapsule_Reward("Celestial", "Astral", (ITEMROOT)AMP_Capsule_Reward_Celestial_3_9cdd23ae-05c2-4779-b83f-d50ce39b4fec);
+DB_AMP_VoidCapsule_Reward("Celestial", "Celestial", (ITEMROOT)AMP_Capsule_Reward_Celestial_4_28a64009-8165-4339-9e1e-48549c26ddbe);
+
+// nature
+DB_AMP_VoidCapsule_Reward("Nature", "Fey", (ITEMROOT)AMP_Capsule_Reward_Nature_1_60386f0c-136b-4a4a-909e-3c95b36915fc);
+DB_AMP_VoidCapsule_Reward("Nature", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_Nature_2_16518c77-3cd8-49f6-aa55-299b29abd529);
+DB_AMP_VoidCapsule_Reward("Nature", "Astral", (ITEMROOT)AMP_Capsule_Reward_Nature_3_cfdaa67a-13e2-4a0c-90eb-ac07850f7de1);
+DB_AMP_VoidCapsule_Reward("Nature", "Celestial", (ITEMROOT)AMP_Capsule_Reward_Nature_4_f2a22885-8c44-4faf-b512-f2cbb2b7e6e5);
+
+// destructive
+DB_AMP_VoidCapsule_Reward("Destructive", "Fey", (ITEMROOT)AMP_Capsule_Reward_Destructive_1_0957495a-8978-4964-bce8-eaec84c024a7);
+DB_AMP_VoidCapsule_Reward("Destructive", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_Destructive_2_a72c1f8e-be72-4c4f-aa13-a49554c48079);
+DB_AMP_VoidCapsule_Reward("Destructive", "Astral", (ITEMROOT)AMP_Capsule_Reward_Destructive_3_1e5acb72-b80d-42d6-8739-f0041101597c);
+DB_AMP_VoidCapsule_Reward("Destructive", "Celestial", (ITEMROOT)AMP_Capsule_Reward_Destructive_4_3d9fe7e2-9a0e-4ee2-8811-7354d969c9b8);
+
+// war
+DB_AMP_VoidCapsule_Reward("War", "Fey", (ITEMROOT)AMP_Capsule_Reward_War_1_49cb8031-a952-4641-a064-aa6de9067075);
+DB_AMP_VoidCapsule_Reward("War", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_War_2_ca36d32d-90db-4187-8174-9efcabec40a8);
+DB_AMP_VoidCapsule_Reward("War", "Astral", (ITEMROOT)AMP_Capsule_Reward_War_3_48ddc241-cc69-47ff-b9ba-ebccd4d671d2);
+DB_AMP_VoidCapsule_Reward("War", "Celestial", (ITEMROOT)AMP_Capsule_Reward_War_4_fe31b6eb-1962-44bb-957e-ce3c2233fa92);
+
+// psionic
+DB_AMP_VoidCapsule_Reward("Psionic", "Fey", (ITEMROOT)AMP_Capsule_Reward_Psionic_1_f3cba11d-1cc2-40df-bce7-3a41c1afe2a4);
+DB_AMP_VoidCapsule_Reward("Psionic", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_Psionic_2_a7a47b4d-65d8-4c5b-ab9f-fd127038b09a);
+DB_AMP_VoidCapsule_Reward("Psionic", "Astral", (ITEMROOT)AMP_Capsule_Reward_Psionic_3_b76b6665-1c35-41b5-ba3a-b0918f412cb6);
+DB_AMP_VoidCapsule_Reward("Psionic", "Celestial", (ITEMROOT)AMP_Capsule_Reward_Psionic_4_35ae3c8b-d73c-4f92-a403-44f58f6925f5);
+
+// primal
+DB_AMP_VoidCapsule_Reward("Primal", "Fey", (ITEMROOT)AMP_Capsule_Reward_Primal_1_8a14a377-6eec-42b5-a571-7c2684cac1c3);
+DB_AMP_VoidCapsule_Reward("Primal", "Shadowfell", (ITEMROOT)AMP_Capsule_Reward_Primal_2_204d8a60-53d7-4f00-98f8-235f27988e02);
+DB_AMP_VoidCapsule_Reward("Primal", "Astral", (ITEMROOT)AMP_Capsule_Reward_Primal_3_a35d686f-9d74-42f5-87ee-49c73a75d1eb);
+DB_AMP_VoidCapsule_Reward("Primal", "Celestial", (ITEMROOT)AMP_Capsule_Reward_Primal_4_e44d7573-932a-4303-847a-02d2c1324df5);
+
+// shard reward mappings (5)
+// legacy 8e23db66 kept for ring44 moonshard integration
+DB_AMP_VoidCapsule_Reward("Shards", "Salvage",           (ITEMROOT)AMP_Capsule_Reward_Shards_8e23db66-b87a-43a4-a154-69a80c4ac6c3);
+DB_AMP_VoidCapsule_Reward("Shards", "Salvage_Uncommon",  (ITEMROOT)AMP_Capsule_Reward_Shards_Uncommon_ba33bd2b-59ed-4205-bba8-39312df94109);
+DB_AMP_VoidCapsule_Reward("Shards", "Salvage_Rare",      (ITEMROOT)AMP_Capsule_Reward_Shards_Rare_a165c989-b06a-4271-afb2-790874d5b37b);
+DB_AMP_VoidCapsule_Reward("Shards", "Salvage_VeryRare",  (ITEMROOT)AMP_Capsule_Reward_Shards_VeryRare_76b07b2c-8cf9-46fc-92ab-5d9f31005523);
+DB_AMP_VoidCapsule_Reward("Shards", "Salvage_Legendary", (ITEMROOT)AMP_Capsule_Reward_Shards_Legendary_71c048a2-2ec7-4a23-ac59-e080282ebe45);
+
+// salvage reward by rarity (salvageapply success lookup)
+DB_AMP_VoidCapsule_SalvageRewardByRarity("Uncommon",  (ITEMROOT)AMP_Capsule_Reward_Shards_Uncommon_ba33bd2b-59ed-4205-bba8-39312df94109);
+DB_AMP_VoidCapsule_SalvageRewardByRarity("Rare",      (ITEMROOT)AMP_Capsule_Reward_Shards_Rare_a165c989-b06a-4271-afb2-790874d5b37b);
+DB_AMP_VoidCapsule_SalvageRewardByRarity("VeryRare",  (ITEMROOT)AMP_Capsule_Reward_Shards_VeryRare_76b07b2c-8cf9-46fc-92ab-5d9f31005523);
+DB_AMP_VoidCapsule_SalvageRewardByRarity("Legendary", (ITEMROOT)AMP_Capsule_Reward_Shards_Legendary_71c048a2-2ec7-4a23-ac59-e080282ebe45);
+
+// gold-value brackets for salvage rarity detection
+DB_AMP_VoidCapsule_RarityRange("Uncommon",   150,    399);
+DB_AMP_VoidCapsule_RarityRange("Rare",       400,    799);
+DB_AMP_VoidCapsule_RarityRange("VeryRare",   800,   2499);
+DB_AMP_VoidCapsule_RarityRange("Legendary", 2500, 999999);
+
+// allowed equipment slots (artifact validation)
+DB_AMP_VoidCapsule_AllowedSlot(EQUIPMENTSLOT.Helmet);
+DB_AMP_VoidCapsule_AllowedSlot(EQUIPMENTSLOT.Breast);
+DB_AMP_VoidCapsule_AllowedSlot(EQUIPMENTSLOT.Cloak);
+DB_AMP_VoidCapsule_AllowedSlot(EQUIPMENTSLOT.MeleeMainHand);
+DB_AMP_VoidCapsule_AllowedSlot(EQUIPMENTSLOT.MeleeOffHand);
+DB_AMP_VoidCapsule_AllowedSlot(EQUIPMENTSLOT.RangedMainHand);
+DB_AMP_VoidCapsule_AllowedSlot(EQUIPMENTSLOT.Ring);
+DB_AMP_VoidCapsule_AllowedSlot(EQUIPMENTSLOT.Ring2);
+DB_AMP_VoidCapsule_AllowedSlot(EQUIPMENTSLOT.Boots);
+DB_AMP_VoidCapsule_AllowedSlot(EQUIPMENTSLOT.Gloves);
+DB_AMP_VoidCapsule_AllowedSlot(EQUIPMENTSLOT.Amulet);
+DB_AMP_VoidCapsule_AllowedSlot(EQUIPMENTSLOT.MusicalInstrument);
+
+// shard tier -> coin. tier comes from tot shop's shardreg db.
+// shards_20=uncommon, shards_6=rare, shards_2=veryrare, shards_1=legendary.
+DB_AMP_VoidCapsule_TierToCoin("SHARDS_20", (ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b);
+DB_AMP_VoidCapsule_TierToCoin("SHARDS_6",  (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d);
+DB_AMP_VoidCapsule_TierToCoin("SHARDS_2",  (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80);
+DB_AMP_VoidCapsule_TierToCoin("SHARDS_1",  (ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1);
+
+// fallback coin for shards not in tot shop
+DB_AMP_VoidCapsule_FallbackCoin((ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b);
+
+// shard -> coin conversion chance per tier (mode-independent).
+// tier = pool frequency in tot shop: common converts easily, rare rarely.
+DB_AMP_VoidCapsule_ShardCoinChanceByTier("SHARDS_20", 80);
+DB_AMP_VoidCapsule_ShardCoinChanceByTier("SHARDS_6",  60);
+DB_AMP_VoidCapsule_ShardCoinChanceByTier("SHARDS_2",  35);
+DB_AMP_VoidCapsule_ShardCoinChanceByTier("SHARDS_1",  10);
+
+// fallback chance for shards not in tot shop (fey coin, treated as common)
+DB_AMP_VoidCapsule_ShardCoinChanceFallback(80);
+
+KBSECTION
+
+EXITSECTION
+ENDEXITSECTION

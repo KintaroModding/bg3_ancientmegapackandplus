@@ -1,0 +1,287 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+DB_AMP_UL_School(0, "AMP_ARCANE_SCHOOL_EVOCATION");
+DB_AMP_UL_School(1, "AMP_ARCANE_SCHOOL_ABJURATION");
+DB_AMP_UL_School(2, "AMP_ARCANE_SCHOOL_CONJURATION");
+DB_AMP_UL_School(3, "AMP_ARCANE_SCHOOL_NECROMANCY");
+DB_AMP_UL_School(4, "AMP_ARCANE_SCHOOL_TRANSMUTATION");
+DB_AMP_UL_School(5, "AMP_ARCANE_SCHOOL_DIVINATION");
+DB_AMP_UL_School(6, "AMP_ARCANE_SCHOOL_ENCHANTMENT");
+DB_AMP_UL_School(7, "AMP_ARCANE_SCHOOL_ILLUSION");
+
+DB_AMP_UL_BadSchool(0, "AMP_ARCANE_SCHOOL_DIVINATION");
+DB_AMP_UL_BadSchool(1, "AMP_ARCANE_SCHOOL_ILLUSION");
+DB_AMP_UL_BadSchool(2, "AMP_ARCANE_SCHOOL_ENCHANTMENT");
+DB_AMP_UL_BadSchool(3, "AMP_ARCANE_SCHOOL_ABJURATION");
+
+DB_AMP_UL_FixV2(1);
+
+KBSECTION
+
+// unmade library boots: random spell school each turn, rigged worse on a streak
+
+// turn start: cleanup, decide streak, pick school
+
+IF
+TurnStarted((CHARACTER)_Char)
+AND
+HasActiveStatus(_Char, "AMP_ARCANE_RECLAIM_TECH", 1)
+THEN
+PROC_AMP_UL_TurnTick(_Char);
+
+PROC
+PROC_AMP_UL_TurnTick((CHARACTER)_Char)
+THEN
+PROC_AMP_UL_Cleanup(_Char);
+PROC_AMP_UL_DecideStreak(_Char);
+PROC_AMP_UL_ClearEpiphanyFlag(_Char);
+PROC_AMP_UL_PickAndApply(_Char);
+
+// clear old school marker + v stack
+
+PROC
+PROC_AMP_UL_Cleanup((CHARACTER)_Char)
+AND
+DB_AMP_UL_ActiveSchool(_Char, (STRING)_OldStatus)
+THEN
+RemoveStatus(_Char, _OldStatus);
+NOT DB_AMP_UL_ActiveSchool(_Char, _OldStatus);
+
+PROC
+PROC_AMP_UL_Cleanup((CHARACTER)_Char)
+THEN
+RemoveStatus(_Char, "AMP_ARCANE_V_1");
+
+// streak grows if epiphany flag set, else resets
+
+PROC
+PROC_AMP_UL_DecideStreak((CHARACTER)_Char)
+AND
+DB_AMP_UL_GotEpiphany(_Char, 1)
+THEN
+PROC_AMP_UL_StreakBump(_Char, 1);
+
+PROC
+PROC_AMP_UL_DecideStreak((CHARACTER)_Char)
+AND
+NOT DB_AMP_UL_GotEpiphany(_Char, _)
+THEN
+PROC_AMP_UL_StreakBump(_Char, 0);
+
+// streakbump: gain=1 increments, gain=0 resets to 0
+
+PROC
+PROC_AMP_UL_StreakBump((CHARACTER)_Char, (INTEGER)_Gain)
+AND
+_Gain == 1
+AND
+DB_AMP_UL_Streak(_Char, (INTEGER)_Old)
+AND
+IntegerSum(_Old, 1, (INTEGER)_New)
+THEN
+NOT DB_AMP_UL_Streak(_Char, _Old);
+DB_AMP_UL_Streak(_Char, _New);
+
+PROC
+PROC_AMP_UL_StreakBump((CHARACTER)_Char, (INTEGER)_Gain)
+AND
+_Gain == 1
+AND
+NOT DB_AMP_UL_Streak(_Char, _)
+THEN
+DB_AMP_UL_Streak(_Char, 1);
+
+PROC
+PROC_AMP_UL_StreakBump((CHARACTER)_Char, (INTEGER)_Gain)
+AND
+_Gain == 0
+AND
+DB_AMP_UL_Streak(_Char, (INTEGER)_Old)
+THEN
+NOT DB_AMP_UL_Streak(_Char, _Old);
+DB_AMP_UL_Streak(_Char, 0);
+
+PROC
+PROC_AMP_UL_StreakBump((CHARACTER)_Char, (INTEGER)_Gain)
+AND
+_Gain == 0
+AND
+NOT DB_AMP_UL_Streak(_Char, _)
+THEN
+DB_AMP_UL_Streak(_Char, 0);
+
+// clear epiphany flag after streak decided
+
+PROC
+PROC_AMP_UL_ClearEpiphanyFlag((CHARACTER)_Char)
+AND
+DB_AMP_UL_GotEpiphany(_Char, (INTEGER)_V)
+THEN
+NOT DB_AMP_UL_GotEpiphany(_Char, _V);
+
+// pick school, one random(100) per streak tier
+// streak=0: fair pick from all 8
+PROC
+PROC_AMP_UL_PickAndApply((CHARACTER)_Char)
+AND
+DB_AMP_UL_Streak(_Char, 0)
+AND
+Random(8, (INTEGER)_Idx)
+AND
+DB_AMP_UL_School(_Idx, (STRING)_Status)
+THEN
+PROC_AMP_UL_ApplySchool(_Char, _Status);
+
+// streak=1: 30% bad
+PROC
+PROC_AMP_UL_PickAndApply((CHARACTER)_Char)
+AND
+DB_AMP_UL_Streak(_Char, 1)
+AND
+Random(100, (INTEGER)_Roll)
+THEN
+PROC_AMP_UL_PickStreak1(_Char, _Roll);
+
+PROC
+PROC_AMP_UL_PickStreak1((CHARACTER)_Char, (INTEGER)_Roll)
+AND
+_Roll < 30
+AND
+Random(4, (INTEGER)_Idx)
+AND
+DB_AMP_UL_BadSchool(_Idx, (STRING)_Status)
+THEN
+PROC_AMP_UL_ApplySchool(_Char, _Status);
+
+PROC
+PROC_AMP_UL_PickStreak1((CHARACTER)_Char, (INTEGER)_Roll)
+AND
+_Roll >= 30
+AND
+Random(8, (INTEGER)_Idx)
+AND
+DB_AMP_UL_School(_Idx, (STRING)_Status)
+THEN
+PROC_AMP_UL_ApplySchool(_Char, _Status);
+
+// streak=2: 50% bad
+PROC
+PROC_AMP_UL_PickAndApply((CHARACTER)_Char)
+AND
+DB_AMP_UL_Streak(_Char, 2)
+AND
+Random(100, (INTEGER)_Roll)
+THEN
+PROC_AMP_UL_PickStreak2(_Char, _Roll);
+
+PROC
+PROC_AMP_UL_PickStreak2((CHARACTER)_Char, (INTEGER)_Roll)
+AND
+_Roll < 50
+AND
+Random(4, (INTEGER)_Idx)
+AND
+DB_AMP_UL_BadSchool(_Idx, (STRING)_Status)
+THEN
+PROC_AMP_UL_ApplySchool(_Char, _Status);
+
+PROC
+PROC_AMP_UL_PickStreak2((CHARACTER)_Char, (INTEGER)_Roll)
+AND
+_Roll >= 50
+AND
+Random(8, (INTEGER)_Idx)
+AND
+DB_AMP_UL_School(_Idx, (STRING)_Status)
+THEN
+PROC_AMP_UL_ApplySchool(_Char, _Status);
+
+// streak>=3: 70% bad
+PROC
+PROC_AMP_UL_PickAndApply((CHARACTER)_Char)
+AND
+DB_AMP_UL_Streak(_Char, (INTEGER)_S)
+AND
+_S >= 3
+AND
+Random(100, (INTEGER)_Roll)
+THEN
+PROC_AMP_UL_PickStreak3(_Char, _Roll);
+
+PROC
+PROC_AMP_UL_PickStreak3((CHARACTER)_Char, (INTEGER)_Roll)
+AND
+_Roll < 70
+AND
+Random(4, (INTEGER)_Idx)
+AND
+DB_AMP_UL_BadSchool(_Idx, (STRING)_Status)
+THEN
+PROC_AMP_UL_ApplySchool(_Char, _Status);
+
+PROC
+PROC_AMP_UL_PickStreak3((CHARACTER)_Char, (INTEGER)_Roll)
+AND
+_Roll >= 70
+AND
+Random(8, (INTEGER)_Idx)
+AND
+DB_AMP_UL_School(_Idx, (STRING)_Status)
+THEN
+PROC_AMP_UL_ApplySchool(_Char, _Status);
+
+// apply chosen school
+
+PROC
+PROC_AMP_UL_ApplySchool((CHARACTER)_Char, (STRING)_Status)
+THEN
+ApplyStatus(_Char, _Status, -1.0, 1, _Char);
+DB_AMP_UL_ActiveSchool(_Char, _Status);
+
+// epiphany when passive applies v_mark
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_ARCANE_V_MARK", _, _)
+AND
+HasActiveStatus(_Char, "AMP_ARCANE_RECLAIM_TECH", 1)
+THEN
+DB_AMP_UL_GotEpiphany(_Char, 1);
+
+// full cleanup on unequip / combat end
+
+IF
+StatusRemoved((CHARACTER)_Char, "AMP_ARCANE_RECLAIM_TECH", _, _)
+THEN
+PROC_AMP_UL_FullCleanup(_Char);
+
+PROC
+PROC_AMP_UL_FullCleanup((CHARACTER)_Char)
+AND
+DB_AMP_UL_ActiveSchool(_Char, (STRING)_Status)
+THEN
+RemoveStatus(_Char, _Status);
+NOT DB_AMP_UL_ActiveSchool(_Char, _Status);
+
+PROC
+PROC_AMP_UL_FullCleanup((CHARACTER)_Char)
+AND
+DB_AMP_UL_Streak(_Char, (INTEGER)_S)
+THEN
+NOT DB_AMP_UL_Streak(_Char, _S);
+
+PROC
+PROC_AMP_UL_FullCleanup((CHARACTER)_Char)
+AND
+DB_AMP_UL_GotEpiphany(_Char, (INTEGER)_V)
+THEN
+NOT DB_AMP_UL_GotEpiphany(_Char, _V);
+
+PROC
+PROC_AMP_UL_FullCleanup((CHARACTER)_Char)
+THEN
+RemoveStatus(_Char, "AMP_ARCANE_V_1");
+
+EXITSECTION
+ENDEXITSECTION

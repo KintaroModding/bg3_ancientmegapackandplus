@@ -1,0 +1,88 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// ApplyEquipmentStatus marker is slot-bound and drops when the ring leaves the ring slot, plain ApplyStatus on re-equip sticks
+
+// save shard data on unequip (update existing)
+IF
+Unequipped((ITEM)_Item, (CHARACTER)_Char)
+AND
+DB_AMP_Shard_Count(_Item, _ItemStatus, _Count)
+AND
+DB_AMP_Shard_Transfer(_ItemStatus, _)
+AND
+DB_AMP_Shard_Saved(_Item, _ItemStatus, _OldCount)
+THEN
+NOT DB_AMP_Shard_Saved(_Item, _ItemStatus, _OldCount);
+DB_AMP_Shard_Saved(_Item, _ItemStatus, _Count);
+
+// save shard data on unequip (first time)
+IF
+Unequipped((ITEM)_Item, (CHARACTER)_Char)
+AND
+DB_AMP_Shard_Count(_Item, _ItemStatus, _Count)
+AND
+DB_AMP_Shard_Transfer(_ItemStatus, _)
+AND
+NOT DB_AMP_Shard_Saved(_Item, _ItemStatus, _)
+THEN
+DB_AMP_Shard_Saved(_Item, _ItemStatus, _Count);
+
+// re-apply marker on equip if it got dropped
+IF
+Equipped((ITEM)_Item, (CHARACTER)_Char)
+AND
+DB_AMP_Shard_Saved(_Item, _ItemStatus, _Count)
+AND
+DB_AMP_Shard_Transfer(_ItemStatus, _)
+AND
+HasActiveStatus(_Item, _ItemStatus, 0)
+THEN
+PROC_AMP_ReapplyMarker(_Item, _ItemStatus, _Count, _Char);
+NOT DB_AMP_Shard_Saved(_Item, _ItemStatus, _Count);
+
+// re-apply marker _count times
+PROC
+PROC_AMP_ReapplyMarker((ITEM)_Item, (STRING)_Status, (INTEGER)_Count, (CHARACTER)_Char)
+AND
+_Count > 0
+AND
+IntegerSubtract(_Count, 1, _Next)
+THEN
+ApplyStatus(_Item, _Status, -1.0, 1, _Char);
+PROC_AMP_ReapplyMarker(_Item, _Status, _Next, _Char);
+
+PROC
+PROC_AMP_ReapplyMarker((ITEM)_Item, (STRING)_Status, (INTEGER)_Count, (CHARACTER)_Char)
+AND
+_Count <= 0
+THEN
+DB_NOOP(1);
+
+// migrate existing enchants on level load
+IF
+LevelGameplayStarted(_Level, _)
+AND
+DB_AMP_Shard_Count(_Item, _ItemStatus, _Count)
+AND
+DB_AMP_Shard_Transfer(_ItemStatus, _)
+AND
+NOT DB_AMP_Shard_Saved(_Item, _ItemStatus, _)
+THEN
+DB_AMP_Shard_Saved(_Item, _ItemStatus, _Count);
+
+// clear saved data on recovery
+PROC
+PROC_AMP_RecoverFromSlot((CHARACTER)_Char, (STRING)_Slot)
+AND
+GetEquippedItem(_Char, _Slot, _Item)
+AND
+DB_AMP_Shard_Saved(_Item, _MarkerStatus, _Count)
+THEN
+NOT DB_AMP_Shard_Saved(_Item, _MarkerStatus, _Count);
+
+EXITSECTION
+ENDEXITSECTION

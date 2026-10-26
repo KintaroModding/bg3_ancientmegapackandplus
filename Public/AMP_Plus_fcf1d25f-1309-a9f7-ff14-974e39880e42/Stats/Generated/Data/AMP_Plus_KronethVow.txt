@@ -1,0 +1,21 @@
+// engine counts weapon swings as casts, so Osiris reads this marker instead of the cast event
+
+new entry "AMP_Plus_KRONETH_VOW_BROKEN"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_Plus_KRONETH_VOW_BROKEN"
+data "RemoveEvents" "OnCombatEnded"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator;ApplyToDead"
+
+new entry "AMP_Plus_Kroneth_SilenceWatch"
+type "PassiveData"
+data "Properties" "IsHidden"
+data "StatsFunctorContext" "OnCast"
+data "Conditions" "IsSpell()"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_Plus_KRONETH_VOW_BROKEN,100,-1)"
+
+new entry "AMP_KRONETH_OBLIGATION_SILENCE"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_KRONETH_OBLIGATION_SILENCE"
+data "Passives" "AMP_Plus_Kroneth_SilenceWatch"

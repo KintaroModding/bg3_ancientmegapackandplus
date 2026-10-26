@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="59bd6dc0-373f-41a4-8ad3-e923f89e2bc5" />
+					<attribute id="Name" type="LSString" value="AMP_Camp_Lootbox" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="0b90bf9d-66fd-4741-be1f-39181efca97a" />
+					<attribute id="VisualTemplate" type="FixedString" value="39898e5b-3534-ad58-7ba6-279ec7c482b8" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="d3092b25-3266-1861-b13b-71aaa2f6c4cf" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h6be74855g59c6g4a23gae6aga6251a6c64b2" version="1" />
+					<attribute id="Icon" type="FixedString" value="Astral_Chest" />
+					<attribute id="Stats" type="FixedString" value="AMP_Camp_Lootbox" />
+					<attribute id="LockDifficultyClassID" type="guid" value="5543aeb5-1847-4efd-b195-a84703125e1b" />
+					<attribute id="Key" type="FixedString" value="NO_KEY" />
+					<attribute id="CanBePickedUp" type="bool" value="False" />
+					<attribute id="BloodSurfaceType" type="FixedString" value="SurfaceHolyFire" />
+					<attribute id="Description" type="TranslatedString" handle="hceccb762g0f70g462fga6c6gd4f8ab317523" version="1" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="d5d006a2-613a-4c2e-87b4-a529c2ce9816" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="AMP_Camp_Lootbox_01" />
+								</node>
+							</children>
+						</node>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="DEBRIS_THRESHOLD_GREATER" />
+								</node>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="AMP_LOOTBOX_VFX" />
+								</node>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="AMP_LOOTBOX_WARNING" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

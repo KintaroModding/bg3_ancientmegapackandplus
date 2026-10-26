@@ -1,0 +1,48 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// ARCANIZER SHARDS - BATCH 14
+// fist ring shards tier 1 (Ring_29..39): stackable -> nonstack, one copy per ring
+
+NOT DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_29_7a21ceba-6a39-4aed-afe7-a3e26c1df06d, "Ring", "AMP_SHARD_APPLY_RING_FIST_FIRE_R", "Ring");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_29_7a21ceba-6a39-4aed-afe7-a3e26c1df06d, "Ring", "AMP_SHARD_APPLY_RING_FIST_FIRE_R", "Ring", "AMP_SHARD_RING_FIST_FIRE_R");
+
+NOT DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_30_b0ae2946-ab7b-4f2d-9320-67b6c4f90d7a, "Ring", "AMP_SHARD_APPLY_RING_FIST_COLD_R", "Ring");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_30_b0ae2946-ab7b-4f2d-9320-67b6c4f90d7a, "Ring", "AMP_SHARD_APPLY_RING_FIST_COLD_R", "Ring", "AMP_SHARD_RING_FIST_COLD_R");
+
+NOT DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_31_d935406e-f1f2-45f2-8af0-5f53bbdf8d59, "Ring", "AMP_SHARD_APPLY_RING_FIST_LIGHTNING_R", "Ring");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_31_d935406e-f1f2-45f2-8af0-5f53bbdf8d59, "Ring", "AMP_SHARD_APPLY_RING_FIST_LIGHTNING_R", "Ring", "AMP_SHARD_RING_FIST_LIGHTNING_R");
+
+NOT DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_32_eff2b9f0-c197-4a50-8ec7-2abfd3212aa1, "Ring", "AMP_SHARD_APPLY_RING_FIST_THUNDER_R", "Ring");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_32_eff2b9f0-c197-4a50-8ec7-2abfd3212aa1, "Ring", "AMP_SHARD_APPLY_RING_FIST_THUNDER_R", "Ring", "AMP_SHARD_RING_FIST_THUNDER_R");
+
+NOT DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_33_96e0a8f4-5b01-4822-b184-24b773688037, "Ring", "AMP_SHARD_APPLY_RING_FIST_ACID_R", "Ring");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_33_96e0a8f4-5b01-4822-b184-24b773688037, "Ring", "AMP_SHARD_APPLY_RING_FIST_ACID_R", "Ring", "AMP_SHARD_RING_FIST_ACID_R");
+
+NOT DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_34_836d0830-05e1-4bbe-a8b8-7563470a590a, "Ring", "AMP_SHARD_APPLY_RING_FIST_POISON_R", "Ring");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_34_836d0830-05e1-4bbe-a8b8-7563470a590a, "Ring", "AMP_SHARD_APPLY_RING_FIST_POISON_R", "Ring", "AMP_SHARD_RING_FIST_POISON_R");
+
+NOT DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_35_35a254fc-f36b-4288-8dfb-9310e0cbd460, "Ring", "AMP_SHARD_APPLY_RING_FIST_NECROTIC_R", "Ring");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_35_35a254fc-f36b-4288-8dfb-9310e0cbd460, "Ring", "AMP_SHARD_APPLY_RING_FIST_NECROTIC_R", "Ring", "AMP_SHARD_RING_FIST_NECROTIC_R");
+
+NOT DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_36_8f9eb5d5-8c91-41c1-ba21-875c3481b24f, "Ring", "AMP_SHARD_APPLY_RING_FIST_RADIANT_R", "Ring");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_36_8f9eb5d5-8c91-41c1-ba21-875c3481b24f, "Ring", "AMP_SHARD_APPLY_RING_FIST_RADIANT_R", "Ring", "AMP_SHARD_RING_FIST_RADIANT_R");
+
+NOT DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_37_cdc1952c-f580-4b17-8c26-5254567690e2, "Ring", "AMP_SHARD_APPLY_RING_FIST_PSYCHIC_R", "Ring");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_37_cdc1952c-f580-4b17-8c26-5254567690e2, "Ring", "AMP_SHARD_APPLY_RING_FIST_PSYCHIC_R", "Ring", "AMP_SHARD_RING_FIST_PSYCHIC_R");
+
+NOT DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_38_f85de6fb-3f5e-42e3-82a8-741e1f800a47, "Ring", "AMP_SHARD_APPLY_RING_FIST_FORCE_R", "Ring");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_38_f85de6fb-3f5e-42e3-82a8-741e1f800a47, "Ring", "AMP_SHARD_APPLY_RING_FIST_FORCE_R", "Ring", "AMP_SHARD_RING_FIST_FORCE_R");
+
+NOT DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_39_d5f96c4c-00bc-40ba-8186-48e2b0a8da73, "Ring", "AMP_SHARD_APPLY_RING_FIST_CONCUSSIVE_R", "Ring");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_39_d5f96c4c-00bc-40ba-8186-48e2b0a8da73, "Ring", "AMP_SHARD_APPLY_RING_FIST_CONCUSSIVE_R", "Ring", "AMP_SHARD_RING_FIST_CONCUSSIVE_R");
+
+// glass shard moved to legendary tier: re-register tot shop tier (set semantics, retract old)
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_14_20cf8542-3378-4fac-b7b3-0678f0e7c0c0, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_14_20cf8542-3378-4fac-b7b3-0678f0e7c0c0, "SHARDS_1");
+
+KBSECTION
+
+EXITSECTION
+ENDEXITSECTION

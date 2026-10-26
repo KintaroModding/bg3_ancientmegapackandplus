@@ -1,0 +1,20 @@
+// no action points and nothing to attack, so only the end position scores
+// radius covers one turn of movement, past it every position ties and it stops running halfway
+
+USING ranged
+MULTIPLIER_ENDPOS_ENEMIES_NEARBY                -1.00
+ENDPOS_ENEMIES_NEARBY_MIN_DISTANCE               3.90
+ENDPOS_ENEMIES_NEARBY_MAX_DISTANCE              30.00
+
+// it has to be able to bolt through the line
+ENABLE_MOVEMENT_AVOID_AOO                        0.00
+MULTIPLIER_BOOST_IGNORE_AOO                      0.00
+SPELL_JUMP_MINIMUM_DISTANCE                      1.50
+FALLBACK_JUMP_OVER_WALK_PREFERRED_DISTANCE       0.50
+
+MULTIPLIER_DAMAGE_SELF_NEG                       0.60
+MULTIPLIER_MOVEMENT_SURFACE                      0.00
+USE_INVENTORY_ITEMS_ENABLED                      0
+
+// Being caught is worse than any ground it can flee across.
+MULTIPLIER_ENDPOS_NOT_IN_DANGEROUS_SURFACE       0.00

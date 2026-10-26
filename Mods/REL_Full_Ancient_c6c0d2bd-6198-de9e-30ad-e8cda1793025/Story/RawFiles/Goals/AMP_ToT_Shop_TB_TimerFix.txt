@@ -1,0 +1,47 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// core batch timer is object-bound and freezes in turn-based, a parallel global timer finalizes the batch
+// idempotent, whichever fires first finalizes and the other only drops the flag
+
+// arm global backup on first item pulled from a batch
+IF
+RemovedFrom((ITEM)_Item, (ITEM)_Container)
+AND
+DB_ToT_Shop_Enabled(1)
+AND
+NOT DB_ToT_Shop_SystemAction(_Item)
+AND
+DB_ToT_Shop_Stock(_Container, _Item, _)
+AND
+NOT DB_ToT_Shop_TBBackupActive(1)
+THEN
+DB_ToT_Shop_TBBackupActive(1);
+TimerLaunch("ToT_Shop_TB_Backup", 500);
+
+// batch still active -> finalize here (the TB case)
+IF
+TimerFinished("ToT_Shop_TB_Backup")
+AND
+DB_ToT_Shop_BatchActive(1)
+AND
+DB_ToT_Shop_BatchTotal((INTEGER)_Total)
+THEN
+NOT DB_ToT_Shop_TBBackupActive(1);
+PROC_ToT_Shop_DeductBatchGold(_Total);
+PROC_ToT_Shop_FinalizeBatchItems();
+PROC_ToT_Shop_ResetBatch();
+
+// already finalized by the object timer -> cleanup only
+IF
+TimerFinished("ToT_Shop_TB_Backup")
+AND
+NOT DB_ToT_Shop_BatchActive(1)
+THEN
+NOT DB_ToT_Shop_TBBackupActive(1);
+
+EXITSECTION
+ENDEXITSECTION

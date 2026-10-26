@@ -1,0 +1,19 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+IF
+Died(S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255)
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+NOT DB_AMP_Grym_Avarice_Done(1)
+THEN
+DB_AMP_Grym_Avarice_Done(1);
+TemplateAddTo(AMP_Capsule_Reward_Generic_3_007e6a6b-4d51-4a7f-b03a-560e06edd5f6, _Host, 1, 1);
+
+EXITSECTION
+ENDEXITSECTION

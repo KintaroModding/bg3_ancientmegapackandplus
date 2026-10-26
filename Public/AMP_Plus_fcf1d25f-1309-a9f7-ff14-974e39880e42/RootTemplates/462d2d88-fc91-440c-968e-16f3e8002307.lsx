@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="462d2d88-fc91-440c-968e-16f3e8002307" />
+					<attribute id="Name" type="LSString" value="AMP_Boss_Test" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="ParentTemplateId" type="FixedString" value="64663337-90aa-4944-89b9-3973e4738cc0" />
+					<attribute id="Faction" type="guid" value="7d29235c-cea0-40f6-a2cb-3b0de9f091c1" />
+					<attribute id="IsBoss" type="bool" value="True" />
+					<children>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

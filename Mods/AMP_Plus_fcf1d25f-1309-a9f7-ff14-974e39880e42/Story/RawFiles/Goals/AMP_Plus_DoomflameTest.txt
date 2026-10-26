@@ -1,0 +1,118 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// debug spawn of a Doomflame batch, oe AMP_TestSpawnDoomflame / AMP_TestKillDoomflame
+
+KBSECTION
+
+IF
+TextEvent("AMP_TestSpawnDoomflame")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsDead(_Host, 0)
+AND
+GetPosition(_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+THEN
+PROC_AMP_Plus_DoomTestSized(_Host, _HX, _HY, _HZ);
+
+PROC
+PROC_AMP_Plus_DoomTestSized((CHARACTER)_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+AND
+DB_AMP_Plus_PCAcc((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_PCAcc(_Old);
+DB_AMP_Plus_PCAcc(0);
+
+PROC
+PROC_AMP_Plus_DoomTestSized((CHARACTER)_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+THEN
+PROC_AMP_Plus_CountPlayers();
+
+PROC
+PROC_AMP_Plus_DoomTestSized((CHARACTER)_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+AND
+DB_AMP_Plus_PCAcc((INTEGER)_Players)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+DB_AMP_Plus_SpawnIntensity_Size((INTEGER)_Tier)
+AND
+DB_AMP_Plus_UltraSizeTable(_Tier, (INTEGER)_PMin, (INTEGER)_PMax, (INTEGER)_LMin, (INTEGER)_LMax, (INTEGER)_N)
+AND
+_Players >= _PMin
+AND
+_Players <= _PMax
+AND
+_Lvl >= _LMin
+AND
+_Lvl <= _LMax
+THEN
+PROC_AMP_Plus_DoomTestSpawnN(0, _N, _Host, _HX, _HY, _HZ);
+
+PROC
+PROC_AMP_Plus_DoomTestSpawnN((INTEGER)_K, (INTEGER)_N, (CHARACTER)_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+AND
+_K < _N
+AND
+Random(5, (INTEGER)_Rx)
+AND
+Random(5, (INTEGER)_Rz)
+AND
+IntegerToReal(_Rx, (REAL)_Rxf)
+AND
+IntegerToReal(_Rz, (REAL)_Rzf)
+AND
+RealSum(_HX, _Rxf, (REAL)_SX0)
+AND
+RealSum(_SX0, -2.0, (REAL)_SX)
+AND
+RealSum(_HZ, _Rzf, (REAL)_SZ0)
+AND
+RealSum(_SZ0, 1.0, (REAL)_SZ)
+AND
+IntegerSum(_K, 1, (INTEGER)_K2)
+AND
+CreateAt((GUIDSTRING)AMP_ULTRA_Summon_01_6b432bff-5bf9-4295-8c54-faba8515b33f, _SX, _HY, _SZ, 0, 1, "", (GUIDSTRING)_Mob)
+THEN
+DB_AMP_MirrorChase_Mob((CHARACTER)_Mob, AMP_ULTRA_Summon_01_6b432bff-5bf9-4295-8c54-faba8515b33f);
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, (CHARACTER)_Mob);
+DB_AMP_Plus_DoomTest_Mob((CHARACTER)_Mob);
+PROC_AMP_Plus_ApplyPursuerFaction(_Mob);
+ApplyStatus(_Mob, "AMP_ULTRA_SPAWN_VFX", 6.0, 1, _Mob);
+EnterCombat(_Mob, _Host);
+PROC_AMP_Plus_DoomTestSpawnN(_K2, _N, _Host, _HX, _HY, _HZ);
+
+PROC
+PROC_AMP_Plus_DoomTestSpawnN((INTEGER)_K, (INTEGER)_N, (CHARACTER)_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+AND
+_K >= _N
+THEN
+DB_NOOP(1);
+
+// clear tracking first or a deleted mob respawns as a pursuer
+IF
+TextEvent("AMP_TestKillDoomflame")
+THEN
+PROC_AMP_Plus_DoomTestKill();
+
+PROC
+PROC_AMP_Plus_DoomTestKill()
+THEN
+PROC_AMP_Plus_DoomTestDrainMob();
+
+PROC
+PROC_AMP_Plus_DoomTestDrainMob()
+AND
+DB_AMP_Plus_DoomTest_Mob((CHARACTER)_Mob)
+THEN
+NOT DB_AMP_Plus_DoomTest_Mob(_Mob);
+NOT DB_AMP_MirrorSupport_Spawned(_Mob, _Mob);
+NOT DB_AMP_Plus_UltraMob(_Mob, _Mob);
+NOT DB_AMP_MirrorChase_Mob(_Mob, AMP_ULTRA_Summon_01_6b432bff-5bf9-4295-8c54-faba8515b33f);
+RequestDeleteTemporary(_Mob);
+PROC_AMP_Plus_DoomTestDrainMob();
+
+EXITSECTION
+
+ENDEXITSECTION

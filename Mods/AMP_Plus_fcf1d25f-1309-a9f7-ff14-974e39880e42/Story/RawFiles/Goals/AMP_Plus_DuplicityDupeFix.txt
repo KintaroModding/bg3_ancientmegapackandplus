@@ -1,0 +1,27 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// vanilla copies the caster's gear onto the clone, draggable as dupes
+IF
+StatusApplied((CHARACTER)_Duplicity, "INVOKE_DUPLICITY_TECHNICAL", (CHARACTER)_Player, _)
+AND
+DB_Players(_Player)
+THEN
+RealtimeObjectTimerLaunch(_Duplicity, "AMP_Plus_DuplicityStrip", 500);
+
+IF
+ObjectTimerFinished((CHARACTER)_Duplicity, "AMP_Plus_DuplicityStrip")
+THEN
+IterateInventory(_Duplicity, "AMP_Plus_DuplicityStripItem", "");
+
+// template ships empty, so everything inside is a copy
+IF
+EntityEvent((ITEM)_Item, "AMP_Plus_DuplicityStripItem")
+THEN
+RequestDelete(_Item);
+
+EXITSECTION
+ENDEXITSECTION

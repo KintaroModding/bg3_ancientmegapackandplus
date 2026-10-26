@@ -1,0 +1,203 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// shop capsules stay out of the shared registry, which doubles as a draw pool
+
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_Generic_VoidCapsule_ToTShop_8c953bb7-a4b8-461e-bed8-9d82a3cf3789, "Generic");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_Hat_VoidCapsule_ToTShop_c22dfef8-3520-4aeb-ba30-40fecc71d277, "Hat");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_Cloak_VoidCapsule_ToTShop_d570d443-3180-4eb0-9919-7c6772ba5a16, "Cloak");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_Cloth_VoidCapsule_ToTShop_5de621a7-e60e-4c12-a19c-7cb1d46327e2, "Cloth");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_Armor_VoidCapsule_ToTShop_29092cce-813a-491d-b1df-20f8592fb44a, "Armor");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_Shield_VoidCapsule_ToTShop_7fc4d53a-30ff-4279-be50-a90697b04589, "Shield");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_Glove_VoidCapsule_ToTShop_b4964691-7c54-403f-b446-af1294558f7c, "Glove");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_Boot_VoidCapsule_ToTShop_1618c261-4d99-4b5d-8845-aa21389a5b1c, "Boot");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_Amulet_VoidCapsule_ToTShop_b0e06ee2-56b6-4a80-82c9-60db89c0afd4, "Amulet");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_Ring_VoidCapsule_ToTShop_736b9195-9732-4d55-8cca-c26184dc79e4, "Ring");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_1H_VoidCapsule_ToTShop_11dd70c0-c731-4545-b50c-e3a12456ec1d, "1H");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_2H_VoidCapsule_ToTShop_76e10309-b18d-4bef-a5b0-39a822e45bf8, "2H");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_Swamp_VoidCapsule_ToTShop_397ace98-fc45-4454-829b-110c16cb7ce8, "Swamp");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_Aquatic_VoidCapsule_ToTShop_42a5275a-59bd-401e-9221-0f0b04737fad, "Aquatic");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_Shadowfell_VoidCapsule_ToTShop_4ca02f02-50ff-4d3f-8fa0-cb35cfae7965, "Shadowfell");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_Arcane_VoidCapsule_ToTShop_c335ce02-624a-476e-86d6-7070529e26f7, "Arcane");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_Celestial_VoidCapsule_ToTShop_d447e80c-5a23-4d80-a7f6-e77d64e53d24, "Celestial");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_Nature_VoidCapsule_ToTShop_06b7b5d4-6d2e-4e12-bb8c-79af8df10168, "Nature");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_Destructive_VoidCapsule_ToTShop_2c1da830-025f-4ed6-af34-b224ea61d866, "Destructive");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_War_VoidCapsule_ToTShop_311187f9-6152-491c-b9de-8684435c858e, "War");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_Psionic_VoidCapsule_ToTShop_b3fe901d-93b7-4452-acd0-0c7e40c865d7, "Psionic");
+DB_AMP_Plus_CapsuleAlt((ITEMROOT)AMP_Primal_VoidCapsule_ToTShop_56a0018e-286c-4bd2-817c-fcd2cca2ba99, "Primal");
+
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_Generic_VoidCapsule_bb84619f-7c56-4a1d-aa8a-d5f0a33ea620, (ITEMROOT)AMP_Generic_VoidCapsule_ToTShop_8c953bb7-a4b8-461e-bed8-9d82a3cf3789);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_Hat_VoidCapsule_98bdbe88-d3ea-493d-a803-9cc6bcf0b200, (ITEMROOT)AMP_Hat_VoidCapsule_ToTShop_c22dfef8-3520-4aeb-ba30-40fecc71d277);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_Cloak_VoidCapsule_2e11382e-7156-424f-b6cb-4d856db392b5, (ITEMROOT)AMP_Cloak_VoidCapsule_ToTShop_d570d443-3180-4eb0-9919-7c6772ba5a16);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_Cloth_VoidCapsule_a9b47da1-7857-4a91-bdc0-845ecf092b83, (ITEMROOT)AMP_Cloth_VoidCapsule_ToTShop_5de621a7-e60e-4c12-a19c-7cb1d46327e2);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_Armor_VoidCapsule_15564fed-94e5-4541-a8d6-0ab7fb588439, (ITEMROOT)AMP_Armor_VoidCapsule_ToTShop_29092cce-813a-491d-b1df-20f8592fb44a);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_Shield_VoidCapsule_45538e4d-9d80-42c8-b879-d2aaca220651, (ITEMROOT)AMP_Shield_VoidCapsule_ToTShop_7fc4d53a-30ff-4279-be50-a90697b04589);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_Glove_VoidCapsule_f6b3a6af-5168-4408-b463-07814f26e3a5, (ITEMROOT)AMP_Glove_VoidCapsule_ToTShop_b4964691-7c54-403f-b446-af1294558f7c);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_Boot_VoidCapsule_3750f2b0-8888-498f-ac15-c71af93f973f, (ITEMROOT)AMP_Boot_VoidCapsule_ToTShop_1618c261-4d99-4b5d-8845-aa21389a5b1c);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_Amulet_VoidCapsule_27eeca56-5e80-47b3-8a64-aca99f4e5da4, (ITEMROOT)AMP_Amulet_VoidCapsule_ToTShop_b0e06ee2-56b6-4a80-82c9-60db89c0afd4);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_Ring_VoidCapsule_8ee480e7-b5f2-4c5f-9b22-9a4b1289508a, (ITEMROOT)AMP_Ring_VoidCapsule_ToTShop_736b9195-9732-4d55-8cca-c26184dc79e4);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_1H_VoidCapsule_0dc57310-fb72-43e5-a61b-caf1a3a8bbd3, (ITEMROOT)AMP_1H_VoidCapsule_ToTShop_11dd70c0-c731-4545-b50c-e3a12456ec1d);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_2H_VoidCapsule_dd892a12-a733-49a0-bec5-cac418bafe79, (ITEMROOT)AMP_2H_VoidCapsule_ToTShop_76e10309-b18d-4bef-a5b0-39a822e45bf8);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_Swamp_VoidCapsule_9cc7c34c-568d-43e3-9032-ff2409d3d1b2, (ITEMROOT)AMP_Swamp_VoidCapsule_ToTShop_397ace98-fc45-4454-829b-110c16cb7ce8);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_Aquatic_VoidCapsule_ca6c58a9-d0f4-4df4-bdb8-93538a248547, (ITEMROOT)AMP_Aquatic_VoidCapsule_ToTShop_42a5275a-59bd-401e-9221-0f0b04737fad);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_Shadowfell_VoidCapsule_091d95c0-2bf0-4f6e-9a04-7c49e7fe1bd9, (ITEMROOT)AMP_Shadowfell_VoidCapsule_ToTShop_4ca02f02-50ff-4d3f-8fa0-cb35cfae7965);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_Arcane_VoidCapsule_79ecd0e9-e036-46f0-8d3e-2f6f3c30d28c, (ITEMROOT)AMP_Arcane_VoidCapsule_ToTShop_c335ce02-624a-476e-86d6-7070529e26f7);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_Celestial_VoidCapsule_9ccff182-c01b-4256-93d8-f0d0e794b02a, (ITEMROOT)AMP_Celestial_VoidCapsule_ToTShop_d447e80c-5a23-4d80-a7f6-e77d64e53d24);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_Nature_VoidCapsule_86da09ce-d855-47a6-a30e-2d0ced02bb5c, (ITEMROOT)AMP_Nature_VoidCapsule_ToTShop_06b7b5d4-6d2e-4e12-bb8c-79af8df10168);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_Destructive_VoidCapsule_cbd3e5d5-79a3-4e96-8db7-0d59f51e9261, (ITEMROOT)AMP_Destructive_VoidCapsule_ToTShop_2c1da830-025f-4ed6-af34-b224ea61d866);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_War_VoidCapsule_ec91ffb2-182b-49db-82b6-f311d63d1363, (ITEMROOT)AMP_War_VoidCapsule_ToTShop_311187f9-6152-491c-b9de-8684435c858e);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_Psionic_VoidCapsule_758e8cab-c712-4068-8fd1-94dbda0f484d, (ITEMROOT)AMP_Psionic_VoidCapsule_ToTShop_b3fe901d-93b7-4452-acd0-0c7e40c865d7);
+DB_AMP_Plus_CapsuleAltOf((ITEMROOT)AMP_Primal_VoidCapsule_d75c3820-2d6b-4355-8e0d-70af3570399c, (ITEMROOT)AMP_Primal_VoidCapsule_ToTShop_56a0018e-286c-4bd2-817c-fcd2cca2ba99);
+
+DB_AMP_Plus_CoinAlt((ITEMROOT)AMP_FeyCoin_ToTShop_d3f7ae1b-2a5f-46d2-ae38-69b56bc170ec, "Fey");
+DB_AMP_Plus_CoinAlt((ITEMROOT)AMP_ShadowfellCoin_ToTShop_e5b9f9a0-503a-4e21-9b10-50b75e6756bf, "Shadowfell");
+DB_AMP_Plus_CoinAlt((ITEMROOT)AMP_AstralCoin_ToTShop_9f362ee6-b6d9-4abb-b1c1-c68afb5947f0, "Astral");
+DB_AMP_Plus_CoinAlt((ITEMROOT)AMP_CelestialCoin_ToTShop_cf07ca82-7762-45bc-93f1-d295b87f02ae, "Celestial");
+
+DB_AMP_Plus_CoinAltOf((ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b, (ITEMROOT)AMP_FeyCoin_ToTShop_d3f7ae1b-2a5f-46d2-ae38-69b56bc170ec);
+DB_AMP_Plus_CoinAltOf((ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, (ITEMROOT)AMP_ShadowfellCoin_ToTShop_e5b9f9a0-503a-4e21-9b10-50b75e6756bf);
+DB_AMP_Plus_CoinAltOf((ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, (ITEMROOT)AMP_AstralCoin_ToTShop_9f362ee6-b6d9-4abb-b1c1-c68afb5947f0);
+DB_AMP_Plus_CoinAltOf((ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1, (ITEMROOT)AMP_CelestialCoin_ToTShop_cf07ca82-7762-45bc-93f1-d295b87f02ae);
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_ToTStockSwapped(2)
+THEN
+DB_AMP_Plus_ToTStockSwapped(2);
+PROC_AMP_Plus_ToTCapsuleSwap();
+PROC_AMP_Plus_ToTCoinSwap();
+PROC_ToT_RebuildPools("GENERAL");
+
+PROC
+PROC_AMP_Plus_ToTCapsuleSwap()
+THEN
+PROC_AMP_Plus_ToTCapsulePrice_DrainCapsules();
+
+PROC
+PROC_AMP_Plus_ToTCoinSwap()
+THEN
+PROC_AMP_Plus_ToTCapsulePrice_DrainCoins();
+
+// swapped row has a shop template with no pairing, so the drain skips it
+PROC
+PROC_AMP_Plus_ToTCapsulePrice_DrainCapsules()
+AND
+DB_ToT_ItemFreq((STRING)_ShopID, "CAPSULES", (ITEMROOT)_Base, (INTEGER)_Weight)
+AND
+DB_AMP_Plus_CapsuleAltOf(_Base, (ITEMROOT)_Alt)
+THEN
+NOT DB_ToT_ItemFreq(_ShopID, "CAPSULES", _Base, _Weight);
+DB_ToT_ItemFreq(_ShopID, "CAPSULES", _Alt, _Weight);
+PROC_AMP_Plus_ToTCapsulePrice_DrainCapsules();
+
+PROC
+PROC_AMP_Plus_ToTCapsulePrice_DrainCoins()
+AND
+DB_ToT_ItemFreq((STRING)_ShopID, "COINS", (ITEMROOT)_Base, (INTEGER)_Weight)
+AND
+DB_AMP_Plus_CoinAltOf(_Base, (ITEMROOT)_Alt)
+THEN
+NOT DB_ToT_ItemFreq(_ShopID, "COINS", _Base, _Weight);
+DB_ToT_ItemFreq(_ShopID, "COINS", _Alt, _Weight);
+PROC_AMP_Plus_ToTCapsulePrice_DrainCoins();
+
+QRY
+QRY_AMP_VoidCapsule_IsContainer((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+DB_AMP_Plus_CapsuleAlt(_T, _)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_VoidCapsule_IsCoin((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+DB_AMP_Plus_CoinAlt(_T, _)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_AL_IsVoidCapsule((ITEM)_Container)
+AND
+GetTemplate(_Container, (ITEMROOT)_Tpl)
+AND
+DB_AMP_Plus_CapsuleAlt(_Tpl, _)
+THEN
+DB_NOOP(1);
+
+PROC
+PROC_AMP_VoidCapsule_RerollStart((ITEM)_Item, (ITEM)_Capsule, (CHARACTER)_Owner)
+AND
+DB_AMP_Reroll_ItemInfo(_Item, (STRING)_OrigCapsType, (STRING)_OrigCoinType)
+AND
+GetTemplate(_Capsule, (ITEMROOT)_CapsuleTemplate)
+AND
+DB_AMP_Plus_CapsuleAlt(_CapsuleTemplate, (STRING)_CurrentCapsType)
+AND
+DB_AMP_VoidCapsule_Reward(_CurrentCapsType, _OrigCoinType, (ITEMROOT)_RewardTemplate)
+AND
+DB_AMP_VoidCapsule_RerollCostActive((INTEGER)_Cost)
+THEN
+PROC_AMP_VoidCapsule_InitCharges(_Capsule);
+NOT DB_AMP_VoidCapsule_RerollProcessing(_Item);
+NOT DB_AMP_Reroll_ItemInfo(_Item, _OrigCapsType, _OrigCoinType);
+RemoveStatus(_Item, "AMP_REROLL_WINDOW", _Item);
+RequestDelete(_Item);
+PROC_AMP_VoidCapsule_DecrementBy(_Capsule, _Owner, _Cost);
+PlaySound(_Owner, "CrSpell_Cast_MagicClub");
+PROC_AMP_VoidCapsule_SpawnReward(_Owner, "Reroll", _RewardTemplate, _Capsule);
+PROC_AMP_VoidCapsule_ReleaseBusy(_Capsule);
+
+// base pairs registry coin with registry capsule, shop templates need the other three
+
+PROC
+PROC_AMP_VoidCapsule_CoinStart((ITEM)_Coin, (ITEM)_Capsule, (CHARACTER)_Actor)
+AND
+GetTemplate(_Coin, (ITEMROOT)_CoinTemplate)
+AND
+DB_AMP_VoidCapsule_Coin(_CoinTemplate, (STRING)_CoinType)
+AND
+GetTemplate(_Capsule, (ITEMROOT)_CapsuleTemplate)
+AND
+DB_AMP_Plus_CapsuleAlt(_CapsuleTemplate, (STRING)_CapsuleType)
+THEN
+PROC_AMP_VoidCapsule_InitCharges(_Capsule);
+PROC_AMP_VoidCapsule_CoinGenerate(_Coin, _Capsule, _CoinType, _CapsuleType, _Actor);
+
+PROC
+PROC_AMP_VoidCapsule_CoinStart((ITEM)_Coin, (ITEM)_Capsule, (CHARACTER)_Actor)
+AND
+GetTemplate(_Coin, (ITEMROOT)_CoinTemplate)
+AND
+DB_AMP_Plus_CoinAlt(_CoinTemplate, (STRING)_CoinType)
+AND
+GetTemplate(_Capsule, (ITEMROOT)_CapsuleTemplate)
+AND
+DB_AMP_VoidCapsule_Container(_CapsuleTemplate, (STRING)_CapsuleType)
+THEN
+PROC_AMP_VoidCapsule_InitCharges(_Capsule);
+PROC_AMP_VoidCapsule_CoinGenerate(_Coin, _Capsule, _CoinType, _CapsuleType, _Actor);
+
+PROC
+PROC_AMP_VoidCapsule_CoinStart((ITEM)_Coin, (ITEM)_Capsule, (CHARACTER)_Actor)
+AND
+GetTemplate(_Coin, (ITEMROOT)_CoinTemplate)
+AND
+DB_AMP_Plus_CoinAlt(_CoinTemplate, (STRING)_CoinType)
+AND
+GetTemplate(_Capsule, (ITEMROOT)_CapsuleTemplate)
+AND
+DB_AMP_Plus_CapsuleAlt(_CapsuleTemplate, (STRING)_CapsuleType)
+THEN
+PROC_AMP_VoidCapsule_InitCharges(_Capsule);
+PROC_AMP_VoidCapsule_CoinGenerate(_Coin, _Capsule, _CoinType, _CapsuleType, _Actor);
+
+EXITSECTION
+ENDEXITSECTION

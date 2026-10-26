@@ -1,0 +1,32 @@
+// Tickhara - Solar Bridgewarden.
+// Pure support: keeps maximum distance, spams daylight orbs and Sanctuary, never attacks.
+
+USING ranged
+
+// Never use items: no item-throwing or improvised attacks
+USE_INVENTORY_ITEMS_ENABLED                     0
+THROW_INVENTORY_ITEM_LIMIT                      0
+USE_ITEM_MODIFIER                               0.00
+MULTIPLIER_USABLE_ITEM                          0.00
+WEAPON_PICKUP_MODIFIER                          0.00
+WEAPON_PICKUP_PREFER_RANGED_ENABLED             0
+
+// Stay far from players: wide avoidance bubble, retreats far on fallback
+MULTIPLIER_ENDPOS_ENEMIES_NEARBY               -1.00
+ENDPOS_ENEMIES_NEARBY_MAX_DISTANCE              40.00
+MULTIPLIER_FALLBACK_ENEMIES_NEARBY             -1.00
+FALLBACK_ENEMIES_NEARBY_MAX_DISTANCE            40.00
+
+// Hazard-layer, not a striker: no interest in chasing kills
+MULTIPLIER_KILL_ENEMY                           0.40
+
+// Keep buffs up (Sanctuary) and value her own positioning
+MULTIPLIER_FIRST_ACTION_BUFF                    6.00
+MULTIPLIER_BOOST_SELF_POS                       2.00
+
+// Avoid provoking attacks of opportunity entirely
+ENABLE_MOVEMENT_AVOID_AOO                       1.00
+
+// Steps around hazards where she can, but the ground never pins her in place.
+MULTIPLIER_MOVEMENT_SURFACE                      0.25
+MULTIPLIER_ENDPOS_NOT_IN_DANGEROUS_SURFACE       0.05

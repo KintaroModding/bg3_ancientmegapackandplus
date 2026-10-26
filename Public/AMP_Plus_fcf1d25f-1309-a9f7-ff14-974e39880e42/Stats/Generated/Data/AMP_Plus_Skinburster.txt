@@ -1,0 +1,18 @@
+// 5 turns is also where the blast fires, ward and blast arrive together
+new entry "AMP_Plus_ForceConduit_CritWard"
+type "PassiveData"
+data "DisplayName" "h1fa5383egc51fg4fbegbc89g52dfc85517b5;1"
+data "Description" "h16b045e8gef43g4f20g8e54g4e32a8df3bdf;1"
+data "DescriptionParams" "5"
+data "Boosts" "CriticalHit(AttackTarget,Success,Never)"
+data "BoostContext" "OnStatusApplied;OnStatusRemoved;OnTurn;OnDamaged;OnCombatStarted"
+data "BoostConditions" "StatusDurationEqualOrMoreThan(context.Source,'MAG_ZOC_FORCE_CONDUIT',5)"
+
+new entry "MAG_ZOC_ForceConduit_Halberd"
+type "Weapon"
+using "MAG_ZOC_ForceConduit_Halberd"
+data "PassivesOnEquip" "MAG_ZOC_ForceConduit_Halberd_Passive;AMP_Plus_ForceConduit_CritWard"
+data "Rarity" "VeryRare"
+data "ValueOverride" "1100"
+data "ValueLevel" "7"
+data "DefaultBoosts" "WeaponEnchantment(3);WeaponProperty(Magical)"

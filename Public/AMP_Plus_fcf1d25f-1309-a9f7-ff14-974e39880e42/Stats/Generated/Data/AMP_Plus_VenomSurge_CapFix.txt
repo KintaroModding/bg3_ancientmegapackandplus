@@ -1,0 +1,31 @@
+// cap check names the tier's own status, the base name reads the wrong one
+
+new entry "N_Poison_VenomSurge_T2"
+type "PassiveData"
+using "N_Poison_VenomSurge_T2"
+data "Conditions" "StatusId('AMP_TOXEMIA') and not StatusDurationEqualOrMoreThan(context.Source, 'N_POISON_VENOM_SURGE_T2', 3)"
+
+new entry "N_Poison_VenomSurge_T3"
+type "PassiveData"
+using "N_Poison_VenomSurge_T3"
+data "Conditions" "StatusId('AMP_TOXEMIA') and not StatusDurationEqualOrMoreThan(context.Source, 'N_POISON_VENOM_SURGE_T3', 4)"
+
+new entry "N_Poison_VenomSurge_T4"
+type "PassiveData"
+using "N_Poison_VenomSurge_T4"
+data "Conditions" "StatusId('AMP_TOXEMIA') and not StatusDurationEqualOrMoreThan(context.Source, 'N_POISON_VENOM_SURGE_T4', 5)"
+
+new entry "N_Poison_VenomSurge_T2_Receive"
+type "PassiveData"
+using "N_Poison_VenomSurge_T2_Receive"
+data "Conditions" "StatusId('AMP_TOXEMIA') and not StatusDurationEqualOrMoreThan(context.Target, 'N_POISON_VENOM_SURGE_T2', 3)"
+
+new entry "N_Poison_VenomSurge_T3_Receive"
+type "PassiveData"
+using "N_Poison_VenomSurge_T3_Receive"
+data "Conditions" "StatusId('AMP_TOXEMIA') and not StatusDurationEqualOrMoreThan(context.Target, 'N_POISON_VENOM_SURGE_T3', 4)"
+
+new entry "N_Poison_VenomSurge_T4_Receive"
+type "PassiveData"
+using "N_Poison_VenomSurge_T4_Receive"
+data "Conditions" "StatusId('AMP_TOXEMIA') and not StatusDurationEqualOrMoreThan(context.Target, 'N_POISON_VENOM_SURGE_T4', 5)"

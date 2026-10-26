@@ -1,0 +1,316 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// rules gate on the template as well as the tag, so a line can't surface on another form
+
+KBSECTION
+
+IF
+EnteredCombat((CHARACTER)_Mob, _)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_12_Ronin_7b08f7b1-414b-4c8e-a593-13fb7f1c9939)
+AND
+NOT DB_AMP_Undying_Greeted(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Undying_Ronin_Greeting_1f077c2a-9cee-46b2-9c25-744a9cb77f77, _Mob)
+THEN
+DB_AMP_Undying_Greeted(_Mob);
+DB_AMP_Undying_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Undying_BarkUnlock", 5000);
+
+IF
+TurnStarted((CHARACTER)_Mob)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_12_Ronin_7b08f7b1-414b-4c8e-a593-13fb7f1c9939)
+AND
+NOT DB_AMP_Undying_Greeted(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Undying_Ronin_Greeting_1f077c2a-9cee-46b2-9c25-744a9cb77f77, _Mob)
+THEN
+DB_AMP_Undying_Greeted(_Mob);
+DB_AMP_Undying_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Undying_BarkUnlock", 5000);
+
+IF
+TurnStarted((CHARACTER)_Mob)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_12_Ronin_7b08f7b1-414b-4c8e-a593-13fb7f1c9939)
+AND
+NOT DB_AMP_Undying_Greeted(_Mob)
+THEN
+DB_AMP_Undying_Greeted(_Mob);
+
+IF
+UsingSpell((CHARACTER)_Mob, _, _, _, _)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_12_Ronin_7b08f7b1-414b-4c8e-a593-13fb7f1c9939)
+AND
+NOT DB_AMP_Undying_BarkLock(_Mob)
+AND
+Random(5, (INTEGER)_Roll)
+AND
+_Roll == 0
+THEN
+DB_AMP_Undying_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Undying_BarkDelay", 1500);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Undying_BarkDelay")
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_12_Ronin_7b08f7b1-414b-4c8e-a593-13fb7f1c9939)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Undying_Ronin_Taunt_b9a3928f-79db-42d7-bef0-669d6b7e294e, _Mob)
+THEN
+RealtimeObjectTimerLaunch(_Mob, "AMP_Undying_BarkUnlock", 10000);
+
+IF
+HitpointsChanged((CHARACTER)_Mob, (REAL)_Pct)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_12_Ronin_7b08f7b1-414b-4c8e-a593-13fb7f1c9939)
+AND
+_Pct <= 60.0
+AND
+NOT DB_AMP_Undying_Failing(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Undying_Ronin_Failing_151e7904-2765-442f-b367-e00257632f03, _Mob)
+THEN
+DB_AMP_Undying_Failing(_Mob);
+
+IF
+HitpointsChanged((CHARACTER)_Mob, (REAL)_Pct)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_12_Ronin_7b08f7b1-414b-4c8e-a593-13fb7f1c9939)
+AND
+_Pct <= 60.0
+AND
+NOT DB_AMP_Undying_Failing(_Mob)
+THEN
+DB_AMP_Undying_Failing(_Mob);
+
+IF
+DB_AMP_Plus_Undying_Blade((CHARACTER)_Blade)
+AND
+NOT DB_AMP_Undying_Rose(_Blade)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Undying_Blade_Rise_b08bcbc8-df93-47a5-b2b9-b2d145fd1edd, _Blade)
+THEN
+DB_AMP_Undying_Rose(_Blade);
+DB_AMP_Undying_BarkLock(_Blade);
+RealtimeObjectTimerLaunch(_Blade, "AMP_Undying_BarkUnlock", 5000);
+
+IF
+TurnStarted((CHARACTER)_Blade)
+AND
+GetTemplate(_Blade, AMP_ULTRA_Summon_12_b415c998-a00b-406f-85b8-76c9caa82ed1)
+AND
+NOT DB_AMP_Undying_Rose(_Blade)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Undying_Blade_Rise_b08bcbc8-df93-47a5-b2b9-b2d145fd1edd, _Blade)
+THEN
+DB_AMP_Undying_Rose(_Blade);
+DB_AMP_Undying_BarkLock(_Blade);
+RealtimeObjectTimerLaunch(_Blade, "AMP_Undying_BarkUnlock", 5000);
+
+IF
+TurnStarted((CHARACTER)_Blade)
+AND
+GetTemplate(_Blade, AMP_ULTRA_Summon_12_b415c998-a00b-406f-85b8-76c9caa82ed1)
+AND
+NOT DB_AMP_Undying_Rose(_Blade)
+THEN
+DB_AMP_Undying_Rose(_Blade);
+
+IF
+StatusRemoved((CHARACTER)_Blade, "AMP_UNDYING_DOWNED", _, _)
+AND
+GetTemplate(_Blade, AMP_ULTRA_Summon_12_b415c998-a00b-406f-85b8-76c9caa82ed1)
+AND
+NOT DB_AMP_Undying_BarkLock(_Blade)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Undying_Blade_GetUp_2101fad3-6ac3-4eef-bea5-7e02e983cb97, _Blade)
+THEN
+DB_AMP_Undying_BarkLock(_Blade);
+RealtimeObjectTimerLaunch(_Blade, "AMP_Undying_BarkUnlock", 10000);
+
+IF
+UsingSpell((CHARACTER)_Blade, _, _, _, _)
+AND
+GetTemplate(_Blade, AMP_ULTRA_Summon_12_b415c998-a00b-406f-85b8-76c9caa82ed1)
+AND
+NOT DB_AMP_Undying_BarkLock(_Blade)
+AND
+Random(5, (INTEGER)_Roll)
+AND
+_Roll == 0
+THEN
+DB_AMP_Undying_BarkLock(_Blade);
+RealtimeObjectTimerLaunch(_Blade, "AMP_Undying_BarkDelay", 1500);
+
+IF
+ObjectTimerFinished((CHARACTER)_Blade, "AMP_Undying_BarkDelay")
+AND
+GetTemplate(_Blade, AMP_ULTRA_Summon_12_b415c998-a00b-406f-85b8-76c9caa82ed1)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Undying_Blade_Casts_25d6d4b1-ab43-4d4a-9687-fa11209719a2, _Blade)
+THEN
+RealtimeObjectTimerLaunch(_Blade, "AMP_Undying_BarkUnlock", 10000);
+
+// template gate, the form chain retracts the blade record on the same event
+IF
+Died((CHARACTER)_Blade)
+AND
+GetTemplate(_Blade, AMP_ULTRA_Summon_12_b415c998-a00b-406f-85b8-76c9caa82ed1)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Undying_Blade_Death_abc2e526-a613-4615-ae0f-c25d77f16392, _Blade)
+THEN
+DB_NOOP(1);
+
+IF
+StatusApplied((CHARACTER)_Crab, "AMP_UNDYING_RETURNING", _, _)
+AND
+GetTemplate(_Crab, AMP_ULTRA_Summon_12_Crab_b2829dff-1e45-4a02-8b2a-8694d544f4dc)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Undying_Crab_Emerge_8afff096-e4ba-4714-83bb-fec1402188f0, _Crab)
+THEN
+DB_NOOP(1);
+
+IF
+TurnStarted((CHARACTER)_Crab)
+AND
+GetTemplate(_Crab, AMP_ULTRA_Summon_12_Crab_b2829dff-1e45-4a02-8b2a-8694d544f4dc)
+AND
+NOT DB_AMP_Undying_Fled(_Crab)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Undying_Crab_Flee_84d26605-f24f-4b43-bed7-08a7228856ec, _Crab)
+THEN
+DB_AMP_Undying_Fled(_Crab);
+
+IF
+TurnStarted((CHARACTER)_Crab)
+AND
+GetTemplate(_Crab, AMP_ULTRA_Summon_12_Crab_b2829dff-1e45-4a02-8b2a-8694d544f4dc)
+AND
+NOT DB_AMP_Undying_Fled(_Crab)
+THEN
+DB_AMP_Undying_Fled(_Crab);
+
+IF
+Died((CHARACTER)_Crab)
+AND
+GetTemplate(_Crab, AMP_ULTRA_Summon_12_Crab_b2829dff-1e45-4a02-8b2a-8694d544f4dc)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Undying_Crab_Death_5639e406-6dba-4b2a-b59e-440fd5f4d6f7, _Crab)
+THEN
+DB_NOOP(1);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Undying_BarkUnlock")
+AND
+DB_AMP_Undying_BarkLock(_Mob)
+THEN
+NOT DB_AMP_Undying_BarkLock(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Undying_Greeted(_Mob)
+THEN
+NOT DB_AMP_Undying_Greeted(_Mob);
+
+IF
+CombatEnded(_)
+THEN
+PROC_AMP_Plus_UndyingBarks_DrainGreeted();
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Undying_BarkLock(_Mob)
+THEN
+NOT DB_AMP_Undying_BarkLock(_Mob);
+
+IF
+CombatEnded(_)
+THEN
+PROC_AMP_Plus_UndyingBarks_DrainBarkLock();
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Undying_Failing(_Mob)
+THEN
+NOT DB_AMP_Undying_Failing(_Mob);
+
+IF
+CombatEnded(_)
+THEN
+PROC_AMP_Plus_UndyingBarks_DrainFailing();
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Undying_Rose(_Mob)
+THEN
+NOT DB_AMP_Undying_Rose(_Mob);
+
+IF
+CombatEnded(_)
+THEN
+PROC_AMP_Plus_UndyingBarks_DrainRose();
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Undying_Fled(_Mob)
+THEN
+NOT DB_AMP_Undying_Fled(_Mob);
+
+IF
+CombatEnded(_)
+THEN
+PROC_AMP_Plus_UndyingBarks_DrainFled();
+
+PROC
+PROC_AMP_Plus_UndyingBarks_DrainGreeted()
+AND
+DB_AMP_Undying_Greeted((CHARACTER)_Mob)
+THEN
+NOT DB_AMP_Undying_Greeted(_Mob);
+PROC_AMP_Plus_UndyingBarks_DrainGreeted();
+
+PROC
+PROC_AMP_Plus_UndyingBarks_DrainBarkLock()
+AND
+DB_AMP_Undying_BarkLock((CHARACTER)_Mob)
+THEN
+NOT DB_AMP_Undying_BarkLock(_Mob);
+PROC_AMP_Plus_UndyingBarks_DrainBarkLock();
+
+PROC
+PROC_AMP_Plus_UndyingBarks_DrainFailing()
+AND
+DB_AMP_Undying_Failing((CHARACTER)_Mob)
+THEN
+NOT DB_AMP_Undying_Failing(_Mob);
+PROC_AMP_Plus_UndyingBarks_DrainFailing();
+
+// single pass. the blade re-marks itself on retract, a recursive drain never empties
+PROC
+PROC_AMP_Plus_UndyingBarks_DrainRose()
+AND
+DB_AMP_Undying_Rose((CHARACTER)_Mob)
+THEN
+NOT DB_AMP_Undying_Rose(_Mob);
+
+PROC
+PROC_AMP_Plus_UndyingBarks_DrainFled()
+AND
+DB_AMP_Undying_Fled((CHARACTER)_Mob)
+THEN
+NOT DB_AMP_Undying_Fled(_Mob);
+PROC_AMP_Plus_UndyingBarks_DrainFled();
+
+EXITSECTION
+
+ENDEXITSECTION

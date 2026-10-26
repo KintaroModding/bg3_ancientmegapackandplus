@@ -1,0 +1,115 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// kavir combat barks
+
+IF
+EnteredCombat((CHARACTER)_Mob, _)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_09_1fa91153-3ab3-4e21-bdeb-85122afad286)
+AND
+NOT DB_AMP_Kavir_Greeted(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Kavir_Greeting_d8ff7b68-7425-4ead-9065-70b64dd61683, _Mob)
+THEN
+DB_AMP_Kavir_Greeted(_Mob);
+DB_AMP_Kavir_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Kavir_BarkUnlock", 5000);
+
+IF
+TurnStarted((CHARACTER)_Mob)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_09_1fa91153-3ab3-4e21-bdeb-85122afad286)
+AND
+NOT DB_AMP_Kavir_Greeted(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Kavir_Greeting_d8ff7b68-7425-4ead-9065-70b64dd61683, _Mob)
+THEN
+DB_AMP_Kavir_Greeted(_Mob);
+DB_AMP_Kavir_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Kavir_BarkUnlock", 5000);
+
+IF
+UsingSpell((CHARACTER)_Mob, _, _, _, _)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_09_1fa91153-3ab3-4e21-bdeb-85122afad286)
+AND
+IsDead(_Mob, 0)
+AND
+NOT DB_AMP_Kavir_BarkLock(_Mob)
+AND
+Random(3, (INTEGER)_Roll)
+AND
+_Roll == 0
+THEN
+DB_AMP_Kavir_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Kavir_BarkDelay", 1500);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Kavir_BarkDelay")
+AND
+DB_AMP_Kavir_BarkLock(_Mob)
+AND
+IsDead(_Mob, 0)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Kavir_Casts_1206c8e6-795f-4fbe-92fe-574451427847, _Mob)
+THEN
+RealtimeObjectTimerLaunch(_Mob, "AMP_Kavir_BarkUnlock", 10000);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Kavir_BarkUnlock")
+AND
+DB_AMP_Kavir_BarkLock(_Mob)
+THEN
+NOT DB_AMP_Kavir_BarkLock(_Mob);
+
+IF
+HitpointsChanged((CHARACTER)_Mob, (REAL)_Pct)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_09_1fa91153-3ab3-4e21-bdeb-85122afad286)
+AND
+_Pct <= 40.0
+AND
+NOT DB_AMP_Kavir_LowHP(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Kavir_LowHP_32e003af-6450-439c-9156-0c9fddf2a5f6, _Mob)
+THEN
+DB_AMP_Kavir_LowHP(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_09_1fa91153-3ab3-4e21-bdeb-85122afad286)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Kavir_Death_a5c7d094-4538-4123-a73f-bc8e8cdd5858, _Mob)
+THEN
+DB_NOOP(1);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Kavir_Greeted(_Mob)
+THEN
+NOT DB_AMP_Kavir_Greeted(_Mob);
+DB_AMP_Kavir_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Kavir_BarkUnlock", 5000);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Kavir_BarkLock(_Mob)
+THEN
+NOT DB_AMP_Kavir_BarkLock(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Kavir_LowHP(_Mob)
+THEN
+NOT DB_AMP_Kavir_LowHP(_Mob);
+
+EXITSECTION
+
+ENDEXITSECTION

@@ -1,0 +1,77 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// direct-target: any spell with "Knock" in the name
+IF
+UsingSpellOnTarget((CHARACTER)_Character, (ITEM)_Target, (STRING)_Spell, _, _, _)
+AND
+IsTagged(_Target, (TAG)ASTRAL_CHEST_KNOCK_d5d006a2-613a-4c2e-87b4-a529c2ce9816, 1)
+AND
+IsSubstring(_Spell, "Knock", 1)
+AND
+NOT DB_PAB_KillAllPlayers(1)
+AND
+GetPosition(_Target, _X, _Y, _Z)
+THEN
+PlayEffectAtPosition(VFX_Script_IronFlask_Poof_01_e770f08f-38d7-a1a7-91ca-380b3444f834, _X, _Y, _Z, 2.0);
+PlaySound(_Target, "Spell_Impact_Damage_Disintegrate");
+Close(_Target);
+DB_PAB_KillAllPlayers(1);
+
+// direct-target: any IsSpell, catches everything else
+IF
+UsingSpellOnTarget((CHARACTER)_Character, (ITEM)_Target, (STRING)_Spell, _, _, _)
+AND
+IsTagged(_Target, (TAG)ASTRAL_CHEST_KNOCK_d5d006a2-613a-4c2e-87b4-a529c2ce9816, 1)
+AND
+SpellHasSpellFlag(_Spell, "IsSpell", 1)
+AND
+NOT DB_PAB_KillAllPlayers(1)
+AND
+GetPosition(_Target, _X, _Y, _Z)
+THEN
+PlayEffectAtPosition(VFX_Script_IronFlask_Poof_01_e770f08f-38d7-a1a7-91ca-380b3444f834, _X, _Y, _Z, 2.0);
+PlaySound(_Target, "Spell_Impact_Damage_Disintegrate");
+Close(_Target);
+DB_PAB_KillAllPlayers(1);
+
+// aoe zone: "Knock" spells
+IF
+UsingSpellOnZoneWithTarget((CHARACTER)_Caster, (ITEM)_Target, (STRING)_Spell, _, _, _)
+AND
+IsTagged(_Target, (TAG)ASTRAL_CHEST_KNOCK_d5d006a2-613a-4c2e-87b4-a529c2ce9816, 1)
+AND
+IsSubstring(_Spell, "Knock", 1)
+AND
+NOT DB_PAB_KillAllPlayers(1)
+AND
+GetPosition(_Target, _X, _Y, _Z)
+THEN
+PlayEffectAtPosition(VFX_Script_IronFlask_Poof_01_e770f08f-38d7-a1a7-91ca-380b3444f834, _X, _Y, _Z, 2.0);
+PlaySound(_Target, "Spell_Impact_Damage_Disintegrate");
+Close(_Target);
+DB_PAB_KillAllPlayers(1);
+
+// aoe zone: any IsSpell
+IF
+UsingSpellOnZoneWithTarget((CHARACTER)_Caster, (ITEM)_Target, (STRING)_Spell, _, _, _)
+AND
+IsTagged(_Target, (TAG)ASTRAL_CHEST_KNOCK_d5d006a2-613a-4c2e-87b4-a529c2ce9816, 1)
+AND
+SpellHasSpellFlag(_Spell, "IsSpell", 1)
+AND
+NOT DB_PAB_KillAllPlayers(1)
+AND
+GetPosition(_Target, _X, _Y, _Z)
+THEN
+PlayEffectAtPosition(VFX_Script_IronFlask_Poof_01_e770f08f-38d7-a1a7-91ca-380b3444f834, _X, _Y, _Z, 2.0);
+PlaySound(_Target, "Spell_Impact_Damage_Disintegrate");
+Close(_Target);
+DB_PAB_KillAllPlayers(1);
+
+EXITSECTION
+
+ENDEXITSECTION

@@ -1,0 +1,69 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_EclipseNameVer(2)
+THEN
+PROC_AMP_Plus_EclipseNameReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_EclipseNameVer(2)
+THEN
+PROC_AMP_Plus_EclipseNameReseed();
+
+PROC
+PROC_AMP_Plus_EclipseNameReseed()
+AND
+DB_AMP_Plus_EclipseNameVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_EclipseNameVer(_Old);
+
+PROC
+PROC_AMP_Plus_EclipseNameReseed()
+THEN
+PROC_AMP_Plus_EclipseNameDrainInfo();
+
+PROC
+PROC_AMP_Plus_EclipseNameReseed()
+THEN
+DB_AMP_Plus_EclipseNameVer(2);
+DB_AMP_Plus_EclipseInfoName("AMP_ECLIPSE_INFO");
+DB_AMP_Plus_EclipseInfoName("AMP_ECLIPSE_INFO_ACID");
+DB_AMP_Plus_EclipseInfoName("AMP_ECLIPSE_INFO_FIRE");
+DB_AMP_Plus_EclipseInfoName("AMP_ECLIPSE_INFO_FORCE");
+DB_AMP_Plus_EclipseInfoName("AMP_ECLIPSE_INFO_LIGHTNING");
+DB_AMP_Plus_EclipseInfoName("AMP_ECLIPSE_INFO_NECROTIC");
+DB_AMP_Plus_EclipseInfoName("AMP_ECLIPSE_INFO_POISON");
+DB_AMP_Plus_EclipseInfoName("AMP_ECLIPSE_INFO_PSYCHIC");
+
+PROC
+PROC_AMP_Plus_EclipseNameDrainInfo()
+AND
+DB_AMP_Plus_EclipseInfoName((STRING)_A)
+THEN
+NOT DB_AMP_Plus_EclipseInfoName(_A);
+PROC_AMP_Plus_EclipseNameDrainInfo();
+
+// base grants the marker only on a cast, so a first-turn burst skips eclipse
+IF
+StatusApplied((CHARACTER)_Boss, _Info, _, _)
+AND
+DB_AMP_Plus_EclipseInfoName(_Info)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_Boss, _Host, 1)
+AND
+HasActiveStatus(_Boss, "AMP_ECLIPSE_RESOURCE_USER", 0)
+THEN
+ApplyStatus(_Boss, "AMP_ECLIPSE_RESOURCE_USER", -1.0, 1, _Boss);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,290 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// spawns every AMP_Para chest into the player inventory, deleted when dropped
+
+// register all para chest templates for tracking
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_1_154bf227-60ce-4241-8071-b1308dc61d62);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_2_ebccaea7-915a-4c38-84d5-969aabaaa225);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_3_43f455aa-e223-47a0-b36a-a4892b59fb1d);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_4_8af6de1e-2c8f-46bf-b39e-a4c328a8e508);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_5_436e1377-dec7-45f5-8e01-47abc613d873);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_6_940d5537-8c9e-4f8b-b0af-684f729a79bf);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_7_b13fb766-6d48-4966-8e8f-33aa6de22316);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_8_6e565003-8d78-418e-bdad-f0a9642c56ff);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_9_153adb1b-08e8-47d7-94ab-931361169759);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_10_a3bf7070-9e83-45cc-b0f5-72b465dc4eb2);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_11_14fc4dd5-5f2b-4f4a-b33a-8f3abfba0057);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_12_f78639e0-8abf-4089-bfee-a5f202a6b5c9);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_13_5e7486b5-49ec-4a2d-b38e-161925e8becf);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_14_a07659c2-43b2-4205-91d0-5eb3094520d5);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_15_2620e29c-adbd-4a93-86f7-0b6a09e71b47);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_16_74b3508b-f1de-4d54-9dfc-0f40c52d22a2);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_17_2ea8fa2c-a8be-4e73-9ff6-63036feeb731);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_18_3b977477-c138-4252-a0b2-f40bbbafcfd6);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_19_d9b5f378-81ad-4e62-b8e3-be54eb74b88a);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_20_cc2c6340-3923-481f-9861-39d48538c02d);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_21_020343e6-4ec3-425b-bdc6-5377582d5f77);
+DB_AMP_Para_Template((ITEMROOT)AMP_Para_22_4634ff20-29a9-460c-9e1f-a766f1462363);
+
+KBSECTION
+// spell casting - spawn chests
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_Test", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+PROC_AMP_Para_SpawnAllChests(_Character);
+
+PROC
+PROC_AMP_Para_SpawnAllChests((CHARACTER)_Character)
+AND
+DB_AMP_Para_Template(_Template)
+THEN
+TemplateAddTo(_Template, _Character, 1, 0);
+
+// final effect after all chests spawned
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_Test", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+PROC_AMP_PlayModeEffect(_Character);
+
+// track spawned chests
+IF
+TemplateAddedTo((ITEMROOT)_Template, (ITEM)_Chest, (CHARACTER)_Owner, _)
+AND
+DB_AMP_Para_Template(_Template)
+THEN
+DB_AMP_Para_Spawned(_Chest);
+
+// auto-delete when dropped
+IF
+RemovedFrom((ITEM)_Chest, (GUIDSTRING)_Container)
+AND
+DB_AMP_Para_Spawned(_Chest)
+THEN
+PROC_AMP_Para_CheckAndDelete(_Chest);
+
+PROC
+PROC_AMP_Para_CheckAndDelete((ITEM)_Chest)
+AND
+NOT QRY_AMP_Para_IsInAnyPlayerInventory(_Chest)
+AND
+GetPosition(_Chest, _X, _Y, _Z)
+AND
+RealSubtract(_Y, 1.0, _YLow)
+THEN
+PROC_AMP_PlayModeEffectAtPos(_X, _YLow, _Z);
+ObjectTimerLaunch(_Chest, "AMP_Para_Delete", 500, 0);
+
+QRY
+QRY_AMP_Para_IsInAnyPlayerInventory((ITEM)_Chest)
+AND
+DB_Players(_Player)
+AND
+IsInInventoryOf(_Chest, _Player, 1)
+THEN
+DB_NOOP(1);
+
+// deletion timer
+IF
+ObjectTimerFinished((ITEM)_Chest, "AMP_Para_Delete")
+AND
+DB_AMP_Para_Spawned(_Chest)
+AND
+Exists(_Chest, 1)
+THEN
+NOT DB_AMP_Para_Spawned(_Chest);
+RequestDelete(_Chest);
+
+// cleanup on destroy
+IF
+DestroyedBy((ITEM)_Chest, _, _, _)
+AND
+DB_AMP_Para_Spawned(_Chest)
+THEN
+NOT DB_AMP_Para_Spawned(_Chest);
+
+// ser copperbottom's chest picker
+// individual chest spawning via sub-spells
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_01", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_1_154bf227-60ce-4241-8071-b1308dc61d62, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_02", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_2_ebccaea7-915a-4c38-84d5-969aabaaa225, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_03", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_3_43f455aa-e223-47a0-b36a-a4892b59fb1d, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_04", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_4_8af6de1e-2c8f-46bf-b39e-a4c328a8e508, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_05", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_5_436e1377-dec7-45f5-8e01-47abc613d873, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_06", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_6_940d5537-8c9e-4f8b-b0af-684f729a79bf, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_07", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_7_b13fb766-6d48-4966-8e8f-33aa6de22316, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_08", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_8_6e565003-8d78-418e-bdad-f0a9642c56ff, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_09", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_9_153adb1b-08e8-47d7-94ab-931361169759, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_10", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_10_a3bf7070-9e83-45cc-b0f5-72b465dc4eb2, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_11", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_11_14fc4dd5-5f2b-4f4a-b33a-8f3abfba0057, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_12", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_12_f78639e0-8abf-4089-bfee-a5f202a6b5c9, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_13", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_13_5e7486b5-49ec-4a2d-b38e-161925e8becf, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_14", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_14_a07659c2-43b2-4205-91d0-5eb3094520d5, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_15", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_15_2620e29c-adbd-4a93-86f7-0b6a09e71b47, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_16", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_16_74b3508b-f1de-4d54-9dfc-0f40c52d22a2, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_17", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_17_2ea8fa2c-a8be-4e73-9ff6-63036feeb731, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_18", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_18_3b977477-c138-4252-a0b2-f40bbbafcfd6, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_19", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_19_d9b5f378-81ad-4e62-b8e3-be54eb74b88a, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_20", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_20_cc2c6340-3923-481f-9861-39d48538c02d, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_21", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_21_020343e6-4ec3-425b-bdc6-5377582d5f77, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+IF
+CastedSpell((CHARACTER)_Character, "Shout_AMP_CB_22", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Para_22_4634ff20-29a9-460c-9e1f-a766f1462363, _Character, 1, 0);
+PROC_AMP_PlayModeEffect(_Character);
+
+EXITSECTION
+
+ENDEXITSECTION

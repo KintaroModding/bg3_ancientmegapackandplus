@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<contentList>
+	<content contentuid="hd6cfa82bg0d21g48c3gbb8eg13067bb1288e" version="1">混乱之王</content>
+	<content contentuid="h95b309f3g04b6g408fga20dgee5279dd59c3" version="1">弗鲁德贝尔是眼前这团混乱的真正行家，他为战场带来实实在在的骚动。没有人知道他是如何来到这个世界的，但传闻这个古怪的半身人是一只狡猾的跨位面生物，会化作与当前位面相称的形态。当心他的随机效果，别让他念出最古怪的法术，而且千万不要逃跑！</content>
+
+	<content contentuid="h38fa73f1g7cc0g472agb7bag9a3829269f7b" version="1">混乱大师</content>
+	<content contentuid="hf992eb3cgbd2ag439cga555gaf59157cc209" version="1">弗鲁德贝尔在自己回合开始时触发一次随机的&lt;LSTag Type="Status" Tooltip="AMP_VLUDBER_CHAOTIZATION"&gt;混乱化&lt;/LSTag&gt;，大幅改变战场上的局势。</content>
+
+	<content contentuid="hb6478c7cgfe77g46bcg84f1g292683dcafac" version="1">混乱化</content>
+	<content contentuid="h26fc2587gde8eg435bg9426gcd9e58d8b849" version="1">混乱化是一组特殊的随机效果，其中许多绝对称不上有益。好消息是，混乱不分敌我。</content>
+
+	<content contentuid="h6396ef69g3373g472fg8c29g53763ce4baa9" version="1">混乱编织</content>
+	<content contentuid="h98fc626aga964g4291ga4d6g040ee70bc77f" version="1">弗鲁德贝尔可以诅咒一个目标，使其在每次&lt;LSTag Tooltip="AttackRoll"&gt;攻击掷骰&lt;/LSTag&gt;和每次施放法术后触发一次随机的&lt;LSTag Tooltip="WildMagic"&gt;狂野魔法&lt;/LSTag&gt;效果。</content>
+
+	<content contentuid="h91afd34dg5323g445dg9ff7gc110d4dbf0cd" version="1">每次&lt;LSTag Tooltip="AttackRoll"&gt;攻击掷骰&lt;/LSTag&gt;和每次施放法术后，你都会触发一次随机的&lt;LSTag Tooltip="WildMagic"&gt;狂野魔法&lt;/LSTag&gt;效果。</content>
+
+	<content contentuid="hc37568b9g844dg41f0ga633g8292d055cc93" version="1">游戏规则</content>
+	<content contentuid="hf4b7ddd8ga4e6g4faagbc32g308487d3ee96" version="1">弗鲁德贝尔知晓如何改变位面的物质，随心所欲地编织战场的织体。对他进行&lt;LSTag Tooltip="AttackRoll"&gt;攻击掷骰&lt;/LSTag&gt;的生物须通过一次&lt;LSTag Tooltip="Wisdom"&gt;感知&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;（&lt;b&gt;[3]&lt;/b&gt;），否则陷入&lt;LSTag Type="Status" Tooltip="MADNESS"&gt;疯狂&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。此后&lt;b&gt;[4]&lt;/b&gt;回合内，该生物不会再因此陷入疯狂。&lt;i&gt;造成伤害时&lt;/i&gt;，弗鲁德贝尔会&lt;LSTag Type="Status" Tooltip="DOMINATE_PERSON"&gt;支配&lt;/LSTag&gt;该生物&lt;b&gt;[2]&lt;/b&gt;回合，除非它是玩家。</content>
+
+	<content contentuid="hdadc72d6g2945g4daeg9fffg98fa1d5ea701" version="1">传染性笑声</content>
+	<content contentuid="h78253ae9gdb36g4ce8gbbb1gf68540e4f7fc" version="1">每当战斗中有人受到&lt;LSTag Type="Status" Tooltip="AMP_WARRANK_INFO_AFFLICTIONS"&gt;战斗创伤&lt;/LSTag&gt;时，所有生物都必须通过一次&lt;LSTag Tooltip="Charisma"&gt;魅力&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;(&lt;b&gt;[1]&lt;/b&gt;)，否则将陷入&lt;LSTag Type="Status" Tooltip="HIDEOUS_LAUGHTER"&gt;狂笑&lt;/LSTag&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合。每个生物每回合只能触发一次。</content>
+
+	<content contentuid="hc239902cgee3cg4112g97f5g5e02cb57f0c3" version="1">雷霆之众</content>
+	<content contentuid="hd1d534d4g871dg4f3cgaa11g6709125ee711" version="1">每个生物每回合可免费施放一次&lt;LSTag Type="Spell" Tooltip="Projectile_ChainLightning"&gt;闪电链&lt;/LSTag&gt;，并对&lt;b&gt;[1]&lt;/b&gt;具有&lt;LSTag Tooltip="Resistant"&gt;抗性&lt;/LSTag&gt;。</content>
+
+	<content contentuid="h2286f16bgea6dg4bf5gbc16g80be89ac9e80" version="1">地板是熔岩！</content>
+	<content contentuid="hfa38dbfdg0f80g49e7ga60dg1e8a192ae633" version="1">攻击失手的生物会将自身周围 &lt;b&gt;[1]&lt;/b&gt; 内的地面化为熔岩。</content>
+
+	<content contentuid="h4728b11fg9f65g4b19ga1f6g1e72319fd8a4" version="1">刽子手之手</content>
+	<content contentuid="h5e002dccge259g453fg95adge81497c461ac" version="1">每个生物在自己回合开始时获得一次必定的&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;。</content>
+
+	<content contentuid="h19306cd9g76fdg470ag96d0g98b0a8c4aa2c" version="1">元素的宽赦</content>
+	<content contentuid="hc5e329cbga51dg4b74g9e13ga029562ace9f" version="1">每个生物对除物理之外的所有伤害&lt;LSTag Tooltip="Immune"&gt;免疫&lt;/LSTag&gt;。</content>
+
+	<content contentuid="h9d0d86a4g4bb3g4516g9dcfg3fcc7ec3c08a" version="1">镜面报应</content>
+	<content contentuid="hd2994b70g7314g44bdgbd7ag2593c0f2bd8d" version="1">所有物理伤害都会返回其来源。</content>
+
+	<content contentuid="hfbedc89cgbe51g42c3g951egb78c217d9c1e" version="1">脆弱外壳</content>
+	<content contentuid="h0b9ae212gffa4g49c4g81b7gb00554fa0b13" version="1">每个生物对物理伤害&lt;LSTag Tooltip="Vulnerable"&gt;易伤&lt;/LSTag&gt;。</content>
+
+	<content contentuid="h5cf1864fg312cg445dg95b9g6f86437eb9a8" version="1">暗影的敏捷</content>
+	<content contentuid="hb0c6b195g71bdg4c38g91f6g719a9bdafc9d" version="1">每个生物获得一次额外的&lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;附赠动作&lt;/LSTag&gt;。</content>
+
+	<content contentuid="hbee5e94dg38e4g45c4g9699g4418cdcef9ef" version="1">无形壁障</content>
+	<content contentuid="hff4a29f3gf1c0g48dega1f8ga2152e102a4e" version="1">每个生物每回合可免费施放一次&lt;LSTag Type="Spell" Tooltip="Shout_Shield_Wizard"&gt;护盾术&lt;/LSTag&gt;，不消耗&lt;LSTag Tooltip="SpellSlot"&gt;法术位&lt;/LSTag&gt;。</content>
+
+	<content contentuid="hd942ce0bg242fg4449g86d4g37ea67db2794" version="1">十足分量</content>
+	<content contentuid="h3d68ebc4g1c84g44ceg9fcfg98932d47a7e6" version="1">所有伤害骰均掷出最大值。</content>
+
+	<content contentuid="hbc5f6315g54c7g497bgacbbg10758807be8f" version="1">不破之幕</content>
+	<content contentuid="h1268edccgf105g4840gb5c7g583e1c04341f" version="1">每个生物对物理伤害&lt;LSTag Tooltip="Immune"&gt;免疫&lt;/LSTag&gt;。</content>
+
+	<content contentuid="h8f3a40ceg5f37g4d44g9c88g34b9e4e03d07" version="1">尘灰之印</content>
+	<content contentuid="heff1c83cg7495g4883g92fag94e89669fe96" version="1">每个生物化为不死生物：对&lt;b&gt;[1]&lt;/b&gt;&lt;LSTag Tooltip="Immune"&gt;免疫&lt;/LSTag&gt;，对&lt;b&gt;[2]&lt;/b&gt;具有&lt;LSTag Tooltip="Resistant"&gt;抗性&lt;/LSTag&gt;，但普通治疗对其不再有效。</content>
+
+	<content contentuid="h389cdfc0gfb27g4a2fg877dga3911469f466" version="1">野兽的质朴</content>
+	<content contentuid="hd8a1e0cfga4e5g473agad79g0c552a6db9db" version="1">每个生物的&lt;LSTag Tooltip="Strength"&gt;力量&lt;/LSTag&gt;、&lt;LSTag Tooltip="Dexterity"&gt;敏捷&lt;/LSTag&gt;与&lt;LSTag Tooltip="Constitution"&gt;体质&lt;/LSTag&gt;变为 &lt;b&gt;[1]&lt;/b&gt;，&lt;LSTag Tooltip="Intelligence"&gt;智力&lt;/LSTag&gt;与&lt;LSTag Tooltip="Wisdom"&gt;感知&lt;/LSTag&gt;降至 &lt;b&gt;[2]&lt;/b&gt;。</content>
+
+	<content contentuid="he5fb1b65g5856g4fcbgbe01g7bb3d73771ec" version="1">以言对言</content>
+	<content contentuid="h68c3f08agf1bfg4827g9b19g00a6ddc65778" version="1">每个生物可无限次施放&lt;LSTag Type="Spell" Tooltip="Target_Counterspell"&gt;法术反制&lt;/LSTag&gt;。</content>
+
+	<content contentuid="hce4e21efg2204g4687g9e5fg5e9f1129c7fb" version="1">菌丝幻象</content>
+	<content contentuid="h9e50a7a9g3f51g4a6dg9c4bg5cca3c739a80" version="1">孢子云笼罩全场：生物在 &lt;b&gt;[1]&lt;/b&gt; 回合内&lt;LSTag Type="Status" Tooltip="CONFUSION"&gt;狂笑并胡乱冲撞&lt;/LSTag&gt;。</content>
+
+	<content contentuid="hf76c9016g1cebg46b0ga8d4g1786358a6534" version="1">屏住的呼吸</content>
+	<content contentuid="he26291f9g954eg4f2fg8f83gf519b1756d4d" version="1">每个生物在 &lt;b&gt;[1]&lt;/b&gt; 回合内处于&lt;LSTag Type="Status" Tooltip="SURPRISED"&gt;措手不及&lt;/LSTag&gt;状态。</content>
+
+	<content contentuid="heff9bc37g9232g4080gbc4dgfa93c7ea48e1" version="1">被窃之声</content>
+	<content contentuid="h46f2b7bdgbf03g42e0g95dfg377265af1032" version="1">每个生物失声，无法施放带言语成分的法术。</content>
+
+	<content contentuid="hfa163845ga9ecg4be9ga25fgbb69c64f8d42" version="1">景观设计</content>
+	<content contentuid="h6313fcacg1395g481eg842dg4cbe614ec8c3" version="1">每个生物在自己回合结束时于周围 &lt;b&gt;[1]&lt;/b&gt; 内长出一片花田。</content>
+
+	<content contentuid="hd435be49gd48cg41ecg83e4g5131e9ff6bd9" version="1">计划外飞行表演</content>
+	<content contentuid="h0f8bebb0gdce1g4bd8gb10egbc7f475ab16a" version="1">每个生物获得&lt;LSTag Type="Status" Tooltip="FLY"&gt;飞行&lt;/LSTag&gt;能力。</content>
+
+	<content contentuid="h9d7c901bg3ee8g43deg8dbfg403b2289f8d4" version="1">将熄者之怒</content>
+	<content contentuid="h20ae19c7g72bbg4b49gb12dgb79501e22e6d" version="1">生命值低于 &lt;b&gt;[1]%&lt;/b&gt; 的生物只会打出&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;，且该重击无视一切免疫。</content>
+
+	<content contentuid="hd9d22c3fg6bd8g4c73gb85eg412768d4d7b2" version="1">必然之锈</content>
+	<content contentuid="h89baf458gdca0g4d31gbcd2gbb164f5fc9e6" version="1">每受到一次命中，该生物的&lt;LSTag Tooltip="ArmourClass"&gt;护甲等级&lt;/LSTag&gt;便永久降低 &lt;b&gt;[1]&lt;/b&gt; 点。</content>
+
+	<content contentuid="h54373c5cgc1dbg40efgb0f4g407457002941" version="1">命运的背面</content>
+	<content contentuid="h52ddedb0gc8fag4722g9e66g419db6184757" version="1">生物的重失会立刻杀死其目标，而它自己的&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;会杀死它本人。</content>
+
+	<content contentuid="h426243fbg4997g4446g8be6g239032268ef7" version="1">战术撤退</content>
+	<content contentuid="h1052a1f6gaa70g4e52g8832gda416e1d6ba9" version="1">未命中后，生物转身逃跑，直到通过一次&lt;LSTag Tooltip="Wisdom"&gt;感知&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免&lt;/LSTag&gt;（&lt;b&gt;[1]&lt;/b&gt;）为止。</content>
+
+	<content contentuid="h46b5b65bg3ee7g4b06ga711g24b6343abd42" version="1">一张白纸</content>
+	<content contentuid="hddb19d5agd521g4940gb08fg16e65a90a969" version="1">所有生物身上的全部状态被一次性清空——包括正在生效的混沌化。</content>
+
+	<content contentuid="h9172cebag4575g4b80g91b7g63b8ae659960" version="1">血中之风</content>
+	<content contentuid="ha97e6bb0g97f2g4f0eg9bd0g7d67bad313ed" version="1">每个生物获得&lt;LSTag Type="Status" Tooltip="HASTE"&gt;加速&lt;/LSTag&gt;，且其后通常出现的迟滞不会到来。</content>
+
+	<content contentuid="h7405b2a8g5388g4f4cg89cfg011ffd32b489" version="1">生产定额</content>
+	<content contentuid="haddf00dfg5934g4dc9g9ed1gc6b3fe36613e" version="1">生物须在 &lt;b&gt;[1]&lt;/b&gt; 回合内打出一次&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;。未能做到则失去最大生命值的 &lt;b&gt;[2]%&lt;/b&gt;。</content>
+
+	<content contentuid="hd337b74agb710g499bg9176g36f23c3db9f6" version="1">痛楚的沉醉</content>
+	<content contentuid="h9412156dg3480g42b2ga89dgc32a7d8e01ad" version="1">每次&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;额外投掷 &lt;b&gt;[1]&lt;/b&gt; 枚伤害骰。</content>
+
+	<content contentuid="he26bac5dg7010g4456gaf5egee2ae08e562c" version="1">治愈的残酷</content>
+	<content contentuid="h71d1bfb1g959eg4fd0g9c0fg62d5a628fbf4" version="1">每受到一次命中，生物便恢复最大生命值的 &lt;b&gt;[1]%&lt;/b&gt;。</content>
+
+	<content contentuid="h8dee9248g7a29g42acg9812ga04ae5a8769b" version="1">伟大的翻盘</content>
+	<content contentuid="h5447a24dg4b88g49d0gbcf9g4886abb2973d" version="1">生物首次跌破 &lt;b&gt;[1]%&lt;/b&gt; 生命值时，恢复最大生命值的 &lt;b&gt;[2]%&lt;/b&gt; 以及全部&lt;LSTag Tooltip="SpellSlot"&gt;法术位&lt;/LSTag&gt;。</content>
+
+	<content contentuid="h0c4eb2d5g4ae4g48e0g8318gb47286b3b267" version="1">皮下之雷</content>
+	<content contentuid="h314254b1g3175g4e35g8a2cg421c0b322b4c" version="1">生物每造成一次伤害，便在自身累积&lt;LSTag Type="Status" Tooltip="MAG_CHARGED_LIGHTNING"&gt;闪电充能&lt;/LSTag&gt;。</content>
+
+	<content contentuid="h2a6c931ege026g476dg8e8dg96a5785823b2" version="1">寒霜之息</content>
+	<content contentuid="h2965141fgc420g44d8gb7e7gca594af9de8d" version="1">战斗中的任何一次未命中都会让所有生物覆上&lt;LSTag Type="Status" Tooltip="MAG_FROST"&gt;冰霜&lt;/LSTag&gt;，持续 &lt;b&gt;[1]&lt;/b&gt; 回合。</content>
+
+	<content contentuid="h6142a34ege8afg420egbc9cg299017a2d091" version="1">任性的火焰</content>
+	<content contentuid="hc0d5c50fg9322g486ega4dfgded07fc29f8e" version="1">每个生物获得免费的&lt;LSTag Type="Spell" Tooltip="Projectile_FireBolt"&gt;火焰箭&lt;/LSTag&gt;，它有 &lt;b&gt;[1]%&lt;/b&gt; 的几率化作&lt;LSTag Type="Spell" Tooltip="Projectile_Fireball"&gt;火球术&lt;/LSTag&gt;。</content>
+
+	<content contentuid="hc4c0c41ag3bc4g442agb54dg4951e53833ff" version="1">容器的裂口</content>
+	<content contentuid="h9eb8ba56g3416g4d2eg952agfd8d856cd40b" version="1">每受到一次命中，生物周围 &lt;b&gt;[1]&lt;/b&gt; 内便释放出一团&lt;LSTag Type="Status" Tooltip="STINKING_CLOUD"&gt;恶臭气体&lt;/LSTag&gt;。</content>
+
+	<content contentuid="hb4348ee7g9d26g4965g9e0bg693555051510" version="1">星界食腐者</content>
+	<content contentuid="hb22938a8g4ee0g4ef5gac82geeddbd033be5" version="1">&lt;b&gt;[1]&lt;/b&gt; 名有翼来客降临战场，对所有人一律敌对。</content>
+
+	<content contentuid="h55f9d00agcc99g4d54g9542gb1941f41dec4" version="1">破碎之回响</content>
+	<content contentuid="ha66f567cgce57g4234gb322gd985b7133065" version="1">摧毁物件后，生物&lt;LSTag Type="Status" Tooltip="STUNNED"&gt;昏迷&lt;/LSTag&gt;直到自己回合结束。</content>
+
+	<content contentuid="h32645bf8g14e0g4cf4gb74egfe29ed9bf357" version="1">酒馆斗殴</content>
+	<content contentuid="h45ced2e3g6e31g468dg97e3gf90db69701f5" version="1">每个生物脱手掉落武器，且无法握持。</content>
+
+	<content contentuid="h45fbbe52g53a1g4fa8gabf5g83457119c2f9" version="1">比例的心血来潮</content>
+	<content contentuid="h5361c9aag4566g4dadgb898gb0934b0c1bcf" version="1">每个生物在自己回合开始时抽到一个新体型——从微型到巨型，重量与负重一并改变。</content>
+
+	<content contentuid="h19831e1egc3c7g4af3g8788g28f0ab075b13" version="1">微型</content>
+	<content contentuid="haf52c753g6e64g4fe2g81d1g0b76fe406ace" version="1">生物缩小到了最小的体型，重量与负重也随之下降。</content>
+
+	<content contentuid="h324b5841g643dg4a22g94bdg92ac35515fc1" version="1">小型</content>
+	<content contentuid="hb4c01e63g4c25g4c10ga1beg68b33fb171d5" version="1">生物缩小了，重量与负重也随之下降。</content>
+
+	<content contentuid="hd0a9575bg20a8g4e13ga10bg000971abe1d1" version="1">大型</content>
+	<content contentuid="hf47e4772g2beeg40d3g9d06g8b5c0dfa422a" version="1">生物变大了，重量与负重也随之上升。</content>
+
+	<content contentuid="hf2a4b460gd18fg4b5bg8387g51bc55c3107f" version="1">巨型</content>
+	<content contentuid="h3586b789g4662g4ecdg9dbegb07ae488b74a" version="1">生物长到了最大的体型，重量与负重也随之上升。</content>
+
+	<content contentuid="hc1f56797g6be7g40f8gb51bg3f5babd3e779" version="1">强制笨手笨脚</content>
+	<content contentuid="h3687976dg39aeg42e5gb441gfdcf32430674" version="1">生物须在 &lt;b&gt;[1]&lt;/b&gt; 回合内掷出一次重失。未能做到则要度过一个没有&lt;LSTag Type="ActionResource" Tooltip="ActionPoint"&gt;动作&lt;/LSTag&gt;的回合。</content>
+
+	<content contentuid="h10769655g6aaeg4190g93b8g0b71483e5268" version="1">蚊子叮咬</content>
+	<content contentuid="hdd944cbdg46bcg436eg9ff2g85d9e40f3b4b" version="1">所有伤害骰均掷出最小值。</content>
+
+	<content contentuid="h4e782027gd895g4d37gaf02g4d33ae4e9b87" version="1">囤出来的膘</content>
+	<content contentuid="hc1674309gfc47g4a14ga008g6016f6322137" version="1">每个生物获得&lt;b&gt;[1]&lt;/b&gt;。</content>
+
+	<content contentuid="ha9fd2bf1g9662g42ebg85f1g07e17048b99b" version="1">白捡的一步</content>
+	<content contentuid="h72d963e3g17b7g49a0gad0fg13f08254197e" version="1">每个生物每回合可&lt;LSTag Type="Spell" Tooltip="Target_MistyStep"&gt;短距离传送&lt;/LSTag&gt;一次，不消耗&lt;LSTag Tooltip="SpellSlot"&gt;法术位&lt;/LSTag&gt;。</content>
+
+	<content contentuid="hea580f4cgae25g416fg80f8g559a4bab58b8" version="1">两班倒</content>
+	<content contentuid="h1fc0270eg0540g4457gb2dcgde8ea0237f3c" version="1">每个生物获得一次额外的&lt;LSTag Type="ActionResource" Tooltip="ActionPoint"&gt;动作&lt;/LSTag&gt;。</content>
+
+	<content contentuid="h86f06072gabffg4babg8704g726542b245cc" version="1">突如其来的石膏</content>
+	<content contentuid="he2a944e2g6857g4f2bgb672gcff84ce0a1c9" version="1">移动时，生物有 &lt;b&gt;[1]%&lt;/b&gt; 的几率&lt;LSTag Type="Status" Tooltip="PRONE"&gt;滑倒&lt;/LSTag&gt;。</content>
+
+	<content contentuid="h0ce6e4f0g92a9g4671gab95gf7cca2006882" version="1">以为自己最聪明？</content>
+	<content contentuid="h4cba3a7bgd37eg455agbb6fgb284198145cf" version="1">生物倒在地上。起身需要消耗一半的&lt;LSTag Tooltip="MovementSpeed"&gt;移动速度&lt;/LSTag&gt;。</content>
+
+	<content contentuid="hb903ba80g8acdg491dga95ag986819f9bd0b" version="1">谁也不认账</content>
+	<content contentuid="h43639e8bg7e85g40a1g90d4gaba365e7fc96" version="1">每个生物在自己回合结束时于周围 &lt;b&gt;[1]&lt;/b&gt; 内释放一团&lt;LSTag Type="Status" Tooltip="STINKING_CLOUD"&gt;毒气&lt;/LSTag&gt;。</content>
+
+	<content contentuid="h700acd8ag75deg411dg8282g2e3a13b4afc0" version="1">这儿有人</content>
+	<content contentuid="h5acfbc42g80abg4f5bgb26bg287f4d5c2463" version="1">生物发动攻击或施法时，会与目标交换位置。</content>
+
+	<content contentuid="hde6ba2a6gebe5g4c93g8024g620dc1261635" version="1">人都没了</content>
+	<content contentuid="hce43eadag7de9g4529g9cbdg46bc8b61179a" version="1">每个生物&lt;LSTag Type="Status" Tooltip="INVISIBILITY"&gt;隐形&lt;/LSTag&gt; &lt;b&gt;[1]&lt;/b&gt; 回合。</content>
+
+	<content contentuid="h718f08c4g4756g4872gbc1eg4017542eaf68" version="1">屋顶飞了</content>
+	<content contentuid="h6b4aff20g96c5g4b34g9792g09070439a36c" version="1">生物在自己回合开始时须通过一次&lt;LSTag Tooltip="Wisdom"&gt;感知&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免&lt;/LSTag&gt;（&lt;b&gt;[1]&lt;/b&gt;），否则陷入&lt;LSTag Type="Status" Tooltip="MADNESS"&gt;疯狂&lt;/LSTag&gt; &lt;b&gt;[2]&lt;/b&gt; 回合。维持&lt;LSTag Tooltip="Concentration"&gt;专注&lt;/LSTag&gt;的生物不受影响。</content>
+
+	<content contentuid="h43a1009dg9554g47a9gbac3ged44eed54745" version="1">战斗裸奔</content>
+	<content contentuid="he076f766g38b6g4bd3ga5b0g5883d883405a" version="1">每个生物将身上的装备掉落在地，传奇神器留在原处。</content>
+</contentList>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="d47b582c-33be-b9dc-db9d-ff4d15311e18" />
+					<attribute id="Name" type="LSString" value="VFX_SnowGiantHelmet" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/VFX_SnowGiantHelmet.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="VFX_SnowGiantHelmet" />
+					<attribute id="BoundsMin" type="fvec3" value="-4 -4 -4" />
+					<attribute id="BoundsMax" type="fvec3" value="4 4 4" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="3" />
+					<attribute id="Looping" type="bool" value="True" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="24e1e148-63e5-bfa1-f898-cfad146eb015" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="e5a2d6c9-561a-0e37-b3ac-a9a8547d569e" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

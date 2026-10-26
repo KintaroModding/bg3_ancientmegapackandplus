@@ -1,0 +1,496 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_AMP_ItemMoveCost_Disabled(0);
+KBSECTION
+
+// mode gate
+
+// hard: always active, toggle ignored
+QRY
+QRY_AMP_ItemMoveCost_Active()
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+THEN
+DB_NOOP(1);
+
+// normal: active unless disabled
+QRY
+QRY_AMP_ItemMoveCost_Active()
+AND
+DB_AMP_Difficulty_Mode("STANDARD")
+AND
+NOT DB_AMP_ItemMoveCost_Disabled(1)
+THEN
+DB_NOOP(1);
+
+// throw exception: any Throw_ spell sets a skip flag
+IF
+UsingSpell(_Player, _Spell, _, _, _)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+IsSubstring(_Spell, "Throw_", _Result)
+AND
+_Result == 1
+THEN
+DB_AMP_ThrowException(_Player);
+
+// flag items pushed by shove/thunderwave/force aoe so MovedBy won't charge them
+IF
+ForceMoveStarted(_Source, _Target, _StoryActionID)
+AND
+IsItem(_Target, 1)
+THEN
+DB_AMP_ForceMoving((ITEM)_Target);
+
+IF
+ForceMoveEnded(_Source, _Target, _StoryActionID)
+AND
+IsItem(_Target, 1)
+AND
+DB_AMP_ForceMoving((ITEM)_Target)
+THEN
+NOT DB_AMP_ForceMoving((ITEM)_Target);
+
+// capture inventory state before move (force-moved items skip this)
+
+// in an inventory before moving
+IF
+PreMovedBy((ITEM)_Item, (CHARACTER)_Player)
+AND
+DB_Players(_Player)
+AND
+IsInCombat(_Player, 1)
+AND
+QRY_AMP_ItemMoveCost_Active()
+AND
+NOT DB_AMP_ForceMoving(_Item)
+AND
+IsInInventory((GUIDSTRING)_Item, 1)
+THEN
+DB_AMP_ItemWasInInventory(_Item, 1);
+
+// on ground before moving
+IF
+PreMovedBy((ITEM)_Item, (CHARACTER)_Player)
+AND
+DB_Players(_Player)
+AND
+IsInCombat(_Player, 1)
+AND
+QRY_AMP_ItemMoveCost_Active()
+AND
+NOT DB_AMP_ForceMoving(_Item)
+AND
+IsInInventory((GUIDSTRING)_Item, 0)
+THEN
+DB_AMP_ItemWasInInventory(_Item, 0);
+
+// throw: consume the skip flag (must come before cost rules)
+IF
+MovedBy(_Object, (CHARACTER)_Player)
+AND
+DB_AMP_ThrowException(_Player)
+AND
+IsItem(_Object, 1)
+THEN
+NOT DB_AMP_ThrowException(_Player);
+NOT DB_AMP_ItemWasInInventory((ITEM)_Object, 1);
+
+// charge BA (inv -> ground)
+IF
+MovedBy(_Object, (CHARACTER)_Player)
+AND
+DB_Players(_Player)
+AND
+IsInCombat(_Player, 1)
+AND
+QRY_AMP_ItemMoveCost_Active()
+AND
+IsItem(_Object, 1)
+AND
+DB_AMP_ItemWasInInventory((ITEM)_Object, 1)
+AND
+IsInInventory(_Object, 0)
+AND
+GetActionResourceValuePersonal(_Player, "BonusActionPoint", 0, _BA)
+AND
+_BA >= 1.0
+THEN
+NOT DB_AMP_ItemWasInInventory((ITEM)_Object, 1);
+ApplyStatus(_Player, "AMP_ITEM_MOVE_BA_COST", 0.0, 1, _Player);
+
+// charge BA (ground -> inv)
+IF
+MovedBy(_Object, (CHARACTER)_Player)
+AND
+DB_Players(_Player)
+AND
+IsInCombat(_Player, 1)
+AND
+QRY_AMP_ItemMoveCost_Active()
+AND
+IsItem(_Object, 1)
+AND
+DB_AMP_ItemWasInInventory((ITEM)_Object, 0)
+AND
+IsInInventory(_Object, 1)
+AND
+GetActionResourceValuePersonal(_Player, "BonusActionPoint", 0, _BA)
+AND
+_BA >= 1.0
+THEN
+NOT DB_AMP_ItemWasInInventory((ITEM)_Object, 0);
+ApplyStatus(_Player, "AMP_ITEM_MOVE_BA_COST", 0.0, 1, _Player);
+
+// no BA, charge AP (inv -> ground)
+IF
+MovedBy(_Object, (CHARACTER)_Player)
+AND
+DB_Players(_Player)
+AND
+IsInCombat(_Player, 1)
+AND
+QRY_AMP_ItemMoveCost_Active()
+AND
+IsItem(_Object, 1)
+AND
+DB_AMP_ItemWasInInventory((ITEM)_Object, 1)
+AND
+IsInInventory(_Object, 0)
+AND
+GetActionResourceValuePersonal(_Player, "BonusActionPoint", 0, _BA)
+AND
+_BA < 1.0
+AND
+GetActionResourceValuePersonal(_Player, "ActionPoint", 0, _AP)
+AND
+_AP >= 1.0
+THEN
+NOT DB_AMP_ItemWasInInventory((ITEM)_Object, 1);
+ApplyStatus(_Player, "AMP_ITEM_MOVE_AP_COST", 0.0, 1, _Player);
+
+// no BA, charge AP (ground -> inv)
+IF
+MovedBy(_Object, (CHARACTER)_Player)
+AND
+DB_Players(_Player)
+AND
+IsInCombat(_Player, 1)
+AND
+QRY_AMP_ItemMoveCost_Active()
+AND
+IsItem(_Object, 1)
+AND
+DB_AMP_ItemWasInInventory((ITEM)_Object, 0)
+AND
+IsInInventory(_Object, 1)
+AND
+GetActionResourceValuePersonal(_Player, "BonusActionPoint", 0, _BA)
+AND
+_BA < 1.0
+AND
+GetActionResourceValuePersonal(_Player, "ActionPoint", 0, _AP)
+AND
+_AP >= 1.0
+THEN
+NOT DB_AMP_ItemWasInInventory((ITEM)_Object, 0);
+ApplyStatus(_Player, "AMP_ITEM_MOVE_AP_COST", 0.0, 1, _Player);
+
+// no BA, no AP -> end turn (inv -> ground)
+IF
+MovedBy(_Object, (CHARACTER)_Player)
+AND
+DB_Players(_Player)
+AND
+IsInCombat(_Player, 1)
+AND
+QRY_AMP_ItemMoveCost_Active()
+AND
+IsItem(_Object, 1)
+AND
+DB_AMP_ItemWasInInventory((ITEM)_Object, 1)
+AND
+IsInInventory(_Object, 0)
+AND
+GetActionResourceValuePersonal(_Player, "BonusActionPoint", 0, _BA)
+AND
+_BA < 1.0
+AND
+GetActionResourceValuePersonal(_Player, "ActionPoint", 0, _AP)
+AND
+_AP < 1.0
+THEN
+NOT DB_AMP_ItemWasInInventory((ITEM)_Object, 1);
+ApplyStatus(_Player, "AMP_ITEM_MOVE_ENDTURN", 0.0, 1, _Player);
+EndTurn(_Player);
+
+// no BA, no AP -> end turn (ground -> inv)
+IF
+MovedBy(_Object, (CHARACTER)_Player)
+AND
+DB_Players(_Player)
+AND
+IsInCombat(_Player, 1)
+AND
+QRY_AMP_ItemMoveCost_Active()
+AND
+IsItem(_Object, 1)
+AND
+DB_AMP_ItemWasInInventory((ITEM)_Object, 0)
+AND
+IsInInventory(_Object, 1)
+AND
+GetActionResourceValuePersonal(_Player, "BonusActionPoint", 0, _BA)
+AND
+_BA < 1.0
+AND
+GetActionResourceValuePersonal(_Player, "ActionPoint", 0, _AP)
+AND
+_AP < 1.0
+THEN
+NOT DB_AMP_ItemWasInInventory((ITEM)_Object, 0);
+ApplyStatus(_Player, "AMP_ITEM_MOVE_ENDTURN", 0.0, 1, _Player);
+EndTurn(_Player);
+
+// charge BA (ground -> ground)
+IF
+MovedBy(_Object, (CHARACTER)_Player)
+AND
+DB_Players(_Player)
+AND
+IsInCombat(_Player, 1)
+AND
+QRY_AMP_ItemMoveCost_Active()
+AND
+IsItem(_Object, 1)
+AND
+DB_AMP_ItemWasInInventory((ITEM)_Object, 0)
+AND
+IsInInventory(_Object, 0)
+AND
+GetActionResourceValuePersonal(_Player, "BonusActionPoint", 0, _BA)
+AND
+_BA >= 1.0
+THEN
+NOT DB_AMP_ItemWasInInventory((ITEM)_Object, 0);
+ApplyStatus(_Player, "AMP_ITEM_MOVE_BA_COST", 0.0, 1, _Player);
+
+// no BA, charge AP (ground -> ground)
+IF
+MovedBy(_Object, (CHARACTER)_Player)
+AND
+DB_Players(_Player)
+AND
+IsInCombat(_Player, 1)
+AND
+QRY_AMP_ItemMoveCost_Active()
+AND
+IsItem(_Object, 1)
+AND
+DB_AMP_ItemWasInInventory((ITEM)_Object, 0)
+AND
+IsInInventory(_Object, 0)
+AND
+GetActionResourceValuePersonal(_Player, "BonusActionPoint", 0, _BA)
+AND
+_BA < 1.0
+AND
+GetActionResourceValuePersonal(_Player, "ActionPoint", 0, _AP)
+AND
+_AP >= 1.0
+THEN
+NOT DB_AMP_ItemWasInInventory((ITEM)_Object, 0);
+ApplyStatus(_Player, "AMP_ITEM_MOVE_AP_COST", 0.0, 1, _Player);
+
+// no BA, no AP -> end turn (ground -> ground)
+IF
+MovedBy(_Object, (CHARACTER)_Player)
+AND
+DB_Players(_Player)
+AND
+IsInCombat(_Player, 1)
+AND
+QRY_AMP_ItemMoveCost_Active()
+AND
+IsItem(_Object, 1)
+AND
+DB_AMP_ItemWasInInventory((ITEM)_Object, 0)
+AND
+IsInInventory(_Object, 0)
+AND
+GetActionResourceValuePersonal(_Player, "BonusActionPoint", 0, _BA)
+AND
+_BA < 1.0
+AND
+GetActionResourceValuePersonal(_Player, "ActionPoint", 0, _AP)
+AND
+_AP < 1.0
+THEN
+NOT DB_AMP_ItemWasInInventory((ITEM)_Object, 0);
+ApplyStatus(_Player, "AMP_ITEM_MOVE_ENDTURN", 0.0, 1, _Player);
+EndTurn(_Player);
+
+// catch-all cleanup for non-charging moves (inv -> inv party transfer). must be last
+IF
+MovedBy(_Object, (CHARACTER)_Player)
+AND
+IsItem(_Object, 1)
+AND
+DB_AMP_ItemWasInInventory((ITEM)_Object, _WasInInv)
+THEN
+NOT DB_AMP_ItemWasInInventory((ITEM)_Object, _WasInInv);
+
+// settings ring toggle
+
+// spell trigger - non-stock
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Settings_ItemMoveCost", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+NOT DB_AMP_GameMode("STOCK")
+THEN
+PROC_AMP_ItemMoveCost_ShowToggle(_Caster);
+
+// spell trigger - stock
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Settings_ItemMoveCost", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_AMP_GameMode("STOCK")
+THEN
+OpenMessageBox(_Caster, "AMP_Settings028");
+
+// normal, on -> ask to disable
+PROC
+PROC_AMP_ItemMoveCost_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_Difficulty_Mode("STANDARD")
+AND
+NOT DB_AMP_ItemMoveCost_Disabled(1)
+THEN
+DB_AMP_ItemMoveCost_Pending(_Host);
+OpenMessageBoxYesNo(_Host, "AMP_ItemMoveCost_AskDisable");
+
+// normal, off -> ask to enable
+PROC
+PROC_AMP_ItemMoveCost_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_Difficulty_Mode("STANDARD")
+AND
+DB_AMP_ItemMoveCost_Disabled(1)
+THEN
+DB_AMP_ItemMoveCost_Pending(_Host);
+OpenMessageBoxYesNo(_Host, "AMP_ItemMoveCost_AskEnable");
+
+// hard -> locked info
+PROC
+PROC_AMP_ItemMoveCost_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+THEN
+OpenMessageBox(_Host, "AMP_ItemMoveCost_HardLocked");
+
+// casual / no mode -> inactive
+PROC
+PROC_AMP_ItemMoveCost_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_Difficulty_Mode("NONE")
+THEN
+OpenMessageBox(_Host, "AMP_ItemMoveCost_Inactive");
+
+PROC
+PROC_AMP_ItemMoveCost_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_Difficulty_Mode("NORMAL")
+THEN
+OpenMessageBox(_Host, "AMP_ItemMoveCost_Inactive");
+
+// yes = keep current state
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_ItemMoveCost_AskDisable", 1)
+AND
+DB_AMP_ItemMoveCost_Pending(_Host)
+THEN
+NOT DB_AMP_ItemMoveCost_Pending(_Host);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_ItemMoveCost_AskEnable", 1)
+AND
+DB_AMP_ItemMoveCost_Pending(_Host)
+THEN
+NOT DB_AMP_ItemMoveCost_Pending(_Host);
+PROC_AMP_PlayModeEffect(_Host);
+
+// no = flip state
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_ItemMoveCost_AskDisable", 0)
+AND
+DB_AMP_ItemMoveCost_Pending(_Host)
+AND
+DB_AMP_ItemMoveCost_Disabled(0)
+THEN
+NOT DB_AMP_ItemMoveCost_Pending(_Host);
+NOT DB_AMP_ItemMoveCost_Disabled(0);
+DB_AMP_ItemMoveCost_Disabled(1);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_ItemMoveCost_AskEnable", 0)
+AND
+DB_AMP_ItemMoveCost_Pending(_Host)
+AND
+DB_AMP_ItemMoveCost_Disabled(1)
+THEN
+NOT DB_AMP_ItemMoveCost_Pending(_Host);
+NOT DB_AMP_ItemMoveCost_Disabled(1);
+DB_AMP_ItemMoveCost_Disabled(0);
+PROC_AMP_PlayModeEffect(_Host);
+
+// clear stale pending on save load
+IF
+SavegameLoaded()
+AND
+DB_AMP_ItemMoveCost_Pending(_Host)
+THEN
+NOT DB_AMP_ItemMoveCost_Pending(_Host);
+
+// clean db on combat exit
+IF
+LeftCombat(_Player, _)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+DB_AMP_ItemWasInInventory(_Item, _Val)
+THEN
+NOT DB_AMP_ItemWasInInventory(_Item, _Val);
+
+IF
+LeftCombat(_Player, _)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+DB_AMP_ThrowException((CHARACTER)_Player)
+THEN
+NOT DB_AMP_ThrowException(_Player);
+
+// clear any stuck forcemoving flags on combat exit
+IF
+LeftCombat(_Player, _)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+DB_AMP_ForceMoving(_Item)
+THEN
+NOT DB_AMP_ForceMoving(_Item);
+
+EXITSECTION
+ENDEXITSECTION

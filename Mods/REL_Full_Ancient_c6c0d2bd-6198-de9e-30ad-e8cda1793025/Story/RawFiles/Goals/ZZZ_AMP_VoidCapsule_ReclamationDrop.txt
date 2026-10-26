@@ -1,0 +1,65 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// flat reclamation chance per dusted shard, separate from the coin roll, hooked on shardstart beside core
+
+// per-mode rate
+DB_AMP_VoidCapsule_ReclamationChanceByMode("NONE",       25);
+DB_AMP_VoidCapsule_ReclamationChanceByMode("STANDARD",   25);
+DB_AMP_VoidCapsule_ReclamationChanceByMode("IMPOSSIBLE", 25);
+
+KBSECTION
+
+// clear active value on refreshcache
+PROC
+PROC_AMP_VoidCapsule_ClearActive()
+AND
+DB_AMP_VoidCapsule_ReclamationChanceActive((INTEGER)_V)
+THEN
+NOT DB_AMP_VoidCapsule_ReclamationChanceActive(_V);
+
+// build active: current mode -> standard fallback -> no mode -> standard
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+DB_AMP_VoidCapsule_ReclamationChanceByMode(_M, (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_ReclamationChanceActive(_V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+NOT DB_AMP_VoidCapsule_ReclamationChanceByMode(_M, _)
+AND
+DB_AMP_VoidCapsule_ReclamationChanceByMode("STANDARD", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_ReclamationChanceActive(_V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+NOT DB_AMP_Difficulty_Mode(_)
+AND
+DB_AMP_VoidCapsule_ReclamationChanceByMode("STANDARD", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_ReclamationChanceActive(_V);
+
+// parallel shardstart hook, independent roll grants the reclamation
+PROC
+PROC_AMP_VoidCapsule_ShardStart((ITEM)_Shard, (ITEM)_Capsule, (CHARACTER)_Owner)
+AND
+DB_AMP_VoidCapsule_ReclamationChanceActive((INTEGER)_Chance)
+AND
+Random(100, (INTEGER)_Roll)
+AND
+_Roll < _Chance
+THEN
+TemplateAddTo((ITEMROOT)AMP_Arcanizer_Shard_Recovery_1_6d07a9e3-b288-4ec3-86f9-b3360973b879, _Owner, 1, 1);
+PlaySound(_Owner, "LOW_HagSurvivors_SurrogateMother_Cured_ZombieSpell01");
+
+EXITSECTION
+ENDEXITSECTION

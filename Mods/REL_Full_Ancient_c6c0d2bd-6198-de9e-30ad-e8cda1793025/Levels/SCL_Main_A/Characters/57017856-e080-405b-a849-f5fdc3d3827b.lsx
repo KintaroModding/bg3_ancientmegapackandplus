@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="57017856-e080-405b-a849-f5fdc3d3827b" />
+					<attribute id="Name" type="LSString" value="S_COL_KethericShowdown_Apostle_Dummy" />
+					<attribute id="LevelName" type="FixedString" value="SCL_Main_A" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="TemplateName" type="FixedString" value="760f2d17-de55-4f38-83c1-279399b22096" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="Stats" type="FixedString" value="Stats_Placeholder" />
+					<attribute id="LevelOverride" type="int32" value="12" />
+					<attribute id="SoundAttenuation" type="int16" value="100" />
+					<attribute id="IsBoss" type="bool" value="True" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="2.75" />
+							<attribute id="Position" type="fvec3" value="68.15929 1.1444092E-05 -1410.4716" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0 0 1" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="SCL_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="9cc8e46a-cf37-55e5-8323-ea1670d977c3" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="dfc9bfa1-f16a-0f1d-353a-eae09776bb33" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="0be16a55-888c-a329-ef71-a982b6248d5d" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

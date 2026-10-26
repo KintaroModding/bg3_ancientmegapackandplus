@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="170f1295-0bca-434a-8637-d8d980e61ab8" />
+					<attribute id="Name" type="LSString" value="Orb_Warrior" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="b085e96d-e199-467f-b6a8-5d9d44e3cb21" />
+					<attribute id="ReadinessFlags" type="uint32" value="128" />
+					<attribute id="Flag" type="uint8" value="0" />
+					<attribute id="DisplayName" type="TranslatedString" handle="hbd903adcgffb6g497agb346g94b56430aa0d" version="2" />
+					<attribute id="Icon" type="FixedString" value="Orb_Warrior" />
+					<attribute id="Stats" type="FixedString" value="AMP_Orb_Warrior_Ring_T4" />
+					<attribute id="maxStackAmount" type="int32" value="1" />
+					<attribute id="Description" type="TranslatedString" handle="hdb65b16dg0317g47b5g9238g6ea43102bfca" version="2" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="bd349698-3353-46bf-90cd-345d9930d12b" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

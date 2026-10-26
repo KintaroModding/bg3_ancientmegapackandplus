@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="e92db056-a76d-4428-b31a-07c6f2b53c5d" />
+					<attribute id="Name" type="LSString" value="S_CHA_OutpostSkeleton" />
+					<attribute id="LevelName" type="FixedString" value="WLD_Main_A" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="68391e9c-5600-49d6-bdf3-6c1807096380" />
+					<attribute id="ReadinessFlags" type="uint32" value="128" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="InventoryType" type="uint8" value="7" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="152.5714 38.47005 365.8098" />
+							<attribute id="RotationQuat" type="fvec4" value="-0.05310645 -0.7471703 -0.0469704 0.6608405" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="WLD_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="0d1b3e0e-930a-23a0-2ad9-f0f3deba210b" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="1febf8e2-b314-1d36-6b8a-ad07268b9724" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="3131247c-e795-6e18-1be4-7e585c0babdc" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="OnUsePeaceActions">
+							<children>
+								<node id="Action">
+									<attribute id="ActionType" type="int32" value="1" />
+									<children>
+										<node id="Attributes">
+											<attribute id="Animation" type="FixedString" value="" />
+											<attribute id="Conditions" type="LSString" value="" />
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="Gold_Pocket_Modest" />
+								</node>
+							</children>
+						</node>
+						<node id="ItemList" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

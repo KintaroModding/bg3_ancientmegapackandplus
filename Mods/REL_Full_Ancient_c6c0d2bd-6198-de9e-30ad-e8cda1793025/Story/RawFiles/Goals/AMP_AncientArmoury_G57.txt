@@ -1,0 +1,20 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// gloves of starlight's embrace: boss kill -> inspiration to killer
+IF
+StatusApplied(_Victim, "AMP_STARLIGHT_BOSS_KILL_MARKER", _Causee, _)
+AND
+IsBoss(_Victim, 1)
+AND
+GetPosition(_Victim, (REAL)_X, (REAL)_Y, (REAL)_Z)
+THEN
+GiveInspirationPoints((CHARACTER)_Causee, 1.0, "", "");
+PlayEffectAtPosition(VFX_Projectiles_CRE_LathandersBlessing_HealingExplosion_Impact_01_478ae65c-b606-fcec-ba8d-7dfe774e5d31, _X, _Y, _Z, 1.0);
+RemoveStatus(_Victim, "AMP_STARLIGHT_BOSS_KILL_MARKER", _Causee);
+
+EXITSECTION
+
+ENDEXITSECTION

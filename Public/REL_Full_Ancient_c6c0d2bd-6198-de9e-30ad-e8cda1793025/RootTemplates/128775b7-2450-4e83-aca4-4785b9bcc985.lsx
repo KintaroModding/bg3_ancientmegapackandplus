@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="128775b7-2450-4e83-aca4-4785b9bcc985" />
+					<attribute id="Name" type="LSString" value="AMP_Malakai" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="ParentTemplateId" type="FixedString" value="167ee470-5f36-4618-a423-b04f6d8dbbb2" />
+					<attribute id="DisplayName" type="TranslatedString" handle="he06199e2g5008g1fb9g5ccbg34a1d41f831e" version="1" />
+					<attribute id="Icon" type="FixedString" value="AMP_Malakai" />
+					<attribute id="Stats" type="FixedString" value="AMP_Malakai" />
+					<attribute id="SpellSet" type="FixedString" value="CommonSummonActions" />
+					<attribute id="Equipment" type="FixedString" value="EQP_Dagger_B" />
+					<attribute id="BloodType" type="FixedString" value="Green" />
+					<attribute id="ForceLifetimeDeath" type="bool" value="True" />
+					<attribute id="DeathEffect" type="guid" value="e810848c-ed90-40bd-a329-7269d1cdf6b3" />
+					<attribute id="BloodSurfaceType" type="FixedString" value="SurfacePoison" />
+					<attribute id="LevelOverride" type="int32" value="4" />
+					<attribute id="VocalAttackResourceID" type="FixedString" value="89ed2ba0-3b2a-0122-1473-ea12608a53a2" />
+					<attribute id="VocalDeathResourceID" type="FixedString" value="e2feb0d4-62ea-dc4b-ebc3-496bbd4c1ff7" />
+					<attribute id="VocalDodgeResourceID" type="FixedString" value="cdc72419-44ea-0e0f-7ddc-4e749a3efb86" />
+					<attribute id="VocalPainResourceID" type="FixedString" value="6a1ae6ee-f3f6-1fba-9db1-8a0aa681ac9b" />
+					<attribute id="VocalAnticipationResourceID" type="FixedString" value="d0d20862-55a2-778b-54e4-fcd6188b4737" />
+					<attribute id="VocalFallResourceID" type="FixedString" value="" />
+					<attribute id="VocalShoutResourceID" type="FixedString" value="" />
+					<attribute id="VocalSpawnResourceID" type="FixedString" value="ff63018c-c389-911f-32d9-5fd97febb380" />
+					<attribute id="VocalAngryResourceID" type="FixedString" value="9265c40e-6565-3a2c-da48-52af32192506" />
+					<attribute id="VocalAwakeResourceID" type="FixedString" value="" />
+					<attribute id="VocalVictoryResourceID" type="FixedString" value="" />
+					<attribute id="VocalSnoreResourceID" type="FixedString" value="" />
+					<attribute id="VocalEffortsResourceID" type="FixedString" value="" />
+					<attribute id="VocalInitiativeResourceID" type="FixedString" value="186bec65-6604-5a77-5357-a50b94acc03e" />
+					<attribute id="VocalWeakResourceID" type="FixedString" value="" />
+					<attribute id="VocalLaughterResourceID" type="FixedString" value="" />
+					<attribute id="VocalRecoverResourceID" type="FixedString" value="" />
+					<attribute id="VocalBuffResourceID" type="FixedString" value="" />
+					<attribute id="VocalIdle1ResourceID" type="FixedString" value="" />
+					<attribute id="VocalIdleCombat1ResourceID" type="FixedString" value="c366b6dd-1341-58fd-4dd9-a03774d22751" />
+					<attribute id="VocalIdleCombat2ResourceID" type="FixedString" value="c366b6dd-1341-58fd-4dd9-a03774d22751" />
+					<attribute id="VocalIdleCombat3ResourceID" type="FixedString" value="c366b6dd-1341-58fd-4dd9-a03774d22751" />
+					<attribute id="VocalGaspResourceID" type="FixedString" value="" />
+					<attribute id="VocalLaughterManiacalResourceID" type="FixedString" value="" />
+					<attribute id="CharacterVisualResourceID" type="FixedString" value="6d01c885-b0c0-464c-f3ec-0cd9f37101ca" />
+					<attribute id="IsEquipmentLootable" type="bool" value="False" />
+					<attribute id="CanBePickedUp" type="bool" value="False" />
+					<attribute id="CanBePickpocketed" type="bool" value="False" />
+					<attribute id="Race" type="guid" value="3c066deb-eaaf-4bbf-b021-61ad0acc51a2" />
+					<attribute id="Title" type="TranslatedString" handle="h44002cd8ga6d6g0b32g9f01g59aff62123b3" version="6" />
+					<attribute id="Archetype" type="FixedString" value="mage" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="26c78224-a4c1-43e4-b943-75e7fa1bfa41" />
+								</node>
+							</children>
+						</node>
+						<node id="OnDeathActions">
+							<children>
+								<node id="Action">
+									<attribute id="ActionType" type="int32" value="10" />
+									<children>
+										<node id="Attributes">
+											<attribute id="Animation" type="FixedString" value="" />
+											<attribute id="Conditions" type="LSString" value="" />
+											<attribute id="SurfaceType" type="FixedString" value="SurfaceCloudkillCloud" />
+											<attribute id="LifeTime" type="float" value="-1" />
+											<attribute id="Timeout" type="float" value="0" />
+											<attribute id="TotalCells" type="int32" value="10" />
+											<attribute id="CellAtGrow" type="int32" value="2" />
+											<attribute id="GrowTimer" type="float" value="0.4" />
+											<attribute id="ExternalCauseAsSurfaceOwner" type="bool" value="True" />
+											<attribute id="ApplyDeathTypeBloodCheck" type="bool" value="True" />
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="SkillList">
+							<children>
+								<node id="Skill">
+									<attribute id="Skill" type="FixedString" value="Projectile_AMP_Malakai_ToxicOrb" />
+									<attribute id="SpellCastingAbility" type="uint8" value="0" />
+									<attribute id="LearningStrategy" type="uint8" value="0" />
+									<attribute id="ScoreModifier" type="float" value="1" />
+									<attribute id="StartRound" type="int32" value="0" />
+									<attribute id="FallbackStartRound" type="int32" value="-1" />
+									<attribute id="MinimumImpact" type="int32" value="0" />
+									<attribute id="OnlyCastOnSelf" type="bool" value="False" />
+									<attribute id="AIFlags" type="uint16" value="0" />
+									<children>
+										<node id="SourceConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+										<node id="TargetConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

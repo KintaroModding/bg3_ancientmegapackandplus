@@ -1,0 +1,27 @@
+// Hard is the base carrier. each downed status clears its own charge, so a boss can't rise twice off one grant
+
+new entry "AMP_Plus_ANTIDEATH_DOWNED_STD"
+type "StatusData"
+data "StatusType" "DOWNED"
+using "AMP_BOSS_ANTIDEATH_DOWNED"
+data "OnApplyFunctors" "RemoveStatus(AMP_Plus_ANTIDEATH_CHARGE_STD);RegainHitPoints(MaxHP/4,Guaranteed);ApplyStatus(ACTION_SURGE,100,1);ApplyStatus(AMP_BOSS_POSSESSED,100,-1)"
+
+new entry "AMP_Plus_ANTIDEATH_DOWNED_CAS"
+type "StatusData"
+data "StatusType" "DOWNED"
+using "AMP_BOSS_ANTIDEATH_DOWNED"
+data "OnApplyFunctors" "RemoveStatus(AMP_Plus_ANTIDEATH_CHARGE_CAS);RegainHitPoints(MaxHP/10,Guaranteed);ApplyStatus(ACTION_SURGE,100,1);ApplyStatus(AMP_BOSS_POSSESSED,100,-1)"
+
+new entry "AMP_Plus_ANTIDEATH_CHARGE_STD"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_BOSS_ANTIDEATH_CHARGE"
+data "StackId" "AMP_BOSS_ANTIDEATH_CHARGE"
+data "Boosts" "DownedStatus(AMP_Plus_ANTIDEATH_DOWNED_STD,10)"
+
+new entry "AMP_Plus_ANTIDEATH_CHARGE_CAS"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_BOSS_ANTIDEATH_CHARGE"
+data "StackId" "AMP_BOSS_ANTIDEATH_CHARGE"
+data "Boosts" "DownedStatus(AMP_Plus_ANTIDEATH_DOWNED_CAS,10)"

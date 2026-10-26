@@ -1,0 +1,204 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+// one cheap player-owned gate runs QRY_AMP_VoidCapsule_IsContainer once per AddedTo, then routes via PROC_AMP_VoidCapsule_OnItemAdded
+// IsContainer calls GetTemplate, per-rule it ran on every AddedTo in the game and cost combat fps
+
+// gate: only items added to a player-owned voidcapsule reach the router
+// cheap filters first: getinventoryowner fails fast on world/npc containers,
+// so iscontainer (gettemplate) never runs for them.
+IF
+AddedTo((ITEM)_Item, (ITEM)_Capsule, _)
+AND
+GetInventoryOwner(_Capsule, (CHARACTER)_Actor)
+AND
+DB_Players(_Actor)
+AND
+QRY_AMP_VoidCapsule_IsContainer(_Capsule)
+THEN
+PROC_AMP_VoidCapsule_OnItemAdded(_Item, _Capsule, _Actor);
+
+// rule 1: coin success
+PROC
+PROC_AMP_VoidCapsule_OnItemAdded((ITEM)_Coin, (ITEM)_Capsule, (CHARACTER)_Actor)
+AND
+QRY_AMP_VoidCapsule_IsCoin(_Coin)
+AND
+HasActiveStatus(_Coin, "TOT_SHOP_ITEM", 0)
+AND
+NOT DB_AMP_VoidCapsule_CoinProcessed(_Coin)
+AND
+NOT DB_AMP_VoidCapsule_Depleted(_Capsule)
+AND
+NOT DB_AMP_VoidCapsule_Busy(_Capsule)
+THEN
+DB_AMP_VoidCapsule_CoinProcessed(_Coin);
+DB_AMP_VoidCapsule_Busy(_Capsule);
+ObjectTimerLaunch(_Capsule, "AMP_VoidCapsule_BusySafety", 2000, 0);
+PROC_AMP_VoidCapsule_SetActionUser(_Capsule, _Actor);
+PROC_AMP_VoidCapsule_CoinStart(_Coin, _Capsule, _Actor);
+
+// rule 2a: reroll on fresh capsule (no charges yet, max >= cost)
+PROC
+PROC_AMP_VoidCapsule_OnItemAdded((ITEM)_Item, (ITEM)_Capsule, (CHARACTER)_Actor)
+AND
+QRY_AMP_VoidCapsule_IsRerollItem(_Item)
+AND
+HasActiveStatus(_Item, "TOT_SHOP_ITEM", 0)
+AND
+NOT DB_AMP_VoidCapsule_RerollProcessing(_Item)
+AND
+NOT DB_AMP_VoidCapsule_Depleted(_Capsule)
+AND
+NOT DB_AMP_VoidCapsule_Busy(_Capsule)
+AND
+NOT DB_AMP_VoidCapsule_Charges(_Capsule, _)
+AND
+DB_AMP_VoidCapsule_ChargesMaxActive((INTEGER)_Max)
+AND
+DB_AMP_VoidCapsule_RerollCostActive((INTEGER)_Cost)
+AND
+_Max >= _Cost
+THEN
+DB_AMP_VoidCapsule_RerollProcessing(_Item);
+DB_AMP_VoidCapsule_Busy(_Capsule);
+ObjectTimerLaunch(_Capsule, "AMP_VoidCapsule_BusySafety", 2000, 0);
+PROC_AMP_VoidCapsule_SetActionUser(_Capsule, _Actor);
+PROC_AMP_VoidCapsule_RerollStart(_Item, _Capsule, _Actor);
+
+// rule 2b: reroll on existing capsule (charges >= cost)
+PROC
+PROC_AMP_VoidCapsule_OnItemAdded((ITEM)_Item, (ITEM)_Capsule, (CHARACTER)_Actor)
+AND
+QRY_AMP_VoidCapsule_IsRerollItem(_Item)
+AND
+HasActiveStatus(_Item, "TOT_SHOP_ITEM", 0)
+AND
+NOT DB_AMP_VoidCapsule_RerollProcessing(_Item)
+AND
+NOT DB_AMP_VoidCapsule_Depleted(_Capsule)
+AND
+NOT DB_AMP_VoidCapsule_Busy(_Capsule)
+AND
+DB_AMP_VoidCapsule_Charges(_Capsule, (INTEGER)_Charges)
+AND
+DB_AMP_VoidCapsule_RerollCostActive((INTEGER)_Cost)
+AND
+_Charges >= _Cost
+THEN
+DB_AMP_VoidCapsule_RerollProcessing(_Item);
+DB_AMP_VoidCapsule_Busy(_Capsule);
+ObjectTimerLaunch(_Capsule, "AMP_VoidCapsule_BusySafety", 2000, 0);
+PROC_AMP_VoidCapsule_SetActionUser(_Capsule, _Actor);
+PROC_AMP_VoidCapsule_RerollStart(_Item, _Capsule, _Actor);
+
+// rule 2c: reroll with insufficient charges (eject, no resource cost)
+PROC
+PROC_AMP_VoidCapsule_OnItemAdded((ITEM)_Item, (ITEM)_Capsule, (CHARACTER)_Actor)
+AND
+QRY_AMP_VoidCapsule_IsRerollItem(_Item)
+AND
+HasActiveStatus(_Item, "TOT_SHOP_ITEM", 0)
+AND
+NOT DB_AMP_VoidCapsule_Depleted(_Capsule)
+AND
+NOT DB_AMP_VoidCapsule_Busy(_Capsule)
+AND
+DB_AMP_VoidCapsule_Charges(_Capsule, (INTEGER)_Charges)
+AND
+DB_AMP_VoidCapsule_RerollCostActive((INTEGER)_Cost)
+AND
+_Charges < _Cost
+THEN
+PlaySound(_Actor, "UI_HUD_Combine_Error");
+ObjectTimerLaunch(_Item, "AMP_VoidCapsule_Eject", 100, 0);
+
+// rule 3: shard success
+PROC
+PROC_AMP_VoidCapsule_OnItemAdded((ITEM)_Shard, (ITEM)_Capsule, (CHARACTER)_Actor)
+AND
+QRY_AMP_VoidCapsule_IsShard(_Shard)
+AND
+HasActiveStatus(_Shard, "TOT_SHOP_ITEM", 0)
+AND
+NOT DB_AMP_VoidCapsule_ShardProcessing(_Shard)
+AND
+NOT DB_AMP_VoidCapsule_Depleted(_Capsule)
+AND
+NOT DB_AMP_VoidCapsule_Busy(_Capsule)
+THEN
+DB_AMP_VoidCapsule_ShardProcessing(_Shard);
+DB_AMP_VoidCapsule_Busy(_Capsule);
+ObjectTimerLaunch(_Capsule, "AMP_VoidCapsule_BusySafety", 2000, 0);
+PROC_AMP_VoidCapsule_SetActionUser(_Capsule, _Actor);
+PROC_AMP_VoidCapsule_ShardStart(_Shard, _Capsule, _Actor);
+
+// rule 4: artifact salvage success
+PROC
+PROC_AMP_VoidCapsule_OnItemAdded((ITEM)_Item, (ITEM)_Capsule, (CHARACTER)_Actor)
+AND
+NOT QRY_AMP_VoidCapsule_IsCoin(_Item)
+AND
+NOT QRY_AMP_VoidCapsule_IsShard(_Item)
+AND
+NOT QRY_AMP_VoidCapsule_IsRerollItem(_Item)
+AND
+QRY_AMP_VoidCapsule_IsValidArtifact(_Item)
+AND
+HasActiveStatus(_Item, "TOT_SHOP_ITEM", 0)
+AND
+NOT DB_AMP_VoidCapsule_SalvageProcessing(_Item)
+AND
+NOT DB_AMP_VoidCapsule_Depleted(_Capsule)
+AND
+NOT DB_AMP_VoidCapsule_Busy(_Capsule)
+THEN
+DB_AMP_VoidCapsule_SalvageProcessing(_Item);
+DB_AMP_VoidCapsule_Busy(_Capsule);
+ObjectTimerLaunch(_Capsule, "AMP_VoidCapsule_BusySafety", 2000, 0);
+PROC_AMP_VoidCapsule_SetActionUser(_Capsule, _Actor);
+PROC_AMP_VoidCapsule_SalvageStart(_Item, _Capsule, _Actor);
+
+// rule 5: busy -> eject (no processing flag)
+PROC
+PROC_AMP_VoidCapsule_OnItemAdded((ITEM)_Item, (ITEM)_Capsule, (CHARACTER)_Actor)
+AND
+NOT DB_AMP_VoidCapsule_Depleted(_Capsule)
+AND
+DB_AMP_VoidCapsule_Busy(_Capsule)
+THEN
+PlaySound(_Actor, "UI_HUD_Combine_Error");
+ObjectTimerLaunch(_Item, "AMP_VoidCapsule_Eject", 100, 0);
+
+// rule 6: depleted -> eject (covers all items including coin)
+PROC
+PROC_AMP_VoidCapsule_OnItemAdded((ITEM)_Item, (ITEM)_Capsule, (CHARACTER)_Actor)
+AND
+DB_AMP_VoidCapsule_Depleted(_Capsule)
+THEN
+PlaySound(_Actor, "UI_HUD_Combine_Error");
+ObjectTimerLaunch(_Item, "AMP_VoidCapsule_Eject", 100, 0);
+
+// rule 7: invalid item -> eject (junk)
+PROC
+PROC_AMP_VoidCapsule_OnItemAdded((ITEM)_Item, (ITEM)_Capsule, (CHARACTER)_Actor)
+AND
+NOT QRY_AMP_VoidCapsule_IsCoin(_Item)
+AND
+NOT QRY_AMP_VoidCapsule_IsShard(_Item)
+AND
+NOT QRY_AMP_VoidCapsule_IsRerollItem(_Item)
+AND
+NOT QRY_AMP_VoidCapsule_IsValidArtifact(_Item)
+AND
+NOT DB_AMP_VoidCapsule_Depleted(_Capsule)
+AND
+NOT DB_AMP_VoidCapsule_Busy(_Capsule)
+THEN
+PlaySound(_Actor, "UI_HUD_Combine_Error");
+ObjectTimerLaunch(_Item, "AMP_VoidCapsule_Eject", 100, 0);
+
+EXITSECTION
+ENDEXITSECTION

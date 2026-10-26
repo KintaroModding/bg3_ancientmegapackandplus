@@ -1,0 +1,18 @@
+// each source checks the pool first, the clamp and end-of-turn tick backstop simultaneous procs
+
+new entry "AMP_KOY_PRIMORDIALCHAOS"
+type "StatusData"
+using "AMP_KOY_PRIMORDIALCHAOS"
+data "TickFunctors" "IF(StatusDurationEqualOrMoreThan(context.Target,'AMP_KOY_PRIMORDIALCHAOS',5)):SetStatusDuration(AMP_KOY_PRIMORDIALCHAOS,4,ForceSet)"
+
+new entry "AMP_Koy_ChaosConverter_Active_Passive"
+type "PassiveData"
+using "AMP_Koy_ChaosConverter_Active_Passive"
+data "Conditions" "Combat() and HasHPPercentageWithoutTemporaryHPLessThan(51,context.Source) and not StatusDurationEqualOrMoreThan(context.Source,'AMP_KOY_PRIMORDIALCHAOS',3)"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_KOY_PRIMORDIALCHAOS,100,2);IF(StatusDurationEqualOrMoreThan(context.Source,'AMP_KOY_PRIMORDIALCHAOS',5)):SetStatusDuration(SELF,AMP_KOY_PRIMORDIALCHAOS,4,ForceSet)"
+
+new entry "AMP_Koy_ChaosConverter_Reactive_Passive"
+type "PassiveData"
+using "AMP_Koy_ChaosConverter_Reactive_Passive"
+data "Conditions" "Combat() and not HasHPPercentageWithoutTemporaryHPLessThan(50,context.Target) and not StatusDurationEqualOrMoreThan(context.Target,'AMP_KOY_PRIMORDIALCHAOS',4)"
+data "StatsFunctors" "ApplyStatus(AMP_KOY_PRIMORDIALCHAOS,100,1);IF(StatusDurationEqualOrMoreThan(context.Target,'AMP_KOY_PRIMORDIALCHAOS',5)):SetStatusDuration(AMP_KOY_PRIMORDIALCHAOS,4,ForceSet)"

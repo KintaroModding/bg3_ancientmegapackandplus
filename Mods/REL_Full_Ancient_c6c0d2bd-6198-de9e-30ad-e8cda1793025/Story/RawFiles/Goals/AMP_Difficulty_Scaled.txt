@@ -1,0 +1,310 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// difficulty system v2.0 - level-tiered enemy enhancement.
+// t1: lvl 1-4, t2: lvl 5-8, t3: lvl 9+.
+
+// asked-this-session flag (legacy)
+//DB_AMP_Difficulty_Asked(0);
+
+// choice-made flag (legacy)
+//DB_AMP_Difficulty_Chosen(0);
+
+// current mode: NONE, NORMAL, HARD, IMPOSSIBLE
+DB_AMP_Difficulty_Mode("NONE");
+
+// v3: old db mappings disabled, v3 uses its own _V3-suffixed dbs
+//DB_AMP_Difficulty_Map("NORMAL", "AMP_DIFFICULTY_AURA_NORMAL");
+//DB_AMP_Difficulty_Map("HARD", "AMP_DIFFICULTY_AURA_HARD");
+//DB_AMP_Difficulty_Map("IMPOSSIBLE", "AMP_DIFFICULTY_AURA_IMPOSSIBLE");
+//DB_AMP_Difficulty_TierMap("AMP_DIFFICULTY_MARKER_NORMAL", 1, "AMP_DIFFICULTY_TARGET_NORMAL_T1");
+//DB_AMP_Difficulty_TierMap("AMP_DIFFICULTY_MARKER_NORMAL", 2, "AMP_DIFFICULTY_TARGET_NORMAL_T2");
+//DB_AMP_Difficulty_TierMap("AMP_DIFFICULTY_MARKER_NORMAL", 3, "AMP_DIFFICULTY_TARGET_NORMAL_T3");
+//DB_AMP_Difficulty_TierMap("AMP_DIFFICULTY_MARKER_HARD", 1, "AMP_DIFFICULTY_TARGET_HARD_T1");
+//DB_AMP_Difficulty_TierMap("AMP_DIFFICULTY_MARKER_HARD", 2, "AMP_DIFFICULTY_TARGET_HARD_T2");
+//DB_AMP_Difficulty_TierMap("AMP_DIFFICULTY_MARKER_HARD", 3, "AMP_DIFFICULTY_TARGET_HARD_T3");
+//DB_AMP_Difficulty_TierMap("AMP_DIFFICULTY_MARKER_IMPOSSIBLE", 1, "AMP_DIFFICULTY_TARGET_IMPOSSIBLE_T1");
+//DB_AMP_Difficulty_TierMap("AMP_DIFFICULTY_MARKER_IMPOSSIBLE", 2, "AMP_DIFFICULTY_TARGET_IMPOSSIBLE_T2");
+//DB_AMP_Difficulty_TierMap("AMP_DIFFICULTY_MARKER_IMPOSSIBLE", 3, "AMP_DIFFICULTY_TARGET_IMPOSSIBLE_T3");
+//DB_AMP_Difficulty_BossMap("AMP_DIFFICULTY_TARGET_NORMAL_T1", "AMP_DIFFICULTY_BOSS_NORMAL_T1");
+//DB_AMP_Difficulty_BossMap("AMP_DIFFICULTY_TARGET_NORMAL_T2", "AMP_DIFFICULTY_BOSS_NORMAL_T2");
+//DB_AMP_Difficulty_BossMap("AMP_DIFFICULTY_TARGET_NORMAL_T3", "AMP_DIFFICULTY_BOSS_NORMAL_T3");
+//DB_AMP_Difficulty_BossMap("AMP_DIFFICULTY_TARGET_HARD_T1", "AMP_DIFFICULTY_BOSS_HARD_T1");
+//DB_AMP_Difficulty_BossMap("AMP_DIFFICULTY_TARGET_HARD_T2", "AMP_DIFFICULTY_BOSS_HARD_T2");
+//DB_AMP_Difficulty_BossMap("AMP_DIFFICULTY_TARGET_HARD_T3", "AMP_DIFFICULTY_BOSS_HARD_T3");
+//DB_AMP_Difficulty_BossMap("AMP_DIFFICULTY_TARGET_IMPOSSIBLE_T1", "AMP_DIFFICULTY_BOSS_IMPOSSIBLE_T1");
+//DB_AMP_Difficulty_BossMap("AMP_DIFFICULTY_TARGET_IMPOSSIBLE_T2", "AMP_DIFFICULTY_BOSS_IMPOSSIBLE_T2");
+//DB_AMP_Difficulty_BossMap("AMP_DIFFICULTY_TARGET_IMPOSSIBLE_T3", "AMP_DIFFICULTY_BOSS_IMPOSSIBLE_T3");
+//DB_AMP_Difficulty_AllTargets("AMP_DIFFICULTY_TARGET_NORMAL_T1");
+//DB_AMP_Difficulty_AllTargets("AMP_DIFFICULTY_TARGET_NORMAL_T2");
+//DB_AMP_Difficulty_AllTargets("AMP_DIFFICULTY_TARGET_NORMAL_T3");
+//DB_AMP_Difficulty_AllTargets("AMP_DIFFICULTY_TARGET_HARD_T1");
+//DB_AMP_Difficulty_AllTargets("AMP_DIFFICULTY_TARGET_HARD_T2");
+//DB_AMP_Difficulty_AllTargets("AMP_DIFFICULTY_TARGET_HARD_T3");
+//DB_AMP_Difficulty_AllTargets("AMP_DIFFICULTY_TARGET_IMPOSSIBLE_T1");
+//DB_AMP_Difficulty_AllTargets("AMP_DIFFICULTY_TARGET_IMPOSSIBLE_T2");
+//DB_AMP_Difficulty_AllTargets("AMP_DIFFICULTY_TARGET_IMPOSSIBLE_T3");
+//DB_AMP_Difficulty_AllBosses("AMP_DIFFICULTY_BOSS_NORMAL_T1");
+//DB_AMP_Difficulty_AllBosses("AMP_DIFFICULTY_BOSS_NORMAL_T2");
+//DB_AMP_Difficulty_AllBosses("AMP_DIFFICULTY_BOSS_NORMAL_T3");
+//DB_AMP_Difficulty_AllBosses("AMP_DIFFICULTY_BOSS_HARD_T1");
+//DB_AMP_Difficulty_AllBosses("AMP_DIFFICULTY_BOSS_HARD_T2");
+//DB_AMP_Difficulty_AllBosses("AMP_DIFFICULTY_BOSS_HARD_T3");
+//DB_AMP_Difficulty_AllBosses("AMP_DIFFICULTY_BOSS_IMPOSSIBLE_T1");
+//DB_AMP_Difficulty_AllBosses("AMP_DIFFICULTY_BOSS_IMPOSSIBLE_T2");
+//DB_AMP_Difficulty_AllBosses("AMP_DIFFICULTY_BOSS_IMPOSSIBLE_T3");
+
+// excluded npcs (no difficulty buffs)
+DB_AMP_Difficulty_Excluded((CHARACTER)S_DEN_ScoutCaptive_f5b5819f-1636-4f2e-82bb-709522cc399f);
+
+KBSECTION
+// v3: spell trigger, initial prompt, camp-entry trigger and dialog chain
+// all disabled, replaced by AMP_GameMode_Core.txt. old rules commented below.
+
+//IF
+//UsingSpell((CHARACTER)_Caster, "Shout_AMP_Settings_Difficulty", _, _, _)
+//AND
+//IsPlayer(_Caster, 1)
+//AND
+//GetHostCharacter(_Caster)
+//THEN
+//OpenMessageBoxYesNo(_Caster, "AMP_Settings009");
+
+//IF
+//LevelGameplayStarted(_, _)
+//AND
+//DB_AMP_Difficulty_Asked(0)
+//AND
+//DB_AMP_Difficulty_Chosen(0)
+//AND
+//GetHostCharacter((CHARACTER)_Host)
+//THEN
+//TimerLaunch("AMP_Difficulty_Initial_Delay", 200000);
+
+//IF
+//TimerFinished("AMP_Difficulty_Initial_Delay")
+//AND
+//DB_AMP_Difficulty_Asked(0)
+//AND
+//DB_AMP_Difficulty_Chosen(0)
+//AND
+//GetHostCharacter((CHARACTER)_Host)
+//THEN
+//NOT DB_AMP_Difficulty_Asked(0);
+//DB_AMP_Difficulty_Asked(1);
+//OpenMessageBoxYesNo(_Host, "AMP_Settings009");
+
+//IF
+//DB_PlayerInCamp((CHARACTER)_Player)
+//AND
+//DB_Players((CHARACTER)_Player)
+//AND
+//DB_AMP_Difficulty_Chosen(0)
+//AND
+//DB_AMP_Difficulty_Asked(0)
+//AND
+//GetHostCharacter(_Player)
+//THEN
+//NOT DB_AMP_Difficulty_Asked(0);
+//DB_AMP_Difficulty_Asked(1);
+//ObjectTimerLaunch(_Player, "AMP_Difficulty_CampDelay", 8000);
+
+//IF
+//ObjectTimerFinished((CHARACTER)_Player, "AMP_Difficulty_CampDelay")
+//AND
+//DB_AMP_Difficulty_Chosen(0)
+//AND
+//GetHostCharacter(_Player)
+//THEN
+//OpenMessageBoxYesNo(_Player, "AMP_Settings009");
+
+//IF
+//MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings009", 1)
+//THEN
+//PROC_AMP_ApplyDifficulty(_Host, "NORMAL");
+
+//IF
+//MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings009", 0)
+//THEN
+//OpenMessageBoxYesNo(_Host, "AMP_Settings010");
+
+//IF
+//MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings010", 1)
+//THEN
+//PROC_AMP_ApplyDifficulty(_Host, "HARD");
+
+//IF
+//MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings010", 0)
+//THEN
+//OpenMessageBoxYesNo(_Host, "AMP_Settings011");
+
+//IF
+//MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings011", 1)
+//THEN
+//PROC_AMP_ApplyDifficulty(_Host, "IMPOSSIBLE");
+
+//IF
+//MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings011", 0)
+//THEN
+//OpenMessageBoxYesNo(_Host, "AMP_Settings012");
+
+//IF
+//MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings012", 1)
+//THEN
+//PROC_AMP_ApplyDifficulty(_Host, "NONE");
+
+//IF
+//MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings012", 0)
+//THEN
+//OpenMessageBoxYesNo(_Host, "AMP_Settings009");
+
+// difficulty application (kept, used by v3)
+
+PROC
+PROC_AMP_ApplyDifficulty((CHARACTER)_Host, (STRING)_Mode)
+AND
+DB_AMP_Difficulty_Mode(_OldMode)
+THEN
+// remove old auras
+PROC_AMP_RemoveDifficultyAurasFromAllPlayers();
+// update mode
+NOT DB_AMP_Difficulty_Mode(_OldMode);
+DB_AMP_Difficulty_Mode(_Mode);
+// chosen flag is handled by the game mode
+// NOT DB_AMP_Difficulty_Chosen(0);
+// DB_AMP_Difficulty_Chosen(1);
+PROC_AMP_PlayModeEffect(_Host);
+
+// stub, real definition commented out below
+PROC
+PROC_AMP_RemoveDifficultyAurasFromAllPlayers()
+THEN
+DB_NOOP(1);
+
+// everything below is off, AMP_Difficulty_V3.txt replaces it
+
+//IF
+//CombatStarted(_CombatID)
+//AND
+//DB_AMP_Difficulty_Mode((STRING)_Mode)
+//AND
+//_Mode != "NONE"
+//AND
+//DB_AMP_Difficulty_Map(_Mode, (STRING)_AuraName)
+//AND
+//DB_Players((CHARACTER)_Player)
+//AND
+//HasActiveStatus(_Player, _AuraName, 0)
+//THEN
+//ApplyStatus(_Player, _AuraName, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+//IF
+//LeftCombat((CHARACTER)_Player, _CombatID)
+//AND
+//DB_AMP_Difficulty_Mode((STRING)_Mode)
+//AND
+//_Mode != "NONE"
+//AND
+//DB_AMP_Difficulty_Map(_Mode, (STRING)_AuraName)
+//AND
+//HasActiveStatus(_Player, _AuraName, 1)
+//THEN
+//RemoveStatus(_Player, _AuraName, NULL_00000000-0000-0000-0000-000000000000);
+
+//IF
+//StatusApplied((CHARACTER)_Creature, (STRING)_Marker, _, _)
+//AND
+//DB_AMP_Difficulty_TierMap(_Marker, 1, (STRING)_Target)
+//AND
+//NOT DB_AMP_Difficulty_Excluded(_Creature)
+//AND
+//GetLevel(_Creature, _Level)
+//AND
+//_Level < 5
+//THEN
+//PROC_AMP_RemoveDifficultyFromCreature(_Creature);
+//ApplyStatus(_Creature, _Target, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+//IF
+//StatusApplied((CHARACTER)_Creature, (STRING)_Marker, _, _)
+//AND
+//DB_AMP_Difficulty_TierMap(_Marker, 2, (STRING)_Target)
+//AND
+//NOT DB_AMP_Difficulty_Excluded(_Creature)
+//AND
+//GetLevel(_Creature, _Level)
+//AND
+//_Level >= 5
+//AND
+//_Level < 9
+//THEN
+//PROC_AMP_RemoveDifficultyFromCreature(_Creature);
+//ApplyStatus(_Creature, _Target, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+//IF
+//StatusApplied((CHARACTER)_Creature, (STRING)_Marker, _, _)
+//AND
+//DB_AMP_Difficulty_TierMap(_Marker, 3, (STRING)_Target)
+//AND
+//NOT DB_AMP_Difficulty_Excluded(_Creature)
+//AND
+//GetLevel(_Creature, _Level)
+//AND
+//_Level >= 9
+//THEN
+//PROC_AMP_RemoveDifficultyFromCreature(_Creature);
+//ApplyStatus(_Creature, _Target, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+//IF
+//StatusApplied((CHARACTER)_Boss, (STRING)_Target, _, _)
+//AND
+//DB_AMP_Difficulty_BossMap(_Target, (STRING)_BossStatus)
+//AND
+//IsBoss(_Boss, 1)
+//AND
+//HasActiveStatus(_Boss, _BossStatus, 0)
+//THEN
+//ApplyStatus(_Boss, _BossStatus, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+//PROC
+//PROC_AMP_RemoveDifficultyFromCreature((CHARACTER)_Creature)
+//AND
+//DB_AMP_Difficulty_AllTargets((STRING)_Status)
+//AND
+//HasActiveStatus(_Creature, _Status, 1)
+//THEN
+//RemoveStatus(_Creature, _Status, NULL_00000000-0000-0000-0000-000000000000);
+
+//PROC
+//PROC_AMP_RemoveDifficultyFromCreature((CHARACTER)_Creature)
+//AND
+//DB_AMP_Difficulty_AllBosses((STRING)_Status)
+//AND
+//HasActiveStatus(_Creature, _Status, 1)
+//THEN
+//RemoveStatus(_Creature, _Status, NULL_00000000-0000-0000-0000-000000000000);
+
+//IF
+//LeftCombat((CHARACTER)_Creature, _CombatID)
+//AND
+//NOT DB_Players(_Creature)
+//THEN
+//PROC_AMP_RemoveDifficultyFromCreature(_Creature);
+
+//PROC
+//PROC_AMP_RemoveDifficultyAuras((CHARACTER)_Player)
+//THEN
+//RemoveStatus(_Player, "AMP_DIFFICULTY_AURA_NORMAL", NULL_00000000-0000-0000-0000-000000000000);
+//RemoveStatus(_Player, "AMP_DIFFICULTY_AURA_HARD", NULL_00000000-0000-0000-0000-000000000000);
+//RemoveStatus(_Player, "AMP_DIFFICULTY_AURA_IMPOSSIBLE", NULL_00000000-0000-0000-0000-000000000000);
+
+//PROC
+//PROC_AMP_RemoveDifficultyAurasFromAllPlayers()
+//AND
+//DB_Players((CHARACTER)_Player)
+//THEN
+//PROC_AMP_RemoveDifficultyAuras(_Player);
+
+EXITSECTION
+
+ENDEXITSECTION

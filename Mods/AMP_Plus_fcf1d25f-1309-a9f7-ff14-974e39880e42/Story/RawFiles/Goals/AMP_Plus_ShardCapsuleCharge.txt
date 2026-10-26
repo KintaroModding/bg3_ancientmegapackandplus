@@ -1,0 +1,113 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+DB_AMP_Plus_ShardCapsule((ITEMROOT)AMP_Arcanizer_Shard_Capsule_1_20508e40-f93f-4196-abac-b5e5f2533ff9, "FULL");
+DB_AMP_Plus_ShardCapsule((ITEMROOT)AMP_Arcanizer_Shard_Capsule_2_15419dc3-8973-4888-a681-4690442f4026, "RANDOM");
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_ShardCapsuleVer(2)
+THEN
+PROC_AMP_Plus_ShardCapsuleReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_ShardCapsuleVer(2)
+THEN
+PROC_AMP_Plus_ShardCapsuleReseed();
+
+PROC
+PROC_AMP_Plus_ShardCapsuleReseed()
+AND
+DB_AMP_Plus_ShardCapsuleVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_ShardCapsuleVer(_Old);
+
+PROC
+PROC_AMP_Plus_ShardCapsuleReseed()
+THEN
+PROC_AMP_Plus_ShardCapsuleDrainReg();
+
+PROC
+PROC_AMP_Plus_ShardCapsuleDrainReg()
+AND
+DB_AMP_Plus_ShardCapsule((ITEMROOT)_T, (STRING)_Mode)
+THEN
+NOT DB_AMP_Plus_ShardCapsule(_T, _Mode);
+PROC_AMP_Plus_ShardCapsuleDrainReg();
+
+PROC
+PROC_AMP_Plus_ShardCapsuleReseed()
+THEN
+DB_AMP_Plus_ShardCapsule((ITEMROOT)AMP_Arcanizer_Shard_Capsule_1_20508e40-f93f-4196-abac-b5e5f2533ff9, "FULL");
+DB_AMP_Plus_ShardCapsule((ITEMROOT)AMP_Arcanizer_Shard_Capsule_2_15419dc3-8973-4888-a681-4690442f4026, "RANDOM");
+DB_AMP_Plus_ShardCapsuleVer(2);
+
+// type query overload, or the dispatch rejects the shard as junk
+QRY
+QRY_AMP_VoidCapsule_IsCoin((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+DB_AMP_Plus_ShardCapsule(_T, _)
+THEN
+DB_NOOP(1);
+
+PROC
+PROC_AMP_VoidCapsule_CoinStart((ITEM)_Shard, (ITEM)_Capsule, (CHARACTER)_Actor)
+AND
+GetTemplate(_Shard, (ITEMROOT)_T)
+AND
+DB_AMP_Plus_ShardCapsule(_T, "FULL")
+AND
+DB_AMP_VoidCapsule_ChargesMaxActive((INTEGER)_Max)
+THEN
+PROC_AMP_Plus_ShardCapsuleSet(_Shard, _Capsule, _Actor, _Max);
+
+PROC
+PROC_AMP_VoidCapsule_CoinStart((ITEM)_Shard, (ITEM)_Capsule, (CHARACTER)_Actor)
+AND
+GetTemplate(_Shard, (ITEMROOT)_T)
+AND
+DB_AMP_Plus_ShardCapsule(_T, "RANDOM")
+AND
+DB_AMP_VoidCapsule_ChargesMaxActive((INTEGER)_Max)
+AND
+Random(_Max, (INTEGER)_Roll)
+AND
+IntegerSum(_Roll, 1, (INTEGER)_New)
+THEN
+PROC_AMP_Plus_ShardCapsuleSet(_Shard, _Capsule, _Actor, _New);
+
+// a capsule holds one count row, retract before writing
+PROC
+PROC_AMP_Plus_ShardCapsuleSet((ITEM)_Shard, (ITEM)_Capsule, (CHARACTER)_Actor, (INTEGER)_New)
+AND
+DB_AMP_VoidCapsule_Charges(_Capsule, (INTEGER)_Old)
+THEN
+NOT DB_AMP_VoidCapsule_Charges(_Capsule, _Old);
+PROC_AMP_Plus_ShardCapsuleWrite(_Shard, _Capsule, _Actor, _New);
+
+PROC
+PROC_AMP_Plus_ShardCapsuleSet((ITEM)_Shard, (ITEM)_Capsule, (CHARACTER)_Actor, (INTEGER)_New)
+AND
+NOT DB_AMP_VoidCapsule_Charges(_Capsule, _)
+THEN
+PROC_AMP_Plus_ShardCapsuleWrite(_Shard, _Capsule, _Actor, _New);
+
+PROC
+PROC_AMP_Plus_ShardCapsuleWrite((ITEM)_Shard, (ITEM)_Capsule, (CHARACTER)_Actor, (INTEGER)_New)
+THEN
+DB_AMP_VoidCapsule_Charges(_Capsule, _New);
+NOT DB_AMP_VoidCapsule_CoinProcessed(_Shard);
+RequestDelete(_Shard);
+PlaySound(_Actor, "EPI_Epilogue_SpectralVoiceGale_GaleProjectionDisappear");
+PROC_AMP_VoidCapsule_ReleaseBusy(_Capsule);
+
+EXITSECTION
+ENDEXITSECTION

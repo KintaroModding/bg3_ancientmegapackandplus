@@ -1,0 +1,413 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// shard limit system
+
+// shards allowed per rarity (lower rarity = more)
+DB_AMP_Shard_SlotLimit("Common", 8);
+DB_AMP_Shard_SlotLimit("Uncommon", 4);
+DB_AMP_Shard_SlotLimit("Rare", 3);
+DB_AMP_Shard_SlotLimit("VeryRare", 2);
+DB_AMP_Shard_SlotLimit("Legendary", 1);
+
+// rarity by gold value
+DB_AMP_Shard_PriceRange("Common", 0, 149);
+DB_AMP_Shard_PriceRange("Uncommon", 150, 399);
+DB_AMP_Shard_PriceRange("Rare", 400, 799);
+DB_AMP_Shard_PriceRange("VeryRare", 800, 2499);
+DB_AMP_Shard_PriceRange("Legendary", 2500, 999999);
+
+// weapon shard markers, watched on statusremoved
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_FIRE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_COLD");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_LIGHTNING");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_THUNDER");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_ACID");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_POISON");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_NECROTIC");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_RADIANT");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_PSYCHIC");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_FORCE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_THROWN");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_ACCURACY");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_FINESSE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_MAGIC");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_SPIRIT");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_THUNDERCALLER");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_BLOODSUCKER");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_DISCHARGE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_BARGAIN");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_LIFEDRAIN");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_BLOODLETTER");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_FAERIEFIRE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_ENCHANT");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_EW_ACID");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_EW_COLD");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_EW_FIRE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_EW_LIGHTNING");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_EW_THUNDER");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_REACH");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_NETHSEED");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_HONING");
+
+KBSECTION
+
+// can a shard be applied? (limit by rarity)
+
+// first shard, no total count yet = allowed.
+// also require no per-shard rows, else legacy items bypass the limit as "fresh".
+QRY
+QRY_AMP_Shard_CanApply((ITEM)_Item)
+AND
+NOT DB_AMP_Shard_TotalCount(_Item, _)
+AND
+NOT DB_AMP_Shard_Count(_Item, _, _)
+THEN
+DB_NOOP(1);
+
+// later shards - check limit by price
+QRY
+QRY_AMP_Shard_CanApply((ITEM)_Item)
+AND
+ItemGetGoldValue(_Item, _Value)
+AND
+DB_AMP_Shard_PriceRange(_Rarity, _Min, _Max)
+AND
+_Value >= _Min
+AND
+_Value <= _Max
+AND
+DB_AMP_Shard_SlotLimit(_Rarity, _Limit)
+AND
+DB_AMP_Shard_TotalCount(_Item, _Current)
+AND
+_Current < _Limit
+THEN
+DB_NOOP(1);
+
+// inc/dec total count
+
+PROC
+PROC_AMP_Shard_IncTotal((ITEM)_Item)
+AND
+DB_AMP_Shard_TotalCount(_Item, _Old)
+AND
+IntegerSum(_Old, 1, _New)
+THEN
+NOT DB_AMP_Shard_TotalCount(_Item, _Old);
+DB_AMP_Shard_TotalCount(_Item, _New);
+
+PROC
+PROC_AMP_Shard_IncTotal((ITEM)_Item)
+AND
+NOT DB_AMP_Shard_TotalCount(_Item, _)
+THEN
+DB_AMP_Shard_TotalCount(_Item, 1);
+
+PROC
+PROC_AMP_Shard_DecTotal((ITEM)_Item)
+AND
+DB_AMP_Shard_TotalCount(_Item, _Old)
+AND
+_Old > 1
+AND
+IntegerSubtract(_Old, 1, _New)
+THEN
+NOT DB_AMP_Shard_TotalCount(_Item, _Old);
+DB_AMP_Shard_TotalCount(_Item, _New);
+
+PROC
+PROC_AMP_Shard_DecTotal((ITEM)_Item)
+AND
+DB_AMP_Shard_TotalCount(_Item, 1)
+THEN
+NOT DB_AMP_Shard_TotalCount(_Item, 1);
+
+// limit-reached error popups
+
+// equip stackable - limit
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_Stackable(_Template, _, _, _Slot)
+AND
+GetEquippedItem(_Char, _Slot, _Item)
+AND
+NOT QRY_AMP_Shard_CanApply(_Item)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+OpenMessageBox(_Char, "AMP_Shard_Limit_Error");
+
+// equip nonstack - limit
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, _, _, _Slot, _FinalStatus)
+AND
+GetEquippedItem(_Char, _Slot, _Item)
+AND
+HasActiveStatus(_Item, _FinalStatus, 0)
+AND
+NOT QRY_AMP_Shard_CanApply(_Item)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+OpenMessageBox(_Char, "AMP_Shard_Limit_Error");
+
+// weapon stackable melee - limit
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Weapon_Stackable(_Template, _, _)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Melee Main Weapon", _Weapon)
+AND
+NOT QRY_AMP_Shard_CanApply(_Weapon)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+OpenMessageBox(_Char, "AMP_Shard_Limit_Error");
+
+// weapon stackable ranged - limit
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Weapon_Stackable(_Template, _, _)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 0)
+AND
+HasRangedWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Ranged Main Weapon", _Weapon)
+AND
+NOT QRY_AMP_Shard_CanApply(_Weapon)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+OpenMessageBox(_Char, "AMP_Shard_Limit_Error");
+
+// weapon nonstack melee - limit
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Weapon_NonStack(_Template, _, _, _FinalStatus)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Melee Main Weapon", _Weapon)
+AND
+HasActiveStatus(_Weapon, _FinalStatus, 0)
+AND
+NOT QRY_AMP_Shard_CanApply(_Weapon)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+OpenMessageBox(_Char, "AMP_Shard_Limit_Error");
+
+// weapon nonstack ranged - limit
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Weapon_NonStack(_Template, _, _, _FinalStatus)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 0)
+AND
+HasRangedWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Ranged Main Weapon", _Weapon)
+AND
+HasActiveStatus(_Weapon, _FinalStatus, 0)
+AND
+NOT QRY_AMP_Shard_CanApply(_Weapon)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+OpenMessageBox(_Char, "AMP_Shard_Limit_Error");
+
+// rows with no total count bypass the limit, so the total locks to the rarity limit and the item counts as full
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_Stackable(_Template, _, _, _Slot)
+AND
+GetEquippedItem(_Char, _Slot, _Item)
+AND
+NOT DB_AMP_Shard_TotalCount(_Item, _)
+AND
+DB_AMP_Shard_Count(_Item, _, _)
+AND
+ItemGetGoldValue(_Item, _Value)
+AND
+DB_AMP_Shard_PriceRange(_Rarity, _Min, _Max)
+AND
+_Value >= _Min
+AND
+_Value <= _Max
+AND
+DB_AMP_Shard_SlotLimit(_Rarity, _Limit)
+THEN
+DB_AMP_Shard_TotalCount(_Item, _Limit);
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, _, _, _Slot, _)
+AND
+GetEquippedItem(_Char, _Slot, _Item)
+AND
+NOT DB_AMP_Shard_TotalCount(_Item, _)
+AND
+DB_AMP_Shard_Count(_Item, _, _)
+AND
+ItemGetGoldValue(_Item, _Value)
+AND
+DB_AMP_Shard_PriceRange(_Rarity, _Min, _Max)
+AND
+_Value >= _Min
+AND
+_Value <= _Max
+AND
+DB_AMP_Shard_SlotLimit(_Rarity, _Limit)
+THEN
+DB_AMP_Shard_TotalCount(_Item, _Limit);
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Weapon_Stackable(_Template, _, _)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Melee Main Weapon", _Item)
+AND
+NOT DB_AMP_Shard_TotalCount(_Item, _)
+AND
+DB_AMP_Shard_Count(_Item, _, _)
+AND
+ItemGetGoldValue(_Item, _Value)
+AND
+DB_AMP_Shard_PriceRange(_Rarity, _Min, _Max)
+AND
+_Value >= _Min
+AND
+_Value <= _Max
+AND
+DB_AMP_Shard_SlotLimit(_Rarity, _Limit)
+THEN
+DB_AMP_Shard_TotalCount(_Item, _Limit);
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Weapon_Stackable(_Template, _, _)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 0)
+AND
+HasRangedWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Ranged Main Weapon", _Item)
+AND
+NOT DB_AMP_Shard_TotalCount(_Item, _)
+AND
+DB_AMP_Shard_Count(_Item, _, _)
+AND
+ItemGetGoldValue(_Item, _Value)
+AND
+DB_AMP_Shard_PriceRange(_Rarity, _Min, _Max)
+AND
+_Value >= _Min
+AND
+_Value <= _Max
+AND
+DB_AMP_Shard_SlotLimit(_Rarity, _Limit)
+THEN
+DB_AMP_Shard_TotalCount(_Item, _Limit);
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Weapon_NonStack(_Template, _, _, _)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Melee Main Weapon", _Item)
+AND
+NOT DB_AMP_Shard_TotalCount(_Item, _)
+AND
+DB_AMP_Shard_Count(_Item, _, _)
+AND
+ItemGetGoldValue(_Item, _Value)
+AND
+DB_AMP_Shard_PriceRange(_Rarity, _Min, _Max)
+AND
+_Value >= _Min
+AND
+_Value <= _Max
+AND
+DB_AMP_Shard_SlotLimit(_Rarity, _Limit)
+THEN
+DB_AMP_Shard_TotalCount(_Item, _Limit);
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Weapon_NonStack(_Template, _, _, _)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 0)
+AND
+HasRangedWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Ranged Main Weapon", _Item)
+AND
+NOT DB_AMP_Shard_TotalCount(_Item, _)
+AND
+DB_AMP_Shard_Count(_Item, _, _)
+AND
+ItemGetGoldValue(_Item, _Value)
+AND
+DB_AMP_Shard_PriceRange(_Rarity, _Min, _Max)
+AND
+_Value >= _Min
+AND
+_Value <= _Max
+AND
+DB_AMP_Shard_SlotLimit(_Rarity, _Limit)
+THEN
+DB_AMP_Shard_TotalCount(_Item, _Limit);
+
+// weapon marker removed -> decrement total
+
+IF
+StatusRemoved((ITEM)_Item, _Status, _, _)
+AND
+DB_AMP_Shard_WeaponMarker(_Status)
+AND
+DB_AMP_Shard_TotalCount(_Item, _)
+THEN
+PROC_AMP_Shard_DecTotal(_Item);
+
+EXITSECTION
+ENDEXITSECTION

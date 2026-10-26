@@ -1,0 +1,167 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// base drain over-returns stacked markers, so its trigger is retracted
+
+NOT DB_AMP_Shard_Recovery((ITEMROOT)AMP_Arcanizer_Shard_Recovery_1_6d07a9e3-b288-4ec3-86f9-b3360973b879);
+
+KBSECTION
+
+// bump the version when the rows change
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_ShardRecVer(2)
+THEN
+PROC_AMP_Plus_ShardRecReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_ShardRecVer(2)
+THEN
+PROC_AMP_Plus_ShardRecReseed();
+
+PROC
+PROC_AMP_Plus_ShardRecReseed()
+AND
+DB_AMP_Plus_ShardRecVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_ShardRecVer(_Old);
+
+PROC
+PROC_AMP_Plus_ShardRecReseed()
+THEN
+PROC_AMP_Plus_ShardRecDrainRecovery();
+
+PROC
+PROC_AMP_Plus_ShardRecDrainRecovery()
+AND
+DB_AMP_Plus_Shard_Recovery((ITEMROOT)_A)
+THEN
+NOT DB_AMP_Plus_Shard_Recovery(_A);
+PROC_AMP_Plus_ShardRecDrainRecovery();
+
+PROC
+PROC_AMP_Plus_ShardRecReseed()
+THEN
+DB_AMP_Plus_ShardRecVer(2);
+DB_AMP_Plus_Shard_Recovery((ITEMROOT)AMP_Arcanizer_Shard_Recovery_1_6d07a9e3-b288-4ec3-86f9-b3360973b879);
+
+// base re-adds the registry in a later init pass, catch every appearance
+IF
+DB_AMP_Shard_Recovery((ITEMROOT)_T)
+THEN
+NOT DB_AMP_Shard_Recovery(_T);
+DB_AMP_Plus_Shard_Recovery(_T);
+
+// base IsShard reads the registry we emptied, hence this overload
+QRY
+QRY_AMP_VoidCapsule_IsShard((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+DB_AMP_Plus_Shard_Recovery(_T)
+THEN
+DB_NOOP(1);
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+DB_AMP_Plus_Shard_Recovery(_Template)
+THEN
+PROC_AMP_Plus_RecoverAllShards(_Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+PROC
+PROC_AMP_Plus_RecoverAllShards((CHARACTER)_Char)
+AND
+DB_AMP_Shard_RecoverySlot(_Slot)
+THEN
+PROC_AMP_Plus_RecoverFromSlot(_Char, _Slot);
+
+// non-stackable markers, no counter row
+PROC
+PROC_AMP_Plus_RecoverFromSlot((CHARACTER)_Char, (STRING)_Slot)
+AND
+GetEquippedItem(_Char, _Slot, _Item)
+AND
+DB_AMP_Shard_RecoveryMap(_MarkerStatus, _Template)
+AND
+HasActiveStatus(_Item, _MarkerStatus, 1)
+AND
+NOT DB_AMP_Shard_Count(_Item, _MarkerStatus, _)
+THEN
+TemplateAddTo(_Template, _Char, 1, 1);
+RemoveStatus(_Item, _MarkerStatus, _Char);
+PROC_AMP_RecoverTransferCleanup(_Char, _MarkerStatus);
+
+// stackable markers: three ordered passes
+PROC
+PROC_AMP_Plus_RecoverFromSlot((CHARACTER)_Char, (STRING)_Slot)
+AND
+GetEquippedItem(_Char, _Slot, _Item)
+THEN
+PROC_AMP_Plus_StackSpawn(_Char, _Item);
+PROC_AMP_Plus_StackClean(_Char, _Item);
+PROC_AMP_Plus_StackClearTemp(_Item);
+PROC_AMP_Plus_ClearTotal(_Item);
+
+// spawn pass only reads the counter table
+PROC
+PROC_AMP_Plus_StackSpawn((CHARACTER)_Char, (ITEM)_Item)
+AND
+DB_AMP_Shard_Count(_Item, _MarkerStatus, _Count)
+AND
+DB_AMP_Shard_RecoveryMap(_MarkerStatus, _Template)
+THEN
+PROC_AMP_SpawnMultiple(_Char, _Template, _Count);
+DB_AMP_Plus_ShardDrained(_Item, _MarkerStatus, _Count);
+
+// counter row first, so the StatusRemoved refire finds nothing to decrement
+PROC
+PROC_AMP_Plus_StackClean((CHARACTER)_Char, (ITEM)_Item)
+AND
+DB_AMP_Plus_ShardDrained(_Item, _MarkerStatus, _Count)
+THEN
+NOT DB_AMP_Shard_Count(_Item, _MarkerStatus, _Count);
+PROC_AMP_RecoverTransferCleanup(_Char, _MarkerStatus);
+RemoveStatus(_Item, _MarkerStatus, _Char);
+
+// recursion is safe here, no spawn side effect
+PROC
+PROC_AMP_Plus_StackClearTemp((ITEM)_Item)
+AND
+DB_AMP_Plus_ShardDrained(_Item, _MarkerStatus, _Count)
+THEN
+NOT DB_AMP_Plus_ShardDrained(_Item, _MarkerStatus, _Count);
+PROC_AMP_Plus_StackClearTemp(_Item);
+
+PROC
+PROC_AMP_Plus_ClearTotal((ITEM)_Item)
+AND
+DB_AMP_Shard_TotalCount(_Item, _Any)
+THEN
+NOT DB_AMP_Shard_TotalCount(_Item, _Any);
+
+
+// base proc clears the ring2/transfer backup but is retracted, so clear it here
+PROC
+PROC_AMP_Plus_RecoverFromSlot((CHARACTER)_Char, (STRING)_Slot)
+AND
+GetEquippedItem(_Char, _Slot, _Item)
+THEN
+PROC_AMP_Plus_ClearSaved(_Item);
+
+PROC
+PROC_AMP_Plus_ClearSaved((ITEM)_Item)
+AND
+DB_AMP_Shard_Saved(_Item, _MarkerStatus, _Count)
+THEN
+NOT DB_AMP_Shard_Saved(_Item, _MarkerStatus, _Count);
+PROC_AMP_Plus_ClearSaved(_Item);
+
+EXITSECTION
+ENDEXITSECTION

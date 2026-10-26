@@ -1,0 +1,363 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// from party level 6: (own + party + gear * 2) / 4
+// top tier needs party level 13, built for level-cap mods
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_GearTier_Ver(2)
+THEN
+PROC_AMP_Plus_GearTier_Reseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_GearTier_Ver(2)
+THEN
+PROC_AMP_Plus_GearTier_Reseed();
+
+PROC
+PROC_AMP_Plus_GearTier_Reseed()
+AND
+DB_AMP_Plus_GearTier_Ver((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_GearTier_Ver(_Old);
+
+PROC
+PROC_AMP_Plus_GearTier_Reseed()
+THEN
+PROC_AMP_Plus_GearTier_DrainLvlBand();
+
+PROC
+PROC_AMP_Plus_GearTier_DrainLvlBand()
+AND
+DB_AMP_Plus_GearLvlBand((INTEGER)_Min, (INTEGER)_Max, (INTEGER)_G)
+THEN
+NOT DB_AMP_Plus_GearLvlBand(_Min, _Max, _G);
+PROC_AMP_Plus_GearTier_DrainLvlBand();
+
+PROC
+PROC_AMP_Plus_GearTier_Reseed()
+THEN
+PROC_AMP_Plus_GearTier_DrainEffTierBand();
+
+PROC
+PROC_AMP_Plus_GearTier_DrainEffTierBand()
+AND
+DB_AMP_Plus_EffTierBand((INTEGER)_Min, (INTEGER)_Max, (INTEGER)_T)
+THEN
+NOT DB_AMP_Plus_EffTierBand(_Min, _Max, _T);
+PROC_AMP_Plus_GearTier_DrainEffTierBand();
+
+PROC
+PROC_AMP_Plus_GearTier_Reseed()
+THEN
+DB_AMP_Plus_GearTier_Ver(2);
+DB_AMP_Plus_GearLvlBand(0, 79, 1);
+DB_AMP_Plus_GearLvlBand(80, 119, 2);
+DB_AMP_Plus_GearLvlBand(120, 159, 3);
+DB_AMP_Plus_GearLvlBand(160, 199, 4);
+DB_AMP_Plus_GearLvlBand(200, 244, 5);
+DB_AMP_Plus_GearLvlBand(245, 294, 6);
+DB_AMP_Plus_GearLvlBand(295, 339, 7);
+DB_AMP_Plus_GearLvlBand(340, 424, 8);
+DB_AMP_Plus_GearLvlBand(425, 509, 9);
+DB_AMP_Plus_GearLvlBand(510, 594, 10);
+DB_AMP_Plus_GearLvlBand(595, 679, 11);
+DB_AMP_Plus_GearLvlBand(680, 834, 12);
+DB_AMP_Plus_GearLvlBand(835, 984, 13);
+DB_AMP_Plus_GearLvlBand(985, 1139, 14);
+DB_AMP_Plus_GearLvlBand(1140, 1294, 15);
+DB_AMP_Plus_GearLvlBand(1295, 1444, 16);
+DB_AMP_Plus_GearLvlBand(1445, 1599, 17);
+DB_AMP_Plus_GearLvlBand(1600, 9999999, 18);
+DB_AMP_Plus_EffTierBand(0, 2, 0);
+DB_AMP_Plus_EffTierBand(3, 4, 1);
+DB_AMP_Plus_EffTierBand(5, 8, 2);
+DB_AMP_Plus_EffTierBand(9, 11, 3);
+DB_AMP_Plus_EffTierBand(12, 15, 4);
+DB_AMP_Plus_EffTierBand(16, 9999, 5);
+
+// a member with no peak yet is skipped, not counted as naked
+
+PROC
+PROC_AMP_Plus_GearLvl_Update()
+AND
+DB_AMP_Plus_GearLvl_Acc((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_GearLvl_Acc(_Old);
+
+PROC
+PROC_AMP_Plus_GearLvl_Update()
+AND
+DB_AMP_Plus_GearLvl_Unread(1)
+THEN
+NOT DB_AMP_Plus_GearLvl_Unread(1);
+
+PROC
+PROC_AMP_Plus_GearLvl_Update()
+THEN
+DB_AMP_Plus_GearLvl_Acc(0);
+PROC_AMP_Plus_GearLvl_Sum();
+
+PROC
+PROC_AMP_Plus_GearLvl_Sum()
+AND
+DB_Players((CHARACTER)_P)
+AND
+IsSummon(_P, 0)
+AND
+DB_AMP_Plus_GS_Peak(_P, (INTEGER)_Peak)
+AND
+DB_AMP_Plus_GearLvl_Acc((INTEGER)_Sum)
+AND
+IntegerSum(_Sum, _Peak, (INTEGER)_New)
+THEN
+NOT DB_AMP_Plus_GearLvl_Acc(_Sum);
+DB_AMP_Plus_GearLvl_Acc(_New);
+
+PROC
+PROC_AMP_Plus_GearLvl_Sum()
+AND
+DB_Players((CHARACTER)_P)
+AND
+IsSummon(_P, 0)
+AND
+DB_AMP_Plus_GS_ShardSum(_P, (INTEGER)_Shards)
+AND
+DB_AMP_Plus_GearLvl_Acc((INTEGER)_Sum)
+AND
+IntegerSum(_Sum, _Shards, (INTEGER)_New)
+THEN
+NOT DB_AMP_Plus_GearLvl_Acc(_Sum);
+DB_AMP_Plus_GearLvl_Acc(_New);
+
+PROC
+PROC_AMP_Plus_GearLvl_Sum()
+AND
+DB_Players((CHARACTER)_P)
+AND
+IsSummon(_P, 0)
+AND
+NOT DB_AMP_Plus_GS_Peak(_P, _)
+AND
+NOT DB_AMP_Plus_GearLvl_Unread(1)
+THEN
+DB_AMP_Plus_GearLvl_Unread(1);
+
+PROC
+PROC_AMP_Plus_GearLvl_Update()
+AND
+NOT DB_AMP_Plus_GearLvl_Unread(1)
+AND
+DB_AMP_Plus_GearLvl_Acc((INTEGER)_Score)
+AND
+DB_AMP_Plus_GearLvlBand((INTEGER)_Min, (INTEGER)_Max, (INTEGER)_G)
+AND
+_Score >= _Min
+AND
+_Score <= _Max
+THEN
+PROC_AMP_Plus_GearLvl_Store(_G);
+
+PROC
+PROC_AMP_Plus_GearLvl_Store((INTEGER)_G)
+AND
+NOT DB_AMP_Plus_GearLevel(_)
+THEN
+DB_AMP_Plus_GearLevel(_G);
+DB_AMP_Plus_GearLvl_Dirty(1);
+
+PROC
+PROC_AMP_Plus_GearLvl_Store((INTEGER)_G)
+AND
+DB_AMP_Plus_GearLevel((INTEGER)_Old)
+AND
+_Old != _G
+THEN
+NOT DB_AMP_Plus_GearLevel(_Old);
+DB_AMP_Plus_GearLevel(_G);
+DB_AMP_Plus_GearLvl_Dirty(1);
+
+// re-grade out of combat only, the engine tops up current hp
+
+PROC
+PROC_AMP_Plus_GearLvl_Flush()
+AND
+DB_AMP_Plus_GearLvl_Dirty(1)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+_Mode != "NONE"
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_P)
+AND
+_P >= 6
+THEN
+NOT DB_AMP_Plus_GearLvl_Dirty(1);
+PROC_AMP_Plus_DiffReconcile();
+
+PROC
+PROC_AMP_Plus_GearLvl_Flush()
+AND
+DB_AMP_Plus_GearLvl_Dirty(1)
+THEN
+NOT DB_AMP_Plus_GearLvl_Dirty(1);
+
+PROC
+PROC_AMP_Plus_GearLvl_FlushGuarded()
+AND
+DB_AMP_Plus_GearLvl_Dirty(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsInCombat(_Host, 1)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+_Mode != "NONE"
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_P)
+AND
+_P >= 6
+THEN
+NOT DB_AMP_Plus_GearLvl_Dirty(1);
+DB_AMP_Plus_DiffReconcilePending(1);
+
+PROC
+PROC_AMP_Plus_GearLvl_FlushGuarded()
+THEN
+PROC_AMP_Plus_GearLvl_Flush();
+
+IF
+CombatEnded((GUIDSTRING)_CombatGuid)
+THEN
+PROC_AMP_Plus_GearLvl_Update();
+PROC_AMP_Plus_GearLvl_Flush();
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_AMP_Plus_GearLvl_Update();
+PROC_AMP_Plus_GearLvl_FlushGuarded();
+
+IF
+DB_Players((CHARACTER)_Joined)
+THEN
+PROC_AMP_Plus_GearLvl_Update();
+PROC_AMP_Plus_GearLvl_FlushGuarded();
+
+PROC
+PROC_AMP_Plus_GearDelta_Calc((CHARACTER)_C)
+AND
+DB_AMP_Plus_GearDelta(_C, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_GearDelta(_C, _Old);
+
+PROC
+PROC_AMP_Plus_GearDelta_Calc((CHARACTER)_C)
+THEN
+DB_AMP_Plus_GearDelta(_C, 0);
+
+PROC
+PROC_AMP_Plus_GearDelta_Calc((CHARACTER)_C)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_P)
+AND
+_P >= 6
+AND
+DB_AMP_Plus_GearLevel((INTEGER)_G)
+AND
+GetLevel(_C, (INTEGER)_E)
+AND
+IntegerProduct(_P, 2, (INTEGER)_P2)
+AND
+IntegerSum(_E, _P2, (INTEGER)_BaseSum)
+AND
+IntegerDivide(_BaseSum, 3, (INTEGER)_BaseEff)
+AND
+DB_AMP_Plus_EffTierBand((INTEGER)_BMin, (INTEGER)_BMax, (INTEGER)_BT)
+AND
+_BaseEff >= _BMin
+AND
+_BaseEff <= _BMax
+AND
+IntegerProduct(_G, 2, (INTEGER)_G2)
+AND
+IntegerSum(_E, _P, (INTEGER)_EP)
+AND
+IntegerSum(_EP, _G2, (INTEGER)_GearSum)
+AND
+IntegerDivide(_GearSum, 4, (INTEGER)_GearEff)
+AND
+DB_AMP_Plus_EffTierBand((INTEGER)_GMin, (INTEGER)_GMax, (INTEGER)_GT)
+AND
+_GearEff >= _GMin
+AND
+_GearEff <= _GMax
+THEN
+PROC_AMP_Plus_GearDelta_Cap(_C, _P, _BT, _GT);
+
+PROC
+PROC_AMP_Plus_GearDelta_Cap((CHARACTER)_C, (INTEGER)_P, (INTEGER)_BT, (INTEGER)_GT)
+AND
+_P >= 13
+THEN
+PROC_AMP_Plus_GearDelta_Set(_C, _BT, _GT, 5);
+
+PROC
+PROC_AMP_Plus_GearDelta_Cap((CHARACTER)_C, (INTEGER)_P, (INTEGER)_BT, (INTEGER)_GT)
+AND
+_P < 13
+AND
+_BT >= 5
+THEN
+PROC_AMP_Plus_GearDelta_Set(_C, _BT, _GT, 5);
+
+PROC
+PROC_AMP_Plus_GearDelta_Cap((CHARACTER)_C, (INTEGER)_P, (INTEGER)_BT, (INTEGER)_GT)
+AND
+_P < 13
+AND
+_BT < 5
+THEN
+PROC_AMP_Plus_GearDelta_Set(_C, _BT, _GT, 4);
+
+PROC
+PROC_AMP_Plus_GearDelta_Set((CHARACTER)_C, (INTEGER)_BT, (INTEGER)_GT, (INTEGER)_Cap)
+AND
+_GT <= _Cap
+AND
+IntegerSubtract(_GT, _BT, (INTEGER)_D)
+AND
+DB_AMP_Plus_GearDelta(_C, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_GearDelta(_C, _Old);
+DB_AMP_Plus_GearDelta(_C, _D);
+
+PROC
+PROC_AMP_Plus_GearDelta_Set((CHARACTER)_C, (INTEGER)_BT, (INTEGER)_GT, (INTEGER)_Cap)
+AND
+_GT > _Cap
+AND
+IntegerSubtract(_Cap, _BT, (INTEGER)_D)
+AND
+DB_AMP_Plus_GearDelta(_C, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_GearDelta(_C, _Old);
+DB_AMP_Plus_GearDelta(_C, _D);
+
+IF
+Died((CHARACTER)_C)
+AND
+DB_AMP_Plus_GearDelta(_C, (INTEGER)_D)
+THEN
+NOT DB_AMP_Plus_GearDelta(_C, _D);
+
+EXITSECTION
+ENDEXITSECTION

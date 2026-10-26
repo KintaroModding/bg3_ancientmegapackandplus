@@ -1,0 +1,66 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// permanent death on the bad ending, kill delayed so the closing messagebox stays readable
+
+// trigger: blacklist + delayed death
+IF
+StatusApplied((CHARACTER)_Char, "AMP_DAMNED_KRONETH", _, _)
+AND
+NOT DB_AMP_Kroneth_DeathBlacklist(_Char)
+THEN
+DB_AMP_Kroneth_DeathBlacklist(_Char);
+SetTag(_Char, (TAG)BLOCK_RESURRECTION_22a75dbb-1588-407e-b559-5aa4e6d4e6a6);
+ObjectTimerLaunch(_Char, "AMP_Kroneth_DamnationDeath", 4000);
+
+// kill after delay + party cleanup
+IF
+ObjectTimerFinished((CHARACTER)_Char, "AMP_Kroneth_DamnationDeath")
+AND
+DB_AMP_Kroneth_DeathBlacklist(_Char)
+THEN
+PROC_AMP_Kroneth_Damnation_Kill(_Char);
+
+PROC
+PROC_AMP_Kroneth_Damnation_Kill((CHARACTER)_Char)
+THEN
+RemovePartyFollower(_Char, NULL_00000000-0000-0000-0000-000000000000);
+Die(_Char, DEATHTYPE.DoT, NULL_00000000-0000-0000-0000-000000000000, 1, 0);
+
+// re-kill when dying clears (revivify, healing word, stabilise)
+IF
+StatusRemoved((CHARACTER)_Char, "DYING", _, _)
+AND
+DB_AMP_Kroneth_DeathBlacklist(_Char)
+THEN
+Die(_Char, DEATHTYPE.DoT, NULL_00000000-0000-0000-0000-000000000000, 1, 0);
+
+// re-kill on ko recovery (help action, etc)
+IF
+StatusRemoved((CHARACTER)_Char, "KNOCKED_OUT", _, _)
+AND
+DB_AMP_Kroneth_DeathBlacklist(_Char)
+THEN
+Die(_Char, DEATHTYPE.DoT, NULL_00000000-0000-0000-0000-000000000000, 1, 0);
+
+// re-kill on revivify scroll
+IF
+UsingSpellOnTarget(_, (CHARACTER)_Char, "Teleportation_Revivify_Scroll", _, _, _)
+AND
+DB_AMP_Kroneth_DeathBlacklist(_Char)
+THEN
+Die(_Char, DEATHTYPE.DoT, NULL_00000000-0000-0000-0000-000000000000, 1, 0);
+
+// re-kill on revivify spell variant
+IF
+UsingSpellOnTarget(_, (CHARACTER)_Char, "Target_Revivify", _, _, _)
+AND
+DB_AMP_Kroneth_DeathBlacklist(_Char)
+THEN
+Die(_Char, DEATHTYPE.DoT, NULL_00000000-0000-0000-0000-000000000000, 1, 0);
+
+EXITSECTION
+ENDEXITSECTION

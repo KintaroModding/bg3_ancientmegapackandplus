@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="55bf5412-1ab8-460f-9bbb-e8b860454ad9" />
+					<attribute id="Name" type="LSString" value="AMP_Capsule_Reward_Generic_4" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="007e6a6b-4d51-4a7f-b03a-560e06edd5f6" />
+					<attribute id="DisplayName" type="TranslatedString" handle="hfd931890gc61ag344fgf1c8gef810787cb90" version="1" />
+					<attribute id="Stats" type="FixedString" value="AMP_Arcanizer_Reward_4" />
+					<children>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="REL_All_Legendary" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

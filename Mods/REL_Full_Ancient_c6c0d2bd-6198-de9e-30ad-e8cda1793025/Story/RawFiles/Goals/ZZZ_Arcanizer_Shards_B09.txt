@@ -1,0 +1,599 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// ARCANIZER SHARDS - BATCH 09 (WEAPON EXPANSION 87 SHARDS)
+
+// UNCOMMON (100g base, 400g shop, SHARDS_20 pool)
+
+// G1 Weapon_16 CUDGEL (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_16_675bffd7-dc64-4f25-93f7-676e9bd4395f, "AMP_SHARD_APPLY_MELEE_CUDGEL", "AMP_SHARD_APPLY_RANGED_CUDGEL");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_CUDGEL");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_CUDGEL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_CUDGEL", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_16_675bffd7-dc64-4f25-93f7-676e9bd4395f);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_16_675bffd7-dc64-4f25-93f7-676e9bd4395f, "SHARDS_20");
+
+// G1 Weapon_17 PRICK (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_17_6a9ae81a-dbdc-473e-b220-8d20247e471e, "AMP_SHARD_APPLY_MELEE_PRICK", "AMP_SHARD_APPLY_RANGED_PRICK");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_PRICK");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_PRICK");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_PRICK", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_17_6a9ae81a-dbdc-473e-b220-8d20247e471e);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_17_6a9ae81a-dbdc-473e-b220-8d20247e471e, "SHARDS_20");
+
+// G1 Weapon_18 GASH (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_18_aae9b37b-6c75-46b1-977a-8b56b786b24d, "AMP_SHARD_APPLY_MELEE_GASH", "AMP_SHARD_APPLY_RANGED_GASH");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_GASH");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_GASH");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_GASH", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_18_aae9b37b-6c75-46b1-977a-8b56b786b24d);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_18_aae9b37b-6c75-46b1-977a-8b56b786b24d, "SHARDS_20");
+
+// G2 Weapon_19 EMBER (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_19_a6d9c542-8210-48ef-9064-dbcf4136f1ed, "AMP_SHARD_APPLY_MELEE_EMBER", "AMP_SHARD_APPLY_RANGED_EMBER");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_EMBER");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_EMBER");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_EMBER", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_19_a6d9c542-8210-48ef-9064-dbcf4136f1ed);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_19_a6d9c542-8210-48ef-9064-dbcf4136f1ed, "SHARDS_20");
+
+// G2 Weapon_20 CHILL (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_20_0dab2570-94b3-4db3-ab23-ff7bd8c8a306, "AMP_SHARD_APPLY_MELEE_CHILL", "AMP_SHARD_APPLY_RANGED_CHILL");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_CHILL");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_CHILL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_CHILL", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_20_0dab2570-94b3-4db3-ab23-ff7bd8c8a306);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_20_0dab2570-94b3-4db3-ab23-ff7bd8c8a306, "SHARDS_20");
+
+// G2 Weapon_21 JOLT (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_21_8080bddb-b39e-4d8e-8f65-b4bb2f0826b9, "AMP_SHARD_APPLY_MELEE_JOLT", "AMP_SHARD_APPLY_RANGED_JOLT");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_JOLT");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_JOLT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_JOLT", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_21_8080bddb-b39e-4d8e-8f65-b4bb2f0826b9);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_21_8080bddb-b39e-4d8e-8f65-b4bb2f0826b9, "SHARDS_20");
+
+// G2 Weapon_22 RUMBLE (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_22_ff5f41ac-0bcf-4135-877e-e28bf0fcb352, "AMP_SHARD_APPLY_MELEE_RUMBLE", "AMP_SHARD_APPLY_RANGED_RUMBLE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_RUMBLE");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_RUMBLE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_RUMBLE", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_22_ff5f41ac-0bcf-4135-877e-e28bf0fcb352);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_22_ff5f41ac-0bcf-4135-877e-e28bf0fcb352, "SHARDS_20");
+
+// G2 Weapon_23 REEK (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_23_40b0afa5-1403-4f20-8f26-b9cfb5c30b58, "AMP_SHARD_APPLY_MELEE_REEK", "AMP_SHARD_APPLY_RANGED_REEK");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_REEK");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_REEK");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_REEK", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_23_40b0afa5-1403-4f20-8f26-b9cfb5c30b58);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_23_40b0afa5-1403-4f20-8f26-b9cfb5c30b58, "SHARDS_20");
+
+// G2 Weapon_24 STING (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_24_0f329e0b-a970-4efe-b753-dd50e370974d, "AMP_SHARD_APPLY_MELEE_STING", "AMP_SHARD_APPLY_RANGED_STING");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_STING");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_STING");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_STING", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_24_0f329e0b-a970-4efe-b753-dd50e370974d);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_24_0f329e0b-a970-4efe-b753-dd50e370974d, "SHARDS_20");
+
+// G2 Weapon_25 ROT (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_25_a556c6a7-165e-40bc-a423-6b9dd1e5e95a, "AMP_SHARD_APPLY_MELEE_ROT", "AMP_SHARD_APPLY_RANGED_ROT");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_ROT");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_ROT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_ROT", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_25_a556c6a7-165e-40bc-a423-6b9dd1e5e95a);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_25_a556c6a7-165e-40bc-a423-6b9dd1e5e95a, "SHARDS_20");
+
+// G2 Weapon_26 SHINE (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_26_2279d7ae-af1d-4757-8689-3e109abac7f5, "AMP_SHARD_APPLY_MELEE_SHINE", "AMP_SHARD_APPLY_RANGED_SHINE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_SHINE");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_SHINE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_SHINE", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_26_2279d7ae-af1d-4757-8689-3e109abac7f5);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_26_2279d7ae-af1d-4757-8689-3e109abac7f5, "SHARDS_20");
+
+// G2 Weapon_27 TWITCH (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_27_a5a247f0-79e7-4b69-895a-2735385567be, "AMP_SHARD_APPLY_MELEE_TWITCH", "AMP_SHARD_APPLY_RANGED_TWITCH");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_TWITCH");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_TWITCH");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_TWITCH", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_27_a5a247f0-79e7-4b69-895a-2735385567be);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_27_a5a247f0-79e7-4b69-895a-2735385567be, "SHARDS_20");
+
+// G2 Weapon_28 HEAVE (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_28_c74602ea-4373-4b1c-98ea-68e00d13ba83, "AMP_SHARD_APPLY_MELEE_HEAVE", "AMP_SHARD_APPLY_RANGED_HEAVE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_HEAVE");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_HEAVE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_HEAVE", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_28_c74602ea-4373-4b1c-98ea-68e00d13ba83);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_28_c74602ea-4373-4b1c-98ea-68e00d13ba83, "SHARDS_20");
+
+// G3 Weapon_29 POUNCE (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_29_04db87ca-a75b-4799-8778-12528ebe37b4, "AMP_SHARD_APPLY_MELEE_POUNCE", "AMP_SHARD_APPLY_RANGED_POUNCE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_POUNCE");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_POUNCE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_POUNCE", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_29_04db87ca-a75b-4799-8778-12528ebe37b4);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_29_04db87ca-a75b-4799-8778-12528ebe37b4, "SHARDS_20");
+
+// G4 Weapon_30 GLOOM (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_30_b5db3da9-0589-476d-93c2-3c05173b7dd7, "AMP_SHARD_APPLY_MELEE_GLOOM", "AMP_SHARD_APPLY_RANGED_GLOOM");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_GLOOM");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_GLOOM");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_GLOOM", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_30_b5db3da9-0589-476d-93c2-3c05173b7dd7);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_30_b5db3da9-0589-476d-93c2-3c05173b7dd7, "SHARDS_20");
+
+// G5 Weapon_31 SWIFT (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_31_f96751fb-f561-4792-8996-5807063832d7, "AMP_SHARD_APPLY_MELEE_SWIFT", "AMP_SHARD_APPLY_RANGED_SWIFT", "AMP_SHARD_WEAPON_SWIFT");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_SWIFT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_SWIFT", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_31_f96751fb-f561-4792-8996-5807063832d7);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_31_f96751fb-f561-4792-8996-5807063832d7, "SHARDS_20");
+
+// G6 Weapon_32 SCAVENGER (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_32_54a0417f-8846-4d56-b9ec-59f65d62b840, "AMP_SHARD_APPLY_MELEE_SCAVENGER", "AMP_SHARD_APPLY_RANGED_SCAVENGER");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_SCAVENGER");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_SCAVENGER");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_SCAVENGER", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_32_54a0417f-8846-4d56-b9ec-59f65d62b840);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_32_54a0417f-8846-4d56-b9ec-59f65d62b840, "SHARDS_20");
+
+// G7 Weapon_33 PELT (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_33_1b6df88d-b28f-4ea4-9678-fc9b0bd3c721, "AMP_SHARD_APPLY_MELEE_PELT", "AMP_SHARD_APPLY_RANGED_PELT");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_PELT");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_PELT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_PELT", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_33_1b6df88d-b28f-4ea4-9678-fc9b0bd3c721);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_33_1b6df88d-b28f-4ea4-9678-fc9b0bd3c721, "SHARDS_20");
+
+// G7 Weapon_34 RIFT (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_34_87507d96-6df2-4369-8622-648d7daee2bd, "AMP_SHARD_APPLY_MELEE_RIFT", "AMP_SHARD_APPLY_RANGED_RIFT");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_RIFT");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_RIFT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_RIFT", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_34_87507d96-6df2-4369-8622-648d7daee2bd);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_34_87507d96-6df2-4369-8622-648d7daee2bd, "SHARDS_20");
+
+// G7 Weapon_35 RITE (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_35_da71f3db-f08d-4921-8b79-b66e0f0df89c, "AMP_SHARD_APPLY_MELEE_RITE", "AMP_SHARD_APPLY_RANGED_RITE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_RITE");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_RITE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_RITE", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_35_da71f3db-f08d-4921-8b79-b66e0f0df89c);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_35_da71f3db-f08d-4921-8b79-b66e0f0df89c, "SHARDS_20");
+
+// G8 Weapon_36 AURA (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_36_786a855d-a7d6-4803-b5c0-b45ec3f73065, "AMP_SHARD_APPLY_MELEE_AURA", "AMP_SHARD_APPLY_RANGED_AURA", "AMP_SHARD_WEAPON_AURA");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_AURA");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_AURA", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_36_786a855d-a7d6-4803-b5c0-b45ec3f73065);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_36_786a855d-a7d6-4803-b5c0-b45ec3f73065, "SHARDS_20");
+
+// G9 Weapon_37 NICK (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_37_59985e51-6565-46ca-9abc-b96486485507, "AMP_SHARD_APPLY_MELEE_NICK", "AMP_SHARD_APPLY_RANGED_NICK", "AMP_SHARD_WEAPON_NICK");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_NICK");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_NICK", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_37_59985e51-6565-46ca-9abc-b96486485507);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_37_59985e51-6565-46ca-9abc-b96486485507, "SHARDS_20");
+
+// G10 Weapon_38 CLASH (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_38_b8901ba0-e6d0-4cba-ab24-0dbe2b514cc3, "AMP_SHARD_APPLY_MELEE_CLASH", "AMP_SHARD_APPLY_RANGED_CLASH");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_CLASH");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_CLASH");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_CLASH", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_38_b8901ba0-e6d0-4cba-ab24-0dbe2b514cc3);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_38_b8901ba0-e6d0-4cba-ab24-0dbe2b514cc3, "SHARDS_20");
+
+// G12 Weapon_39 BELL (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_39_a0496936-10dc-4272-b9da-1b09a51dce2e, "AMP_SHARD_APPLY_MELEE_BELL", "AMP_SHARD_APPLY_RANGED_BELL", "AMP_SHARD_WEAPON_BELL");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_BELL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_BELL", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_39_a0496936-10dc-4272-b9da-1b09a51dce2e);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_39_a0496936-10dc-4272-b9da-1b09a51dce2e, "SHARDS_20");
+
+// G13 Weapon_40 FLICK (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_40_751820ab-23fb-4c7c-980e-2e60c509bb87, "AMP_SHARD_APPLY_MELEE_FLICK", "AMP_SHARD_APPLY_RANGED_FLICK", "AMP_SHARD_WEAPON_FLICK");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_FLICK");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_FLICK", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_40_751820ab-23fb-4c7c-980e-2e60c509bb87);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_40_751820ab-23fb-4c7c-980e-2e60c509bb87, "SHARDS_20");
+
+// RARE (250g base, 1000g shop, SHARDS_6 pool)
+
+// G14 Weapon_41 DRIFT (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_41_8aa70ebb-8375-4dfe-b562-0132e0faec4d, "AMP_SHARD_APPLY_MELEE_DRIFT", "AMP_SHARD_APPLY_RANGED_DRIFT");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_DRIFT");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_DRIFT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_DRIFT", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_41_8aa70ebb-8375-4dfe-b562-0132e0faec4d);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_41_8aa70ebb-8375-4dfe-b562-0132e0faec4d, "SHARDS_6");
+
+// G15 Weapon_42 NUMB (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_42_2f7bcaa5-d5cd-4dfb-acd6-192a16944c07, "AMP_SHARD_APPLY_MELEE_NUMB", "AMP_SHARD_APPLY_RANGED_NUMB");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_NUMB");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_NUMB");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_NUMB", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_42_2f7bcaa5-d5cd-4dfb-acd6-192a16944c07);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_42_2f7bcaa5-d5cd-4dfb-acd6-192a16944c07, "SHARDS_6");
+
+// G16 Weapon_43 SEAR (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_43_dafa9037-3f47-4a57-84e5-55bafddad9df, "AMP_SHARD_APPLY_MELEE_SEAR", "AMP_SHARD_APPLY_RANGED_SEAR");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_SEAR");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_SEAR");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_SEAR", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_43_dafa9037-3f47-4a57-84e5-55bafddad9df);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_43_dafa9037-3f47-4a57-84e5-55bafddad9df, "SHARDS_6");
+
+// G17 Weapon_44 SWEEP (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_44_3af094a4-2e74-450d-92ed-2a8b73381866, "AMP_SHARD_APPLY_MELEE_SWEEP", "AMP_SHARD_APPLY_RANGED_SWEEP", "AMP_SHARD_WEAPON_SWEEP");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_SWEEP");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_SWEEP", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_44_3af094a4-2e74-450d-92ed-2a8b73381866);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_44_3af094a4-2e74-450d-92ed-2a8b73381866, "SHARDS_6");
+
+// G18 Weapon_45 GRIP (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_45_441ee3b9-9df9-45cd-bec2-382c64be7e54, "AMP_SHARD_APPLY_MELEE_GRIP", "AMP_SHARD_APPLY_RANGED_GRIP", "AMP_SHARD_WEAPON_GRIP");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_GRIP");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_GRIP", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_45_441ee3b9-9df9-45cd-bec2-382c64be7e54);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_45_441ee3b9-9df9-45cd-bec2-382c64be7e54, "SHARDS_6");
+
+// G19 Weapon_46 EDGE (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_46_f692c64a-f186-4be5-a67d-10ca4f2d2fb2, "AMP_SHARD_APPLY_MELEE_EDGE", "AMP_SHARD_APPLY_RANGED_EDGE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_EDGE");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_EDGE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_EDGE", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_46_f692c64a-f186-4be5-a67d-10ca4f2d2fb2);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_46_f692c64a-f186-4be5-a67d-10ca4f2d2fb2, "SHARDS_6");
+
+// G20 Weapon_47 HAWK (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_47_a6eebf15-9745-4baf-a590-4f889c6e48ea, "AMP_SHARD_APPLY_MELEE_HAWK", "AMP_SHARD_APPLY_RANGED_HAWK", "AMP_SHARD_WEAPON_HAWK");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_HAWK");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_HAWK", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_47_a6eebf15-9745-4baf-a590-4f889c6e48ea);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_47_a6eebf15-9745-4baf-a590-4f889c6e48ea, "SHARDS_6");
+
+// G21 Weapon_48 HALO (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_48_e8081d29-4c40-413b-bdfe-6de30969c184, "AMP_SHARD_APPLY_MELEE_HALO", "AMP_SHARD_APPLY_RANGED_HALO", "AMP_SHARD_WEAPON_HALO");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_HALO");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_HALO", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_48_e8081d29-4c40-413b-bdfe-6de30969c184);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_48_e8081d29-4c40-413b-bdfe-6de30969c184, "SHARDS_6");
+
+// G22 Weapon_49 REPEL (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_49_ba05612a-d803-413a-9c85-e3fa491923e8, "AMP_SHARD_APPLY_MELEE_REPEL", "AMP_SHARD_APPLY_RANGED_REPEL", "AMP_SHARD_WEAPON_REPEL");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_REPEL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_REPEL", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_49_ba05612a-d803-413a-9c85-e3fa491923e8);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_49_ba05612a-d803-413a-9c85-e3fa491923e8, "SHARDS_6");
+
+// G23 Weapon_50 CHANNEL (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_50_cf928e93-9594-43b2-8e28-01835ae52881, "AMP_SHARD_APPLY_MELEE_CHANNEL", "AMP_SHARD_APPLY_RANGED_CHANNEL", "AMP_SHARD_WEAPON_CHANNEL");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_CHANNEL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_CHANNEL", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_50_cf928e93-9594-43b2-8e28-01835ae52881);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_50_cf928e93-9594-43b2-8e28-01835ae52881, "SHARDS_6");
+
+// G24 Weapon_51 FIST (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_51_5253b918-b30d-4948-9716-f67ce480db4d, "AMP_SHARD_APPLY_MELEE_FIST", "AMP_SHARD_APPLY_RANGED_FIST", "AMP_SHARD_WEAPON_FIST");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_FIST");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_FIST", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_51_5253b918-b30d-4948-9716-f67ce480db4d);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_51_5253b918-b30d-4948-9716-f67ce480db4d, "SHARDS_6");
+
+// G25 Weapon_52 GAMBLE (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_52_851da09f-b607-4983-a886-fd0faa74222e, "AMP_SHARD_APPLY_MELEE_GAMBLE", "AMP_SHARD_APPLY_RANGED_GAMBLE", "AMP_SHARD_WEAPON_GAMBLE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_GAMBLE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_GAMBLE", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_52_851da09f-b607-4983-a886-fd0faa74222e);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_52_851da09f-b607-4983-a886-fd0faa74222e, "SHARDS_6");
+
+// G26 Weapon_53 KNELL (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_53_fd62e4fb-d76c-4c32-8e8e-5caada2ed022, "AMP_SHARD_APPLY_MELEE_KNELL", "AMP_SHARD_APPLY_RANGED_KNELL");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_KNELL");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_KNELL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_KNELL", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_53_fd62e4fb-d76c-4c32-8e8e-5caada2ed022);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_53_fd62e4fb-d76c-4c32-8e8e-5caada2ed022, "SHARDS_6");
+
+// G27 Weapon_54 BLAZE (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_54_42c3c833-9432-4788-a284-caa8e31cb724, "AMP_SHARD_APPLY_MELEE_BLAZE", "AMP_SHARD_APPLY_RANGED_BLAZE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_BLAZE");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_BLAZE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_BLAZE", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_54_42c3c833-9432-4788-a284-caa8e31cb724);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_54_42c3c833-9432-4788-a284-caa8e31cb724, "SHARDS_6");
+
+// G28 Weapon_55 CHAR (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_55_65bad126-db5a-4b78-a25c-2460c3f75f5a, "AMP_SHARD_APPLY_MELEE_CHAR", "AMP_SHARD_APPLY_RANGED_CHAR");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_CHAR");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_CHAR");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_CHAR", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_55_65bad126-db5a-4b78-a25c-2460c3f75f5a);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_55_65bad126-db5a-4b78-a25c-2460c3f75f5a, "SHARDS_6");
+
+// G29 Weapon_56 FANG (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_56_8be9d401-e72c-4717-9231-53be6f7a440d, "AMP_SHARD_APPLY_MELEE_FANG", "AMP_SHARD_APPLY_RANGED_FANG");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_FANG");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_FANG");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_FANG", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_56_8be9d401-e72c-4717-9231-53be6f7a440d);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_56_8be9d401-e72c-4717-9231-53be6f7a440d, "SHARDS_6");
+
+// G29 Weapon_57 BITE (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_57_20a463a2-59a2-486b-bdef-823b2d0c4ef1, "AMP_SHARD_APPLY_MELEE_BITE", "AMP_SHARD_APPLY_RANGED_BITE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_BITE");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_BITE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_BITE", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_57_20a463a2-59a2-486b-bdef-823b2d0c4ef1);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_57_20a463a2-59a2-486b-bdef-823b2d0c4ef1, "SHARDS_6");
+
+// G29 Weapon_58 ARC (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_58_839b795c-6977-47d9-ba31-ba9657b91f4a, "AMP_SHARD_APPLY_MELEE_ARC", "AMP_SHARD_APPLY_RANGED_ARC");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_ARC");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_ARC");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_ARC", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_58_839b795c-6977-47d9-ba31-ba9657b91f4a);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_58_839b795c-6977-47d9-ba31-ba9657b91f4a, "SHARDS_6");
+
+// G29 Weapon_59 MAW (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_59_6a3eb2d6-071a-41a4-93d9-b947805d898a, "AMP_SHARD_APPLY_MELEE_MAW", "AMP_SHARD_APPLY_RANGED_MAW");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_MAW");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_MAW");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_MAW", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_59_6a3eb2d6-071a-41a4-93d9-b947805d898a);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_59_6a3eb2d6-071a-41a4-93d9-b947805d898a, "SHARDS_6");
+
+// G29 Weapon_60 DRIP (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_60_4f41e1a1-5ac0-49ba-9aac-99516b9a24ce, "AMP_SHARD_APPLY_MELEE_DRIP", "AMP_SHARD_APPLY_RANGED_DRIP");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_DRIP");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_DRIP");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_DRIP", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_60_4f41e1a1-5ac0-49ba-9aac-99516b9a24ce);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_60_4f41e1a1-5ac0-49ba-9aac-99516b9a24ce, "SHARDS_6");
+
+// G29 Weapon_61 BARB (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_61_61859b17-b718-4788-babe-a8c0ddcfd730, "AMP_SHARD_APPLY_MELEE_BARB", "AMP_SHARD_APPLY_RANGED_BARB");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_BARB");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_BARB");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_BARB", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_61_61859b17-b718-4788-babe-a8c0ddcfd730);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_61_61859b17-b718-4788-babe-a8c0ddcfd730, "SHARDS_6");
+
+// G29 Weapon_62 GNAW (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_62_5404092f-9d64-47be-a8c5-0a65dfc52d1d, "AMP_SHARD_APPLY_MELEE_GNAW", "AMP_SHARD_APPLY_RANGED_GNAW");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_GNAW");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_GNAW");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_GNAW", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_62_5404092f-9d64-47be-a8c5-0a65dfc52d1d);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_62_5404092f-9d64-47be-a8c5-0a65dfc52d1d, "SHARDS_6");
+
+// G29 Weapon_63 CLAW (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_63_09549cec-95a1-4ef2-8d82-6f5d80fe9aef, "AMP_SHARD_APPLY_MELEE_CLAW", "AMP_SHARD_APPLY_RANGED_CLAW");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_CLAW");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_CLAW");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_CLAW", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_63_09549cec-95a1-4ef2-8d82-6f5d80fe9aef);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_63_09549cec-95a1-4ef2-8d82-6f5d80fe9aef, "SHARDS_6");
+
+// G29 Weapon_64 NIP (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_64_a424f13a-7063-4dd6-a0ef-c2fcb1f31b87, "AMP_SHARD_APPLY_MELEE_NIP", "AMP_SHARD_APPLY_RANGED_NIP");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_NIP");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_NIP");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_NIP", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_64_a424f13a-7063-4dd6-a0ef-c2fcb1f31b87);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_64_a424f13a-7063-4dd6-a0ef-c2fcb1f31b87, "SHARDS_6");
+
+// G29 Weapon_65 JAB (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_65_ff5b7567-02a0-4a62-811b-50b0c9309f26, "AMP_SHARD_APPLY_MELEE_JAB", "AMP_SHARD_APPLY_RANGED_JAB");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_JAB");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_JAB");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_JAB", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_65_ff5b7567-02a0-4a62-811b-50b0c9309f26);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_65_ff5b7567-02a0-4a62-811b-50b0c9309f26, "SHARDS_6");
+
+// G30 Weapon_66 STAB (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_66_0240ad9d-d7bf-465e-9fa1-b336d8f7795f, "AMP_SHARD_APPLY_MELEE_STAB", "AMP_SHARD_APPLY_RANGED_STAB", "AMP_SHARD_WEAPON_STAB");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_STAB");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_STAB", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_66_0240ad9d-d7bf-465e-9fa1-b336d8f7795f);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_66_0240ad9d-d7bf-465e-9fa1-b336d8f7795f, "SHARDS_6");
+
+// G31 Weapon_67 TWIN (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_67_10270d55-9575-4264-8b3a-d727e034028c, "AMP_SHARD_APPLY_MELEE_TWIN", "AMP_SHARD_APPLY_RANGED_TWIN", "AMP_SHARD_WEAPON_TWIN");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_TWIN");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_TWIN", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_67_10270d55-9575-4264-8b3a-d727e034028c);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_67_10270d55-9575-4264-8b3a-d727e034028c, "SHARDS_6");
+
+// G32 Weapon_68 MAUL (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_68_3ed5c5f0-dff0-4f37-8eb7-c87ead4ffb0d, "AMP_SHARD_APPLY_MELEE_MAUL", "AMP_SHARD_APPLY_RANGED_MAUL", "AMP_SHARD_WEAPON_MAUL");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_MAUL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_MAUL", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_68_3ed5c5f0-dff0-4f37-8eb7-c87ead4ffb0d);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_68_3ed5c5f0-dff0-4f37-8eb7-c87ead4ffb0d, "SHARDS_6");
+
+// VERYRARE (500g base, 3000g shop, SHARDS_2 pool)
+
+// G33 Weapon_69 VECTOR (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_69_ae4856c7-e51c-47f7-9002-b091c7873171, "AMP_SHARD_APPLY_MELEE_VECTOR", "AMP_SHARD_APPLY_RANGED_VECTOR");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_VECTOR");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_VECTOR");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_VECTOR", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_69_ae4856c7-e51c-47f7-9002-b091c7873171);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_69_ae4856c7-e51c-47f7-9002-b091c7873171, "SHARDS_2");
+
+// G34 Weapon_70 AWE (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_70_0797f51b-45ae-44c8-97ad-ed42b5bac923, "AMP_SHARD_APPLY_MELEE_AWE", "AMP_SHARD_APPLY_RANGED_AWE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_AWE");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_AWE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_AWE", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_70_0797f51b-45ae-44c8-97ad-ed42b5bac923);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_70_0797f51b-45ae-44c8-97ad-ed42b5bac923, "SHARDS_2");
+
+// G35 Weapon_71 SEVER (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_71_e5d41f31-903f-4f3a-b126-487c250642a5, "AMP_SHARD_APPLY_MELEE_SEVER", "AMP_SHARD_APPLY_RANGED_SEVER", "AMP_SHARD_WEAPON_SEVER");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_SEVER");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_SEVER", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_71_e5d41f31-903f-4f3a-b126-487c250642a5);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_71_e5d41f31-903f-4f3a-b126-487c250642a5, "SHARDS_2");
+
+// G36 Weapon_72 PIERCE (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_72_c1b71bc3-145e-42ff-af83-2628374807b9, "AMP_SHARD_APPLY_MELEE_PIERCE", "AMP_SHARD_APPLY_RANGED_PIERCE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_PIERCE");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_PIERCE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_PIERCE", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_72_c1b71bc3-145e-42ff-af83-2628374807b9);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_72_c1b71bc3-145e-42ff-af83-2628374807b9, "SHARDS_2");
+
+// G36 Weapon_73 LANCE (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_73_e8bf851a-5865-4ef1-ad58-a4432e592502, "AMP_SHARD_APPLY_MELEE_LANCE", "AMP_SHARD_APPLY_RANGED_LANCE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_LANCE");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_LANCE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_LANCE", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_73_e8bf851a-5865-4ef1-ad58-a4432e592502);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_73_e8bf851a-5865-4ef1-ad58-a4432e592502, "SHARDS_2");
+
+// G36 Weapon_74 BOLT (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_74_040e8f4b-831a-4a7a-b507-4b24c07293fa, "AMP_SHARD_APPLY_MELEE_BOLT", "AMP_SHARD_APPLY_RANGED_BOLT");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_BOLT");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_BOLT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_BOLT", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_74_040e8f4b-831a-4a7a-b507-4b24c07293fa);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_74_040e8f4b-831a-4a7a-b507-4b24c07293fa, "SHARDS_2");
+
+// G36 Weapon_75 BREAK (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_75_f5b4eeea-039d-441e-8308-5961ae8f4840, "AMP_SHARD_APPLY_MELEE_BREAK", "AMP_SHARD_APPLY_RANGED_BREAK");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_BREAK");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_BREAK");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_BREAK", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_75_f5b4eeea-039d-441e-8308-5961ae8f4840);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_75_f5b4eeea-039d-441e-8308-5961ae8f4840, "SHARDS_2");
+
+// G36 Weapon_76 ETCH (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_76_bded7e53-7ff8-4a12-926f-f1680456285a, "AMP_SHARD_APPLY_MELEE_ETCH", "AMP_SHARD_APPLY_RANGED_ETCH");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_ETCH");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_ETCH");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_ETCH", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_76_bded7e53-7ff8-4a12-926f-f1680456285a);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_76_bded7e53-7ff8-4a12-926f-f1680456285a, "SHARDS_2");
+
+// G36 Weapon_77 NEEDLE (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_77_47dca5a4-7445-4a0f-940b-bc2c1c206e55, "AMP_SHARD_APPLY_MELEE_NEEDLE", "AMP_SHARD_APPLY_RANGED_NEEDLE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_NEEDLE");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_NEEDLE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_NEEDLE", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_77_47dca5a4-7445-4a0f-940b-bc2c1c206e55);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_77_47dca5a4-7445-4a0f-940b-bc2c1c206e55, "SHARDS_2");
+
+// G36 Weapon_78 CLEAVE (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_78_404417ac-b028-4559-b4a4-4f2c1ab8e0f8, "AMP_SHARD_APPLY_MELEE_CLEAVE", "AMP_SHARD_APPLY_RANGED_CLEAVE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_CLEAVE");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_CLEAVE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_CLEAVE", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_78_404417ac-b028-4559-b4a4-4f2c1ab8e0f8);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_78_404417ac-b028-4559-b4a4-4f2c1ab8e0f8, "SHARDS_2");
+
+// G36 Weapon_79 RAY (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_79_75ff25b4-3544-4fcf-addd-f074de8c5320, "AMP_SHARD_APPLY_MELEE_RAY", "AMP_SHARD_APPLY_RANGED_RAY");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_RAY");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_RAY");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_RAY", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_79_75ff25b4-3544-4fcf-addd-f074de8c5320);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_79_75ff25b4-3544-4fcf-addd-f074de8c5320, "SHARDS_2");
+
+// G36 Weapon_80 WEDGE (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_80_5e1a3846-8fed-42d0-8bd4-39796abe03ed, "AMP_SHARD_APPLY_MELEE_WEDGE", "AMP_SHARD_APPLY_RANGED_WEDGE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_WEDGE");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_WEDGE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_WEDGE", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_80_5e1a3846-8fed-42d0-8bd4-39796abe03ed);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_80_5e1a3846-8fed-42d0-8bd4-39796abe03ed, "SHARDS_2");
+
+// G36 Weapon_81 SPIKE (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_81_fc7bb66b-a1fe-4a1e-a444-fcb3a3836424, "AMP_SHARD_APPLY_MELEE_SPIKE", "AMP_SHARD_APPLY_RANGED_SPIKE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_SPIKE");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_SPIKE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_SPIKE", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_81_fc7bb66b-a1fe-4a1e-a444-fcb3a3836424);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_81_fc7bb66b-a1fe-4a1e-a444-fcb3a3836424, "SHARDS_2");
+
+// LEGENDARY (1500g base, 7000g shop, SHARDS_1 pool)
+
+// G37 Weapon_82 PYRELAND (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_82_f01531ee-6ee6-447f-8edf-2b0d68cb6066, "AMP_SHARD_APPLY_MELEE_PYRELAND", "AMP_SHARD_APPLY_RANGED_PYRELAND");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_PYRELAND");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_PYRELAND");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_PYRELAND", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_82_f01531ee-6ee6-447f-8edf-2b0d68cb6066);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_82_f01531ee-6ee6-447f-8edf-2b0d68cb6066, "SHARDS_1");
+
+// G37 Weapon_83 TUNDRA (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_83_de9de865-cc23-49b3-9c9e-456724db05cd, "AMP_SHARD_APPLY_MELEE_TUNDRA", "AMP_SHARD_APPLY_RANGED_TUNDRA");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_TUNDRA");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_TUNDRA");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_TUNDRA", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_83_de9de865-cc23-49b3-9c9e-456724db05cd);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_83_de9de865-cc23-49b3-9c9e-456724db05cd, "SHARDS_1");
+
+// G37 Weapon_84 SKYVAULT (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_84_4b0fd76f-ca38-46bd-bccc-b71748fd5601, "AMP_SHARD_APPLY_MELEE_SKYVAULT", "AMP_SHARD_APPLY_RANGED_SKYVAULT");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_SKYVAULT");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_SKYVAULT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_SKYVAULT", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_84_4b0fd76f-ca38-46bd-bccc-b71748fd5601);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_84_4b0fd76f-ca38-46bd-bccc-b71748fd5601, "SHARDS_1");
+
+// G37 Weapon_85 MAELSTROM (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_85_dc107b62-fd94-4d53-8d5f-855d84e762ce, "AMP_SHARD_APPLY_MELEE_MAELSTROM", "AMP_SHARD_APPLY_RANGED_MAELSTROM");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_MAELSTROM");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_MAELSTROM");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_MAELSTROM", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_85_dc107b62-fd94-4d53-8d5f-855d84e762ce);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_85_dc107b62-fd94-4d53-8d5f-855d84e762ce, "SHARDS_1");
+
+// G37 Weapon_86 MARSH (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_86_75a40f5d-cf64-4a19-b721-025faf6e727b, "AMP_SHARD_APPLY_MELEE_MARSH", "AMP_SHARD_APPLY_RANGED_MARSH");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_MARSH");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_MARSH");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_MARSH", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_86_75a40f5d-cf64-4a19-b721-025faf6e727b);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_86_75a40f5d-cf64-4a19-b721-025faf6e727b, "SHARDS_1");
+
+// G37 Weapon_87 BLIGHT (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_87_e36c1bbe-e04e-44ca-8aae-6242954c9875, "AMP_SHARD_APPLY_MELEE_BLIGHT", "AMP_SHARD_APPLY_RANGED_BLIGHT");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_BLIGHT");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_BLIGHT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_BLIGHT", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_87_e36c1bbe-e04e-44ca-8aae-6242954c9875);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_87_e36c1bbe-e04e-44ca-8aae-6242954c9875, "SHARDS_1");
+
+// G37 Weapon_88 BARROW (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_88_c54f7a5e-457d-4481-bd55-42d85e964807, "AMP_SHARD_APPLY_MELEE_BARROW", "AMP_SHARD_APPLY_RANGED_BARROW");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_BARROW");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_BARROW");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_BARROW", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_88_c54f7a5e-457d-4481-bd55-42d85e964807);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_88_c54f7a5e-457d-4481-bd55-42d85e964807, "SHARDS_1");
+
+// G37 Weapon_89 DAWNFIELD (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_89_42c9716e-cc7e-4074-89ad-824b6409db59, "AMP_SHARD_APPLY_MELEE_DAWNFIELD", "AMP_SHARD_APPLY_RANGED_DAWNFIELD");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_DAWNFIELD");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_DAWNFIELD");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_DAWNFIELD", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_89_42c9716e-cc7e-4074-89ad-824b6409db59);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_89_42c9716e-cc7e-4074-89ad-824b6409db59, "SHARDS_1");
+
+// G37 Weapon_90 REVERIE (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_90_159e3fe7-e3fa-42d1-9dc9-bc5472c54ba7, "AMP_SHARD_APPLY_MELEE_REVERIE", "AMP_SHARD_APPLY_RANGED_REVERIE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_REVERIE");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_REVERIE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_REVERIE", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_90_159e3fe7-e3fa-42d1-9dc9-bc5472c54ba7);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_90_159e3fe7-e3fa-42d1-9dc9-bc5472c54ba7, "SHARDS_1");
+
+// G37 Weapon_91 ABYSS (Stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_91_28fb34bb-a898-494c-9b90-e39857ff4d20, "AMP_SHARD_APPLY_MELEE_ABYSS", "AMP_SHARD_APPLY_RANGED_ABYSS");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_ABYSS");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_ABYSS");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_ABYSS", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_91_28fb34bb-a898-494c-9b90-e39857ff4d20);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_91_28fb34bb-a898-494c-9b90-e39857ff4d20, "SHARDS_1");
+
+// G38 Weapon_92 TITAN (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_92_e87bb0fa-4371-4c04-9828-221a0cdb118b, "AMP_SHARD_APPLY_MELEE_TITAN", "AMP_SHARD_APPLY_RANGED_TITAN", "AMP_SHARD_WEAPON_TITAN");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_TITAN");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_TITAN", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_92_e87bb0fa-4371-4c04-9828-221a0cdb118b);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_92_e87bb0fa-4371-4c04-9828-221a0cdb118b, "SHARDS_1");
+
+// G39 Weapon_93 SUNFALL (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_93_b612d6fa-21e2-4321-a477-a9734b77d840, "AMP_SHARD_APPLY_MELEE_SUNFALL", "AMP_SHARD_APPLY_RANGED_SUNFALL", "AMP_SHARD_WEAPON_SUNFALL");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_SUNFALL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_SUNFALL", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_93_b612d6fa-21e2-4321-a477-a9734b77d840);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_93_b612d6fa-21e2-4321-a477-a9734b77d840, "SHARDS_1");
+
+// G39 Weapon_94 FROSTBOUND (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_94_96c45fef-960b-4e86-80fb-22718cbd6bc3, "AMP_SHARD_APPLY_MELEE_FROSTBOUND", "AMP_SHARD_APPLY_RANGED_FROSTBOUND", "AMP_SHARD_WEAPON_FROSTBOUND");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_FROSTBOUND");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_FROSTBOUND", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_94_96c45fef-960b-4e86-80fb-22718cbd6bc3);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_94_96c45fef-960b-4e86-80fb-22718cbd6bc3, "SHARDS_1");
+
+// G39 Weapon_95 SKYBOLT (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_95_d1e45af8-0183-45fe-bf9c-bc88c86d30a3, "AMP_SHARD_APPLY_MELEE_SKYBOLT", "AMP_SHARD_APPLY_RANGED_SKYBOLT", "AMP_SHARD_WEAPON_SKYBOLT");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_SKYBOLT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_SKYBOLT", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_95_d1e45af8-0183-45fe-bf9c-bc88c86d30a3);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_95_d1e45af8-0183-45fe-bf9c-bc88c86d30a3, "SHARDS_1");
+
+// G39 Weapon_96 STORMHEART (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_96_eccfaba5-c1f2-4d55-a43e-0f5a3fe36c59, "AMP_SHARD_APPLY_MELEE_STORMHEART", "AMP_SHARD_APPLY_RANGED_STORMHEART", "AMP_SHARD_WEAPON_STORMHEART");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_STORMHEART");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_STORMHEART", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_96_eccfaba5-c1f2-4d55-a43e-0f5a3fe36c59);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_96_eccfaba5-c1f2-4d55-a43e-0f5a3fe36c59, "SHARDS_1");
+
+// G39 Weapon_97 RUSTVEIL (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_97_216fbc64-8497-438a-b447-ccc5ac584085, "AMP_SHARD_APPLY_MELEE_RUSTVEIL", "AMP_SHARD_APPLY_RANGED_RUSTVEIL", "AMP_SHARD_WEAPON_RUSTVEIL");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_RUSTVEIL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_RUSTVEIL", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_97_216fbc64-8497-438a-b447-ccc5ac584085);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_97_216fbc64-8497-438a-b447-ccc5ac584085, "SHARDS_1");
+
+// G39 Weapon_98 VENOMTIDE (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_98_1ef58117-861c-4934-afb1-5582eed5069b, "AMP_SHARD_APPLY_MELEE_VENOMTIDE", "AMP_SHARD_APPLY_RANGED_VENOMTIDE", "AMP_SHARD_WEAPON_VENOMTIDE");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_VENOMTIDE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_VENOMTIDE", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_98_1ef58117-861c-4934-afb1-5582eed5069b);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_98_1ef58117-861c-4934-afb1-5582eed5069b, "SHARDS_1");
+
+// G39 Weapon_99 GRAVECALL (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_99_6663e18b-8486-4133-8ebd-b994f351d597, "AMP_SHARD_APPLY_MELEE_GRAVECALL", "AMP_SHARD_APPLY_RANGED_GRAVECALL", "AMP_SHARD_WEAPON_GRAVECALL");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_GRAVECALL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_GRAVECALL", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_99_6663e18b-8486-4133-8ebd-b994f351d597);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_99_6663e18b-8486-4133-8ebd-b994f351d597, "SHARDS_1");
+
+// G39 Weapon_100 DAYBREAK (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_100_b91f0576-a0fa-422a-aeba-f7f5770de33e, "AMP_SHARD_APPLY_MELEE_DAYBREAK", "AMP_SHARD_APPLY_RANGED_DAYBREAK", "AMP_SHARD_WEAPON_DAYBREAK");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_DAYBREAK");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_DAYBREAK", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_100_b91f0576-a0fa-422a-aeba-f7f5770de33e);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_100_b91f0576-a0fa-422a-aeba-f7f5770de33e, "SHARDS_1");
+
+// G39 Weapon_101 MINDREND (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_101_cfaf6d18-e005-4536-acd9-5a593106b087, "AMP_SHARD_APPLY_MELEE_MINDREND", "AMP_SHARD_APPLY_RANGED_MINDREND", "AMP_SHARD_WEAPON_MINDREND");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_MINDREND");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_MINDREND", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_101_cfaf6d18-e005-4536-acd9-5a593106b087);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_101_cfaf6d18-e005-4536-acd9-5a593106b087, "SHARDS_1");
+
+// G39 Weapon_102 NULLFALL (NonStack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_102_73dc56f9-7866-4335-a4a1-d4b6a877ade0, "AMP_SHARD_APPLY_MELEE_NULLFALL", "AMP_SHARD_APPLY_RANGED_NULLFALL", "AMP_SHARD_WEAPON_NULLFALL");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_NULLFALL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_NULLFALL", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_102_73dc56f9-7866-4335-a4a1-d4b6a877ade0);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_102_73dc56f9-7866-4335-a4a1-d4b6a877ade0, "SHARDS_1");
+
+KBSECTION
+
+EXITSECTION
+ENDEXITSECTION

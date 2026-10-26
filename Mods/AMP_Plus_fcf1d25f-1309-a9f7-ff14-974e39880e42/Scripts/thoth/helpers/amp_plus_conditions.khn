@@ -1,0 +1,637 @@
+-- AMP_Plus custom Khonsu conditions
+
+-- vanilla ManeuverAndWeaponActionCheck greps ManeuverSaveDC and misses saveless maneuvers
+-- the die is a HitCost, so HasUseCosts only sees sweeping attack, and riposte pays on its reaction
+-- no HitCost reader in Khonsu: vanilla ones listed by id, cost and save legs cover modded
+function AMP_Plus_IsManeuver()
+    return (
+        SpellId('Target_MenacingAttack') | SpellId('Target_PushingAttack') |
+        SpellId('Target_TripAttack') | SpellId('Target_DisarmingAttack') |
+        SpellId('Target_DistractingStrike') | SpellId('Target_GoadingAttack') |
+        SpellId('Target_ManeuveringAttack') | SpellId('Target_LungingAttack') |
+        SpellId('Target_FeintingAttack') | SpellId('Target_Riposte') |
+        SpellId('Zone_SweepingAttack') |
+        SpellId('Projectile_MenacingAttack') | SpellId('Projectile_PushingAttack') |
+        SpellId('Projectile_TripAttack') | SpellId('Projectile_DisarmingAttack') |
+        SpellId('Projectile_DistractingStrike') | SpellId('Projectile_GoadingAttack') |
+        SpellId('Projectile_ManeuveringAttack') |
+        HasUseCosts('SuperiorityDie') |
+        HasStringInSpellRoll('ManeuverSaveDC') | HasStringInFunctorConditions('ManeuverSaveDC')
+    )
+end
+
+-- +2 on top of the max, unlike vanilla HybridCasterWeaponActionDC
+-- -10 fallback on SourceSpellDC: a phantom default spell DC of 10 must not beat a real maneuver DC
+-- both halves guard a missing source, vanilla ManeuverSaveDC indexes Source.ProficiencyBonus bare
+-- a status tick or apply roll can have a dead or unloaded causee, and indexing it throws
+function AMP_Plus_ManeuverDC(entity)
+    local entity = entity or context.Source
+    local dc = nil
+    if entity ~= nil and entity.IsValid then
+        try
+            dc = 8 + entity.ProficiencyBonus + math.max(GetModifier(entity.Strength), GetModifier(entity.Dexterity))
+        catch e then
+        end
+    end
+    return dc
+end
+
+function AMP_Plus_PotencyDC(fallbackDC)
+    local entity = context.Source
+    if entity == nil or not entity.IsValid then
+        return fallbackDC or 18
+    end
+    local spellDC = -10
+    try
+        spellDC = SourceSpellDC(-10, entity)
+    catch e then
+    end
+    local maneuverDC = AMP_Plus_ManeuverDC(entity)
+    if maneuverDC == nil then
+        if spellDC <= -10 then
+            return fallbackDC or 18
+        end
+        return spellDC + 2
+    end
+    return math.max(spellDC, maneuverDC) + 2
+end
+
+-- Scarlet Warlock declares its own root per damage type, so those roots are listed
+-- its variants inherit from them and the child leg catches those
+function AMP_Plus_IsEldritchBlast()
+    local blastRoots = {
+          'Projectile_EldritchBlast'
+        , 'Projectile_EldritchBlast_Force_Spell'
+        , 'Projectile_EldritchBlast_Hexblade_Spell'
+        , 'Projectile_EldritchBlast_Psychic_Spell'
+        , 'Projectile_EldritchBlast_Fairy_Spell'
+        , 'Projectile_EldritchBlast_Radiant_Spell'
+        , 'Projectile_EldritchBlast_Lunar_Spell'
+        , 'Projectile_EldritchBlast_Acid_Spell'
+        , 'Projectile_EldritchBlast_Void_Spell'
+        , 'Projectile_EldritchBlast_Poison_Spell'
+        , 'Projectile_EldritchBlast_Blight_Spell'
+        , 'Projectile_EldritchBlast_Necrotic_Spell'
+        , 'Projectile_EldritchBlast_Blood_Spell'
+        , 'Projectile_EldritchBlast_Fire_Spell'
+        , 'Projectile_EldritchBlast_Felfire_Spell'
+        , 'Projectile_EldritchBlast_Cold_Spell'
+        , 'Projectile_EldritchBlast_Water_Spell'
+        , 'Projectile_EldritchBlast_Lightning_Spell'
+        , 'Projectile_EldritchBlast_Electricity_Spell'
+        , 'Projectile_EldritchBlast_Thunder_Spell'
+        , 'Projectile_EldritchBlast_Darkness_Spell'
+    }
+    for i,v in ipairs(blastRoots) do
+        if SpellId(v).Result then
+            return ConditionResult(true)
+        end
+        if IsSpellChildOrVariantFromContext(v).Result then
+            return ConditionResult(true)
+        end
+    end
+    return ConditionResult(false)
+end
+
+-- the clothes' own steps inherit via using, not RootSpellID, so the child leg misses them
+function AMP_Plus_IsShadowStep()
+    local shadowSteps = {
+          'Target_ShadowStep'
+        , 'Target_ShadowWalk'
+        , 'Target_SHA_Justiciar_ShadowStep'
+        , 'Target_MAG_Shadow_Shadowstep'
+        , 'Target_ShadowStrike_Instant'
+        , 'Target_LOW_HouseOfGrief_ShadowStep'
+        , 'Target_AMP_Plus_C11_ShadowSlip'
+        , 'Target_AMP_Plus_C11_ShadowSlip_2'
+        , 'Target_AMP_Plus_C11_ShadowSlip_3'
+        , 'Target_AMP_Plus_C11_ShadowSlip_4'
+    }
+    for i,v in ipairs(shadowSteps) do
+        if SpellId(v).Result then
+            return ConditionResult(true)
+        end
+        if IsSpellChildOrVariantFromContext(v).Result then
+            return ConditionResult(true)
+        end
+    end
+    return ConditionResult(false)
+end
+
+-- stats have no IsBoss(), so read the difficulty overlay: tier V4 status, its V5 twin, ULTRA champion
+function AMP_Plus_IsAmpBoss(entity)
+    local entity = entity or context.Target
+    return HasAnyStatus({
+        'AMP_BOSS_STANDARD_T0_V4', 'AMP_BOSS_STANDARD_T1_V4', 'AMP_BOSS_STANDARD_T2_V4',
+        'AMP_BOSS_STANDARD_T3_V4', 'AMP_BOSS_STANDARD_T4_V4', 'AMP_BOSS_STANDARD_T5_V4',
+        'AMP_BOSS_IMPOSSIBLE_T0_V4', 'AMP_BOSS_IMPOSSIBLE_T1_V4', 'AMP_BOSS_IMPOSSIBLE_T2_V4',
+        'AMP_BOSS_IMPOSSIBLE_T3_V4', 'AMP_BOSS_IMPOSSIBLE_T4_V4', 'AMP_BOSS_IMPOSSIBLE_T5_V4',
+        'AMP_PROG_BOSS_STANDARD_T0_V5', 'AMP_PROG_BOSS_STANDARD_T1_V5', 'AMP_PROG_BOSS_STANDARD_T2_V5',
+        'AMP_PROG_BOSS_STANDARD_T3_V5', 'AMP_PROG_BOSS_STANDARD_T4_V5', 'AMP_PROG_BOSS_STANDARD_T5_V5',
+        'AMP_PROG_BOSS_IMPOSSIBLE_T0_V5', 'AMP_PROG_BOSS_IMPOSSIBLE_T1_V5', 'AMP_PROG_BOSS_IMPOSSIBLE_T2_V5',
+        'AMP_PROG_BOSS_IMPOSSIBLE_T3_V5', 'AMP_PROG_BOSS_IMPOSSIBLE_T4_V5', 'AMP_PROG_BOSS_IMPOSSIBLE_T5_V5',
+        'AMP_ULTRA_BOSS_OVERLAY'
+    }, {}, {}, entity)
+end
+
+-- Litany prayers only, base IsAMPIlmaterPrayer() covers all ten
+-- Vessel and Wound prayers cast once per rest and stay out of the Unbroken discount
+function AMP_Plus_IsLitanyPrayer()
+    return IsSpellIdOrChild('AMP_Ilmater_Prayer_Preaching_1')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Preaching_2')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Preaching_3')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Preaching_4')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Thread_1')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Thread_2')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Thread_3')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Thread_4')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Prophet_1')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Prophet_2')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Prophet_3')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Prophet_4')
+end
+
+-- how far up the Moleculation ladder a source feeds, read from the causer so a tick on the victim can ask
+-- ring tiers grade it, other and unrecognised sources stop at the first degree, top tier answers five
+function AMP_Plus_ForceSourceCapIs(cap, entity)
+    entity = entity or context.Source
+    local t4 = HasPassive('AMP_Plus_Force_Grip_T4', entity).Result
+    local t3 = HasPassive('AMP_Plus_Force_Grip_T3', entity).Result
+    local t2 = HasPassive('AMP_Plus_Force_Grip_T2', entity).Result
+    if cap == 5 then
+        return ConditionResult(t4)
+    end
+    if cap == 3 then
+        return ConditionResult(t3 and not t4)
+    end
+    if cap == 2 then
+        return ConditionResult(t2 and not t3 and not t4)
+    end
+    return ConditionResult(not t2 and not t3 and not t4)
+end
+
+function AMP_Plus_HasMoleculation(entity)
+    local entity = entity or context.Target
+    return HasAnyStatus({
+        'MOLECULATION_1', 'MOLECULATION_2', 'MOLECULATION_3', 'MOLECULATION_4', 'MOLECULATION_5'
+    }, {}, {}, entity)
+end
+
+function AMP_Plus_IsTelekinesis()
+    local roots = {
+          'Throw_Telekinesis'
+        , 'Throw_Telekinesis_Recast'
+        , 'Throw_Telekinesis_6'
+        , 'Throw_Telekinesis_WildMagic'
+        , 'Throw_MAG_Throw_Telekinesis'
+        , 'Throw_MAG_Throw_Githborn_Telekinesis'
+    }
+    for i,v in ipairs(roots) do
+        if SpellId(v).Result then
+            return ConditionResult(true)
+        end
+        if IsSpellChildOrVariantFromContext(v).Result then
+            return ConditionResult(true)
+        end
+    end
+    return ConditionResult(false)
+end
+
+-- Khonsu cannot list an entity's statuses, so every shard status with an item icon on a weapon is named
+-- stacks read as one status, so this counts variety on purpose
+local SHARD_ROSTER = {
+      'AMP_SHARD_WEAPON_ABYSS', 'AMP_SHARD_WEAPON_ACCURACY', 'AMP_SHARD_WEAPON_ACID'
+    , 'AMP_SHARD_WEAPON_ARC', 'AMP_SHARD_WEAPON_ARCHITECT', 'AMP_SHARD_WEAPON_AURA'
+    , 'AMP_SHARD_WEAPON_AWE', 'AMP_SHARD_WEAPON_BARB', 'AMP_SHARD_WEAPON_BARGAIN'
+    , 'AMP_SHARD_WEAPON_BARROW', 'AMP_SHARD_WEAPON_BELL', 'AMP_SHARD_WEAPON_BITE'
+    , 'AMP_SHARD_WEAPON_BLAZE', 'AMP_SHARD_WEAPON_BLIGHT', 'AMP_SHARD_WEAPON_BLOODLETTER'
+    , 'AMP_SHARD_WEAPON_BLOODSUCKER', 'AMP_SHARD_WEAPON_BOLT', 'AMP_SHARD_WEAPON_BREAK'
+    , 'AMP_SHARD_WEAPON_CHANNEL', 'AMP_SHARD_WEAPON_CHAR', 'AMP_SHARD_WEAPON_CHILL'
+    , 'AMP_SHARD_WEAPON_CLASH', 'AMP_SHARD_WEAPON_CLAW', 'AMP_SHARD_WEAPON_CLEAVE'
+    , 'AMP_SHARD_WEAPON_COLD', 'AMP_SHARD_WEAPON_CUDGEL', 'AMP_SHARD_WEAPON_DAWNFIELD'
+    , 'AMP_SHARD_WEAPON_DAYBREAK', 'AMP_SHARD_WEAPON_DISCHARGE', 'AMP_SHARD_WEAPON_DRIFT'
+    , 'AMP_SHARD_WEAPON_DRIP', 'AMP_SHARD_WEAPON_EDGE', 'AMP_SHARD_WEAPON_EMBER'
+    , 'AMP_SHARD_WEAPON_ENCHANT', 'AMP_SHARD_WEAPON_ETCH', 'AMP_SHARD_WEAPON_EW_ACID'
+    , 'AMP_SHARD_WEAPON_EW_COLD', 'AMP_SHARD_WEAPON_EW_FIRE', 'AMP_SHARD_WEAPON_EW_LIGHTNING'
+    , 'AMP_SHARD_WEAPON_EW_THUNDER', 'AMP_SHARD_WEAPON_FAERIEFIRE', 'AMP_SHARD_WEAPON_FANG'
+    , 'AMP_SHARD_WEAPON_FINESSE', 'AMP_SHARD_WEAPON_FIRE', 'AMP_SHARD_WEAPON_FIST'
+    , 'AMP_SHARD_WEAPON_FLICK', 'AMP_SHARD_WEAPON_FORCE', 'AMP_SHARD_WEAPON_FROSTBOUND'
+    , 'AMP_SHARD_WEAPON_GAMBLE', 'AMP_SHARD_WEAPON_GASH', 'AMP_SHARD_WEAPON_GLOOM'
+    , 'AMP_SHARD_WEAPON_GNAW', 'AMP_SHARD_WEAPON_GRAVECALL', 'AMP_SHARD_WEAPON_GRIP'
+    , 'AMP_SHARD_WEAPON_HALO', 'AMP_SHARD_WEAPON_HAWK', 'AMP_SHARD_WEAPON_HEAVE'
+    , 'AMP_SHARD_WEAPON_HONING', 'AMP_SHARD_WEAPON_JAB', 'AMP_SHARD_WEAPON_JOLT'
+    , 'AMP_SHARD_WEAPON_KNELL', 'AMP_SHARD_WEAPON_LANCE', 'AMP_SHARD_WEAPON_LIFEDRAIN'
+    , 'AMP_SHARD_WEAPON_LIGHTNING', 'AMP_SHARD_WEAPON_MAELSTROM', 'AMP_SHARD_WEAPON_MAGIC'
+    , 'AMP_SHARD_WEAPON_MARSH', 'AMP_SHARD_WEAPON_MAUL', 'AMP_SHARD_WEAPON_MAW'
+    , 'AMP_SHARD_WEAPON_MINDREND', 'AMP_SHARD_WEAPON_NECROTIC', 'AMP_SHARD_WEAPON_NEEDLE'
+    , 'AMP_SHARD_WEAPON_NETHSEED', 'AMP_SHARD_WEAPON_NICK', 'AMP_SHARD_WEAPON_NIP'
+    , 'AMP_SHARD_WEAPON_NULLFALL', 'AMP_SHARD_WEAPON_NUMB', 'AMP_SHARD_WEAPON_PELT'
+    , 'AMP_SHARD_WEAPON_PIERCE', 'AMP_SHARD_WEAPON_POISON', 'AMP_SHARD_WEAPON_POUNCE'
+    , 'AMP_SHARD_WEAPON_PRICK', 'AMP_SHARD_WEAPON_PSYCHIC', 'AMP_SHARD_WEAPON_PYRELAND'
+    , 'AMP_SHARD_WEAPON_RADIANT', 'AMP_SHARD_WEAPON_RAY', 'AMP_SHARD_WEAPON_REACH'
+    , 'AMP_SHARD_WEAPON_REEK', 'AMP_SHARD_WEAPON_REPEL', 'AMP_SHARD_WEAPON_REVERIE'
+    , 'AMP_SHARD_WEAPON_RIFT', 'AMP_SHARD_WEAPON_RITE', 'AMP_SHARD_WEAPON_ROT'
+    , 'AMP_SHARD_WEAPON_RUMBLE', 'AMP_SHARD_WEAPON_RUSTVEIL', 'AMP_SHARD_WEAPON_SCAVENGER'
+    , 'AMP_SHARD_WEAPON_SEAR', 'AMP_SHARD_WEAPON_SEVER', 'AMP_SHARD_WEAPON_SHINE'
+    , 'AMP_SHARD_WEAPON_SKYBOLT', 'AMP_SHARD_WEAPON_SKYVAULT', 'AMP_SHARD_WEAPON_SPIKE'
+    , 'AMP_SHARD_WEAPON_SPIRIT', 'AMP_SHARD_WEAPON_STAB', 'AMP_SHARD_WEAPON_STING'
+    , 'AMP_SHARD_WEAPON_STORMHEART', 'AMP_SHARD_WEAPON_SUNFALL', 'AMP_SHARD_WEAPON_SWEEP'
+    , 'AMP_SHARD_WEAPON_SWIFT', 'AMP_SHARD_WEAPON_THROWN', 'AMP_SHARD_WEAPON_THUNDER'
+    , 'AMP_SHARD_WEAPON_THUNDERCALLER', 'AMP_SHARD_WEAPON_TITAN', 'AMP_SHARD_WEAPON_TUNDRA'
+    , 'AMP_SHARD_WEAPON_TWIN', 'AMP_SHARD_WEAPON_TWITCH', 'AMP_SHARD_WEAPON_VECTOR'
+    , 'AMP_SHARD_WEAPON_VENOMTIDE', 'AMP_SHARD_WEAPON_WEDGE'
+}
+
+function AMP_Plus_ShardRoster()
+    return SHARD_ROSTER
+end
+
+-- a weapon status' IF runs with the wielder as source, so ask the wielder about one weapon it holds
+-- shards apply main hand but travel with the weapon, which can sit off-hand beside another
+-- anchor is the calling shard's status: its hand is read, no anchor or both hands means main hand
+function AMP_Plus_ShardHand(source, mainHand)
+    local hand = nil
+    try
+        hand = GetActiveWeapon(source, mainHand)
+    catch e then
+    end
+    if hand ~= nil and hand.IsValid and hand ~= source then
+        return hand
+    end
+    return nil
+end
+
+function AMP_Plus_ShardHosts(weapon, anchor)
+    local hosts = {}
+    if weapon ~= nil then
+        hosts[1] = weapon
+        return hosts
+    end
+    local source = context.Source
+    if source == nil or not source.IsValid then
+        return hosts
+    end
+    hosts[1] = source
+    local hand = AMP_Plus_ShardHand(source, true)
+    if anchor ~= nil and (hand == nil or not HasStatus(anchor, hand).Result) then
+        local offHand = AMP_Plus_ShardHand(source, false)
+        if offHand ~= nil and HasStatus(anchor, offHand).Result then
+            hand = offHand
+        end
+    end
+    if hand ~= nil then
+        hosts[2] = hand
+    end
+    return hosts
+end
+
+function AMP_Plus_ShardOnHosts(shardId, hosts)
+    for i,h in ipairs(hosts) do
+        if HasStatus(shardId, h).Result then
+            return true
+        end
+    end
+    return false
+end
+
+function AMP_Plus_UniqueShardsOnWeapon(atLeast, anchor, weapon)
+    local hosts = AMP_Plus_ShardHosts(weapon, anchor)
+    local found = 0
+    for i,v in ipairs(AMP_Plus_ShardRoster()) do
+        if AMP_Plus_ShardOnHosts(v, hosts) then
+            found = found + 1
+            if found >= atLeast then
+                return ConditionResult(true)
+            end
+        end
+    end
+    return ConditionResult(false)
+end
+
+-- Same roster read the other way: a weapon carrying few different shards. The bare-steel
+-- shards pay out here, so the count has to be exact rather than stop early.
+function AMP_Plus_UniqueShardsAtMost(atMost, anchor, weapon)
+    local hosts = AMP_Plus_ShardHosts(weapon, anchor)
+    local found = 0
+    for i,v in ipairs(AMP_Plus_ShardRoster()) do
+        if AMP_Plus_ShardOnHosts(v, hosts) then
+            found = found + 1
+            if found > atMost then
+                return ConditionResult(false)
+            end
+        end
+    end
+    return ConditionResult(true)
+end
+
+-- One named shard on the weapon. Wraps HasStatus only to carry the same default entity as
+-- the rest of the family, so a shard reading its neighbours never has to name the source.
+function AMP_Plus_WeaponHasShard(shardId, anchor, weapon)
+    return ConditionResult(AMP_Plus_ShardOnHosts(shardId, AMP_Plus_ShardHosts(weapon, anchor)))
+end
+
+-- Shards that rewrite the weapon's damage type. Two of them on one weapon fight over the
+-- same field, and a shard can pay for that quarrel instead of losing to it.
+function AMP_Plus_WeaponElementals(atLeast, anchor, weapon)
+    local hosts = AMP_Plus_ShardHosts(weapon, anchor)
+    local elementals = {
+        'AMP_SHARD_WEAPON_FIRE', 'AMP_SHARD_WEAPON_COLD', 'AMP_SHARD_WEAPON_LIGHTNING'
+        , 'AMP_SHARD_WEAPON_THUNDER', 'AMP_SHARD_WEAPON_ACID', 'AMP_SHARD_WEAPON_POISON'
+        , 'AMP_SHARD_WEAPON_NECROTIC', 'AMP_SHARD_WEAPON_RADIANT', 'AMP_SHARD_WEAPON_PSYCHIC'
+        , 'AMP_SHARD_WEAPON_FORCE', 'AMP_SHARD_WEAPON_SUNFALL', 'AMP_SHARD_WEAPON_FROSTBOUND'
+        , 'AMP_SHARD_WEAPON_SKYBOLT', 'AMP_SHARD_WEAPON_STORMHEART', 'AMP_SHARD_WEAPON_RUSTVEIL'
+        , 'AMP_SHARD_WEAPON_VENOMTIDE', 'AMP_SHARD_WEAPON_GRAVECALL', 'AMP_SHARD_WEAPON_DAYBREAK'
+        , 'AMP_SHARD_WEAPON_MINDREND', 'AMP_SHARD_WEAPON_NULLFALL'
+    }
+    local found = 0
+    for i,v in ipairs(elementals) do
+        if AMP_Plus_ShardOnHosts(v, hosts) then
+            found = found + 1
+            if found >= atLeast then
+                return ConditionResult(true)
+            end
+        end
+    end
+    return ConditionResult(false)
+end
+
+-- Shards that set the weapon's damage die.
+function AMP_Plus_WeaponSetsDie(anchor, weapon)
+    local hosts = AMP_Plus_ShardHosts(weapon, anchor)
+    local dice = {
+        'AMP_SHARD_WEAPON_NICK', 'AMP_SHARD_WEAPON_BELL', 'AMP_SHARD_WEAPON_FLICK'
+        , 'AMP_SHARD_WEAPON_GAMBLE', 'AMP_SHARD_WEAPON_STAB', 'AMP_SHARD_WEAPON_TWIN'
+        , 'AMP_SHARD_WEAPON_MAUL', 'AMP_SHARD_WEAPON_TITAN', 'AMP_SHARD_WEAPON_SUNFALL'
+        , 'AMP_SHARD_WEAPON_FROSTBOUND', 'AMP_SHARD_WEAPON_SKYBOLT', 'AMP_SHARD_WEAPON_STORMHEART'
+        , 'AMP_SHARD_WEAPON_RUSTVEIL', 'AMP_SHARD_WEAPON_VENOMTIDE', 'AMP_SHARD_WEAPON_GRAVECALL'
+        , 'AMP_SHARD_WEAPON_DAYBREAK', 'AMP_SHARD_WEAPON_MINDREND', 'AMP_SHARD_WEAPON_NULLFALL'
+    }
+    for i,v in ipairs(dice) do
+        if AMP_Plus_ShardOnHosts(v, hosts) then
+            return ConditionResult(true)
+        end
+    end
+    return ConditionResult(false)
+end
+
+-- Shards that rewrite what the weapon deals: its damage type, its damage die, or both.
+-- Two of those on one weapon are pulling the same field in different directions.
+local SHARD_REWRITES = {
+    'AMP_SHARD_WEAPON_FIRE', 'AMP_SHARD_WEAPON_COLD', 'AMP_SHARD_WEAPON_LIGHTNING'
+    , 'AMP_SHARD_WEAPON_THUNDER', 'AMP_SHARD_WEAPON_ACID', 'AMP_SHARD_WEAPON_POISON'
+    , 'AMP_SHARD_WEAPON_NECROTIC', 'AMP_SHARD_WEAPON_RADIANT', 'AMP_SHARD_WEAPON_PSYCHIC'
+    , 'AMP_SHARD_WEAPON_FORCE', 'AMP_SHARD_WEAPON_SUNFALL', 'AMP_SHARD_WEAPON_FROSTBOUND'
+    , 'AMP_SHARD_WEAPON_SKYBOLT', 'AMP_SHARD_WEAPON_STORMHEART', 'AMP_SHARD_WEAPON_RUSTVEIL'
+    , 'AMP_SHARD_WEAPON_VENOMTIDE', 'AMP_SHARD_WEAPON_GRAVECALL', 'AMP_SHARD_WEAPON_DAYBREAK'
+    , 'AMP_SHARD_WEAPON_MINDREND', 'AMP_SHARD_WEAPON_NULLFALL', 'AMP_SHARD_WEAPON_NICK'
+    , 'AMP_SHARD_WEAPON_BELL', 'AMP_SHARD_WEAPON_FLICK', 'AMP_SHARD_WEAPON_GAMBLE'
+    , 'AMP_SHARD_WEAPON_STAB', 'AMP_SHARD_WEAPON_TWIN', 'AMP_SHARD_WEAPON_MAUL'
+    , 'AMP_SHARD_WEAPON_TITAN'
+}
+
+function AMP_Plus_WeaponRewrites(atLeast, anchor, weapon)
+    local hosts = AMP_Plus_ShardHosts(weapon, anchor)
+    local found = 0
+    for i,v in ipairs(SHARD_REWRITES) do
+        if AMP_Plus_ShardOnHosts(v, hosts) then
+            found = found + 1
+            if found >= atLeast then
+                return ConditionResult(true)
+            end
+        end
+    end
+    return ConditionResult(false)
+end
+
+-- The target is not turned towards the attacker.
+function AMP_Plus_FromBehind(target, source)
+    target = target or context.Target
+    source = source or context.Source
+    return ~FacingMe(target, source)
+end
+
+function AMP_Plus_TargetUnmoved(target)
+    target = target or context.Target
+    return ~HadTurnInCombat(target)
+end
+
+-- reach boost sits on the wearer, not the weapon status, so each hand checks its own weapon for the shard
+function AMP_Plus_ReachMainHand()
+    return IsSpellIdOrChild('Target_MainHandAttack')
+        & HasStatus('AMP_SHARD_WEAPON_REACH', GetActiveWeapon(context.Source, true))
+end
+
+function AMP_Plus_ReachOffHand()
+    return IsSpellIdOrChild('Target_OffhandAttack')
+        & HasStatus('AMP_SHARD_WEAPON_REACH', GetActiveWeapon(context.Source, false))
+end
+
+-- melee spells read the main-hand weapon, a spell is cast from it
+-- Booming Blade rolls as a weapon attack, so it is named in all three forms
+function AMP_Plus_ReachMeleeSpell()
+    return (HasStringInSpellRoll('MeleeSpellAttack')
+        | IsSpellIdOrChild('Target_BoomingBlade')
+        | IsSpellIdOrChild('Target_BoomingBladeEx')
+        | IsSpellIdOrChild('Target_BoomingBlade_ClassSpell'))
+        & HasStatus('AMP_SHARD_WEAPON_REACH', GetActiveWeapon(context.Source, true))
+end
+
+function AMP_Plus_IsBoomingBlade()
+    return SpellId('Target_BoomingBlade')
+         | SpellId('Target_BoomingBladeEx')
+         | SpellId('Target_BoomingBlade_ClassSpell')
+         | SpellId('AMP_Kyzr_Booming_Blade_3')
+         | SpellId('AMP_Kyzr_Booming_Blade_4')
+end
+
+-- Booming Blade is a weapon attack as well, so cantrip riders land twice. Gates use this, not IsCantrip()
+function AMP_Plus_IsTrueCantrip()
+    return IsCantrip()
+         & ~SpellId('Target_BoomingBlade')
+         & ~SpellId('Target_BoomingBladeEx')
+         & ~SpellId('Target_BoomingBlade_ClassSpell')
+         & ~SpellId('AMP_Kyzr_Booming_Blade_3')
+         & ~SpellId('AMP_Kyzr_Booming_Blade_4')
+end
+
+-- The improvisation discount is spent once per turn, so its cooldown marker joins the gate.
+function AMP_Plus_IsImprovCantrip()
+    return AMP_Plus_IsTrueCantrip() & ~HasStatus('AMP_SHARD_IMPROVISE_CD', context.Source)
+end
+
+-- FightingStyle_GreatWeapon also matches mauls, battleaxes and pikes, so weapon groups are asked directly
+function AMP_Plus_IsPalatineWeapon()
+    local weapon = GetActiveWeapon(context.Source, true)
+    local isGuardArm = IsWeaponOfProficiencyGroup('Greatswords', weapon)
+                     | IsWeaponOfProficiencyGroup('Longswords', weapon)
+                     | IsWeaponOfProficiencyGroup('Glaives', weapon)
+                     | IsWeaponOfProficiencyGroup('Halberds', weapon)
+    return isGuardArm
+         & ~WieldingWeapon('Melee', true, false, context.Source)
+         & ~WieldingWeapon('Ammunition', true, false, context.Source)
+         & ~HasShieldEquipped(context.Source)
+end
+
+-- wearer is context.Source in a turn-start passive and context.Target in OnDamage, so both are tried
+-- a tie counts as not highest, the bonus is for wielders Charisma does not already pay
+function AMP_Plus_CharismaNotHighest(entity)
+    entity = entity or context.Source
+    if entity == nil or not entity.IsValid then
+        entity = context.Target
+    end
+    if entity == nil or not entity.IsValid then
+        return ConditionResult(false)
+    end
+    local cha = entity.Charisma
+    return ConditionResult(not (
+        cha > entity.Strength and
+        cha > entity.Dexterity and
+        cha > entity.Constitution and
+        cha > entity.Intelligence and
+        cha > entity.Wisdom
+    ))
+end
+
+-- one of these seats at a time, so HasStatus('BLESS') answers no on a creature already blessed
+-- Khonsu cannot read a StackId. Inheritors with their own StackId stack beside Bless and stay out
+local BLESS_FAMILY = {
+      'BLESS'
+    , 'WYR_CIRCUS_STATUEBLESS'
+    , 'GOB_PAIN_PRIEST_DAGGER_BLESS'
+    , 'MAG_ILLITHID_BLESS'
+    , 'AMP_NEWYEAR_BLESS'
+    , 'AMP_PLUS_HERO_BLESS'
+}
+
+function AMP_Plus_HasAnyBless(entity)
+    entity = entity or context.Target
+    return HasAnyStatus(BLESS_FAMILY, {}, {}, entity)
+end
+
+-- The same family read from an OnStatusApply context, where the question is which status
+-- just landed rather than what the creature carries.
+function AMP_Plus_IsBlessStatus()
+    return StatusId('BLESS')
+         | StatusId('WYR_CIRCUS_STATUEBLESS')
+         | StatusId('GOB_PAIN_PRIEST_DAGGER_BLESS')
+         | StatusId('MAG_ILLITHID_BLESS')
+         | StatusId('AMP_NEWYEAR_BLESS')
+         | StatusId('AMP_PLUS_HERO_BLESS')
+end
+
+
+-- Evocation cantrips, spell-filter form for UnlockSpellVariant. Shout variants are excluded:
+-- they are self-cast and a forced spell variant on them behaves badly.
+function AMP_Plus_IsEvocationCantrip()
+    return IsCantrip() & IsSpellOfSchool(SpellSchool.Evocation) & ~SpellTypeIs(SpellType.Shout)
+end
+
+-- Illusion spells that take a target. Shout variants are excluded: an extra forced target
+-- makes a self-cast spell uncastable.
+function AMP_Plus_IsIllusionTargetSpell()
+    return IsSpellOfSchool(SpellSchool.Illusion) & ~SpellTypeIs(SpellType.Shout)
+end
+
+-- scrolls and items skip the caster's spell list, so read the status the spell lands
+-- upcast tiers have no shared parent
+function AMP_Plus_IsFalseLifeStatus()
+    return StatusId('FALSE_LIFE')
+         | StatusId('FALSE_LIFE_2')
+         | StatusId('FALSE_LIFE_3')
+         | StatusId('FALSE_LIFE_4')
+         | StatusId('FALSE_LIFE_5')
+         | StatusId('FALSE_LIFE_6')
+end
+
+-- every follower carries one ALIGN_* tag in Gods.lsx, so the alignment legs cover all 21 deities
+-- Dead Three have no alignment and Loviatar no vanilla tag, so both are named
+-- CLERIC_* legs stay for Disciple shards that grant the tag alone, Gale for the Mystra pledge
+function AMP_Plus_IsAtheist(entity)
+    entity = entity or context.Source
+    return ~Tagged('ALIGN_GOOD', entity) &
+           ~Tagged('ALIGN_EVIL', entity) &
+           ~Tagged('ALIGN_NEUTRAL', entity) &
+           ~Tagged('BANE', entity) &
+           ~Tagged('CLERIC_BANE', entity) &
+           ~Tagged('PALADIN_BANE', entity) &
+           ~Tagged('BHAAL', entity) &
+           ~Tagged('CLERIC_BHAAL', entity) &
+           ~Tagged('PALADIN_BHAAL', entity) &
+           ~Tagged('MYRKUL', entity) &
+           ~Tagged('CLERIC_MYRKUL', entity) &
+           ~Tagged('PALADIN_MYRKUL', entity) &
+           ~Tagged('CLERIC_LOVIATAR', entity) &
+           ~Tagged('CLERIC_MYSTRA', entity) &
+           ~Tagged('CLERIC_SELUNE', entity) &
+           ~Tagged('CLERIC_SHAR', entity) &
+           ~Tagged('CLERIC_TYR', entity) &
+           ~Tagged('CLERIC_TALOS', entity) &
+           ~Tagged('CLERIC_ILMATER', entity) &
+           ~Tagged('CLERIC_LOLTH', entity) &
+           ~Tagged('CLERIC_LATHANDER', entity) &
+           ~Tagged('CLERIC_MIELIKKI', entity) &
+           ~Tagged('REALLY_GALE', entity)
+end
+
+-- Faithful's Helm reads this plain and negated, so every route to Tyr must count
+function AMP_Plus_IsTyrFollower(entity)
+    entity = entity or context.Source
+    return Tagged('TYR', entity) | Tagged('CLERIC_TYR', entity) | Tagged('PALADIN_TYR', entity)
+end
+
+-- own bonus is subtracted once AMP_TAG_RAVEN_ACCURACY_ON is on, it shares the boost list
+-- a capped score is taken as it stands, the bonus may have added less
+function AMP_Plus_IsDexterityHighestRaven(entity, bonus, cap)
+    entity = entity or context.Source
+    local dex = entity.Dexterity
+    if Tagged('AMP_TAG_RAVEN_ACCURACY_ON', entity).Result and dex < cap then
+        dex = dex - bonus
+    end
+    return ConditionResult(
+        dex > entity.Strength and
+        dex > entity.Constitution and
+        dex > entity.Intelligence and
+        dex > entity.Wisdom and
+        dex > entity.Charisma
+    )
+end
+
+-- outside a cast the casting ability defaults to Charisma, so SourceSpellDC() undercounts Int and Wis casters
+function AMP_Plus_BestSpellDC(fallbackDC, entity)
+    entity = entity or context.Source
+    local best = nil
+    if entity ~= nil and entity.IsValid then
+        for i,a in ipairs({Ability.Intelligence, Ability.Wisdom, Ability.Charisma}) do
+            try
+                local dc = SourceSpellDC(-10, entity, a)
+                if dc > -10 and (best == nil or dc > best) then
+                    best = dc
+                end
+            catch e then
+            end
+        end
+    end
+    if best == nil then
+        return fallbackDC or 10
+    end
+    return best
+end
+
+function AMP_Plus_IsAquamancerPower()
+    return IsAquamancerPower()
+         | SpellId('AMP_RusMage_RayOfFrost')
+end
+
+-- Mage Armour: the base list plus the statuses MageArmorRework gives for its Intelligence and
+-- Charisma versions.
+function IsMageArmored(entity)
+    entity = entity or context.Target
+    return HasStatus('MAGE_ARMOR', entity)
+         | HasStatus('MAG_SELUNITE_MAGE_ARMOR', entity)
+         | HasStatus('LOW_ROLAN_MAGE_ARMOR', entity)
+         | HasStatus('AMP_Hatul_MAGE_ARMOR', entity)
+         | HasStatus('MAGE_ARMOR_INT', entity)
+         | HasStatus('MAGE_ARMORINT', entity)
+         | HasStatus('MAGE_ARMOR_CHAR', entity)
+         | HasStatus('MAGE_ARMORCHAR', entity)
+end

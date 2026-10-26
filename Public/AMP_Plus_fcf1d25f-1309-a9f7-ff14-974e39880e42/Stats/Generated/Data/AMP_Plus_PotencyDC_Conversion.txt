@@ -1,0 +1,463 @@
+new entry "AMP_Knuckle2_Throw"
+type "PassiveData"
+using "AMP_Knuckle2_Throw"
+data "StatsFunctors" "DealDamage(1d6,Force,Magical,,0,,true,false);ApplyStatus(PRONE,100,1,,,,not SavingThrow(Ability.Dexterity,AMP_Plus_PotencyDC()-1))"
+
+new entry "AMP_Kyzr_ShieldRetaliation_1_T1"
+type "PassiveData"
+using "AMP_Kyzr_ShieldRetaliation_1_T1"
+data "StatsFunctors" "ApplyStatus(SWAP,AMP_KYZR_SHIELD_RETALIATION_VFX,100,0);DealDamage(SWAP,1d4,Psychic,Magical);ApplyStatus(SWAP,FRIGHTENED,100,1,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()-2));RemoveStatus(AMP_KYZR_SHIELD_1_T1)"
+
+new entry "AMP_Kyzr_ShieldRetaliation_1_T2"
+type "PassiveData"
+using "AMP_Kyzr_ShieldRetaliation_1_T2"
+data "StatsFunctors" "ApplyStatus(SWAP,AMP_KYZR_SHIELD_RETALIATION_VFX,100,0);DealDamage(SWAP,1d6,Psychic,Magical);ApplyStatus(SWAP,FRIGHTENED,100,1,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()));RemoveStatus(AMP_KYZR_SHIELD_1_T2)"
+
+new entry "AMP_Kyzr_ShieldRetaliation_1_T3"
+type "PassiveData"
+using "AMP_Kyzr_ShieldRetaliation_1_T3"
+data "StatsFunctors" "ApplyStatus(SWAP,AMP_KYZR_SHIELD_RETALIATION_VFX,100,0);DealDamage(SWAP,1d8,Psychic,Magical);ApplyStatus(SWAP,FRIGHTENED,100,1,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()+2));RemoveStatus(AMP_KYZR_SHIELD_1_T3)"
+
+new entry "AMP_Kyzr_ShieldRetaliation_1_T4"
+type "PassiveData"
+using "AMP_Kyzr_ShieldRetaliation_1_T4"
+data "StatsFunctors" "ApplyStatus(SWAP,AMP_KYZR_SHIELD_RETALIATION_VFX,100,0);DealDamage(SWAP,2d8,Psychic,Magical);ApplyStatus(SWAP,FRIGHTENED,100,2,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()+4));RemoveStatus(AMP_KYZR_SHIELD_1_T4)"
+
+new entry "AMP_Kyzr_ShieldRetaliation_2_T1"
+type "PassiveData"
+using "AMP_Kyzr_ShieldRetaliation_2_T1"
+data "StatsFunctors" "ApplyStatus(SWAP,AMP_KYZR_SHIELD_RETALIATION_VFX,100,0);DealDamage(SWAP,1d4,Psychic,Magical);ApplyStatus(SWAP,FRIGHTENED,100,1,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()-2));RemoveStatus(AMP_KYZR_SHIELD_2_T1)"
+
+new entry "AMP_Kyzr_ShieldRetaliation_2_T2"
+type "PassiveData"
+using "AMP_Kyzr_ShieldRetaliation_2_T2"
+data "StatsFunctors" "ApplyStatus(SWAP,AMP_KYZR_SHIELD_RETALIATION_VFX,100,0);DealDamage(SWAP,1d6,Psychic,Magical);ApplyStatus(SWAP,FRIGHTENED,100,1,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()));RemoveStatus(AMP_KYZR_SHIELD_2_T2)"
+
+new entry "AMP_Kyzr_ShieldRetaliation_2_T3"
+type "PassiveData"
+using "AMP_Kyzr_ShieldRetaliation_2_T3"
+data "StatsFunctors" "ApplyStatus(SWAP,AMP_KYZR_SHIELD_RETALIATION_VFX,100,0);DealDamage(SWAP,1d8,Psychic,Magical);ApplyStatus(SWAP,FRIGHTENED,100,1,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()+2));RemoveStatus(AMP_KYZR_SHIELD_2_T3)"
+
+new entry "AMP_Kyzr_ShieldRetaliation_2_T4"
+type "PassiveData"
+using "AMP_Kyzr_ShieldRetaliation_2_T4"
+data "StatsFunctors" "ApplyStatus(SWAP,AMP_KYZR_SHIELD_RETALIATION_VFX,100,0);DealDamage(SWAP,2d8,Psychic,Magical);ApplyStatus(SWAP,FRIGHTENED,100,2,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()+4));RemoveStatus(AMP_KYZR_SHIELD_2_T4)"
+
+new entry "AMP_Kyzr_ShieldRetaliation_3_T1"
+type "PassiveData"
+using "AMP_Kyzr_ShieldRetaliation_3_T1"
+data "StatsFunctors" "ApplyStatus(SWAP,AMP_KYZR_SHIELD_RETALIATION_VFX,100,0);DealDamage(SWAP,1d4,Psychic,Magical);ApplyStatus(SWAP,FRIGHTENED,100,1,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()-2));RemoveStatus(AMP_KYZR_SHIELD_3_T1)"
+
+new entry "AMP_Kyzr_ShieldRetaliation_3_T2"
+type "PassiveData"
+using "AMP_Kyzr_ShieldRetaliation_3_T2"
+data "StatsFunctors" "ApplyStatus(SWAP,AMP_KYZR_SHIELD_RETALIATION_VFX,100,0);DealDamage(SWAP,1d6,Psychic,Magical);ApplyStatus(SWAP,FRIGHTENED,100,1,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()));RemoveStatus(AMP_KYZR_SHIELD_3_T2)"
+
+new entry "AMP_Kyzr_ShieldRetaliation_3_T3"
+type "PassiveData"
+using "AMP_Kyzr_ShieldRetaliation_3_T3"
+data "StatsFunctors" "ApplyStatus(SWAP,AMP_KYZR_SHIELD_RETALIATION_VFX,100,0);DealDamage(SWAP,1d8,Psychic,Magical);ApplyStatus(SWAP,FRIGHTENED,100,1,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()+2));RemoveStatus(AMP_KYZR_SHIELD_3_T3)"
+
+new entry "AMP_Kyzr_ShieldRetaliation_3_T4"
+type "PassiveData"
+using "AMP_Kyzr_ShieldRetaliation_3_T4"
+data "StatsFunctors" "ApplyStatus(SWAP,AMP_KYZR_SHIELD_RETALIATION_VFX,100,0);DealDamage(SWAP,2d8,Psychic,Magical);ApplyStatus(SWAP,FRIGHTENED,100,2,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()+4));RemoveStatus(AMP_KYZR_SHIELD_3_T4)"
+
+new entry "AMP_Kyzr_ShieldRetaliation_4_T1"
+type "PassiveData"
+using "AMP_Kyzr_ShieldRetaliation_4_T1"
+data "StatsFunctors" "ApplyStatus(SWAP,AMP_KYZR_SHIELD_RETALIATION_VFX,100,0);DealDamage(SWAP,1d4,Psychic,Magical);ApplyStatus(SWAP,FRIGHTENED,100,1,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()-2));RemoveStatus(AMP_KYZR_SHIELD_4_T1)"
+
+new entry "AMP_Kyzr_ShieldRetaliation_4_T2"
+type "PassiveData"
+using "AMP_Kyzr_ShieldRetaliation_4_T2"
+data "StatsFunctors" "ApplyStatus(SWAP,AMP_KYZR_SHIELD_RETALIATION_VFX,100,0);DealDamage(SWAP,1d6,Psychic,Magical);ApplyStatus(SWAP,FRIGHTENED,100,1,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()));RemoveStatus(AMP_KYZR_SHIELD_4_T2)"
+
+new entry "AMP_Kyzr_ShieldRetaliation_4_T3"
+type "PassiveData"
+using "AMP_Kyzr_ShieldRetaliation_4_T3"
+data "StatsFunctors" "ApplyStatus(SWAP,AMP_KYZR_SHIELD_RETALIATION_VFX,100,0);DealDamage(SWAP,1d8,Psychic,Magical);ApplyStatus(SWAP,FRIGHTENED,100,1,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()+2));RemoveStatus(AMP_KYZR_SHIELD_4_T3)"
+
+new entry "AMP_Kyzr_ShieldRetaliation_4_T4"
+type "PassiveData"
+using "AMP_Kyzr_ShieldRetaliation_4_T4"
+data "StatsFunctors" "ApplyStatus(SWAP,AMP_KYZR_SHIELD_RETALIATION_VFX,100,0);DealDamage(SWAP,2d8,Psychic,Magical);ApplyStatus(SWAP,FRIGHTENED,100,2,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()+4));RemoveStatus(AMP_KYZR_SHIELD_4_T4)"
+
+new entry "AMP_Kyzr_ShieldRetaliation_5_T1"
+type "PassiveData"
+using "AMP_Kyzr_ShieldRetaliation_5_T1"
+data "StatsFunctors" "ApplyStatus(SWAP,AMP_KYZR_SHIELD_RETALIATION_VFX,100,0);DealDamage(SWAP,1d4,Psychic,Magical);ApplyStatus(SWAP,FRIGHTENED,100,1,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()-2));RemoveStatus(AMP_KYZR_SHIELD_5_T1)"
+
+new entry "AMP_Kyzr_ShieldRetaliation_5_T2"
+type "PassiveData"
+using "AMP_Kyzr_ShieldRetaliation_5_T2"
+data "StatsFunctors" "ApplyStatus(SWAP,AMP_KYZR_SHIELD_RETALIATION_VFX,100,0);DealDamage(SWAP,1d6,Psychic,Magical);ApplyStatus(SWAP,FRIGHTENED,100,1,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()));RemoveStatus(AMP_KYZR_SHIELD_5_T2)"
+
+new entry "AMP_Kyzr_ShieldRetaliation_5_T3"
+type "PassiveData"
+using "AMP_Kyzr_ShieldRetaliation_5_T3"
+data "StatsFunctors" "ApplyStatus(SWAP,AMP_KYZR_SHIELD_RETALIATION_VFX,100,0);DealDamage(SWAP,1d8,Psychic,Magical);ApplyStatus(SWAP,FRIGHTENED,100,1,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()+2));RemoveStatus(AMP_KYZR_SHIELD_5_T3)"
+
+new entry "AMP_Kyzr_ShieldRetaliation_5_T4"
+type "PassiveData"
+using "AMP_Kyzr_ShieldRetaliation_5_T4"
+data "StatsFunctors" "ApplyStatus(SWAP,AMP_KYZR_SHIELD_RETALIATION_VFX,100,0);DealDamage(SWAP,2d8,Psychic,Magical);ApplyStatus(SWAP,FRIGHTENED,100,2,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()+4));RemoveStatus(AMP_KYZR_SHIELD_5_T4)"
+
+new entry "AMP_SwarmkeeperRanger_Helmet_4_Madness"
+type "PassiveData"
+using "AMP_SwarmkeeperRanger_Helmet_4_Madness"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom, AMP_Plus_PotencyDC())):ApplyStatus(MADNESS,100,1)"
+
+new entry "AMP_Target_ShamanLightning"
+type "SpellData"
+using "AMP_Target_ShamanLightning"
+data "SpellRoll" "not SavingThrow(Ability.Dexterity, AMP_Plus_PotencyDC())"
+
+new entry "ARC_PARALYZE_CHECK"
+type "StatusData"
+using "ARC_PARALYZE_CHECK"
+data "TickFunctors" "IF(not SavingThrow(Ability.Constitution, AMP_Plus_PotencyDC()-2, AdvantageOnParalyzed())):ApplyStatus(PARALYZED,100,2)"
+
+new entry "Armour_B_133_explosion"
+type "SpellData"
+using "Armour_B_133_explosion"
+data "SpellRoll" "not SavingThrow(Ability.Dexterity, AMP_Plus_PotencyDC()+1)"
+
+new entry "CLOAK39_FANGS_Passive"
+type "PassiveData"
+using "CLOAK39_FANGS_Passive"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Dexterity, AMP_Plus_PotencyDC())):ApplyStatus(BURNING,100,3)"
+
+new entry "CLOAK53_FEAR_EXPLOSION"
+type "SpellData"
+using "CLOAK53_FEAR_EXPLOSION"
+data "SpellRoll" "not SavingThrow(Ability.Wisdom, AMP_Plus_PotencyDC())"
+
+new entry "CLOAK53_3_FEAR_EXPLOSION"
+type "SpellData"
+using "CLOAK53_3_FEAR_EXPLOSION"
+data "SpellRoll" "not SavingThrow(Ability.Wisdom, AMP_Plus_PotencyDC()+2)"
+
+new entry "CLOAK53_4_FEAR_EXPLOSION"
+type "SpellData"
+using "CLOAK53_4_FEAR_EXPLOSION"
+data "SpellRoll" "not SavingThrow(Ability.Wisdom, AMP_Plus_PotencyDC()+4)"
+
+new entry "MAG_Armour_A_50_bonus"
+type "PassiveData"
+using "MAG_Armour_A_50_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom, AMP_Plus_PotencyDC()-2)):ApplyStatus(CONFUSION,100,2)"
+
+new entry "MAG_Armour_C_29_bonus"
+type "PassiveData"
+using "MAG_Armour_C_29_bonus"
+data "StatsFunctors" "DealDamage(SWAP,2d8, Thunder,Magical);ApplyStatus(SWAP,PRONE, 100, 1,,,,not SavingThrow(Ability.Strength, AMP_Plus_PotencyDC()-2))"
+
+new entry "MAG_Armour_G_79_bonus"
+type "PassiveData"
+using "MAG_Armour_G_79_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()-3)):ApplyStatus(STUNNED, 100, 1)"
+
+new entry "MAG_Armour_H_117_bonus"
+type "PassiveData"
+using "MAG_Armour_H_117_bonus"
+data "StatsFunctors" "ApplyStatus(SWAP,ARMOURH117, 100, 2,,,,not SavingThrow(Ability.Constitution,AMP_Plus_PotencyDC()))"
+
+new entry "MAG_Armour_H_119_bonus"
+type "PassiveData"
+using "MAG_Armour_H_119_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Constitution, AMP_Plus_PotencyDC())):ApplyStatus(MAG_POISON_POISON_LETHALITY,100,1)"
+
+new entry "MAG_Cloak41_bonus"
+type "PassiveData"
+using "MAG_Cloak41_bonus"
+data "StatsFunctors" "DealDamage(1,Cold,Magical,,0,,true,false);IF(not SavingThrow(Ability.Constitution, AMP_Plus_PotencyDC()-2)):ApplyStatus(FROZEN,100,1)"
+
+new entry "MAG_Cloak79_bonus"
+type "PassiveData"
+using "MAG_Cloak79_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Intelligence, AMP_Plus_PotencyDC()+2, context.Source)):ApplyStatus(SWAP,CLOAK79,100,2)"
+
+new entry "MAG_Cloak97_Disarming_Legendary_Passive"
+type "PassiveData"
+using "MAG_Cloak97_Disarming_Legendary_Passive"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Strength,AMP_Plus_PotencyDC()+4)):ApplyStatus(DISARM,100,0)"
+
+new entry "MAG_LaserCannon_Euphoria"
+type "PassiveData"
+using "MAG_LaserCannon_Euphoria"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Charisma, AMP_Plus_PotencyDC())):ApplyStatus(HIDEOUS_LAUGHTER,100,2)"
+
+new entry "MAG_Neck45_bonus"
+type "PassiveData"
+using "MAG_Neck45_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom, AMP_Plus_PotencyDC()+1)):ApplyStatus(SWAP,NECK45,100,3)"
+
+new entry "MAG_Ring32_bonus"
+type "PassiveData"
+using "MAG_Ring32_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Constitution, AMP_Plus_PotencyDC()-2)):ApplyStatus(RING32,100,4)"
+
+new entry "MAG_Ring53_bonus"
+type "PassiveData"
+using "MAG_Ring53_bonus"
+data "StatsFunctors" "ApplyStatus(SWAP,DOMINATE_PERSON,100,2,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()-2))"
+
+new entry "MAG_Weapon104_bonus"
+type "PassiveData"
+using "MAG_Weapon104_bonus"
+data "Conditions" "not SavingThrow(Ability.Constitution, AMP_Plus_PotencyDC()+2) and Character()"
+
+new entry "MAG_Weapon116_bonus"
+type "PassiveData"
+using "MAG_Weapon116_bonus"
+data "StatsFunctors" "DealDamage(SWAP,1d12,Radiant,Magical);ApplyStatus(SWAP,WEAPON116_T_VFX,100,0);IF(not SavingThrow(Ability.Constitution,AMP_Plus_PotencyDC())):ApplyStatus(SWAP,BLINDED,100,2)"
+
+new entry "MAG_Weapon123_bonus"
+type "PassiveData"
+using "MAG_Weapon123_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC())):ApplyStatus(WEAPON40_2,100,2)"
+
+new entry "MAG_Weapon15_2_bonus"
+type "PassiveData"
+using "MAG_Weapon15_2_bonus"
+data "StatsFunctors" "SetStatusDuration(SELF,WEAPON15,-1,Add);IF(not SavingThrow(Ability.Wisdom, AMP_Plus_PotencyDC())):ApplyStatus(FEARED, 100, 4)"
+
+new entry "MAG_Weapon31_Heritage_bonus"
+type "PassiveData"
+using "MAG_Weapon31_Heritage_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom, AMP_Plus_PotencyDC())):ApplyStatus(WEAPON31, 100, 1)"
+
+new entry "MAG_Weapon40_2_bonus"
+type "PassiveData"
+using "MAG_Weapon40_2_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom, AMP_Plus_PotencyDC())):ApplyStatus(WEAPON40_2,100,1)"
+
+new entry "MAG_Weapon40_bonus"
+type "PassiveData"
+using "MAG_Weapon40_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Constitution, AMP_Plus_PotencyDC()+4)):ApplyStatus(WEAPON40,100,4)"
+
+new entry "MAG_Weapon48_Fear"
+type "PassiveData"
+using "MAG_Weapon48_Fear"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC())):ApplyStatus(FRIGHTENED,100,1)"
+
+new entry "MAG_Weapon55_Chill"
+type "PassiveData"
+using "MAG_Weapon55_Chill"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Constitution,AMP_Plus_PotencyDC())):ApplyStatus(CHILLED,100,2)"
+
+new entry "MAG_Weapon96_bonus"
+type "PassiveData"
+using "MAG_Weapon96_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Constitution, AMP_Plus_PotencyDC()-2)):ApplyStatus(WEAPON96, 100, 1)"
+
+new entry "NECK27_DRENCH_SELF_CHECK"
+type "StatusData"
+using "NECK27_DRENCH_SELF_CHECK"
+data "OnApplyFunctors" "IF(not SavingThrow(Ability.Dexterity, AMP_Plus_PotencyDC()-2)):ApplyStatus(WET,100,2)"
+
+new entry "NECK27_DRENCH_TICK"
+type "StatusData"
+using "NECK27_DRENCH_TICK"
+data "TickFunctors" "IF(Combat() and not SavingThrow(Ability.Dexterity, AMP_Plus_PotencyDC())):ApplyStatus(WET,100,2)"
+
+new entry "NECK27_DRENCH_TICK_T2"
+type "StatusData"
+using "NECK27_DRENCH_TICK_T2"
+data "TickFunctors" "IF(Combat() and not SavingThrow(Ability.Dexterity, AMP_Plus_PotencyDC())):ApplyStatus(WET,100,3)"
+
+new entry "NECK27_DRENCH_TICK_T3"
+type "StatusData"
+using "NECK27_DRENCH_TICK_T3"
+data "TickFunctors" "IF(Combat() and not SavingThrow(Ability.Dexterity, AMP_Plus_PotencyDC())):ApplyStatus(WET,100,4)"
+
+new entry "NECK27_DRENCH_TICK_T4"
+type "StatusData"
+using "NECK27_DRENCH_TICK_T4"
+data "TickFunctors" "IF(Combat() and not SavingThrow(Ability.Dexterity, AMP_Plus_PotencyDC()+2)):ApplyStatus(WET,100,4)"
+
+new entry "Projectile_AMP_FrostPrince_Permafrost"
+type "SpellData"
+using "Projectile_AMP_FrostPrince_Permafrost"
+data "SpellSuccess" "TARGET:DealDamage(1d6,Cold,Magical);IF(not SavingThrow(Ability.Constitution,AMP_Plus_PotencyDC())):ApplyStatus(SLOW,100,1)"
+
+new entry "Projectile_AMP_PetrifyingBlast"
+type "SpellData"
+using "Projectile_AMP_PetrifyingBlast"
+data "SpellRoll" "not SavingThrow(Ability.Strength, AMP_Plus_PotencyDC())"
+
+new entry "Projectile_Ring32"
+type "SpellData"
+using "Projectile_Ring32"
+data "SpellRoll" "not SavingThrow(Ability.Dexterity, AMP_Plus_PotencyDC())"
+
+new entry "Projectile_W_120"
+type "SpellData"
+using "Projectile_W_120"
+data "SpellRoll" "not SavingThrow(Ability.Constitution,AMP_Plus_PotencyDC())"
+
+new entry "Projectile_W_39"
+type "SpellData"
+using "Projectile_W_39"
+data "SpellRoll" "not SavingThrow(Ability.Dexterity, AMP_Plus_PotencyDC())"
+
+new entry "SJ02_1"
+type "StatusData"
+using "SJ02_1"
+data "OnApplyFunctors" "IF(not SavingThrow(Ability.Constitution, AMP_Plus_PotencyDC())):ApplyStatus(SJ02_2,100,-1);IF(not HasStatus('SJ02_2')):ApplyStatus(SJ02_3,100,-1)"
+
+new entry "Target_AMP_WaterWhip_T1"
+type "SpellData"
+using "Target_AMP_WaterWhip_T1"
+data "SpellRoll" "not SavingThrow(Ability.Dexterity, AMP_Plus_PotencyDC())"
+
+// shares a passive with a tier on the old DC
+
+new entry "AMP_Plus_N_Psychic_MindMastery_T2"
+type "PassiveData"
+using "N_Psychic_MindMastery"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom, AMP_Plus_PotencyDC())):ApplyStatus(MIND_MASTERY,100,2)"
+
+new entry "arc_N_Psychic2"
+type "Armor"
+using "arc_N_Psychic2"
+data "PassivesOnEquip" "N_Psychic2_bonus;AMP_Plus_N_Psychic_MindMastery_T2"
+
+// BestSpellDC, because a bare spell DC in a passive falls back to Charisma
+new entry "N_Psychic_MindMastery"
+type "PassiveData"
+using "N_Psychic_MindMastery"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom, AMP_Plus_BestSpellDC())):ApplyStatus(MIND_MASTERY,100,2)"
+
+
+new entry "AMP_Plus_DEATHCLERIC_FETID_ROT_T3"
+type "StatusData"
+using "AMP_DEATHCLERIC_FETID_ROT_EPIC"
+data "TickFunctors" "IF(not HasObscuredState(ObscuredState.Clear)):DealDamage(1d4,Necrotic,Magical);IF(not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC())):ApplyStatus(MADNESS,100,1)"
+
+new entry "AMP_Plus_DeathCleric_Helmet_FetidRot_T3"
+type "PassiveData"
+using "AMP_DeathCleric_Helmet_FetidRot_Epic"
+data "StatsFunctors" "ApplyStatus(AMP_Plus_DEATHCLERIC_FETID_ROT_T3,100,5)"
+
+new entry "AMP_DeathCleric_Helmet_3"
+type "Armor"
+using "AMP_DeathCleric_Helmet_3"
+data "PassivesOnEquip" "AMP_DeathCleric_Helmet_NecroCrit_T3;AMP_Plus_DeathCleric_Helmet_FetidRot_T3;AMP_DeathCleric_Helmet_MadnessInfo"
+
+new entry "MAG_Weapon123_bonus_1"
+type "PassiveData"
+using "MAG_Weapon123_bonus_1"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()-2)):ApplyStatus(WEAPON40_2,100,2)"
+
+new entry "MAG_Weapon123_bonus_3"
+type "PassiveData"
+using "MAG_Weapon123_bonus_3"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()+2)):ApplyStatus(WEAPON40_2,100,2)"
+
+new entry "MAG_Weapon123_bonus_4"
+type "PassiveData"
+using "MAG_Weapon123_bonus_4"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()+4)):ApplyStatus(WEAPON40_2,100,2)"
+
+new entry "MAG_Weapon48_Fear_1"
+type "PassiveData"
+using "MAG_Weapon48_Fear_1"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()-2)):ApplyStatus(FRIGHTENED,100,1)"
+
+new entry "MAG_Weapon48_Fear_3"
+type "PassiveData"
+using "MAG_Weapon48_Fear_3"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()+2)):ApplyStatus(FRIGHTENED,100,1)"
+
+new entry "MAG_Weapon55_Chill_1"
+type "PassiveData"
+using "MAG_Weapon55_Chill_1"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Constitution,AMP_Plus_PotencyDC()-2)):ApplyStatus(CHILLED,100,2)"
+
+new entry "MAG_Weapon55_Chill_3"
+type "PassiveData"
+using "MAG_Weapon55_Chill_3"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Constitution,AMP_Plus_PotencyDC()+2)):ApplyStatus(CHILLED,100,2)"
+
+new entry "MAG_Weapon96_bonus_2"
+type "PassiveData"
+using "MAG_Weapon96_bonus_2"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Constitution, AMP_Plus_PotencyDC())):ApplyStatus(WEAPON96, 100, 2)"
+
+new entry "MAG_Weapon96_bonus_3"
+type "PassiveData"
+using "MAG_Weapon96_bonus_3"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Constitution, AMP_Plus_PotencyDC()+2)):ApplyStatus(WEAPON96, 100, 3)"
+
+new entry "NECK27_DRENCH_SELF_CHECK_T2"
+type "StatusData"
+using "NECK27_DRENCH_SELF_CHECK_T2"
+data "OnApplyFunctors" "IF(not SavingThrow(Ability.Dexterity, AMP_Plus_PotencyDC())):ApplyStatus(WET,100,3)"
+
+new entry "NECK27_DRENCH_SELF_CHECK_T3"
+type "StatusData"
+using "NECK27_DRENCH_SELF_CHECK_T3"
+data "OnApplyFunctors" "IF(not SavingThrow(Ability.Dexterity, AMP_Plus_PotencyDC())):ApplyStatus(WET,100,4)"
+
+new entry "NECK27_DRENCH_SELF_CHECK_T4"
+type "StatusData"
+using "NECK27_DRENCH_SELF_CHECK_T4"
+data "OnApplyFunctors" "IF(not SavingThrow(Ability.Dexterity, AMP_Plus_PotencyDC()+2)):ApplyStatus(WET,100,4)"
+
+new entry "Projectile_W_120_1"
+type "SpellData"
+using "Projectile_W_120_1"
+data "SpellRoll" "not SavingThrow(Ability.Constitution,AMP_Plus_PotencyDC()-2)"
+
+new entry "Projectile_W_120_3"
+type "SpellData"
+using "Projectile_W_120_3"
+data "SpellRoll" "not SavingThrow(Ability.Constitution,AMP_Plus_PotencyDC()+2)"
+
+new entry "MAG_Neck28_P2"
+type "PassiveData"
+using "MAG_Neck28_P2"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Strength, AMP_Plus_BestSpellDC())):ApplyStatus(PRONE,100,1)"
+
+new entry "MAG_Armour_A_50_1_bonus"
+type "PassiveData"
+using "MAG_Armour_A_50_1_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom, AMP_Plus_PotencyDC()-4)):ApplyStatus(CONFUSION,100,1)"
+
+new entry "MAG_Armour_A_50_3_bonus"
+type "PassiveData"
+using "MAG_Armour_A_50_3_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom, AMP_Plus_PotencyDC())):ApplyStatus(CONFUSION,100,2)"
+
+new entry "MAG_Armour_A_50_4_bonus"
+type "PassiveData"
+using "MAG_Armour_A_50_4_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom, AMP_Plus_PotencyDC()+2)):ApplyStatus(CONFUSION,100,3)"
+
+new entry "MAG_Ring53_3_bonus"
+type "PassiveData"
+using "MAG_Ring53_3_bonus"
+data "StatsFunctors" "ApplyStatus(SWAP,DOMINATE_PERSON,100,2,,,,not SavingThrow(Ability.Wisdom,AMP_Plus_PotencyDC()-5))"
+
+new entry "MAG_Neck45_1_bonus"
+type "PassiveData"
+using "MAG_Neck45_1_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom, AMP_Plus_PotencyDC())):ApplyStatus(SWAP,NECK45_1,100,3)"
+
+new entry "MAG_Neck45_3_bonus"
+type "PassiveData"
+using "MAG_Neck45_3_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom, AMP_Plus_PotencyDC()+2)):ApplyStatus(SWAP,NECK45_3,100,3)"
+
+new entry "MAG_Cloak79_1_bonus"
+type "PassiveData"
+using "MAG_Cloak79_1_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Intelligence, AMP_Plus_PotencyDC()-2, context.Source)):ApplyStatus(SWAP,CLOAK79_1,100,2)"
+
+new entry "MAG_Cloak79_2_bonus"
+type "PassiveData"
+using "MAG_Cloak79_2_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Intelligence, AMP_Plus_PotencyDC(), context.Source)):ApplyStatus(SWAP,CLOAK79_2,100,2)"

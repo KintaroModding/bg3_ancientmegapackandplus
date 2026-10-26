@@ -1,0 +1,933 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// disenchant config
+
+// rarity by gold value
+DB_AMP_Arcanizer_RarityValueRange("Uncommon", 150, 399);
+DB_AMP_Arcanizer_RarityValueRange("Rare", 400, 799);
+DB_AMP_Arcanizer_RarityValueRange("VeryRare", 800, 2499);
+DB_AMP_Arcanizer_RarityValueRange("Legendary", 2500, 99999);
+
+// slots we accept for disenchant
+DB_AMP_Arcanizer_AllowedSlot("Helmet", EQUIPMENTSLOT.Helmet);
+DB_AMP_Arcanizer_AllowedSlot("Breast", EQUIPMENTSLOT.Breast);
+DB_AMP_Arcanizer_AllowedSlot("Cloak", EQUIPMENTSLOT.Cloak);
+DB_AMP_Arcanizer_AllowedSlot("MeleeMainHand", EQUIPMENTSLOT.MeleeMainHand);
+DB_AMP_Arcanizer_AllowedSlot("MeleeOffHand", EQUIPMENTSLOT.MeleeOffHand);
+DB_AMP_Arcanizer_AllowedSlot("RangedMainHand", EQUIPMENTSLOT.RangedMainHand);
+DB_AMP_Arcanizer_AllowedSlot("RangedOffHand", EQUIPMENTSLOT.RangedOffHand);
+DB_AMP_Arcanizer_AllowedSlot("Ring", EQUIPMENTSLOT.Ring);
+DB_AMP_Arcanizer_AllowedSlot("Boots", EQUIPMENTSLOT.Boots);
+DB_AMP_Arcanizer_AllowedSlot("Gloves", EQUIPMENTSLOT.Gloves);
+DB_AMP_Arcanizer_AllowedSlot("Amulet", EQUIPMENTSLOT.Amulet);
+DB_AMP_Arcanizer_AllowedSlot("Ring2", EQUIPMENTSLOT.Ring2);
+
+// cosmetic slots, never disenchant
+DB_AMP_Arcanizer_SlotBlacklist("Wings", EQUIPMENTSLOT.Wings);
+DB_AMP_Arcanizer_SlotBlacklist("Horns", EQUIPMENTSLOT.Horns);
+DB_AMP_Arcanizer_SlotBlacklist("Overhead", EQUIPMENTSLOT.Overhead);
+DB_AMP_Arcanizer_SlotBlacklist("MusicalInstrument", EQUIPMENTSLOT.MusicalInstrument);
+DB_AMP_Arcanizer_SlotBlacklist("VanityBody", EQUIPMENTSLOT.VanityBody);
+DB_AMP_Arcanizer_SlotBlacklist("VanityBoots", EQUIPMENTSLOT.VanityBoots);
+DB_AMP_Arcanizer_SlotBlacklist("Underwear", EQUIPMENTSLOT.Underwear);
+
+// loot table per rarity. chance>=100 = guaranteed (200 = x2)
+
+// uncommon (150-399 gold)
+DB_AMP_Disenchant_Loot("Uncommon", "AstrumArcanum", 50);
+DB_AMP_Disenchant_Loot("Uncommon", "AstrumEmpyreum", 10);
+DB_AMP_Disenchant_Loot("Uncommon", "AstrumOpus", 5);
+DB_AMP_Disenchant_Loot("Uncommon", "AstrumImmortallis", 1);
+DB_AMP_Disenchant_Loot("Uncommon", "FeyDust", 100);
+
+// rare (400-799 gold)
+DB_AMP_Disenchant_Loot("Rare", "CelestialShard", 50);
+DB_AMP_Disenchant_Loot("Rare", "AstrumArcanum", 50);
+DB_AMP_Disenchant_Loot("Rare", "AstrumEmpyreum", 50);
+DB_AMP_Disenchant_Loot("Rare", "AstrumOpus", 10);
+DB_AMP_Disenchant_Loot("Rare", "AstrumImmortallis", 5);
+DB_AMP_Disenchant_Loot("Rare", "NethereseDust", 100);
+
+// very rare (800-2499 gold)
+DB_AMP_Disenchant_Loot("VeryRare", "CelestialShard", 100);
+DB_AMP_Disenchant_Loot("VeryRare", "AstrumArcanum", 100);
+DB_AMP_Disenchant_Loot("VeryRare", "AstrumEmpyreum", 50);
+DB_AMP_Disenchant_Loot("VeryRare", "AstrumOpus", 50);
+DB_AMP_Disenchant_Loot("VeryRare", "AstrumImmortallis", 10);
+DB_AMP_Disenchant_Loot("VeryRare", "EldritchDust", 100);
+
+// legendary (2500+ gold)
+DB_AMP_Disenchant_Loot("Legendary", "CelestialShard", 200);
+DB_AMP_Disenchant_Loot("Legendary", "AstrumArcanum", 200);
+DB_AMP_Disenchant_Loot("Legendary", "AstrumEmpyreum", 100);
+DB_AMP_Disenchant_Loot("Legendary", "AstrumOpus", 50);
+DB_AMP_Disenchant_Loot("Legendary", "AstrumImmortallis", 50);
+DB_AMP_Disenchant_Loot("Legendary", "CelestialDust", 100);
+
+// db name -> item template
+DB_AMP_Arcanizer_Resource_Map("CelestialShard", (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5, 1);
+DB_AMP_Arcanizer_Resource_Map("AstrumArcanum", (ITEMROOT)Enchant_Crystal4_faca0315-cb41-4a63-9b37-9afc6a1d1da4, 1);
+DB_AMP_Arcanizer_Resource_Map("AstrumEmpyreum", (ITEMROOT)Enchant_Crystal2_f90f99ba-d30d-4f05-8cde-b90092f128d8, 1);
+DB_AMP_Arcanizer_Resource_Map("AstrumOpus", (ITEMROOT)Enchant_Crystal_d09be0fd-f230-47af-a523-c919e41c1261, 1);
+DB_AMP_Arcanizer_Resource_Map("AstrumImmortallis", (ITEMROOT)Enchant_Crystal3_98f1085c-1a49-474a-875c-cd0f2d9fdff0, 1);
+DB_AMP_Arcanizer_Resource_Map("FeyDust", (ITEMROOT)Craft1_2454d5f5-ea62-4c0c-a781-c8c0b275ba04, 1);
+DB_AMP_Arcanizer_Resource_Map("NethereseDust", (ITEMROOT)Craft2_ca3214aa-ce66-4d7f-97dc-64af68cd3af8, 1);
+DB_AMP_Arcanizer_Resource_Map("EldritchDust", (ITEMROOT)Craft3_4feac3b3-32e1-4284-848e-fe9f3696c474, 1);
+DB_AMP_Arcanizer_Resource_Map("CelestialDust", (ITEMROOT)Craft4_aed0d644-3863-4aaa-87ba-86740f11ed12, 1);
+DB_AMP_Arcanizer_Resource_Map("ResonanceMatrix", (ITEMROOT)AMP_Resonance_Matrix_2c8dfeb6-c86e-4595-b9e9-080aa87bd0b7, 1);
+
+// stabilizer chaos reduction (disabled)
+// db_amp_arcanizer_stabilizer_effect("astrumarcanum", 10);
+// db_amp_arcanizer_stabilizer_effect("astrumempyreum", 30);
+// db_amp_arcanizer_stabilizer_effect("astrumopus", 50);
+// db_amp_arcanizer_stabilizer_effect("astrumimmortallis", 75);
+// db_amp_arcanizer_stabilizer_effect("resonancematrix", 100);
+
+// items that never disenchant
+DB_AMP_Arcanizer_Blacklist_Template((ITEMROOT)WPN_HUM_Shortsword_A_1_261b946f-154b-4f75-8985-cab6531034a2);
+DB_AMP_Arcanizer_Blacklist_Template((ITEMROOT)WPN_HUM_Warpick_A_1_75586d3e-21b2-4d94-ac99-99a6b0e8c3dd);
+
+// state flags
+DB_AMP_Disenchant_Processing((ITEM)NULL_00000000-0000-0000-0000-000000000000, "");
+DB_AMP_Disenchant_TempChaosItem((ITEMROOT)NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_Disenchant_ItemProcessed((ITEM)NULL_00000000-0000-0000-0000-000000000000, 0);
+DB_AMP_Disenchant_IsProcessing(0);
+DB_AMP_Disenchant_FinalChaos(0);
+DB_AMP_Disenchant_ResCount(0);
+DB_AMP_ChaosReduction_Status("AMP_CHAOS_REDUCTION_STATUS");
+
+DB_AMP_CleanupTimerRunning(0);
+KBSECTION
+/*
+// section 1: stabilizer usage - improved
+// unified approach to stabilizer usage with proper matrix resonance support
+
+// generic stabilizer use handler that maps to the correct stabilizer
+// and applies the appropriate reduction based on the stabilizer's strength
+IF
+TemplateUseStarted((CHARACTER)_Character, (ITEMROOT)_ItemTemplate, (ITEM)_ItemInstance)
+AND
+DB_AMP_Arcanizer_Resource_Map(_StabilizerType, _ItemTemplate, _)
+AND
+DB_AMP_Arcanizer_Stabilizer_Effect(_StabilizerType, (INTEGER)_ReductionValue)
+AND
+IntegerToReal(_ReductionValue, (REAL)_RealValue)
+AND
+RealProduct(_RealValue, 6.0, (REAL)_FinalValue)
+AND
+DB_AMP_ChaosReduction_Status(_Status)
+AND
+IntegerToString(_ReductionValue, _ValueString)
+AND
+Concatenate("Applied ", _StabilizerType, _TempMsg1)
+AND
+Concatenate(_TempMsg1, " reduction (-", _TempMsg2)
+AND
+Concatenate(_TempMsg2, _ValueString, _TempMsg3)
+AND
+Concatenate(_TempMsg3, ")", _DebugMsg)
+THEN
+ApplyStatus(_Character, _Status, _FinalValue, 1, _Character);
+DebugText(_Character, _DebugMsg);
+// visual effect based on stabilizer type
+PlayEffect(_Character, VFX_Status_LOW_ORIN_DEATHBRINGER_ACTIVE_Root_01_5aeff525-42b9-00bf-cd1c-a464b71aa3e7, "", 1.0);
+// remove the item after use
+RequestDelete(_ItemInstance);
+
+// special handling for resonance matrix (complete chaos removal)
+// if
+// templateusestarted((character)_character, (itemroot)amp_resonance_matrix_2c8dfeb6-c86e-4595-b9e9-080aa87bd0b7, (item)_iteminstance)
+// and
+// db_amp_chaosreduction_status(_status)
+// then
+// applystatus(_character, _status, 600.0, 1, _character);
+// debugtext(_character, "applied resonance matrix reduction (-100, complete chaos removal)");
+// special visual for the resonance matrix
+// playeffect(_character, vfx_status_low_orin_deathbringer_active_root_01_5aeff525-42b9-00bf-cd1c-a464b71aa3e7, "", 2.0);
+// playeffect(_character, vfx_script_djinni_teleport_7c79ada5-e179-5d0b-0557-29fca6201742, "", 1.0);
+// remove the item after use
+// requestdelete(_iteminstance);
+
+// crafting and disenchanting integration - main entry point
+
+// main entry point for item processing in arcanizer - modified
+// this code replaces the existing addedto block in arcanizer_02.txt
+IF
+AddedTo((ITEM)_Item, (ITEM)_Container, _)
+AND
+DB_AMP_Arcanizer_Tag((TAG)_ArcanTag)
+AND
+IsTagged(_Container, _ArcanTag, 1)
+AND
+DB_AMP_Arcanizer_Owner((CHARACTER)_Owner)
+AND
+_Owner != NULL_00000000-0000-0000-0000-000000000000
+AND
+DB_AMP_Disenchant_IsProcessing(0)
+AND
+Exists(_Item, 1)
+THEN
+// check processing mode before proceeding
+PROC_AMP_CheckProcessingMode(_Item, _Owner, _Container);
+
+// new procedure to check processing mode
+PROC
+PROC_AMP_CheckProcessingMode((ITEM)_Item, (CHARACTER)_Owner, (ITEM)_Container)
+AND
+DB_AMP_Crafting_CollectionMode(1)
+AND
+NOT IsStoryItem(_Item, 1)
+AND
+QRY_AMP_IsCraftingResource(_Item)
+THEN
+// we're in collection mode and this item is a crafting resource
+DebugText(_Item, "Item added to crafting collection");
+// check for recipes after a short delay
+ObjectTimerLaunch(_Container, "AMP_CheckRecipes", 100, 0);
+
+// standard processing path for everything else
+PROC
+PROC_AMP_CheckProcessingMode((ITEM)_Item, (CHARACTER)_Owner, (ITEM)_Container)
+THEN
+// standard processing through disenchant system
+NOT DB_AMP_Disenchant_IsProcessing(0);
+DB_AMP_Disenchant_IsProcessing(1);
+DebugText(_Item, "Processing item through disenchant system");
+
+// elegant item processing chain
+// uses a chain of responsibility pattern for clean code
+
+// helper query to detect crafted items
+QRY
+QRY_AMP_IsCraftedItem((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_Template)
+AND
+DB_AMP_Arcanizer_Craft_Amulet(_Template, _, _)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_IsCraftedItem((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_Template)
+AND
+DB_AMP_Arcanizer_Craft_Ring(_Template, _, _)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_IsCraftedItem((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_Template)
+AND
+DB_AMP_Arcanizer_Craft_Gloves(_Template, _, _)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_IsCraftedItem((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_Template)
+AND
+DB_AMP_Arcanizer_Craft_Weapon(_Template, _, _)
+THEN
+DB_NOOP(1);
+
+// check valuable enough
+PROC
+PROC_AMP_ProcessEquipment((ITEM)_Item, (CHARACTER)_Owner, (INTEGER)_GoldValue)
+AND
+DB_AMP_Arcanizer_RarityValueRange("Uncommon", _MinValue, _)
+AND
+_GoldValue >= _MinValue
+THEN
+PROC_AMP_DetermineRarity(_Item, _Owner, _GoldValue);
+
+// not valuable enough
+PROC
+PROC_AMP_ProcessEquipment((ITEM)_Item, (CHARACTER)_Owner, (INTEGER)_GoldValue)
+AND
+DB_AMP_Arcanizer_RarityValueRange("Uncommon", _MinValue, _)
+AND
+_GoldValue < _MinValue
+THEN
+ToInventory(_Item, _Owner, 1, 1, 0);
+DebugText(_Item, "Rejected: Not valuable enough");
+PROC_AMP_FinishProcessing();
+
+// rarity determination
+
+// determine rarity based on value
+PROC
+PROC_AMP_DetermineRarity((ITEM)_Item, (CHARACTER)_Owner, (INTEGER)_GoldValue)
+AND
+DB_AMP_Arcanizer_RarityValueRange("Legendary", _MinLegendary, _)
+AND
+_GoldValue >= _MinLegendary
+THEN
+DB_AMP_Disenchant_Processing(_Item, "Legendary");
+DebugText(_Item, "Legendary Item");
+PROC_AMP_Disenchant_CalculateChaos(_Owner);
+
+PROC
+PROC_AMP_DetermineRarity((ITEM)_Item, (CHARACTER)_Owner, (INTEGER)_GoldValue)
+AND
+DB_AMP_Arcanizer_RarityValueRange("VeryRare", _MinVeryRare, _MaxVeryRare)
+AND
+_GoldValue >= _MinVeryRare
+AND
+_GoldValue <= _MaxVeryRare
+THEN
+DB_AMP_Disenchant_Processing(_Item, "VeryRare");
+DebugText(_Item, "Very Rare Item");
+PROC_AMP_Disenchant_CalculateChaos(_Owner);
+
+PROC
+PROC_AMP_DetermineRarity((ITEM)_Item, (CHARACTER)_Owner, (INTEGER)_GoldValue)
+AND
+DB_AMP_Arcanizer_RarityValueRange("Rare", _MinRare, _MaxRare)
+AND
+_GoldValue >= _MinRare
+AND
+_GoldValue <= _MaxRare
+THEN
+DB_AMP_Disenchant_Processing(_Item, "Rare");
+DebugText(_Item, "Rare Item");
+PROC_AMP_Disenchant_CalculateChaos(_Owner);
+
+PROC
+PROC_AMP_DetermineRarity((ITEM)_Item, (CHARACTER)_Owner, (INTEGER)_GoldValue)
+AND
+DB_AMP_Arcanizer_RarityValueRange("Uncommon", _MinUncommon, _MaxUncommon)
+AND
+_GoldValue >= _MinUncommon
+AND
+_GoldValue <= _MaxUncommon
+THEN
+DB_AMP_Disenchant_Processing(_Item, "Uncommon");
+DebugText(_Item, "Uncommon Item");
+PROC_AMP_Disenchant_CalculateChaos(_Owner);
+
+// helper functions 
+
+// check if item is a valid slot for disenchanting
+QRY
+QRY_AMP_IsValidEquipmentSlot((EQUIPMENTSLOT)_Slot)
+AND
+DB_AMP_Arcanizer_AllowedSlot(_, _Slot)
+AND
+NOT DB_AMP_Arcanizer_SlotBlacklist(_, _Slot)
+THEN
+DB_NOOP(1);
+
+// check if item is blacklisted
+QRY
+QRY_AMP_IsBlacklistedItem((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_Template)
+AND
+DB_AMP_Arcanizer_Blacklist_Template(_Template)
+THEN
+DB_NOOP(1);
+
+// clear flags when finished processing
+PROC
+PROC_AMP_FinishProcessing()
+AND
+DB_AMP_Disenchant_IsProcessing(1)
+THEN
+NOT DB_AMP_Disenchant_IsProcessing(1);
+DB_AMP_Disenchant_IsProcessing(0);
+DebugText(NULL_00000000-0000-0000-0000-000000000000, "Processing completed");
+
+// crafting resource detection - optimized
+
+// unified crafting resource check using resource map database
+QRY
+QRY_AMP_IsCraftingResource((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_Template)
+AND
+DB_AMP_Arcanizer_Resource_Map(_, _Template, _)
+THEN
+DB_NOOP(1);
+
+// extension point for future crafting ingredients via tag
+QRY
+QRY_AMP_IsCraftingResource((ITEM)_Item)
+AND
+IsTagged(_Item, (TAG)AMP_CRAFTING_INGREDIENT_bd349698-3353-46bf-90cd-345d9930d12b, 1)
+THEN
+DB_NOOP(1);
+
+// section 4: improved chaos system
+
+// calculate final chaos value - streamlined approach
+PROC
+PROC_AMP_Disenchant_CalculateChaos((CHARACTER)_Owner)
+AND
+DB_AMP_Arcanizer_ChaosStatus(_BaseStatus)
+AND
+DB_AMP_ChaosReduction_Status(_ReductionStatus)
+AND
+HasActiveStatus(_Owner, _BaseStatus, 1)
+THEN
+// base chaos is always 100 (internal value 100)
+PROC_AMP_Disenchant_GetReduction(_Owner, _ReductionStatus, 100);
+
+// calculate reduction if available
+PROC
+PROC_AMP_Disenchant_GetReduction((CHARACTER)_Owner, (STRING)_ReductionStatus, (INTEGER)_BaseChaos)
+AND
+HasActiveStatus(_Owner, _ReductionStatus, 1)
+AND
+GetStatusTurns(_Owner, _ReductionStatus, _Reduction)
+THEN
+PROC_AMP_Disenchant_SetFinalChaos(_Owner, _BaseChaos, _Reduction);
+
+// no reduction case
+PROC
+PROC_AMP_Disenchant_GetReduction((CHARACTER)_Owner, (STRING)_ReductionStatus, (INTEGER)_BaseChaos)
+AND
+NOT HasActiveStatus(_Owner, _ReductionStatus, 1)
+THEN
+PROC_AMP_Disenchant_SetFinalChaos(_Owner, _BaseChaos, 0);
+
+// set final chaos with minimum cap of 1
+PROC
+PROC_AMP_Disenchant_SetFinalChaos((CHARACTER)_Owner, (INTEGER)_BaseChaos, (INTEGER)_Reduction)
+AND
+IntegerSubtract(_BaseChaos, _Reduction, _NewChaos)
+AND
+_NewChaos > 1
+AND
+DB_AMP_Disenchant_FinalChaos(_CurrentValue)
+THEN
+NOT DB_AMP_Disenchant_FinalChaos(_CurrentValue);
+DB_AMP_Disenchant_FinalChaos(_NewChaos);
+PROC_AMP_DebugChaosMessage(_Owner, _BaseChaos, _Reduction, _NewChaos);
+PROC_AMP_Disenchant_ApplyChaos(_Owner);
+
+// handle minimum chaos cap of 1
+PROC
+PROC_AMP_Disenchant_SetFinalChaos((CHARACTER)_Owner, (INTEGER)_BaseChaos, (INTEGER)_Reduction)
+AND
+IntegerSubtract(_BaseChaos, _Reduction, _NewChaos)
+AND
+_NewChaos <= 1
+AND
+DB_AMP_Disenchant_FinalChaos(_CurrentValue)
+THEN
+NOT DB_AMP_Disenchant_FinalChaos(_CurrentValue);
+DB_AMP_Disenchant_FinalChaos(1);
+PROC_AMP_DebugChaosMinMessage(_Owner, _BaseChaos, _Reduction);
+PROC_AMP_Disenchant_ApplyChaos(_Owner);
+
+// debug messages for clarity
+PROC
+PROC_AMP_DebugChaosMessage((CHARACTER)_Owner, (INTEGER)_BaseChaos, (INTEGER)_Reduction, (INTEGER)_FinalChaos)
+AND
+IntegerToString(_BaseChaos, _BaseStr)
+AND
+IntegerToString(_Reduction, _ReductionStr)
+AND
+IntegerToString(_FinalChaos, _FinalStr)
+AND
+Concatenate("Chaos: Base=", _BaseStr, _TempMsg1)
+AND
+Concatenate(_TempMsg1, " Reduct=", _TempMsg2)
+AND
+Concatenate(_TempMsg2, _ReductionStr, _TempMsg3)
+AND
+Concatenate(_TempMsg3, " Final=", _TempMsg4)
+AND
+Concatenate(_TempMsg4, _FinalStr, _DebugMsg)
+THEN
+DebugText(_Owner, _DebugMsg);
+
+PROC
+PROC_AMP_DebugChaosMinMessage((CHARACTER)_Owner, (INTEGER)_BaseChaos, (INTEGER)_Reduction)
+AND
+IntegerToString(_BaseChaos, _BaseStr)
+AND
+IntegerToString(_Reduction, _ReductionStr)
+AND
+Concatenate("Chaos: Base=", _BaseStr, _TempMsg1)
+AND
+Concatenate(_TempMsg1, " Reduct=", _TempMsg2)
+AND
+Concatenate(_TempMsg2, _ReductionStr, _TempMsg3)
+AND
+Concatenate(_TempMsg3, " Final=1 (minimum)", _DebugMsg)
+THEN
+DebugText(_Owner, _DebugMsg);
+
+// apply chaos check with clear roll messaging
+PROC
+PROC_AMP_Disenchant_ApplyChaos((CHARACTER)_Owner)
+AND
+DB_AMP_Disenchant_FinalChaos(_FinalChaos)
+AND
+Random(100, _Roll)
+THEN
+PROC_AMP_DebugRollMessage(_Owner, _FinalChaos, _Roll);
+PROC_AMP_Disenchant_EvaluateRoll(_Owner, _FinalChaos, _Roll);
+
+// debug roll messages
+PROC
+PROC_AMP_DebugRollMessage((CHARACTER)_Owner, (INTEGER)_FinalChaos, (INTEGER)_Roll)
+AND
+IntegerToString(_Roll, _RollStr)
+AND
+IntegerToString(_FinalChaos, _ThresholdStr)
+AND
+Concatenate("Roll: ", _RollStr, _TempMsg1)
+AND
+Concatenate(_TempMsg1, "/", _TempMsg2)
+AND
+Concatenate(_TempMsg2, _ThresholdStr, _TempMsg3)
+AND
+_Roll <= _FinalChaos
+AND
+Concatenate(_TempMsg3, " CHAOS!", _DebugMsg)
+THEN
+DebugText(_Owner, _DebugMsg);
+
+PROC
+PROC_AMP_DebugRollMessage((CHARACTER)_Owner, (INTEGER)_FinalChaos, (INTEGER)_Roll)
+AND
+IntegerToString(_Roll, _RollStr)
+AND
+IntegerToString(_FinalChaos, _ThresholdStr)
+AND
+Concatenate("Roll: ", _RollStr, _TempMsg1)
+AND
+Concatenate(_TempMsg1, "/", _TempMsg2)
+AND
+Concatenate(_TempMsg2, _ThresholdStr, _TempMsg3)
+AND
+_Roll > _FinalChaos
+AND
+Concatenate(_TempMsg3, " SUCCESS!", _DebugMsg)
+THEN
+DebugText(_Owner, _DebugMsg);
+
+// evaluate roll result
+PROC
+PROC_AMP_Disenchant_EvaluateRoll((CHARACTER)_Owner, (INTEGER)_FinalChaos, (INTEGER)_Roll)
+AND
+_Roll <= _FinalChaos
+AND
+DB_AMP_Disenchant_Processing((ITEM)_Item, _)
+AND
+_Item != NULL_00000000-0000-0000-0000-000000000000
+AND
+Exists(_Item, 1)
+THEN
+PROC_AMP_Disenchant_ChaoticResult(_Owner);
+
+PROC
+PROC_AMP_Disenchant_EvaluateRoll((CHARACTER)_Owner, (INTEGER)_FinalChaos, (INTEGER)_Roll)
+AND
+_Roll > _FinalChaos
+AND
+DB_AMP_Disenchant_Processing((ITEM)_Item, (STRING)_Rarity)
+AND
+_Item != NULL_00000000-0000-0000-0000-000000000000
+AND
+Exists(_Item, 1)
+THEN
+PROC_AMP_Disenchant_NormalResult(_Owner, _Rarity);
+
+// handle normal result with cleaner code
+PROC
+PROC_AMP_Disenchant_NormalResult((CHARACTER)_Owner, (STRING)_Rarity)
+THEN
+PROC_AMP_Disenchant_GenerateResources(_Rarity, _Owner);
+PROC_AMP_Disenchant_FinishProcess(_Owner);
+
+// clean up after processing - remove reduction status
+PROC
+PROC_AMP_RemoveChaosReductionStatus((CHARACTER)_Owner)
+AND
+DB_AMP_ChaosReduction_Status(_ReductionStatus)
+AND
+HasActiveStatus(_Owner, _ReductionStatus, 1)
+THEN
+RemoveStatus(_Owner, _ReductionStatus, _Owner);
+DebugText(_Owner, "Reduction status removed");
+
+// section 5: process completion - improved
+
+// process completion with visual effects
+PROC
+PROC_AMP_Disenchant_FinishProcess((CHARACTER)_Owner)
+AND
+DB_AMP_Disenchant_Processing((ITEM)_Item, (STRING)_Rarity)
+AND
+_Item != NULL_00000000-0000-0000-0000-000000000000
+AND
+Exists(_Item, 1)
+AND
+GetPosition(_Item, _X, _Y, _Z)
+THEN
+// visual effects at item position
+PlayEffectAtPosition(VFX_Script_Djinni_Teleport_7c79ada5-e179-5d0b-0557-29fca6201742, _X, _Y, _Z, 1.0);
+PlayEffect(_Item, VFX_Script_IronFlask_Poof_01_e770f08f-38d7-a1a7-91ca-380b3444f834, "", 1.0);
+// visual effect on owner
+PlayEffect(_Owner, VFX_Spells_Cast_Sorcerer_BendLuck_Negative_TargetEffect_01_226517df-06be-b075-c074-00fab219483a, "", 1.0);
+// sound effect
+PlaySound(_Item, "Spell_Impact_Damage_Disintegrate");
+// cleanup
+NOT DB_AMP_Disenchant_Processing(_Item, _Rarity);
+ObjectTimerLaunch(_Item, "AMP_DeleteDisenchantedItem", 500, 0);
+PROC_AMP_RemoveChaosReductionStatus(_Owner);
+PROC_AMP_Disenchant_FinishProcessing();
+
+// clean up the disenchanted item after effects play
+IF
+ObjectTimerFinished((ITEM)_Item, "AMP_DeleteDisenchantedItem")
+AND
+Exists(_Item, 1)
+THEN
+RequestDelete(_Item);
+
+// handle null items
+PROC
+PROC_AMP_Disenchant_FinishProcess((CHARACTER)_Owner)
+AND
+DB_AMP_Disenchant_Processing((ITEM)_Item, (STRING)_Rarity)
+AND
+_Item == NULL_00000000-0000-0000-0000-000000000000
+THEN
+NOT DB_AMP_Disenchant_Processing(_Item, _Rarity);
+PROC_AMP_Disenchant_FinishProcessing();
+
+// 1. fixed proc_amp_disenchant_finishprocessing()
+PROC
+PROC_AMP_Disenchant_FinishProcessing()
+AND
+DB_AMP_Disenchant_IsProcessing(1)
+AND
+DB_AMP_Disenchant_FinalChaos(_CurrentValue)
+AND
+DB_AMP_Disenchant_ResCount(_Count)
+AND
+// move string operations here
+IntegerToString(_Count, _CountStr)
+AND
+Concatenate("Disenchant completed: ", _CountStr, _TempMsg1)
+AND
+Concatenate(_TempMsg1, " resources generated", _DebugMsg)
+THEN
+// reset all flags 
+NOT DB_AMP_Disenchant_IsProcessing(1);
+DB_AMP_Disenchant_IsProcessing(0);
+NOT DB_AMP_Disenchant_FinalChaos(_CurrentValue);
+DB_AMP_Disenchant_FinalChaos(0);
+NOT DB_AMP_Disenchant_ResCount(_Count);
+DB_AMP_Disenchant_ResCount(0);
+// now _debugmsg is bound in and section
+DebugText(NULL_00000000-0000-0000-0000-000000000000, _DebugMsg);
+
+// section 6: unified resource generation
+
+// master resource generation procedure - simple and straightforward
+// 2. fixed proc_amp_disenchant_generateresources()
+PROC
+PROC_AMP_Disenchant_GenerateResources((STRING)_Rarity, (CHARACTER)_Owner)
+THEN
+// can't use wildcard not db_amp_disenchant_rescount(_);
+// create a separate procedure for cleaning instead:
+PROC_AMP_Disenchant_ClearResourceCounter();
+DB_AMP_Disenchant_ResCount(0);
+PROC_AMP_Disenchant_GenerateLoot(_Rarity, _Owner);
+DebugText(_Owner, "Resource generation completed");
+
+// single unified procedure for generating loot from the loot table
+PROC
+PROC_AMP_Disenchant_GenerateLoot((STRING)_Rarity, (CHARACTER)_Owner)
+AND
+DB_AMP_Disenchant_Loot(_Rarity, _ResourceType, (INTEGER)_Chance)
+THEN
+PROC_AMP_Disenchant_RollForResource(_ResourceType, _Chance, _Owner);
+
+// roll for each resource based on its chance
+PROC
+PROC_AMP_Disenchant_RollForResource((STRING)_ResourceType, (INTEGER)_Chance, (CHARACTER)_Owner)
+AND
+_Chance >= 100 // Guaranteed resource (100% or higher)
+AND
+DB_AMP_Arcanizer_Resource_Map(_ResourceType, (ITEMROOT)_Template, _)
+AND
+IntegerDivide(_Chance, 100, _Amount) // Calculate quantity (e.g., 200 means 2)
+AND
+IntegerToString(_Amount, _AmountStr)
+AND
+Concatenate("Generated guaranteed: ", _ResourceType, _TempMsg1)
+AND 
+Concatenate(_TempMsg1, " (", _TempMsg2)
+AND
+Concatenate(_TempMsg2, _AmountStr, _TempMsg3)
+AND
+Concatenate(_TempMsg3, ")", _DebugMsg)
+AND
+DB_AMP_Disenchant_ResCount(_CurrentCount)
+AND
+IntegerSum(_CurrentCount, _Amount, _NewCount)
+THEN
+TemplateAddTo(_Template, _Owner, _Amount, 1);
+DebugText(_Owner, _DebugMsg);
+NOT DB_AMP_Disenchant_ResCount(_CurrentCount);
+DB_AMP_Disenchant_ResCount(_NewCount);
+
+// roll for chance-based resources
+PROC
+PROC_AMP_Disenchant_RollForResource((STRING)_ResourceType, (INTEGER)_Chance, (CHARACTER)_Owner)
+AND
+_Chance > 0
+AND
+_Chance < 100 // Not guaranteed, has a percentage chance
+AND
+DB_AMP_Arcanizer_Resource_Map(_ResourceType, (ITEMROOT)_Template, _)
+AND
+Random(100, _RollValue)
+AND
+_RollValue <= _Chance
+AND
+IntegerToString(_RollValue, _RollStr)
+AND
+IntegerToString(_Chance, _ChanceStr)
+AND
+Concatenate("Generated: ", _ResourceType, _TempMsg1)
+AND
+Concatenate(_TempMsg1, " (Roll: ", _TempMsg2)
+AND
+Concatenate(_TempMsg2, _RollStr, _TempMsg3)
+AND
+Concatenate(_TempMsg3, "/", _TempMsg4)
+AND
+Concatenate(_TempMsg4, _ChanceStr, _TempMsg5)
+AND
+Concatenate(_TempMsg5, ")", _DebugMsg)
+AND
+DB_AMP_Disenchant_ResCount(_CurrentCount)
+AND
+IntegerSum(_CurrentCount, 1, _NewCount)
+THEN
+TemplateAddTo(_Template, _Owner, 1, 1);
+DebugText(_Owner, _DebugMsg);
+NOT DB_AMP_Disenchant_ResCount(_CurrentCount);
+DB_AMP_Disenchant_ResCount(_NewCount);
+
+// handle chaotic result with better object selection
+PROC
+PROC_AMP_Disenchant_ChaoticResult((CHARACTER)_Owner)
+AND
+QRY_GetRandom("DB_AMP_Arcanizer_Chaos_Loot", 1, "DB_AMP_Disenchant_TempChaosItem")
+AND
+DB_AMP_Disenchant_TempChaosItem((ITEMROOT)_ChaoItem)
+THEN
+TemplateAddTo(_ChaoItem, _Owner, 1, 1);
+NOT DB_AMP_Disenchant_TempChaosItem(_ChaoItem);
+// special chaos effect
+PlayEffect(_Owner, VFX_Spells_Cast_Transmutation_Twinkling_Beam_TargetEffect_01_5a3ef1c2-ac1e-77cd-d1a3-cabcf001ef97, "", 1.0);
+PlayEffect(_Owner, VFX_Script_Djinni_Teleport_7c79ada5-e179-5d0b-0557-29fca6201742, "", 0.6);
+DebugText(_Owner, "Generated chaotic item from Chaos loot table");
+PROC_AMP_Disenchant_FinishProcess(_Owner);
+
+// section 7: cleanup & safety system
+
+// definition for main cleanup procedure
+PROC
+PROC_AMP_CleanupInvalidDBEntries()
+THEN
+PROC_AMP_CleanupProcessingDB();
+PROC_AMP_ResetProcessingState();
+
+// clean up null items (first procedure)
+PROC
+PROC_AMP_CleanupProcessingDB()
+AND
+DB_AMP_Disenchant_Processing((ITEM)_Item, (STRING)_Rarity)
+AND
+_Item == NULL_00000000-0000-0000-0000-000000000000
+THEN
+NOT DB_AMP_Disenchant_Processing(_Item, _Rarity);
+DebugText(NULL_00000000-0000-0000-0000-000000000000, "Cleanup: Removed NULL item from Processing DB");
+
+// clean up non-existent items (second procedure)
+PROC
+PROC_AMP_CleanupProcessingDB()
+AND
+DB_AMP_Disenchant_Processing((ITEM)_Item, (STRING)_Rarity)
+AND
+NOT Exists(_Item, 1)
+AND
+_Item != NULL_00000000-0000-0000-0000-000000000000
+THEN
+NOT DB_AMP_Disenchant_Processing(_Item, _Rarity);
+DebugText(NULL_00000000-0000-0000-0000-000000000000, "Cleanup: Removed non-existent item from Processing DB");
+
+// periodic database cleanup
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_CleanupTimerStarted(1)
+THEN
+DB_AMP_CleanupTimerStarted(1);
+TimerLaunch("AMP_CleanupInvalidDBEntries", 5000);
+DebugText(NULL_00000000-0000-0000-0000-000000000000, "Started cleanup timer");
+
+IF
+TimerFinished("AMP_CleanupInvalidDBEntries")
+THEN
+PROC_AMP_CleanupInvalidDBEntries();
+TimerLaunch("AMP_CleanupInvalidDBEntries", 60000);
+
+// reset state on game start
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_AMP_ResetProcessingState();
+DebugText(NULL_00000000-0000-0000-0000-000000000000, "Reset state on game start");
+
+// reset processing flags when needed
+PROC
+PROC_AMP_ResetProcessingState()
+AND
+DB_AMP_Disenchant_IsProcessing(1)
+THEN
+NOT DB_AMP_Disenchant_IsProcessing(1);
+DB_AMP_Disenchant_IsProcessing(0);
+DB_AMP_Disenchant_FinalChaos(0);
+DebugText(NULL_00000000-0000-0000-0000-000000000000, "Reset disenchant processing state");
+
+// auto-eject system reset
+PROC
+PROC_AMP_ResetProcessingState()
+AND
+DB_AMP_AutoEject_Processing(1)
+THEN
+NOT DB_AMP_AutoEject_Processing(1);
+DB_AMP_AutoEject_Processing(0);
+DebugText(NULL_00000000-0000-0000-0000-000000000000, "Reset auto-eject processing state");
+
+// section 7: cleanup & safety system - adapted
+
+// definition for main cleanup procedure
+PROC
+PROC_AMP_CleanupInvalidDBEntries()
+THEN
+PROC_AMP_CleanupProcessingDB();
+PROC_AMP_ResetProcessingState();
+
+// clean up null items
+PROC
+PROC_AMP_CleanupProcessingDB()
+AND
+DB_AMP_Disenchant_Processing((ITEM)_Item, (STRING)_Rarity)
+AND
+_Item == NULL_00000000-0000-0000-0000-000000000000
+THEN
+NOT DB_AMP_Disenchant_Processing(_Item, _Rarity);
+DebugText(NULL_00000000-0000-0000-0000-000000000000, "Cleanup: Removed NULL item from Processing DB");
+
+// clean up non-existent items
+PROC
+PROC_AMP_CleanupProcessingDB()
+AND
+DB_AMP_Disenchant_Processing((ITEM)_Item, (STRING)_Rarity)
+AND
+NOT Exists(_Item, 1)
+AND
+_Item != NULL_00000000-0000-0000-0000-000000000000
+THEN
+NOT DB_AMP_Disenchant_Processing(_Item, _Rarity);
+DebugText(NULL_00000000-0000-0000-0000-000000000000, "Cleanup: Removed non-existent item from Processing DB");
+
+// periodic database cleanup
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_CleanupTimerStarted(1)
+AND
+DB_AMP_CleanupTimerRunning(0)
+THEN
+DB_AMP_CleanupTimerStarted(1);
+NOT DB_AMP_CleanupTimerRunning(0);
+DB_AMP_CleanupTimerRunning(1);
+TimerLaunch("AMP_CleanupInvalidDBEntries", 5000);
+DebugText(NULL_00000000-0000-0000-0000-000000000000, "Started cleanup timer");
+
+IF
+TimerFinished("AMP_CleanupInvalidDBEntries")
+AND
+DB_AMP_CleanupTimerRunning(1)
+THEN
+NOT DB_AMP_CleanupTimerRunning(1);
+DB_AMP_CleanupTimerRunning(0);
+PROC_AMP_CleanupInvalidDBEntries();
+// wait a frame before relaunching
+ObjectTimerLaunch(NULL_00000000-0000-0000-0000-000000000000, "AMP_RestartCleanupTimer", 16, 0);
+
+// add new handler for safe restart
+IF
+ObjectTimerFinished(NULL_00000000-0000-0000-0000-000000000000, "AMP_RestartCleanupTimer")
+AND
+DB_AMP_CleanupTimerRunning(0)
+THEN
+DB_AMP_CleanupTimerRunning(1);
+TimerLaunch("AMP_CleanupInvalidDBEntries", 60000);
+DebugText(NULL_00000000-0000-0000-0000-000000000000, "Restarted cleanup timer safely");
+
+// reset state on game start
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_AMP_ResetProcessingState();
+DebugText(NULL_00000000-0000-0000-0000-000000000000, "Reset state on game start");
+
+// add this procedure to clean the database:
+PROC
+PROC_AMP_Disenchant_ClearResourceCounter()
+AND
+DB_AMP_Disenchant_ResCount(_OldCount)
+THEN
+NOT DB_AMP_Disenchant_ResCount(_OldCount);
+
+// 3. fixed proc_amp_resetprocessingstate()
+PROC
+PROC_AMP_ResetProcessingState()
+AND
+DB_AMP_Disenchant_IsProcessing(1)
+THEN
+NOT DB_AMP_Disenchant_IsProcessing(1);
+DB_AMP_Disenchant_IsProcessing(0);
+// split into two separate procedures:
+PROC_AMP_ClearFinalChaos();
+PROC_AMP_ClearResCount();
+DebugText(NULL_00000000-0000-0000-0000-000000000000, "Reset disenchant processing state");
+
+// add these two procedures:
+PROC
+PROC_AMP_ClearFinalChaos()
+AND
+DB_AMP_Disenchant_FinalChaos(_Value)
+THEN
+NOT DB_AMP_Disenchant_FinalChaos(_Value);
+DB_AMP_Disenchant_FinalChaos(0);
+
+PROC
+PROC_AMP_ClearResCount()
+AND
+DB_AMP_Disenchant_ResCount(_Value)
+THEN
+NOT DB_AMP_Disenchant_ResCount(_Value);
+DB_AMP_Disenchant_ResCount(0);
+*/
+EXITSECTION
+
+ENDEXITSECTION

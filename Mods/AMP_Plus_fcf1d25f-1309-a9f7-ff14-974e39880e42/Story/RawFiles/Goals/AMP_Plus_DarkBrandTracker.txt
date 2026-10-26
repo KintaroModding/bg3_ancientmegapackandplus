@@ -1,0 +1,119 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_AMP_Plus_BrandType("AMP_DARK_BRAND_T1");
+DB_AMP_Plus_BrandType("AMP_DARK_BRAND_T2");
+DB_AMP_Plus_BrandType("AMP_DARK_BRAND_T3");
+DB_AMP_Plus_BrandType("AMP_DARK_BRAND_T4");
+
+// only the top tier jumps on host death
+DB_AMP_Plus_BrandJumps("AMP_DARK_BRAND_T4");
+
+DB_AMP_Plus_OrbMark("AMP_PLUS_ORB_MARK_T1", "AMP_PLUS_BRAND_PULSE_T1");
+DB_AMP_Plus_OrbMark("AMP_PLUS_ORB_MARK_T2", "AMP_PLUS_BRAND_PULSE_T2");
+DB_AMP_Plus_OrbMark("AMP_PLUS_ORB_MARK_T3", "AMP_PLUS_BRAND_PULSE_T3");
+DB_AMP_Plus_OrbMark("AMP_PLUS_ORB_MARK_T4", "AMP_PLUS_BRAND_PULSE_T4");
+
+DB_AMP_Plus_PulseBrand("AMP_PLUS_BRAND_PULSE_T1", "AMP_DARK_BRAND_T1");
+DB_AMP_Plus_PulseBrand("AMP_PLUS_BRAND_PULSE_T2", "AMP_DARK_BRAND_T2");
+DB_AMP_Plus_PulseBrand("AMP_PLUS_BRAND_PULSE_T3", "AMP_DARK_BRAND_T3");
+DB_AMP_Plus_PulseBrand("AMP_PLUS_BRAND_PULSE_T4", "AMP_DARK_BRAND_T4");
+
+KBSECTION
+
+// keyed on the pulse, the brand's applier is not the wearer
+IF
+StatusApplied((CHARACTER)_Target, _Pulse, (CHARACTER)_Owner, _)
+AND
+DB_AMP_Plus_PulseBrand(_Pulse, _Brand)
+AND
+NOT DB_AMP_Plus_BrandLink(_Owner, _Target, _Brand)
+THEN
+DB_AMP_Plus_BrandLink(_Owner, _Target, _Brand);
+
+IF
+StatusRemoved((CHARACTER)_Target, _Brand, _, _)
+AND
+DB_AMP_Plus_BrandType(_Brand)
+THEN
+PROC_AMP_Plus_DarkBrand_DrainLinkOn(_Target, _Brand);
+
+// declared before the cleanup, the explosion needs the link
+IF
+Died((CHARACTER)_Dead)
+AND
+DB_AMP_Plus_BrandLink((CHARACTER)_Owner, _Dead, _Brand)
+AND
+DB_AMP_Plus_BrandJumps(_Brand)
+THEN
+CreateExplosion(_Dead, "AMP_Plus_DarkBrand_Jump", 1, _Owner);
+
+IF
+Died((CHARACTER)_Dead)
+THEN
+PROC_AMP_Plus_DarkBrand_DrainLinksOf(_Dead);
+
+IF
+CombatEnded(_)
+AND
+DB_AMP_Plus_BrandLink((CHARACTER)_Owner, (CHARACTER)_Target, _Brand)
+THEN
+RemoveStatus(_Target, _Brand, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_DarkBrand_DrainLinkOn((CHARACTER)_Target, (STRING)_Brand)
+AND
+DB_AMP_Plus_BrandLink((CHARACTER)_Owner, _Target, _Brand)
+THEN
+NOT DB_AMP_Plus_BrandLink(_Owner, _Target, _Brand);
+PROC_AMP_Plus_DarkBrand_DrainLinkOn(_Target, _Brand);
+
+PROC
+PROC_AMP_Plus_DarkBrand_DrainLinksOf((CHARACTER)_Dead)
+AND
+DB_AMP_Plus_BrandLink((CHARACTER)_Owner, _Dead, _Brand)
+THEN
+NOT DB_AMP_Plus_BrandLink(_Owner, _Dead, _Brand);
+PROC_AMP_Plus_DarkBrand_DrainLinksOf(_Dead);
+
+IF
+StatusApplied((CHARACTER)_Owner, _Mark, _, _)
+AND
+DB_AMP_Plus_OrbMark(_Mark, _Pulse)
+AND
+NOT DB_AMP_Plus_OrbBearer(_Owner, _Pulse)
+THEN
+DB_AMP_Plus_OrbBearer(_Owner, _Pulse);
+
+IF
+StatusRemoved((CHARACTER)_Owner, _Mark, _, _)
+AND
+DB_AMP_Plus_OrbMark(_Mark, _Pulse)
+AND
+DB_AMP_Plus_OrbBearer(_Owner, _Pulse)
+THEN
+NOT DB_AMP_Plus_OrbBearer(_Owner, _Pulse);
+
+// obscured state, not our own clouds, so night counts too
+// same-combat gate, or another party's turns mark enemies
+IF
+TurnEnded((CHARACTER)_Char)
+AND
+DB_AMP_Plus_OrbBearer((CHARACTER)_Owner, _Pulse)
+AND
+IsInCombat(_Char, 1)
+AND
+DB_Is_InCombat(_Char, _CombatID)
+AND
+DB_Is_InCombat(_Owner, _CombatID)
+AND
+IsEnemy(_Owner, _Char, 1)
+AND
+GetObscuredState(_Char, _State)
+AND
+_State != "Clear"
+THEN
+ApplyStatus(_Char, _Pulse, 6.0, 1, _Owner);
+
+EXITSECTION
+ENDEXITSECTION

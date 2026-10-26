@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="8be23a3c-c3cd-4e18-bb3b-ac4a55115f64" />
+					<attribute id="Name" type="LSString" value="AMP_Astral_Chest_000" />
+					<attribute id="LevelName" type="FixedString" value="CTY_Main_A" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="9b0bd3b3-3677-4b7a-a4a6-978735f764d2" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="-1603.0728 0.85206753 108.81374" />
+							<attribute id="RotationQuat" type="fvec4" value="0 -0.5182604 0 0.855223" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="CTY_Main_A" />
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="DEBRIS_THRESHOLD_GREATER" />
+								</node>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="AMP_ASTRAL_CHEST_VFX" />
+								</node>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="AMP_ASTRALCHEST_WARNING" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

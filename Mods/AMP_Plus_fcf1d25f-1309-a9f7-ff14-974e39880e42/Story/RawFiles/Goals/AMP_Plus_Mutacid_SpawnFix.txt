@@ -1,0 +1,44 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// base seed spawn needs the ACID causee to be the player owner, surface acid has none
+// owner comes from the player registry and active mutacid marker. spawned guard: one seed per combat
+// slime fights the enemy that took the acid, combat with its owner leaves it hostile to the party
+IF
+StatusApplied((CHARACTER)_Enemy, "ACID", _, _)
+AND
+DB_Players(_Owner)
+AND
+HasActiveStatus(_Owner, "AMP_MUTACID_ACTIVE", 1)
+AND
+IsInCombat(_Owner, 1)
+AND
+IsEnemy(_Enemy, _Owner, 1)
+AND
+NOT DB_AMP_Mutacid_Spawned(_Owner)
+AND
+DB_AMP_Mutacid_AmoebaTemplate((GUIDSTRING)_Template)
+AND
+GetPosition(_Enemy, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+CreateAt(_Template, _X, _Y, _Z, 0, 1, "", (GUIDSTRING)_Slime)
+THEN
+DB_AMP_Mutacid_Spawned(_Owner);
+DB_AMP_Mutacid_SlimeOwner((CHARACTER)_Slime, _Owner);
+ApplyStatus(_Slime, "AMP_ACIDSLIME_PARTY_ALLY", -1.0, 1, _Owner);
+ApplyStatus(_Slime, "AMP_AcidSlime_Control", -1.0, 1, _Owner);
+EnterCombat(_Slime, _Enemy);
+PROC_AMP_Mutacid_ScaleSlime((CHARACTER)_Slime, _Owner);
+PROC_AMP_Mutacid_SyncQToSlime(_Owner, (CHARACTER)_Slime);
+DB_AMP_Mutacid_DraftTarget(_Owner, (CHARACTER)_Slime);
+DB_AMP_Mutacid_BroodCount(_Owner, 1);
+DB_AMP_Mutacid_Tally(_Owner, "DEF", 0);
+DB_AMP_Mutacid_Tally(_Owner, "OFF", 0);
+DB_AMP_Mutacid_Tally(_Owner, "MOB", 0);
+DB_AMP_Mutacid_PicksSinceTier(_Owner, 0);
+
+EXITSECTION
+ENDEXITSECTION

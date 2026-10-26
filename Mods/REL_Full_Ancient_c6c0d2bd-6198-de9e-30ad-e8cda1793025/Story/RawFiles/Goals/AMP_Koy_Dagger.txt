@@ -1,0 +1,140 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// koy dagger: dark urge detect + status management, per tier
+
+// uncommon (base)
+
+IF
+StatusApplied(_Character, "AMP_KOY_DAGGER_TECHNICAL", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+IsTagged((CHARACTER)_Character, (TAG)REALLY_DARK_URGE_cd611d7d-b67d-42b4-a75c-a0c6091ef8a2, 1)
+THEN
+ApplyStatus(_Character, "AMP_KOY_DAGGER_DURGE_ACTIVE", -1.0, 1, _Character);
+
+IF
+StatusRemoved(_Character, "AMP_KOY_DAGGER_TECHNICAL", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasAppliedStatus(_Character, "SLAYER_PLAYER", 0)
+AND
+HasAppliedStatus(_Character, "SLAYER_PLAYER_10", 0)
+THEN
+RemoveStatus(_Character, "AMP_KOY_DAGGER_DURGE_ACTIVE", _Character);
+
+// rare (t2)
+
+IF
+StatusApplied(_Character, "AMP_KOY_DAGGER_TECHNICAL_2", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+IsTagged((CHARACTER)_Character, (TAG)REALLY_DARK_URGE_cd611d7d-b67d-42b4-a75c-a0c6091ef8a2, 1)
+THEN
+ApplyStatus(_Character, "AMP_KOY_DAGGER_DURGE_ACTIVE_2", -1.0, 1, _Character);
+
+IF
+StatusRemoved(_Character, "AMP_KOY_DAGGER_TECHNICAL_2", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasAppliedStatus(_Character, "SLAYER_PLAYER", 0)
+AND
+HasAppliedStatus(_Character, "SLAYER_PLAYER_10", 0)
+THEN
+RemoveStatus(_Character, "AMP_KOY_DAGGER_DURGE_ACTIVE_2", _Character);
+
+// very rare (t3)
+
+IF
+StatusApplied(_Character, "AMP_KOY_DAGGER_TECHNICAL_3", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+IsTagged((CHARACTER)_Character, (TAG)REALLY_DARK_URGE_cd611d7d-b67d-42b4-a75c-a0c6091ef8a2, 1)
+THEN
+ApplyStatus(_Character, "AMP_KOY_DAGGER_DURGE_ACTIVE_3", -1.0, 1, _Character);
+
+IF
+StatusRemoved(_Character, "AMP_KOY_DAGGER_TECHNICAL_3", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasAppliedStatus(_Character, "SLAYER_PLAYER", 0)
+AND
+HasAppliedStatus(_Character, "SLAYER_PLAYER_10", 0)
+THEN
+RemoveStatus(_Character, "AMP_KOY_DAGGER_DURGE_ACTIVE_3", _Character);
+
+// legendary (t4)
+
+IF
+StatusApplied(_Character, "AMP_KOY_DAGGER_TECHNICAL_4", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+IsTagged((CHARACTER)_Character, (TAG)REALLY_DARK_URGE_cd611d7d-b67d-42b4-a75c-a0c6091ef8a2, 1)
+THEN
+ApplyStatus(_Character, "AMP_KOY_DAGGER_DURGE_ACTIVE_4", -1.0, 1, _Character);
+
+IF
+StatusRemoved(_Character, "AMP_KOY_DAGGER_TECHNICAL_4", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasAppliedStatus(_Character, "SLAYER_PLAYER", 0)
+AND
+HasAppliedStatus(_Character, "SLAYER_PLAYER_10", 0)
+THEN
+RemoveStatus(_Character, "AMP_KOY_DAGGER_DURGE_ACTIVE_4", _Character);
+
+// slayer form handling, shared across tiers
+
+// delayed check on SLAYER_PLAYER exit
+IF
+StatusRemoved(_Character, "SLAYER_PLAYER", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasAppliedStatus(_Character, "SLAYER_PLAYER_10", 0)
+THEN
+ObjectTimerLaunch((GUIDSTRING)_Character, "AMP_KoyDagger_SlayerExit_Check", 1000, 0);
+
+// delayed check on SLAYER_PLAYER_10 exit
+IF
+StatusRemoved(_Character, "SLAYER_PLAYER_10", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasAppliedStatus(_Character, "SLAYER_PLAYER", 0)
+THEN
+ObjectTimerLaunch((GUIDSTRING)_Character, "AMP_KoyDagger_SlayerExit_Check", 1000, 0);
+
+// no tech status left -> drop all durge-active statuses
+IF
+ObjectTimerFinished(_Character, "AMP_KoyDagger_SlayerExit_Check")
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasActiveStatus(_Character, "AMP_KOY_DAGGER_TECHNICAL", 0)
+AND
+HasActiveStatus(_Character, "AMP_KOY_DAGGER_TECHNICAL_2", 0)
+AND
+HasActiveStatus(_Character, "AMP_KOY_DAGGER_TECHNICAL_3", 0)
+AND
+HasActiveStatus(_Character, "AMP_KOY_DAGGER_TECHNICAL_4", 0)
+THEN
+RemoveStatus(_Character, "AMP_KOY_DAGGER_DURGE_ACTIVE", _Character);
+RemoveStatus(_Character, "AMP_KOY_DAGGER_DURGE_ACTIVE_2", _Character);
+RemoveStatus(_Character, "AMP_KOY_DAGGER_DURGE_ACTIVE_3", _Character);
+RemoveStatus(_Character, "AMP_KOY_DAGGER_DURGE_ACTIVE_4", _Character);
+
+EXITSECTION
+
+ENDEXITSECTION

@@ -1,0 +1,143 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// lock state is not settled when picking stops, read it a second later
+
+IF
+StoppedLockpicking((CHARACTER)_Char, (ITEM)_Lock)
+AND
+GetEquippedItem(_Char, "Gloves", (ITEM)_Gloves)
+AND
+GetStatString(_Gloves, (STRING)_Stat)
+AND
+DB_AMP_Plus_LockGloves_Stat(_Stat)
+AND
+NOT DB_AMP_Plus_LockGloves_Check((GUIDSTRING)_Lock, _)
+THEN
+DB_AMP_Plus_LockGloves_Check((GUIDSTRING)_Lock, (CHARACTER)_Char);
+ObjectTimerLaunch((GUIDSTRING)_Lock, "AMP_Plus_LockGloves_Check", 1000, 0);
+
+IF
+ObjectTimerFinished(_LockGUID, "AMP_Plus_LockGloves_Check")
+AND
+DB_AMP_Plus_LockGloves_Check(_LockGUID, (CHARACTER)_Char)
+AND
+IsLocked((ITEM)_LockGUID, 0)
+THEN
+NOT DB_AMP_Plus_LockGloves_Check(_LockGUID, _Char);
+PROC_AMP_Plus_LockGloves_Opened(_Char);
+
+IF
+ObjectTimerFinished(_LockGUID, "AMP_Plus_LockGloves_Check")
+AND
+DB_AMP_Plus_LockGloves_Check(_LockGUID, (CHARACTER)_Char)
+AND
+IsLocked((ITEM)_LockGUID, 1)
+THEN
+NOT DB_AMP_Plus_LockGloves_Check(_LockGUID, _Char);
+
+// a lever can shut a door again, so the payout needs a per-rest ceiling
+// ordered rules, the tally is seeded before it is read
+
+PROC
+PROC_AMP_Plus_LockGloves_Opened((CHARACTER)_Char)
+AND
+NOT DB_AMP_Plus_LockGloves_Paid(_Char, _)
+THEN
+DB_AMP_Plus_LockGloves_Paid(_Char, 0);
+
+PROC
+PROC_AMP_Plus_LockGloves_Opened((CHARACTER)_Char)
+AND
+DB_AMP_Plus_LockGloves_Paid(_Char, (INTEGER)_Paid)
+AND
+DB_AMP_Plus_LockGloves_Cap((INTEGER)_Cap)
+AND
+_Paid < _Cap
+THEN
+PROC_AMP_Plus_LockGloves_Roll(_Char, _Paid);
+
+PROC
+PROC_AMP_Plus_LockGloves_Roll((CHARACTER)_Char, (INTEGER)_Paid)
+AND
+GetEquippedItem(_Char, "Gloves", (ITEM)_Gloves)
+AND
+GetStatString(_Gloves, (STRING)_Stat)
+AND
+_Stat == "MAG_PHB_OfThievery_Gloves"
+AND
+DB_AMP_Plus_LockGloves_Pct((INTEGER)_Pct)
+AND
+Random(100, (INTEGER)_Roll)
+AND
+_Roll < _Pct
+THEN
+PROC_AMP_Plus_LockGloves_Bump(_Char, _Paid);
+PROC_AMP_Plus_AvaCap_GrantOne(_Char);
+
+PROC
+PROC_AMP_Plus_LockGloves_Roll((CHARACTER)_Char, (INTEGER)_Paid)
+AND
+GetEquippedItem(_Char, "Gloves", (ITEM)_Gloves)
+AND
+GetStatString(_Gloves, (STRING)_Stat)
+AND
+_Stat == "MAG_Zhentarim_Lockpicking_Gloves"
+AND
+DB_AMP_Plus_LockGloves_Pct((INTEGER)_Pct)
+AND
+Random(100, (INTEGER)_Roll)
+AND
+_Roll < _Pct
+THEN
+PROC_AMP_Plus_LockGloves_Bump(_Char, _Paid);
+TemplateAddTo((ITEMROOT)AMP_Capsule_Reward_Shards_8e23db66-b87a-43a4-a154-69a80c4ac6c3, _Char, 1, 0);
+
+PROC
+PROC_AMP_Plus_LockGloves_Bump((CHARACTER)_Char, (INTEGER)_Paid)
+AND
+IntegerSum(_Paid, 1, (INTEGER)_New)
+THEN
+NOT DB_AMP_Plus_LockGloves_Paid(_Char, _Paid);
+DB_AMP_Plus_LockGloves_Paid(_Char, _New);
+
+IF
+LongRestFinished()
+THEN
+PROC_AMP_Plus_LockGloves_DrainPaid();
+
+PROC
+PROC_AMP_Plus_LockGloves_DrainPaid()
+AND
+DB_AMP_Plus_LockGloves_Paid((CHARACTER)_Char, (INTEGER)_Paid)
+THEN
+NOT DB_AMP_Plus_LockGloves_Paid(_Char, _Paid);
+PROC_AMP_Plus_LockGloves_DrainPaid();
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_LockGloves_Cap(_)
+THEN
+PROC_AMP_Plus_LockGloves_Seed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_LockGloves_Cap(_)
+THEN
+PROC_AMP_Plus_LockGloves_Seed();
+
+PROC
+PROC_AMP_Plus_LockGloves_Seed()
+THEN
+DB_AMP_Plus_LockGloves_Cap(5);
+DB_AMP_Plus_LockGloves_Pct(5);
+DB_AMP_Plus_LockGloves_Stat("MAG_PHB_OfThievery_Gloves");
+DB_AMP_Plus_LockGloves_Stat("MAG_Zhentarim_Lockpicking_Gloves");
+
+EXITSECTION
+ENDEXITSECTION

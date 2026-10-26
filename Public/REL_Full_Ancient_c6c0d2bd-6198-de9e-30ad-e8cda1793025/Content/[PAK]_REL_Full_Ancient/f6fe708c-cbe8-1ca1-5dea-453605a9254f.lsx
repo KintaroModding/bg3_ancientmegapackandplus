@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="f6fe708c-cbe8-1ca1-5dea-453605a9254f" />
+					<attribute id="Name" type="LSString" value="126_Fighter_Warhammer" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/126_Fighter_Warhammer.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="126_Fighter_Warhammer" />
+					<attribute id="BoundsMin" type="fvec3" value="-2 -2 -2" />
+					<attribute id="BoundsMax" type="fvec3" value="2 2 2" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="2.5" />
+					<attribute id="Looping" type="bool" value="True" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="d686ed3e-0708-069e-4d02-1c9458d2cd79" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="e54b5578-f34d-5dbf-fc80-9dee664f7e46" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="ebfbf452-11ae-460a-96e5-5d1afaae10c3" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

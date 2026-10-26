@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="ed103005-fd71-457d-ae6c-39654bbd8f2e" />
+					<attribute id="Name" type="LSString" value="S_TUT_Helm_Devil_005" />
+					<attribute id="LevelName" type="FixedString" value="TUT_Avernus_C" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="TemplateName" type="FixedString" value="db4e657f-13d4-45a9-871e-bc55e26f1a2a" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h62aeaf2bgee72g4274g9170gac359946c7d6" version="7" />
+					<attribute id="Icon" type="FixedString" value="93547f86-fa3b-c5b8-bed2-c1dd78f8153f-TUT_Zhalk_(Icon_Cambion_Male)" />
+					<attribute id="Stats" type="FixedString" value="TUT_CambionCommander" />
+					<attribute id="Equipment" type="FixedString" value="TUT_Zhalk" />
+					<attribute id="LevelOverride" type="int32" value="3" />
+					<attribute id="CharacterVisualResourceID" type="FixedString" value="93547f86-fa3b-c5b8-bed2-c1dd78f8153f" />
+					<attribute id="IsEquipmentLootable" type="bool" value="False" />
+					<attribute id="Race" type="guid" value="b278457e-a3ee-45b1-8ff4-620b868c9193" />
+					<attribute id="Faction" type="guid" value="0314cde4-8572-4d70-a117-dba88e20e70d" />
+					<attribute id="Archetype" type="FixedString" value="zhalk_enhanced" />
+					<attribute id="IsBoss" type="bool" value="True" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1.1" />
+							<attribute id="Position" type="fvec3" value="-53.685936 17.342987 -391.7505" />
+							<attribute id="RotationQuat" type="fvec4" value="0 -0.86311996 0 0.50499904" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="TUT_Avernus_C" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="50d0102b-20d6-e358-fc29-38d368dcb1d0" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="57b4068d-f5bb-be4b-9094-f5b1ee40d144" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="SkillList">
+							<children>
+								<node id="Skill">
+									<attribute id="Skill" type="FixedString" value="Projectile_Fly_Spell" />
+									<attribute id="SpellCastingAbility" type="uint8" value="0" />
+									<attribute id="LearningStrategy" type="uint8" value="0" />
+									<attribute id="ScoreModifier" type="float" value="1" />
+									<attribute id="StartRound" type="int32" value="0" />
+									<attribute id="FallbackStartRound" type="int32" value="-1" />
+									<attribute id="MinimumImpact" type="int32" value="0" />
+									<attribute id="OnlyCastOnSelf" type="bool" value="False" />
+									<attribute id="AIFlags" type="uint16" value="0" />
+									<children>
+										<node id="SourceConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+										<node id="TargetConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="ItemList">
+							<children>
+								<node id="Item">
+									<attribute id="ScoreModifier" type="float" value="1" />
+									<attribute id="StartRound" type="int32" value="0" />
+									<attribute id="FallbackStartRound" type="int32" value="-1" />
+									<attribute id="MinimumImpact" type="int32" value="0" />
+									<attribute id="OnlyCastOnSelf" type="bool" value="False" />
+									<attribute id="AIFlags" type="uint16" value="0" />
+									<attribute id="ItemName" type="LSString" value="WPN_HUM_Greatsword_A_1" />
+									<attribute id="LevelName" type="LSString" value="" />
+									<attribute id="UUID" type="FixedString" value="" />
+									<attribute id="TemplateID" type="FixedString" value="1a2a58b7-4bd5-44d5-b1fe-8cd7e5b53def" />
+									<attribute id="Amount" type="int32" value="1" />
+									<attribute id="IsTradable" type="uint8" value="0" />
+									<attribute id="Type" type="uint8" value="1" />
+									<attribute id="CanBePickpocketed" type="bool" value="False" />
+									<attribute id="IsDroppedOnDeath" type="bool" value="False" />
+									<children>
+										<node id="SourceConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+										<node id="TargetConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="StatusList" />
+						<node id="Treasures">
+							<children>
+								<node id="TreasureItem">
+									<attribute id="Object" type="FixedString" value="TUT_Zhalk_Loot" />
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

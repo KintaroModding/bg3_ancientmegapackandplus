@@ -1,0 +1,277 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// SaveAnubisState then RestoreAnubisState rebuilds the behaviour tree in place
+// never orders an action or ends a turn, forced orders ignore the spell list and pull casters into melee
+
+// must stay well under the turn timeout in AMP_BossCombat.ann, a window as long fires only after the engine closed the turn
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_StallCfgVer(4)
+THEN
+PROC_AMP_Plus_StallCfgReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_StallCfgVer(4)
+THEN
+PROC_AMP_Plus_StallCfgReseed();
+
+PROC
+PROC_AMP_Plus_StallCfgReseed()
+AND
+DB_AMP_Plus_StallCfgVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_StallCfgVer(_Old);
+
+PROC
+PROC_AMP_Plus_StallCfgReseed()
+AND
+DB_AMP_Plus_StallSilence((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_StallSilence(_Old);
+
+PROC
+PROC_AMP_Plus_StallCfgReseed()
+THEN
+DB_AMP_Plus_StallCfgVer(4);
+DB_AMP_Plus_StallSilence(12000);
+
+// substring match, the character and combat-only configs share one rule
+
+QRY
+QRY_AMP_Plus_StallGuarded((CHARACTER)_Char)
+AND
+GetAnubisConfig(_Char, (STRING)_Cfg)
+AND
+IsSubstring(_Cfg, "AMP_Boss", _Found)
+AND
+_Found == 1
+THEN
+DB_NOOP(1);
+
+// no rebuild at turn start, the Anubis state sets the turn timer in its own TurnStarted and would lose it
+
+IF
+TurnStarted((CHARACTER)_Char)
+AND
+QRY_AMP_Plus_StallGuarded(_Char)
+THEN
+DB_AMP_Plus_StallTurn(_Char);
+PROC_AMP_Plus_StallArm(_Char);
+
+PROC
+PROC_AMP_Plus_StallArm((CHARACTER)_Char)
+AND
+DB_AMP_Plus_StallSilence((INTEGER)_Watch)
+THEN
+RealtimeObjectTimerCancel(_Char, "AMP_Plus_StallWatch");
+RealtimeObjectTimerLaunch(_Char, "AMP_Plus_StallWatch", _Watch);
+PROC_AMP_Plus_StallMark(_Char);
+
+PROC
+PROC_AMP_Plus_StallMark((CHARACTER)_Char)
+AND
+DB_AMP_Plus_StallAt(_Char, (REAL)_OX, (REAL)_OY, (REAL)_OZ)
+THEN
+NOT DB_AMP_Plus_StallAt(_Char, _OX, _OY, _OZ);
+
+PROC
+PROC_AMP_Plus_StallMark((CHARACTER)_Char)
+AND
+GetPosition(_Char, (REAL)_X, (REAL)_Y, (REAL)_Z)
+THEN
+DB_AMP_Plus_StallAt(_Char, _X, _Y, _Z);
+
+IF
+UsingSpell((CHARACTER)_Char, _, _, _, _)
+AND
+DB_AMP_Plus_StallTurn(_Char)
+AND
+NOT DB_AMP_Plus_StallActed(_Char)
+THEN
+DB_AMP_Plus_StallActed(_Char);
+
+IF
+CastedSpell((CHARACTER)_Char, _, _, _, _)
+AND
+DB_AMP_Plus_StallTurn(_Char)
+AND
+NOT DB_AMP_Plus_StallActed(_Char)
+THEN
+DB_AMP_Plus_StallActed(_Char);
+
+// must stay above the rules that read the acted flag
+
+IF
+ObjectTimerFinished((CHARACTER)_Char, "AMP_Plus_StallWatch")
+AND
+DB_AMP_Plus_StallTurn(_Char)
+AND
+NOT DB_AMP_Plus_StallActed(_Char)
+AND
+DB_AMP_Plus_StallAt(_Char, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+GetDistanceToPosition(_Char, _X, _Y, _Z, (REAL)_Dist)
+AND
+_Dist > 1.0
+THEN
+DB_AMP_Plus_StallActed(_Char);
+
+IF
+ObjectTimerFinished((CHARACTER)_Char, "AMP_Plus_StallWatch")
+AND
+DB_AMP_Plus_StallTurn(_Char)
+AND
+DB_AMP_Plus_StallActed(_Char)
+THEN
+NOT DB_AMP_Plus_StallActed(_Char);
+PROC_AMP_Plus_StallArm(_Char);
+
+IF
+ObjectTimerFinished((CHARACTER)_Char, "AMP_Plus_StallWatch")
+AND
+DB_AMP_Plus_StallTurn(_Char)
+AND
+NOT DB_AMP_Plus_StallActed(_Char)
+THEN
+PROC_AMP_Plus_StallRepair(_Char);
+PROC_AMP_Plus_StallArm(_Char);
+
+PROC
+PROC_AMP_Plus_StallRepair((CHARACTER)_Char)
+THEN
+SaveAnubisState(_Char);
+RestoreAnubisState(_Char);
+PROC_AMP_Plus_StallCount(_Char);
+
+IF
+CombatTurnTimedOut((CHARACTER)_Char)
+AND
+IsPlayer(_Char, 0)
+THEN
+PROC_AMP_Plus_StallRepair(_Char);
+
+// timer keeps running through reaction prompts and animations, so it is suspended and restarted after
+// a release timer always restores it, a creature with no turn timer can hang the fight
+
+IF
+ReactionInterruptActionNeeded(_)
+AND
+DB_AMP_Plus_StallTurn((CHARACTER)_Char)
+THEN
+PROC_AMP_Plus_StallHold(_Char);
+
+IF
+CombatPaused(_)
+AND
+DB_AMP_Plus_StallTurn((CHARACTER)_Char)
+THEN
+PROC_AMP_Plus_StallHold(_Char);
+
+PROC
+PROC_AMP_Plus_StallHold((CHARACTER)_Char)
+THEN
+SetEntityEvent(_Char, "AMP_Plus_TimerHold", 1);
+RealtimeObjectTimerCancel(_Char, "AMP_Plus_TimerRelease");
+RealtimeObjectTimerLaunch(_Char, "AMP_Plus_TimerRelease", 20000);
+PROC_AMP_Plus_StallArm(_Char);
+
+IF
+CombatResumed(_)
+AND
+DB_AMP_Plus_StallTurn((CHARACTER)_Char)
+THEN
+PROC_AMP_Plus_StallRelease(_Char);
+
+IF
+ReactionInterruptUsed(_, _, _)
+AND
+DB_AMP_Plus_StallTurn((CHARACTER)_Char)
+THEN
+PROC_AMP_Plus_StallRelease(_Char);
+
+IF
+ObjectTimerFinished((CHARACTER)_Char, "AMP_Plus_TimerRelease")
+AND
+DB_AMP_Plus_StallTurn(_Char)
+THEN
+PROC_AMP_Plus_StallRelease(_Char);
+
+PROC
+PROC_AMP_Plus_StallRelease((CHARACTER)_Char)
+THEN
+RealtimeObjectTimerCancel(_Char, "AMP_Plus_TimerRelease");
+SetEntityEvent(_Char, "AMP_Plus_TimerKick", 1);
+PROC_AMP_Plus_StallArm(_Char);
+
+IF
+AttackedBy((CHARACTER)_Char, _, _, _, _, _, _)
+AND
+DB_AMP_Plus_StallTurn(_Char)
+THEN
+PROC_AMP_Plus_StallArm(_Char);
+
+IF
+TurnEnded((CHARACTER)_Char)
+AND
+DB_AMP_Plus_StallTurn(_Char)
+THEN
+PROC_AMP_Plus_StallClear(_Char);
+
+IF
+Died((CHARACTER)_Char)
+AND
+DB_AMP_Plus_StallTurn(_Char)
+THEN
+PROC_AMP_Plus_StallClear(_Char);
+
+IF
+LeftCombat((CHARACTER)_Char, _)
+AND
+DB_AMP_Plus_StallTurn(_Char)
+THEN
+PROC_AMP_Plus_StallClear(_Char);
+
+PROC
+PROC_AMP_Plus_StallClear((CHARACTER)_Char)
+THEN
+NOT DB_AMP_Plus_StallTurn(_Char);
+NOT DB_AMP_Plus_StallActed(_Char);
+RealtimeObjectTimerCancel(_Char, "AMP_Plus_StallWatch");
+RealtimeObjectTimerCancel(_Char, "AMP_Plus_TimerRelease");
+SetEntityEvent(_Char, "AMP_Plus_TimerKick", 1);
+PROC_AMP_Plus_StallForget(_Char);
+
+PROC
+PROC_AMP_Plus_StallForget((CHARACTER)_Char)
+AND
+DB_AMP_Plus_StallAt(_Char, (REAL)_X, (REAL)_Y, (REAL)_Z)
+THEN
+NOT DB_AMP_Plus_StallAt(_Char, _X, _Y, _Z);
+
+PROC
+PROC_AMP_Plus_StallCount((CHARACTER)_Char)
+AND
+DB_AMP_Plus_StallSeen(_Char, (INTEGER)_Old)
+AND
+IntegerSum(_Old, 1, (INTEGER)_New)
+THEN
+NOT DB_AMP_Plus_StallSeen(_Char, _Old);
+DB_AMP_Plus_StallSeen(_Char, _New);
+
+PROC
+PROC_AMP_Plus_StallCount((CHARACTER)_Char)
+AND
+NOT DB_AMP_Plus_StallSeen(_Char, _)
+THEN
+DB_AMP_Plus_StallSeen(_Char, 1);
+
+EXITSECTION
+ENDEXITSECTION

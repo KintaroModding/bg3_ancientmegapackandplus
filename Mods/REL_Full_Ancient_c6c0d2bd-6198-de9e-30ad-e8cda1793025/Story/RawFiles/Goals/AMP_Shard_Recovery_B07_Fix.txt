@@ -1,0 +1,19 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// batch 07 shards were missing from RecoveryMap - fix for existing saves
+
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_NETHSEED", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_14_068218d4-fbab-4dfc-aeca-d0f901f7eb50);
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_BOOTS_STEADFAST", (ITEMROOT)AMP_Arcanizer_Shard_Boots_12_4bd4f3eb-8e05-4fcb-b478-b3d99f6512b3);
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_FIRECONDS", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_11_75828bed-0a9d-4884-be41-6a78aa358c9d);
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_JUGGERNAUT", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_2_62e35f12-4026-4bd5-9f74-5c1283bd9b45);
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_ALACRITY", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_3_63f3f727-1497-457f-a0ac-8984f8e1053f);
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_FORTITUDE", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_4_f207d9a6-7a7b-42ad-9b56-498b5b8bf559);
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_ACUITY", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_5_90aacef6-59e1-4238-bc42-0debcbe76160);
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_SAGACITY", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_6_f5d23d81-f020-4098-bf7f-7307841b137b);
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_SPLENDOR", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_7_c9827110-2e7c-4066-ba15-9a7affe80616);
+
+KBSECTION
+
+EXITSECTION
+ENDEXITSECTION

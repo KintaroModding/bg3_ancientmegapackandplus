@@ -1,0 +1,106 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// lock state is not settled when picking stops, it is read one second later
+
+IF
+StoppedLockpicking((CHARACTER)_Char, (ITEM)_Lock)
+AND
+HasActiveStatus(_Char, "AMP_SHARD_CHAR_HOUSEBREAKER", 1)
+AND
+NOT DB_AMP_Plus_ShardHousebreaker_Check((GUIDSTRING)_Lock, _)
+THEN
+DB_AMP_Plus_ShardHousebreaker_Check((GUIDSTRING)_Lock, (CHARACTER)_Char);
+ObjectTimerLaunch((GUIDSTRING)_Lock, "AMP_Plus_ShardHousebreaker_Check", 1000, 0);
+
+IF
+ObjectTimerFinished(_LockGUID, "AMP_Plus_ShardHousebreaker_Check")
+AND
+DB_AMP_Plus_ShardHousebreaker_Check(_LockGUID, (CHARACTER)_Char)
+AND
+IsLocked((ITEM)_LockGUID, 0)
+THEN
+NOT DB_AMP_Plus_ShardHousebreaker_Check(_LockGUID, _Char);
+PROC_AMP_Plus_ShardHousebreaker_Lock(_Char);
+
+IF
+ObjectTimerFinished(_LockGUID, "AMP_Plus_ShardHousebreaker_Check")
+AND
+DB_AMP_Plus_ShardHousebreaker_Check(_LockGUID, (CHARACTER)_Char)
+AND
+IsLocked((ITEM)_LockGUID, 1)
+THEN
+NOT DB_AMP_Plus_ShardHousebreaker_Check(_LockGUID, _Char);
+
+// ordered rules, the tally is seeded before it is read
+
+PROC
+PROC_AMP_Plus_ShardHousebreaker_Lock((CHARACTER)_Char)
+AND
+NOT DB_AMP_Plus_ShardHousebreaker_Stacks(_Char, _)
+THEN
+DB_AMP_Plus_ShardHousebreaker_Stacks(_Char, 0);
+
+PROC
+PROC_AMP_Plus_ShardHousebreaker_Lock((CHARACTER)_Char)
+AND
+GetEquippedItem(_Char, "Amulet", (ITEM)_Item)
+AND
+DB_AMP_Shard_Count(_Item, "AMP_SHARD_AMULET_HOUSEBREAKER", (INTEGER)_Count)
+AND
+IntegerProduct(_Count, 3, (INTEGER)_Cap)
+AND
+DB_AMP_Plus_ShardHousebreaker_Stacks(_Char, (INTEGER)_Have)
+AND
+IntegerSubtract(_Cap, _Have, (INTEGER)_Room)
+THEN
+PROC_AMP_Plus_ShardHousebreaker_Gain(_Char, _Count, _Room);
+
+PROC
+PROC_AMP_Plus_ShardHousebreaker_Gain((CHARACTER)_Char, (INTEGER)_Count, (INTEGER)_Room)
+AND
+_Room >= _Count
+THEN
+PROC_AMP_Plus_ShardHousebreaker_Apply(_Char, _Count);
+
+PROC
+PROC_AMP_Plus_ShardHousebreaker_Gain((CHARACTER)_Char, (INTEGER)_Count, (INTEGER)_Room)
+AND
+_Room < _Count
+AND
+_Room > 0
+THEN
+PROC_AMP_Plus_ShardHousebreaker_Apply(_Char, _Room);
+
+PROC
+PROC_AMP_Plus_ShardHousebreaker_Apply((CHARACTER)_Char, (INTEGER)_N)
+AND
+_N > 0
+AND
+DB_AMP_Plus_ShardHousebreaker_Stacks(_Char, (INTEGER)_Have)
+AND
+IntegerSum(_Have, _N, (INTEGER)_New)
+THEN
+NOT DB_AMP_Plus_ShardHousebreaker_Stacks(_Char, _Have);
+DB_AMP_Plus_ShardHousebreaker_Stacks(_Char, _New);
+PROC_AMP_ApplyShardEffectN(_Char, "AMP_SHARD_HOUSEBREAKER_STR", _N);
+
+IF
+LongRestFinished()
+THEN
+PROC_AMP_Plus_ShardHousebreaker_DrainStacks();
+
+PROC
+PROC_AMP_Plus_ShardHousebreaker_DrainStacks()
+AND
+DB_AMP_Plus_ShardHousebreaker_Stacks((CHARACTER)_Char, (INTEGER)_Have)
+THEN
+NOT DB_AMP_Plus_ShardHousebreaker_Stacks(_Char, _Have);
+RemoveStatus(_Char, "AMP_SHARD_HOUSEBREAKER_STR", _Char);
+PROC_AMP_Plus_ShardHousebreaker_DrainStacks();
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="8c2d4ce4-dea4-45b4-8bbc-0ff9b031ba0d" />
+					<attribute id="Name" type="LSString" value="AMP_Kyzr_Cloak_Summon_3" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="ParentTemplateId" type="FixedString" value="d022e2f8-3154-43f9-a08d-698013dbbf12" />
+					<attribute id="Scale" type="float" value="1.2" />
+					<attribute id="DisplayName" type="TranslatedString" handle="hbd64418cg010dge491gc753ge712d962f426" version="1" />
+					<attribute id="CharacterVisualResourceID" type="FixedString" value="235ad64c-4e28-0988-d3dd-82d5320f4339" />
+					<attribute id="IsLootable" type="bool" value="False" />
+					<attribute id="IsEquipmentLootable" type="bool" value="False" />
+					<attribute id="Title" type="TranslatedString" handle="hcd138b1egf308g5671g7016g6673fa0d3f09" version="3" />
+					<attribute id="Faction" type="guid" value="cfb709b3-220f-9682-bcfb-6f0d8837462e" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="ff16e8ab-e8e6-4acb-a105-aae53a9d510e" />
+								</node>
+							</children>
+						</node>
+						<node id="SkillList">
+							<children>
+								<node id="Skill">
+									<attribute id="Skill" type="FixedString" value="Projectile_Jump" />
+									<attribute id="SpellCastingAbility" type="uint8" value="0" />
+									<attribute id="LearningStrategy" type="uint8" value="0" />
+									<attribute id="ScoreModifier" type="float" value="1" />
+									<attribute id="StartRound" type="int32" value="0" />
+									<attribute id="FallbackStartRound" type="int32" value="-1" />
+									<attribute id="MinimumImpact" type="int32" value="0" />
+									<attribute id="OnlyCastOnSelf" type="bool" value="False" />
+									<attribute id="AIFlags" type="uint16" value="0" />
+									<children>
+										<node id="SourceConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+										<node id="TargetConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

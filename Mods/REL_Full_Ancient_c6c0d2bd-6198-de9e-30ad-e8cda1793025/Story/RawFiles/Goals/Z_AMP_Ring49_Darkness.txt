@@ -1,0 +1,108 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// ring49: darkness immunity while wielding greatsword/longsword and no shield
+
+// track ring owners, guard against dup db
+IF
+StatusApplied(_Char, "RING49_EQUIPPED", _Caster, _)
+AND
+NOT DB_AMP_Ring49_Owner((CHARACTER)_Char)
+THEN
+DB_AMP_Ring49_Owner((CHARACTER)_Char);
+PROC_AMP_Ring49_CheckDarkness(_Char);
+
+// register wearers from old saves where the status fired before this script existed
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_Players((CHARACTER)_Char)
+AND
+HasActiveStatus(_Char, "RING49_EQUIPPED", 1)
+AND
+NOT DB_AMP_Ring49_Owner(_Char)
+THEN
+DB_AMP_Ring49_Owner(_Char);
+PROC_AMP_Ring49_CheckDarkness(_Char);
+
+// re-check known wearers on load, gear may have changed
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Ring49_Owner((CHARACTER)_Char)
+THEN
+PROC_AMP_Ring49_CheckDarkness(_Char);
+
+IF
+StatusRemoved(_Char, "RING49_EQUIPPED", _, _)
+THEN
+NOT DB_AMP_Ring49_Owner((CHARACTER)_Char);
+RemoveStatus(_Char, "RING49_DARKNESS_IMMUNITY", NULL_00000000-0000-0000-0000-000000000000);
+
+// re-check on any equip/unequip
+IF
+Equipped(_Item, _Character)
+AND
+DB_AMP_Ring49_Owner(_Character)
+THEN
+PROC_AMP_Ring49_CheckDarkness(_Character);
+
+IF
+Unequipped(_Item, _Character)
+AND
+DB_AMP_Ring49_Owner(_Character)
+THEN
+PROC_AMP_Ring49_CheckDarkness(_Character);
+
+// always strip first, re-apply below if conditions hold
+PROC
+PROC_AMP_Ring49_CheckDarkness((CHARACTER)_Char)
+THEN
+RemoveStatus(_Char, "RING49_DARKNESS_IMMUNITY", NULL_00000000-0000-0000-0000-000000000000);
+
+// only if ring still equipped, avoids race on unequip
+PROC
+PROC_AMP_Ring49_CheckDarkness((CHARACTER)_Char)
+AND
+HasActiveStatus(_Char, "RING49_EQUIPPED", 1)
+AND
+QRY_AMP_Ring49_HasValidWeapon(_Char)
+AND
+NOT QRY_AMP_Ring49_HasShield(_Char)
+THEN
+ApplyStatus(_Char, "RING49_DARKNESS_IMMUNITY", -1.0, 1, _Char);
+
+// greatswords or longswords (two qry = or)
+QRY
+QRY_AMP_Ring49_HasValidWeapon((CHARACTER)_Char)
+AND
+GetEquippedItem(_Char, "Melee Main Weapon", _Weapon)
+AND
+IsEquipmentWithProficiency(_Weapon, "Greatswords", 1)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Ring49_HasValidWeapon((CHARACTER)_Char)
+AND
+GetEquippedItem(_Char, "Melee Main Weapon", _Weapon)
+AND
+IsEquipmentWithProficiency(_Weapon, "Longswords", 1)
+THEN
+DB_NOOP(1);
+
+// shield check
+QRY
+QRY_AMP_Ring49_HasShield((CHARACTER)_Char)
+AND
+GetEquippedItem(_Char, "Melee Offhand Weapon", _Offhand)
+AND
+IsEquipmentWithProficiency(_Offhand, "Shields", 1)
+THEN
+DB_NOOP(1);
+
+EXITSECTION
+
+ENDEXITSECTION

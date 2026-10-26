@@ -1,0 +1,47 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// debug spawn helper, console: oe AMP_TestSpawnUkra / oe AMP_TestKillUkra
+// also sets DB_AMP_MirrorChase_Mob, which the live pool sets at spawn
+
+KBSECTION
+
+IF
+TextEvent("AMP_TestSpawnUkra")
+AND
+GetHostCharacter(_Host)
+AND
+GetPosition(_Host, _X, _Y, _Z)
+AND
+RealSum(_Z, 3.0, _SZ)
+AND
+CreateAt((GUIDSTRING)AMP_ULTRA_Summon_10_2e3a6cd3-6380-4e15-8945-d8d04a49f2e6, _X, _Y, _SZ, 0, 1, "", (GUIDSTRING)_Mob)
+THEN
+DB_AMP_Ukra_TestSpawn((CHARACTER)_Mob);
+DB_AMP_MirrorChase_Mob((CHARACTER)_Mob, AMP_ULTRA_Summon_10_2e3a6cd3-6380-4e15-8945-d8d04a49f2e6);
+ApplyStatus(_Mob, "AMP_MIRROR_SUPPORT_FLAG", -1.0, 1, _Mob);
+ApplyStatus(_Mob, "AMP_MIRROR_DIVINE_SUPPORT", -1.0, 1, _Mob);
+ApplyStatus(_Mob, "AMP_MIRROR_WRATH", -1.0, 1, _Mob);
+ApplyStatus(_Mob, "AMP_ULTRA_NPC_OVERLAY", -1.0, 1, _Mob);
+ApplyStatus(_Mob, "AMP_ULTRA_SPAWN_VFX", 6.0, 1, _Mob);
+SetCharacterLootable(_Mob, 0);
+SetRelationTemporaryHostile((CHARACTER)_Mob, _Host);
+EnterCombat(_Mob, _Host);
+
+IF
+TextEvent("AMP_TestKillUkra")
+THEN
+PROC_AMP_Ukra_DrainTestSpawn();
+
+PROC
+PROC_AMP_Ukra_DrainTestSpawn()
+AND
+DB_AMP_Ukra_TestSpawn((CHARACTER)_Mob)
+THEN
+NOT DB_AMP_Ukra_TestSpawn(_Mob);
+RequestDeleteTemporary(_Mob);
+PROC_AMP_Ukra_DrainTestSpawn();
+
+EXITSECTION
+
+ENDEXITSECTION

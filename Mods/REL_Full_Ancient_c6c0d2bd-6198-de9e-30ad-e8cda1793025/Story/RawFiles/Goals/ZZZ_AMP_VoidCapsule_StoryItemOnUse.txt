@@ -1,0 +1,31 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// mark capsule as story item (golden border, can't sell) on first use.
+// separate goal so init runs on existing saves too.
+
+KBSECTION
+
+// charges first appear -> new use
+IF
+DB_AMP_VoidCapsule_Charges((ITEM)_Capsule, _)
+AND
+NOT DB_AMP_VoidCapsule_StoryItemMarked(_Capsule)
+THEN
+DB_AMP_VoidCapsule_StoryItemMarked(_Capsule);
+SetStoryItem(_Capsule, 1);
+
+// catch-up on level load for capsules already used before this goal existed
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_VoidCapsule_Charges((ITEM)_Capsule, _)
+AND
+NOT DB_AMP_VoidCapsule_StoryItemMarked(_Capsule)
+THEN
+DB_AMP_VoidCapsule_StoryItemMarked(_Capsule);
+SetStoryItem(_Capsule, 1);
+
+EXITSECTION
+
+ENDEXITSECTION

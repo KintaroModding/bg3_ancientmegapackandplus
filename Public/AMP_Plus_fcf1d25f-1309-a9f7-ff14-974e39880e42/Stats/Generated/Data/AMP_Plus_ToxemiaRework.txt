@@ -1,0 +1,55 @@
+// one save roll, the remove and pin legs read PARALYZED. whole tick gated on Combat()
+// RemoveEvents cleared too, inherited alone it strips the status early
+
+new entry "AMP_TOXEMIA"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_TOXEMIA"
+data "DescriptionParams" "DealDamage(1,Poison);7;1;Distance(2);10"
+data "TickFunctors" "IF(Combat() and StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',10)):DealDamage(10,Poison);IF(Combat() and StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',9) and not StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',10)):DealDamage(9,Poison);IF(Combat() and StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',8) and not StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',9)):DealDamage(8,Poison);IF(Combat() and StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',7) and not StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',8)):DealDamage(7,Poison);IF(Combat() and StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',6) and not StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',7)):DealDamage(6,Poison);IF(Combat() and StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',5) and not StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',6)):DealDamage(5,Poison);IF(Combat() and StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',4) and not StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',5)):DealDamage(4,Poison);IF(Combat() and StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',3) and not StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',4)):DealDamage(3,Poison);IF(Combat() and StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',2) and not StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',3)):DealDamage(2,Poison);IF(Combat() and StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',1) and not StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',2)):DealDamage(1,Poison);IF(Combat() and StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',8) and not SavingThrow(Ability.Constitution, AMP_Plus_PotencyDC())):ApplyStatus(PARALYZED,100,1);IF(Combat() and StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',8) and HasStatus('PARALYZED',context.Target)):RemoveStatus(AMP_TOXEMIA);IF(Combat() and StatusDurationEqualOrMoreThan(context.Target,'AMP_TOXEMIA',8) and not HasStatus('PARALYZED',context.Target)):SetStatusDuration(context.Target,'AMP_TOXEMIA',10,ForceSet)"
+data "RemoveConditions" ""
+data "RemoveEvents" ""
+data "OnRemoveFunctors" ""
+
+new entry "AMP_POTENCY_DC"
+type "StatusData"
+data "StatusType" "BOOST"
+data "DisplayName" "hf5e82dedgec16g4812gb95cg51a2f457432a;1"
+data "Description" "h43bbe768ge4d7g43a9gb814g5a3020e2429a;1"
+data "Icon" "PassiveFeature_Generic_Threat"
+data "StackId" "AMP_POTENCY_DC"
+data "Boosts" ""
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
+
+// OncePerTurn replaces the HasStatus gate, else four attacks reach the save in one turn
+// decay stays, it is the brake against AMP_Toxemia_Escalation on the chaos orb
+
+new entry "R_Poison_Volatile_T1"
+type "PassiveData"
+using "R_Poison_Volatile_T1"
+data "Properties" "Highlighted;OncePerTurn"
+data "Conditions" "(IsAttack() or IsSpell()) and Enemy() and Character() and not Dead() and not HasStatus('PARALYZED',context.Target)"
+
+new entry "R_Poison_Volatile_T2"
+type "PassiveData"
+using "R_Poison_Volatile_T2"
+data "Properties" "Highlighted;OncePerTurn"
+data "Conditions" "(IsAttack() or IsSpell()) and Enemy() and Character() and not Dead() and not HasStatus('PARALYZED',context.Target)"
+
+new entry "R_Poison_Volatile_T3"
+type "PassiveData"
+using "R_Poison_Volatile_T3"
+data "Properties" "Highlighted;OncePerTurn"
+data "Conditions" "(IsAttack() or IsSpell()) and Enemy() and Character() and not Dead() and not HasStatus('PARALYZED',context.Target)"
+
+new entry "R_Poison_Volatile_T4"
+type "PassiveData"
+using "R_Poison_Volatile_T4"
+data "Properties" "Highlighted;OncePerTurn"
+data "Conditions" "(IsAttack() or IsSpell()) and Enemy() and Character() and not Dead() and not HasStatus('PARALYZED',context.Target)"
+
+// OncePerTurn, else every damage instance spends a charge
+new entry "AMP_Toxemia_Burst_Hidden"
+type "PassiveData"
+using "AMP_Toxemia_Burst_Hidden"
+data "Properties" "IsHidden;OncePerTurn"

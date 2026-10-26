@@ -1,0 +1,48 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// story-item filters sit on the pickup paths only, so a quest item from a corpse lands in the camp chest, out of reach of its HasItem events
+// base delivery waits 500ms, a shorter timer here pulls the item back first
+
+IF
+RemovedFrom((ITEM)_Item, (CHARACTER)_Corpse)
+AND
+DB_AMP_AL_CampSendCorpse(_Corpse, _)
+THEN
+ObjectTimerLaunch(_Item, "AMP_Plus_CampSendGuard", 100);
+
+IF
+ObjectTimerFinished((ITEM)_Item, "AMP_Plus_CampSendGuard")
+AND
+QRY_AMP_Plus_CampSendProtected(_Item)
+THEN
+PROC_AMP_Plus_CampSendDrainPending(_Item);
+
+PROC
+PROC_AMP_Plus_CampSendDrainPending((ITEM)_Item)
+AND
+DB_AMP_AL_CampSend_Pending(_Item, (CHARACTER)_Player)
+THEN
+NOT DB_AMP_AL_CampSend_Pending(_Item, _Player);
+ObjectTimerCancel(_Item, "AMP_AL_CampSendDefer");
+PROC_AMP_Plus_CampSendDrainPending(_Item);
+
+QRY
+QRY_AMP_Plus_CampSendProtected((ITEM)_Item)
+AND
+IsStoryItem(_Item, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Plus_CampSendProtected((ITEM)_Item)
+AND
+IsTagged(_Item, KEY_9851fa99-5538-432a-8e77-c90929a88974, 1)
+THEN
+DB_NOOP(1);
+
+EXITSECTION
+ENDEXITSECTION

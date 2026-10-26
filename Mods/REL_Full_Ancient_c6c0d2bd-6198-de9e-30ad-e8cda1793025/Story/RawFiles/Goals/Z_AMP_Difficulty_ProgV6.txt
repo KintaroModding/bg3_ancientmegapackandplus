@@ -1,0 +1,240 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// force-recast: every trigger strips all prog statuses and re-applies from the applied + killtier lists
+
+// triggers
+
+// level load: backfill missing killtier then recast all
+// (the old scan runs first and fills applied from db_onlyonce)
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_AMP_ProgV6_BackfillKillTier();
+PROC_AMP_ProgV6_RecastAll();
+
+// backfill killtier for any applied key missing it (killed on casual, mode changed later)
+PROC
+PROC_AMP_ProgV6_BackfillKillTier()
+AND
+DB_AMP_BossProgression_Applied((STRING)_Key)
+AND
+NOT DB_AMP_BossProgression_KillTier(_Key, _)
+AND
+DB_AMP_CurrentTier((INTEGER)_Tier)
+THEN
+DB_AMP_BossProgression_KillTier(_Key, _Tier);
+
+// new kill: update list + recast
+IF
+DB_OnlyOnce((STRING)_Key)
+AND
+DB_AMP_BossProgression_BossKey(_Key)
+AND
+NOT DB_AMP_BossProgression_Applied(_Key)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+_Mode != "NONE"
+AND
+DB_AMP_CurrentTier((INTEGER)_Tier)
+THEN
+DB_AMP_BossProgression_Applied(_Key);
+DB_AMP_BossProgression_KillTier(_Key, _Tier);
+PROC_AMP_ProgV6_RecastAll();
+
+// entered combat: recast participant
+IF
+EnteredCombat((CHARACTER)_Char, _)
+THEN
+PROC_AMP_ProgV6_RecastOne(_Char);
+
+// new party member: recast
+IF
+DB_Players((CHARACTER)_Player)
+THEN
+PROC_AMP_ProgV6_RecastOne(_Player);
+
+// mode changed: recast everyone
+IF
+DB_AMP_Difficulty_Mode((STRING)_NewMode)
+THEN
+PROC_AMP_ProgV6_RecastAll();
+
+// recast all
+
+// players
+PROC
+PROC_AMP_ProgV6_RecastAll()
+AND
+DB_Players((CHARACTER)_P)
+THEN
+PROC_AMP_ProgV6_RecastOne(_P);
+
+// companions / ally camp members
+PROC
+PROC_AMP_ProgV6_RecastAll()
+AND
+DB_PartOfTheTeam((CHARACTER)_C)
+THEN
+PROC_AMP_ProgV6_RecastOne(_C);
+
+// tracked enemies on stage
+PROC
+PROC_AMP_ProgV6_RecastAll()
+AND
+DB_AMP_DiffV3_Tracked((CHARACTER)_E, (STRING)_S)
+THEN
+PROC_AMP_ProgV6_RecastOne(_E);
+
+// recast one
+
+PROC
+PROC_AMP_ProgV6_RecastOne((CHARACTER)_Target)
+THEN
+PROC_AMP_ProgV6_StripAll(_Target);
+PROC_AMP_ProgV6_ApplyByRole(_Target);
+
+// strip all prog statuses for a clean slate
+
+PROC
+PROC_AMP_ProgV6_StripAll((CHARACTER)_Target)
+THEN
+RemoveStatus(_Target, "AMP_BOSS_PROGRESS_STANDARD", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_BOSS_PROGRESS_IMPOSSIBLE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_NPC_STANDARD_T0_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_NPC_STANDARD_T1_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_NPC_STANDARD_T2_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_NPC_STANDARD_T3_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_NPC_STANDARD_T4_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_NPC_IMPOSSIBLE_T0_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_NPC_IMPOSSIBLE_T1_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_NPC_IMPOSSIBLE_T2_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_NPC_IMPOSSIBLE_T3_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_NPC_IMPOSSIBLE_T4_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_BOSS_STANDARD_T0_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_BOSS_STANDARD_T1_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_BOSS_STANDARD_T2_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_BOSS_STANDARD_T3_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_BOSS_STANDARD_T4_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_BOSS_IMPOSSIBLE_T0_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_BOSS_IMPOSSIBLE_T1_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_BOSS_IMPOSSIBLE_T2_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_BOSS_IMPOSSIBLE_T3_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_BOSS_IMPOSSIBLE_T4_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_NPC_STANDARD_T5_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_NPC_IMPOSSIBLE_T5_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_BOSS_STANDARD_T5_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Target, "AMP_PROG_BOSS_IMPOSSIBLE_T5_V5", NULL_00000000-0000-0000-0000-000000000000);
+
+// apply by role
+
+// player: one marker per killed boss
+PROC
+PROC_AMP_ProgV6_ApplyByRole((CHARACTER)_Target)
+AND
+IsPlayer(_Target, 1)
+AND
+IsDead(_Target, 0)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+_Mode != "NONE"
+AND
+DB_AMP_BossProgression_PlayerStatus(_Mode, (STRING)_Status)
+AND
+DB_AMP_BossProgression_Applied((STRING)_Key)
+THEN
+ApplyStatus(_Target, _Status, -1.0, 1, _Target);
+
+// non-player non-boss non-summon: enemy or temp ally npc
+// (excludes party members, hirelings, companions, party summons)
+PROC
+PROC_AMP_ProgV6_ApplyByRole((CHARACTER)_Target)
+AND
+IsPlayer(_Target, 0)
+AND
+IsBoss(_Target, 0)
+AND
+IsSummon(_Target, 0)
+AND
+IsDead(_Target, 0)
+AND
+NOT DB_Players(_Target)
+AND
+NOT DB_PartOfTheTeam(_Target)
+AND
+NOT DB_AMP_Difficulty_Excluded(_Target)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+_Mode != "NONE"
+AND
+DB_AMP_BossProgression_Applied((STRING)_Key)
+AND
+DB_AMP_BossProgression_KillTier(_Key, (INTEGER)_Tier)
+AND
+DB_AMP_BossProgression_EnemyNPCTierStatus(_Mode, _Tier, (STRING)_ProgStatus)
+THEN
+ApplyStatus(_Target, _ProgStatus, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// enemy summon (owner not player/companion): same npc tier-status
+PROC
+PROC_AMP_ProgV6_ApplyByRole((CHARACTER)_Target)
+AND
+IsPlayer(_Target, 0)
+AND
+IsBoss(_Target, 0)
+AND
+IsSummon(_Target, 1)
+AND
+IsDead(_Target, 0)
+AND
+CharacterGetOwner(_Target, (CHARACTER)_Owner)
+AND
+NOT DB_Players(_Owner)
+AND
+NOT DB_PartOfTheTeam(_Owner)
+AND
+NOT DB_AMP_Difficulty_Excluded(_Target)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+_Mode != "NONE"
+AND
+DB_AMP_BossProgression_Applied((STRING)_Key)
+AND
+DB_AMP_BossProgression_KillTier(_Key, (INTEGER)_Tier)
+AND
+DB_AMP_BossProgression_EnemyNPCTierStatus(_Mode, _Tier, (STRING)_ProgStatus)
+THEN
+ApplyStatus(_Target, _ProgStatus, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// non-player boss: one boss tier-status per killed boss
+PROC
+PROC_AMP_ProgV6_ApplyByRole((CHARACTER)_Target)
+AND
+IsPlayer(_Target, 0)
+AND
+IsBoss(_Target, 1)
+AND
+IsDead(_Target, 0)
+AND
+NOT DB_AMP_Difficulty_Excluded(_Target)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+_Mode != "NONE"
+AND
+DB_AMP_BossProgression_Applied((STRING)_Key)
+AND
+DB_AMP_BossProgression_KillTier(_Key, (INTEGER)_Tier)
+AND
+DB_AMP_BossProgression_EnemyBossTierStatus(_Mode, _Tier, (STRING)_ProgStatus)
+THEN
+ApplyStatus(_Target, _ProgStatus, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+ENDEXITSECTION

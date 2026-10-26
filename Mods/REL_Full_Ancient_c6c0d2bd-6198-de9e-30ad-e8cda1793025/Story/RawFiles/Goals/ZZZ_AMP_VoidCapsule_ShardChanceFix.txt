@@ -1,0 +1,21 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+// reseed per-tier shard->coin chance on old saves (registry init doesn't rerun pre-update).
+// without it the shard handler never matches and the capsule rejects the shard.
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_VoidCapsule_ShardCoinChanceFallback(_)
+THEN
+DB_AMP_VoidCapsule_ShardCoinChanceByTier("SHARDS_20", 80);
+DB_AMP_VoidCapsule_ShardCoinChanceByTier("SHARDS_6", 60);
+DB_AMP_VoidCapsule_ShardCoinChanceByTier("SHARDS_2", 35);
+DB_AMP_VoidCapsule_ShardCoinChanceByTier("SHARDS_1", 10);
+DB_AMP_VoidCapsule_ShardCoinChanceFallback(80);
+
+EXITSECTION
+ENDEXITSECTION

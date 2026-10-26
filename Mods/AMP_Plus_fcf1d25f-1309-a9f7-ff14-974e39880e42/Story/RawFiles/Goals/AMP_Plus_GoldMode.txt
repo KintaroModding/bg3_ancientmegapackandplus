@@ -1,0 +1,102 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_Settings_GoldMode", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+NOT DB_AMP_Plus_PureMind(1)
+AND
+NOT DB_AMP_Plus_GoldMode_Enabled(1)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_GoldMode_AskEnable");
+
+// a party that gave up ring advantages cannot re-enable, turning off stays open
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_Settings_GoldMode", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_AMP_Plus_PureMind(1)
+AND
+NOT DB_AMP_Plus_GoldMode_Enabled(1)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_PureMind_Locked");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_Settings_GoldMode", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_AMP_Plus_GoldMode_Enabled(1)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_GoldMode_AskDisable");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_GoldMode_AskEnable", 1)
+AND
+NOT DB_AMP_Plus_GoldMode_Enabled(1)
+THEN
+DB_AMP_Plus_GoldMode_Enabled(1);
+TimerLaunch("AMP_Plus_GoldMode_Tick", 500);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_GoldMode_AskDisable", 1)
+THEN
+NOT DB_AMP_Plus_GoldMode_Enabled(1);
+PROC_AMP_PlayModeEffect(_Host);
+
+// disabling empties the party purse
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_GoldMode_AskDisable", 1)
+AND
+GetGold(_Host, (INTEGER)_Gold)
+AND
+_Gold > 0
+AND
+IntegerSubtract(0, _Gold, (INTEGER)_Neg)
+THEN
+AddGold(_Host, _Neg);
+
+IF
+TimerFinished("AMP_Plus_GoldMode_Tick")
+AND
+DB_AMP_Plus_GoldMode_Enabled(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+GetGold(_Host, (INTEGER)_Gold)
+AND
+_Gold < 99000
+AND
+IntegerSubtract(99000, _Gold, (INTEGER)_Diff)
+THEN
+AddGold(_Host, _Diff);
+
+IF
+TimerFinished("AMP_Plus_GoldMode_Tick")
+AND
+DB_AMP_Plus_GoldMode_Enabled(1)
+THEN
+TimerLaunch("AMP_Plus_GoldMode_Tick", 1000);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Plus_GoldMode_Enabled(1)
+THEN
+TimerLaunch("AMP_Plus_GoldMode_Tick", 2000);
+
+EXITSECTION
+ENDEXITSECTION

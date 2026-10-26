@@ -1,0 +1,19 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_AMP_DarkestReaper_Template((ITEMROOT)MAG_Weapon117_e3ffadf6-edfe-457a-ac26-8169127543ba);
+KBSECTION
+IF
+Died((CHARACTER)_Character)
+AND
+DB_AMP_DarkestReaper_Template(_WeaponTemplate)
+AND
+GetEquippedWeapon(_Character, _Weapon)
+AND
+GetTemplate(_Weapon, _WeaponTemplate)
+THEN
+// darkest reaper wielder died -> game over
+ShowGameOverMenu("GameOver_01");
+EXITSECTION
+
+ENDEXITSECTION

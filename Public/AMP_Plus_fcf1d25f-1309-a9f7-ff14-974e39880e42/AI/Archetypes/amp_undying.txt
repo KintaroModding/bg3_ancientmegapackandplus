@@ -1,0 +1,22 @@
+// tesshin, blade form. takes whoever stands in front of him instead of hunting a finish,
+// and does not path around terrain that hurts.
+
+USING melee_smart
+MODIFIER_HIT_CHANCE_STUPIDITY                    0.88
+
+// a real cut, not a reset: melee_smart raises the 1.25 base by 0.20. TARGET_HEALTH_BIAS is
+// left alone, the engine default is already 0.00 and no melee base touches it.
+MULTIPLIER_KILL_ENEMY                            0.90
+
+// fire, acid and spikes do not enter the pathing cost
+MULTIPLIER_MOVEMENT_SURFACE                      0.00
+MULTIPLIER_ENDPOS_NOT_IN_DANGEROUS_SURFACE       0.00
+MULTIPLIER_DAMAGE_SELF_NEG                       0.40
+MULTIPLIER_FALL_DAMAGE_SELF                      0.00
+MULTIPLIER_REFLECT_DAMAGE                        0.00
+ENABLE_MOVEMENT_AVOID_AOO                        0.00
+MULTIPLIER_BOOST_IGNORE_AOO                      0.00
+
+MULTIPLIER_ENEMY_HEIGHT_DIFFERENCE               0.00
+WEAPON_PICKUP_MODIFIER                           0.00
+THROW_INVENTORY_ITEM_LIMIT                       0

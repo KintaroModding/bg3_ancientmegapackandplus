@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="d40a99df-ee66-4f39-83fe-6b9388e48e55" />
+					<attribute id="Name" type="LSString" value="AMP_Lockpick02" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="3945a26c-d689-453e-86e6-d01add014e16" />
+					<attribute id="VisualTemplate" type="FixedString" value="26d94388-cd22-bf59-a752-de4f59673b9f" />
+					<attribute id="DisplayName" type="TranslatedString" handle="ha63ba01eg0e73g0186gfd00g769cbd79d2e2" version="1" />
+					<attribute id="CanShootThrough" type="bool" value="False" />
+					<attribute id="Icon" type="FixedString" value="Astral_Beacon" />
+					<attribute id="Stats" type="FixedString" value="AMP_Torch_Lockpick" />
+					<attribute id="Description" type="TranslatedString" handle="hb87c10afgf223g9919gd47bgb7691417ad3d" version="1" />
+					<children>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="AMP_LOCKPICK_TORCH_VFX" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

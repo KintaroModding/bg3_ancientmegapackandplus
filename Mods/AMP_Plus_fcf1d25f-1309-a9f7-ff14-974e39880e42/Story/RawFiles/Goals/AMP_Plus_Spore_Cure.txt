@@ -1,0 +1,26 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// amulet is a source, never infected, so the base fire-cleanse misses it
+IF
+StatusAttempt((ITEM)_Item, "BURNING", _, _)
+AND
+GetTemplate(_Item, (ITEMROOT)AMP_Cursed_Spore_ec2ffd1d-2f0f-420a-989d-ea6d1c5bfee9)
+THEN
+PROC_AMP_Spore_NukeAll();
+
+// by rest finish a gone amulet has no carrier row, base cleanup ran at rest start
+IF
+LongRestFinished()
+AND
+NOT DB_AMP_Spore_Carrier(_, _)
+AND
+DB_AMP_Spore_ItemInfections((ITEM)_AnyInfected, _)
+THEN
+PROC_AMP_Spore_NukeAll();
+
+EXITSECTION
+ENDEXITSECTION

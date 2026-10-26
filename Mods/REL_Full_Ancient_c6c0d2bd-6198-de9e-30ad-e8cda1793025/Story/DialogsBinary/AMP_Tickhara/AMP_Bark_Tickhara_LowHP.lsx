@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="6" revision="0" build="1" lslib_meta="v1,bswap_guids,lsf_keys_adjacency" />
+	<region id="dialog">
+		<node id="dialog">
+			<attribute id="automated" type="bool" value="True" />
+			<attribute id="category" type="LSString" value="Automated NPC Dialog" />
+			<attribute id="UUID" type="FixedString" value="76d34c6e-b6a6-4f7d-b3d5-1a8be001b389" />
+			<attribute id="TimelineId" type="FixedString" value="bb13ddc9-8e87-4c31-a88f-709bce40760c" />
+			<children>
+				<node id="DefaultAddressedSpeakers">
+					<children>
+						<node id="Object" key="MapKey">
+							<attribute id="MapKey" type="int32" value="0" />
+							<attribute id="MapValue" type="int32" value="-1" />
+						</node>
+					</children>
+				</node>
+				<node id="speakerlist">
+					<children>
+						<node id="speaker" key="index">
+							<attribute id="index" type="FixedString" value="0" />
+							<attribute id="list" type="LSString" value="47769380-1709-47a1-853d-9f6c9ae95803" />
+							<attribute id="SpeakerMappingId" type="guid" value="e28e9b47-8bdf-40a4-943a-7f375aba30b6" />
+						</node>
+					</children>
+				</node>
+				<node id="nodes">
+					<children>
+						<node id="node" key="UUID">
+							<attribute id="constructor" type="FixedString" value="TagGreeting" />
+							<attribute id="UUID" type="FixedString" value="5e02cccf-566e-4865-b269-754f94cb2596" />
+							<attribute id="endnode" type="bool" value="True" />
+							<attribute id="Root" type="bool" value="True" />
+							<attribute id="exclusive" type="bool" value="True" />
+							<attribute id="transitionmode" type="uint8" value="1" />
+							<attribute id="waittime" type="float" value="1" />
+							<attribute id="speaker" type="int32" value="0" />
+							<children>
+								<node id="children" />
+								<node id="GameData">
+									<children>
+										<node id="AiPersonalities" key="AiPersonality" />
+										<node id="MusicInstrumentSounds" />
+										<node id="OriginSound" />
+									</children>
+								</node>
+								<node id="Tags" />
+								<node id="setflags" />
+								<node id="checkflags">
+									<children>
+										<node id="flaggroup" key="type">
+											<attribute id="type" type="FixedString" value="Tag" />
+											<children>
+												<node id="flag" key="UUID">
+													<attribute id="UUID" type="FixedString" value="47769380-1709-47a1-853d-9f6c9ae95803" />
+													<attribute id="value" type="bool" value="True" />
+													<attribute id="paramval" type="int32" value="0" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="TaggedTexts">
+									<children>
+										<node id="TaggedText">
+											<attribute id="HasTagRule" type="bool" value="True" />
+											<children>
+												<node id="TagTexts">
+													<children>
+							<node id="TagText">
+								<attribute id="TagText" type="TranslatedFSString" handle="h82ba7088g78f1g4acdg9e6ag6c6a651b3bdc" version="1" />
+								<attribute id="LineId" type="guid" value="c1e4a300-9ce5-4449-bae9-96ff3d3f74ab" />
+								<attribute id="stub" type="bool" value="True" />
+							</node>
+							<node id="TagText">
+								<attribute id="TagText" type="TranslatedFSString" handle="h9693ecefgd8efg446agb03fg8c3551d1434b" version="1" />
+								<attribute id="LineId" type="guid" value="87a64a02-43b4-4ccf-8d66-584a560aaa07" />
+								<attribute id="stub" type="bool" value="True" />
+							</node>
+							<node id="TagText">
+								<attribute id="TagText" type="TranslatedFSString" handle="haf5c5e59g1b9ag4198ga266g9af830a0827a" version="1" />
+								<attribute id="LineId" type="guid" value="871d5732-3eed-4dfd-ad19-b863b64bd546" />
+								<attribute id="stub" type="bool" value="True" />
+							</node>
+											</children>
+												</node>
+												<node id="RuleGroup">
+													<attribute id="TagCombineOp" type="uint8" value="0" />
+													<children><node id="Rules" /></children>
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="RootNodes">
+							<attribute id="RootNodes" type="FixedString" value="5e02cccf-566e-4865-b269-754f94cb2596" />
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

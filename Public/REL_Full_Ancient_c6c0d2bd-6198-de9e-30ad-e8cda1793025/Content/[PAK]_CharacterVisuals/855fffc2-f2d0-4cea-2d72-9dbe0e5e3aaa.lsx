@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="855fffc2-f2d0-4cea-2d72-9dbe0e5e3aaa" />
+					<attribute id="Name" type="LSString" value="arc_rapier_havoc_prepare_weapon" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/arc_rapier_havoc_prepare_weapon.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="arc_rapier_havoc_prepare_weapon" />
+					<attribute id="BoundsMin" type="fvec3" value="-1.7320509 -1.7320509 -1.7320509" />
+					<attribute id="BoundsMax" type="fvec3" value="1.7320509 1.7320509 1.7320509" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="1.6" />
+					<attribute id="Looping" type="bool" value="True" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="d686ed3e-0708-069e-4d02-1c9458d2cd79" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="1f27364e-c958-08a1-be9b-d986925374a0" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

@@ -1,0 +1,224 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+DB_AMP_Plus_UltraKillAcc(0);
+DB_AMP_Plus_UltraKeyAcc(0);
+
+KBSECTION
+
+// base reads Tracked on EnteredCombat, a summoned boss is untracked then and the rule never reruns
+// this pair of facts fires whichever of the two lands last
+
+IF
+DB_AMP_Plus_UltraMob((CHARACTER)_Mob, _)
+AND
+DB_AMP_DiffV3_Tracked(_Mob, (STRING)_Status)
+AND
+DB_AMP_BattleInstinct_StatusList(_Status)
+AND
+QRY_AMP_BattleInstinct_Active()
+AND
+NOT DB_AMP_Plus_UltraInstinct(_Mob)
+THEN
+DB_AMP_Plus_UltraInstinct(_Mob);
+ApplyStatus(_Mob, "AMP_BATTLE_INSTINCT", 6.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// base list stops at tier 4, a boss climbing to tier 5 must not lose its instinct
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_BattleInstinct_StatusList("AMP_BOSS_IMPOSSIBLE_T5_V4")
+THEN
+DB_AMP_BattleInstinct_StatusList("AMP_BOSS_IMPOSSIBLE_T5_V4");
+DB_AMP_BattleInstinct_StatusList("AMP_BOSS_STANDARD_T5_V4");
+DB_AMP_BattleInstinct_StatusList("AMP_NPC_IMPOSSIBLE_T5_V4");
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_BattleInstinct_StatusList("AMP_BOSS_IMPOSSIBLE_T5_V4")
+THEN
+DB_AMP_BattleInstinct_StatusList("AMP_BOSS_IMPOSSIBLE_T5_V4");
+DB_AMP_BattleInstinct_StatusList("AMP_BOSS_STANDARD_T5_V4");
+DB_AMP_BattleInstinct_StatusList("AMP_NPC_IMPOSSIBLE_T5_V4");
+
+// the trigger's resource marker is granted on landing, so a boss that never cast still reaches eclipse
+
+IF
+DB_AMP_Plus_UltraMob((CHARACTER)_Mob, _)
+AND
+DB_AMP_Ultra_Active(1)
+AND
+IsBoss(_Mob, 1)
+AND
+DB_AMP_Plus_AffixState("ECLIPSE", 1)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+_Lvl >= 12
+AND
+IsDead(_Mob, 0)
+AND
+NOT DB_AMP_Eclipse_HasInfo(_Mob)
+THEN
+PROC_AMP_Eclipse_ApplyInfo(_Mob);
+
+PROC
+PROC_AMP_Plus_UltraBumpScan()
+AND
+DB_AMP_Plus_UltraKillAcc((INTEGER)_OldK)
+AND
+DB_AMP_Plus_UltraKeyAcc((INTEGER)_OldT)
+THEN
+NOT DB_AMP_Plus_UltraKillAcc(_OldK);
+NOT DB_AMP_Plus_UltraKeyAcc(_OldT);
+DB_AMP_Plus_UltraKillAcc(0);
+DB_AMP_Plus_UltraKeyAcc(0);
+
+PROC
+PROC_AMP_Plus_UltraBumpScan()
+AND
+DB_AMP_BossProgression_Applied((STRING)_Key)
+AND
+DB_AMP_Plus_UltraKillAcc((INTEGER)_C)
+AND
+IntegerSum(_C, 1, (INTEGER)_C2)
+THEN
+NOT DB_AMP_Plus_UltraKillAcc(_C);
+DB_AMP_Plus_UltraKillAcc(_C2);
+
+PROC
+PROC_AMP_Plus_UltraBumpScan()
+AND
+DB_AMP_BossProgression_BossKey((STRING)_Key)
+AND
+DB_AMP_Plus_UltraKeyAcc((INTEGER)_C)
+AND
+IntegerSum(_C, 1, (INTEGER)_C2)
+THEN
+NOT DB_AMP_Plus_UltraKeyAcc(_C);
+DB_AMP_Plus_UltraKeyAcc(_C2);
+
+PROC
+PROC_AMP_Plus_UltraBumpScan()
+AND
+DB_AMP_Plus_UltraKillAcc((INTEGER)_Killed)
+AND
+DB_AMP_Plus_UltraKeyAcc((INTEGER)_Total)
+AND
+_Total > 0
+AND
+IntegerProduct(_Killed, 10, (INTEGER)_KilledScaled)
+AND
+IntegerProduct(_Total, 7, (INTEGER)_Threshold)
+AND
+_KilledScaled >= _Threshold
+AND
+NOT DB_AMP_Plus_UltraTierBump(1)
+THEN
+DB_AMP_Plus_UltraTierBump(1);
+
+IF
+DB_AMP_BossProgression_Applied((STRING)_Key)
+AND
+NOT DB_AMP_Plus_UltraTierBump(1)
+THEN
+PROC_AMP_Plus_UltraBumpScan();
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_UltraTierBump(1)
+THEN
+PROC_AMP_Plus_UltraBumpScan();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_UltraTierBump(1)
+THEN
+PROC_AMP_Plus_UltraBumpScan();
+
+// the tracking fact moves with the status or its other readers answer for the old tier
+
+IF
+DB_AMP_Plus_UltraMob((CHARACTER)_Mob, _)
+AND
+DB_AMP_Plus_UltraTierBump(1)
+AND
+NOT DB_AMP_Plus_UltraBumped(_Mob)
+AND
+DB_AMP_DiffV3_Tracked(_Mob, (STRING)_Status)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+DB_AMP_DiffV3_BossTierMap(_Mode, (INTEGER)_Tier, _Status)
+AND
+IntegerSum(_Tier, 1, (INTEGER)_Next)
+AND
+DB_AMP_DiffV3_BossTierMap(_Mode, _Next, (STRING)_NextStatus)
+THEN
+DB_AMP_Plus_UltraBumped(_Mob);
+NOT DB_AMP_DiffV3_Tracked(_Mob, _Status);
+RemoveStatus(_Mob, _Status, NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_DiffV3_Tracked(_Mob, _NextStatus);
+ApplyStatus(_Mob, _NextStatus, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// the second waits half a second, identical applies in one body collapse into one
+
+IF
+DB_AMP_Plus_UltraMob((CHARACTER)_Mob, _)
+AND
+DB_AMP_Plus_UltraTierBump(1)
+AND
+NOT DB_AMP_Plus_UltraBumped(_Mob)
+AND
+DB_AMP_DiffV3_Tracked(_Mob, (STRING)_Status)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+DB_AMP_DiffV3_BossTierMap(_Mode, (INTEGER)_Tier, _Status)
+AND
+IntegerSum(_Tier, 1, (INTEGER)_Next)
+AND
+NOT DB_AMP_DiffV3_BossTierMap(_Mode, _Next, _)
+AND
+DB_AMP_BossProgression_EnemyBossTierStatus(_Mode, _Tier, (STRING)_Prog)
+THEN
+DB_AMP_Plus_UltraBumped(_Mob);
+ApplyStatus(_Mob, _Prog, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Plus_UltraBumpProg2", 500);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Plus_UltraBumpProg2")
+AND
+IsDead(_Mob, 0)
+AND
+DB_AMP_DiffV3_Tracked(_Mob, (STRING)_Status)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+DB_AMP_DiffV3_BossTierMap(_Mode, (INTEGER)_Tier, _Status)
+AND
+DB_AMP_BossProgression_EnemyBossTierStatus(_Mode, _Tier, (STRING)_Prog)
+THEN
+ApplyStatus(_Mob, _Prog, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Plus_UltraBumped(_Mob)
+THEN
+NOT DB_AMP_Plus_UltraBumped(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Plus_UltraInstinct(_Mob)
+THEN
+NOT DB_AMP_Plus_UltraInstinct(_Mob);
+
+EXITSECTION
+ENDEXITSECTION

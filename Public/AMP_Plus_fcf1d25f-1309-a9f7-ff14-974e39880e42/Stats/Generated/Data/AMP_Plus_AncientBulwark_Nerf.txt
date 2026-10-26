@@ -1,0 +1,17 @@
+new entry "MAG_Weapon69_bonus"
+type "PassiveData"
+using "MAG_Weapon69_bonus"
+data "DescriptionParams" "10;2"
+data "StatsFunctors" "IF(Tagged('REALLY_DWARF',context.Source) and not RollDieAgainstDC(DiceType.d100,20)):ApplyStatus(BLUR,100,2);IF(not Tagged('REALLY_DWARF',context.Source) and not RollDieAgainstDC(DiceType.d100,10)):ApplyStatus(BLUR,100,2)"
+
+new entry "MAG_Weapon69_bonus_2"
+type "PassiveData"
+using "MAG_Weapon69_bonus_2"
+data "DescriptionParams" "20;2"
+data "StatsFunctors" "IF(Tagged('REALLY_DWARF',context.Source) and not RollDieAgainstDC(DiceType.d100,40)):ApplyStatus(BLUR,100,2);IF(not Tagged('REALLY_DWARF',context.Source) and not RollDieAgainstDC(DiceType.d100,20)):ApplyStatus(BLUR,100,2)"
+
+new entry "MAG_Weapon69_bonus_3"
+type "PassiveData"
+using "MAG_Weapon69_bonus_3"
+data "DescriptionParams" "30;3"
+data "StatsFunctors" "IF(Tagged('REALLY_DWARF',context.Source) and not RollDieAgainstDC(DiceType.d100,60)):ApplyStatus(BLUR,100,3);IF(not Tagged('REALLY_DWARF',context.Source) and not RollDieAgainstDC(DiceType.d100,30)):ApplyStatus(BLUR,100,3)"

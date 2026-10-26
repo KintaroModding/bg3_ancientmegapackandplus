@@ -1,0 +1,770 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// random station - universal recipe system
+
+// station template
+DB_AMP_RandomStation((ITEMROOT)AMP_Arcanizer_Station_2_19a3a3ea-17c8-414e-9990-a5ab38aec877);
+
+DB_AMP_Matrix_Charges(0);
+
+// crystal charge cost by rarity
+DB_AMP_Crystal_Cost((ITEMROOT)Enchant_Crystal4_faca0315-cb41-4a63-9b37-9afc6a1d1da4, 1);  // uncommon = 1
+DB_AMP_Crystal_Cost((ITEMROOT)Enchant_Crystal2_f90f99ba-d30d-4f05-8cde-b90092f128d8, 2);  // rare = 2
+DB_AMP_Crystal_Cost((ITEMROOT)Enchant_Crystal_d09be0fd-f230-47af-a523-c919e41c1261, 5);   // very rare = 5
+DB_AMP_Crystal_Cost((ITEMROOT)Enchant_Crystal3_98f1085c-1a49-474a-875c-cd0f2d9fdff0, 30); // legendary = 30
+
+// recipes: input crystal -> reward container
+DB_AMP_RandomRecipe((ITEMROOT)Enchant_Crystal4_faca0315-cb41-4a63-9b37-9afc6a1d1da4, (ITEMROOT)AMP_Arcanizer_Reward_1_9456da3b-2e42-46c4-bd7e-bf191ddba743); // uncommon
+DB_AMP_RandomRecipe((ITEMROOT)Enchant_Crystal2_f90f99ba-d30d-4f05-8cde-b90092f128d8, (ITEMROOT)AMP_Arcanizer_Reward_2_1c06086f-255f-47d4-8c63-fc0c6177ebc9); // rare
+DB_AMP_RandomRecipe((ITEMROOT)Enchant_Crystal_d09be0fd-f230-47af-a523-c919e41c1261, (ITEMROOT)AMP_Arcanizer_Reward_3_7aca4415-1a22-441c-859f-ede1af1c1cea);   // very rare
+DB_AMP_RandomRecipe((ITEMROOT)Enchant_Crystal3_98f1085c-1a49-474a-875c-cd0f2d9fdff0, (ITEMROOT)AMP_Arcanizer_Reward_4_8f2e5b6d-0784-4c3e-9582-f3d5bd95c7bd); // legendary
+
+// reward sounds - 38 for variety
+DB_AMP_RewardSounds(1, "GLO_Cinematics_Stingers_Mindflayer");
+DB_AMP_RewardSounds(2, "END_BrainBattle_FinalDecision_Nested_EvilAstarion_DarkWhooshAdd");
+DB_AMP_RewardSounds(3, "END_BrainBattle_FinalDecision_Nested_EvilAvatar_PlayerMagicDown");
+DB_AMP_RewardSounds(4, "END_MorphicPool_NetherbrainConfrontation_ThunderCloudDarken");
+DB_AMP_RewardSounds(5, "END_IllithidOptions_RaphaelLastChance_SnapA");
+DB_AMP_RewardSounds(6, "END_IllithidOptions_RaphaelLastChance_SnapB");
+DB_AMP_RewardSounds(7, "END_GatherYourAllies_GatheredAllies_CrowdCheer");
+DB_AMP_RewardSounds(8, "END_GatherYourAllies_GatheredAllies_Crowd_Cheer");
+DB_AMP_RewardSounds(9, "END_GameFinale_MystraGaleConfrontation_Stereo_SkySymbolGlow");
+DB_AMP_RewardSounds(10, "END_GameFinale_MystraGaleConfrontation_MystraHandMoveB");
+DB_AMP_RewardSounds(11, "END_GameFinale_MystraGaleConfrontation_HandsTouch");
+DB_AMP_RewardSounds(12, "END_GameFinale_MystraGaleConfrontation_MystraHandMoveA");
+DB_AMP_RewardSounds(13, "END_GameFinale_MystraGaleConfrontation_GoodEnding_GaleChestGlow");
+DB_AMP_RewardSounds(14, "END_GameFinale_MystraGaleConfrontation_GaleWhiteRiser");
+DB_AMP_RewardSounds(15, "END_GameFinale_MystraGaleConfrontation_GaleWhiteImpact");
+DB_AMP_RewardSounds(16, "END_GameFinale_MystraGaleConfrontation_GaleChestParticles_");
+DB_AMP_RewardSounds(17, "END_GameFinale_MystraGaleConfrontation_ChestLightUp");
+DB_AMP_RewardSounds(18, "END_GameFinale_MystraGaleConfrontation_BadEnding_Stereo_SkySymbolGlow");
+DB_AMP_RewardSounds(19, "LOW_StormshoreTabernacle_MystraShrine_OM_Gale_AOM_OOM_MystraAppears");
+DB_AMP_RewardSounds(20, "CAMP_Shadowheart_CRD_WildMagic_EmotionalDamage");
+DB_AMP_RewardSounds(21, "VFX_Script_SCL_MagicCircle_CombineSuccess");
+DB_AMP_RewardSounds(22, "VFX_Script_SCL_MagicCircle_CombineFail");
+DB_AMP_RewardSounds(23, "VFX_Script_SCL_MagicCircle_Dissapear");
+DB_AMP_RewardSounds(24, "VFX_Shar_Temple_Altar_LightBlast");
+DB_AMP_RewardSounds(25, "VFX_TreasurePile_Destroy_01");
+DB_AMP_RewardSounds(26, "UniqueNPC_HAG_Hag_Gen_Laughter");
+DB_AMP_RewardSounds(27, "Orthon_Voice_Combat_Laughter");
+DB_AMP_RewardSounds(28, "Man02_Laugh");
+DB_AMP_RewardSounds(29, "Goblin02_Laugh");
+DB_AMP_RewardSounds(30, "Goblin01_Laugh");
+DB_AMP_RewardSounds(31, "LOW_HagSurvivors_FirstMeeting_Adrielle_Kleidunn_Jatlo_VoodooDollAppear");
+DB_AMP_RewardSounds(32, "LOW_HagSurvivors_SurrogateMother_SheepForm_Yip");
+DB_AMP_RewardSounds(33, "LOW_PhilgravesMansion_FatherCarrion_CallOpen");
+DB_AMP_RewardSounds(34, "LOW_SorcerousSundries_FinalConfrontation_BookWhoosh");
+DB_AMP_RewardSounds(35, "LOW_SorcerousSundries_FinalConfrontation_MagicBookChime");
+DB_AMP_RewardSounds(36, "LOW_StormshoreTabernacle_TyrShrine");
+DB_AMP_RewardSounds(37, "II_Button_SharTemple");
+DB_AMP_RewardSounds(38, "CrSpell_Impact_Hollyphant_TrumpetOfBlasting");
+
+KBSECTION
+
+// track who used the station
+IF
+UseStarted((CHARACTER)_Character, (ITEM)_Station)
+AND
+GetTemplate(_Station, (ITEMROOT)_StationTemplate)
+AND
+DB_AMP_RandomStation(_StationTemplate)
+THEN
+// seed crystal costs on old saves
+PROC_AMP_InitializeCrystalCosts();
+// clear stuck flags
+NOT DB_AMP_Matrix_JustDepleted(_Station);
+SysClear("DB_AMP_RandomStation_LastUser", 1);
+DB_AMP_RandomStation_LastUser(_Character);
+// track this instance for status restore after long rest
+PROC_AMP_TrackStationInstance(_Station);
+
+// item dropped into the station
+IF
+AddedTo(_Item, _Container, _)
+AND
+DB_AMP_RandomStation((ITEMROOT)_StationTemplate)
+AND
+GetTemplate(_Container, _StationTemplate)
+AND
+NOT DB_AMP_RandomProcessing(_Item)
+THEN
+// mark processing so we don't loop
+DB_AMP_RandomProcessing(_Item);
+PROC_AMP_CheckItemType((ITEM)_Item, (ITEM)_Container);
+
+// matrix vs crystal
+
+// resonance matrix -> queue it
+PROC
+PROC_AMP_CheckItemType((ITEM)_Item, (ITEM)_Container)
+AND
+GetTemplate(_Item, (ITEMROOT)_ItemTemplate)
+AND
+_ItemTemplate == Resonance_Matrix_2c8dfeb6-c86e-4595-b9e9-080aa87bd0b7
+THEN
+PROC_AMP_QueueMatrix((ITEM)_Item, (ITEM)_Container);
+
+// anything else (crystals)
+PROC
+PROC_AMP_CheckItemType((ITEM)_Item, (ITEM)_Container)
+AND
+GetTemplate(_Item, (ITEMROOT)_ItemTemplate)
+AND
+NOT _ItemTemplate == Resonance_Matrix_2c8dfeb6-c86e-4595-b9e9-080aa87bd0b7
+THEN
+PROC_AMP_CheckAndProcessItem((ITEM)_Item, (ITEM)_Container);
+
+// matrix queue - process one at a time to avoid race conditions
+
+// queue a matrix
+PROC
+PROC_AMP_QueueMatrix((ITEM)_Matrix, (ITEM)_Station)
+THEN
+DB_AMP_MatrixQueue(_Matrix, _Station);
+PROC_AMP_TryProcessNextMatrix();
+
+// process next if idle
+PROC
+PROC_AMP_TryProcessNextMatrix()
+AND
+NOT DB_AMP_MatrixProcessingActive(_)
+AND
+DB_AMP_MatrixQueue((ITEM)_Matrix, (ITEM)_Station)
+THEN
+DB_AMP_MatrixProcessingActive(1);
+NOT DB_AMP_MatrixQueue(_Matrix, _Station);
+PROC_AMP_InstallMatrix((ITEM)_Matrix, (ITEM)_Station);
+TimerLaunch("AMP_ProcessNextMatrix", 200);
+
+// empty queue -> nothing
+PROC
+PROC_AMP_TryProcessNextMatrix()
+AND
+NOT DB_AMP_MatrixQueue(_, _)
+THEN
+DB_NOOP(1);
+
+// timer -> clear flag, process next
+IF
+TimerFinished("AMP_ProcessNextMatrix")
+THEN
+SysClear("DB_AMP_MatrixProcessingActive", 1);
+PROC_AMP_TryProcessNextMatrix();
+
+// matrix install / recharge
+
+// first install - no status yet, set 10 charges
+PROC
+PROC_AMP_InstallMatrix((ITEM)_Matrix, (ITEM)_Container)
+AND
+DB_AMP_RandomStation_LastUser((CHARACTER)_Player)
+AND
+HasActiveStatus(_Container, "AMP_MATRIX_ACTIVE", 0)
+THEN
+RequestDelete(_Matrix);
+SysClear("DB_AMP_Matrix_Charges", 1);
+DB_AMP_Matrix_Charges(10);
+ApplyStatus(_Container, "AMP_MATRIX_ACTIVE", -1.0, 1, _Player);
+PROC_AMP_ShowMatrixInstallMessage(_Player);
+PlayEffect(_Container, VFX_Script_ChestOfMundane_01_ac66b4c8-0a75-2edf-e9a5-3e7511689359);
+NOT DB_AMP_RandomProcessing(_Matrix);
+
+// recharge - status exists, +10 charges
+PROC
+PROC_AMP_InstallMatrix((ITEM)_Matrix, (ITEM)_Container)
+AND
+DB_AMP_RandomStation_LastUser((CHARACTER)_Player)
+AND
+HasActiveStatus(_Container, "AMP_MATRIX_ACTIVE", 1)
+AND
+DB_AMP_Matrix_Charges(_CurrentCharges)
+AND
+IntegerSum(_CurrentCharges, 10, _NewCharges)
+THEN
+RequestDelete(_Matrix);
+SysClear("DB_AMP_Matrix_Charges", 1);
+DB_AMP_Matrix_Charges(_NewCharges);
+PROC_AMP_ShowMatrixRechargeMessage(_Player, _NewCharges);
+PlayEffect(_Container, VFX_Script_ChestOfMundane_01_ac66b4c8-0a75-2edf-e9a5-3e7511689359);
+NOT DB_AMP_RandomProcessing(_Matrix);
+
+// fallback first install - no last user, use host
+PROC
+PROC_AMP_InstallMatrix((ITEM)_Matrix, (ITEM)_Container)
+AND
+NOT DB_AMP_RandomStation_LastUser(_)
+AND
+GetHostCharacter((CHARACTER)_Player)
+AND
+HasActiveStatus(_Container, "AMP_MATRIX_ACTIVE", 0)
+THEN
+RequestDelete(_Matrix);
+SysClear("DB_AMP_Matrix_Charges", 1);
+DB_AMP_Matrix_Charges(10);
+ApplyStatus(_Container, "AMP_MATRIX_ACTIVE", -1.0, 1, _Player);
+PROC_AMP_ShowMatrixInstallMessage(_Player);
+PlayEffect(_Container, VFX_Script_ChestOfMundane_01_ac66b4c8-0a75-2edf-e9a5-3e7511689359);
+NOT DB_AMP_RandomProcessing(_Matrix);
+
+// fallback recharge - no last user, use host
+PROC
+PROC_AMP_InstallMatrix((ITEM)_Matrix, (ITEM)_Container)
+AND
+NOT DB_AMP_RandomStation_LastUser(_)
+AND
+GetHostCharacter((CHARACTER)_Player)
+AND
+HasActiveStatus(_Container, "AMP_MATRIX_ACTIVE", 1)
+AND
+DB_AMP_Matrix_Charges(_CurrentCharges)
+AND
+IntegerSum(_CurrentCharges, 10, _NewCharges)
+THEN
+RequestDelete(_Matrix);
+SysClear("DB_AMP_Matrix_Charges", 1);
+DB_AMP_Matrix_Charges(_NewCharges);
+PROC_AMP_ShowMatrixRechargeMessage(_Player, _NewCharges);
+PlayEffect(_Container, VFX_Script_ChestOfMundane_01_ac66b4c8-0a75-2edf-e9a5-3e7511689359);
+NOT DB_AMP_RandomProcessing(_Matrix);
+
+// reward container dropped back in -> ignore, clear flag
+PROC
+PROC_AMP_CheckAndProcessItem((ITEM)_Item, (ITEM)_Container)
+AND
+GetTemplate(_Item, (ITEMROOT)_ItemTemplate)
+AND
+DB_AMP_RandomRecipe(_, _ItemTemplate)
+THEN
+NOT DB_AMP_RandomProcessing(_Item);
+
+// anything else -> validate
+PROC
+PROC_AMP_CheckAndProcessItem((ITEM)_Item, (ITEM)_Container)
+AND
+GetTemplate(_Item, (ITEMROOT)_ItemTemplate)
+AND
+NOT DB_AMP_RandomRecipe(_, _ItemTemplate)
+THEN
+PROC_AMP_ValidateRandomInput(_Item, _Container);
+
+// recipe validation - check matrix status first
+PROC
+PROC_AMP_ValidateRandomInput((ITEM)_Item, (ITEM)_Container)
+AND
+GetTemplate(_Item, (ITEMROOT)_InputTemplate)  
+AND
+DB_AMP_RandomRecipe(_InputTemplate, (ITEMROOT)_OutputContainer)
+AND
+HasActiveStatus(_Container, "AMP_MATRIX_ACTIVE", 1)
+THEN
+// valid recipe + matrix active -> convert
+PROC_AMP_ProcessRandomConversion((ITEM)_Item, _OutputContainer, (ITEM)_Container);
+
+// no matrix on station -> reject
+PROC
+PROC_AMP_ValidateRandomInput((ITEM)_Item, (ITEM)_Container)
+AND
+GetTemplate(_Item, (ITEMROOT)_InputTemplate)
+AND
+DB_AMP_RandomRecipe(_InputTemplate, (ITEMROOT)_OutputContainer)
+AND
+HasActiveStatus(_Container, "AMP_MATRIX_ACTIVE", 0)
+AND
+DB_AMP_RandomStation_LastUser((CHARACTER)_Player)
+THEN
+// return crystal, show "matrix required", error vfx
+ToInventory(_Item, _Player, 1, 1, 0);
+PROC_AMP_ShowMatrixRequiredMessage(_Player);
+PlayEffect(_Container, VFX_Spells_Cast_Damage_Force_Red_ProjectileMultiple_HandFX_Textkey_02_a9219097-1858-87eb-ca20-1fcb79a79f59);
+NOT DB_AMP_RandomProcessing(_Item);
+
+// same, host fallback
+PROC
+PROC_AMP_ValidateRandomInput((ITEM)_Item, (ITEM)_Container)
+AND
+GetTemplate(_Item, (ITEMROOT)_InputTemplate)
+AND
+DB_AMP_RandomRecipe(_InputTemplate, (ITEMROOT)_OutputContainer)
+AND
+HasActiveStatus(_Container, "AMP_MATRIX_ACTIVE", 0)
+AND
+NOT DB_AMP_RandomStation_LastUser(_)
+AND
+GetHostCharacter((CHARACTER)_Player)
+THEN
+// return crystal, show "matrix required", error vfx
+ToInventory(_Item, _Player, 1, 1, 0);
+PROC_AMP_ShowMatrixRequiredMessage(_Player);
+PlayEffect(_Container, VFX_Spells_Cast_Damage_Force_Red_ProjectileMultiple_HandFX_Textkey_02_a9219097-1858-87eb-ca20-1fcb79a79f59);
+NOT DB_AMP_RandomProcessing(_Item);
+
+// not a recipe input -> drop the processing flag
+PROC
+PROC_AMP_ValidateRandomInput((ITEM)_Item, (ITEM)_Container)
+AND
+GetTemplate(_Item, (ITEMROOT)_InputTemplate)
+AND
+NOT DB_AMP_RandomRecipe(_InputTemplate, _)
+AND
+DB_AMP_RandomProcessing(_Item)
+THEN
+NOT DB_AMP_RandomProcessing(_Item);
+
+// conversion with variable charge cost
+
+// check cost, delete input, spawn reward, spend charges
+PROC
+PROC_AMP_ProcessRandomConversion((ITEM)_Item, (ITEMROOT)_OutputContainer, (ITEM)_Station)
+AND
+DB_AMP_RandomStation_LastUser((CHARACTER)_Player)
+AND
+DB_AMP_RandomProcessing(_Item)
+AND
+HasActiveStatus(_Station, "AMP_MATRIX_ACTIVE", 1)
+AND
+DB_AMP_Matrix_Charges(_CurrentCharges)
+AND
+GetTemplate(_Item, (ITEMROOT)_ItemTemplate)
+AND
+DB_AMP_Crystal_Cost(_ItemTemplate, _RequiredCharges)
+AND
+_CurrentCharges >= _RequiredCharges
+AND
+IntegerSubtract(_CurrentCharges, _RequiredCharges, _NewCharges)
+THEN
+RequestDelete((ITEM)_Item);
+SysClear("DB_AMP_Matrix_Charges", 1);
+DB_AMP_Matrix_Charges(_NewCharges);
+PROC_AMP_CheckMatrixDepletion(_Station, _Player, _NewCharges);
+PROC_AMP_SpawnRewardContainer(_Player, _OutputContainer);
+PlayEffect(_Station, VFX_Spells_Cast_Intent_Utility_TargetSingle_Reduce_HandFX_01_b6c6564b-bf68-38e5-7ca9-382fa4c63b8e);
+NOT DB_AMP_RandomProcessing(_Item);
+
+// fallback: no cost entry -> old 1-charge logic
+PROC
+PROC_AMP_ProcessRandomConversion((ITEM)_Item, (ITEMROOT)_OutputContainer, (ITEM)_Station)
+AND
+DB_AMP_RandomStation_LastUser((CHARACTER)_Player)
+AND
+DB_AMP_RandomProcessing(_Item)
+AND
+HasActiveStatus(_Station, "AMP_MATRIX_ACTIVE", 1)
+AND
+DB_AMP_Matrix_Charges(_CurrentCharges)
+AND
+_CurrentCharges > 0
+AND
+GetTemplate(_Item, (ITEMROOT)_ItemTemplate)
+AND
+NOT DB_AMP_Crystal_Cost(_ItemTemplate, _)
+AND
+IntegerSubtract(_CurrentCharges, 1, _NewCharges)
+THEN
+RequestDelete((ITEM)_Item);
+SysClear("DB_AMP_Matrix_Charges", 1);
+DB_AMP_Matrix_Charges(_NewCharges);
+PROC_AMP_CheckMatrixDepletion(_Station, _Player, _NewCharges);
+PROC_AMP_SpawnRewardContainer(_Player, _OutputContainer);
+PlayEffect(_Station, VFX_Spells_Cast_Intent_Utility_TargetSingle_Reduce_HandFX_01_b6c6564b-bf68-38e5-7ca9-382fa4c63b8e);
+NOT DB_AMP_RandomProcessing(_Item);
+
+// not enough charges -> return crystal, show message
+PROC
+PROC_AMP_ProcessRandomConversion((ITEM)_Item, (ITEMROOT)_OutputContainer, (ITEM)_Station)
+AND
+DB_AMP_RandomStation_LastUser((CHARACTER)_Player)
+AND
+DB_AMP_RandomProcessing(_Item)
+AND
+HasActiveStatus(_Station, "AMP_MATRIX_ACTIVE", 1)
+AND
+DB_AMP_Matrix_Charges(_CurrentCharges)
+AND
+GetTemplate(_Item, (ITEMROOT)_ItemTemplate)
+AND
+DB_AMP_Crystal_Cost(_ItemTemplate, _RequiredCharges)
+AND
+_CurrentCharges < _RequiredCharges
+THEN
+ToInventory(_Item, _Player, 1, 1, 0);
+PROC_AMP_ShowInsufficientEnergyMessage_Detailed(_Player, _CurrentCharges);
+PlayEffect(_Station, VFX_Spells_Cast_Damage_Force_Red_ProjectileMultiple_HandFX_Textkey_02_a9219097-1858-87eb-ca20-1fcb79a79f59);
+NOT DB_AMP_RandomProcessing(_Item);
+
+// fallback: no last user, use host
+PROC
+PROC_AMP_ProcessRandomConversion((ITEM)_Item, (ITEMROOT)_OutputContainer, (ITEM)_Station)
+AND
+NOT DB_AMP_RandomStation_LastUser(_)
+AND
+GetHostCharacter((CHARACTER)_Player)
+AND
+DB_AMP_RandomProcessing(_Item)
+AND
+HasActiveStatus(_Station, "AMP_MATRIX_ACTIVE", 1)
+AND
+DB_AMP_Matrix_Charges(_CurrentCharges)
+AND
+GetTemplate(_Item, (ITEMROOT)_ItemTemplate)
+AND
+DB_AMP_Crystal_Cost(_ItemTemplate, _RequiredCharges)
+AND
+_CurrentCharges >= _RequiredCharges
+AND
+IntegerSubtract(_CurrentCharges, _RequiredCharges, _NewCharges)
+THEN
+RequestDelete((ITEM)_Item);
+SysClear("DB_AMP_Matrix_Charges", 1);
+DB_AMP_Matrix_Charges(_NewCharges);
+PROC_AMP_CheckMatrixDepletion(_Station, _Player, _NewCharges);
+PROC_AMP_SpawnRewardContainer(_Player, _OutputContainer);
+PlayEffect(_Station, VFX_Spells_Cast_Intent_Utility_TargetSingle_Reduce_HandFX_01_b6c6564b-bf68-38e5-7ca9-382fa4c63b8e);
+NOT DB_AMP_RandomProcessing(_Item);
+
+// host fallback: no cost entry -> old 1-charge logic
+PROC
+PROC_AMP_ProcessRandomConversion((ITEM)_Item, (ITEMROOT)_OutputContainer, (ITEM)_Station)
+AND
+NOT DB_AMP_RandomStation_LastUser(_)
+AND
+GetHostCharacter((CHARACTER)_Player)
+AND
+DB_AMP_RandomProcessing(_Item)
+AND
+HasActiveStatus(_Station, "AMP_MATRIX_ACTIVE", 1)
+AND
+DB_AMP_Matrix_Charges(_CurrentCharges)
+AND
+_CurrentCharges > 0
+AND
+GetTemplate(_Item, (ITEMROOT)_ItemTemplate)
+AND
+NOT DB_AMP_Crystal_Cost(_ItemTemplate, _)
+AND
+IntegerSubtract(_CurrentCharges, 1, _NewCharges)
+THEN
+RequestDelete((ITEM)_Item);
+SysClear("DB_AMP_Matrix_Charges", 1);
+DB_AMP_Matrix_Charges(_NewCharges);
+PROC_AMP_CheckMatrixDepletion(_Station, _Player, _NewCharges);
+PROC_AMP_SpawnRewardContainer(_Player, _OutputContainer);
+PlayEffect(_Station, VFX_Spells_Cast_Intent_Utility_TargetSingle_Reduce_HandFX_01_b6c6564b-bf68-38e5-7ca9-382fa4c63b8e);
+NOT DB_AMP_RandomProcessing(_Item);
+
+// host fallback: not enough charges
+PROC
+PROC_AMP_ProcessRandomConversion((ITEM)_Item, (ITEMROOT)_OutputContainer, (ITEM)_Station)
+AND
+NOT DB_AMP_RandomStation_LastUser(_)
+AND
+GetHostCharacter((CHARACTER)_Player)
+AND
+DB_AMP_RandomProcessing(_Item)
+AND
+HasActiveStatus(_Station, "AMP_MATRIX_ACTIVE", 1)
+AND
+DB_AMP_Matrix_Charges(_CurrentCharges)
+AND
+GetTemplate(_Item, (ITEMROOT)_ItemTemplate)
+AND
+DB_AMP_Crystal_Cost(_ItemTemplate, _RequiredCharges)
+AND
+_CurrentCharges < _RequiredCharges
+THEN
+ToInventory(_Item, _Player, 1, 1, 0);
+PROC_AMP_ShowInsufficientEnergyMessage_Detailed(_Player, _CurrentCharges);
+PlayEffect(_Station, VFX_Spells_Cast_Damage_Force_Red_ProjectileMultiple_HandFX_Textkey_02_a9219097-1858-87eb-ca20-1fcb79a79f59);
+NOT DB_AMP_RandomProcessing(_Item);
+
+// matrix depletion
+
+// charges hit 0 -> remove status, message, set short guard flag
+PROC
+PROC_AMP_CheckMatrixDepletion((ITEM)_Station, (CHARACTER)_Player, (INTEGER)_RemainingCharges)
+AND
+_RemainingCharges == 0
+THEN
+// flag guards against the "no matrix" message racing in
+DB_AMP_Matrix_JustDepleted(_Station);
+RemoveStatus(_Station, "AMP_MATRIX_ACTIVE", _Player);
+PROC_AMP_ShowMatrixDepletedMessage(_Player);
+ObjectTimerLaunch(_Station, "AMP_ClearDepletionFlag", 1000, 0);
+
+// still has charges -> nothing
+PROC
+PROC_AMP_CheckMatrixDepletion((ITEM)_Station, (CHARACTER)_Player, (INTEGER)_RemainingCharges)
+AND
+_RemainingCharges > 0
+THEN
+DB_NOOP(1);
+
+// spawn reward container into player inventory
+PROC
+PROC_AMP_SpawnRewardContainer((CHARACTER)_Player, (ITEMROOT)_ContainerTemplate)
+THEN
+TemplateAddTo(_ContainerTemplate, _Player, 1, 1);
+
+// reward container sounds
+
+// open a reward container -> sound + tutorial, once each, + 10s delete timer
+IF
+UseStarted((CHARACTER)_Player, (ITEM)_Container)
+AND
+GetTemplate(_Container, (ITEMROOT)_Template)
+AND
+DB_AMP_RandomRecipe(_, _Template)
+AND
+NOT DB_AMP_ContainerSoundPlayed((ITEM)_Container)
+THEN
+DB_AMP_ContainerSoundPlayed((ITEM)_Container);
+PROC_AMP_PlayRandomRewardSound(_Player, _Template);
+PROC_AMP_ShowRewardContainerTutorial(_Player);
+ObjectTimerLaunch(_Container, "AMP_ForceDeleteRewardContainer", 10000, 0);
+
+// timer up, container empty -> clean up and delete
+IF
+ObjectTimerFinished((ITEM)_Container, "AMP_ForceDeleteRewardContainer")
+AND
+GetTemplate(_Container, (ITEMROOT)_Template)
+AND
+DB_AMP_RandomRecipe(_, _Template)
+AND
+IsInventoryEmpty(_Container, 1)
+THEN
+NOT DB_AMP_ContainerSoundPlayed((ITEM)_Container);
+NOT DB_AMP_RandomProcessing((ITEM)_Container);
+RequestDelete((ITEM)_Container);
+
+// timer up but container not empty -> just clean tracking
+IF
+ObjectTimerFinished((ITEM)_Container, "AMP_ForceDeleteRewardContainer")
+AND
+GetTemplate(_Container, (ITEMROOT)_Template)
+AND
+DB_AMP_RandomRecipe(_, _Template)
+AND
+NOT IsInventoryEmpty(_Container, 1)
+THEN
+NOT DB_AMP_ContainerSoundPlayed((ITEM)_Container);
+NOT DB_AMP_RandomProcessing((ITEM)_Container);
+
+// reward sound. random pick disabled, just play one fixed sound
+PROC
+PROC_AMP_PlayRandomRewardSound((CHARACTER)_Player, (ITEMROOT)_Template)
+// AND
+// Random(38, _RandomSound)
+// AND
+// DB_AMP_RewardSounds(_RandomSound, (STRING)_SoundID)
+THEN
+PlaySound(_Player, "END_GameFinale_MystraGaleConfrontation_GaleWhiteImpact");
+
+// auto-delete reward container when emptied
+
+// item removed from a reward container -> check if empty
+IF
+RemovedFrom(_Item, _Container)
+AND
+GetTemplate(_Container, (ITEMROOT)_Template)
+AND
+DB_AMP_RandomRecipe(_, _Template)
+THEN
+PROC_AMP_CheckAndDeleteEmptyRewardContainer((ITEM)_Container);
+
+// delete the reward container if empty
+PROC
+PROC_AMP_CheckAndDeleteEmptyRewardContainer((ITEM)_Container)
+AND
+GetTemplate(_Container, (ITEMROOT)_Template)
+AND
+DB_AMP_RandomRecipe(_, _Template)
+AND
+IsInventoryEmpty(_Container, 1)
+AND
+NOT DB_AMP_RandomProcessing(_Container)
+THEN
+// mark processing so we don't loop, delete after a short delay
+DB_AMP_RandomProcessing((ITEM)_Container);
+ObjectTimerLaunch(_Container, "AMP_DeleteEmptyRewardContainer", 200, 0);
+
+// delete timer fires, still empty -> delete
+IF
+ObjectTimerFinished(_Container, "AMP_DeleteEmptyRewardContainer")
+AND
+GetTemplate(_Container, (ITEMROOT)_Template)
+AND
+DB_AMP_RandomRecipe(_, _Template)
+AND
+DB_AMP_RandomProcessing(_Container)
+AND
+IsInventoryEmpty(_Container, 1)
+THEN
+NOT DB_AMP_RandomProcessing((ITEM)_Container);
+RequestDelete((ITEM)_Container);
+
+IF
+ObjectTimerFinished(_Container, "AMP_DeleteEmptyRewardContainer")
+AND
+DB_AMP_RandomProcessing(_Container)
+AND
+NOT IsInventoryEmpty(_Container, 1)
+THEN
+NOT DB_AMP_RandomProcessing((ITEM)_Container);
+
+// one-time reward container tutorial
+
+// mode 0: show every time, no flag
+PROC
+PROC_AMP_ShowRewardContainerTutorial((CHARACTER)_Player)
+AND
+DB_Players(_Player)
+AND
+DB_AMP_Hints_Mode(0)
+AND
+QRY_AMP_ShouldShowHint(2)
+THEN
+OpenMessageBox(_Player, "AMP_Tutorial_Reward_Container");
+
+// modes 1/3/4: show once per player, flagged
+PROC
+PROC_AMP_ShowRewardContainerTutorial((CHARACTER)_Player)
+AND
+DB_Players(_Player)
+AND
+NOT DB_AMP_Hints_Mode(0)
+AND
+NOT DB_AMP_Tutorial_Shown(_Player, "RewardContainer")
+AND
+QRY_AMP_ShouldShowHint(2)
+THEN
+OpenMessageBox(_Player, "AMP_Tutorial_Reward_Container");
+DB_AMP_Tutorial_Shown(_Player, "RewardContainer");
+
+// already shown -> nothing
+PROC
+PROC_AMP_ShowRewardContainerTutorial((CHARACTER)_Player)
+AND
+DB_AMP_Tutorial_Shown(_Player, "RewardContainer")
+AND
+NOT DB_AMP_Hints_Mode(0)
+THEN
+DB_NOOP(1);
+
+// clear the depletion guard flag when its timer fires
+IF
+ObjectTimerFinished((ITEM)_Station, "AMP_ClearDepletionFlag")
+THEN
+NOT DB_AMP_Matrix_JustDepleted(_Station);
+
+// manual cleanup for stuck crystals
+PROC
+PROC_AMP_ForceCleanupStuckFlags()
+THEN
+SysClear("DB_AMP_RandomProcessing", 1);
+
+// seed crystal costs on legacy saves where the db is empty
+PROC
+PROC_AMP_InitializeCrystalCosts()
+AND
+NOT DB_AMP_Crystal_Cost(_, _)
+THEN
+DB_AMP_Crystal_Cost((ITEMROOT)Enchant_Crystal4_faca0315-cb41-4a63-9b37-9afc6a1d1da4, 1);  // uncommon = 1
+DB_AMP_Crystal_Cost((ITEMROOT)Enchant_Crystal2_f90f99ba-d30d-4f05-8cde-b90092f128d8, 2);  // rare = 2
+DB_AMP_Crystal_Cost((ITEMROOT)Enchant_Crystal_d09be0fd-f230-47af-a523-c919e41c1261, 5);   // very rare = 5
+DB_AMP_Crystal_Cost((ITEMROOT)Enchant_Crystal3_98f1085c-1a49-474a-875c-cd0f2d9fdff0, 30); // legendary = 30
+
+// already seeded -> nothing
+PROC
+PROC_AMP_InitializeCrystalCosts()
+AND
+DB_AMP_Crystal_Cost(_, _)
+THEN
+DB_NOOP(1);
+
+// message procs, all gated on the hints setting
+
+PROC
+PROC_AMP_ShowMatrixInstallMessage((CHARACTER)_Player)
+AND
+QRY_AMP_ShouldShowHint(1)
+THEN
+OpenMessageBox(_Player, "AMP_Generation_Instructions_Detailed");
+
+PROC
+PROC_AMP_ShowMatrixRequiredMessage((CHARACTER)_Player)
+AND
+QRY_AMP_ShouldShowHint(1)
+THEN
+OpenMessageBox(_Player, "AMP_Salvage_Instructions_Detailed");
+
+// two boxes: second one opens first on screen, so order is reversed here
+PROC
+PROC_AMP_ShowInsufficientEnergyMessage_Detailed((CHARACTER)_Player, (INTEGER)_Available)
+AND
+QRY_AMP_ShouldShowHint(1)
+AND
+IntegerToString(_Available, _AvailStr)
+THEN
+OpenMessageBox(_Player, _AvailStr);
+OpenMessageBox(_Player, "AMP_Settings008");
+
+PROC
+PROC_AMP_ShowMatrixDepletedMessage((CHARACTER)_Player)
+AND
+QRY_AMP_ShouldShowHint(1)
+THEN
+OpenMessageBox(_Player, "AMP_Troubleshooting_Help");
+
+// reversed box order again, see above
+PROC
+PROC_AMP_ShowMatrixRechargeMessage((CHARACTER)_Player, (INTEGER)_TotalCharges)
+AND
+QRY_AMP_ShouldShowHint(1)
+AND
+IntegerToString(_TotalCharges, _ChargesStr)
+THEN
+OpenMessageBox(_Player, _ChargesStr);
+OpenMessageBox(_Player, "AMP_Settings007");
+
+// track station instances so we can restore matrix status after long rest
+
+PROC
+PROC_AMP_TrackStationInstance((ITEM)_Station)
+AND
+NOT DB_AMP_TrackedStation(_Station)
+THEN
+DB_AMP_TrackedStation(_Station);
+
+PROC
+PROC_AMP_TrackStationInstance((ITEM)_Station)
+AND
+DB_AMP_TrackedStation(_Station)
+THEN
+DB_NOOP(1);
+
+// long rest -> restore matrix status on tracked stations that still have charges
+IF
+LongRestFinished()
+AND
+DB_AMP_Matrix_Charges(_Charges)
+AND
+_Charges > 0
+AND
+DB_AMP_TrackedStation((ITEM)_Station)
+AND
+HasActiveStatus(_Station, "AMP_MATRIX_ACTIVE", 0)
+AND
+GetHostCharacter((CHARACTER)_Player)
+THEN
+ApplyStatus(_Station, "AMP_MATRIX_ACTIVE", -1.0, 1, _Player);
+
+EXITSECTION
+// clear tracking, but keep processing flags - they must persist
+SysClear("DB_AMP_RandomStation_LastUser", 1);
+SysClear("DB_AMP_ContainerSoundPlayed", 1);
+// do not clear DB_AMP_RandomProcessing
+SysClear("DB_AMP_Matrix_JustDepleted", 1);
+SysClear("DB_AMP_MatrixQueue", 2);
+SysClear("DB_AMP_MatrixProcessingActive", 1);
+
+ENDEXITSECTION

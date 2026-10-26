@@ -1,0 +1,28 @@
+// seat SANCTUARY_BLOCK before the strip. SANCTUARY's OnRemoveFunctors seats its own one-turn block
+// and the default Ignore stack type swallows anything applied on top
+
+new entry "AMP_ECLIPSE_SAVES"
+type "StatusData"
+data "StatusType" "BOOST"
+data "DisplayName" "he3f1c207g8b44g4d97ga1e6g2f5b9c3d4e10;1"
+data "Description" "h1d4a8f93g6c52g4e08gb7d1g0a9e6f2c5b84;1"
+data "DescriptionParams" "14;15;2"
+data "StackId" "AMP_ECLIPSE_SAVES"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator;IgnoreResting"
+data "OnApplyFunctors" "IF(not SavingThrow(Ability.Constitution,14)):ApplyStatus(STUNNED,100,1);IF(not SavingThrow(Ability.Intelligence,15)):ApplyStatus(SLOW,100,1);ApplyStatus(SANCTUARY_BLOCK,100,2);RemoveStatus(SANCTUARY);RemoveStatus(SANCTUARY_TRANQUILITY)"
+
+new entry "AMP_Plus_ECLIPSE_SAVES_CAS"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ECLIPSE_SAVES"
+data "StackId" "AMP_ECLIPSE_SAVES"
+data "DescriptionParams" "10;11;2"
+data "OnApplyFunctors" "IF(not SavingThrow(Ability.Constitution,10)):ApplyStatus(STUNNED,100,1);IF(not SavingThrow(Ability.Intelligence,11)):ApplyStatus(SLOW,100,1);ApplyStatus(SANCTUARY_BLOCK,100,2);RemoveStatus(SANCTUARY);RemoveStatus(SANCTUARY_TRANQUILITY)"
+
+new entry "AMP_Plus_ECLIPSE_SAVES_HARD"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ECLIPSE_SAVES"
+data "StackId" "AMP_ECLIPSE_SAVES"
+data "DescriptionParams" "16;17;2"
+data "OnApplyFunctors" "IF(not SavingThrow(Ability.Constitution,16)):ApplyStatus(STUNNED,100,1);IF(not SavingThrow(Ability.Intelligence,17)):ApplyStatus(SLOW,100,1);ApplyStatus(SANCTUARY_BLOCK,100,2);RemoveStatus(SANCTUARY);RemoveStatus(SANCTUARY_TRANQUILITY)"

@@ -1,0 +1,20 @@
+// closes to point-blank for the dread aura. No proactive ACTION while AMP_VALDRYN_CHARGING
+
+USING melee_smart
+
+MODIFIER_HIT_CHANCE_STUPIDITY                    0.85
+MULTIPLIER_KILL_ENEMY                            1.40
+
+// Stoneskin (flat -1 all dmg) + RollBonus(Save,3): less twitchy about taking hits
+MULTIPLIER_DAMAGE_SELF_NEG                       0.85
+
+// Charge straight in, do not fear opportunity attacks
+ENABLE_MOVEMENT_AVOID_AOO                        0.0
+
+// Strongly prefer ending the turn right next to a target (point-blank -> aura pressure)
+MULTIPLIER_ENDPOS_ENEMIES_NEARBY                 0.20
+
+// Cannot be knocked down and takes flat reduction from every hit: nothing on the floor
+// is worth breaking off the approach for.
+MULTIPLIER_MOVEMENT_SURFACE                      0.00
+MULTIPLIER_ENDPOS_NOT_IN_DANGEROUS_SURFACE       0.00

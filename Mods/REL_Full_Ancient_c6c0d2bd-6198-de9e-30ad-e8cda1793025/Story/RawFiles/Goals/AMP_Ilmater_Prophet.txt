@@ -1,0 +1,12 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+IF
+StatusApplied((CHARACTER)_Target, "AMP_ILMATER_PROPHET_INSPIRATION_TRIGGER", _, _)
+THEN
+GiveInspirationPoints(_Target, 1.0, "", "");
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,77 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+/*
+// old crafting state tracking, never finished
+DB_AMP_Crafting_Active(0);         // 0=inactive 1=active
+DB_AMP_Crafting_Recipe("");        // current recipe
+
+// 2-ingredient recipes
+DB_AMP_Crafting_Ingredient1((ITEM)NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_Crafting_Ingredient2((ITEM)NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_Crafting_Count(0);          // ingredients found, max 2
+
+// container
+DB_AMP_Crafting_Container((ITEM)NULL_00000000-0000-0000-0000-000000000000);
+*/
+KBSECTION
+/*
+// tagged as crafting ingredient
+QRY
+QRY_AMP_IsValidCraftingItem((ITEM)_Item)
+AND
+DB_AMP_Arcanizer_Crafting_Tag((TAG)_CraftingTag)
+AND
+IsTagged(_Item, _CraftingTag, 1)
+THEN
+DB_NOOP(1);
+
+// potential base items by equipment slot
+QRY
+QRY_AMP_IsPotentialBaseItem((ITEM)_Item)
+AND
+IsEquipable(_Item, 1)
+AND
+GetEquipmentSlotForItem(_Item, (EQUIPMENTSLOT)_Slot)
+AND
+DB_AMP_Arcanizer_BaseItemSlot(_Slot, _)
+THEN
+DB_NOOP(1);
+
+// potential base items: weapons by tag
+QRY
+QRY_AMP_IsPotentialBaseItem((ITEM)_Item)
+AND
+IsWeapon(_Item, 1)
+AND
+DB_AMP_Arcanizer_WeaponTag((TAG)_WeaponTag, _)
+AND
+IsTagged(_Item, _WeaponTag, 1)
+THEN
+DB_NOOP(1);
+
+// valid equipment slots
+QRY
+QRY_AMP_IsValidEquipmentSlot((EQUIPMENTSLOT)_Slot)
+AND
+DB_AMP_Arcanizer_AllowedSlot(_, _Slot)
+AND
+NOT DB_AMP_Arcanizer_SlotBlacklist(_, _Slot)
+THEN
+DB_NOOP(1);
+
+// disenchantable equipment
+QRY
+QRY_AMP_IsValidCraftingItem((ITEM)_Item)
+AND
+IsEquipable(_Item, 1)
+AND
+GetEquipmentSlotForItem(_Item, (EQUIPMENTSLOT)_Slot)
+AND
+QRY_AMP_IsValidEquipmentSlot(_Slot)
+THEN
+DB_NOOP(1);
+*/
+EXITSECTION
+
+ENDEXITSECTION

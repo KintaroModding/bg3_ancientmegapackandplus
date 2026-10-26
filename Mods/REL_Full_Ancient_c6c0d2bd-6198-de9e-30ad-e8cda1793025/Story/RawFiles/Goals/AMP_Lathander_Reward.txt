@@ -1,0 +1,24 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_AMP_Lathander_RewardItem((ITEM)S_CRE_BloodOfLathander_e26f0c19-6185-43a7-b7f7-7155b936c59c);
+
+KBSECTION
+
+// blood of lathander pickup -> quest reward window
+IF
+AddedTo((ITEM)_Item, (CHARACTER)_Player, _)
+AND
+IsPlayer(_Player, 1)
+AND
+DB_AMP_Lathander_RewardItem(_Item)
+AND
+HasActiveStatus(_Player, "AMP_BOSS_REWARDS_DISABLED", 1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Lathander")
+THEN
+RequestDelete(_Item);
+QuestUpdate(_Player, "HIDDEN_WLD_Boosters", "AMP_Lathander");
+
+EXITSECTION
+ENDEXITSECTION

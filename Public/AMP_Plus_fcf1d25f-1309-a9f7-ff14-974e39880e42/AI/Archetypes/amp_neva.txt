@@ -1,0 +1,11 @@
+// neva: stationary blind striker. ranged brain (no repositioning value), smart, spends
+// actions on her 20m ghost blade; movement is blocked at stat level so avoid-AoO logic is moot.
+USING ranged
+MODIFIER_HIT_CHANCE_STUPIDITY 0.85
+ENABLE_MOVEMENT_AVOID_AOO 0.00
+MULTIPLIER_DAMAGE_SELF_NEG 0.60
+MULTIPLIER_KILL_ENEMY 1.30
+
+// She never leaves her spot, so the ground under it must not become a reason to do nothing.
+MULTIPLIER_MOVEMENT_SURFACE                      0.00
+MULTIPLIER_ENDPOS_NOT_IN_DANGEROUS_SURFACE       0.00

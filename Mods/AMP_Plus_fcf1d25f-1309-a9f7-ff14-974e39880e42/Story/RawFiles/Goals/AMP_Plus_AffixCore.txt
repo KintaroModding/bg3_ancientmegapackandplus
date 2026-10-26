@@ -1,0 +1,336 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// affix registry, _Idx contiguous from 0, _MBKey must exist in generated_books.lsx
+
+QRY
+QRY_AMP_Plus_Affix_On((STRING)_Id)
+AND
+NOT DB_AMP_GameMode("STOCK")
+AND
+DB_AMP_Plus_AffixState(_Id, 1)
+THEN
+DB_NOOP(1);
+
+PROC
+PROC_AMP_Plus_Affix_Set((STRING)_Id, (INTEGER)_Val)
+AND
+DB_AMP_Plus_AffixState(_Id, (INTEGER)_Old)
+AND
+NOT _Old == _Val
+THEN
+NOT DB_AMP_Plus_AffixState(_Id, _Old);
+DB_AMP_Plus_AffixState(_Id, _Val);
+PROC_AMP_Plus_Affix_OnChanged(_Id, _Val);
+PROC_AMP_Plus_Affix_RecheckDeviation(_Id);
+
+PROC
+PROC_AMP_Plus_Affix_Set((STRING)_Id, (INTEGER)_Val)
+AND
+NOT DB_AMP_Plus_AffixState(_Id, _)
+THEN
+DB_AMP_Plus_AffixState(_Id, _Val);
+PROC_AMP_Plus_Affix_OnChanged(_Id, _Val);
+PROC_AMP_Plus_Affix_RecheckDeviation(_Id);
+
+PROC
+PROC_AMP_Plus_Affix_SetByPlayer((STRING)_Id, (INTEGER)_Val)
+AND
+QRY_AMP_Plus_Affix_ChangeAllowed(_Id, _Val)
+AND
+NOT DB_AMP_Plus_AffixTouched(_Id)
+THEN
+DB_AMP_Plus_AffixTouched(_Id);
+PROC_AMP_Plus_Affix_Set(_Id, _Val);
+
+PROC
+PROC_AMP_Plus_Affix_SetByPlayer((STRING)_Id, (INTEGER)_Val)
+AND
+QRY_AMP_Plus_Affix_ChangeAllowed(_Id, _Val)
+AND
+DB_AMP_Plus_AffixTouched(_Id)
+THEN
+PROC_AMP_Plus_Affix_Set(_Id, _Val);
+
+PROC
+PROC_AMP_Plus_Affix_SetByPlayer((STRING)_Id, (INTEGER)_Val)
+AND
+NOT QRY_AMP_Plus_Affix_ChangeAllowed(_Id, _Val)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+OpenMessageBox(_Host, "AMP_Plus_PureMind_Frozen");
+
+PROC
+PROC_AMP_Plus_Affix_ApplyDefaults((STRING)_Mode)
+AND
+DB_AMP_Plus_AffixDef(_, (STRING)_Id, _, (INTEGER)_DefC, _, _)
+AND
+_Mode == "CASUAL"
+AND
+NOT DB_AMP_Plus_AffixTouched(_Id)
+THEN
+PROC_AMP_Plus_Affix_Set(_Id, _DefC);
+
+PROC
+PROC_AMP_Plus_Affix_ApplyDefaults((STRING)_Mode)
+AND
+DB_AMP_Plus_AffixDef(_, (STRING)_Id, _, _, (INTEGER)_DefN, _)
+AND
+_Mode == "NORMAL"
+AND
+NOT DB_AMP_Plus_AffixTouched(_Id)
+THEN
+PROC_AMP_Plus_Affix_Set(_Id, _DefN);
+
+PROC
+PROC_AMP_Plus_Affix_ApplyDefaults((STRING)_Mode)
+AND
+DB_AMP_Plus_AffixDef(_, (STRING)_Id, _, _, _, (INTEGER)_DefH)
+AND
+_Mode == "HARD"
+AND
+NOT DB_AMP_Plus_AffixTouched(_Id)
+THEN
+PROC_AMP_Plus_Affix_Set(_Id, _DefH);
+
+IF
+DB_AMP_GameMode((STRING)_Mode)
+THEN
+PROC_AMP_Plus_Affix_ApplyDefaults(_Mode);
+
+// hand-set affixes skip ApplyDefaults, so deviation is rechecked here
+
+IF
+DB_AMP_GameMode(_)
+AND
+DB_AMP_Plus_AffixDef(_, (STRING)_Id, _, _, _, _)
+THEN
+PROC_AMP_Plus_Affix_RecheckDeviation(_Id);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_GameMode((STRING)_Mode)
+THEN
+PROC_AMP_Plus_Affix_ApplyDefaults(_Mode);
+
+// a retracted negated fact re-runs no rule, so live enemies are reapplied by hand
+// mid-combat reapply waits for CombatEnded, a max HP rewrite heals engaged enemies
+
+PROC
+PROC_AMP_Plus_Affix_OnChanged((STRING)_Id, (INTEGER)_Val)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsInCombat(_Host, 1)
+THEN
+DB_AMP_Plus_AffixPending(_Id, _Val);
+
+PROC
+PROC_AMP_Plus_Affix_OnChanged((STRING)_Id, (INTEGER)_Val)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+NOT IsInCombat(_Host, 1)
+THEN
+PROC_AMP_Plus_Affix_Reconcile(_Id, _Val);
+
+IF
+CombatEnded((GUIDSTRING)_C)
+THEN
+PROC_AMP_Plus_Affix_DrainPending();
+
+PROC
+PROC_AMP_Plus_Affix_DrainPending()
+AND
+DB_AMP_Plus_AffixPending((STRING)_Id, (INTEGER)_Val)
+THEN
+NOT DB_AMP_Plus_AffixPending(_Id, _Val);
+PROC_AMP_Plus_Affix_Reconcile(_Id, _Val);
+PROC_AMP_Plus_Affix_DrainPending();
+
+// no-op only so the proc resolves with an empty registry, not a fallback
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+THEN
+DB_NOOP(1);
+
+PROC
+PROC_AMP_Plus_Affix_StartLoop((CHARACTER)_Host)
+AND
+NOT DB_AMP_Plus_PureMind(1)
+THEN
+SysClear("DB_AMP_Plus_AffixCursor", 2);
+DB_AMP_Plus_AffixCursor(_Host, 0);
+PROC_AMP_Plus_Affix_RunStep(_Host, 0);
+
+PROC
+PROC_AMP_Plus_Affix_StartLoop((CHARACTER)_Host)
+AND
+DB_AMP_Plus_PureMind(1)
+THEN
+OpenMessageBox(_Host, "AMP_Plus_PureMind_Frozen");
+
+PROC
+PROC_AMP_Plus_Affix_RunStep((CHARACTER)_Host, (INTEGER)_Idx)
+AND
+DB_AMP_Plus_AffixDef(_Idx, _, (STRING)_MBKey, _, _, _)
+THEN
+OpenMessageBoxYesNo(_Host, _MBKey);
+
+PROC
+PROC_AMP_Plus_Affix_RunStep((CHARACTER)_Host, (INTEGER)_Idx)
+AND
+NOT DB_AMP_Plus_AffixDef(_Idx, _, _, _, _, _)
+THEN
+PROC_AMP_Plus_Affix_EndLoop(_Host);
+
+PROC
+PROC_AMP_Plus_Affix_EndLoop((CHARACTER)_Host)
+THEN
+SysClear("DB_AMP_Plus_AffixCursor", 2);
+
+// Yes = on, No = off, unlike the inverted AutoLoot and LootManager prompts
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, (STRING)_MBKey, (INTEGER)_Result)
+AND
+DB_AMP_Plus_AffixCursor(_Host, (INTEGER)_Idx)
+AND
+DB_AMP_Plus_AffixDef(_Idx, (STRING)_Id, _MBKey, _, _, _)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_Affix_SetByPlayer(_Id, _Result);
+NOT DB_AMP_Plus_AffixCursor(_Host, _Idx);
+DB_AMP_Plus_AffixCursor(_Host, _Next);
+PROC_AMP_Plus_Affix_RunStep(_Host, _Next);
+
+PROC
+PROC_AMP_Plus_Affix_RecheckDeviation((STRING)_Id)
+AND
+DB_AMP_GameMode("NORMAL")
+AND
+DB_AMP_Plus_AffixDef(_, _Id, _, _, (INTEGER)_Def, _)
+AND
+DB_AMP_Plus_AffixState(_Id, (INTEGER)_Val)
+AND
+NOT _Val == _Def
+AND
+NOT DB_AMP_Plus_AffixDeviation(_Id)
+THEN
+DB_AMP_Plus_AffixDeviation(_Id);
+
+PROC
+PROC_AMP_Plus_Affix_RecheckDeviation((STRING)_Id)
+AND
+DB_AMP_GameMode("NORMAL")
+AND
+DB_AMP_Plus_AffixDef(_, _Id, _, _, (INTEGER)_Def, _)
+AND
+DB_AMP_Plus_AffixState(_Id, (INTEGER)_Val)
+AND
+_Val == _Def
+AND
+DB_AMP_Plus_AffixDeviation(_Id)
+THEN
+NOT DB_AMP_Plus_AffixDeviation(_Id);
+
+PROC
+PROC_AMP_Plus_Affix_RecheckDeviation((STRING)_Id)
+AND
+DB_AMP_GameMode("HARD")
+AND
+DB_AMP_Plus_AffixDef(_, _Id, _, _, _, (INTEGER)_Def)
+AND
+DB_AMP_Plus_AffixState(_Id, (INTEGER)_Val)
+AND
+NOT _Val == _Def
+AND
+NOT DB_AMP_Plus_AffixDeviation(_Id)
+THEN
+DB_AMP_Plus_AffixDeviation(_Id);
+
+PROC
+PROC_AMP_Plus_Affix_RecheckDeviation((STRING)_Id)
+AND
+DB_AMP_GameMode("HARD")
+AND
+DB_AMP_Plus_AffixDef(_, _Id, _, _, _, (INTEGER)_Def)
+AND
+DB_AMP_Plus_AffixState(_Id, (INTEGER)_Val)
+AND
+_Val == _Def
+AND
+DB_AMP_Plus_AffixDeviation(_Id)
+THEN
+NOT DB_AMP_Plus_AffixDeviation(_Id);
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_Settings_Affixes", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+PROC_AMP_Plus_Affix_StartLoop(_Host);
+
+// latch on the step 17 close, start the loop after the LootManager question
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_GenerousLoot_AskEnable", _)
+AND
+DB_AMP_Wizard_Active(1)
+THEN
+DB_AMP_Plus_AffixWizardPending(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_GenerousLoot_AskDisable", _)
+AND
+DB_AMP_Wizard_Active(1)
+THEN
+DB_AMP_Plus_AffixWizardPending(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_LM_Toggle_AskEnable", _)
+AND
+DB_AMP_Plus_AffixWizardPending(_Host)
+THEN
+NOT DB_AMP_Plus_AffixWizardPending(_Host);
+PROC_AMP_Plus_Affix_StartLoop(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_LM_Toggle_AskDisable", _)
+AND
+DB_AMP_Plus_AffixWizardPending(_Host)
+THEN
+NOT DB_AMP_Plus_AffixWizardPending(_Host);
+PROC_AMP_Plus_Affix_StartLoop(_Host);
+
+IF
+SavegameLoaded()
+AND
+DB_AMP_Plus_AffixCursor((CHARACTER)_Host, (INTEGER)_Idx)
+THEN
+NOT DB_AMP_Plus_AffixCursor(_Host, _Idx);
+
+IF
+SavegameLoaded()
+THEN
+PROC_AMP_Plus_Affix_DrainWizardPending();
+
+PROC
+PROC_AMP_Plus_Affix_DrainWizardPending()
+AND
+DB_AMP_Plus_AffixWizardPending((CHARACTER)_Host)
+THEN
+NOT DB_AMP_Plus_AffixWizardPending(_Host);
+PROC_AMP_Plus_Affix_DrainWizardPending();
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,248 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// init
+DB_AMP_AutoLoot_MinValue(2);
+DB_AMP_AutoLoot_Processing(0);
+DB_AMP_AutoLoot_ActivePlayer((CHARACTER)NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_AutoLoot_CurrentItem((ITEM)NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_AutoLoot_ItemQueue((ITEM)NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_AutoLoot_TimerRunning(0);
+KBSECTION
+// event handlers
+IF
+StatusApplied((CHARACTER)_Character, "AMP_AUTOLOOT_STATUS", _, _)
+AND
+DB_Players(_Character)
+THEN
+NOT DB_AMP_AutoLoot_ActivePlayer((CHARACTER)NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_AutoLoot_ActivePlayer(_Character);
+NOT DB_AMP_AutoLoot_Processing(0);
+DB_AMP_AutoLoot_Processing(0);
+PROC_AMP_AutoLoot_ContinueProcessing();
+
+IF 
+StatusRemoved((CHARACTER)_Character, "AMP_AUTOLOOT_STATUS", _, _)
+AND
+DB_Players(_Character)
+AND
+DB_AMP_AutoLoot_ActivePlayer(_Character)
+THEN
+NOT DB_AMP_AutoLoot_ActivePlayer(_Character);
+DB_AMP_AutoLoot_ActivePlayer((CHARACTER)NULL_00000000-0000-0000-0000-000000000000);
+NOT DB_AMP_AutoLoot_Processing(0);
+DB_AMP_AutoLoot_Processing(0);
+PROC_AMP_AutoLoot_ClearCurrentItem();
+PROC_AMP_AutoLoot_ClearItemQueue();
+
+IF
+StatusApplied((ITEM)_Item, "AMP_LOOT_ITEM", (CHARACTER)_Character, _)
+AND
+DB_AMP_AutoLoot_ActivePlayer(_Character)
+THEN
+PROC_AMP_AutoLoot_AddToQueue(_Item);
+
+IF
+TimerFinished("AMP_AutoLoot_SafetyReset")
+THEN
+NOT DB_AMP_AutoLoot_TimerRunning(1);
+DB_AMP_AutoLoot_TimerRunning(0);
+PROC_AMP_AutoLoot_CheckTimerReset();
+
+// queue management
+PROC
+PROC_AMP_AutoLoot_AddToQueue((ITEM)_Item)
+AND
+NOT DB_AMP_AutoLoot_ItemQueue(_Item)
+THEN
+DB_AMP_AutoLoot_ItemQueue(_Item);
+PROC_AMP_AutoLoot_ContinueProcessing();
+
+PROC
+PROC_AMP_AutoLoot_ContinueProcessing()
+AND
+DB_AMP_AutoLoot_ActivePlayer(_Character)
+AND
+_Character != NULL_00000000-0000-0000-0000-000000000000
+AND
+DB_AMP_AutoLoot_Processing(0)
+AND
+DB_AMP_AutoLoot_ItemQueue(_NextItem)
+AND
+_NextItem != NULL_00000000-0000-0000-0000-000000000000
+THEN
+NOT DB_AMP_AutoLoot_Processing(0);
+DB_AMP_AutoLoot_Processing(1);
+NOT DB_AMP_AutoLoot_CurrentItem((ITEM)NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_AutoLoot_CurrentItem(_NextItem);
+NOT DB_AMP_AutoLoot_ItemQueue(_NextItem);
+PROC_AMP_AutoLoot_ValidateItem(_Character, _NextItem);
+PROC_AMP_AutoLoot_EnsureSafetyTimer();
+
+PROC
+PROC_AMP_AutoLoot_ClearCurrentItem()
+AND
+DB_AMP_AutoLoot_CurrentItem(_CurrentItem)
+THEN
+NOT DB_AMP_AutoLoot_CurrentItem(_CurrentItem);
+DB_AMP_AutoLoot_CurrentItem((ITEM)NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_AutoLoot_ClearItemQueue()
+AND
+DB_AMP_AutoLoot_ItemQueue(_QueuedItem)
+THEN
+NOT DB_AMP_AutoLoot_ItemQueue(_QueuedItem);
+
+// item validation
+PROC
+PROC_AMP_AutoLoot_ValidateItem((CHARACTER)_Character, (ITEM)_Item)
+AND
+Exists(_Item, 1)
+AND
+GetCanPickUp(_Item, 1)
+AND
+IsDestroyed(_Item, 0)
+AND
+IsInCombat(_Character, 0)
+AND
+DB_AMP_AutoLoot_MinValue(_MinValue)
+AND
+ItemGetGoldValue(_Item, _Value)
+AND
+_Value >= _MinValue
+THEN
+PROC_AMP_AutoLoot_CheckOwnership(_Character, _Item);
+
+PROC
+PROC_AMP_AutoLoot_ValidateItem((CHARACTER)_Character, (ITEM)_Item)
+AND
+Exists(_Item, 0)
+THEN
+PROC_AMP_AutoLoot_ResetProcessing();
+
+PROC
+PROC_AMP_AutoLoot_ValidateItem((CHARACTER)_Character, (ITEM)_Item)
+AND
+Exists(_Item, 1)
+AND
+GetCanPickUp(_Item, 0)
+THEN
+PROC_AMP_AutoLoot_ResetProcessing();
+
+PROC
+PROC_AMP_AutoLoot_ValidateItem((CHARACTER)_Character, (ITEM)_Item)
+AND
+Exists(_Item, 1)
+AND
+IsDestroyed(_Item, 1)
+THEN
+PROC_AMP_AutoLoot_ResetProcessing();
+
+PROC
+PROC_AMP_AutoLoot_ValidateItem((CHARACTER)_Character, (ITEM)_Item)
+AND
+Exists(_Item, 1)
+AND
+IsInCombat(_Character, 1)
+THEN
+PROC_AMP_AutoLoot_ResetProcessing();
+
+PROC
+PROC_AMP_AutoLoot_ValidateItem((CHARACTER)_Character, (ITEM)_Item)
+AND
+Exists(_Item, 1)
+AND
+DB_AMP_AutoLoot_MinValue(_MinValue)
+AND
+ItemGetGoldValue(_Item, _Value)
+AND
+_Value < _MinValue
+THEN
+PROC_AMP_AutoLoot_ResetProcessing();
+
+// ownership validation
+PROC
+PROC_AMP_AutoLoot_CheckOwnership((CHARACTER)_Character, (ITEM)_Item)
+AND
+GetOwner(_Item, _Owner)
+THEN
+DB_AMP_AutoLoot_TempOwner(_Item, _Owner);
+PROC_AMP_AutoLoot_ValidateOwnership(_Character, _Item);
+
+PROC
+PROC_AMP_AutoLoot_ValidateOwnership((CHARACTER)_Character, (ITEM)_Item)
+AND
+DB_AMP_AutoLoot_TempOwner(_Item, (CHARACTER)NULL_00000000-0000-0000-0000-000000000000)
+THEN
+PROC_AMP_AutoLoot_ClearTempOwner(_Item);
+PROC_AMP_AutoLoot_MoveToInventory(_Character, _Item);
+
+PROC
+PROC_AMP_AutoLoot_ValidateOwnership((CHARACTER)_Character, (ITEM)_Item)
+AND
+DB_AMP_AutoLoot_TempOwner(_Item, _Owner)
+AND
+_Owner == _Character
+THEN
+PROC_AMP_AutoLoot_ClearTempOwner(_Item);
+PROC_AMP_AutoLoot_MoveToInventory(_Character, _Item);
+
+PROC
+PROC_AMP_AutoLoot_ValidateOwnership((CHARACTER)_Character, (ITEM)_Item)
+AND
+DB_AMP_AutoLoot_TempOwner(_Item, _Owner)
+AND
+_Owner != NULL_00000000-0000-0000-0000-000000000000
+AND
+_Owner != _Character
+THEN
+PROC_AMP_AutoLoot_ClearTempOwner(_Item);
+PROC_AMP_AutoLoot_ResetProcessing();
+
+PROC
+PROC_AMP_AutoLoot_ClearTempOwner((ITEM)_Item)
+AND
+DB_AMP_AutoLoot_TempOwner(_Item, _Owner)
+THEN
+NOT DB_AMP_AutoLoot_TempOwner(_Item, _Owner);
+
+// inventory ops
+PROC
+PROC_AMP_AutoLoot_MoveToInventory((CHARACTER)_Character, (ITEM)_Item)
+THEN
+ToInventory(_Item, _Character, 1, 1, 0);
+PROC_AMP_AutoLoot_ResetProcessing();
+
+PROC
+PROC_AMP_AutoLoot_ResetProcessing()
+AND
+DB_AMP_AutoLoot_ActivePlayer(_ActivePlayer)
+AND
+_ActivePlayer != NULL_00000000-0000-0000-0000-000000000000
+THEN
+NOT DB_AMP_AutoLoot_Processing(1);
+DB_AMP_AutoLoot_Processing(0);
+PROC_AMP_AutoLoot_ClearCurrentItem();
+PROC_AMP_AutoLoot_ContinueProcessing();
+
+// timer management
+PROC
+PROC_AMP_AutoLoot_EnsureSafetyTimer()
+AND
+DB_AMP_AutoLoot_TimerRunning(0)
+THEN
+NOT DB_AMP_AutoLoot_TimerRunning(0);
+DB_AMP_AutoLoot_TimerRunning(1);
+TimerLaunch("AMP_AutoLoot_SafetyReset", 5000);
+
+PROC
+PROC_AMP_AutoLoot_CheckTimerReset()
+AND
+DB_AMP_AutoLoot_Processing(1)
+THEN
+PROC_AMP_AutoLoot_ResetProcessing();
+EXITSECTION
+PROC_AMP_AutoLoot_ClearItemQueue();
+PROC_AMP_AutoLoot_ClearCurrentItem();
+ENDEXITSECTION

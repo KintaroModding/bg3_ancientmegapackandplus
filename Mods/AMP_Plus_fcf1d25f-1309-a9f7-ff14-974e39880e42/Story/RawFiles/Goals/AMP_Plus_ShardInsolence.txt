@@ -1,0 +1,14 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// an inspiration point has no status behind it, so stats cannot hand it out
+IF
+StatusApplied(_Victim, "AMP_SHARD_INSOLENCE_KILL_MARKER", _Causee, _)
+THEN
+GiveInspirationPoints((CHARACTER)_Causee, 1.0, "", "");
+
+EXITSECTION
+ENDEXITSECTION

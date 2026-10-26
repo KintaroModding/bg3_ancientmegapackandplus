@@ -1,0 +1,247 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// only finished state is touched, a mid-combat save keeps its fight
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_Pyre2_MigVer(3)
+THEN
+PROC_AMP_Plus_Pyre2_Migrate();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_Pyre2_MigVer(3)
+THEN
+PROC_AMP_Plus_Pyre2_Migrate();
+
+PROC
+PROC_AMP_Plus_Pyre2_Migrate()
+AND
+DB_AMP_Plus_Pyre2_MigVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre2_MigVer(_Old);
+
+// one procedure per fight id, teardown drops the Armed fact the later bodies need
+
+PROC
+PROC_AMP_Plus_Pyre2_Migrate()
+THEN
+PROC_AMP_Plus_Pyre2_DrainMigArmed();
+
+PROC
+PROC_AMP_Plus_Pyre2_MigSweep((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_DrainMigPartyHP(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_MigSweep((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_DrainMigBrooded(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_MigSweep((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Ward(_CombatID, (CHARACTER)_Boss)
+THEN
+NOT DB_AMP_Plus_Pyre2_Ward(_CombatID, _Boss);
+
+PROC
+PROC_AMP_Plus_Pyre2_MigSweep((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_PyreTools_Armed(_CombatID)
+THEN
+NOT DB_AMP_Plus_PyreTools_Armed(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_MigSweep((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_DrainMigBrood(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_MigSweep((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_Teardown(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_Migrate()
+THEN
+PROC_AMP_Plus_Pyre2_DrainMigStage();
+
+PROC
+PROC_AMP_Plus_Pyre2_Migrate()
+THEN
+PROC_AMP_Plus_Pyre2_DrainMigPhase();
+
+PROC
+PROC_AMP_Plus_Pyre2_Migrate()
+THEN
+PROC_AMP_Plus_Pyre2_DrainMigWorn();
+
+PROC
+PROC_AMP_Plus_Pyre2_Migrate()
+AND
+DB_AMP_DiffV3_Known((CHARACTER)_Char)
+AND
+IsOnStage(_Char, 1)
+AND
+NOT IsInCombat(_Char, 1)
+THEN
+PROC_AMP_Plus_Pyre2_Strip(_Char);
+
+PROC
+PROC_AMP_Plus_Pyre2_Migrate()
+AND
+DB_Players((CHARACTER)_Char)
+AND
+NOT IsInCombat(_Char, 1)
+THEN
+RemoveStatus(_Char, "AMP_PLUS_PYRE_TOOLS", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE_BREAKER_OK", NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre2_Migrate()
+THEN
+PROC_AMP_Plus_Pyre2_DrainMigCand();
+
+PROC
+PROC_AMP_Plus_Pyre2_Migrate()
+THEN
+PROC_AMP_Plus_Pyre2_DrainMigCandN();
+
+PROC
+PROC_AMP_Plus_Pyre2_Migrate()
+THEN
+PROC_AMP_Plus_Pyre2_DrainMigDomHit();
+
+PROC
+PROC_AMP_Plus_Pyre2_Migrate()
+THEN
+PROC_AMP_Plus_Pyre2_DrainMigDomStep();
+
+PROC
+PROC_AMP_Plus_Pyre2_Migrate()
+THEN
+PROC_AMP_Plus_Pyre2_DrainMigVent();
+
+// mark last: written first, an interrupted run leaves only it
+
+PROC
+PROC_AMP_Plus_Pyre2_Migrate()
+THEN
+DB_AMP_Plus_Pyre2_MigVer(3);
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainMigArmed()
+AND
+DB_AMP_Plus_Pyre2_Armed((GUIDSTRING)_CombatID)
+AND
+NOT CombatIsActive(_CombatID, 1)
+THEN
+NOT DB_AMP_Plus_Pyre2_Armed(_CombatID);
+PROC_AMP_Plus_Pyre2_MigSweep(_CombatID);
+PROC_AMP_Plus_Pyre2_DrainMigArmed();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainMigPartyHP((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_PartyHP(_CombatID, (INTEGER)_Cur, (INTEGER)_Max)
+THEN
+NOT DB_AMP_Plus_Pyre_PartyHP(_CombatID, _Cur, _Max);
+PROC_AMP_Plus_Pyre2_DrainMigPartyHP(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainMigBrooded((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Brooded(_CombatID, (INTEGER)_Round)
+THEN
+NOT DB_AMP_Plus_Pyre2_Brooded(_CombatID, _Round);
+PROC_AMP_Plus_Pyre2_DrainMigBrooded(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainMigBrood((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Brood((CHARACTER)_Mob, _CombatID, (INTEGER)_Expire)
+THEN
+NOT DB_AMP_Plus_Pyre2_Brood(_Mob, _CombatID, _Expire);
+RequestDeleteTemporary(_Mob);
+PROC_AMP_Plus_Pyre2_DrainMigBrood(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainMigStage()
+AND
+DB_AMP_Plus_Pyre_Stage((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+NOT CombatIsActive(_CombatID, 1)
+THEN
+NOT DB_AMP_Plus_Pyre_Stage(_CombatID, _N);
+PROC_AMP_Plus_Pyre2_DrainMigStage();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainMigPhase()
+AND
+DB_AMP_Plus_Pyre_Phase((GUIDSTRING)_CombatID, (STRING)_Phase)
+AND
+NOT CombatIsActive(_CombatID, 1)
+THEN
+NOT DB_AMP_Plus_Pyre_Phase(_CombatID, _Phase);
+PROC_AMP_Plus_Pyre2_DrainMigPhase();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainMigWorn()
+AND
+DB_AMP_Plus_Pyre2_Worn((CHARACTER)_Char, (INTEGER)_N)
+AND
+NOT IsInCombat(_Char, 1)
+THEN
+NOT DB_AMP_Plus_Pyre2_Worn(_Char, _N);
+PROC_AMP_Plus_Pyre2_Strip(_Char);
+PROC_AMP_Plus_Pyre2_DrainMigWorn();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainMigCand()
+AND
+DB_AMP_Plus_PyreTools_Cand((CHARACTER)_Char, (INTEGER)_Idx, (ITEM)_Item)
+THEN
+NOT DB_AMP_Plus_PyreTools_Cand(_Char, _Idx, _Item);
+PROC_AMP_Plus_Pyre2_DrainMigCand();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainMigCandN()
+AND
+DB_AMP_Plus_PyreTools_CandN((CHARACTER)_Char, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_PyreTools_CandN(_Char, _N);
+PROC_AMP_Plus_Pyre2_DrainMigCandN();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainMigDomHit()
+AND
+DB_AMP_Plus_Pyre_DomHit((GUIDSTRING)_CombatID, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Pyre_DomHit(_CombatID, _N);
+PROC_AMP_Plus_Pyre2_DrainMigDomHit();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainMigDomStep()
+AND
+DB_AMP_Plus_Pyre_DomStep((INTEGER)_Idx, (INTEGER)_Pct, (INTEGER)_Prog)
+THEN
+NOT DB_AMP_Plus_Pyre_DomStep(_Idx, _Pct, _Prog);
+PROC_AMP_Plus_Pyre2_DrainMigDomStep();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainMigVent()
+AND
+DB_AMP_Plus_Pyre_Vent((GUIDSTRING)_CombatID, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Pyre_Vent(_CombatID, _N);
+PROC_AMP_Plus_Pyre2_DrainMigVent();
+
+EXITSECTION
+ENDEXITSECTION

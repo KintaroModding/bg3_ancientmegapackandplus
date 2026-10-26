@@ -1,0 +1,84 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_EclipseInfoVer(2)
+THEN
+PROC_AMP_Plus_EclipseInfoReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_EclipseInfoVer(2)
+THEN
+PROC_AMP_Plus_EclipseInfoReseed();
+
+PROC
+PROC_AMP_Plus_EclipseInfoReseed()
+AND
+DB_AMP_Plus_EclipseInfoVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_EclipseInfoVer(_Old);
+
+PROC
+PROC_AMP_Plus_EclipseInfoReseed()
+THEN
+PROC_AMP_Plus_EclipseInfo_DrainInfo();
+
+PROC
+PROC_AMP_Plus_EclipseInfoReseed()
+THEN
+DB_AMP_Plus_EclipseInfoVer(2);
+DB_AMP_Plus_EclipseInfo("AMP_ECLIPSE_INFO");
+DB_AMP_Plus_EclipseInfo("AMP_ECLIPSE_INFO_NECROTIC");
+DB_AMP_Plus_EclipseInfo("AMP_ECLIPSE_INFO_FIRE");
+DB_AMP_Plus_EclipseInfo("AMP_ECLIPSE_INFO_LIGHTNING");
+DB_AMP_Plus_EclipseInfo("AMP_ECLIPSE_INFO_FORCE");
+DB_AMP_Plus_EclipseInfo("AMP_ECLIPSE_INFO_ACID");
+DB_AMP_Plus_EclipseInfo("AMP_ECLIPSE_INFO_POISON");
+DB_AMP_Plus_EclipseInfo("AMP_ECLIPSE_INFO_PSYCHIC");
+
+PROC
+PROC_AMP_Plus_EclipseInfo_DrainInfo()
+AND
+DB_AMP_Plus_EclipseInfo((STRING)_A)
+THEN
+NOT DB_AMP_Plus_EclipseInfo(_A);
+PROC_AMP_Plus_EclipseInfo_DrainInfo();
+
+// both markers persist and the stats branch prefers the higher one
+
+IF
+StatusApplied((CHARACTER)_Boss, _Info, _, _)
+AND
+DB_AMP_Plus_EclipseInfo(_Info)
+AND
+DB_Players(_P)
+AND
+GetLevel(_P, (INTEGER)_Lvl)
+AND
+_Lvl >= 20
+THEN
+ApplyStatus(_Boss, "AMP_ECLIPSE_DUR3", -1.0, 1, _Boss);
+
+IF
+StatusApplied((CHARACTER)_Boss, _Info, _, _)
+AND
+DB_AMP_Plus_EclipseInfo(_Info)
+AND
+DB_Players(_P)
+AND
+GetLevel(_P, (INTEGER)_Lvl)
+AND
+_Lvl >= 12
+THEN
+ApplyStatus(_Boss, "AMP_ECLIPSE_DUR2", -1.0, 1, _Boss);
+
+EXITSECTION
+ENDEXITSECTION

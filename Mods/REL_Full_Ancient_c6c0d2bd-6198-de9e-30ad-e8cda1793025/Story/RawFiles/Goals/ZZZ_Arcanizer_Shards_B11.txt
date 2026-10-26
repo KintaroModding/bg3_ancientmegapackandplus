@@ -1,0 +1,106 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// ARCANIZER SHARDS - BATCH 11 (PLEDGE + ATHEIST + DISCIPLE COMPLETION)
+
+// SERIES PLEDGE (Armor UC, NonStack x 10, shared StackId AMP_SHARD_ARMOR_PLEDGE)
+
+// 01 Pledge-Mystra (Armor UC, NonStack) - Cleric of Mystra: +1 Spell Save DC
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_14_c232e0d1-8866-47ce-8f22-92ae8e0cf114, "Armor", "AMP_SHARD_APPLY_ARMOR_14", "Breast", "AMP_SHARD_ARMOR_PLEDGE_MYSTRA");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_PLEDGE_MYSTRA", "AMP_SHARD_CHAR_PLEDGE_MYSTRA");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_PLEDGE_MYSTRA", (ITEMROOT)AMP_Arcanizer_Shard_Armor_14_c232e0d1-8866-47ce-8f22-92ae8e0cf114);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_14_c232e0d1-8866-47ce-8f22-92ae8e0cf114, "SHARDS_20");
+
+// 02 Pledge-Selune (Armor UC, NonStack) - Cleric of Selune: +1d4 Radiant vs Undead
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_15_87fcdc6c-54f3-4b69-9e06-88d013432d51, "Armor", "AMP_SHARD_APPLY_ARMOR_15", "Breast", "AMP_SHARD_ARMOR_PLEDGE_SELUNE");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_PLEDGE_SELUNE", "AMP_SHARD_CHAR_PLEDGE_SELUNE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_PLEDGE_SELUNE", (ITEMROOT)AMP_Arcanizer_Shard_Armor_15_87fcdc6c-54f3-4b69-9e06-88d013432d51);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_15_87fcdc6c-54f3-4b69-9e06-88d013432d51, "SHARDS_20");
+
+// 03 Pledge-Shar (Armor UC, NonStack) - Cleric of Shar: +Stealth; +1d4 Necrotic while obscured
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_16_a00043de-856e-4806-8391-365647268038, "Armor", "AMP_SHARD_APPLY_ARMOR_16", "Breast", "AMP_SHARD_ARMOR_PLEDGE_SHAR");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_PLEDGE_SHAR", "AMP_SHARD_CHAR_PLEDGE_SHAR");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_PLEDGE_SHAR", (ITEMROOT)AMP_Arcanizer_Shard_Armor_16_a00043de-856e-4806-8391-365647268038);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_16_a00043de-856e-4806-8391-365647268038, "SHARDS_20");
+
+// 04 Pledge-Tyr (Armor UC, NonStack) - Cleric of Tyr: +1 Saving Throws
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_17_e60d4ad7-e78c-4b04-8761-f14e22f6031d, "Armor", "AMP_SHARD_APPLY_ARMOR_17", "Breast", "AMP_SHARD_ARMOR_PLEDGE_TYR");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_PLEDGE_TYR", "AMP_SHARD_CHAR_PLEDGE_TYR");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_PLEDGE_TYR", (ITEMROOT)AMP_Arcanizer_Shard_Armor_17_e60d4ad7-e78c-4b04-8761-f14e22f6031d);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_17_e60d4ad7-e78c-4b04-8761-f14e22f6031d, "SHARDS_20");
+
+// 05 Pledge-Talos (Armor UC, NonStack) - Cleric of Talos: Resistance Lightning
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_18_e46285a9-70d3-4b9d-a55c-590625859657, "Armor", "AMP_SHARD_APPLY_ARMOR_18", "Breast", "AMP_SHARD_ARMOR_PLEDGE_TALOS");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_PLEDGE_TALOS", "AMP_SHARD_CHAR_PLEDGE_TALOS");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_PLEDGE_TALOS", (ITEMROOT)AMP_Arcanizer_Shard_Armor_18_e46285a9-70d3-4b9d-a55c-590625859657);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_18_e46285a9-70d3-4b9d-a55c-590625859657, "SHARDS_20");
+
+// 06 Pledge-Ilmater (Armor UC, NonStack) - Cleric of Ilmater: Resistance Bludgeoning
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_19_19da8914-7e5d-4475-af88-8a4dfbf644cf, "Armor", "AMP_SHARD_APPLY_ARMOR_19", "Breast", "AMP_SHARD_ARMOR_PLEDGE_ILMATER");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_PLEDGE_ILMATER", "AMP_SHARD_CHAR_PLEDGE_ILMATER");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_PLEDGE_ILMATER", (ITEMROOT)AMP_Arcanizer_Shard_Armor_19_19da8914-7e5d-4475-af88-8a4dfbf644cf);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_19_19da8914-7e5d-4475-af88-8a4dfbf644cf, "SHARDS_20");
+
+// 07 Pledge-Lolth (Armor UC, NonStack) - Cleric of Lolth: Immune WEB; +1d4 Poison vs Spiders
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_20_e314c18a-dd8c-4245-bebb-d4976c29ebee, "Armor", "AMP_SHARD_APPLY_ARMOR_20", "Breast", "AMP_SHARD_ARMOR_PLEDGE_LOLTH");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_PLEDGE_LOLTH", "AMP_SHARD_CHAR_PLEDGE_LOLTH");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_PLEDGE_LOLTH", (ITEMROOT)AMP_Arcanizer_Shard_Armor_20_e314c18a-dd8c-4245-bebb-d4976c29ebee);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_20_e314c18a-dd8c-4245-bebb-d4976c29ebee, "SHARDS_20");
+
+// 08 Pledge-Loviatar (Armor UC, NonStack) - Cleric of Loviatar: Immune Frightened
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_21_d3fb2c0c-e569-49c8-b771-429787e802e7, "Armor", "AMP_SHARD_APPLY_ARMOR_21", "Breast", "AMP_SHARD_ARMOR_PLEDGE_LOVIATAR");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_PLEDGE_LOVIATAR", "AMP_SHARD_CHAR_PLEDGE_LOVIATAR");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_PLEDGE_LOVIATAR", (ITEMROOT)AMP_Arcanizer_Shard_Armor_21_d3fb2c0c-e569-49c8-b771-429787e802e7);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_21_d3fb2c0c-e569-49c8-b771-429787e802e7, "SHARDS_20");
+
+// 09 Pledge-Lathander (Armor UC, NonStack) - Cleric of Lathander: +1d4 Radiant in sunlight
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_22_6f52e98a-2dff-4496-b58e-5d2ba4a312e0, "Armor", "AMP_SHARD_APPLY_ARMOR_22", "Breast", "AMP_SHARD_ARMOR_PLEDGE_LATHANDER");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_PLEDGE_LATHANDER", "AMP_SHARD_CHAR_PLEDGE_LATHANDER");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_PLEDGE_LATHANDER", (ITEMROOT)AMP_Arcanizer_Shard_Armor_22_6f52e98a-2dff-4496-b58e-5d2ba4a312e0);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_22_6f52e98a-2dff-4496-b58e-5d2ba4a312e0, "SHARDS_20");
+
+// 10 Pledge-Mielikki (Armor UC, NonStack) - Cleric of Mielikki: Immune vines; +1d4 Piercing vs Beasts
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_23_edfff17a-5b49-419d-b4b3-7086b72614c6, "Armor", "AMP_SHARD_APPLY_ARMOR_23", "Breast", "AMP_SHARD_ARMOR_PLEDGE_MIELIKKI");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_PLEDGE_MIELIKKI", "AMP_SHARD_CHAR_PLEDGE_MIELIKKI");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_PLEDGE_MIELIKKI", (ITEMROOT)AMP_Arcanizer_Shard_Armor_23_edfff17a-5b49-419d-b4b3-7086b72614c6);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_23_edfff17a-5b49-419d-b4b3-7086b72614c6, "SHARDS_20");
+
+// SERIES ATHEIST (Armor UC, NonStack x 3, shared StackId AMP_SHARD_ARMOR_PLEDGE)
+
+// 11 Atheist-Freemind (Armor UC, NonStack) - No deity: Advantage on Charisma Saves
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_24_9d1c60a9-9f1a-4ccf-baeb-de5dca06530c, "Armor", "AMP_SHARD_APPLY_ARMOR_24", "Breast", "AMP_SHARD_ARMOR_PLEDGE_FREEMIND");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_PLEDGE_FREEMIND", "AMP_SHARD_CHAR_PLEDGE_FREEMIND");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_PLEDGE_FREEMIND", (ITEMROOT)AMP_Arcanizer_Shard_Armor_24_9d1c60a9-9f1a-4ccf-baeb-de5dca06530c);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_24_9d1c60a9-9f1a-4ccf-baeb-de5dca06530c, "SHARDS_20");
+
+// 12 Atheist-Selfmade (Armor UC, NonStack) - No deity: +1 Attack and Saving Throws
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_25_6a9162bc-3fca-4ee6-8497-d90895f5712e, "Armor", "AMP_SHARD_APPLY_ARMOR_25", "Breast", "AMP_SHARD_ARMOR_PLEDGE_SELFMADE");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_PLEDGE_SELFMADE", "AMP_SHARD_CHAR_PLEDGE_SELFMADE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_PLEDGE_SELFMADE", (ITEMROOT)AMP_Arcanizer_Shard_Armor_25_6a9162bc-3fca-4ee6-8497-d90895f5712e);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_25_6a9162bc-3fca-4ee6-8497-d90895f5712e, "SHARDS_20");
+
+// 13 Atheist-Resolve (Armor UC, NonStack) - No deity: Resistance Psychic; +2 Death Saves
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_26_29552c4a-7f79-489c-a9d0-f7e304deb146, "Armor", "AMP_SHARD_APPLY_ARMOR_26", "Breast", "AMP_SHARD_ARMOR_PLEDGE_RESOLVE");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_PLEDGE_RESOLVE", "AMP_SHARD_CHAR_PLEDGE_RESOLVE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_PLEDGE_RESOLVE", (ITEMROOT)AMP_Arcanizer_Shard_Armor_26_29552c4a-7f79-489c-a9d0-f7e304deb146);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_26_29552c4a-7f79-489c-a9d0-f7e304deb146, "SHARDS_20");
+
+// SERIES DISCIPLE COMPLETION (Helmet UC, NonStack x 2)
+
+// 14 Disciple-Dawn (Helmet UC, NonStack) - Grants CLERIC_LATHANDER tag; Vulnerable Necrotic
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_35_90626543-4d21-49df-b6c0-4ac09ae032b7, "Helmet", "AMP_SHARD_APPLY_HELMET_35", "Helmet", "AMP_SHARD_HEAD_DISCIPLE_DAWN");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_DISCIPLE_DAWN", "AMP_SHARD_CHAR_DISCIPLE_DAWN");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_DISCIPLE_DAWN", (ITEMROOT)AMP_Arcanizer_Shard_Head_35_90626543-4d21-49df-b6c0-4ac09ae032b7);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_35_90626543-4d21-49df-b6c0-4ac09ae032b7, "SHARDS_20");
+
+// 15 Disciple-Wilds (Helmet UC, NonStack) - Grants CLERIC_MIELIKKI tag; Vulnerable Fire
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_36_3ad15bae-3d98-477b-8585-43fc00d70acd, "Helmet", "AMP_SHARD_APPLY_HELMET_36", "Helmet", "AMP_SHARD_HEAD_DISCIPLE_WILDS");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_DISCIPLE_WILDS", "AMP_SHARD_CHAR_DISCIPLE_WILDS");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_DISCIPLE_WILDS", (ITEMROOT)AMP_Arcanizer_Shard_Head_36_3ad15bae-3d98-477b-8585-43fc00d70acd);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_36_3ad15bae-3d98-477b-8585-43fc00d70acd, "SHARDS_20");
+
+KBSECTION
+
+EXITSECTION
+ENDEXITSECTION

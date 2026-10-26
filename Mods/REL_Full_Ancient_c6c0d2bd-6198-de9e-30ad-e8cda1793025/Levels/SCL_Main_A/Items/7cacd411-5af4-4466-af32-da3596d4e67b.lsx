@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="7cacd411-5af4-4466-af32-da3596d4e67b" />
+					<attribute id="Name" type="LSString" value="S_SCL_Chest_004" />
+					<attribute id="LevelName" type="FixedString" value="SCL_Main_A" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="0b90bf9d-66fd-4741-be1f-39181efca97a" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="LockDifficultyClassID" type="guid" value="89f0acd4-346f-479d-8b7a-1a3eb5382f6d" />
+					<attribute id="Key" type="FixedString" value="S_SCL_Chest_Key_004" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="-2.4128735 34.688354 -40.992767" />
+							<attribute id="RotationQuat" type="fvec4" value="-0.010871622 -0.69418716 0.08688667 0.7144486" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="SCL_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="91450084-e118-ff17-bf5d-ec7212c70b99" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="f7f9f6d0-d1ac-cbdc-a9f5-e0775a3b035d" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="Exploration_Minor" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

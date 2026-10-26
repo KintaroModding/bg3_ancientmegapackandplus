@@ -1,0 +1,97 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// darkness fix v3, osiris-driven (no auras) - the old aura version leaked memory.
+// runs off TurnEnded/TurnStarted + GetSurfaceCloudAt.
+
+KBSECTION
+// block 1: player ends turn in darkness -> tag combat enemies with the fix.
+// DB_Is_InCombat + IsEnemy (CHARACTER) cast, same as larian GLO_Tutorials.
+
+// darkness cloud
+IF
+TurnEnded((CHARACTER)_Player)
+AND
+DB_Players(_Player)
+AND
+IsInCombat(_Player, 1)
+AND
+GetSurfaceCloudAt(_Player, "SurfaceDarknessCloud")
+AND
+DB_Is_InCombat(_Player, _CombatID)
+AND
+DB_Is_InCombat(_Enemy, _CombatID)
+AND
+IsEnemy((CHARACTER)_Player, (CHARACTER)_Enemy, 1)
+AND
+HasPassive((CHARACTER)_Enemy, "Darkness_Fix_Immune", 0)
+AND
+HasActiveStatus((CHARACTER)_Enemy, "AMP_DARKNESS_FIX", 0)
+AND
+NOT DB_AMP_GameMode("STOCK")
+THEN
+ApplyStatus((CHARACTER)_Enemy, "AMP_DARKNESS_FIX", 12.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// fog cloud
+IF
+TurnEnded((CHARACTER)_Player)
+AND
+DB_Players(_Player)
+AND
+IsInCombat(_Player, 1)
+AND
+GetSurfaceCloudAt(_Player, "SurfaceFogCloud")
+AND
+DB_Is_InCombat(_Player, _CombatID)
+AND
+DB_Is_InCombat(_Enemy, _CombatID)
+AND
+IsEnemy((CHARACTER)_Player, (CHARACTER)_Enemy, 1)
+AND
+HasPassive((CHARACTER)_Enemy, "Darkness_Fix_Immune", 0)
+AND
+HasActiveStatus((CHARACTER)_Enemy, "AMP_DARKNESS_FIX", 0)
+AND
+NOT DB_AMP_GameMode("STOCK")
+THEN
+ApplyStatus((CHARACTER)_Enemy, "AMP_DARKNESS_FIX", 12.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// block 2: enemy starts turn in darkness - safety net
+
+// darkness cloud
+IF
+TurnStarted((CHARACTER)_Creature)
+AND
+NOT DB_Players(_Creature)
+AND
+GetSurfaceCloudAt(_Creature, "SurfaceDarknessCloud")
+AND
+HasPassive(_Creature, "Darkness_Fix_Immune", 0)
+AND
+HasActiveStatus(_Creature, "AMP_DARKNESS_FIX", 0)
+AND
+NOT DB_AMP_GameMode("STOCK")
+THEN
+ApplyStatus(_Creature, "AMP_DARKNESS_FIX", 12.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// fog cloud
+IF
+TurnStarted((CHARACTER)_Creature)
+AND
+NOT DB_Players(_Creature)
+AND
+GetSurfaceCloudAt(_Creature, "SurfaceFogCloud")
+AND
+HasPassive(_Creature, "Darkness_Fix_Immune", 0)
+AND
+HasActiveStatus(_Creature, "AMP_DARKNESS_FIX", 0)
+AND
+NOT DB_AMP_GameMode("STOCK")
+THEN
+ApplyStatus(_Creature, "AMP_DARKNESS_FIX", 12.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// no cleanup needed - 12s (~2 turns); if darkness clears it just expires
+
+EXITSECTION
+
+ENDEXITSECTION

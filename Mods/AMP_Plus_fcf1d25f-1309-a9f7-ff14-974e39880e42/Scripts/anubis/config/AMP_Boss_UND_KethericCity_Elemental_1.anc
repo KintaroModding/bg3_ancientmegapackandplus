@@ -1,0 +1,17 @@
+game.configs.AMP_Boss_UND_KethericCity_Elemental_1 = Config{
+    params={
+        patrolSpline = {
+            type = EParamType.String,
+            help = [[Spline to be patrolled]],
+            required = false,
+            default = [[S_UND_KethericCity_ElementalPatrol_1_001_8b01188d-8d28-41f6-bbad-2fbf4cb01276]]
+        },
+    },
+    root=StateRef{game.roots.DefaultCharacter,
+        combat = StateRef{game.states.AMP_BossCombat},
+        genericBehaviours = StateRef{game.states.CrimesHumanoid},
+        idle = StateRef{game.states.GEN_Patrol,
+            patrolSpline = params.patrolSpline,
+        },
+    }
+}

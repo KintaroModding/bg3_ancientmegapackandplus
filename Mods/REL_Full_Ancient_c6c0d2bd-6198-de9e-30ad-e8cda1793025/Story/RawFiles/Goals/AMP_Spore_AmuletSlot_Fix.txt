@@ -1,0 +1,11 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// amulet slot was missing from DB_AMP_Spore_EquipSlots in AMP_CursedArtifacts_Osiris.txt.
+// new goal so it seeds on existing saves too.
+DB_AMP_Spore_EquipSlots("Amulet");
+
+KBSECTION
+EXITSECTION
+ENDEXITSECTION

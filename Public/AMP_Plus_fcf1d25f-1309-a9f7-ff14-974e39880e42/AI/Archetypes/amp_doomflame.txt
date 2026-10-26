@@ -1,0 +1,24 @@
+// Doomflame - Hellfire warlock kamikaze.
+// Rushes in for fast kills; pays HP for casts; Last Breath compensates dying.
+
+USING mage_smart
+
+MODIFIER_HIT_CHANCE_STUPIDITY                    0.85
+
+// Suicide-rusher: closes the distance instead of kiting
+MULTIPLIER_ENDPOS_ENEMIES_NEARBY                 0.05
+MULTIPLIER_FALLBACK_ENEMIES_NEARBY              -0.10
+
+// HP-cost casting (Life Tap) + ignores death (Last Breath explodes anyway)
+MULTIPLIER_DAMAGE_SELF_NEG                       0.40
+ENABLE_MOVEMENT_AVOID_AOO                        0.00
+
+// Killer instinct - finishes weakened players fast
+MULTIPLIER_KILL_ENEMY                            1.65
+
+// Twin Cast Focus is a OncePerCombat self-buff worth opening with
+MULTIPLIER_FIRST_ACTION_BUFF                     2.50
+
+// Fire is his own element: burning ground is neither a cost to cross nor to stand in.
+MULTIPLIER_MOVEMENT_SURFACE                      0.00
+MULTIPLIER_ENDPOS_NOT_IN_DANGEROUS_SURFACE       0.00

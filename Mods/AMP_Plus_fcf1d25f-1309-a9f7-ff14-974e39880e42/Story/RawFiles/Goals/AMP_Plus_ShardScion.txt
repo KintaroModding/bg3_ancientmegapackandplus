@@ -1,0 +1,127 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+TurnStarted((CHARACTER)_Char)
+AND
+HasActiveStatus(_Char, "AMP_SHARD_CHAR_SCION", 1)
+AND
+CombatGetGuidFor(_Char, _)
+THEN
+PROC_AMP_Plus_ShardScion_Check(_Char);
+
+// alone is assumed, any teammate retracts it, so rule order matters
+// whole team counts, a companion in camp is still in DB_PartOfTheTeam
+
+PROC
+PROC_AMP_Plus_ShardScion_Check((CHARACTER)_Char)
+THEN
+DB_AMP_Plus_ShardScion_Alone(_Char);
+
+PROC
+PROC_AMP_Plus_ShardScion_Check((CHARACTER)_Char)
+AND
+DB_Players((CHARACTER)_Other)
+AND
+_Other != _Char
+AND
+DB_AMP_Plus_ShardScion_Alone(_Char)
+THEN
+NOT DB_AMP_Plus_ShardScion_Alone(_Char);
+
+PROC
+PROC_AMP_Plus_ShardScion_Check((CHARACTER)_Char)
+AND
+DB_PartOfTheTeam((CHARACTER)_Other)
+AND
+_Other != _Char
+AND
+DB_AMP_Plus_ShardScion_Alone(_Char)
+THEN
+NOT DB_AMP_Plus_ShardScion_Alone(_Char);
+
+PROC
+PROC_AMP_Plus_ShardScion_Check((CHARACTER)_Char)
+AND
+DB_AMP_Plus_ShardScion_Alone(_Char)
+THEN
+NOT DB_AMP_Plus_ShardScion_Alone(_Char);
+PROC_AMP_Plus_ShardScion_Open(_Char);
+
+PROC
+PROC_AMP_Plus_ShardScion_Open((CHARACTER)_Char)
+AND
+GetEquippedItem(_Char, "Amulet", (ITEM)_Item)
+AND
+DB_AMP_Shard_Count(_Item, "AMP_SHARD_AMULET_SCION", (INTEGER)_Count)
+AND
+IntegerProduct(_Count, 10, (INTEGER)_RestCap)
+AND
+IntegerProduct(_Count, 50, (INTEGER)_TotalCap)
+THEN
+PROC_AMP_Plus_ShardScion_Seed(_Char, _Item);
+PROC_AMP_Plus_ShardScion_Give(_Char, _Item, _Count, _RestCap, _TotalCap);
+
+PROC
+PROC_AMP_Plus_ShardScion_Seed((CHARACTER)_Char, (ITEM)_Item)
+AND
+NOT DB_AMP_Plus_ShardScion_Rest(_Char, _)
+THEN
+DB_AMP_Plus_ShardScion_Rest(_Char, 0);
+
+PROC
+PROC_AMP_Plus_ShardScion_Seed((CHARACTER)_Char, (ITEM)_Item)
+AND
+NOT DB_AMP_Plus_ShardScion_Total(_Item, _)
+THEN
+DB_AMP_Plus_ShardScion_Total(_Item, 0);
+
+PROC
+PROC_AMP_Plus_ShardScion_Give((CHARACTER)_Char, (ITEM)_Item, (INTEGER)_Left, (INTEGER)_RestCap, (INTEGER)_TotalCap)
+AND
+_Left > 0
+AND
+DB_AMP_Plus_ShardScion_Rest(_Char, (INTEGER)_R)
+AND
+_R < _RestCap
+AND
+DB_AMP_Plus_ShardScion_Total(_Item, (INTEGER)_T)
+AND
+_T < _TotalCap
+AND
+QRY_GetRandom("DB_AMP_VoidCapsule_Container", 2, "DB_AMP_Plus_ShardScion_Roll")
+AND
+DB_AMP_Plus_ShardScion_Roll((ITEMROOT)_Template, (STRING)_Type)
+AND
+IntegerSum(_R, 1, (INTEGER)_NextR)
+AND
+IntegerSum(_T, 1, (INTEGER)_NextT)
+AND
+IntegerSubtract(_Left, 1, (INTEGER)_Rest)
+THEN
+NOT DB_AMP_Plus_ShardScion_Roll(_Template, _Type);
+NOT DB_AMP_Plus_ShardScion_Rest(_Char, _R);
+DB_AMP_Plus_ShardScion_Rest(_Char, _NextR);
+NOT DB_AMP_Plus_ShardScion_Total(_Item, _T);
+DB_AMP_Plus_ShardScion_Total(_Item, _NextT);
+TemplateAddTo(_Template, _Char, 1, 1);
+PROC_AMP_Plus_ShardScion_Give(_Char, _Item, _Rest, _RestCap, _TotalCap);
+
+IF
+LongRestFinished()
+THEN
+PROC_AMP_Plus_ShardScion_DrainRest();
+
+PROC
+PROC_AMP_Plus_ShardScion_DrainRest()
+AND
+DB_AMP_Plus_ShardScion_Rest((CHARACTER)_Char, (INTEGER)_R)
+THEN
+NOT DB_AMP_Plus_ShardScion_Rest(_Char, _R);
+PROC_AMP_Plus_ShardScion_DrainRest();
+
+EXITSECTION
+ENDEXITSECTION

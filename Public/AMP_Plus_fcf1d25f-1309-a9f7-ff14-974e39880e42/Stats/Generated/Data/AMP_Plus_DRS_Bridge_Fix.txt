@@ -1,0 +1,27 @@
+// per-target once-per-turn reentry lock breaks the proc cascade through other gear's on-damage riders
+// IgnoreOnDamage would strip kill credit from the proc
+
+new entry "AMP_Plus_H93_ReentryCD"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_Plus_H93_ReentryCD"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator;IgnoreResting;ApplyToDead"
+
+new entry "MAG_Armour_H_93_bonus"
+type "PassiveData"
+using "MAG_Armour_H_93_bonus"
+data "Description" "h1c61fbbdga50dg4a02g9c08g6e6b9643dfb1;2"
+data "Conditions" "not Item() and not Self() and Enemy() and not StatusDoesNotInvokeOnStatusApply() and IsGameplayStatus() and not HasStatus('AMP_Plus_H93_ReentryCD',context.Target)"
+data "StatsFunctors" "ApplyStatus(AMP_Plus_H93_ReentryCD,100,1);ApplyStatus(MAG_ARMOUR_H_93_VFX,100,0)"
+
+new entry "MAG_Armour_H_93_3_bonus"
+type "PassiveData"
+using "MAG_Armour_H_93_bonus"
+data "DescriptionParams" "DealDamage(1d6,Psychic)"
+data "StatsFunctors" "ApplyStatus(AMP_Plus_H93_ReentryCD,100,1);ApplyStatus(MAG_ARMOUR_H_93_VFX_3,100,0)"
+
+new entry "MAG_Armour_H_93_4_bonus"
+type "PassiveData"
+using "MAG_Armour_H_93_bonus"
+data "DescriptionParams" "DealDamage(2d4,Psychic)"
+data "StatsFunctors" "ApplyStatus(AMP_Plus_H93_ReentryCD,100,1);ApplyStatus(MAG_ARMOUR_H_93_VFX_4,100,0)"

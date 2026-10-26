@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="22a400ec-5f01-4659-82e1-aed0b203c846" />
+					<attribute id="Name" type="LSString" value="S_TUT_Helm_MindFlayer" />
+					<attribute id="LevelName" type="FixedString" value="TUT_Avernus_C" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="TemplateName" type="FixedString" value="23ac81c1-597e-41c3-8c3c-6688ca399be1" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="Icon" type="FixedString" value="ee301526-870c-fc02-c44a-d55c2a611c7c-_(Icon_Mindflayer)" />
+					<attribute id="Stats" type="FixedString" value="TUT_HelmMindflayer" />
+					<attribute id="IsPlayer" type="bool" value="False" />
+					<attribute id="LevelOverride" type="int32" value="3" />
+					<attribute id="CharacterVisualResourceID" type="FixedString" value="ee301526-870c-fc02-c44a-d55c2a611c7c" />
+					<attribute id="SoftBodyCollisionTemplate" type="FixedString" value="83b26323-5737-d24f-0b1f-06c5730c6746" />
+					<attribute id="Faction" type="guid" value="8edc7770-b83c-412e-8a5a-5427a63e5b8a" />
+					<attribute id="Archetype" type="FixedString" value="cinematic_melee" />
+					<attribute id="AiHint" type="guid" value="f76e60e1-2957-470b-8a25-efdf32475ce0" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="-51.899258 16.414225 -390.58466" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0.79866415 0 0.6017771" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="TUT_Avernus_C" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="50d0102b-20d6-e358-fc29-38d368dcb1d0" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="57b4068d-f5bb-be4b-9094-f5b1ee40d144" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="EquipmentTypes">
+							<children>
+								<node id="">
+									<attribute id="Object" type="guid" value="d2141ff0-1368-4c35-b438-e9cd208182f8" />
+								</node>
+							</children>
+						</node>
+						<node id="SkillList">
+							<children>
+								<node id="Skill">
+									<attribute id="Skill" type="FixedString" value="Zone_TUT_MindBlast_MindFlayer" />
+									<attribute id="SpellCastingAbility" type="uint8" value="0" />
+									<attribute id="LearningStrategy" type="uint8" value="0" />
+									<attribute id="ScoreModifier" type="float" value="1" />
+									<attribute id="StartRound" type="int32" value="0" />
+									<attribute id="FallbackStartRound" type="int32" value="-1" />
+									<attribute id="MinimumImpact" type="int32" value="0" />
+									<attribute id="OnlyCastOnSelf" type="bool" value="False" />
+									<attribute id="AIFlags" type="uint16" value="0" />
+									<children>
+										<node id="SourceConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+										<node id="TargetConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Skill">
+									<attribute id="Skill" type="FixedString" value="Target_Tentacles_MindFlayer_NoStun" />
+									<attribute id="SpellCastingAbility" type="uint8" value="0" />
+									<attribute id="LearningStrategy" type="uint8" value="0" />
+									<attribute id="ScoreModifier" type="float" value="1" />
+									<attribute id="StartRound" type="int32" value="0" />
+									<attribute id="FallbackStartRound" type="int32" value="-1" />
+									<attribute id="MinimumImpact" type="int32" value="0" />
+									<attribute id="OnlyCastOnSelf" type="bool" value="False" />
+									<attribute id="AIFlags" type="uint16" value="0" />
+									<children>
+										<node id="SourceConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+										<node id="TargetConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="Treasures">
+							<children>
+								<node id="TreasureItem">
+									<attribute id="Object" type="FixedString" value="TUT_Monster_Mindflayer" />
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

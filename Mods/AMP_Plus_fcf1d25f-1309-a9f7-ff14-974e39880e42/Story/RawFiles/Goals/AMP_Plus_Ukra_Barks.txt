@@ -1,0 +1,120 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// U'kra combat barks
+
+KBSECTION
+
+IF
+EnteredCombat((CHARACTER)_Mob, _)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_10_2e3a6cd3-6380-4e15-8945-d8d04a49f2e6)
+AND
+NOT DB_AMP_Ukra_Greeted(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Ukra_Greeting_b56885f0-aab3-4f14-8665-783b29956b76, _Mob)
+THEN
+DB_AMP_Ukra_Greeted(_Mob);
+DB_AMP_Ukra_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Ukra_BarkUnlock", 5000);
+
+// fallback if the EnteredCombat event was missed
+IF
+TurnStarted((CHARACTER)_Mob)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_10_2e3a6cd3-6380-4e15-8945-d8d04a49f2e6)
+AND
+NOT DB_AMP_Ukra_Greeted(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Ukra_Greeting_b56885f0-aab3-4f14-8665-783b29956b76, _Mob)
+THEN
+DB_AMP_Ukra_Greeted(_Mob);
+DB_AMP_Ukra_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Ukra_BarkUnlock", 5000);
+
+// one attempt only, or a failed start retries every turn
+IF
+TurnStarted((CHARACTER)_Mob)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_10_2e3a6cd3-6380-4e15-8945-d8d04a49f2e6)
+AND
+NOT DB_AMP_Ukra_Greeted(_Mob)
+THEN
+DB_AMP_Ukra_Greeted(_Mob);
+
+IF
+UsingSpell((CHARACTER)_Mob, _, _, _, _)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_10_2e3a6cd3-6380-4e15-8945-d8d04a49f2e6)
+AND
+NOT DB_AMP_Ukra_BarkLock(_Mob)
+AND
+Random(3, (INTEGER)_Roll)
+AND
+_Roll == 0
+THEN
+DB_AMP_Ukra_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Ukra_BarkDelay", 1500);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Ukra_BarkDelay")
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_10_2e3a6cd3-6380-4e15-8945-d8d04a49f2e6)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Ukra_Casts_e2828571-1662-4aad-aa06-f59ea2f773b8, _Mob)
+THEN
+RealtimeObjectTimerLaunch(_Mob, "AMP_Ukra_BarkUnlock", 10000);
+
+IF
+HitpointsChanged((CHARACTER)_Mob, (REAL)_Pct)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_10_2e3a6cd3-6380-4e15-8945-d8d04a49f2e6)
+AND
+_Pct <= 40.0
+AND
+NOT DB_AMP_Ukra_LowHP(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Ukra_LowHP_499e4680-c432-4a58-8369-57548b4f855a, _Mob)
+THEN
+DB_AMP_Ukra_LowHP(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_10_2e3a6cd3-6380-4e15-8945-d8d04a49f2e6)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Ukra_Death_34ef7605-75c7-4d7f-88fc-e34efe946139, _Mob)
+THEN
+DB_NOOP(1);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Ukra_BarkUnlock")
+AND
+DB_AMP_Ukra_BarkLock(_Mob)
+THEN
+NOT DB_AMP_Ukra_BarkLock(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Ukra_Greeted(_Mob)
+THEN
+NOT DB_AMP_Ukra_Greeted(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Ukra_BarkLock(_Mob)
+THEN
+NOT DB_AMP_Ukra_BarkLock(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Ukra_LowHP(_Mob)
+THEN
+NOT DB_AMP_Ukra_LowHP(_Mob);
+
+EXITSECTION
+ENDEXITSECTION

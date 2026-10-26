@@ -1,0 +1,169 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// two rules for one button, the base gates settings on the host
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_GS_Reset", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+THEN
+PROC_AMP_Plus_GS_ResetAll();
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_GS_Reset", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+NOT _Caster == _Host
+THEN
+PROC_AMP_Plus_GS_ResetAll();
+
+PROC
+PROC_AMP_Plus_GS_ResetAll()
+AND
+NOT DB_AMP_Plus_Illegit_Permanent(1)
+THEN
+DB_AMP_Plus_Illegit_Permanent(1);
+
+// clear measurements only. Wiping the seeded config would leave the score unable to count
+
+PROC
+PROC_AMP_Plus_GS_ResetAll()
+THEN
+PROC_AMP_Plus_GS_DrainResetPeak();
+
+PROC
+PROC_AMP_Plus_GS_ResetAll()
+THEN
+PROC_AMP_Plus_GS_DrainResetAcc();
+
+PROC
+PROC_AMP_Plus_GS_ResetAll()
+THEN
+PROC_AMP_Plus_GS_DrainResetShardSum();
+
+PROC
+PROC_AMP_Plus_GS_ResetAll()
+THEN
+PROC_AMP_Plus_GS_DrainResetVRAcc();
+
+PROC
+PROC_AMP_Plus_GS_ResetAll()
+THEN
+PROC_AMP_Plus_GS_DrainResetBreaker();
+
+PROC
+PROC_AMP_Plus_GS_ResetAll()
+THEN
+PROC_AMP_Plus_GS_DrainResetItemShardW();
+
+PROC
+PROC_AMP_Plus_GS_ResetAll()
+THEN
+PROC_AMP_Plus_GS_DrainResetShardAcc();
+
+PROC
+PROC_AMP_Plus_GS_ResetAll()
+THEN
+PROC_AMP_Plus_GS_DrainResetParty();
+
+PROC
+PROC_AMP_Plus_GS_ResetAll()
+THEN
+PROC_AMP_Plus_GS_DrainResetPartyAcc();
+
+PROC
+PROC_AMP_Plus_GS_ResetAll()
+THEN
+PROC_AMP_Plus_GS_DrainResetBonus();
+
+PROC
+PROC_AMP_Plus_GS_DrainResetPeak()
+AND
+DB_AMP_Plus_GS_Peak((CHARACTER)_Char, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_GS_Peak(_Char, _V);
+PROC_AMP_Plus_GS_DrainResetPeak();
+
+PROC
+PROC_AMP_Plus_GS_DrainResetAcc()
+AND
+DB_AMP_Plus_GS_Acc((CHARACTER)_Char, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_GS_Acc(_Char, _V);
+PROC_AMP_Plus_GS_DrainResetAcc();
+
+PROC
+PROC_AMP_Plus_GS_DrainResetShardSum()
+AND
+DB_AMP_Plus_GS_ShardSum((CHARACTER)_Char, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_GS_ShardSum(_Char, _V);
+PROC_AMP_Plus_GS_DrainResetShardSum();
+
+PROC
+PROC_AMP_Plus_GS_DrainResetVRAcc()
+AND
+DB_AMP_Plus_GS_VRAcc((CHARACTER)_Char, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_GS_VRAcc(_Char, _V);
+PROC_AMP_Plus_GS_DrainResetVRAcc();
+
+PROC
+PROC_AMP_Plus_GS_DrainResetBreaker()
+AND
+DB_AMP_Plus_GS_Breaker((CHARACTER)_Char)
+THEN
+NOT DB_AMP_Plus_GS_Breaker(_Char);
+PROC_AMP_Plus_GS_DrainResetBreaker();
+
+PROC
+PROC_AMP_Plus_GS_DrainResetItemShardW()
+AND
+DB_AMP_Plus_GS_ItemShardW((ITEM)_Item, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_GS_ItemShardW(_Item, _V);
+PROC_AMP_Plus_GS_DrainResetItemShardW();
+
+PROC
+PROC_AMP_Plus_GS_DrainResetShardAcc()
+AND
+DB_AMP_Plus_GS_ShardAcc((ITEM)_Item, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_GS_ShardAcc(_Item, _V);
+PROC_AMP_Plus_GS_DrainResetShardAcc();
+
+PROC
+PROC_AMP_Plus_GS_DrainResetParty()
+AND
+DB_AMP_Plus_GS_Party((GUIDSTRING)_CombatGuid, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_GS_Party(_CombatGuid, _V);
+PROC_AMP_Plus_GS_DrainResetParty();
+
+PROC
+PROC_AMP_Plus_GS_DrainResetPartyAcc()
+AND
+DB_AMP_Plus_GS_PartyAcc((GUIDSTRING)_CombatGuid, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_GS_PartyAcc(_CombatGuid, _V);
+PROC_AMP_Plus_GS_DrainResetPartyAcc();
+
+PROC
+PROC_AMP_Plus_GS_DrainResetBonus()
+AND
+DB_AMP_Plus_GS_Bonus((GUIDSTRING)_CombatGuid, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_GS_Bonus(_CombatGuid, _V);
+PROC_AMP_Plus_GS_DrainResetBonus();
+
+EXITSECTION
+ENDEXITSECTION

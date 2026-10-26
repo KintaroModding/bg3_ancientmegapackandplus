@@ -1,0 +1,66 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// party level cannot change mid-fight, so check on entering combat or on the spot for a late overlay
+
+IF
+StatusApplied((CHARACTER)_Mob, "AMP_ULTRA_BOSS_OVERLAY", _, _)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+_Lvl >= 12
+THEN
+ApplyStatus(_Mob, "AMP_Plus_ULTRA_LATE_DAMAGE", -1.0, 1, _Mob);
+
+IF
+StatusApplied((CHARACTER)_Mob, "AMP_ULTRA_NPC_OVERLAY", _, _)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+_Lvl >= 12
+THEN
+ApplyStatus(_Mob, "AMP_Plus_ULTRA_LATE_DAMAGE", -1.0, 1, _Mob);
+
+IF
+EnteredCombat((CHARACTER)_Mob, _)
+AND
+HasActiveStatus(_Mob, "AMP_ULTRA_BOSS_OVERLAY", 1)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+_Lvl >= 12
+AND
+HasActiveStatus(_Mob, "AMP_Plus_ULTRA_LATE_DAMAGE", 0)
+THEN
+ApplyStatus(_Mob, "AMP_Plus_ULTRA_LATE_DAMAGE", -1.0, 1, _Mob);
+
+IF
+EnteredCombat((CHARACTER)_Mob, _)
+AND
+HasActiveStatus(_Mob, "AMP_ULTRA_NPC_OVERLAY", 1)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+_Lvl >= 12
+AND
+HasActiveStatus(_Mob, "AMP_Plus_ULTRA_LATE_DAMAGE", 0)
+THEN
+ApplyStatus(_Mob, "AMP_Plus_ULTRA_LATE_DAMAGE", -1.0, 1, _Mob);
+
+// the average can fall back below 12 when a lower-level companion joins
+IF
+EnteredCombat((CHARACTER)_Mob, _)
+AND
+HasActiveStatus(_Mob, "AMP_Plus_ULTRA_LATE_DAMAGE", 1)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+_Lvl < 12
+THEN
+RemoveStatus(_Mob, "AMP_Plus_ULTRA_LATE_DAMAGE", NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+ENDEXITSECTION

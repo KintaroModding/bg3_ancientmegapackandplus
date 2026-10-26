@@ -1,0 +1,122 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// hard: stopped picking an astral chest -> delayed lock-check (let IsLocked settle first)
+IF
+StoppedLockpicking((CHARACTER)_Character, (ITEM)_Chest)
+AND
+DB_AMP_GameMode("HARD")
+AND
+IsTagged(_Chest, (TAG)ASTRAL_CHEST_KNOCK_d5d006a2-613a-4c2e-87b4-a529c2ce9816, 1)
+AND
+NOT DB_AMP_AstralChest_Pending(_, _)
+AND
+NOT DB_AMP_AstralChest_PendingCheck(_, _)
+AND
+NOT DB_AMP_AstralChest_Consumed(_Chest)
+THEN
+DB_AMP_AstralChest_PendingCheck((GUIDSTRING)_Chest, (CHARACTER)_Character);
+ObjectTimerLaunch((GUIDSTRING)_Chest, "AMP_AstralChest_LockCheck", 1000, 0);
+
+// still locked -> show offer
+IF
+ObjectTimerFinished(_ChestGUID, "AMP_AstralChest_LockCheck")
+AND
+DB_AMP_AstralChest_PendingCheck(_ChestGUID, (CHARACTER)_Character)
+AND
+IsLocked((ITEM)_ChestGUID, 1)
+AND
+NOT DB_AMP_AstralChest_Consumed((ITEM)_ChestGUID)
+THEN
+NOT DB_AMP_AstralChest_PendingCheck(_ChestGUID, _Character);
+DB_AMP_AstralChest_Pending((ITEM)_ChestGUID, _Character);
+OpenMessageBoxYesNo(_Character, "AMP_AstralChest_AutoOpen_Offer");
+
+// unlocked in the meantime -> drop pending check, no offer
+IF
+ObjectTimerFinished(_ChestGUID, "AMP_AstralChest_LockCheck")
+AND
+DB_AMP_AstralChest_PendingCheck(_ChestGUID, (CHARACTER)_Character)
+AND
+IsLocked((ITEM)_ChestGUID, 0)
+THEN
+NOT DB_AMP_AstralChest_PendingCheck(_ChestGUID, _Character);
+
+// yes, tutorial chest (TUT_Avernus_C/_D) -> fixed modest t2 (party is lvl 1 here)
+IF
+MessageBoxYesNoClosed((CHARACTER)_Character, "AMP_AstralChest_AutoOpen_Offer", 1)
+AND
+DB_AMP_AstralChest_Pending((ITEM)_Chest, _Character)
+AND
+GetRegion(_Chest, (STRING)_Region)
+AND
+_Region == "TUT_Avernus_C"
+AND
+ConcatenateGUID("AMP_AstralChest_", _Chest, (STRING)_Key)
+THEN
+NOT DB_AMP_AstralChest_Pending(_Chest, _Character);
+DB_AMP_AstralChest_Consumed(_Chest);
+DB_AMP_BossProgression_Applied(_Key);
+DB_AMP_BossProgression_KillTier(_Key, 2);
+PROC_AMP_ProgV6_RecastAll();
+Unlock(_Chest);
+Open(_Chest);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Character, "AMP_AstralChest_AutoOpen_Offer", 1)
+AND
+DB_AMP_AstralChest_Pending((ITEM)_Chest, _Character)
+AND
+GetRegion(_Chest, (STRING)_Region)
+AND
+_Region == "TUT_Avernus_D"
+AND
+ConcatenateGUID("AMP_AstralChest_", _Chest, (STRING)_Key)
+THEN
+NOT DB_AMP_AstralChest_Pending(_Chest, _Character);
+DB_AMP_AstralChest_Consumed(_Chest);
+DB_AMP_BossProgression_Applied(_Key);
+DB_AMP_BossProgression_KillTier(_Key, 2);
+PROC_AMP_ProgV6_RecastAll();
+Unlock(_Chest);
+Open(_Chest);
+
+// yes, non-tutorial chest -> record as boss kill at current tier
+IF
+MessageBoxYesNoClosed((CHARACTER)_Character, "AMP_AstralChest_AutoOpen_Offer", 1)
+AND
+DB_AMP_AstralChest_Pending((ITEM)_Chest, _Character)
+AND
+GetRegion(_Chest, (STRING)_Region)
+AND
+_Region != "TUT_Avernus_C"
+AND
+_Region != "TUT_Avernus_D"
+AND
+DB_AMP_CurrentTier((INTEGER)_Tier)
+AND
+ConcatenateGUID("AMP_AstralChest_", _Chest, (STRING)_Key)
+THEN
+NOT DB_AMP_AstralChest_Pending(_Chest, _Character);
+DB_AMP_AstralChest_Consumed(_Chest);
+DB_AMP_BossProgression_Applied(_Key);
+DB_AMP_BossProgression_KillTier(_Key, _Tier);
+PROC_AMP_ProgV6_RecastAll();
+Unlock(_Chest);
+Open(_Chest);
+
+// no -> consumed, don't offer again for this chest
+IF
+MessageBoxYesNoClosed((CHARACTER)_Character, "AMP_AstralChest_AutoOpen_Offer", 0)
+AND
+DB_AMP_AstralChest_Pending((ITEM)_Chest, _Character)
+THEN
+NOT DB_AMP_AstralChest_Pending(_Chest, _Character);
+DB_AMP_AstralChest_Consumed(_Chest);
+
+EXITSECTION
+
+ENDEXITSECTION

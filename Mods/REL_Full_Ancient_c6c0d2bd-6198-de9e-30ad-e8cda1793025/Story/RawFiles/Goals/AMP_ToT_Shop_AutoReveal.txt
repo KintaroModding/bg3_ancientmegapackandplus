@@ -1,0 +1,21 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// containers respawn INVISIBLE on level change, strip it if the shop is already on
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_ToT_Shop_Enabled(1)
+AND
+DB_ToT_Shop_Activated(1)
+AND
+DB_ToT_Shop((STRING)_ShopID, (ITEM)_Container)
+THEN
+RemoveStatus(_Container, "INVISIBLE", _Container);
+
+EXITSECTION
+ENDEXITSECTION

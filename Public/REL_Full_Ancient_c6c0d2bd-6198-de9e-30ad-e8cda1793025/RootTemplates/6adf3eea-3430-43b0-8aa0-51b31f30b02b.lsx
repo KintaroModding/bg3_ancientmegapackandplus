@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="6adf3eea-3430-43b0-8aa0-51b31f30b02b" />
+					<attribute id="Name" type="LSString" value="AMP_ToT_Shop" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="4964192d-2cf5-4099-9d78-ee6ce48b40f7" />
+					<attribute id="Scale" type="float" value="2" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h2673f03cg6ab6g0805g2ca5g4d1a643fa134" version="1" />
+					<attribute id="CanClimbOn" type="bool" value="False" />
+					<attribute id="WalkThrough" type="bool" value="True" />
+					<attribute id="WalkOn" type="bool" value="False" />
+					<attribute id="Icon" type="FixedString" value="AMP_Shop" />
+					<attribute id="Stats" type="FixedString" value="OBJ_GenericImmutableObject" />
+					<attribute id="TreasureOnDestroy" type="bool" value="False" />
+					<attribute id="CanBePickedUp" type="bool" value="False" />
+					<attribute id="CanBePickpocketed" type="bool" value="False" />
+					<attribute id="CanBeMoved" type="bool" value="False" />
+					<attribute id="GravityType" type="uint8" value="1" />
+					<attribute id="Description" type="TranslatedString" handle="h420b71acgc0b1gbdfegd6b1gdd28247215b9" version="1" />
+					<children>
+						<node id="OnUsePeaceActions">
+							<children>
+								<node id="Action">
+									<attribute id="ActionType" type="int32" value="1" />
+									<children>
+										<node id="Attributes">
+											<attribute id="Animation" type="FixedString" value="" />
+											<attribute id="Conditions" type="LSString" value="" />
+										</node>
+									</children>
+								</node>
+								<node id="Action">
+									<attribute id="ActionType" type="int32" value="8" />
+									<children>
+										<node id="Attributes">
+											<attribute id="Animation" type="FixedString" value="" />
+											<attribute id="Conditions" type="LSString" value="" />
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList" />
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="INVULNERABLE_NOT_SHOWN" />
+								</node>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="INVISIBLE" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

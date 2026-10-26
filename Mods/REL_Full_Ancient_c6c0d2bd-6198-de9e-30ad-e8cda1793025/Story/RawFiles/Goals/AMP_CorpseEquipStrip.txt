@@ -1,0 +1,51 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_AMP_CorpseStrip_MinValue(150);
+DB_AMP_CorpseStrip_Excluded((CHARACTER)S_DEN_Apprentice_7cabf226-e34b-4556-8903-a45d0fe26caf);
+KBSECTION
+
+// stops raise-corpse -> swap gear -> steal boss loot exploit.
+// npc dies -> delete equipped items worth >= 150 gold (uncommon+)
+IF
+Died((CHARACTER)_NPC)
+AND
+IsPlayer(_NPC, 0)
+AND
+NOT DB_AMP_GameMode("STOCK")
+THEN
+PROC_AMP_CorpseStrip(_NPC);
+
+PROC
+PROC_AMP_CorpseStrip((CHARACTER)_NPC)
+THEN
+PROC_AMP_CorpseStrip_Slot(_NPC, "Breast");
+PROC_AMP_CorpseStrip_Slot(_NPC, "Melee Main Weapon");
+PROC_AMP_CorpseStrip_Slot(_NPC, "Melee Offhand Weapon");
+PROC_AMP_CorpseStrip_Slot(_NPC, "Ranged Main Weapon");
+PROC_AMP_CorpseStrip_Slot(_NPC, "Ranged Offhand Weapon");
+PROC_AMP_CorpseStrip_Slot(_NPC, "Helmet");
+PROC_AMP_CorpseStrip_Slot(_NPC, "Gloves");
+PROC_AMP_CorpseStrip_Slot(_NPC, "Boots");
+PROC_AMP_CorpseStrip_Slot(_NPC, "Cloak");
+PROC_AMP_CorpseStrip_Slot(_NPC, "Amulet");
+PROC_AMP_CorpseStrip_Slot(_NPC, "Ring");
+PROC_AMP_CorpseStrip_Slot(_NPC, "Ring2");
+
+PROC
+PROC_AMP_CorpseStrip_Slot((CHARACTER)_NPC, (STRING)_Slot)
+AND
+GetEquippedItem(_NPC, _Slot, (ITEM)_Item)
+AND
+DB_AMP_CorpseStrip_MinValue(_MinValue)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+_Value >= _MinValue
+AND
+NOT DB_AMP_CorpseStrip_Excluded(_NPC)
+THEN
+RequestDelete(_Item);
+
+EXITSECTION
+ENDEXITSECTION

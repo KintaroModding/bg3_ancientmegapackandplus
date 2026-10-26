@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="10" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="3a059edd-c14f-404d-8eab-68941e9bc0b7" />
+					<attribute id="Name" type="LSString" value="AMP_Camp_Lootbox_000" />
+					<attribute id="LevelName" type="FixedString" value="TUT_Avernus_C" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="59bd6dc0-373f-41a4-8ad3-e923f89e2bc5" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="LockDifficultyClassID" type="guid" value="e0a7c461-08bf-459d-9c9a-747008ced85c" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="31.41965 22.33551 -434.9147" />
+							<attribute id="RotationQuat" type="fvec4" value="0 -0.3790257 0 0.9253865" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object">
+											<attribute id="MapKey" type="FixedString" value="TUT_Avernus_C" />
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="AMP_Tutorial_Lootbox" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

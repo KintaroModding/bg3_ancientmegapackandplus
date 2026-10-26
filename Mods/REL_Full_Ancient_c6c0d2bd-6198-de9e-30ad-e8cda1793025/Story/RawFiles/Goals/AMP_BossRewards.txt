@@ -1,0 +1,853 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+QRY
+QRY_AMP_BossRewardsEnabled()
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+HasActiveStatus(_Host, "AMP_BOSS_REWARDS_DISABLED", 0)
+THEN
+DB_NOOP(1);
+
+// deferred reward delivery
+
+// in combat -> queue, deliver after combat ends
+PROC
+PROC_AMP_BossRewardGrant((CHARACTER)_Player, (STRING)_RewardID)
+AND
+IsInCombat(_Player, 1)
+THEN
+DB_AMP_BossReward_Pending(_Player, _RewardID);
+
+// not in combat -> deliver now
+PROC
+PROC_AMP_BossRewardGrant((CHARACTER)_Player, (STRING)_RewardID)
+AND
+IsInCombat(_Player, 0)
+THEN
+QuestUpdate(_Player, "HIDDEN_WLD_Boosters", _RewardID);
+
+// flush queued rewards on combat end
+IF
+CombatEnded(_CombatGuid)
+AND
+DB_AMP_BossReward_Pending(_Player, _RewardID)
+THEN
+QuestUpdate(_Player, "HIDDEN_WLD_Boosters", _RewardID);
+NOT DB_AMP_BossReward_Pending(_Player, _RewardID);
+
+// act 1
+
+// auntie ethel (hag)
+// generous branch
+IF
+Died(S_HAG_Hag_c457d064-83fb-4ec6-b74d-1f30dfafd12d)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Ethel")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Ethel_Generous");
+
+// normal branch
+IF
+Died(S_HAG_Hag_c457d064-83fb-4ec6-b74d-1f30dfafd12d)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Ethel")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Ethel");
+
+// dror ragzlin (goblin king)
+// generous branch
+IF
+Died(S_GOB_GoblinKing_11337af0-6a57-426b-a820-c4b00923dd54)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_DrorRagzlin")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_DrorRagzlin_Generous");
+
+// normal branch
+IF
+Died(S_GOB_GoblinKing_11337af0-6a57-426b-a820-c4b00923dd54)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_DrorRagzlin")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_DrorRagzlin");
+
+// minthara (drow commander)
+// generous branch
+IF
+Died(S_GOB_DrowCommander_25721313-0c15-4935-8176-9f134385451b)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Minthara")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Minthara_Generous");
+
+// normal branch
+IF
+Died(S_GOB_DrowCommander_25721313-0c15-4935-8176-9f134385451b)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Minthara")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Minthara");
+
+// priestess gut
+// generous branch
+IF
+Died(S_GOB_GoblinPriest_b983c336-9a14-4e9b-adb9-4689e7e0afa9)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_PriestessGut")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_PriestessGut_Generous");
+
+// normal branch
+IF
+Died(S_GOB_GoblinPriest_b983c336-9a14-4e9b-adb9-4689e7e0afa9)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_PriestessGut")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_PriestessGut");
+
+// spectator (beholder)
+// generous branch
+IF
+Died(S_UND_PetrifiedDrow_Spectator_39ff8241-fadd-4fbe-ab89-fc5a8b7638a0)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Spectator")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Spectator_Generous");
+
+// normal branch
+IF
+Died(S_UND_PetrifiedDrow_Spectator_39ff8241-fadd-4fbe-ab89-fc5a8b7638a0)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Spectator")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Spectator");
+
+// phase spider queen
+// generous branch
+IF
+Died(S_FOR_Bottomless_SpiderQueen_e6b2f3ba-2d02-4507-8680-6047322e1a4b)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_PhaseSpider")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_PhaseSpider_Generous");
+
+// normal branch
+IF
+Died(S_FOR_Bottomless_SpiderQueen_e6b2f3ba-2d02-4507-8680-6047322e1a4b)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_PhaseSpider")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_PhaseSpider");
+
+// kagha (druid leader)
+// generous branch
+IF
+Died(S_DEN_DruidLeader_95eb2b0b-a522-4ea5-8167-c5f4d1418156)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Kagha")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Kagha_Generous");
+
+// normal branch
+IF
+Died(S_DEN_DruidLeader_95eb2b0b-a522-4ea5-8167-c5f4d1418156)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Kagha")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Kagha");
+
+// act 2
+
+// ketheric thorm
+// generous branch
+IF
+Died(S_MOO_Ketheric_e9918f3e-5b87-40a3-a9bd-61545151573f)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Ketheric")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Ketheric_Generous");
+
+// normal branch
+IF
+Died(S_MOO_Ketheric_e9918f3e-5b87-40a3-a9bd-61545151573f)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Ketheric")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Ketheric");
+
+// gerringothe thorm (tollhouse)
+// generous branch
+IF
+Died(S_TWN_Tollhouse_TollhouseMaster_3b460226-8ca2-4bbc-9bd7-8bb947aa2c06)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Gerringothe")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Gerringothe_Generous");
+
+// normal branch
+IF
+Died(S_TWN_Tollhouse_TollhouseMaster_3b460226-8ca2-4bbc-9bd7-8bb947aa2c06)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Gerringothe")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Gerringothe");
+
+// malus thorm (surgeon)
+// generous branch
+IF
+Died(S_TWN_Hospital_Surgeon_e58b8b34-038b-4858-b817-c2a8096a9381)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_MalusThorm")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_MalusThorm_Generous");
+
+// normal branch
+IF
+Died(S_TWN_Hospital_Surgeon_e58b8b34-038b-4858-b817-c2a8096a9381)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_MalusThorm")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_MalusThorm");
+
+// thisobald thorm (brewer)
+// generous branch
+IF
+Died(S_TWN_Distillery_Brewer_4d9e3db3-9a78-4f4b-8101-1dd73c0f3be5)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Thisobald")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Thisobald_Generous");
+
+// normal branch
+IF
+Died(S_TWN_Distillery_Brewer_4d9e3db3-9a78-4f4b-8101-1dd73c0f3be5)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Thisobald")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Thisobald");
+
+// balthazar (necromancer)
+// generous branch
+IF
+Died(S_SHA_Necromancer_53651a9f-7ea8-444f-ba2d-224390b72f7d)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Balthazar")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Balthazar_Generous");
+
+// normal branch
+IF
+Died(S_SHA_Necromancer_53651a9f-7ea8-444f-ba2d-224390b72f7d)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Balthazar")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Balthazar");
+
+// yurgir (orthon)
+// generous branch
+IF
+Died(S_GLO_Orthon_1dc8091d-2af6-4d33-9268-998ef266d19c)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Yurgir")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Yurgir_Generous");
+
+// normal branch
+IF
+Died(S_GLO_Orthon_1dc8091d-2af6-4d33-9268-998ef266d19c)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Yurgir")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Yurgir");
+
+// act 3
+
+// orin (bhaal's chosen)
+// generous branch
+IF
+Died(S_GLO_Orin_bf24e0ec-a3a6-4905-bd2d-45dc8edf8101)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Orin")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Orin_Generous");
+
+// normal branch
+IF
+Died(S_GLO_Orin_bf24e0ec-a3a6-4905-bd2d-45dc8edf8101)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Orin")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Orin");
+
+// gortash (bane's chosen)
+// generous branch
+IF
+Died(S_GLO_Gortash_b878a854-f790-4999-95c4-3f20f00f65ac)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Gortash")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Gortash_Generous");
+
+// normal branch
+IF
+Died(S_GLO_Gortash_b878a854-f790-4999-95c4-3f20f00f65ac)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Gortash")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Gortash");
+
+// raphael (devil)
+// generous branch
+IF
+Died(S_GLO_Monitor_f65becd6-5cd7-4c88-b85e-6dd06b60f7b8)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Raphael")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Raphael_Generous");
+
+// normal branch
+IF
+Died(S_GLO_Monitor_f65becd6-5cd7-4c88-b85e-6dd06b60f7b8)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Raphael")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Raphael");
+
+// cazador (vampire lord)
+// generous branch
+IF
+Died(S_GLO_Cazador_2f1880e6-1297-4ca3-a79c-9fabc7f179d3)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Cazador")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Cazador_Generous");
+
+// normal branch
+IF
+Died(S_GLO_Cazador_2f1880e6-1297-4ca3-a79c-9fabc7f179d3)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Cazador")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Cazador");
+
+// sarevok
+// generous branch
+IF
+Died(S_LOW_MurderTribunal_Sarevok_ae9f784a-ea64-4297-95a7-8377e85231b6)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Sarevok")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Sarevok_Generous");
+
+// normal branch
+IF
+Died(S_LOW_MurderTribunal_Sarevok_ae9f784a-ea64-4297-95a7-8377e85231b6)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Sarevok")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Sarevok");
+
+// ansur (skeletal dragon)
+// generous branch
+IF
+Died(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a)
+AND
+DB_State_Current(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a, "WYR_SkeletalDragon", "Risen")
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Ansur")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Ansur_Generous");
+
+// normal branch
+IF
+Died(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a)
+AND
+DB_State_Current(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a, "WYR_SkeletalDragon", "Risen")
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Ansur")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Ansur");
+
+// viconia (shar priestess)
+// generous branch
+IF
+Died(S_LOW_Viconia_b1ea974d-96fb-47ca-b6d9-9c85fcb69313)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Viconia")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Viconia_Generous");
+
+// normal branch
+IF
+Died(S_LOW_Viconia_b1ea974d-96fb-47ca-b6d9-9c85fcb69313)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Viconia")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Viconia");
+
+// lorroakan (archwizard)
+// generous branch
+IF
+Died(S_LOW_Lorroakan_a9d4b71d-b0ef-429e-8210-6dc8be986ee9)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Lorroakan")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Lorroakan_Generous");
+
+// normal branch
+IF
+Died(S_LOW_Lorroakan_a9d4b71d-b0ef-429e-8210-6dc8be986ee9)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Lorroakan")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Lorroakan");
+
+// new bosses
+
+// zhalk (commander devil, tutorial)
+// generous branch
+IF
+Died(S_TUT_Helm_Devil_005_ed103005-fd71-457d-ae6c-39654bbd8f2e)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Zhalk")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Zhalk_Generous");
+
+// normal branch
+IF
+Died(S_TUT_Helm_Devil_005_ed103005-fd71-457d-ae6c-39654bbd8f2e)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Zhalk")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Zhalk");
+
+// owlbear
+// generous branch
+IF
+Died(S_FOR_OwlBear_e903a41f-8ef7-46dc-a847-7d0ec2804d08)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Owlbear")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Owlbear_Generous");
+
+// normal branch
+IF
+Died(S_FOR_OwlBear_e903a41f-8ef7-46dc-a847-7d0ec2804d08)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Owlbear")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Owlbear");
+
+// bulette (underdark land shark)
+// generous branch
+IF
+Died(S_UND_Bulette_307934b5-6fb5-4fdc-a7ff-433a7ba175b3)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Bulette")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Bulette_Generous");
+
+// normal branch
+IF
+Died(S_UND_Bulette_307934b5-6fb5-4fdc-a7ff-433a7ba175b3)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Bulette")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Bulette");
+
+// grym (adamantine golem) - scaling only, reward handled elsewhere
+IF
+Died(S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255)
+AND
+DB_Players(_Player)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Grym")
+THEN
+DB_NOOP(1);
+
+// inquisitor w'wargaz (githyanki creche)
+// generous branch
+IF
+Died(S_CRE_Templar_378ac93e-03a0-40b4-904c-f37989ac7a8c)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Wargaz")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Wargaz_Generous");
+
+// normal branch
+IF
+Died(S_CRE_Templar_378ac93e-03a0-40b4-904c-f37989ac7a8c)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Wargaz")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Wargaz");
+
+// shambling mound (shadow cursed lands)
+// generous branch
+IF
+Died(S_SCL_BlightCombat2_Mound_01_1b294fe0-f1a1-4e81-9d4c-8d86bbda7d2b)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_ShamblingMound")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_ShamblingMound_Generous");
+
+// normal branch
+IF
+Died(S_SCL_BlightCombat2_Mound_01_1b294fe0-f1a1-4e81-9d4c-8d86bbda7d2b)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_ShamblingMound")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_ShamblingMound");
+
+// nightsong (dame aylin) - isenemy gate so ally death in lorroakan fight doesn't fire
+// generous branch
+IF
+Died(S_GLO_Nightsong_6c55edb0-901b-4ba4-b9e8-3475a8392d9b)
+AND
+DB_Players(_Player)
+AND
+IsEnemy(S_GLO_Nightsong_6c55edb0-901b-4ba4-b9e8-3475a8392d9b, _Player, 1)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Nightsong")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Nightsong_Generous");
+
+// normal branch
+IF
+Died(S_GLO_Nightsong_6c55edb0-901b-4ba4-b9e8-3475a8392d9b)
+AND
+DB_Players(_Player)
+AND
+IsEnemy(S_GLO_Nightsong_6c55edb0-901b-4ba4-b9e8-3475a8392d9b, _Player, 1)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Nightsong")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Nightsong");
+
+EXITSECTION
+ENDEXITSECTION

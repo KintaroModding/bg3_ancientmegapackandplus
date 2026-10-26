@@ -1,0 +1,30 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// both base delete paths need an event the eject does not always raise, so empty cubes are swept after landing
+
+IF
+AddedTo((ITEM)_Cube, (CHARACTER)_Owner, _)
+AND
+DB_Players(_Owner)
+AND
+GetTemplate(_Cube, (ITEMROOT)_Template)
+AND
+DB_AMP_VoidCapsule_Reward(_, _, _Template)
+THEN
+ObjectTimerLaunch(_Cube, "AMP_Plus_CubeSweep", 4000, 0);
+
+IF
+ObjectTimerFinished((ITEM)_Cube, "AMP_Plus_CubeSweep")
+AND
+IsInventoryEmpty(_Cube, 1)
+AND
+NOT DB_AMP_SeedReset_DecoyCube(_Cube)
+THEN
+RequestDelete(_Cube);
+
+EXITSECTION
+ENDEXITSECTION

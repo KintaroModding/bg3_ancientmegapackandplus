@@ -1,0 +1,61 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// chests mid-deletion (seed with null so the db exists)
+DB_AMP_ChestDeletionInProgress((ITEM)NULL_00000000-0000-0000-0000-000000000000);
+KBSECTION
+// item pulled from an astral chest -> recheck if empty
+IF
+RemovedFrom((ITEM)_Item, (GUIDSTRING)_Container)
+AND
+IsTagged(_Container, (TAG)ASTRAL_CHEST_KNOCK_d5d006a2-613a-4c2e-87b4-a529c2ce9816, 1)
+THEN
+PROC_AMP_CheckAndDeleteEmptyChest((ITEM)_Container);
+
+// empty chest -> poof vfx then delete after a short delay
+PROC
+PROC_AMP_CheckAndDeleteEmptyChest((ITEM)_Container)
+AND
+IsInventoryEmpty(_Container, 1)
+AND
+NOT DB_AMP_ChestDeletionInProgress(_Container)
+AND
+GetPosition(_Container, _X, _Y, _Z)
+THEN
+DB_AMP_ChestDeletionInProgress(_Container);
+PlayEffectAtPosition(AMP_Lootbox_Poof_c2df298a-1926-695f-0de8-88372b87b05c, _X, _Y, _Z, 1.0);
+ObjectTimerLaunch(_Container, "AMP_DeleteEmptyChest", 500, 0);
+
+// timer done + still empty + still tagged -> delete
+IF
+ObjectTimerFinished((ITEM)_Container, "AMP_DeleteEmptyChest")
+AND
+IsTagged(_Container, (TAG)ASTRAL_CHEST_KNOCK_d5d006a2-613a-4c2e-87b4-a529c2ce9816, 1)
+AND
+IsInventoryEmpty(_Container, 1)
+THEN
+NOT DB_AMP_ChestDeletionInProgress(_Container);
+RequestDelete(_Container);
+
+// refilled before timer -> abort delete
+IF
+ObjectTimerFinished((ITEM)_Container, "AMP_DeleteEmptyChest")
+AND
+DB_AMP_ChestDeletionInProgress(_Container)
+AND
+NOT IsInventoryEmpty(_Container, 1)
+THEN
+NOT DB_AMP_ChestDeletionInProgress(_Container);
+
+// lost the tag before timer -> abort delete
+IF
+ObjectTimerFinished((ITEM)_Container, "AMP_DeleteEmptyChest")
+AND
+DB_AMP_ChestDeletionInProgress(_Container)
+AND
+IsTagged(_Container, (TAG)ASTRAL_CHEST_KNOCK_d5d006a2-613a-4c2e-87b4-a529c2ce9816, 0)
+THEN
+NOT DB_AMP_ChestDeletionInProgress(_Container);
+EXITSECTION
+
+ENDEXITSECTION

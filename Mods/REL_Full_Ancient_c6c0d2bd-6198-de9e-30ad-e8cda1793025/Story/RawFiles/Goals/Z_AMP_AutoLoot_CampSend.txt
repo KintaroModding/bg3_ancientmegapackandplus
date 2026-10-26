@@ -1,0 +1,109 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// mode 0 off, 1 all, 2 junk only, 3 cheaper than 100g per unit
+// deferred timer so autosell runs first
+DB_AMP_AL_CampSend(0);
+KBSECTION
+
+// mark an item for deferred camp-chest delivery. self-gates on the setting.
+PROC
+PROC_AMP_AL_CampSend_Mark((ITEM)_Item, (CHARACTER)_Player)
+AND
+DB_AMP_AL_CampSend((INTEGER)_Mode)
+AND
+_Mode > 0
+THEN
+DB_AMP_AL_CampSend_Pending(_Item, _Player);
+ObjectTimerLaunch(_Item, "AMP_AL_CampSendDefer", 500);
+
+// corpse loot: mark every item leaving a tracked corpse
+IF
+RemovedFrom((ITEM)_Item, (CHARACTER)_Corpse)
+AND
+DB_AMP_AL_CampSendCorpse(_Corpse, _Player)
+THEN
+PROC_AMP_AL_CampSend_Mark(_Item, _Player);
+
+// drop the corpse tracker once the loot window closes
+IF
+ObjectTimerFinished((CHARACTER)_Corpse, "AMP_AL_CorpseVFXCleanup")
+AND
+DB_AMP_AL_CampSendCorpse(_Corpse, _Player)
+THEN
+NOT DB_AMP_AL_CampSendCorpse(_Corpse, _Player);
+
+// deferred resolve: autosell already had its turn.
+// still exists -> not sold, route it to the chest.
+IF
+ObjectTimerFinished((ITEM)_Item, "AMP_AL_CampSendDefer")
+AND
+DB_AMP_AL_CampSend_Pending(_Item, (CHARACTER)_Player)
+AND
+Exists(_Item, 1)
+AND
+DB_AMP_AL_CampSend((INTEGER)_Mode)
+THEN
+NOT DB_AMP_AL_CampSend_Pending(_Item, _Player);
+PROC_AMP_AL_CampSend_Resolve(_Item, _Player, _Mode);
+
+// item gone (sold): just drop the tracker
+IF
+ObjectTimerFinished((ITEM)_Item, "AMP_AL_CampSendDefer")
+AND
+DB_AMP_AL_CampSend_Pending(_Item, (CHARACTER)_Player)
+AND
+NOT Exists(_Item, 1)
+THEN
+NOT DB_AMP_AL_CampSend_Pending(_Item, _Player);
+
+// mode 1: send everything
+PROC
+PROC_AMP_AL_CampSend_Resolve((ITEM)_Item, (CHARACTER)_Player, 1)
+THEN
+PROC_AMP_AL_CampSend_Deliver(_Item, _Player);
+
+// mode 2: junk only
+PROC
+PROC_AMP_AL_CampSend_Resolve((ITEM)_Item, (CHARACTER)_Player, 2)
+AND
+IsJunk(_Item, 1)
+THEN
+PROC_AMP_AL_CampSend_Deliver(_Item, _Player);
+
+// mode 3: items under 100g per unit
+PROC
+PROC_AMP_AL_CampSend_Resolve((ITEM)_Item, (CHARACTER)_Player, 3)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Total)
+AND
+GetStackAmount(_Item, (INTEGER)_Count, _)
+AND
+_Count > 0
+AND
+IntegerDivide(_Total, _Count, (INTEGER)_PerUnit)
+AND
+_PerUnit < 100
+THEN
+PROC_AMP_AL_CampSend_Deliver(_Item, _Player);
+
+// only deliver if this save has a real camp chest.
+// the vanilla tracker is empty until a chest spawns, so pre-camp the item stays on the player.
+PROC
+PROC_AMP_AL_CampSend_Deliver((ITEM)_Item, (CHARACTER)_Player)
+AND
+GetReservedUserID(_Player, (INTEGER)_Uid)
+AND
+DB_Camp_UserCampChest(_Uid, _)
+THEN
+SendToCampChest(_Item, _Player);
+
+// level-load cleanup of transient trackers
+IF
+LevelGameplayStarted(_, _)
+THEN
+SysClear("DB_AMP_AL_CampSend_Pending", 2);
+SysClear("DB_AMP_AL_CampSendCorpse", 2);
+
+EXITSECTION
+ENDEXITSECTION

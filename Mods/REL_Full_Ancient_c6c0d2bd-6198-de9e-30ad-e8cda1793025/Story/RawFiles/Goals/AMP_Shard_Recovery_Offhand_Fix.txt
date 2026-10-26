@@ -1,0 +1,12 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// registers the off-hand slots PROC_AMP_RecoverAllShards walks, the marker follows the item there
+DB_AMP_Shard_RecoverySlot("Melee Offhand Weapon");
+DB_AMP_Shard_RecoverySlot("Ranged Offhand Weapon");
+
+KBSECTION
+
+EXITSECTION
+ENDEXITSECTION

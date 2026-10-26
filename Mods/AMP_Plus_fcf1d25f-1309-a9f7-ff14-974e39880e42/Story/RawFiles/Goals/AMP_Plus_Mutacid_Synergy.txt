@@ -1,0 +1,115 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// single hook: Control lands after the owner link on every spawn path
+// (base Core, SpawnFix, Minigame SpawnArch)
+
+IF
+StatusApplied((CHARACTER)_Slime, "AMP_AcidSlime_Control", _, _)
+AND
+DB_AMP_Mutacid_SlimeOwner(_Slime, (CHARACTER)_Owner)
+THEN
+ApplyStatus(_Slime, "AMP_MUTACID_COCOON", 12.0, 1, _Owner);
+ApplyStatus(_Slime, "AMP_MUTACID_SURVIVE_ENGINE", -1.0, 1, _Slime);
+
+// highest owner tier marker only, exclusive via the (..., 0) does-not-have form
+IF
+StatusApplied((CHARACTER)_Slime, "AMP_AcidSlime_Control", _, _)
+AND
+DB_AMP_Mutacid_SlimeOwner(_Slime, (CHARACTER)_Owner)
+AND
+HasActiveStatus(_Owner, "AMP_MUTACID_TIER4", 1)
+THEN
+ApplyStatus(_Slime, "AMP_MUTACID_RARITY_T4", -1.0, 1, _Owner);
+
+IF
+StatusApplied((CHARACTER)_Slime, "AMP_AcidSlime_Control", _, _)
+AND
+DB_AMP_Mutacid_SlimeOwner(_Slime, (CHARACTER)_Owner)
+AND
+HasActiveStatus(_Owner, "AMP_MUTACID_TIER3", 1)
+AND
+HasActiveStatus(_Owner, "AMP_MUTACID_TIER4", 0)
+THEN
+ApplyStatus(_Slime, "AMP_MUTACID_RARITY_T3", -1.0, 1, _Owner);
+
+IF
+StatusApplied((CHARACTER)_Slime, "AMP_AcidSlime_Control", _, _)
+AND
+DB_AMP_Mutacid_SlimeOwner(_Slime, (CHARACTER)_Owner)
+AND
+HasActiveStatus(_Owner, "AMP_MUTACID_TIER2", 1)
+AND
+HasActiveStatus(_Owner, "AMP_MUTACID_TIER3", 0)
+AND
+HasActiveStatus(_Owner, "AMP_MUTACID_TIER4", 0)
+THEN
+ApplyStatus(_Slime, "AMP_MUTACID_RARITY_T2", -1.0, 1, _Owner);
+
+IF
+StatusApplied((CHARACTER)_Slime, "AMP_AcidSlime_Control", _, _)
+AND
+DB_AMP_Mutacid_SlimeOwner(_Slime, (CHARACTER)_Owner)
+AND
+HasActiveStatus(_Owner, "AMP_MUTACID_TIER1", 1)
+AND
+HasActiveStatus(_Owner, "AMP_MUTACID_TIER2", 0)
+AND
+HasActiveStatus(_Owner, "AMP_MUTACID_TIER3", 0)
+AND
+HasActiveStatus(_Owner, "AMP_MUTACID_TIER4", 0)
+THEN
+ApplyStatus(_Slime, "AMP_MUTACID_RARITY_T1", -1.0, 1, _Owner);
+
+// ApplyStatus is queued, a same-block heal would use the old max HP
+IF
+StatusApplied((CHARACTER)_Slime, "AMP_MUTACID_RARITY_T1", _, _)
+AND
+DB_AMP_Mutacid_SlimeOwner(_Slime, _)
+THEN
+SetHitpointsPercentage(_Slime, 100.0, "");
+
+IF
+StatusApplied((CHARACTER)_Slime, "AMP_MUTACID_RARITY_T2", _, _)
+AND
+DB_AMP_Mutacid_SlimeOwner(_Slime, _)
+THEN
+SetHitpointsPercentage(_Slime, 100.0, "");
+
+IF
+StatusApplied((CHARACTER)_Slime, "AMP_MUTACID_RARITY_T3", _, _)
+AND
+DB_AMP_Mutacid_SlimeOwner(_Slime, _)
+THEN
+SetHitpointsPercentage(_Slime, 100.0, "");
+
+IF
+StatusApplied((CHARACTER)_Slime, "AMP_MUTACID_RARITY_T4", _, _)
+AND
+DB_AMP_Mutacid_SlimeOwner(_Slime, _)
+THEN
+SetHitpointsPercentage(_Slime, 100.0, "");
+
+// bare RequestDeleteTemporary leaves a free-acting on-stage ally, so LeaveCombat, SetOnStage(0), delete
+// ungated on slime combat flag: Cleanup's CombatEnded rule gates on IsInCombat and can miss
+IF
+CombatEnded(_)
+THEN
+PROC_AMP_Plus_MutacidSynergy_DrainSlimes();
+
+PROC
+PROC_AMP_Plus_MutacidSynergy_DrainSlimes()
+AND
+DB_AMP_Mutacid_SlimeOwner((CHARACTER)_Slime, (CHARACTER)_Owner)
+THEN
+NOT DB_AMP_Mutacid_SlimeOwner(_Slime, _Owner);
+LeaveCombat(_Slime);
+SetOnStage(_Slime, 0);
+RequestDeleteTemporary(_Slime);
+PROC_AMP_Plus_MutacidSynergy_DrainSlimes();
+
+EXITSECTION
+ENDEXITSECTION

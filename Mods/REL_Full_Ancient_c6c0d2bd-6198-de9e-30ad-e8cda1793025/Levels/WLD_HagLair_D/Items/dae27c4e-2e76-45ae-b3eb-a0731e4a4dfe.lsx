@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="dae27c4e-2e76-45ae-b3eb-a0731e4a4dfe" />
+					<attribute id="Name" type="LSString" value="REF_DOOR_DoubleBig_Round_A_Wood_000" />
+					<attribute id="LevelName" type="FixedString" value="WLD_HagLair_D" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="65782f93-4eaa-414d-995c-2ca714166efd" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="GroupID" type="uint32" value="29099" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h38bffb86g90abg4131g93b5g15cdb7645afa" version="2" />
+					<attribute id="CoverAmount" type="uint8" value="0" />
+					<attribute id="CanClimbOn" type="bool" value="False" />
+					<attribute id="CanShootThrough" type="bool" value="True" />
+					<attribute id="CanClickThrough" type="bool" value="False" />
+					<attribute id="WalkThrough" type="bool" value="False" />
+					<attribute id="WalkOn" type="bool" value="False" />
+					<attribute id="Wadable" type="bool" value="False" />
+					<attribute id="LoopSound" type="FixedString" value="" />
+					<attribute id="SoundInitEvent" type="FixedString" value="" />
+					<attribute id="SoundAttenuation" type="int16" value="-1" />
+					<attribute id="IsPointerBlocker" type="bool" value="False" />
+					<attribute id="IsPortal" type="bool" value="True" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="-31.969011 -10.838073 26.444355" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0.9987863 0 0.049255732" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="WLD_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="6648065c-29ea-0113-fe85-cead6f8e2dc3" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="5b7cebd1-4d46-dff8-9a82-de1e7bf89983" />
+												</node>
+											</children>
+										</node>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="WLD_HagLair_D" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="63c5799d-6f85-5757-de9b-c40bd8dd74c8" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

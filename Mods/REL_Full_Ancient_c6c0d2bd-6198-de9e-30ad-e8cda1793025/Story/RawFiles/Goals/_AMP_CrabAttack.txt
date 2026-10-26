@@ -1,0 +1,440 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// track the specific trigger crab by guid
+DB_AMP_Beach_TriggerCrab((CHARACTER)AMP_RiverCrab_000_008b9b10-493f-41db-87e0-8a05b92197ef);
+
+// define all possible spawn positions
+DB_AMP_Beach_CrabSpawnPosition(1, 287.0, 0.0, 269.0);
+DB_AMP_Beach_CrabSpawnPosition(2, 280.0, 1.0, 298.0);
+DB_AMP_Beach_CrabSpawnPosition(3, 276.0, 0.0, 293.0);
+DB_AMP_Beach_CrabSpawnPosition(4, 288.0, 1.0, 301.0);
+DB_AMP_Beach_CrabSpawnPosition(5, 284.0, 0.0, 295.0);
+DB_AMP_Beach_CrabSpawnPosition(6, 286.0, 0.0, 290.0);
+DB_AMP_Beach_CrabSpawnPosition(7, 282.0, 0.0, 291.0);
+DB_AMP_Beach_CrabSpawnPosition(8, 271.0, 0.0, 286.0);
+DB_AMP_Beach_CrabSpawnPosition(9, 279.0, 0.0, 287.0);
+DB_AMP_Beach_CrabSpawnPosition(10, 284.0, 0.0, 287.0);
+DB_AMP_Beach_CrabSpawnPosition(11, 287.0, 0.0, 285.0);
+DB_AMP_Beach_CrabSpawnPosition(12, 278.0, 0.0, 282.0);
+DB_AMP_Beach_CrabSpawnPosition(13, 282.0, 0.0, 280.0);
+DB_AMP_Beach_CrabSpawnPosition(14, 284.0, 0.0, 277.0);
+DB_AMP_Beach_CrabSpawnPosition(15, 285.0, 0.0, 271.0);
+DB_AMP_Beach_CrabSpawnPosition(16, 284.0, 0.0, 269.0);
+DB_AMP_Beach_CrabSpawnPosition(17, 293.0, 0.0, 261.0);
+DB_AMP_Beach_CrabSpawnPosition(18, 293.0, 0.0, 266.0);
+DB_AMP_Beach_CrabSpawnPosition(19, 294.0, 0.0, 269.0);
+DB_AMP_Beach_CrabSpawnPosition(20, 291.0, 0.0, 273.0);
+DB_AMP_Beach_CrabSpawnPosition(21, 290.0, 0.0, 276.0);
+DB_AMP_Beach_CrabSpawnPosition(22, 290.0, 0.0, 281.0);
+DB_AMP_Beach_CrabSpawnPosition(23, 296.0, 0.0, 268.0);
+DB_AMP_Beach_CrabSpawnPosition(24, 272.0, 11.0, 281.0);
+DB_AMP_Beach_CrabSpawnPosition(25, 271.0, 11.0, 285.0);
+DB_AMP_Beach_CrabSpawnPosition(26, 270.0, 10.0, 289.0);
+DB_AMP_Beach_CrabSpawnPosition(27, 283.0, 0.0, 265.0);
+DB_AMP_Beach_CrabSpawnPosition(28, 280.0, 0.0, 259.0);
+DB_AMP_Beach_CrabSpawnPosition(29, 284.0, 0.0, 259.0);
+DB_AMP_Beach_CrabSpawnPosition(30, 290.0, 0.0, 248.0);
+DB_AMP_Beach_CrabSpawnPosition(31, 296.0, 0.0, 246.0);
+DB_AMP_Beach_CrabSpawnPosition(32, 274.0, 1.0, 250.0);
+DB_AMP_Beach_CrabSpawnPosition(33, 283.0, 0.0, 246.0);
+DB_AMP_Beach_CrabSpawnPosition(34, 280.0, 1.0, 240.0);
+DB_AMP_Beach_CrabSpawnPosition(35, 276.0, 0.0, 253.0);
+DB_AMP_Beach_CrabSpawnPosition(36, 284.0, 1.0, 229.0);
+DB_AMP_Beach_CrabSpawnPosition(37, 266.0, 0.0, 212.0);
+DB_AMP_Beach_CrabSpawnPosition(38, 268.0, 10.0, 291.0);
+DB_AMP_Beach_CrabSpawnPosition(39, 265.0, 10.0, 291.0);
+DB_AMP_Beach_CrabSpawnPosition(40, 264.0, 10.0, 292.0);
+DB_AMP_Beach_CrabSpawnPosition(41, 261.0, 8.0, 291.0);
+DB_AMP_Beach_CrabSpawnPosition(42, 261.0, 6.0, 289.0);
+DB_AMP_Beach_CrabSpawnPosition(43, 263.0, 2.0, 282.0);
+DB_AMP_Beach_CrabSpawnPosition(44, 270.0, 11.0, 285.0);
+DB_AMP_Beach_CrabSpawnPosition(45, 270.0, 11.0, 278.0);
+DB_AMP_Beach_CrabSpawnPosition(46, 273.0, 0.0, 287.0);
+DB_AMP_Beach_CrabSpawnPosition(47, 281.0, 0.0, 284.0);
+DB_AMP_Beach_CrabSpawnPosition(48, 290.0, 0.0, 281.0);
+DB_AMP_Beach_CrabSpawnPosition(49, 284.0, 0.0, 290.0);
+DB_AMP_Beach_CrabSpawnPosition(50, 288.0, 0.0, 271.0);
+DB_AMP_Beach_CrabSpawnPosition(51, 288.0, 0.0, 265.0);
+
+// store total number of positions for random selection
+DB_AMP_Beach_TotalPositions(51);
+
+// template for all spawned crabs
+DB_AMP_Beach_CrabTemplate((CHARACTERROOT)AMP_RiverCrab_53dbd49e-4e34-4a51-a8e0-b2946529a1c6);
+
+// wave progression tracking
+DB_AMP_Beach_AmbushTriggered(0);
+DB_AMP_Beach_CurrentWave(0);
+DB_AMP_Beach_MaxWaves(6);
+
+// wave timing configuration (in milliseconds)
+DB_AMP_Beach_WaveDelay(1, 5000);  // First wave: 3 seconds
+DB_AMP_Beach_WaveDelay(2, 3000);  // Second wave: 4 seconds later
+DB_AMP_Beach_WaveDelay(3, 6000);  // Third wave: 3.5 seconds later
+DB_AMP_Beach_WaveDelay(4, 15000);  // Fourth wave: 3 seconds later
+DB_AMP_Beach_WaveDelay(5, 20000);  // Fifth wave: 2.5 seconds later
+DB_AMP_Beach_WaveDelay(6, 5000);  // Final wave: 2 seconds later
+
+// wave composition (wave number, crab count)
+DB_AMP_Beach_WaveComposition(1, 1);  // First wave: 1 crab near player
+DB_AMP_Beach_WaveComposition(2, 3);  // Second wave: 2 crabs at random positions
+DB_AMP_Beach_WaveComposition(3, 4);  // Third wave: 3 crabs
+DB_AMP_Beach_WaveComposition(4, 3);  // Fourth wave: 4 crabs
+DB_AMP_Beach_WaveComposition(5, 3);  // Fifth wave: 3 crabs
+DB_AMP_Beach_WaveComposition(6, 8);  // Final wave: 2 crabs
+KBSECTION
+// CrabRage is a default passive of the AMP_RiverCrab template, AddPassive would duplicate it, so only the faction swaps
+IF
+DB_AMP_Beach_TriggerCrab(_TriggerCrab)
+AND
+DB_AMP_Beach_AmbushTriggered(0)
+THEN
+SetFaction(_TriggerCrab, (FACTION)Evil_NPC_64321d50-d516-b1b2-cfac-2eb773de1ff6);
+ApplyStatus(_TriggerCrab, "AMP_DONT_KILL_ME", -1.0, 1, _TriggerCrab);
+
+// detect when trigger crab dies and start wave sequence
+IF
+Died((CHARACTER)_TriggerCrab)
+AND
+DB_AMP_Beach_TriggerCrab(_TriggerCrab)
+AND
+DB_AMP_Beach_AmbushTriggered(0)
+THEN
+// set flags to prevent multiple triggers
+NOT DB_AMP_Beach_AmbushTriggered(0);
+DB_AMP_Beach_AmbushTriggered(1);
+NOT DB_AMP_Beach_CurrentWave(0);
+DB_AMP_Beach_CurrentWave(1);
+// start first wave timer
+PROC_AMP_Beach_StartWave(1);
+
+// wave timing system
+PROC
+PROC_AMP_Beach_StartWave((INTEGER)_WaveNum)
+AND
+DB_AMP_Beach_WaveDelay(_WaveNum, _Delay)
+AND
+IntegerToString(_WaveNum, _WaveStr)
+AND
+Concatenate("AMP_Beach_Wave_", _WaveStr, _TimerName)
+THEN
+TimerLaunch(_TimerName, _Delay);
+
+// first wave - spawn single crab near a random player
+IF
+TimerFinished("AMP_Beach_Wave_1")
+AND
+DB_AMP_Beach_CurrentWave(1)
+THEN
+PROC_AMP_Beach_ExecuteWave(1);
+
+// execute wave based on composition
+PROC
+PROC_AMP_Beach_ExecuteWave((INTEGER)_WaveNum)
+AND
+DB_AMP_Beach_WaveComposition(_WaveNum, _CrabCount)
+AND
+_WaveNum == 1
+THEN
+// special handling for first wave - spawn near player
+PROC_AMP_Beach_SpawnNearRandomPlayer();
+PROC_AMP_Beach_AdvanceToNextWave(_WaveNum);
+
+// general wave execution for waves 2+
+PROC
+PROC_AMP_Beach_ExecuteWave((INTEGER)_WaveNum)
+AND
+DB_AMP_Beach_WaveComposition(_WaveNum, _CrabCount)
+AND
+_WaveNum > 1
+THEN
+DB_AMP_Beach_WaveSpawnRemaining(_WaveNum, _CrabCount);
+PROC_AMP_Beach_SpawnWaveCrabs(_WaveNum);
+PROC_AMP_Beach_AdvanceToNextWave(_WaveNum);
+
+// spawn single crab near random player for first wave
+PROC
+PROC_AMP_Beach_SpawnNearRandomPlayer()
+AND
+DB_AMP_Beach_CrabTemplate(_Template)
+AND
+DB_Players(_Player)
+THEN
+PROC_AMP_Beach_SpawnCrabNearPlayer(_Template, _Player);
+
+// spawn crabs for wave at random positions
+PROC
+PROC_AMP_Beach_SpawnWaveCrabs((INTEGER)_WaveNum)
+AND
+DB_AMP_Beach_WaveSpawnRemaining(_WaveNum, _Remaining)
+AND
+_Remaining > 0
+AND
+DB_AMP_Beach_TotalPositions(_Total)
+AND
+Random(_Total, _RandPos)
+AND
+IntegerSum(_RandPos, 1, _PosIndex)
+AND
+DB_AMP_Beach_CrabSpawnPosition(_PosIndex, _X, _Y, _Z)
+AND
+NOT DB_AMP_Beach_UsedPosition(_PosIndex)
+AND
+DB_AMP_Beach_CrabTemplate(_Template)
+AND
+CreateAt(_Template, _X, _Y, _Z, 0, 0, "", _Crab)
+AND
+IntegerSubtract(_Remaining, 1, _NewRemaining)
+AND
+RealSum(_Y, 0.5, _EffectY)
+THEN
+// mark position as used and update counters
+DB_AMP_Beach_UsedPosition(_PosIndex);
+NOT DB_AMP_Beach_WaveSpawnRemaining(_WaveNum, _Remaining);
+DB_AMP_Beach_WaveSpawnRemaining(_WaveNum, _NewRemaining);
+// visual and audio feedback
+PlayEffectAtPosition(VFX_Combat_GroundImpact_Projectile_01_Sand_b743fa2b-2653-87eb-883a-92d814cabdc7, _X, _EffectY, _Z, 1.0);
+DB_AMP_Beach_SpawnedCrab(_Crab);
+// continue spawning if more remain
+PROC_AMP_Beach_SpawnWaveCrabs(_WaveNum);
+
+// handle used position retry
+PROC
+PROC_AMP_Beach_SpawnWaveCrabs((INTEGER)_WaveNum)
+AND
+DB_AMP_Beach_WaveSpawnRemaining(_WaveNum, _Remaining)
+AND
+_Remaining > 0
+AND
+DB_AMP_Beach_TotalPositions(_Total)
+AND
+Random(_Total, _RandPos)
+AND
+IntegerSum(_RandPos, 1, _PosIndex)
+AND
+DB_AMP_Beach_UsedPosition(_PosIndex)
+THEN
+// retry with different position
+PROC_AMP_Beach_SpawnWaveCrabs(_WaveNum);
+
+// stop wave spawning when complete
+PROC
+PROC_AMP_Beach_SpawnWaveCrabs((INTEGER)_WaveNum)
+AND
+DB_AMP_Beach_WaveSpawnRemaining(_WaveNum, 0)
+THEN
+NOT DB_AMP_Beach_WaveSpawnRemaining(_WaveNum, 0);
+
+// advance to next wave
+PROC
+PROC_AMP_Beach_AdvanceToNextWave((INTEGER)_CurrentWave)
+AND
+DB_AMP_Beach_CurrentWave(_CurrentWave)
+AND
+IntegerSum(_CurrentWave, 1, _NextWave)
+AND
+DB_AMP_Beach_MaxWaves(_MaxWaves)
+AND
+_NextWave <= _MaxWaves
+THEN
+NOT DB_AMP_Beach_CurrentWave(_CurrentWave);
+DB_AMP_Beach_CurrentWave(_NextWave);
+PROC_AMP_Beach_StartWave(_NextWave);
+
+// end sequence when all waves complete
+PROC
+PROC_AMP_Beach_AdvanceToNextWave((INTEGER)_CurrentWave)
+AND
+DB_AMP_Beach_CurrentWave(_CurrentWave)
+AND
+IntegerSum(_CurrentWave, 1, _NextWave)
+AND
+DB_AMP_Beach_MaxWaves(_MaxWaves)
+AND
+_NextWave > _MaxWaves
+THEN
+PROC_AMP_Beach_CleanupSequence();
+
+// spawn crab near specific player (reused from original)
+PROC
+PROC_AMP_Beach_SpawnCrabNearPlayer((CHARACTERROOT)_Template, (CHARACTER)_Player)
+AND
+GetPosition(_Player, _PlayerX, _PlayerY, _PlayerZ)
+AND
+Random(8, _DirIndex)
+THEN
+PROC_AMP_Beach_SpawnWithDirection(_Template, _Player, _PlayerX, _PlayerY, _PlayerZ, _DirIndex);
+
+// directional spawn patterns (reused from original)
+PROC
+PROC_AMP_Beach_SpawnWithDirection((CHARACTERROOT)_Template, (CHARACTER)_Player, (REAL)_X, (REAL)_Y, (REAL)_Z, (INTEGER)_Dir)
+AND
+_Dir == 0
+AND
+RealSum(_X, 0.0, _SpawnX)
+AND
+RealSum(_Y, 0.0, _SpawnY)
+AND
+RealSum(_Z, 2.0, _SpawnZ)
+THEN
+PROC_AMP_Beach_CreateCrab(_Template, _SpawnX, _SpawnY, _SpawnZ);
+
+PROC
+PROC_AMP_Beach_SpawnWithDirection((CHARACTERROOT)_Template, (CHARACTER)_Player, (REAL)_X, (REAL)_Y, (REAL)_Z, (INTEGER)_Dir)
+AND
+_Dir == 1
+AND
+RealSum(_X, 1.5, _SpawnX)
+AND
+RealSum(_Y, 0.0, _SpawnY)
+AND
+RealSum(_Z, 1.5, _SpawnZ)
+THEN
+PROC_AMP_Beach_CreateCrab(_Template, _SpawnX, _SpawnY, _SpawnZ);
+
+PROC
+PROC_AMP_Beach_SpawnWithDirection((CHARACTERROOT)_Template, (CHARACTER)_Player, (REAL)_X, (REAL)_Y, (REAL)_Z, (INTEGER)_Dir)
+AND
+_Dir == 2
+AND
+RealSum(_X, 2.0, _SpawnX)
+AND
+RealSum(_Y, 0.0, _SpawnY)
+AND
+RealSum(_Z, 0.0, _SpawnZ)
+THEN
+PROC_AMP_Beach_CreateCrab(_Template, _SpawnX, _SpawnY, _SpawnZ);
+
+PROC
+PROC_AMP_Beach_SpawnWithDirection((CHARACTERROOT)_Template, (CHARACTER)_Player, (REAL)_X, (REAL)_Y, (REAL)_Z, (INTEGER)_Dir)
+AND
+_Dir == 3
+AND
+RealSum(_X, 1.5, _SpawnX)
+AND
+RealSum(_Y, 0.0, _SpawnY)
+AND
+RealSum(_Z, -1.5, _SpawnZ)
+THEN
+PROC_AMP_Beach_CreateCrab(_Template, _SpawnX, _SpawnY, _SpawnZ);
+
+PROC
+PROC_AMP_Beach_SpawnWithDirection((CHARACTERROOT)_Template, (CHARACTER)_Player, (REAL)_X, (REAL)_Y, (REAL)_Z, (INTEGER)_Dir)
+AND
+_Dir == 4
+AND
+RealSum(_X, 0.0, _SpawnX)
+AND
+RealSum(_Y, 0.0, _SpawnY)
+AND
+RealSum(_Z, -2.0, _SpawnZ)
+THEN
+PROC_AMP_Beach_CreateCrab(_Template, _SpawnX, _SpawnY, _SpawnZ);
+
+PROC
+PROC_AMP_Beach_SpawnWithDirection((CHARACTERROOT)_Template, (CHARACTER)_Player, (REAL)_X, (REAL)_Y, (REAL)_Z, (INTEGER)_Dir)
+AND
+_Dir == 5
+AND
+RealSum(_X, -1.5, _SpawnX)
+AND
+RealSum(_Y, 0.0, _SpawnY)
+AND
+RealSum(_Z, -1.5, _SpawnZ)
+THEN
+PROC_AMP_Beach_CreateCrab(_Template, _SpawnX, _SpawnY, _SpawnZ);
+
+PROC
+PROC_AMP_Beach_SpawnWithDirection((CHARACTERROOT)_Template, (CHARACTER)_Player, (REAL)_X, (REAL)_Y, (REAL)_Z, (INTEGER)_Dir)
+AND
+_Dir == 6
+AND
+RealSum(_X, -2.0, _SpawnX)
+AND
+RealSum(_Y, 0.0, _SpawnY)
+AND
+RealSum(_Z, 0.0, _SpawnZ)
+THEN
+PROC_AMP_Beach_CreateCrab(_Template, _SpawnX, _SpawnY, _SpawnZ);
+
+PROC
+PROC_AMP_Beach_SpawnWithDirection((CHARACTERROOT)_Template, (CHARACTER)_Player, (REAL)_X, (REAL)_Y, (REAL)_Z, (INTEGER)_Dir)
+AND
+_Dir == 7
+AND
+RealSum(_X, -1.5, _SpawnX)
+AND
+RealSum(_Y, 0.0, _SpawnY)
+AND
+RealSum(_Z, 1.5, _SpawnZ)
+THEN
+PROC_AMP_Beach_CreateCrab(_Template, _SpawnX, _SpawnY, _SpawnZ);
+
+// create crab at coordinates with effects
+PROC
+PROC_AMP_Beach_CreateCrab((CHARACTERROOT)_Template, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+CreateAt(_Template, _X, _Y, _Z, 0, 0, "", _Crab)
+AND
+RealSum(_Y, 0.5, _EffectY)
+THEN
+PlayEffectAtPosition(VFX_Combat_GroundImpact_Projectile_01_Sand_b743fa2b-2653-87eb-883a-92d814cabdc7, _X, _EffectY, _Z, 1.0);
+DB_AMP_Beach_SpawnedCrab(_Crab);
+
+// make spawned crabs hostile and enter combat
+IF
+DB_AMP_Beach_SpawnedCrab(_Crab)
+AND
+DB_Players(_Player)
+THEN
+SetRelationTemporaryHostile((CHARACTER)_Crab, (CHARACTER)_Player);
+EnterCombat(_Crab, _Player);
+NOT DB_AMP_Beach_SpawnedCrab(_Crab);
+
+// cleanup sequence
+PROC
+PROC_AMP_Beach_CleanupSequence()
+AND
+DB_AMP_Beach_UsedPosition(_Index)
+THEN
+NOT DB_AMP_Beach_UsedPosition(_Index);
+
+// individual wave timer handlers for remaining waves
+IF
+TimerFinished("AMP_Beach_Wave_2")
+AND
+DB_AMP_Beach_CurrentWave(2)
+THEN
+PROC_AMP_Beach_ExecuteWave(2);
+
+IF
+TimerFinished("AMP_Beach_Wave_3")
+AND
+DB_AMP_Beach_CurrentWave(3)
+THEN
+PROC_AMP_Beach_ExecuteWave(3);
+
+IF
+TimerFinished("AMP_Beach_Wave_4")
+AND
+DB_AMP_Beach_CurrentWave(4)
+THEN
+PROC_AMP_Beach_ExecuteWave(4);
+
+IF
+TimerFinished("AMP_Beach_Wave_5")
+AND
+DB_AMP_Beach_CurrentWave(5)
+THEN
+PROC_AMP_Beach_ExecuteWave(5);
+
+IF
+TimerFinished("AMP_Beach_Wave_6")
+AND
+DB_AMP_Beach_CurrentWave(6)
+THEN
+PROC_AMP_Beach_ExecuteWave(6);
+EXITSECTION
+
+ENDEXITSECTION

@@ -1,0 +1,835 @@
+<?xml version="1.0" encoding="utf-8"?>
+<contentList>
+	<content contentuid="hd16e580bgbc9fg482dg96b3gd9119c2fab25" version="1">調試箱</content>
+	<content contentuid="h49666a90geaa4g4873g8d3dg7b70b47807df" version="1">&lt;LSTag Type="Image" Info="SoftWarning"/&gt; 請使用調試箱中的物品來了解制作機制，不建議將它們用於正式流程！</content>
+	<content contentuid="ha1a929f8g8f46g405cg9133g3bd7576ad1e1" version="1">遁逸宗師長袍</content>
+	<content contentuid="h53836c24gde55g49fag93fag8f511bcbedfa" version="1">這件長袍由虛幻絲綢編織而成，承載著其前任主人——一位武僧昔日偉業的迴響。據傳這位武僧是徒手戰鬥的大師，即使在瀕死之際，也能以閃電般的速度移動。</content>
+	<content contentuid="h1439423bg7ac9g4564ga314g7179e8b34bea" version="1">遁逸步</content>
+	<content contentuid="h1d6a6301gb14dg4decg92c8g23380dfdd206" version="1">你的&lt;LSTag Tooltip="MovementSpeed"&gt;移動速度&lt;/LSTag&gt;獲得&lt;b&gt;+[2]&lt;/b&gt;，條件是&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;為&lt;b&gt;[1]%&lt;/b&gt;或更低。</content>
+	<content contentuid="had0afa08gd715g4d22g9ddagb2e5aee2d5cd" version="1">寧心長袍</content>
+	<content contentuid="hafd07956g24c1g4298g8aebg2b92aaa42466" version="1">這件衣物粗糙卻舒適，任何觸控它的人，都會被一種寧靜與平和的思緒包裹。長袍不會限制戰鬥的動作，而其布料卻似乎對肌膚有安撫效果，能在久戰後放鬆肌肉和心靈。</content>
+	<content contentuid="h1f9ac599gbb69g42cagb747g4304f00e12fa" version="1">寧心織物</content>
+	<content contentuid="hbfda7c8egad7eg405agae05gd60f5a6aaa43" version="1">每次戰鬥後，為自己施加持續 &lt;b&gt;[1]&lt;/b&gt; 回合的&lt;LSTag Type="Status" Tooltip="ARMOURC2"&gt;強效寧心&lt;/LSTag&gt;狀態。</content>
+	<content contentuid="hae53b274ge5fdg471fg8f8dg5652de8b6846" version="1">強效寧心</content>
+	<content contentuid="hfe70f4a9g4236g4a6ag91f6gd74b8b893028" version="1">你在每個回合開始時恢復 &lt;b&gt;[1]&lt;/b&gt;。進入戰鬥時移除。&lt;br&gt;&lt;br&gt;治療量等同於你的&lt;LSTag Tooltip="Wisdom"&gt;感知&lt;/LSTag&gt;&lt;LSTag Tooltip="AbilityModifier"&gt;調整值&lt;/LSTag&gt;。</content>
+	<content contentuid="h7ad8a922gfc6ag4f2bg98f2g71376f686ef2" version="1">虛偽先知長袍</content>
+	<content contentuid="h58475b2cg5d73g4409gaa74gf5b339564389" version="1">你可能會發現，這件衣服縫製手法怪異，而且幾乎沒有口袋，彷彿受到了某種宗教影響。這件長袍吸收了一位古賢者的法力，昔日的他常常遊歷於神殿之間，宣揚自己虛偽的教義。也許，你能更成功地傳佈這套奇異的信仰？</content>
+	<content contentuid="h11633dc8g18bag4968gb046g0ec1ffe994e6" version="1">虛偽佈道</content>
+	<content contentuid="h6c5e3529g9f05g4005gbc23g10802c5eaf34" version="1">如果你是&lt;b&gt;牧師&lt;/b&gt;，&lt;LSTag Tooltip="Deception"&gt;欺瞞&lt;/LSTag&gt;和&lt;LSTag Tooltip="Persuasion"&gt;遊說&lt;/LSTag&gt;獲得&lt;b&gt;+[1]&lt;/b&gt;。</content>
+	<content contentuid="h30aa7835ge525g4ab9g8b55g056357c6d6bc" version="1">祝禱</content>
+	<content contentuid="hb1250efegab00g4be6g9fcagbaf94c548581" version="1">以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;&lt;b&gt;治療&lt;/b&gt;一名生物時，額外恢復&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="he14ff004gb2d9g4b30g849fg6289b484dc75" version="1">苦修</content>
+	<content contentuid="h59c84560g0709g4f65gb38dge3f6b501ff11" version="1">以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;造成&lt;b&gt;[1]&lt;/b&gt;時，&lt;b&gt;還會&lt;/b&gt;造成&lt;b&gt;[2]&lt;/b&gt;，並由你的&lt;LSTag Tooltip="Wisdom"&gt;感知&lt;/LSTag&gt;&lt;LSTag Tooltip="AbilityModifier"&gt;調整值&lt;/LSTag&gt;提升。</content>
+	<content contentuid="h6608689ag8a92g4959ga127g468e899abc8f" version="1">偽護神盾</content>
+	<content contentuid="ha8022054gb725g4973gbc20g56150ebb07d0" version="1">當你處於&lt;LSTag Type="Status" Tooltip="MAGE_ARMOR"&gt;法師護甲&lt;/LSTag&gt;狀態時，對你的攻擊具有&lt;LSTag Tooltip="Disadvantage"&gt;劣勢&lt;/LSTag&gt;。</content>
+	<content contentuid="h88e1225bg61a8g4b40g8251g022588453b86" version="1">墓法之衣</content>
+	<content contentuid="h63b2114fg0063g4cf0g821bg4c4f33a948db" version="1">這件束腰外衣曾屬於津吉，她畢生致力於精研一道特殊的咒語。夜復一夜，她引導死靈能量自掌心湧出，直至那道法術成為她意志的延伸。外衣至今仍迴盪著她執念的餘音，賦予人們對死亡技藝更深層的掌控。</content>
+	<content contentuid="h3d6d3f5eg4fceg47abgb97ag2a26b68c2a72" version="1">纏綿腐壞</content>
+	<content contentuid="h809da5c6g5073g49d1gac78g02611549e61e" version="1">以&lt;LSTag Type="Spell" Tooltip="Target_InflictWounds"&gt;致傷術&lt;/LSTag&gt;命中敵人時，你對目標施加&lt;LSTag Type="Status" Tooltip="AMP_DEATHCLERIC_FETID_ROT"&gt;惡臭腐壞&lt;/LSTag&gt;狀態，持續&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h95fa81ecgbee0g4b95g80a0g5dab384fad7e" version="1">墓法精準</content>
+	<content contentuid="h6a63f820g8b25g401ega8afg7324fa79464c" version="1">墓觸</content>
+	<content contentuid="h3a6467d1g6f59g499fga412g78940b2bc38c" version="1">當敵人的&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;低於&lt;b&gt;[1]%&lt;/b&gt;時，&lt;LSTag Type="Spell" Tooltip="Target_InflictWounds"&gt;致傷術&lt;/LSTag&gt;將&lt;b&gt;自動&lt;/b&gt;造成&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;。</content>
+	<content contentuid="h9e5e6a62g6fb2g4ef6g9ba9g85562e7f6852" version="1">生命汲取</content>
+	<content contentuid="h4e88f9a5gbb4bg4723g98bdg97c30db5e0ed" version="1">當你用&lt;LSTag Type="Spell" Tooltip="Target_InflictWounds"&gt;致傷術&lt;/LSTag&gt;命中敵人時，恢復相當於造成傷害&lt;b&gt;[1]%&lt;/b&gt;的&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;（&lt;i&gt;即使你是不死生物&lt;/i&gt;）。</content>
+	<content contentuid="hc4d9ce6cgea31g4634g9ab2g8f9044660ba2" version="1">以生命之力為咒語充能。對一名生物進行&lt;LSTag Tooltip="MeleeSpellAttack"&gt;近戰法術攻擊&lt;/LSTag&gt;；命中時，充盈掌中的死靈能量使其腐朽，造成&lt;b&gt;[1]&lt;/b&gt;，你也會承受&lt;b&gt;[2]&lt;/b&gt;，除非你對&lt;b&gt;[3]&lt;/b&gt;具有&lt;LSTag Tooltip="Resistant"&gt;抗性&lt;/LSTag&gt;。</content>
+	<content contentuid="h281ae3e0gae77g4455g8b3agabd30d81227d" version="1">少主長袍</content>
+	<content contentuid="h520a31b9gedbag473dg960ag08e543f320cb" version="1">這件以月光織就的長袍，浸染著已隕落英雄的淚水。它的優雅源自一名善與刀鋒共舞的年輕領主，這位少主因摯友的背叛而英年早逝，但他卓絕的天姿仍留存於衣袂之中。</content>
+	<content contentuid="hfc087da1g8020g4db5ga0e5g5c03a427c98c" version="1">避影圓舞</content>
+	<content contentuid="h8623e58cg0e73g43d5gb679gea4b2fde34bb" version="1">成功閃避一次攻擊時，你的&lt;LSTag Tooltip="ArmourClass"&gt;護甲等級&lt;/LSTag&gt;提高&lt;b&gt;[1]&lt;/b&gt;，持續至你的下個回合開始。</content>
+	<content contentuid="h714b93b7gcf45g4fd6gbe2agd2f0757f0dcb" version="1">迅捷身法</content>
+	<content contentuid="h02efdb00g2e60g452ag9c36g007c930a689a" version="1">&lt;LSTag Tooltip="ArmourClass"&gt;護甲等級&lt;/LSTag&gt; &lt;b&gt;+[1]&lt;/b&gt;。</content>
+	<content contentuid="h4cac015cg6882g4c68g854cgef023876faaf" version="1">凝心之衣</content>
+	<content contentuid="h37a554bbgd68ag4f87ga429g1190671c0bcd" version="1">費倫東部的一位大師曾言：“破山中賊易，破心中賊難。”或許他是對的，但若能有一件能讓人順氣通達，無須擔憂心魔的外衣，豈不美哉？</content>
+	<content contentuid="h125812a1g6fedg4882gac34g7baa2e76e394" version="1">凝心守一</content>
+	<content contentuid="hb4af652dg8461g4354g9643gf4cae13a2f2c" version="1">使用一個需要消耗&lt;LSTag Type="ActionResource" Tooltip="KiPoint"&gt;氣點&lt;/LSTag&gt;的動作時，你有&lt;b&gt;[1]%&lt;/b&gt;的機率恢復該&lt;LSTag Type="ActionResource" Tooltip="KiPoint"&gt;氣點&lt;/LSTag&gt;。</content>
+	<content contentuid="h6bd8dfa5g0263g4af4gb2f4g867aad5d36bb" version="1">幽蟲長袍</content>
+	<content contentuid="h24e7d89agcfd1g457fgbbd4g582c08e90bc5" version="1">“幽穴甲蟲”是一個崇奉古蟲秘法的宗教，其儀式如今看來或屬反常。該教派的高手專精隱匿與潛行之術：他們透過研習昆蟲受益匪淺，並領悟了“何謂真正的無形無影”。</content>
+	<content contentuid="h371f695bg0df5g49c9ga71eg0920392befe2" version="1">匿影無蹤</content>
+	<content contentuid="h677307b8g9dfcg4d7bg8f93g50dd0e124f5c" version="1">進入&lt;b&gt;潛行狀態&lt;/b&gt;時，你獲得&lt;LSTag Type="Status" Tooltip="ARMOURC7"&gt;幽蟲覆影&lt;/LSTag&gt;。</content>
+	<content contentuid="h49b25907g902cg4d9fg9affgf57dabd8b548" version="1">進入&lt;b&gt;潛行狀態&lt;/b&gt;時，你獲得&lt;LSTag Type="Status" Tooltip="ARMOURC7_2"&gt;幽蟲覆影&lt;/LSTag&gt;。</content>
+	<content contentuid="h5d2e6483gf35ag4e6cgad23g4dbcb1313855" version="1">進入&lt;b&gt;潛行狀態&lt;/b&gt;時，你獲得&lt;LSTag Type="Status" Tooltip="ARMOURC7_3"&gt;幽蟲覆影&lt;/LSTag&gt;。</content>
+	<content contentuid="hbb273666g474fg430dg9f2bg42564f5be162" version="1">進入&lt;b&gt;潛行狀態&lt;/b&gt;時，你獲得&lt;LSTag Type="Status" Tooltip="ARMOURC7_4"&gt;幽蟲覆影&lt;/LSTag&gt;。</content>
+	<content contentuid="hda1c1367gc8cag4d4bg91c3gc62f3f3fdcc3" version="1">幽蟲覆影</content>
+	<content contentuid="hdb11a4ecg013fg4b30gbfa3g0d89934f06d5" version="1">&lt;LSTag Type="Skills" Tooltip="Stealth"&gt;隱匿&lt;/LSTag&gt; &lt;b&gt;+[1]&lt;/b&gt;，&lt;b&gt;武器攻擊&lt;/b&gt;獲得&lt;b&gt;+[2]&lt;/b&gt;。&lt;br&gt;&lt;br&gt;當離開&lt;b&gt;隱匿狀態&lt;/b&gt;時，效果消失。&lt;/content&gt;</content>
+	<content contentuid="he3719f2dg1229g4962g9ce1gd9b4c1fd1f43" version="1">皇家信使禮服</content>
+	<content contentuid="h3e01c84bgbf23g43d0g837eg1a83dc811581" version="1">這件禮服做工精良，選用最上乘的織物。無須贅言，數百年來，它刺繡上的皇家紋章幾乎未有磨損，其內裡的布料微微閃爍著的附魔之光，昭示著前任主人所負使命之重大。</content>
+	<content contentuid="h101d936ag9a7cg43e8ga419g9a10b08faae5" version="1">輕身步</content>
+	<content contentuid="h182ee8a3gf73eg40bdg8665gd2f909755dbf" version="1">&lt;LSTag Type="Skills" Tooltip="Stealth"&gt;隱匿&lt;/LSTag&gt;&lt;b&gt;+[1]&lt;/b&gt;。&lt;br&gt;&lt;br&gt;非戰鬥狀態下，你的&lt;LSTag Tooltip="MovementSpeed"&gt;移動速度&lt;/LSTag&gt;額外增加&lt;b&gt;+[3]&lt;/b&gt;。</content>
+	<content contentuid="h89fd5a3cg68bag40c5g8c72g66f5b2a4c94a" version="1">神行步</content>
+	<content contentuid="h687c4158g7b76g40e7gac53g10c5c812d0a2" version="1">非戰鬥狀態下，你的&lt;LSTag Tooltip="MovementSpeed"&gt;移動速度&lt;/LSTag&gt;增加&lt;b&gt;+[1]&lt;/b&gt;。</content>
+	<content contentuid="hb5be097cg1b74g4a65ga08eg425bb92c7f07" version="1">僧後戰袍</content>
+	<content contentuid="h678b425fg84aag4cdfg855eg992f4ff35e31" version="1">這是古代女王心武曾用的戰袍之一。她八歲時便在武藝上造詣非凡，常常為了一個早已被遺忘之國的獨立而投身於艱苦的保衛戰中。這件長袍合身舒適，戰鬥時非但不影響動作，還與其相得益彰，盡顯靈巧與優雅。</content>
+	<content contentuid="hb78d23c4g6026g49fbgb340g97e01e894b12" version="1">翩然戰舞</content>
+	<content contentuid="he7cce4f3gbda1g4874ga7a7gce1bab14b95d" version="1">你不會觸發&lt;LSTag Tooltip="OpportunityAttack"&gt;藉機攻擊&lt;/LSTag&gt;。</content>
+	<content contentuid="hce18c125g3e2eg4808g94aegbca561d542e3" version="1">探險服</content>
+	<content contentuid="h6678536fgec2cg4446g88f9g7491f503265a" version="1">關於衣物昔日主人的傳說已然湮沒無聞，或許他是王國戰爭期間蹂躪費倫的眾多強盜或惡徒之一？儘管如此，這套衣服看起來並不普通，它似乎能提升人們察覺細微末節的能力。</content>
+	<content contentuid="ha9baec28g6912g4c90g9a29ga5c784dbcdf0" version="1">洞見符文</content>
+	<content contentuid="hf0b13e8fg008bg4982g94a0ge5c4f4a0c456" version="1">&lt;LSTag Type="Skills" Tooltip="Perception"&gt;察覺&lt;/LSTag&gt; &lt;b&gt;+[1]&lt;/b&gt;。</content>
+	<content contentuid="h3b5649d2gb3cdg4f41g9cf1ge00361cf3627" version="1">卓越刺客服</content>
+	<content contentuid="h1a0b61feg3ebag4d0cg96ddgfb56ced3556a" version="1">傭兵始終是費倫不可或缺的一部分。許多人尋求過他們的服務，尤其是在涉及微妙事務之際——諸如除去那些覬覦王座的敵對王子，或剷除阻礙其他帝國崛起的、春風得意的國王。這套衣服的首任主人顯然專業地對待其工作，甚至為衣物施加了附魔，以更精準地引導其致命一擊，對付那些作為其工作目標、毫無戒心的物件。</content>
+	<content contentuid="h463ec33dgeddfg4305g8455ga7d667e8ab46" version="1">精準潛襲</content>
+	<content contentuid="h850d5cc7g10cag4240ga4bdgf25122f0207c" version="1">對&lt;LSTag Type="Status" Tooltip="SURPRISED"&gt;突襲&lt;/LSTag&gt;的生物造成傷害時，你進入&lt;LSTag Type="Status" Tooltip="INVISIBILITY"&gt;隱形&lt;/LSTag&gt;。</content>
+	<content contentuid="hb14551b9g22a7g4965ga327g50257e319fa1" version="1">精準伏擊</content>
+	<content contentuid="h8f53da0cg53dbg4d14gbe70g615ee43cf20e" version="1">暗影精準</content>
+	<content contentuid="hcfb16307g9351g4da5ga638gcad9134a6a18" version="1">競法冠軍長袍</content>
+	<content contentuid="h0b01de7bg2d48g4aacg9f5eg252d881b703a" version="1">很久以前，國王們常為取悅民眾而在競技場舉辦搏鬥。競技場上既有強悍的戰士、狡黠的弓手，也有身經百戰的法師。其中一位鬥士便擁有這件長袍，他在袍中研習所謂的“精準魔法”，藉此屢次擊敗了實力更強的對手，取得了不可思議的勝利。</content>
+	<content contentuid="he201cfb3g7ca6g4c83g8594g02bb06138c04" version="1">精準符文</content>
+	<content contentuid="h8b2af2b0g1c58g4897gbd0bg69a533d34c07" version="1">戰鬥中施放&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;時，獲得&lt;LSTag Type="Status" Tooltip="ARMOURC12"&gt;渦旋魔力&lt;/LSTag&gt;，持續至你的回合結束。</content>
+	<content contentuid="h49ee586ag8953g498dga9e1gea33f0d9234e" version="1">渦旋魔力</content>
+	<content contentuid="he33b5f2dgc38bg48c5gad72gd01453603c3a" version="1">&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;的&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;&lt;b&gt;+[1]&lt;/b&gt;。</content>
+	<content contentuid="ha6ae5d56g3151g4526g91bbgf6aa10b7b126" version="1">學徒長袍</content>
+	<content contentuid="ha0b16cdbg1944g4d26g8490g7ace48443288" version="1">在法師公會中，資質平庸的學徒並不受青睞。因此，格倫瑟不懈苦練，在掌握魔法竅門方面超越了所有同輩。遺憾的是，當其他人埋頭研習恢弘而枯燥的典籍時，格倫瑟卻沉溺於練習有趣的戲法與低階法術。待到重大考核來臨，他的學業毫無懸念地落了榜。此後，他便流連酒館，用花哨的戲法取悅醉客們謀生。而他的這件長袍，便烙印著這充滿坎坷的一生。</content>
+	<content contentuid="h9e983e7fg708bg400egbf0bgcbdff80663f8" version="1">勤研不輟</content>
+	<content contentuid="h04399954g4684g4045gb48dg996cc0dd71c0" version="1">&lt;LSTag Tooltip="Cantrip"&gt;戲法&lt;/LSTag&gt;&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;&lt;b&gt;+[1]&lt;/b&gt;。&lt;br&gt;&lt;br&gt;效果每&lt;b&gt;[2]&lt;/b&gt;級提升一次。</content>
+	<content contentuid="h3b45a3d5g0c70g478bg8823g5bdecbab085b" version="1">宗師法師之袍</content>
+	<content contentuid="hbf9ea3fdg32d9g4eecg821dg008ed80f6291" version="1">據說，這件長袍是冒險者們發掘傳奇法師依茨肯那令人生畏的陵墓時的主要發現之一。它本身看似平平無奇，但其中蘊含的力量能將人的魔力放大數十倍。自然而然的，它立刻引起了聲名顯赫的法師們的垂涎，其中有一些人在追尋此物的過程中便遭遇了不測之禍。</content>
+	<content contentuid="h8f968c16g1bc7g4343gb084g9f99deffd9ab" version="1">大法師之力</content>
+	<content contentuid="hd88684f4gce5fg4ea9g9ab2gc45124688dce" version="1">每場戰鬥中你的首次&lt;LSTag Tooltip="EvocationSpells"&gt;塑能&lt;/LSTag&gt;&lt;LSTag Tooltip="AttackRoll"&gt;法術攻擊&lt;/LSTag&gt;自動達成&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;，但若你不具備&lt;LSTag Type="Passive" Tooltip="SculptSpells"&gt;法術塑形&lt;/LSTag&gt;，則受到&lt;b&gt;[1]&lt;/b&gt;點傷害。</content>
+	<content contentuid="h937011bdgc730g4fb0ga779g5d2e05bd1019" version="1">大法師的詭計</content>
+	<content contentuid="hc74f4e8eg0a47g43f8gb205gcc5310e20043" version="1">&lt;i&gt;可切換特性。&lt;/i&gt;你的&lt;LSTag Type="Spell" Tooltip="Projectile_Fireball"&gt;火球術&lt;/LSTag&gt;消耗&lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;附贈動作&lt;/LSTag&gt;，而非&lt;LSTag Type="ActionResource" Tooltip="ActionPoint"&gt;動作&lt;/LSTag&gt;。</content>
+	<content contentuid="hf0e3385dgef6dg4993ga217g73f6f75dac67" version="1">大法師的回聲</content>
+	<content contentuid="h39243fa0g3bc2g418cg9232g68bc15e14f19" version="1">以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;造成傷害時，有&lt;b&gt;[1]%&lt;/b&gt;的機率恢復&lt;b&gt;1&lt;/b&gt;點&lt;LSTag Type="ActionResource" Tooltip="ArcaneRecoveryPoint"&gt;奧術恢復&lt;/LSTag&gt;。</content>
+	<content contentuid="h2a7f762bg05efg40bcg81c6g80fb8415a34b" version="1">大法師的風暴</content>
+	<content contentuid="h7d8f9ccbg37b0g4f62g81e8g54662259fe84" version="1">施展&lt;LSTag Type="Spell" Tooltip="Projectile_ChainLightning"&gt;連鎖閃電&lt;/LSTag&gt;會恢復你的&lt;LSTag Type="ActionResource" Tooltip="ActionPoint"&gt;動作&lt;/LSTag&gt;。每回合只能觸發&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h278a9633g5653g4d6bga034g27f25f718609" version="1">大法師的專注</content>
+	<content contentuid="hdd8db796g8bddg48afgbdd1g8ed65ddc44ad" version="1">你的下一個&lt;LSTag Tooltip="EvocationSpells"&gt;塑能系&lt;/LSTag&gt;&lt;LSTag Tooltip="AttackRoll"&gt;法術攻擊&lt;/LSTag&gt;將必定造成&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;。</content>
+	<content contentuid="he0944103g2b76g421bga8f2gd5f819d1efa3" version="1">地底長袍</content>
+	<content contentuid="h15df5c34g9616g4fcegb230g3e4017741bd2" version="1">任何探索幽暗地域的旅行者都應時刻保持戒備，充斥著可怕怪物與嗜血卓爾的黑暗洞窟，不過是這奇詭之地最微不足道的麻煩。而準備尤為周全之人，既會考慮為衣裝施加防護符文，也能在平凡卻暗藏著致命威脅的時刻，依然保持鎮定。</content>
+	<content contentuid="h92339e54g8f60g462dgafefg4c8af5fe7dd6" version="1">防護符文</content>
+	<content contentuid="h3d3438c1g8190g4fb4g96a5g8a4478f816de" version="1">每當你施放&lt;b&gt;環階變化法術&lt;/b&gt;時，獲得&lt;LSTag Type="Status" Tooltip="ARMOURC15"&gt;織法護盾&lt;/LSTag&gt;。</content>
+	<content contentuid="h6c36dee8g4ec6g4450g9c97g75b12419efbd" version="1">織法護盾</content>
+	<content contentuid="he5965049ga3f0g4fe5g87bcgc53a12b59fb4" version="1">你受到的&lt;b&gt;首次傷害&lt;/b&gt;降低&lt;b&gt;[1]&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此數值以雙倍&lt;LSTag Tooltip="Intelligence"&gt;智力&lt;/LSTag&gt;&lt;LSTag Tooltip="AbilityModifier"&gt;調整值&lt;/LSTag&gt;為基準。</content>
+	<content contentuid="h424ce7cbg2498g4a54g8ca3gfd6bbbd03326" version="1">靜默披氅</content>
+	<content contentuid="he021b635gadecg4c0bga5a1g423ca66ed670" version="1">它的創造者信奉“先手施法，徒留破綻”——而所有持反對意見者，皆已先他而逝。</content>
+	<content contentuid="h208d1cfdgb331g4636gba72g6ffa9efae4ae" version="1">靜默護符</content>
+	<content contentuid="h949dfc8dgae54g4ed4g89c7gaa165fd654f2" version="1">當你處於&lt;LSTag Type="Status" Tooltip="BLADE_WARD"&gt;劍刃防護&lt;/LSTag&gt;狀態時，你不會受到&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;。</content>
+	<content contentuid="hdfcaf328gdb49g42f0ga42dg0364d041a06d" version="1">防護壁壘</content>
+	<content contentuid="h4b465c48gf136g4dd9ga608g2185493c3b23" version="1">冰霜懲戒</content>
+	<content contentuid="he33c8e00gc73bg44edg9276g2e518e7bd5ee" version="1">在&lt;LSTag Type="Status" Tooltip="BLADE_WARD"&gt;劍刃防護&lt;/LSTag&gt;效果下，&lt;b&gt;近戰武器&lt;/b&gt;攻擊&lt;b&gt;還會&lt;/b&gt;額外造成&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="he91e2ab4gccf5g4021g90ccg4db2013a8a95" version="1">屏息</content>
+	<content contentuid="h03fc7381gd48cg4003gb81cg7a3a66abb5a0" version="1">處於&lt;LSTag Type="Status" Tooltip="BLADE_WARD"&gt;劍刃防護&lt;/LSTag&gt;效果下時，你的&lt;LSTag Tooltip="ArmourClass"&gt;護甲等級&lt;/LSTag&gt;獲得&lt;b&gt;+[1]&lt;/b&gt;加值。</content>
+	<content contentuid="h5543f1fbg6285g4bcdgba68ga09f12744702" version="1">逆握長袍</content>
+	<content contentuid="h8cff2244g6ba5g4b35gb2c8g3ddff3e2cce2" version="1">這件長袍的主人曾是千年前一名強大的術士，他血脈中蘊含的魔力如此磅礴，以至於貼身衣物都永葆常新。它世代相傳，直到在一次以多欺少的暴行中，落入了劫掠者之手。然而，對於不諳魔網的凡夫俗子而言，它不過是一塊平庸無奇的破布罷了。</content>
+	<content contentuid="h27b869d9gb0b4g4c85g87ceg9603fed232e5" version="1">防護符文</content>
+	<content contentuid="h2b25810bg0417g4770gaca0ge7570428ba35" version="1">施展&lt;LSTag Type="Status" Tooltip="TIDES_OF_CHAOS"&gt;混沌之潮&lt;/LSTag&gt;時，獲得&lt;LSTag Type="Status" Tooltip="ARMOURC17"&gt;虛緲屏障&lt;/LSTag&gt;。</content>
+	<content contentuid="heb796402g16e5g4598g9ab8gccd56fff3a8f" version="1">虛緲屏障</content>
+	<content contentuid="h71fa2fadg6847g4fefgb676g0b638a639347" version="1">你受到的&lt;b&gt;首次&lt;/b&gt;傷害將降低&lt;b&gt;[1]&lt;/b&gt;點。&lt;br&gt;&lt;br&gt;隨&lt;LSTag Tooltip="Charisma"&gt;魅力&lt;/LSTag&gt;&lt;LSTag Tooltip="AbilityModifier"&gt;調整值&lt;/LSTag&gt;提升。</content>
+	<content contentuid="hb5f02f83g7450g4aa6g9debgb59c7e72dc2d" version="1">愈法長袍</content>
+	<content contentuid="h6d71d3d7g58c1g4868g87c8g7feca609405c" version="1">長袍的前任主人以頑強不屈的生命力而著稱——他曾被派往偏遠島嶼，清剿一整群豺狼人：即便在最慘烈的戰鬥後，他也只是撣去長袍上的血汙，喝下一瓶藥劑，便好似無事發生。鮮為人知的是，他的活力並非源於自身，而是得益於從父親那繼承而來的衣物。時光荏苒，這位術士卻在一次戰鬥後再也沒能醒來——畢竟一顆被斬斷的頭顱，是無法簡單地歸位的。</content>
+	<content contentuid="hb5dcae4eg1dffg4445ga0f1g9a784c73350e" version="1">治癒魔法</content>
+	<content contentuid="h81204a37g3717g480egaabcg10fb9a87c1ef" version="1">戰鬥結束後，每擁有一個&lt;b&gt;術士&lt;/b&gt;等級，恢復&lt;b&gt;[1]&lt;/b&gt;點生命值。</content>
+	<content contentuid="hcba9b31bg51e9g467ega240g3e67e6c2f2ce" version="1">風語長袍</content>
+	<content contentuid="hc22e5e4bga8c9g40e6g938fgf7de7a8a2827" version="1">梅加利斯並非風暴神殿唯一的先知，但他卻是最堅定不移者。當所有同伴都因絕望而一鬨而散時，他獨自堅守神殿大門，抵禦那些試圖奪取風暴與雷鳴祭壇的兇暴怪物。他遍體鱗傷，衣袍也瘡痍累累。無人知曉這件聖物為何流落凡塵，但它靈魂的歸宿，毋庸置疑，當屬天外高天的長空。</content>
+	<content contentuid="hea312ed6g9d6cg4e9ag9328g8e7e5b990c13" version="1">守護姿態</content>
+	<content contentuid="h60451073gc935g4cd0g8b07g31d0a94ee2f2" version="1">若你在自己的回合中未移動，則在回合結束時獲得&lt;b&gt;[1]&lt;/b&gt;層&lt;LSTag Type="Status" Tooltip="MAG_CHARGED_LIGHTNING"&gt;閃電充能&lt;/LSTag&gt;。&lt;/content&gt;</content>
+	<content contentuid="hf02a440bga502g425fgaf21g28e41f68d721" version="1">堅守陣地</content>
+	<content contentuid="hc959349bgfb2cg4903gbe59g6358a421f794" version="1">如堅守神殿大門的梅加利斯般屹立不倒。回合結束時獲得&lt;b&gt;[1]&lt;/b&gt;層&lt;LSTag Type="Status" Tooltip="MAG_CHARGED_LIGHTNING"&gt;閃電充能&lt;/LSTag&gt;。</content>
+	<content contentuid="hba68f3fcgc6cbg4eecg9f96g66322baf86f4" version="1">蓄能防護</content>
+	<content contentuid="h5a8962dcg6061g44e7ga15bgf0ff8b3c4f2a" version="1">當你擁有&lt;LSTag Type="Status" Tooltip="MAG_CHARGED_LIGHTNING"&gt;閃電充能&lt;/LSTag&gt;時，&lt;LSTag Tooltip="ArmourClass"&gt;護甲等級&lt;/LSTag&gt; &lt;b&gt;+[1]&lt;/b&gt;。</content>
+	<content contentuid="hd08d7e9egf787g4134g90e3g11e433690a2b" version="1">蹩腳巫師長袍</content>
+	<content contentuid="hfa481a2eg0869g4eacga94fg5be1bd911a4b" version="1">這件長袍的首任主人並未獲得充分利用它的機會：其內蘊含的魔能太過強橫而難以駕馭，這位法師在一次失控的魔力爆發中，被自己釋放的火球燒成了灰燼。</content>
+	<content contentuid="h8ff7dd28gc427g41d5g83bag67a5cc62f096" version="1">魔流奔湧</content>
+	<content contentuid="he47bf0a0ge0ebg44d3ga4e6g7bdfbd69016e" version="1">在戰鬥中受到傷害時，有&lt;b&gt;[1]%&lt;/b&gt;的機率恢復一個&lt;LSTag Type="ActionResource" Tooltip="SorceryPoint"&gt;術法點&lt;/LSTag&gt;。</content>
+	<content contentuid="h8793398dga48bg4d07g910ag589744f6a707" version="1">惡靈長袍</content>
+	<content contentuid="h2e5e8fa2g3587g41deg8673gcfab5d9413c3" version="1">尼格里克能透過言語汲取力量，每當有人提及這個名字，他的邪靈便會愈發強大。歷經數千年，即是靈體也已如此強勁，乃至能編織一件詭秘、黑暗的魔法長袍，並將它投入世間，冀望有人將其尋獲。屆時，他將聚焦人心的惡念，推波助瀾，掀起更大的災禍，讓世界變得更加酷烈，一如他的本性。</content>
+	<content contentuid="h191254afg851cg4e11ga9f8g751e545873b9" version="1">惡念共鳴</content>
+	<content contentuid="ha8dd9b01g66ddg4017g8246gddb5868bd80d" version="1">當目標受到你的&lt;b&gt;詛咒&lt;/b&gt;影響（不包括&lt;LSTag Type="Status" Tooltip="HEX_STRENGTH"&gt;脆弱詛咒&lt;/LSTag&gt;!）時，它還必須透過一次&lt;LSTag Tooltip="Wisdom"&gt;感知&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;，否則將受到&lt;LSTag Type="Status" Tooltip="ARMOURC21"&gt;遠古詛咒&lt;/LSTag&gt;的影響。&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;難度等級&lt;/LSTag&gt;取決於你的&lt;LSTag Tooltip="SpellDifficultyClass"&gt;法術豁免難度等級&lt;/LSTag&gt;。</content>
+	<content contentuid="h334ad9b9gc7afg44e0g992egb09deec7b317" version="1">遠古詛咒</content>
+	<content contentuid="hb1b8af8fgb9e4g4002gbbd1g9b4dd291fd08" version="1">&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;&lt;b&gt;-[1]&lt;/b&gt;。&lt;br&gt;&lt;br&gt;每回合開始時承受&lt;b&gt;[2]&lt;/b&gt;。&lt;br&gt;&lt;br&gt;不會隨時間消散。</content>
+	<content contentuid="h3f0b0771gf145g417cg95cage69e6d60c7bf" version="1">靈障甲冑</content>
+	<content contentuid="h52d613e4g3bbdg4ff7g8a46ga09070c7ffee" version="1">很久以前，精靈工匠打造了這件布甲，並在其上施加了防護魔法，用以抵禦精神干擾。此舉在當時相當罕見，但尚在理解的範疇，畢竟你永遠無從知曉在戰場上究竟會面對何種敵人。然而，精靈們又是如何丟掉了這件裝備的呢？</content>
+	<content contentuid="h75cc6c97g1cadg4529g9942g812f608695f8" version="1">心靈屏障</content>
+	<content contentuid="h608afe13gcfc8g4fe7gb538gca6dd332206c" version="1">&lt;br&gt;&lt;LSTag Tooltip="Charisma"&gt;魅力&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;&lt;b&gt;+[1]&lt;/b&gt;。&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="Intelligence"&gt;智力&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;&lt;b&gt;+[1]&lt;/b&gt;。</content>
+	<content contentuid="h9a91d8dagea5cg4c04g903cg4e06ffe47b96" version="1">隱士巫袍</content>
+	<content contentuid="h59bafa5fga50dg4525g8fbbgb17e415a317f" version="1">曾經，在幽暗森林的中央，住著一個邪惡的術士，他的窮兇極惡連大地都為之膽寒，步履所及之處，花草皆盡數枯萎。他慣常誘拐孩童，利用他們的血肉進行殘酷的儀式，最終，當地國王下令擒獲了他，將其流放至國境以北，和半人馬部族交戰的前線。正是這場茹毛飲血的戰爭，促成了這件（取自半人馬皮的）長袍出世——術士藉此從中滋補他的魔力。</content>
+	<content contentuid="h3cbd61e8g5a33g4584g9c8cg637c79d35673" version="1">半人馬之魂</content>
+	<content contentuid="hb6712db3g5e1cg4423g8981g3fdc7cf58e32" version="1">處於&lt;LSTag Type="Status" Tooltip="MADNESS"&gt;瘋狂&lt;/LSTag&gt;時，你所有的&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;均為&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;，且&lt;LSTag Tooltip="ArmourClass"&gt;護甲等級&lt;/LSTag&gt;增加&lt;b&gt;[1]&lt;/b&gt;。你的施法者本能猶存——保持距離，優先使用法術。&lt;br&gt;&lt;br&gt;若未處於&lt;LSTag Type="Status" Tooltip="MADNESS"&gt;瘋狂&lt;/LSTag&gt;，則每回合成功透過一次&lt;LSTag Tooltip="Charisma"&gt;魅力&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;（&lt;b&gt;[2]&lt;/b&gt;），以獲得&lt;LSTag Type="Status" Tooltip="MADNESS"&gt;瘋狂&lt;/LSTag&gt;，直至&lt;b&gt;你的回合結束&lt;/b&gt;。</content>
+	<content contentuid="h9029504egeab4g4278g8223gdafc6ca167a5" version="1">誅殺令</content>
+	<content contentuid="h2c0da34cgab12g418ag87dcgfcf2d8fae9e6" version="1">以&lt;b&gt;[1]&lt;/b&gt;&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;達成&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;時，額外造成&lt;b&gt;[2]&lt;/b&gt;點傷害。</content>
+	<content contentuid="h8604a6b4gc957g4cadg9229g24937fb22c99" version="1">天光法衣</content>
+	<content contentuid="h8bc82deag4a7fg43ffg980dgb1023d214c56" version="1">這件法袍由凱爾托米爾王國的月精靈於一萬兩千年前打造，曾是精靈附魔技藝巔峰的傳奇象徵。綠龍鱗片傾注翠色織錦，月光銀線縫紉堅韌皮革，它曾予人涅槃之力，如群鳥之首翱翔長空。可光陰飛逝，歲月無情，如今的它僅是昔日偉業的一道殘影。</content>
+	<content contentuid="h9efd101cg0370g445dg92adg0b187e0588ca" version="1">冥域輝光</content>
+	<content contentuid="h33eeb724g7a2fg4489ga395ge6e4e072b8d7" version="1">對&lt;b&gt;不死生物&lt;/b&gt;、&lt;b&gt;邪魔&lt;/b&gt;、&lt;b&gt;異怪&lt;/b&gt;或&lt;b&gt;構裝生物&lt;/b&gt;造成傷害時，目標獲得&lt;LSTag Type="Status" Tooltip="MAG_RADIANT_RADIATING_ORB"&gt;光耀法球&lt;/LSTag&gt;，持續&lt;b&gt;[1]&lt;/b&gt;回合。&lt;br&gt;每回合最多觸發一次。</content>
+	<content contentuid="hc0079419gf183g4f49g8908g04f249153fb2" version="1">法球殉爆</content>
+	<content contentuid="h36238a77g107ag4071gac8dg12b102cb93bd" version="1">你對受到&lt;LSTag Type="Status" Tooltip="MAG_RADIANT_RADIATING_ORB"&gt;光耀法球&lt;/LSTag&gt;影響的目標&lt;b&gt;額外&lt;/b&gt;造成&lt;b&gt;[1]&lt;/b&gt;點傷害。</content>
+	<content contentuid="h7dc48c5ag7b6cg439aga792gcd60fae4fcc2" version="1">堅毅長袍</content>
+	<content contentuid="h3b152bcfge08cg40d7g8849ga9d4035861ae" version="1">這是古代戰爭中戰鬥法師的典型穿著之一。其附魔十分簡單，卻極為有效，能將致命的元素攻擊，徑直穿透魔法的屏障。</content>
+	<content contentuid="h5eb46299gf9bcg4decga84cgee8fdcea0ee9" version="1">堅毅咒語</content>
+	<content contentuid="hdc3512f2g5672g4620g993ag75efab6f16a9" version="1">以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;造成傷害時，獲得&lt;LSTag Type="Status" Tooltip="ARMOURC25"&gt;無盡魔能&lt;/LSTag&gt;，持續至你的回合結束。</content>
+	<content contentuid="h2145e8c3ge74bg44adg8514gf12b81ac86e2" version="1">無盡魔能</content>
+	<content contentuid="hec3a8b37g9533g4b05g9025gcc88936dec02" version="1">你無視對[1]、[2]、[3]、[4]和[5]的所有&lt;LSTag Tooltip="Resistant"&gt;抗性&lt;/LSTag&gt;和&lt;LSTag Tooltip="Immune"&gt;免疫&lt;/LSTag&gt;。</content>
+	<content contentuid="h36e82159gc9aag482cgbe61gdfe660ec59af" version="1">惡霸服</content>
+	<content contentuid="hbf3c2beag689ag4bfcgb0deg5e17659103a8" version="1">這件看起來普普通通的野蠻人裝束，實際暗藏玄機。它出自一種密度極高的材料，且衣袋記憶體放著前主人特意留下的繽紛寶石。這些寶石是古代洞窟的晶體殘骸，它們光彩奪目，熠熠生輝，共同和鳴出治癒的魔法。然而，寶石一旦離開外衣，就會瞬間黯然失色。</content>
+	<content contentuid="hc5c98390g2160g4700g95b5gc072f1476ea9" version="1">晶石和絃</content>
+	<content contentuid="h434330d9g47cfg4cd0gb8bdg81752ebebed3" version="1">戰鬥中&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;為&lt;b&gt;[1]%&lt;/b&gt;或更低時，獲得&lt;LSTag Type="Status" Tooltip="ARMOURC26"&gt;晶石療愈&lt;/LSTag&gt;，持續&lt;b&gt;[2]&lt;/b&gt;回合。</content>
+	<content contentuid="hcc084936g4580g4990g9a80g4f6d47725042" version="1">晶石療愈</content>
+	<content contentuid="h3bf8a4b4gae5bg479cg883bg712469f5ee8e" version="1">在每個回合結束時，你恢復&lt;b&gt;[1]&lt;/b&gt;點生命值。&lt;br&gt;&lt;br&gt;數值基於&lt;LSTag Tooltip="Constitution"&gt;體質&lt;/LSTag&gt;&lt;LSTag Tooltip="AbilityModifier"&gt;調整值&lt;/LSTag&gt;乘以&lt;b&gt;[2]&lt;/b&gt;&lt;i&gt;（向下取整）&lt;/i&gt;。</content>
+	<content contentuid="h7673a73cge97fg40c1gbbfdg6dc944f731f5" version="1">遊牧裝</content>
+	<content contentuid="h31bb2e39ga21cg41d5gb6fdgeb85e4852ac0" version="1">對遊牧民而言，這件衣物實屬一件珍品。它承載著強化符文，能感知並回應人們的體溫和心緒，以此協調肢體，輕化動作，有時甚至能救人於水火之中。</content>
+	<content contentuid="h24bc4dcagacacg4572gb3a2g5fc2467407b8" version="1">靈巧符文</content>
+	<content contentuid="h7de9acbagcd49g4858g82f0ga62b8b8d22eb" version="1">在&lt;LSTag Type="Status" Tooltip="RAGE"&gt;狂暴&lt;/LSTag&gt;狀態下，&lt;LSTag Tooltip="Dexterity"&gt;敏捷&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;&lt;b&gt;+[1]~[2]&lt;/b&gt;。</content>
+	<content contentuid="h3f21e60cg4a21g4ab8g95c9g24ad9575ecf0" version="1">薩滿之衣</content>
+	<content contentuid="h8f539d7agebc7g46d1gbff8g90321b3e9dab" version="1">在遠古時代，部落中也許有眾多戰士戍衛邊疆，但薩滿才是其中最為可怖的存在。薩滿的地位僅次於酋長，獲有整個部落的尊敬與愛戴，他們時而呼風喚雨，向敵群降下致命風暴；時而又只是視死如歸的勇士。眼前這件便是某位薩滿的遺物，儘管部分皮件看上去仍頗為新鮮。</content>
+	<content contentuid="hbc039c8egb0fdg4a15gab4ag1b3d90d293c2" version="1">原始狂怒</content>
+	<content contentuid="h5e6fc7dcgd3fdg4fa1g89c6g6c6ca269d11b" version="1">處於&lt;LSTag Type="Status" Tooltip="RAGE"&gt;狂暴&lt;/LSTag&gt;狀態時，你的&lt;b&gt;近戰&lt;/b&gt;攻擊額外造成&lt;b&gt;[1]&lt;/b&gt;點傷害。此加值在&lt;LSTag Type="Spell" Tooltip="Shout_WildShape"&gt;荒野形態&lt;/LSTag&gt;中同樣生效，且在該形態下&lt;b&gt;翻倍&lt;/b&gt;。</content>
+	<content contentuid="hb915ac3cg21a8g430bgaae0g9c522e2465af" version="1">先靈之怒</content>
+	<content contentuid="h354769cdgb478g4aadga56eg438a7c15eeea" version="1">若你擁有&lt;b&gt;野獸之心&lt;/b&gt;，觸發&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;所需點數減少&lt;b&gt;[1]&lt;/b&gt;。該加成在&lt;LSTag Type="Spell" Tooltip="Shout_WildShape"&gt;野性變形&lt;/LSTag&gt;時也生效，且會&lt;b&gt;翻倍&lt;/b&gt;。</content>
+	<content contentuid="hd8e53202gfcdcg4b86gbdb2g8ed5af1fe0f7" version="1">先祖堅韌</content>
+	<content contentuid="h0045292egdf62g4093gb50agce7923d6b2d9" version="1">當你進入&lt;LSTag Type="Status" Tooltip="RAGE"&gt;狂暴&lt;/LSTag&gt;或離開&lt;LSTag Type="Spell" Tooltip="Shout_WildShape"&gt;野性變形&lt;/LSTag&gt;時，獲得&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="hfd8d0562gfd12g4d75gaae3g19275bee6db1" version="1">原初儀式</content>
+	<content contentuid="hdc57deb7g6405g430dgb605g22ef80da2e1d" version="1">&lt;b&gt;可切換。&lt;/b&gt;&lt;LSTag Type="Status" Tooltip="RAGE"&gt;狂暴&lt;/LSTag&gt;不再需要&lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;附贈動作&lt;/LSTag&gt;，但改為消耗&lt;LSTag Type="ActionResource" Tooltip="WildShape"&gt;野性變形充能&lt;/LSTag&gt;。</content>
+	<content contentuid="hd9af817fg5c08g475cg97e9ge5f3e6e167b3" version="1">雷霆恩典</content>
+	<content contentuid="haf53dcbag131eg48e1g85dcg35e3149b777b" version="1">在絕望之際，梅里斯託斯向他的神祇祈求：“請降下您的恩典，賜我脫離仇敵之手！”於是，他藉由元素符文被賦予神力，頃刻間殲滅了所有敵人。日後，梅里斯託斯成為了偉大的國王，他彼時所穿衣物仍充盈著恩典餘暉，被珍藏於王室寶庫數千年，直至最後，惡魔之力毀滅了王國，蠻族將殘存之物洗劫一空。</content>
+	<content contentuid="hac3c6e43g41b2g44f8gbf90g5d8f3e5e9ca1" version="1">神賜</content>
+	<content contentuid="h028f3439g1db5g481ag88degb6341dbed984" version="1">受到&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;時，對攻擊者造成&lt;b&gt;[1]&lt;/b&gt;點傷害，並可令攻擊者&lt;LSTag Type="Status" Tooltip="PRONE"&gt;倒地&lt;/LSTag&gt;（力量豁免，對抗&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;戰技豁免難度等級&lt;/LSTag&gt;）。</content>
+	<content contentuid="h4a3468a8g2f54g4109g94aeg820251dcbbb4" version="1">不息怒衣</content>
+	<content contentuid="h234c2043g9866g403agaa71gf9575dd403b6" version="1">傳說，奧列什是人們的良友，身為森林隱士的他，卻樂於對他人施以援手。但故事往往是真假參半的——其中並未記載，奧列什幫助“朋友”的代價是收取一個靈魂，他藉此獲得野獸般的力量，從而完成朋友們託付的任務。</content>
+	<content contentuid="h7eebf159g7fc9g4a99g83c6gcb1ad81356b3" version="1">隱者秘技</content>
+	<content contentuid="h96269856gac73g41dcg9621g363dd3c11e28" version="1">在戰鬥中&lt;LSTag Type="Spell" Tooltip="Throw_Throw"&gt;投擲&lt;/LSTag&gt;時，你的&lt;LSTag Tooltip="Strength"&gt;力量&lt;/LSTag&gt;獲得&lt;b&gt;+[1]&lt;/b&gt;加值，持續至&lt;b&gt;你下個回合結束&lt;/b&gt;。</content>
+	<content contentuid="ha24a2f12g8ac3g44d4g8690g43710c93a128" version="1">沸血</content>
+	<content contentuid="h87458443g0504g4e7fga82dg43c592061fe1" version="1">&lt;LSTag Tooltip="Strength"&gt;力量&lt;/LSTag&gt;&lt;b&gt;+[1]&lt;/b&gt;。</content>
+	<content contentuid="h4a9c282ag0919g4f72gb575g923498a5e9ab" version="1">諧律愈甲</content>
+	<content contentuid="h15c4b9edg3bd3g489fg9370g414e999d079d" version="1">這件護甲鍛造於一片瑰異密林的核心，鳴響著自然靜謐的低語。作為一件來自恬靜守護者的遺物，據說它擁有一種力量，能在暮光曲調平息的靜謐間歇中，癒合血肉與靈魂。</content>
+	<content contentuid="h91042534g721cg4d38g9c98g4741cc2a13f8" version="1">暮光復元</content>
+	<content contentuid="h8dbfd6e9g22d5g4a21gad33gd7636e77d833" version="1">施展&lt;LSTag Type="Spell" Tooltip="Shout_SongOfRest"&gt;休憩曲&lt;/LSTag&gt;時，你會完全恢復你的&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;。</content>
+	<content contentuid="h34b4891bg1d27g483dgbf80gf19ccdcf4b02" version="1">繆斯恩典</content>
+	<content contentuid="hcf6bc90dg2c7ag4b60g9d0dg9b3cc12dc1c5" version="1">這襲交織著啟迪銀絲的紫羅蘭色華服，曾是一位傳奇吟遊詩人的獎賞，他演奏的旋律足以觸動鐵石心腸，每一節奏響的音符，都會引來機運本身的垂青。</content>
+	<content contentuid="h6c990af6g4e04g4d43g9f06g0bbebcb2b3c6" version="1">靈機再現</content>
+	<content contentuid="h323b7968g1f0bg4353gb12eg4a06c4d3ae20" version="1">在戰鬥中使用&lt;LSTag Tooltip="Cantrip"&gt;戲法&lt;/LSTag&gt;時，有&lt;b&gt;[1]%&lt;/b&gt;的機率恢復一次&lt;LSTag Type="ActionResource" Tooltip="BardicInspiration"&gt;詩人激勵&lt;/LSTag&gt;。</content>
+	<content contentuid="h83c2c37ag8c79g4684gb0a2gf2fdfac39b55" version="1">暗影征戰斗篷</content>
+	<content contentuid="haeee8312gc902g4c84g9525g7ed90a33de8d" version="1">這件斗篷繚繞著影界位面的陰影與低語，曾屬於一位在戰爭殘垣中崛起的戰士，暗影滲入他的體內，許諾給他在殺戮中愈戰愈勇的力量……直至這股力量最終將他吞噬。</content>
+	<content contentuid="h38ea2066gbad5g482ag820dgb8e1553f8cd1" version="1">噬亡之力</content>
+	<content contentuid="h3046babcg33c7g42e0gb583gfa528a2aaaab" version="1">擊殺敵人時，獲得&lt;b&gt;[1]&lt;/b&gt;層&lt;LSTag Type="Status" Tooltip="ARMOURA33"&gt;暗影侵蝕&lt;/LSTag&gt;。</content>
+	<content contentuid="hee806662g16f6g4a00gb584ge5ac3ff61a6a" version="1">暗影侵蝕</content>
+	<content contentuid="h9312acb8g694ag4f56g980bgf319d436eb38" version="1">每有一層此效果，&lt;LSTag Tooltip="SpellDifficultyClass"&gt;法術豁免難度等級&lt;/LSTag&gt;獲得&lt;b&gt;+[1]&lt;/b&gt;加值。&lt;br&gt;你每回合受到&lt;b&gt;[2]&lt;/b&gt;點傷害。&lt;br&gt;&lt;br&gt;若層數達到&lt;b&gt;[3]&lt;/b&gt;或以上，暗影侵蝕消散，你受到&lt;b&gt;[4]&lt;/b&gt;點傷害。&lt;br&gt;&lt;br&gt;不會隨時間消散。</content>
+	<content contentuid="ha2857858g2698g4208ga5cegb35a8bcc09fd" version="1">碎影盔甲</content>
+	<content contentuid="h5534cfa4g7b36g41begbc25g61fff598d3c0" version="1">這件護甲由一群避世離俗的法師工匠所制，據說能汲取生命精華的本源。除了基本的防護，它還有吸收內在的生命之泉的力量，如同一位無形無跡，卻永遠警醒的靈體守衛。</content>
+	<content contentuid="h95815b1bg9457g4a8cg9ca4g0e6ef04de7f7" version="1">靈體復生</content>
+	<content contentuid="h62b492b9g061fg42e0ga444gf5f8a7fe6602" version="1">在戰鬥中使用&lt;LSTag Type="Spell" Tooltip="Shout_FalseLife"&gt;虛假生命&lt;/LSTag&gt;時，恢復自身最大&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;的&lt;b&gt;[1]%&lt;/b&gt;。&lt;br&gt;每場戰鬥最多觸發&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="hfaad4878g8f21g44b8ga3dag01a6d0d1640a" version="1">黑豹皮甲</content>
+	<content contentuid="h075ebf76g6238g41a8gb3c2g3f4b152ab520" version="1">這件不凡皮甲的前襟，裝飾著一個獨特的月亮結社徽記，由精美的博德之門彩色棉線繡制而成。你還注意到一點：它的內側，繡有一間工坊的印記與地址。看來這是一份特別訂製品，無疑也由當地的巫師所打造。</content>
+	<content contentuid="h760ce41bgb511g47caga02dg8ebe9c6a42ab" version="1">獸之共鳴</content>
+	<content contentuid="hf91c217cg9136g4806g901dg88d6577743d9" version="1">進入&lt;LSTag Type="Spell" Tooltip="Shout_WildShape"&gt;荒野形態&lt;/LSTag&gt;後的前&lt;b&gt;[1]&lt;/b&gt;回合內，&lt;LSTag Tooltip="Dexterity"&gt;敏捷&lt;/LSTag&gt;增加&lt;b&gt;[1]&lt;/b&gt;點。</content>
+	<content contentuid="h489770f0g0dedg4d57gaf8fga97a9deb135e" version="1">智者亡鎧</content>
+	<content contentuid="hea056789gb62ag4876g809fgb9970eebd512" version="1">這件盔甲鍛造於幽魂低語的林地之中，以遠古先知的智慧，加深黯蝕之觸，引導穿戴者的智慧，讓他們邪穢的法術以更濃烈的惡意滲透敵人。</content>
+	<content contentuid="h14af3005gd9d9g4074g9759g51267a5c939e" version="1">幽魂創傷</content>
+	<content contentuid="hba963601g7aa2g4022ga738gda92e8a298ec" version="1">以&lt;LSTag Type="Spell" Tooltip="Target_HaloOfSpores"&gt;孢子光環&lt;/LSTag&gt;造成傷害時，你對目標施加&lt;LSTag Type="Status" Tooltip="AMP_DEATHCLERIC_FETID_ROT"&gt;惡臭腐壞&lt;/LSTag&gt;狀態，持續&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h1d8cd578gfa7cg43ddga1c0g5a5a954de51f" version="1">死靈匯流</content>
+	<content contentuid="h76df3abag5297g4a43ga4bdg4c46a35f98c6" version="1">切換後，&lt;LSTag Type="Spell" Tooltip="Target_ChillTouch"&gt;凍寒之觸&lt;/LSTag&gt;不再消耗&lt;LSTag Tooltip="ActionPoint"&gt;動作&lt;/LSTag&gt;，改為消耗全部&lt;LSTag Type="Status" Tooltip="AMP_ANCIENTCHAOS"&gt;遠古混沌&lt;/LSTag&gt;層數。</content>
+	<content contentuid="hf386eec7g7812g4774g89cfga95afc395889" version="1">刺骨寒霜</content>
+	<content contentuid="hb3bb1e3cg5c0ag43eegaedbg426f0279e946" version="1">若目標處於&lt;LSTag Type="Status" Tooltip="CHILL_TOUCH"&gt;骨髓冰寒&lt;/LSTag&gt;狀態，你的&lt;b&gt;[1]&lt;/b&gt;傷害骰結果不會低於&lt;b&gt;[2]&lt;/b&gt;。</content>
+	<content contentuid="h32ceca1bga35cg4fbbg8ddeg23fb95f6bbcb" version="1">永珍回春</content>
+	<content contentuid="h46f49808g60f4g41ffga8bbgedd60e1a225e" version="1">這件盔甲鍛造於太古森林的核心，承載著不朽古樹的堅韌。它加深了德魯伊與大自然的聯結，賦予他們生生不息的力量，猶如萬物重歸大地的懷抱。</content>
+	<content contentuid="h2f37596agfa23g4984g974bgeb0d6706b855" version="1">生生不息</content>
+	<content contentuid="hcad64441gb463g4729g9af8ga1fb5d6a0aa3" version="1">消耗一次&lt;LSTag Type="ActionResource" Tooltip="NaturalRecoveryPoint"&gt;自然恢復&lt;/LSTag&gt;時，你有&lt;b&gt;[1]%&lt;/b&gt;的機率立即恢復它。</content>
+	<content contentuid="h0bd2f83eg21cfg4ae7g8208ge7048cc46f3f" version="1">天怒法袍</content>
+	<content contentuid="h7bc0d9b5g8452g48a2ga9f9gc135f0893e02" version="1">這件衣袍在銀月清輝下織就，盪漾著天界星體的純粹烈性。透過裝飾的蒼穹符文，你得以窺見神性的一角：祝福和災禍一體同生，在宇宙的布帛中交織纏繞。</content>
+	<content contentuid="hd41cd880gd83bg4791g9a5dgbeed12d52f44" version="1">天穹輝光</content>
+	<content contentuid="he3d539afg1c90g42ccg96bag3a65e3360eb7" version="1">移動你的&lt;LSTag Type="Spell" Tooltip="Target_Moonbeam"&gt;月華之光&lt;/LSTag&gt;時，恢復你的&lt;LSTag Tooltip="ActionPoint"&gt;動作&lt;/LSTag&gt;，並獲得&lt;LSTag Type="Status" Tooltip="ARMOURA38"&gt;月光庇護&lt;/LSTag&gt;，持續&lt;b&gt;[1]&lt;/b&gt;回合。&lt;br&gt;&lt;br&gt;每回合最多觸發&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h0be8715fga194g4eceg830eg27540ad11218" version="1">月光庇護</content>
+	<content contentuid="h5e898f22g7282g4ea9g9c8eg8ee84813ed79" version="1">在移動你的&lt;LSTag Type="Spell" Tooltip="Target_Moonbeam"&gt;月華之光&lt;/LSTag&gt;後，你可以施放&lt;LSTag Type="Spell" Tooltip="Target_Sanctuary"&gt;庇護術&lt;/LSTag&gt;，持續&lt;b&gt;[1]&lt;/b&gt;回合。&lt;br&gt;&lt;br&gt;月光將繼續造成傷害，且不會打破庇護術效果。</content>
+	<content contentuid="h9c8f005agec48g4a75g90f9g2b81eb6046e6" version="1">刺影軟甲</content>
+	<content contentuid="h1eb08e59g2cabg462fg88c8g5c535ea63cf0" version="1">皮甲的表面暗得彷彿能吸收光線。它貫徹著靜默狩獵的精髓，是刺客的完美盟友，也是獵物的剋星，讓毫無防備者在陰影與恐懼中動彈不得。</content>
+	<content contentuid="he099b32ag8a59g48e8g8ce6ga72a95489091" version="1">無形之握</content>
+	<content contentuid="h499087c0g6f7bg497cga3c3g92ba6e49ba71" version="1">以&lt;b&gt;近戰或遠端&lt;/b&gt;&lt;LSTag Type="Spell" Tooltip="Target_SneakAttack"&gt;偷襲&lt;/LSTag&gt;命中一名敵人時，若其未能透過一次&lt;LSTag Tooltip="Constitution"&gt;體質&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;，則對其施加&lt;LSTag Type="Status" Tooltip="PARALYZED"&gt;麻痺&lt;/LSTag&gt;狀態。&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;難度等級&lt;/LSTag&gt;取決於你的&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;戰技豁免難度等級&lt;/LSTag&gt;。</content>
+	<content contentuid="hf759dedag213bg4fb5ga60fge8214f62c33f" version="1">奇策</content>
+	<content contentuid="h352e6390gb6d2g4d43g8081g17a8c483ee76" version="1">這件軟甲打造於盜賊工會的影灣，針線裡同時縫入了疾風的迅捷和賭徒的好運。每一次成功的暗殺，都可能催生又一個與命運共舞的契機。</content>
+	<content contentuid="ha8c9bee8g2aa4g46b3ga4d1g8c1a75245aa9" version="1">完勝</content>
+	<content contentuid="h61702134gdb0cg40e5gadacgef2aad41ca6e" version="1">當你以&lt;b&gt;近戰或遠端&lt;/b&gt;&lt;LSTag Type="Spell" Tooltip="Target_SneakAttack"&gt;偷襲&lt;/LSTag&gt;命中一名敵人時，你恢復&lt;b&gt;所有&lt;/b&gt;&lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;附贈動作&lt;/LSTag&gt;。&lt;br&gt;每回合最多觸發&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h00e2a105gcee8g4f6dgabeag01bfdce2bfc6" version="1">以&lt;b&gt;近戰或遠端&lt;/b&gt;&lt;LSTag Type="Spell" Tooltip="Target_SneakAttack"&gt;偷襲&lt;/LSTag&gt;命中一名敵人時，恢復&lt;b&gt;所有&lt;/b&gt;&lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;附贈動作&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;每場戰鬥最多觸發一次。</content>
+	<content contentuid="h6defbb7eg5c89g4943gae30g8c857c50ee22" version="1">行險詭策</content>
+	<content contentuid="he0930c59gdbfcg4adcg9178gfcd35ac0cf06" version="1">潛影皮甲</content>
+	<content contentuid="h1caa06edg5233g446dgb4d4g45c2b2112b7a" version="1">這件皮革外衣曾屬於一位匿影公會的首領，在秘法針腳的加持下，它能在穿戴者隱匿身形時給予一劑生命活流，以陰影般的精妙，重縫生命之線。</content>
+	<content contentuid="he43e4ff4g6031g4a24g8831g5844613a8e56" version="1">遁影續存</content>
+	<content contentuid="hd1ea1b05gd722g4c52ga558gd29dc4c41250" version="1">在戰鬥中對自身施加&lt;b&gt;隱形&lt;/b&gt;效果時，你將恢復&lt;b&gt;[1]&lt;/b&gt;點生命值。</content>
+	<content contentuid="h1f0d5c92gfa7eg44e8ga352gda72d6dc8372" version="1">後來者的餘裕</content>
+	<content contentuid="h514e5af8g7b1fg403egb4b7g99a52c00cb23" version="1">這件護甲工藝精湛，由柔韌至極的皮革裁剪而成，兼備防護與靈敏：穿戴者會發現自己的動作總是後發先至，尤其在規避傷害時最為迅捷。</content>
+	<content contentuid="h13e36632g674fg41cegb8c4g74431d9d447c" version="1">優遊自若</content>
+	<content contentuid="hfa771f7bg290dg4be9gb41ag706d018804c9" version="1">&lt;LSTag Type="Spell" Tooltip="Shout_Disengage"&gt;撤離時&lt;/LSTag&gt;，你恢復一個&lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;附贈動作&lt;/LSTag&gt;。</content>
+	<content contentuid="hf59f317bgc0feg4663g9cdege33f224ee7b7" version="1">織網絲袍</content>
+	<content contentuid="hfa9fceecgcd58g443bg867fgefc437d1e189" version="1">這件輕盈亮澤的衣裳據說是幽暗地域的卓爾紡織而成，它在效仿蛛絲的特質方面尤為出色，不僅能賦予穿戴者蜘蛛般的靈巧優雅，還讓蛛網成為他們得天獨厚的優勢。</content>
+	<content contentuid="h86c070b2gc63eg467ag836cge36b4ed3847a" version="1">卓爾匿蹤</content>
+	<content contentuid="hc8b9d329gcd9ag4019ga24ag0a8d42d1c1c2" version="1">當敵人對你失手時，透過一次&lt;LSTag Type="Skills" Tooltip="Stealth"&gt;隱匿&lt;/LSTag&gt;檢定（&lt;b&gt;[1]&lt;/b&gt;）以獲得&lt;LSTag Type="Status" Tooltip="INVISIBILITY"&gt;隱形&lt;/LSTag&gt;，持續&lt;b&gt;[2]&lt;/b&gt;回合。</content>
+	<content contentuid="h7f20ec02g44e6g4f89ga6efg318eeb437993" version="1">劇毒之觸</content>
+	<content contentuid="h61576c4cg8f4cg4b99gadc8g078d2a7dadf9" version="1">處於&lt;b&gt;被遮蔽&lt;/b&gt;或&lt;LSTag Type="Status" Tooltip="INVISIBILITY"&gt;隱形&lt;/LSTag&gt;狀態時，造成傷害會對目標施加&lt;LSTag Type="Status" Tooltip="AMP_TOXEMIA"&gt;毒血癥&lt;/LSTag&gt;，持續&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h4c5b5dd2gc330g45cdga82cgf7959de0a6d9" version="1">織網淬毒</content>
+	<content contentuid="h6bb414b5g6bebg4eefgb2feg030f88dbbca6" version="1">處於&lt;b&gt;蛛網&lt;/b&gt;上時，你的攻擊額外造成&lt;b&gt;[1]&lt;/b&gt;，數值等同於你的&lt;LSTag Tooltip="ProficiencyBonus"&gt;熟練加值&lt;/LSTag&gt;。</content>
+	<content contentuid="h348065f4g72bcg4ef9gab8fg306911516ee2" version="1">掠食節律</content>
+	<content contentuid="h12e83126g8e92g4fbbg8cebg83c4615ecba4" version="1">對處於&lt;LSTag Type="Status" Tooltip="SURPRISED"&gt;受驚&lt;/LSTag&gt;或&lt;LSTag Type="Status" Tooltip="PARALYZED"&gt;麻痺&lt;/LSTag&gt;狀態的生物造成傷害時，你&lt;b&gt;每回合一次&lt;/b&gt;恢復一個&lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;附贈動作&lt;/LSTag&gt;。</content>
+	<content contentuid="h05972d63g6c30g4b91g8968g0a92cfcd6935" version="1">外交官禮服</content>
+	<content contentuid="he0484188g7042g4843gace3g2248eff41175" version="1">衣服上的品紅色軟革，令人聯想起暮色的天空。據說，曾有一位穿著它的使者，僅憑一場演講便終結了戰爭——靠的並非狡計，而是因為廳中的每一縷靈魂都深信不疑地認定，和平，才是神聖的意志。</content>
+	<content contentuid="hb9c913abgb63eg4cf4g97b8gd9a85b76733d" version="1">一表非凡</content>
+	<content contentuid="h97102447g3b23g4cd9g8fe6gc356e5b3f267" version="1">對一名盟友使用&lt;LSTag Type="ActionResource" Tooltip="BardicInspiration"&gt;詩人激勵&lt;/LSTag&gt;時，該盟友同時獲得&lt;LSTag Type="Status" Tooltip="BLESS"&gt;祝福術&lt;/LSTag&gt;效果，持續&lt;b&gt;[1]&lt;/b&gt;回合。若你為&lt;b&gt;人類&lt;/b&gt;，自身也獲得&lt;LSTag Type="Status" Tooltip="BLESS"&gt;祝福術&lt;/LSTag&gt;。</content>
+	<content contentuid="he069b93ag912eg4eb4g8170g42c514ed864d" version="1">外交風度</content>
+	<content contentuid="h121e4d9eg262dg42a7g84c7gfac50ae0e1c0" version="1">你的&lt;LSTag Type="ActionResource" Tooltip="BardicInspiration"&gt;詩人激勵&lt;/LSTag&gt;不再消耗&lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;附贈動作&lt;/LSTag&gt;。</content>
+	<content contentuid="hfffea94bg1af4g45d4ga3e6gaf910a225134" version="1">振奮氣場</content>
+	<content contentuid="h9cdc2f88g60f5g4f7dg8bb6gcf2c73259e21" version="1">&lt;b&gt;[1]&lt;/b&gt;範圍內所有獲得&lt;LSTag Type="Status" Tooltip="BLESS"&gt;祝福術&lt;/LSTag&gt;效果的生物，其&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;具有&lt;LSTag Tooltip="Advantage"&gt;優勢&lt;/LSTag&gt;。</content>
+	<content contentuid="h460d6d3eg52b8g4ba6g92bfgc08927bacf8c" version="1">祝福諧振</content>
+	<content contentuid="h4edbb779g9c5dg49b9ga20ag5f0fda70ad45" version="1">每當你受到&lt;LSTag Type="Status" Tooltip="BLESS"&gt;祝福術&lt;/LSTag&gt;影響時，恢復1次&lt;LSTag Type="ActionResource" Tooltip="BardicInspiration"&gt;詩人激勵&lt;/LSTag&gt;。</content>
+	<content contentuid="h1b79d36cg827dg439cg8207gffb1504f6fda" version="1">獸群之樂</content>
+	<content contentuid="hf10c4ecag0845g4fe7gb9d6g1d134dffcd46" version="1">呼應荒野的繁複紋路鑲嵌在皮甲上，這不僅僅是一件護具，它正與眾多生靈的心跳發出共鳴，讓人能與野獸之靈心意相通，並安撫它們的情緒。</content>
+	<content contentuid="h5e7dd79dg44dfg46fdg888age49b55e4e825" version="1">獸靈低語</content>
+	<content contentuid="h492197d3g9286g4859g9d7agf14bfe3175fe" version="1">&lt;LSTag Tooltip="AnimalHandling"&gt;馴獸&lt;/LSTag&gt; &lt;b&gt;+[1]&lt;/b&gt;。</content>
+	<content contentuid="hc1eaefa1gd735g4737ga780g48aaad8a59e9" version="1">獸王坎肩</content>
+	<content contentuid="h9199657cg08a3g4925g9be4gae969948e467" version="1">馬甲上嵌有一顆隨荒野之力而搏動的翡翠，專為那些與野獸夥伴同行之人所準備。獸王之手的每一次治癒，都會在其盟友身上得到呼應，以狂野精魂的韌性來癒合傷口。</content>
+	<content contentuid="h7906b522g66bag4b16g96a3g888ab0987976" version="1">始源之心</content>
+	<content contentuid="h2ca47f46ge1f0g49b4g8ccdg02b765fcc47a" version="1">治療你所&lt;b&gt;召喚&lt;/b&gt;的生物時，為其恢復&lt;b&gt;[1]&lt;/b&gt;點生命值。</content>
+	<content contentuid="h20430d51g4980g4fb8gb8feg64f865089227" version="1">泰坦禍星</content>
+	<content contentuid="h06615481gb720g408fgaa73g3e4a2abd67eb" version="1">一位傳奇鐵匠以隕落星辰的銀心鍛造了它，旨在制衡巨人。它的魔力能迷惑強敵，令形體變得撲朔迷離，彷彿遊走於體積與空間的絲縷之中。</content>
+	<content contentuid="hd73f6821gee02g4e0agb709g8d361a881f29" version="1">銀光遁影</content>
+	<content contentuid="hd30ec86dg58ecg404cgb446gd6552aa3ec14" version="1">&lt;b&gt;怪獸&lt;/b&gt;對你進行的&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;具有&lt;LSTag Tooltip="Disadvantage"&gt;劣勢&lt;/LSTag&gt;。你的體型&lt;b&gt;變小&lt;/b&gt;，使你得以擠過狹小縫隙和擁擠人群。</content>
+	<content contentuid="haab71f40g0ce7g44bdgac87g60f0bcd93b20" version="1">霧裡看花</content>
+	<content contentuid="h400189d1g4da1g4bfag9bdcg21dc180c769b" version="1">鍊金白銀的紋路流淌在衣服上，映襯著晨霧的變幻莫測。在激戰之中，它會響應痛楚，生成一團防護之霧。然而，這個魔法並不穩定，有時甚至會模糊自身的視野。</content>
+	<content contentuid="h7ae1a821gc139g41fegb028gb63990681d4b" version="1">霧靄沉沉</content>
+	<content contentuid="h3c50d5c0g851ag49a4g89ebg02a250802ecb" version="1">戰鬥開始時，你在自身周圍&lt;b&gt;[1]&lt;/b&gt;範圍內覆蓋一片&lt;b&gt;雲霧&lt;/b&gt;，持續&lt;b&gt;[2]&lt;/b&gt;回合。</content>
+	<content contentuid="h7a17b5ccg69bbg407egb5b3gd07e29a9fa0a" version="1">捷甲先登</content>
+	<content contentuid="he34ee762geb60g405bg9823g9dfc1f33ef0a" version="1">這件護甲由柔韌至極的皮革鞣製，旨在融入身體的一部分，就像人們自身的手足般靈活。甲身的關鍵部位被巧妙地加固了，允許穿戴者以迅雷不及掩耳之勢移動，在躲避法術或陷阱時搶佔先機。</content>
+	<content contentuid="h53c71fc2ga419g4560g91a1g7645bf43b1d5" version="1">織心胸甲</content>
+	<content contentuid="hd00cf00dgdcc0g419fgacc1g368036317ed8" version="1">由一位偏執的法師委託打造，他堅信奪心魔會在他泡澡時讀取自己的思想。這件胸甲本應抵禦心靈入侵，結果卻適得其反——而且效果驚人。金屬中融入了受奪心魔汙染的試劑，如今反而會放大穿戴者的靈能不穩定性，使每個法術都變成一場攪亂大腦的意外。那位法師最後的想法？已被列為機密。大概也早已被攪成一團漿糊了。</content>
+	<content contentuid="h7caec3c6gc1a3g470cg863fga6ecb0a0bf05" version="1">思維亂碼</content>
+	<content contentuid="h6bd2c03cgfe37g4742ga5adgeeede1535f58" version="1">靈能反衝</content>
+	<content contentuid="h3c5375bcg04e8g4fe9g8071gdd4162fba189" version="1">在戰鬥中，若你尚未擁有&lt;LSTag Type="Status" Tooltip="TAD_SHIELD_OF_THRALLS"&gt;隸屬之盾&lt;/LSTag&gt;，則會在你的每個回合開始時獲得該狀態。</content>
+	<content contentuid="he92b3b52g7e22g4886gaa6dgb2576467c503" version="1">和風</content>
+	<content contentuid="h653b8171g8662g45d2g987dg91e1730ad3bd" version="1">深水城的古籍中，記載著“和風”的傳說——這雙如海般碧藍的優雅手套，曾屬於以迅捷和御風術聞名的精靈：伊蘭鐸·風翼。他將魔力注入手套，使它能遲緩對手，好似空氣本身都在阻撓其步伐。手套隨伊蘭鐸的逝去而失傳，卻在危難時刻重現於世，以謙遜優雅之姿扭轉戰局——它是希望的象徵，亦是風之偉力改寫命運的明證。</content>
+	<content contentuid="h97f6e033g7472g4809g89b7gf9f18bae6e5f" version="1">疾風刻印</content>
+	<content contentuid="h19300a4cg1fe0g4c47ga34ag9602b0855444" version="1">受到你&lt;b&gt;近戰武器&lt;/b&gt;或&lt;b&gt;徒手&lt;/b&gt;攻擊傷害的敵人，必須透過一次&lt;LSTag Tooltip="Constitution"&gt;體質&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;，否則將受到&lt;LSTag Type="Status" Tooltip="ARMOURG51"&gt;烈風侵襲&lt;/LSTag&gt;的影響，持續&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h81b2c30ag4657g4ab9gb556g7481ef214996" version="1">烈風侵襲</content>
+	<content contentuid="h1369c63eg4200g4d41ga2ddg4e1597d9f42d" version="1">此生物移動所消耗的&lt;LSTag Tooltip="MovementSpeed"&gt;移動速度&lt;/LSTag&gt;增加&lt;b&gt;[1]&lt;/b&gt;倍。</content>
+	<content contentuid="ha3f34bd1ga565g4362g944dg305eb98d049e" version="1">影狐之爪</content>
+	<content contentuid="h40e0fbceg553cg41c8gbd3dg8decfe07aa50" version="1">這雙幽影般的手套曾屬於傳奇盜賊沙迦，他以能從最嚴密的金庫中消失無蹤而聞名。手套上附著的疾速魔力，令沙迦出手快得敵人無從反應，在他驚心動魄的冒險中功不可沒。傳說沙迦正是戴著“影狐之爪”完成了最後一次、也是最偉大的遁逃，此後他便人間蒸發，只留下這件遺物。</content>
+	<content contentuid="h14a7acd2g9934g45e7g855agc646ce1233a5" version="1">電光石火</content>
+	<content contentuid="hc8fa542ega0c0g420bg83c5gf1c63595b8b0" version="1">在戰鬥中使用&lt;LSTag Type="Spell" Tooltip="Shout_Dash"&gt;疾走&lt;/LSTag&gt;後，你的&lt;b&gt;近戰武器&lt;/b&gt;&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;獲得&lt;b&gt;+[1]~[2]&lt;/b&gt;加值，持續至你的回合結束。</content>
+	<content contentuid="h0e48b39dga2c0g4b51gad31gc9cbd2702409" version="1">龍裔護爪</content>
+	<content contentuid="hdc70334dg289eg4575gba98g637354322689" version="1">這雙護爪曾屬於泰曼瑟最強大的龍裔鬥士，以遠古巨獸的皮革鞣製，並綴以鉚釘。它專為血脈中流淌著巨龍之力者打造，能讓鬥士的每一次打擊都迸發龍族傳承之力，將毀滅性的威能灌注於攻擊之中。如今，護爪正靜待新的英雄，以繼承龍之勇士的征途。</content>
+	<content contentuid="h04fa547fgc715g4d3dgb2afgadf1a9b76c9b" version="1">龍之勇武</content>
+	<content contentuid="h8e269030g4b84g4c0cgab01gfe89af16447f" version="1">若你為&lt;b&gt;龍裔&lt;/b&gt;（或&lt;b&gt;偽裝成龍裔&lt;/b&gt;），則你的&lt;b&gt;武器&lt;/b&gt;攻擊造成&lt;b&gt;[1]&lt;/b&gt;點額外傷害。</content>
+	<content contentuid="h61ae4e47gab06g4502g903agf7eb4a1a5714" version="1">鬥場直覺</content>
+	<content contentuid="hd1493823g03eeg41f1gac41gab4f73d55f50" version="1">當你&lt;b&gt;閃避&lt;/b&gt;一次&lt;b&gt;武器攻擊&lt;/b&gt;時，獲得&lt;b&gt;[1]&lt;/b&gt;層&lt;LSTag Type="Status" Tooltip="MAG_ZOC_FORCE_CONDUIT"&gt;力場導體&lt;/LSTag&gt;。若你為&lt;b&gt;龍裔&lt;/b&gt;，則改為獲得&lt;b&gt;[2]&lt;/b&gt;層。</content>
+	<content contentuid="h1a37ad6egd782g408dga5fcg7ee89c736909" version="1">泰曼瑟之威</content>
+	<content contentuid="he4b705ceg10bcg4eacga3d4g981db6778b87" version="1">若你的&lt;LSTag Tooltip="Charisma"&gt;魅力&lt;/LSTag&gt;高於&lt;b&gt;[1]&lt;/b&gt;，&lt;b&gt;武器攻擊&lt;/b&gt;&lt;b&gt;還會&lt;/b&gt;造成&lt;b&gt;[2]&lt;/b&gt;。若你是&lt;b&gt;龍裔&lt;/b&gt;，則改為&lt;b&gt;還會&lt;/b&gt;造成&lt;b&gt;[3]&lt;/b&gt;，數值等同於你的&lt;LSTag Tooltip="Charisma"&gt;魅力&lt;/LSTag&gt;調整值。</content>
+	<content contentuid="hf97b213dg6513g4931g9dc5gbed93e1f0864" version="1">若你的&lt;LSTag Tooltip="Charisma"&gt;魅力&lt;/LSTag&gt;高於&lt;b&gt;[1]&lt;/b&gt;，&lt;b&gt;武器攻擊&lt;/b&gt;&lt;b&gt;還會&lt;/b&gt;造成&lt;b&gt;[2]&lt;/b&gt;。若你是&lt;b&gt;龍裔&lt;/b&gt;，則改為&lt;b&gt;還會&lt;/b&gt;造成&lt;b&gt;[3]&lt;/b&gt;，數值等同於你&lt;b&gt;雙倍&lt;/b&gt;的&lt;LSTag Tooltip="Charisma"&gt;魅力&lt;/LSTag&gt;調整值。</content>
+	<content contentuid="hab17a71aga3a7g49e9g9477g4b29a0be76fa" version="1">冠軍吐息</content>
+	<content contentuid="hf388b1f9g5f39g4fcfgb146g379a8c8a26f4" version="1">當你用&lt;b&gt;武器攻擊&lt;/b&gt;造成傷害時，每回合&lt;b&gt;一次&lt;/b&gt;，會立刻釋放你的&lt;b&gt;龍族吐息&lt;/b&gt;。</content>
+	<content contentuid="he5c95a85gff8bg4a11g8616g2dfede6f0043" version="1">當敵人進入你&lt;b&gt;[1]&lt;/b&gt;範圍內時，消耗你的反應，對其釋放&lt;b&gt;龍族吐息&lt;/b&gt;。</content>
+	<content contentuid="h74dd2610g9b1cg42a3ga90eged89bbc16f25" version="1">風語纏手</content>
+	<content contentuid="h65c76948g55a8g4556gbec1g511abdbd67ce" version="1">這件遺物曾屬於一支遊歷四方的僧侶部族，他們參透了主宰平原的風之奧秘。當你向護手低語時，它便會捲起一陣疾風，甚至快過“順風”二字的發音。穿上它的戰士每邁出一步，自身的破綻便會減少幾分，彷彿空氣正在周身織就無形的鎧甲。自從僧侶們神隱後，遺物便下落不明——此後只在冒險者與古董商手中偶現蹤跡。</content>
+	<content contentuid="h3f6bc894g40d1g494bg8cbfg51111962bbf2" version="1">迴風</content>
+	<content contentuid="h9bf4d214gb072g42c8g8ff1gab6b34a94e1f" version="1">以&lt;b&gt;近戰武器&lt;/b&gt;或&lt;b&gt;徒手&lt;/b&gt;攻擊命中時，&lt;LSTag Tooltip="ArmourClass"&gt;護甲等級&lt;/LSTag&gt;增加&lt;b&gt;+[1]&lt;/b&gt;，持續至你下回合開始。</content>
+	<content contentuid="hc3245755g76b6g4a45gaa45g52b87b0f5cd4" version="1">織網獵手</content>
+	<content contentuid="h869f1932gd589g46a9gb396gee14a7bdee08" version="1">這件護腕曾屬於卓爾族的伊芙瑞娜，她是如此精於陷阱，以至於哪怕是幽暗地域最膽大的住民都感到不安。據說她可操縱世間之網，以精準得令人咋舌的巧思，將毫無防備的靈魂誘入陷阱。一旦落入她的蛛網，敵人便束手無策——之後只需一擊，便足以將他們終結。然而，伊芙瑞娜竟敢挑戰羅絲本人，意欲篡奪蜘蛛神後的名號。那場小冒險的結局無人知曉，但此後起，她那雙浸染著古代魔法的護腕便下落不明。它們總會在不可思議之處重現蹤跡，沉默地提醒世人：野心過大，往往只會作繭自縛，而非夢想成真。</content>
+	<content contentuid="h7f52c02cgf862g4dbcg88c2g79acb7566024" version="1">甕中捕獵</content>
+	<content contentuid="hf0d94b04g575cg4f2egb23ag16834a91463b" version="1">若目標立於&lt;b&gt;蛛網表面&lt;/b&gt;，則你的&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;獲得&lt;b&gt;+[1]~[2]&lt;/b&gt;加值。</content>
+	<content contentuid="h97fe745ag5dcag40c3ga57bg7f53d480ab85" version="1">最終防手</content>
+	<content contentuid="he425abc6g19e0g4f44gb154g24dcc175f992" version="1">這雙沉重的板甲護手曾包裹著阿斯托恩的雙手，他是哈杜爾要塞的守衛。當敵人攻破城牆，希望幾近破滅之時，阿斯托恩依然固執地拒絕撤退。相反，他不停地醫治著倒下的戰友，同時吸引著敵軍精銳毫無保留的火力。然而，每一次的治療，似乎都讓阿斯托恩更加堅韌了，彷彿要塞本身正將自身不屈的韌性借予他。在要塞的最後一戰中，阿斯托恩倒下了，但在此之前，他已留下了不可磨滅的印記。如今，他的護手浸染著他那不屈意志的魔法，總會在最意想不到的人手中重現蹤跡。它們堅定地提醒著世人：有時最好的進攻，就是——嗯，就是死賴著不走，真的。</content>
+	<content contentuid="hfa40ef53gc4e2g4195g9695g5579ac96a6a2" version="1">圍城輓歌</content>
+	<content contentuid="hbb398dfdg79d6g4745ga680gf4e20410ab8b" version="1">以&lt;b&gt;環級法術&lt;/b&gt;進行治療時，&lt;LSTag Tooltip="ArmourClass"&gt;護甲等級&lt;/LSTag&gt;增加&lt;b&gt;+[1]&lt;/b&gt;，持續至&lt;b&gt;你下回合開始&lt;/b&gt;。</content>
+	<content contentuid="hd64547dfg9632g49c1ga1dbg5e21ab691f16" version="1">星輝擁握</content>
+	<content contentuid="h5d90d51bgbe5ag4f4cgb815gf8d4d4ca8da8" version="1">這件璀璨的遺物曾屬於傳奇戰鬥法師泰瑞斯，他僅憑觸碰便能引導宇宙之怒。在鼎盛時期，泰瑞斯遍尋天下最強大的對手：巨龍、巫妖、惡魔領主……他堅信，唯有徵服不可征服者，方能贏得真正的榮耀。每倒下一尊泰坦，便有星界能量湧入手套，讓神聖的使命感充盈全身。然而，泰瑞斯對更強對手的無盡渴求，最終驅使他挑戰了一位超越凡人認知的存在。他倒下了，手套卻留存至今，依然低吟著星輝，依然渴望著下一份值得託付的雙手，去裁決那諸般強大。</content>
+	<content contentuid="h0c4a58a0gdc48g4a4cg8443g994d351537d6" version="1">虛空之噬</content>
+	<content contentuid="ha735a357g9282g4e98g86e2g1b0a35093937" version="1">以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;或&lt;b&gt;武器&lt;/b&gt;&lt;b&gt;擊殺&lt;/b&gt;一名&lt;b&gt;首領&lt;/b&gt;時，獲得一個&lt;LSTag Tooltip="Inspiration"&gt;激勵點&lt;/LSTag&gt;。</content>
+	<content contentuid="h79c34ad2gffdcg4a0ag9fc2ga36b83fc5da8" version="1">神射護手</content>
+	<content contentuid="h4e941c8ag3fa1g46c3g9238g670be57ec81e" version="1">這雙護腕曾屬於拉倫·銳目，一位信奉西凡納斯的森林精靈弓箭手。在對抗卡林珊帝國的戰爭中，精靈們從先祖森林的陰影中出擊，向遠方的敵人傾瀉箭雨。拉倫是他們中最出色的箭手之一，以百發百中而聞名。護腕中的魔法引導著他的箭矢，精準得無可挑剔。在一次殘酷的伏擊中，拉倫陣亡，護腕落入卡林珊士兵之手，隨即被轉賣。它們真正的歷史就此被遺忘，淪落為集市貨堆裡一件來歷不明的奇巧物件。</content>
+	<content contentuid="h61eea65fgaafeg4c28g8509g4a903663beca" version="1">精準技藝</content>
+	<content contentuid="hbd49481bg1544g4c84g8c6bgd2f36184861c" version="1">你的遠端武器&lt;/b&gt;的&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;增加&lt;b&gt;+[1]&lt;/b&gt;。</content>
+	<content contentuid="h8e766c19g92e7g4316g9b34g3974016e7c12" version="1">最後的微光</content>
+	<content contentuid="h24649b89g3ac8g435cg816cga0e87917db78" version="1">這雙手套曾屬於安姆一位惡名昭著的刺客，他的獵物總在黑暗的安謐中迎來終結。手套被注入了禁忌儀式的力量，只需輕輕一彈指，便能令弱者目盲，在命運面前毫無還手之力。然而，在他膽大妄為地試圖刺殺城市執政官之後，這件珍貴的遺物便與它的主人一同消失得無影無蹤。刺客的結局至今成謎，而那雙浸染著陰影魔力的手套也再未現世——徒留傳說的餘音在風中低語。</content>
+	<content contentuid="h9e066c34gd8b3g4c31g8af5g40c3122f440a" version="1">束手待斃</content>
+	<content contentuid="he6beab9dgdc1fg495fgaef9g1874f6a87461" version="1">當目標處於&lt;LSTag Type="Status" Tooltip="BLINDED"&gt;目盲&lt;/LSTag&gt;狀態時，對其發動&lt;b&gt;近戰武器&lt;/b&gt;攻擊的&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;閾值降低&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="hf37ac617g512cg4f6fgbc44g5f3180acdca0" version="1">終末餘暉</content>
+	<content contentuid="he20282b6g4c56g487cgb041gc6d65af28194" version="1">當你造成&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;時，&lt;b&gt;同時&lt;/b&gt;使目標陷入&lt;LSTag Type="Status" Tooltip="BLINDED"&gt;目盲&lt;/LSTag&gt;狀態，持續&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h17a0fc27gb70ag46eegae7egfb2dffab0d5e" version="1">無誤打擊</content>
+	<content contentuid="hb40f002eg10c6g43adgaa6bg952801a5adbc" version="1">對處於&lt;LSTag Type="Status" Tooltip="BLINDED"&gt;目盲&lt;/LSTag&gt;狀態的目標時，你&lt;b&gt;不會&lt;/b&gt;出現&lt;LSTag Tooltip="CriticalHit"&gt;重大失誤&lt;/LSTag&gt;。</content>
+	<content contentuid="hbc5902ceg0481g45c8g9592gab712b791507" version="1">亡者之握</content>
+	<content contentuid="hb06550afgfc97g42c2gbc60g8897bf00aa65" version="1">由紅納格氏族符文大師格羅森親手鍛造，銘刻著強大符文的這雙手套，其力量之宏偉在所有矮人國度都無可匹敵。在技藝的巔峰時期，紅納格氏族是符文魔法領域中最卓越的存在，而這雙被稱為“亡者之握”的手套，正是他們奧術造詣的巔峰之作。它能汲取氏族先祖的靈體，將其偉力灌注於佩戴者之手。許多如今已傳頌為傳奇的戰士，其功績皆仰仗於此，因它賦予的力量遠超凡人所能企及。在激烈的戰鬥中，最後一位已知的佩戴者，一位聲名顯赫的矮人領主，隕落於一名死靈法師的邪惡詛咒之下。隨著他的逝去，“亡者之握”也隱入時間迷霧之中，輾轉流落於正義之士與邪惡之徒手中，每一任持有者都在歷史上留下了濃墨重彩的印記，卻無人能重現其昔日完整的力量。</content>
+	<content contentuid="h9814944bg9039g4884ga706g171fd34edc4b" version="1">符文偉力</content>
+	<content contentuid="hc22dd962g8040g4319gb9cag5386f1f4e914" version="1">在戰鬥中用&lt;b&gt;武器&lt;/b&gt;造成傷害時，你獲得&lt;b&gt;[1]&lt;/b&gt;層&lt;LSTag Type="Status" Tooltip="ARMOURG60"&gt;力量符文&lt;/LSTag&gt;。</content>
+	<content contentuid="ha8182832g65d0g4b99g9da7gd5ce5e61196e" version="1">在戰鬥中用&lt;b&gt;武器&lt;/b&gt;造成傷害時，你獲得&lt;b&gt;[1]&lt;/b&gt;層&lt;LSTag Type="Status" Tooltip="ARMOURG60_4"&gt;力量符文&lt;/LSTag&gt;。</content>
+	<content contentuid="h0f3a6cf7g6394g4593gbb21g434896dc4d03" version="1">力量符文</content>
+	<content contentuid="hef4a76d5gc3f8g494ega198g3744c457bb91" version="1">每有一層此效果，你的&lt;b&gt;武器&lt;/b&gt;額外造成&lt;b&gt;[1]&lt;/b&gt;點傷害。累積&lt;b&gt;[2]&lt;/b&gt;層後，將其吸收並獲得&lt;LSTag Type="Status" Tooltip="ARMOURG60_2"&gt;至高符文&lt;/LSTag&gt;。</content>
+	<content contentuid="hf0161aabg7034g4c8cg9e2egfac96f5d0a7d" version="1">至高符文</content>
+	<content contentuid="hd0c39818gfdfbg4e0bg93ecgfaba167149a4" version="1">你的下一次&lt;b&gt;武器&lt;/b&gt;攻擊命中時，必定造成&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;。</content>
+	<content contentuid="h1f5db11agb9a5g45c0ga16dg80cd574159d3" version="1">黑焰之縛</content>
+	<content contentuid="h553a522cga664g4cadgbfbcg25d024577fcb" version="1">哈坎·黑焰曾為日魂教團的信徒，卻背棄了其光明的教義，堅信真正的力量蘊藏於火焰的混沌之中。他透過禁忌儀式鑄造了這雙護臂，從火焰的核心汲取力量。他的崛起最終以在安姆東部建立“龍焰要塞”而達到頂峰，在那裡他與安姆和泰瑟爾的聯軍展開鏖戰。儘管許多洛山達的聖武士倒在了他的烈焰之下，但哈坎仍無法孤身對抗一整支軍隊，被烈火吞噬的他，只留下了這雙護臂。它們被遺忘在一位法師的金庫中許久，最終被盜走，在熙攘的集市上淪落為一塊不起眼的碎布。</content>
+	<content contentuid="hc3b66025g3f6eg420eg93a5gcbad74efc406" version="1">怨火復仇</content>
+	<content contentuid="h6cf95d95ga456g4a07g8980gbe8d15190a08" version="1">當一名生物受到你造成的&lt;b&gt;[2]&lt;/b&gt;傷害，併成功透過任何&lt;LSTag Tooltip="Dexterity"&gt;敏捷&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;時，其將陷入&lt;LSTag Type="Status" Tooltip="BURNING"&gt;燃燒&lt;/LSTag&gt;狀態並受到&lt;b&gt;[1]&lt;/b&gt;點傷害。</content>
+	<content contentuid="h8a2f75d0g2111g4571g921fg18b5199a4dc7" version="1">混沌氣流</content>
+	<content contentuid="h96ba0731g1bf2g42fdgba94geb927db64e45" version="1">當一名生物受到你造成的&lt;b&gt;[2]&lt;/b&gt;傷害，且未能透過任何&lt;LSTag Tooltip="Dexterity"&gt;敏捷&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;時，你恢復&lt;b&gt;[1]&lt;/b&gt;點&lt;LSTag Type="ActionResource" Tooltip="KiPoint"&gt;氣點&lt;/LSTag&gt;。此效果每場戰鬥可觸發一次。</content>
+	<content contentuid="hb6cc1d7fg2a35g484fg8d14g27b2d1dc2044" version="1">繁咒手甲</content>
+	<content contentuid="h80c17d6bga0acg4690gb72bgf5c97f787b57" version="1">這雙手甲由無冬城的萊艾裡瑪鍛造，他是精通奧術之秘的大師。在皇家工坊中，他嚴格按照自己的規格要求打造了它們。其上鐫刻的每一道紋路都承載著獨特的附魔，形成了一套前所未見的奧術組合，賦予人們無窮的魔法潛力。然而，由於擔心自己的造物並不穩定，萊艾裡瑪將它藏於山巔一座孤塔之中，並用迷宮般的陷阱將其環繞。多年後，萊艾裡瑪離世，而這雙與創造者斷了聯結的手甲，開始逐漸失去力量。八百四十二年後，一隊冒險者闖入高塔，繞過了重重陷阱，將這件遺物據為己有。可是他們覺得它沒什麼用，便在當地一家商店用它換了幾瓶治療藥水。</content>
+	<content contentuid="h730e66e5g9474g4fd2gb5bfgb6003ca91cd1" version="1">衰竭咒術</content>
+	<content contentuid="h2f125560g45b0g4a17gb6e9g8ac0a25e3e65" version="1">&lt;LSTag Tooltip="Concentration"&gt;專注&lt;/LSTag&gt;於&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;時，你的&lt;LSTag Tooltip="SpellDifficultyClass"&gt;法術豁免難度等級&lt;/LSTag&gt;與法術&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;獲得&lt;b&gt;+[1]&lt;/b&gt;加值。</content>
+	<content contentuid="hf3e36ce0g7e5eg49d1g95d4g3e824118f272" version="1">震鳴手套</content>
+	<content contentuid="h84a08dddg6510g4455g9340g83a74380563e" version="1">在蘭檀島隱秘的熔爐中，匠心與巫術彼此交融。這雙手套作為一項秘密工程而鍛造，其目的是將音聲之力屈從於凡人的意志。蘭檀人素以結合奧術與機械聞名，他們造出了“震鳴手套”，卻始終無法馴服其桀驁的本性。最終，專案被遺棄，手套也消失於記憶的長廊中。直到一位膽大的工程師冒險將其從島上偷運出來，在陰影集市上賣給了那些渾然不知其兇險的冒險者。手套之中，音聲的精魄如風暴般蟄伏盤繞，唯有既睿智又警覺者方能釋放，以免反被其中蘊藏的混沌所吞噬。</content>
+	<content contentuid="hf05d2b0ag69a4g4bc3g8850g067b8a2c3699" version="1">秘研</content>
+	<content contentuid="ha684b5b0gd473g42d8gbea7g84eade4f1d66" version="1">戰鬥中以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;造成&lt;b&gt;[3]&lt;/b&gt;時，獲得&lt;b&gt;[1]/[2]&lt;/b&gt;層&lt;LSTag Type="Status" Tooltip="ARMOURG63"&gt;震鳴精魄&lt;/LSTag&gt;。</content>
+	<content contentuid="hd5a1ab79g724ag427cg89cegfa4bcb8717ba" version="1">震鳴精魄</content>
+	<content contentuid="h2900f5cdg2d15g4c3eg9cd2g891a08d1d7d0" version="1">&lt;LSTag Tooltip="ArmourClass"&gt;護甲等級&lt;/LSTag&gt;&lt;b&gt;+[1]&lt;/b&gt;&lt;i&gt;（無論層數多少）&lt;/i&gt;。&lt;br&gt;累積&lt;b&gt;[2]&lt;/b&gt;層此效果後，將其吸收並獲得&lt;LSTag Type="Status" Tooltip="ARMOURG63_2"&gt;鳴音打擊&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;不會隨時間推移而消失。</content>
+	<content contentuid="h574ee8dbg0dd5g4a48g81a3gb4c25c07ffd9" version="1">鳴音打擊</content>
+	<content contentuid="haa9eef7ag5cf1g4e06g8be2g377b057f8e79" version="1">你的下一次近戰攻擊命中時，將額外造成&lt;b&gt;[1]&lt;/b&gt;點傷害。效果每級提升一次。</content>
+	<content contentuid="hff163e2eg6187g4842ga314gf2a14b4b32bd" version="1">永凍之手</content>
+	<content contentuid="h6a457a1ag2d93g4b04gb6a0gfc9e8dbec477" version="1">這雙手套鍛造於無垠的北方廢土，長期為偏遠的烏斯加特部落的法師所持有。它的織線由一種罕見的北方金屬製成，其鍛造之法已在漫長時光中失傳。烏斯加特人在一處古代文明的廢墟中發現了這一卷奇異的絲線，便用它來加強與魔網的聯絡。手套的毀滅性力量常助部落抵禦外敵，保衛他們冰封的家園，因此這件遺物本身也在莊嚴的儀式中代代相傳，被尊為神聖的圖騰。但最終，烏斯加特人被巨人擊潰，遺物連同他們的記憶一同被無垠的冰雪吞噬，從此消弭於世間。</content>
+	<content contentuid="ha144b82ag08abg471eg9616g7c83c88da4c6" version="1">霜握</content>
+	<content contentuid="h22b85884g4690g4e38g9022g97069c3b2995" version="1">對處於&lt;b&gt;雲霧&lt;/b&gt;中的目標造成傷害時，你對其施加&lt;LSTag Type="Status" Tooltip="MAG_FROST"&gt;覆霜&lt;/LSTag&gt;狀態，持續&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h8b526445g328eg4e26gb9ceg357354465c3c" version="1">基礎版本的&lt;LSTag Type="Spell" Tooltip="Target_IceStorm"&gt;冰風暴&lt;/LSTag&gt;不再需要消耗&lt;LSTag Type="Image" Info="SpellSlot"/&gt;&lt;LSTag Tooltip="SpellSlot"&gt;法術位&lt;/LSTag&gt;。若你是一個&lt;b&gt;法師&lt;/b&gt;，更強大的版本&lt;b&gt;同樣&lt;/b&gt;會變為&lt;b&gt;免費&lt;/b&gt;施放。</content>
+	<content contentuid="hdd5152dbgc333g4a6fgbac8gb2e5878d2c54" version="1">&lt;LSTag Type="Spell" Tooltip="Target_IceStorm"&gt;冰風暴&lt;/LSTag&gt;的基礎版本不再消耗&lt;LSTag Type="Image" Info="SpellSlot"/&gt;&lt;LSTag Tooltip="SpellSlot"&gt;法術位&lt;/LSTag&gt;。若你為&lt;b&gt;法師&lt;/b&gt;，更強版本&lt;b&gt;同樣&lt;/b&gt;可&lt;b&gt;免費&lt;/b&gt;施放。&lt;br&gt;&lt;br&gt;戰鬥中每回合，你將獲得&lt;LSTag Type="Status" Tooltip="MAG_FROST"&gt;霜覆&lt;/LSTag&gt;，持續&lt;b&gt;[1]&lt;/b&gt;回合，除非你對&lt;b&gt;冰面&lt;/b&gt;效應免疫。</content>
+	<content contentuid="h88fe4e4bg7ee4g4ccfga21fg1eebdc45e3d9" version="1">寒冰精通</content>
+	<content contentuid="h4e7a0c4fg6609g41bcga985ga0b044ca4b7e" version="1">冰川熵蝕</content>
+	<content contentuid="hd3ccbd89g818dg4c75g8d74g32b12d3e3a24" version="1">若你為&lt;b&gt;法師&lt;/b&gt;，每次對敵人造成&lt;b&gt;[1]&lt;/b&gt;時，有&lt;b&gt;[2]%&lt;/b&gt;機率創造一顆&lt;b&gt;水棲虛空膠囊&lt;/b&gt;。</content>
+	<content contentuid="hb93bcb66ga263g4c4dgbba8g371d2304e96b" version="1">碎冰</content>
+	<content contentuid="hd0619a89g7025g4aecgb3f1g07195f6cb70b" version="1">對處於&lt;LSTag Type="Status" Tooltip="FROZEN"&gt;凍結&lt;/LSTag&gt;狀態的目標&lt;b&gt;自動&lt;/b&gt;達成&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;。</content>
+	<content contentuid="h2dd2f9a4gd2a0g44e4g894dg30bde3e1cf6f" version="1">狡詐詭手</content>
+	<content contentuid="h2f82984fg3c5cg45dag8becgcb2b70cf3ec7" version="1">多年來，這件遺物一直為拉吉斯·託倫所有。他是一位著名的指揮官兼戰鬥法師，以其大膽的奇策與戰場上無雙的勇猛而聞名。在他的眾多功績中，最引人注目的莫過於在一次與狡猾地精的擲骰豪賭中贏下了這雙手套。然而好景不長，手套被竊賊從他的密室中盜走。自那以後，它便輾轉出現在各種拍賣會與市集上，為每一位試圖駕馭其力量之人帶來厄運。每一位新主人都難以掌控它的力量，結局往往是滑稽而悲慘的橫死。但坊間低語流傳：終有一日，這雙手套將覓得那位值得託付的持有者——喚引其風暴淬鍊的魔力，亦如鼎盛時期的拉吉斯·託倫一般，召來雷霆之怒。</content>
+	<content contentuid="ha5e243cag7da2g425cg846bg6affd7094734" version="1">詭計多端</content>
+	<content contentuid="hc5ce9b53gf4f2g4159g8b13ge2cddf6d5033" version="1">在處於&lt;LSTag Type="Status" Tooltip="MAGE_ARMOR"&gt;法師護甲&lt;/LSTag&gt;狀態下受到敵人傷害時，你有&lt;b&gt;[1]%&lt;/b&gt;的機率施放&lt;LSTag Type="Spell" Tooltip="Projectile_ChainLightning"&gt;鏈狀閃電&lt;/LSTag&gt;進行反擊，該閃電可能擊中&lt;b&gt;任意&lt;/b&gt;生物。</content>
+	<content contentuid="h56514cd4g3245g49e6gbbfbgc13fc0233be6" version="1">詭惡魔手</content>
+	<content contentuid="h69a593efgee5fg442fga432g81855091ebe4" version="1">這雙手套曾為傳奇盜賊“影中客”卡里斯所擁有，他的鼎鼎大名更甚本人。據說手套擁有奇蹟般的力量，能以不可思議的精準引導人們的動作，屢屢在看似希望渺茫的絕境中帶領他們走向勝利。正是這種魔力，讓卡里斯從難如登天的決鬥中凱旋而歸。然而，這件遺物有著自己的意志——並且絕非仁慈。久而久之，卡里斯變得極度依賴手套，甚至再也不願摘下它們，轉而讓其替他打理一切。他的手指漸漸枯朽，一旦失去遺物的助力，他便束手無策。隨後，彷彿在嘲弄他這無度的依賴似的，手套突然變成了一堆平平無奇的破布，讓這個昔日令人聞風喪膽的盜賊淪為自己曇花一現的可憐殘影。自那天起，這件惡意的遺物便輾轉流傳於眾人之手，摧毀了每一個敢於相信其所謂“奇蹟”的愚者們的生活。</content>
+	<content contentuid="hfd3a4034gd90bg461agb134g391ef7d5e192" version="1">奇蹟何存</content>
+	<content contentuid="h9d407cf6g35d3g40e4gb020gaed150a813fd" version="1">&lt;LSTag Type="Status" Tooltip="AMP_CURSED_ARTIFACT_INFO"&gt;詛咒遺物&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;近戰武器&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;&lt;b&gt;+[1]&lt;/b&gt;。&lt;br&gt;效果每&lt;b&gt;[2]&lt;/b&gt;級提升一次。&lt;br&gt;&lt;br&gt;&lt;LSTag Type="Image" Info="SoftWarning"/&gt; 每一次&lt;b&gt;武器攻擊&lt;/b&gt;都索求著它的貢品，這雙手套自會&lt;b&gt;揭示&lt;/b&gt;代價。</content>
+	<content contentuid="h00fa3aecg83efg410dgaa4cg3460f88b6028" version="1">黎明之金</content>
+	<content contentuid="h5aa04857g9e53g4f19g9077g8dd8c3ca8ee8" version="1">洛山達的黃金護手曾賜予薩·阿蘭德爵士無可匹敵的力量。過於自信的他孤身闖入了不死生物領地，可神恩在那片土地上失效了。如今，這位隕落聖武士的珍貴聖物，已淪落到一夥不配擁有它的地精拾荒者手中。</content>
+	<content contentuid="had13ad47g1bafg49f2g83bag999ea3656ff6" version="1">洛山達的恩典</content>
+	<content contentuid="h3579c024gdc81g400ag9536g5fba35da8a32" version="1">處於&lt;b&gt;陽光或等同的法術效果&lt;/b&gt;下時，你的&lt;b&gt;環級法術&lt;/b&gt;造成&lt;b&gt;[1]&lt;/b&gt;；以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;進行&lt;b&gt;攻擊&lt;/b&gt;時，達成&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;所需的擲骰降低&lt;b&gt;[2]&lt;/b&gt;&lt;i&gt;（可與同類效果疊加）&lt;/i&gt;。</content>
+	<content contentuid="hdbf41846g577fg4f16gada6g94ceb6ac0fdd" version="1">當你處於&lt;b&gt;陽光或等效法術效果&lt;/b&gt;下時，你的&lt;b&gt;環級法術&lt;/b&gt;額外造成&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="h769d8d35g55d5g4e95g93aeg5d965f2f3bbd" version="1">處於&lt;b&gt;陽光或等同的法術效果&lt;/b&gt;下時，你的&lt;b&gt;環級法術&lt;/b&gt;造成&lt;b&gt;[1]&lt;/b&gt;；以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;進行&lt;b&gt;攻擊&lt;/b&gt;時，達成&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;所需的擲骰降低&lt;b&gt;[2]&lt;/b&gt;&lt;i&gt;（可與同類效果疊加）&lt;/i&gt;。&lt;br&gt;&lt;br&gt;若你信奉&lt;b&gt;洛山達&lt;/b&gt;，你的&lt;b&gt;[3]&lt;/b&gt;&lt;b&gt;還會&lt;/b&gt;造成&lt;b&gt;[4]&lt;/b&gt;。</content>
+	<content contentuid="h07f356b1gd812g42d4g86c8gfd1ffbf6bbbd" version="1">處於&lt;b&gt;陽光或等同的法術效果&lt;/b&gt;下時，你的&lt;b&gt;環級法術&lt;/b&gt;造成&lt;b&gt;[1]&lt;/b&gt;；以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;進行&lt;b&gt;攻擊&lt;/b&gt;時，達成&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;所需的擲骰降低&lt;b&gt;[2]&lt;/b&gt;&lt;i&gt;（可與同類效果疊加）&lt;/i&gt;。&lt;br&gt;&lt;br&gt;若你信奉&lt;b&gt;洛山達&lt;/b&gt;，你的&lt;b&gt;[3]&lt;/b&gt;&lt;b&gt;還會&lt;/b&gt;造成&lt;b&gt;[4]&lt;/b&gt;。&lt;br&gt;&lt;br&gt;當你擁有&lt;LSTag Type="Status" Tooltip="AURA_OF_COURAGE"&gt;勇氣靈光&lt;/LSTag&gt;時，敵人的&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;具有&lt;LSTag Tooltip="Disadvantage"&gt;劣勢&lt;/LSTag&gt;。</content>
+	<content contentuid="hcc29fbb9gf9a6g4f90g86a0ge584c14cf532" version="1">夜詠者之握</content>
+	<content contentuid="h0f52930eg095bg43aag8d48g75d25871f311" version="1">這雙手套從不屬於某一任主人，而是一代又一代地傳承於莎爾的精銳戰士之間，作為剷除最危險目標的致命工具。它的魔力與黑暗緊密相連：只要藏身於陰影之中，遺物便會汲取周圍的能量。這股力量從敵人身上抽取生命，而且通常會留下永不消退的死靈傷痕——前提是目標還能活著。然而，命運弄人，一日，一位莎爾戰士受命刺殺智者埃萊里昂：一位以先見之明聞名的法師。埃萊里昂早已洞悉這一陰謀，事先佈下了陷阱。當刺殺開始時，手套失效了——陰影被一道燦爛的光芒驅散，它的力量也隨之消失。失去了防護的戰士被當場俘獲，埃萊里昂將他從莎爾的陰影中解放出來，抹去了他侍奉黑暗的記憶。這名戰士的所有物品，包括這件遺物，都被贈予了窮人。在凡人眼中，它看起來不過是普通的衣物，唯有啟蒙者才能洞見其中隱晦的魔法力量。</content>
+	<content contentuid="h3cb1ba01g9d86g442ega60fg24da3396c1b7" version="1">暗影之觸</content>
+	<content contentuid="h47671380gb9b8g4f14g895bgdbe5bf0c9240" version="1">在&lt;b&gt;遮蔽區域&lt;/b&gt;內以&lt;b&gt;匕首&lt;/b&gt;或&lt;b&gt;短劍&lt;/b&gt;造成傷害時，額外造成&lt;b&gt;[1]&lt;/b&gt;點傷害。</content>
+	<content contentuid="ha941a871g9970g466cg9ab6gacf8cdcc75bf" version="1">反射手甲</content>
+	<content contentuid="h6d2ec502g95d9g417cg94d4gbdcbf850dfb3" version="1">在久遠的過去，當託布隆恩氏族矮人的鍛造技藝與符文學識皆無人能及之時，這雙手甲被秘密鍛造而成。其內表面刻著力量符文，能吸收敵對的魔法，並以閃電箭的形式將其回擲——這是矮人巧思的奇蹟。憑藉這雙手甲，同族中的著名戰士杜爾加·鐵須爵士曾抵禦死靈法師扎拉戈斯，將黑暗詛咒反噬其主。但隨著時間的推移，這雙手甲逐漸失傳，傳說也隱入了矮人史冊之中，直到最終被追尋了它們二十年的埃拉里昂·影葉發掘出來。</content>
+	<content contentuid="he74f4a51gcfb0g4916gb9c6g974f7de1d486" version="1">閃電反射</content>
+	<content contentuid="h72cba1d8g2c5ag4f53g9d9agd1651ca19d8c" version="2">當你受到敵人的傷害時，對其造成&lt;b&gt;[1]&lt;/b&gt;作為反擊。每回合一次。</content>
+	<content contentuid="hf97a895cg3830g4e21gb57bgdc7b9f12ab6f" version="1">當你受到敵人的傷害時，反彈 &lt;b&gt;[1]&lt;/b&gt; 傷害。</content>
+	<content contentuid="hf9cfae4dgec1dg455cg9157g1c07dd0223a6" version="1">閃電收割</content>
+	<content contentuid="h52b24521g1e17g4056ga85dgb3c003b0d853" version="1">當你對受到&lt;LSTag Type="Status" Tooltip="MAG_THUNDER_REVERBERATION"&gt;殘響&lt;/LSTag&gt;影響的目標造成傷害時，你獲得一層&lt;LSTag Type="Status" Tooltip="MAG_CHARGED_LIGHTNING"&gt;閃電充能&lt;/LSTag&gt;。</content>
+	<content contentuid="h7f7dbb77gafcdg4a12g9685gaf5dc36762de" version="1">風暴激湧</content>
+	<content contentuid="he1f72bf8g6e6eg40b6g9dc7gc01b73e1d761" version="1">每回合一次，如果你擁有&lt;LSTag Type="Status" Tooltip="MAG_CHARGED_LIGHTNING"&gt;閃電充能&lt;/LSTag&gt;，你的&lt;b&gt;閃電反射&lt;/b&gt;效果將&lt;b&gt;翻倍&lt;/b&gt; —— 觸發第二次造成 &lt;b&gt;[1]&lt;/b&gt; 傷害。</content>
+	<content contentuid="hc52e78ebgb4e7g4f3dga10cg7dd59ef7d82e" version="1">虛空之拳</content>
+	<content contentuid="h798e4f7cgaf20g4daegbe40g19f649680dba" version="1">凱隆始終懷揣著鍛造完美戰士護甲的渴望，不斷探索著魔法工藝最深處的奧秘。在他的求索中，他偶然發現了一塊罕見的虛空碎片，一種即使是智者也知之甚少的晶體。透過既神秘又危險的儀式，他將這塊碎片與青銅結合，創造出了“秘銅”，一種擁有奇異而驚人力量的合金。任何佩戴由此金屬鍛造的手甲與脛甲之人，都會發現自身的力量被極大地增強了。後來，凱隆將自己的造物熔鑄成五套手甲與脛甲，作為禮物贈予人類的偉大國王，並因此獲得了豐厚的黃金與妻室作為回報。然而，虛空是耐心的。終有一日，它會收回本就屬於自己的東西。</content>
+	<content contentuid="h47c7404cg3b63g4e0egb8bcgfaa0634fe674" version="1">秘銅</content>
+	<content contentuid="hab2e5d56ge2b9g4ba6g8b8cgc992a905e2a9" version="1">&lt;b&gt;近戰武器&lt;/b&gt;傷害&lt;b&gt;+[1]&lt;/b&gt;。&lt;br&gt;&lt;LSTag Tooltip="Constitution"&gt;體質&lt;/LSTag&gt;檢定具有&lt;LSTag Tooltip="Disadvantage"&gt;劣勢&lt;/LSTag&gt;，除非你是&lt;b&gt;矮人&lt;/b&gt;&lt;i&gt;（或偽裝成矮人）&lt;/i&gt;。</content>
+	<content contentuid="h4b586922gcd43g4458g896eg75cf71063abc" version="1">渾噩護腕</content>
+	<content contentuid="h73224d7dgefefg4230g9518g013bcf656861" version="1">這雙護腕由一位來自古代耐瑟瑞爾的大法師所附魔，他對魔網反覆無常本性的痴迷早已成為傳奇。這雙護腕旨在引導未經雕琢、毫無過濾的純粹魔法，既綻放其璀璨，也釋放其莫測，考驗著主人承受奧術能量狂暴洪流的意志。這位大法師認為，真正的掌控並非在於命令魔法，而在於擁抱其混沌。敢於穿戴這件神器的冒險者，行走於完美凱旋與萬劫不復之間的鋼絲上，而他們的命運，往往由費倫大陸長久以來試圖馴服的偉力本身所裁決。</content>
+	<content contentuid="hde5f4b5cg6511g48f7g8220g0821e5cd73f0" version="1">混沌魔網</content>
+	<content contentuid="h61da4bc1gd562g4f62ga36bgc07df488f9f5" version="1">進入戰鬥後，你每回合在法術&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;的&lt;LSTag Tooltip="Advantage"&gt;優勢&lt;/LSTag&gt;和&lt;LSTag Tooltip="Disadvantage"&gt;劣勢&lt;/LSTag&gt;之間交替。</content>
+	<content contentuid="h26a5c396g66bdg4138gbe5dg939e62c6df15" version="1">強效波動</content>
+	<content contentuid="ha9574744g303bg427egba5eg5a56ab652d3a" version="1">你的法術&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;具有&lt;LSTag Tooltip="Advantage"&gt;優勢&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;在回合結束時轉變為&lt;LSTag Type="Status" Tooltip="ARMOURG71_2"&gt;弱效波動&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;在戰鬥結束時消失。</content>
+	<content contentuid="hbb08c200gfc34g43cfga18fg0e8cdf5140c9" version="1">弱效波動</content>
+	<content contentuid="h2580c9efg54aeg49ddgb117g1cd7f1b47e54" version="1">你的法術&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;具有&lt;LSTag Tooltip="Disadvantage"&gt;劣勢&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;在回合結束時轉變為&lt;LSTag Type="Status" Tooltip="ARMOURG71"&gt;強效波動&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;在戰鬥結束時消失。</content>
+	<content contentuid="h42895a68gec5eg41a6g9d59gb2c58b691df7" version="1">煉獄低語</content>
+	<content contentuid="hcc87950ag9d14g41d2gba23g8b59291e3f3d" version="1">在安姆的熔爐中，野心與謹慎時常角力，炎術士們試圖馴服火焰本身的本性。於是，他們鍛造了這雙手套，將一隻桀驁不馴的火元素的反叛之魂封印其中。如今，這雙手套已擁有自己的意志，湧動著不息的能量。人們能感受到表面下那沸騰的力量，一束渴望掙脫束縛的烈焰，它對釋放的渴求永無止境且危機重重。遺物曾經的主人鮮有能長久抵禦煉獄低語者。</content>
+	<content contentuid="hba4831c7g05fag4109g81f0g2b68191f3106" version="1">無常之火</content>
+	<content contentuid="h5b304033gff9bg4f4aga7f6g7264307c5142" version="1">以造成&lt;b&gt;[1]&lt;/b&gt;的&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;對敵人造成傷害時，你召喚&lt;LSTag Type="Spell" Tooltip="Projectile_Fireball"&gt;火球術&lt;/LSTag&gt;並承受&lt;b&gt;[2]&lt;/b&gt;&lt;i&gt;（除非你擁有&lt;LSTag Type="Passive" Tooltip="SculptSpells"&gt;法術塑形&lt;/LSTag&gt;）&lt;/i&gt;。每場戰鬥只能觸發&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h2b6b1237gf631g4e69ga170gcd5bbe586bed" version="1">以造成&lt;b&gt;[1]&lt;/b&gt;的&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;對敵人造成傷害時，你召喚&lt;LSTag Type="Spell" Tooltip="Projectile_Fireball"&gt;火球術&lt;/LSTag&gt;並承受&lt;b&gt;[2]&lt;/b&gt;&lt;i&gt;（除非你擁有&lt;LSTag Type="Passive" Tooltip="SculptSpells"&gt;法術塑形&lt;/LSTag&gt;）&lt;/i&gt;。每回合只能觸發&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h0136ec0agd02eg46c5g8af7g6c0131def9c7" version="1">安姆的遺澤</content>
+	<content contentuid="hdcceef3egefecg4da8g8c43ge149eec69218" version="1">消耗&lt;LSTag Tooltip="SorceryPoint"&gt;術法點&lt;/LSTag&gt;施放造成&lt;b&gt;[1]&lt;/b&gt;的&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;時，對目標&lt;b&gt;還會&lt;/b&gt;造成&lt;b&gt;[2]&lt;/b&gt;。</content>
+	<content contentuid="h5264d8f5gc658g4adbga200ge33f321f4d19" version="1">原初低語</content>
+	<content contentuid="hdc35c805gd25cg4858gac9bg246b7ddd1c53" version="1">當一個生物處於&lt;LSTag Type="Status" Tooltip="SILENCED"&gt;沉默&lt;/LSTag&gt;狀態時，對&lt;b&gt;[1]&lt;/b&gt;具有&lt;LSTag Tooltip="Vulnerable"&gt;易傷&lt;/LSTag&gt;。</content>
+	<content contentuid="hb90e718ag2117g4500g931fgf5767c16a573" version="1">破紗之撫</content>
+	<content contentuid="h630ffac7gfb44g4bd2gadd7g26230e29eadd" version="1">由虔誠的塞倫涅的信徒鍛造，這雙手套被注入了從虛空中汲取光芒的力量，讓持有者充盈著月之少女的恩典。相傳曾有戰士身披月光，他們如同撕裂薄霧般，一刀一劍劈開黑暗。在塞倫涅對抗陰影的永恆之戰中，遺物代代相傳，從一位守護者傳至下一位，尋找那些在漫漫長夜中亟需月光指引之人。</content>
+	<content contentuid="h4d321ff7gc1b7g4575g86f0g6615bf8b9a70" version="1">塞倫涅的恩典</content>
+	<content contentuid="h655c8313gf044g4544ga372gf23f34343ec5" version="1">只要你的&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;在&lt;b&gt;[1]%&lt;/b&gt;或以上，針對&lt;b&gt;不死生物&lt;/b&gt;的所有&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;都具有&lt;LSTag Tooltip="Advantage"&gt;優勢&lt;/LSTag&gt;。</content>
+	<content contentuid="hd690e5d8g50e3g40ecg8992ga26190635525" version="1">疾風恩澤</content>
+	<content contentuid="h0ea233b9gc399g4e3fgaf5dg5c68549db15b" version="1">它曾佩戴於傳說中的精靈戰士凱倫·疾風之手，後者在戰鬥中的敏捷身姿早已成為傳奇。凱倫以其不知疲倦的游擊戰術聞名，他以精準無誤與優雅自如的步伐移動，總能在戰鬥中尋得最完美之位。令人稱奇的是，他天賦的一部分似乎留存於他的輕甲之中。凱倫過世後，他的族人將這些部件以不菲的價格分別出售給了不同的買家。</content>
+	<content contentuid="he2ce131ag416cg4c5cg9837g975565f18494" version="2">疾風反射</content>
+	<content contentuid="h9923e82cgc496g41c9g825dg95a0501dd07a" version="2">當你即將受到傷害時，將該次傷害減半。&lt;br&gt;&lt;br&gt;若你為&lt;b&gt;純血精靈&lt;/b&gt;，此效果自動觸發且不消耗&lt;LSTag Type="ActionResource" Tooltip="ReactionActionPoint"&gt;反應&lt;/LSTag&gt;。否則，將消耗你的&lt;LSTag Type="ActionResource" Tooltip="ReactionActionPoint"&gt;反應&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;每回合最多觸發&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="hd86c7be8g178eg43ebgbbbfge95e8ff5fec1" version="1">疾風反射</content>
+	<content contentuid="hdb6523cfg5dd5g4488g801fg934ecf1de96a" version="1">將你承受的傷害減半。</content>
+	<content contentuid="h7bf69682gdd29g4932gbacdg9ad9b2dd5568" version="1">疾風反射</content>
+	<content contentuid="hb0a887cdg61f1g41a4ga172g21b23f21c369" version="1">受到的傷害減半。</content>
+	<content contentuid="h49c8552agd558g4224gba1bgcf914afe3dc4" version="1">迴響護腕</content>
+	<content contentuid="he73214dcge002g469bgb429gc7e3047aa01c" version="1">在遙遠的過去，這雙護腕曾屬於吉斯洋基人的軍閥扎爾科拉，他穿梭於星界，率領了無數次突襲。護腕以閃耀的星鑄金屬打造，鑲嵌著深藍色的蛋白石，並由一位吉斯澤萊智者施以魔法——此人雖是扎爾科拉族人誓不兩立的宿敵，卻因榮譽的束縛而協助他的征程。據說這雙護腕能捕捉最強音聲的迴響，將那股力量轉化為湧動於全身的愈療能量。然而，這份饋贈並非毫無風險；在護腕中激盪的振幅，足以考驗最強者的意志，甚至可能擊潰其心智，扭曲其靈魂。</content>
+	<content contentuid="h22eddf94g9d07g4d6cgb70bg2dd885697dae" version="1">迴響共振</content>
+	<content contentuid="hc3c65041gfa63g4ab9g9002g1fbeaec2d9e5" version="1">透過&lt;b&gt;近戰&lt;/b&gt;或&lt;b&gt;投擲攻擊&lt;/b&gt;造成&lt;b&gt;[3]&lt;/b&gt;點傷害，獲得&lt;b&gt;[1]&lt;/b&gt;層&lt;LSTag Type="Status" Tooltip="MAG_THUNDER_REVERBERATION"&gt;殘響&lt;/LSTag&gt;並恢復&lt;b&gt;[2]&lt;/b&gt;點生命值。</content>
+	<content contentuid="h0b354320g2dd8g4aa4g8e5eg8c7cef7c5383" version="1">汲命</content>
+	<content contentuid="hc7ca7c12g2b4dg4015g90e0g2384a9d0d1bb" version="1">在遠古耐瑟瑞爾幽暗的秘窖深處，這雙手甲為大術士埃林多編織了奧術之力——這個名字曾一度令費倫大陸聞風喪膽。灌注了黑暗魔法的手甲，會吸食倒下的敵人最後的呼吸，以此恢復主人的活力。被長生不死的慾望所吞噬的埃林多，堅信透過汲取敵人的生命力，或許就能逐退死亡本身。如今，這位大法師早已湮沒於史冊，而他的手甲卻留存了下來，其上的符文仍閃爍著那股不安分的、對力量的飢渴，召喚著敢於揮舞它的人，走向那條曾毀滅其主的道路。</content>
+	<content contentuid="hf3282750gdf20g4e9cg90d3g50c0d5b68828" version="1">耐瑟瑞爾符文</content>
+	<content contentuid="h355aeda3g7b04g4cebgb7fdg2e2d11bfc5c5" version="1">以指定目標的&lt;b&gt;[1]&lt;/b&gt;&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;殺死一名敵人時，恢復&lt;b&gt;[2]&lt;/b&gt;個&lt;b&gt;[3]&lt;/b&gt;環&lt;LSTag Tooltip="SpellSlot"&gt;法術位&lt;/LSTag&gt;及任意&lt;LSTag Tooltip="WarlockSpellSlot"&gt;邪術師法術位&lt;/LSTag&gt;，但必須成功透過一次&lt;LSTag Tooltip="Wisdom"&gt;感知&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;(&lt;b&gt;[4]&lt;/b&gt;)，否則將陷入&lt;LSTag Type="Status" Tooltip="MADNESS"&gt;瘋狂&lt;/LSTag&gt;狀態，持續&lt;b&gt;[5]&lt;/b&gt;回合。&lt;br&gt;每回合最多觸發一次。</content>
+	<content contentuid="hdfe88a32g6ad2g4d2egb6d6g13aa1e27b7f7" version="1">灰燼覺醒</content>
+	<content contentuid="hb21c8e1fgc5d6g4bf7g951fg6afb3ede98c3" version="1">這雙手套曾屬於那些試圖駕馭狂野原火之人，他們的名號在大地上令人聞風喪膽。從軍閥到烈焰法師，代代相傳的不僅是力量，還有一道可怖詛咒：其召喚之火併非僅僅燃燒，而是如瘟疫般蔓延。凡觸及者，皆會被烙上火種，頃刻間便以毀滅之勢爆發，吞噬周遭一切。這件詛咒神器的力量，映照出火焰本身的混沌與不休——生生不息，噬盡萬物，在無盡毀滅之鏈中從一魂躍向另一魂。</content>
+	<content contentuid="he571b946gad4cg4db1gac13ge498f48848a6" version="1">噬滅詛咒</content>
+	<content contentuid="h6cd4f48fgc7ffg4d83gaa20g342f2ca3c42f" version="1">戰鬥中，受到你的&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;所造成的&lt;b&gt;[1]&lt;/b&gt;的敵人，必須透過一次&lt;LSTag Tooltip="Constitution"&gt;體質&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;，否則獲得&lt;LSTag Type="Status" Tooltip="ARMOURG77"&gt;火種&lt;/LSTag&gt;，持續&lt;b&gt;[2]&lt;/b&gt;回合。&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;難度等級&lt;/LSTag&gt;取決於你的&lt;LSTag Tooltip="SpellDifficultyClass"&gt;法術豁免難度等級&lt;/LSTag&gt;。。</content>
+	<content contentuid="h7493615cg9fe1g4977gad2bg4dad00529107" version="1">戰鬥中，受到你的&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;所造成的&lt;b&gt;[1]&lt;/b&gt;的敵人，必須透過一次&lt;LSTag Tooltip="Constitution"&gt;體質&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;，否則獲得&lt;LSTag Type="Status" Tooltip="ARMOURG77_1"&gt;火種&lt;/LSTag&gt;，持續&lt;b&gt;[2]&lt;/b&gt;回合。&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;難度等級&lt;/LSTag&gt;取決於你的&lt;LSTag Tooltip="SpellDifficultyClass"&gt;法術豁免難度等級&lt;/LSTag&gt;，但並不等同於該值。。</content>
+	<content contentuid="hec8cd0c4ge679g4062g9d5fg747af6f48a07" version="1">戰鬥中，受到你的&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;所造成的&lt;b&gt;[1]&lt;/b&gt;的敵人，必須透過一次&lt;LSTag Tooltip="Constitution"&gt;體質&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;，否則獲得&lt;LSTag Type="Status" Tooltip="ARMOURG77_2"&gt;火種&lt;/LSTag&gt;，持續&lt;b&gt;[2]&lt;/b&gt;回合。&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;難度等級&lt;/LSTag&gt;取決於你的&lt;LSTag Tooltip="SpellDifficultyClass"&gt;法術豁免難度等級&lt;/LSTag&gt;，但並不等同於該值。。</content>
+	<content contentuid="h35f1c363g640dg435agb638gcaa6d309c094" version="1">戰鬥中，受到你的&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;所造成的&lt;b&gt;[1]&lt;/b&gt;的敵人，必須透過一次&lt;LSTag Tooltip="Constitution"&gt;體質&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;，否則獲得&lt;LSTag Type="Status" Tooltip="ARMOURG77_4"&gt;火種&lt;/LSTag&gt;，持續&lt;b&gt;[2]&lt;/b&gt;回合。&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;難度等級&lt;/LSTag&gt;取決於你的&lt;LSTag Tooltip="SpellDifficultyClass"&gt;法術豁免難度等級&lt;/LSTag&gt;，但並不等同於該值。。</content>
+	<content contentuid="h40354913g5e03g4457ga652g3cb3f007ffaf" version="1">火種</content>
+	<content contentuid="hd29836b8gc0e6g4ce8g8009g006f43e9b4d4" version="1">到期時，在火種持有者的回合開始爆炸，造成&lt;b&gt;[1]&lt;/b&gt;，影響半徑&lt;b&gt;[2]&lt;/b&gt;內的&lt;b&gt;所有&lt;/b&gt;生物。每個受影響的生物有&lt;b&gt;[3]%&lt;/b&gt;的機率獲得持續時間更短的&lt;LSTag Type="Status" Tooltip="ARMOURG77"&gt;火種&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;若該生物已脫離戰鬥，則不會爆炸。</content>
+	<content contentuid="hb1de97f7g1d75g4d74ga904gd3a70d353e91" version="1">到期時，在火種持有者的回合開始爆炸，造成&lt;b&gt;[1]&lt;/b&gt;，影響半徑&lt;b&gt;[2]&lt;/b&gt;內的&lt;b&gt;所有&lt;/b&gt;生物。每個受影響的生物有&lt;b&gt;[3]%&lt;/b&gt;的機率獲得持續時間更短的&lt;LSTag Type="Status" Tooltip="ARMOURG77_1"&gt;火種&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;若該生物已脫離戰鬥，則不會爆炸。</content>
+	<content contentuid="hedd7d45dgab58g4c76gac1ag98174cf268ac" version="1">到期時，在火種持有者的回合開始爆炸，造成&lt;b&gt;[1]&lt;/b&gt;，影響半徑&lt;b&gt;[2]&lt;/b&gt;內的&lt;b&gt;所有&lt;/b&gt;生物。每個受影響的生物有&lt;b&gt;[3]%&lt;/b&gt;的機率獲得持續時間更短的&lt;LSTag Type="Status" Tooltip="ARMOURG77_2"&gt;火種&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;若該生物已脫離戰鬥，則不會爆炸。</content>
+	<content contentuid="h77aee5eeg29b4g4d8fg8703g64afefda4b78" version="1">到期時，在火種持有者的回合開始爆炸，造成&lt;b&gt;[1]&lt;/b&gt;，影響半徑&lt;b&gt;[2]&lt;/b&gt;內的&lt;b&gt;所有&lt;/b&gt;生物。每個受影響的生物有&lt;b&gt;[3]%&lt;/b&gt;的機率獲得持續時間更短的&lt;LSTag Type="Status" Tooltip="ARMOURG77_4"&gt;火種&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;若該生物已脫離戰鬥，則不會爆炸。</content>
+	<content contentuid="h00aa7121ge99bg4439g8b13ga04a036fe858" version="1">寂滅使者</content>
+	<content contentuid="h6e9e8814g6b42g49d1gb9c1g7844ef17e9a5" version="1">這雙重型護手由某個古老的刺客修會所鑄，他們曾效忠於一位已被遺忘的緘默之神。護手被施加了可怖的魔法，能奪走受害者的嗓音，令其在臨終一刻無聲無息。傳說中的殺手伊露希斯曾佩戴此物，令整座王庭噤若寒蟬。箭矢離弦，詛咒陡生，斬斷目標與魔網的聯結，使其墜入永恆的沉寂。</content>
+	<content contentuid="h20553129gb5e5g4685gb4e5gb71e57c7ce85" version="1">失聲之賜</content>
+	<content contentuid="hae630c92gb3a2g4f9bg8941g0bd8f4335f6a" version="1">你在戰鬥中用&lt;b&gt;遠端武器&lt;/b&gt;攻擊的生物必須透過一次&lt;LSTag Tooltip="Intelligence"&gt;智力&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;，否則將陷入&lt;LSTag Type="Status" Tooltip="SILENCED"&gt;沉默&lt;/LSTag&gt;，持續&lt;b&gt;[1]&lt;/b&gt;回合。&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;難度等級&lt;/LSTag&gt;取決於你的&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;戰技豁免難度等級&lt;/LSTag&gt;。</content>
+	<content contentuid="h9285174dg386dg4500g9d5fg9c1525b01a9f" version="1">縛心鐐銬</content>
+	<content contentuid="h3db5a819ga5b5g4d3eg9cdfg80bb42223c87" version="1">這件遺物曾屬於神秘莫測的心靈術士瑟塔拉，她因對意志薄弱者思想的殘酷支配而令人畏懼。她的手段冷酷而持久——緩緩收緊精神桎梏，直至最微弱的心靈壁壘也分崩離析。僅憑几句咒語，人們便拜倒在她腳下，宣誓至死不渝的忠誠。然而，瑟塔拉那永不饜足的野心終引她走向覆滅。她掌控了一座矮人王宮，魅惑國王並將其打入靜滯狀態，以君主的身份統御王國。只可惜，她的統治被一位遊蕩的死靈法師截斷，此人巧施詭計，將她的靈魂囚禁於她自己的衣袍之中。至今，她仍困於其間，怨毒沸騰，法力附著在這雙飽含詛咒的手套之上，等待著下一個可供擺佈的心靈。</content>
+	<content contentuid="hfefdb9cfg1478g47c1g8efdga9c2106d747a" version="1">意念激湧</content>
+	<content contentuid="hf53ebb51gb35ag4940gb462gbf7bf72c677f" version="1">風火遺存</content>
+	<content contentuid="hebcd83d2gd167g46f1gab89geb4ac8f25b80" version="1">凱爾索蘭，那位被尊為"風暴與烈焰賢者"的傳奇薩滿，曾以無與倫比的技藝駕馭原初之力。然而，他對絕對支配自然的執念，將其引入了一條黑暗而險惡的歧途。他越是試圖將元素之力屈從於己意，便越是被其反噬，心智與魂魄雙雙遭受侵蝕。到頭來，那些成就他傳奇的狂嵐與烈焰，恰恰成了他的送葬者。這雙護手是他遺留給世間的全部，承載著他墜入瘋狂的悲劇往事。遺物之中，依舊灌注著凱爾索蘭從未能真正馴服的原始元素之力。據說，膽敢佩戴此物之人，皆能感應到他備受折磨的迴響，永恆地在掌控與毀滅二者間搖搖欲墜。</content>
+	<content contentuid="hd671d794g2a1eg4edegbb1eg905828704b7e" version="1">風火之遺</content>
+	<content contentuid="h1fe6e829g7b5cg46d3ga7d4gac50b87c4c9d" version="1">戰鬥中以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;造成&lt;b&gt;[1]&lt;/b&gt;或&lt;b&gt;[2]&lt;/b&gt;時，獲得&lt;LSTag Type="Status" Tooltip="ARMOURG80"&gt;元素主宰&lt;/LSTag&gt;，持續&lt;b&gt;[3]&lt;/b&gt;回合。</content>
+	<content contentuid="h8704961cg9b3eg4ba8g8fccg23d57da60d3e" version="1">元素主宰</content>
+	<content contentuid="h9e9405bbg3fcfg48c3ga74dgaf758f24b6ff" version="1">戰鬥中以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;造成&lt;b&gt;[1]&lt;/b&gt;或&lt;b&gt;[2]&lt;/b&gt;時，恢復&lt;b&gt;[4]&lt;/b&gt;個&lt;LSTag Tooltip="SpellSlot"&gt;法術位&lt;/LSTag&gt;，每個為[4]環至[5]環。&lt;br&gt;&lt;br&gt;每回合最多觸發&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h19571d0dg7901g46fag99f8ga0a5239fc33f" version="1">虔信之盔</content>
+	<content contentuid="hb8d16d0fge857g457dgb82ag2f0ee0adb7e8" version="1">這頂雅緻的頭盔曾屬於一位提爾的虔誠女祭司——阿爾希雅·晨光女士，她曾在暮歇鎮一座樸素的神殿中侍奉。雖以宏偉聖殿的標準而言，它算不上什麼強大的神器，但頭盔散發的柔和輝光，映照著原主那純粹無瑕的信仰。阿爾希雅女士常年的侍奉中，素來不以宏大奇蹟聞名，而好運彷彿總垂青於她的一舉一動，令她能更好地扶助困苦之人。當地傳說中，提爾本人曾親自祝福此盔，確保佩戴者在正義事業中必獲眷顧。阿爾希雅女士離世後，這頂頭盔本應留存在神殿之中，卻在一次匪幫劫掠中不知所蹤。雖然其威能或許已隨歲月消褪，但盔上仍縈繞著神聖祝福的迴響，在危困之際悄然引導善人之手。</content>
+	<content contentuid="h2dc9995dgb138g4906gb8a2g6ed8acd2d727" version="1">天賜洪運</content>
+	<content contentuid="ha896fe29g84b0g4d4eg920ag4d7183fa8d65" version="1">你的&lt;b&gt;所有&lt;/b&gt;&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;、&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;、&lt;LSTag Tooltip="AbilityCheck"&gt;屬性檢定&lt;/LSTag&gt;、&lt;b&gt;傷害&lt;/b&gt;和&lt;b&gt;先攻&lt;/b&gt;獲得&lt;b&gt;+[1]&lt;/b&gt;。</content>
+	<content contentuid="h58fe9a3dg540eg46cbga3f4g6430551d844d" version="1">安心兜帽</content>
+	<content contentuid="h53d3a5dfg21e9g4cf3ga5dagc30d8d306640" version="1">這頂飽經風霜的兜帽曾屬於戈齊娜，一位隱居在劍山山脈洞窟中的神秘修行者。她飽受未知深處精神異動的侵擾，因而研創出一套法術，能將微弱的心靈入侵隔絕在外，並將它傳授給了少數慕名求教之人。兜帽上附著的微妙魔法，據說正是她護身真言的顯化，經年累月的冥想將其編入了織物之中。當匪徒試圖探查她的思緒、劫掠她的居所時，卻發現他們的心靈攻擊猶如流水劃過頑石，完全無法滲入她的意識。戈齊娜最終消失於洞窟深處，這頂兜帽卻留存了下來，成為她心靈堅毅之道的無聲見證。</content>
+	<content contentuid="hb0892d7dg38e9g4c2agaf74g13aceb6a4110" version="1">心靈護盾</content>
+	<content contentuid="h8472edbag7bd3g4b8bg95ccg5b074c904b44" version="1">受到的&lt;b&gt;[2]&lt;/b&gt;若低於&lt;b&gt;[1]&lt;/b&gt;，則被完全無視。本應陷入&lt;LSTag Type="Status" Tooltip="STUNNED"&gt;震懾&lt;/LSTag&gt;時，改為陷入&lt;LSTag Type="Status" Tooltip="SLOW"&gt;緩慢&lt;/LSTag&gt;，持續&lt;b&gt;[3]&lt;/b&gt;回合。</content>
+	<content contentuid="hb0eec1ffg97d4g40edgba21g097927307ced" version="1">捨生頭環</content>
+	<content contentuid="h39374295g21ffg46acgafb4gd72510ab4ce3" version="1">啊，大魔導師維絲那頂臭名昭著的頭環，若說世間有何物足以為野心作注，這便是了。當尋常魔法已不敷其索求之時，她與遙遠國度中的某些存在訂下了契約；那名字，連最睿智的賢者也諱莫如深。它們賜予她摧枯拉朽的魔法威能，代價卻足以讓絕大多數冒險者三思再三。她的軀體日漸腐朽，法術卻愈發強橫，且世間任何治癒之術皆無法逆轉此般衰敗。真正令人莞爾的是，她竟覺得這筆交易划算得很！有人說她至今仍在諸位面間遊蕩，成了一位法力無邊卻永世凋零的施法者，身後留下這些頭環，權當贈予那些絕望到甘願步其後塵之人的扭曲"饋贈"。賣我這頂頭環的商人居然說它"不過是個花哨的髮帶"——你信嗎？</content>
+	<content contentuid="hc59842acgcc65g4d08gab5fge147b8078cab" version="1">熵之擁懷</content>
+	<content contentuid="hcaeeac3cgfc83g4a6fg9183gc14a9e5c89a7" version="1">法術&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;&lt;b&gt;+[1]&lt;/b&gt;。&lt;br&gt;&lt;br&gt;你&lt;b&gt;無法&lt;/b&gt;透過活物的手段恢復&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;戰鬥中以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;造成傷害時，有&lt;b&gt;[2]%&lt;/b&gt;的機率獲得一顆隨機的&lt;b&gt;虛空膠囊&lt;/b&gt;。</content>
+	<content contentuid="h9b3ae9e6g4125g4961gbedbgfb80547c5f14" version="1">學徒頭環</content>
+	<content contentuid="h1316a2f2gea04g420fgafcegc686bfff2d11" version="1">戰法師乃科米爾王國的精銳之師，立誓守護紫龍王座。他們的訓練強調戰鬥中的快速施法，而這頂頭環，正是以古老的附魔凝聚了這一法則的精髓。</content>
+	<content contentuid="h3f80dbe7g3c9eg4156g8796g5f35f37350bd" version="1">皇家戒律</content>
+	<content contentuid="hb98ad059g7177g4c58gaaa8g26398e68fc71" version="1">&lt;LSTag Type="Spell" Tooltip="Target_FogCloud"&gt;雲霧術&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Target_Grease"&gt;油膩術&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Shout_FalseLife"&gt;虛假生命&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Zone_ColorSpray"&gt;七彩噴射&lt;/LSTag&gt;與&lt;LSTag Type="Spell" Tooltip="Zone_BurningHands"&gt;燃燒之手&lt;/LSTag&gt;不再消耗&lt;LSTag Type="Image" Info="SpellSlot"/&gt;&lt;LSTag Tooltip="SpellSlot"&gt;法術位&lt;/LSTag&gt;。</content>
+	<content contentuid="h84a1b2c3gd4e5g6f78g9a0bg1c2d3e4f5678" version="1">&lt;LSTag Type="Spell" Tooltip="Target_FogCloud"&gt;雲霧術&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Target_Grease"&gt;油膩術&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Shout_FalseLife"&gt;虛假生命&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Zone_ColorSpray"&gt;七彩噴射&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Zone_BurningHands"&gt;燃燒之手&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Target_ArcaneLock"&gt;秘法鎖&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Target_CrownOfMadness"&gt;瘋狂冠冕&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Target_Darkvision"&gt;黑暗視覺&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Target_Knock"&gt;敲擊術&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Shout_SeeInvisibility"&gt;識破隱形&lt;/LSTag&gt;與&lt;LSTag Type="Spell" Tooltip="Shout_MirrorImage"&gt;鏡影術&lt;/LSTag&gt;不再消耗&lt;LSTag Type="Image" Info="SpellSlot"/&gt;&lt;LSTag Tooltip="SpellSlot"&gt;法術位&lt;/LSTag&gt;。</content>
+	<content contentuid="h5678f4e3gd2c1gb0a9g8f76g54321fedcba9" version="1">&lt;LSTag Type="Spell" Tooltip="Target_FogCloud"&gt;雲霧術&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Target_Grease"&gt;油膩術&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Shout_FalseLife"&gt;虛假生命&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Zone_ColorSpray"&gt;七彩噴射&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Zone_BurningHands"&gt;燃燒之手&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Target_ArcaneLock"&gt;秘法鎖&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Target_CrownOfMadness"&gt;瘋狂冠冕&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Target_Darkvision"&gt;黑暗視覺&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Target_Knock"&gt;敲擊術&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Shout_SeeInvisibility"&gt;識破隱形&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Shout_MirrorImage"&gt;鏡影術&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Shout_Blink"&gt;閃現術&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Target_Haste"&gt;加速術&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Target_RemoveCurse"&gt;移除詛咒&lt;/LSTag&gt;、&lt;LSTag Type="Spell" Tooltip="Target_Slow"&gt;緩慢術&lt;/LSTag&gt;與&lt;LSTag Type="Spell" Tooltip="Target_VampiricTouch"&gt;吸血鬼之觸&lt;/LSTag&gt;不再消耗&lt;LSTag Type="Image" Info="SpellSlot"/&gt;&lt;LSTag Tooltip="SpellSlot"&gt;法術位&lt;/LSTag&gt;。</content>
+	<content contentuid="hdfc35f88g4aa2g4d7dg93aeg60a9f9d32353" version="1">X-217 萬能水晶窺鏡</content>
+	<content contentuid="hd2f2aa6fg8fb2g40ccgaff3g3ce460e1455f" version="1">這件水晶面甲裝置堪稱侏儒工藝的傑作，由大工匠尼克斯·微光塵取用一枚產自幽暗地域最深處的巨型藍寶石雕琢而成。每一道切面都經過精密計算，用以引導魔法能量強化感知——儘管初號原型機確實曾意外熔穿了一扇金庫大門。深水城工匠協會"官方名義"上委託此物用於考古勘察，但坊間傳言，好幾位顯赫貴族曾為這件獨一無二的珍品開出了相當慷慨的報價。順帶一提，目鏡中射出的藍色光束完全正常，絕對不是在掃描隱藏寶藏。要是有人問起，你就說是自己其實是個歷史學者！</content>
+	<content contentuid="h9218152eg3d14g4623g9da6g99eba2703f91" version="1">精準視域</content>
+	<content contentuid="hcd09c338g8d43g4500ga41fgae62497e4929" version="1">&lt;LSTag Type="Skills" Tooltip="Perception"&gt;察覺&lt;/LSTag&gt;具有&lt;LSTag Tooltip="Advantage"&gt;優勢&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;&lt;LSTag Type="Skills" Tooltip="SleightOfHand"&gt;巧手&lt;/LSTag&gt; &lt;b&gt;+[1]&lt;/b&gt;。</content>
+	<content contentuid="h091aec76g742eg42a7g97b6g326595fdb252" version="1">靈豹戰冠</content>
+	<content contentuid="hd0a250c3g542ag448dg972fgfafee6636768" version="1">在楚爾特叢林深處一座藤蔓纏繞的神廟中，人們找到了這件儀式頭冠，它訴說著傳奇豹戰士的往事。點綴其上的漂白骨片並非尋常裝飾——那正是一頭巨型叢林大貓的遺骸，精心儲存至今，據說其靈魂至今仍在主物質位面遊弋徘徊。豹戰士一族素以在敵人呼吸之前便疾速出擊而聞名，他們行動迅捷如超乎自然，據目擊者稱，戰局的勝負往往在一次心跳的起落之間便已分曉。當然，若你戴上它後忽然發現自己能以超乎常人的速度做出反應……呃，這大概只是巧合，對吧？</content>
+	<content contentuid="h87a4061bgaaf5g427cg9b50gd1d2df1dfa1a" version="1">迅捷打擊</content>
+	<content contentuid="h863d514dga8d9g48bfga252g4384f6877f39" version="1">&lt;b&gt;先攻&lt;/b&gt; &lt;b&gt;+[1]&lt;/b&gt;。</content>
+	<content contentuid="he4ce38e5g5f62g4528g8330g937304cf0844" version="1">潮汐女王額冠</content>
+	<content contentuid="h69b94fc7g31f3g4d8aga5e5gce2b495a2157" version="1">這頂雅緻的額冠之中，嵌著一枚"瑪厄拉之淚"：一枚誕生於利維坦沉眠之淵的水晶。相傳，無痕之海那位早已被遺忘的女王瑪厄拉，在她的王國沉入波濤之時，落下了這滴悲淚。當然，這八成又是碼頭區那些多嘴水手編出來的奇譚，但有個稀奇之處：月光之下，這枚水晶竟會與深海生物的歌聲產生相同頻率的共鳴。燭堡裡那些學究們堅稱這"不過"是個強大的法器罷了，可你是否注意到，佩戴它時，你的法術就如海潮般勢不可擋，一浪更比一浪強？</content>
+	<content contentuid="he8ba7067g3f36g47a0gac8egecebb5313eae" version="1">海洋統御</content>
+	<content contentuid="ha8f36fcbgaa6cg450cg93e0g4d83d21571aa" version="1">當你以造成&lt;b&gt;[1]&lt;/b&gt;或&lt;b&gt;[2]&lt;/b&gt;的&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;達成&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;時，你可以不消耗&lt;LSTag Tooltip="SpellSlot"&gt;法術位&lt;/LSTag&gt;，以&lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;附贈動作&lt;/LSTag&gt;施放&lt;LSTag Type="Spell" Tooltip="Zone_GustOfWind_ARMOURH87_T2"&gt;造風術&lt;/LSTag&gt;，持續至回合結束。</content>
+	<content contentuid="hb8ad1470g1666g4b4dgaaa6gbc00e82e6ffd" version="1">當你以造成&lt;b&gt;[1]&lt;/b&gt;或&lt;b&gt;[2]&lt;/b&gt;的&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;達成&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;時，你可以不消耗&lt;LSTag Tooltip="SpellSlot"&gt;法術位&lt;/LSTag&gt;，以&lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;附贈動作&lt;/LSTag&gt;施放&lt;LSTag Type="Spell" Tooltip="Zone_GustOfWind_ARMOURH87_T1"&gt;造風術&lt;/LSTag&gt;，持續至回合結束。</content>
+	<content contentuid="h5064cf94g1130g4acdgb8fdg38f683701585" version="1">當你以造成&lt;b&gt;[1]&lt;/b&gt;或&lt;b&gt;[2]&lt;/b&gt;的&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;達成&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;時，你可以不消耗&lt;LSTag Tooltip="SpellSlot"&gt;法術位&lt;/LSTag&gt;，以&lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;附贈動作&lt;/LSTag&gt;施放&lt;LSTag Type="Spell" Tooltip="Zone_GustOfWind_ARMOURH87_T3"&gt;造風術&lt;/LSTag&gt;，持續至回合結束。</content>
+	<content contentuid="ha8afd1e4g110bg4cebga66ega9feffc1acdc" version="1">當你以造成&lt;b&gt;[1]&lt;/b&gt;或&lt;b&gt;[2]&lt;/b&gt;的&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;達成&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;時，你可以不消耗&lt;LSTag Tooltip="SpellSlot"&gt;法術位&lt;/LSTag&gt;，以&lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;附贈動作&lt;/LSTag&gt;施放&lt;LSTag Type="Spell" Tooltip="Zone_GustOfWind_ARMOURH87_T4"&gt;造風術&lt;/LSTag&gt;，持續至回合結束。</content>
+	<content contentuid="hcaf0cb3dg5de4g4272g82b8g0f089e6a121d" version="1">浪花飛濺</content>
+	<content contentuid="h8dd81896g77d2g4163ga547g6bae7eeaec39" version="1">當敵人陷入&lt;LSTag Type="Status" Tooltip="OFF_BALANCED"&gt;失衡&lt;/LSTag&gt;時，同時獲得&lt;LSTag Type="Status" Tooltip="WET"&gt;濡溼&lt;/LSTag&gt;，持續&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h58f12db5g39b5g41d6g9b9cg93b17735ea45" version="1">霜巨人之盔</content>
+	<content contentuid="h3dc8a87cg441ag45d7g8e07g2ad0d432b709" version="1">這件戰利品，既可以視作傳奇的“冰霜之王獵殺”中的赫赫見證，也可以說是個貴得離譜的帽架，這得看你是問誰了。當年霜巨人“嚴霜”肆虐北方商路之時，一隊冒險者在三日暴風雪中追獵其蹤，最終於冰壘之中將其逼入絕境，合力將他誅滅。縱使數百年光陰流轉，遺物依舊散發著徹骨寒意，那是嚴霜暴怒的最後迴響。魔力雖已隨歲月消褪幾分，它卻仍記著原主那龐然之軀——只是別指望能高到正牌霜巨人的個頭。售賣此物的商人賭咒說，你聽見的那些冰寒低語“不過是風聲罷了”。</content>
+	<content contentuid="h91d0fe88g57cfg43d8gacd9gf2cd55d2c045" version="1">巨人之軀</content>
+	<content contentuid="h46d7f674g5424g4cd6g9f4eg217b3b849545" version="1">你的&lt;b&gt;體型和重量&lt;/b&gt;增加&lt;b&gt;[1]&lt;/b&gt;。被你的&lt;LSTag Type="Spell" Tooltip="Throw_Throw"&gt;投擲&lt;/LSTag&gt;攻擊命中的敵人必須透過一次&lt;LSTag Tooltip="Constitution"&gt;體質&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;，否則將陷入&lt;LSTag Type="Status" Tooltip="SLOW"&gt;緩慢&lt;/LSTag&gt;。&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;難度等級&lt;/LSTag&gt;取決於你的&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;戰技豁免難度等級&lt;/LSTag&gt;。</content>
+	<content contentuid="h224b2b8bg9216g46c2g9a98ga782adf0a26a" version="1">小丑的舒適軟帽</content>
+	<content contentuid="hb5cc45ceg3b03g4515gabb8g8d8b449595cb" version="1">可曾見過有小丑拿自己的命換了個段子？這頂古怪的帽子曾屬於皮普·神時機·妙語，他的絕命演出主題是——嘲諷奪心魔餐桌上的禮數。他的俏皮話沒能撐過那場演出，這頂軟帽倒是活了下來，至今仍散逸著一股超自然的自信光環。傳聞皮普直面死亡時風度翩翩，連那奪心魔都頓了頓，品了品那句包袱的笑點。現在，帽子仍在尋覓像皮普那樣精於戲劇性時機的主人，不過嘛，生存本能最好也更強些。記著：那些插科打諢的俏皮話，最好趁著你還沒受傷時趕緊甩出去！</content>
+	<content contentuid="hc2d55d5eg72abg42c6g8a38gf7b489558f7b" version="1">歡謔嘲弄</content>
+	<content contentuid="h6ff1b9e3g2b90g4010g8b1dg5eb601799c17" version="1">在戰鬥中，當處於滿&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;時，獲得&lt;b&gt;+[1]&lt;/b&gt;&lt;LSTag Tooltip="Charisma"&gt;魅力&lt;/LSTag&gt;。</content>
+	<content contentuid="h34ea2b96g8d69g4a4fg85bdg549ee8b6ce84" version="1">冥思僧兜</content>
+	<content contentuid="h4522d0cdg2f09g45d5gb2dfg8aa005e5b6d5" version="1">一頂樸素的布質兜帽，來自第三黎明修道院，那裡的僧侶們曾年復一年地靜默冥想，探求更深層的真諦。奧德溫兄弟在他那著名的“十年緘默”期間一直戴著它——直到他終於開口，警告強盜們正逼近修道院。這警告救了他的同修們，然而奧德溫本人在疏散長者時被擊倒了。修道院的倖存者稱，他那始終如一的專注與澄明心境，彷彿滲入了兜帽本身。可惜，他們沒注意到匪幫早已將它賣給了南下的一支商隊。那些冥想技法，看來還得再練練！</content>
+	<content contentuid="h254e7419gc711g47d7ga002gd8791a7e341a" version="1">漸增睿智</content>
+	<content contentuid="he44ff982g5765g4034gbeb1gba112b39aea4" version="1">&lt;b&gt;+[1]&lt;/b&gt;感知&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;加值。&lt;br&gt;效果每&lt;b&gt;[2]&lt;/b&gt;級提升一次。</content>
+	<content contentuid="h73140920g08fag47d8gb778g01c783a43358" version="1">大使絨帽</content>
+	<content contentuid="h2bdd853bg9375g4224gb0eeg38d9e87d0554" version="1">這頂外交手腕的傑作，來自已隕落的阿諾利亞宮廷。宰相瓦洛裡安曾在臭名昭著的三國峰會期間佩戴此帽，憑他那三寸不爛之舌，竟讓三位彼此敵視的君主相信，他們的分歧“不過是視角問題”，一場戰爭就此消弭。帽上的深緋色染料在當時價值不菲，據說即便在最喧鬧的王座廳中，也能牢牢吸引全場的目光。阿諾利亞本身雖早已化為塵埃，這件外交使團的遺物卻依舊帶著一種舉重若輕的權威氣度。只是，千萬別提你是怎麼在一處遺忘的廢墟里“發現”它的——這可容易折損一個人的可信度。</content>
+	<content contentuid="hb2b38df5gfda2g4b5eg8906gbafe5bbab49c" version="1">外交風度</content>
+	<content contentuid="h4157ccdag2ec3g4223ga5beg99da212cf49d" version="1">&lt;LSTag Type="Skills" Tooltip="Persuasion"&gt;遊說&lt;/LSTag&gt;具有&lt;LSTag Tooltip="Advantage"&gt;優勢&lt;/LSTag&gt;。</content>
+	<content contentuid="hf407551aga632g4c41g8f07g883b0d4cd1fb" version="1">日曜頭環</content>
+	<content contentuid="h5150af9bg2f04g436dgbfc8g8fbc96b06e58" version="1">傳說這頂精巧的頭環，打造於天堂山至高無上的尖塔之巔——那裡的天光永不消逝。一位日精靈工匠與一位熾天神侍之間奇異的合作，催生了這件神性輝光與凡間技藝的優雅結晶。雖然它的初衷至今仍有爭議（那位熾天神侍堅稱它“純屬裝飾品”），這頂頭環卻有個令人莞爾的習性：將多餘的陽光傾瀉向疏於防備的敵人。那位工匠的筆記裡提了一嘴“意外能量轉化”什麼的，然而卷軸的其餘部分已莫名被燒焦了。</content>
+	<content contentuid="hd8664037g2f6dg490bgab99g22b9638ce261" version="1">日耀之賜</content>
+	<content contentuid="h9bd1d03cg9476g4f71g959bg1111f7d79841" version="1">在&lt;b&gt;陽光&lt;/b&gt;下進行&lt;LSTag Tooltip="Concentration"&gt;專注&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;時，你的擲骰結果不會低於&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="hbb8ded19g080eg4fa9g8963g206733a0ece2" version="1">日耀反射</content>
+	<content contentuid="hc06dc978ga10bg4627g857fg5472886803a1" version="1">處於&lt;b&gt;陽光&lt;/b&gt;下時，你將所受傷害的&lt;b&gt;[1]%&lt;/b&gt;反射為&lt;b&gt;[2]&lt;/b&gt;。</content>
+	<content contentuid="h2db2e291gd2fcg40fdgbf1dgc814b8a8ba68" version="1">怨靈之冠</content>
+	<content contentuid="heaf06650gb5b3g49dfga0b3g3caa02a11af5" version="1">一頂來自臭名昭著的巫後瑪拉隕落之際的陰森戰利品，她那束縛靈魂的實驗，結局並未完全如她所料。在一次關鍵的儀式中，那些被她囚禁的怨魂反戈相向，將她視若珍寶的冠冕化為一件業力報應的器具。如今，那些魂靈急切地撲向任何膽敢以主人為目標的愚蠢施法者。據說那尖嘯的魂靈漩渦相當令人難忘。當然，前提是你得在反衝之下活下來——那些聲音聽起來，可真是迫不及待想結識新法師呢！</content>
+	<content contentuid="h79aa3dcbgbd73g42a1g8e3dg45915dd4a88c" version="1">靈魂風暴</content>
+	<content contentuid="h34a7d71age0c3g4c4dga682gbcaec629a01e" version="1">%%% 已廢棄 %%%</content>
+	<content contentuid="h1232a428g5162g4294g8e7eg9a92b16f35f0" version="1">護魂者</content>
+	<content contentuid="h650b8ffbg82d6g4fa0ga4ccg54583b8d2b01" version="1">%%% 已廢棄 %%%</content>
+	<content contentuid="hdf32e395g108dg4e32ga595g8adeb1fbe409" version="1">心靈割裂</content>
+	<content contentuid="h1c61fbbdga50dg4a02g9c08g6e6b9643dfb1" version="1">對敵人施加狀態時，對其造成&lt;b&gt;[1]&lt;/b&gt;點傷害。&lt;br&gt;&lt;br&gt;若你並非吉斯洋基人，則在&lt;b&gt;智力&lt;/b&gt;、&lt;b&gt;感知&lt;/b&gt;和&lt;b&gt;魅力&lt;/b&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;上具有&lt;LSTag Tooltip="Disadvantage"&gt;劣勢&lt;/LSTag&gt;。</content>
+	<content contentuid="h42d38e4cg8507g4187g96cfg28dd0dfc985f" version="1">心靈侵蝕</content>
+	<content contentuid="h7d01b497g3243g4cf9g99d5gac35aad537f2" version="1">你迫使敵人進行的智力、感知或魅力&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;還會施加&lt;LSTag Type="Status" Tooltip="MAG_PSYCHIC_MENTAL_FATIGUE"&gt;心智疲敝&lt;/LSTag&gt;。</content>
+	<content contentuid="h7d7defc0g99fag410cgaff9gbb43806f9a5f" version="1">心智聚焦</content>
+	<content contentuid="h75ca4ea1g6e24g4e78g9e2bg32243ddcd1fc" version="1">造成&lt;b&gt;[1]&lt;/b&gt;時，獲得&lt;b&gt;[2]&lt;/b&gt;層&lt;LSTag Type="Status" Tooltip="MAG_PSYCHIC_MIND_FOCUS"&gt;心智聚焦&lt;/LSTag&gt;，每層提供&lt;b&gt;+[3]&lt;/b&gt;加值。</content>
+	<content contentuid="h372bb6c9g629ag4e43gaff3g7cab74102a6e" version="1">你&lt;b&gt;額外&lt;/b&gt;造成等同於每層此效果的&lt;b&gt;[1]&lt;/b&gt;點傷害。層數無法超過&lt;b&gt;[2]&lt;/b&gt;。達到&lt;b&gt;[2]&lt;/b&gt;層時，受到的&lt;b&gt;[3]&lt;/b&gt;減少&lt;b&gt;[4]&lt;/b&gt;點。</content>
+	<content contentuid="heca39efdg8e72g4f51g8a55g87b2c688804b" version="1">燒腦頭環</content>
+	<content contentuid="h46cb2c1cg3c17g4c64g9d3agef17d08167ee" version="1">這件造物出自臭名昭著的奧術師克莉吉妮·黑棘之手，正值她沉溺於魔法癮的墮落之途——它體現了某些法師為臻至技藝會走到何等絕望的地步。在對不可破解之專注的執迷追逐中，克莉吉妮設計出這頂額冠，字面意義上將魔法能量生生作為燃料。她的學徒們竊竊私語，說她一連數日維持著同一個法術，任由這件神器吞噬她的魔力，直至她力竭倒地。好訊息是？它的功效完全符合預期。壞訊息呢？呃，這麼說吧，克莉吉妮沒能熬過最終的戒斷反應。</content>
+	<content contentuid="hc1a240abg7851g490fga0bfga03a8d02e161" version="1">專注獻祭</content>
+	<content contentuid="h0d8ade20gd6aag4ecdg97fag114f194222e7" version="1">&lt;LSTag Tooltip="Advantage"&gt;優勢&lt;/LSTag&gt;於&lt;LSTag Tooltip="Concentration"&gt;專注&lt;/LSTag&gt;。戰鬥中每回合，你必須透過對抗你的&lt;LSTag Tooltip="SpellDifficultyClass"&gt;法術豁免難度等級&lt;/LSTag&gt;減&lt;b&gt;[2]&lt;/b&gt;的感知&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;，否則消耗&lt;b&gt;一個&lt;/b&gt;&lt;b&gt;[1]&lt;/b&gt;環&lt;LSTag Tooltip="SpellSlot"&gt;法術位&lt;/LSTag&gt;&lt;i&gt;（或任意邪術師法術位）&lt;/i&gt;。</content>
+	<content contentuid="he2005021geaf9g4be5g9e78g29835d59de73" version="1">學者的軟邊帽</content>
+	<content contentuid="h1fba9cabgbe56g4946g8d9agea4328448eb9" version="1">這頂毫不起眼的帽子曾屬於“健忘的溫德爾”，博德之門一位末流法師，他最卓著的天賦就是弄丟自己的法術書。在第三次重寫整部法術目錄之後，他給最心愛的帽子附了魔，好讓它替他記住那些學問——然後轉頭就忘了把它擱在了哪兒。本地的賢者們至今仍會談起，有人在圖書館裡撞見溫德爾，他被四周散落一地的卷軸包圍著，手忙腳亂地拍打著空無一物的腦袋。至少現在，總算有人能讓它物盡其用了！</content>
+	<content contentuid="h74e79adfg540bg4774g9194gd50910b5661e" version="1">借來的知識</content>
+	<content contentuid="h4a564db2g863eg4885g907eg23f932c90f73" version="1">獲得&lt;LSTag Tooltip="Arcana"&gt;奧秘&lt;/LSTag&gt;、&lt;LSTag Tooltip="History"&gt;歷史&lt;/LSTag&gt;和&lt;LSTag Tooltip="Religion"&gt;宗教&lt;/LSTag&gt;&lt;LSTag Tooltip="Proficiency"&gt;熟練項&lt;/LSTag&gt;。</content>
+	<content contentuid="h22e28004g50f4g41bagb3c0gdfc0e742477d" version="1">出走之帽</content>
+	<content contentuid="h2a0b26acg7c30g49cbgba67gf1f693470bb7" version="1">這頂帽子原屬於性情古怪的附魔師馬利法克斯，在經受了太多次實驗性附魔之後，它滋生出了相當鮮明的個性。受夠了主人沒完沒了的鼓搗（以及堪憂的時尚品味），它終於在某天夜裡徑自飄走了，並留下一張字條："我要去尋找一段認真的關係了！"如今，帽子有個古怪的習慣——幫助施法者們糾正錯漏，但若有人膽敢修改它身上的魔法，它便會大發脾氣。想想它的過往，這倒真怪不得它！</content>
+	<content contentuid="he0a77522g351dg41bag8550gdbac20810ae5" version="1">再度機緣</content>
+	<content contentuid="h57273218g2f0dg4bddg8e7dg2c52c435b3c4" version="1">當&lt;LSTag Tooltip="Cantrip"&gt;戲法&lt;/LSTag&gt;的&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;結果低於&lt;b&gt;[1]&lt;/b&gt;時，你可以&lt;b&gt;重擲&lt;/b&gt;一次，並取&lt;b&gt;較高結果&lt;/b&gt;。</content>
+	<content contentuid="h373148e1g62c9g40cbgb3dcgacaf5997c835" version="1">這是一頂帽子</content>
+	<content contentuid="h43fc6119g77fdg4097g8f56g2912fc1ecf22" version="1">金鑄儀式面具</content>
+	<content contentuid="h59106386g2bacg4a00gbaefgfddd16efe09d" version="1">由奧裡谷的傳奇金匠傾力打造，這款純金面具既是登峰造極的工藝傑作，也是強力的魔法器具。每一道繁複的紋樣，皆在引導與回收耗散的魔法能量中發揮著作用。山谷的戰鬥祭司們曾在他們馬拉松式的儀式戰鬥中佩戴它們，汲取蘊藏其中的力量，在平凡人早已力竭之後仍能繼續作戰。當然，這面具本身不菲的金價便足以讓它頗受強盜歡迎——這也解釋了為何存世者寥寥無幾。儘管這件面具的魔力已經衰減，它卻仍未淡忘自身的使命……前提是它沒在忙著讓佩戴者看起來像個行跡可疑的大富翁。</content>
+	<content contentuid="h48a99988g8f3eg4c5ag8372g8607d66be552" version="1">能量煥新</content>
+	<content contentuid="heb34ffcdg3da8g48cbga119gcfd9f0306456" version="1">退出戰鬥時，有&lt;b&gt;[1]%&lt;/b&gt;的機率恢復一次&lt;LSTag Type="ActionResource" Tooltip="ChannelDivinity"&gt;引導神力&lt;/LSTag&gt;、&lt;LSTag Type="ActionResource" Tooltip="Rage"&gt;狂暴&lt;/LSTag&gt;、&lt;LSTag Type="ActionResource" Tooltip="BardicInspiration"&gt;詩人激勵&lt;/LSTag&gt;、&lt;LSTag Type="ActionResource" Tooltip="SorceryPoint"&gt;術法點&lt;/LSTag&gt;、&lt;LSTag Type="ActionResource" Tooltip="ArcaneRecoveryPoint"&gt;奧術恢復&lt;/LSTag&gt;、&lt;LSTag Type="ActionResource" Tooltip="NaturalRecoveryPoint"&gt;自然恢復&lt;/LSTag&gt;、&lt;LSTag Type="ActionResource" Tooltip="LayOnHandsCharge"&gt;聖療&lt;/LSTag&gt;、&lt;LSTag Type="ActionResource" Tooltip="WarPriestActionPoint"&gt;戰爭祭司&lt;/LSTag&gt;、&lt;LSTag Type="ActionResource" Tooltip="WrithingTidePoint"&gt;蠕行暗潮&lt;/LSTag&gt;和&lt;LSTag Type="ActionResource" Tooltip="Bladesong"&gt;劍歌&lt;/LSTag&gt;消耗。</content>
+	<content contentuid="h55fb5ec3g1f21g4a64ga241g06c0cc888000" version="1">獵夢者</content>
+	<content contentuid="hf5fa97ccga2f6g4c07gbf92g43a43376a16b" version="1">這頂威嚴的頭盔曾屬於達瑞厄斯·夜織勳爵，一位被夜驚症驅向愈發危險的魔法解法的貴族。這頂頭盔是他的傑作：一件能將夢境原初能量轉化為防護之力的造物。因附魔中的某種奇詭之故，它的功效好過了頭——不僅吸收他自己的夢，連周遭所有人的夢也一併吞噬。當地的酒館靠向疲憊旅人兜售“無夢安眠”大賺了一筆，那些旅人在他的高塔陰影之下，睡得安穩至極。在達瑞厄斯神秘失蹤後（有人說他被困在了一場夢魘之中），這頂頭盔輾轉於多位主人之手，每一位都享受著超自然的防護；而他們的鄰居，則抱怨著那些異常空洞的夜晚。</content>
+	<content contentuid="he765def4g5f8eg4968ga217g64ab28da7a81" version="1">夢境護盾</content>
+	<content contentuid="hcda08676gf5e9g43e3ga4d4g944ca0ea0224" version="1">&lt;LSTag Tooltip="LongRest"&gt;長休&lt;/LSTag&gt;後，你獲得&lt;b&gt;[1]&lt;/b&gt;點臨時生命值。</content>
+	<content contentuid="hc7efb00eg0ef1g43f1gbde5g8b7690e8f4c0" version="1">半人馬的執著</content>
+	<content contentuid="h4551d8c4g3833g45ffga9e9g89e53735f566" version="1">據說鐵蹄團長絕不會將倒下的戰友棄之不顧，哪怕這意味著要衝破敵陣。這頂飾滿勳章的角盔，凝聚著堅不可摧的袍澤之義，正是這種精神讓他同時在半人馬和人類軍隊中贏得了傳奇之名。相傳在雷鳴平原之戰中，他親手將十六名戰士從地上拽起，重新投入戰鬥——受他不畏生死的表率的感召，每個人都再度振作而起。盔上如今仍留有一處凹陷，那是他在扶起一名倒下的斥候時，用頭將一隻目瞪口呆的食人魔撞退留下的印記。</content>
+	<content contentuid="h8aac5a74gcb7eg4419gbfafg5910b8574cec" version="1">戰士之絆</content>
+	<content contentuid="haa235a25gcb5bg40d6g816ag3a444e339caf" version="1">當你保持滿&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;時，&lt;b&gt;[1]&lt;/b&gt;範圍內的所有盟友在陷入&lt;LSTag Type="Status" Tooltip="DOWNED"&gt;倒地&lt;/LSTag&gt;狀態時自動穩定。</content>
+	<content contentuid="hd1bd98cfg6156g403aga899gfbd438ee41e5" version="1">%%% 已廢棄 %%%</content>
+	<content contentuid="hdb977c23g2a26g4a4fg94d3g35a86bb237ba" version="1">%%% 已廢棄 %%%</content>
+	<content contentuid="h3fc692dag0991g4122g8263ga9f05a231ee8" version="1">影舞面紗</content>
+	<content contentuid="h1b787177g8372g46a5gaa2fg5d98466f011d" version="1">這件遺物出自聲名狼藉的“暮光劫案”，神偷達倫·維爾正是憑此侵入了安姆的暗影寶庫。這頂頭盔的古怪設計並非徒有其表——每道凹槽與紋路，都將成功閃避時攫取的陰影精華，轉化為致命的打擊之力。維爾曾聲稱，在汲取他的刀光劍影時，頭盔會“低語著虛空的秘密”。不幸的是，他領悟得太遲了——那些陰影自有其盤算。如今，細心的觀察者或許會留意到，穿戴它的人在一次格外優雅的閃避之後，其武器會短暫地化為無色。只是，當心那些潛在的陰影——在你凝視深淵時，深淵也在凝視著你。</content>
+	<content contentuid="h76f7e561ga3b3g4c8cg991dg97e993ebebe9" version="1">暗影饋贈</content>
+	<content contentuid="hcef5a448g627fg42bbgbb76g5aa39c74210f" version="1">當你成功透過一次對抗敵人攻擊的敏捷&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;時，你的武器將獲得&lt;LSTag Type="Status" Tooltip="ARMOURH100"&gt;暗影突擊&lt;/LSTag&gt;，持續&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="hffb05762gde83g44cdgb466gfdbb93a7afa7" version="1">暗影突擊</content>
+	<content contentuid="h78752ba6gb9e7g43fega7adg9a517c0a9bb4" version="1">&lt;b&gt;近戰武器&lt;/b&gt;&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;獲得&lt;b&gt;+[1]~[2]&lt;/b&gt;加值。</content>
+	<content contentuid="ha1636c94g9f07g4a67gb493gf208f81977bb" version="1">堅忍神盔</content>
+	<content contentuid="hbe37cdc4g023eg427bg9363gc71bcb182ec1" version="1">人們說，正義之神會護佑那些歷經艱辛而堅韌不拔之人。這頂曾在提爾神殿中受過祝福的頭盔，會在佩戴者遭受重創之際，彰顯他的庇護。最初，它是在“動盪之年”期間被賜予虔誠信徒的聖物，曾在無數危急關頭迸發出提爾的賜福，拯救了不可勝數的生命。在承受幾近致命的一擊後，盈滿其金屬表層的金色輝光，據稱正是提爾本尊神庭之光的映照。儘管其中的力量已隨歲月流逝而衰減，這頂頭盔卻仍承載著神聖不屈的迴響，在正義需要些許援手的時刻，它堪稱完美！</content>
+	<content contentuid="hbd1eef88ga602g4716g98ddg8e7de3e812b0" version="1">提爾的保護</content>
+	<content contentuid="h7dd1e7e8g6bb4g421ag94eeg5e37046514c0" version="1">受到&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;時，你獲得&lt;LSTag Type="Status" Tooltip="ARMOURH101"&gt;提爾神盾&lt;/LSTag&gt;，持續&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="ha0939d40gf012g482cg83b3g1891fa798ef0" version="1">提爾神盾</content>
+	<content contentuid="h520cbf6cg67cfg482ag8059g81117f1ac207" version="1">&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;獲得&lt;LSTag Tooltip="Advantage"&gt;優勢&lt;/LSTag&gt;。</content>
+	<content contentuid="hb6fbddfdgbafdg4ba4ga987g6f66d1f58fdb" version="1">頑心王冠</content>
+	<content contentuid="h6da60fa9g12d3g4f98gaad8g527c293472fa" version="1">大德魯伊棘之心的一件珍貴私藏，他本人因冥想時從不肯安分守己而聲名遠揚。他的同伴們受夠了他無休止的坐立不安，於是給這頂冠冕附了魔，權當一個惡作劇——原本的意圖是在儀式期間將他釘在原地，這法術卻以一種出人意料的方式弄巧成拙，反而賦予了他定身他人的詭異能力，同時增強了他的魔法感知。“他們的嘲弄好歹催生了點好東西，”他在日記中寫道，“雖說我還是坐不住，這點到死也改不了。”自那些日子起，這頂冠冕的力量已然衰減，但它仍保留了昔日那頑皮本性的一縷殘影。</content>
+	<content contentuid="h8e24f9cbgf657g4c34ga916g763ff937a232" version="1">寶貴一課</content>
+	<content contentuid="h26321594g5229g4513g8ba5ga35f8e7abbb7" version="1">在戰鬥中&lt;LSTag Type="Status" Tooltip="RESTRAINED"&gt;束縛&lt;/LSTag&gt;一個敵人時，你獲得&lt;b&gt;[1]&lt;/b&gt;層&lt;LSTag Type="Status" Tooltip="MAG_GISH_ARCANE_ACUITY"&gt;奧術敏銳&lt;/LSTag&gt;。&lt;br&gt;此效果每回合只能觸發&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h22afe904g4872g43ebg9cf0g87a472da89d4" version="1">元素之契</content>
+	<content contentuid="hf14c79fegf25dg499fg98e3g08e3c76605ff" version="1">唯有冰原氏族的真血後裔，才能駕馭這頂附魔頭盔的力量。這件遺物經由天選薩滿代代相傳，在各部落間輾轉流動數萬年，直至作為戰利品被遺忘在一座獸人村落——它仍蘊含著自然之靈的偉力，那些精魂自高天之上垂顧含笑，指引著元素後裔的命運。</content>
+	<content contentuid="hff9890c7ge4a4g483bgb1bag780cac19f559" version="1">元素後裔</content>
+	<content contentuid="ha49fca75ge9c3g44acgaedfg1bd27bd5c1d9" version="1">當你擁有&lt;LSTag Type="Status" Tooltip="MAG_CHARGED_LIGHTNING"&gt;閃電充能&lt;/LSTag&gt;時，受到&lt;b&gt;[1]&lt;/b&gt;、&lt;b&gt;[2]&lt;/b&gt;或&lt;b&gt;[3]&lt;/b&gt;傷害會啟用對應元素的防護，持續&lt;b&gt;[4]&lt;/b&gt;回合。</content>
+	<content contentuid="h30d11062g9836g4c92ga4c6gfee167b86eaa" version="1">流水庇護</content>
+	<content contentuid="heafe5d38g5d13g46cfga15eg7e78c1a1eac0" version="1">受到的所有&lt;b&gt;[1]&lt;/b&gt;傷害減少&lt;b&gt;[2]&lt;/b&gt;點。</content>
+	<content contentuid="h9f76ef5cgf713g4147g9338g56839a36bbb1" version="1">天穹之靈</content>
+	<content contentuid="h204c7a88ge853g47a4gaa6cgbc05d470c23e" version="1">在“元素之契”的&lt;b&gt;元素護盾&lt;/b&gt;保護下受到傷害時，你可以在回合結束前施放&lt;LSTag Type="Spell" Tooltip="AMP_Target_ShamanLightning"&gt;天空之靈之怒&lt;/LSTag&gt;&lt;i&gt;（可以在狂暴期間使用）&lt;/i&gt;。</content>
+	<content contentuid="hef828b48ge4cfg493ag918age92a72435735" version="1">烈火壁障</content>
+	<content contentuid="he86d0d5egc986g4c87g9700gf830a56b48f3" version="1">天魂之怒</content>
+	<content contentuid="hca0d771ege635g447ega768g140ad72bb6aa" version="1">%%% 已廢棄 %%%</content>
+	<content contentuid="h26c20848gcb95g4b0cga365g0d09d3ed2ad7" version="1">殘留能量</content>
+	<content contentuid="h02c32f62g8f96g431dgb14fg190e68e06e28" version="1">%%% 已廢棄 %%%</content>
+	<content contentuid="h2bc2c1bagdcebg4111g9e0ag57809bfdf4e8" version="1">突觸</content>
+	<content contentuid="hf7417122g4436g4d1aga6d3gd9c3315dfc74" version="1">發現於燭堡最臭名昭著的導師——薇洛拉女士的私人收藏中。她以戴著頭盔教授魔法的非傳統方式而聞名。“沒什麼比意想不到的第二次機會更能教會人資源管理了。”她帶著神秘的微笑如是說。儘管她的學生們時常茫然無措，但在施法能力上卻有了顯著進步；雖然有些人懷疑，這其實和頭盔關係不大，更多是因為學生們生怕錯過她那些難以預測的“突擊測驗”而受到懲罰。頭盔上如今仍留有抓痕，都是垂頭喪氣的學生們在課間試圖破解它的奧秘時留下的。</content>
+	<content contentuid="hd49a852ag4c17g40b3gbe2ag2be4bccfc2f3" version="1">奧法共鳴</content>
+	<content contentuid="ha80d8d79gef4ag458dga39bge2bc1b6987b1" version="1">在戰鬥中治療一名&lt;b&gt;盟友&lt;/b&gt;或&lt;b&gt;自己&lt;/b&gt;時，為其恢復一個&lt;b&gt;[1]&lt;/b&gt;個&lt;b&gt;[2]&lt;/b&gt;環&lt;LSTag Tooltip="SpellSlot"&gt;法術位&lt;/LSTag&gt;。&lt;br&gt;此效果每回合最多觸發&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="ha66cce53g1699g41b4g8711gb4b1ac63ce63" version="1">邪牧之面</content>
+	<content contentuid="ha90d9eb1g353bg4370g9789gfd1d7145407a" version="1">一件來自臭名昭著的“靈魂牧者”的可怖戰利品，他透過將受害者變作綿羊、再吞噬其精華，構築起自己黑暗的威能。出於狂妄，他曾試圖將一隻惡魔的精準之力束縛於這枚羊骨面具之中，可惡魔卻以嘲弄般的諷刺扭曲了這道魔法。在一次關鍵的儀式上，牧者自己竟變成了一隻綿羊，這導致了他在驚恐掙扎中的湮滅——據說，他化作綿羊時的咩咩慘嘶聲，至今仍迴盪在面具的低語中。</content>
+	<content contentuid="h298e5f1bg3894g4926gb607gf9334c0da293" version="1">扭曲精準</content>
+	<content contentuid="hb8dfa6d0gd807g4e06g96f9g8e2f46e124b5" version="1">&lt;b&gt;+[1]&lt;/b&gt;法術&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;。&lt;br&gt;戰鬥中每回合，你必須透過對抗你的&lt;LSTag Tooltip="SpellDifficultyClass"&gt;法術豁免難度等級&lt;/LSTag&gt;減&lt;b&gt;2&lt;/b&gt;的感知&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;，否則變成一隻無助的&lt;LSTag Type="Status" Tooltip="POLYMORPH_SHEEP"&gt;綿羊&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;效果每&lt;b&gt;[2]&lt;/b&gt;級提升一次。</content>
+	<content contentuid="h2126898bgf39bg44aag8d5fg4eb88598ae5f" version="1">水手的霜風帽</content>
+	<content contentuid="hc50f3b4bg94c1g47a4g9e7cg4af1b9130fc2" version="1">霜風船長的威名，來自他引領船隻穿越劍灣那些兇險冬季風暴的航程——在那裡，安博裡的吐息會將飛濺的海水凝為堅冰。這位深海女王似乎格外垂青他的勇毅，抑或只是樂於試探他的極限。在最後一次航程中，他被夾擊於海盜與冬季颶風之間，被迫與她做了一場交易：用他的溫暖，換取她的冽風。如今，這頂帽子能賦予人們安博裡般冰冷的精準度，儘管水手間傳言，在暴風雨之夜，仍有一艘結滿冰霜的幽靈船在海岸邊徘徊，它的船長永遠在追尋著他親手易出的那份溫暖。</content>
+	<content contentuid="h4e0af039g15d3g4e21g9037g225b6908a3b0" version="1">安博裡的眷顧</content>
+	<content contentuid="hf3363899g15f0g4281g86b9g9ced3ffa2ce3" version="1">戰鬥的前&lt;b&gt;[3]&lt;/b&gt;回合內，你獲得&lt;b&gt;北風尾流&lt;/b&gt;，使你的&lt;b&gt;遠端武器&lt;/b&gt;&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;增加&lt;b&gt;[1]&lt;/b&gt;，傷害增加&lt;b&gt;[4]&lt;/b&gt;。&lt;br&gt;效果每&lt;b&gt;[2]&lt;/b&gt;級提升一次。</content>
+	<content contentuid="hd85bb66bg7e30g4717g97degba83896b9d95" version="1">死靈領主頭環</content>
+	<content contentuid="hada007begf3a2g4bb1g9b8fg89777ecc2144" version="1">有人說，死靈領主阿茲卡洛斯是他那個時代最有天賦的死靈法師。也有人說，他只是最沒耐心罷了。他這頂本為加速黑暗儀式而設計的頭環，反而為他省下了除了研習亡靈術以外的一切時間。在他私人的日記本中——被發現時旁邊擱著半杯冷熱恰好的香茗，他寫道：“今日，我喚起了十七個亡靈僕從，並將我全部的毒藥收藏按字母順序整理了三遍。黑暗之力的幽默感，真是奇怪。”</content>
+	<content contentuid="hd27cdaa0gabbcg498aga62dgbe1e44a9493b" version="1">迅捷死亡</content>
+	<content contentuid="h388af639ge88cg4936g8ad4gfed8c926e823" version="1">戰鬥中施放&lt;b&gt;死靈系&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;&lt;/b&gt;時，恢復一個&lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;附贈動作&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;每回合最多觸發&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h8cad2ad4gd780g44fega75eg5c3fad8fbc81" version="1">死靈加速</content>
+	<content contentuid="h9aa61789g9158g4927ga49ag557aa0948d91" version="1">當你施放一個&lt;b&gt;環階死靈法術&lt;/b&gt;時，恢復一個&lt;LSTag Type="ActionResource" Tooltip="ActionPoint"&gt;動作點&lt;/LSTag&gt;和一個&lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;附贈動作點&lt;/LSTag&gt;。&lt;br&gt;此效果每回合最多觸發&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h5c446579ga4c9g48d8g96dfgce6a4e6a28ff" version="1">聖典兜帽</content>
+	<content contentuid="h482bc505g8931g425fg9fb0gc0191ae95cf1" version="1">就在動盪之年，洛山達的信徒尋求神蹟時，一樁奇事在劍灣流傳開來。一個謙卑的抄寫員，奉派保管聖典文字，為了穩妥起見，他開始將磨損的經卷殘頁編入兜帽之中。隨著神聖魔法在諸國度全面失控，這些殘頁碎片竟意外地與殘存的光輝產生共鳴。教會起初對此嗤之以鼻，只當是鄉野奇譚——直到他們發現，那些“異端”抄寫員在驅散不死生物時的表現，始終優於正式任命的神官。如今，他們暗地裡默許了這種做法，儘管在明面上，依然否認知曉任何這類“非正統”的法門。</content>
+	<content contentuid="hb107f12dg9e4fg44b6g9752g3ac583dfe916" version="1">天啟神諭</content>
+	<content contentuid="h693a2916g5052g4141ga5fbgabc85a6e2d3d" version="1">你的&lt;LSTag Tooltip="Wisdom"&gt;感知&lt;/LSTag&gt;屬性提升至&lt;b&gt;[1]&lt;/b&gt;。&lt;br&gt;你的攻擊無視目標對&lt;b&gt;[2]&lt;/b&gt;的&lt;LSTag Tooltip="Resistant"&gt;抗性&lt;/LSTag&gt;。</content>
+	<content contentuid="h355dc0d2g99a0g4ec6gaa82g6de63acc3cb6" version="1">破碎前哨</content>
+	<content contentuid="h71d20240g7419g429bg9303g655399d4f1c7" version="1">在迷斯·卓諾的末日時分，當平民們在惡魔圍城之下沿撤退路線疏散時，阿拉瓦中尉奉命守衛通路。她知道，此行必死， 但她必須服從這道命令，將其視為祖國神聖的職責而慷慨就義。任務前夕，一位長者遞給她一頂古老的頭盔。隨著惡魔步步逼近，阿拉瓦的氣力逐漸耗盡，但每一次新添的傷口，都魔法般地令一道純粹的赤紅能量屏障愈發堅固。犧牲已成，民眾得救，那頂頭盔此後便一直長眠於廢墟之中，直到一隊冒險者將其取走轉賣。據說，它最終被一個特別富有的地精買了去，充作一盞美麗又駭人的夜燈。</content>
+	<content contentuid="hdf8e7543g0cadg463cg9df2g02fcdd384873" version="1">烈士堅忍</content>
+	<content contentuid="hc354ffbeg6d9ag490ega3d4g0afd20474e58" version="1">當你的&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;低於&lt;b&gt;[1]%&lt;/b&gt;時，獲得&lt;LSTag Type="Status" Tooltip="ARMOURH109"&gt;絕境庇護&lt;/LSTag&gt;。</content>
+	<content contentuid="h7315cf89g58b7g4147gbaedg68ac43aec32d" version="1">絕境庇護</content>
+	<content contentuid="h138877a3gf316g4046gaff4g69c33a5c923d" version="1">你獲得對&lt;b&gt;所有&lt;/b&gt;傷害型別的&lt;LSTag Tooltip="Resistant"&gt;抗性&lt;/LSTag&gt;。</content>
+	<content contentuid="hd2ee8e29g8b36g4b73g9a86g89572ce5bbf0" version="1">學者絕笑</content>
+	<content contentuid="hcb8d6f55g3213g4e0fg9cd8g719a21c4b073" version="1">“一件來自我那位親愛學生的禮物，”貢德的高階工匠會指著頭頂這頂毫不起眼的帽子說，“不過我至今搞不清楚，這到底算是個玩笑，還是一種羞辱。”這名學生在他的所有測驗都拿到驚世駭俗的不及格之後，只留下了一張便條：“既然您什麼都沒教會我，也許這能幫您教得更出色些。”幾十年後，這位工匠終於承認，那小子或許比所有人預料中的還聰明。</content>
+	<content contentuid="hf4ef5a20gdc0bg4ca1gbb78g33edd8d658c6" version="1">水流頭盔</content>
+	<content contentuid="h8d0096adg8c28g4597ga4c0g635a8b9b7e0d" version="1">當刺客們最終在博德之門港口追蹤到塑潮者莫利斯時，他們滿以為這個孤身一人的水術士會是甕中之鱉。然而他戴著的那頂流質頭盔——一件他控水技藝的信手之作，卻另有打算。就在他們的法術交匯之際，整座港口藉由頭盔的流形升騰而起，將他們的魔法化作了霧氣。“下回，”莫里斯留給殺手的溼噠噠的信上寫道，“或許可以試試在稍微沒那麼溼的地方，去攻擊一個水術士？”當靠近刺客公會佩戴時，這頂頭盔仍會為這樁趣事而泛起漣漪。</content>
+	<content contentuid="h0084585aga28bg4539gbfaegabbc711c5286" version="1">流水護盾</content>
+	<content contentuid="hde07562egecbdg4fffg8741g6019b39c4801" version="1">站在&lt;b&gt;水面&lt;/b&gt;上時，你獲得對&lt;b&gt;所有&lt;/b&gt;傷害型別的&lt;LSTag Tooltip="Resistant"&gt;抗性&lt;/LSTag&gt;。</content>
+	<content contentuid="h99019216gb6a8g463aga650g6136601fd324" version="1">將軍古訓</content>
+	<content contentuid="h95644fdfg2900g429ag88e2g11608ee1f09a" version="1">當有人問起孫將軍是如何精通天下兵刃時，他笑了笑，說：“真正的勇士無畏萬千兵器，而使金戈鐵馬畏懼他。”數百年後，這頂頭盔在劍灣熙攘的貿易港中被發現，上面依然以工整的書法刻著一段銘文：“致我最頑固的學生——願你終將領悟，真正的精通源自智慧，而非僅僅是練習。”將軍的落款似乎補得相當倉促，彷彿當時正在躲避某把朝他扔來的練習劍。</content>
+	<content contentuid="h97a38520g333fg4eb2g8528g9db0ef7be87e" version="1">萬劍之道</content>
+	<content contentuid="h4aeb4aa6g7eb4g4913g88c7gfc4d3f989ea7" version="1">你獲得所有&lt;b&gt;軍用武器&lt;/b&gt;的&lt;LSTag Tooltip="Proficiency"&gt;熟練項&lt;/LSTag&gt;。</content>
+	<content contentuid="hac728a1ag9fe0g4e30gba62g760331f4bf85" version="1">緩行判官</content>
+	<content contentuid="h8e35dc13gfe5ag4991g8c89g66f9b2b96888" version="1">當工匠大師“微光輪”在大機械師展覽會上展示他的最新發明時，旁觀者們一頭霧水。“它能減慢別的物品？”他們問，“可這有什麼用呢？”答案在博覽會臭名昭著的構裝體競速賽中揭曉了：他的對手們那些號稱完美無瑕的機器人，突然像喝醉的矮人一樣跌跌撞撞。“有些時候，”他在頭盔下咧嘴笑道，“取勝之道並非讓自己更快——而是讓所有人都比你慢。”機械師公會隨後禁止了這頂頭盔出現在未來的賽事中，當然，是在他們笑夠了之後。</content>
+	<content contentuid="hced9dab3g6749g4368ga82cg30fd3d0cda10" version="1">動能阻尼力場</content>
+	<content contentuid="hdbe1f2bbg3983g4110g960fg776703cf360b" version="1">&lt;b&gt;[1]&lt;/b&gt;範圍內的所有&lt;b&gt;構裝生物&lt;/b&gt;失去一半&lt;LSTag Tooltip="MovementSpeed"&gt;移動速度&lt;/LSTag&gt;，並對&lt;b&gt;所有&lt;/b&gt;傷害型別&lt;LSTag Tooltip="Vulnerable"&gt;易傷&lt;/LSTag&gt;&lt;i&gt;（除非它們免疫該傷害）&lt;/i&gt;。</content>
+	<content contentuid="he626538bga8f5g4decga382g3aaafbf4fae7" version="1">力場糾纏</content>
+	<content contentuid="h42547364g18ccg464cga9e7gc3ba0ce4f810" version="1">&lt;b&gt;[1]&lt;/b&gt;範圍內的所有&lt;b&gt;構裝生物&lt;/b&gt;失去一半&lt;LSTag Tooltip="MovementSpeed"&gt;移動速度&lt;/LSTag&gt;，並對&lt;b&gt;所有&lt;/b&gt;傷害型別&lt;LSTag Tooltip="Vulnerable"&gt;易傷&lt;/LSTag&gt;&lt;i&gt;（除非它們免疫該傷害）&lt;/i&gt;。</content>
+	<content contentuid="h28f46008gde06g445eg8627g18e2401493b5" version="1">力場糾纏</content>
+	<content contentuid="h1d8f6aa0gcff4g4d09g8c74g18d57fa1e8f6" version="1">此&lt;b&gt;構裝生物&lt;/b&gt;受緩行判官的歸零力場影響，失去一半&lt;LSTag Tooltip="MovementSpeed"&gt;移動速度&lt;/LSTag&gt;，並對&lt;b&gt;所有&lt;/b&gt;傷害型別&lt;LSTag Tooltip="Vulnerable"&gt;易傷&lt;/LSTag&gt;&lt;i&gt;（除非它免疫該傷害）&lt;/i&gt;。</content>
+	<content contentuid="h89a02dc3ga64eg4a73g87b5g576e1b10e3e5" version="1">不滅狂笑</content>
+	<content contentuid="h8ae64ebbg5b94g4ad2gbd45g789667f82eab" version="1">戰酋克拉格斯臭名昭著，全因他總在最不合時宜的時刻狂笑——在葬禮上，在外交會談中，尤其是在被人捅刀子的時候。他的戰士們曾以為他瘋了，直到他們意識到，沒有任何攻擊能阻止他那刺耳的咯咯聲。“死亡啊，”他會在陣陣大笑間怒吼道，“只是無憂的安眠！”在足足三十支箭矢、兩發弩炮和一棵倒下的大樹終於終結了他的暴行之後，他的頭盔留了下來，至今仍與任何膽敢佩戴它的勇者分享著它前任主人那病態的幽默感。</content>
+	<content contentuid="hec7d482bg89e2g4423ga246g3b6a916673c2" version="1">狂笑不止</content>
+	<content contentuid="h2651b98cg8308g4864gaa71g1330bb0c2da3" version="1">當你處於&lt;LSTag Type="Status" Tooltip="DOWNED"&gt;倒地&lt;/LSTag&gt;狀態時，所有智力為&lt;b&gt;[1]&lt;/b&gt;或更高的敵人都會陷入&lt;LSTag Type="Status" Tooltip="HIDEOUS_LAUGHTER"&gt;狂笑術&lt;/LSTag&gt;狀態。</content>
+	<content contentuid="hb0a05e04g804dg4afcga054g07a6c71dc695" version="1">銀白悼詩</content>
+	<content contentuid="hdc1f5bf1gb211g4011gaaf4gb5ae0a7f575f" version="1">在無底深淵的入口，邪術師馬萊哈斯特立下了他的最後一戰。他一面以一道法術維繫著抵擋惡魔大軍的屏障，一面以另一道法術傾瀉著毀滅之力，為援軍的到來爭取了寶貴時間。代價是慘烈的——每一次雙重施法都在撕扯他的心智，直至滿目瘡痍的勝利終於到來。那名邪術師化作灰燼飄散，但這頂頭環仍留存於世，它原本無瑕的表面至今仍銘刻著那絕望之際的烙印——銘記著一個人如何以割裂的專注，使劍灣免於萬劫不復。</content>
+	<content contentuid="h525791e7g1f4dg418agbe2egf888ec358b32" version="1">戰鬥專注</content>
+	<content contentuid="h3ff2340agb3b6g4688g87cega10323a7809f" version="1">在&lt;LSTag Tooltip="Concentration"&gt;專注&lt;/LSTag&gt;於一個法術期間，&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;的&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;具有&lt;LSTag Tooltip="Advantage"&gt;優勢&lt;/LSTag&gt;。</content>
+	<content contentuid="h73f6e51dgecf6g4147ga26eg0bc37f8a4c80" version="1">白銀遠征</content>
+	<content contentuid="h7b3d0a98g6311g475cg9606g1b1d14d018b5" version="1">當奪心魔初次從遙遠國度湧現時，他們視凡人的心智為唾手可得的獵物——直到他們遭遇了白銀遠征軍。祝福著這些頭盔的聖光，對那些異界孽物而言，無異於天譴。在奪心魔戰爭中，每一位佩戴它的鬥士都籠罩在一道錐形天啟輝光之中，成為抵禦黑暗的燈塔。這頂頭盔至今仍牽引著那來自遠古的聖光，警示著所有妄圖扭曲凡人心智的存在。</content>
+	<content contentuid="h675f7719g6fb8g4d73ga5a5gf9140b20ee4e" version="1">心靈之光</content>
+	<content contentuid="h01391144g21d5g4cdagba54g2d0923aec7a9" version="1">&lt;b&gt;異怪&lt;/b&gt;針對你的&lt;LSTag Tooltip="AttackRoll"&gt;攻擊檢定&lt;/LSTag&gt;具有&lt;LSTag Tooltip="Disadvantage"&gt;劣勢&lt;/LSTag&gt;。你獲得對&lt;b&gt;[1]&lt;/b&gt;傷害型別的&lt;LSTag Tooltip="Resistant"&gt;抗性&lt;/LSTag&gt;。</content>
+	<content contentuid="h47d5d6b5g8db2g40ebgae64gdfda8eaa3cfa" version="1">天譴判官</content>
+	<content contentuid="hb673738fg278dg4d9bg90c7gb5003e147bc8" version="1">高階審判官奧勒良在光明大教堂地下的聖鍛爐中鑄就了這頂頭盔，併為其注入了所俘天界生物的精華。其獨特的飛鳥造型，靈感源於那隻曾在神啟異象中造訪他的傳奇鳳凰——它許諾了他對抗威脅國度的亡靈大軍的勝利。數十年來，奧勒良領導著對抗至強巫妖與吸血鬼領主的聖戰，頭盔的神聖魔法能將它們的攻擊如數奉還。當他最終隕落於暮光終焉之戰中時，他的屍身與頭盔均不知所蹤——直到今日。儘管原本的力量已有所衰減，但遺物中束縛著的天界精魂仍在燃燒著義憤之火，渴望著再度將黑暗從這片土地上驅逐出去。</content>
+	<content contentuid="h6718d472gac06g4c61gb071gdd34417cc9dc" version="1">聖火復仇</content>
+	<content contentuid="hd9f4bd16gf946g42beg8228g4c830ec93c07" version="1">&lt;b&gt;不死生物&lt;/b&gt;對你造成傷害時，必須透過對抗你的&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;戰技豁免難度等級&lt;/LSTag&gt;的體質&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;，否則陷入&lt;LSTag Type="Status" Tooltip="ARMOURH117"&gt;天界閃光&lt;/LSTag&gt;，持續&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h1fbe1dd9gb289g41b4ga41agb46578842f79" version="1">天界閃光</content>
+	<content contentuid="h61ba613fged0bg469fgada4g2e2eadac0aa5" version="1">該&lt;b&gt;不死生物&lt;/b&gt;被天界火焰環繞，損失&lt;b&gt;[1]&lt;/b&gt;點&lt;LSTag Tooltip="Strength"&gt;力量&lt;/LSTag&gt;和&lt;LSTag Tooltip="Dexterity"&gt;敏捷&lt;/LSTag&gt;。</content>
+	<content contentuid="h42fa8135g161dg4839g9368g24d8ea7f4f50" version="1">飢焰之冠</content>
+	<content contentuid="h9b563305g59d5g4ba4g8ce7gaa2f4bac66a3" version="1">一位來自火位面的流亡王子，透過與眾火元素的禁忌契約鑄就了這頂炎冠，試圖奪回他的王座。那些生性詭詐的元素們應允了他的願望，卻詛咒這頂王冠對它們的精魂永懷無盡的飢渴。這頂冠冕的胃口愈發膨脹，直至最終吞噬了它的鑄造者，只留下一句低語的警告：“以烈焰飼之，否則它將以你為食。”此後的數百年間，它輾轉流落過諸多位面，每一位主人發現它的渴求永無真正饜足之日時，都已為時太晚。</content>
+	<content contentuid="h98747d80gaafeg46f0ga359gacdc89b9ab7d" version="1">飢渴之刃</content>
+	<content contentuid="h9512a89agea13g432agbe63ga1c7a2331abc" version="1">站在&lt;b&gt;燃燒表面&lt;/b&gt;上時，你的&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;會增加一個額外的&lt;b&gt;傷害骰&lt;/b&gt;。</content>
+	<content contentuid="he06199e2g5008g1fb9g5ccbg34a1d41f831e" version="1">瑪拉凱</content>
+	<content contentuid="h44002cd8ga6d6g0b32g9f01g59aff62123b3" version="1">毒理學家</content>
+	<content contentuid="hda559eb2g389ag414cg89c5geec18ea7b305" version="1">巫毒媒質</content>
+	<content contentuid="hec559729g82c8g4566gb81cg787ba391c409" version="1">數個世紀前，臭名昭著的毒理學家馬萊凱，在深埋世界之脊下的實驗室中，遭遇了一整隊聖武士的圍剿。走投無路之下，他試圖進行一道絕望的儀式，將自己的軀體暫時化為純粹毒液——然而聖武士們合力施放的至聖斬打斷了這道法術。魔力的反噬震碎了他的血肉之軀，但他那飽浸了數十年鍊金實驗的精華，卻遁入了近旁的一件容器——他的兜帽之中。聖武士們只察覺到那看似無害的織物中殘留的微弱魔法，便將它當作證物登記在冊，束之高閣。</content>
+	<content contentuid="h6e9a94b8g6f02g41a2g8f16g42e27e590d5e" version="1">靈魂腐蝕</content>
+	<content contentuid="h20ef35c6gc907g4aa5g80fag2ad1c12f0291" version="1">當你造成&lt;b&gt;[1]&lt;/b&gt;時，目標必須透過一次對抗你的&lt;LSTag Tooltip="SpellDifficultyClass"&gt;法術豁免難度等級&lt;/LSTag&gt;的&lt;LSTag Tooltip="Constitution"&gt;體質&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;，否則將受到&lt;LSTag Type="Status" Tooltip="MAG_POISON_POISON_LETHALITY"&gt;劇毒毒液&lt;/LSTag&gt;影響，持續至本回合結束。&lt;br&gt;&lt;br&gt;每回合只能觸發&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h01496253g1554g4df2gbfbdgd5cbd4efb085" version="1">劇毒毒液</content>
+	<content contentuid="h0e1b5179g776fg42bfg848bg1694447a5081" version="1">每回合開始時，有&lt;b&gt;[1]%&lt;/b&gt;的機率陷入&lt;LSTag Type="Status" Tooltip="AMP_TOXEMIA"&gt;毒血癥&lt;/LSTag&gt;，持續&lt;b&gt;[2]&lt;/b&gt;回合。</content>
+	<content contentuid="h1d0d2b44g1f12g4969g80bbgb16b49253d94" version="1">劇毒球</content>
+	<content contentuid="hc55799c2g1cfag48f8g94b8g8a8cceda0096" version="1">向目標投擲一枚高濃度毒液球，造成&lt;b&gt;[1]&lt;/b&gt;，並在地面留下小片毒液池。&lt;br&gt;&lt;br&gt;傷害受召喚者的&lt;LSTag Tooltip="SpellcastingAbilityModifier"&gt;施法屬性調整值&lt;/LSTag&gt;影響。</content>
+	<content contentuid="hdbc61058g49deg492bgb9d8g078442bcc702" version="1">喚醒瑪拉凱</content>
+	<content contentuid="h5ec87da5g85bdg43ddgb8e3g57ee49a018cd" version="1">釋放被囚於容器中的瑪拉凱精華。他被數十年的毒性實驗浸透的靈魂會&lt;LSTag Type="Status" Tooltip="POISONED"&gt;中毒&lt;/LSTag&gt;附近敵人，並在毀滅時引發一次&lt;b&gt;[1]&lt;/b&gt;爆炸。&lt;br&gt;&lt;br&gt;效果受召喚者的&lt;LSTag Tooltip="SpellcastingAbilityModifier"&gt;施法屬性調整值&lt;/LSTag&gt;影響。</content>
+	<content contentuid="h4ffa68b8gc27bg442egbcaag9fd5422d0c8b" version="1">最後一息</content>
+	<content contentuid="h6bef1fcdge130g4f62gbb26g406c458dc768" version="1">死亡時，瑪拉凱釋放毒性爆炸，造成&lt;b&gt;[1]&lt;/b&gt;，影響&lt;b&gt;[2]&lt;/b&gt;範圍內的&lt;b&gt;所有&lt;/b&gt;生物。</content>
+	<content contentuid="h97b023beg2a9dg439ag8a18gf2821abb28a6" version="1">瑪拉凱的毒爆</content>
+	<content contentuid="h011e7e09gfa8dg45fbga1c1g87c45e92bc42" version="1">法王冠冕</content>
+	<content contentuid="h902e8522g6699g43b7gab06gf02b9e9f1193" version="1">天才術士、這頂冠冕的主人拉雷修斯，留下的最後一句名言是：“相信我，我能感覺到下一發火球術就要來了！”如今，它在一代代過度自信的施法者手中流傳，每個人都篤定自己能駕馭那份混沌。最有趣的部分，莫過於看他們向同伴解釋為何“萬無一失”的法術，最終卻變成了一陣尷尬的手指抽搐。至少，拉雷修斯的鬼魂能看個盡興。</content>
+	<content contentuid="h57faa79ag7694g4647g967dg775709184ca1" version="1">法術機緣</content>
+	<content contentuid="hf12829e7g3765g41a9gbde0g9f0fdb2010ba" version="1">戰鬥中施放&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;時，有&lt;b&gt;[1]%&lt;/b&gt;的機率恢復你所有的&lt;b&gt;[2]~[3]&lt;/b&gt;環&lt;LSTag Tooltip="SpellSlot"&gt;法術位&lt;/LSTag&gt;。</content>
+	<content contentuid="h64f2ba52g343dg4e05g8457g01dbdeaaafb7" version="1">勘探員防酸帽</content>
+	<content contentuid="hfded7ecfg458ag4169g82a8g8899bdcfc85f" version="1">一件源自聲名狼藉的幽暗地域採礦熱的古怪遺物，彼時的勘探員們為尋珍稀礦石，不惜深入至為危險的淵藪。一個名叫老格雷戈裡的頑固矮人，儘管發現自己的礦道正好穿過一頭黑龍的巢穴，卻斷然拒絕放棄產權。那頭黑龍的酸息曾融毀無數採礦作業，但格雷戈裡只是給他的信賴之帽附了魔來抵禦腐蝕。黑龍被這矮人的頑強深深震撼（又或者僅僅是被逗樂了），最終允許他繼續採礦——當然，得分它一份利潤。這頂帽子被擊中時仍會滲出腐蝕性物質——以一種相當有效的方式，提醒著人們它那不尋常的起源。只是，別戴著它去參加高階派對！</content>
+	<content contentuid="h4233d00bg9c0bg40f3gb99bg9f6145f9f0be" version="1">腐蝕防護</content>
+	<content contentuid="h74e67efdg5810g4d38g877fg79bd1a01f3a7" version="1">你&lt;LSTag Tooltip="Immune"&gt;免疫&lt;/LSTag&gt;&lt;b&gt;酸液效果&lt;/b&gt;。&lt;br&gt;受到近戰傷害時，你會將&lt;b&gt;[1]&lt;/b&gt;範圍內的所有表面塗滿&lt;b&gt;強酸&lt;/b&gt;。</content>
+	<content contentuid="h03a4ee0eg60dfg48e3gb430g5bfd90a8f4c1" version="1">逐曉</content>
+	<content contentuid="hda46e59age763g47f9ga00ag5b5ef920d4c6" version="1">一件來自逐曉者的珍貴遺物，鑄造於他們在迷斯·卓諾為洛山達興建神殿的神聖使命期間。當不死生物在谷地開墾歷·13世紀威脅到他們的復興之舉時，這頂帽子被施以魔法，用以引導晨曦之主那護佑的輝光。衍縫紋樣象徵著第一縷破曉的晨光刺破黑暗，每一針每一線都傾注了洛山達的賜福。儘管它的原主在守護神殿地基時倒下，但他的犧牲確保了他人得以活著見到日出。如今，當黑暗迫近時，這頂帽子依然散發著護佑的光芒——儘管當地的死靈法師堅稱它“耀眼得令人無法忍受”。曙光終將降臨於每個人！</content>
+	<content contentuid="he1cadd67g24b7g4e5dgbea5gf770973cf113" version="1">晨光</content>
+	<content contentuid="hbdfcbb5bgb8e8g4a72gad94gb113ebf156bd" version="1">當你受到[1]時，你和&lt;b&gt;[2]&lt;/b&gt;範圍內的盟友獲得&lt;LSTag Type="Status" Tooltip="ARMOURH122"&gt;黎明祝福&lt;/LSTag&gt;，持續&lt;b&gt;[3]&lt;/b&gt;回合。</content>
+	<content contentuid="h6a1d7a12g4cf8g4197g9836gec147a00a9d4" version="1">黎明祝福</content>
+	<content contentuid="hcd4d7323g993eg470fgadfag40c2232f8d26" version="1">在持有者附近時，獲得對&lt;b&gt;[1]&lt;/b&gt;傷害型別的&lt;LSTag Tooltip="Resistant"&gt;抗性&lt;/LSTag&gt;。</content>
+	<content contentuid="h18a575f7gb531g4122gb059g4bb1db765ad6" version="1">逐曉者</content>
+	<content contentuid="he5c8f230gd0a1g423ag8b33gb54dd6264adb" version="1">你對&lt;b&gt;不死生物&lt;/b&gt;&lt;b&gt;額外&lt;/b&gt;造成&lt;b&gt;[1]&lt;/b&gt;點傷害。</content>
+	<content contentuid="hcc6b02d9g4928g43b0gb900gda081121d481" version="1">時滯之冠</content>
+	<content contentuid="ha786fc12g9c3dg4c8cg8b4fg1a59f97e8cad" version="1">這頂不祥的頭盔鍛造於耐瑟瑞爾的沒落時代，曾屬於大奧術師克羅內斯——他對掌控時間的痴迷，驅使他創造出愈發危險的神器。於狂妄之中，他自以為連時間之流本身都能駕馭，可他的實驗最終只產出了這頂受詛咒的冠冕——一個關於魔法妄為的警世寓言。遺物會在周遭創造出局域化的時間畸變，干涉附近所有人的行動。曾佩戴過它的人提及，那感覺彷彿在糖漿中跋涉，無形的鎖鏈鈍化了他們的反應。克羅內斯自己也戴著它迎來了終結——當他自己的學徒終於受夠了他對時間的擺佈，決定了結這一切時——而他連及時施展一道簡單的護盾術都做不到。</content>
+	<content contentuid="h5f6cf22eg363ag4e54gab9egd282449e9003" version="1">時光掌控</content>
+	<content contentuid="ha4cfb786ga607g4019gb249g67bd7da5874d" version="1">在戰鬥中，&lt;b&gt;所有&lt;/b&gt;在&lt;b&gt;[1]&lt;/b&gt;範圍內的生物都無法進行&lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;附贈動作&lt;/LSTag&gt;。</content>
+	<content contentuid="he410641bgcd1eg4957g9eddgb608cc90a0c9" version="1">時空停滯</content>
+	<content contentuid="hdd41cebcg3cabg49f1g9673g21ff00540bcf" version="1">該生物無法執行&lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;附贈動作&lt;/LSTag&gt;。</content>
+	<content contentuid="hc0ced0b8gcdddg4f32g8127g3dd6bf9907d6" version="1">忠烈餘暉</content>
+	<content contentuid="hef7bada3ga623g4ea6ga09egac650c0db004" version="1">它原屬於守護騎士萊拉內爾，她對士兵的奉獻甚至超越了死亡本身。在迷斯·卓諾圍城戰中，她領導了一場對抗壓倒性黑暗勢力的絕境防守。當她的戰士們在身旁接連倒下時，他們的生命精華開始湧過她的頭盔，匯成一道治癒能量的洪流，維繫著其餘守軍的生命。據說，遺物那獨特的淺水色輝光，映照著永聚島的水域，象徵著生命與犧牲的永恆流轉。最令人動容的是，當數百年後地精發現她的遺骸時，他們看到她依然挺立——她的盔甲被無數箭矢刺穿，可她的輪廓，仍被一圈逝去的戰友所環繞。</content>
+	<content contentuid="h61707fe5gff3fg482fg8811g31f69aa099b5" version="1">殉道者的恩賜</content>
+	<content contentuid="he5809b65ge3c4g4570g9712g8845e204b543" version="1">受到敵人傷害時，你為&lt;b&gt;[1]&lt;/b&gt;範圍內的&lt;b&gt;所有&lt;/b&gt;生物恢復&lt;b&gt;[2]&lt;/b&gt;點生命值。</content>
+	<content contentuid="h2a24c1cfg3cbcg4d30g9139gd9f49bf0dbb8" version="1">治癒浪潮</content>
+	<content contentuid="h41a66c20gb95bg4d84ga69eg887f4eed56e4" version="1">被擊中時，為該生物恢復&lt;b&gt;[1]&lt;/b&gt;點生命值。</content>
+	<content contentuid="h828f1d69g587eg473agab4cgab90b7e37530" version="1">啟明</content>
+	<content contentuid="h9e4d3096g381bg4b08gac48gea4fa94c655a" version="1">在洛山達神殿的鍍金廳堂之中，這頂奇特的王冠曾加冕於晨曦之主最虔誠的僕從之首。點綴其上的鎖鏈象徵著晨昏永無止息的輪迴，每一顆水晶珠都盈滿了神能。它由一位僅憑天啟輝光“視”物的盲眼先知親手打造，能將最原始的塑能魔法匯聚成束——或是化作灼燒惡徒的灼目聖光，或是化作撫慰信徒的溫柔曉色。它最令人莞爾的軼事當屬首次測試之時：它的創造者意外地將一整支亡靈大軍變成了即興光源，由此造就了神殿歷史上最為燈火通明的一次午夜彌撒。</content>
+	<content contentuid="h7883250dgeebbg4c45gb576g9164d73a693c" version="1">晨輝擁懷</content>
+	<content contentuid="h0e8a6e7ege9e6g476cg8dd2g57bb58c35309" version="1">對盟友或自身施放的&lt;b&gt;指定性塑能法術&lt;/b&gt;，同時恢復&lt;b&gt;[1]&lt;/b&gt;點生命值。</content>
+	<content contentuid="hc374685bg9437g4eccga190g20f06e04f697" version="1">神聖懲戒</content>
+	<content contentuid="h6216f0fag6ea9g4495gb40cg031928655ad3" version="1">你對敵人施放的&lt;b&gt;指定性塑能法術&lt;/b&gt;造成額外&lt;b&gt;[1]&lt;/b&gt;傷害。&lt;br&gt;&lt;br&gt;每次攻擊只能觸發&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="hd8ebbf0bg4462g4b2dg8e03g5b2a4cd0d0b6" version="1">至暗之面</content>
+	<content contentuid="hbd1e8672gd263g490bgb972g814578be8a03" version="1">在尚未飛昇的凡俗歲月，這頂頭盔曾伴隨著祂，直至那不朽的轉變降臨。如今，它承接著祂在無形領域中的垂注，以超自然的加護庇佑著被選中的冒險者。當死亡逼近時，濃郁的黑霧會愈發厚重，將最致命的攻擊盡數偏折；而若有愚者在其主衰弱之時妄動干戈，便會——憑空消散。最令人不安的是，頭盔縈繞的暗影迷霧似乎自有其意志——彷彿那位黑暗真神的目光，自亙古至今，從未離開過這件古老的遺物。</content>
+	<content contentuid="h67b6d8f5g2ce6g432cg8d87g36994e836ded" version="1">異界庇護</content>
+	<content contentuid="h86366b6cg2661g42a6g885bg9aeebc2582eb" version="1">受到&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;時，你獲得&lt;LSTag Type="Status" Tooltip="ARMOURH126"&gt;至暗者的恩典&lt;/LSTag&gt;，持續&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="hc27f5609gdd25g4a37gb580gc37e315b7c1c" version="1">至暗者的恩典</content>
+	<content contentuid="h87211568g0ce4g4aecg8707gf4a1706991da" version="1">&lt;LSTag Type="Image" Info="SoftWarning"/&gt; 你完全處於&lt;b&gt;無敵&lt;/b&gt;狀態。</content>
+	<content contentuid="hccae04cdgc1d5g4910ga898g4dbc4b770304" version="1">靈魂收割</content>
+	<content contentuid="hb1dc82fbg7bbfg4a86g971ag5c665a6c3797" version="1">&lt;b&gt;類人生物&lt;/b&gt;攻擊者在&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;為&lt;b&gt;[1]%&lt;/b&gt;或更低時會被立刻摧毀。</content>
+	<content contentuid="ha7f72734g28b5g4b3ag91edgea9b03a472f8" version="1">迷境高帽</content>
+	<content contentuid="h693476b0gae2dg48d1g8f5egfdb8afa69a20" version="1">據說這頂花紋詭譎的奇特高帽，來自命運迷宮本身。那座無盡的迷宮存在於位面之間，命運之線在其中交錯纏繞，偶爾會產出一些近乎機率為零的神器。無人注視時，高帽上的紋樣便會悄然移位，每一次重組都在微妙地調整著佩戴者的運數。它的第一任主人在一場賭約中輸掉了它——至於這究竟是一場真正的不幸，抑或恰恰是命運的本意，至今仍是宇宙級辯論的議題。</content>
+	<content contentuid="hf5fe0f85g87f8g434eg827bg16cf62e1e384" version="1">命運的眷顧</content>
+	<content contentuid="h42aa5befga1a5g4f7ag9e9ag03d4fd9803e2" version="1">所有&lt;LSTag Tooltip="AbilityCheck"&gt;屬性檢定&lt;/LSTag&gt;增加&lt;b&gt;+[1]&lt;/b&gt;。</content>
+	<content contentuid="h7baf9539g9b95g4613ga39fg2ea033f9eacc" version="1">熾天使之翼</content>
+	<content contentuid="hafd66e98g212ag43f1gab87g08c2fad36fe1" version="1">在天堂山的聖光典錄中，流傳著一位傳奇異界神侍的傳說——祂對凡人的潛能產生了濃厚的興趣。這位天使打破陳規，以金色的輝光與晨曦之雲鑄就了這頂頭盔，並賜予了一位品行高潔的聖武士。這頂頭盔引導著天界位面的神聖能量，使佩戴者可短暫地超越凡俗肉身的極限。戰鬥中，它散發的輝光會愈發耀眼，彷彿七重天堂親自降下垂青，只為拔擢那當之無愧的靈魂。</content>
+	<content contentuid="he01712faga18dg4bf0g81efg158985611984" version="1">天堂恩典</content>
+	<content contentuid="h5a7a390bg4d9bg4a6bg9e4dgb055dcad3311" version="1">在戰鬥中，你獲得對&lt;b&gt;所有傷害型別&lt;/b&gt;的&lt;LSTag Tooltip="Resistant"&gt;抗性&lt;/LSTag&gt;，並可以&lt;LSTag Type="Spell" Tooltip="Projectile_Fly"&gt;飛行&lt;/LSTag&gt;。</content>
+	<content contentuid="h0a66788dg9cd4g49b3g837cg8d9f3735ffa5" version="1">天界昇華</content>
+	<content contentuid="h0cfe1b39g4e1fg4efbgae73g39780592dee3" version="1">受神聖之力賜福，你超脫凡俗的桎梏，獲得飛行能力以及對&lt;b&gt;所有傷害型別&lt;/b&gt;的&lt;LSTag Tooltip="Resistant"&gt;抗性&lt;/LSTag&gt;。</content>
+	<content contentuid="ha324abbdgd593g47caga116g24937ecfe230" version="1">獵魔</content>
+	<content contentuid="h622dce92g68aag4936ga207g25adceb10e3d" version="1">鍛造自異界的邪汙鋼材，這頂頭盔曾屬於最後一位傳奇獵魔人——“影步”。頭盔散發的獨特綠光來自其中禁錮的數千惡魔精華，它們的力量被反用來對抗自己的同類。每一次全新的獵殺都會強化人們，彷彿頭盔本身就在啜飲邪魔的能量。古老典籍記述著獵魔者們如何將這門手藝昇華為一門藝術，然而無人能及影步的境界——他洞悉了惡魔最大的弱點，恰是它們自身的精華。遺物至今仍渴望著它的獵物，等待著一位當之無愧的繼承者，去延續這場永恆的獵殺。</content>
+	<content contentuid="h2aa8f3f9gbd4cg44bdgb67cgc480f14765c5" version="1">永恆狩獵</content>
+	<content contentuid="h7a4e032dg88abg49ccgb513g0555f16db21d" version="1">當你殺死一名&lt;b&gt;邪魔&lt;/b&gt;或&lt;b&gt;異怪&lt;/b&gt;時，恢復所有&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;。&lt;br&gt;針對&lt;b&gt;邪魔&lt;/b&gt;或&lt;b&gt;異怪&lt;/b&gt;進行攻擊時，&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;所需的擲骰點數減少&lt;b&gt;[1]&lt;/b&gt;（可與類似效果疊加）。</content>
+	<content contentuid="h8b3ff341gab34g4cfbgb16dg75eff414a035" version="1">宏構華冠</content>
+	<content contentuid="h6028dfefgfd6ag4f90ga067gb85eeb2cada4" version="1">這頂華貴的禮帽曾屬於大法師萊里奧，即使在“紫羅蘭之圓”中，他那臻至巔峰的防護魔法亦堪稱傳奇。帽上繁複的純銀紋樣，乃是以純粹的星光之線編織而成，每一道纖細的線條都構成了無與倫比的強力結界。當可怖的巫後瑪拉試圖以她的千重詛咒擊潰他的守禦時，卻發現每一道咒術都在觸及他周身防護之際，悄然消散殆盡。最終，一個時代的至強咒術師敗下陣來——擊敗她的並非反咒術，亦非戰法師的轟擊，而是一道無可逾越的真理：真正的力量，不在於詛咒他人的能為，而在於一件最不可能的素樸之事——拒絕被詛咒。</content>
+	<content contentuid="he990f0fcg8481g42b7ga2afg907b6f7ba60a" version="1">完美格局</content>
+	<content contentuid="h639cf30cgbff3g42bbgbcbeg418cea0f2203" version="1">你無法被&lt;b&gt;詛咒&lt;/b&gt;。&lt;br&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;獲得&lt;b&gt;+[1]&lt;/b&gt;加值。</content>
+	<content contentuid="h874932e8g3db7g4f78g9250g94459441546f" version="1">星識之環</content>
+	<content contentuid="hf82b2690g81eeg4f7egb11eg9c2bf9f4c667" version="1">在星界最為稀世的瑰寶中，漂浮著一種奇異的造物——純粹意識所凝的活體星辰，古老、純淨，由輝光與思維交織而成。這頂頭環，正出自傳奇工匠西西蘭德里亞之手，由一顆甘願獻身的星辰碎片所鑄。她窮盡一生，只為學會與這些天界實體進行交流。這枚水晶至今保留著它的意識，它那眩目的光輝，不過是其蘊含的瀚海知識的一縷殘響。佩戴它的人，會發現自己的心智被拓至超越凡軀的極限——但也有傳言說，頭環與主人的選擇是雙向的，並且分量相當，它在尋覓那些心智足以承受與星辰意識交匯之人。</content>
+	<content contentuid="h01e80348g7290g4497ga751g570ef87c3e08" version="1">星生明晰</content>
+	<content contentuid="hcdb75ab4gc7a3g4477g9d4fg4e79484a8737" version="1">你在所有&lt;LSTag Tooltip="Skill"&gt;技能&lt;/LSTag&gt;上獲得&lt;b&gt;+[1]&lt;/b&gt;。&lt;br&gt;效果隨&lt;LSTag Tooltip="SpellcastingAbilityModifier"&gt;施法屬性調整值&lt;/LSTag&gt;加成。</content>
+	<content contentuid="haa8e8e33g16e7g470egba57g1a46f4d71e7c" version="1">荒花之徑</content>
+	<content contentuid="h0f8a3f19gd5b1g4a6agaf3ag39efd2ae6328" version="1">於塵封已久的遠古遺蹟深處，在被遺忘年代的暗影故地，這雙飽經風霜的靴子長久沉寂。當你初次觸碰它時，指尖摩挲過的紋路驟然煥發生機——纖巧的苔蘚細蔓在木質鞋面上蔓延開來，瞬間織就了一卷跨越千古的史詩。那份求知慾驅使你在滿是塵埃的卷宗裡探尋，書頁間流淌著關於“翠庭漫步者”的記載。那是傳說年代中，一個踏遍諸界山水的遠古德魯伊秘會。這群睿智的先賢始終堅信，真正的治癒源於自然的擁抱。於是，他們將原野精魄的狂野魔力深植於其靴履之中。而這一刻，當你親腳踏上這雙奇妙非凡的靴子，一幅無以言表的奇景盡收眼前：你每一次催動癒合的魔力，周圍的頑石與荒土之間便會迸發出點點繁花，如同整個世界都在為這場充滿生命力的撫慰而鼓舞歡騰。</content>
+	<content contentuid="h1b7d0279gae2dg400cga410gb94da94b09ae" version="1">永珍更生</content>
+	<content contentuid="h0a800404g869bg4bbeg82f0g33cd29f63f13" version="1">當你受到治療時，你在周圍召喚&lt;b&gt;密集的花叢&lt;/b&gt;，持續&lt;b&gt;[1]&lt;/b&gt;回合。你不會被&lt;b&gt;花叢&lt;/b&gt;減速。&lt;br&gt;&lt;br&gt;此效果每回合最多觸發&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="hca57cec0g657fg4242g8048g09637ba2daaa" version="1">狂煉拖鞋</content>
+	<content contentuid="h0da60963gba1ag43baga460ga7ac40532437" version="1">在一間塵土飛揚的實驗室地窖深處，你發現了這雙奇怪的拖鞋，鞋底覆著一層古怪而粘稠的物質。散落在旁的，是燒焦的日誌殘頁——其中的秘密多半已隨火焰消逝，唯有兩條關鍵的記錄得以留存：“第47天：配方接近完成！油脂已達完美稠度。是時候解決那惱人的打滑問題了……”以及“第48天：尤里卡！研磨黑曜石當可……”餘下的字句，盡數湮滅於灰燼與焦痕之中。看看那燻黑的牆壁與蝕進地板的頑固汙漬，便知這位作者最終的實驗何其……壯烈。也罷，至少如今你終於明白，為何這雙拖鞋與重力的關係如此別緻。</content>
+	<content contentuid="h8c2dc190gcc65g4bc6g9a6egee5bd1e13f04" version="1">油滑狂熱</content>
+	<content contentuid="hf40b22e6g41d8g4133g90b0g6688a63b75ff" version="1">在戰鬥中使用&lt;LSTag Type="Spell" Tooltip="Shout_Dash"&gt;疾走&lt;/LSTag&gt;時，你的拖鞋將&lt;LSTag Type="Status" Tooltip="ARMOURB133"&gt;引燃&lt;/LSTag&gt;，持續至回合結束。</content>
+	<content contentuid="hb3f31e5agaff5g4866gb3e4g19f194ee0ca2" version="1">行路打滑</content>
+	<content contentuid="h9db032bcg866fg4bf7g85d8g973f1cfe573c" version="1">移動時，你&lt;b&gt;偶爾&lt;/b&gt;會&lt;LSTag Type="Status" Tooltip="PRONE"&gt;倒地&lt;/LSTag&gt;。</content>
+	<content contentuid="ha5328a8agd7b9g4091g9ec8g034fba9abed7" version="1">揮發物質</content>
+	<content contentuid="h824b1cfagf92fg46c4g8a63gcf681a559b8a" version="1">回合結束時，塗覆在拖鞋上的物質將會&lt;LSTag Type="Spell" Tooltip="Armour_B_133_explosion"&gt;爆炸&lt;/LSTag&gt;。</content>
+	<content contentuid="h8db1d89dg77b2g4f82g8a2bg02ca8ff96b56" version="1">油火噴發</content>
+	<content contentuid="hcc024d95g7985g4975g89e2g0ca10380349e" version="1">產生不穩定物質的爆炸，將地面覆蓋在&lt;b&gt;火焰&lt;/b&gt;中，持續&lt;b&gt;[3]&lt;/b&gt;回合，並造成&lt;b&gt;[1]&lt;/b&gt;點傷害。&lt;br&gt;&lt;br&gt;生物可透過一次&lt;LSTag Tooltip="Dexterity"&gt;敏捷&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;，只承受&lt;b&gt;一半&lt;/b&gt;傷害。</content>
+	<content contentuid="h73722566g2328g44a1ga117g7642cc4510a5" version="1">凌空勇躍</content>
+	<content contentuid="h22bac101g2c00g432bg8774gd506e316e8fe" version="1">在一座遠古風之武僧的神殿廢墟中，你發現了這雙非凡的毛皮襯裡長靴。輕如鴻毛，卻異常堅固。近旁一本殘破的法術書，記載著一個古老的戰士流派——他們日復一日地訓練自己從萬丈高空縱身躍下，如天降雷霆般降臨於敵陣之上。蘊藏在這雙靴子之中的遠古魔法，似乎至今仍保留著那份力量的殘片，在最果敢的縱躍中，賦予絕境逢生的庇護。</content>
+	<content contentuid="hcd4ebc4bg9fcbg44d0g8734g64ded8bea6fa" version="1">天降神力</content>
+	<content contentuid="hc43b3424g6f3ag4c4bg950fgb395aaf418ea" version="1">你&lt;b&gt;免疫&lt;/b&gt;&lt;b&gt;墜落傷害&lt;/b&gt;。執行&lt;LSTag Type="Spell" Tooltip="Projectile_Jump"&gt;跳躍&lt;/LSTag&gt;時，獲得&lt;b&gt;[1]&lt;/b&gt;。&lt;br&gt;&lt;br&gt;效果&lt;b&gt;每&lt;/b&gt;級提升。</content>
+	<content contentuid="hcc0ccd9fgfae3g467egb734g5d85404a7574" version="1">天界守衛</content>
+	<content contentuid="h539af0f2gf4c6g4ed9g9e36gb0aa215d29a1" version="1">此生物獲得&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="h26e65e21g7e56g4bcdga36egc4b552af06d6" version="1">疾風纏帶</content>
+	<content contentuid="hdba5c553g83d9g4720g9e74gb94bfad33c15" version="1">在狂風肆虐的平原深處，古老的石碑訴說著被遺忘的智慧。在一座獨立於時間之外的修道院中，你發現了這對裹布，它們的織料雖已歷經萬古滄桑，但金色絲線繡成的繁複圖紋，在陽光的照耀下，依然如晨霧般流轉變幻。當指尖拂過那些半褪的符文時，你感到周遭的空氣發生一陣奇異的騷動。修道院塵封的檔案裡，殘存著一段非凡的傳說——關於一群已然超越行動極限的苦修者，他們的步履如此迅疾輕盈，以至於目擊者稱，那些身影好似與風融於一體。他們的身法已臻化境，形貌僅如空氣中的一抹漣漪，唯有身後揚起的旋塵，方能證明他們曾飛掠而過。</content>
+	<content contentuid="hdeda1330gf993g4ed3gb00dgaa01917584ed" version="1">風行</content>
+	<content contentuid="hdad50e77gf5eeg4f87ga09ag36ccc8f4058e" version="1">&lt;LSTag Type="Spell" Tooltip="Shout_Dash"&gt;疾走&lt;/LSTag&gt;效果&lt;b&gt;翻倍&lt;/b&gt;。</content>
+	<content contentuid="hd6ff9fb7g84d3g44e3g8244gef4909d777d1" version="1">時光步履</content>
+	<content contentuid="h08879c21gc226g4dfeg92a7g2d85149aa5df" version="1">這雙來自異界的靴子，彷彿存在於此世的時間之外。鑲於靴面的深緋晶石，以一種違逆自然的節奏搏動著，而鍛造它的金屬則彷彿從未凝定——若水體般蜿蜒流轉，彷彿在時間洪流中對自身的形狀猶豫不決。當翻閱古舊的典籍時，你發現了星界文字的殘片，提及“一位曾試圖束縛時間本身的追尋者”。然而餘下的篇章，已無可挽回地模糊不清了，彷彿時間本身拒絕揭示它的秘密。</content>
+	<content contentuid="h588fccdaga4cag4a3dgad8fg91053bcd8c6e" version="1">時空扭曲</content>
+	<content contentuid="h2e671881ga0b6g4bdbgb1f1gdc8bfbe04eab" version="1">&lt;b&gt;[1]&lt;/b&gt;範圍內的敵人損失&lt;b&gt;[2]%&lt;/b&gt;的&lt;LSTag Tooltip="MovementSpeed"&gt;移動速度&lt;/LSTag&gt;。</content>
+	<content contentuid="ha68167ebg0b57g420egbc72g19d2b4c53890" version="1">強制靜止</content>
+	<content contentuid="h93043ca4gd1c2g4916gbf30g5d996a53195d" version="1">此生物受時間之力影響，損失&lt;b&gt;[1]%&lt;/b&gt;&lt;LSTag Tooltip="MovementSpeed"&gt;移動速度&lt;/LSTag&gt;。</content>
+	<content contentuid="hc872a3dfgf954g4531gb386gc00af5aa2587" version="1">時光湧流</content>
+	<content contentuid="hed6b607egcf90g481aga6fag74fb08c21fa4" version="1">當你處於&lt;LSTag Type="Status" Tooltip="SLOW"&gt;緩慢&lt;/LSTag&gt;或&lt;LSTag Type="Status" Tooltip="HASTE"&gt;加速&lt;/LSTag&gt;狀態時，獲得&lt;b&gt;+[1]&lt;/b&gt;&lt;LSTag Tooltip="MovementSpeed"&gt;移動速度&lt;/LSTag&gt;。</content>
+	<content contentuid="h6ba0f203g6521g4ec3gb2d2g0ae7c7439fac" version="1">必然打擊</content>
+	<content contentuid="h12cb4d4eg311bg427cg9a45g4301892c6a4c" version="1">你無法造成&lt;LSTag Tooltip="CriticalHit"&gt;重擊&lt;/LSTag&gt;，但總是會重擲未命中的攻擊。</content>
+	<content contentuid="h241d370dgc606g4557g8f1ag8e262f9eeab4" version="1">時間鎖定</content>
+	<content contentuid="h32323da7gedbeg45f2gabcfg7077b5188208" version="1">對&lt;LSTag Type="Status" Tooltip="PRONE"&gt;倒地&lt;/LSTag&gt;的敵人造成傷害會使其&lt;LSTag Type="Status" Tooltip="STUNNED"&gt;震懾&lt;/LSTag&gt; &lt;b&gt;[1]&lt;/b&gt; 回合。</content>
+	<content contentuid="hbb5bec8cg6968g454fg995dg16adcb994d06" version="1">星馳電掣</content>
+	<content contentuid="h916c3d4bg2e3bg4e8agbc03g01d759a75e23" version="1">這雙拖鞋閃爍著幽藍輝光，令人想起暴風雨來臨前的天空中，那肆意躍動的閃電。當你潛心鑽研其非凡特性時，底棲魔魚語的古老字元在它們的表面浮現——每一道都因內斂的威能而噼啪作響。在探究它的奇特天性時，你發現了它們對於電流的劇烈反應：他們好似甦醒一般，猶如某種被遺忘的星界導體，透過足底汲取著電能。在激戰正酣之際，你能感受到腳下的靜電與拖鞋中蘊藏的異界能量交匯融合，引發一種貫穿空間本質本身的諧振。</content>
+	<content contentuid="h5f3e96d6geeaag4e1fga545g95ddabfd37a6" version="1">風暴諧振</content>
+	<content contentuid="hea91c51cg1283g486eg9da7g70e1627ba228" version="1">站在&lt;b&gt;帶電錶面&lt;/b&gt;上以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;造成&lt;b&gt;[1]&lt;/b&gt;時，恢復一個&lt;LSTag Type="ActionResource" Tooltip="ActionPoint"&gt;動作&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;每回合最多觸發&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="he3e844efg9fd9g43c6g9cb1gc06c7699710e" version="1">火疾火療</content>
+	<content contentuid="ha695aa97g34d2g4f17g87c8g8f7936de5275" version="1">這雙烈火繚繞的長靴，是在一座古老的火之神殿中為人所發現的，此前它正懸浮於一座永恆燃燒的祭壇之上。初次觸碰，你便感受到它與周圍的烈焰產生了共鳴，彷彿在強令火焰屈從於自身的意志。你越是鑽研它的特性，便越是篤定——這雙靴子絕非凡俗的耐火之物，它擁有將火焰純粹的毀滅之力，轉化為治癒精華的真正偉力。</content>
+	<content contentuid="hc6f801e1gcc64g40e8gb40fg712503925f68" version="1">火疾愈燃</content>
+	<content contentuid="h93a16be7ge718g4f6egaf28g130b2c03b45a" version="1">站在&lt;b&gt;燃燒表面&lt;/b&gt;上以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法術&lt;/LSTag&gt;造成&lt;b&gt;[1]&lt;/b&gt;時，為自己恢復&lt;b&gt;[2]&lt;/b&gt;。</content>
+	<content contentuid="hf6375ea0g142fg4465gbc4eg870c718b2408" version="1">魔焰護佑</content>
+	<content contentuid="h5711f1d6g8d57g4fcdgbe25gf9481a8d056e" version="1">當你擁有&lt;LSTag Type="Status" Tooltip="MAGE_ARMOR"&gt;法師護甲&lt;/LSTag&gt;時，每回合在自身腳下創造&lt;b&gt;[1]&lt;/b&gt;道&lt;b&gt;火焰地表&lt;/b&gt;，持續&lt;b&gt;[2]&lt;/b&gt;回合。</content>
+	<content contentuid="h30ac0e90gb697g452cg8e47g6aabafb254cc" version="1">子午線</content>
+	<content contentuid="h1d70680bg0645g4506gbe92gfba6e02200f1" version="1">乍看之下，不過是雙飽經風霜與遠途的樸素皮靴。然而細細端詳，你會察覺它的皮革似乎自內部泛出一層神性的微光，踏出的每一個步伐，都在空氣中留下縷縷光痕。偶有光線恰好灑落時，你甚至能從皮革的織紋深處，辨認出古老的天界符文。究竟是何種力量，將這般奇蹟賜予瞭如此卑微的容器？這個答案，似乎早已遺失於時光長河之中。</content>
+	<content contentuid="h2cebab58g3e5dg45fegaec9gd6638def0357" version="1">天界諧律</content>
+	<content contentuid="hef14415ag96beg4045g9af3g79f595cb6553" version="1">在戰鬥中處於滿&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;狀態時，你&lt;b&gt;免疫被減速&lt;/b&gt;並且可以&lt;LSTag Type="Spell" Tooltip="Projectile_Fly"&gt;飛行&lt;/LSTag&gt;。</content>
+	<content contentuid="h15525d08g9756g4167g9ef8gd66c6bd81b40" version="1">你的攻擊&lt;b&gt;還會&lt;/b&gt;造成&lt;b&gt;[1]&lt;/b&gt;，此時&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;低於&lt;b&gt;[2]%&lt;/b&gt;。</content>
+	<content contentuid="h822f0dbegef2cg4c6fgbacfg7ffef449e9c8" version="1">潮汐女王敕令</content>
+	<content contentuid="h59f43f90g73ceg4e47g9e26g377a7207ae8c" version="2">當任意生物陷入&lt;LSTag Type="Status" Tooltip="PRONE"&gt;倒地&lt;/LSTag&gt;或&lt;LSTag Type="Status" Tooltip="OFF_BALANCED"&gt;失衡&lt;/LSTag&gt;時，必須透過一次敏捷&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;，否則立即獲得&lt;LSTag Type="Status" Tooltip="WET"&gt;溼潤&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;難度等級&lt;/LSTag&gt;取決於你的&lt;LSTag Tooltip="SpellDifficultyClass"&gt;法術豁免難度等級&lt;/LSTag&gt;。</content>
+	<content contentuid="h1c14c14ag0b37g480bg988fgff534ecb8e8d" version="1">深淵專注</content>
+	<content contentuid="h85bfa853g8471g4672g8d84g7504eba028e7" version="1">處於&lt;LSTag Type="Status" Tooltip="WET"&gt;溼潤&lt;/LSTag&gt;時，你不會失去法術的&lt;LSTag Tooltip="Concentration"&gt;專注&lt;/LSTag&gt;。</content>
+	<content contentuid="had2d8f4bg22f0g4f44gaa51gc67661145390" version="1">召喚潮池</content>
+	<content contentuid="h918ca00ag8344g4715gabf8g2bd9c741e571" version="1">煙霧彈</content>
+	<content contentuid="h19c2e0afgbdbdg4fdbgb88eg4221c0df9d9a" version="1">燃燒混合液</content>
+	<content contentuid="h02af77b9g056fg4b40gaf90gf07e5b0134e7" version="1">黑火藥手雷</content>
+	<content contentuid="h73de55b0g6c0dg46a6gbf1cg1addb386725b" version="1">破片手雷</content>
+	<content contentuid="h6c077f5cgb629g4db0gb721g5e233e31a053" version="1">從你的腰包中擲出一枚煙霧彈——命中後會釋放灼眼的腐蝕煙霧，使生物陷入&lt;LSTag Type="Status" Tooltip="BLINDED"&gt;目盲&lt;/LSTag&gt;，並讓區域籠罩在不可穿透的&lt;LSTag Type="Spell" Tooltip="Target_FogCloud"&gt;煙霧雲&lt;/LSTag&gt;中。你的腰包中有&lt;b&gt;[1]&lt;/b&gt;枚煙霧彈。</content>
+	<content contentuid="hd9f65c58g4e5dg443eg93fag3ac30dd49fc9" version="1">從你的腰包中擲出一枚煙霧彈——命中後會釋放灼眼的腐蝕煙霧，使生物陷入&lt;LSTag Type="Status" Tooltip="BLINDED"&gt;目盲&lt;/LSTag&gt;，並讓區域籠罩在不可穿透的&lt;LSTag Type="Spell" Tooltip="Target_FogCloud"&gt;煙霧雲&lt;/LSTag&gt;中。你的腰包中有&lt;b&gt;[1]&lt;/b&gt;枚煙霧彈。</content>
+	<content contentuid="hbd17b698g1e71g4c71ga753g40ea1c04b759" version="1">從你的腰包中擲出一枚煙霧彈——命中後會釋放灼眼的腐蝕煙霧，使生物陷入&lt;LSTag Type="Status" Tooltip="BLINDED"&gt;目盲&lt;/LSTag&gt;，並讓區域籠罩在不可穿透的&lt;LSTag Type="Spell" Tooltip="Target_FogCloud"&gt;煙霧雲&lt;/LSTag&gt;中。你的腰包中有&lt;b&gt;[1]&lt;/b&gt;枚煙霧彈。</content>
+	<content contentuid="h193aee2dga740g4cf2gb8bbgd402574579f4" version="1">從你的腰包中擲出一瓶混合液——命中後其中&lt;LSTag Type="Status" Tooltip="BURNING"&gt;燃燒&lt;/LSTag&gt;物質會迅速擴散，立刻灼燒生物並留下持久烈焰。你的腰包中有&lt;b&gt;[1]&lt;/b&gt;份燃燒混合液。</content>
+	<content contentuid="hb24bf5d7gfdc0g4a88gbe7egae326d077abb" version="1">從你的腰包中擲出一瓶混合液——命中後其中&lt;LSTag Type="Status" Tooltip="BURNING"&gt;燃燒&lt;/LSTag&gt;物質會迅速擴散，立刻灼燒生物並留下持久烈焰。你的腰包中有&lt;b&gt;[1]&lt;/b&gt;份燃燒混合液。</content>
+	<content contentuid="ha12729e6gf31eg44ddga938g0cd534c375c4" version="1">從你的腰包中擲出一瓶混合液——命中後其中&lt;LSTag Type="Status" Tooltip="BURNING"&gt;燃燒&lt;/LSTag&gt;物質會迅速擴散，立刻灼燒生物並留下持久烈焰。你的腰包中有&lt;b&gt;[1]&lt;/b&gt;份燃燒混合液。</content>
+	<content contentuid="h35a728e6g64e9g486dg9ad5g96bcb44e741b" version="1">從你的腰包中擲出一枚黑火藥手雷——強力爆炸會造成毀滅性的力場傷害，並以衝擊波將生物炸飛。你的腰包中有&lt;b&gt;[1]&lt;/b&gt;枚黑火藥手雷。</content>
+	<content contentuid="hc6900d29gb10ag4c25gb9c2g67b84a790e0b" version="1">從你的腰包中擲出一枚黑火藥手雷——強力爆炸會造成毀滅性的力場傷害，並以衝擊波將生物炸飛。你的腰包中有&lt;b&gt;[1]&lt;/b&gt;枚黑火藥手雷。</content>
+	<content contentuid="hd9288b68g0158g4058g9bc6g42c134d784ba" version="1">從你的腰包中擲出一枚黑火藥手雷——強力爆炸會造成毀滅性的力場傷害，並以衝擊波將生物炸飛。你的腰包中有&lt;b&gt;[1]&lt;/b&gt;枚黑火藥手雷。</content>
+	<content contentuid="h5d299397ga3d7g4363g8d9fg75c95926a89d" version="1">從你的腰包中擲出一枚破片裝藥——爆炸時鐵片風暴將覆蓋大範圍區域，撕裂血肉並使生物&lt;LSTag Type="Status" Tooltip="BLEEDING"&gt;流血&lt;/LSTag&gt;。你的腰包中有&lt;b&gt;[1]&lt;/b&gt;枚破片手雷。</content>
+	<content contentuid="ha5dac2d4g1597g4744g9cb5gb83cef5061f2" version="1">從你的腰包中擲出一枚破片裝藥——爆炸時鐵片風暴將覆蓋大範圍區域，撕裂血肉並使生物&lt;LSTag Type="Status" Tooltip="BLEEDING"&gt;流血&lt;/LSTag&gt;。你的腰包中有&lt;b&gt;[1]&lt;/b&gt;枚破片手雷。</content>
+	<content contentuid="h49f163ebg5535g47b0ga235g70832452bbeb" version="1">從你的腰包中擲出一枚破片裝藥——爆炸時鐵片風暴將覆蓋大範圍區域，撕裂血肉並使生物&lt;LSTag Type="Status" Tooltip="BLEEDING"&gt;流血&lt;/LSTag&gt;。你的腰包中有&lt;b&gt;[1]&lt;/b&gt;枚破片手雷。</content>
+	<content contentuid="h9a0a9d1dg6866g4b2bgafc8g384e78f59865" version="1">&lt;LSTag Type="Image" Info="SoftWarning"/&gt;手雷數量&lt;b&gt;有限&lt;/b&gt;，並在&lt;LSTag Tooltip="LongRest"&gt;長休&lt;/LSTag&gt;後補充。&lt;LSTag Tooltip="SavingThrow"&gt;豁免檢定&lt;/LSTag&gt;難度隨你的&lt;LSTag Tooltip="SpellDifficultyClass"&gt;法術豁免難度等級&lt;/LSTag&gt;變化。</content>
+	<content contentuid="h7bb5435cgcb39g4468ga02eg27ebbe856156" version="1">爆破專家的機巧</content>
+	<content contentuid="h097b23a1g0dfag4854g89c6g8a6b998de6d2" version="1">當你造成&lt;LSTag Type="Spell" Tooltip="Target_SneakAttack"&gt;偷襲&lt;/LSTag&gt;傷害時，獲得&lt;b&gt;+[1]&lt;/b&gt;&lt;LSTag Tooltip="SpellDifficultyClass"&gt;法術豁免難度等級&lt;/LSTag&gt;，持續至&lt;b&gt;你的回合結束&lt;/b&gt;。</content>
+	<content contentuid="hf874e93egdad3g4cf7g9974g3b4d4d7e91a3" version="1">爆破專家的機巧</content>
+	<content contentuid="hcf44a774g447bg439ag9f91g03db4b040d0b" version="1">直到你的回合結束，獲得&lt;b&gt;+[1]&lt;/b&gt;&lt;LSTag Tooltip="SpellDifficultyClass"&gt;法術豁免難度等級&lt;/LSTag&gt;。</content>
+	<content contentuid="haf4469b3g0814g446fg82b0g827320d12a9a" version="1">煙霧彈已耗盡</content>
+	<content contentuid="h64487031g1f5fg4640gb28egdb8f580d59d3" version="1">燃燒混合液已耗盡</content>
+	<content contentuid="h163e018aga79bg4a74g97f2g9c443d4cc66a" version="1">火藥手雷已耗盡</content>
+	<content contentuid="h2370058bg425eg410dg9804gcfb5fd7e82e1" version="1">破片手雷已耗盡</content>
+	<content contentuid="ha8e5b441gddfbg4672g841bg425c10025feb" version="1">你已從腰包中使用一枚煙霧彈。於&lt;LSTag Tooltip="LongRest"&gt;長休&lt;/LSTag&gt;後補充。</content>
+	<content contentuid="heb41a3ceg3671g4590ga58fg873028b56d54" version="1">你已從腰包中使用一份燃燒混合液。於&lt;LSTag Tooltip="LongRest"&gt;長休&lt;/LSTag&gt;後補充。</content>
+	<content contentuid="haa214365ge1aeg4741g8379g770c0512a2c2" version="1">你已從腰包中使用一枚黑火藥手雷。於&lt;LSTag Tooltip="LongRest"&gt;長休&lt;/LSTag&gt;後補充。</content>
+	<content contentuid="hedc27e03g32eeg485agb05dgbccb44ee47ee" version="1">你已從腰包中使用一枚破片手雷。於&lt;LSTag Tooltip="LongRest"&gt;長休&lt;/LSTag&gt;後補充。</content>
+	<content contentuid="h9b2b1419gdaf6g45b2g9177g882c340ca76b" version="1">神聖決意</content>
+	<content contentuid="he97f4864gb8d2g41fdgae3egb5fc043865de" version="1">獸友之絆</content>
+	<content contentuid="ha1a5c848g109bg479fga3eage102c824ebfd" version="1">處於被聯結的盟友&lt;b&gt;[1]&lt;/b&gt;範圍內時：攻擊檢定&lt;b&gt;+[2]&lt;/b&gt;，每次命中額外造成&lt;b&gt;[3]&lt;/b&gt;點傷害，獲得&lt;b&gt;[4]&lt;/b&gt;點&lt;LSTag Tooltip="TemporaryHitPoints"&gt;臨時生命值&lt;/LSTag&gt;。</content>
+</contentList>

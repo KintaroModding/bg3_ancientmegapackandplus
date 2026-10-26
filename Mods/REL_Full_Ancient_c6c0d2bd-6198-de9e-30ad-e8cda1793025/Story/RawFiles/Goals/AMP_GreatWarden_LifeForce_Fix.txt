@@ -1,0 +1,64 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// action surge duration from great warden boots, 6s = 1 turn
+DB_AMP_GreatWarden_SurgeDuration(6.0);
+
+KBSECTION
+
+// lifeforce trigger in osiris: the stats passive dies because DOWNED puts the ally
+// in SG_Incapacitated, which disables passives before OnStatusApplied runs. osiris isn't blocked.
+
+// register owner on any LIFEFORCE_AURA* apply
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_LIFEFORCE_AURA", _, _)
+THEN
+DB_AMP_GreatWarden_Owner(_Char, 4.0, "AMP_LIFEFORCE_AURA");
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_LIFEFORCE_AURA_2", _, _)
+THEN
+DB_AMP_GreatWarden_Owner(_Char, 6.0, "AMP_LIFEFORCE_AURA_2");
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_LIFEFORCE_AURA_3", _, _)
+THEN
+DB_AMP_GreatWarden_Owner(_Char, 8.0, "AMP_LIFEFORCE_AURA_3");
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_LIFEFORCE_AURA_4", _, _)
+THEN
+DB_AMP_GreatWarden_Owner(_Char, 20.0, "AMP_LIFEFORCE_AURA_4");
+
+// unregister when aura removed
+
+IF
+StatusRemoved((CHARACTER)_Char, (STRING)_Status, _, _)
+AND
+DB_AMP_GreatWarden_Owner(_Char, (REAL)_Radius, _Status)
+THEN
+NOT DB_AMP_GreatWarden_Owner(_Char, _Radius, _Status);
+
+// DOWNED applied -> nearby owner in range gets action surge
+
+IF
+StatusApplied((CHARACTER)_Downed, "DOWNED", _, _)
+AND
+DB_AMP_GreatWarden_Owner((CHARACTER)_Owner, (REAL)_Radius, _AuraStatus)
+AND
+_Downed != _Owner
+AND
+GetDistanceTo(_Owner, _Downed, (REAL)_Dist)
+AND
+_Dist <= _Radius
+AND
+IsDead(_Owner, 0)
+AND
+DB_AMP_GreatWarden_SurgeDuration((REAL)_Duration)
+THEN
+ApplyStatus(_Owner, "ACTION_SURGE", _Duration, 1, _Owner);
+
+EXITSECTION
+ENDEXITSECTION

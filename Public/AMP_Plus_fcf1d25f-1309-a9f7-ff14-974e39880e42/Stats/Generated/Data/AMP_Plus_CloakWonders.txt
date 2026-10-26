@@ -1,0 +1,4 @@
+new entry "MAG_Cloak100_elf_bonus"
+type "PassiveData"
+using "MAG_Cloak100_elf_bonus"
+data "BoostConditions" "Tagged('REALLY_HIGHELF',context.Source) or Tagged('REALLY_HIGHHALFELF',context.Source)"

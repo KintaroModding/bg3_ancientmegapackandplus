@@ -1,0 +1,11 @@
+new entry "WPN_Greatsword_l_Steadfast"
+type "PassiveData"
+using "MAG_Infernal_Metal_Boots_AntiDisplacement_Passive"
+data "Description" "ha11a682fg931eg4e07g9e60g62b8195d9956;1"
+data "Boosts" "Attribute(Grounded);StatusImmunity(SG_Prone)"
+
+new entry "WPN_Greatsword_l"
+type "Weapon"
+using "WPN_Greatsword_l"
+data "Boosts" "AC(3);RollBonus(SavingThrow,2)"
+data "PassivesOnEquip" "WPN_Greatsword_l_Steadfast"

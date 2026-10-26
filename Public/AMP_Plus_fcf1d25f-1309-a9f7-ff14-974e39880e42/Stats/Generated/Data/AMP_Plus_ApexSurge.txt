@@ -1,0 +1,4 @@
+new entry "AMP_ActionSurge_TurnApply"
+type "PassiveData"
+using "AMP_ActionSurge_TurnApply"
+data "Conditions" "not HasStatus('AMP_ACTION_SURGE_HIT_MARKER',context.Source) and not HasHPPercentageLessThan(50,context.Source)"

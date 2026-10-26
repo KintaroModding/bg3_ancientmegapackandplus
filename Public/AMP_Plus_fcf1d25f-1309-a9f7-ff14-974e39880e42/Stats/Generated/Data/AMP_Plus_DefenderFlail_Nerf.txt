@@ -1,0 +1,10 @@
+new entry "MAG_BG_OfEasthaven_Defender_Flail"
+type "Weapon"
+using "MAG_BG_OfEasthaven_Defender_Flail"
+data "DefaultBoosts" "WeaponEnchantment(1);WeaponProperty(Magical)"
+
+new entry "AMP_DefenderFlail_PhysicalDR3_Passive"
+type "PassiveData"
+using "AMP_DefenderFlail_PhysicalDR3_Passive"
+data "DescriptionParams" "1"
+data "Boosts" "DamageReduction(Piercing,Flat,1);DamageReduction(Bludgeoning,Flat,1);DamageReduction(Slashing,Flat,1)"

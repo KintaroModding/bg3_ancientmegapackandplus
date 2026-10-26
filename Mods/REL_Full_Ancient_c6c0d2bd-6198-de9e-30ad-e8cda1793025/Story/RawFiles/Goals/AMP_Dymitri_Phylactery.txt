@@ -1,0 +1,17 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// long rest clears the max hp penalty and re-arms the once-per-rest revive
+IF
+LongRestFinished()
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+RemoveStatus(_Player, "AMP_NECROBALANCE_SPENT", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_NECROBALANCE_GRIP", NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+ENDEXITSECTION

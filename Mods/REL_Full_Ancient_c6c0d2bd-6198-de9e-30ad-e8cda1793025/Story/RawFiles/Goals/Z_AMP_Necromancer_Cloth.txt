@@ -1,0 +1,25 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// undead dies near robe wearer -> confusion explosion
+IF
+Died((CHARACTER)_Undead)
+AND
+IsTagged(_Undead, (TAG)UNDEAD_33c625aa-6982-4c27-904f-e47029a9b140, 1)
+AND
+GetPosition(_Undead, _X, _Y, _Z)
+AND
+DB_Players(_Player)
+AND
+IsTagged(_Player, (TAG)AMP_NECROMANCER_ARMOUR_ba45ebad-ebe9-4072-9d50-67b8d660dc2d, 1)
+AND
+GetDistanceTo(_Undead, _Player, _Dist)
+AND
+_Dist <= 9.0
+THEN
+CreateExplosionAtPosition(_X, _Y, _Z, "Projectile_AMP_Necromancer_Cloth", 1, _Player);
+EXITSECTION
+
+ENDEXITSECTION

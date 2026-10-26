@@ -1,0 +1,171 @@
+// MultiplyEffectsByDuration has no unarmed counterpart, counters keep DamageBonus there
+// AMP_KNUCKLE*_WS stays DamageBonus, a beast pays through DealDamage
+
+new entry "MAG_Armour_G_53_bonus"
+type "PassiveData"
+using "MAG_Armour_G_53_bonus"
+data "Boosts" "CharacterWeaponDamage(1d4, Force);IF(IsUnarmedAttack()):CharacterUnarmedDamage(1d4, Force)"
+
+new entry "MAG_Armour_G_53_3_bonus"
+type "PassiveData"
+using "MAG_Armour_G_53_3_bonus"
+data "Boosts" "CharacterWeaponDamage(1d6, Force);IF(IsUnarmedAttack()):CharacterUnarmedDamage(1d6, Force)"
+
+new entry "WEAPON3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "WEAPON3"
+data "Boosts" "IF(IsUnarmedAttack()):CharacterUnarmedDamage(1d12,Psychic)"
+
+new entry "MAG_Weapon84_HolyWrath_Passive"
+type "PassiveData"
+using "MAG_Weapon84_HolyWrath_Passive"
+data "Boosts" "IF(HasStatus('BURNING_HOLY', context.Source) and IsWeaponAttack()):CharacterWeaponDamage(1d4, Radiant)"
+
+new entry "MAG_Weapon98_bonus"
+type "PassiveData"
+using "MAG_Weapon98_bonus"
+data "Boosts" "IF(IsMeleeWeaponAttack() and Tagged('UNDEAD', context.Target)):CharacterWeaponDamage(1d4, Radiant)"
+
+new entry "MAG_Weapon98_bonus_3"
+type "PassiveData"
+using "MAG_Weapon98_bonus_3"
+data "Boosts" "IF(IsMeleeWeaponAttack() and Tagged('UNDEAD', context.Target)):CharacterWeaponDamage(1d6, Radiant)"
+
+new entry "WPN_Warhammer_u_bonus"
+type "PassiveData"
+using "WPN_Warhammer_u_bonus"
+data "Boosts" "IF((HasStatus('PRONE',context.Target) or HasStatus('PRONE_ICE',context.Target) or HasStatus('PRONE_GREASE',context.Target) or HasStatus('PRONE_THUNDEROUS_SMITE',context.Target) or HasStatus('PRONE_FALLEN',context.Target)) and AttackedWithPassiveSourceWeapon()):CharacterWeaponDamage(1d8)"
+
+new entry "WPN_Warhammer_r_bonus"
+type "PassiveData"
+using "WPN_Warhammer_r_bonus"
+data "Boosts" "IF((HasStatus('PRONE',context.Target) or HasStatus('PRONE_ICE',context.Target) or HasStatus('PRONE_GREASE',context.Target) or HasStatus('PRONE_THUNDEROUS_SMITE',context.Target) or HasStatus('PRONE_FALLEN',context.Target)) and AttackedWithPassiveSourceWeapon()):CharacterWeaponDamage(1d12)"
+
+new entry "WPN_Warhammer_e_bonus"
+type "PassiveData"
+using "WPN_Warhammer_e_bonus"
+data "Boosts" "IF((HasStatus('PRONE',context.Target) or HasStatus('PRONE_ICE',context.Target) or HasStatus('PRONE_GREASE',context.Target) or HasStatus('PRONE_THUNDEROUS_SMITE',context.Target) or HasStatus('PRONE_FALLEN',context.Target)) and AttackedWithPassiveSourceWeapon()):CharacterWeaponDamage(2d8)"
+
+new entry "WPN_Warhammer_l_bonus"
+type "PassiveData"
+using "WPN_Warhammer_l_bonus"
+data "Boosts" "IF((HasStatus('PRONE',context.Target) or HasStatus('PRONE_ICE',context.Target) or HasStatus('PRONE_GREASE',context.Target) or HasStatus('PRONE_THUNDEROUS_SMITE',context.Target) or HasStatus('PRONE_FALLEN',context.Target)) and AttackedWithPassiveSourceWeapon()):CharacterWeaponDamage(3d12)"
+
+new entry "WPN_LONGSWORD_U"
+type "StatusData"
+data "StatusType" "BOOST"
+using "WPN_LONGSWORD_U"
+data "Boosts" "IF(Tagged('WPN_LONGSWORD', GetAttackWeapon(context.Source))):CharacterWeaponDamage(1)"
+
+new entry "WPN_LONGSWORD_E"
+type "StatusData"
+data "StatusType" "BOOST"
+using "WPN_LONGSWORD_E"
+data "Boosts" "IF(Tagged('WPN_LONGSWORD', GetAttackWeapon(context.Source))):CharacterWeaponDamage(1)"
+
+new entry "WPN_LONGSWORD_L"
+type "StatusData"
+data "StatusType" "BOOST"
+using "WPN_LONGSWORD_L"
+data "Boosts" "IF(Tagged('WPN_LONGSWORD', GetAttackWeapon(context.Source))):CharacterWeaponDamage(1)"
+
+new entry "WPN_Mace_u_bonus"
+type "PassiveData"
+using "WPN_Mace_u_bonus"
+data "Boosts" "IF(HasStatus('SG_Stunned', context.Target) and Tagged('WPN_MACE', GetAttackWeapon(context.Source))):CharacterWeaponDamage(1d4)"
+
+new entry "WPN_Mace_r_bonus"
+type "PassiveData"
+using "WPN_Mace_r_bonus"
+data "Boosts" "IF(HasStatus('SG_Stunned', context.Target) and Tagged('WPN_MACE', GetAttackWeapon(context.Source))):CharacterWeaponDamage(1d6)"
+
+new entry "WPN_Mace_e_bonus"
+type "PassiveData"
+using "WPN_Mace_e_bonus"
+data "Boosts" "IF(HasStatus('SG_Stunned', context.Target) and Tagged('WPN_MACE', GetAttackWeapon(context.Source))):CharacterWeaponDamage(1d8)"
+
+new entry "WPN_Mace_l_bonus"
+type "PassiveData"
+using "WPN_Mace_l_bonus"
+data "Boosts" "IF(HasStatus('SG_Stunned', context.Target) and Tagged('WPN_MACE', GetAttackWeapon(context.Source))):CharacterWeaponDamage(1d12)"
+
+new entry "R_Warrior1_bonus"
+type "PassiveData"
+using "R_Warrior1_bonus"
+data "Boosts" "IF(HasStatus('AMP_WARRING_MARK_AFFLICT',context.Target) and IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(1);IF(HasStatus('AMP_WARRING_MARK_AFFLICT',context.Target) and IsMeleeUnarmedAttack() and not IsRangedUnarmedAttack()):DamageBonus(1);IF(HasStatus('AMP_WARRING_MARK_AFFLICT',context.Target) and IsRangedUnarmedAttack() and not IsMeleeUnarmedAttack()):DamageBonus(1);IF(HasStatus('AMP_WARRING_MARK_AFFLICT',context.Target) and HasStatus('SG_Polymorph_BeastShape',context.Source) and not (Tagged('MYRMIDON_AIR',context.Source) or Tagged('MYRMIDON_FIRE',context.Source) or Tagged('MYRMIDON_WATER',context.Source))):DamageBonus(1)"
+
+new entry "R_Warrior2_bonus"
+type "PassiveData"
+using "R_Warrior2_bonus"
+data "Boosts" "IF(HasStatus('AMP_WARRING_MARK_AFFLICT',context.Target) and IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(1d4);IF(HasStatus('AMP_WARRING_MARK_AFFLICT',context.Target) and IsMeleeUnarmedAttack() and not IsRangedUnarmedAttack()):DamageBonus(1d4);IF(HasStatus('AMP_WARRING_MARK_AFFLICT',context.Target) and IsRangedUnarmedAttack() and not IsMeleeUnarmedAttack()):DamageBonus(1d4);IF(HasStatus('AMP_WARRING_MARK_AFFLICT',context.Target) and HasStatus('SG_Polymorph_BeastShape',context.Source) and not (Tagged('MYRMIDON_AIR',context.Source) or Tagged('MYRMIDON_FIRE',context.Source) or Tagged('MYRMIDON_WATER',context.Source))):DamageBonus(1d4)"
+
+new entry "R_Warrior3_bonus"
+type "PassiveData"
+using "R_Warrior3_bonus"
+data "Boosts" "IF(HasStatus('AMP_WARRING_MARK_AFFLICT',context.Target) and IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(1d6);IF(HasStatus('AMP_WARRING_MARK_AFFLICT',context.Target) and IsMeleeUnarmedAttack() and not IsRangedUnarmedAttack()):DamageBonus(1d6);IF(HasStatus('AMP_WARRING_MARK_AFFLICT',context.Target) and IsRangedUnarmedAttack() and not IsMeleeUnarmedAttack()):DamageBonus(1d6);IF(HasStatus('AMP_WARRING_MARK_AFFLICT',context.Target) and HasStatus('SG_Polymorph_BeastShape',context.Source) and not (Tagged('MYRMIDON_AIR',context.Source) or Tagged('MYRMIDON_FIRE',context.Source) or Tagged('MYRMIDON_WATER',context.Source))):DamageBonus(1d6)"
+
+new entry "R_Warrior4_bonus"
+type "PassiveData"
+using "R_Warrior4_bonus"
+data "Boosts" "IF(HasStatus('AMP_WARRING_MARK_AFFLICT',context.Target) and IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(2d6);IF(HasStatus('AMP_WARRING_MARK_AFFLICT',context.Target) and IsMeleeUnarmedAttack() and not IsRangedUnarmedAttack()):DamageBonus(2d6);IF(HasStatus('AMP_WARRING_MARK_AFFLICT',context.Target) and IsRangedUnarmedAttack() and not IsMeleeUnarmedAttack()):DamageBonus(2d6);IF(HasStatus('AMP_WARRING_MARK_AFFLICT',context.Target) and HasStatus('SG_Polymorph_BeastShape',context.Source) and not (Tagged('MYRMIDON_AIR',context.Source) or Tagged('MYRMIDON_FIRE',context.Source) or Tagged('MYRMIDON_WATER',context.Source))):DamageBonus(2d6)"
+
+new entry "MAG_OuterEntitySlayer_Passive"
+type "PassiveData"
+using "MAG_OuterEntitySlayer_Passive"
+data "Boosts" "IF((Tagged('FEY', context.Target) or Tagged('FIEND', context.Target) or Tagged('UNDEAD', context.Target)) and IsWeaponAttack()):CharacterWeaponDamage(1d4);IF((Tagged('FEY', context.Target) or Tagged('FIEND', context.Target) or Tagged('UNDEAD', context.Target)) and IsWeaponAttack()):RollBonus(Attack,1d4)"
+
+new entry "AMP_CursedWarrior_Passive"
+type "PassiveData"
+using "AMP_CursedWarrior_Passive"
+data "Boosts" "IF(Tagged('WPN_GREATSWORD',GetAttackWeapon(context.Source)) or Tagged('WPN_LONGSWORD',GetAttackWeapon(context.Source))):CharacterWeaponDamage(2,Necrotic);IF(HasStatus('SG_Cursed',context.Source) and (Tagged('WPN_GREATSWORD',GetAttackWeapon(context.Source)) or Tagged('WPN_LONGSWORD',GetAttackWeapon(context.Source)))):CharacterWeaponDamage(2,Necrotic);IF(HasStatus('SPITEFUL_SUFFERING',context.Target) and (Tagged('WPN_GREATSWORD',GetAttackWeapon(context.Source)) or Tagged('WPN_LONGSWORD',GetAttackWeapon(context.Source)))):CharacterWeaponDamage(2,Necrotic)"
+
+new entry "AMP_Thrower_Gloves_Passive"
+type "PassiveData"
+using "AMP_Thrower_Gloves_Passive"
+data "Boosts" "IF(IsRangedUnarmedAttack()):DamageBonus(1d4)"
+
+new entry "CADENCE_STACK"
+type "StatusData"
+data "StatusType" "BOOST"
+using "CADENCE_STACK"
+data "Boosts" "IF(IsWeaponAttack()):CharacterWeaponDamage(2)"
+
+new entry "AMP_Grubbyworm_Whisperwind_Passive"
+type "PassiveData"
+using "AMP_Grubbyworm_Whisperwind_Passive"
+data "Boosts" "IF(IsRangedWeaponAttack()):CharacterWeaponDamage(max(1,WisdomModifier))"
+
+new entry "AMP_Grubbyworm_Mindstrike_Passive"
+type "PassiveData"
+using "AMP_Grubbyworm_Mindstrike_Passive"
+data "Boosts" "IF(IsRangedWeaponAttack()):CharacterWeaponDamage(max(1,IntelligenceModifier))"
+
+new entry "AMP_Kyzr_Vines_Poison_2"
+type "PassiveData"
+using "AMP_Kyzr_Vines_Poison_2"
+data "Boosts" "IF(IsWeaponAttack() and IsNatureEnsnare(context.Target)):CharacterWeaponDamage(1d4,Thunder)"
+
+new entry "AMP_Kyzr_Vines_Poison_3"
+type "PassiveData"
+using "AMP_Kyzr_Vines_Poison_3"
+data "Boosts" "IF(IsWeaponAttack() and IsNatureEnsnare(context.Target)):CharacterWeaponDamage(1d6,Thunder)"
+
+new entry "AMP_Kyzr_Vines_Poison_4"
+type "PassiveData"
+using "AMP_Kyzr_Vines_Poison_4"
+data "Boosts" "IF(IsWeaponAttack() and IsNatureEnsnare(context.Target)):CharacterWeaponDamage(1d10,Thunder)"
+
+new entry "AMP_KNUCKLE3_OVERRIDE"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_KNUCKLE3_OVERRIDE"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator;IgnoreResting"
+data "Boosts" "AttackSpellOverride(Target_AMP_KnuckleStrike_3,Target_UnarmedAttack);IF(IsMeleeUnarmedAttack()):CharacterUnarmedDamage(1d4,Psychic)"
+
+new entry "AMP_KNUCKLE4_SENTENCE"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_KNUCKLE4_SENTENCE"
+data "Boosts" "IF(IsMeleeUnarmedAttack()):CharacterUnarmedDamage(2d6,Radiant);Advantage(AttackTarget)"
+

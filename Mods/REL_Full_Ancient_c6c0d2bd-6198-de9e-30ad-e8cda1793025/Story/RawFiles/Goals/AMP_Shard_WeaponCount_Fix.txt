@@ -1,0 +1,65 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_FIRE");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_COLD");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_LIGHTNING");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_THUNDER");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_ACID");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_POISON");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_NECROTIC");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_RADIANT");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_PSYCHIC");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_FORCE");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_ACCURACY");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_ENCHANT");
+KBSECTION
+// repeat apply -> count++. must come before the first-apply rule below
+IF
+StatusApplied((ITEM)_Item, _ItemStatus, _Causee, _)
+AND
+DB_AMP_Shard_WeaponStackable(_ItemStatus)
+AND
+DB_AMP_Shard_Count(_Item, _ItemStatus, _OldCount)
+AND
+IntegerSum(_OldCount, 1, _NewCount)
+THEN
+NOT DB_AMP_Shard_Count(_Item, _ItemStatus, _OldCount);
+DB_AMP_Shard_Count(_Item, _ItemStatus, _NewCount);
+
+// first apply -> count=1
+IF
+StatusApplied((ITEM)_Item, _ItemStatus, _Causee, _)
+AND
+DB_AMP_Shard_WeaponStackable(_ItemStatus)
+AND
+NOT DB_AMP_Shard_Count(_Item, _ItemStatus, _)
+THEN
+DB_AMP_Shard_Count(_Item, _ItemStatus, 1);
+
+// removed, still more left -> count--
+IF
+StatusRemoved((ITEM)_Item, _ItemStatus, _, _)
+AND
+DB_AMP_Shard_WeaponStackable(_ItemStatus)
+AND
+DB_AMP_Shard_Count(_Item, _ItemStatus, _Count)
+AND
+_Count > 1
+AND
+IntegerSubtract(_Count, 1, _NewCount)
+THEN
+NOT DB_AMP_Shard_Count(_Item, _ItemStatus, _Count);
+DB_AMP_Shard_Count(_Item, _ItemStatus, _NewCount);
+
+// last one removed -> clear count
+IF
+StatusRemoved((ITEM)_Item, _ItemStatus, _, _)
+AND
+DB_AMP_Shard_WeaponStackable(_ItemStatus)
+AND
+DB_AMP_Shard_Count(_Item, _ItemStatus, 1)
+THEN
+NOT DB_AMP_Shard_Count(_Item, _ItemStatus, 1);
+EXITSECTION
+ENDEXITSECTION

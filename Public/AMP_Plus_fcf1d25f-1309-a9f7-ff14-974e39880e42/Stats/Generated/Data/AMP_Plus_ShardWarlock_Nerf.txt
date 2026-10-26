@@ -1,0 +1,23 @@
+// DamageBonus inherits the cantrip's damage type, DealDamage has no spell-damage token
+// marker status read by the boost, so identical shards stack on the first hit
+
+new entry "AMP_SHARD_CHAR_RING_28"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_SHARD_CHAR_RING_28"
+data "Boosts" "IF(AMP_Plus_IsTrueCantrip() and not HasStatus('AMP_PLUS_SHARD_RING28_CD',context.Source)):DamageBonus(StrengthModifier)"
+data "Passives" "AMP_Plus_Shard_Ring28_Cantrip"
+
+new entry "AMP_Plus_Shard_Ring28_Cantrip"
+type "PassiveData"
+data "Properties" "IsHidden"
+data "StatsFunctorContext" "OnDamage"
+data "Conditions" "AMP_Plus_IsTrueCantrip() and TotalDamageDoneGreaterThan(0) and not HasStatus('AMP_PLUS_SHARD_RING28_CD',context.Source)"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_PLUS_SHARD_RING28_CD,100,1)"
+
+new entry "AMP_PLUS_SHARD_RING28_CD"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_PLUS_SHARD_RING28_CD"
+data "TickType" "StartTurn"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator;IgnoreResting;ApplyToDead"

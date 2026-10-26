@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="400" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="9841049f-6e9b-223b-22d9-a494ca5427d9" />
+					<attribute id="Name" type="LSString" value="AMP_Altar_Status" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/AMP_Altar_Status.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="AMP_Altar_Status" />
+					<attribute id="BoundsMin" type="fvec3" value="-5.773503 -5.773503 -5.773503" />
+					<attribute id="BoundsMax" type="fvec3" value="5.773503 5.773503 5.773503" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="10" />
+					<attribute id="Looping" type="bool" value="True" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="cb2c741b-1844-9128-eb24-31a954fb4e41" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="827f0aee-e58f-26bf-48e0-60b4aeb71d98" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

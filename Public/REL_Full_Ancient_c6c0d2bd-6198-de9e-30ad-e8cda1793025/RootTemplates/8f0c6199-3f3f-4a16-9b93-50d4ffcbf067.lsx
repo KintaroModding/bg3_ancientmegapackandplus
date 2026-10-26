@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="8f0c6199-3f3f-4a16-9b93-50d4ffcbf067" />
+					<attribute id="Name" type="LSString" value="arc_N_Blood_Summon1" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="ParentTemplateId" type="FixedString" value="2745bece-b5f0-4d22-920f-c0decdcf5a18" />
+					<attribute id="DisplayName" type="TranslatedString" handle="hc645baa7g59a0gba7dgc763gafeec2af1a1f" version="1" />
+					<attribute id="Icon" type="FixedString" value="AMP_arc_N_Blood_Summon1" />
+					<attribute id="Stats" type="FixedString" value="AMP_arc_N_Blood_Summon1" />
+					<attribute id="SpellSet" type="FixedString" value="CommonPlayerActions" />
+					<attribute id="Equipment" type="FixedString" value="EQP_AMP_arc_N_Blood_Summon" />
+					<attribute id="ForceLifetimeDeath" type="bool" value="True" />
+					<attribute id="DeathEffect" type="guid" value="864da2c0-3cd2-4fc4-8353-19d628d9e550" />
+					<attribute id="BloodSurfaceType" type="FixedString" value="SurfaceBlood" />
+					<attribute id="CanOpenDoors" type="bool" value="False" />
+					<attribute id="CanWalkThroughDoors" type="bool" value="True" />
+					<attribute id="LevelOverride" type="int32" value="2" />
+					<attribute id="CharacterVisualResourceID" type="FixedString" value="6f74e3e1-a948-eac0-f69e-62af39d3a8f7" />
+					<attribute id="IsLootable" type="bool" value="False" />
+					<attribute id="IsEquipmentLootable" type="bool" value="False" />
+					<attribute id="CanBePickpocketed" type="bool" value="False" />
+					<attribute id="AliveInventoryType" type="uint8" value="8" />
+					<attribute id="InventoryType" type="uint8" value="8" />
+					<attribute id="DisableEquipping" type="bool" value="False" />
+					<attribute id="Race" type="guid" value="24dfab7b-7d7e-4df9-aa23-7212b4ef8980" />
+					<attribute id="Title" type="TranslatedString" handle="ha67dfae2gf49bgdfa1g56e4g2de31373d5ae" version="10" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="26c78224-a4c1-43e4-b943-75e7fa1bfa41" />
+								</node>
+							</children>
+						</node>
+						<node id="OnDeathActions" />
+						<node id="SkillList" />
+						<node id="ItemList" />
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="AMP_BLOOD_VFX" />
+								</node>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="AMP_BLOOD2_VFX" />
+								</node>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="DISINTEGRATE_DEATH" />
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

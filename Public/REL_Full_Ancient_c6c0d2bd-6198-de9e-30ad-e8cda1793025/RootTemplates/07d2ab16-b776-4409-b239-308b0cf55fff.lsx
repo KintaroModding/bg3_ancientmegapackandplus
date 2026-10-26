@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="07d2ab16-b776-4409-b239-308b0cf55fff" />
+					<attribute id="Name" type="LSString" value="AMP_RusMage_Dagger" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="11aa209f-6e42-40bd-a12c-aa33445c21ea" />
+					<attribute id="VisualTemplate" type="FixedString" value="cb8ea426-fecc-de0f-ffb2-be1596ae68c0" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="76fd694e-35c8-9109-0d8c-78bf8e107c76" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h9ab66ac8g2c89gebbdg232cg71db40cca7da" version="1" />
+					<attribute id="Icon" type="FixedString" value="AMP_RusMage_Dagger" />
+					<attribute id="Stats" type="FixedString" value="AMP_RusMage_Dagger_4" />
+					<attribute id="Description" type="TranslatedString" handle="h0d58216dg3423g2942g15a1g58f41835d39a" version="1" />
+					<children>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="AMP_RUSMAGE_DAGGER_VFX" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

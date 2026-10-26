@@ -1,0 +1,7 @@
+// Osiris deletes the slime when it loses this, the base leftcombat sweep misses CreateAt allies
+new entry "AMP_MUTACID_SLIME_LIFE"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_MUTACID_SLIME_LIFE"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator;IgnoreResting;ApplyToDead"
+data "RemoveEvents" "OnCombatEnded"

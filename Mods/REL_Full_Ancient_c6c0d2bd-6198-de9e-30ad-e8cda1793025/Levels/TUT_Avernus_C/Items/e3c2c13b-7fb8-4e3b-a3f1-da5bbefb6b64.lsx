@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="e3c2c13b-7fb8-4e3b-a3f1-da5bbefb6b64" />
+					<attribute id="Name" type="LSString" value="S_LOW_MindFlayerChest" />
+					<attribute id="LevelName" type="FixedString" value="TUT_Avernus_C" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="813c005f-72ab-4806-ad7e-2e3135e41d27" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="DevComment" type="LSString" value="Gold in here" />
+					<attribute id="WalkThrough" type="bool" value="True" />
+					<attribute id="Stats" type="FixedString" value="OBJ_Barrel_Weak" />
+					<attribute id="CanBePickedUp" type="bool" value="False" />
+					<attribute id="CanBeMoved" type="bool" value="False" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="44.85971 22.23145 -442.232" />
+							<attribute id="RotationQuat" type="fvec4" value="0.05142942 -0.2911929 -0.01567905 0.9551523" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object">
+											<attribute id="MapKey" type="FixedString" value="TUT_Avernus_C" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="f5ba4fc7-a74b-57c5-7026-fb9f65c7ec5b" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="93e0636e-9861-2bc3-cc8c-1a9e129b8317" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="Exploration_Minor_DoublingPack" />
+								</node>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="Gold_Stash_Poor" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

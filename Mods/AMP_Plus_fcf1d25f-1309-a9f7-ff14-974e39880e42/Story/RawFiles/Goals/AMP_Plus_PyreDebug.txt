@@ -1,0 +1,310 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// console handles for the Script Extender, fired as: oe pyre_off
+
+// strip by hand: the affix defers its clean-up to fight end
+
+IF
+TextEvent("pyre_off")
+THEN
+PROC_AMP_Plus_Affix_SetByPlayer("PYRE2", 0);
+
+IF
+TextEvent("pyre_off")
+AND
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, _)
+THEN
+PROC_AMP_Plus_Pyre2_Strip(_Char);
+
+IF
+TextEvent("pyre_on")
+THEN
+PROC_AMP_Plus_Affix_SetByPlayer("PYRE2", 1);
+
+// same path as the destroy button. phase closed so the round rule can't climb back
+
+IF
+TextEvent("pyre_out")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+CombatGetGuidFor(_Host, (GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_PyreTools_Quench(_CombatID, 0);
+
+IF
+TextEvent("pyre_clean")
+AND
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, _)
+THEN
+PROC_AMP_Plus_Pyre2_Strip(_Char);
+
+IF
+TextEvent("pyre_tools")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+CombatGetGuidFor(_Host, (GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_PyreTools_Arm(_CombatID);
+
+IF
+TextEvent("pyre_tools")
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+PROC_AMP_Plus_PyreTools_ArmOne(_Host);
+
+IF
+TextEvent("pyre_forget")
+THEN
+PROC_AMP_Plus_Pyre2_DrainMemAll();
+
+// strip before the state goes, the member table names the wearers
+
+IF
+TextEvent("pyre_reset")
+AND
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, _)
+THEN
+PROC_AMP_Plus_Pyre2_Strip(_Char);
+
+IF
+TextEvent("pyre_reset")
+THEN
+PROC_AMP_Plus_Pyre2_DrainMemAll();
+
+IF
+TextEvent("pyre_reset")
+THEN
+PROC_AMP_Plus_Pyre2_WipeState();
+
+IF
+TextEvent("pyre_gs_reset")
+THEN
+PROC_AMP_Plus_GS_ResetAll();
+
+IF
+TextEvent("pyre_cut_clear")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+CombatGetGuidFor(_Host, (GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_DrainDbgCapCut(_CombatID);
+
+IF
+TextEvent("pyre_cut_clear")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+CombatGetGuidFor(_Host, (GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_DrainDbgStepCut(_CombatID);
+
+IF
+TextEvent("pyre_cut_clear")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+CombatGetGuidFor(_Host, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Tamed(_CombatID)
+THEN
+NOT DB_AMP_Plus_Pyre2_Tamed(_CombatID);
+
+IF
+TextEvent("pyre_cut_clear")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+CombatGetGuidFor(_Host, (GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_Redress(_CombatID);
+
+IF
+TextEvent("pyre_arm")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+CombatGetGuidFor(_Host, (GUIDSTRING)_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre2_Armed(_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_ArmFight(_CombatID);
+
+IF
+TextEvent("pyre_up")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+CombatGetGuidFor(_Host, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_S)
+AND
+IntegerSum(_S, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_Pyre2_SetStage(_CombatID, _Next);
+
+IF
+TextEvent("pyre_down")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+CombatGetGuidFor(_Host, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_S)
+AND
+_S > 0
+AND
+IntegerSubtract(_S, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_Pyre2_SetStage(_CombatID, _Next);
+
+IF
+TextEvent("pyre_max")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+CombatGetGuidFor(_Host, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Cap(_CombatID, (INTEGER)_Cap)
+THEN
+PROC_AMP_Plus_Pyre2_SetStage(_CombatID, _Cap);
+
+IF
+TextEvent("pyre_gs_calc")
+THEN
+PROC_AMP_Plus_PyreEq_Recalc();
+
+IF
+TextEvent("pyre_gs_calc")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+CombatGetGuidFor(_Host, (GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_GS_Party(_CombatID);
+
+IF
+TextEvent("pyre_state")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+CombatGetGuidFor(_Host, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_S)
+AND
+DB_AMP_Plus_Pyre_Cap(_CombatID, (INTEGER)_Cap)
+AND
+ConcatenateInteger("pyre step ", _S, _Part)
+AND
+Concatenate(_Part, " of ", _Part2)
+AND
+ConcatenateInteger(_Part2, _Cap, _Text)
+THEN
+DebugText(_Host, _Text);
+DebugLog(_Text);
+
+IF
+TextEvent("pyre_state")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+CombatGetGuidFor(_Host, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Phase(_CombatID, (STRING)_Phase)
+AND
+Concatenate("pyre phase ", _Phase, _Text)
+THEN
+DebugText(_Host, _Text);
+DebugLog(_Text);
+
+IF
+TextEvent("pyre_state")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+CombatGetGuidFor(_Host, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_GS_Bonus(_CombatID, (INTEGER)_Gs)
+AND
+ConcatenateInteger("pyre gear bonus ", _Gs, _Text)
+THEN
+DebugText(_Host, _Text);
+DebugLog(_Text);
+
+IF
+TextEvent("pyre_state")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+DB_AMP_Plus_PyreEq_World((INTEGER)_World)
+AND
+ConcatenateInteger("pyre world gear tier ", _World, _Text)
+THEN
+DebugText(_Host, _Text);
+DebugLog(_Text);
+
+IF
+TextEvent("pyre_state")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+CombatGetGuidFor(_Host, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_CapCut((CHARACTER)_Char, _CombatID, (INTEGER)_N)
+AND
+ConcatenateInteger("pyre ceiling cut ", _N, _Text)
+THEN
+DebugText(_Char, _Text);
+DebugLog(_Text);
+
+IF
+TextEvent("pyre_state")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+CombatGetGuidFor(_Host, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_StepCut((CHARACTER)_Char, _CombatID, (INTEGER)_N)
+AND
+ConcatenateInteger("pyre step cut ", _N, _Text)
+THEN
+DebugText(_Char, _Text);
+DebugLog(_Text);
+
+IF
+TextEvent("pyre_state")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+CombatGetGuidFor(_Host, (GUIDSTRING)_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre2_Armed(_CombatID)
+THEN
+DebugText(_Host, "pyre not lit in this fight");
+DebugLog("pyre not lit in this fight");
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainDbgCapCut((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_CapCut((CHARACTER)_Char, _CombatID, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Pyre2_CapCut(_Char, _CombatID, _N);
+PROC_AMP_Plus_Pyre2_DrainDbgCapCut(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainDbgStepCut((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_StepCut((CHARACTER)_Char, _CombatID, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Pyre2_StepCut(_Char, _CombatID, _N);
+PROC_AMP_Plus_Pyre2_DrainDbgStepCut(_CombatID);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="ed8e1be6-7e85-49f6-ba79-821495775c42" />
+					<attribute id="Name" type="LSString" value="AMP_Cursed_LichHand" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="7113f441-5fbd-4e06-84ec-bbb68a2c8f01" />
+					<attribute id="VisualTemplate" type="FixedString" value="ab4b2428-0e35-9790-0e98-02d539645925" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="152e37cd-758a-16d3-a887-9bc3dfd54df4" />
+					<attribute id="Scale" type="float" value="0.1" />
+					<attribute id="DisplayName" type="TranslatedString" handle="hd204396egb2eagce08g8a0dgfce36ddf7665" version="1" />
+					<attribute id="Icon" type="FixedString" value="AMP_Cursed_LichHand" />
+					<attribute id="Stats" type="FixedString" value="AMP_Cursed_LichHand" />
+					<attribute id="Description" type="TranslatedString" handle="hcb4d8f17g827agb9e7g4ceegdbb058870453" version="1" />
+					<children>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="MAG_ARMOUR_1_VFX" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

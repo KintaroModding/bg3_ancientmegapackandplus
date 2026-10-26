@@ -1,0 +1,35 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// safety net: if a cutscene ate the mode-select box, default to normal 100s after avernus load
+
+IF
+LevelGameplayStarted("TUT_Avernus_C", _)
+AND
+NOT DB_AMP_GameMode(_)
+AND
+NOT DB_AMP_Wizard_Exists(1)
+THEN
+TimerLaunch("AMP_GameMode_Fallback", 100000);
+
+// mode picked before timer - cancel
+IF
+DB_AMP_GameMode((STRING)_Mode)
+THEN
+TimerCancel("AMP_GameMode_Fallback");
+
+// timer fired, still no mode - set normal
+IF
+TimerFinished("AMP_GameMode_Fallback")
+AND
+NOT DB_AMP_GameMode(_)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+PROC_AMP_SetGameMode(_Host, "NORMAL");
+
+EXITSECTION
+
+ENDEXITSECTION

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="f3b02747-49c3-43d2-b5a6-cb4da675a9df" />
+					<attribute id="Name" type="LSString" value="AMP_RusMage_HandCrossbow_Main" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="3c9f6e52-1597-4ba6-ae36-d532c0e8bad5" />
+					<attribute id="VisualTemplate" type="FixedString" value="811353c2-9222-9e4d-2322-060c6616eda4" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h17dae43bgdec3g949cg34c3geced40e1ccce" version="1" />
+					<attribute id="Icon" type="FixedString" value="AMP_RusMage_HandCrossbow1" />
+					<attribute id="Stats" type="FixedString" value="AMP_RusMage_CrossbowMain_4" />
+					<attribute id="Description" type="TranslatedString" handle="ha1f4367dge3f4gd6e8g92a1gf2e1e57eed94" version="1" />
+					<children>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="AMP_RUSMAGE_CROSSBOW_VFX" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

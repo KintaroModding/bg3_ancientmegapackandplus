@@ -1,0 +1,138 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// rules key on GetTemplate, the base registration record is stripped after spawn
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_MirrorPool(9, _, _)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_OldSize)
+THEN
+DB_AMP_MirrorPool(9, AMP_ULTRA_Summon_10_2e3a6cd3-6380-4e15-8945-d8d04a49f2e6, 1);
+NOT DB_AMP_MirrorPool_Size(_OldSize);
+DB_AMP_MirrorPool_Size(10);
+
+IF
+StatusApplied((CHARACTER)_Target, "AMP_UKRA_POKROV", (CHARACTER)_Caster, _)
+AND
+GetTemplate(_Caster, AMP_ULTRA_Summon_10_2e3a6cd3-6380-4e15-8945-d8d04a49f2e6)
+THEN
+DB_AMP_Ukra_Warded(_Caster, _Target);
+
+IF
+Died((CHARACTER)_Ukra)
+THEN
+PROC_AMP_Ukra_DrainWardedBy(_Ukra);
+
+IF
+Died((CHARACTER)_Target)
+THEN
+PROC_AMP_Ukra_DrainWardedOn(_Target);
+
+PROC
+PROC_AMP_Ukra_DrainWardedBy((CHARACTER)_Ukra)
+AND
+DB_AMP_Ukra_Warded(_Ukra, (CHARACTER)_Target)
+THEN
+NOT DB_AMP_Ukra_Warded(_Ukra, _Target);
+RemoveStatus(_Target, "AMP_UKRA_POKROV");
+PROC_AMP_Ukra_DrainWardedBy(_Ukra);
+
+PROC
+PROC_AMP_Ukra_DrainWardedOn((CHARACTER)_Target)
+AND
+DB_AMP_Ukra_Warded((CHARACTER)_Ukra, _Target)
+THEN
+NOT DB_AMP_Ukra_Warded(_Ukra, _Target);
+PROC_AMP_Ukra_DrainWardedOn(_Target);
+
+IF
+TurnStarted((CHARACTER)_Ukra)
+AND
+GetTemplate(_Ukra, AMP_ULTRA_Summon_10_2e3a6cd3-6380-4e15-8945-d8d04a49f2e6)
+AND
+NOT DB_AMP_Ukra_NoHeal(_Ukra, _)
+THEN
+DB_AMP_Ukra_NoHeal(_Ukra, 0);
+
+IF
+StatusApplied((CHARACTER)_Ukra, "AMP_UKRA_HEAL_MARK", _, _)
+AND
+GetTemplate(_Ukra, AMP_ULTRA_Summon_10_2e3a6cd3-6380-4e15-8945-d8d04a49f2e6)
+AND
+NOT DB_AMP_Ukra_HealedThisTurn(_Ukra)
+THEN
+DB_AMP_Ukra_HealedThisTurn(_Ukra);
+
+// keep above the reset rule: it retracts the heal flag and this one would fire too
+IF
+TurnEnded((CHARACTER)_Ukra)
+AND
+GetTemplate(_Ukra, AMP_ULTRA_Summon_10_2e3a6cd3-6380-4e15-8945-d8d04a49f2e6)
+AND
+NOT DB_AMP_Ukra_HealedThisTurn(_Ukra)
+THEN
+PROC_AMP_Ukra_NoHealTurn(_Ukra);
+
+IF
+TurnEnded((CHARACTER)_Ukra)
+AND
+GetTemplate(_Ukra, AMP_ULTRA_Summon_10_2e3a6cd3-6380-4e15-8945-d8d04a49f2e6)
+AND
+DB_AMP_Ukra_HealedThisTurn(_Ukra)
+THEN
+PROC_AMP_Ukra_ResetBomb(_Ukra);
+
+PROC
+PROC_AMP_Ukra_ResetBomb((CHARACTER)_Ukra)
+AND
+DB_AMP_Ukra_NoHeal(_Ukra, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Ukra_HealedThisTurn(_Ukra);
+NOT DB_AMP_Ukra_NoHeal(_Ukra, _Old);
+DB_AMP_Ukra_NoHeal(_Ukra, 0);
+
+PROC
+PROC_AMP_Ukra_NoHealTurn((CHARACTER)_Ukra)
+AND
+DB_AMP_Ukra_NoHeal(_Ukra, (INTEGER)_N)
+AND
+_N < 1
+AND
+IntegerSum(_N, 1, (INTEGER)_New)
+THEN
+NOT DB_AMP_Ukra_NoHeal(_Ukra, _N);
+DB_AMP_Ukra_NoHeal(_Ukra, _New);
+
+PROC
+PROC_AMP_Ukra_NoHealTurn((CHARACTER)_Ukra)
+AND
+DB_AMP_Ukra_NoHeal(_Ukra, (INTEGER)_N)
+AND
+_N >= 1
+THEN
+ApplyStatus(_Ukra, "AMP_UKRA_BESTIAL_HERITAGE", 12.0, 1, _Ukra);
+NOT DB_AMP_Ukra_NoHeal(_Ukra, _N);
+DB_AMP_Ukra_NoHeal(_Ukra, 0);
+
+IF
+Died((CHARACTER)_Ukra)
+AND
+DB_AMP_Ukra_NoHeal(_Ukra, (INTEGER)_N)
+THEN
+NOT DB_AMP_Ukra_NoHeal(_Ukra, _N);
+
+IF
+Died((CHARACTER)_Ukra)
+AND
+DB_AMP_Ukra_HealedThisTurn(_Ukra)
+THEN
+NOT DB_AMP_Ukra_HealedThisTurn(_Ukra);
+
+EXITSECTION
+ENDEXITSECTION

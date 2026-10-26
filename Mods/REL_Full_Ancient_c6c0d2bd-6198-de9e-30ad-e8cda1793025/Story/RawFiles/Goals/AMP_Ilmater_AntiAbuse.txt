@@ -1,0 +1,55 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// maps equip-marker status -> stigma to clear when the marker drops (artifact unequipped).
+// on marker StatusRemoved, strip every stigma of that type this wearer cast (DB_AMP_Ilmater_StigmaLink).
+
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_AMULET_EQUIPPED", "AMP_STIGMA_AMULET_1");
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_AMULET_EQUIPPED", "AMP_STIGMA_AMULET_2");
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_AMULET_EQUIPPED", "AMP_STIGMA_AMULET_3");
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_AMULET_EQUIPPED", "AMP_STIGMA_AMULET_4");
+
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_RING_EQUIPPED", "AMP_STIGMA_RING");
+
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_DIADEM_EQUIPPED", "AMP_STIGMA_DIADEM_1");
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_DIADEM_EQUIPPED", "AMP_STIGMA_DIADEM_2");
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_DIADEM_EQUIPPED", "AMP_STIGMA_DIADEM_3");
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_DIADEM_EQUIPPED", "AMP_STIGMA_DIADEM_4");
+
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_ROBE_EQUIPPED", "AMP_STIGMA_ROBE");
+
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_CLOAK_EQUIPPED", "AMP_STIGMA_CLOAK");
+
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_GLOVES_EQUIPPED", "AMP_STIGMA_GLOVES");
+
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_BOOTS_EQUIPPED", "AMP_STIGMA_BOOTS");
+
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_HELMET_EQUIPPED", "AMP_STIGMA_HELMET_1");
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_HELMET_EQUIPPED", "AMP_STIGMA_HELMET_2");
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_HELMET_EQUIPPED", "AMP_STIGMA_HELMET_3");
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_HELMET_EQUIPPED", "AMP_STIGMA_HELMET_4");
+
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_MEDIUMARMOR_EQUIPPED", "AMP_STIGMA_MEDIUMARMOR_1");
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_MEDIUMARMOR_EQUIPPED", "AMP_STIGMA_MEDIUMARMOR_2");
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_MEDIUMARMOR_EQUIPPED", "AMP_STIGMA_MEDIUMARMOR_3");
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_MEDIUMARMOR_EQUIPPED", "AMP_STIGMA_MEDIUMARMOR_4");
+
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_HEAVYARMOR_EQUIPPED", "AMP_STIGMA_HEAVYARMOR_1");
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_HEAVYARMOR_EQUIPPED", "AMP_STIGMA_HEAVYARMOR_2");
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_HEAVYARMOR_EQUIPPED", "AMP_STIGMA_HEAVYARMOR_3");
+DB_AMP_Ilmater_EquipMarker("AMP_ILMATER_HEAVYARMOR_EQUIPPED", "AMP_STIGMA_HEAVYARMOR_4");
+
+KBSECTION
+
+// marker removed (item unequipped) -> strip matching-type stigmas this wearer cast on anyone
+IF
+StatusRemoved((CHARACTER)_Wearer, _Marker, _, _)
+AND
+DB_AMP_Ilmater_EquipMarker(_Marker, _StigmaType)
+AND
+DB_AMP_Ilmater_StigmaLink(_Wearer, _Target, _StigmaType)
+THEN
+RemoveStatus(_Target, _StigmaType, _Wearer);
+
+EXITSECTION
+ENDEXITSECTION

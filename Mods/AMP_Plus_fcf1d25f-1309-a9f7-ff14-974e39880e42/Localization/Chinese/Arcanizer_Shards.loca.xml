@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="utf-8"?>
+<contentList>
+	<content contentuid="hace25014g4291g32eag6fb3g4d011fd087f8" version="1">符文碎片</content>
+	<content contentuid="h7d7e33ffg2b58g32bdgae22g5c83506beffe" version="1">一块刻有古老符文、脉动着奥术能量的碎片。其表面蚀刻的纹印可用于对物品进行奥术化。</content>
+	<content contentuid="h9c2d4e6fg1a38g4b59g8d7cg3f6a9e1b2c47" version="1">符文碎片</content>
+	<content contentuid="hb4e6f8a1g3d92g4c87g9a15gf1d3e6b7c824" version="1">摧毁装备有几率获得一块&lt;LSTag Type="Status" Tooltip="AMP_RUNIC_SHARD_INFO"&gt;符文碎片&lt;/LSTag&gt;。&lt;br&gt;非普通：&lt;b&gt;[1]%&lt;/b&gt; | 稀有：&lt;b&gt;[2]%&lt;/b&gt; | 非常稀有：&lt;b&gt;[3]%&lt;/b&gt; | 传奇：&lt;b&gt;[4]%&lt;/b&gt;</content>
+	<content contentuid="hd5f7a2b3g4c61g4e89g7b3agc8e2d1f4a596" version="1">稀有的符文刻印碎片，可用于对任意装备进行&lt;b&gt;永久奥术化&lt;/b&gt;。&lt;br&gt;可在世界各地发现，或通过虚空胶囊回收提取。</content>
+	<content contentuid="ha2879a6agdebfgabedg823fg9e32b4b43ed7" version="1">符文碎片奖励</content>
+	<content contentuid="h18b714abg9576gda2bga61fg9d3a77b131ba" version="1">奥术化</content>
+	<content contentuid="h81c4bad6g109bg4bdag92e5gd4f1e744fd40" version="1">使用说明</content>
+	<content contentuid="hf7cec362gaf15g4cc7ga9f5gb1b9181ff554" version="1">&lt;b&gt;位面硬币&lt;/b&gt; → 胶囊 → 该槽位的随机物品。硬币稀有度 = 奖励稀有度。&lt;br&gt;将装备放入其中即可进行&lt;b&gt;回收&lt;/b&gt;。</content>
+	<content contentuid="h7c1cb0bbg6621g4126g9542g2488e066140e" version="1">护甲奥术化</content>
+	<content contentuid="hb2daa509g9199g4779gbd92ga864f56214b3" version="1">戒指奥术化</content>
+	<content contentuid="hf0112b7egde91g415egb1c6g76738bd5564c" version="1">手套奥术化</content>
+	<content contentuid="h56d8c29egeb44g4923gba56g5a001f54f5b4" version="1">头饰奥术化</content>
+	<content contentuid="hdac8540bg9d85g41dcgad0ag421013b2e84a" version="1">披风奥术化</content>
+	<content contentuid="h178093c3g9ac2g4e69g9d3bg4a76c6fc89e9" version="1">武器奥术化</content>
+	<content contentuid="ha718ddaagd63ag4797gbd3ag816dbd757161" version="1">靴子奥术化</content>
+	<content contentuid="h26808930g71b7g4f62gafa6gff048e1d90e2" version="1">元素奥术化</content>
+	<content contentuid="h4c078eddgd580g8fe6g49ecg64c489095e3c" version="1">强酸伤害符文碎片 [武器]</content>
+	<content contentuid="h0b1c424cgacc0g4b03gb400gd05c6e7ad4cd" version="1">强酸奥术化</content>
+	<content contentuid="h01edbc60g2dc0gcda1geaedg129ecc0a8385" version="1">寒冷伤害符文碎片 [武器]</content>
+	<content contentuid="hd6e50d48g63ecg492dg9500ga67ae7028a27" version="1">寒冷奥术化</content>
+	<content contentuid="h9b828000g955cgd074gbba3g987d1452867b" version="1">火焰伤害符文碎片 [武器]</content>
+	<content contentuid="h643fd6a9ge4e0g4014g86c8g485f668896f9" version="1">火焰奥术化</content>
+	<content contentuid="h157d1dd3g4945g92a5gb511g013a27e7fb34" version="1">力场伤害符文碎片 [武器]</content>
+	<content contentuid="h83d294cdg7497g45c7g9747g1922f7dea854" version="1">力场奥术化</content>
+	<content contentuid="hd5cc4ca2g84a3g9f8fga7ccg97e97547b779" version="1">闪电伤害符文碎片 [武器]</content>
+	<content contentuid="h897e44ddg0e34g4cb7g93f5ge8df6dd40c7f" version="1">闪电奥术化</content>
+	<content contentuid="h54e7d5fcg91dfgba58gbcd7g0f818613e41f" version="1">灵体符文碎片 [武器]</content>
+	<content contentuid="h96cef76agd09ag4fddga2d5g9c06d56f3a7c" version="1">灵体</content>
+	<content contentuid="hdac85258gac11gc3cdg7c08ge04f4f39b0d7" version="1">吸血者符文碎片 [武器]</content>
+	<content contentuid="h425b2e46gf77cg4c4aga081g318e3260f81c" version="1">吸血者</content>
+	<content contentuid="h12fad5afg0ab1gd191g4acfgc2a0b2e756a6" version="1">黯蚀伤害符文碎片 [武器]</content>
+	<content contentuid="hcba4aba4gcb2dg4be9ga708gfb258b391c7e" version="1">黯蚀奥术化</content>
+	<content contentuid="h1429af64ga67dg27fcge119gc1521e7f3f8d" version="1">毒素伤害符文碎片 [武器]</content>
+	<content contentuid="h6421825dgefa7g4f23gbd18gd6af3501cf65" version="1">毒素奥术化</content>
+	<content contentuid="h83b03c51g7389g35b0ga81eg2b9fa7167c86" version="1">心灵伤害符文碎片 [武器]</content>
+	<content contentuid="h13e541deg82b7g49a1g98adg5dade0012933" version="1">心灵奥术化</content>
+	<content contentuid="h2f2f2551g367dg49ffg968dg2d256c2619c0" version="1">光耀伤害符文碎片 [武器]</content>
+	<content contentuid="heaf3731dg81d0g4a03g874eg3b433d6c4914" version="1">光耀奥术化</content>
+	<content contentuid="ha8a6382dgf889g40d3g30f4gacd24f785dcd" version="1">雷鸣伤害符文碎片 [武器]</content>
+	<content contentuid="h39bebc43gd925g4915gab11g6c141c060483" version="1">雷鸣奥术化</content>
+	<content contentuid="h1c3217c0gf30ag8ee3g3bc9g75dae8fe7e86" version="1">回归符文碎片 [武器]</content>
+	<content contentuid="h8f372133gab97g4939g920dgde4e8bf0a414" version="1">回旋镖</content>
+	<content contentuid="h974f9acege128g2f2bg6a84g6826df33e75f" version="1">精准符文碎片 [武器]</content>
+	<content contentuid="hd8fa450ag3345g4cbcg8206g4f253c6839ff" version="1">精准</content>
+	<content contentuid="h2517d8ffg9f7eg223fg1899g38212f550455" version="1">优雅符文碎片 [武器]</content>
+	<content contentuid="h978ef1f1g1982g437bg9e28gdb54aa765df8" version="1">优雅</content>
+	<content contentuid="he60c6011ge6c3g61b5g2456g4148c6aaa414" version="1">传导符文碎片 [武器]</content>
+	<content contentuid="hc445c308g0bb6g415agbf32g496542e76d62" version="1">传导</content>
+	<content contentuid="h0345915eg2a7dgf712gb0f6g07e1fdb2a261" version="1">唤雷者符文碎片 [武器]</content>
+	<content contentuid="hcbda4fe0g516ag4644g98bag3df05e17fc11" version="1">唤雷者</content>
+	<content contentuid="hf26b99b4g0936g0d8ag9932ga8242c9c8a09" version="1">命运弯曲符文碎片 [护甲]</content>
+	<content contentuid="h1ea0e4c2geb2cg4b7ega255g79f1b7330563" version="1">命运弯曲者</content>
+	<content contentuid="hceaabd9ega127gcc5bg19b8g1fd993befb3c" version="1">虔诚符文碎片 [护甲]</content>
+	<content contentuid="h18f72746g8a99g4b7bg85b0geccd74ccae33" version="1">使用此碎片，为你已装备的&lt;b&gt;护甲或服装&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片&lt;b&gt;在战斗开始时召唤&lt;LSTag Type="Status" Tooltip="SPIRIT_GUARDIANS_RADIANT_AURA"&gt;精魂守卫&lt;/LSTag&gt;，持续回合数等于你的等级&lt;/b&gt;。</content>
+	<content contentuid="h83f80251g964bg4b92g8a9eg34718e6d5410" version="1">虔诚</content>
+	<content contentuid="hb1971c13g10e4g44b3gaf91gb634cc231338" version="1">战斗开始时，持用者获得持续&lt;b&gt;[1]&lt;/b&gt;回合的&lt;LSTag Type="Status" Tooltip="SPIRIT_GUARDIANS_RADIANT_AURA"&gt;精魂守卫&lt;/LSTag&gt;。</content>
+	<content contentuid="h41180222gcdd0g17feg7a60g18032a2ca5df" version="1">秘法符文碎片 [护甲]</content>
+	<content contentuid="hde5e8d45g0555g45e3g8073g893f8d12a05b" version="1">秘法</content>
+	<content contentuid="h9261fb8fg1f08g3cf9gdd1agc9eaac49a2df" version="1">磐石符文碎片 [护甲]</content>
+	<content contentuid="h3416c36dgbd04g434egba33ga5611008056a" version="1">磐石</content>
+	<content contentuid="h814d02e3gc79fg041ege4d7g55b7b95cc6a6" version="1">钢铁符文碎片 [护甲]</content>
+	<content contentuid="hc7be35ddgc1d0g46d6ga902g5a63c67ca586" version="1">壁垒</content>
+	<content contentuid="hf2eda71bgd071gce0eg4f73g9d72ba1f1b6d" version="1">意志符文碎片 [护甲]</content>
+	<content contentuid="h3f7df5d2g5cd6g4ff1ga046gffd3d66efb3f" version="1">顽固</content>
+	<content contentuid="h2d474583ga509g4366gb7a9gbbd236e957af" version="1">持用者可以重掷失败的&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;。</content>
+	<content contentuid="h47c0d0c3g50cdge91fg0b16g3aab8529d413" version="1">形态骨化符文碎片 [护甲]</content>
+	<content contentuid="h6cd3cd82ge0d7g4297gab76g68ecb0b96f87" version="1">形态骨化</content>
+	<content contentuid="hea2f7143g80c6gbacdg772bgad1f16e15128" version="1">半神符文碎片 [护甲]</content>
+	<content contentuid="h9b013e7eg7f4cg47feg964dg03b1055d4670" version="1">半神</content>
+	<content contentuid="h7dd56dbag221agc423g492bg6d48773bbc04" version="1">阴影符文碎片 [护甲]</content>
+	<content contentuid="hbc592895gbdffg46f0g82deg82ff8b57714e" version="1">织影者</content>
+	<content contentuid="h0c6c197bgb874ged9eg347dg75455e3445f7" version="1">高等阴影符文碎片 [护甲]</content>
+	<content contentuid="ha4f8fc66ge47bg47b1g89d5ge0413aa3f7de" version="1">高等织影者</content>
+	<content contentuid="h722a7856g8dfdg83e8gb9adg36c3a48ca6c6" version="1">狂暴符文碎片 [护甲]</content>
+	<content contentuid="h47c28202gea00g4f41ga571gcde5e276d06b" version="1">狂暴</content>
+	<content contentuid="hea20bf2ag5a51g1d7cg4326gd5da1232cec2" version="1">织法符文碎片 [戒指]</content>
+	<content contentuid="ha4b662c5g957cg43bagbf27g953c97f46df8" version="1">织法</content>
+	<content contentuid="ha1070e18g592dgc1c6g9110gfb7d078bb76a" version="1">掠食符文碎片 [戒指]</content>
+	<content contentuid="hb4408910g347cg44ccg9e70gc1bdad881ef7" version="1">掠食者</content>
+	<content contentuid="h7d5b31c0gdd17g7342gc265g3b52f1e8551e" version="1">肉身符文碎片 [戒指]</content>
+	<content contentuid="h09094d41g99cdg4d31g9af3gac5837617b72" version="1">肉身饥渴</content>
+	<content contentuid="h0d4affabgd6beg6c80g2070g317d42b413c9" version="1">大地符文碎片 [戒指]</content>
+	<content contentuid="h1750fd52gd777g4ab2ga1e0g04b4181cb026" version="1">接地</content>
+	<content contentuid="h6b029c77g1d2fg00acg0ef6g1fd4e9670152" version="1">专注符文碎片 [戒指]</content>
+	<content contentuid="hd5000e71g903ag4a8bgad67g45d92f038733" version="1">坚定意志</content>
+	<content contentuid="hccc513c3g0b68ga9e7gab04g1d64010bd9ee" version="1">妙手符文碎片 [手套]</content>
+	<content contentuid="h36886103gaee5g4bb7g899dg4eef7ab43e8c" version="1">妙手</content>
+	<content contentuid="hd936afc7gfef8g2b40g2a06gf76bc49db892" version="1">流浪符文碎片 [手套]</content>
+	<content contentuid="h8234763fg0196g47e8g9819g613f2a0c4acd" version="1">流浪者</content>
+	<content contentuid="h0711fae0gde3bga428g1e5ag04195d616ff9" version="1">突破符文碎片 [手套]</content>
+	<content contentuid="hfaa406ddg9ccdg4e9bg8856gbf233e85207b" version="1">破甲</content>
+	<content contentuid="he64c6664g69e3g8ae6g8a33g8622d65b8093" version="1">狙击印记符文碎片 [手套]</content>
+	<content contentuid="hae81d22bgdf8eg46ceg8b1dg51882c7363cf" version="1">狙击印记</content>
+	<content contentuid="h5f40ac6dge691ga528g93d6g1f93e3b41e8f" version="1">圣洁之触符文碎片 [手套]</content>
+	<content contentuid="h310f1bd8g1597g4776g8778g4e8fb2948ba1" version="1">圣疗之触</content>
+	<content contentuid="h6a90b60dg7b95g9289g53ffg3a10185d40e2" version="1">放电符文碎片 [手套]</content>
+	<content contentuid="h24a880d3gfe47g4386g87eegd5fda4fad74e" version="1">放电者</content>
+	<content contentuid="h3c234e79g06ccg4e83gbfbcg243bb5ce49a5" version="1">荒野藤蔓符文碎片 [手套]</content>
+	<content contentuid="hf5573badg7595g4ffbgb9ebgab9925c60717" version="1">荒野藤蔓</content>
+	<content contentuid="h44c81018g25eag1378g6501gf80bb1412ddf" version="1">符文之眼符文碎片 [头盔]</content>
+	<content contentuid="h0b344489g83f9g4353g840egeead264dcfa7" version="1">真视</content>
+	<content contentuid="h8686ab4dg360cgf032g7be0gb63577809aac" version="1">近战符文碎片 [头盔]</content>
+	<content contentuid="hacf6ad13g109cg4b6dgb741gbbbdf5112347" version="1">零距离</content>
+	<content contentuid="h900793b4gcaadg63d1gb306g6e544dcaf687" version="1">幸运符文碎片 [头盔]</content>
+	<content contentuid="h4a6f4e95g8e98g4f50gbf87g32b5a41e4b3f" version="1">幸运</content>
+	<content contentuid="h977930fag0685gf2f2g7ad5ga9a033a87758" version="1">伟大脑力符文碎片 [头盔]</content>
+	<content contentuid="h74657a7fg497ag43d8ga02ag9d404e64e4a5" version="1">伟大脑力</content>
+	<content contentuid="h8702763fg7a0eg59f7g7553ga06fe9ce015f" version="1">虚空矿石符文碎片 [头盔]</content>
+	<content contentuid="he2e4f319g1efcg454eg864bg8326f405be15" version="1">虚空矿石</content>
+	<content contentuid="h173fb379g5f46g4992gaeeaga63843780389" version="1">无法施展法术。</content>
+	<content contentuid="hd02237fcgc5f7g9967g5b93gc3ab4d363ec0" version="1">阴影符文碎片 [披风]</content>
+	<content contentuid="hd7597169g3cf1g4c9ag8906gf54c3910fcb0" version="1">幽灵</content>
+	<content contentuid="h5e5f1715g92d6g6be9g4daagc391f83b35d0" version="1">如风符文碎片 [披风]</content>
+	<content contentuid="h5ad6ad72g3922g4f2eg82efgf79ffe5b7dee" version="1">如风</content>
+	<content contentuid="hdf943180g692dg8371g0d8dg8ed8c32e2038" version="1">镜像符文碎片 [披风]</content>
+	<content contentuid="h17ba0bceg274dg42fegb069gf0cc822d0e90" version="1">镜像</content>
+	<content contentuid="h95492ee3gd629g7d9dg6029g73e2351f0778" version="1">灵动符文碎片 [披风]</content>
+	<content contentuid="hfde9cc6fg9219g41a6gb791g82710cbe143c" version="1">灵动</content>
+	<content contentuid="h111f133cg24d2g09fcgf093g4b51dbb74dd0" version="1">元素屏障符文碎片 [披风]</content>
+	<content contentuid="h8489ab6cg7803g4571g83fdga74e4beb05f3" version="1">元素屏障</content>
+	<content contentuid="hf5118797gf2cag03b8g5892gbf152273280c" version="1">辉耀闪避符文碎片 [披风]</content>
+	<content contentuid="hc1418c49g2922g471bga113g4f71d65186f2" version="1">辉耀闪避</content>
+	<content contentuid="h897c3302gbf4fgc686gab29ga6a91b915dc0" version="1">天行者符文碎片 [靴子]</content>
+	<content contentuid="hc7fa4a80gecd2g488fgbf61ge659bfcc0c8d" version="1">天行者</content>
+	<content contentuid="hd7a8d3dfg5b4fg5a9ege534g5829182040f7" version="1">轻羽符文碎片 [靴子]</content>
+	<content contentuid="h93e17c90g8509g4357ga63bg3b1c27c10f28" version="1">轻羽</content>
+	<content contentuid="he2886a7cgd8fbge14dg2653g00b46d0d79e0" version="1">燎原符文碎片 [靴子]</content>
+	<content contentuid="h37077154g0e3cg46efgae4fg273aa4776ff5" version="1">使用此碎片，为你已装备的&lt;b&gt;靴子&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片会在战斗中的每个回合于你足下&lt;b&gt;留下火焰地表&lt;/b&gt;。&lt;i&gt;取代其他同类地表碎片的效果。&lt;/i&gt;</content>
+	<content contentuid="hc7eedd20gcabfg4ef2ga5cagf080e5d29d60" version="1">燎原</content>
+	<content contentuid="h27cda684ge152g4adfg8db8g8338d79848dc" version="1">战斗中轮到持有者的回合时，会在足下产生一块&lt;b&gt;燃烧表面&lt;/b&gt;。</content>
+	<content contentuid="h8ce4074ag409bg1387g0697gb36f2797bf35" version="1">洁净符文碎片 [靴子]</content>
+	<content contentuid="h483a7809gbacdg46a9gb932g0704aefb90c3" version="1">使用此碎片，为你已装备的&lt;b&gt;靴子&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片会在战斗中的每个回合于你足下&lt;b&gt;溅起一小片积水&lt;/b&gt;。&lt;i&gt;取代其他同类地表碎片的效果。&lt;/i&gt;</content>
+	<content contentuid="h7b4602eag6d22g4b3ag91a5g445caa64185c" version="1">洁净者</content>
+	<content contentuid="hc81ffe12g4a62g49f0gb6a5g8f430ef9a9d4" version="1">战斗中轮到穿戴者的回合时，会释放&lt;b&gt;一小片积水&lt;/b&gt;。</content>
+	<content contentuid="h922897deg1f91g537eg4faeg1e8173ffee14" version="1">急冻符文碎片 [靴子]</content>
+	<content contentuid="h1d3ed65ag4ef2g4792g9334g0bca2e164ee4" version="1">使用此碎片，为你已装备的&lt;b&gt;靴子&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片会在战斗中的每个回合于你足下&lt;b&gt;留下冰面&lt;/b&gt;。&lt;i&gt;取代其他同类地表碎片的效果。&lt;/i&gt;</content>
+	<content contentuid="h2d6dcedeg3209g4a34g9d84g47d93c260e1f" version="1">急冻</content>
+	<content contentuid="h037cef6dgd44fg4064g90bcge49032cceaaf" version="1">战斗中轮到穿戴者的回合时，会在足下产生&lt;b&gt;冰面&lt;/b&gt;。</content>
+	<content contentuid="h549cd84cg251eg048ag80a3g489b83a5e338" version="1">鬼婆符文碎片 [靴子]</content>
+	<content contentuid="h7818fb99g1dc8g4177ga2a0g65741942f189" version="1">使用此碎片，为你已装备的&lt;b&gt;靴子&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片会在战斗中的每个回合于你足下&lt;b&gt;留下强酸地表&lt;/b&gt;。&lt;i&gt;取代其他同类地表碎片的效果。&lt;/i&gt;</content>
+	<content contentuid="h24ba01begab58g4b54g9d7dgdee2f3ec87c5" version="1">鬼婆</content>
+	<content contentuid="hdf8ccdc0gf01fg4cd1g9224ga5e5d5559566" version="1">战斗中轮到穿戴者的回合时，会在足下产生一块&lt;b&gt;强酸表面&lt;/b&gt;。</content>
+	<content contentuid="h7fd7ebe9g369agd299g7f32g1a922f793b80" version="1">损坏构装体符文碎片 [靴子]</content>
+	<content contentuid="ha828925fgdf15g443dga101g9c6be82c5b00" version="1">使用此碎片，为你已装备的&lt;b&gt;靴子&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片会在战斗中的每个回合于你足下&lt;b&gt;渗出油脂&lt;/b&gt;。&lt;i&gt;会覆盖其他同类地表碎片的效果。&lt;/i&gt;</content>
+	<content contentuid="ha015d2ffgd15cg48e4ga741ga5d99eec7811" version="1">损坏构装体</content>
+	<content contentuid="h95e44e87gc0fag4e5dg9c02gc34491709132" version="1">战斗中轮到持用者的回合时，脚下会&lt;b&gt;渗出油脂&lt;/b&gt;。</content>
+	<content contentuid="he9f78f20gae0dg83a8gbcabgb944d0c23403" version="1">恶臭符文碎片 [靴子]</content>
+	<content contentuid="h05ffeb6bg96cbg4c4dga055g862b8e2685d8" version="1">使用此碎片，为你已装备的&lt;b&gt;靴子&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片&lt;b&gt;在战斗中每回合散发毒气，并使持有者对其&lt;LSTag Tooltip="Immune"&gt;免疫&lt;/LSTag&gt;&lt;/b&gt;。&lt;i&gt;取代其他同类地表碎片的效果。&lt;/i&gt;</content>
+	<content contentuid="he0aed69agc311g4c9dgb50fg27fa295af2e9" version="1">恶臭者</content>
+	<content contentuid="h94d574b4gdee4g4cb2g9fcbg13a803954358" version="1">持有者在战斗中每回合散发&lt;b&gt;有毒气体&lt;/b&gt;，并对其&lt;LSTag Tooltip="Immune"&gt;免疫&lt;/LSTag&gt;。</content>
+	<content contentuid="h1f8e4e90g730cg8655g7ac5g0e752463d7b5" version="1">考德印记符文碎片 [靴子]</content>
+	<content contentuid="hd0988181g20e7g4044gbc7fg857c05197dc9" version="1">考德印记</content>
+	<content contentuid="h0f30db7cg9e34g9208g6ef7gf04fca5504ad" version="1">高等考德印记符文碎片 [靴子]</content>
+	<content contentuid="h1d1adedeg413cg4526g8907ge41298c76be0" version="1">高等考德印记</content>
+	<content contentuid="h8789f4c8g5455ga5b6g0837g0a1f4d00b50e" version="1">淬炼符文碎片 [护甲]</content>
+	<content contentuid="h619e27f2gfb10g458ag901ag5a628a378f4f" version="1">淬炼</content>
+	<content contentuid="h7ecfd509gc5afg0346g0ec1g0d1d42f16073" version="1">雷震符文碎片 [武器]</content>
+	<content contentuid="hb46145e3gf5d6g4cc2gb305g188a26ea63b8" version="1">雷震</content>
+	<content contentuid="hab3f86f9g6826g9e74gee0fgbee7d8c1b617" version="1">终极契约符文碎片 [武器]</content>
+	<content contentuid="hac528b19gc2a9g415bgb2fcg9878adf5af79" version="1">终极契约</content>
+	<content contentuid="h79a3bc28gbf5fg463bg4785gf91dbd25e681" version="1">生命汲取符文碎片 [武器]</content>
+	<content contentuid="h0cdba9f5g2b5bg4e92gb945g0fc07f6a9cb0" version="1">生命汲取</content>
+	<content contentuid="h7d5f38e0g0bb8g85a1ge892ga17cee882e40" version="1">放血者符文碎片 [武器]</content>
+	<content contentuid="hbf75c583g40fcg468eg97a0g7f9693675ce5" version="1">放血者</content>
+	<content contentuid="h47685f80gedf0g3e4cgc7bfg71b1b62ac287" version="1">弗莱格索斯符文碎片 [戒指]</content>
+	<content contentuid="ha2b7e7dfga97bg48c8g8256g27bde742066d" version="1">弗莱格索斯</content>
+	<content contentuid="h9263780dg59f0g52b7g84abg7c98ebb6ca00" version="1">电导符文碎片 [手套]</content>
+	<content contentuid="h925aa7edg13aag4733g9784g2af1e857a140" version="1">电导</content>
+	<content contentuid="ha0459284g2ddfgf48eg12f7g251105cbccc7" version="1">远见符文碎片 [头盔]</content>
+	<content contentuid="h45e21040g93abg4ffbg919fg53b262628137" version="1">远见</content>
+	<content contentuid="h4b665c94gee18g78ccg0a8egb08ee3a5184a" version="1">元素和谐符文碎片 [靴子]</content>
+	<content contentuid="h9db124c7g0b0cg4ba8g8466g10a5b20fdfcd" version="1">元素和谐</content>
+	<content contentuid="h16ea89e7g4254gc662ga0ffgd6ad4d54c753" version="1">黎明符文碎片 [戒指]</content>
+	<content contentuid="h07c472a1g6a2eg4b9fg81fbg5de703d9de14" version="1">黎明</content>
+	<content contentuid="h99347fcag2071g0532gefceg02d3eda679e2" version="1">奥术涌动符文碎片 [头盔]</content>
+	<content contentuid="h002bc247g50aag4e2fga451g0a6186915d89" version="1">奥术涌动</content>
+	<content contentuid="he30c9548g8cbagf4e1gb793g57f56806233d" version="1">霜雾符文碎片 [戒指]</content>
+	<content contentuid="h2283e5b8g988cg4350g87b6gc1ca472a78eb" version="1">霜雾</content>
+	<content contentuid="hc39ccc0bg34fdgbf96g8414g6bf77e765af4" version="1">星界之志符文碎片 [头盔]</content>
+	<content contentuid="h0e4d83d9g4ba0g4439g97a5g9ae395e035d8" version="1">星界之志</content>
+	<content contentuid="ha7976bb6g2c88gff12g9c2eg85e98685693d" version="1">警觉符文碎片 [头盔]</content>
+	<content contentuid="hfec38fa5g1188g4b64g9054g27080a8e35e3" version="1">警觉</content>
+	<content contentuid="h9272953fg3408g062cgc258g479531ba80bf" version="1">柔韧符文碎片 [戒指]</content>
+	<content contentuid="h8302dd6bgc668g49cfg89b6g0d2e421483f0" version="1">柔韧</content>
+	<content contentuid="hc75dbf8dg23d9gc845ga742gd92acac9e062" version="1">艾嘉西斯符文碎片 [护甲]</content>
+	<content contentuid="h5fd2f80bg4aaeg41e5g9c59g3514e4893202" version="1">艾嘉西斯之铠</content>
+	<content contentuid="he87c3ea3g3a8dgce3cg0d30g74f085f50e0b" version="1">混沌符文碎片 [戒指]</content>
+	<content contentuid="h4e57e546g8d94g4b69g9a62gf98f7874c70e" version="1">混沌</content>
+	<content contentuid="h827cb715gbe0dg2a90gfb7eg24dc1268ad73" version="1">共鸣符文碎片 [戒指]</content>
+	<content contentuid="h2404aa31g1db1g4b9cgbf01ga566364747e5" version="1">共鸣</content>
+	<content contentuid="h66aa7965g1dfcg195ag54f3gf721ed7e49ca" version="1">死霜符文碎片 [手套]</content>
+	<content contentuid="h93c500e5gaae5g4b85g8f4ag46b307613cba" version="1">死霜</content>
+	<content contentuid="h19d190e3gb30fg66b2g0bb8g3bc0ed7f1a21" version="1">无情驱动符文碎片 [头盔]</content>
+	<content contentuid="hb9c9c5fcg0111g4bf4g9e58g9c0026c7a8d7" version="1">无情驱动</content>
+	<content contentuid="h6d28fa34g503dg224fg487bg7b32e46e9fe0" version="1">微光符文碎片 [武器]</content>
+	<content contentuid="h7bcb809ag7a42g44fegb57cgee41c14e78c5" version="1">微光</content>
+	<content contentuid="hc343d621ga319ga8c7g3c8ag00e5b1f7d0be" version="1">迅捷符文碎片 [头盔]</content>
+	<content contentuid="h5b697a85g52d1g4f2ag8561gad9454706852" version="1">使用此碎片，为你已装备的&lt;b&gt;头盔或头饰&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片赋予&lt;b&gt;+ [1] &lt;LSTag Type="ActionResource" Tooltip="ReactionActionPoint"&gt;反应&lt;/LSTag&gt;&lt;/b&gt;。</content>
+	<content contentuid="h4562a7f0g46a8g4fcagb6fdg7f3ffe48ae18" version="1">迅捷</content>
+	<content contentuid="h571eb73bg43f9g4b65ga852gd4a26d41c8d5" version="1">持有者获得&lt;b&gt;+[1]&lt;/b&gt;个&lt;LSTag Type="ActionResource" Tooltip="ReactionActionPoint"&gt;反应&lt;/LSTag&gt;。</content>
+	<content contentuid="hb457b92bg37cfg1141g7962gd85c289845e1" version="1">赋能符文碎片 [武器]</content>
+	<content contentuid="h70845e5dg4c58g4957g9157g981856ae37af" version="1">赋能</content>
+	<content contentuid="h52309c68gb030gd39bgd6b0g1627d1ce4f5c" version="1">残暴符文碎片 [手套]</content>
+	<content contentuid="h7dff1715gbb4fg46ccg9641ge26317aa61d2" version="1">残暴</content>
+	<content contentuid="h1af9dd53gc1d0ga305g5258g4e0c998a6a8b" version="1">原初之炎符文碎片 [头盔]</content>
+	<content contentuid="h90481097gf9f6g4cb4g9652g44e9e6b56a5f" version="1">原初之炎</content>
+	<content contentuid="hcf89801dg1c3dga918g95beg2225ce2973ce" version="1">原初之霜符文碎片 [头盔]</content>
+	<content contentuid="hf442c1a1g0faeg4a1dga0a7gbfd1028b06ed" version="1">原初之霜</content>
+	<content contentuid="ha17adb89g9e19g1c9egc958ga72c84cbeeed" version="1">唤雷者符文碎片 [头盔]</content>
+	<content contentuid="hde2ead31g68d8g4f1fg958cg04fae5ff5fe3" version="1">唤雷者</content>
+	<content contentuid="h8293f887g999cgc2b1g0d1dga5bc224b6242" version="1">雷鸣之灵符文碎片 [头盔]</content>
+	<content contentuid="h7d43cfb8g92d9g4850gabc7gb9dac77cab18" version="1">雷鸣之灵</content>
+	<content contentuid="h855e7e9dg278bg7d14g9d54g27a6535093a7" version="1">腐蚀符文碎片 [武器]</content>
+	<content contentuid="h20589535g6ef9g45ceg8d60g6dc381b293ee" version="1">腐蚀</content>
+	<content contentuid="hd837f811gbf25g10b1gcadag7fa85132b637" version="1">白霜符文碎片 [武器]</content>
+	<content contentuid="h31d6a80ag1585g46a5gb997g594ef09bb33f" version="1">白霜</content>
+	<content contentuid="h58411201g7d55gf532ge5f4g7382e6bd34b6" version="1">烬击符文碎片 [武器]</content>
+	<content contentuid="h11c58b66gf3fdg4984g80c4gfc7f1bea4274" version="1">烬击</content>
+	<content contentuid="h68d96ed1g8d95g1a26g7ae0g999a691d6e89" version="1">电激符文碎片 [武器]</content>
+	<content contentuid="h82474ee5gca99g4760g9b33gf25df59b0110" version="1">电激</content>
+	<content contentuid="hed36c836g1243ga039gc676g421ad2f2cd86" version="1">震荡符文碎片 [武器]</content>
+	<content contentuid="hf73d41bcg3e16g4c08g9730gc03ddfcb5f6d" version="1">震荡</content>
+	<content contentuid="hd365e2a1g4145g516ag7b31g72dafc13f132" version="1">雄辩符文碎片 [护符]</content>
+	<content contentuid="h92e2374ag5342g4aa2gbc69g004ddeee82d9" version="1">护符奥术化</content>
+	<content contentuid="hf4f5872dga047g415bgb907g0384b731aff2" version="1">雄辩</content>
+	<content contentuid="h938e433dga18cg823agb68dg6768b9b4d7e6" version="1">长臂符文碎片 [武器]</content>
+	<content contentuid="h714b244agf47ag49ebg8d04gdd2aa03318d6" version="1">长臂</content>
+	<content contentuid="hfa6326e9gb813g43d3g8b79g2ead54d24a62" version="1">该武器的近战攻击范围增加&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="had934e58gcb0fg695bg6157gd90700e5605c" version="1">回收符文碎片</content>
+	<content contentuid="h4bf5b3d0ge5d9g4152g815fg0940469b539a" version="1">回收</content>
+	<content contentuid="hbe0c4f67g4196g45c7g8a95g28a43fa007ba" version="1">使用此碎片从&lt;b&gt;所有已装备物品&lt;/b&gt;中&lt;b&gt;收回所有符文碎片&lt;/b&gt;。所有的奥术化效果都将被移除，相应的碎片将返回你的背包。</content>
+	<content contentuid="h1b486ba4gba35g67degbd47g67de786b5088" version="1">耐瑟瑞尔之种符文碎片 [武器]</content>
+	<content contentuid="hb864820eg7404g4d10gbf7bg0efe102d3257" version="1">耐瑟瑞尔之种</content>
+	<content contentuid="h1b58bf44ge487g486bge1ddg8a7a0466072d" version="1">坚定符文碎片 [靴子]</content>
+	<content contentuid="h9dd7b990gc69ag43fegade2g3186943fc01e" version="1">使用此碎片，为你已装备的&lt;b&gt;靴子&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片&lt;b&gt;防止持有者陷入&lt;LSTag Type="Status" Tooltip="PRONE"&gt;倒伏&lt;/LSTag&gt;状态&lt;/b&gt;。</content>
+	<content contentuid="h3e846768ga607g4fc9g8181g046225d5dbed" version="1">持有者不会陷入&lt;LSTag Type="Status" Tooltip="PRONE"&gt;倒伏&lt;/LSTag&gt;状态。</content>
+	<content contentuid="h339643a3g1bb5g857agde3fg328d1cdf4b54" version="1">火电传导符文碎片 [手套]</content>
+	<content contentuid="h2fed6fdcgb463g41f1gaf37g3571bee79db6" version="1">火电传导</content>
+	<content contentuid="h0ef8371fg4b21g6567ga6e6ga967dd922875" version="1">主宰符文碎片 [护符]</content>
+	<content contentuid="hf3151146gad4bg49a2g80degbcda487110e5" version="1">主宰</content>
+	<content contentuid="h4514bbf4g69deg733dg0144g351e65330a24" version="1">敏捷符文碎片 [护符]</content>
+	<content contentuid="hfa97969bgdc08g4325ga508gcec52ef49314" version="1">敏捷</content>
+	<content contentuid="h16b0314fg1484g4e7ag3bdfg63cd926fd44a" version="1">坚韧符文碎片 [护符]</content>
+	<content contentuid="he28ff635gb5dbg44f2ga616g7239e035656e" version="1">坚韧</content>
+	<content contentuid="h6bf9c1b2gba87gb7c6g13d7g6a7ddd6de5a3" version="1">智慧符文碎片 [护符]</content>
+	<content contentuid="hdfaf7867g750fg4743g8251g790b82d9ad5b" version="1">智慧</content>
+	<content contentuid="h4482ce63gb37age83bg3bb6g3ed40be7e727" version="1">感应符文碎片 [护符]</content>
+	<content contentuid="h0cc0b03dg74a6g4eb5ga518g2d4c048252f1" version="1">感应</content>
+	<content contentuid="hbe454d35gc835g0fccg027cg06358e7beb96" version="1">颜值符文碎片 [护符]</content>
+	<content contentuid="h6605697agd8dfg41b4g912bg8aa8b6da26a7" version="1">颜值</content>
+	<content contentuid="hb1efb17cgff99g2810g378egcfc584e8349e" version="1">魔网裂隙符文碎片 [头盔]</content>
+	<content contentuid="hed2fe0b7g8d01g4426gb8d7g8ff05149fb3d" version="1">魔网裂隙</content>
+	<content contentuid="h0041ba94ga225g0756g2740ga6df80c214f0" version="1">砺锋符文碎片 [武器]</content>
+	<content contentuid="hd8debe44gb5f9g49ebga6dfg635be71ca60c" version="1">砺锋</content>
+	<content contentuid="h90de49f8g4464gf026gf71fg92a7c7db4c43" version="1">灼烧苦难符文碎片 [手套]</content>
+	<content contentuid="h8cfc0a81gee3cg4110g8d29g73b7a86448a0" version="1">灼烧苦难</content>
+	<content contentuid="hd79b436dg6a35g961fgec83g5ba81fc05606" version="1">思维枷锁符文碎片 [戒指]</content>
+	<content contentuid="h3d94b712gf365g4c8bg994bg6bd5abc111c9" version="1">使用此碎片，为你&lt;b&gt;上方戒指栏位中的戒指&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片&lt;b&gt;提供+[1]个&lt;LSTag Type="ActionResource" Tooltip="ReactionActionPoint"&gt;反应&lt;/LSTag&gt;，但持有者在未维持&lt;LSTag Tooltip="Concentration"&gt;专注&lt;/LSTag&gt;时受到伤害，便会陷入&lt;LSTag Type="Status" Tooltip="PARALYZED"&gt;麻痹&lt;/LSTag&gt;状态&lt;/b&gt;。</content>
+	<content contentuid="h3ffb6d01gba7eg4326gaf66g0fdc517d2e3b" version="1">思维枷锁</content>
+	<content contentuid="hae65c66bge8bdg4978gb7edg7cc71d52ca63" version="1">持有者获得&lt;b&gt;+[1]&lt;/b&gt;个&lt;LSTag Type="ActionResource" Tooltip="ReactionActionPoint"&gt;反应&lt;/LSTag&gt;，但在未维持&lt;LSTag Tooltip="Concentration"&gt;专注&lt;/LSTag&gt;时受到伤害，便会陷入&lt;LSTag Type="Status" Tooltip="PARALYZED"&gt;麻痹&lt;/LSTag&gt;状态。</content>
+	<content contentuid="hde45e57bg8e29ga447g30a8g86459450847b" version="1">禅定之拳符文碎片 [手套]</content>
+	<content contentuid="hbe3a4351g2a1fg4b82g9ebag91dda6bd0be6" version="1">禅定之拳</content>
+	<content contentuid="h443ecd6ege610g44abgad39g2e735bcb28ff" version="1">奥术化上限</content>
+	<content contentuid="h02d46462gb781g40b5gb712gf85d01391af1" version="1">该物品已达到奥术化上限。</content>
+	<content contentuid="h5b5fb11cg4718g4170gbe61gfa1c587c1140" version="1">莽击符文碎片 [武器]</content>
+	<content contentuid="h44a9cf87g8355g40b5g8df6g7eb18e44333a" version="1">莽击</content>
+	<content contentuid="hd88e0788gbe3eg4f1bga996g604b0c78e842" version="1">刺痛符文碎片 [武器]</content>
+	<content contentuid="he0b30234g6cf7g4fc5ga6dcgf73bb4775dc3" version="1">刺痛</content>
+	<content contentuid="hf5f4b559g71cfg4ef6gbb1eg3496e849ae28" version="1">锋锐符文碎片 [武器]</content>
+	<content contentuid="h28a33982ga24fg47c5ga1e1gdb2b2488d967" version="1">锋锐</content>
+	<content contentuid="h74c6612dg42dfg43d0gac02g03cadb7e1802" version="1">余烬符文碎片 [武器]</content>
+	<content contentuid="hfcdf8161g3714g4498g8d64g4c5e24fd89d4" version="1">余烬</content>
+	<content contentuid="hae1e11b6gdb50g4559gac85ge81007de19cd" version="1">寒意符文碎片 [武器]</content>
+	<content contentuid="ha93c1663g968fg4024g88b5g9c17ffbad245" version="1">寒意</content>
+	<content contentuid="hbd5aa586g10f8g4200g8c6fg4183919fae04" version="1">电击符文碎片 [武器]</content>
+	<content contentuid="h86b964c9g576ag4ac3ga98ag1dc687fa6d85" version="1">电击</content>
+	<content contentuid="h8c312892ge119g4ec2g9035g5af474ba8f22" version="1">轰鸣符文碎片 [武器]</content>
+	<content contentuid="h9e6b1fb8g02fcg4b30g996cgbf7a78306b12" version="1">轰鸣</content>
+	<content contentuid="h4b036558g9ea7g4d61g8c1dgc9d6e4a82d52" version="1">臭气符文碎片 [武器]</content>
+	<content contentuid="h0a827978g0b85g4bbbg8ec9gc079514523c8" version="1">臭气</content>
+	<content contentuid="h5e702ac3gb648g43caga3bbge3051cd25d05" version="1">蛰刺符文碎片 [武器]</content>
+	<content contentuid="he691623eg3f3ag46d0gbd72g4045fc1b186d" version="1">蛰刺</content>
+	<content contentuid="h23fcaa25g2b22g4a18gae46gcad6e4df7f90" version="1">腐朽符文碎片 [武器]</content>
+	<content contentuid="h0e5d6759g663dg481cg9fd8g0a055c28de92" version="1">腐朽</content>
+	<content contentuid="h4464efe8g8a4dg43b0gbdfdgd5f5e1efbd01" version="1">闪耀符文碎片 [武器]</content>
+	<content contentuid="he7d71138g4843g45f4gb4afg43517fcf1fe4" version="1">闪耀</content>
+	<content contentuid="h2899399dg6241g42c3g90d2g91aeef7651cc" version="1">抽搐符文碎片 [武器]</content>
+	<content contentuid="h2bbe14d3gf2bag4c0dg93dagbee3f867adeb" version="1">抽搐</content>
+	<content contentuid="hb2db7831g3476g4d99g99b6g928e039e8e61" version="1">起伏符文碎片 [武器]</content>
+	<content contentuid="h8adafb33gbd4bg47aaga5a5g02b3c8463ccc" version="1">起伏</content>
+	<content contentuid="h158afbe3gb414g40fagb8e4g721b71c0b25a" version="1">扑击符文碎片 [武器]</content>
+	<content contentuid="h01c74f25gd730g46b9gbf6ag3a189dbd39af" version="1">扑击</content>
+	<content contentuid="hef9b1d76g7fd7g443dgb4e3g406071d22a60" version="1">幽暗符文碎片 [武器]</content>
+	<content contentuid="hcf26f1c4ge1f5g412dg9d43g23392732ff4c" version="1">幽暗</content>
+	<content contentuid="hbb7b1c99g600eg44e5g8653g8e73720fe7af" version="1">迅捷符文碎片 [武器]</content>
+	<content contentuid="h3a8a212ega614g448dg92f4g6b09c3d7146a" version="1">迅捷</content>
+	<content contentuid="hd7336a6bg81e4g4cb4ga17fgbf19ce836a69" version="1">清道夫符文碎片 [武器]</content>
+	<content contentuid="he33c267ag13cdg4b29g878bgac2e05d88bfa" version="1">清道夫</content>
+	<content contentuid="hafff2e19g1f35g4294g84adge8264aa7c1de" version="1">荒猎符文碎片 [武器]</content>
+	<content contentuid="h60b3afe3g8a82g4d39g8da3g8994e5d518d8" version="1">荒猎</content>
+	<content contentuid="hfdf65262gf1f7g4a00ga8dfg48026d03072e" version="1">裂隙符文碎片 [武器]</content>
+	<content contentuid="hb16abc8egdd7cg409fga5cbg0468348a47e6" version="1">裂隙</content>
+	<content contentuid="ha50bd10cgc5d0g44a6ga299g6a61852fe887" version="1">祓邪符文碎片 [武器]</content>
+	<content contentuid="h3ab3b097g9ec9g4d2egba93g3ddb198f68c6" version="1">祓邪</content>
+	<content contentuid="hbc682386gde01g4cbcg8f44g156945bc77ad" version="1">光华符文碎片 [武器]</content>
+	<content contentuid="ha4991614g7eebg4626g8ba3g9c42903ddd02" version="1">光华</content>
+	<content contentuid="h14efecdcg30dfg49f7gbc13g9dd0ea09a8a1" version="1">轻锐符文碎片 [武器]</content>
+	<content contentuid="h718c9649g5a27g44b6ga608g2b522f946d8c" version="1">轻锐</content>
+	<content contentuid="h353f4001gf2dfg4d52g8400gda3c7a793018" version="1">交锋符文碎片 [武器]</content>
+	<content contentuid="h42809545gf09cg4bf0gabd1gdfc18844229c" version="1">交锋</content>
+	<content contentuid="hf114efd3g3282g469bg8ad3g3c1de6a29348" version="1">钟鸣符文碎片 [武器]</content>
+	<content contentuid="he49928c4g9f02g40a8g8cdfg8d181922bed4" version="1">钟鸣</content>
+	<content contentuid="h9c745f2egf1b8g4aa8ga2f8gf60d06d4a9af" version="1">轻拂符文碎片 [武器]</content>
+	<content contentuid="h3bbeb206gee05g4841ga558g6e801f89ab3f" version="1">轻拂</content>
+	<content contentuid="haaf53e81gc494g47ebgaa52g1730657eab49" version="1">迟滞符文碎片 [武器]</content>
+	<content contentuid="hc78264dfgf0abg4febgaebagefb14abe2585" version="1">使用此碎片，为你装备的&lt;b&gt;主手武器&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。若未装备&lt;b&gt;近战武器&lt;/b&gt;，则改为赋予主手的&lt;b&gt;远程武器&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片在&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;时有&lt;b&gt;[1]%&lt;/b&gt;的几率施加&lt;LSTag Type="Status" Tooltip="SLOW"&gt;减速&lt;/LSTag&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合。</content>
+	<content contentuid="h91fba58cg714eg443dg8022g03f6c0a6a8b6" version="1">迟滞</content>
+	<content contentuid="hab6264a6g3f5fg447ega001ga3567c74f2f3" version="1">&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;时，此武器有&lt;b&gt;[1]%&lt;/b&gt;的几率对目标施加&lt;LSTag Type="Status" Tooltip="SLOW"&gt;减速&lt;/LSTag&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合。</content>
+	<content contentuid="h72cea902gcdfbg4b97gbe24geda258255f4f" version="1">麻木符文碎片 [武器]</content>
+	<content contentuid="h5509a573g8db6g4cdbgbb38g18b900ca7140" version="1">麻木</content>
+	<content contentuid="hddfae8c7g93b5g4d08g9008g2297ca6095d8" version="1">灼烧符文碎片 [武器]</content>
+	<content contentuid="h8ad0ebf7g87a8g40acgb94dg15a6bb2fffec" version="1">灼烧</content>
+	<content contentuid="he895c3dcge779g4d5cga0edgd16b24a8c1fe" version="1">横扫符文碎片 [武器]</content>
+	<content contentuid="h47c22e34g6ca6g4cb8g9d01g378a144ab4c1" version="1">横扫</content>
+	<content contentuid="h96ef89ddgd116g4b71gadabg22e2cc8f641c" version="1">稳握符文碎片 [武器]</content>
+	<content contentuid="ha495ed26g12fdg4180g942fg756d55a6c825" version="1">稳握</content>
+	<content contentuid="h85e35c37gf267g490cga3a4g27d4db6f8a6a" version="1">锋刃符文碎片 [武器]</content>
+	<content contentuid="h4669ea6cgcb8eg4c73g8b23gb1aef99a293b" version="1">锋刃</content>
+	<content contentuid="he1a53faeg0d63g4958gb65ag69dfe31e94ee" version="1">鹰眼符文碎片 [武器]</content>
+	<content contentuid="hd7077f71g149dg4c55g9522g745a0724e17f" version="1">鹰眼</content>
+	<content contentuid="h0176da17ga618g4986g9160gb5462cce051a" version="1">光环符文碎片 [武器]</content>
+	<content contentuid="h3573c17cg2df6g4adcg87d6g8140ee41fb5e" version="1">光环</content>
+	<content contentuid="h46dbcef5g8323g4e44g8fb5g2534af8867d5" version="1">斥退符文碎片 [武器]</content>
+	<content contentuid="ha6017876g3043g4e41gbadcg7875bb753837" version="1">斥退</content>
+	<content contentuid="h9546dba6gc4a3g4d66gab4cgdd2f70513634" version="1">魔化符文碎片 [武器]</content>
+	<content contentuid="hcf66e620g6a57g4645g9879gc877b170d257" version="1">魔化</content>
+	<content contentuid="h2480949fge761g47c8gbcc1g86470bd520d9" version="1">拳势符文碎片 [武器]</content>
+	<content contentuid="hbb12b957gc1d7g476cg800bg248f6ac3f80e" version="1">拳势</content>
+	<content contentuid="h62cd3afag06fcg4a1fga7e4ge911db117a1e" version="1">豪赌符文碎片 [武器]</content>
+	<content contentuid="hc277cf94gc049g4d2fgaaf2gc7852f5f417a" version="1">豪赌</content>
+	<content contentuid="hccd8d777g0e1cg4932gb349gbb68bd4affa2" version="1">丧钟符文碎片 [武器]</content>
+	<content contentuid="h2e80224cg9104g4854g8ce2g5c2ac985843e" version="1">丧钟</content>
+	<content contentuid="hc65cdcd6gb0eeg41c6ga366g031fc82476b9" version="1">烈焰符文碎片 [武器]</content>
+	<content contentuid="h754ee05dg3611g44f4gb2b4g0f505104c683" version="1">烈焰</content>
+	<content contentuid="h60b24ac5g5b8fg453agab81gb366d1308a7f" version="1">焦灼符文碎片 [武器]</content>
+	<content contentuid="h11722202g2ceag436dg8fcegbba9f09968fe" version="1">焦灼</content>
+	<content contentuid="h2097635ag2ad7g47d7gab16ge0ed7b9a4ca0" version="1">毒牙符文碎片 [武器]</content>
+	<content contentuid="ha5c2ad02g387dg492agb3eeg5cc3398621ef" version="1">毒牙</content>
+	<content contentuid="h30fc6a37g11d6g42b2g8342gde3082f37737" version="1">毒咬符文碎片 [武器]</content>
+	<content contentuid="h5dcb373cg6802g499egb0f3g8df698ffa39f" version="1">毒咬</content>
+	<content contentuid="h5060b575gd202g45ccga07fgc0dcda0d1918" version="1">电弧符文碎片 [武器]</content>
+	<content contentuid="h63a6f9b0ge21ag439ag9bd6g0c4e4de3b696" version="1">电弧</content>
+	<content contentuid="hc52b8c2eg0e22g4cdfg8008ge1ceb8bbc8af" version="1">巨噬符文碎片 [武器]</content>
+	<content contentuid="h36fedf18g16c5g4139gaab2gcedf3b8c8aab" version="1">巨噬</content>
+	<content contentuid="hef0b2b1eg3989g44a1g9127g6290aed30e1f" version="1">水滴符文碎片 [武器]</content>
+	<content contentuid="h0f2ccd45g0502g4deegac60g73674ea396f1" version="1">水滴</content>
+	<content contentuid="h3c8a4e96g23ecg4f82g8339g9117de86e768" version="1">倒钩符文碎片 [武器]</content>
+	<content contentuid="h03679a18gcb87g4575g9849gd7ed6cc92e45" version="1">倒钩</content>
+	<content contentuid="hba7f3a23g9a60g4120g8b14gab28cffb609b" version="1">啃咬符文碎片 [武器]</content>
+	<content contentuid="h7d9690ecg00d8g4068g90cege004099b88c9" version="1">啃咬</content>
+	<content contentuid="h665a7133g1313g456egb2a3g9b492138de07" version="1">利爪符文碎片 [武器]</content>
+	<content contentuid="had307077gdc2bg461bg921dg4836c5f1c323" version="1">利爪</content>
+	<content contentuid="hf97aabf2g263dg4427g8f1cg3a58605ce6e4" version="1">啮刺符文碎片 [武器]</content>
+	<content contentuid="hdec90c37ge8d8g42c7gaa7ega47c43e35e40" version="1">啮刺</content>
+	<content contentuid="ha5c05b93gc2dfg4e0cg9636g340d68604682" version="1">戳刺符文碎片 [武器]</content>
+	<content contentuid="h4bb544acg8abeg4d7bg9179gaaf3ada338a8" version="1">戳刺</content>
+	<content contentuid="h00486946g8c15g45e1g818dg725157ed3f21" version="1">穿刺符文碎片 [武器]</content>
+	<content contentuid="h4affbaa7g47bag483dg8145g3a6cf53617f6" version="1">穿刺</content>
+	<content contentuid="hcb8f1567g857ag4186g8536g7fa6c603343e" version="1">双生符文碎片 [武器]</content>
+	<content contentuid="h8ea7402fg2189g44fdg927fg7a2eec31f207" version="1">双生</content>
+	<content contentuid="h650bb42ag8eceg44d5gb53cga6f34a8b7a04" version="1">巨槌符文碎片 [武器]</content>
+	<content contentuid="h903fdcb6g9052g4602ga92eg5e6526f5b7e8" version="1">巨槌</content>
+	<content contentuid="hafe979f7g31d9g4990g9bc2ga1c753f860db" version="1">矢量符文碎片 [武器]</content>
+	<content contentuid="h81601b69g9042g4e4eg99bdge51938ff7a7c" version="1">矢量</content>
+	<content contentuid="h4c5a1a0dgac0eg4dccg90c4g60a4d337fd40" version="1">震慑符文碎片 [武器]</content>
+	<content contentuid="hf3871a24gdf4ag429dg9c17gf558dd0bbcd8" version="1">震慑</content>
+	<content contentuid="hc9a5b7a1gf234g46a8gbc68ge7d88bfabf2c" version="1">割断符文碎片 [武器]</content>
+	<content contentuid="h906c40ddgf4a6g4060g8be7gf9b84bc6c4d4" version="1">割断</content>
+	<content contentuid="h8e4c0ffag15a3g4d10g956ag0a4c238940e5" version="1">使用此碎片，为你装备的&lt;b&gt;主手武器&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。若未装备&lt;b&gt;近战武器&lt;/b&gt;，则改为奥术化主手的&lt;b&gt;远程武器&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片使该武器的[1]无视敌人的&lt;LSTag Tooltip="Resistance"&gt;抗性&lt;/LSTag&gt;。</content>
+	<content contentuid="hdb85ad6ageb58g4934ga9d0ged9541fcdad2" version="1">穿透</content>
+	<content contentuid="h664c12fcg45c7g4812gbf48ge5153b601127" version="1">该武器的&lt;b&gt;[1]&lt;/b&gt;伤害无视敌人的&lt;LSTag Tooltip="Resistance"&gt;抗性&lt;/LSTag&gt;。</content>
+	<content contentuid="h8b795f80g21c9g4c78ga314ga1639c307868" version="1">长枪</content>
+	<content contentuid="h28f7616dg633cg4742gbf6bgf12d2b327bb8" version="1">箭矢</content>
+	<content contentuid="h0357595egb82cg410bgad81g45e8baf3b3f9" version="1">破碎</content>
+	<content contentuid="h35b14759gadecg4f00g8fc2g9880bf2154df" version="1">蚀刻</content>
+	<content contentuid="h7ab8b1ceg5d07g46e8gaf52g9901d4d58bbd" version="1">细针</content>
+	<content contentuid="hf4003db4gddf9g4f88g858agbf91e18105c6" version="1">横劈</content>
+	<content contentuid="hd979b445gcf49g4effga978g1e9ce02e2131" version="1">射线</content>
+	<content contentuid="h63e3ad57g5119g4920g8b73g9d53e38d4108" version="1">尖楔</content>
+	<content contentuid="h29a6f453gde7ag4a43g91edgf99d7d081efa" version="1">长钉</content>
+	<content contentuid="h196b0204g2718g4bd2gbeffg90e48a8026aa" version="1">燎原符文碎片 [武器]</content>
+	<content contentuid="hfd236529gf94cg4760g9566g4ccc29b50904" version="1">燎原</content>
+	<content contentuid="h4c780005gb2a6g437bga702ga45e76a3df49" version="1">苔原符文碎片 [武器]</content>
+	<content contentuid="h13ae9cbcg50cag42d6g9217g438d34555331" version="1">苔原</content>
+	<content contentuid="h6b5e9084g6114g4befg8739g499bdcf79ad9" version="1">天穹符文碎片 [武器]</content>
+	<content contentuid="h3cef7cb1g7c21g4244g9f5bg2db8fa11ac6a" version="1">天穹</content>
+	<content contentuid="he5517564g7cedg4c4bg9cc8g2da995b8053c" version="1">大漩涡符文碎片 [武器]</content>
+	<content contentuid="h52175650g8335g4fd6gb6f0g57b0f37a7ca5" version="1">大漩涡</content>
+	<content contentuid="h28cc4d24g7114g4d13ga5cbg7c21e788d96f" version="1">沼泽符文碎片 [武器]</content>
+	<content contentuid="he26a8f2ag9470g4901gb7dcgce0a4e5d5bcb" version="1">沼泽</content>
+	<content contentuid="hbd552db8g5df2g4f34g9ef5gb9ec501ce7a9" version="1">枯萎符文碎片 [武器]</content>
+	<content contentuid="haf3c3776g1f7fg4382gbfbegb34f17a540dc" version="1">枯萎</content>
+	<content contentuid="h6f6e27e4gbf2dg48d4g8030g4c31e56aa097" version="1">墓冢符文碎片 [武器]</content>
+	<content contentuid="hfd2f1de3g93d9g458cgbb28gab5e9f86ddea" version="1">墓冢</content>
+	<content contentuid="h07ed0b9bg0482g427dgb1d6g5c7fa2611e26" version="1">曙野符文碎片 [武器]</content>
+	<content contentuid="h146fdf9cgf0a4g4da2gb4fdgfae6b2900b7c" version="1">曙野</content>
+	<content contentuid="hd447d0ceg8806g4d68g919dg26aeadefa9cb" version="1">遐想符文碎片 [武器]</content>
+	<content contentuid="heaa29a27gbfafg4777g9cf8g516b3b3091f5" version="1">遐想</content>
+	<content contentuid="h71d12757g4fd0g4c53gb049ga1f258c41905" version="1">深渊符文碎片 [武器]</content>
+	<content contentuid="h861aa159g63cag4e2dg96f4gfa3d61393d42" version="1">深渊</content>
+	<content contentuid="h91b6cc1cg6758g4addgb5d2gb83f64a2c91b" version="1">泰坦符文碎片 [武器]</content>
+	<content contentuid="h4ff9c44cgaa69g42a2ga2b9g87061408d041" version="1">泰坦</content>
+	<content contentuid="h187109e1gfb61g4184g83a4g777e3bf44bdf" version="1">陨日符文碎片 [武器]</content>
+	<content contentuid="hb6d7ba6bg67a6g48a8g805dg8a2283b6d710" version="1">陨日</content>
+	<content contentuid="h78a542c1g628cg4196g9c56g91fe922b744a" version="1">霜缚符文碎片 [武器]</content>
+	<content contentuid="hbb175f70g293ag44e3gbe2agdc2d8755028b" version="1">霜缚</content>
+	<content contentuid="h8e5229a2g232eg4591g8d2agb581d31268eb" version="1">天箭符文碎片 [武器]</content>
+	<content contentuid="h7eac61bdg056bg4416gad18g58200f87e308" version="1">天箭</content>
+	<content contentuid="h36fa9c9bg31c8g4f13g929dg736ef3280b5f" version="1">风暴之心符文碎片 [武器]</content>
+	<content contentuid="h3cad2946g1138g46e8g8d37g58cc29fb9fd0" version="1">风暴之心</content>
+	<content contentuid="he1d23cc8gbaf8g4344g9bf6g3290933b4cf3" version="1">锈蚀之面符文碎片 [武器]</content>
+	<content contentuid="h4998d601g5633g4ce8g8765gabc820f92db5" version="1">锈蚀之面</content>
+	<content contentuid="ha74604f4g804fg4184g88fcg77e15992faea" version="1">毒液潮符文碎片 [武器]</content>
+	<content contentuid="h58de1496g5e2bg4afdg81d7g077c619957b7" version="1">毒液潮</content>
+	<content contentuid="hb863f137g6b80g498ag9052g759f9b3bab76" version="1">墓冢呼唤符文碎片 [武器]</content>
+	<content contentuid="h59adad54g2304g4723g91c0g3f632f766620" version="1">墓冢呼唤</content>
+	<content contentuid="h7ac10c91g41c9g4be0gb399gbae34122f6de" version="1">破晓符文碎片 [武器]</content>
+	<content contentuid="h5c0a65d8g341fg400bg82c0g1323fff09cc5" version="1">破晓</content>
+	<content contentuid="hdd30cdb3g797fg4db0g91adgd4191c167031" version="1">心灵撕裂符文碎片 [武器]</content>
+	<content contentuid="h31134e7cg0ccdg4b7egb997g80aada0ff4a1" version="1">心灵撕裂</content>
+	<content contentuid="h6118e61fg3d9bg473cg9ca0g3b8909d8fce2" version="1">虚无坠落符文碎片 [武器]</content>
+	<content contentuid="h3c579f19gd49bg4d9cgb6f1g5dd97c8b9d5b" version="1">虚无坠落</content>
+	<content contentuid="h4c348f85gf303g49a2g8bdege250bb1a96db" version="1">守护符文碎片 [披风]</content>
+	<content contentuid="h61d61582g759dg40c2g8705g2bbf66ede0d8" version="1">守护</content>
+	<content contentuid="ha49b7128gdee1g4b1eg9aeag680667901cf7" version="1">机运符文碎片 [戒指]</content>
+	<content contentuid="h5abbeae8g09c5g490cga02agd219e4dba2bc" version="1">机运</content>
+	<content contentuid="h7084d5ddg4502g4915gbcd0g639a539399cb" version="1">娴熟符文碎片 [头盔]</content>
+	<content contentuid="h13fd704eg9571g4af8g8b5bg8e39778e9786" version="1">娴熟</content>
+	<content contentuid="h9a4f9033g0b0fg4fb9g9d8bg51c9342ee891" version="1">触延符文碎片 [手套]</content>
+	<content contentuid="hc40e2785g390fg4800g9076gc53d878812a2" version="1">触延</content>
+	<content contentuid="h346645dcg016eg49d5g8077gbdba483739af" version="1">狗头人符文碎片 [披风]</content>
+	<content contentuid="h625207cag562ag4bceg9ef5g2ed4e9434fed" version="1">狗头人</content>
+	<content contentuid="h780d676bg5e63g476ag99abg81f4adb618b1" version="1">狂乱符文碎片 [护符]</content>
+	<content contentuid="h8e90bdffg8967g4fdbgad3agcd09d35af459" version="1">狂乱</content>
+	<content contentuid="hf37158d6g3e30g4744gb6f1g5c911ab21587" version="1">先机符文碎片 [头盔]</content>
+	<content contentuid="h40d209d6gc1b1g4dd3g8d07gf73ae614561e" version="1">先机</content>
+	<content contentuid="h19ea7a62g5d68g41dfgb6c2gb0de06d06a64" version="1">斥退符文碎片 [披风]</content>
+	<content contentuid="h5608b0c3gce0fg4277gad31g8cf9211e900a" version="1">斥退</content>
+	<content contentuid="h7a12eec3g8097g4056g9764ga42ddb6f6ead" version="1">颂赞符文碎片 [护符]</content>
+	<content contentuid="ha99ecf92g688eg4fcfg8583g740dd03565f0" version="1">颂赞</content>
+	<content contentuid="hb26cebefg1e63g42b1g8b88g6aca590c95d4" version="1">玻璃符文碎片 [戒指]</content>
+	<content contentuid="h9fc1007dgc12dg435fg90fcg92433946a17d" version="1">汲取符文碎片 [护符]</content>
+	<content contentuid="h2bbdfbd1g611eg4bc3g864cg5c2fbc6bd6ec" version="1">汲取</content>
+	<content contentuid="h1d295e5ag4334g4205g9683g847cbdd66608" version="1">持有者以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;造成伤害时，恢复&lt;b&gt;[1]&lt;/b&gt;点&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;。</content>
+	<content contentuid="h0dc98f76g69fbg4672ga88fg32b74b13f1eb" version="1">玻璃</content>
+	<content contentuid="h6c86a474g89e8g4a18ga665gcc64e326d4c0" version="1">集群符文碎片 [护符]</content>
+	<content contentuid="h6f9ba745g87d0g45c8g800bg353b32d066d5" version="1">集群</content>
+	<content contentuid="hebd7d593g3604g45bdg8cf2g3cd3ff66616a" version="1">变色龙符文碎片 [护甲]</content>
+	<content contentuid="hef12c9b9g0da4g41e7g9ec3g6c0d04ec9f0d" version="1">变色龙</content>
+	<content contentuid="h989d71d1g5c4cg4200ga7f2g0ba89c56edf5" version="1">处刑者符文碎片 [头盔]</content>
+	<content contentuid="hf297383dgae20g4e73ga9fdg003154c8f8b1" version="1">处刑者</content>
+	<content contentuid="h7c9f22dagdad7g4763ga671g0c86be177976" version="1">钟摆符文碎片 [护符]</content>
+	<content contentuid="h6174c593gc9b2g488cg8a0eg6ae1c9727728" version="1">钟摆</content>
+	<content contentuid="h8fb4db86gacdag4165g9086g6a2b031aa7cf" version="1">绝境符文碎片 [戒指]</content>
+	<content contentuid="h3cef9a4ag0b3bg45acg9ea1g2b6dd6a2de63" version="1">绝境</content>
+	<content contentuid="hfe820d71g326bg4a96g97a0gfeec5c08ebf8" version="1">负面状态</content>
+	<content contentuid="h821863ebg33a9g4369gb573g6a4633ed5e26" version="1">以下状态视为&lt;b&gt;负面状态&lt;/b&gt;：&lt;br&gt;&lt;br&gt;&lt;b&gt;持续伤害：&lt;/b&gt;&lt;LSTag Type="Status" Tooltip="BURNING"&gt;燃烧&lt;/LSTag&gt;、&lt;LSTag Type="Status" Tooltip="BLEEDING"&gt;流血&lt;/LSTag&gt;、&lt;LSTag Type="Status" Tooltip="POISONED"&gt;中毒&lt;/LSTag&gt;。&lt;br&gt;&lt;b&gt;元素：&lt;/b&gt;&lt;LSTag Type="Status" Tooltip="MAG_FROST"&gt;覆霜&lt;/LSTag&gt;、&lt;LSTag Type="Status" Tooltip="MAG_THUNDER_REVERBERATION"&gt;残响&lt;/LSTag&gt;。&lt;br&gt;&lt;b&gt;控制：&lt;/b&gt;&lt;LSTag Type="Status" Tooltip="STUNNED"&gt;震慑&lt;/LSTag&gt;、&lt;LSTag Type="Status" Tooltip="FRIGHTENED"&gt;恐慌&lt;/LSTag&gt;、&lt;LSTag Type="Status" Tooltip="RESTRAINED"&gt;束缚&lt;/LSTag&gt;、&lt;LSTag Type="Status" Tooltip="CHARMED"&gt;魅惑&lt;/LSTag&gt;、&lt;LSTag Type="Status" Tooltip="BLINDED"&gt;目盲&lt;/LSTag&gt;、&lt;LSTag Type="Status" Tooltip="PARALYZED"&gt;麻痹&lt;/LSTag&gt;、&lt;LSTag Type="Status" Tooltip="PRONE"&gt;倒伏&lt;/LSTag&gt;、&lt;LSTag Type="Status" Tooltip="SLEEPING"&gt;睡眠&lt;/LSTag&gt;、&lt;LSTag Type="Status" Tooltip="INCAPACITATED"&gt;失能&lt;/LSTag&gt;。&lt;br&gt;&lt;b&gt;其他：&lt;/b&gt;诅咒、疾病、嘲讽、支配、变形、石化、困惑、疯狂。</content>
+	<content contentuid="hfedaa1ffg0e02g4d9bga4d4g8cd0df1cad9c" version="1">混沌符文碎片 [披风]</content>
+	<content contentuid="heb2f4b3fge49dg4519g9e83g0b5e93adcde0" version="1">共鸣</content>
+	<content contentuid="h2cd684f2g8682g4a53g9a79g0fe88bb666a5" version="1">磁石符文碎片 [手套]</content>
+	<content contentuid="hfc46ec28ga6c5g49b6gbb34g41249c17b9df" version="1">磁石</content>
+	<content contentuid="h9d36e634ge939g418agb196g590cd1f5bd7b" version="1">守势符文碎片 [头盔]</content>
+	<content contentuid="h77af5d94g0309g461cg9dc1g6fd7025044e6" version="1">守势</content>
+	<content contentuid="h311e1ce6ge949g4351ga8aeg567440dbdc6c" version="1">杂耍符文碎片 [手套]</content>
+	<content contentuid="ha302bfc6g5252g4f11gb8b5gf7107ebfba34" version="1">杂耍</content>
+	<content contentuid="h1d8dd11bg9d7bg4ed6ga413g703d20452f11" version="1">晨曦符文碎片 [头盔]</content>
+	<content contentuid="h145c2d2bg123eg4806gbd02g6b94876d7455" version="1">晨曦</content>
+	<content contentuid="hd27addc2g218ag4fabg9114gd340f4f617ba" version="1">封门符文碎片 [戒指]</content>
+	<content contentuid="hb0df0181ga78bg4285gb07egf866cb648228" version="1">封门</content>
+	<content contentuid="ha6b85feeg044dg4cecg829dg38c2c6f249df" version="1">坚忍符文碎片 [头盔]</content>
+	<content contentuid="h18bcceb4g821ag4166ga85dg31b125a8421f" version="1">使用此碎片，为你已装备的&lt;b&gt;头盔或头饰&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片将你标记为&lt;b&gt;伊尔玛特&lt;/b&gt;的侍僧。&lt;br&gt;&lt;br&gt;&lt;i&gt;取代其他侍僧碎片。&lt;/i&gt;</content>
+	<content contentuid="h0565d0c6gcc97g4775g9da9gd9b0835fff7e" version="1">坚忍</content>
+	<content contentuid="h69539fe5g12a2g4a72gaf58gfc4f18ba2d3a" version="1">你是&lt;b&gt;伊尔玛特&lt;/b&gt;的侍僧。&lt;br&gt;&lt;br&gt;&lt;i&gt;取代其他侍僧碎片。&lt;/i&gt;</content>
+	<content contentuid="hc0fd50d3g2f66g4c4dga13cgee03891c554d" version="1">蜘蛛符文碎片 [头盔]</content>
+	<content contentuid="hc750f391g6ce4g40bagb849ge75469383964" version="1">使用此碎片，为你已装备的&lt;b&gt;头盔或头饰&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片将你标记为&lt;b&gt;罗丝&lt;/b&gt;的侍僧。&lt;br&gt;&lt;br&gt;&lt;i&gt;取代其他侍僧碎片。&lt;/i&gt;</content>
+	<content contentuid="h19602ef8g645cg4659g971ag3274e5122367" version="1">蜘蛛神后</content>
+	<content contentuid="h4e1d2e11g9832g4f4cg94b0ge0bb9a2045c8" version="1">你是&lt;b&gt;罗丝&lt;/b&gt;的侍僧。&lt;br&gt;&lt;br&gt;&lt;i&gt;取代其他侍僧碎片。&lt;/i&gt;</content>
+	<content contentuid="h84e47965gd6c3g4a9dga2d5g55919f9db3c9" version="1">鞭笞符文碎片 [头盔]</content>
+	<content contentuid="hfde1e039g8c8eg4b81gbe0fg788bd8bc2872" version="1">使用此碎片，为你已装备的&lt;b&gt;头盔或头饰&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片将你标记为&lt;b&gt;劳薇塔&lt;/b&gt;的侍僧。&lt;br&gt;&lt;br&gt;&lt;i&gt;取代其他侍僧碎片。&lt;/i&gt;</content>
+	<content contentuid="h2ccbe1f6g9386g4cd6g8ee4ge26c2461310b" version="1">鞭笞</content>
+	<content contentuid="hdf2dbcb2g9920g4f11ga2dfg095b225a1db1" version="1">你是&lt;b&gt;劳薇塔&lt;/b&gt;的侍僧。&lt;br&gt;&lt;br&gt;&lt;i&gt;取代其他侍僧碎片。&lt;/i&gt;</content>
+	<content contentuid="hf1412848ge162g4d3bg9819g48ffb12e197e" version="1">魔网符文碎片 [头盔]</content>
+	<content contentuid="h8ac91949g0526g4c84g89f9g201928ed303f" version="1">使用此碎片，为你已装备的&lt;b&gt;头盔或头饰&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片将你标记为&lt;b&gt;密斯特拉&lt;/b&gt;的侍僧。&lt;br&gt;&lt;br&gt;&lt;i&gt;取代其他侍僧碎片。&lt;/i&gt;</content>
+	<content contentuid="hf8a64fe5gdfb2g4264g8310g7a034ed91eb3" version="1">密斯特拉的侍僧</content>
+	<content contentuid="hdec5058eg04bbg404cg95baga27be32bce54" version="1">你是&lt;b&gt;密斯特拉&lt;/b&gt;的侍僧。&lt;br&gt;&lt;br&gt;&lt;i&gt;取代其他侍僧碎片。&lt;/i&gt;</content>
+	<content contentuid="h2a097360g1e23g4351gb0d7g9acdbf831713" version="1">满月符文碎片 [头盔]</content>
+	<content contentuid="h88c20aa3g8203g4a82ga760g9d00ae0820c1" version="1">使用此碎片，为你已装备的&lt;b&gt;头盔或头饰&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片将你标记为&lt;b&gt;塞伦涅&lt;/b&gt;的侍僧。&lt;br&gt;&lt;br&gt;&lt;i&gt;取代其他侍僧碎片。&lt;/i&gt;</content>
+	<content contentuid="hff32d69fg9cf8g4c82g9c2bg2ffc2eae59a6" version="1">满月</content>
+	<content contentuid="ha6a55b32g39bfg49d0ga0b9g3c22d949b957" version="1">你是&lt;b&gt;塞伦涅&lt;/b&gt;的侍僧。&lt;br&gt;&lt;br&gt;&lt;i&gt;取代其他侍僧碎片。&lt;/i&gt;</content>
+	<content contentuid="hacff6a50gbf77g4e46ga423g4953729859e0" version="1">暮光符文碎片 [头盔]</content>
+	<content contentuid="h9b36f52bgd062g449bg951eg772af8a89054" version="1">使用此碎片，为你已装备的&lt;b&gt;头盔或头饰&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片将你标记为&lt;b&gt;莎尔&lt;/b&gt;的侍僧。&lt;br&gt;&lt;br&gt;&lt;i&gt;取代其他侍僧碎片。&lt;/i&gt;</content>
+	<content contentuid="hba3b71bdg1604g43d7gaf63g3e3c0f301214" version="1">暮光</content>
+	<content contentuid="h03ecb559g24c6g4fdcg959eg495944e0b8fa" version="1">你是&lt;b&gt;莎尔&lt;/b&gt;的侍僧。&lt;br&gt;&lt;br&gt;&lt;i&gt;取代其他侍僧碎片。&lt;/i&gt;</content>
+	<content contentuid="h1f764771g2b75g4748g999fg8ad9423bdc39" version="1">律法符文碎片 [头盔]</content>
+	<content contentuid="hb1de3a22g2232g4a5cg8b47g58282a9df45c" version="1">使用此碎片，为你已装备的&lt;b&gt;头盔或头饰&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片将你标记为&lt;b&gt;提尔&lt;/b&gt;的侍僧。&lt;br&gt;&lt;br&gt;&lt;i&gt;取代其他侍僧碎片。&lt;/i&gt;</content>
+	<content contentuid="hbadd2ba6gc06dg4d25g9edfg4d6786e9900e" version="1">律法</content>
+	<content contentuid="hd0b4b5f6g7bf7g42f7ga085g04d76f194658" version="1">你是&lt;b&gt;提尔&lt;/b&gt;的侍僧。&lt;br&gt;&lt;br&gt;&lt;i&gt;取代其他侍僧碎片。&lt;/i&gt;</content>
+	<content contentuid="h133486a2gbe88g4942gacf1g878f5bef9d9e" version="1">风暴符文碎片 [头盔]</content>
+	<content contentuid="h6864f825ge15fg494dg8859g027da9be6eba" version="1">使用此碎片，为你已装备的&lt;b&gt;头盔或头饰&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片将你标记为&lt;b&gt;塔洛斯&lt;/b&gt;的侍僧。&lt;br&gt;&lt;br&gt;&lt;i&gt;取代其他侍僧碎片。&lt;/i&gt;</content>
+	<content contentuid="haa2bc7e3gc5b3g4383g9c9dg9bc30733a82f" version="1">风暴</content>
+	<content contentuid="h4159165ega800g480fg9491g2363c5657728" version="1">你是&lt;b&gt;塔洛斯&lt;/b&gt;的侍僧。&lt;br&gt;&lt;br&gt;&lt;i&gt;取代其他侍僧碎片。&lt;/i&gt;</content>
+	<content contentuid="h41ebe739gb762g4279g884fg2b0c752e399b" version="1">盲眼先知符文碎片 [头盔]</content>
+	<content contentuid="h687be781g7c61g4323g8d15gd4a2ccb25395" version="1">盲眼先知</content>
+	<content contentuid="h1634e650gddf9g4798g97f8g96673c97c2b7" version="1">扎根符文碎片 [靴子]</content>
+	<content contentuid="h87ffde4dga302g44c0g84f1g47384dcc9b97" version="1">扎根</content>
+	<content contentuid="h93f53096g9a8eg4bc7gbc42g28f417bb4fc4" version="1">即兴符文碎片 [护符]</content>
+	<content contentuid="hb42900c8g9aa6g43efg864ag98ce9b635df4" version="1">即兴</content>
+	<content contentuid="h8ae875a9g8ba1g4258g853fga19b267199ec" version="1">魔匠符文碎片 [头盔]</content>
+	<content contentuid="h0f60facfg6964g408bga92bga8312d2e16a8" version="1">魔匠</content>
+	<content contentuid="h2095ec6eg86f4g410cg8d84g2f61c90c266d" version="1">备用法术符文碎片 [手套]</content>
+	<content contentuid="h760e1ccdg39eeg4c83gbca1gd08303f99acb" version="1">备用法术</content>
+	<content contentuid="h7d1db941g0bcag4d0agb5afgc611c92c92cb" version="1">篝火符文碎片 [披风]</content>
+	<content contentuid="h3ff23dfdg2f78g47e6g9679ga817e69cfb5a" version="1">篝火</content>
+	<content contentuid="h9e7d5281g6bd9g4baag871fg9a9d6494bc76" version="1">蜕变符文碎片 [护甲]</content>
+	<content contentuid="h8be593e2gbccdg48d1gab57g0620eaf941ba" version="1">蜕变</content>
+	<content contentuid="h8cb13f31gf704g4637gb2eeg4ee49a9b07d0" version="1">庇护符文碎片 [披风]</content>
+	<content contentuid="hae9c7908g0691g439bg93bcgbc5ed82a5f9c" version="1">庇护</content>
+	<content contentuid="h09f75329ga623g4ee0g9531gc276aff6ad44" version="1">核心符文碎片 [头盔]</content>
+	<content contentuid="h098d56bdgad01g4c8bg8f50ga8a826b0f089" version="1">核心</content>
+	<content contentuid="h1e19dab8ga23fg43cfgbb1dgf71079e27c84" version="1">滑行符文碎片 [靴子]</content>
+	<content contentuid="hec6cfd05ga066g4e16g8423g9e289208ef17" version="1">滑行</content>
+	<content contentuid="h28229090g1e5dg416bgacefgfdeff8650bbc" version="1">魔音符文碎片 [披风]</content>
+	<content contentuid="h75fb71d3g2412g461cga021g43999a61c4c2" version="1">魔音</content>
+	<content contentuid="h047e926dga275g4491g9ab3g41b1f54f3ef6" version="1">精准符文碎片 [戒指]</content>
+	<content contentuid="h81e210c8gdd27g4618g8fc3gd506159634bd" version="1">精准</content>
+	<content contentuid="hac5df055g3718g4e10g82bdg5ebea88c8d2c" version="1">塑能符文碎片 [护甲]</content>
+	<content contentuid="had596652g2900g4ee6g993age9721c3cecde" version="1">塑能师</content>
+	<content contentuid="ha671f84fge7ccg4b36ga04fg0e31d3299a44" version="1">幻术符文碎片 [披风]</content>
+	<content contentuid="h3fae4197g93f4g4b98g8d01g9ba413b50bd8" version="1">幻术师</content>
+	<content contentuid="hc61a4fd4gf625g44c7ga633g59b735180d09" version="1">死灵符文碎片 [头盔]</content>
+	<content contentuid="hc1c9ac53g2cd2g4110gaa28g66e767e73600" version="1">死灵</content>
+	<content contentuid="h12570afdg43f7g403cga55fg888e7bb71945" version="1">语出惊人符文碎片 [护符]</content>
+	<content contentuid="hcde6cc98gb835g412agac35g0abee4099a30" version="1">语出惊人</content>
+	<content contentuid="h8531019agfcc4g4dc1g8e85g1654baf88f4a" version="1">奇点符文碎片 [戒指]</content>
+	<content contentuid="h2e3e67afgf5a3g4384gadf9g98bcff3c4043" version="1">使用此碎片，为你&lt;b&gt;上方戒指栏位中的戒指&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片&lt;b&gt;在每个回合结束时，将[1]范围内的所有敌人拉近[2]&lt;/b&gt;。</content>
+	<content contentuid="hc2c6ea71gfeafg4ef2gb79ag068538a73d5c" version="1">奇点</content>
+	<content contentuid="hf8b672fbgb1dag4df4ga800g647eba375334" version="1">持有者的回合结束时，&lt;b&gt;[1]&lt;/b&gt;范围内的所有敌人被拉近&lt;b&gt;[2]&lt;/b&gt;。</content>
+	<content contentuid="hccc758b7ge676g4b9ag97e0g2090cd36795f" version="1">微缩符文碎片 [手套]</content>
+	<content contentuid="hd1766f60gc96bg4c4dgbadcg5015294a5693" version="1">微缩</content>
+	<content contentuid="had52388bga48dg4703g95e3g6b04a25a4280" version="1">灼烧符文碎片 [手套]</content>
+	<content contentuid="h5787abb2g5cf1g4d78g8f27gfc2adb0a68be" version="1">灼烧</content>
+	<content contentuid="h73f7a0dbgcd17g4ee2gb2a6g601113f3dc11" version="1">冰火符文碎片 [戒指]</content>
+	<content contentuid="h54f6ca30gb169g478fg83d5ge0084e8c7030" version="1">冰与火</content>
+	<content contentuid="h6e0e423age3c7g42afgaeaegba7cc672ae6b" version="1">双面符文碎片 [护符]</content>
+	<content contentuid="h304a40f5g4445g4106g96a5g3ec06958958b" version="1">双面</content>
+	<content contentuid="h8d7ad4fcg21cfg4f61gb536g56d1daa216e0" version="1">大法师符文碎片 [头盔]</content>
+	<content contentuid="h60ed386fg71e2g414cg829eg2b63b14e5161" version="1">大法师</content>
+	<content contentuid="h9af3ac9egf308g434fgb8c9g80794da8938c" version="1">枷锁符文碎片 [披风]</content>
+	<content contentuid="h03fbdf2ag5488g46a2ga881g779c12ee978b" version="1">枷锁</content>
+	<content contentuid="h0ca40b5eg3448g4d15g8dfcg52a33e6a6038" version="1">暗影符文碎片 [披风]</content>
+	<content contentuid="h90a732ecgab75g49a3gb905g26b567d69002" version="1">暗影</content>
+	<content contentuid="h81eecb43g8b04g4d6bgb95ag0d89536287be" version="1">分叉符文碎片 [护符]</content>
+	<content contentuid="h77dded39gc422g4577gbddeg2f75fe0eb4ac" version="1">分叉</content>
+	<content contentuid="h8f1b3090g0f25g4769g9403gdc4bdcfd07f6" version="1">架构符文碎片 [武器]</content>
+	<content contentuid="hc6bb7910g9f7fg469cg8506ge7f3ea423d57" version="1">使用此碎片，为你装备的&lt;b&gt;主手武器&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片&lt;b&gt;将此武器的奥术化上限提高[1]&lt;/b&gt;。</content>
+	<content contentuid="hc0e3c121g1ac3g418cga13bg12fdd8642911" version="1">架构</content>
+	<content contentuid="he7ef4db2g598ag4b69g8911gca7739635d69" version="1">此武器的奥术化上限提高&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="h30a173ddg0c11g4d74g8519g911e54fc4b6a" version="1">投掷者符文碎片 [手套]</content>
+	<content contentuid="h09c48d47gf20ag43c9g8011g759ba9cdf393" version="1">投掷者</content>
+	<content contentuid="h856ee262gb4d4g4b6ag8a08ge2abdf3d08d0" version="1">野心</content>
+	<content contentuid="h6ce07de4g0e05g436eg90f5g159bed9882d2" version="1">对物理伤害具有&lt;LSTag Tooltip="Resistant"&gt;抗性&lt;/LSTag&gt;。对所有其他伤害具有&lt;LSTag Tooltip="Vulnerable"&gt;易伤&lt;/LSTag&gt;。</content>
+	<content contentuid="h22e0e11cg05eeg4955ga07cgf63f2d0ae4a0" version="1">知识</content>
+	<content contentuid="hcbb2463aga63eg473bgb9fdgc5c22f9b5416" version="1">对非物理伤害具有&lt;LSTag Tooltip="Resistant"&gt;抗性&lt;/LSTag&gt;。对物理伤害具有&lt;LSTag Tooltip="Vulnerable"&gt;易伤&lt;/LSTag&gt;。</content>
+	<content contentuid="he07b4c9agf914g4617gbae9gd01217a6c513" version="1">魔网之誓符文碎片 [护甲]</content>
+	<content contentuid="h9cdfab9cgc48fg42e0gb97dg23f7a1dafce0" version="1">使用此碎片，为你已装备的&lt;b&gt;护甲或服装&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片在你身为&lt;b&gt;密斯特拉&lt;/b&gt;的信徒时，使你的&lt;LSTag Tooltip="SpellDifficultyClass"&gt;法术豁免难度等级&lt;/LSTag&gt;提高&lt;b&gt;+[1]&lt;/b&gt;。&lt;i&gt;取代其他誓约碎片。&lt;/i&gt;</content>
+	<content contentuid="hf4480f8fg0645g4613g853ag393698694a81" version="1">魔网誓约</content>
+	<content contentuid="h9a49d673gca4ag4524g8229g000da99b6776" version="1">身为&lt;b&gt;密斯特拉&lt;/b&gt;的信徒时，你的&lt;LSTag Tooltip="SpellDifficultyClass"&gt;法术豁免难度等级&lt;/LSTag&gt;提高&lt;b&gt;+[1]&lt;/b&gt;。</content>
+	<content contentuid="h732fe098gf3f2g4a5fgb19dg2b79cc2a37ea" version="1">银月誓约符文碎片 [护甲]</content>
+	<content contentuid="h067ad4f0g6ac3g4b89gbea1gf54f052ae156" version="1">使用此碎片，为你已装备的&lt;b&gt;护甲或服装&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片在你身为&lt;b&gt;塞伦涅&lt;/b&gt;的信徒时，使你对不死生物额外造成&lt;b&gt;[1]&lt;/b&gt;点伤害。&lt;i&gt;取代其他誓约碎片。&lt;/i&gt;</content>
+	<content contentuid="hb7da049bg0febg438ag8266gc0afeec9b13b" version="1">银月之誓</content>
+	<content contentuid="h635cf854ga51ag4360ga2f3g10d915b5ac2d" version="1">身为&lt;b&gt;塞伦涅&lt;/b&gt;的信徒时，你对不死生物额外造成&lt;b&gt;[1]&lt;/b&gt;点伤害。</content>
+	<content contentuid="h5e0d525cgb5dag4c5fg812fgbd24cdd51b89" version="1">暗影誓约符文碎片 [护甲]</content>
+	<content contentuid="h003312b6g31e3g49ecg9644ge31ed509e5ec" version="1">使用此碎片，为你已装备的&lt;b&gt;护甲或服装&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片在你身为&lt;b&gt;莎尔&lt;/b&gt;的信徒时，使你的&lt;LSTag Tooltip="Stealth"&gt;隐匿&lt;/LSTag&gt;检定获得&lt;b&gt;+[1]&lt;/b&gt;加值；在阴影或黑暗中，你的攻击额外造成&lt;b&gt;[2]&lt;/b&gt;点伤害。&lt;i&gt;取代其他誓约碎片。&lt;/i&gt;</content>
+	<content contentuid="h010758b0g1486g4c9bg828bgaa0b26d8d9f0" version="1">暗影之誓</content>
+	<content contentuid="h0b2ec3edgc8a6g4210gbdcagefe3d34c6ce4" version="1">身为&lt;b&gt;莎尔&lt;/b&gt;的信徒时，你的&lt;LSTag Tooltip="Stealth"&gt;隐匿&lt;/LSTag&gt;检定获得&lt;b&gt;+[1]&lt;/b&gt;加值；在阴影或黑暗中，你的攻击额外造成&lt;b&gt;[2]&lt;/b&gt;点伤害。</content>
+	<content contentuid="h330d782dgdcf8g45f6gb81ege680e4b29dec" version="1">正义誓约符文碎片 [护甲]</content>
+	<content contentuid="hd67389dbgcdecg4a94g9df6gef1edccf9a0d" version="1">使用此碎片，为你已装备的&lt;b&gt;护甲或服装&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片在你身为&lt;b&gt;提尔&lt;/b&gt;的信徒时，使你的所有&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;获得&lt;b&gt;+[1]&lt;/b&gt;加值。&lt;i&gt;取代其他誓约碎片。&lt;/i&gt;</content>
+	<content contentuid="h84b4013fgff10g4cccga2f1g8e8c6b2f9793" version="1">正义之誓</content>
+	<content contentuid="h6865d8afga8c8g4bcega2b8g44f4293c8bdd" version="1">身为&lt;b&gt;提尔&lt;/b&gt;的信徒时，你的所有&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;获得&lt;b&gt;+[1]&lt;/b&gt;加值。</content>
+	<content contentuid="hf9e6a670g9125g4a58gaed5gb12a49734a0d" version="1">风暴誓约符文碎片 [护甲]</content>
+	<content contentuid="h4ef3ac7fgc314g4fcdgbea2g3b8b0a0c3889" version="1">风暴之誓</content>
+	<content contentuid="hf8c00cb9g7c62g4d0bg9166g7897fcd64365" version="1">苦修誓约符文碎片 [护甲]</content>
+	<content contentuid="hec181d5bg7b15g4208g88d9gb92577828f64" version="1">使用此碎片，为你已装备的&lt;b&gt;护甲或服装&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片使你额外造成&lt;b&gt;[1]&lt;/b&gt;；条件是你身为&lt;b&gt;伊尔玛特&lt;/b&gt;的信徒，且&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;低于&lt;b&gt;[2]%&lt;/b&gt;。&lt;i&gt;取代其他誓约碎片。&lt;/i&gt;</content>
+	<content contentuid="had8c8c7dgd3acg4599g995egf387d28e3b02" version="1">苦修之誓</content>
+	<content contentuid="hf0f6d919g1f4eg4f49ga6fcgafd5700c4775" version="1">身为&lt;b&gt;伊尔玛特&lt;/b&gt;的信徒，且&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;低于&lt;b&gt;[2]%&lt;/b&gt;时，额外造成&lt;b&gt;[1]&lt;/b&gt;点伤害。</content>
+	<content contentuid="hbd7001a4g830cg4c33g813fgac6b9be7913d" version="1">蜘蛛誓约符文碎片 [护甲]</content>
+	<content contentuid="h771233eagdc9ag4c48gbfb1gd935cb637f78" version="1">蜘蛛之誓</content>
+	<content contentuid="h6fbb6881g209bg4c4agbd1ag50959f60f2fd" version="1">苦痛誓约符文碎片 [护甲]</content>
+	<content contentuid="he6aba392g599fg4354g9a36g7ac1f6f5f416" version="1">苦痛之誓</content>
+	<content contentuid="h7de24568ge5c3g4f3eg8ae6g652b009309b8" version="1">黎明誓约符文碎片 [护甲]</content>
+	<content contentuid="h59de9e5fgbb37g4e1egab8agadcc00d2680f" version="1">使用此碎片，为你已装备的&lt;b&gt;护甲或服装&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片在你身为&lt;b&gt;洛山达&lt;/b&gt;的信徒时，使你在&lt;b&gt;阳光&lt;/b&gt;下额外造成&lt;b&gt;[1]&lt;/b&gt;点伤害。&lt;i&gt;取代其他誓约碎片。&lt;/i&gt;</content>
+	<content contentuid="hbed948f5g8a26g4daag9ce8gcfc9c72832b5" version="1">黎明之誓</content>
+	<content contentuid="h67539828g1d5fg4136g9f99gb380dc2b1764" version="1">身为&lt;b&gt;洛山达&lt;/b&gt;的信徒时，你在&lt;b&gt;阳光&lt;/b&gt;下额外造成&lt;b&gt;[1]&lt;/b&gt;点伤害。</content>
+	<content contentuid="hc130815fg8925g4e2egbd8fga6d44f2a9878" version="1">密林誓约符文碎片 [护甲]</content>
+	<content contentuid="h0698b97bgc60eg4f47g85c5g22f2288d2f7f" version="1">密林之誓</content>
+	<content contentuid="h96cdec03g1df7g49a9g9c34g31c64cfd068f" version="1">随心符文碎片 [护甲]</content>
+	<content contentuid="h8c351a5bgbf80g40e3g97a9gd34a021f5771" version="1">使用此碎片，为你已装备的&lt;b&gt;护甲或服装&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片在你未信仰任何神祇时，使你在&lt;LSTag Tooltip="Charisma"&gt;魅力&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;上具有&lt;LSTag Tooltip="Advantage"&gt;优势&lt;/LSTag&gt;。&lt;i&gt;取代其他誓约碎片。&lt;/i&gt;</content>
+	<content contentuid="h148280f9g30f7g450egba84g7070bc90f7e5" version="1">随心</content>
+	<content contentuid="hc2e36543g49f5g4965g91e5g2b6450786e09" version="1">未信仰任何神祇时，你在&lt;LSTag Tooltip="Charisma"&gt;魅力&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;上具有&lt;LSTag Tooltip="Advantage"&gt;优势&lt;/LSTag&gt;。</content>
+	<content contentuid="h56c84acdg6bddg4cc2gb209ge90b1c0ad707" version="1">自立符文碎片 [护甲]</content>
+	<content contentuid="h8b61d65bgec12g4f06gb0b6g007ed306af3f" version="1">使用此碎片，为你已装备的&lt;b&gt;护甲或服装&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片在你未信仰任何神祇时，使你的&lt;LSTag Tooltip="AttackRoll"&gt;攻击检定&lt;/LSTag&gt;与&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;获得&lt;b&gt;+[1]&lt;/b&gt;加值。&lt;i&gt;取代其他誓约碎片。&lt;/i&gt;</content>
+	<content contentuid="h92f2ea3cgc4b1g4a5cgac34g4b86e5475439" version="1">自立</content>
+	<content contentuid="h67b325f6g1b06g4f2bg94a0g16f6861b5b9b" version="1">未信仰任何神祇时，你的&lt;LSTag Tooltip="AttackRoll"&gt;攻击检定&lt;/LSTag&gt;与&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;获得&lt;b&gt;+[1]&lt;/b&gt;加值。</content>
+	<content contentuid="h6a83b23dg466cg4ab8ga9adg5d759a64371e" version="1">凡志符文碎片 [护甲]</content>
+	<content contentuid="h9dc778a1g6807g4014g8f8fgc6c5538c382f" version="1">使用此碎片，为你已装备的&lt;b&gt;护甲或服装&lt;/b&gt;进行&lt;b&gt;奥术化&lt;/b&gt;。&lt;br&gt;&lt;br&gt;此类碎片在你未信仰任何神祇时，使你对&lt;b&gt;[1]&lt;/b&gt;具有&lt;LSTag Tooltip="Resistance"&gt;抗性&lt;/LSTag&gt;，且&lt;b&gt;死亡豁免检定&lt;/b&gt;获得&lt;b&gt;+[2]&lt;/b&gt;加值。&lt;i&gt;取代其他誓约碎片。&lt;/i&gt;</content>
+	<content contentuid="h12d641acg3544g406dgbd8ag17205b4372b5" version="1">凡志</content>
+	<content contentuid="h4f824e96gb624g4800ga26fg59b451dd6d1e" version="1">未信仰任何神祇时，你对&lt;b&gt;[1]&lt;/b&gt;具有&lt;LSTag Tooltip="Resistance"&gt;抗性&lt;/LSTag&gt;，且&lt;b&gt;死亡豁免检定&lt;/b&gt;获得&lt;b&gt;+[2]&lt;/b&gt;加值。</content>
+	<content contentuid="h447cf23eg93b6g4465gae2bg09fef93d0e7a" version="1">黎明符文碎片 [头盔]</content>
+	<content contentuid="h59ad6f40gcc6cg49aegb911g00419056fcfe" version="1">黎明</content>
+	<content contentuid="h216835bfg5588g44e0gb84ag605fc18fb1b3" version="1">密林符文碎片 [头盔]</content>
+	<content contentuid="h9824edaege13dg472ag929fg868bbe7965eb" version="1">密林</content>
+	<content contentuid="ha7bf30a8gc63fg4ee7gb898g07b9c6784cb4" version="1">法术精准</content>
+	<content contentuid="h5ae114fdg401fg4221gbedag678c98f60957" version="1">一项综合加值，提高你的&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;&lt;LSTag Tooltip="AttackRoll"&gt;攻击检定&lt;/LSTag&gt;与&lt;LSTag Tooltip="SpellDifficultyClass"&gt;法术豁免难度等级&lt;/LSTag&gt;。</content>
+	<content contentuid="h5a64509bgeab8g4b05g931age6aa7d40e5ca" version="1">法术界定澄清</content>
+	<content contentuid="ha873041dg796dg4052gb4fbgbc5369df6821" version="1">当文本提及“法术”而未明说“环阶”时，戏法亦包括在内。</content>
+	<content contentuid="h4b3537d8gd16eg409ag822ag8d9db721258d" version="1">回收增益</content>
+	<content contentuid="h276e3026g8b7fg430dg82eagcdb53c3ce6df" version="1">当此碎片在&lt;b&gt;虚空胶囊&lt;/b&gt;中被化为粉尘时，你有&lt;b&gt;[1]%&lt;/b&gt;的几率同时获得一枚&lt;b&gt;回收碎片&lt;/b&gt;。</content>
+	<content contentuid="h5cc94bd5g30aag4fdfgb391g28149b5cfa48" version="1">御热符文碎片 [护甲]</content>
+	<content contentuid="hf215e953gc02fg4556ga785gb5399e45bff9" version="1">御热</content>
+	<content contentuid="h9a2e9b8fg723fg434eg88e4g3d8ddb9d298e" version="1">霜板符文碎片 [护甲]</content>
+	<content contentuid="hdf39f4dfg8bd2g4deag94ddgc51101f5538b" version="1">霜板</content>
+	<content contentuid="hbfd2d0acg894bg4b4dga502gdf1cbd926b5f" version="1">雷场符文碎片 [护甲]</content>
+	<content contentuid="h5ae5c337gfb93g4015g9b19g0045e12fa98b" version="1">雷场</content>
+	<content contentuid="h1d7d4ea4ge90dg4384ga3cdg1df19d4fae44" version="1">梦帷符文碎片 [护甲]</content>
+	<content contentuid="h6493d44egddb8g4da0gbe00g23175306509e" version="1">梦帷</content>
+	<content contentuid="h63ba3720g015eg4569ga5c0g6b6ba0ec5400" version="1">墓布符文碎片 [护甲]</content>
+	<content contentuid="hd777c36eg4406g4bfdga1e2gd3f5519e6961" version="1">墓布</content>
+	<content contentuid="h79b2c1b9g986ag4eceg8ee1g0797a72bfb35" version="1">通用符文碎片 [披风]</content>
+	<content contentuid="hc07a6f7fg5cc7g4dfdg8504g059bf2045b50" version="1">通用</content>
+	<content contentuid="h80bb94f8g9af4g45d8ga1dfge45eeafeb890" version="1">元素缓冲符文碎片 [护甲]</content>
+	<content contentuid="h2f0e49a5g48eeg491aga322gdafebbcc8b84" version="1">元素缓冲</content>
+	<content contentuid="h2d54c753g3eb3g4f55gb0aag42ddfa233d6e" version="1">柯尔姆斯符文碎片 [护甲]</content>
+	<content contentuid="he5180322gcfd0g4c47g91d9g1ffce32c9316" version="1">柯尔姆斯</content>
+	<content contentuid="h2475e019g4bdfg4da8ga06bg748b4805d511" version="1">堡垒符文碎片 [护甲]</content>
+	<content contentuid="hea6202abg4a3fg45b8g9771gd3798ec6bb1b" version="1">堡垒</content>
+	<content contentuid="h274595e4g4724g450fg8a5ag183b33da065f" version="1">先见</content>
+	<content contentuid="h6cd0a9d5g0fc8g4f97g83d1g1163043c44cf" version="1">先见符文碎片 [头盔]</content>
+	<content contentuid="hac5e8b82g3120g44b7ga3a3gaea05f2a25ac" version="1">鹰眼</content>
+	<content contentuid="h3fd00384g925ag445bgb7f5g7d6ea3760dda" version="1">鹰眼符文碎片 [头盔]</content>
+	<content contentuid="h9e70b465g8f24g4b4dg8af3g4dd84d467020" version="1">积极</content>
+	<content contentuid="h14758d65g3a9bg4adbgbe76g2c0ea7e9f850" version="1">积极符文碎片 [护符]</content>
+	<content contentuid="h4a92b7f0gba34g45bag9420gd66918866780" version="1">博学</content>
+	<content contentuid="h13b5c123g864eg41abgb115g797e729461cb" version="1">博学符文碎片 [护符]</content>
+	<content contentuid="h7a36fbc1g6d98g4d57gb871g9b383d5319db" version="1">灵敏</content>
+	<content contentuid="h6aadae62g8206g45adga480g03ba14c53bb0" version="1">雷主符文碎片 [护甲]</content>
+	<content contentuid="h2e7b26c8g1ecbg4463g8adbgd64407bf1d36" version="1">雷主</content>
+	<content contentuid="hd17a3764g9b22g4ddfg9169g9cc864bf902a" version="1">狂战士符文碎片 [护甲]</content>
+	<content contentuid="h56e8ea55g84ecg4d59ga8beg6d66cfda79b9" version="1">狂战士</content>
+	<content contentuid="h10ce49c6gc4e3g49f6g9dc8g0880d925ff1c" version="1">齐射符文碎片 [戒指]</content>
+	<content contentuid="h2121a435g354ag4f01ga040ge10b82551b2c" version="1">齐射</content>
+	<content contentuid="h2e192950gb221g4115gb49eg1388f1ce335e" version="1">契约符文碎片 [戒指]</content>
+	<content contentuid="hcb37ae15g4510g4171gb793g3b76e9fb8392" version="1">契约</content>
+	<content contentuid="h238bffecgc23ag4703g91b4g1b2eb1af020f" version="1">协律符文碎片 [戒指]</content>
+	<content contentuid="h00102a6cg36d4g4ff0gb0b5gee3d9c792cab" version="1">协律</content>
+	<content contentuid="h34ef03c2gcbd4g425cga111g77bf2a4a10cb" version="1">凋零符文碎片 [戒指]</content>
+	<content contentuid="hb81d89afg9383g40ddga001g7679e9e586e0" version="1">凋零</content>
+	<content contentuid="h28d48c57g0ee5g47b5gb516g253119368320" version="1">魔网激涌符文碎片 [戒指]</content>
+	<content contentuid="had5f2f62g8946g4720g8babgc0b45a4d6aea" version="1">魔网激涌</content>
+	<content contentuid="h59b16693g7023g4616gbe18g06d6b06fa4a6" version="1">导师符文碎片 [戒指]</content>
+	<content contentuid="ha467172egedfcg4504ga85bgf37ddeae1c58" version="1">导师</content>
+	<content contentuid="h5d3a682egd565g4704g8845g102fd7cad20a" version="1">琢面符文碎片 [戒指]</content>
+	<content contentuid="h92614631g8a42g4589g87f8gf9766dba99d2" version="1">琢面</content>
+	<content contentuid="hbe8dd2dbg1d4fg4220g9a48g8dd1daa9f282" version="1">博学符文碎片 [戒指]</content>
+	<content contentuid="h7b2ef83bgccc1g433bg9ef4ga8dd85937e26" version="1">博学</content>
+	<content contentuid="h92a9ef0dg900bg46efgb6f3gd0b0e8b00d91" version="1">邪术师符文碎片 [戒指]</content>
+	<content contentuid="h02a415d1g58edg43afga09fgcc19a2484fe9" version="1">邪术师</content>
+	<content contentuid="ha9185a93g5d54g4175gac4eg2b0781b802f5" version="1">烬掌符文碎片 [手套]</content>
+	<content contentuid="h39ed2e8fg7898g40fbga8f7g7f3b37ce238e" version="1">烬掌</content>
+	<content contentuid="h99ff60beg9065g4249g9212g4090a7e00cde" version="1">激涌符文碎片 [手套]</content>
+	<content contentuid="h78cececbg57adg402dgb14cg31d1d05465b1" version="1">激涌</content>
+	<content contentuid="hd70a66deg7514g4909g9ac4g28986d801938" version="1">灵长符文碎片 [手套]</content>
+	<content contentuid="hb26cfe12g74a2g48c5g8521g0966bc548754" version="1">灵长</content>
+	<content contentuid="h1f383428gea6fg4a73ga717g03c4c5e91b48" version="1">炉火符文碎片 [手套]</content>
+	<content contentuid="h0a24dcc2g6fc9g49edga44ag37aa58bcc294" version="1">炉火</content>
+	<content contentuid="h8a500102g8690g4b6eg9d17gf126b47a0e02" version="1">终结者符文碎片 [手套]</content>
+	<content contentuid="ha786de73g3ec6g427bg89e9g6a761e169c81" version="1">终结者</content>
+	<content contentuid="h499b2637gb716g4c93gaa8bg5aafce6fee02" version="1">弓手符文碎片 [手套]</content>
+	<content contentuid="h20b61211g080ag41f9gacd8g0006b7d6d4c8" version="1">弓手</content>
+	<content contentuid="h72d7cbcega757g487dgabfeg8c8e85f3ccd5" version="1">精准射击符文碎片 [手套]</content>
+	<content contentuid="h801f1e16g3ca9g4bceg8d88g7b11e75ab7af" version="1">精准射击</content>
+	<content contentuid="h86bebf81g22f8g4d1fg94c3g27c31f6900c9" version="1">大师符文碎片 [手套]</content>
+	<content contentuid="h327ee956g223bg4ddeg8d24g54b607edfe3a" version="1">大师</content>
+	<content contentuid="hdb127206gc882g49c9ga029gdd782b8248ac" version="1">飞矢</content>
+	<content contentuid="h931bef44g30b1g4b54g8791g2f5b03c7e271" version="1">飞矢符文碎片 [靴子]</content>
+	<content contentuid="h0b97d597g854dg4366ga95dg25cc62438e6e" version="1">涌流</content>
+	<content contentuid="h0390cb30gd4e5g42a9g9b4agf7b434caf3b6" version="1">涌流符文碎片 [靴子]</content>
+	<content contentuid="h5d15fcf9g954ag4e52g9ef9g34415e15c56c" version="1">蚱蜢符文碎片 [靴子]</content>
+	<content contentuid="hc738fd35g7559g4803g90ecgafe7ad7d7732" version="1">蚱蜢</content>
+	<content contentuid="h3038dcaagbd4dg4d15gaa31g417f30954381" version="1">袋鼠符文碎片 [靴子]</content>
+	<content contentuid="h1fa5f44fge508g457dga7c3g59efcc00733b" version="1">袋鼠</content>
+	<content contentuid="h7c6b6ae1gf964g4ee8gb4fbg03061b7f54d6" version="1">轻装符文碎片 [靴子]</content>
+	<content contentuid="hdd1167d2g89bag488bg9403g843e20ec79cf" version="1">轻装</content>
+	<content contentuid="hc3d19acfg8cb7g4edfgb1a1g58b785ff1d05" version="1">自熄符文碎片 [靴子]</content>
+	<content contentuid="h107d549ag41c0g481ag8fe3g2728a71a991a" version="1">自熄</content>
+	<content contentuid="haab82c2fg6c7cg4516g99e9gf6ca95f19be6" version="1">融霜符文碎片 [靴子]</content>
+	<content contentuid="h5d720673g529eg4b48g8433g1fd1b8c431b9" version="1">融霜</content>
+	<content contentuid="h0fb2d7b3gee37g4504gb9b4gebd1a9da7829" version="1">革命者符文碎片 [披风]</content>
+	<content contentuid="h3f174dd2g1e2eg4377g95d0gdbb1de070457" version="1">革命者</content>
+	<content contentuid="ha0a7a420g4f00g4b42gaf6cgb5903002e613" version="1">微步符文碎片 [披风]</content>
+	<content contentuid="he9fcc760g18f4g4a7eg89f9g6b7da1adc2aa" version="1">微步</content>
+	<content contentuid="habf89a00g7b5cg418fg9d0cg93484107e281" version="1">帷幕符文碎片 [披风]</content>
+	<content contentuid="hc5d6dd74g63e3g4c37g8c91g20d4f7b12540" version="1">帷幕</content>
+	<content contentuid="hcadfbf37g40e6g433bgb6eega454cf5aa6b1" version="1">生刃符文碎片 [披风]</content>
+	<content contentuid="hb9bfb4ceg41b3g4afdg83bbgba01a7dd9133" version="1">生刃</content>
+	<content contentuid="hf5063e98g248cg4be1gad69gaa62eaadc692" version="1">等离子符文碎片 [披风]</content>
+	<content contentuid="h0a906c74g1a1bg47a1g888fgaaf6d22b35f7" version="1">等离子</content>
+	<content contentuid="h4721943ag5e7eg4168g955bg91dec83490a0" version="1">春分符文碎片 [护符]</content>
+	<content contentuid="hc0357709gd19bg4f37g9abeg76e93651c791" version="1">春分</content>
+	<content contentuid="h14bdc668ge45ag4c84g82d5gd958ba5d528b" version="1">坚毅符文碎片 [护符]</content>
+	<content contentuid="ha4d4985egf326g4289ga8ebg6ae07d6e7869" version="1">坚毅</content>
+	<content contentuid="hf9a74fccgf066g4876g9a27g15fdcf318ff2" version="1">干燥符文碎片 [护符]</content>
+	<content contentuid="hf82ff046g4f64g46d6gb94fg65c9a3e20bdc" version="1">干燥</content>
+	<content contentuid="h18c42165g0dc8g4fabg99a4gc756d29f8894" version="1">解毒符文碎片 [护符]</content>
+	<content contentuid="ha6e0926ag3750g4b1fgb940g5071c1fc0b71" version="1">解毒</content>
+	<content contentuid="h44b5e844gbd2bg40b1gb496g6e87b4771c46" version="1">暴富符文碎片 [护符]</content>
+	<content contentuid="h134d02f2gf824g4facg9f3bg50e88e743498" version="1">暴富</content>
+	<content contentuid="hf798dfb8gc487g437cga428g7f09c5b29555" version="1">稳妥符文碎片 [护符]</content>
+	<content contentuid="h08fc2751g5f65g48e2gb439g9a6015f824b3" version="1">稳妥</content>
+	<content contentuid="h13a49df9ga81dg4542gb664g954225aa88a1" version="1">再起符文碎片 [护符]</content>
+	<content contentuid="hbc35087bgccd9g4d08g9a5fg66d7800e815f" version="1">再起</content>
+	<content contentuid="h74105032g711fg41a1g8abag862579ca4d74" version="1">时间魔法符文碎片 [护符]</content>
+	<content contentuid="h005278d2g6e24g4dc6g9eebgc748bb6ee373" version="1">时间魔法</content>
+	<content contentuid="ha5d1d1cfg664cg4467gbc43gb8a1900ea0a5" version="1">警觉符文碎片 [护符]</content>
+	<content contentuid="hf1e6f421g26bcg40b0ga3dagf4a02f7a3f6a" version="1">警觉</content>
+	<content contentuid="hca199596g6d7cg4e53gae15gaee20b379db5" version="1">沉稳符文碎片 [护符]</content>
+	<content contentuid="h29c146e2g831ag4a68g9a13g324926ad56ea" version="1">沉稳</content>
+	<content contentuid="h729fdb8cg2884g4852ga68cg2cf882545f9b" version="1">明晰符文碎片 [护符]</content>
+	<content contentuid="h34183c73ge18fg4cdcgb13dg84aea193de0f" version="1">明晰</content>
+	<content contentuid="hae2963daga5cag40c3g9502g99f285689da3" version="1">膂力符文碎片 [护符]</content>
+	<content contentuid="hfca4f86eg0015g473dgaed8g0a7c5ce0e675" version="1">膂力</content>
+	<content contentuid="h478f8723g3ca0g4a99g8e21gc50406e4d847" version="1">敏捷符文碎片 [护符]</content>
+	<content contentuid="hf45ed000g9bc0g47f8gbc82g55a854b5a276" version="1">闷燃符文碎片 [戒指]</content>
+	<content contentuid="hbfdc74fbg208dg450ega8d7ged3ed0daba70" version="1">闷燃</content>
+	<content contentuid="h536f6c19ge858g41a4g887fg44d819c064c2" version="1">灼烧符文碎片 [戒指]</content>
+	<content contentuid="h5d52bf84g0705g460cg9175g79009ce586b5" version="1">灼烧</content>
+	<content contentuid="h63faadd0g9d60g40c8gab77g5e4a96f050ce" version="1">落尘符文碎片 [戒指]</content>
+	<content contentuid="he4712af5g391ag4276g8cfag51aebbea3ef8" version="1">落尘</content>
+	<content contentuid="h8be42f0fg4323g4a26g960fgb8ad88baf074" version="1">霜凇符文碎片 [戒指]</content>
+	<content contentuid="h32a4e7ffg22b0g4d14gb1beg10a89f842f7b" version="1">霜凇</content>
+	<content contentuid="h1209400bge009g434ag887egb5fdb7505c28" version="1">冻伤符文碎片 [戒指]</content>
+	<content contentuid="h94988a6dg4800g40a5g9d23g60763fd7ff03" version="1">冻伤</content>
+	<content contentuid="h64c0f278gbc55g490eg8086g677a6ab49ed3" version="1">冰川符文碎片 [戒指]</content>
+	<content contentuid="h9fe75841gaeb4g4b52gbc5ag13db9ed04bb5" version="1">冰川</content>
+	<content contentuid="hbe9b97b9g2d39g4e16gb546g64f0c77ecacd" version="1">火花符文碎片 [戒指]</content>
+	<content contentuid="h139e412dg408cg4336gb844ga2f56150a8f5" version="1">火花</content>
+	<content contentuid="h9be9f047ge34cg4e1fgb96cg0ade5f21f6a3" version="1">伏打符文碎片 [戒指]</content>
+	<content contentuid="hfc049153g1b03g498ag857fg48e0a8641ed4" version="1">伏打</content>
+	<content contentuid="h7e71f94dgbe20g42eagb0f7g2ae6ea023bbe" version="1">雷鸣符文碎片 [戒指]</content>
+	<content contentuid="h9918cb01gb69ag48a9g9f44gca9b2b4f5e3a" version="1">雷鸣</content>
+	<content contentuid="hf3412923g09c7g49d7g96bbg6409f1a2dd12" version="1">钟鸣符文碎片 [戒指]</content>
+	<content contentuid="h0f663dd8gab6ag4596g8059g90a3c479317a" version="1">钟鸣</content>
+	<content contentuid="he4684b82ge74ag4198gadb2gad8997b66e89" version="1">雷云符文碎片 [戒指]</content>
+	<content contentuid="he9aa51bfgfefeg467eg9196g62195eec18e6" version="1">雷云</content>
+	<content contentuid="hf0b3ceecgeb5ag4f7egb6d9g69ffcd77ce24" version="1">爆震符文碎片 [戒指]</content>
+	<content contentuid="h32195a02g3e25g4ca0ga971g7d67948d28ed" version="1">爆震</content>
+	<content contentuid="h30409af2g69b5g48d6g9e58gceab0d032ef1" version="1">酸蚀符文碎片 [戒指]</content>
+	<content contentuid="h174e912bg4027g4069gb5a8g7adc87256543" version="1">粉碎</content>
+	<content contentuid="h6f9a57eeg1374g49d6ga8d5g3a6012f4ca82" version="1">粉碎符文碎片 [戒指]</content>
+	<content contentuid="h6f660509g5b6cg4b94ga21egbeca2420eeae" version="1">闷响</content>
+	<content contentuid="h2d1a6179g0edfg49fdgb7c8g5994568fc23b" version="1">酸蚀</content>
+	<content contentuid="ha40f2549gca52g4df0ga294g52f80cbfab8c" version="1">苛性符文碎片 [戒指]</content>
+	<content contentuid="h5878a9adgf4bag4ed8g8002ge11d4f1e6cd8" version="1">苛性</content>
+	<content contentuid="h680bb6edg511fg4cd5gb812gb80f310cbd9b" version="1">消溶符文碎片 [戒指]</content>
+	<content contentuid="h7b810bf9gab98g404cgbbfagb319a8e7da21" version="1">消溶</content>
+	<content contentuid="h0dac34edgf3a7g4b95ga130g6891c150137a" version="1">毒液符文碎片 [戒指]</content>
+	<content contentuid="h6ddea093g76d9g41cbg8b8eg0f8be3b699ed" version="1">毒液</content>
+	<content contentuid="hb942ebbdg3482g4bc8gafe2g2ddecb6c94ae" version="1">瘴气符文碎片 [戒指]</content>
+	<content contentuid="h76921c01ge327g40f8ga1b0g60bd0323cb3e" version="1">瘴气</content>
+	<content contentuid="h35931007g8d8ag42cegbf32gaac77220873c" version="1">瘟疫符文碎片 [戒指]</content>
+	<content contentuid="h403b9d29gfd9dg49bcgb904gef9742a3f373" version="1">瘟疫</content>
+	<content contentuid="hd518cbebg4401g4e3ag8373gff95a218dd5f" version="1">赤手符文碎片 [戒指]</content>
+	<content contentuid="he743103cg86aeg4175ga119g1d3bb64e755a" version="1">空拳</content>
+	<content contentuid="h8cbe0733gc278g42b0ga43fg7665619f55d6" version="1">凋萎符文碎片 [戒指]</content>
+	<content contentuid="hc6a624a2g0022g42d3g9ef7gf5d40718a0a1" version="1">凋萎</content>
+	<content contentuid="hf865d9begbc0eg4261g9b84g1c1915cd5e76" version="1">熵蚀符文碎片 [戒指]</content>
+	<content contentuid="h6f556d9aga94ag4726g83d1gd21e345262c7" version="1">熵蚀</content>
+	<content contentuid="hc74672ddgc8f9g4d5dgac59gf6c17774c7e6" version="1">流明符文碎片 [戒指]</content>
+	<content contentuid="h28a7481ag884bg4af4g935cg9077fea8b8c4" version="1">流明</content>
+	<content contentuid="hee11c37bg84ebg4d54g9067g8715cb38c1df" version="1">光耀符文碎片 [戒指]</content>
+	<content contentuid="hcbecf2f3g59e9g4bd2g9ec6g161b3b2ea530" version="1">光耀</content>
+	<content contentuid="h14058ee7gfdd9g4dbdg827bgcd6116717abc" version="1">璨光符文碎片 [戒指]</content>
+	<content contentuid="hf6abf016g522eg447cg8e34g6b03c9282e56" version="1">璨光</content>
+	<content contentuid="h3b31319cg3b24g4262gad1egfcffdd6747d2" version="1">搏动符文碎片 [戒指]</content>
+	<content contentuid="h9b21aa7cg4ae6g4e88g95bcg4afa9547208d" version="1">搏动</content>
+	<content contentuid="h2823fb30gf451g414fg984egbab4f17bfc8d" version="1">苦痛符文碎片 [戒指]</content>
+	<content contentuid="hcfd146ecg455dg4f85g83b0g8fc49fd5846d" version="1">苦痛</content>
+	<content contentuid="h4e6611a2ga93eg4bd0gbea9gec5bf29401dd" version="1">谵妄符文碎片 [戒指]</content>
+	<content contentuid="hdf865bd4g7526g49bcg819dg980d76079323" version="1">谵妄</content>
+	<content contentuid="h671bba29g63a0g4ca2g90a1g0f7e5062d0f1" version="1">推撞符文碎片 [戒指]</content>
+	<content contentuid="h512bd507ge0e0g43d0gaa72g983a23d70de7" version="1">推撞</content>
+	<content contentuid="h9d0bb24eg4b05g4bc7g9ae9gbfa95c7ab5e1" version="1">冲击符文碎片 [戒指]</content>
+	<content contentuid="hcaa8c452g3af0g42edgb74bgc8671de7e9ed" version="1">冲击</content>
+	<content contentuid="h1bf587e4gf0d3g4c3bg8f85g562676a7b913" version="1">碎裂符文碎片 [戒指]</content>
+	<content contentuid="hcfd2a414gc219g4123gaefbgfc6bf7b01082" version="1">碎裂</content>
+	<content contentuid="h79475817g46f5g4ca9g9cd8gfd89aae190d5" version="1">闷响符文碎片 [戒指]</content>
+	<content contentuid="ha5ad361bg7b91g4f35g9555g4b68793f324a" version="1">猛击符文碎片 [戒指]</content>
+	<content contentuid="h719ec86cg16c4g4c8fg8b20g68d2aa0e0815" version="1">猛击</content>
+</contentList>

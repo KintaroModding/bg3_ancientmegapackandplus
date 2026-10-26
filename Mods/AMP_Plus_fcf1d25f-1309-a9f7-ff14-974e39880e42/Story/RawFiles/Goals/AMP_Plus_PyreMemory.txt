@@ -1,0 +1,308 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+SavegameLoaded()
+THEN
+PROC_AMP_Plus_Pyre2_DrainMemAll();
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_AMP_Plus_Pyre2_DrainMemAll();
+
+// Decaying outlives a load, its table does not. Stale, it blocks re-arming
+
+IF
+SavegameLoaded()
+AND
+DB_AMP_Plus_Pyre2_Decaying(1)
+THEN
+NOT DB_AMP_Plus_Pyre2_Decaying(1);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Plus_Pyre2_Decaying(1)
+THEN
+NOT DB_AMP_Plus_Pyre2_Decaying(1);
+
+// disarms the base's own memory. It rearms on every join, so react to the fact
+
+IF
+DB_AMP_Pyre_Mem((CHARACTER)_Char, (INTEGER)_N)
+THEN
+NOT DB_AMP_Pyre_Mem(_Char, _N);
+
+// called before the core clears anything. A BROKEN fight stores nothing: the player paid
+
+PROC
+PROC_AMP_Plus_Pyre2_Persist((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Phase(_CombatID, "BROKEN")
+THEN
+DB_NOOP(1);
+
+PROC
+PROC_AMP_Plus_Pyre2_Persist((GUIDSTRING)_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre_Phase(_CombatID, "BROKEN")
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_S)
+AND
+_S > 0
+THEN
+PROC_AMP_Plus_Pyre2_StoreAll(_CombatID, _S);
+PROC_AMP_Plus_Pyre2_ArmDecay();
+
+PROC
+PROC_AMP_Plus_Pyre2_StoreAll((GUIDSTRING)_CombatID, (INTEGER)_S)
+AND
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, _CombatID)
+AND
+NOT DB_AMP_Plus_Pyre2_Brood(_Char, _, _)
+AND
+IsDead(_Char, 0)
+AND
+QRY_AMP_Plus_Pyre_Hostile(_Char)
+THEN
+PROC_AMP_Plus_Pyre2_SetMem(_Char, _S);
+
+PROC
+PROC_AMP_Plus_Pyre2_SetMem((CHARACTER)_Char, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre2_Mem(_Char, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre2_Mem(_Char, _Old);
+DB_AMP_Plus_Pyre2_Mem(_Char, _N);
+
+PROC
+PROC_AMP_Plus_Pyre2_SetMem((CHARACTER)_Char, (INTEGER)_N)
+AND
+NOT DB_AMP_Plus_Pyre2_Mem(_Char, _)
+THEN
+DB_AMP_Plus_Pyre2_Mem(_Char, _N);
+
+PROC
+PROC_AMP_Plus_Pyre2_ArmDecay()
+AND
+NOT DB_AMP_Plus_Pyre2_Decaying(1)
+AND
+DB_AMP_Plus_Pyre2_Cfg("MEMSTEP", (INTEGER)_Period)
+THEN
+DB_AMP_Plus_Pyre2_Decaying(1);
+TimerLaunch("AMP_Plus_Pyre2_MemDecay", _Period);
+
+IF
+TimerFinished("AMP_Plus_Pyre2_MemDecay")
+AND
+DB_AMP_Plus_Pyre2_Decaying(1)
+THEN
+NOT DB_AMP_Plus_Pyre2_Decaying(1);
+PROC_AMP_Plus_Pyre2_Fade();
+
+// last rung first, or fresh ones step twice in a tick
+
+PROC
+PROC_AMP_Plus_Pyre2_Fade()
+THEN
+PROC_AMP_Plus_Pyre2_DrainMemLast();
+
+PROC
+PROC_AMP_Plus_Pyre2_Fade()
+AND
+DB_AMP_Plus_Pyre2_Mem((CHARACTER)_Char, (INTEGER)_N)
+AND
+_N > 1
+THEN
+DB_AMP_Plus_Pyre2_FadeQ(_Char);
+
+PROC
+PROC_AMP_Plus_Pyre2_Fade()
+THEN
+PROC_AMP_Plus_Pyre2_DrainFadeQ();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainFadeQ()
+AND
+DB_AMP_Plus_Pyre2_FadeQ((CHARACTER)_Char)
+THEN
+NOT DB_AMP_Plus_Pyre2_FadeQ(_Char);
+PROC_AMP_Plus_Pyre2_FadeStep(_Char);
+PROC_AMP_Plus_Pyre2_DrainFadeQ();
+
+PROC
+PROC_AMP_Plus_Pyre2_FadeStep((CHARACTER)_Char)
+AND
+DB_AMP_Plus_Pyre2_Mem(_Char, (INTEGER)_N)
+AND
+_N > 1
+AND
+IntegerSubtract(_N, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Plus_Pyre2_Mem(_Char, _N);
+DB_AMP_Plus_Pyre2_Mem(_Char, _Next);
+
+PROC
+PROC_AMP_Plus_Pyre2_Fade()
+AND
+DB_AMP_Plus_Pyre2_Mem(_, _)
+THEN
+PROC_AMP_Plus_Pyre2_ArmDecay();
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+QRY_AMP_Plus_Pyre_Hostile(_Char)
+AND
+DB_AMP_Plus_Pyre2_Mem(_Char, (INTEGER)_N)
+AND
+_N > 0
+THEN
+PROC_AMP_Plus_Pyre2_Restore(_CombatID, _N);
+
+PROC
+PROC_AMP_Plus_Pyre2_Restore((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+NOT DB_AMP_Plus_Pyre2_Armed(_CombatID)
+THEN
+DB_AMP_Plus_Pyre2_Armed(_CombatID);
+DB_AMP_Plus_Pyre_Stage(_CombatID, 0);
+DB_AMP_Plus_Pyre_Prog(_CombatID, 0);
+PROC_AMP_Plus_Pyre2_SeedMod(_CombatID);
+PROC_AMP_Plus_Pyre2_SeedCap(_CombatID);
+PROC_AMP_Plus_Pyre2_Rebase(_CombatID);
+PROC_AMP_Plus_PyreTools_Arm(_CombatID);
+
+// GROW, not the ramp: restored is past base. Joiners must not lift a QUENCH
+
+PROC
+PROC_AMP_Plus_Pyre2_Restore((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+NOT DB_AMP_Plus_Pyre_Phase(_CombatID, "BROKEN")
+AND
+NOT DB_AMP_Plus_Pyre_Phase(_CombatID, "QUENCH")
+THEN
+PROC_AMP_Plus_Pyre2_SetPhase(_CombatID, "GROW");
+PROC_AMP_Plus_Pyre2_SeedMax(_CombatID, _N);
+
+PROC
+PROC_AMP_Plus_Pyre2_SeedMax((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_Cur)
+AND
+_Cur < _N
+AND
+DB_AMP_Plus_Pyre_Cap(_CombatID, (INTEGER)_Cap)
+AND
+_N <= _Cap
+THEN
+PROC_AMP_Plus_Pyre2_SetStage(_CombatID, _N);
+
+PROC
+PROC_AMP_Plus_Pyre2_SeedMax((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_Cur)
+AND
+_Cur < _N
+AND
+DB_AMP_Plus_Pyre_Cap(_CombatID, (INTEGER)_Cap)
+AND
+_N > _Cap
+THEN
+PROC_AMP_Plus_Pyre2_SetStage(_CombatID, _Cap);
+
+// punitive batch spawns as its own parent, so the boss's step is set aside at his death
+// window is the quick-kill guard's ten seconds
+
+IF
+Died((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_Pyre2_Boss(_Boss, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre_Phase(_CombatID, "BROKEN")
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+PROC_AMP_Plus_Pyre2_Willed(_CombatID, _Host);
+
+PROC
+PROC_AMP_Plus_Pyre2_Willed((GUIDSTRING)_CombatID, (CHARACTER)_Host)
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_S)
+AND
+DB_AMP_Plus_Pyre_Base(_CombatID, (INTEGER)_B)
+AND
+_S >= _B
+AND
+_S > 0
+THEN
+PROC_AMP_Plus_Pyre2_Bequeath(_Host, _S);
+
+PROC
+PROC_AMP_Plus_Pyre2_Willed((GUIDSTRING)_CombatID, (CHARACTER)_Host)
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_S)
+AND
+DB_AMP_Plus_Pyre_Base(_CombatID, (INTEGER)_B)
+AND
+_S < _B
+AND
+_B > 0
+THEN
+PROC_AMP_Plus_Pyre2_Bequeath(_Host, _B);
+
+PROC
+PROC_AMP_Plus_Pyre2_Bequeath((CHARACTER)_Host, (INTEGER)_S)
+AND
+DB_AMP_Plus_Pyre2_Bequest((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre2_Bequest(_Old);
+
+PROC
+PROC_AMP_Plus_Pyre2_Bequeath((CHARACTER)_Host, (INTEGER)_S)
+THEN
+DB_AMP_Plus_Pyre2_Bequest(_S);
+RealtimeObjectTimerLaunch(_Host, "AMP_Plus_Pyre2_Bequest", 10000);
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_Plus_Pyre2_Bequest")
+AND
+DB_AMP_Plus_Pyre2_Bequest((INTEGER)_S)
+THEN
+NOT DB_AMP_Plus_Pyre2_Bequest(_S);
+
+IF
+DB_AMP_Plus_ChaseActive((CHARACTER)_Mob, _)
+AND
+DB_AMP_Plus_Pyre2_Bequest((INTEGER)_S)
+AND
+NOT DB_AMP_Plus_Pyre2_Mem(_Mob, _)
+THEN
+DB_AMP_Plus_Pyre2_Mem(_Mob, _S);
+
+// single pass: a Bequest re-adds a pursuer's row on retraction, recursion never empties the table
+PROC
+PROC_AMP_Plus_Pyre2_DrainMemAll()
+AND
+DB_AMP_Plus_Pyre2_Mem((CHARACTER)_Char, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Pyre2_Mem(_Char, _N);
+
+// single pass, same Bequest reason
+PROC
+PROC_AMP_Plus_Pyre2_DrainMemLast()
+AND
+DB_AMP_Plus_Pyre2_Mem((CHARACTER)_Char, 1)
+THEN
+NOT DB_AMP_Plus_Pyre2_Mem(_Char, 1);
+
+EXITSECTION
+ENDEXITSECTION

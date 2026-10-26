@@ -1,0 +1,189 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// kroneth trial labyrinth. endings: demand=bad, stepin=chaos, stepaway=good
+
+// judgement stays up until an ending is committed, esc/cancel can re-cast the trial
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_KronethTrial", _, _, _)
+AND
+HasActiveStatus(_Caster, "AMP_KRONETH_JUDGEMENT", 1)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_KronethTrial_Entry");
+
+// entry
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Caster, "AMP_KronethTrial_Entry", 1)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_KronethTrial_Listen");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Caster, "AMP_KronethTrial_Entry", 0)
+THEN
+OpenMessageBox(_Caster, "AMP_KronethTrial_Loop1");
+
+IF
+MessageBoxClosed((CHARACTER)_Caster, "AMP_KronethTrial_Loop1")
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_KronethTrial_Entry");
+
+// listen
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Caster, "AMP_KronethTrial_Listen", 1)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_KronethTrial_Sign");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Caster, "AMP_KronethTrial_Listen", 0)
+THEN
+OpenMessageBox(_Caster, "AMP_KronethTrial_Loop2");
+
+IF
+MessageBoxClosed((CHARACTER)_Caster, "AMP_KronethTrial_Loop2")
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_KronethTrial_Listen");
+
+// sign - splits to cling (greed) or release (humility/chaos)
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Caster, "AMP_KronethTrial_Sign", 1)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_KronethTrial_Cling");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Caster, "AMP_KronethTrial_Sign", 0)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_KronethTrial_Release");
+
+// cling - leads to demand or loops back
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Caster, "AMP_KronethTrial_Cling", 1)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_KronethTrial_Demand");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Caster, "AMP_KronethTrial_Cling", 0)
+THEN
+OpenMessageBox(_Caster, "AMP_KronethTrial_Loop3");
+
+IF
+MessageBoxClosed((CHARACTER)_Caster, "AMP_KronethTrial_Loop3")
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_KronethTrial_Sign");
+
+// release - leads to stepin (chaos) or stepaway (good)
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Caster, "AMP_KronethTrial_Release", 1)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_KronethTrial_StepIn");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Caster, "AMP_KronethTrial_Release", 0)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_KronethTrial_StepAway");
+
+// demand - commits bad ending
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Caster, "AMP_KronethTrial_Demand", 1)
+THEN
+PROC_AMP_Kroneth_ApplyBad(_Caster);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Caster, "AMP_KronethTrial_Demand", 0)
+THEN
+OpenMessageBox(_Caster, "AMP_KronethTrial_Loop4");
+
+IF
+MessageBoxClosed((CHARACTER)_Caster, "AMP_KronethTrial_Loop4")
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_KronethTrial_Cling");
+
+// stepin - commits chaos ending
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Caster, "AMP_KronethTrial_StepIn", 1)
+THEN
+PROC_AMP_Kroneth_ApplyChaos(_Caster);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Caster, "AMP_KronethTrial_StepIn", 0)
+THEN
+OpenMessageBox(_Caster, "AMP_KronethTrial_Loop5");
+
+IF
+MessageBoxClosed((CHARACTER)_Caster, "AMP_KronethTrial_Loop5")
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_KronethTrial_Release");
+
+// stepaway - commits good ending
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Caster, "AMP_KronethTrial_StepAway", 1)
+THEN
+PROC_AMP_Kroneth_ApplyGood(_Caster);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Caster, "AMP_KronethTrial_StepAway", 0)
+THEN
+OpenMessageBox(_Caster, "AMP_KronethTrial_Loop6");
+
+IF
+MessageBoxClosed((CHARACTER)_Caster, "AMP_KronethTrial_Loop6")
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_KronethTrial_Release");
+
+// ending application procs
+
+PROC
+PROC_AMP_Kroneth_ApplyGood((CHARACTER)_Char)
+THEN
+RemoveStatus(_Char, "AMP_KRONETH_CURSE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_KRONETH_JUDGEMENT", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_KRONETH_AUTOCRIT", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_KRONETH_CRITMISS", NULL_00000000-0000-0000-0000-000000000000);
+ApplyStatus(_Char, "AMP_HUMBLED_KRONETH", -1.0, 1, _Char);
+OpenMessageBox(_Char, "AMP_KronethTrial_End_Good");
+
+PROC
+PROC_AMP_Kroneth_ApplyChaos((CHARACTER)_Char)
+THEN
+RemoveStatus(_Char, "AMP_KRONETH_CURSE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_KRONETH_JUDGEMENT", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_KRONETH_AUTOCRIT", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_KRONETH_CRITMISS", NULL_00000000-0000-0000-0000-000000000000);
+ApplyStatus(_Char, "AMP_INCARNATE_KRONETH", -1.0, 1, _Char);
+OpenMessageBox(_Char, "AMP_KronethTrial_End_Chaos");
+
+PROC
+PROC_AMP_Kroneth_ApplyBad((CHARACTER)_Char)
+AND
+NOT HasActiveStatus(_Char, "AMP_GRAND_DESIGN_WARD", 1)
+THEN
+RemoveStatus(_Char, "AMP_KRONETH_JUDGEMENT", NULL_00000000-0000-0000-0000-000000000000);
+ApplyStatus(_Char, "AMP_DAMNED_KRONETH", -1.0, 1, _Char);
+OpenMessageBox(_Char, "AMP_KronethTrial_End_Bad");
+
+// ward-bearer: refused the bargain, clean exit (treat as good)
+PROC
+PROC_AMP_Kroneth_ApplyBad((CHARACTER)_Char)
+AND
+HasActiveStatus(_Char, "AMP_GRAND_DESIGN_WARD", 1)
+THEN
+RemoveStatus(_Char, "AMP_KRONETH_CURSE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_KRONETH_JUDGEMENT", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_KRONETH_AUTOCRIT", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_KRONETH_CRITMISS", NULL_00000000-0000-0000-0000-000000000000);
+ApplyStatus(_Char, "AMP_HUMBLED_KRONETH", -1.0, 1, _Char);
+OpenMessageBox(_Char, "AMP_KronethTrial_End_Good");
+
+EXITSECTION
+ENDEXITSECTION

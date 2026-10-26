@@ -1,0 +1,96 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// in one tick the engine collapses strip and rebuild, cached boosts (AC, attack rolls) keep the removal
+// so each phase runs a second apart. cancel waits for the base timers to launch
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+TimerLaunch("AMP_Plus_ShardRecon_Take", 1000);
+
+IF
+TimerFinished("AMP_Plus_ShardRecon_Take")
+THEN
+TimerCancel("AMP_ShardFix2");
+TimerCancel("AMP_ShardFix3");
+TimerLaunch("AMP_Plus_ShardRecon_Strip", 6000);
+
+IF
+TimerFinished("AMP_Plus_ShardRecon_Strip")
+AND
+DB_Players(_Player)
+THEN
+PROC_AMP_Plus_ShardRecon_Strip(_Player);
+
+IF
+TimerFinished("AMP_Plus_ShardRecon_Strip")
+THEN
+TimerLaunch("AMP_Plus_ShardRecon_Restore", 1000);
+
+IF
+TimerFinished("AMP_Plus_ShardRecon_Restore")
+AND
+DB_Players(_Player)
+THEN
+PROC_AMP_Plus_ShardRecon_Slot(_Player, "Breast");
+PROC_AMP_Plus_ShardRecon_Slot(_Player, "Ring");
+PROC_AMP_Plus_ShardRecon_Slot(_Player, "Ring2");
+PROC_AMP_Plus_ShardRecon_Slot(_Player, "Gloves");
+PROC_AMP_Plus_ShardRecon_Slot(_Player, "Helmet");
+PROC_AMP_Plus_ShardRecon_Slot(_Player, "Cloak");
+PROC_AMP_Plus_ShardRecon_Slot(_Player, "Boots");
+PROC_AMP_Plus_ShardRecon_Slot(_Player, "Amulet");
+PROC_AMP_Plus_ShardRecon_Slot(_Player, "Melee Main Weapon");
+PROC_AMP_Plus_ShardRecon_Slot(_Player, "Ranged Main Weapon");
+
+// toggle-only carriers are skipped, stripping one drops the hotbar toggle
+PROC
+PROC_AMP_Plus_ShardRecon_Strip((CHARACTER)_Char)
+AND
+DB_AMP_Shard_Transfer(_ItemStatus, _CharStatus)
+AND
+_CharStatus != "AMP_SHARD_CHAR_JUGGLER"
+AND
+_CharStatus != "AMP_SHARD_CHAR_IMPROVISE"
+AND
+_CharStatus != "AMP_SHARD_CHAR_CANNONADE"
+AND
+_CharStatus != "AMP_SHARD_CHAR_COMMUTATION"
+AND
+HasActiveStatus((CHARACTER)_Char, _CharStatus, 1)
+THEN
+RemoveStatus(_Char, _CharStatus, _Char);
+
+PROC
+PROC_AMP_Plus_ShardRecon_Slot((CHARACTER)_Char, (STRING)_Slot)
+AND
+GetEquippedItem(_Char, _Slot, (ITEM)_Item)
+AND
+DB_AMP_Shard_Count(_Item, _ItemStatus, _Count)
+AND
+DB_AMP_Shard_Transfer(_ItemStatus, _CharStatus)
+AND
+HasActiveStatus(_Item, _ItemStatus, 1)
+THEN
+PROC_AMP_ApplyShardEffectN(_Char, _CharStatus, _Count);
+
+PROC
+PROC_AMP_Plus_ShardRecon_Slot((CHARACTER)_Char, (STRING)_Slot)
+AND
+GetEquippedItem(_Char, _Slot, (ITEM)_Item)
+AND
+DB_AMP_Shard_Transfer(_ItemStatus, _CharStatus)
+AND
+NOT DB_AMP_Shard_Count(_Item, _ItemStatus, _)
+AND
+HasActiveStatus(_Item, _ItemStatus, 1)
+THEN
+DB_AMP_Shard_Count(_Item, _ItemStatus, 1);
+PROC_AMP_ApplyShardEffectN(_Char, _CharStatus, 1);
+
+EXITSECTION
+ENDEXITSECTION

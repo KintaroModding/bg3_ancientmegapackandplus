@@ -1,0 +1,201 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// the base registry doubles as a control-immunity switch for registered champions
+// base record is cleared after its spawn-time hooks run, later base readers are re-implemented here
+
+IF
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, (CHARACTER)_Boss)
+AND
+NOT DB_AMP_Plus_UltraMob(_Mob, _)
+THEN
+DB_AMP_Plus_UltraMob((CHARACTER)_Mob, _Boss);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Plus_UltraRegClear", 1000);
+
+// a champion registered again keeps its record, only the base one is dropped
+
+IF
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, (CHARACTER)_Boss)
+AND
+DB_AMP_Plus_UltraMob(_Mob, _)
+THEN
+RealtimeObjectTimerLaunch(_Mob, "AMP_Plus_UltraRegClear", 1000);
+
+// delay lets every spawn-time hook answering the base insert run first
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Plus_UltraRegClear")
+THEN
+PROC_AMP_Plus_UltraReg_DrainBaseSpawned(_Mob);
+
+PROC
+PROC_AMP_Plus_UltraReg_DrainBaseSpawned((CHARACTER)_Mob)
+AND
+DB_AMP_MirrorSupport_Spawned(_Mob, (CHARACTER)_Boss)
+THEN
+NOT DB_AMP_MirrorSupport_Spawned(_Mob, _Boss);
+PROC_AMP_Plus_UltraReg_DrainBaseSpawned(_Mob);
+
+// control statuses, shrugged off when an npc places them
+
+PROC
+PROC_AMP_Plus_UltraStripCC((CHARACTER)_Mob, (STRING)_Status, (STRING)_Group)
+AND
+IsStatusFromGroup(_Status, _Group, 1)
+THEN
+RemoveStatus(_Mob, _Status);
+
+IF
+StatusApplied((CHARACTER)_Mob, _Status, (CHARACTER)_Causer, _)
+AND
+DB_AMP_Plus_UltraMob(_Mob, _)
+AND
+NOT _Causer == _Mob
+AND
+NOT DB_Players(_Causer)
+AND
+NOT DB_PartOfTheTeam(_Causer)
+AND
+IsSummon(_Causer, 0)
+THEN
+PROC_AMP_Plus_UltraStripCC(_Mob, _Status, "SG_Charmed");
+PROC_AMP_Plus_UltraStripCC(_Mob, _Status, "SG_Incapacitated");
+PROC_AMP_Plus_UltraStripCC(_Mob, _Status, "SG_Mad");
+PROC_AMP_Plus_UltraStripCC(_Mob, _Status, "SG_Polymorph");
+PROC_AMP_Plus_UltraStripCC(_Mob, _Status, "SG_Frightened");
+PROC_AMP_Plus_UltraStripCC(_Mob, _Status, "SG_Prone");
+PROC_AMP_Plus_UltraStripCC(_Mob, _Status, "SG_Restrained");
+PROC_AMP_Plus_UltraStripCC(_Mob, _Status, "SG_Taunted");
+
+// the parent may enter combat after the champion exists, so both orders are handled
+
+IF
+DB_AMP_Plus_UltraMob((CHARACTER)_Mob, (CHARACTER)_Boss)
+AND
+IsInCombat(_Boss, 1)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+IsInCombat(_Player, 1)
+THEN
+EnterCombat(_Mob, _Player);
+
+IF
+DB_Sees((CHARACTER)_Mob, (CHARACTER)_Player)
+AND
+DB_AMP_Plus_UltraMob(_Mob, _)
+AND
+DB_Players(_Player)
+AND
+NOT IsInCombat(_Mob, 1)
+THEN
+SetRelationTemporaryHostile(_Mob, _Player);
+EnterCombat(_Mob, _Player);
+
+// final-tier surge, hard only. eff = (npc + party*2)/3, 12 or more is tier 4+
+
+IF
+DB_AMP_Plus_UltraMob((CHARACTER)_Mob, _)
+AND
+DB_AMP_GameMode("HARD")
+AND
+GetLevel(_Mob, (INTEGER)_NpcLvl)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_PartyLvl)
+AND
+IntegerProduct(_PartyLvl, 2, (INTEGER)_Weighted)
+AND
+IntegerSum(_NpcLvl, _Weighted, (INTEGER)_Sum)
+AND
+IntegerDivide(_Sum, 3, (INTEGER)_EffLvl)
+AND
+_EffLvl >= 12
+THEN
+ApplyStatus(_Mob, "AMP_MIRROR_ENDGAME", -1.0, 1, _Mob);
+
+// the tier map is seeded by the base on level start, read here not duplicated
+
+IF
+DB_AMP_Plus_UltraMob((CHARACTER)_Mob, _)
+AND
+NOT DB_AMP_Ultra_HPScaled(_Mob)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+DB_AMP_Ultra_HPScaleMap(_Lvl, (STRING)_Status)
+THEN
+DB_AMP_Ultra_HPScaled((CHARACTER)_Mob);
+ApplyStatus(_Mob, _Status, -1.0, 1, _Mob);
+
+// SetFaction reverts on its own, so it is re-applied each round
+
+IF
+CombatRoundStarted((GUIDSTRING)_CombatID, _)
+AND
+DB_AMP_Plus_UltraMob((CHARACTER)_Mob, (CHARACTER)_Boss)
+AND
+IsDead(_Mob, 0)
+AND
+IsDead(_Boss, 0)
+AND
+GetFaction(_Boss, (FACTION)_BossFaction)
+THEN
+SetFaction(_Mob, _BossFaction);
+
+IF
+LeftCombat((CHARACTER)_Mob, _)
+AND
+DB_AMP_Plus_UltraMob(_Mob, (CHARACTER)_Boss)
+AND
+IsDead(_Mob, 0)
+AND
+IsDead(_Boss, 0)
+AND
+GetFaction(_Boss, (FACTION)_BossFaction)
+THEN
+SetFaction(_Mob, _BossFaction);
+
+IF
+Died((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_UltraMob((CHARACTER)_Mob, _Boss)
+AND
+IsDead(_Mob, 0)
+THEN
+ApplyStatus(_Mob, "AMP_FORCE_HOSTILE", -1.0, 1, _Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Plus_UltraMob(_Mob, (CHARACTER)_Boss)
+THEN
+NOT DB_AMP_Plus_UltraMob(_Mob, _Boss);
+
+// console: mirrorclear
+
+IF
+TextEvent("mirrorclear")
+THEN
+PROC_AMP_Plus_UltraReg_DrainMirrorClear();
+
+// single pass: a retracted row is re-registered at once, a recursive drain never empties
+PROC
+PROC_AMP_Plus_UltraReg_DrainMirrorClear()
+AND
+DB_AMP_Plus_UltraMob((CHARACTER)_Mob, (CHARACTER)_Boss)
+AND
+GetPosition(_Mob, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+RealSum(_Y, 1.0, (REAL)_YUp)
+THEN
+NOT DB_AMP_Plus_UltraMob(_Mob, _Boss);
+PlayEffectAtPosition(VFX_Script_DarkButler_Poof_01_2b59237f-69f1-003b-d44b-d7e31fb79be2, _X, _YUp, _Z, 1.0);
+NOT DB_AMP_MirrorSupport_Fired(_Boss);
+Die(_Mob, DEATHTYPE.Necrotic, NULL_00000000-0000-0000-0000-000000000000, 0, 1, 0.0);
+
+EXITSECTION
+
+ENDEXITSECTION

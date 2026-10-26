@@ -1,0 +1,194 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// single owner of tier changes, hard-mode escalation and gear tier sum into one delta
+// target is re-derived from the stored base tier, so flip order never matters
+
+// migration of legacy AvariceBumped markers: restore the original tier
+IF
+DB_AMP_Plus_AvariceBumped((CHARACTER)_C, (STRING)_Orig, (STRING)_Bumped)
+THEN
+RemoveStatus(_C, _Bumped, NULL_00000000-0000-0000-0000-000000000000);
+NOT DB_AMP_DiffV3_Tracked(_C, _Bumped);
+ApplyStatus(_C, _Orig, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_DiffV3_Tracked(_C, _Orig);
+NOT DB_AMP_Plus_AvariceBumped(_C, _Orig, _Bumped);
+
+IF
+DB_AMP_DiffV3_Tracked((CHARACTER)_C, (STRING)_S)
+AND
+NOT DB_AMP_Plus_TierBump(_C, _, _)
+AND
+NOT DB_AMP_Plus_AvariceBumped(_C, _, _)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_C, _Host, 1)
+THEN
+PROC_AMP_Plus_GearDelta_Calc(_C);
+DB_AMP_Plus_TierBump(_C, _S, _S);
+
+PROC
+PROC_AMP_DiffV3_UntrackCreature((CHARACTER)_C)
+AND
+DB_AMP_Plus_TierBump(_C, (STRING)_Base, (STRING)_Applied)
+THEN
+NOT DB_AMP_Plus_TierBump(_C, _Base, _Applied);
+
+IF
+DB_AMP_Plus_TierBump((CHARACTER)_C, _, _)
+THEN
+PROC_AMP_Plus_TierBump_Sync(_C);
+
+// whichever of this and the escalation multiplier rule lands last runs the sync
+IF
+DB_AMP_Plus_FeralMult((CHARACTER)_C, _)
+AND
+DB_AMP_Plus_TierBump(_C, _, _)
+THEN
+PROC_AMP_Plus_TierBump_Sync(_C);
+
+IF
+DB_AMP_Feral_Active(_)
+AND
+DB_AMP_Plus_TierBump((CHARACTER)_C, _, _)
+THEN
+DB_AMP_Plus_TierBump_SyncQ(_C);
+
+IF
+DB_AMP_Feral_Active(_)
+THEN
+PROC_AMP_Plus_TierBump_DrainSyncQ();
+
+PROC
+PROC_AMP_Plus_TierBump_DrainSyncQ()
+AND
+DB_AMP_Plus_TierBump_SyncQ((CHARACTER)_C)
+THEN
+NOT DB_AMP_Plus_TierBump_SyncQ(_C);
+PROC_AMP_Plus_TierBump_Sync(_C);
+PROC_AMP_Plus_TierBump_DrainSyncQ();
+
+PROC
+PROC_AMP_Plus_TierBump_Sync((CHARACTER)_C)
+AND
+DB_AMP_Plus_TierBump(_C, (STRING)_Base, (STRING)_Applied)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+DB_AMP_DiffV3_TierMap(_Mode, (INTEGER)_BaseTier, _Base)
+AND
+DB_AMP_Feral_Active((INTEGER)_F)
+AND
+DB_AMP_Plus_FeralMult(_C, (INTEGER)_M)
+AND
+DB_AMP_Plus_GearDelta(_C, (INTEGER)_GD)
+AND
+IntegerProduct(_F, _M, (INTEGER)_FD)
+AND
+IntegerSum(_FD, _GD, (INTEGER)_Delta)
+AND
+IntegerSum(_BaseTier, _Delta, (INTEGER)_Raw)
+THEN
+PROC_AMP_Plus_TierBump_Clamp(_C, _Base, _Applied, _Raw, 0);
+
+PROC
+PROC_AMP_Plus_TierBump_Sync((CHARACTER)_C)
+AND
+DB_AMP_Plus_TierBump(_C, (STRING)_Base, (STRING)_Applied)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+DB_AMP_DiffV3_BossTierMap(_Mode, (INTEGER)_BaseTier, _Base)
+AND
+DB_AMP_Feral_Active((INTEGER)_F)
+AND
+DB_AMP_Plus_FeralMult(_C, (INTEGER)_M)
+AND
+DB_AMP_Plus_GearDelta(_C, (INTEGER)_GD)
+AND
+IntegerProduct(_F, _M, (INTEGER)_FD)
+AND
+IntegerSum(_FD, _GD, (INTEGER)_Delta)
+AND
+IntegerSum(_BaseTier, _Delta, (INTEGER)_Raw)
+THEN
+PROC_AMP_Plus_TierBump_Clamp(_C, _Base, _Applied, _Raw, 1);
+
+PROC
+PROC_AMP_Plus_TierBump_Clamp((CHARACTER)_C, (STRING)_Base, (STRING)_Applied, (INTEGER)_Raw, (INTEGER)_Boss)
+AND
+_Raw < 0
+THEN
+PROC_AMP_Plus_TierBump_Move(_C, _Base, _Applied, 0, _Boss);
+
+PROC
+PROC_AMP_Plus_TierBump_Clamp((CHARACTER)_C, (STRING)_Base, (STRING)_Applied, (INTEGER)_Raw, (INTEGER)_Boss)
+AND
+_Raw > 5
+THEN
+PROC_AMP_Plus_TierBump_Move(_C, _Base, _Applied, 5, _Boss);
+
+PROC
+PROC_AMP_Plus_TierBump_Clamp((CHARACTER)_C, (STRING)_Base, (STRING)_Applied, (INTEGER)_Raw, (INTEGER)_Boss)
+AND
+_Raw >= 0
+AND
+_Raw <= 5
+THEN
+PROC_AMP_Plus_TierBump_Move(_C, _Base, _Applied, _Raw, _Boss);
+
+// a stale marker would leave two tiers, another system may have moved the creature
+PROC
+PROC_AMP_Plus_TierBump_Move((CHARACTER)_C, (STRING)_Base, (STRING)_Applied, (INTEGER)_Tier, (INTEGER)_Boss)
+AND
+_Boss == 0
+AND
+DB_AMP_DiffV3_Tracked(_C, _Applied)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+DB_AMP_DiffV3_TierMap(_Mode, _Tier, (STRING)_Desired)
+AND
+_Desired != _Applied
+THEN
+PROC_AMP_Plus_TierBump_Swap(_C, _Base, _Applied, _Desired);
+
+PROC
+PROC_AMP_Plus_TierBump_Move((CHARACTER)_C, (STRING)_Base, (STRING)_Applied, (INTEGER)_Tier, (INTEGER)_Boss)
+AND
+_Boss == 1
+AND
+DB_AMP_DiffV3_Tracked(_C, _Applied)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+DB_AMP_DiffV3_BossTierMap(_Mode, _Tier, (STRING)_Desired)
+AND
+_Desired != _Applied
+THEN
+PROC_AMP_Plus_TierBump_Swap(_C, _Base, _Applied, _Desired);
+
+// marker moves before the tracking fact lands, or its readers open a second marker
+PROC
+PROC_AMP_Plus_TierBump_Swap((CHARACTER)_C, (STRING)_Base, (STRING)_Applied, (STRING)_Desired)
+THEN
+RemoveStatus(_C, _Applied, NULL_00000000-0000-0000-0000-000000000000);
+NOT DB_AMP_DiffV3_Tracked(_C, _Applied);
+NOT DB_AMP_Plus_TierBump(_C, _Base, _Applied);
+DB_AMP_Plus_TierBump(_C, _Base, _Desired);
+ApplyStatus(_C, _Desired, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_DiffV3_Tracked(_C, _Desired);
+
+IF
+Died((CHARACTER)_C)
+AND
+DB_AMP_Plus_TierBump(_C, (STRING)_Base, (STRING)_Applied)
+THEN
+NOT DB_AMP_Plus_TierBump(_C, _Base, _Applied);
+
+EXITSECTION
+ENDEXITSECTION

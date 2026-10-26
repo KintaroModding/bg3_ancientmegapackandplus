@@ -1,0 +1,48 @@
+// cap of 8 matches MAG_Ring40_StunToggle, which gates on and spends 8
+
+new entry "AMP_PLUS_POTENT_MAGIC_CAP"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_PLUS_POTENT_MAGIC_CAP"
+data "StackType" "Overwrite"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
+data "OnApplyFunctors" "IF(StatusDurationEqualOrMoreThan(context.Target,'MAG_CQC_ARCANE_CHARGE',9)):SetStatusDuration(MAG_CQC_ARCANE_CHARGE,8,ForceSet)"
+
+new entry "MAG_CQC_ARCANE_CHARGE"
+type "StatusData"
+data "StatusType" "BOOST"
+using "MAG_CQC_ARCANE_CHARGE"
+data "Description" "h61724da0gfabfg42f9g8b95gccf24571a697;1"
+data "DescriptionParams" "1;8"
+
+new entry "MAG_Ring23_GravebornAcumen"
+type "PassiveData"
+using "MAG_Ring23_GravebornAcumen"
+data "StatsFunctors" "ApplyStatus(SELF,MAG_CQC_ARCANE_CHARGE,100,2);ApplyStatus(SELF,AMP_PLUS_POTENT_MAGIC_CAP,100,1)"
+
+new entry "MAG_Ring23_GravebornAcumen_4"
+type "PassiveData"
+using "MAG_Ring23_GravebornAcumen_4"
+data "StatsFunctors" "ApplyStatus(SELF,MAG_CQC_ARCANE_CHARGE,100,3);ApplyStatus(SELF,AMP_PLUS_POTENT_MAGIC_CAP,100,1)"
+
+new entry "AMP_Shard_Head_Executioner_Passive"
+type "PassiveData"
+using "AMP_Shard_Head_Executioner_Passive"
+data "StatsFunctors" "ApplyStatus(SELF,MAG_CQC_ARCANE_CHARGE,100,1);ApplyStatus(SELF,AMP_PLUS_POTENT_MAGIC_CAP,100,1)"
+
+new entry "AMP_ArcaneWarrior_Charge"
+type "PassiveData"
+using "AMP_ArcaneWarrior_Charge"
+data "StatsFunctors" "ApplyStatus(SELF,MAG_CQC_ARCANE_CHARGE,100,1);ApplyStatus(SELF,AMP_PLUS_POTENT_MAGIC_CAP,100,1)"
+
+new entry "MAG_RING40_TICK"
+type "StatusData"
+data "StatusType" "BOOST"
+using "MAG_RING40_TICK"
+data "TickFunctors" "IF(IsMageArmored() and Combat()):ApplyStatus(MAG_CQC_ARCANE_CHARGE,100,2);IF(IsMageArmored() and Combat()):ApplyStatus(AMP_PLUS_POTENT_MAGIC_CAP,100,1)"
+
+new entry "MAG_RING40_TICK_3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "MAG_RING40_TICK_3"
+data "TickFunctors" "IF(IsMageArmored() and Combat()):ApplyStatus(MAG_CQC_ARCANE_CHARGE,100,2);IF(IsMageArmored() and Combat()):ApplyStatus(AMP_PLUS_POTENT_MAGIC_CAP,100,1)"

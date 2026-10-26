@@ -1,0 +1,16 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+// level up strips the stacks and the v3 buff procs are stubs, so nothing restores them until next combat
+// this goal sorts last and re-applies after the strip
+
+IF
+LeveledUp((CHARACTER)_Player)
+AND
+DB_Players(_Player)
+THEN
+PROC_AMP_ProgV6_RecastAll();
+
+EXITSECTION
+ENDEXITSECTION

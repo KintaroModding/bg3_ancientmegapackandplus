@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="226a6513-e5f4-49a5-a765-9836a04c2ebe" />
+					<attribute id="Name" type="LSString" value="DEC_Dungeon_Skeleton_Crawling_A_003" />
+					<attribute id="LevelName" type="FixedString" value="WLD_Main_A" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="702d4b08-5d46-4f18-a625-e387930d25a5" />
+					<attribute id="Flag" type="uint8" value="0" />
+					<attribute id="GroupID" type="uint32" value="0" />
+					<attribute id="HasParentModRelation" type="bool" value="True" />
+					<attribute id="Fadeable" type="bool" value="True" />
+					<attribute id="HierarchyOnlyFade" type="bool" value="True" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h554088d8g6139g4ac2gbd59g7c270ea98a6a" version="1" />
+					<attribute id="CoverAmount" type="uint8" value="0" />
+					<attribute id="CanShootThrough" type="bool" value="True" />
+					<attribute id="WalkThrough" type="bool" value="True" />
+					<attribute id="WadableSurfaceType" type="FixedString" value="SurfaceDeepWater" />
+					<attribute id="Icon" type="FixedString" value="Item_DEC_Dungeon_Skeleton_Laying_B" />
+					<attribute id="Stats" type="FixedString" value="OBJ_GenericImmutableObjectHeavy" />
+					<attribute id="LevelOverride" type="int32" value="-1" />
+					<attribute id="GravityType" type="uint8" value="1" />
+					<attribute id="Tooltip" type="uint8" value="1" />
+					<attribute id="BloodSurfaceType" type="FixedString" value="SurfaceNone" />
+					<attribute id="InventoryType" type="uint8" value="7" />
+					<attribute id="Description" type="TranslatedString" handle="h9a10a09agc874g4862gb9afgc74e3074af1c" version="1" />
+					<attribute id="IsPortal" type="bool" value="False" />
+					<attribute id="AttackableWhenClickThrough" type="bool" value="False" />
+					<attribute id="Faction" type="guid" value="376e33c4-dd15-4c46-a586-87d8b421a0c7" />
+					<attribute id="Archetype" type="FixedString" value="base" />
+					<attribute id="AiHint" type="guid" value="00000000-0000-0000-0000-000000000000" />
+					<attribute id="IsInspector" type="bool" value="True" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="161.74907 15.058065 554.61694" />
+							<attribute id="RotationQuat" type="fvec4" value="0 -0.092896536 0 0.99567586" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="WLD_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="46bf2460-7de1-6bba-140d-dd1238dbe671" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="cfbcf0de-a416-4650-9a15-4a847e822020" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="3d66c12d-0012-2c63-76c6-a56384792be2" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="ec5d68e6-647b-4e7c-3f89-0615cbcc5a18" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="OnUsePeaceActions">
+							<children>
+								<node id="Action">
+									<attribute id="ActionType" type="int32" value="1" />
+									<children>
+										<node id="Attributes">
+											<attribute id="Animation" type="FixedString" value="" />
+											<attribute id="Conditions" type="LSString" value="" />
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="OnDestroyActions">
+							<children>
+								<node id="Action">
+									<attribute id="ActionType" type="int32" value="5" />
+									<children>
+										<node id="Attributes">
+											<attribute id="Animation" type="FixedString" value="" />
+											<attribute id="Conditions" type="LSString" value="" />
+											<attribute id="TargetItemState" type="uint8" value="0" />
+											<attribute id="SnapToGround" type="bool" value="True" />
+											<attribute id="ExplodeFX" type="FixedString" value="15362651-9b96-579a-86f5-829e53325d8b" />
+											<attribute id="visualDestruction" type="FixedString" value="" />
+											<attribute id="VisualWithDynamicPhysics" type="FixedString" value="" />
+											<attribute id="FadeOutDelay" type="float" value="0" />
+											<attribute id="FadeOutFX" type="FixedString" value="" />
+											<attribute id="templateAfterDestruction" type="FixedString" value="558b4f99-ae8d-40d3-adf0-c109db552c5e" />
+										</node>
+									</children>
+								</node>
+								<node id="Action">
+									<attribute id="ActionType" type="int32" value="26" />
+									<children>
+										<node id="Attributes">
+											<attribute id="Animation" type="FixedString" value="" />
+											<attribute id="Conditions" type="LSString" value="" />
+											<attribute id="ActivateSoundEvent" type="FixedString" value="3ea82655-5140-4287-9ab8-794559f182d3" />
+											<attribute id="PlayOnHUD" type="bool" value="False" />
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="ExcludeInDifficulty" />
+						<node id="OnlyInDifficulty" />
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="Exploration_Minor" />
+								</node>
+							</children>
+						</node>
+						<node id="Scripts" />
+						<node id="ScriptOverrides">
+							<children>
+								<node id="ScriptOverrides" />
+							</children>
+						</node>
+						<node id="ItemList" />
+						<node id="StatusList" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

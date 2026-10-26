@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="092e8fd4-5769-44bf-9a61-17b58acfa19a" />
+					<attribute id="Name" type="LSString" value="AMP_Energy_Wall" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="be0379ff-6eba-4fb3-96f4-cb637fdd2273" />
+					<attribute id="Scale" type="float" value="0.9" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h9fc4cf24g1340gb865g518fgde530d8164e7" version="1" />
+					<children>
+						<node id="OnUsePeaceActions" />
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="HAG_MASK_ILLUSION" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

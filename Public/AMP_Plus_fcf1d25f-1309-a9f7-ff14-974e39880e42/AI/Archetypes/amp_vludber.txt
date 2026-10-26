@@ -1,0 +1,8 @@
+USING humanoid_mage_tactical
+
+// Land control on the weakest save, not just any target
+MODIFIER_CONTROL_STUPIDITY                       0.75
+
+// Weighs dangerous ground, never enough to spend the turn standing on the spot.
+MULTIPLIER_MOVEMENT_SURFACE                      0.35
+MULTIPLIER_ENDPOS_NOT_IN_DANGEROUS_SURFACE       0.10

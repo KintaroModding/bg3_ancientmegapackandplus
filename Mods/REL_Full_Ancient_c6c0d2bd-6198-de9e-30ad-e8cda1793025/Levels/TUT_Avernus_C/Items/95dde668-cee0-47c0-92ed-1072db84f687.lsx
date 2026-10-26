@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="95dde668-cee0-47c0-92ed-1072db84f687" />
+					<attribute id="Name" type="LSString" value="S_TUT_TransformChamber_SharChest" />
+					<attribute id="LevelName" type="FixedString" value="TUT_Avernus_C" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="a87debb4-a746-41b8-8441-7c436a91cc2d" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h5bd4d94agdc2fg4260gaddeg36e53446d685" version="5" />
+					<attribute id="WalkThrough" type="bool" value="True" />
+					<attribute id="LockDifficultyClassID" type="guid" value="ea049218-36a8-4440-a3fc-f3019a57c86b" />
+					<attribute id="Key" type="FixedString" value="TUT_SharChest" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="0.6" />
+							<attribute id="Position" type="fvec3" value="5.8299336 18.30138 -362.53143" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0.51136196 0 0.8593655" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="TUT_Avernus_C" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="63deda87-5c21-83d2-61d4-8920bda260da" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="TUT_Chest_Shar" />
+								</node>
+							</children>
+						</node>
+						<node id="ItemList" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

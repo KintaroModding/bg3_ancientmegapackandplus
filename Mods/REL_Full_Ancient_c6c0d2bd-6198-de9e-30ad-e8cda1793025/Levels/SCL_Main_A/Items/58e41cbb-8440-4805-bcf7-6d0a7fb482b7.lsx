@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="58e41cbb-8440-4805-bcf7-6d0a7fb482b7" />
+					<attribute id="Name" type="LSString" value="DOOR_SCL_Graveyard" />
+					<attribute id="LevelName" type="FixedString" value="SCL_Main_A" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="aedff83c-bc48-484b-9073-a02444494c12" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="LockDifficultyClassID" type="guid" value="753ed8df-b5dc-4584-b9fa-de18c4c956b2" />
+					<attribute id="Key" type="FixedString" value="TWN_Hospital_TombWithBootsOfApparentDeath" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="0.5" />
+							<attribute id="Position" type="fvec3" value="-161.196 32.306 47.485" />
+							<attribute id="RotationQuat" type="fvec4" value="0 -0.7071068 0 0.70710677" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="SCL_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="1afdce5a-4c84-f16d-29c8-faec3ee4f4b3" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="9c80f885-df47-8672-bf64-2a2b63950178" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="DEBRIS_THRESHOLD_GREATER" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

@@ -1,0 +1,139 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+DB_AMP_CurrentTable((CHARACTER)_Trader, (STRING)_Table)
+AND
+DB_AMP_TradingFix_Enabled(1)
+AND
+NOT DB_AMP_Plus_CapShop_Seeded(_Trader, _Table)
+THEN
+PROC_AMP_Plus_CapShop_Seed(_Trader, _Table);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_TradingFix_Enabled(1)
+AND
+DB_AMP_CurrentTable((CHARACTER)_Trader, (STRING)_Table)
+AND
+NOT DB_AMP_Plus_CapShop_Seeded(_Trader, _Table)
+THEN
+PROC_AMP_Plus_CapShop_Seed(_Trader, _Table);
+
+IF
+SavegameLoaded()
+AND
+DB_AMP_TradingFix_Enabled(1)
+AND
+DB_AMP_CurrentTable((CHARACTER)_Trader, (STRING)_Table)
+AND
+NOT DB_AMP_Plus_CapShop_Seeded(_Trader, _Table)
+THEN
+PROC_AMP_Plus_CapShop_Seed(_Trader, _Table);
+
+IF
+RequestTrade((CHARACTER)_Player, (CHARACTER)_Trader, _, _)
+AND
+DB_AMP_TradingFix_Enabled(1)
+AND
+DB_AMP_CurrentTable(_Trader, (STRING)_Table)
+AND
+NOT DB_AMP_Plus_CapShop_Seeded(_Trader, _Table)
+THEN
+PROC_AMP_Plus_CapShop_Seed(_Trader, _Table);
+
+// without the Ready gate the opening pass finds no assortment and marks every trader stocked
+
+PROC
+PROC_AMP_Plus_CapShop_Seed((CHARACTER)_Trader, (STRING)_Table)
+AND
+DB_AMP_Plus_CapShop_Ready(1)
+AND
+GetPosition(_Trader, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+DB_AMP_Plus_CapShop_Count(_Table, (INTEGER)_N)
+THEN
+DB_AMP_Plus_CapShop_Seeded(_Trader, _Table);
+PROC_AMP_Plus_CapShop_Draw(_Trader, _Table, _N);
+
+PROC
+PROC_AMP_Plus_CapShop_Seed((CHARACTER)_Trader, (STRING)_Table)
+AND
+DB_AMP_Plus_CapShop_Ready(1)
+AND
+GetPosition(_Trader, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+DB_AMP_Plus_CapShop_Count(_Table, (INTEGER)_N)
+AND
+DB_AMP_Plus_CapShop_Rolls(_Table, 2)
+THEN
+PROC_AMP_Plus_CapShop_Draw(_Trader, _Table, _N);
+
+// no assortment still marks the table seeded, so the sweep stops retrying
+
+PROC
+PROC_AMP_Plus_CapShop_Seed((CHARACTER)_Trader, (STRING)_Table)
+AND
+DB_AMP_Plus_CapShop_Ready(1)
+AND
+GetPosition(_Trader, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+NOT DB_AMP_Plus_CapShop_Count(_Table, _)
+THEN
+DB_AMP_Plus_CapShop_Seeded(_Trader, _Table);
+
+PROC
+PROC_AMP_Plus_CapShop_Draw((CHARACTER)_Trader, (STRING)_Table, (INTEGER)_N)
+AND
+Random(_N, (INTEGER)_Roll1)
+AND
+IntegerSum(_Roll1, 1, (INTEGER)_First)
+AND
+DB_AMP_Plus_CapShop_Theme(_Table, _First, (ITEMROOT)_Template)
+THEN
+TemplateAddTo(_Template, _Trader, 1, 0);
+PROC_AMP_Plus_CapShop_MaybeSecond(_Trader, _Table, _First, _N);
+
+PROC
+PROC_AMP_Plus_CapShop_MaybeSecond((CHARACTER)_Trader, (STRING)_Table, (INTEGER)_First, (INTEGER)_N)
+AND
+_N > 1
+AND
+Random(5, (INTEGER)_Roll)
+AND
+_Roll == 0
+AND
+IntegerSubtract(_N, 1, (INTEGER)_Reduced)
+AND
+Random(_Reduced, (INTEGER)_Roll2)
+AND
+IntegerSum(_Roll2, 1, (INTEGER)_Second)
+THEN
+PROC_AMP_Plus_CapShop_Give(_Trader, _Table, _Second, _First);
+
+PROC
+PROC_AMP_Plus_CapShop_Give((CHARACTER)_Trader, (STRING)_Table, (INTEGER)_Index, (INTEGER)_First)
+AND
+_Index < _First
+AND
+DB_AMP_Plus_CapShop_Theme(_Table, _Index, (ITEMROOT)_Template)
+THEN
+TemplateAddTo(_Template, _Trader, 1, 0);
+
+PROC
+PROC_AMP_Plus_CapShop_Give((CHARACTER)_Trader, (STRING)_Table, (INTEGER)_Index, (INTEGER)_First)
+AND
+_Index >= _First
+AND
+IntegerSum(_Index, 1, (INTEGER)_Shifted)
+AND
+DB_AMP_Plus_CapShop_Theme(_Table, _Shifted, (ITEMROOT)_Template)
+THEN
+TemplateAddTo(_Template, _Trader, 1, 0);
+
+EXITSECTION
+ENDEXITSECTION

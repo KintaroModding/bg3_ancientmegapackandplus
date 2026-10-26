@@ -1,0 +1,76 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// tech status -> tier
+DB_AMP_Knuckle_Tech("AMP_KNUCKLE1_TECH", 1);
+DB_AMP_Knuckle_Tech("AMP_KNUCKLE2_TECH", 2);
+DB_AMP_Knuckle_Tech("AMP_KNUCKLE3_TECH", 3);
+DB_AMP_Knuckle_Tech("AMP_KNUCKLE4_TECH", 4);
+
+// tier -> wild shape bonus status
+DB_AMP_Knuckle_WS(1, "AMP_KNUCKLE1_WS");
+DB_AMP_Knuckle_WS(2, "AMP_KNUCKLE2_WS");
+DB_AMP_Knuckle_WS(3, "AMP_KNUCKLE3_WS");
+DB_AMP_Knuckle_WS(4, "AMP_KNUCKLE4_WS");
+
+KBSECTION
+
+// equip: cache equipped tier
+IF
+StatusApplied(_Char, _Status, _, _)
+AND
+DB_AMP_Knuckle_Tech(_Status, _Tier)
+THEN
+NOT DB_AMP_Knuckle_Equipped(_Char, _Tier);
+DB_AMP_Knuckle_Equipped(_Char, _Tier);
+
+// tech removed -> delayed unequip check (tech drops before wildshape status)
+IF
+StatusRemoved(_Char, _Status, _, _)
+AND
+DB_AMP_Knuckle_Tech(_Status, _Tier)
+THEN
+ObjectTimerLaunch((GUIDSTRING)_Char, "AMP_Knuckle_UnequipCheck", 1000, 0);
+
+// real unequip: out of beast shape and tech gone -> drop ws + clear db
+IF
+ObjectTimerFinished(_Char, "AMP_Knuckle_UnequipCheck")
+AND
+DB_AMP_Knuckle_Equipped((CHARACTER)_Char, _Tier)
+AND
+DB_AMP_Knuckle_Tech(_TechStatus, _Tier)
+AND
+HasActiveStatus((CHARACTER)_Char, _TechStatus, 0)
+AND
+HasActiveStatusWithGroup((CHARACTER)_Char, "SG_Polymorph_BeastShape", 0)
+AND
+DB_AMP_Knuckle_WS(_Tier, _WSStatus)
+THEN
+RemoveStatus((CHARACTER)_Char, _WSStatus);
+NOT DB_AMP_Knuckle_Equipped((CHARACTER)_Char, _Tier);
+
+// wild shape enter: apply ws bonus on the beast
+IF
+StatusApplied(_Char, _WS, _, _)
+AND
+IsStatusFromGroup(_WS, "SG_Polymorph_BeastShape", 1)
+AND
+DB_AMP_Knuckle_Equipped(_Char, _Tier)
+AND
+DB_AMP_Knuckle_WS(_Tier, _WSStatus)
+THEN
+ApplyStatus(_Char, _WSStatus, -1.0, 1, _Char);
+
+// wild shape exit: remove ws bonus
+IF
+StatusRemoved(_Char, _WS, _, _)
+AND
+IsStatusFromGroup(_WS, "SG_Polymorph_BeastShape", 1)
+AND
+DB_AMP_Knuckle_WS(_Tier, _WSStatus)
+THEN
+RemoveStatus(_Char, _WSStatus);
+
+EXITSECTION
+ENDEXITSECTION

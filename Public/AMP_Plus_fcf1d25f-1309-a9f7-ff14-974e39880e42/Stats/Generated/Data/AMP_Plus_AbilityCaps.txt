@@ -1,0 +1,662 @@
+// Ability(Stat,N,Cap) without the third argument is unbounded and item bonuses stack
+
+
+new entry "MAG_Armour_C_20"
+type "Armor"
+using "MAG_Armour_C_20"
+data "Boosts" "Ability(Intelligence,1,18)"
+
+new entry "MAG_Armour_C_20_2"
+type "Armor"
+using "MAG_Armour_C_20_2"
+data "Boosts" "Ability(Intelligence,2,20)"
+
+new entry "AMP_ArcaneFighter_Helmet_1"
+type "Armor"
+using "AMP_ArcaneFighter_Helmet_1"
+data "Boosts" "Ability(Intelligence,1,18)"
+
+new entry "AMP_ArcaneFighter_Helmet_2"
+type "Armor"
+using "AMP_ArcaneFighter_Helmet_2"
+data "Boosts" "Ability(Intelligence,1,20)"
+
+new entry "AMP_ArcaneFighter_Helmet_3"
+type "Armor"
+using "AMP_ArcaneFighter_Helmet_3"
+data "Boosts" "Ability(Intelligence,1,22)"
+
+new entry "AMP_ArcaneFighter_Helmet_4"
+type "Armor"
+using "AMP_ArcaneFighter_Helmet_4"
+data "Boosts" "Ability(Intelligence,3,24)"
+
+new entry "UNI_Druid_Helmet_Circlet"
+type "Armor"
+using "UNI_Druid_Helmet_Circlet"
+data "Boosts" "Skill(Nature, 1);Ability(Wisdom,1,18)"
+
+new entry "ARM_TalismanOfJergal"
+type "Armor"
+using "ARM_TalismanOfJergal"
+data "Boosts" "UnlockSpell(Target_SpeakWithDead_Amulet_CHA);Ability(Wisdom, 1, 18)"
+
+new entry "ARM_HAG_Phylactery"
+type "Armor"
+using "ARM_HAG_Phylactery"
+data "Boosts" "Ability(Constitution,1,18,true)"
+
+new entry "MAG_Druid_Ironvine_Shield"
+type "Armor"
+using "MAG_Druid_Ironvine_Shield"
+data "Boosts" "Ability(Constitution,1,18,true)"
+
+new entry "MAG_WoodWoad_Nature_Shield"
+type "Armor"
+using "MAG_WoodWoad_Nature_Shield"
+data "Boosts" "UnlockSpell(Target_MAG_EnsnaringStrike_Shield);Ability(Constitution,1,18,true)"
+
+new entry "MAG_Armour_G_78"
+type "Armor"
+using "MAG_Armour_G_78"
+data "Boosts" "Skill(Stealth,1);Ability(Dexterity,1,20)"
+
+new entry "MAG_Cloak56_1"
+type "Armor"
+using "MAG_Cloak56_1"
+data "Boosts" "Ability(Constitution, 2, 18,true)"
+
+new entry "MAG_Cloak56"
+type "Armor"
+using "MAG_Cloak56"
+data "Boosts" "Ability(Constitution, 3, 20,true)"
+
+new entry "MAG_Cloak56_3"
+type "Armor"
+using "MAG_Cloak56_3"
+data "Boosts" "Ability(Constitution, 3, 22,true)"
+
+
+new entry "MAG_Armour_A_35_3"
+type "Armor"
+using "MAG_Armour_A_35_3"
+data "Boosts" "Ability(Dexterity, 2,22)"
+
+new entry "MAG_Armour_A_35_4"
+type "Armor"
+using "MAG_Armour_A_35_4"
+data "Boosts" "Ability(Dexterity, 3,24)"
+
+new entry "MAG_Neck36_3"
+type "Armor"
+using "MAG_Neck36_3"
+data "Boosts" "Ability(Constitution,2,22,true)"
+
+new entry "MAG_Neck38_3"
+type "Armor"
+using "MAG_Neck38_3"
+data "Boosts" "Ability(Dexterity,2,22)"
+
+new entry "MAG_Weapon66"
+type "Armor"
+using "MAG_Weapon66"
+data "Boosts" "Ability(Strength, 1, 18)"
+
+new entry "MAG_Armour_C_29_4"
+type "Armor"
+using "MAG_Armour_C_29_4"
+data "Boosts" "Ability(Constitution,4,24,true)"
+
+new entry "MAG_Neck1_1"
+type "Armor"
+using "MAG_Neck1_1"
+data "Boosts" "Ability(Constitution,1,18,true)"
+
+new entry "MAG_Neck1_2"
+type "Armor"
+using "MAG_Neck1_2"
+data "Boosts" "Ability(Constitution,2,20,true)"
+
+new entry "MAG_Neck1"
+type "Armor"
+using "MAG_Neck1"
+data "Boosts" "Ability(Constitution,2,22,true)"
+
+new entry "MAG_Neck1_4"
+type "Armor"
+using "MAG_Neck1_4"
+data "Boosts" "Ability(Constitution,4,24,true)"
+
+new entry "MAG_Cloak58"
+type "Armor"
+using "MAG_Cloak58"
+data "Boosts" "Ability(Intelligence, 2, 22)"
+
+new entry "MAG_Cloak58_3"
+type "Armor"
+using "MAG_Cloak58_3"
+data "Boosts" "Ability(Intelligence, 3, 24)"
+
+
+new entry "AMP_Kyzr_Armour_2_1"
+type "Armor"
+using "AMP_Kyzr_Armour_2_1"
+data "Boosts" "Disadvantage(Skill,Stealth);Ability(Constitution,1,18);UnlockSpell(AMP_Kyzr_Defensive_Stance_1)"
+
+new entry "AMP_Kyzr_Armour_2_2"
+type "Armor"
+using "AMP_Kyzr_Armour_2_2"
+data "Boosts" "Disadvantage(Skill,Stealth);Ability(Constitution,1,20);UnlockSpell(AMP_Kyzr_Defensive_Stance_2)"
+
+new entry "AMP_Kyzr_Armour_2_3"
+type "Armor"
+using "AMP_Kyzr_Armour_2_3"
+data "Boosts" "Disadvantage(Skill,Stealth);Ability(Constitution,2,22);Advantage(SavingThrow,Constitution);UnlockSpell(AMP_Kyzr_Defensive_Stance_3)"
+
+new entry "AMP_Kyzr_Armour_2_4"
+type "Armor"
+using "AMP_Kyzr_Armour_2_4"
+data "Boosts" "Disadvantage(Skill,Stealth);Ability(Constitution,3,24);UnlockSpell(AMP_Kyzr_Defensive_Stance_4)"
+
+new entry "AMP_PirateRogue_Helmet_1"
+type "Armor"
+using "AMP_PirateRogue_Helmet_1"
+data "Boosts" "Ability(Dexterity,1,18)"
+
+new entry "AMP_PirateRogue_Helmet_2"
+type "Armor"
+using "AMP_PirateRogue_Helmet_2"
+data "Boosts" "Ability(Dexterity,1,20)"
+
+new entry "AMP_PirateRogue_Helmet_3"
+type "Armor"
+using "AMP_PirateRogue_Helmet_3"
+data "Boosts" "Ability(Dexterity,2,22)"
+
+new entry "AMP_PirateRogue_Helmet_4"
+type "Armor"
+using "AMP_PirateRogue_Helmet_4"
+data "Boosts" "Ability(Dexterity,3,24)"
+
+new entry "AMP_Boots_FatesGamble_2"
+type "Armor"
+using "AMP_Boots_FatesGamble_2"
+data "Boosts" "UnlockSpell(Shout_AMP_GamblersBet_2);Ability(Charisma,1,20)"
+
+new entry "AMP_Boots_FatesGamble_3"
+type "Armor"
+using "AMP_Boots_FatesGamble_3"
+data "Boosts" "UnlockSpell(Shout_AMP_GamblersBet_3);Ability(Charisma,1,22)"
+
+new entry "AMP_Boots_FatesGamble_4"
+type "Armor"
+using "AMP_Boots_FatesGamble_4"
+data "Boosts" "UnlockSpell(Shout_AMP_GamblersBet_4);Ability(Charisma,2,24)"
+
+new entry "MAG_Armour_C_27"
+type "Armor"
+using "MAG_Armour_C_27"
+data "Boosts" "AC(1);Ability(Dexterity,1,20)"
+
+new entry "MAG_Armour_C_27_2"
+type "Armor"
+using "MAG_Armour_C_27_2"
+data "Boosts" "AC(2);Ability(Dexterity,1,20)"
+
+new entry "MAG_Armour_C_27_3"
+type "Armor"
+using "MAG_Armour_C_27_3"
+data "Boosts" "AC(3);Ability(Dexterity,1,20)"
+
+new entry "MAG_Armour_H_115"
+type "Armor"
+using "MAG_Armour_H_115"
+data "Boosts" "Ability(Charisma,1,22)"
+
+new entry "MAG_Armour_H_115_4"
+type "Armor"
+using "MAG_Armour_H_115_4"
+data "Boosts" "Ability(Charisma,3,24)"
+
+new entry "MAG_Ring48"
+type "Armor"
+using "MAG_Ring48"
+data "Boosts" "Ability(Wisdom,1,22)"
+
+new entry "MAG_Ring48_4"
+type "Armor"
+using "MAG_Ring48_4"
+data "Boosts" "Ability(Wisdom,2,24)"
+
+new entry "MAG_Armour_C_10"
+type "Armor"
+using "MAG_Armour_C_10"
+data "Boosts" "Ability(Charisma,1,18);UnlockSpell(MAG_Armour_C_10_TavernRumour)"
+
+new entry "MAG_Armour_C_10_2"
+type "Armor"
+using "MAG_Armour_C_10_2"
+data "Boosts" "Ability(Charisma,2,20);AC(1);UnlockSpell(MAG_Armour_C_10_2_UnsettlingTale)"
+
+new entry "MAG_Armour_C_10_3"
+type "Armor"
+using "MAG_Armour_C_10_3"
+data "Boosts" "Ability(Charisma,4,22);AC(2);UnlockSpell(MAG_Armour_C_10_3_CampfireHorror)"
+
+new entry "MAG_Armour_C_15"
+type "Armor"
+using "MAG_Armour_C_15"
+data "Boosts" "Ability(Intelligence,1,18);Skill(Arcana,1)"
+
+new entry "MAG_Armour_A_43_4"
+type "Armor"
+using "MAG_Armour_A_43_4"
+data "Boosts" "Ability(Dexterity,2,24)"
+
+new entry "MAG_Armour_B_137"
+type "Armor"
+using "MAG_Armour_B_137"
+data "Boosts" "Ability(Intelligence, 2, 22)"
+
+new entry "MAG_Weapon121"
+type "Weapon"
+using "MAG_Weapon121"
+data "Boosts" "Ability(Strength,1,24)"
+
+new entry "MAG_Weapon99"
+type "Weapon"
+using "MAG_Weapon99"
+data "Boosts" "Ability(Dexterity,1,20)"
+
+new entry "MAG_Weapon64_3"
+type "Armor"
+using "MAG_Weapon64_3"
+data "Boosts" "Ability(Dexterity,1,22)"
+
+new entry "MAG_Weapon83_4"
+type "Armor"
+using "MAG_Weapon83_4"
+data "Boosts" "Ability(Wisdom,2,24)"
+
+new entry "MAG_Cloak16_3"
+type "Armor"
+using "MAG_Cloak16_3"
+data "Boosts" "Ability(Dexterity, 1, 22)"
+
+new entry "MAG_Cloak45"
+type "Armor"
+using "MAG_Cloak45"
+data "Boosts" "Ability(Strength,1,22)"
+
+new entry "MAG_Cloak53"
+type "Armor"
+using "MAG_Cloak53"
+data "Boosts" "Ability(Dexterity,1,20)"
+
+new entry "MAG_Cloak53_1"
+type "Armor"
+using "MAG_Cloak53_1"
+data "Boosts" "Ability(Dexterity,1,18)"
+
+new entry "MAG_Cloak53_3"
+type "Armor"
+using "MAG_Cloak53_3"
+data "Boosts" "Ability(Dexterity,2,22)"
+
+new entry "MAG_Cloak53_4"
+type "Armor"
+using "MAG_Cloak53_4"
+data "Boosts" "Ability(Dexterity,2,24)"
+
+new entry "MAG_Cloak71"
+type "Armor"
+using "MAG_Cloak71"
+data "Boosts" "Ability(Dexterity,1,20)"
+
+new entry "MAG_Cloak60"
+type "Armor"
+using "MAG_Cloak60"
+data "Boosts" "Advantage(SavingThrow, Constitution);Ability(Charisma,1,20);Ability(Strength,1,20)"
+
+new entry "MAG_Cloak60_3"
+type "Armor"
+using "MAG_Cloak60_3"
+data "Boosts" "Advantage(SavingThrow, Constitution);Ability(Charisma,2,22);Ability(Strength,2,22)"
+
+new entry "AMP_Kyzr_Armour_1_2"
+type "Armor"
+using "AMP_Kyzr_Armour_1_2"
+data "Boosts" "Disadvantage(Skill,Stealth);Ability(Wisdom,1,20);UnlockSpell(AMP_Kyzr_Shatter_3)"
+
+new entry "AMP_Kyzr_Armour_1_3"
+type "Armor"
+using "AMP_Kyzr_Armour_1_3"
+data "Boosts" "Disadvantage(Skill,Stealth);Ability(Wisdom,2,22);UnlockSpell(AMP_Kyzr_Destructive_Wave_5)"
+
+new entry "AMP_Kyzr_Armour_1_4"
+type "Armor"
+using "AMP_Kyzr_Armour_1_4"
+data "Boosts" "Disadvantage(Skill,Stealth);Ability(Wisdom,3,24);UnlockSpell(AMP_Kyzr_Destructive_Wave_6)"
+
+new entry "AMP_Kyzr_HalfPlate_Soul_3"
+type "Armor"
+using "AMP_Kyzr_HalfPlate_Soul_3"
+data "Boosts" "IF(not HasPassive('MediumArmorMaster', context.Source)):Disadvantage(Skill,Stealth);Ability(Charisma,1,22)"
+
+new entry "AMP_Kyzr_HalfPlate_Soul_4"
+type "Armor"
+using "AMP_Kyzr_HalfPlate_Soul_4"
+data "Boosts" "IF(not HasPassive('MediumArmorMaster', context.Source)):Disadvantage(Skill,Stealth);Ability(Charisma,2,24);Resistance(Psychic,Resistant);Resistance(Necrotic,Resistant)"
+
+new entry "AMP_Boots_PerfectCrime"
+type "Armor"
+using "AMP_Boots_PerfectCrime"
+data "Boosts" "Ability(Dexterity,1,18)"
+
+new entry "AMP_Boots_PerfectCrime_2"
+type "Armor"
+using "AMP_Boots_PerfectCrime_2"
+data "Boosts" "Ability(Dexterity,1,20)"
+
+new entry "AMP_Boots_PerfectCrime_3"
+type "Armor"
+using "AMP_Boots_PerfectCrime_3"
+data "Boosts" "Ability(Dexterity,2,22)"
+
+new entry "AMP_Boots_PerfectCrime_4"
+type "Armor"
+using "AMP_Boots_PerfectCrime_4"
+data "Boosts" "Ability(Dexterity,2,24)"
+
+new entry "Needle01"
+type "Weapon"
+using "Needle01"
+data "Boosts" "Ability(Dexterity,1,20)"
+
+new entry "Needle02"
+type "Weapon"
+using "Needle02"
+data "Boosts" "Ability(Dexterity,2,22)"
+
+new entry "Needle03"
+type "Weapon"
+using "Needle03"
+data "Boosts" "Ability(Dexterity,3,24)"
+
+new entry "MAG_Enforcer_NonLethalFright_Club"
+type "Weapon"
+using "MAG_Enforcer_NonLethalFright_Club"
+data "Boosts" "Ability(Strength,1,20)"
+
+new entry "MAG_LC_Lorroakan_Robe"
+type "Armor"
+using "MAG_LC_Lorroakan_Robe"
+data "Boosts" "Ability(Charisma,2,22);Ability(Intelligence,2,22);Ability(Wisdom,2,22);UnlockSpell(Shout_MAG_MirrorImage)"
+
+
+new entry "MAG_Armour_H_91"
+type "Armor"
+using "MAG_Armour_H_91"
+data "Boosts" "AbilityOverrideMinimum(Charisma,20)"
+
+new entry "MAG_Armour_H_94"
+type "Armor"
+using "MAG_Armour_H_94"
+data "Boosts" "AbilityOverrideMinimum(Intelligence,16)"
+
+new entry "MAG_Armour_C_18"
+type "Armor"
+using "MAG_Armour_C_18"
+data "Boosts" "AbilityOverrideMinimum(Constitution,16)"
+
+new entry "MAG_Armour_C_18_2"
+type "Armor"
+using "MAG_Armour_C_18_2"
+data "Boosts" "AbilityOverrideMinimum(Constitution,18)"
+
+new entry "MAG_Armour_C_18_3"
+type "Armor"
+using "MAG_Armour_C_18_3"
+data "Boosts" "AbilityOverrideMinimum(Constitution,20)"
+
+new entry "MAG_Cloak35"
+type "Armor"
+using "MAG_Cloak35"
+data "Boosts" "AbilityOverrideMinimum(Wisdom, 14)"
+
+new entry "MAG_Cloak35_2"
+type "Armor"
+using "MAG_Cloak35_2"
+data "Boosts" "AbilityOverrideMinimum(Wisdom, 16)"
+
+
+// odd minimums round down, 17 reads as 16 and 21 as 20
+new entry "MAG_Cloak55_2"
+type "Armor"
+using "MAG_Cloak55_2"
+data "Boosts" "AbilityOverrideMinimum(Constitution,18,true)"
+
+new entry "MAG_Cloak57"
+type "Armor"
+using "MAG_Cloak57"
+data "Boosts" "AbilityOverrideMinimum(Charisma,20)"
+
+new entry "MAG_Cloak85"
+type "Armor"
+using "MAG_Cloak85"
+data "Boosts" "AbilityOverrideMinimum(Dexterity,22);AC(-1)"
+
+new entry "AMP_Banes_Tyrannical_Vestments"
+type "Armor"
+using "AMP_Banes_Tyrannical_Vestments"
+data "Boosts" "AC(3);Ability(Strength,4,26);Ability(Constitution,4,26)"
+data "StatusOnEquip" "AMP_PLUS_AURA_OF_TERROR"
+
+new entry "MAG_Weapon61"
+type "Weapon"
+using "MAG_Weapon61"
+data "Boosts" "Ability(Dexterity, 3, 22)"
+
+new entry "MAG_Weapon58"
+type "Weapon"
+using "MAG_Weapon58"
+data "Boosts" "Ability(Dexterity, 2, 22)"
+
+new entry "AMP_WildMagic_Robe"
+type "Armor"
+using "AMP_WildMagic_Robe"
+data "Boosts" "Ability(Charisma,1,22);Initiative(2)"
+
+
+new entry "WEAPON106"
+type "StatusData"
+data "StatusType" "BOOST"
+using "WEAPON106"
+data "Boosts" "Ability(Strength, 3);Ability(Constitution, 3, 99, true)"
+
+new entry "WEAPON106_R"
+type "StatusData"
+data "StatusType" "BOOST"
+using "WEAPON106_R"
+data "Boosts" "Ability(Strength, 4);Ability(Constitution, 4, 99, true)"
+
+new entry "WEAPON106_VR"
+type "StatusData"
+data "StatusType" "BOOST"
+using "WEAPON106_VR"
+data "Boosts" "Ability(Strength, 5);Ability(Constitution, 5, 99, true)"
+
+new entry "WEAPON106_L"
+type "StatusData"
+data "StatusType" "BOOST"
+using "WEAPON106_L"
+data "Boosts" "Ability(Strength, 8);Ability(Constitution, 8, 99, true)"
+
+new entry "AMP_ARCANE_V_1"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ARCANE_V_1"
+data "Boosts" "Ability(Intelligence,1,20);Ability(Wisdom,1,20);Ability(Charisma,1,20)"
+
+new entry "AMP_ARCANE_V_2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ARCANE_V_2"
+data "Boosts" "Ability(Intelligence,2,22);Ability(Wisdom,2,22);Ability(Charisma,2,22)"
+
+new entry "AMP_ARCANE_V_3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ARCANE_V_3"
+data "Boosts" "Ability(Intelligence,3,24);Ability(Wisdom,3,24);Ability(Charisma,3,24)"
+
+new entry "AMP_ARCANE_V_4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ARCANE_V_4"
+data "Boosts" "Ability(Intelligence,4,24);Ability(Wisdom,4,24);Ability(Charisma,4,24)"
+
+new entry "AMP_ISOLATION_ACTIVE"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ISOLATION_ACTIVE"
+data "Boosts" "UnlockSpellVariant(IsTeleportSpell(),ModifyTargetRadius(Multiplicative,1.25));Ability(Wisdom,2,20)"
+
+new entry "AMP_ISOLATION_ACTIVE_2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ISOLATION_ACTIVE_2"
+data "Boosts" "UnlockSpellVariant(IsTeleportSpell(),ModifyTargetRadius(Multiplicative,1.5));Ability(Wisdom,3,22)"
+
+new entry "AMP_ISOLATION_ACTIVE_3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ISOLATION_ACTIVE_3"
+data "Boosts" "UnlockSpellVariant(IsTeleportSpell(),ModifyTargetRadius(Multiplicative,1.75));Ability(Wisdom,4,24)"
+
+new entry "AMP_ISOLATION_ACTIVE_4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ISOLATION_ACTIVE_4"
+data "Boosts" "UnlockSpellVariant(IsTeleportSpell(),ModifyTargetRadius(Multiplicative,2));Ability(Wisdom,5,24)"
+data "DescriptionParams" "Distance(200);100;5"
+
+new entry "MAG_Neck15_bonus"
+type "PassiveData"
+using "MAG_Neck15_bonus"
+data "Boosts" "IgnoreResistance(Slashing,Immune);IgnoreResistance(Piercing,Immune);IgnoreResistance(Bludgeoning,Immune);IgnoreResistance(Acid,Immune);IgnoreResistance(Thunder,Immune);IgnoreResistance(Necrotic,Immune);IgnoreResistance(Fire,Immune);IgnoreResistance(Lightning,Immune);IgnoreResistance(Cold,Immune);IgnoreResistance(Psychic,Immune);IgnoreResistance(Poison,Immune);IgnoreResistance(Radiant,Immune);IgnoreResistance(Force,Immune);Ability(Strength,-2);Ability(Dexterity,-2);Ability(Constitution,-2,99,true);Ability(Intelligence,-2);Ability(Wisdom,-2);Ability(Charisma,-2)"
+
+new entry "MAG_Weapon117"
+type "Weapon"
+using "MAG_Weapon117"
+data "Boosts" "Disadvantage(SavingThrow, Constitution);Ability(Constitution, -5,99,true)"
+
+new entry "WEAPON111"
+type "StatusData"
+data "StatusType" "BOOST"
+using "WEAPON111"
+data "Boosts" "AbilityOverrideMinimum(Strength,14);AbilityOverrideMinimum(Dexterity,14);AbilityOverrideMinimum(Constitution,14);AbilityOverrideMinimum(Intelligence,14);AbilityOverrideMinimum(Wisdom,14);AbilityOverrideMinimum(Charisma,14)"
+data "DescriptionParams" "7;DealDamage(10d10,Necrotic);100;5;1;14"
+
+new entry "MAG_Neck12_P3"
+type "PassiveData"
+using "MAG_Neck12_P3"
+data "BoostConditions" "AMP_Plus_IsDexterityHighestRaven(context.Source,4,24)"
+data "Boosts" "Ability(Dexterity,4,24);ReduceCriticalAttackThreshold(1);Tag(AMP_TAG_RAVEN_ACCURACY_ON)"
+
+new entry "MAG_Neck2_bonus"
+type "PassiveData"
+using "MAG_Neck2_bonus"
+data "DescriptionParams" "2;22"
+data "Boosts" "Ability(Strength,2,22);Advantage(SavingThrow,Strength);"
+
+new entry "MAG_Neck3_bonus"
+type "PassiveData"
+using "MAG_Neck3_bonus"
+data "DescriptionParams" "2;22"
+data "Boosts" "Ability(Constitution,2,22,true);Advantage(SavingThrow,Constitution);"
+
+new entry "MAG_Neck4_bonus"
+type "PassiveData"
+using "MAG_Neck4_bonus"
+data "DescriptionParams" "2;22"
+data "Boosts" "Ability(Dexterity,2,22);Advantage(SavingThrow,Dexterity);"
+
+new entry "MAG_Neck5_bonus"
+type "PassiveData"
+using "MAG_Neck5_bonus"
+data "DescriptionParams" "2;22"
+data "Boosts" "Ability(Intelligence,2,22);Advantage(SavingThrow,Intelligence);"
+
+new entry "MAG_Neck6_bonus"
+type "PassiveData"
+using "MAG_Neck6_bonus"
+data "DescriptionParams" "2;22"
+data "Boosts" "Ability(Wisdom,2,22);Advantage(SavingThrow,Wisdom);"
+
+new entry "MAG_Neck7_bonus"
+type "PassiveData"
+using "MAG_Neck7_bonus"
+data "DescriptionParams" "2;22"
+data "Boosts" "Ability(Charisma,2,22);Advantage(Ability,Charisma);"
+
+
+new entry "AMP_Amulet_CaioShin"
+type "Armor"
+using "AMP_Amulet_CaioShin"
+data "Boosts" "Ability(Wisdom,1,22)"
+
+new entry "AMP_Amulet_CaioShin_4"
+type "Armor"
+using "AMP_Amulet_CaioShin_4"
+data "Boosts" "Ability(Wisdom,2,24)"
+
+
+new entry "ARMOURH89_1"
+type "StatusData"
+data "StatusType" "BOOST"
+using "ARMOURH89_1"
+data "Boosts" "Ability(Charisma,2,18)"
+
+new entry "ARMOURH89"
+type "StatusData"
+data "StatusType" "BOOST"
+using "ARMOURH89"
+data "Boosts" "Ability(Charisma,3,20)"
+
+new entry "ARMOURH89_3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "ARMOURH89_3"
+data "Boosts" "Ability(Charisma,4,22)"
+
+new entry "ARMOURH89_4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "ARMOURH89_4"
+data "Boosts" "Ability(Charisma,6,24)"
+
+
+new entry "RING34"
+type "StatusData"
+data "StatusType" "BOOST"
+using "RING34"
+data "Boosts" "Ability(Charisma,3,22)"
+
+new entry "RING34_3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "RING34_3"
+data "Boosts" "Ability(Charisma,4,24)"
+
+new entry "RING34_4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "RING34_4"
+data "Boosts" "Ability(Charisma,6,26)"
+
+
+new entry "MAG_Cloak57_4"
+type "Armor"
+using "MAG_Cloak57_4"
+data "Boosts" "AbilityOverrideMinimum(Charisma,22)"

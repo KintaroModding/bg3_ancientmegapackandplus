@@ -1,0 +1,133 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// retract the base threshold so the base check rule can't resolve. streak bookkeeping stays
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_TurtleThreshold((INTEGER)_T)
+THEN
+NOT DB_AMP_TurtleThreshold(_T);
+
+// per-combat lock is shared with the CC wave, so both can't fire in one fight
+// chase gate reads the submod record, the base one is emptied
+PROC
+PROC_AMP_Turtle_Check((CHARACTER)_Player, (INTEGER)_N)
+AND
+DB_AMP_Plus_SpawnIntensity_Freq((INTEGER)_Tier)
+AND
+DB_AMP_Plus_TurtleThreshByTier(_Tier, (INTEGER)_Thresh)
+AND
+_N >= _Thresh
+AND
+DB_AMP_Ultra_Active(1)
+AND
+CombatGetGuidFor(_Player, (GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_TurtleCombatBoss(_CombatGuid, (CHARACTER)_Boss)
+AND
+NOT DB_AMP_Plus_UltraAlly(_Boss)
+AND
+DB_AMP_Plus_TurtleEngaged(_CombatGuid)
+AND
+IsDead(_Boss, 0)
+AND
+NOT DB_AMP_Plus_MirrorFiredCombat(_CombatGuid)
+AND
+NOT DB_AMP_Plus_ChaseActive(_, _)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_PoolSize)
+AND
+_PoolSize > 0
+THEN
+DB_AMP_Plus_MirrorFiredCombat(_CombatGuid);
+NOT DB_AMP_TurtleStreak(_Player, _N);
+DB_AMP_TurtleStreak(_Player, 0);
+PROC_AMP_Plus_MirrorSpawnSized(_Boss);
+
+// damage either way starts the fight. party damage also clears every streak
+
+IF
+AttackedBy((CHARACTER)_Boss, (CHARACTER)_Owner, _, _, (INTEGER)_Amount, _, _)
+AND
+_Amount > 0
+AND
+DB_Players(_Owner)
+AND
+CombatGetGuidFor(_Boss, (GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_TurtleCombatBoss(_CombatGuid, _Boss)
+AND
+NOT DB_AMP_Plus_TurtleEngaged(_CombatGuid)
+THEN
+DB_AMP_Plus_TurtleEngaged(_CombatGuid);
+PROC_AMP_Plus_TurtleClearStreaks();
+
+IF
+AttackedBy((CHARACTER)_Player, (CHARACTER)_Boss, _, _, (INTEGER)_Amount, _, _)
+AND
+_Amount > 0
+AND
+DB_Players(_Player)
+AND
+CombatGetGuidFor(_Player, (GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_TurtleCombatBoss(_CombatGuid, _Boss)
+AND
+NOT DB_AMP_Plus_TurtleEngaged(_CombatGuid)
+THEN
+DB_AMP_Plus_TurtleEngaged(_CombatGuid);
+PROC_AMP_Plus_TurtleClearStreaks();
+
+IF
+LeftCombat(_, (GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_Plus_TurtleEngaged(_CombatGuid)
+THEN
+NOT DB_AMP_Plus_TurtleEngaged(_CombatGuid);
+
+IF
+AttackedBy(_, (CHARACTER)_Owner, _, _, (INTEGER)_Amount, _, _)
+AND
+_Amount > 0
+AND
+DB_Players(_Owner)
+THEN
+PROC_AMP_Plus_TurtleClearStreaks();
+
+PROC
+PROC_AMP_Plus_TurtleClearStreaks()
+AND
+DB_AMP_TurtleStreak((CHARACTER)_P, (INTEGER)_C)
+AND
+_C != 0
+THEN
+DB_AMP_Plus_TurtleZeroQ(_P);
+
+PROC
+PROC_AMP_Plus_TurtleClearStreaks()
+THEN
+PROC_AMP_Plus_TurtleDrainZeroQ();
+
+PROC
+PROC_AMP_Plus_TurtleDrainZeroQ()
+AND
+DB_AMP_Plus_TurtleZeroQ((CHARACTER)_P)
+THEN
+NOT DB_AMP_Plus_TurtleZeroQ(_P);
+PROC_AMP_Plus_TurtleZeroStreak(_P);
+PROC_AMP_Plus_TurtleDrainZeroQ();
+
+PROC
+PROC_AMP_Plus_TurtleZeroStreak((CHARACTER)_P)
+AND
+DB_AMP_TurtleStreak(_P, (INTEGER)_C)
+THEN
+NOT DB_AMP_TurtleStreak(_P, _C);
+DB_AMP_TurtleStreak(_P, 0);
+
+EXITSECTION
+ENDEXITSECTION

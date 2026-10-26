@@ -1,0 +1,154 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// weighted shard tier rows for saves that ran the flat init, duplicate inserts are no-ops
+
+// Fix category weights (old: COINS=5, CAPSULES=5, SHARDS=1)
+NOT DB_ToT_CatWeight("GENERAL", "COINS", 5);
+DB_ToT_CatWeight("GENERAL", "COINS", 10);
+NOT DB_ToT_CatWeight("GENERAL", "CAPSULES", 5);
+DB_ToT_CatWeight("GENERAL", "CAPSULES", 3);
+
+// Recovery_1 must sit in one tier only, stale SHARDS_6 and SHARDS_1 rows made dust match both and spawn two coins
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Recovery_1_6d07a9e3-b288-4ec3-86f9-b3360973b879, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Recovery_1_6d07a9e3-b288-4ec3-86f9-b3360973b879, "SHARDS_1");
+DB_ToT_CatWeight("GENERAL", "SHARDS_20", 20);
+DB_ToT_CatWeight("GENERAL", "SHARDS_6", 6);
+DB_ToT_CatWeight("GENERAL", "SHARDS_2", 2);
+DB_ToT_CatWeight("GENERAL", "SHARDS_1", 1);
+
+// Init CatSize for new tiers (PROC_ToT_UpdateCatSizes needs these to exist)
+DB_ToT_CatSize("GENERAL", "SHARDS_20", 0);
+DB_ToT_CatSize("GENERAL", "SHARDS_6", 0);
+DB_ToT_CatSize("GENERAL", "SHARDS_2", 0);
+DB_ToT_CatSize("GENERAL", "SHARDS_1", 0);
+
+// Init new thresholds (PROC_ToT_Rebuild needs Thresh 2/3/4 to exist)
+DB_ToT_Thresh("GENERAL", 2, 0);
+DB_ToT_Thresh("GENERAL", 3, 0);
+DB_ToT_Thresh("GENERAL", 4, 0);
+
+// SHARDS_20 (17 items, weight 20)
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_1_ff83a7ab-9fff-42c6-ad07-e060ebbd0ea4, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_12_3e16c21b-b1d1-4b99-9548-03f28d4deac3, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_13_fa0ceaef-0f14-4514-9e00-d2d8585c5ab3, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_2_8d5ac97d-5b12-432b-8dff-efb31a7c42c2, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_3_eb06ce8e-4f52-46ab-9fbd-5fb54cbb6150, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_4_6dc1384f-8d17-4f27-9ece-8479665fdc11, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_5_f4fbaee4-8f08-4432-ab2b-40b34dcdc921, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_6_1214ea63-d0e7-4fd7-811a-fe0c9264f23b, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_1_3b200ca5-b282-4930-8c6a-d055a068691c, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_13_52142beb-afbe-400f-b876-0e01004be32a, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_6_f4205ae3-db2c-40d5-a6e2-c6ca7f52916e, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_11_5bb5e89e-5e54-41a6-a664-add12c818c25, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Recovery_1_6d07a9e3-b288-4ec3-86f9-b3360973b879, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_12_b9c703c8-1efb-47b1-958a-4f0f28b8bdf2, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_8_ad1880b3-d94d-47b8-94eb-3706448b85b6, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_1_d6b577f4-91eb-4015-bf1e-2b3bcd656d70, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_15_46160140-11f0-42ae-ba1c-ce33c6c67a1b, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_4_901321e8-47f5-4ed5-8d09-6d2039283401, "SHARDS_20");
+
+// SHARDS_6 (35 items, weight 6)
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_11_07edecab-dcc7-4cd0-a89d-b9907783cfe0, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_2_cf7c5356-3552-43ee-a50b-d690f4ea78ba, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_3_a3d62991-3c30-40b3-8136-25c036363fe8, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_7_ee2bf8b4-3988-4d15-b46f-7284fbe98445, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_9_247f636c-c103-42c6-bdce-290d7134298c, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_1_57bbfc40-8622-46a4-9b86-0f8feb58e129, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_10_0911f7cd-1d28-4ae8-aaf9-680e5a9db2c5, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_8_a01643f4-97dc-48e8-bfef-15463c649443, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_2_a081971e-2b4f-492a-aba9-da0dcb192c9d, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_1_fa1a14d8-07ad-414f-bf0c-1cb675faa94e, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_11_75828bed-0a9d-4884-be41-6a78aa358c9d, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_2_99069903-c62a-4d40-b014-603317db3d18, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_5_429201d8-afe0-49d4-9848-265273e036a5, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_6_eda9f33c-9e79-4b41-a96c-10d1a9042cff, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_7_a27b2265-237e-4f5e-a938-9e1c899cc5d1, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_1_bf038b64-8083-4997-88c0-140972478c74, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_12_5cfacb3a-29ae-478e-8eae-9974b5225f09, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_13_2772caa8-b566-4338-b45a-6c206cca61f0, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_14_31c3e45d-f5c7-4620-bff2-1344d4798afc, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_15_36ed5bbe-eaad-43f3-a82c-e3770b66b807, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_16_4ea35d33-e08e-4a61-8cea-719cc37b3037, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_2_78230eef-2716-4d51-8f0f-99a57b93895b, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_7_4fb212b6-4cb5-4038-8601-1daf340ed616, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_9_a41b5ee1-c9ec-4210-95a4-105297a81d47, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_MWeapon_3_9bdcaf61-e9b7-41f6-bfd6-f93ba7cccb53, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_MWeapon_5_da01b87a-d417-4fd0-a65d-818f5e89abd7, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_1_f19117a0-8960-4457-acf0-b2da03a0d919, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_3_dd21cbf2-850e-4b2b-b7af-c0b0f07b487f, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_6_4b27b7f5-a190-42a4-9d50-6046c67c89e9, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_7_de38fa95-fa74-4e21-9a53-32dbfeace67e, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_9_ee67e3ff-042b-41ed-9995-2e493597a6ff, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_2_f30e2913-2cc7-49b4-a8e9-597e80ea9ee6, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_3_2d044324-8d55-4a3f-a05b-916617fa9b3e, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_5_c971df9e-e047-448f-a188-b3ee4102bcbe, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_6_230ecf40-633c-4907-8ea0-2f3a6be1905f, "SHARDS_6");
+
+// SHARDS_2 (46 items, weight 2)
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Acid_51b26d59-317b-492f-930c-cba1f01afdba, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_2_62e35f12-4026-4bd5-9f74-5c1283bd9b45, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_3_63f3f727-1497-457f-a0ac-8984f8e1053f, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_4_f207d9a6-7a7b-42ad-9b56-498b5b8bf559, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_5_90aacef6-59e1-4238-bc42-0debcbe76160, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_6_f5d23d81-f020-4098-bf7f-7307841b137b, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_7_c9827110-2e7c-4066-ba15-9a7affe80616, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_5_8f8abcf7-891f-4479-94d5-ffd09d58bad3, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_8_03172a9e-7009-42e5-ba17-cc147985bda6, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_11_53b04fe1-71bf-4381-a4bf-10001d9d316a, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_12_4bd4f3eb-8e05-4fcb-b478-b3d99f6512b3, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_7_917c57ad-f743-4e00-b16e-520f4ff58b9a, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_3_069ad0ea-6ce2-414a-b243-84f5427b0e2a, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_4_a64ba3da-1532-4eb9-be08-846fc5379363, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_5_e5bbba00-8740-49bd-9cda-18f9d5f9eb90, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_6_a9a2364c-815a-46ed-85a3-7f61b9bc4731, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cold_13e45baf-2a4f-4306-bf42-a571c9b2c68e, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Fire_b093e9fc-6197-49d0-b70a-601b36753cf3, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Force_a29a0058-2554-4e00-913a-1358eec9b13c, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_10_6f2cf524-5515-4472-a01b-335fe116e108, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_12_b3726cc8-074c-4d9f-b5f9-22caac60fcf0, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_3_49fd65f2-10af-4e52-aa3a-361645a2bc38, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_4_d5750e5a-8247-43d5-872f-3c1bc1f4be36, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_9_ee2e4ee0-2f10-449c-9aac-1d5ff4568948, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_10_305e6cdf-f804-44a4-98eb-4c83c2f5d9eb, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_3_ec594e30-e633-4b53-8f02-3559ed68a6a9, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_5_1e80ef36-f66c-4dc8-9366-70650a21ce97, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Lightning_afe829dc-6af0-4628-881b-06a2a94fe536, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_MWeapon_1_65352de8-0e22-4d65-b92b-3818d4bd3e9c, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_MWeapon_4_229d92f6-9cda-472a-9b75-642dbdc959fc, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_MWeapon_6_57a57576-72fe-47bf-871a-78fcd054532f, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Necrotic_63f7f014-d3c2-4ad6-bac0-4f58e139a912, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Poison_7c071afa-674f-4826-ae3c-325983cce6e3, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Psychic_728e48e8-16cf-4444-a2ac-2dc51d0507ad, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Radiant_3099279e-52d6-43ef-8671-b82c90a91086, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_10_cdfadb35-e40a-435d-a767-aeae07108803, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_4_38b04964-19dd-40db-919f-33b7ccb9b279, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_5_75184286-df49-4fdf-812a-48820e440bf0, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Thunder_0e943ce0-f937-4a0b-a135-060726086420, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_10_14894fd0-3b08-4b88-8ebc-bb1e0b1e1bee, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_11_4ebb240b-8258-4d89-924d-46ce9b13086a, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_12_48de2e33-a21a-4cf5-bffa-a22650787e2f, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_13_75c705a4-7b28-42dd-ae4c-6d667397d458, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_7_75386591-b3de-48fe-8af0-d6b98faedd5a, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_8_d9e7ace9-cb69-46f9-a7f7-b42ef1a2bb8f, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_9_908d9939-3c02-4508-9efd-fee2b95b0da0, "SHARDS_2");
+
+// SHARDS_1 (13 items, weight 1)
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_1_52f83898-88f0-4140-b83f-fc175f6c673b, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_10_a1bf4ace-c2bf-4839-b70b-e9b113217548, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_4_8d741b5a-c668-47f6-9a5a-42d0322206e1, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_6_4ff81ff2-6904-4c16-8bae-9feb3ce1680c, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_9_9e294aa5-364d-494a-b759-0a78c1bf9172, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_8_b95d53db-8ef1-4acc-9383-79ee526ff58d, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_11_4ca77a96-c585-4615-8494-e0a914d48858, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_4_48f52d1d-617a-48f2-a599-21d480741626, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_8_0da0f666-1dd2-449f-a1c5-06806fbbf43d, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_MWeapon_2_c0a66367-bc82-41c7-8b22-a0563f092eea, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_2_d5188e9b-a3c7-4a6b-b336-96deee113148, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_14_068218d4-fbab-4dfc-aeca-d0f901f7eb50, "SHARDS_1");
+
+KBSECTION
+
+EXITSECTION
+ENDEXITSECTION

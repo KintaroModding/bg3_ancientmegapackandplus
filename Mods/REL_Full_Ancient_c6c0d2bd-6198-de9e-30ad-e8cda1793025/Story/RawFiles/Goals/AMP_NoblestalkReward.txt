@@ -1,0 +1,18 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// noblestalk -> baelen reward, fires after the threeway dialog ends
+IF
+DialogEnded(UND_MushroomHunter_ThreewayDialogAfterBaelenAteMushroom_26c1ca49-32c8-a814-2066-1bf53e927f42, _)
+AND
+DB_Players(_Player)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Noblestalk_Baelen")
+THEN
+QuestUpdate(_Player, "HIDDEN_WLD_Boosters", "AMP_Noblestalk_Baelen");
+
+EXITSECTION
+ENDEXITSECTION

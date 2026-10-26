@@ -1,0 +1,26 @@
+// fires on the hit flag, so absorbed or immune blows still answer
+// tiers restated, base tiers inherit from the base parent
+
+new entry "AMP_ReactiveArmor_Counter"
+type "PassiveData"
+using "AMP_ReactiveArmor_Counter"
+data "StatsFunctorContext" "OnAttacked"
+data "Conditions" "HasDamageEffectFlag(DamageFlags.Hit) and not IsRedirectedDamage() and not Self() and Enemy()"
+
+new entry "AMP_ReactiveArmor_Counter_2"
+type "PassiveData"
+using "AMP_ReactiveArmor_Counter_2"
+data "StatsFunctorContext" "OnAttacked"
+data "Conditions" "HasDamageEffectFlag(DamageFlags.Hit) and not IsRedirectedDamage() and not Self() and Enemy()"
+
+new entry "AMP_ReactiveArmor_Counter_3"
+type "PassiveData"
+using "AMP_ReactiveArmor_Counter_3"
+data "StatsFunctorContext" "OnAttacked"
+data "Conditions" "HasDamageEffectFlag(DamageFlags.Hit) and not IsRedirectedDamage() and not Self() and Enemy()"
+
+new entry "AMP_ReactiveArmor_Counter_4"
+type "PassiveData"
+using "AMP_ReactiveArmor_Counter_4"
+data "StatsFunctorContext" "OnAttacked"
+data "Conditions" "HasDamageEffectFlag(DamageFlags.Hit) and not IsRedirectedDamage() and not Self() and Enemy()"

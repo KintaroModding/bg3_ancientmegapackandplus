@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="c681a4f4-46f8-45b8-a2da-746896434f53" />
+					<attribute id="Name" type="LSString" value="S_LOW_JaheirasHouse_KhalidsGiftDisplayCase" />
+					<attribute id="LevelName" type="FixedString" value="CTY_Main_A" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="8e35dc2d-1a0f-47a0-be33-df98bc11aee9" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="owner" type="FixedString" value="91b6b200-7d00-4d62-8dc9-99e8339dfa1a" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="-1577.967 1.026395 978.1116" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0.7138327 0 0.7003164" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="CTY_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="57e10301-831b-f6cf-1258-a93ddbdfa8a0" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="71fa0663-a7d1-35e1-196e-a031776f1043" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="a2c8192e-abe2-4c47-b744-e50fe3d5076a" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="100e0b24-9964-a5cb-3431-bccfb523194e" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="WYR_SmugglerCave_Basement_Treasure" />
+								</node>
+							</children>
+						</node>
+						<node id="ItemList" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

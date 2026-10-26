@@ -1,0 +1,18 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// debug: kills every live mirror champion, console oe AMP_TestKillMirrorWave
+IF
+TextEvent("AMP_TestKillMirrorWave")
+AND
+DB_AMP_Plus_UltraMob((CHARACTER)_Mob, _)
+AND
+IsDead(_Mob, 0)
+THEN
+Die(_Mob, DEATHTYPE.DoT, NULL_00000000-0000-0000-0000-000000000000, 1, 0);
+
+EXITSECTION
+ENDEXITSECTION

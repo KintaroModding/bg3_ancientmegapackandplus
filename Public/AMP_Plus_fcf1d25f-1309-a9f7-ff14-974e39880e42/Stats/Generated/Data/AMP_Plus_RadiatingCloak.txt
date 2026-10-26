@@ -1,0 +1,13 @@
+new entry "AMP_Radiating_Cloak_MarkOfRadiance"
+type "PassiveData"
+using "MAG_Cloak20_3_bonus"
+data "DisplayName" "hdc0b4dc5ge965g48d9g98a2g6ebfe99879f3;1"
+data "DescriptionParams" "DealDamage(2d4,Radiant)"
+data "StatsFunctors" "DealDamage(SWAP,2d4,Radiant,Magical)"
+
+new entry "AMP_Radiating_Cloak"
+type "Armor"
+using "MAG_Cloak20_3"
+data "RootTemplate" "27dad484-11e4-49df-8a69-5998634dc870"
+data "Unique" ""
+data "PassivesOnEquip" "AMP_Radiating_Cloak_MarkOfRadiance"

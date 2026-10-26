@@ -1,0 +1,142 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// stock maps to difficulty NONE, the same key as casual, so the capsule cache is overridden with standard values
+// 500ms delay lets refreshcache fire first on the same event
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_GameMode("STOCK")
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+ObjectTimerLaunch(_Host, "AMP_Stock_CapsuleOverride", 500, 0);
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_Stock_CapsuleOverride")
+AND
+DB_AMP_GameMode("STOCK")
+THEN
+PROC_AMP_VoidCapsule_StockOverride();
+
+// shard->coin chance: none 100 -> standard 25
+PROC
+PROC_AMP_VoidCapsule_StockOverride()
+AND
+DB_AMP_VoidCapsule_ShardCoinChanceActive((INTEGER)_Old)
+AND
+DB_AMP_VoidCapsule_ShardCoinChanceByMode("STANDARD", (INTEGER)_Std)
+AND
+_Old != _Std
+THEN
+NOT DB_AMP_VoidCapsule_ShardCoinChanceActive(_Old);
+DB_AMP_VoidCapsule_ShardCoinChanceActive(_Std);
+
+// pity threshold: none 0 -> standard 6
+PROC
+PROC_AMP_VoidCapsule_StockOverride()
+AND
+DB_AMP_VoidCapsule_PityThresholdActive((INTEGER)_Old)
+AND
+DB_AMP_VoidCapsule_PityThresholdByMode("STANDARD", (INTEGER)_Std)
+AND
+_Old != _Std
+THEN
+NOT DB_AMP_VoidCapsule_PityThresholdActive(_Old);
+DB_AMP_VoidCapsule_PityThresholdActive(_Std);
+
+// pity reward count: none 0 -> standard 1
+PROC
+PROC_AMP_VoidCapsule_StockOverride()
+AND
+DB_AMP_VoidCapsule_PityRewardCountActive((INTEGER)_Old)
+AND
+DB_AMP_VoidCapsule_PityRewardCountByMode("STANDARD", (INTEGER)_Std)
+AND
+_Old != _Std
+THEN
+NOT DB_AMP_VoidCapsule_PityRewardCountActive(_Old);
+DB_AMP_VoidCapsule_PityRewardCountActive(_Std);
+
+// pity reward rarity: none veryrare -> standard rare
+PROC
+PROC_AMP_VoidCapsule_StockOverride()
+AND
+DB_AMP_VoidCapsule_PityRewardRarityActive((STRING)_Old)
+AND
+DB_AMP_VoidCapsule_PityRewardRarityByMode("STANDARD", (STRING)_Std)
+AND
+_Old != _Std
+THEN
+NOT DB_AMP_VoidCapsule_PityRewardRarityActive(_Old);
+DB_AMP_VoidCapsule_PityRewardRarityActive(_Std);
+
+// salvage chance per rarity: none 5/25/50/100 -> standard 20/45/70/100
+PROC
+PROC_AMP_VoidCapsule_StockOverride()
+AND
+DB_AMP_VoidCapsule_SalvageChanceActive("Uncommon", (INTEGER)_Old)
+AND
+DB_AMP_VoidCapsule_SalvageChanceByMode("STANDARD", "Uncommon", (INTEGER)_Std)
+AND
+_Old != _Std
+THEN
+NOT DB_AMP_VoidCapsule_SalvageChanceActive("Uncommon", _Old);
+DB_AMP_VoidCapsule_SalvageChanceActive("Uncommon", _Std);
+
+PROC
+PROC_AMP_VoidCapsule_StockOverride()
+AND
+DB_AMP_VoidCapsule_SalvageChanceActive("Rare", (INTEGER)_Old)
+AND
+DB_AMP_VoidCapsule_SalvageChanceByMode("STANDARD", "Rare", (INTEGER)_Std)
+AND
+_Old != _Std
+THEN
+NOT DB_AMP_VoidCapsule_SalvageChanceActive("Rare", _Old);
+DB_AMP_VoidCapsule_SalvageChanceActive("Rare", _Std);
+
+PROC
+PROC_AMP_VoidCapsule_StockOverride()
+AND
+DB_AMP_VoidCapsule_SalvageChanceActive("VeryRare", (INTEGER)_Old)
+AND
+DB_AMP_VoidCapsule_SalvageChanceByMode("STANDARD", "VeryRare", (INTEGER)_Std)
+AND
+_Old != _Std
+THEN
+NOT DB_AMP_VoidCapsule_SalvageChanceActive("VeryRare", _Old);
+DB_AMP_VoidCapsule_SalvageChanceActive("VeryRare", _Std);
+
+// chargesmax: none 16 -> standard 8
+PROC
+PROC_AMP_VoidCapsule_StockOverride()
+AND
+DB_AMP_VoidCapsule_ChargesMaxActive((INTEGER)_Old)
+AND
+DB_AMP_VoidCapsule_ChargesMaxByMode("STANDARD", (INTEGER)_Std)
+AND
+_Old != _Std
+THEN
+NOT DB_AMP_VoidCapsule_ChargesMaxActive(_Old);
+DB_AMP_VoidCapsule_ChargesMaxActive(_Std);
+
+// rerollcost: none 1 -> standard 2
+PROC
+PROC_AMP_VoidCapsule_StockOverride()
+AND
+DB_AMP_VoidCapsule_RerollCostActive((INTEGER)_Old)
+AND
+DB_AMP_VoidCapsule_RerollCostByMode("STANDARD", (INTEGER)_Std)
+AND
+_Old != _Std
+THEN
+NOT DB_AMP_VoidCapsule_RerollCostActive(_Old);
+DB_AMP_VoidCapsule_RerollCostActive(_Std);
+
+EXITSECTION
+ENDEXITSECTION

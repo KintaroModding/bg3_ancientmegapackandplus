@@ -1,0 +1,20 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// hide status expires after one turn if the reveal timer is lost
+
+IF
+StatusApplied((CHARACTER)_Mob, "AMP_ULTRA_SPAWN_HIDE", _, _)
+THEN
+RealtimeObjectTimerLaunch(_Mob, "AMP_Plus_UltraSpawnReveal", 850);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Plus_UltraSpawnReveal")
+THEN
+RemoveStatus(_Mob, "AMP_ULTRA_SPAWN_HIDE");
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,109 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// vludber combat barks (pool boss)
+
+IF
+EnteredCombat((CHARACTER)_Mob, _)
+AND
+GetTemplate(_Mob, AMP_Vludber_11eef355-dc6a-4d04-a072-417b70f569cd)
+AND
+NOT DB_AMP_Vludber_Greeted(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Vludber_Greeting_b9b9afb4-b241-4f25-ac3d-139b432d5d89, _Mob)
+THEN
+DB_AMP_Vludber_Greeted(_Mob);
+
+IF
+TurnStarted((CHARACTER)_Mob)
+AND
+GetTemplate(_Mob, AMP_Vludber_11eef355-dc6a-4d04-a072-417b70f569cd)
+AND
+NOT DB_AMP_Vludber_Greeted(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Vludber_Greeting_b9b9afb4-b241-4f25-ac3d-139b432d5d89, _Mob)
+THEN
+DB_AMP_Vludber_Greeted(_Mob);
+
+IF
+UsingSpell((CHARACTER)_Mob, _, _, _, _)
+AND
+GetTemplate(_Mob, AMP_Vludber_11eef355-dc6a-4d04-a072-417b70f569cd)
+AND
+IsDead(_Mob, 0)
+AND
+NOT DB_AMP_Vludber_BarkLock(_Mob)
+AND
+Random(3, (INTEGER)_Roll)
+AND
+_Roll == 0
+THEN
+DB_AMP_Vludber_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Vludber_BarkDelay", 1500);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Vludber_BarkDelay")
+AND
+DB_AMP_Vludber_BarkLock(_Mob)
+AND
+IsDead(_Mob, 0)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Vludber_SpellCast_00bf1dbb-09b2-4357-abc2-9105ba8b8b76, _Mob)
+THEN
+RealtimeObjectTimerLaunch(_Mob, "AMP_Vludber_BarkUnlock", 10000);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Vludber_BarkUnlock")
+AND
+DB_AMP_Vludber_BarkLock(_Mob)
+THEN
+NOT DB_AMP_Vludber_BarkLock(_Mob);
+
+IF
+HitpointsChanged((CHARACTER)_Mob, (REAL)_Pct)
+AND
+GetTemplate(_Mob, AMP_Vludber_11eef355-dc6a-4d04-a072-417b70f569cd)
+AND
+_Pct <= 35.0
+AND
+NOT DB_AMP_Vludber_LowHP(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Vludber_LowHP_b36cbe0c-827e-4cf2-a67e-980cc3e0490c, _Mob)
+THEN
+DB_AMP_Vludber_LowHP(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+GetTemplate(_Mob, AMP_Vludber_11eef355-dc6a-4d04-a072-417b70f569cd)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Vludber_Death_0f59dadc-9713-400b-b519-40ee556e2737, _Mob)
+THEN
+DB_NOOP(1);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Vludber_Greeted(_Mob)
+THEN
+NOT DB_AMP_Vludber_Greeted(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Vludber_BarkLock(_Mob)
+THEN
+NOT DB_AMP_Vludber_BarkLock(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Vludber_LowHP(_Mob)
+THEN
+NOT DB_AMP_Vludber_LowHP(_Mob);
+
+EXITSECTION
+
+ENDEXITSECTION

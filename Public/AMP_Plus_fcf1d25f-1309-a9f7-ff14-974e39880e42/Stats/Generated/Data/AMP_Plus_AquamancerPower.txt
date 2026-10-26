@@ -1,0 +1,51 @@
+// checks read AMP_Plus_IsAquamancerPower(), which also counts item copies such as AMP_RusMage_RayOfFrost
+
+new entry "MAG_Ring35_LeviathanVitality_Passive"
+type "PassiveData"
+using "MAG_Ring35_LeviathanVitality_Passive"
+data "Conditions" "AMP_Plus_IsAquamancerPower() and not HasDamageDoneForType(DamageType.Fire) and not Item()"
+
+new entry "MAG_Weapon81_bonus"
+type "PassiveData"
+using "MAG_Weapon81_bonus"
+data "Conditions" "AMP_Plus_IsAquamancerPower()"
+
+new entry "AMP_FrostMage_FloodCaller_Passive"
+type "PassiveData"
+using "AMP_FrostMage_FloodCaller_Passive"
+data "Conditions" "AMP_Plus_IsAquamancerPower() and not HasDamageDoneForType(DamageType.Fire) and not Item()"
+
+new entry "AMP_FrostMage2_Deluge_Passive"
+type "PassiveData"
+using "AMP_FrostMage2_Deluge_Passive"
+data "Conditions" "AMP_Plus_IsAquamancerPower() and not HasDamageDoneForType(DamageType.Fire) and not Item()"
+
+new entry "AMP_Gloves_Drownsurge_Passive"
+type "PassiveData"
+using "AMP_Gloves_Drownsurge_Passive"
+data "Conditions" "AMP_Plus_IsAquamancerPower()"
+
+new entry "AMP_Gloves_TidalMomentum_Passive"
+type "PassiveData"
+using "AMP_Gloves_TidalMomentum_Passive"
+data "Conditions" "AMP_Plus_IsAquamancerPower() and not RollDieAgainstDC(DiceType.d100,18) and not HasDamageDoneForType(DamageType.Fire) and not Item()"
+
+new entry "AMP_Gloves_TidalMomentum_Passive_T2"
+type "PassiveData"
+using "AMP_Gloves_TidalMomentum_Passive_T2"
+data "Conditions" "AMP_Plus_IsAquamancerPower() and not RollDieAgainstDC(DiceType.d100,26) and not HasDamageDoneForType(DamageType.Fire) and not Item()"
+
+new entry "AMP_Gloves_TidalMomentum_Passive_T3"
+type "PassiveData"
+using "AMP_Gloves_TidalMomentum_Passive_T3"
+data "Conditions" "AMP_Plus_IsAquamancerPower() and not RollDieAgainstDC(DiceType.d100,34) and not HasDamageDoneForType(DamageType.Fire) and not Item()"
+
+new entry "AMP_Gloves_TidalMomentum_Passive_T4"
+type "PassiveData"
+using "AMP_Gloves_TidalMomentum_Passive_T4"
+data "Conditions" "AMP_Plus_IsAquamancerPower() and not RollDieAgainstDC(DiceType.d100,35) and not HasDamageDoneForType(DamageType.Fire) and not Item()"
+
+new entry "AMP_Boost11_Erosion_Passive"
+type "PassiveData"
+using "AMP_Boost11_Erosion_Passive"
+data "Conditions" "AMP_Plus_IsAquamancerPower() and Enemy() and not HasDamageDoneForType(DamageType.Fire) and not Item()"

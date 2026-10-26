@@ -1,0 +1,6 @@
+new entry "Target_MAG_Legendary_ImmolatingGaze"
+type "SpellData"
+data "SpellType" "Target"
+using "Target_MAG_Legendary_ImmolatingGaze"
+data "UseCosts" "BonusActionPoint:1"
+data "Cooldown" "OncePerCombat"

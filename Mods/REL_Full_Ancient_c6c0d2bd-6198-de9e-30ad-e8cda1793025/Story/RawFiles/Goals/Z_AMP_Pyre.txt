@@ -1,0 +1,1013 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_AMP_Pyre_Disabled(1);
+DB_AMP_Pyre_DecayScheduled(0);
+
+KBSECTION
+// per-fight points, graded into 10 statuses on every live hostile
+
+// active for current difficulty + toggle
+QRY
+QRY_AMP_Pyre_Active()
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Pyre_Active()
+AND
+DB_AMP_Difficulty_Mode("STANDARD")
+AND
+NOT DB_AMP_Pyre_Disabled(1)
+THEN
+DB_NOOP(1);
+
+// hostile to the players
+QRY
+QRY_AMP_Pyre_IsHostile((CHARACTER)_Char)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+IsEnemy(_Player, _Char, 1)
+THEN
+DB_NOOP(1);
+
+// combat membership and arming
+
+// record every hostile entering any combat
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+QRY_AMP_Pyre_Active()
+AND
+QRY_AMP_Pyre_IsHostile(_Char)
+THEN
+DB_AMP_Pyre_Combatant(_Char, _CombatID);
+
+// boss in the fight arms it
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+IsBoss(_Char, 1)
+AND
+NOT DB_AMP_Pyre_BossCombat(_CombatID)
+THEN
+DB_AMP_Pyre_BossCombat(_CombatID);
+PROC_AMP_Pyre_ArmCombat(_CombatID);
+
+// hostile joining an armed fight: track + catch up
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_BossCombat(_CombatID)
+AND
+QRY_AMP_Pyre_Active()
+AND
+QRY_AMP_Pyre_IsHostile(_Char)
+THEN
+ApplyStatus(_Char, "AMP_PYRE_TRACKER", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+PROC_AMP_Pyre_CatchUpOne(_Char, _CombatID);
+
+// tracker to all hostiles already present when boss appears
+PROC
+PROC_AMP_Pyre_ArmCombat((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_Combatant((CHARACTER)_Char, _CombatID)
+AND
+IsDead(_Char, 0)
+AND
+QRY_AMP_Pyre_IsHostile(_Char)
+THEN
+ApplyStatus(_Char, "AMP_PYRE_TRACKER", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// late joiner only: give the new hostile the current grade, don't re-blast everyone
+PROC
+PROC_AMP_Pyre_CatchUpOne((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_Grade(_CombatID, (INTEGER)_G)
+AND
+_G > 0
+THEN
+PROC_AMP_Pyre_ApplyGradeOne(_Char, _G);
+
+// point accrual (markers from tracker passives + kill events)
+
+// enemy took damage: +2 (tempo: damage now weighs as much as a cc landing)
+IF
+StatusApplied((CHARACTER)_Char, "AMP_PYRE_MARK_DMG", _, _)
+AND
+DB_AMP_Pyre_Combatant(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_BossCombat(_CombatID)
+AND
+QRY_AMP_Pyre_Active()
+THEN
+PROC_AMP_Pyre_AddPoints(_CombatID, 2);
+
+// acid/radiant taken: -6 (net -4 with the +2 damage tick; plus the per-round douse-kick)
+IF
+StatusApplied((CHARACTER)_Char, "AMP_PYRE_MARK_DOUSE", _, _)
+AND
+DB_AMP_Pyre_Combatant(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_BossCombat(_CombatID)
+AND
+QRY_AMP_Pyre_Active()
+THEN
+PROC_AMP_Pyre_AddPoints(_CombatID, -6);
+
+// douse kick rearms every round: clear the guard at round start
+IF
+CombatRoundStarted((GUIDSTRING)_CombatID, _)
+AND
+DB_AMP_Pyre_FirstDouse(_CombatID)
+THEN
+NOT DB_AMP_Pyre_FirstDouse(_CombatID);
+
+// first douse this round: drop a grade now so it feels responsive, not at round tick
+IF
+StatusApplied((CHARACTER)_Char, "AMP_PYRE_MARK_DOUSE", _, _)
+AND
+DB_AMP_Pyre_Combatant(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_BossCombat(_CombatID)
+AND
+QRY_AMP_Pyre_Active()
+AND
+NOT DB_AMP_Pyre_FirstDouse(_CombatID)
+THEN
+DB_AMP_Pyre_FirstDouse(_CombatID);
+PROC_AMP_Pyre_DouseKick(_CombatID);
+
+// cc landed on an enemy: +2
+IF
+StatusApplied((CHARACTER)_Char, "AMP_PYRE_MARK_CC", _, _)
+AND
+DB_AMP_Pyre_Combatant(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_BossCombat(_CombatID)
+AND
+QRY_AMP_Pyre_Active()
+THEN
+PROC_AMP_Pyre_AddPoints(_CombatID, 2);
+
+// enemy healed: -24 flat (healing an enemy hard-douses the fire; 3x the old dock)
+IF
+StatusApplied((CHARACTER)_Char, "AMP_PYRE_MARK_HEAL", _, _)
+AND
+DB_AMP_Pyre_Combatant(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_BossCombat(_CombatID)
+AND
+QRY_AMP_Pyre_Active()
+THEN
+PROC_AMP_Pyre_AddPoints(_CombatID, -24);
+
+// enemy failed a con save: -1
+IF
+StatusApplied((CHARACTER)_Char, "AMP_PYRE_MARK_CON", _, _)
+AND
+DB_AMP_Pyre_Combatant(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_BossCombat(_CombatID)
+AND
+QRY_AMP_Pyre_Active()
+THEN
+PROC_AMP_Pyre_AddPoints(_CombatID, -1);
+
+// any hostile dies in an armed fight: +15
+IF
+Died((CHARACTER)_Dead)
+AND
+DB_AMP_Pyre_Combatant(_Dead, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_BossCombat(_CombatID)
+AND
+QRY_AMP_Pyre_Active()
+AND
+QRY_AMP_Pyre_IsHostile(_Dead)
+THEN
+PROC_AMP_Pyre_AddPoints(_CombatID, 15);
+
+// dead one was a boss: +65 more (total +80)
+IF
+Died((CHARACTER)_Dead)
+AND
+DB_AMP_Pyre_Combatant(_Dead, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_BossCombat(_CombatID)
+AND
+QRY_AMP_Pyre_Active()
+AND
+IsBoss(_Dead, 1)
+THEN
+PROC_AMP_Pyre_AddPoints(_CombatID, 65);
+
+// recompute on death so a fast kill flares at once, ordered after the accrual above
+IF
+Died((CHARACTER)_Dead)
+AND
+DB_AMP_Pyre_Combatant(_Dead, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_BossCombat(_CombatID)
+AND
+QRY_AMP_Pyre_Active()
+AND
+QRY_AMP_Pyre_IsHostile(_Dead)
+AND
+NOT DB_AMP_Pyre_DeathRecomputed(_CombatID)
+AND
+DB_AMP_Pyre_Points(_CombatID, (INTEGER)_N)
+THEN
+DB_AMP_Pyre_DeathRecomputed(_CombatID);
+PROC_AMP_Pyre_Recompute(_CombatID, _N);
+
+// death flare fires once per turn: clear the guard at each turn start
+IF
+TurnStarted((GUIDSTRING)_Obj)
+AND
+CombatGetGuidFor(_Obj, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_DeathRecomputed(_CombatID)
+THEN
+NOT DB_AMP_Pyre_DeathRecomputed(_CombatID);
+
+// keeps 60% of points then grades once, grade moves only here so the fire steps once per round
+IF
+CombatRoundStarted((GUIDSTRING)_CombatID, (INTEGER)_Round)
+AND
+DB_AMP_Pyre_BossCombat(_CombatID)
+AND
+QRY_AMP_Pyre_Active()
+AND
+DB_AMP_Pyre_Points(_CombatID, (INTEGER)_N)
+THEN
+PROC_AMP_Pyre_RoundTick(_CombatID, _N);
+
+PROC
+PROC_AMP_Pyre_RoundTick((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+IntegerProduct(_N, 3, (INTEGER)_X)
+AND
+IntegerDivide(_X, 5, (INTEGER)_Kept)
+THEN
+PROC_AMP_Pyre_Write(_CombatID, _Kept);
+PROC_AMP_Pyre_Recompute(_CombatID, _Kept);
+
+// knock the live grade down one step now (no-op below grade 1)
+PROC
+PROC_AMP_Pyre_DouseKick((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_Grade(_CombatID, (INTEGER)_G)
+AND
+_G > 0
+AND
+IntegerSubtract(_G, 1, (INTEGER)_New)
+THEN
+PROC_AMP_Pyre_SetGrade(_CombatID, _New);
+
+// point storage + clamp at 0 (grade recomputed once per round, not per change)
+PROC
+PROC_AMP_Pyre_AddPoints((GUIDSTRING)_CombatID, (INTEGER)_Delta)
+AND
+DB_AMP_Pyre_Points(_CombatID, (INTEGER)_Old)
+AND
+IntegerSum(_Old, _Delta, (INTEGER)_Raw)
+THEN
+PROC_AMP_Pyre_Commit(_CombatID, _Raw);
+
+PROC
+PROC_AMP_Pyre_AddPoints((GUIDSTRING)_CombatID, (INTEGER)_Delta)
+AND
+NOT DB_AMP_Pyre_Points(_CombatID, _)
+AND
+IntegerSum(0, _Delta, (INTEGER)_Raw)
+THEN
+PROC_AMP_Pyre_Commit(_CombatID, _Raw);
+
+PROC
+PROC_AMP_Pyre_Commit((GUIDSTRING)_CombatID, (INTEGER)_Raw)
+AND
+_Raw >= 0
+THEN
+PROC_AMP_Pyre_Write(_CombatID, _Raw);
+
+PROC
+PROC_AMP_Pyre_Commit((GUIDSTRING)_CombatID, (INTEGER)_Raw)
+AND
+_Raw < 0
+THEN
+PROC_AMP_Pyre_Write(_CombatID, 0);
+
+PROC
+PROC_AMP_Pyre_Write((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_Pyre_Points(_CombatID, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Pyre_Points(_CombatID, _Old);
+DB_AMP_Pyre_Points(_CombatID, _N);
+
+PROC
+PROC_AMP_Pyre_Write((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+NOT DB_AMP_Pyre_Points(_CombatID, _)
+THEN
+DB_AMP_Pyre_Points(_CombatID, _N);
+
+// level ramp first, then the hard multiplier, then thresholds. stored points stay raw
+PROC
+PROC_AMP_Pyre_Recompute((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_L)
+THEN
+PROC_AMP_Pyre_ScaleByLevel(_CombatID, _N, _L);
+
+// party level unknown yet: treat as full speed
+PROC
+PROC_AMP_Pyre_Recompute((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+NOT DB_AMP_AvgPartyLevel(_)
+THEN
+PROC_AMP_Pyre_GradeFinal(_CombatID, _N);
+
+// level ramp: <=3 x2/5, 4-6 x3/5, 7-9 x4/5, 10+ full
+PROC
+PROC_AMP_Pyre_ScaleByLevel((GUIDSTRING)_CombatID, (INTEGER)_N, (INTEGER)_L)
+AND
+_L <= 3
+AND
+IntegerProduct(_N, 2, (INTEGER)_X)
+AND
+IntegerDivide(_X, 5, (INTEGER)_S)
+THEN
+PROC_AMP_Pyre_GradeFinal(_CombatID, _S);
+
+PROC
+PROC_AMP_Pyre_ScaleByLevel((GUIDSTRING)_CombatID, (INTEGER)_N, (INTEGER)_L)
+AND
+_L >= 4
+AND
+_L <= 6
+AND
+IntegerProduct(_N, 3, (INTEGER)_X)
+AND
+IntegerDivide(_X, 5, (INTEGER)_S)
+THEN
+PROC_AMP_Pyre_GradeFinal(_CombatID, _S);
+
+PROC
+PROC_AMP_Pyre_ScaleByLevel((GUIDSTRING)_CombatID, (INTEGER)_N, (INTEGER)_L)
+AND
+_L >= 7
+AND
+_L <= 9
+AND
+IntegerProduct(_N, 4, (INTEGER)_X)
+AND
+IntegerDivide(_X, 5, (INTEGER)_S)
+THEN
+PROC_AMP_Pyre_GradeFinal(_CombatID, _S);
+
+PROC
+PROC_AMP_Pyre_ScaleByLevel((GUIDSTRING)_CombatID, (INTEGER)_N, (INTEGER)_L)
+AND
+_L >= 10
+THEN
+PROC_AMP_Pyre_GradeFinal(_CombatID, _N);
+
+// hard grades 25% hotter, on top of the level ramp
+PROC
+PROC_AMP_Pyre_GradeFinal((GUIDSTRING)_CombatID, (INTEGER)_S)
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+AND
+IntegerProduct(_S, 5, (INTEGER)_X)
+AND
+IntegerDivide(_X, 4, (INTEGER)_Eff)
+THEN
+PROC_AMP_Pyre_Grade(_CombatID, _Eff);
+
+PROC
+PROC_AMP_Pyre_GradeFinal((GUIDSTRING)_CombatID, (INTEGER)_S)
+AND
+NOT DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+THEN
+PROC_AMP_Pyre_Grade(_CombatID, _S);
+
+PROC
+PROC_AMP_Pyre_Grade((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+_N >= 180
+THEN
+PROC_AMP_Pyre_SetGrade(_CombatID, 10);
+
+PROC
+PROC_AMP_Pyre_Grade((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+_N >= 135
+AND
+_N < 180
+THEN
+PROC_AMP_Pyre_SetGrade(_CombatID, 9);
+
+PROC
+PROC_AMP_Pyre_Grade((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+_N >= 100
+AND
+_N < 135
+THEN
+PROC_AMP_Pyre_SetGrade(_CombatID, 8);
+
+PROC
+PROC_AMP_Pyre_Grade((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+_N >= 78
+AND
+_N < 100
+THEN
+PROC_AMP_Pyre_SetGrade(_CombatID, 7);
+
+PROC
+PROC_AMP_Pyre_Grade((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+_N >= 66
+AND
+_N < 78
+THEN
+PROC_AMP_Pyre_SetGrade(_CombatID, 6);
+
+PROC
+PROC_AMP_Pyre_Grade((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+_N >= 54
+AND
+_N < 66
+THEN
+PROC_AMP_Pyre_SetGrade(_CombatID, 5);
+
+PROC
+PROC_AMP_Pyre_Grade((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+_N >= 42
+AND
+_N < 54
+THEN
+PROC_AMP_Pyre_SetGrade(_CombatID, 4);
+
+PROC
+PROC_AMP_Pyre_Grade((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+_N >= 30
+AND
+_N < 42
+THEN
+PROC_AMP_Pyre_SetGrade(_CombatID, 3);
+
+PROC
+PROC_AMP_Pyre_Grade((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+_N >= 18
+AND
+_N < 30
+THEN
+PROC_AMP_Pyre_SetGrade(_CombatID, 2);
+
+PROC
+PROC_AMP_Pyre_Grade((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+_N >= 8
+AND
+_N < 18
+THEN
+PROC_AMP_Pyre_SetGrade(_CombatID, 1);
+
+PROC
+PROC_AMP_Pyre_Grade((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+_N < 8
+THEN
+PROC_AMP_Pyre_SetGrade(_CombatID, 0);
+
+// grade change -> apply to all hostiles (overwrite swaps the active grade)
+PROC
+PROC_AMP_Pyre_SetGrade((GUIDSTRING)_CombatID, (INTEGER)_G)
+AND
+DB_AMP_Pyre_Grade(_CombatID, (INTEGER)_Cur)
+AND
+_Cur != _G
+THEN
+NOT DB_AMP_Pyre_Grade(_CombatID, _Cur);
+DB_AMP_Pyre_Grade(_CombatID, _G);
+PROC_AMP_Pyre_ApplyGrade(_CombatID, _G);
+
+PROC
+PROC_AMP_Pyre_SetGrade((GUIDSTRING)_CombatID, (INTEGER)_G)
+AND
+DB_AMP_Pyre_Grade(_CombatID, (INTEGER)_Cur)
+AND
+_Cur == _G
+THEN
+DB_NOOP(1);
+
+PROC
+PROC_AMP_Pyre_SetGrade((GUIDSTRING)_CombatID, (INTEGER)_G)
+AND
+NOT DB_AMP_Pyre_Grade(_CombatID, _)
+THEN
+DB_AMP_Pyre_Grade(_CombatID, _G);
+PROC_AMP_Pyre_ApplyGrade(_CombatID, _G);
+
+// map grade int to the literal status
+PROC
+PROC_AMP_Pyre_ApplyGrade((GUIDSTRING)_CombatID, (INTEGER)_G)
+AND
+_G == 0
+THEN
+PROC_AMP_Pyre_StripAll(_CombatID);
+
+PROC
+PROC_AMP_Pyre_ApplyGrade((GUIDSTRING)_CombatID, (INTEGER)_G)
+AND
+_G == 1
+THEN
+PROC_AMP_Pyre_ApplyAll(_CombatID, "AMP_PYRE_G1");
+
+PROC
+PROC_AMP_Pyre_ApplyGrade((GUIDSTRING)_CombatID, (INTEGER)_G)
+AND
+_G == 2
+THEN
+PROC_AMP_Pyre_ApplyAll(_CombatID, "AMP_PYRE_G2");
+
+PROC
+PROC_AMP_Pyre_ApplyGrade((GUIDSTRING)_CombatID, (INTEGER)_G)
+AND
+_G == 3
+THEN
+PROC_AMP_Pyre_ApplyAll(_CombatID, "AMP_PYRE_G3");
+
+PROC
+PROC_AMP_Pyre_ApplyGrade((GUIDSTRING)_CombatID, (INTEGER)_G)
+AND
+_G == 4
+THEN
+PROC_AMP_Pyre_ApplyAll(_CombatID, "AMP_PYRE_G4");
+
+PROC
+PROC_AMP_Pyre_ApplyGrade((GUIDSTRING)_CombatID, (INTEGER)_G)
+AND
+_G == 5
+THEN
+PROC_AMP_Pyre_ApplyAll(_CombatID, "AMP_PYRE_G5");
+
+PROC
+PROC_AMP_Pyre_ApplyGrade((GUIDSTRING)_CombatID, (INTEGER)_G)
+AND
+_G == 6
+THEN
+PROC_AMP_Pyre_ApplyAll(_CombatID, "AMP_PYRE_G6");
+
+PROC
+PROC_AMP_Pyre_ApplyGrade((GUIDSTRING)_CombatID, (INTEGER)_G)
+AND
+_G == 7
+THEN
+PROC_AMP_Pyre_ApplyAll(_CombatID, "AMP_PYRE_G7");
+
+PROC
+PROC_AMP_Pyre_ApplyGrade((GUIDSTRING)_CombatID, (INTEGER)_G)
+AND
+_G == 8
+THEN
+PROC_AMP_Pyre_ApplyAll(_CombatID, "AMP_PYRE_G8");
+
+PROC
+PROC_AMP_Pyre_ApplyGrade((GUIDSTRING)_CombatID, (INTEGER)_G)
+AND
+_G == 9
+THEN
+PROC_AMP_Pyre_ApplyAll(_CombatID, "AMP_PYRE_G9");
+
+PROC
+PROC_AMP_Pyre_ApplyGrade((GUIDSTRING)_CombatID, (INTEGER)_G)
+AND
+_G == 10
+THEN
+PROC_AMP_Pyre_ApplyAll(_CombatID, "AMP_PYRE_G10");
+
+// apply grade status to every live hostile in the fight
+PROC
+PROC_AMP_Pyre_ApplyAll((GUIDSTRING)_CombatID, (STRING)_Status)
+AND
+DB_AMP_Pyre_Combatant((CHARACTER)_Char, _CombatID)
+AND
+IsDead(_Char, 0)
+AND
+QRY_AMP_Pyre_IsHostile(_Char)
+THEN
+ApplyStatus(_Char, _Status, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// apply grade to a single hostile (late joiner catch-up)
+PROC
+PROC_AMP_Pyre_ApplyGradeOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 1
+THEN
+ApplyStatus(_Char, "AMP_PYRE_G1", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Pyre_ApplyGradeOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 2
+THEN
+ApplyStatus(_Char, "AMP_PYRE_G2", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Pyre_ApplyGradeOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 3
+THEN
+ApplyStatus(_Char, "AMP_PYRE_G3", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Pyre_ApplyGradeOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 4
+THEN
+ApplyStatus(_Char, "AMP_PYRE_G4", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Pyre_ApplyGradeOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 5
+THEN
+ApplyStatus(_Char, "AMP_PYRE_G5", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Pyre_ApplyGradeOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 6
+THEN
+ApplyStatus(_Char, "AMP_PYRE_G6", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Pyre_ApplyGradeOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 7
+THEN
+ApplyStatus(_Char, "AMP_PYRE_G7", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Pyre_ApplyGradeOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 8
+THEN
+ApplyStatus(_Char, "AMP_PYRE_G8", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Pyre_ApplyGradeOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 9
+THEN
+ApplyStatus(_Char, "AMP_PYRE_G9", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Pyre_ApplyGradeOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 10
+THEN
+ApplyStatus(_Char, "AMP_PYRE_G10", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+
+// strip all gradations from every combatant in the fight
+PROC
+PROC_AMP_Pyre_StripAll((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_Combatant((CHARACTER)_Char, _CombatID)
+THEN
+PROC_AMP_Pyre_StripChar(_Char);
+
+PROC
+PROC_AMP_Pyre_StripChar((CHARACTER)_Char)
+THEN
+RemoveStatus(_Char, "AMP_PYRE_G1", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PYRE_G2", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PYRE_G3", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PYRE_G4", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PYRE_G5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PYRE_G6", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PYRE_G7", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PYRE_G8", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PYRE_G9", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PYRE_G10", NULL_00000000-0000-0000-0000-000000000000);
+
+// 15-min persistence across stealth/flee
+
+// re-entering combat within the window restores the fire
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+QRY_AMP_Pyre_Active()
+AND
+QRY_AMP_Pyre_IsHostile(_Char)
+AND
+DB_AMP_Pyre_Mem(_Char, (INTEGER)_N)
+AND
+_N > 0
+THEN
+PROC_AMP_Pyre_Restore(_CombatID, _N);
+
+// cancel wipe timer when a remembered creature re-engages
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_Mem(_Char, _)
+AND
+DB_AMP_Pyre_DecayScheduled(1)
+THEN
+TimerCancel("AMP_Pyre_HistoryDecay");
+NOT DB_AMP_Pyre_DecayScheduled(1);
+DB_AMP_Pyre_DecayScheduled(0);
+
+// restore arms the fight (even if boss already dead) and seeds points
+PROC
+PROC_AMP_Pyre_Restore((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+NOT DB_AMP_Pyre_BossCombat(_CombatID)
+THEN
+DB_AMP_Pyre_BossCombat(_CombatID);
+PROC_AMP_Pyre_ArmCombat(_CombatID);
+
+PROC
+PROC_AMP_Pyre_Restore((GUIDSTRING)_CombatID, (INTEGER)_N)
+THEN
+PROC_AMP_Pyre_SeedMax(_CombatID, _N);
+
+PROC
+PROC_AMP_Pyre_SeedMax((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_Pyre_Points(_CombatID, (INTEGER)_Cur)
+AND
+_Cur < _N
+THEN
+PROC_AMP_Pyre_Write(_CombatID, _N);
+
+PROC
+PROC_AMP_Pyre_SeedMax((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+NOT DB_AMP_Pyre_Points(_CombatID, _)
+THEN
+PROC_AMP_Pyre_Write(_CombatID, _N);
+
+// combat end: persist, schedule wipe, clean up
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_BossCombat(_CombatID)
+AND
+DB_AMP_Pyre_Points(_CombatID, (INTEGER)_N)
+AND
+_N > 0
+THEN
+PROC_AMP_Pyre_StoreMemAll(_CombatID, _N);
+NOT DB_AMP_Pyre_DecayScheduled(0);
+DB_AMP_Pyre_DecayScheduled(1);
+TimerCancel("AMP_Pyre_HistoryDecay");
+TimerLaunch("AMP_Pyre_HistoryDecay", 900000);
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+THEN
+NOT DB_AMP_Pyre_BossCombat(_CombatID);
+PROC_AMP_Pyre_EndCleanup(_CombatID);
+
+PROC
+PROC_AMP_Pyre_StoreMemAll((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_Pyre_Combatant((CHARACTER)_Char, _CombatID)
+AND
+IsDead(_Char, 0)
+AND
+QRY_AMP_Pyre_IsHostile(_Char)
+THEN
+PROC_AMP_Pyre_SetMem(_Char, _N);
+
+PROC
+PROC_AMP_Pyre_SetMem((CHARACTER)_Char, (INTEGER)_N)
+AND
+DB_AMP_Pyre_Mem(_Char, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Pyre_Mem(_Char, _Old);
+DB_AMP_Pyre_Mem(_Char, _N);
+
+PROC
+PROC_AMP_Pyre_SetMem((CHARACTER)_Char, (INTEGER)_N)
+AND
+NOT DB_AMP_Pyre_Mem(_Char, _)
+THEN
+DB_AMP_Pyre_Mem(_Char, _N);
+
+PROC
+PROC_AMP_Pyre_EndCleanup((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Pyre_StripAll(_CombatID);
+PROC_AMP_Pyre_ClearTrackers(_CombatID);
+PROC_AMP_Pyre_ClearPoints(_CombatID);
+PROC_AMP_Pyre_ClearGrade(_CombatID);
+PROC_AMP_Pyre_ClearCombatants(_CombatID);
+NOT DB_AMP_Pyre_FirstDouse(_CombatID);
+NOT DB_AMP_Pyre_DeathRecomputed(_CombatID);
+
+PROC
+PROC_AMP_Pyre_ClearTrackers((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_Combatant((CHARACTER)_Char, _CombatID)
+THEN
+RemoveStatus(_Char, "AMP_PYRE_TRACKER", NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Pyre_ClearPoints((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_Points(_CombatID, (INTEGER)_N)
+THEN
+NOT DB_AMP_Pyre_Points(_CombatID, _N);
+
+PROC
+PROC_AMP_Pyre_ClearGrade((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_Grade(_CombatID, (INTEGER)_G)
+THEN
+NOT DB_AMP_Pyre_Grade(_CombatID, _G);
+
+PROC
+PROC_AMP_Pyre_ClearCombatants((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Pyre_Combatant((CHARACTER)_Char, _CombatID)
+THEN
+NOT DB_AMP_Pyre_Combatant(_Char, _CombatID);
+
+// wipe timer expired with no re-engagement: forget everything
+IF
+TimerFinished("AMP_Pyre_HistoryDecay")
+AND
+DB_AMP_Pyre_DecayScheduled(1)
+THEN
+NOT DB_AMP_Pyre_DecayScheduled(1);
+DB_AMP_Pyre_DecayScheduled(0);
+PROC_AMP_Pyre_ClearAllMem();
+
+PROC
+PROC_AMP_Pyre_ClearAllMem()
+AND
+DB_AMP_Pyre_Mem((CHARACTER)_Char, (INTEGER)_N)
+THEN
+NOT DB_AMP_Pyre_Mem(_Char, _N);
+
+// settings ring toggle (normal only; hard locked on; casual inactive)
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Settings_Pyre", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+NOT DB_AMP_GameMode("STOCK")
+THEN
+PROC_AMP_Pyre_ShowToggle(_Caster);
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Settings_Pyre", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_AMP_GameMode("STOCK")
+THEN
+OpenMessageBox(_Caster, "AMP_Settings028");
+
+PROC
+PROC_AMP_Pyre_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_Difficulty_Mode("STANDARD")
+AND
+NOT DB_AMP_Pyre_Disabled(1)
+THEN
+DB_AMP_Pyre_Pending(_Host);
+OpenMessageBoxYesNo(_Host, "AMP_Pyre_AskDisable");
+
+PROC
+PROC_AMP_Pyre_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_Difficulty_Mode("STANDARD")
+AND
+DB_AMP_Pyre_Disabled(1)
+THEN
+DB_AMP_Pyre_Pending(_Host);
+OpenMessageBoxYesNo(_Host, "AMP_Pyre_AskEnable");
+
+PROC
+PROC_AMP_Pyre_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+THEN
+OpenMessageBox(_Host, "AMP_Pyre_HardLocked");
+
+PROC
+PROC_AMP_Pyre_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_Difficulty_Mode("NONE")
+THEN
+OpenMessageBox(_Host, "AMP_Pyre_Inactive");
+
+// yes = keep current state
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Pyre_AskDisable", 1)
+AND
+DB_AMP_Pyre_Pending(_Host)
+THEN
+NOT DB_AMP_Pyre_Pending(_Host);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Pyre_AskEnable", 1)
+AND
+DB_AMP_Pyre_Pending(_Host)
+THEN
+NOT DB_AMP_Pyre_Pending(_Host);
+PROC_AMP_PlayModeEffect(_Host);
+
+// no = flip
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Pyre_AskDisable", 0)
+AND
+DB_AMP_Pyre_Pending(_Host)
+AND
+DB_AMP_Pyre_Disabled(0)
+THEN
+NOT DB_AMP_Pyre_Pending(_Host);
+NOT DB_AMP_Pyre_Disabled(0);
+DB_AMP_Pyre_Disabled(1);
+PROC_AMP_Pyre_RemoveAllActive();
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Pyre_AskEnable", 0)
+AND
+DB_AMP_Pyre_Pending(_Host)
+AND
+DB_AMP_Pyre_Disabled(1)
+THEN
+NOT DB_AMP_Pyre_Pending(_Host);
+NOT DB_AMP_Pyre_Disabled(1);
+DB_AMP_Pyre_Disabled(0);
+PROC_AMP_PlayModeEffect(_Host);
+
+// disabling strips active gradations + resets grades so re-enable rebuilds
+PROC
+PROC_AMP_Pyre_RemoveAllActive()
+AND
+DB_AMP_Pyre_Combatant((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Pyre_StripChar(_Char);
+
+PROC
+PROC_AMP_Pyre_RemoveAllActive()
+AND
+DB_AMP_Pyre_Grade((GUIDSTRING)_CombatID, (INTEGER)_G)
+THEN
+NOT DB_AMP_Pyre_Grade(_CombatID, _G);
+
+// game-mode switch: pyre follows the new mode. normal defaults off (ring re-enables),
+// casual/stock force off + strip. hard needs nothing, the difficulty query forces it on.
+PROC
+PROC_AMP_SetGameMode((CHARACTER)_Host, "NORMAL")
+THEN
+NOT DB_AMP_Pyre_Disabled(0);
+DB_AMP_Pyre_Disabled(1);
+PROC_AMP_Pyre_RemoveAllActive();
+
+PROC
+PROC_AMP_SetGameMode((CHARACTER)_Host, "CASUAL")
+THEN
+PROC_AMP_Pyre_RemoveAllActive();
+
+PROC
+PROC_AMP_SetGameMode((CHARACTER)_Host, "STOCK")
+THEN
+PROC_AMP_Pyre_RemoveAllActive();
+
+// clear stale pending flag on save load
+IF
+SavegameLoaded()
+AND
+DB_AMP_Pyre_Pending(_Host)
+THEN
+NOT DB_AMP_Pyre_Pending(_Host);
+
+EXITSECTION
+
+ENDEXITSECTION

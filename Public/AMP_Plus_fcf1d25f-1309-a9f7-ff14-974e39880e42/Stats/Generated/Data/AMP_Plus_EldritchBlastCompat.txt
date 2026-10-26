@@ -1,0 +1,4 @@
+new entry "MAG_Neck14_SLOW_PENALTY"
+type "PassiveData"
+using "MAG_Neck14_SLOW_PENALTY"
+data "Conditions" "(IsMiss() or IsCriticalMiss()) and AMP_Plus_IsEldritchBlast()"

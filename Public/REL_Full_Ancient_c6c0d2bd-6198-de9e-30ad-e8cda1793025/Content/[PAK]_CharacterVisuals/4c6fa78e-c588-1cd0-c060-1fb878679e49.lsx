@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="4c6fa78e-c588-1cd0-c060-1fb878679e49" />
+					<attribute id="Name" type="LSString" value="AMP_Pirate_Grenade_04_Hand_Cast_Grenade" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/AMP_Pirate_Grenade_04_Hand_Cast_Grenade.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="AMP_Pirate_Grenade_04_Hand_Cast_Grenade" />
+					<attribute id="BoundsMin" type="fvec3" value="-1 -1 -1" />
+					<attribute id="BoundsMax" type="fvec3" value="1 1 1" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="1" />
+					<attribute id="Looping" type="bool" value="False" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="ebfbf452-11ae-460a-96e5-5d1afaae10c3" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="f06b3d17-6e7c-31ca-b7a7-58b0da242a81" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="88ab1c5e-5bcd-e4a5-7249-9c6a439a18d6" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="30e17083-9341-c17f-1993-4301d74f2152" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="a145bbf5-f3b6-071e-c820-9b5a88db47aa" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="f31385c9-20dc-61bb-a980-fa9739cc61c5" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="09507f13-8b48-c991-2f7e-46e2958f3344" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

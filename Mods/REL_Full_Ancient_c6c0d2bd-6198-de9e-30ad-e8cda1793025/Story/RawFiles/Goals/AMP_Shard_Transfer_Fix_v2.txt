@@ -1,0 +1,55 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// IsEquipped/GetInventoryOwner do not match the db item refs, so GetEquippedItem per slot
+// 5s timer runs after the 3s timer of v1 on saves that still have it
+
+IF
+LevelGameplayStarted(_Level, _)
+THEN
+TimerLaunch("AMP_ShardFix2", 5000);
+
+IF
+TimerFinished("AMP_ShardFix2")
+AND
+DB_Players(_Player)
+THEN
+PROC_AMP_ShardFix2_Clean(_Player);
+PROC_AMP_ShardFix2_Slot(_Player, "Breast");
+PROC_AMP_ShardFix2_Slot(_Player, "Ring");
+PROC_AMP_ShardFix2_Slot(_Player, "Gloves");
+PROC_AMP_ShardFix2_Slot(_Player, "Helmet");
+PROC_AMP_ShardFix2_Slot(_Player, "Cloak");
+PROC_AMP_ShardFix2_Slot(_Player, "Boots");
+PROC_AMP_ShardFix2_Slot(_Player, "Melee Main Weapon");
+PROC_AMP_ShardFix2_Slot(_Player, "Ranged Main Weapon");
+
+// phase 1: strip all transfer CHAR statuses off the character
+PROC
+PROC_AMP_ShardFix2_Clean((CHARACTER)_Char)
+AND
+DB_AMP_Shard_Transfer(_ItemStatus, _CharStatus)
+AND
+HasActiveStatus((CHARACTER)_Char, _CharStatus, 1)
+THEN
+RemoveStatus(_Char, _CharStatus, _Char);
+
+// phase 2: reapply per equipped slot via GetEquippedItem
+PROC
+PROC_AMP_ShardFix2_Slot((CHARACTER)_Char, (STRING)_Slot)
+AND
+GetEquippedItem(_Char, _Slot, (ITEM)_Item)
+AND
+DB_AMP_Shard_Count(_Item, _ItemStatus, _Count)
+AND
+DB_AMP_Shard_Transfer(_ItemStatus, _CharStatus)
+AND
+HasActiveStatus(_Item, _ItemStatus, 1)
+THEN
+PROC_AMP_ApplyShardEffectN(_Char, _CharStatus, _Count);
+
+EXITSECTION
+ENDEXITSECTION

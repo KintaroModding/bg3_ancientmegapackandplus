@@ -1,0 +1,174 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// base check and status list know only Normal and Hard, T5 rows are in AMP_Plus_UltraLateGame.txt
+
+QRY
+QRY_AMP_BattleInstinct_Active()
+AND
+DB_AMP_Difficulty_Mode("CASUAL")
+AND
+NOT DB_AMP_BattleInstinct_Disabled(1)
+THEN
+DB_NOOP(1);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_BattleInstinct_StatusList("AMP_Plus_BOSS_CASUAL_T2_V4")
+THEN
+DB_AMP_BattleInstinct_StatusList("AMP_Plus_BOSS_CASUAL_T2_V4");
+DB_AMP_BattleInstinct_StatusList("AMP_Plus_BOSS_CASUAL_T3_V4");
+DB_AMP_BattleInstinct_StatusList("AMP_Plus_BOSS_CASUAL_T4_V4");
+DB_AMP_BattleInstinct_StatusList("AMP_Plus_BOSS_CASUAL_T5_V4");
+
+// swap on landing, both variants share the base carrier's stack id
+
+IF
+StatusApplied((CHARACTER)_C, "AMP_BATTLE_INSTINCT", _, _)
+AND
+DB_AMP_Difficulty_Mode("STANDARD")
+THEN
+RemoveStatus(_C, "AMP_BATTLE_INSTINCT", NULL_00000000-0000-0000-0000-000000000000);
+ApplyStatus(_C, "AMP_Plus_BI_STANDARD", 6.0, 1, _C);
+
+IF
+StatusApplied((CHARACTER)_C, "AMP_BATTLE_INSTINCT", _, _)
+AND
+DB_AMP_Difficulty_Mode("CASUAL")
+THEN
+RemoveStatus(_C, "AMP_BATTLE_INSTINCT", NULL_00000000-0000-0000-0000-000000000000);
+ApplyStatus(_C, "AMP_Plus_BI_CASUAL", 6.0, 1, _C);
+
+IF
+StatusApplied((CHARACTER)_C, "AMP_BATTLE_INSTINCT", _, _)
+AND
+NOT QRY_AMP_Plus_Affix_On("BATTLEINSTINCT")
+THEN
+RemoveStatus(_C, "AMP_BATTLE_INSTINCT", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+StatusApplied((CHARACTER)_C, "AMP_Plus_BI_STANDARD", _, _)
+AND
+NOT QRY_AMP_Plus_Affix_On("BATTLEINSTINCT")
+THEN
+RemoveStatus(_C, "AMP_Plus_BI_STANDARD", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+StatusApplied((CHARACTER)_C, "AMP_Plus_BI_CASUAL", _, _)
+AND
+NOT QRY_AMP_Plus_Affix_On("BATTLEINSTINCT")
+THEN
+RemoveStatus(_C, "AMP_Plus_BI_CASUAL", NULL_00000000-0000-0000-0000-000000000000);
+
+// spent mark is set when the turn holding a carrier ends, so a reload mid-turn stays intact
+
+IF
+StatusApplied((CHARACTER)_C, "AMP_BATTLE_INSTINCT", _, _)
+AND
+NOT DB_AMP_Plus_BIHeld(_C)
+THEN
+DB_AMP_Plus_BIHeld(_C);
+
+IF
+StatusApplied((CHARACTER)_C, "AMP_Plus_BI_STANDARD", _, _)
+AND
+NOT DB_AMP_Plus_BIHeld(_C)
+THEN
+DB_AMP_Plus_BIHeld(_C);
+
+IF
+StatusApplied((CHARACTER)_C, "AMP_Plus_BI_CASUAL", _, _)
+AND
+NOT DB_AMP_Plus_BIHeld(_C)
+THEN
+DB_AMP_Plus_BIHeld(_C);
+
+IF
+TurnEnded((CHARACTER)_C)
+AND
+DB_AMP_Plus_BIHeld(_C)
+AND
+NOT DB_AMP_Plus_MirrorPassed(_C, _)
+THEN
+NOT DB_AMP_Plus_BIHeld(_C);
+DB_AMP_Plus_BISpent(_C);
+
+// AMP_Plus_MirrorFirstTurn.txt closes an arrival's first turn at once, so it is not counted
+
+IF
+TurnEnded((CHARACTER)_C)
+AND
+DB_AMP_Plus_MirrorPassed(_C, _)
+AND
+DB_AMP_Plus_BIHeld(_C)
+THEN
+ApplyStatus(_C, "AMP_BATTLE_INSTINCT", 6.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+StatusApplied((CHARACTER)_C, "AMP_BATTLE_INSTINCT", _, _)
+AND
+DB_AMP_Plus_BISpent(_C)
+THEN
+RemoveStatus(_C, "AMP_BATTLE_INSTINCT", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+StatusApplied((CHARACTER)_C, "AMP_Plus_BI_STANDARD", _, _)
+AND
+DB_AMP_Plus_BISpent(_C)
+THEN
+RemoveStatus(_C, "AMP_Plus_BI_STANDARD", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+StatusApplied((CHARACTER)_C, "AMP_Plus_BI_CASUAL", _, _)
+AND
+DB_AMP_Plus_BISpent(_C)
+THEN
+RemoveStatus(_C, "AMP_Plus_BI_CASUAL", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+LeftCombat((CHARACTER)_C, _)
+AND
+DB_AMP_Plus_BISpent(_C)
+THEN
+NOT DB_AMP_Plus_BISpent(_C);
+
+IF
+LeftCombat((CHARACTER)_C, _)
+AND
+DB_AMP_Plus_BIHeld(_C)
+THEN
+NOT DB_AMP_Plus_BIHeld(_C);
+
+// one-off sweep for fights that began before the spent mark existed
+// delay needed, a creature does not read as in combat on the load event itself
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_BIMigrated(1)
+THEN
+DB_AMP_Plus_BIMigrated(1);
+TimerLaunch("AMP_Plus_BILoadSweep", 2000);
+
+IF
+TimerFinished("AMP_Plus_BILoadSweep")
+AND
+DB_AMP_DiffV3_Tracked((CHARACTER)_C, (STRING)_Status)
+AND
+DB_AMP_BattleInstinct_StatusList(_Status)
+AND
+IsInCombat(_C, 1)
+AND
+NOT DB_AMP_Plus_BISpent(_C)
+THEN
+DB_AMP_Plus_BISpent(_C);
+RemoveStatus(_C, "AMP_BATTLE_INSTINCT", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_Plus_BI_STANDARD", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_Plus_BI_CASUAL", NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+ENDEXITSECTION

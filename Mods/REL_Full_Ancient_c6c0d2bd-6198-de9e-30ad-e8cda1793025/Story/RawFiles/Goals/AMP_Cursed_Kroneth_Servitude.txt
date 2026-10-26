@@ -1,0 +1,319 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// servitude obligation pool, after the good ending
+
+// assignment: random pick from pool
+
+IF
+EnteredCombat((CHARACTER)_Char, _)
+AND
+HasActiveStatus(_Char, "AMP_HUMBLED_KRONETH", 1)
+AND
+NOT DB_AMP_Kroneth_ActiveObligation(_Char, _)
+AND
+Random(5, (INTEGER)_Roll)
+THEN
+PROC_AMP_Kroneth_Assign(_Char, _Roll);
+
+PROC
+PROC_AMP_Kroneth_Assign((CHARACTER)_Char, 0)
+THEN
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_KRONETH_OBLIGATION_DEVOTION");
+DB_AMP_Kroneth_Counter(_Char, 0);
+ApplyStatus(_Char, "AMP_KRONETH_OBLIGATION_DEVOTION", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Kroneth_Assign((CHARACTER)_Char, 1)
+THEN
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_KRONETH_OBLIGATION_SILENCE");
+DB_AMP_Kroneth_Counter(_Char, 0);
+ApplyStatus(_Char, "AMP_KRONETH_OBLIGATION_SILENCE", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Kroneth_Assign((CHARACTER)_Char, 2)
+THEN
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_KRONETH_OBLIGATION_SLAUGHTER");
+DB_AMP_Kroneth_Counter(_Char, 0);
+ApplyStatus(_Char, "AMP_KRONETH_OBLIGATION_SLAUGHTER", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Kroneth_Assign((CHARACTER)_Char, 3)
+THEN
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_KRONETH_OBLIGATION_ENDURANCE");
+DB_AMP_Kroneth_Counter(_Char, 0);
+ApplyStatus(_Char, "AMP_KRONETH_OBLIGATION_ENDURANCE", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Kroneth_Assign((CHARACTER)_Char, 4)
+THEN
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_KRONETH_OBLIGATION_THEATRICS");
+DB_AMP_Kroneth_Counter(_Char, 0);
+ApplyStatus(_Char, "AMP_KRONETH_OBLIGATION_THEATRICS", -1.0, 1, _Char);
+
+// trackers
+
+// devotion: each cast +1
+IF
+CastedSpell((CHARACTER)_Char, _, _, _, _)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_KRONETH_OBLIGATION_DEVOTION")
+AND
+DB_AMP_Kroneth_Counter(_Char, (INTEGER)_Old)
+AND
+IntegerSum(_Old, 1, (INTEGER)_New)
+THEN
+NOT DB_AMP_Kroneth_Counter(_Char, _Old);
+DB_AMP_Kroneth_Counter(_Char, _New);
+
+// silence: any cast breaks the vow
+IF
+CastedSpell((CHARACTER)_Char, _, _, _, _)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_KRONETH_OBLIGATION_SILENCE")
+AND
+NOT DB_AMP_Kroneth_VowBroken(_Char)
+THEN
+DB_AMP_Kroneth_VowBroken(_Char);
+
+// slaughter: last attacker, counted on victim death
+// split in two so THEN keeps explicit bindings, no wildcards
+
+IF
+AttackedBy((CHARACTER)_Defender, _, (CHARACTER)_Attacker, _, _, _, _)
+AND
+DB_AMP_Kroneth_LastAttacker(_Defender, (CHARACTER)_OldAttacker)
+AND
+_OldAttacker != _Attacker
+THEN
+NOT DB_AMP_Kroneth_LastAttacker(_Defender, _OldAttacker);
+DB_AMP_Kroneth_LastAttacker(_Defender, _Attacker);
+
+IF
+AttackedBy((CHARACTER)_Defender, _, (CHARACTER)_Attacker, _, _, _, _)
+AND
+NOT DB_AMP_Kroneth_LastAttacker(_Defender, _)
+THEN
+DB_AMP_Kroneth_LastAttacker(_Defender, _Attacker);
+
+IF
+Died((CHARACTER)_Victim)
+AND
+DB_AMP_Kroneth_LastAttacker(_Victim, (CHARACTER)_Killer)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Killer, "AMP_KRONETH_OBLIGATION_SLAUGHTER")
+AND
+DB_AMP_Kroneth_Counter(_Killer, (INTEGER)_Old)
+AND
+IntegerSum(_Old, 1, (INTEGER)_New)
+THEN
+NOT DB_AMP_Kroneth_Counter(_Killer, _Old);
+DB_AMP_Kroneth_Counter(_Killer, _New);
+NOT DB_AMP_Kroneth_LastAttacker(_Victim, _Killer);
+
+// endurance: each turn end +1
+IF
+TurnEnded((CHARACTER)_Char)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_KRONETH_OBLIGATION_ENDURANCE")
+AND
+DB_AMP_Kroneth_Counter(_Char, (INTEGER)_Old)
+AND
+IntegerSum(_Old, 1, (INTEGER)_New)
+THEN
+NOT DB_AMP_Kroneth_Counter(_Char, _Old);
+DB_AMP_Kroneth_Counter(_Char, _New);
+
+// theatrics: status applied on enemy by char +1
+// source != target so self-buffs don't inflate the counter
+IF
+StatusApplied((CHARACTER)_Target, _, (CHARACTER)_Source, _)
+AND
+_Source != _Target
+AND
+DB_AMP_Kroneth_ActiveObligation(_Source, "AMP_KRONETH_OBLIGATION_THEATRICS")
+AND
+IsEnemy(_Source, _Target, 1)
+AND
+DB_AMP_Kroneth_Counter(_Source, (INTEGER)_Old)
+AND
+IntegerSum(_Old, 1, (INTEGER)_New)
+THEN
+NOT DB_AMP_Kroneth_Counter(_Source, _Old);
+DB_AMP_Kroneth_Counter(_Source, _New);
+
+// resolution at combat end
+
+// devotion pass: 3+
+IF
+LeftCombat((CHARACTER)_Char, _)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_KRONETH_OBLIGATION_DEVOTION")
+AND
+DB_AMP_Kroneth_Counter(_Char, (INTEGER)_Count)
+AND
+_Count >= 3
+THEN
+PROC_AMP_Kroneth_VowFulfilled(_Char);
+
+// devotion fail
+IF
+LeftCombat((CHARACTER)_Char, _)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_KRONETH_OBLIGATION_DEVOTION")
+AND
+DB_AMP_Kroneth_Counter(_Char, (INTEGER)_Count)
+AND
+_Count < 3
+THEN
+PROC_AMP_Kroneth_VowBroken_Resolve(_Char);
+
+// silence pass: not broken
+IF
+LeftCombat((CHARACTER)_Char, _)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_KRONETH_OBLIGATION_SILENCE")
+AND
+NOT DB_AMP_Kroneth_VowBroken(_Char)
+THEN
+PROC_AMP_Kroneth_VowFulfilled(_Char);
+
+// silence fail
+IF
+LeftCombat((CHARACTER)_Char, _)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_KRONETH_OBLIGATION_SILENCE")
+AND
+DB_AMP_Kroneth_VowBroken(_Char)
+THEN
+PROC_AMP_Kroneth_VowBroken_Resolve(_Char);
+
+// slaughter pass: 2+ kills
+IF
+LeftCombat((CHARACTER)_Char, _)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_KRONETH_OBLIGATION_SLAUGHTER")
+AND
+DB_AMP_Kroneth_Counter(_Char, (INTEGER)_Count)
+AND
+_Count >= 2
+THEN
+PROC_AMP_Kroneth_VowFulfilled(_Char);
+
+// slaughter fail
+IF
+LeftCombat((CHARACTER)_Char, _)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_KRONETH_OBLIGATION_SLAUGHTER")
+AND
+DB_AMP_Kroneth_Counter(_Char, (INTEGER)_Count)
+AND
+_Count < 2
+THEN
+PROC_AMP_Kroneth_VowBroken_Resolve(_Char);
+
+// endurance pass: 5+ turns
+IF
+LeftCombat((CHARACTER)_Char, _)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_KRONETH_OBLIGATION_ENDURANCE")
+AND
+DB_AMP_Kroneth_Counter(_Char, (INTEGER)_Count)
+AND
+_Count >= 5
+THEN
+PROC_AMP_Kroneth_VowFulfilled(_Char);
+
+// endurance fail
+IF
+LeftCombat((CHARACTER)_Char, _)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_KRONETH_OBLIGATION_ENDURANCE")
+AND
+DB_AMP_Kroneth_Counter(_Char, (INTEGER)_Count)
+AND
+_Count < 5
+THEN
+PROC_AMP_Kroneth_VowBroken_Resolve(_Char);
+
+// theatrics pass: 2+ harmful statuses on enemies
+IF
+LeftCombat((CHARACTER)_Char, _)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_KRONETH_OBLIGATION_THEATRICS")
+AND
+DB_AMP_Kroneth_Counter(_Char, (INTEGER)_Count)
+AND
+_Count >= 2
+THEN
+PROC_AMP_Kroneth_VowFulfilled(_Char);
+
+// theatrics fail
+IF
+LeftCombat((CHARACTER)_Char, _)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_KRONETH_OBLIGATION_THEATRICS")
+AND
+DB_AMP_Kroneth_Counter(_Char, (INTEGER)_Count)
+AND
+_Count < 2
+THEN
+PROC_AMP_Kroneth_VowBroken_Resolve(_Char);
+
+// LeftCombat never fires for the dead, the obligation would stick and block the next combat
+
+IF
+Died((CHARACTER)_Char)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, (STRING)_Status)
+THEN
+PROC_AMP_Kroneth_VowBroken_Resolve(_Char);
+
+// cleanup procs
+
+PROC
+PROC_AMP_Kroneth_VowFulfilled((CHARACTER)_Char)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, (STRING)_Status)
+AND
+DB_AMP_Kroneth_Counter(_Char, (INTEGER)_Count)
+THEN
+NOT DB_AMP_Kroneth_ActiveObligation(_Char, _Status);
+NOT DB_AMP_Kroneth_Counter(_Char, _Count);
+NOT DB_AMP_Kroneth_VowBroken(_Char);
+
+PROC
+PROC_AMP_Kroneth_VowBroken_Resolve((CHARACTER)_Char)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, (STRING)_Status)
+AND
+DB_AMP_Kroneth_Counter(_Char, (INTEGER)_Count)
+AND
+NOT HasActiveStatus(_Char, "AMP_GRAND_DESIGN_WARD", 1)
+THEN
+NOT DB_AMP_Kroneth_ActiveObligation(_Char, _Status);
+NOT DB_AMP_Kroneth_Counter(_Char, _Count);
+NOT DB_AMP_Kroneth_VowBroken(_Char);
+RemoveStatus(_Char, "AMP_HUMBLED_KRONETH", NULL_00000000-0000-0000-0000-000000000000);
+ApplyStatus(_Char, "AMP_KRONETH_CURSE", -1.0, 1, _Char);
+ApplyStatus(_Char, "AMP_KRONETH_JUDGEMENT", -1.0, 1, _Char);
+
+// ward-bearer: vow broken but no penalty, stays humbled
+PROC
+PROC_AMP_Kroneth_VowBroken_Resolve((CHARACTER)_Char)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, (STRING)_Status)
+AND
+DB_AMP_Kroneth_Counter(_Char, (INTEGER)_Count)
+AND
+HasActiveStatus(_Char, "AMP_GRAND_DESIGN_WARD", 1)
+THEN
+NOT DB_AMP_Kroneth_ActiveObligation(_Char, _Status);
+NOT DB_AMP_Kroneth_Counter(_Char, _Count);
+NOT DB_AMP_Kroneth_VowBroken(_Char);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="4c670121-7769-420a-a336-a9a5697889b7" />
+					<attribute id="Name" type="LSString" value="Orb_Fire" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="b085e96d-e199-467f-b6a8-5d9d44e3cb21" />
+					<attribute id="ReadinessFlags" type="uint32" value="128" />
+					<attribute id="Flag" type="uint8" value="0" />
+					<attribute id="DisplayName" type="TranslatedString" handle="hdeaad3d9gf5a8g479fg9fa1g18570a8424b7" version="2" />
+					<attribute id="Icon" type="FixedString" value="Orb_Fire" />
+					<attribute id="Stats" type="FixedString" value="AMP_Orb_Fire_Ring_T4" />
+					<attribute id="maxStackAmount" type="int32" value="1" />
+					<attribute id="Description" type="TranslatedString" handle="hc5cff84dg7a36g408eg91ebg5f85bddc0a76" version="2" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="bd349698-3353-46bf-90cd-345d9930d12b" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

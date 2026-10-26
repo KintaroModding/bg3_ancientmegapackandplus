@@ -1,0 +1,44 @@
+USING rogue_smart
+
+// endpos penalty scores the final tile only, so adjacency during the swing is free
+// radius has to be reachable after the swing: wide and strong never attacks, weak stands glued
+MULTIPLIER_ENDPOS_ENEMIES_NEARBY                -0.35
+ENDPOS_ENEMIES_NEARBY_MIN_DISTANCE               1.90
+ENDPOS_ENEMIES_NEARBY_MAX_DISTANCE               7.00
+
+// --- IGNORE opportunity attacks entirely (Scout darts through the line) ---
+ENABLE_MOVEMENT_AVOID_AOO                        0.00
+MULTIPLIER_BOOST_IGNORE_AOO                      0.00
+
+// --- JUMP CONSTANTLY, even short hops ---
+SPELL_JUMP_MINIMUM_DISTANCE                      1.50
+SPELL_TELEPORT_MINIMUM_DISTANCE                  1.50
+FALLBACK_JUMP_OVER_WALK_PREFERRED_DISTANCE       0.50
+
+// --- RECKLESS (Mad Max): ignores self-damage and fall damage ---
+MULTIPLIER_DAMAGE_SELF_NEG                       0.50
+MULTIPLIER_FALL_DAMAGE_SELF                      0.00
+MULTIPLIER_REFLECT_DAMAGE                        0.00
+MULTIPLIER_MOVEMENT_SURFACE                      0.00
+MULTIPLIER_ENDPOS_NOT_IN_DANGEROUS_SURFACE       0.00
+
+// --- SNEAKY STUNS: target squishies and weak saves, value control over raw damage ---
+MODIFIER_HIT_CHANCE_STUPIDITY                    0.82
+MODIFIER_CONTROL_STUPIDITY                       0.75
+MULTIPLIER_CONTROL_ENEMY_POS                     1.40
+MULTIPLIER_BOOST_ENEMY_POS                       1.30
+MULTIPLIER_KNOCKDOWN                             0.70
+MODIFIER_CONCENTRATION_REMOVE_TARGET             0.40
+
+// --- PREDATOR: finishes the wounded and isolated, ignores summons ---
+MULTIPLIER_TARGET_HEALTH_BIAS                    0.20
+MULTIPLIER_KILL_ENEMY                            1.65
+MULTIPLIER_TARGET_PREFERRED                      4.00
+MULTIPLIER_TARGET_SUMMON                         0.40
+
+// --- street-level brawler: no high-ground seeking, no barrels/scavenging ---
+MULTIPLIER_ENEMY_HEIGHT_DIFFERENCE               0.00
+WEAPON_PICKUP_MODIFIER                           0.00
+MULTIPLIER_USABLE_ITEM                           0.00
+THROW_INVENTORY_ITEM_LIMIT                       0
+USE_INVENTORY_ITEMS_ENABLED                      1

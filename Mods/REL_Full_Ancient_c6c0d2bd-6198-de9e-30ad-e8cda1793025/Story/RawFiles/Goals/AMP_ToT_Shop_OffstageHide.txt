@@ -1,0 +1,51 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// INVISIBLE alone gets beaten by see-invisibility/detect magic, so pull the
+// container off stage entirely until the shop is activated.
+
+// level entry: hide if not activated
+IF
+LevelGameplayStarted("WLD_Main_A", _)
+AND
+DB_ToT_Shop_Enabled(1)
+AND
+NOT DB_ToT_Shop_Activated(1)
+AND
+DB_ToT_Shop((STRING)_ShopID, (ITEM)_Container)
+THEN
+SetOnStage(_Container, 0);
+
+// level entry: restore if activated
+IF
+LevelGameplayStarted("WLD_Main_A", _)
+AND
+DB_ToT_Shop_Enabled(1)
+AND
+DB_ToT_Shop_Activated(1)
+AND
+DB_ToT_Shop((STRING)_ShopID, (ITEM)_Container)
+THEN
+SetOnStage(_Container, 1);
+
+// yes -> on stage
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings018", 1)
+AND
+DB_ToT_Shop((STRING)_ShopID, (ITEM)_Container)
+THEN
+SetOnStage(_Container, 1);
+
+// no -> off stage
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings018", 0)
+AND
+DB_ToT_Shop((STRING)_ShopID, (ITEM)_Container)
+THEN
+SetOnStage(_Container, 0);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,18 @@
+USING healer_melee
+
+// smart target selection
+MODIFIER_HIT_CHANCE_STUPIDITY        0.85
+
+// open the fight with a buff -- Pokrov (AI sees AI_HELPER_BUFF_MASSIVE)
+MULTIPLIER_FIRST_ACTION_BUFF         6.00
+
+// tank / martyr: hold the line, do not fear attacks of opportunity, do not mind being struck
+ENABLE_MOVEMENT_AVOID_AOO            0.00
+MULTIPLIER_DAMAGE_SELF_NEG           0.40
+
+// pure attrition -- even less kill-focused than a stock healer (healer_melee = 1.1)
+MULTIPLIER_KILL_ENEMY                0.30
+
+// He holds the line where it stands, burning or not.
+MULTIPLIER_MOVEMENT_SURFACE                      0.00
+MULTIPLIER_ENDPOS_NOT_IN_DANGEROUS_SURFACE       0.00

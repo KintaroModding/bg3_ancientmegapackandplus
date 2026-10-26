@@ -1,0 +1,51 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// v3: old status names gone from stats. party cleanup now in
+// AMP_Difficulty_V3.txt block 8 (DB_PartOfTheTeam). old rules commented below.
+
+//IF
+//DB_Players((CHARACTER)_Player)
+//AND
+//DB_AMP_Difficulty_AllTargets((STRING)_Status)
+//AND
+//HasActiveStatus(_Player, _Status, 1)
+//THEN
+//RemoveStatus(_Player, _Status, NULL_00000000-0000-0000-0000-000000000000);
+
+//IF
+//DB_Players((CHARACTER)_Player)
+//AND
+//DB_AMP_Difficulty_AllBosses((STRING)_Status)
+//AND
+//HasActiveStatus(_Player, _Status, 1)
+//THEN
+//RemoveStatus(_Player, _Status, NULL_00000000-0000-0000-0000-000000000000);
+
+//IF
+//LevelGameplayStarted(_, _)
+//AND
+//DB_Players((CHARACTER)_Player)
+//AND
+//DB_AMP_Difficulty_AllTargets((STRING)_Status)
+//AND
+//HasActiveStatus(_Player, _Status, 1)
+//THEN
+//RemoveStatus(_Player, _Status, NULL_00000000-0000-0000-0000-000000000000);
+
+//IF
+//LevelGameplayStarted(_, _)
+//AND
+//DB_Players((CHARACTER)_Player)
+//AND
+//DB_AMP_Difficulty_AllBosses((STRING)_Status)
+//AND
+//HasActiveStatus(_Player, _Status, 1)
+//THEN
+//RemoveStatus(_Player, _Status, NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+
+ENDEXITSECTION

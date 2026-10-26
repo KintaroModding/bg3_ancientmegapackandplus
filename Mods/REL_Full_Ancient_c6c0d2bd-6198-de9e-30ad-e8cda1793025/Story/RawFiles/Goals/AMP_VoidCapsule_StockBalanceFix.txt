@@ -1,0 +1,54 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// migrate old saves to rebuilt stock shard config (chance/threshold/count -> 100/0/0).
+// runs once, marker blocks repeats across level loads.
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_VoidCapsule_StockBalanceFix_V1(1)
+THEN
+PROC_AMP_VoidCapsule_StockBalanceFix_Apply();
+
+PROC
+PROC_AMP_VoidCapsule_StockBalanceFix_Apply()
+AND
+DB_AMP_VoidCapsule_ShardCoinChanceByMode("NONE", (INTEGER)_OldChance)
+AND
+_OldChance != 100
+THEN
+NOT DB_AMP_VoidCapsule_ShardCoinChanceByMode("NONE", _OldChance);
+DB_AMP_VoidCapsule_ShardCoinChanceByMode("NONE", 100);
+
+PROC
+PROC_AMP_VoidCapsule_StockBalanceFix_Apply()
+AND
+DB_AMP_VoidCapsule_PityThresholdByMode("NONE", (INTEGER)_OldT)
+AND
+_OldT != 0
+THEN
+NOT DB_AMP_VoidCapsule_PityThresholdByMode("NONE", _OldT);
+DB_AMP_VoidCapsule_PityThresholdByMode("NONE", 0);
+
+PROC
+PROC_AMP_VoidCapsule_StockBalanceFix_Apply()
+AND
+DB_AMP_VoidCapsule_PityRewardCountByMode("NONE", (INTEGER)_OldR)
+AND
+_OldR != 0
+THEN
+NOT DB_AMP_VoidCapsule_PityRewardCountByMode("NONE", _OldR);
+DB_AMP_VoidCapsule_PityRewardCountByMode("NONE", 0);
+
+PROC
+PROC_AMP_VoidCapsule_StockBalanceFix_Apply()
+THEN
+PROC_AMP_VoidCapsule_RefreshCache();
+DB_AMP_VoidCapsule_StockBalanceFix_V1(1);
+
+EXITSECTION
+ENDEXITSECTION

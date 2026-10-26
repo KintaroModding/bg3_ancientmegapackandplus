@@ -1,0 +1,54 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+/*
+// detect when projectile_jump is used
+IF
+UsingSpell((CHARACTER)_Character, _Spell, _, _, _)
+AND
+_Spell == "Projectile_Jump"
+THEN
+PROC_GiveArcanizer(_Character);
+
+// give arcanizer chest to the player
+PROC
+PROC_GiveArcanizer((CHARACTER)_Character)
+AND
+IsPlayer(_Character, 1)
+THEN
+TemplateAddTo(AMP_Arcanizer_8b0d5eb7-fe0c-448c-a159-645a27a6afc0, _Character, 1, 1);
+
+IF
+UsingSpell((CHARACTER)_Character, _Spell, _, _, _)
+AND
+_Spell == "Shout_Dash"
+THEN
+PROC_AMP_Items(_Character);
+
+
+PROC
+PROC_AMP_Items((CHARACTER)_Character)
+AND
+IsPlayer(_Character, 1)
+THEN
+// templateaddto(arc_n_radiant1_22af5e09-7567-4574-ba26-61e5638381fe, _character, 1, 1);
+// templateaddto(arc_n_radiant4_2cf290de-081a-46b2-bd7e-41d1b419903c, _character, 1, 1);
+// templateaddto(arc_g_monk4_995302fb-1e5c-4f74-8770-6ba4460715e9, _character, 1, 1);
+// templateaddto(wpn_battleaxe_e_1180cb95-9c7a-487d-a8ae-6f73302d82a4, _character, 1, 1);
+// templateaddto(mag_weapon55_fd75a48b-fdb2-45e6-a8dc-ba0d3393aab2, _character, 1, 1);
+// templateaddto(mag_weapon57_e6e42677-467b-4168-9308-7468c08cdc9b, _character, 1, 1);
+// templateaddto(mag_weapon126_9db7f557-d56e-46cf-80f8-39cd33f53196, _character, 1, 1);
+// templateaddto(amp_resonance_matrix_2c8dfeb6-c86e-4595-b9e9-080aa87bd0b7, _character, 1, 1);
+// templateaddto(amp_resonance_matrix_2c8dfeb6-c86e-4595-b9e9-080aa87bd0b7, _character, 1, 1);
+IF
+CastedSpell((CHARACTER)_Character, "Shout_Dash", _, _, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+// generate treasure directly to player inventory
+GenerateTreasure(_Character, "AMP_Test01", 1, _Character);
+*/
+EXITSECTION
+ENDEXITSECTION

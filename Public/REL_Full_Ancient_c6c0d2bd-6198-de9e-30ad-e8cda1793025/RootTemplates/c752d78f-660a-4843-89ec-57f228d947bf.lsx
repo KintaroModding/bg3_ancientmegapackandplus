@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="c752d78f-660a-4843-89ec-57f228d947bf" />
+					<attribute id="Name" type="LSString" value="WPN_Torch_l" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="88be0257-cd9a-4922-85c9-178ad8579af2" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h207f4c56gc831g4197g8885g7d4a05abe966" version="1" />
+					<attribute id="Icon" type="FixedString" value="arc_Torch_l" />
+					<attribute id="Stats" type="FixedString" value="WPN_Torch_l" />
+					<attribute id="owner" type="FixedString" value="" />
+					<attribute id="Description" type="TranslatedString" handle="h44ef84cag9525gf4b7ge9daged5ebc143187" version="1" />
+					<children>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="MAG_WEAPON1_VFX" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

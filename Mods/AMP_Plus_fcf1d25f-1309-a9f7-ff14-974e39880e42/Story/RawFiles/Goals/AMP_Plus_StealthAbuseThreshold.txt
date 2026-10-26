@@ -1,0 +1,42 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_StealthThreshold_Ver(1)
+THEN
+PROC_AMP_Plus_StealthThreshold_Reseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_StealthThreshold_Ver(1)
+THEN
+PROC_AMP_Plus_StealthThreshold_Reseed();
+
+PROC
+PROC_AMP_Plus_StealthThreshold_Reseed()
+AND
+DB_AMP_Plus_StealthThreshold_Ver((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_StealthThreshold_Ver(_Old);
+
+PROC
+PROC_AMP_Plus_StealthThreshold_Reseed()
+AND
+DB_AMP_StealthAbuse_Threshold((INTEGER)_T)
+THEN
+NOT DB_AMP_StealthAbuse_Threshold(_T);
+
+PROC
+PROC_AMP_Plus_StealthThreshold_Reseed()
+THEN
+DB_AMP_Plus_StealthThreshold_Ver(1);
+DB_AMP_StealthAbuse_Threshold(3);
+
+EXITSECTION
+ENDEXITSECTION

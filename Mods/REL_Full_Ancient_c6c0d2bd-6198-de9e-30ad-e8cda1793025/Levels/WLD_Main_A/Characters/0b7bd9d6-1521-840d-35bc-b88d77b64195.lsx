@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="0b7bd9d6-1521-840d-35bc-b88d77b64195" />
+					<attribute id="Name" type="LSString" value="S_CRA_DeadFisherman3" />
+					<attribute id="LevelName" type="FixedString" value="WLD_Main_A" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="TemplateName" type="FixedString" value="3a318f03-c49f-4dd5-b6fb-cfd54a722b2a" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="GroupID" type="uint32" value="3178" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h2903594fg0a8dg4f2egb4feg0c328f968c51" version="2" />
+					<attribute id="Icon" type="FixedString" value="6f6dce78-cc21-3b9b-9138-d968061250f9-_(Icon_Human_Male)" />
+					<attribute id="DefaultState" type="uint8" value="11" />
+					<attribute id="CharacterVisualResourceID" type="FixedString" value="6f6dce78-cc21-3b9b-9138-d968061250f9" />
+					<attribute id="SoftBodyCollisionTemplate" type="FixedString" value="4350b66a-f56a-4f2a-9c60-b5a56609afa4" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="293.21 0.2781096 270.211" />
+							<attribute id="RotationQuat" type="fvec4" value="0.0004302271 0.6611721 0.0166921 0.7500485" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="Testlevel_Dialogs_POC2" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="fe18ee74-b4e7-29f1-819d-c0047dc99014" />
+												</node>
+											</children>
+										</node>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="WLD_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="d092dace-9f6c-2013-dac7-91de3fe17459" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="05101262-e5a4-c68b-9ecf-e249f696a639" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="OnDeathActions" />
+						<node id="ItemList">
+							<children>
+								<node id="Item">
+									<attribute id="ScoreModifier" type="float" value="1" />
+									<attribute id="StartRound" type="int32" value="0" />
+									<attribute id="FallbackStartRound" type="int32" value="-1" />
+									<attribute id="MinimumImpact" type="int32" value="0" />
+									<attribute id="OnlyCastOnSelf" type="bool" value="False" />
+									<attribute id="AIFlags" type="uint16" value="0" />
+									<attribute id="ItemName" type="LSString" value="CRA_Fisher_LoveLetter" />
+									<attribute id="LevelName" type="LSString" value="" />
+									<attribute id="UUID" type="FixedString" value="" />
+									<attribute id="TemplateID" type="FixedString" value="" />
+									<attribute id="Amount" type="int32" value="1" />
+									<attribute id="IsTradable" type="uint8" value="0" />
+									<attribute id="Type" type="uint8" value="0" />
+									<attribute id="CanBePickpocketed" type="bool" value="True" />
+									<attribute id="IsDroppedOnDeath" type="bool" value="True" />
+									<attribute id="DisplayName" type="LSString" value="Perfumed Letter" />
+									<children>
+										<node id="SourceConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+										<node id="TargetConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

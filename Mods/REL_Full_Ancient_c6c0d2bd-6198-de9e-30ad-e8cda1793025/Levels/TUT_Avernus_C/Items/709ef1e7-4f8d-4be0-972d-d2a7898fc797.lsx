@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="709ef1e7-4f8d-4be0-972d-d2a7898fc797" />
+					<attribute id="Name" type="LSString" value="AMP_HardChest_000" />
+					<attribute id="LevelName" type="FixedString" value="TUT_Avernus_C" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="011bd6ef-d3fc-437c-b9a5-5a66670e9f75" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="Key" type="FixedString" value="" />
+					<attribute id="CanBePickedUp" type="bool" value="False" />
+					<attribute id="CanBeMoved" type="bool" value="False" />
+					<attribute id="GravityType" type="uint8" value="1" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="46.318638 17.159409 -350.80618" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0 0 1" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="TUT_Avernus_C" />
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

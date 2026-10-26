@@ -1,0 +1,173 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+// entry from dispatch
+PROC
+PROC_AMP_VoidCapsule_SalvageStart((ITEM)_Item, (ITEM)_Capsule, (CHARACTER)_Owner)
+THEN
+PROC_AMP_VoidCapsule_InitCharges(_Capsule);
+PROC_AMP_VoidCapsule_SalvageDetermineRarity(_Item, _Capsule, _Owner);
+
+// determine rarity (4 proc defs, one matches)
+// legendary: _value >= 2500
+PROC
+PROC_AMP_VoidCapsule_SalvageDetermineRarity((ITEM)_Item, (ITEM)_Capsule, (CHARACTER)_Owner)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+DB_AMP_VoidCapsule_RarityRange("Legendary", (INTEGER)_Min, _)
+AND
+_Value >= _Min
+THEN
+PROC_AMP_VoidCapsule_SalvageRoll(_Item, _Capsule, _Owner, "Legendary");
+
+// veryrare: 800-2499
+PROC
+PROC_AMP_VoidCapsule_SalvageDetermineRarity((ITEM)_Item, (ITEM)_Capsule, (CHARACTER)_Owner)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+DB_AMP_VoidCapsule_RarityRange("VeryRare", (INTEGER)_Min, (INTEGER)_Max)
+AND
+_Value >= _Min
+AND
+_Value <= _Max
+THEN
+PROC_AMP_VoidCapsule_SalvageRoll(_Item, _Capsule, _Owner, "VeryRare");
+
+// rare: 400-799
+PROC
+PROC_AMP_VoidCapsule_SalvageDetermineRarity((ITEM)_Item, (ITEM)_Capsule, (CHARACTER)_Owner)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+DB_AMP_VoidCapsule_RarityRange("Rare", (INTEGER)_Min, (INTEGER)_Max)
+AND
+_Value >= _Min
+AND
+_Value <= _Max
+THEN
+PROC_AMP_VoidCapsule_SalvageRoll(_Item, _Capsule, _Owner, "Rare");
+
+// uncommon: 150-399
+PROC
+PROC_AMP_VoidCapsule_SalvageDetermineRarity((ITEM)_Item, (ITEM)_Capsule, (CHARACTER)_Owner)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+DB_AMP_VoidCapsule_RarityRange("Uncommon", (INTEGER)_Min, (INTEGER)_Max)
+AND
+_Value >= _Min
+AND
+_Value <= _Max
+THEN
+PROC_AMP_VoidCapsule_SalvageRoll(_Item, _Capsule, _Owner, "Uncommon");
+
+// single random --> apply
+PROC
+PROC_AMP_VoidCapsule_SalvageRoll((ITEM)_Item, (ITEM)_Capsule, (CHARACTER)_Owner, (STRING)_Rarity)
+AND
+DB_AMP_VoidCapsule_SalvageChanceActive(_Rarity, (INTEGER)_Chance)
+AND
+Random(100, (INTEGER)_Roll)
+THEN
+PROC_AMP_VoidCapsule_SalvageApply(_Item, _Capsule, _Owner, _Roll, _Chance, _Rarity);
+
+// apply success (_roll < _chance)
+PROC
+PROC_AMP_VoidCapsule_SalvageApply((ITEM)_Item, (ITEM)_Capsule, (CHARACTER)_Owner, (INTEGER)_Roll, (INTEGER)_Chance, (STRING)_Rarity)
+AND
+_Roll < _Chance
+AND
+DB_AMP_VoidCapsule_SalvageRewardByRarity(_Rarity, (ITEMROOT)_RewardTemplate)
+THEN
+NOT DB_AMP_VoidCapsule_SalvageProcessing(_Item);
+RequestDelete(_Item);
+PlaySound(_Owner, "EPI_Epilogue_SpectralVoiceGale_GaleProjectionDisappear");
+PROC_AMP_VoidCapsule_SpawnReward(_Owner, "Salvage", _RewardTemplate, _Capsule);
+PROC_AMP_VoidCapsule_Decrement(_Capsule, _Owner);
+PROC_AMP_VoidCapsule_PityReset(_Owner);
+PROC_AMP_VoidCapsule_ReleaseBusy(_Capsule);
+
+// apply fail (_roll >= _chance)
+PROC
+PROC_AMP_VoidCapsule_SalvageApply((ITEM)_Item, (ITEM)_Capsule, (CHARACTER)_Owner, (INTEGER)_Roll, (INTEGER)_Chance, (STRING)_Rarity)
+AND
+_Roll >= _Chance
+THEN
+NOT DB_AMP_VoidCapsule_SalvageProcessing(_Item);
+RequestDelete(_Item);
+PlaySound(_Owner, "UI_HUD_Combine_Error");
+PlaySound(_Owner, "COL_KethericShowdown_CrownController_ShadowVoidSweetener_Intro");
+PROC_AMP_VoidCapsule_Decrement(_Capsule, _Owner);
+PROC_AMP_VoidCapsule_PityIncrement(_Owner, _Capsule);
+PROC_AMP_VoidCapsule_ReleaseBusy(_Capsule);
+
+// pity system (inline)
+
+// increment: counter exists
+PROC
+PROC_AMP_VoidCapsule_PityIncrement((CHARACTER)_Owner, (ITEM)_Capsule)
+AND
+DB_AMP_VoidCapsule_PityCounter(_Owner, (INTEGER)_Count)
+AND
+IntegerSum(_Count, 1, (INTEGER)_NewCount)
+THEN
+NOT DB_AMP_VoidCapsule_PityCounter(_Owner, _Count);
+DB_AMP_VoidCapsule_PityCounter(_Owner, _NewCount);
+PROC_AMP_VoidCapsule_PityCheck(_Owner, _Capsule, _NewCount);
+
+// increment: first fail (no counter yet)
+PROC
+PROC_AMP_VoidCapsule_PityIncrement((CHARACTER)_Owner, (ITEM)_Capsule)
+AND
+NOT DB_AMP_VoidCapsule_PityCounter(_Owner, _)
+THEN
+DB_AMP_VoidCapsule_PityCounter(_Owner, 1);
+PROC_AMP_VoidCapsule_PityCheck(_Owner, _Capsule, 1);
+
+// check: threshold reached, reward greater than 0, grant
+PROC
+PROC_AMP_VoidCapsule_PityCheck((CHARACTER)_Owner, (ITEM)_Capsule, (INTEGER)_Count)
+AND
+DB_AMP_VoidCapsule_PityThresholdActive((INTEGER)_Threshold)
+AND
+_Threshold > 0
+AND
+_Count >= _Threshold
+AND
+DB_AMP_VoidCapsule_PityRewardCountActive((INTEGER)_RewardCount)
+AND
+_RewardCount > 0
+THEN
+NOT DB_AMP_VoidCapsule_PityCounter(_Owner, _Count);
+DB_AMP_VoidCapsule_PityCounter(_Owner, 0);
+PROC_AMP_VoidCapsule_PityGrant(_Owner, _Capsule, _RewardCount);
+
+// grant: recursive spawn n rewards, rarity from active cache
+PROC
+PROC_AMP_VoidCapsule_PityGrant((CHARACTER)_Owner, (ITEM)_Capsule, (INTEGER)_Count)
+AND
+_Count > 0
+AND
+DB_AMP_VoidCapsule_PityRewardRarityActive((STRING)_Rarity)
+AND
+DB_AMP_VoidCapsule_SalvageRewardByRarity(_Rarity, (ITEMROOT)_Template)
+AND
+IntegerSubtract(_Count, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_VoidCapsule_SpawnReward(_Owner, "Pity", _Template, _Capsule);
+PROC_AMP_VoidCapsule_PityGrant(_Owner, _Capsule, _Next);
+
+// reset: on success
+PROC
+PROC_AMP_VoidCapsule_PityReset((CHARACTER)_Owner)
+AND
+DB_AMP_VoidCapsule_PityCounter(_Owner, (INTEGER)_Count)
+THEN
+NOT DB_AMP_VoidCapsule_PityCounter(_Owner, _Count);
+
+EXITSECTION
+ENDEXITSECTION

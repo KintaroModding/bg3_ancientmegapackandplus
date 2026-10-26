@@ -1,0 +1,67 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// rare omen easter egg: any boss fight, 1-in-20000 to silently conjure a random
+// ultra boss. mode-independent, keyed on IsBoss only, one roll per combat.
+
+// 1-in-N odds
+DB_AMP_RareOmen_Odds(20000);
+
+KBSECTION
+
+// one roll the first time a boss enters a combat
+IF
+EnteredCombat((CHARACTER)_Boss, (GUIDSTRING)_CombatGuid)
+AND
+IsBoss(_Boss, 1)
+AND
+IsPlayer(_Boss, 0)
+AND
+IsDead(_Boss, 0)
+AND
+NOT DB_AMP_RareOmen_Rolled(_CombatGuid)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_PoolSize)
+AND
+_PoolSize > 0
+THEN
+DB_AMP_RareOmen_Rolled(_CombatGuid);
+PROC_AMP_RareOmen_TryConjure(_Boss);
+
+// roll, on hit summon
+PROC
+PROC_AMP_RareOmen_TryConjure((CHARACTER)_Boss)
+AND
+DB_AMP_RareOmen_Odds((INTEGER)_Odds)
+AND
+Random(_Odds, (INTEGER)_Roll)
+AND
+_Roll == 0
+THEN
+PROC_AMP_RareOmen_Spawn(_Boss);
+
+// pick random pool entry, spawn behind boss via solo path
+PROC
+PROC_AMP_RareOmen_Spawn((CHARACTER)_Boss)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_Size)
+AND
+Random(_Size, (INTEGER)_Idx)
+AND
+DB_AMP_MirrorPool(_Idx, (GUIDSTRING)_Template, (INTEGER)_Count)
+AND
+GetPosition(_Boss, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _BX, _BY, _BZ);
+
+// clear per-combat marker on fight end
+IF
+LeftCombat(_, (GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_RareOmen_Rolled(_CombatGuid)
+THEN
+NOT DB_AMP_RareOmen_Rolled(_CombatGuid);
+
+EXITSECTION
+ENDEXITSECTION

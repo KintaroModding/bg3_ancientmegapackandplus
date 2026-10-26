@@ -1,0 +1,12 @@
+new entry "MAG_Weapon97_3_TidingsOfDawn"
+type "SpellData"
+data "SpellType" "Shout"
+using "Shout_RadianceOfTheDawn"
+data "DisplayName" "h225a2ac7g0127g4888gb551g3aa5101eb172;1"
+data "UseCosts" "ActionPoint:1"
+data "Cooldown" "OncePerCombat"
+
+new entry "MAG_Weapon97_3"
+type "Weapon"
+using "MAG_Weapon97_3"
+data "Boosts" "UnlockSpell(MAG_Weapon97_3_TidingsOfDawn)"

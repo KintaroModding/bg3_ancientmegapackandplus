@@ -1,0 +1,11 @@
+new entry "AMP_SHARD_PROFLIGACY_FILL"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator;IgnoreResting;ApplyToDead"
+data "OnApplyFunctors" "RestoreResource(SpellSlot,100%,1);RestoreResource(SpellSlot,100%,2);RestoreResource(SpellSlot,100%,3);RestoreResource(SpellSlot,100%,4);RestoreResource(SpellSlot,100%,5);RestoreResource(SpellSlot,100%,6);RestoreResource(WarlockSpellSlot,100%,1);RestoreResource(WarlockSpellSlot,100%,2);RestoreResource(WarlockSpellSlot,100%,3);RestoreResource(WarlockSpellSlot,100%,4);RestoreResource(WarlockSpellSlot,100%,5);RestoreResource(KiPoint,100%,0);RestoreResource(SorceryPoint,100%,0);RestoreResource(ChannelDivinity,100%,0);RestoreResource(ChannelOath,100%,0);RestoreResource(BardicInspiration,100%,0);RestoreResource(SuperiorityDie,100%,0);RestoreResource(LayOnHandsCharge,100%,0);RestoreResource(Rage,100%,0);RestoreResource(WildShape,100%,0);RestoreResource(TidesOfChaos,100%,0)"
+
+new entry "AMP_SHARD_PROFLIGACY_DRAIN"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator;IgnoreResting;ApplyToDead"
+data "OnApplyFunctors" "UseActionResource(SpellSlot,100%,1);UseActionResource(SpellSlot,100%,2);UseActionResource(SpellSlot,100%,3);UseActionResource(SpellSlot,100%,4);UseActionResource(SpellSlot,100%,5);UseActionResource(SpellSlot,100%,6);UseActionResource(WarlockSpellSlot,100%,1);UseActionResource(WarlockSpellSlot,100%,2);UseActionResource(WarlockSpellSlot,100%,3);UseActionResource(WarlockSpellSlot,100%,4);UseActionResource(WarlockSpellSlot,100%,5);UseActionResource(KiPoint,100%,0);UseActionResource(SorceryPoint,100%,0);UseActionResource(ChannelDivinity,100%,0);UseActionResource(ChannelOath,100%,0);UseActionResource(BardicInspiration,100%,0);UseActionResource(SuperiorityDie,100%,0);UseActionResource(LayOnHandsCharge,100%,0);UseActionResource(Rage,100%,0);UseActionResource(WildShape,100%,0);UseActionResource(TidesOfChaos,100%,0)"

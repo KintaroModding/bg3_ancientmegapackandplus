@@ -1,0 +1,16 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// lurking mound reads neutral to the base force-boss pass, so the flag is set at level load
+IF
+LevelGameplayStarted("SCL_Main_A", _)
+THEN
+SetIsBoss(S_SCL_BlightCombat2_Mound_01_1b294fe0-f1a1-4e81-9d4c-8d86bbda7d2b, 1);
+ApplyStatus(S_SCL_BlightCombat2_Mound_01_1b294fe0-f1a1-4e81-9d4c-8d86bbda7d2b, "AMP_PLUS_MOUND_TELEPORT", -1.0, 1, S_SCL_BlightCombat2_Mound_01_1b294fe0-f1a1-4e81-9d4c-8d86bbda7d2b);
+
+EXITSECTION
+
+ENDEXITSECTION

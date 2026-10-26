@@ -1,0 +1,27 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// own per-marker counter, outside the base refire compensation
+// base raises the row first, so clearing a row left at one wipes the shard on load
+
+IF
+StatusApplied((ITEM)_Item, (STRING)_ItemStatus, (CHARACTER)_Causee, _)
+AND
+DB_AMP_Shard_WeaponStackable(_ItemStatus)
+AND
+NOT DB_Players(_Causee)
+AND
+DB_AMP_Shard_Count(_Item, _ItemStatus, (INTEGER)_Count)
+AND
+_Count > 1
+AND
+IntegerSubtract(_Count, 1, (INTEGER)_New)
+THEN
+NOT DB_AMP_Shard_Count(_Item, _ItemStatus, _Count);
+DB_AMP_Shard_Count(_Item, _ItemStatus, _New);
+
+EXITSECTION
+ENDEXITSECTION

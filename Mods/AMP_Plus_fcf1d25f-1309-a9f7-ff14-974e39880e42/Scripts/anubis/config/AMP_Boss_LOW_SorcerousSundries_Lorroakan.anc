@@ -1,0 +1,8 @@
+game.configs.AMP_Boss_LOW_SorcerousSundries_Lorroakan = Config{
+    root=StateRef{game.roots.DefaultCharacter,
+        combat = StateRef{game.states.AMP_BossCombat},
+        genericBehaviours = StateRef{game.states.CrimesHumanoid},
+        combatCowerState = StateRef{game.states.CombatCower},
+        idle = StateRef{game.states.LOW_SorcerousSundries_Lorroakan},
+    }
+}

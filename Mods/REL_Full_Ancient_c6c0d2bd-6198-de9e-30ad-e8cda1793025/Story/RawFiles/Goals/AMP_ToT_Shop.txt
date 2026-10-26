@@ -1,0 +1,1585 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// container item shop for trials of tav, take = pay gold, drop = sell
+
+// config
+DB_ToT_Shop_Enabled(1);
+DB_ToT_Shop_SellPercent(60);
+
+// shop containers
+DB_ToT_Shop("GENERAL", (ITEM)AMP_ToT_Shop_000_4b6d8be3-bb3d-422a-b0de-4c1c7764b21d);
+DB_ToT_Shop("GENERAL", (ITEM)AMP_ToT_Shop_001_4464952c-7f56-44c1-8817-d95527362ac0);
+DB_ToT_Shop("GENERAL", (ITEM)AMP_ToT_Shop_002_64bad0c0-6064-44e4-803e-84287a7a54a3);
+DB_ToT_Shop("GENERAL", (ITEM)AMP_ToT_Shop_003_04a21167-75be-4037-b851-28e5dd48d05d);
+DB_ToT_Shop("GENERAL", (ITEM)AMP_ToT_Shop_000_d1fc36d3-13bc-4ec3-ba05-7dd669d74721);
+DB_ToT_Shop("GENERAL", (ITEM)AMP_ToT_Shop_001_a3272440-6056-4056-920f-088578192f0a);
+DB_ToT_Shop("GENERAL", (ITEM)AMP_ToT_Shop_000_a2042517-a3cf-4e0d-9bd3-c21fed7b29d6);
+DB_ToT_Shop("GENERAL", (ITEM)AMP_ToT_Shop_001_babb199f-499e-461b-a149-49bebed1d9f8);
+DB_ToT_Shop("GENERAL", (ITEM)AMP_ToT_Shop_002_5450fcdb-a360-4fd2-a222-325927f5cc34);
+DB_ToT_Shop("GENERAL", (ITEM)AMP_ToT_Shop_003_791d090c-9b18-4a81-9848-dd3bb79dcbf6);
+DB_ToT_Shop("GENERAL", (ITEM)AMP_ToT_Shop_000_2617e545-36aa-4312-82bb-3a1fe364e73f);
+DB_ToT_Shop("GENERAL", (ITEM)AMP_ToT_Shop_000_dc54f558-9421-40a2-b135-179bc6ab6045);
+DB_ToT_Shop_MaxStock("GENERAL", 8);
+DB_ToT_Shop_BuyMultiplier("GENERAL", 100);
+DB_ToT_Shop_BatchTotal(0);
+DB_ToT_Shop_RerollsSinceLR(0);
+
+// category weights, per-item weight comes from DB_ToT_ItemFreq
+DB_ToT_CatWeight("GENERAL", "COINS", 39);
+DB_ToT_CatWeight("GENERAL", "CAPSULES", 70);
+DB_ToT_CatWeight("GENERAL", "SHARDS_20", 50);
+DB_ToT_CatWeight("GENERAL", "SHARDS_6", 15);
+DB_ToT_CatWeight("GENERAL", "SHARDS_2", 5);
+DB_ToT_CatWeight("GENERAL", "SHARDS_1", 1);
+
+// category sizes, recomputed from DB_ToT_ItemFreq
+DB_ToT_CatSize("GENERAL", "COINS", 0);
+DB_ToT_CatSize("GENERAL", "CAPSULES", 0);
+DB_ToT_CatSize("GENERAL", "SHARDS_20", 0);
+DB_ToT_CatSize("GENERAL", "SHARDS_6", 0);
+DB_ToT_CatSize("GENERAL", "SHARDS_2", 0);
+DB_ToT_CatSize("GENERAL", "SHARDS_1", 0);
+
+// thresholds, rebuilt by PROC_ToT_Rebuild
+DB_ToT_Thresh("GENERAL", 0, 0);
+DB_ToT_Thresh("GENERAL", 1, 0);
+DB_ToT_Thresh("GENERAL", 2, 0);
+DB_ToT_Thresh("GENERAL", 3, 0);
+DB_ToT_Thresh("GENERAL", 4, 0);
+DB_ToT_Shop_TotalWeight("GENERAL", 0);
+
+// pools come from DB_ToT_ItemFreq (ZZZ_ToT_Shop_Weights_B04.txt) plus the legacy
+// DB_ToT_ShardReg shorthand below.
+
+// shard registry, tier = weight from treasuretable
+// batch files add more shards, one line each
+
+// shards_20
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_1_ff83a7ab-9fff-42c6-ad07-e060ebbd0ea4, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_12_3e16c21b-b1d1-4b99-9548-03f28d4deac3, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_13_fa0ceaef-0f14-4514-9e00-d2d8585c5ab3, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_2_8d5ac97d-5b12-432b-8dff-efb31a7c42c2, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_3_eb06ce8e-4f52-46ab-9fbd-5fb54cbb6150, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_4_6dc1384f-8d17-4f27-9ece-8479665fdc11, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_5_f4fbaee4-8f08-4432-ab2b-40b34dcdc921, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_6_1214ea63-d0e7-4fd7-811a-fe0c9264f23b, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_1_3b200ca5-b282-4930-8c6a-d055a068691c, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_13_52142beb-afbe-400f-b876-0e01004be32a, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_6_f4205ae3-db2c-40d5-a6e2-c6ca7f52916e, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_11_5bb5e89e-5e54-41a6-a664-add12c818c25, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_12_b9c703c8-1efb-47b1-958a-4f0f28b8bdf2, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_8_ad1880b3-d94d-47b8-94eb-3706448b85b6, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_1_d6b577f4-91eb-4015-bf1e-2b3bcd656d70, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_15_46160140-11f0-42ae-ba1c-ce33c6c67a1b, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_4_901321e8-47f5-4ed5-8d09-6d2039283401, "SHARDS_20");
+
+// shards_6
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_11_07edecab-dcc7-4cd0-a89d-b9907783cfe0, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_2_cf7c5356-3552-43ee-a50b-d690f4ea78ba, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_3_a3d62991-3c30-40b3-8136-25c036363fe8, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_7_ee2bf8b4-3988-4d15-b46f-7284fbe98445, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_9_247f636c-c103-42c6-bdce-290d7134298c, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_1_57bbfc40-8622-46a4-9b86-0f8feb58e129, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_10_0911f7cd-1d28-4ae8-aaf9-680e5a9db2c5, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_8_a01643f4-97dc-48e8-bfef-15463c649443, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_2_a081971e-2b4f-492a-aba9-da0dcb192c9d, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_1_fa1a14d8-07ad-414f-bf0c-1cb675faa94e, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_11_75828bed-0a9d-4884-be41-6a78aa358c9d, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_2_99069903-c62a-4d40-b014-603317db3d18, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_5_429201d8-afe0-49d4-9848-265273e036a5, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_6_eda9f33c-9e79-4b41-a96c-10d1a9042cff, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_7_a27b2265-237e-4f5e-a938-9e1c899cc5d1, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_1_bf038b64-8083-4997-88c0-140972478c74, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_12_5cfacb3a-29ae-478e-8eae-9974b5225f09, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_13_2772caa8-b566-4338-b45a-6c206cca61f0, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_14_31c3e45d-f5c7-4620-bff2-1344d4798afc, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_15_36ed5bbe-eaad-43f3-a82c-e3770b66b807, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_16_4ea35d33-e08e-4a61-8cea-719cc37b3037, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_2_78230eef-2716-4d51-8f0f-99a57b93895b, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_7_4fb212b6-4cb5-4038-8601-1daf340ed616, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_9_a41b5ee1-c9ec-4210-95a4-105297a81d47, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_MWeapon_3_9bdcaf61-e9b7-41f6-bfd6-f93ba7cccb53, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_MWeapon_5_da01b87a-d417-4fd0-a65d-818f5e89abd7, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_1_f19117a0-8960-4457-acf0-b2da03a0d919, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_3_dd21cbf2-850e-4b2b-b7af-c0b0f07b487f, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_6_4b27b7f5-a190-42a4-9d50-6046c67c89e9, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_7_de38fa95-fa74-4e21-9a53-32dbfeace67e, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_9_ee67e3ff-042b-41ed-9995-2e493597a6ff, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_2_f30e2913-2cc7-49b4-a8e9-597e80ea9ee6, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_3_2d044324-8d55-4a3f-a05b-916617fa9b3e, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_5_c971df9e-e047-448f-a188-b3ee4102bcbe, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_6_230ecf40-633c-4907-8ea0-2f3a6be1905f, "SHARDS_6");
+
+// shards_2
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Acid_51b26d59-317b-492f-930c-cba1f01afdba, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_2_62e35f12-4026-4bd5-9f74-5c1283bd9b45, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_3_63f3f727-1497-457f-a0ac-8984f8e1053f, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_4_f207d9a6-7a7b-42ad-9b56-498b5b8bf559, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_5_90aacef6-59e1-4238-bc42-0debcbe76160, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_6_f5d23d81-f020-4098-bf7f-7307841b137b, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_7_c9827110-2e7c-4066-ba15-9a7affe80616, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_5_8f8abcf7-891f-4479-94d5-ffd09d58bad3, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_8_03172a9e-7009-42e5-ba17-cc147985bda6, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_11_53b04fe1-71bf-4381-a4bf-10001d9d316a, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_12_4bd4f3eb-8e05-4fcb-b478-b3d99f6512b3, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_7_917c57ad-f743-4e00-b16e-520f4ff58b9a, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_3_069ad0ea-6ce2-414a-b243-84f5427b0e2a, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_4_a64ba3da-1532-4eb9-be08-846fc5379363, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_5_e5bbba00-8740-49bd-9cda-18f9d5f9eb90, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_6_a9a2364c-815a-46ed-85a3-7f61b9bc4731, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cold_13e45baf-2a4f-4306-bf42-a571c9b2c68e, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Fire_b093e9fc-6197-49d0-b70a-601b36753cf3, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Force_a29a0058-2554-4e00-913a-1358eec9b13c, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_10_6f2cf524-5515-4472-a01b-335fe116e108, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_12_b3726cc8-074c-4d9f-b5f9-22caac60fcf0, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_3_49fd65f2-10af-4e52-aa3a-361645a2bc38, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_4_d5750e5a-8247-43d5-872f-3c1bc1f4be36, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_9_ee2e4ee0-2f10-449c-9aac-1d5ff4568948, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_10_305e6cdf-f804-44a4-98eb-4c83c2f5d9eb, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_3_ec594e30-e633-4b53-8f02-3559ed68a6a9, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_5_1e80ef36-f66c-4dc8-9366-70650a21ce97, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Lightning_afe829dc-6af0-4628-881b-06a2a94fe536, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_MWeapon_1_65352de8-0e22-4d65-b92b-3818d4bd3e9c, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_MWeapon_4_229d92f6-9cda-472a-9b75-642dbdc959fc, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_MWeapon_6_57a57576-72fe-47bf-871a-78fcd054532f, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Necrotic_63f7f014-d3c2-4ad6-bac0-4f58e139a912, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Poison_7c071afa-674f-4826-ae3c-325983cce6e3, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Psychic_728e48e8-16cf-4444-a2ac-2dc51d0507ad, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Radiant_3099279e-52d6-43ef-8671-b82c90a91086, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_10_cdfadb35-e40a-435d-a767-aeae07108803, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_4_38b04964-19dd-40db-919f-33b7ccb9b279, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_5_75184286-df49-4fdf-812a-48820e440bf0, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Thunder_0e943ce0-f937-4a0b-a135-060726086420, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_10_14894fd0-3b08-4b88-8ebc-bb1e0b1e1bee, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_11_4ebb240b-8258-4d89-924d-46ce9b13086a, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_12_48de2e33-a21a-4cf5-bffa-a22650787e2f, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_13_75c705a4-7b28-42dd-ae4c-6d667397d458, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_7_75386591-b3de-48fe-8af0-d6b98faedd5a, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_8_d9e7ace9-cb69-46f9-a7f7-b42ef1a2bb8f, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_9_908d9939-3c02-4508-9efd-fee2b95b0da0, "SHARDS_2");
+
+// shards_1
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_1_52f83898-88f0-4140-b83f-fc175f6c673b, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_10_a1bf4ace-c2bf-4839-b70b-e9b113217548, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_4_8d741b5a-c668-47f6-9a5a-42d0322206e1, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_6_4ff81ff2-6904-4c16-8bae-9feb3ce1680c, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_9_9e294aa5-364d-494a-b759-0a78c1bf9172, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_8_b95d53db-8ef1-4acc-9383-79ee526ff58d, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_11_4ca77a96-c585-4615-8494-e0a914d48858, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_4_48f52d1d-617a-48f2-a599-21d480741626, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_8_0da0f666-1dd2-449f-a1c5-06806fbbf43d, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_MWeapon_2_c0a66367-bc82-41c7-8b22-a0563f092eea, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Recovery_1_6d07a9e3-b288-4ec3-86f9-b3360973b879, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_2_d5188e9b-a3c7-4a6b-b336-96deee113148, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_14_068218d4-fbab-4dfc-aeca-d0f901f7eb50, "SHARDS_1");
+
+KBSECTION
+
+// pool rebuild: expand DB_ToT_ItemFreq + DB_ToT_ShardReg into indexed pools on load.
+// clean -> reset -> expand -> index shards -> update sizes -> rebuild.
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_ToT_RebuildPools("GENERAL");
+
+// clean old indexed pools
+PROC
+PROC_ToT_CleanPools((STRING)_ShopID)
+AND
+DB_ToT_Pool(_ShopID, (STRING)_Tier, (INTEGER)_Idx, (ITEMROOT)_T)
+THEN
+NOT DB_ToT_Pool(_ShopID, _Tier, _Idx, _T);
+
+PROC
+PROC_ToT_CleanPools((STRING)_ShopID)
+AND
+DB_ToT_Pool_COINS(_ShopID, (INTEGER)_Idx, (ITEMROOT)_T)
+THEN
+NOT DB_ToT_Pool_COINS(_ShopID, _Idx, _T);
+
+PROC
+PROC_ToT_CleanPools((STRING)_ShopID)
+AND
+DB_ToT_Pool_CAPSULES(_ShopID, (INTEGER)_Idx, (ITEMROOT)_T)
+THEN
+NOT DB_ToT_Pool_CAPSULES(_ShopID, _Idx, _T);
+
+// reset counters
+PROC
+PROC_ToT_ResetCounters()
+AND
+DB_ToT_IdxCounter((STRING)_Cat, (INTEGER)_Old)
+THEN
+NOT DB_ToT_IdxCounter(_Cat, _Old);
+
+PROC
+PROC_ToT_ResetCounters()
+THEN
+DB_ToT_IdxCounter("COINS", 0);
+DB_ToT_IdxCounter("CAPSULES", 0);
+DB_ToT_IdxCounter("SHARDS_20", 0);
+DB_ToT_IdxCounter("SHARDS_6", 0);
+DB_ToT_IdxCounter("SHARDS_2", 0);
+DB_ToT_IdxCounter("SHARDS_1", 0);
+
+// expand itemfreq into pools, weight = copy count
+PROC
+PROC_ToT_ExpandItemFreq((STRING)_ShopID)
+AND
+DB_ToT_ItemFreq(_ShopID, (STRING)_Cat, (ITEMROOT)_Template, (INTEGER)_Weight)
+THEN
+PROC_ToT_AddNCopies(_ShopID, _Cat, _Template, _Weight);
+
+// add N copies to the pool
+PROC
+PROC_ToT_AddNCopies((STRING)_ShopID, (STRING)_Cat, (ITEMROOT)_Template, (INTEGER)_N)
+AND
+_N > 0
+AND
+IntegerSubtract(_N, 1, (INTEGER)_Remaining)
+THEN
+PROC_ToT_AddOneCopy(_ShopID, _Cat, _Template);
+PROC_ToT_AddNCopies(_ShopID, _Cat, _Template, _Remaining);
+
+PROC
+PROC_ToT_AddNCopies((STRING)_ShopID, (STRING)_Cat, (ITEMROOT)_Template, (INTEGER)_N)
+AND
+_N <= 0
+THEN
+DB_NOOP(1);
+
+// append one copy, route by category
+PROC
+PROC_ToT_AddOneCopy((STRING)_ShopID, (STRING)_Cat, (ITEMROOT)_Template)
+AND
+_Cat == "COINS"
+AND
+DB_ToT_IdxCounter("COINS", (INTEGER)_Idx)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+NOT DB_ToT_IdxCounter("COINS", _Idx);
+DB_ToT_IdxCounter("COINS", _Next);
+DB_ToT_Pool_COINS(_ShopID, _Idx, _Template);
+
+PROC
+PROC_ToT_AddOneCopy((STRING)_ShopID, (STRING)_Cat, (ITEMROOT)_Template)
+AND
+_Cat == "CAPSULES"
+AND
+DB_ToT_IdxCounter("CAPSULES", (INTEGER)_Idx)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+NOT DB_ToT_IdxCounter("CAPSULES", _Idx);
+DB_ToT_IdxCounter("CAPSULES", _Next);
+DB_ToT_Pool_CAPSULES(_ShopID, _Idx, _Template);
+
+PROC
+PROC_ToT_AddOneCopy((STRING)_ShopID, (STRING)_Cat, (ITEMROOT)_Template)
+AND
+_Cat == "SHARDS_20"
+AND
+DB_ToT_IdxCounter("SHARDS_20", (INTEGER)_Idx)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+NOT DB_ToT_IdxCounter("SHARDS_20", _Idx);
+DB_ToT_IdxCounter("SHARDS_20", _Next);
+DB_ToT_Pool(_ShopID, "SHARDS_20", _Idx, _Template);
+
+PROC
+PROC_ToT_AddOneCopy((STRING)_ShopID, (STRING)_Cat, (ITEMROOT)_Template)
+AND
+_Cat == "SHARDS_6"
+AND
+DB_ToT_IdxCounter("SHARDS_6", (INTEGER)_Idx)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+NOT DB_ToT_IdxCounter("SHARDS_6", _Idx);
+DB_ToT_IdxCounter("SHARDS_6", _Next);
+DB_ToT_Pool(_ShopID, "SHARDS_6", _Idx, _Template);
+
+PROC
+PROC_ToT_AddOneCopy((STRING)_ShopID, (STRING)_Cat, (ITEMROOT)_Template)
+AND
+_Cat == "SHARDS_2"
+AND
+DB_ToT_IdxCounter("SHARDS_2", (INTEGER)_Idx)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+NOT DB_ToT_IdxCounter("SHARDS_2", _Idx);
+DB_ToT_IdxCounter("SHARDS_2", _Next);
+DB_ToT_Pool(_ShopID, "SHARDS_2", _Idx, _Template);
+
+PROC
+PROC_ToT_AddOneCopy((STRING)_ShopID, (STRING)_Cat, (ITEMROOT)_Template)
+AND
+_Cat == "SHARDS_1"
+AND
+DB_ToT_IdxCounter("SHARDS_1", (INTEGER)_Idx)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+NOT DB_ToT_IdxCounter("SHARDS_1", _Idx);
+DB_ToT_IdxCounter("SHARDS_1", _Next);
+DB_ToT_Pool(_ShopID, "SHARDS_1", _Idx, _Template);
+
+// legacy shardreg = weight-1 items, after the expand pass
+PROC
+PROC_ToT_IndexShards((STRING)_ShopID)
+AND
+DB_ToT_ShardReg((ITEMROOT)_Template, (STRING)_Tier)
+AND
+DB_ToT_IdxCounter(_Tier, (INTEGER)_Idx)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+NOT DB_ToT_IdxCounter(_Tier, _Idx);
+DB_ToT_IdxCounter(_Tier, _Next);
+DB_ToT_Pool(_ShopID, _Tier, _Idx, _Template);
+
+// update catsize from final counters
+PROC
+PROC_ToT_UpdateCatSizes((STRING)_ShopID)
+AND
+DB_ToT_IdxCounter("COINS", (INTEGER)_N)
+AND
+DB_ToT_CatSize(_ShopID, "COINS", (INTEGER)_Old)
+THEN
+NOT DB_ToT_CatSize(_ShopID, "COINS", _Old);
+DB_ToT_CatSize(_ShopID, "COINS", _N);
+
+PROC
+PROC_ToT_UpdateCatSizes((STRING)_ShopID)
+AND
+DB_ToT_IdxCounter("CAPSULES", (INTEGER)_N)
+AND
+DB_ToT_CatSize(_ShopID, "CAPSULES", (INTEGER)_Old)
+THEN
+NOT DB_ToT_CatSize(_ShopID, "CAPSULES", _Old);
+DB_ToT_CatSize(_ShopID, "CAPSULES", _N);
+
+PROC
+PROC_ToT_UpdateCatSizes((STRING)_ShopID)
+AND
+DB_ToT_IdxCounter("SHARDS_20", (INTEGER)_S20)
+AND
+DB_ToT_CatSize(_ShopID, "SHARDS_20", (INTEGER)_Old20)
+THEN
+NOT DB_ToT_CatSize(_ShopID, "SHARDS_20", _Old20);
+DB_ToT_CatSize(_ShopID, "SHARDS_20", _S20);
+
+PROC
+PROC_ToT_UpdateCatSizes((STRING)_ShopID)
+AND
+DB_ToT_IdxCounter("SHARDS_6", (INTEGER)_S6)
+AND
+DB_ToT_CatSize(_ShopID, "SHARDS_6", (INTEGER)_Old6)
+THEN
+NOT DB_ToT_CatSize(_ShopID, "SHARDS_6", _Old6);
+DB_ToT_CatSize(_ShopID, "SHARDS_6", _S6);
+
+PROC
+PROC_ToT_UpdateCatSizes((STRING)_ShopID)
+AND
+DB_ToT_IdxCounter("SHARDS_2", (INTEGER)_S2)
+AND
+DB_ToT_CatSize(_ShopID, "SHARDS_2", (INTEGER)_Old2)
+THEN
+NOT DB_ToT_CatSize(_ShopID, "SHARDS_2", _Old2);
+DB_ToT_CatSize(_ShopID, "SHARDS_2", _S2);
+
+PROC
+PROC_ToT_UpdateCatSizes((STRING)_ShopID)
+AND
+DB_ToT_IdxCounter("SHARDS_1", (INTEGER)_S1)
+AND
+DB_ToT_CatSize(_ShopID, "SHARDS_1", (INTEGER)_Old1)
+THEN
+NOT DB_ToT_CatSize(_ShopID, "SHARDS_1", _Old1);
+DB_ToT_CatSize(_ShopID, "SHARDS_1", _S1);
+
+// orchestrator
+PROC
+PROC_ToT_RebuildPools((STRING)_ShopID)
+THEN
+PROC_ToT_CleanPools(_ShopID);
+PROC_ToT_ResetCounters();
+PROC_ToT_ExpandItemFreq(_ShopID);
+PROC_ToT_IndexShards(_ShopID);
+PROC_ToT_UpdateCatSizes(_ShopID);
+PROC_ToT_Rebuild(_ShopID);
+
+// container open/close
+
+// open
+IF
+UseStarted((CHARACTER)_Player, (ITEM)_Container)
+AND
+DB_ToT_Shop((STRING)_ShopID, _Container)
+THEN
+ApplyStatus(_Container, "TOT_SHOP_ACTIVE", -1.0, 1, _Player);
+
+// close
+IF
+UseFinished((CHARACTER)_Player, (ITEM)_Container, (INTEGER)_Success)
+AND
+DB_ToT_Shop((STRING)_ShopID, _Container)
+THEN
+RemoveStatus(_Container, "TOT_SHOP_ACTIVE");
+
+// purchase flow: take item from container
+
+// accumulate price into batch, arm timer once
+IF
+RemovedFrom((ITEM)_Item, (ITEM)_Container)
+AND
+DB_ToT_Shop_Enabled(1)
+AND
+NOT DB_ToT_Shop_SystemAction(_Item)
+AND
+DB_ToT_Shop_Stock(_Container, _Item, (ITEMROOT)_Template)
+AND
+DB_ToT_Shop((STRING)_ShopID, _Container)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+DB_ToT_Shop_BuyMultiplier(_ShopID, (INTEGER)_Mult)
+AND
+IntegerProduct(_Value, _Mult, (INTEGER)_Temp)
+AND
+IntegerDivide(_Temp, 100, (INTEGER)_BuyPrice)
+AND
+DB_ToT_Shop_BatchTotal((INTEGER)_OldTotal)
+AND
+IntegerSum(_OldTotal, _BuyPrice, (INTEGER)_NewTotal)
+THEN
+NOT DB_ToT_Shop_BatchTotal(_OldTotal);
+DB_ToT_Shop_BatchTotal(_NewTotal);
+DB_ToT_Shop_PendingPurchase(_Item, _Container, _ShopID, _Template);
+PROC_ToT_Shop_MaybeStartBatch();
+
+// batch timer on host, once per batch
+PROC
+PROC_ToT_Shop_MaybeStartBatch()
+AND
+NOT DB_ToT_Shop_BatchActive(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+DB_ToT_Shop_BatchActive(1);
+ObjectTimerLaunch(_Host, "ToT_Shop_ProcessBatch", 500, 0);
+
+PROC
+PROC_ToT_Shop_MaybeStartBatch()
+AND
+DB_ToT_Shop_BatchActive(1)
+THEN
+DB_NOOP(1);
+
+// timer: one gold deduction for the whole batch
+IF
+ObjectTimerFinished((CHARACTER)_Host, "ToT_Shop_ProcessBatch")
+AND
+DB_ToT_Shop_BatchActive(1)
+AND
+DB_ToT_Shop_BatchTotal((INTEGER)_Total)
+THEN
+PROC_ToT_Shop_DeductBatchGold(_Total);
+PROC_ToT_Shop_FinalizeBatchItems();
+PROC_ToT_Shop_ResetBatch();
+
+// enough gold, deduct once
+PROC
+PROC_ToT_Shop_DeductBatchGold((INTEGER)_Total)
+AND
+_Total > 0
+AND
+NOT DB_ToT_Shop_DeductDone(1)
+AND
+DB_ToT_Shop_PendingPurchase((ITEM)_AnyItem, _, _, _)
+AND
+GetInventoryOwner(_AnyItem, (CHARACTER)_Player)
+AND
+DB_Players(_Player)
+AND
+GetGoldInMagicPockets(_Player, (INTEGER)_Gold)
+AND
+_Gold >= _Total
+THEN
+DB_ToT_Shop_DeductDone(1);
+RemoveGoldFromMagicPockets(_Player, _Total);
+PlaySound(_Player, "UI_Gameplay_Coin_Removed");
+
+// not enough gold, flag items for return
+PROC
+PROC_ToT_Shop_DeductBatchGold((INTEGER)_Total)
+AND
+_Total > 0
+AND
+NOT DB_ToT_Shop_DeductDone(1)
+AND
+DB_ToT_Shop_PendingPurchase((ITEM)_AnyItem, _, _, _)
+AND
+GetInventoryOwner(_AnyItem, (CHARACTER)_Player)
+AND
+DB_Players(_Player)
+AND
+GetGoldInMagicPockets(_Player, (INTEGER)_Gold)
+AND
+_Gold < _Total
+THEN
+DB_ToT_Shop_DeductDone(1);
+DB_ToT_Shop_BatchReturn(1);
+PlaySound(_Player, "VFX_Status_WildMagic_Barbarian_Flumph_SpawnImpact");
+PROC_ToT_Shop_ShowNoGoldMessage(_Player);
+
+// total 0, free batch
+PROC
+PROC_ToT_Shop_DeductBatchGold((INTEGER)_Total)
+AND
+_Total <= 0
+THEN
+DB_ToT_Shop_DeductDone(1);
+
+// finalize each item after deduction
+PROC
+PROC_ToT_Shop_FinalizeBatchItems()
+AND
+DB_ToT_Shop_DeductDone(1)
+AND
+NOT DB_ToT_Shop_BatchReturn(1)
+AND
+DB_ToT_Shop_PendingPurchase((ITEM)_Item, (ITEM)_Container, (STRING)_ShopID, (ITEMROOT)_Template)
+THEN
+NOT DB_ToT_Shop_PendingPurchase(_Item, _Container, _ShopID, _Template);
+RemoveStatus(_Item, "TOT_SHOP_ITEM", _Item);
+SetIsTradable(_Item, TRADABLETYPE.Default);
+NOT DB_ToT_Shop_Stock(_Container, _Item, _Template);
+
+// not enough gold, return all items
+PROC
+PROC_ToT_Shop_FinalizeBatchItems()
+AND
+DB_ToT_Shop_BatchReturn(1)
+AND
+DB_ToT_Shop_PendingPurchase((ITEM)_Item, (ITEM)_Container, (STRING)_ShopID, (ITEMROOT)_Template)
+THEN
+NOT DB_ToT_Shop_PendingPurchase(_Item, _Container, _ShopID, _Template);
+PROC_ToT_Shop_ReturnItem(_Item, _Container, _ShopID, _Template);
+
+// fallback: deduct never ran, return all
+PROC
+PROC_ToT_Shop_FinalizeBatchItems()
+AND
+NOT DB_ToT_Shop_DeductDone(1)
+AND
+DB_ToT_Shop_PendingPurchase((ITEM)_Item, (ITEM)_Container, (STRING)_ShopID, (ITEMROOT)_Template)
+THEN
+NOT DB_ToT_Shop_PendingPurchase(_Item, _Container, _ShopID, _Template);
+PROC_ToT_Shop_ReturnItem(_Item, _Container, _ShopID, _Template);
+
+// reset batch state
+PROC
+PROC_ToT_Shop_ResetBatch()
+AND
+DB_ToT_Shop_BatchTotal((INTEGER)_Total)
+THEN
+NOT DB_ToT_Shop_BatchTotal(_Total);
+DB_ToT_Shop_BatchTotal(0);
+NOT DB_ToT_Shop_BatchActive(1);
+NOT DB_ToT_Shop_DeductDone(1);
+NOT DB_ToT_Shop_BatchReturn(1);
+
+// return item, systemaction flag avoids the AddedTo loop
+PROC
+PROC_ToT_Shop_ReturnItem((ITEM)_Item, (ITEM)_Container, (STRING)_ShopID, (ITEMROOT)_Template)
+THEN
+DB_ToT_Shop_SystemAction(_Item);
+ToInventory(_Item, _Container, 1, 0, 0);
+
+// sell flow: drop item into container
+
+// item placed in container
+IF
+AddedTo((ITEM)_Item, (ITEM)_Container, _)
+AND
+DB_ToT_Shop_Enabled(1)
+AND
+DB_ToT_Shop((STRING)_ShopID, _Container)
+AND
+DB_ToT_Shop_SystemAction(_Item)
+THEN
+// system action (return/spawn), clear flag and skip
+NOT DB_ToT_Shop_SystemAction(_Item);
+
+// just spawned by restock, skip
+IF
+AddedTo((ITEM)_Item, (ITEM)_Container, _)
+AND
+DB_ToT_Shop_Enabled(1)
+AND
+DB_ToT_Shop((STRING)_ShopID, _Container)
+AND
+NOT DB_ToT_Shop_SystemAction(_Item)
+AND
+DB_ToT_Shop_PendingSpawn(_Container, (ITEMROOT)_Template)
+THEN
+NOT DB_ToT_Shop_PendingSpawn(_Container, _Template);
+DB_ToT_Shop_Stock(_Container, _Item, _Template);
+ApplyStatus(_Item, "TOT_SHOP_ITEM", -1.0, 1, _Item);
+SetIsTradable(_Item, TRADABLETYPE.NonTradable);
+
+// returned shop item, skip
+IF
+AddedTo((ITEM)_Item, (ITEM)_Container, _)
+AND
+DB_ToT_Shop_Enabled(1)
+AND
+DB_ToT_Shop((STRING)_ShopID, _Container)
+AND
+NOT DB_ToT_Shop_SystemAction(_Item)
+AND
+NOT DB_ToT_Shop_PendingSpawn(_Container, _)
+AND
+HasActiveStatus(_Item, "TOT_SHOP_ITEM", 1)
+THEN
+DB_NOOP(1);
+
+// foreign item, run sell
+IF
+AddedTo((ITEM)_Item, (ITEM)_Container, _)
+AND
+DB_ToT_Shop_Enabled(1)
+AND
+DB_ToT_Shop((STRING)_ShopID, _Container)
+AND
+NOT DB_ToT_Shop_SystemAction(_Item)
+AND
+NOT DB_ToT_Shop_PendingSpawn(_Container, _)
+AND
+NOT DB_ToT_Shop_Stock(_Container, _Item, _)
+AND
+HasActiveStatus(_Item, "TOT_SHOP_ITEM", 0)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+DB_ToT_Shop_PendingSell(_Item, _Container, _Host);
+ObjectTimerLaunch(_Item, "ToT_Shop_CheckSell", 100, 0);
+
+// timer: process sell
+IF
+ObjectTimerFinished((ITEM)_Item, "ToT_Shop_CheckSell")
+AND
+DB_ToT_Shop_PendingSell(_Item, (ITEM)_Container, (CHARACTER)_Player)
+THEN
+NOT DB_ToT_Shop_PendingSell(_Item, _Container, _Player);
+PROC_ToT_Shop_ProcessSell(_Item, _Container, _Player);
+
+// validate then price
+PROC
+PROC_ToT_Shop_ProcessSell((ITEM)_Item, (ITEM)_Container, (CHARACTER)_Player)
+THEN
+PROC_ToT_Shop_ValidateSell(_Item, _Container, _Player);
+
+// gold item, eject
+PROC
+PROC_ToT_Shop_ValidateSell((ITEM)_Item, (ITEM)_Container, (CHARACTER)_Player)
+AND
+GetTemplate(_Item, (ITEMROOT)_Tpl)
+AND
+_Tpl == LOOT_Gold_A_1c3c9c74-34a1-4685-989e-410dc080be6f
+THEN
+PROC_ToT_Shop_EjectItem(_Item, _Container, _Player);
+
+// story item, eject
+PROC
+PROC_ToT_Shop_ValidateSell((ITEM)_Item, (ITEM)_Container, (CHARACTER)_Player)
+AND
+GetTemplate(_Item, (ITEMROOT)_Tpl)
+AND
+NOT _Tpl == LOOT_Gold_A_1c3c9c74-34a1-4685-989e-410dc080be6f
+AND
+IsStoryItem(_Item, 1)
+THEN
+PROC_ToT_Shop_EjectItem(_Item, _Container, _Player);
+
+// valid, price it
+PROC
+PROC_ToT_Shop_ValidateSell((ITEM)_Item, (ITEM)_Container, (CHARACTER)_Player)
+AND
+GetTemplate(_Item, (ITEMROOT)_Tpl)
+AND
+NOT _Tpl == LOOT_Gold_A_1c3c9c74-34a1-4685-989e-410dc080be6f
+AND
+NOT IsStoryItem(_Item, 1)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+DB_ToT_Shop_SellPercent((INTEGER)_Pct)
+AND
+IntegerProduct(_Value, _Pct, (INTEGER)_Temp)
+AND
+IntegerDivide(_Temp, 100, (INTEGER)_SellPrice)
+AND
+_SellPrice >= 1
+THEN
+AddGoldToMagicPockets(_Player, _SellPrice);
+RequestDelete(_Item);
+PlaySound(_Player, "CAMP_Courier_Dog_9_Gold_Swipe");
+
+// worth 0, eject
+PROC
+PROC_ToT_Shop_ValidateSell((ITEM)_Item, (ITEM)_Container, (CHARACTER)_Player)
+AND
+GetTemplate(_Item, (ITEMROOT)_Tpl)
+AND
+NOT _Tpl == LOOT_Gold_A_1c3c9c74-34a1-4685-989e-410dc080be6f
+AND
+NOT IsStoryItem(_Item, 1)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+DB_ToT_Shop_SellPercent((INTEGER)_Pct)
+AND
+IntegerProduct(_Value, _Pct, (INTEGER)_Temp)
+AND
+IntegerDivide(_Temp, 100, (INTEGER)_SellPrice)
+AND
+_SellPrice < 1
+THEN
+PROC_ToT_Shop_EjectItem(_Item, _Container, _Player);
+
+// eject back to player
+PROC
+PROC_ToT_Shop_EjectItem((ITEM)_Item, (ITEM)_Container, (CHARACTER)_Player)
+THEN
+DB_ToT_Shop_SystemAction(_Item);
+ToInventory(_Item, _Player, 1, 1, 0);
+PlaySound(_Player, "VFX_Status_WildMagic_Barbarian_Flumph_SpawnImpact");
+
+// restock flow: weighted category pick, timer chain on host (container timers don't fire).
+// rebuild thresholds, then random pick per tick, 8 ticks x 200ms.
+
+// long rest: mark for restock if cooldown expired
+IF
+LongRestFinished()
+AND
+DB_ToT_Shop_Enabled(1)
+AND
+DB_ToT_Shop_Activated(1)
+AND
+NOT DB_ToT_Shop_RestockCooldown(1)
+AND
+DB_ToT_Shop((STRING)_ShopID, (ITEM)_Container)
+THEN
+DB_ToT_Shop_NeedsRestock(_Container);
+
+// reset reroll counter on a real long rest
+IF
+LongRestFinished()
+AND
+DB_ToT_Shop_Enabled(1)
+AND
+DB_ToT_Shop_Activated(1)
+AND
+NOT DB_ToT_Shop_RestockCooldown(1)
+AND
+DB_ToT_Shop_RerollsSinceLR((INTEGER)_Cycle)
+THEN
+NOT DB_ToT_Shop_RerollsSinceLR(_Cycle);
+DB_ToT_Shop_RerollsSinceLR(0);
+
+// clear stock
+PROC
+PROC_ToT_Shop_ClearStock((STRING)_ShopID, (ITEM)_Container)
+AND
+DB_ToT_Shop_Stock(_Container, (ITEM)_Item, (ITEMROOT)_Template)
+THEN
+NOT DB_ToT_Shop_Stock(_Container, _Item, _Template);
+DB_ToT_Shop_SystemAction(_Item);
+RequestDelete(_Item);
+
+// start restock: roll stock count, rebuild thresholds, timer on host
+PROC
+PROC_ToT_Shop_StartRestock((STRING)_ShopID, (ITEM)_Container)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+Random(5, (INTEGER)_Roll)
+AND
+IntegerSum(_Roll, 2, (INTEGER)_NewMax)
+AND
+DB_ToT_Shop_MaxStock(_ShopID, (INTEGER)_OldMax)
+THEN
+NOT DB_ToT_Shop_MaxStock(_ShopID, _OldMax);
+DB_ToT_Shop_MaxStock(_ShopID, _NewMax);
+PROC_ToT_Rebuild(_ShopID);
+PROC_ToT_Shop_CleanupRestockTemp(_ShopID, _Container);
+DB_ToT_Shop_SpawnCounter(_ShopID, 0);
+DB_ToT_Shop_RestockTarget(_ShopID, _Container);
+ObjectTimerLaunch(_Host, "ToT_Shop_SpawnNext", 200, 0);
+
+// spawn-next tick, weighted pick
+IF
+ObjectTimerFinished((CHARACTER)_Host, "ToT_Shop_SpawnNext")
+AND
+DB_ToT_Shop_RestockTarget((STRING)_ShopID, (ITEM)_Container)
+AND
+DB_ToT_Shop_SpawnCounter(_ShopID, (INTEGER)_Count)
+AND
+DB_ToT_Shop_MaxStock(_ShopID, (INTEGER)_Max)
+AND
+_Count < _Max
+THEN
+PROC_ToT_Shop_PickWeighted(_ShopID, _Container, 0);
+
+// stock full, done
+IF
+ObjectTimerFinished((CHARACTER)_Host, "ToT_Shop_SpawnNext")
+AND
+DB_ToT_Shop_RestockTarget((STRING)_ShopID, (ITEM)_Container)
+AND
+DB_ToT_Shop_SpawnCounter(_ShopID, (INTEGER)_Count)
+AND
+DB_ToT_Shop_MaxStock(_ShopID, (INTEGER)_Max)
+AND
+_Count >= _Max
+AND
+DB_ToT_Shop_RestockTarget(_ShopID, (ITEM)_DoneContainer)
+THEN
+PROC_ToT_Shop_CleanupRestockTemp(_ShopID, _DoneContainer);
+
+// rebuild thresholds = catsize * catweight, cumulative
+PROC
+PROC_ToT_Rebuild((STRING)_ShopID)
+AND
+DB_ToT_CatSize(_ShopID, "COINS", (INTEGER)_CoinsN)
+AND
+DB_ToT_CatWeight(_ShopID, "COINS", (INTEGER)_CoinsW)
+AND
+DB_ToT_CatSize(_ShopID, "CAPSULES", (INTEGER)_CapsN)
+AND
+DB_ToT_CatWeight(_ShopID, "CAPSULES", (INTEGER)_CapsW)
+AND
+DB_ToT_CatSize(_ShopID, "SHARDS_20", (INTEGER)_S20N)
+AND
+DB_ToT_CatWeight(_ShopID, "SHARDS_20", (INTEGER)_S20W)
+AND
+DB_ToT_CatSize(_ShopID, "SHARDS_6", (INTEGER)_S6N)
+AND
+DB_ToT_CatWeight(_ShopID, "SHARDS_6", (INTEGER)_S6W)
+AND
+DB_ToT_CatSize(_ShopID, "SHARDS_2", (INTEGER)_S2N)
+AND
+DB_ToT_CatWeight(_ShopID, "SHARDS_2", (INTEGER)_S2W)
+AND
+DB_ToT_CatSize(_ShopID, "SHARDS_1", (INTEGER)_S1N)
+AND
+DB_ToT_CatWeight(_ShopID, "SHARDS_1", (INTEGER)_S1W)
+AND
+IntegerProduct(_CoinsN, _CoinsW, (INTEGER)_T0)
+AND
+IntegerProduct(_CapsN, _CapsW, (INTEGER)_CapsEff)
+AND
+IntegerSum(_T0, _CapsEff, (INTEGER)_T1)
+AND
+IntegerProduct(_S20N, _S20W, (INTEGER)_S20Eff)
+AND
+IntegerSum(_T1, _S20Eff, (INTEGER)_T2)
+AND
+IntegerProduct(_S6N, _S6W, (INTEGER)_S6Eff)
+AND
+IntegerSum(_T2, _S6Eff, (INTEGER)_T3)
+AND
+IntegerProduct(_S2N, _S2W, (INTEGER)_S2Eff)
+AND
+IntegerSum(_T3, _S2Eff, (INTEGER)_T4)
+AND
+IntegerProduct(_S1N, _S1W, (INTEGER)_S1Eff)
+AND
+IntegerSum(_T4, _S1Eff, (INTEGER)_TW)
+AND
+DB_ToT_Thresh(_ShopID, 0, (INTEGER)_OldT0)
+AND
+DB_ToT_Thresh(_ShopID, 1, (INTEGER)_OldT1)
+AND
+DB_ToT_Thresh(_ShopID, 2, (INTEGER)_OldT2)
+AND
+DB_ToT_Thresh(_ShopID, 3, (INTEGER)_OldT3)
+AND
+DB_ToT_Thresh(_ShopID, 4, (INTEGER)_OldT4)
+AND
+DB_ToT_Shop_TotalWeight(_ShopID, (INTEGER)_OldTW)
+THEN
+NOT DB_ToT_Thresh(_ShopID, 0, _OldT0);
+NOT DB_ToT_Thresh(_ShopID, 1, _OldT1);
+NOT DB_ToT_Thresh(_ShopID, 2, _OldT2);
+NOT DB_ToT_Thresh(_ShopID, 3, _OldT3);
+NOT DB_ToT_Thresh(_ShopID, 4, _OldT4);
+NOT DB_ToT_Shop_TotalWeight(_ShopID, _OldTW);
+DB_ToT_Thresh(_ShopID, 0, _T0);
+DB_ToT_Thresh(_ShopID, 1, _T1);
+DB_ToT_Thresh(_ShopID, 2, _T2);
+DB_ToT_Thresh(_ShopID, 3, _T3);
+DB_ToT_Thresh(_ShopID, 4, _T4);
+DB_ToT_Shop_TotalWeight(_ShopID, _TW);
+
+// pick category from the roll, one rule fires
+
+// < T0 coins
+PROC
+PROC_ToT_PickCategory((STRING)_ShopID, (INTEGER)_Roll)
+AND
+DB_ToT_Thresh(_ShopID, 0, (INTEGER)_T0)
+AND
+_Roll < _T0
+THEN
+PROC_ToT_PickFromCat(_ShopID, "COINS");
+
+// < T1 capsules
+PROC
+PROC_ToT_PickCategory((STRING)_ShopID, (INTEGER)_Roll)
+AND
+DB_ToT_Thresh(_ShopID, 0, (INTEGER)_T0)
+AND
+_Roll >= _T0
+AND
+DB_ToT_Thresh(_ShopID, 1, (INTEGER)_T1)
+AND
+_Roll < _T1
+THEN
+PROC_ToT_PickFromCat(_ShopID, "CAPSULES");
+
+// < T2 shards_20
+PROC
+PROC_ToT_PickCategory((STRING)_ShopID, (INTEGER)_Roll)
+AND
+DB_ToT_Thresh(_ShopID, 1, (INTEGER)_T1)
+AND
+_Roll >= _T1
+AND
+DB_ToT_Thresh(_ShopID, 2, (INTEGER)_T2)
+AND
+_Roll < _T2
+THEN
+PROC_ToT_PickFromCat(_ShopID, "SHARDS_20");
+
+// < T3 shards_6
+PROC
+PROC_ToT_PickCategory((STRING)_ShopID, (INTEGER)_Roll)
+AND
+DB_ToT_Thresh(_ShopID, 2, (INTEGER)_T2)
+AND
+_Roll >= _T2
+AND
+DB_ToT_Thresh(_ShopID, 3, (INTEGER)_T3)
+AND
+_Roll < _T3
+THEN
+PROC_ToT_PickFromCat(_ShopID, "SHARDS_6");
+
+// < T4 shards_2
+PROC
+PROC_ToT_PickCategory((STRING)_ShopID, (INTEGER)_Roll)
+AND
+DB_ToT_Thresh(_ShopID, 3, (INTEGER)_T3)
+AND
+_Roll >= _T3
+AND
+DB_ToT_Thresh(_ShopID, 4, (INTEGER)_T4)
+AND
+_Roll < _T4
+THEN
+PROC_ToT_PickFromCat(_ShopID, "SHARDS_2");
+
+// >= T4 shards_1
+PROC
+PROC_ToT_PickCategory((STRING)_ShopID, (INTEGER)_Roll)
+AND
+DB_ToT_Thresh(_ShopID, 4, (INTEGER)_T4)
+AND
+_Roll >= _T4
+THEN
+PROC_ToT_PickFromCat(_ShopID, "SHARDS_1");
+
+// random index into the category pool
+
+PROC
+PROC_ToT_RandFromCoins((STRING)_ShopID)
+AND
+DB_ToT_CatSize(_ShopID, "COINS", (INTEGER)_Size)
+AND
+_Size > 0
+AND
+Random(_Size, (INTEGER)_Idx)
+AND
+DB_ToT_Pool_COINS(_ShopID, _Idx, (ITEMROOT)_Template)
+THEN
+DB_ToT_PickResult(_ShopID, _Template);
+
+PROC
+PROC_ToT_RandFromCapsules((STRING)_ShopID)
+AND
+DB_ToT_CatSize(_ShopID, "CAPSULES", (INTEGER)_Size)
+AND
+_Size > 0
+AND
+Random(_Size, (INTEGER)_Idx)
+AND
+DB_ToT_Pool_CAPSULES(_ShopID, _Idx, (ITEMROOT)_Template)
+THEN
+DB_ToT_PickResult(_ShopID, _Template);
+
+// generic shard-tier picker
+PROC
+PROC_ToT_RandFromShardTier((STRING)_ShopID, (STRING)_Tier)
+AND
+DB_ToT_CatSize(_ShopID, _Tier, (INTEGER)_Size)
+AND
+_Size > 0
+AND
+Random(_Size, (INTEGER)_Idx)
+AND
+DB_ToT_Pool(_ShopID, _Tier, _Idx, (ITEMROOT)_Template)
+THEN
+DB_ToT_PickResult(_ShopID, _Template);
+
+// route category string to its picker
+
+PROC
+PROC_ToT_PickFromCat((STRING)_ShopID, (STRING)_Cat)
+AND
+_Cat == "COINS"
+THEN
+PROC_ToT_RandFromCoins(_ShopID);
+
+PROC
+PROC_ToT_PickFromCat((STRING)_ShopID, (STRING)_Cat)
+AND
+_Cat == "CAPSULES"
+THEN
+PROC_ToT_RandFromCapsules(_ShopID);
+
+PROC
+PROC_ToT_PickFromCat((STRING)_ShopID, (STRING)_Cat)
+AND
+_Cat == "SHARDS_20"
+THEN
+PROC_ToT_RandFromShardTier(_ShopID, "SHARDS_20");
+
+PROC
+PROC_ToT_PickFromCat((STRING)_ShopID, (STRING)_Cat)
+AND
+_Cat == "SHARDS_6"
+THEN
+PROC_ToT_RandFromShardTier(_ShopID, "SHARDS_6");
+
+PROC
+PROC_ToT_PickFromCat((STRING)_ShopID, (STRING)_Cat)
+AND
+_Cat == "SHARDS_2"
+THEN
+PROC_ToT_RandFromShardTier(_ShopID, "SHARDS_2");
+
+PROC
+PROC_ToT_PickFromCat((STRING)_ShopID, (STRING)_Cat)
+AND
+_Cat == "SHARDS_1"
+THEN
+PROC_ToT_RandFromShardTier(_ShopID, "SHARDS_1");
+
+// one weighted pick with dedup re-roll, capped at 20 attempts
+
+PROC
+PROC_ToT_Shop_PickWeighted((STRING)_ShopID, (ITEM)_Container, (INTEGER)_Attempt)
+AND
+_Attempt < 20
+AND
+DB_ToT_Shop_TotalWeight(_ShopID, (INTEGER)_TotalW)
+AND
+_TotalW > 0
+AND
+Random(_TotalW, (INTEGER)_Roll)
+THEN
+PROC_ToT_PickCategory(_ShopID, _Roll);
+PROC_ToT_CheckDedup(_ShopID, _Container, _Attempt);
+
+// hit the cap, skip this slot
+PROC
+PROC_ToT_Shop_PickWeighted((STRING)_ShopID, (ITEM)_Container, (INTEGER)_Attempt)
+AND
+_Attempt >= 20
+THEN
+PROC_ToT_Shop_AdvanceSpawnCounter(_ShopID, _Container);
+
+// unique spawns, duplicate re-rolls
+
+// unique, spawn and advance
+PROC
+PROC_ToT_CheckDedup((STRING)_ShopID, (ITEM)_Container, (INTEGER)_Attempt)
+AND
+DB_ToT_PickResult(_ShopID, (ITEMROOT)_Template)
+AND
+NOT DB_ToT_Shop_SelectedThisRestock(_Container, _Template)
+THEN
+NOT DB_ToT_PickResult(_ShopID, _Template);
+DB_ToT_Shop_SelectedThisRestock(_Container, _Template);
+PROC_ToT_Shop_SpawnItem(_ShopID, _Container, _Template);
+PROC_ToT_Shop_AdvanceSpawnCounter(_ShopID, _Container);
+
+// duplicate, re-roll
+PROC
+PROC_ToT_CheckDedup((STRING)_ShopID, (ITEM)_Container, (INTEGER)_Attempt)
+AND
+DB_ToT_PickResult(_ShopID, (ITEMROOT)_Template)
+AND
+DB_ToT_Shop_SelectedThisRestock(_Container, _Template)
+AND
+IntegerSum(_Attempt, 1, (INTEGER)_Next)
+THEN
+NOT DB_ToT_PickResult(_ShopID, _Template);
+PROC_ToT_Shop_PickWeighted(_ShopID, _Container, _Next);
+
+// spawn: add to container, mark pending, sound
+PROC
+PROC_ToT_Shop_SpawnItem((STRING)_ShopID, (ITEM)_Container, (ITEMROOT)_Template)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+DB_ToT_Shop_PendingSpawn(_Container, _Template);
+TemplateAddTo(_Template, _Container, 1, 0);
+PlaySound(_Host, "Spell_Impact_Wizard_BenignTranspositionTeleport_L1to3");
+
+// count++ then check done
+PROC
+PROC_ToT_Shop_AdvanceSpawnCounter((STRING)_ShopID, (ITEM)_Container)
+AND
+DB_ToT_Shop_SpawnCounter(_ShopID, (INTEGER)_Count)
+AND
+IntegerSum(_Count, 1, (INTEGER)_NewCount)
+THEN
+NOT DB_ToT_Shop_SpawnCounter(_ShopID, _Count);
+DB_ToT_Shop_SpawnCounter(_ShopID, _NewCount);
+PROC_ToT_Shop_CheckRestockDone(_ShopID, _Container, _NewCount);
+
+// more needed -> next tick, else cleanup
+
+// need more, next tick
+PROC
+PROC_ToT_Shop_CheckRestockDone((STRING)_ShopID, (ITEM)_Container, (INTEGER)_Count)
+AND
+DB_ToT_Shop_MaxStock(_ShopID, (INTEGER)_Max)
+AND
+_Count < _Max
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+ObjectTimerLaunch(_Host, "ToT_Shop_SpawnNext", 200, 0);
+
+// done, cleanup
+PROC
+PROC_ToT_Shop_CheckRestockDone((STRING)_ShopID, (ITEM)_Container, (INTEGER)_Count)
+AND
+DB_ToT_Shop_MaxStock(_ShopID, (INTEGER)_Max)
+AND
+_Count >= _Max
+THEN
+PROC_ToT_Shop_CleanupRestockTemp(_ShopID, _Container);
+
+// clear per-restock temp dbs
+PROC
+PROC_ToT_Shop_CleanupRestockTemp((STRING)_ShopID, (ITEM)_Container)
+AND
+DB_ToT_Shop_SelectedThisRestock(_Container, (ITEMROOT)_Template)
+THEN
+NOT DB_ToT_Shop_SelectedThisRestock(_Container, _Template);
+
+PROC
+PROC_ToT_Shop_CleanupRestockTemp((STRING)_ShopID, (ITEM)_Container)
+AND
+DB_ToT_PickResult(_ShopID, (ITEMROOT)_Template)
+THEN
+NOT DB_ToT_PickResult(_ShopID, _Template);
+
+PROC
+PROC_ToT_Shop_CleanupRestockTemp((STRING)_ShopID, (ITEM)_Container)
+AND
+DB_ToT_Shop_RestockTarget(_ShopID, (ITEM)_TargetContainer)
+THEN
+NOT DB_ToT_Shop_RestockTarget(_ShopID, _TargetContainer);
+
+PROC
+PROC_ToT_Shop_CleanupRestockTemp((STRING)_ShopID, (ITEM)_Container)
+AND
+DB_ToT_Shop_SpawnCounter(_ShopID, (INTEGER)_Count)
+THEN
+NOT DB_ToT_Shop_SpawnCounter(_ShopID, _Count);
+
+// 30 min cooldown, stops long-rest spam
+PROC
+PROC_ToT_Shop_CleanupRestockTemp((STRING)_ShopID, (ITEM)_Container)
+AND
+NOT DB_ToT_Shop_RestockCooldown(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+DB_ToT_Shop_RestockCooldown(1);
+ObjectTimerLaunch(_Host, "ToT_Shop_RestockCooldown", 1800000, 0);
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "ToT_Shop_RestockCooldown")
+AND
+DB_ToT_Shop_RestockCooldown(1)
+THEN
+NOT DB_ToT_Shop_RestockCooldown(1);
+
+// tutorial on first interaction
+
+// open + needs restock -> clear and restock
+IF
+UseStarted((CHARACTER)_Player, (ITEM)_Container)
+AND
+DB_ToT_Shop_Enabled(1)
+AND
+DB_ToT_Shop_Activated(1)
+AND
+DB_ToT_Shop((STRING)_ShopID, _Container)
+AND
+DB_Players(_Player)
+AND
+DB_ToT_Shop_NeedsRestock(_Container)
+AND
+NOT DB_ToT_Shop_RestockTarget(_, _)
+AND
+DB_ToT_Shop_RerollsSinceLR((INTEGER)_Cycle)
+AND
+_Cycle < 5
+AND
+IntegerSum(_Cycle, 1, (INTEGER)_NewCycle)
+THEN
+NOT DB_ToT_Shop_NeedsRestock(_Container);
+NOT DB_ToT_Shop_RerollsSinceLR(_Cycle);
+DB_ToT_Shop_RerollsSinceLR(_NewCycle);
+PROC_ToT_Shop_ClearStock(_ShopID, _Container);
+PROC_ToT_Shop_StartRestock(_ShopID, _Container);
+PROC_ToT_Shop_ShowTutorial(_Player);
+
+// first open, no stock -> initial restock
+IF
+UseStarted((CHARACTER)_Player, (ITEM)_Container)
+AND
+DB_ToT_Shop_Enabled(1)
+AND
+DB_ToT_Shop_Activated(1)
+AND
+DB_ToT_Shop((STRING)_ShopID, _Container)
+AND
+DB_Players(_Player)
+AND
+NOT DB_ToT_Shop_NeedsRestock(_Container)
+AND
+NOT DB_ToT_Shop_Stock(_Container, _, _)
+AND
+NOT DB_ToT_Shop_RestockTarget(_, _)
+AND
+DB_ToT_Shop_RerollsSinceLR((INTEGER)_Cycle)
+AND
+_Cycle < 5
+AND
+IntegerSum(_Cycle, 1, (INTEGER)_NewCycle)
+THEN
+NOT DB_ToT_Shop_RerollsSinceLR(_Cycle);
+DB_ToT_Shop_RerollsSinceLR(_NewCycle);
+PROC_ToT_Shop_StartRestock(_ShopID, _Container);
+PROC_ToT_Shop_ShowTutorial(_Player);
+
+// empty + rerolls spent -> need a long rest, error sound
+IF
+UseStarted((CHARACTER)_Player, (ITEM)_Container)
+AND
+DB_ToT_Shop_Enabled(1)
+AND
+DB_ToT_Shop_Activated(1)
+AND
+DB_ToT_Shop((STRING)_ShopID, _Container)
+AND
+DB_Players(_Player)
+AND
+NOT DB_ToT_Shop_Stock(_Container, _, _)
+AND
+NOT DB_ToT_Shop_RestockTarget(_, _)
+AND
+DB_ToT_Shop_RerollsSinceLR((INTEGER)_Cycle)
+AND
+_Cycle >= 5
+THEN
+PlaySound(_Player, "UI_HUD_Combine_Error");
+
+// seed reroll counter for old saves
+IF
+UseStarted((CHARACTER)_Player, (ITEM)_Container)
+AND
+DB_ToT_Shop((STRING)_ShopID, _Container)
+AND
+DB_Players(_Player)
+AND
+NOT DB_ToT_Shop_RerollsSinceLR(_)
+THEN
+DB_ToT_Shop_RerollsSinceLR(0);
+
+// has stock -> tutorial only
+IF
+UseStarted((CHARACTER)_Player, (ITEM)_Container)
+AND
+DB_ToT_Shop_Enabled(1)
+AND
+DB_ToT_Shop_Activated(1)
+AND
+DB_ToT_Shop((STRING)_ShopID, _Container)
+AND
+DB_Players(_Player)
+AND
+NOT DB_ToT_Shop_NeedsRestock(_Container)
+AND
+DB_ToT_Shop_Stock(_Container, _, _)
+THEN
+PROC_ToT_Shop_ShowTutorial(_Player);
+
+// mode 0: repeating
+PROC
+PROC_ToT_Shop_ShowTutorial((CHARACTER)_Player)
+AND
+DB_AMP_Hints_Mode(0)
+AND
+QRY_AMP_ShouldShowHint(2)
+THEN
+OpenMessageBox(_Player, "AMP_Settings019");
+
+// other modes: once
+PROC
+PROC_ToT_Shop_ShowTutorial((CHARACTER)_Player)
+AND
+NOT DB_AMP_Hints_Mode(0)
+AND
+NOT DB_AMP_Tutorial_Shown(_Player, "ToTShop")
+AND
+QRY_AMP_ShouldShowHint(2)
+THEN
+OpenMessageBox(_Player, "AMP_Settings019");
+DB_AMP_Tutorial_Shown((CHARACTER)_Player, "ToTShop");
+
+// already shown
+PROC
+PROC_ToT_Shop_ShowTutorial((CHARACTER)_Player)
+AND
+DB_AMP_Tutorial_Shown(_Player, "ToTShop")
+AND
+NOT DB_AMP_Hints_Mode(0)
+THEN
+DB_NOOP(1);
+
+// message boxes
+
+// no-gold message
+PROC
+PROC_ToT_Shop_ShowNoGoldMessage((CHARACTER)_Player)
+AND
+QRY_AMP_ShouldShowHint(1)
+THEN
+OpenMessageBox(_Player, "AMP_Settings020");
+
+// shop activation via settings spell / textevent
+
+// auto-prompt on world entry was disabled, players found it intrusive.
+// activation is manual now: settings container spell or textevent amptot.
+
+
+// settings spell toggle
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Settings_ToTShop", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+NOT DB_AMP_GameMode("STOCK")
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Settings018");
+
+// yes: reveal containers, restock only if empty
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings018", 1)
+AND
+DB_ToT_Shop((STRING)_ShopID, (ITEM)_Container)
+AND
+NOT DB_ToT_Shop_Stock(_Container, _, _)
+THEN
+DB_ToT_Shop_Activated(1);
+RemoveStatus(_Container, "INVISIBLE", _Container);
+DB_ToT_Shop_NeedsRestock(_Container);
+PlaySound(_Player, "CrSpell_Cast_SummonGoldLance");
+PlayEffect(_Container, (EFFECTRESOURCE)VFX_Script_CONT_GEN_SecretChest_01_a164a018-22f3-a538-5acb-4aedf67358de, "Dummy_Root", 1.0);
+
+// yes + already stocked: just reveal
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings018", 1)
+AND
+DB_ToT_Shop((STRING)_ShopID, (ITEM)_Container)
+AND
+DB_ToT_Shop_Stock(_Container, _, _)
+THEN
+DB_ToT_Shop_Activated(1);
+RemoveStatus(_Container, "INVISIBLE", _Container);
+PlaySound(_Player, "CrSpell_Cast_SummonGoldLance");
+PlayEffect(_Container, (EFFECTRESOURCE)VFX_Script_CONT_GEN_SecretChest_01_a164a018-22f3-a538-5acb-4aedf67358de, "Dummy_Root", 1.0);
+
+// no: deactivate and hide, keep stock
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings018", 0)
+AND
+DB_ToT_Shop((STRING)_ShopID, (ITEM)_Container)
+THEN
+DB_ToT_Shop_Activated(0);
+ApplyStatus(_Container, "INVISIBLE", -1.0, 1, _Container);
+
+// textevent amptot: manual activation prompt
+IF
+TextEvent("amptot")
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Settings018");
+
+// state cleanup on level load
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_ToT_Shop_PendingPurchase((ITEM)_Item, (ITEM)_Container, (STRING)_ShopID, (ITEMROOT)_Template)
+THEN
+NOT DB_ToT_Shop_PendingPurchase(_Item, _Container, _ShopID, _Template);
+RemoveStatus(_Item, "TOT_SHOP_ITEM", _Item);
+SetIsTradable(_Item, TRADABLETYPE.Default);
+NOT DB_ToT_Shop_Stock(_Container, _Item, _Template);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_ToT_Shop_PendingSell((ITEM)_Item, (ITEM)_Container, (CHARACTER)_Player)
+THEN
+NOT DB_ToT_Shop_PendingSell(_Item, _Container, _Player);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_ToT_Shop_SystemAction((ITEM)_Item)
+THEN
+NOT DB_ToT_Shop_SystemAction(_Item);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_ToT_Shop_PendingSpawn((ITEM)_Container, (ITEMROOT)_Template)
+THEN
+NOT DB_ToT_Shop_PendingSpawn(_Container, _Template);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_ToT_Shop_SelectedThisRestock((ITEM)_Container, (ITEMROOT)_Template)
+THEN
+NOT DB_ToT_Shop_SelectedThisRestock(_Container, _Template);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_ToT_Shop_NeedsRestock((ITEM)_Container)
+THEN
+NOT DB_ToT_Shop_NeedsRestock(_Container);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_ToT_Shop_BatchTotal((INTEGER)_Total)
+AND
+_Total > 0
+THEN
+NOT DB_ToT_Shop_BatchTotal(_Total);
+DB_ToT_Shop_BatchTotal(0);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_ToT_Shop_BatchActive(1)
+THEN
+NOT DB_ToT_Shop_BatchActive(1);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_ToT_Shop_DeductDone(1)
+THEN
+NOT DB_ToT_Shop_DeductDone(1);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_ToT_Shop_BatchReturn(1)
+THEN
+NOT DB_ToT_Shop_BatchReturn(1);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_ToT_Shop_RestockCooldown(1)
+THEN
+NOT DB_ToT_Shop_RestockCooldown(1);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_ToT_Shop_RestockTarget((STRING)_ShopID, (ITEM)_Container)
+THEN
+NOT DB_ToT_Shop_RestockTarget(_ShopID, _Container);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_ToT_PickResult((STRING)_ShopID, (ITEMROOT)_Template)
+THEN
+NOT DB_ToT_PickResult(_ShopID, _Template);
+
+EXITSECTION
+SysClear("DB_ToT_Shop_PendingPurchase", 4);
+SysClear("DB_ToT_Shop_PendingSell", 3);
+SysClear("DB_ToT_Shop_SystemAction", 1);
+SysClear("DB_ToT_Shop_PendingSpawn", 2);
+SysClear("DB_ToT_Shop_SelectedThisRestock", 2);
+SysClear("DB_ToT_Shop_NeedsRestock", 1);
+SysClear("DB_ToT_Shop_SpawnCounter", 2);
+SysClear("DB_ToT_Shop_RestockTarget", 2);
+SysClear("DB_ToT_PickResult", 2);
+SysClear("DB_ToT_Shop_MaxStock", 2);
+SysClear("DB_ToT_Shop_BuyMultiplier", 2);
+SysClear("DB_ToT_Pool_COINS", 3);
+SysClear("DB_ToT_Pool_CAPSULES", 3);
+SysClear("DB_ToT_Pool", 4);
+SysClear("DB_ToT_ShardReg", 2);
+SysClear("DB_ToT_ItemFreq", 4);
+SysClear("DB_ToT_IdxCounter", 2);
+SysClear("DB_ToT_CatSize", 3);
+SysClear("DB_ToT_CatWeight", 3);
+SysClear("DB_ToT_Thresh", 3);
+SysClear("DB_ToT_Shop_TotalWeight", 2);
+SysClear("DB_ToT_Shop_BatchTotal", 1);
+SysClear("DB_ToT_Shop_BatchActive", 1);
+SysClear("DB_ToT_Shop_DeductDone", 1);
+SysClear("DB_ToT_Shop_BatchReturn", 1);
+SysClear("DB_ToT_Shop_RestockCooldown", 1);
+ENDEXITSECTION

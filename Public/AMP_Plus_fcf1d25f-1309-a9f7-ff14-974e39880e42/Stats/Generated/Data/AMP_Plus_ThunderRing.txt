@@ -1,0 +1,18 @@
+// no enemy filter on the aura, so combat only or it hits the party and bystanders in water
+
+new entry "ARC_THUNDER_LIQUID_AURA"
+type "StatusData"
+data "StatusType" "BOOST"
+using "ARC_THUNDER_LIQUID_AURA"
+data "AuraStatuses" "TARGET:IF(Character() and not Dead() and Combat()):ApplyStatus(ARC_THUNDER_LIQUID_MARKER)"
+
+new entry "ARC_THUNDER_LIQUID_MARKER"
+type "StatusData"
+data "StatusType" "BOOST"
+using "ARC_THUNDER_LIQUID_MARKER"
+data "TickFunctors" "IF(IsLiquidSurface() and Combat()):ApplyStatus(MAG_THUNDER_REVERBERATION,100,2);IF(IsLiquidSurface() and Combat()):ApplyStatus(MAG_THUNDER_REVERBERATION_DURATION_TECHNICAL,100,1);IF(IsLiquidSurface() and Combat()):ApplyStatus(RING27_REVERB_TRIGGER,100,0)"
+
+new entry "R_Thunder3_selfTick"
+type "PassiveData"
+using "R_Thunder3_selfTick"
+data "Conditions" "IsLiquidSurface(context.Source) and Combat()"

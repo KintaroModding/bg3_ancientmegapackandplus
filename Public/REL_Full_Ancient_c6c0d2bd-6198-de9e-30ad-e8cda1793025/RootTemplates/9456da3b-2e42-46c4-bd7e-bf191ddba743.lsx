@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="400" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="9456da3b-2e42-46c4-bd7e-bf191ddba743" />
+					<attribute id="Name" type="LSString" value="AMP_Arcanizer_Reward_1" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="8b0d5eb7-fe0c-448c-a159-645a27a6afc0" />
+					<attribute id="VisualTemplate" type="FixedString" value="4364f9b4-b8fd-9484-6bd5-3688c3dead69" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="dcadc52c-8ab5-94da-26cb-0aae2901e889" />
+					<attribute id="Scale" type="float" value="0.3" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h8e786608g32c8gdc1fg05a9g94fad711f531" version="1" />
+					<attribute id="Stats" type="FixedString" value="AMP_Arcanizer_Reward_1" />
+					<attribute id="ExamineRotation" type="fvec3" value="10 25 10" />
+					<attribute id="InventoryType" type="uint8" value="51" />
+					<attribute id="Description" type="TranslatedString" handle="hba0dd3a7g584ag71a9g9133gf5f5f0e7a0f3" version="1" />
+					<children>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="AMP_Arcanizer_1" />
+								</node>
+							</children>
+						</node>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="ARCANIZER_OVERLAY_VFX" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

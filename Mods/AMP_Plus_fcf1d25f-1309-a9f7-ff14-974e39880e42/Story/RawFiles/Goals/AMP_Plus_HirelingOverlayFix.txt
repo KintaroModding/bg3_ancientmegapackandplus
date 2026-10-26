@@ -1,0 +1,130 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// base misses a re-apply after the join strip, and reload sweeps that run too early
+
+IF
+StatusApplied(_Char, _Status, _, _)
+AND
+DB_Players((CHARACTER)_Char)
+AND
+DB_AMP_DiffV3_AllTargets(_Status)
+THEN
+RemoveStatus(_Char, _Status, NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+StatusApplied(_Char, _Status, _, _)
+AND
+DB_Players((CHARACTER)_Char)
+AND
+DB_AMP_DiffV3_AllBosses(_Status)
+THEN
+RemoveStatus(_Char, _Status, NULL_00000000-0000-0000-0000-000000000000);
+
+// status landed before the join, the rule above never saw it
+IF
+CharacterJoinedParty((CHARACTER)_Char)
+THEN
+RemoveStatus(_Char, "AMP_ACTION_SURGE_INFO", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+StatusApplied(_Char, "AMP_ACTION_SURGE_INFO", _, _)
+AND
+DB_Players((CHARACTER)_Char)
+THEN
+RemoveStatus(_Char, "AMP_ACTION_SURGE_INFO", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+StatusApplied(_Char, "AMP_ULTRA_NPC_OVERLAY", _, _)
+AND
+DB_Players((CHARACTER)_Char)
+THEN
+RemoveStatus(_Char, "AMP_ULTRA_NPC_OVERLAY", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+StatusApplied(_Char, "AMP_ULTRA_BOSS_OVERLAY", _, _)
+AND
+DB_Players((CHARACTER)_Char)
+THEN
+RemoveStatus(_Char, "AMP_ULTRA_BOSS_OVERLAY", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+TimerLaunch("AMP_Plus_OverlayScrub", 5000);
+
+IF
+TimerFinished("AMP_Plus_OverlayScrub")
+AND
+DB_Players((CHARACTER)_Player)
+AND
+DB_AMP_DiffV3_AllTargets((STRING)_Status)
+AND
+HasActiveStatus(_Player, _Status, 1)
+THEN
+RemoveStatus(_Player, _Status, NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+TimerFinished("AMP_Plus_OverlayScrub")
+AND
+DB_Players((CHARACTER)_Player)
+AND
+DB_AMP_DiffV3_AllBosses((STRING)_Status)
+AND
+HasActiveStatus(_Player, _Status, 1)
+THEN
+RemoveStatus(_Player, _Status, NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+TimerFinished("AMP_Plus_OverlayScrub")
+AND
+DB_Players((CHARACTER)_Player)
+AND
+HasActiveStatus(_Player, "AMP_ACTION_SURGE_INFO", 1)
+THEN
+RemoveStatus(_Player, "AMP_ACTION_SURGE_INFO", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+TimerFinished("AMP_Plus_OverlayScrub")
+AND
+DB_Players((CHARACTER)_Player)
+AND
+HasActiveStatus(_Player, "AMP_ULTRA_NPC_OVERLAY", 1)
+THEN
+RemoveStatus(_Player, "AMP_ULTRA_NPC_OVERLAY", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+TimerFinished("AMP_Plus_OverlayScrub")
+AND
+DB_Players((CHARACTER)_Player)
+AND
+HasActiveStatus(_Player, "AMP_ULTRA_BOSS_OVERLAY", 1)
+THEN
+RemoveStatus(_Player, "AMP_ULTRA_BOSS_OVERLAY", NULL_00000000-0000-0000-0000-000000000000);
+
+// forced IsBoss survives recruitment, dropped on join and on load
+IF
+CharacterJoinedParty((CHARACTER)_Char)
+AND
+DB_AMP_ForceBoss(_Char)
+AND
+IsBoss(_Char, 1)
+THEN
+SetIsBoss(_Char, 0);
+
+IF
+TimerFinished("AMP_Plus_OverlayScrub")
+AND
+DB_Players((CHARACTER)_Player)
+AND
+DB_AMP_ForceBoss(_Player)
+AND
+IsBoss(_Player, 1)
+THEN
+SetIsBoss(_Player, 0);
+
+EXITSECTION
+ENDEXITSECTION

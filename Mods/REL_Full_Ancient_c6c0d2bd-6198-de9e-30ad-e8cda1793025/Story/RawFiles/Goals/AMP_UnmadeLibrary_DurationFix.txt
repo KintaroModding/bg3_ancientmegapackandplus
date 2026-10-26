@@ -1,0 +1,38 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// school markers applied at 6.0 expire before the turn-tick cleanup, re-applied at infinite duration while DB_AMP_UL_FixV2 is unset
+
+IF
+StatusApplied((CHARACTER)_Char, (STRING)_Status, _, _)
+AND
+NOT DB_AMP_UL_FixV2(1)
+AND
+HasActiveStatus(_Char, "AMP_ARCANE_RECLAIM_TECH", 1)
+AND
+DB_AMP_UL_School(_, _Status)
+AND
+NOT DB_AMP_UL_HotfixDone(_Char, _Status)
+THEN
+DB_AMP_UL_HotfixDone(_Char, _Status);
+ApplyStatus(_Char, _Status, -1.0, 1, _Char);
+
+IF
+TurnStarted((CHARACTER)_Char)
+AND
+DB_AMP_UL_HotfixDone(_Char, (STRING)_S)
+THEN
+NOT DB_AMP_UL_HotfixDone(_Char, _S);
+
+IF
+StatusRemoved((CHARACTER)_Char, "AMP_ARCANE_RECLAIM_TECH", _, _)
+AND
+DB_AMP_UL_HotfixDone(_Char, (STRING)_S)
+THEN
+NOT DB_AMP_UL_HotfixDone(_Char, _S);
+
+EXITSECTION
+ENDEXITSECTION

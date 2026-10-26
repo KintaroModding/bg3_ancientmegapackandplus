@@ -1,0 +1,25 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// activity query passes for all of Hard and a query cannot lose a body, so the pre-move snapshot is dropped on write
+
+// read the snapshot bare, an item cast on it does not compile
+IF
+DB_AMP_ItemWasInInventory(_Item, _Where)
+AND
+NOT QRY_AMP_Plus_Affix_On("ITEMMOVECOST")
+THEN
+NOT DB_AMP_ItemWasInInventory(_Item, _Where);
+
+QRY
+QRY_AMP_ItemMoveCost_Active()
+AND
+QRY_AMP_Plus_Affix_On("ITEMMOVECOST")
+THEN
+DB_NOOP(1);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="4699b924-d240-4576-901b-191bea56ce89" />
+					<attribute id="Name" type="LSString" value="AMP_Melee_Test" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="ParentTemplateId" type="FixedString" value="85712660-4f7a-46cf-b54f-9f39baf8070c" />
+					<attribute id="DisplayName" type="TranslatedString" handle="hb128b69bg0764g2317g46b6gb9a9c6f6ea0a" version="1" />
+					<attribute id="Stats" type="FixedString" value="Dwarf_Duergar_Melee_StoneGuard" />
+					<attribute id="BloodSurfaceType" type="FixedString" value="SurfaceNone" />
+					<attribute id="Faction" type="guid" value="3d43e9cb-9b68-cd0e-2035-d231338c3e5b" />
+					<attribute id="Archetype" type="FixedString" value="melee_smart" />
+					<children>
+						<node id="Bounds">
+							<children>
+								<node id="Bound">
+									<attribute id="Type" type="uint8" value="0" />
+									<attribute id="Shape" type="uint8" value="2" />
+									<attribute id="Min" type="fvec3" value="-0.728505 0.000385523 -0.156601" />
+									<attribute id="Max" type="fvec3" value="0.728548 1.82883 0.122748" />
+									<attribute id="Radius" type="float" value="0.1" />
+									<attribute id="Height" type="float" value="1.4" />
+								</node>
+								<node id="Bound">
+									<attribute id="Type" type="uint8" value="1" />
+									<attribute id="Shape" type="uint8" value="2" />
+									<attribute id="Min" type="fvec3" value="-0.728505 0.000385523 -0.156601" />
+									<attribute id="Max" type="fvec3" value="0.728548 1.82883 0.122748" />
+									<attribute id="Radius" type="float" value="0.2" />
+									<attribute id="Height" type="float" value="1.4" />
+								</node>
+								<node id="Bound">
+									<attribute id="Type" type="uint8" value="2" />
+									<attribute id="Shape" type="uint8" value="2" />
+									<attribute id="Min" type="fvec3" value="-0.728505 0.000385523 -0.156601" />
+									<attribute id="Max" type="fvec3" value="0.728548 1.82883 0.122748" />
+									<attribute id="Radius" type="float" value="0.2" />
+									<attribute id="Height" type="float" value="1.4" />
+								</node>
+							</children>
+						</node>
+						<node id="OnDeathActions" />
+						<node id="ItemList" />
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="STONESKIN" />
+								</node>
+							</children>
+						</node>
+						<node id="Treasures">
+							<children>
+								<node id="TreasureItem">
+									<attribute id="Object" type="FixedString" value="Empty" />
+								</node>
+							</children>
+						</node>
+						<node id="TradeTreasures">
+							<children>
+								<node id="TreasureItem">
+									<attribute id="Object" type="FixedString" value="Empty" />
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

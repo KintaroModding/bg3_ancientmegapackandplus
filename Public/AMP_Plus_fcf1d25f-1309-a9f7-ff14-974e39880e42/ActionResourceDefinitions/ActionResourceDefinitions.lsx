@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<save>
+    <version major="4" minor="8" revision="0" build="500"/>
+    <region id="ActionResourceDefinitions">
+        <node id="root">
+            <children>
+                <node id="ActionResourceDefinition">
+                    <attribute id="Description" type="TranslatedString" handle="hb8abe274g41c8g481dgbd39g8a1c1c692457" version="3"/>
+                    <attribute id="DisplayName" type="TranslatedString" handle="h43f4dbfeg0d62g49eegbecagad62630e032d" version="2"/>
+                    <attribute id="MaxLevel" type="uint32" value="0"/>
+                    <attribute id="Name" type="FixedString" value="ReactionActionPoint"/>
+                    <attribute id="ReplenishType" type="FixedString" value="Turn"/>
+                    <attribute id="ShowOnActionResourcePanel" type="bool" value="true"/>
+                    <attribute id="UUID" type="guid" value="45ff0f48-b210-4024-972f-b64a44dc6985"/>
+                </node>
+                <node id="ActionResourceDefinition">
+                    <attribute id="DisplayName" type="TranslatedString" handle="h97e21087g1d54g4166ga5e1g4c55d4cdaa5d" version="1"/>
+                    <attribute id="IsHidden" type="bool" value="true"/>
+                    <attribute id="IsSpellResource" type="bool" value="false"/>
+                    <attribute id="MaxLevel" type="uint32" value="0"/>
+                    <attribute id="Name" type="FixedString" value="AMP_Plus_SpearWallCharge"/>
+                    <attribute id="ReplenishType" type="FixedString" value="Turn"/>
+                    <attribute id="ShowOnActionResourcePanel" type="bool" value="false"/>
+                    <attribute id="UUID" type="guid" value="8b71b6a6-50ff-4dbd-8bfd-baa8075ea6c0"/>
+                </node>
+                <node id="ActionResourceDefinition">
+                    <attribute id="DisplayName" type="TranslatedString" handle="h97e21087g1d54g4166ga5e1g4c55d4cdaa5d" version="1"/>
+                    <attribute id="IsHidden" type="bool" value="true"/>
+                    <attribute id="IsSpellResource" type="bool" value="false"/>
+                    <attribute id="MaxLevel" type="uint32" value="0"/>
+                    <attribute id="Name" type="FixedString" value="AMP_Plus_StormWindCharge"/>
+                    <attribute id="ReplenishType" type="FixedString" value="Turn"/>
+                    <attribute id="ShowOnActionResourcePanel" type="bool" value="false"/>
+                    <attribute id="UUID" type="guid" value="f401d4f9-ab94-4741-acee-8c386bffd1d2"/>
+                </node>
+                <node id="ActionResourceDefinition">
+                    <attribute id="DisplayName" type="TranslatedString" handle="h612e4548gf9a1g4100gabfbgd3cdf07a5e08" version="1"/>
+                    <attribute id="IsHidden" type="bool" value="true"/>
+                    <attribute id="IsSpellResource" type="bool" value="false"/>
+                    <attribute id="MaxLevel" type="uint32" value="0"/>
+                    <attribute id="Name" type="FixedString" value="AMP_Plus_ShieldWallCharge"/>
+                    <attribute id="ReplenishType" type="FixedString" value="Turn"/>
+                    <attribute id="ShowOnActionResourcePanel" type="bool" value="false"/>
+                    <attribute id="UUID" type="guid" value="71e655d4-23dd-45fa-9390-6da325f5cbc1"/>
+                </node>
+                <node id="ActionResourceDefinition">
+                    <attribute id="DisplayName" type="TranslatedString" handle="hd1e7bde0g840cg4a25gb898g680f162fae2a" version="1"/>
+                    <attribute id="IsHidden" type="bool" value="true"/>
+                    <attribute id="IsSpellResource" type="bool" value="false"/>
+                    <attribute id="MaxLevel" type="uint32" value="0"/>
+                    <attribute id="Name" type="FixedString" value="AMP_Plus_ShardIndomCharge"/>
+                    <attribute id="ReplenishType" type="FixedString" value="Rest"/>
+                    <attribute id="ShowOnActionResourcePanel" type="bool" value="false"/>
+                    <attribute id="UUID" type="guid" value="d1643e39-9b51-4394-ba1f-f1449186a301"/>
+                </node>
+                <node id="ActionResourceDefinition">
+                    <attribute id="DisplayName" type="TranslatedString" handle="hda41a4feg3cb4g4662g8031g6c5c41d633aa" version="1"/>
+                    <attribute id="IsHidden" type="bool" value="true"/>
+                    <attribute id="IsSpellResource" type="bool" value="false"/>
+                    <attribute id="MaxLevel" type="uint32" value="0"/>
+                    <attribute id="Name" type="FixedString" value="AMP_Plus_PyreHoldCharge"/>
+                    <attribute id="ReplenishType" type="FixedString" value="Turn"/>
+                    <attribute id="ShowOnActionResourcePanel" type="bool" value="false"/>
+                    <attribute id="UUID" type="guid" value="9fa75ff0-65c2-4d75-a82c-2d7f95a8eff4"/>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

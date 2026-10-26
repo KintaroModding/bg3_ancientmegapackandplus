@@ -1,0 +1,78 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// timer lets the base 36.0 land first, then trims or drops it
+// trim rule stays ahead of the drop rule, else a retracted drop-mark re-arms it
+
+IF
+CastedSpell((CHARACTER)_Caster, _Spell, _, _, _)
+AND
+DB_Players((CHARACTER)_Caster)
+AND
+IsSubstring(_Spell, "AMP_Ilmater_Prayer_", _Found)
+AND
+_Found == 1
+THEN
+RealtimeObjectTimerLaunch(_Caster, "AMP_Plus_BurdenTune", 250);
+
+IF
+CastedSpell((CHARACTER)_Caster, _Spell, _, _, _)
+AND
+DB_Players((CHARACTER)_Caster)
+AND
+IsSubstring(_Spell, "AMP_Ilmater_Prayer_Preaching", _Found)
+AND
+_Found == 1
+AND
+NOT DB_AMP_Plus_BurdenDrop(_Caster)
+THEN
+DB_AMP_Plus_BurdenDrop(_Caster);
+
+IF
+CastedSpell((CHARACTER)_Caster, _Spell, _, _, _)
+AND
+DB_Players((CHARACTER)_Caster)
+AND
+IsSubstring(_Spell, "AMP_Ilmater_Prayer_Thread", _Found)
+AND
+_Found == 1
+AND
+NOT DB_AMP_Plus_BurdenDrop(_Caster)
+THEN
+DB_AMP_Plus_BurdenDrop(_Caster);
+
+IF
+CastedSpell((CHARACTER)_Caster, _Spell, _, _, _)
+AND
+DB_Players((CHARACTER)_Caster)
+AND
+IsSubstring(_Spell, "AMP_Ilmater_Prayer_Prophet", _Found)
+AND
+_Found == 1
+AND
+NOT DB_AMP_Plus_BurdenDrop(_Caster)
+THEN
+DB_AMP_Plus_BurdenDrop(_Caster);
+
+IF
+ObjectTimerFinished((CHARACTER)_Caster, "AMP_Plus_BurdenTune")
+AND
+NOT DB_AMP_Plus_BurdenDrop(_Caster)
+AND
+HasActiveStatus(_Caster, "AMP_ILMATER_BURDEN", 1)
+THEN
+ApplyStatus(_Caster, "AMP_ILMATER_BURDEN", 12.0, 1, _Caster);
+
+IF
+ObjectTimerFinished((CHARACTER)_Caster, "AMP_Plus_BurdenTune")
+AND
+DB_AMP_Plus_BurdenDrop(_Caster)
+THEN
+NOT DB_AMP_Plus_BurdenDrop(_Caster);
+RemoveStatus(_Caster, "AMP_ILMATER_BURDEN", NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+ENDEXITSECTION

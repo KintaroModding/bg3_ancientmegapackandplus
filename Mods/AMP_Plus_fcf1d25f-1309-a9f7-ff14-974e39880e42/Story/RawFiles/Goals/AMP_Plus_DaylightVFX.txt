@@ -1,0 +1,65 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_Settings_DaylightVFX", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+NOT DB_AMP_Plus_DaylightVFX_Off(1)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_DaylightVFX_AskDisable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_Settings_DaylightVFX", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_AMP_Plus_DaylightVFX_Off(1)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_DaylightVFX_AskEnable");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_DaylightVFX_AskDisable", 1)
+THEN
+DB_AMP_Plus_DaylightVFX_Off(1);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_DaylightVFX_AskEnable", 1)
+AND
+DB_AMP_Plus_DaylightVFX_Off(1)
+THEN
+NOT DB_AMP_Plus_DaylightVFX_Off(1);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+StatusApplied((GUIDSTRING)_Sphere, "DAYLIGHT_GROUND", _, _)
+AND
+DB_AMP_Plus_DaylightVFX_Off(1)
+THEN
+Transform(_Sphere, AMP_Plus_Daylight_NoVFX_01_a23beb99-34a6-405b-8933-8786efa1cfb5, (SHAPESHIFTRULE)DisguiseKeepName_c7c3381e-b901-416e-a0c4-bc745e1ff54a);
+
+IF
+StatusApplied((GUIDSTRING)_Target, "DAYLIGHT", _, _)
+AND
+NOT DB_AMP_Plus_DaylightVFX_Off(1)
+THEN
+ApplyStatus(_Target, "AMP_PLUS_DAYLIGHT_GLOW", -1.0, 1, _Target);
+
+IF
+StatusApplied((GUIDSTRING)_Target, "DAYLIGHT", _, _)
+AND
+DB_AMP_Plus_DaylightVFX_Off(1)
+THEN
+ApplyStatus(_Target, "AMP_PLUS_DAYLIGHT_SOFT", -1.0, 1, _Target);
+
+EXITSECTION
+ENDEXITSECTION

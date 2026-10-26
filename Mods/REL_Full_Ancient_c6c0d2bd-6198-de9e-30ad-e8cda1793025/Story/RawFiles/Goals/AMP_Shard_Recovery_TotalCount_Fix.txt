@@ -1,0 +1,59 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// delay (ms) before the totalcount wipe - let core recovery finish clearing
+// markers first, then reset totalcount on the equipped slots.
+DB_AMP_Shard_RecoveryFixDelay(500);
+
+KBSECTION
+
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+DB_AMP_Shard_Recovery(_Template)
+AND
+DB_AMP_Shard_RecoveryFixDelay((INTEGER)_Delay)
+THEN
+ObjectTimerLaunch(_Char, "AMP_ShardRecoveryTotalFix", _Delay, 0);
+
+IF
+ObjectTimerFinished((CHARACTER)_Char, "AMP_ShardRecoveryTotalFix")
+THEN
+PROC_AMP_ShardFix_ResetSlotTotals(_Char);
+
+PROC
+PROC_AMP_ShardFix_ResetSlotTotals((CHARACTER)_Char)
+AND
+DB_AMP_Shard_RecoverySlot(_Slot)
+AND
+GetEquippedItem(_Char, _Slot, _Item)
+AND
+DB_AMP_Shard_TotalCount(_Item, _Any)
+THEN
+NOT DB_AMP_Shard_TotalCount(_Item, _Any);
+
+PROC
+PROC_AMP_ShardFix_ResetSlotTotals((CHARACTER)_Char)
+AND
+DB_AMP_Shard_RecoverySlot(_Slot)
+AND
+GetEquippedItem(_Char, _Slot, _Item)
+AND
+DB_AMP_Shard_Count(_Item, _Status, _Count)
+THEN
+NOT DB_AMP_Shard_Count(_Item, _Status, _Count);
+
+PROC
+PROC_AMP_ShardFix_ResetSlotTotals((CHARACTER)_Char)
+AND
+DB_AMP_Shard_RecoverySlot(_Slot)
+AND
+GetEquippedItem(_Char, _Slot, _Item)
+AND
+DB_AMP_Shard_ItemSlotOverride(_Item, _Bonus)
+THEN
+NOT DB_AMP_Shard_ItemSlotOverride(_Item, _Bonus);
+
+EXITSECTION
+ENDEXITSECTION

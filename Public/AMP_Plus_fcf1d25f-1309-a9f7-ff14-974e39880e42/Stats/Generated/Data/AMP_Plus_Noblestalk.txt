@@ -1,0 +1,5 @@
+new entry "UND_NOBLESTALK"
+type "StatusData"
+data "StatusType" "BOOST"
+using "UND_NOBLESTALK"
+data "OnApplyFunctors" "RemoveStatus(SG_Blinded);RemoveStatus(SG_Disease);RemoveStatus(SG_Exhausted);RemoveStatus(SG_Poisoned);RemoveStatus(SG_Frightened);RemoveStatus(SG_Charmed);RemoveStatus(SG_Cursed);RemoveStatus(SG_Possessed);RemoveStatus(SG_Madness);RemoveStatus(SG_Condition);RegainHitPoints(MaxHP)"

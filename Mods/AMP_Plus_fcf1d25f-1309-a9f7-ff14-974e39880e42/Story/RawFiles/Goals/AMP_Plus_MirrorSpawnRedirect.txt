@@ -1,0 +1,47 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// watchers raise AMP_PLUS_MIRROR_TRIGGER, so the base spawn never fires
+// guards copied from the base spawn rule
+// once per combat: several boss-flagged enemies (creche) each fired a wave
+IF
+StatusApplied((CHARACTER)_Boss, "AMP_PLUS_MIRROR_TRIGGER", _, _)
+AND
+NOT DB_AMP_MirrorSupport_Fired(_Boss)
+AND
+NOT DB_AMP_Plus_ChaseActive(_, _)
+AND
+IsBoss(_Boss, 1)
+AND
+IsInCombat(_Boss, 1)
+AND
+IsDead(_Boss, 0)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_Boss, _Host, 1)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_PoolSize)
+AND
+_PoolSize > 0
+AND
+CombatGetGuidFor(_Boss, (GUIDSTRING)_CombatId)
+AND
+NOT DB_AMP_Plus_MirrorFiredCombat(_CombatId)
+THEN
+DB_AMP_MirrorSupport_Fired(_Boss);
+DB_AMP_Plus_MirrorFiredCombat(_CombatId);
+PROC_AMP_Plus_MirrorSpawnSized(_Boss);
+
+IF
+CombatEnded((GUIDSTRING)_CombatId)
+AND
+DB_AMP_Plus_MirrorFiredCombat(_CombatId)
+THEN
+NOT DB_AMP_Plus_MirrorFiredCombat(_CombatId);
+
+EXITSECTION
+ENDEXITSECTION

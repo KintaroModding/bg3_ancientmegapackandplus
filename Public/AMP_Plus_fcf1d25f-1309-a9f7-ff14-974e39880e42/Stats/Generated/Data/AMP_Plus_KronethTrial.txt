@@ -1,0 +1,9 @@
+new entry "AMP_KRONETH_JUDGEMENT"
+type "StatusData"
+using "AMP_KRONETH_JUDGEMENT"
+data "Boosts" "UnlockSpell(Shout_AMP_Plus_KronethTrial)"
+
+new entry "Shout_AMP_Plus_KronethTrial"
+type "SpellData"
+data "SpellType" "Shout"
+using "Shout_AMP_KronethTrial"

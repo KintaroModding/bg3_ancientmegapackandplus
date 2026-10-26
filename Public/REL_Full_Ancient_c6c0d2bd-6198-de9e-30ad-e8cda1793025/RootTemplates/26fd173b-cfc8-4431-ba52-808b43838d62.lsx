@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="400" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="26fd173b-cfc8-4431-ba52-808b43838d62" />
+					<attribute id="Name" type="LSString" value="AMP_Arcanizer_Altar" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="8e036eac-fc9c-4d16-9265-f71eacc9f3e9" />
+					<attribute id="VisualTemplate" type="FixedString" value="827f0aee-e58f-26bf-48e0-60b4aeb71d98" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="81676bad-34f9-9267-acc8-fba74f65e40e" />
+					<attribute id="Scale" type="float" value="1.75" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h66b7c842g2cc1gbbfcgc953gb3e6e9540f6c" version="1" />
+					<attribute id="CoverAmount" type="uint8" value="1" />
+					<attribute id="CanClimbOn" type="bool" value="False" />
+					<attribute id="CanShootThrough" type="bool" value="False" />
+					<attribute id="WalkOn" type="bool" value="False" />
+					<attribute id="Icon" type="FixedString" value="AMP_Altar" />
+					<attribute id="Stats" type="FixedString" value="AMP_Altar" />
+					<attribute id="CanBePickedUp" type="bool" value="False" />
+					<attribute id="CanBePickpocketed" type="bool" value="False" />
+					<attribute id="CanBeMoved" type="bool" value="False" />
+					<attribute id="IsInteractionDisabled" type="bool" value="False" />
+					<attribute id="Tooltip" type="uint8" value="2" />
+					<attribute id="OnUseDescription" type="TranslatedString" handle="hd5a2f1ccgf9c3gb0d2g48d4gb8d7ae32c724" version="16" />
+					<attribute id="CanBeImprovisedWeapon" type="bool" value="False" />
+					<attribute id="EquipSound" type="FixedString" value="" />
+					<attribute id="UnequipSound" type="FixedString" value="" />
+					<attribute id="PhysicsCollisionSound" type="FixedString" value="" />
+					<attribute id="ImpactSound" type="FixedString" value="" />
+					<attribute id="InventoryMoveSound" type="FixedString" value="" />
+					<attribute id="DropSound" type="FixedString" value="" />
+					<attribute id="PickupSound" type="FixedString" value="" />
+					<attribute id="InventoryType" type="uint8" value="32" />
+					<attribute id="Description" type="TranslatedString" handle="ls::TranslatedStringRepository::s_HandleUnknown" version="1" />
+					<attribute id="MaterialPreset" type="guid" value="00000000-0000-0000-0000-000000000000" />
+					<attribute id="ColorPreset" type="guid" value="00000000-0000-0000-0000-000000000000" />
+					<attribute id="IsInspector" type="bool" value="False" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="daf044dd-a6f1-450e-94ad-5f7770aa35b3" />
+								</node>
+							</children>
+						</node>
+						<node id="Bounds">
+							<children>
+								<node id="Bound">
+									<attribute id="Type" type="uint8" value="0" />
+									<attribute id="Shape" type="uint8" value="1" />
+									<attribute id="Min" type="fvec3" value="-0.5331216 -0.01599407 -0.5331216" />
+									<attribute id="Max" type="fvec3" value="0.5331216 4.02773 0.5331216" />
+									<attribute id="Radius" type="float" value="0.5331216" />
+									<attribute id="Height" type="float" value="4.043724" />
+								</node>
+								<node id="Bound">
+									<attribute id="Type" type="uint8" value="1" />
+									<attribute id="Shape" type="uint8" value="2" />
+									<attribute id="Min" type="fvec3" value="-0.5331216 -0.01599407 -0.5331216" />
+									<attribute id="Max" type="fvec3" value="0.5331216 4.02773 0.5331216" />
+									<attribute id="Radius" type="float" value="0.5331216" />
+									<attribute id="Height" type="float" value="4.043724" />
+								</node>
+								<node id="Bound">
+									<attribute id="Type" type="uint8" value="2" />
+									<attribute id="Shape" type="uint8" value="1" />
+									<attribute id="Min" type="fvec3" value="-0.5331216 -0.01599407 -0.5331216" />
+									<attribute id="Max" type="fvec3" value="0.5331216 4.02773 0.5331216" />
+									<attribute id="Radius" type="float" value="0.5331216" />
+									<attribute id="Height" type="float" value="4.043724" />
+								</node>
+							</children>
+						</node>
+						<node id="OnUsePeaceActions">
+							<children>
+								<node id="Action">
+									<attribute id="ActionType" type="int32" value="1" />
+									<children>
+										<node id="Attributes">
+											<attribute id="Animation" type="FixedString" value="" />
+											<attribute id="Conditions" type="LSString" value="" />
+										</node>
+									</children>
+								</node>
+								<node id="Action">
+									<attribute id="ActionType" type="int32" value="8" />
+									<children>
+										<node id="Attributes">
+											<attribute id="Animation" type="FixedString" value="" />
+											<attribute id="Conditions" type="LSString" value="" />
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="OnDestroyActions" />
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="Empty" />
+								</node>
+							</children>
+						</node>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="ARCANIZER_ALTAR_STATION" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

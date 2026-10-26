@@ -1,0 +1,70 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// relative subtract stacking with the boss's own proficiency, not an override
+// party level 8+ has no entry, a normal-level boss keeps full proficiency
+
+KBSECTION
+
+// bump the version when the rows change
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_ProfCutVer(2)
+THEN
+PROC_AMP_Plus_ProfCutReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_ProfCutVer(2)
+THEN
+PROC_AMP_Plus_ProfCutReseed();
+
+PROC
+PROC_AMP_Plus_ProfCutReseed()
+AND
+DB_AMP_Plus_ProfCutVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_ProfCutVer(_Old);
+
+PROC
+PROC_AMP_Plus_ProfCutReseed()
+THEN
+PROC_AMP_Plus_ProfCutDrainMap();
+
+PROC
+PROC_AMP_Plus_ProfCutDrainMap()
+AND
+DB_AMP_Plus_ProfCutMap((INTEGER)_A, (STRING)_B)
+THEN
+NOT DB_AMP_Plus_ProfCutMap(_A, _B);
+PROC_AMP_Plus_ProfCutDrainMap();
+
+PROC
+PROC_AMP_Plus_ProfCutReseed()
+THEN
+DB_AMP_Plus_ProfCutVer(2);
+DB_AMP_Plus_ProfCutMap(1, "AMP_Plus_ULTRA_PROFCUT_4");
+DB_AMP_Plus_ProfCutMap(2, "AMP_Plus_ULTRA_PROFCUT_4");
+DB_AMP_Plus_ProfCutMap(3, "AMP_Plus_ULTRA_PROFCUT_3");
+DB_AMP_Plus_ProfCutMap(4, "AMP_Plus_ULTRA_PROFCUT_3");
+DB_AMP_Plus_ProfCutMap(5, "AMP_Plus_ULTRA_PROFCUT_2");
+DB_AMP_Plus_ProfCutMap(6, "AMP_Plus_ULTRA_PROFCUT_2");
+DB_AMP_Plus_ProfCutMap(7, "AMP_Plus_ULTRA_PROFCUT_1");
+
+IF
+DB_AMP_Plus_UltraMob((CHARACTER)_Mob, _)
+AND
+NOT DB_AMP_Plus_ProfCutDone(_Mob)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+DB_AMP_Plus_ProfCutMap(_Lvl, (STRING)_Status)
+THEN
+DB_AMP_Plus_ProfCutDone((CHARACTER)_Mob);
+ApplyStatus(_Mob, _Status, -1.0, 1, _Mob);
+
+EXITSECTION
+ENDEXITSECTION

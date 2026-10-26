@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="db4e4f3d-d46a-a6d2-9869-9dd911c7b0ba" />
+					<attribute id="Name" type="LSString" value="SJ02_Squeeze" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/SJ02_Squeeze.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="SJ02_Squeeze" />
+					<attribute id="BoundsMin" type="fvec3" value="-2 -2 -2" />
+					<attribute id="BoundsMax" type="fvec3" value="2 2 2" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="2" />
+					<attribute id="Looping" type="bool" value="False" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="f31385c9-20dc-61bb-a980-fa9739cc61c5" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="f51d4ea9-e053-382a-31b6-7d2458e4aab3" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="5874a588-b4ad-4a78-a823-8f5f739555be" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="9c15f129-f070-7a2b-e66d-d728aaea2383" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="8b853a92-bcdf-bd5e-3f0a-a3c7893567bc" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="b5dd8d98-46ef-79bb-478f-612b8f47c8ca" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="09507f13-8b48-c991-2f7e-46e2958f3344" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="34e7be6f-608d-4000-9f7f-77f16a601ad9" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="fc8e0913-f843-7157-27f5-3144ca3b9932" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="4827c8bd-c911-440d-bb94-42d94df44e17" />
+					<attribute id="Name" type="LSString" value="S_LOW_DeadTrall_003" />
+					<attribute id="LevelName" type="FixedString" value="TUT_Avernus_C" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="TemplateName" type="FixedString" value="b36fe7f5-2913-49ed-9f6c-ef6a0e646e77" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h3a65df58gc402g4327gb91bg929ecc9e8b36" version="2" />
+					<attribute id="Icon" type="FixedString" value="4fb468e3-2b7e-506f-e3f9-749b51e18963-EQP_Scimitar_(Icon_Human_Female)" />
+					<attribute id="Equipment" type="FixedString" value="EQP_Scimitar" />
+					<attribute id="DefaultState" type="uint8" value="11" />
+					<attribute id="LevelOverride" type="int32" value="3" />
+					<attribute id="CharacterVisualResourceID" type="FixedString" value="4fb468e3-2b7e-506f-e3f9-749b51e18963" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="29.640549 18.290792 -356.98065" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0 0 1" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="TUT_Avernus_C" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="f5ba4fc7-a74b-57c5-7026-fb9f65c7ec5b" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="88654c5e-5959-74af-b3e6-7037d8b99707" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="ItemList" />
+						<node id="Treasures">
+							<children>
+								<node id="TreasureItem">
+									<attribute id="Object" type="FixedString" value="Empty" />
+								</node>
+								<node id="TreasureItem">
+									<attribute id="Object" type="FixedString" value="TUT_Victim_Generic" />
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

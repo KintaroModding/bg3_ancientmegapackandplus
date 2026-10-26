@@ -1,0 +1,487 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// ambush chase. the intercept kills the base warp/recreate/loot/doppelganger rules, they are redone here
+
+IF
+TeleportedFromCamp((CHARACTER)_Char)
+AND
+DB_Players(_Char)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+PROC_AMP_Plus_ChaseArmShort(_Host);
+
+// support mobs move onto our record, base row cleared. active pursuers keep their role
+IF
+DB_AMP_MirrorChase_Mob((CHARACTER)_Mob, (GUIDSTRING)_Template)
+AND
+NOT DB_AMP_Plus_Chase(_Mob, _)
+AND
+NOT DB_AMP_Plus_ChaseActive(_Mob, _)
+THEN
+DB_AMP_Plus_Chase((CHARACTER)_Mob, _Template);
+NOT DB_AMP_MirrorChase_Mob(_Mob, _Template);
+
+IF
+DB_AMP_MirrorChase_Mob((CHARACTER)_Mob, (GUIDSTRING)_Template)
+AND
+DB_AMP_Plus_ChaseActive(_Mob, _)
+THEN
+NOT DB_AMP_MirrorChase_Mob(_Mob, _Template);
+
+// not instant: faction changes reshuffle combat and everyone reads as out of it for a tick
+// short timer glues strays back in, long timer owes the pursuer after the full tier delay
+IF
+LeftCombat((CHARACTER)_Host, _)
+AND
+GetHostCharacter(_Host)
+AND
+IsDead(_Host, 0)
+AND
+DB_AMP_Plus_Chase((CHARACTER)_Mob, _)
+AND
+IsDead(_Mob, 0)
+AND
+DB_AMP_Plus_SpawnIntensity_Chase((INTEGER)_CTier)
+AND
+DB_AMP_Plus_ChaseQueueByTier(_CTier, (INTEGER)_QMs)
+THEN
+RealtimeObjectTimerLaunch(_Mob, "AMP_Plus_ChaseGlue", 3000);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Plus_ChaseQueue", _QMs);
+
+// leak guard, must precede the delete rules. a deleted mob never dies, its attacker row lingers
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Plus_ChaseQueue")
+AND
+IsInCombat(_Mob, 0)
+AND
+DB_AMP_MirrorChase_LastAttacker(_Mob, (CHARACTER)_Old)
+THEN
+NOT DB_AMP_MirrorChase_LastAttacker(_Mob, _Old);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Plus_ChaseQueue")
+AND
+DB_AMP_Plus_Chase(_Mob, (GUIDSTRING)_Template)
+AND
+IsDead(_Mob, 0)
+AND
+IsInCombat(_Mob, 0)
+AND
+DB_AMP_Plus_UltraMob(_Mob, (CHARACTER)_Boss)
+AND
+IsDead(_Boss, 1)
+THEN
+DB_AMP_Plus_ChasePending(_Template);
+NOT DB_AMP_Plus_Chase(_Mob, _Template);
+SetOnStage(_Mob, 0);
+RequestDeleteTemporary(_Mob);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Plus_ChaseGlue")
+AND
+DB_AMP_Plus_Chase(_Mob, _)
+AND
+IsDead(_Mob, 0)
+AND
+IsInCombat(_Mob, 0)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsInCombat(_Host, 1)
+THEN
+EnterCombat(_Mob, _Host);
+
+IF
+DB_AMP_Plus_ChasePending((GUIDSTRING)_Template)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+NOT QRY_AMP_Plus_CampGuard()
+AND
+NOT DB_AMP_Plus_ChaseTimer(_Host)
+THEN
+PROC_AMP_Plus_ChaseArmLong(_Host);
+
+PROC
+PROC_AMP_Plus_ChaseArmLong((CHARACTER)_Host)
+AND
+NOT DB_AMP_Plus_ChaseTimer(_Host)
+AND
+DB_AMP_Plus_SpawnIntensity_Chase((INTEGER)_CTier)
+AND
+DB_AMP_Plus_ChaseBreatherByTier(_CTier, (INTEGER)_MinMs, (INTEGER)_SpanMs)
+AND
+Random(_SpanMs, (INTEGER)_R)
+AND
+IntegerSum(_R, _MinMs, (INTEGER)_MS)
+THEN
+DB_AMP_Plus_ChaseTimer(_Host);
+ObjectTimerLaunch(_Host, "AMP_Plus_ChaseBreather", _MS, 0);
+
+// re-arm unconditionally, a flag cannot tell a live timer from one dropped on level change
+PROC
+PROC_AMP_Plus_ChaseArmShort((CHARACTER)_Host)
+AND
+Random(120000, (INTEGER)_R)
+AND
+IntegerSum(_R, 60000, (INTEGER)_MS)
+THEN
+ObjectTimerCancel(_Host, "AMP_Plus_ChaseBreather");
+DB_AMP_Plus_ChaseTimer(_Host);
+ObjectTimerLaunch(_Host, "AMP_Plus_ChaseBreather", _MS, 0);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Plus_ChasePending(_)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+NOT QRY_AMP_Plus_CampGuard()
+THEN
+PROC_AMP_Plus_ChaseArmShort(_Host);
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_Plus_ChaseBreather")
+AND
+GetHostCharacter(_Host)
+AND
+NOT QRY_AMP_Plus_CampGuard()
+AND
+DB_AMP_Plus_ChasePending((GUIDSTRING)_Template)
+THEN
+DB_AMP_Plus_ChaseSpawnQ(_Template);
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_Plus_ChaseBreather")
+AND
+GetHostCharacter(_Host)
+THEN
+PROC_AMP_Plus_ChaseDrainSpawnQ(_Host);
+
+PROC
+PROC_AMP_Plus_ChaseDrainSpawnQ((CHARACTER)_Host)
+AND
+DB_AMP_Plus_ChaseSpawnQ((GUIDSTRING)_Template)
+THEN
+NOT DB_AMP_Plus_ChaseSpawnQ(_Template);
+PROC_AMP_Plus_ChaseSpawnOne(_Template, _Host);
+PROC_AMP_Plus_ChaseDrainSpawnQ(_Host);
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_Plus_ChaseBreather")
+AND
+DB_AMP_Plus_ChaseTimer(_Host)
+THEN
+NOT DB_AMP_Plus_ChaseTimer(_Host);
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_Plus_ChaseBreather")
+AND
+GetHostCharacter(_Host)
+AND
+QRY_AMP_Plus_CampGuard()
+AND
+DB_AMP_Plus_ChasePending(_)
+THEN
+PROC_AMP_Plus_ChaseArmShort(_Host);
+
+PROC
+PROC_AMP_Plus_ChaseSpawnOne((GUIDSTRING)_Template, (CHARACTER)_Host)
+AND
+GetPosition(_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+AND
+RealSum(_HZ, 3.0, (REAL)_SZ)
+AND
+CreateAt(_Template, _HX, _HY, _SZ, 0, 1, "", (GUIDSTRING)_NewMob)
+THEN
+NOT DB_AMP_Plus_ChasePending(_Template);
+DB_AMP_Plus_ChaseActive((CHARACTER)_NewMob, _Template);
+// base row is written after the active mark, else the intercept demotes the mob to support
+DB_AMP_MirrorChase_Mob((CHARACTER)_NewMob, _Template);
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_NewMob, (CHARACTER)_NewMob);
+ApplyStatus(_NewMob, "AMP_FORCE_HOSTILE", -1.0, 1, _NewMob);
+ApplyStatus(_NewMob, "AMP_ULTRA_SPAWN_VFX", 6.0, 1, _NewMob);
+EnterCombat(_NewMob, _Host);
+
+IF
+DB_AMP_Plus_ChaseActive((CHARACTER)_Mob, AMP_Ysatiy_92506335-12dd-4e4b-848c-f33fd8cc39fa)
+THEN
+ApplyStatus(_Mob, "AMP_VASHT_ASTRAL_LEAP", -1.0, 1, _Mob);
+ApplyStatus(_Mob, "AMP_VASHT_FRENZY", -1.0, 1, _Mob);
+
+IF
+LeftCombat((CHARACTER)_Host, _)
+AND
+GetHostCharacter(_Host)
+AND
+DB_AMP_Plus_ChaseActive((CHARACTER)_Mob, _)
+AND
+IsDead(_Mob, 0)
+AND
+IsDead(_Host, 0)
+AND
+DB_AMP_Plus_SpawnIntensity_Chase((INTEGER)_CTier)
+AND
+DB_AMP_Plus_ChaseQueueByTier(_CTier, (INTEGER)_QMs)
+THEN
+RealtimeObjectTimerLaunch(_Mob, "AMP_Plus_ChaseGlue", 3000);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Plus_ChaseQueue", _QMs);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Plus_ChaseQueue")
+AND
+DB_AMP_Plus_ChaseActive(_Mob, (GUIDSTRING)_Template)
+AND
+IsDead(_Mob, 0)
+AND
+IsInCombat(_Mob, 0)
+THEN
+DB_AMP_Plus_ChasePending(_Template);
+NOT DB_AMP_Plus_ChaseActive(_Mob, _Template);
+SetOnStage(_Mob, 0);
+RequestDeleteTemporary(_Mob);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Plus_ChaseGlue")
+AND
+DB_AMP_Plus_ChaseActive(_Mob, _)
+AND
+IsDead(_Mob, 0)
+AND
+IsInCombat(_Mob, 0)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsInCombat(_Host, 1)
+THEN
+EnterCombat(_Mob, _Host);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Plus_ChaseActive(_Mob, (GUIDSTRING)_Template)
+THEN
+NOT DB_AMP_Plus_ChaseActive(_Mob, _Template);
+PROC_AMP_Plus_MirrorLoot_OnDeath(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Plus_Chase(_Mob, (GUIDSTRING)_Template)
+THEN
+NOT DB_AMP_Plus_Chase(_Mob, _Template);
+PROC_AMP_Plus_MirrorLoot_OnDeath(_Mob);
+
+IF
+EnteredCombat((CHARACTER)_Mob, (GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_Plus_Chase(_Mob, AMP_ULTRA_Summon_05_f8560efd-1d3c-4dcc-8b4e-b36f2cc79684)
+AND
+NOT DB_AMP_MirrorDoppel_Current(_Mob, _)
+THEN
+PROC_AMP_MirrorDoppel_PickPlayer(_Mob, _CombatGuid);
+
+IF
+EnteredCombat((CHARACTER)_Mob, (GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_Plus_ChaseActive(_Mob, AMP_ULTRA_Summon_05_f8560efd-1d3c-4dcc-8b4e-b36f2cc79684)
+AND
+NOT DB_AMP_MirrorDoppel_Current(_Mob, _)
+THEN
+PROC_AMP_MirrorDoppel_PickPlayer(_Mob, _CombatGuid);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_MirrorDoppel_Reassume")
+AND
+DB_AMP_Plus_Chase(_Mob, AMP_ULTRA_Summon_05_f8560efd-1d3c-4dcc-8b4e-b36f2cc79684)
+AND
+IsDead(_Mob, 0)
+AND
+CombatGetGuidFor(_Mob, (GUIDSTRING)_CombatGuid)
+THEN
+PROC_AMP_MirrorDoppel_PickPlayer(_Mob, _CombatGuid);
+PROC_AMP_MirrorDoppel_RestoreHP(_Mob);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_MirrorDoppel_Reassume")
+AND
+DB_AMP_Plus_ChaseActive(_Mob, AMP_ULTRA_Summon_05_f8560efd-1d3c-4dcc-8b4e-b36f2cc79684)
+AND
+IsDead(_Mob, 0)
+AND
+CombatGetGuidFor(_Mob, (GUIDSTRING)_CombatGuid)
+THEN
+PROC_AMP_MirrorDoppel_PickPlayer(_Mob, _CombatGuid);
+PROC_AMP_MirrorDoppel_RestoreHP(_Mob);
+
+// camp clothes leave the clone on an empty vanity set, force the layout after gear lands
+IF
+DB_AMP_MirrorDoppel_Current((CHARACTER)_Mob, _)
+THEN
+ObjectTimerLaunch(_Mob, "AMP_Plus_DoppelArmourSet", 500, 0);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Plus_DoppelArmourSet")
+AND
+DB_AMP_MirrorDoppel_Current(_Mob, _)
+THEN
+PROC_SetArmourSet(_Mob, ARMOURSET.Normal);
+
+IF
+AttackedBy((CHARACTER)_Mob, (CHARACTER)_Owner, _, _, _, _, _)
+AND
+DB_AMP_Plus_ChaseActive(_Mob, _)
+AND
+DB_AMP_MirrorChase_LastAttacker(_Mob, (CHARACTER)_Old)
+THEN
+NOT DB_AMP_MirrorChase_LastAttacker(_Mob, _Old);
+DB_AMP_MirrorChase_LastAttacker(_Mob, _Owner);
+
+IF
+AttackedBy((CHARACTER)_Mob, (CHARACTER)_Owner, _, _, _, _, _)
+AND
+DB_AMP_Plus_ChaseActive(_Mob, _)
+AND
+NOT DB_AMP_MirrorChase_LastAttacker(_Mob, _)
+THEN
+DB_AMP_MirrorChase_LastAttacker(_Mob, _Owner);
+
+IF
+AttackedBy((CHARACTER)_Mob, (CHARACTER)_Owner, _, _, _, _, _)
+AND
+DB_AMP_Plus_Chase(_Mob, _)
+AND
+DB_AMP_MirrorChase_LastAttacker(_Mob, (CHARACTER)_Old)
+THEN
+NOT DB_AMP_MirrorChase_LastAttacker(_Mob, _Old);
+DB_AMP_MirrorChase_LastAttacker(_Mob, _Owner);
+
+IF
+AttackedBy((CHARACTER)_Mob, (CHARACTER)_Owner, _, _, _, _, _)
+AND
+DB_AMP_Plus_Chase(_Mob, _)
+AND
+NOT DB_AMP_MirrorChase_LastAttacker(_Mob, _)
+THEN
+DB_AMP_MirrorChase_LastAttacker(_Mob, _Owner);
+
+// Mini-boss reward
+// replaces the base death resolution: a second proc body can only pay more, never less
+
+PROC
+PROC_AMP_Plus_MirrorLoot_OnDeath((CHARACTER)_Mob)
+AND
+DB_AMP_MirrorChase_LastAttacker(_Mob, (CHARACTER)_Attacker)
+AND
+DB_Players(_Attacker)
+THEN
+PROC_AMP_Plus_MirrorLoot_Roll(_Mob);
+NOT DB_AMP_MirrorChase_LastAttacker(_Mob, _Attacker);
+
+PROC
+PROC_AMP_Plus_MirrorLoot_OnDeath((CHARACTER)_Mob)
+AND
+DB_AMP_MirrorChase_LastAttacker(_Mob, (CHARACTER)_Attacker)
+AND
+DB_PartOfTheTeam(_Attacker)
+AND
+NOT DB_Players(_Attacker)
+THEN
+PROC_AMP_Plus_MirrorLoot_Roll(_Mob);
+NOT DB_AMP_MirrorChase_LastAttacker(_Mob, _Attacker);
+
+PROC
+PROC_AMP_Plus_MirrorLoot_OnDeath((CHARACTER)_Mob)
+AND
+DB_AMP_MirrorChase_LastAttacker(_Mob, (CHARACTER)_Attacker)
+AND
+NOT DB_Players(_Attacker)
+AND
+NOT DB_PartOfTheTeam(_Attacker)
+THEN
+NOT DB_AMP_MirrorChase_LastAttacker(_Mob, _Attacker);
+
+PROC
+PROC_AMP_Plus_MirrorLoot_OnDeath((CHARACTER)_Mob)
+AND
+NOT DB_AMP_MirrorChase_LastAttacker(_Mob, _)
+THEN
+DB_NOOP(1);
+
+PROC
+PROC_AMP_Plus_MirrorLoot_Roll((CHARACTER)_Mob)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+Random(100, (INTEGER)_Roll)
+THEN
+PROC_AMP_Plus_MirrorLoot_Grant(_Host, _Roll);
+
+PROC
+PROC_AMP_Plus_MirrorLoot_Grant((CHARACTER)_Host, (INTEGER)_Roll)
+AND
+_Roll < 51
+THEN
+DB_NOOP(1);
+
+PROC
+PROC_AMP_Plus_MirrorLoot_Grant((CHARACTER)_Host, (INTEGER)_Roll)
+AND
+_Roll >= 51
+AND
+_Roll < 66
+THEN
+TemplateAddTo(AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, _Host, 1, 1);
+
+PROC
+PROC_AMP_Plus_MirrorLoot_Grant((CHARACTER)_Host, (INTEGER)_Roll)
+AND
+_Roll >= 66
+AND
+_Roll < 79
+THEN
+TemplateAddTo(AMP_Generic_VoidCapsule_bb84619f-7c56-4a1d-aa8a-d5f0a33ea620, _Host, 1, 1);
+
+PROC
+PROC_AMP_Plus_MirrorLoot_Grant((CHARACTER)_Host, (INTEGER)_Roll)
+AND
+_Roll >= 79
+AND
+_Roll < 89
+THEN
+TemplateAddTo(AMP_Generic_VoidCapsule_bb84619f-7c56-4a1d-aa8a-d5f0a33ea620, _Host, 2, 1);
+
+PROC
+PROC_AMP_Plus_MirrorLoot_Grant((CHARACTER)_Host, (INTEGER)_Roll)
+AND
+_Roll >= 89
+AND
+_Roll < 97
+THEN
+TemplateAddTo(AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, _Host, 1, 1);
+
+PROC
+PROC_AMP_Plus_MirrorLoot_Grant((CHARACTER)_Host, (INTEGER)_Roll)
+AND
+_Roll >= 97
+AND
+_Roll < 99
+THEN
+TemplateAddTo(AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, _Host, 2, 1);
+
+PROC
+PROC_AMP_Plus_MirrorLoot_Grant((CHARACTER)_Host, (INTEGER)_Roll)
+AND
+_Roll >= 99
+THEN
+TemplateAddTo(AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1, _Host, 1, 1);
+
+EXITSECTION
+
+ENDEXITSECTION

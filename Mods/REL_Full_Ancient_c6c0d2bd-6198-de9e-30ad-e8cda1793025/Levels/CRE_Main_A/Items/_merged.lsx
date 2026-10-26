@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="0" revision="9" build="0" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="DisplayName" type="TranslatedString" handle="h28724e80g961dg4b57g91d6gc5f8007c6531" version="2" />
+					<attribute id="Flag" type="int32" value="1" />
+					<attribute id="GravityType" type="uint8" value="2" />
+					<attribute id="LevelName" type="FixedString" value="CRE_Main_A" />
+					<attribute id="MapKey" type="FixedString" value="fce42526-f518-4727-91f6-c41c234fa053" />
+					<attribute id="Name" type="LSString" value="S_CRE_Abbot1_Weapon" />
+					<attribute id="Stats" type="FixedString" value="WPN_Mace_1" />
+					<attribute id="TemplateName" type="FixedString" value="5a948b12-ca43-4256-9821-0d151036dbd1" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="_OriginalFileVersion_" type="int64" value="144115207403209023" />
+					<children>
+						<node id="LayerList" />
+						<node id="Transform" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Flag" type="int32" value="1" />
+					<attribute id="GravityType" type="uint8" value="2" />
+					<attribute id="LevelName" type="FixedString" value="CRE_Main_A" />
+					<attribute id="MapKey" type="FixedString" value="e47eb807-f2b2-45b1-9af5-5c3793756021" />
+					<attribute id="Name" type="LSString" value="MAG_ZOC_ForceConduit_Halberd_000" />
+					<attribute id="TemplateName" type="FixedString" value="64cdd668-5c09-48f3-a064-d4581156ca31" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="_OriginalFileVersion_" type="int64" value="144115207403209026" />
+					<children>
+						<node id="LayerList" />
+						<node id="Transform" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Flag" type="int32" value="1" />
+					<attribute id="GravityType" type="uint8" value="2" />
+					<attribute id="LevelName" type="FixedString" value="CRE_Main_A" />
+					<attribute id="MapKey" type="FixedString" value="e4da8f24-83f7-4730-b1be-9daf642affae" />
+					<attribute id="Name" type="LSString" value="WPN_HUM_Longsword_A_0_Rusty_A_001" />
+					<attribute id="TemplateName" type="FixedString" value="dddd2204-0ee3-47b0-a7ea-6b5216a65e89" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="_OriginalFileVersion_" type="int64" value="144115207403209023" />
+					<children>
+						<node id="LayerList" />
+						<node id="Transform" />
+					</children>
+				</node>
+				<node id="GameObjects">
+					<attribute id="Flag" type="int32" value="1" />
+					<attribute id="LevelName" type="FixedString" value="CRE_Main_A" />
+					<attribute id="MapKey" type="FixedString" value="d29b0d48-8470-42d0-a4b3-7270a7b44bed" />
+					<attribute id="Name" type="LSString" value="CONT_GEN_Chest_Rich_A_000" />
+					<attribute id="TemplateName" type="FixedString" value="51446e33-fea9-4166-9b7e-74b8e3fc9809" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="_OriginalFileVersion_" type="int64" value="144115207403209032" />
+					<children>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="Exploration_Major" />
+								</node>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="MOO_SecretStudyTreasure_Chest" />
+								</node>
+							</children>
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object">
+											<attribute id="MapKey" type="FixedString" value="CRE_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="e98c019e-02ac-a69c-9503-5c6506de1e65" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="6d5143cd-48e9-172b-7450-d36505ec2b76" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="Transform">
+							<attribute id="Position" type="fvec3" value="-84.40193 65.308495 -118.65124" />
+							<attribute id="RotationQuat" type="fvec4" value="0.0044551915 0.64424765 -0.23158221 0.728899" />
+							<attribute id="Scale" type="float" value="1" />
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

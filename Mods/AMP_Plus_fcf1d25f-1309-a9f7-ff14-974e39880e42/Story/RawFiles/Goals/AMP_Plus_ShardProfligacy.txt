@@ -1,0 +1,65 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+IsBoss(_Char, 1)
+AND
+NOT DB_AMP_Plus_ShardProfligacy_Combat(_CombatID)
+THEN
+DB_AMP_Plus_ShardProfligacy_Combat(_CombatID);
+PROC_AMP_Plus_ShardProfligacy_Sweep(_CombatID);
+
+PROC
+PROC_AMP_Plus_ShardProfligacy_Sweep((GUIDSTRING)_CombatID)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+HasActiveStatus(_Player, "AMP_SHARD_CHAR_PROFLIGACY", 1)
+AND
+CombatGetGuidFor(_Player, _CombatID)
+AND
+NOT DB_AMP_Plus_ShardProfligacy_Filled(_Player, _CombatID)
+THEN
+DB_AMP_Plus_ShardProfligacy_Filled((CHARACTER)_Player, (GUIDSTRING)_CombatID);
+ApplyStatus(_Player, "AMP_SHARD_PROFLIGACY_FILL", 0.0, 1, _Player);
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_ShardProfligacy_Combat(_CombatID)
+AND
+HasActiveStatus(_Char, "AMP_SHARD_CHAR_PROFLIGACY", 1)
+AND
+NOT DB_AMP_Plus_ShardProfligacy_Filled(_Char, _CombatID)
+THEN
+DB_AMP_Plus_ShardProfligacy_Filled((CHARACTER)_Char, (GUIDSTRING)_CombatID);
+ApplyStatus(_Char, "AMP_SHARD_PROFLIGACY_FILL", 0.0, 1, _Char);
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_ShardProfligacy_DrainFilled(_CombatID);
+
+PROC
+PROC_AMP_Plus_ShardProfligacy_DrainFilled((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_ShardProfligacy_Filled((CHARACTER)_Char, _CombatID)
+THEN
+NOT DB_AMP_Plus_ShardProfligacy_Filled(_Char, _CombatID);
+ApplyStatus(_Char, "AMP_SHARD_PROFLIGACY_DRAIN", 0.0, 1, _Char);
+PROC_AMP_Plus_ShardProfligacy_DrainFilled(_CombatID);
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_ShardProfligacy_Combat(_CombatID)
+THEN
+NOT DB_AMP_Plus_ShardProfligacy_Combat(_CombatID);
+
+EXITSECTION
+ENDEXITSECTION

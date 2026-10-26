@@ -1,0 +1,161 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// only a boss whose support trigger fired but spawn was blocked is queued for the camp ambush
+// otherwise every IsBoss death would ambush the camp, vanilla story bosses included
+
+// persistent, unlike the base per-fight flag. mob == boss is a standalone pursuer, skipped
+IF
+DB_AMP_Plus_UltraMob((CHARACTER)_Mob, (CHARACTER)_Boss)
+AND
+NOT _Mob == _Boss
+AND
+NOT DB_AMP_Plus_UltraDidSpawn(_Boss)
+THEN
+DB_AMP_Plus_UltraDidSpawn(_Boss);
+
+// overlay only goes on tracked enemy bosses, never allies
+IF
+StatusApplied((CHARACTER)_Boss, "AMP_ULTRA_BOSS_OVERLAY", _, _)
+AND
+NOT DB_AMP_Plus_UltraBossSeen(_Boss)
+THEN
+DB_AMP_Plus_UltraBossSeen(_Boss);
+
+IF
+StatusApplied((CHARACTER)_Boss, "AMP_PLUS_MIRROR_TRIGGER", _, _)
+AND
+NOT DB_AMP_Plus_UltraTriggered(_Boss)
+THEN
+DB_AMP_Plus_UltraTriggered(_Boss);
+
+IF
+Died((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_UltraBossSeen(_Boss)
+AND
+DB_AMP_Plus_UltraTriggered(_Boss)
+AND
+NOT DB_AMP_Plus_UltraDidSpawn(_Boss)
+AND
+NOT DB_AMP_Plus_UltraPending(_Boss)
+THEN
+DB_AMP_Plus_UltraPending(_Boss);
+
+// the lock gives one roll per rest even with several fights pending
+IF
+LongRestFinished()
+AND
+DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_Plus_UltraPending((CHARACTER)_Boss)
+AND
+NOT DB_AMP_Plus_UltraRestLock(1)
+THEN
+DB_AMP_Plus_UltraRestLock(1);
+PROC_AMP_Plus_UltraRest_Roll(_Boss);
+
+IF
+LongRestStarted()
+AND
+DB_AMP_Plus_UltraRestLock(1)
+THEN
+NOT DB_AMP_Plus_UltraRestLock(1);
+
+PROC
+PROC_AMP_Plus_UltraRest_Roll((CHARACTER)_Boss)
+AND
+Random(100, (INTEGER)_Roll)
+AND
+DB_AMP_Plus_SpawnIntensity_Freq((INTEGER)_Tier)
+AND
+DB_AMP_Plus_RestChanceByTier(_Tier, (INTEGER)_Chance)
+AND
+_Roll < _Chance
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+NOT DB_AMP_Plus_UltraPending(_Boss);
+DB_AMP_Plus_UltraRestOwed(1);
+PROC_AMP_Plus_UltraRestArm(_Host);
+
+// camp holds the quest givers, so the ambush arms a timer and lands only once the party is out
+// re-arm is unconditional, the owed record cannot tell a live timer from a dropped one
+PROC
+PROC_AMP_Plus_UltraRestArm((CHARACTER)_Host)
+AND
+Random(60000, (INTEGER)_R)
+AND
+IntegerSum(_R, 30000, (INTEGER)_MS)
+THEN
+ObjectTimerCancel(_Host, "AMP_Plus_UltraRestAmbush");
+ObjectTimerLaunch(_Host, "AMP_Plus_UltraRestAmbush", _MS, 0);
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_Plus_UltraRestAmbush")
+AND
+GetHostCharacter(_Host)
+AND
+DB_AMP_Plus_UltraRestOwed(1)
+AND
+NOT QRY_AMP_Plus_CampGuard()
+AND
+IsDead(_Host, 0)
+AND
+GetPosition(_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_Size)
+AND
+_Size > 0
+THEN
+NOT DB_AMP_Plus_UltraRestOwed(1);
+PROC_AMP_Plus_UltraSpawnSized(_Host, _HX, _HY, _HZ);
+PROC_AMP_Plus_ChaseMarkSync(_Host);
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_Plus_UltraRestAmbush")
+AND
+GetHostCharacter(_Host)
+AND
+DB_AMP_Plus_UltraRestOwed(1)
+AND
+QRY_AMP_Plus_CampGuard()
+THEN
+PROC_AMP_Plus_UltraRestArm(_Host);
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_Plus_UltraRestAmbush")
+AND
+GetHostCharacter(_Host)
+AND
+DB_AMP_Plus_UltraRestOwed(1)
+AND
+IsDead(_Host, 1)
+THEN
+PROC_AMP_Plus_UltraRestArm(_Host);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Plus_UltraRestOwed(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+PROC_AMP_Plus_UltraRestArm(_Host);
+
+IF
+SavegameLoaded()
+AND
+DB_AMP_Plus_UltraRestOwed(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+PROC_AMP_Plus_UltraRestArm(_Host);
+
+// batch size comes from AMP_Plus_UltraBossCount.txt, camp state from AMP_Plus_CampSafeZone.txt
+
+EXITSECTION
+ENDEXITSECTION

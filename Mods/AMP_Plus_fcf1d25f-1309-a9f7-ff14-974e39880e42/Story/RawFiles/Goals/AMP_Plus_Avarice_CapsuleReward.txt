@@ -1,0 +1,220 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// thematic capsules listed twice for double weight, the third column only tells the copies apart
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_AvaCapPoolVer(2)
+THEN
+PROC_AMP_Plus_AvaCapPoolReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_AvaCapPoolVer(2)
+THEN
+PROC_AMP_Plus_AvaCapPoolReseed();
+
+PROC
+PROC_AMP_Plus_AvaCapPoolReseed()
+AND
+DB_AMP_Plus_AvaCapPoolVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_AvaCapPoolVer(_Old);
+
+PROC
+PROC_AMP_Plus_AvaCapPoolReseed()
+THEN
+PROC_AMP_Plus_AvaCap_DrainPool();
+
+PROC
+PROC_AMP_Plus_AvaCapPoolReseed()
+THEN
+DB_AMP_Plus_AvaCapPoolVer(2);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Generic_VoidCapsule_bb84619f-7c56-4a1d-aa8a-d5f0a33ea620, "Generic", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Hat_VoidCapsule_98bdbe88-d3ea-493d-a803-9cc6bcf0b200, "Hat", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Cloak_VoidCapsule_2e11382e-7156-424f-b6cb-4d856db392b5, "Cloak", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Cloth_VoidCapsule_a9b47da1-7857-4a91-bdc0-845ecf092b83, "Cloth", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Armor_VoidCapsule_15564fed-94e5-4541-a8d6-0ab7fb588439, "Armor", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Shield_VoidCapsule_45538e4d-9d80-42c8-b879-d2aaca220651, "Shield", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Glove_VoidCapsule_f6b3a6af-5168-4408-b463-07814f26e3a5, "Glove", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Boot_VoidCapsule_3750f2b0-8888-498f-ac15-c71af93f973f, "Boot", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Amulet_VoidCapsule_27eeca56-5e80-47b3-8a64-aca99f4e5da4, "Amulet", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Ring_VoidCapsule_8ee480e7-b5f2-4c5f-9b22-9a4b1289508a, "Ring", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_1H_VoidCapsule_0dc57310-fb72-43e5-a61b-caf1a3a8bbd3, "1H", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_2H_VoidCapsule_dd892a12-a733-49a0-bec5-cac418bafe79, "2H", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Swamp_VoidCapsule_9cc7c34c-568d-43e3-9032-ff2409d3d1b2, "Swamp", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Swamp_VoidCapsule_9cc7c34c-568d-43e3-9032-ff2409d3d1b2, "Swamp", 2);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Aquatic_VoidCapsule_ca6c58a9-d0f4-4df4-bdb8-93538a248547, "Aquatic", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Aquatic_VoidCapsule_ca6c58a9-d0f4-4df4-bdb8-93538a248547, "Aquatic", 2);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Shadowfell_VoidCapsule_091d95c0-2bf0-4f6e-9a04-7c49e7fe1bd9, "Shadowfell", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Shadowfell_VoidCapsule_091d95c0-2bf0-4f6e-9a04-7c49e7fe1bd9, "Shadowfell", 2);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Arcane_VoidCapsule_79ecd0e9-e036-46f0-8d3e-2f6f3c30d28c, "Arcane", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Arcane_VoidCapsule_79ecd0e9-e036-46f0-8d3e-2f6f3c30d28c, "Arcane", 2);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Celestial_VoidCapsule_9ccff182-c01b-4256-93d8-f0d0e794b02a, "Celestial", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Celestial_VoidCapsule_9ccff182-c01b-4256-93d8-f0d0e794b02a, "Celestial", 2);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Nature_VoidCapsule_86da09ce-d855-47a6-a30e-2d0ced02bb5c, "Nature", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Nature_VoidCapsule_86da09ce-d855-47a6-a30e-2d0ced02bb5c, "Nature", 2);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Destructive_VoidCapsule_cbd3e5d5-79a3-4e96-8db7-0d59f51e9261, "Destructive", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Destructive_VoidCapsule_cbd3e5d5-79a3-4e96-8db7-0d59f51e9261, "Destructive", 2);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_War_VoidCapsule_ec91ffb2-182b-49db-82b6-f311d63d1363, "War", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_War_VoidCapsule_ec91ffb2-182b-49db-82b6-f311d63d1363, "War", 2);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Psionic_VoidCapsule_758e8cab-c712-4068-8fd1-94dbda0f484d, "Psionic", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Psionic_VoidCapsule_758e8cab-c712-4068-8fd1-94dbda0f484d, "Psionic", 2);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Primal_VoidCapsule_d75c3820-2d6b-4355-8e0d-70af3570399c, "Primal", 1);
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)AMP_Primal_VoidCapsule_d75c3820-2d6b-4355-8e0d-70af3570399c, "Primal", 2);
+
+PROC
+PROC_AMP_Plus_AvaCap_DrainPool()
+AND
+DB_AMP_Plus_AvaCap_Pool((ITEMROOT)_A, (STRING)_B, (INTEGER)_C)
+THEN
+NOT DB_AMP_Plus_AvaCap_Pool(_A, _B, _C);
+PROC_AMP_Plus_AvaCap_DrainPool();
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_Players(_Char)
+AND
+NOT DB_AMP_Plus_AvaCap_PartyCombat(_CombatID)
+THEN
+DB_AMP_Plus_AvaCap_PartyCombat(_CombatID);
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+IsBoss(_Char, 1)
+AND
+NOT DB_AMP_Plus_AvaCap_BossCombat(_CombatID)
+THEN
+DB_AMP_Plus_AvaCap_BossCombat(_CombatID);
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_AvaCap_PartyCombat(_CombatID)
+AND
+DB_AMP_Plus_AvaCap_BossCombat(_CombatID)
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+HasAppliedStatus(_Host, "AMP_PLUS_AVARICE_REWARD_CD", 0)
+AND
+Random(100, (INTEGER)_Roll)
+AND
+DB_AMP_Plus_AvaCap_BossPct((INTEGER)_Pct)
+AND
+_Roll < _Pct
+AND
+Random(2, (INTEGER)_Extra)
+THEN
+PROC_AMP_Plus_AvaCap_ApplyCDAll();
+PROC_AMP_Plus_AvaCap_GrantOne(_Host);
+PROC_AMP_Plus_AvaCap_GrantExtra(_Host, _Extra);
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_AvaCap_PartyCombat(_CombatID)
+AND
+NOT DB_AMP_Plus_AvaCap_BossCombat(_CombatID)
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+HasAppliedStatus(_Host, "AMP_PLUS_AVARICE_REWARD_CD", 0)
+AND
+Random(100, (INTEGER)_Roll)
+AND
+DB_AMP_Plus_AvaCap_MobPct((INTEGER)_Pct)
+AND
+_Roll < _Pct
+THEN
+PROC_AMP_Plus_AvaCap_ApplyCDAll();
+PROC_AMP_Plus_AvaCap_GrantOne(_Host);
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_AvaCap_PartyCombat(_CombatID)
+THEN
+NOT DB_AMP_Plus_AvaCap_PartyCombat(_CombatID);
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_AvaCap_BossCombat(_CombatID)
+THEN
+NOT DB_AMP_Plus_AvaCap_BossCombat(_CombatID);
+
+PROC
+PROC_AMP_Plus_AvaCap_GrantOne((CHARACTER)_Host)
+AND
+QRY_GetRandom("DB_AMP_Plus_AvaCap_Pool", 3, "DB_AMP_Plus_AvaCap_Pick")
+AND
+DB_AMP_Plus_AvaCap_Pick((ITEMROOT)_Template, (STRING)_Type, (INTEGER)_Idx)
+THEN
+NOT DB_AMP_Plus_AvaCap_Pick(_Template, _Type, _Idx);
+TemplateAddTo(_Template, _Host, 1, 1);
+
+PROC
+PROC_AMP_Plus_AvaCap_GrantExtra((CHARACTER)_Host, (INTEGER)_Extra)
+AND
+_Extra == 1
+THEN
+PROC_AMP_Plus_AvaCap_GrantOne(_Host);
+
+// marker goes on every player, the host included, since the gate reads the host
+PROC
+PROC_AMP_Plus_AvaCap_ApplyCDAll()
+AND
+DB_Players((CHARACTER)_P)
+THEN
+ApplyStatus(_P, "AMP_PLUS_AVARICE_REWARD_CD", 1800.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// cooldown is the status itself. Never re-arm it on load, statuses are not restored yet and every load would grant a fresh one
+
+PROC
+PROC_AMP_Plus_AvaCap_SetOdds((INTEGER)_Mob, (INTEGER)_Boss)
+AND
+DB_AMP_Plus_AvaCap_MobPct((INTEGER)_OldMob)
+AND
+DB_AMP_Plus_AvaCap_BossPct((INTEGER)_OldBoss)
+THEN
+NOT DB_AMP_Plus_AvaCap_MobPct(_OldMob);
+NOT DB_AMP_Plus_AvaCap_BossPct(_OldBoss);
+DB_AMP_Plus_AvaCap_MobPct(_Mob);
+DB_AMP_Plus_AvaCap_BossPct(_Boss);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_AvaCap_MobPct(_)
+THEN
+DB_AMP_Plus_AvaCap_MobPct(40);
+DB_AMP_Plus_AvaCap_BossPct(60);
+
+IF
+DB_AMP_GameMode("CASUAL")
+THEN
+PROC_AMP_Plus_AvaCap_SetOdds(50, 75);
+
+IF
+DB_AMP_GameMode("NORMAL")
+THEN
+PROC_AMP_Plus_AvaCap_SetOdds(40, 60);
+
+IF
+DB_AMP_GameMode("HARD")
+THEN
+PROC_AMP_Plus_AvaCap_SetOdds(25, 50);
+
+EXITSECTION
+ENDEXITSECTION

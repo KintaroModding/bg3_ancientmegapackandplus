@@ -1,0 +1,14 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+DB_AMP_Plus_UltraMob((CHARACTER)_Mob, _)
+THEN
+ApplyStatus(_Mob, "AMP_PLUS_ULTRA_SHADOWWARD", -1.0, 1, _Mob);
+
+EXITSECTION
+
+ENDEXITSECTION

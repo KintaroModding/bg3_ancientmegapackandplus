@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="d791e0fe-a999-4649-a3c6-df9f7b972d29" />
+					<attribute id="Name" type="LSString" value="AMP_Arcanizer_Shard_Generic" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="67131136-f11d-4b27-9017-23162629310d" />
+					<attribute id="VisualTemplate" type="FixedString" value="de5d88cb-4eaa-ee8e-c275-ee8a2091f0e0" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="2e049219-67e8-d46c-3471-a79ff82f9c8d" />
+					<attribute id="DisplayName" type="TranslatedString" handle="hace25014g4291g32eag6fb3g4d011fd087f8" version="2" />
+					<attribute id="Icon" type="FixedString" value="AMP_Arcanizer_Shard_Generic" />
+					<attribute id="Stats" type="FixedString" value="AMP_Arcanizer_Shard_Generic" />
+					<attribute id="OnUseDescription" type="TranslatedString" handle="h18b714abg9576gda2bga61fg9d3a77b131ba" version="2" />
+					<attribute id="ImpactSound" type="FixedString" value="5290a2da-7af9-dc1e-c32f-64df15f74a4c" />
+					<attribute id="InventoryMoveSound" type="FixedString" value="7f06581c-2518-4a88-84f1-23e95feb2d81" />
+					<attribute id="DropSound" type="FixedString" value="7f06581c-2518-4a88-84f1-23e95feb2d81" />
+					<attribute id="PickupSound" type="FixedString" value="7aeac0fb-c070-4448-87c0-5275eb9d4b58" />
+					<attribute id="Description" type="TranslatedString" handle="h7d7e33ffg2b58g32bdgae22g5c83506beffe" version="2" />
+					<children>
+						<node id="OnUsePeaceActions">
+							<children>
+								<node id="Action">
+									<attribute id="ActionType" type="int32" value="8" />
+									<children>
+										<node id="Attributes">
+											<attribute id="Animation" type="FixedString" value="" />
+											<attribute id="Conditions" type="LSString" value="" />
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="StatusList" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

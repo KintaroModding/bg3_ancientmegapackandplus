@@ -1,0 +1,102 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// boss tag -> coin template, count
+// act 1
+DB_AMP_BossCoins("AMP_Boss_Zhalk", (ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b, 1);
+DB_AMP_BossCoins("AMP_Boss_Owlbear", (ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b, 1);
+DB_AMP_BossCoins("AMP_Boss_PhaseSpider", (ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b, 1);
+DB_AMP_BossCoins("AMP_Boss_PriestessGut", (ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b, 1);
+DB_AMP_BossCoins("AMP_Boss_Kagha", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 1);
+DB_AMP_BossCoins("AMP_Boss_DrorRagzlin", (ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b, 1);
+DB_AMP_BossCoins("AMP_Boss_Minthara", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 1);
+DB_AMP_BossCoins("AMP_Boss_Ethel", (ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b, 5);
+DB_AMP_BossCoins("AMP_Boss_Spectator", (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, 1);
+DB_AMP_BossCoins("AMP_Boss_Wargaz", (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, 1);
+
+// act 2
+DB_AMP_BossCoins("AMP_Boss_ShamblingMound", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 2);
+DB_AMP_BossCoins("AMP_Boss_Gerringothe", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 2);
+DB_AMP_BossCoins("AMP_Boss_MalusThorm", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 2);
+DB_AMP_BossCoins("AMP_Boss_Thisobald", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 2);
+DB_AMP_BossCoins("AMP_Boss_Balthazar", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 2);
+DB_AMP_BossCoins("AMP_Boss_Yurgir", (ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1, 1);
+DB_AMP_BossCoins("AMP_Boss_Nightsong", (ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1, 1);
+DB_AMP_BossCoins("AMP_Boss_Ketheric", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 5);
+
+// act 3
+DB_AMP_BossCoins("AMP_Boss_Orin", (ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1, 1);
+DB_AMP_BossCoins("AMP_Boss_Gortash", (ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1, 1);
+DB_AMP_BossCoins("AMP_Boss_Cazador", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 5);
+DB_AMP_BossCoins("AMP_Boss_Sarevok", (ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1, 1);
+DB_AMP_BossCoins("AMP_Boss_Viconia", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 5);
+DB_AMP_BossCoins("AMP_Boss_Lorroakan", (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, 1);
+DB_AMP_BossCoins("AMP_Boss_Ansur", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 5);
+DB_AMP_BossCoins("AMP_Boss_Raphael", (ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1, 1);
+
+// generous-loot variants - same coins, bossrewards swaps to the _Generous tag so mirror it here
+// act 1
+DB_AMP_BossCoins("AMP_Boss_Zhalk_Generous", (ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b, 1);
+DB_AMP_BossCoins("AMP_Boss_Owlbear_Generous", (ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b, 1);
+DB_AMP_BossCoins("AMP_Boss_PhaseSpider_Generous", (ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b, 1);
+DB_AMP_BossCoins("AMP_Boss_PriestessGut_Generous", (ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b, 1);
+DB_AMP_BossCoins("AMP_Boss_Kagha_Generous", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 1);
+DB_AMP_BossCoins("AMP_Boss_DrorRagzlin_Generous", (ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b, 1);
+DB_AMP_BossCoins("AMP_Boss_Minthara_Generous", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 1);
+DB_AMP_BossCoins("AMP_Boss_Ethel_Generous", (ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b, 5);
+DB_AMP_BossCoins("AMP_Boss_Spectator_Generous", (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, 1);
+DB_AMP_BossCoins("AMP_Boss_Wargaz_Generous", (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, 1);
+
+// act 2
+DB_AMP_BossCoins("AMP_Boss_ShamblingMound_Generous", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 2);
+DB_AMP_BossCoins("AMP_Boss_Gerringothe_Generous", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 2);
+DB_AMP_BossCoins("AMP_Boss_MalusThorm_Generous", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 2);
+DB_AMP_BossCoins("AMP_Boss_Thisobald_Generous", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 2);
+DB_AMP_BossCoins("AMP_Boss_Balthazar_Generous", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 2);
+DB_AMP_BossCoins("AMP_Boss_Yurgir_Generous", (ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1, 1);
+DB_AMP_BossCoins("AMP_Boss_Nightsong_Generous", (ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1, 1);
+DB_AMP_BossCoins("AMP_Boss_Ketheric_Generous", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 5);
+
+// act 3
+DB_AMP_BossCoins("AMP_Boss_Orin_Generous", (ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1, 1);
+DB_AMP_BossCoins("AMP_Boss_Gortash_Generous", (ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1, 1);
+DB_AMP_BossCoins("AMP_Boss_Cazador_Generous", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 5);
+DB_AMP_BossCoins("AMP_Boss_Sarevok_Generous", (ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1, 1);
+DB_AMP_BossCoins("AMP_Boss_Viconia_Generous", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 5);
+DB_AMP_BossCoins("AMP_Boss_Lorroakan_Generous", (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, 1);
+DB_AMP_BossCoins("AMP_Boss_Ansur_Generous", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 5);
+DB_AMP_BossCoins("AMP_Boss_Raphael_Generous", (ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1, 1);
+
+KBSECTION
+
+// main rule - hooks the bossrewards questupdate event
+IF
+QuestUpdateUnlocked((CHARACTER)_Player, "HIDDEN_WLD_Boosters", (STRING)_BossTag)
+AND
+DB_AMP_GameMode("CASUAL")
+AND
+DB_AMP_BossCoins(_BossTag, (ITEMROOT)_CoinTemplate, (INTEGER)_Count)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsCharacter(_Host, 1)
+THEN
+TemplateAddTo(_CoinTemplate, _Host, _Count, 0);
+
+// grym has no questupdate in bossrewards, hook his death directly
+IF
+Died(S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255)
+AND
+DB_AMP_GameMode("CASUAL")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsCharacter(_Host, 1)
+AND
+QRY_OnlyOnce("AMP_BossCoins_Grym")
+THEN
+TemplateAddTo((ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b, _Host, 1, 0);
+
+EXITSECTION
+ENDEXITSECTION

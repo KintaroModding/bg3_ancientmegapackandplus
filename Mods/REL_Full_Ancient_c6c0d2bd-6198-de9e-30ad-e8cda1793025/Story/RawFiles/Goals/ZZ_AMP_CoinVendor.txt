@@ -1,0 +1,87 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// coin vendor - buy planar coins for gold. button -> check gold -> give coin or error.
+
+// db_amp_coinvendor_button(button, cointemplate, price)
+DB_AMP_CoinVendor_Button((ITEM)AMP_Button_Coin_000_f7497b12-acd3-447d-9a55-9ed14f89cdeb, (ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b, 300);
+DB_AMP_CoinVendor_Button((ITEM)AMP_Button_Coin_001_c6605a15-bbd2-46ec-bb73-5b39f0ba15a6, (ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b, 300);
+DB_AMP_CoinVendor_Button((ITEM)AMP_Button_Coin_001_771681aa-9afa-4f9a-8fd5-25d423e15568, (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 1250);
+DB_AMP_CoinVendor_Button((ITEM)AMP_Button_Coin_000_a1f19206-131c-416c-aab8-b175432d037a, (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, 6400);
+DB_AMP_CoinVendor_Button((ITEM)AMP_Button_Coin_000_683f47de-2785-41e3-8402-f89c80b9624b, (ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1, 19000);
+
+KBSECTION
+// first use - show tutorial + mark player ready
+
+IF
+UseStarted((CHARACTER)_Player, (ITEM)_Button)
+AND
+DB_AMP_CoinVendor_Button(_Button, _, _)
+AND
+NOT DB_AMP_CoinVendor_Ready(_Player)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+DB_AMP_CoinVendor_Ready(_Player);
+PROC_AMP_CoinVendor_ShowTutorial(_Player);
+
+// mode 0: always show, no flag tracking
+PROC
+PROC_AMP_CoinVendor_ShowTutorial((CHARACTER)_Player)
+AND
+DB_AMP_Hints_Mode(0)
+AND
+QRY_AMP_ShouldShowHint(2)
+THEN
+OpenMessageBox(_Player, "AMP_Settings016");
+
+// modes 1/3/4: show once, track with flag
+PROC
+PROC_AMP_CoinVendor_ShowTutorial((CHARACTER)_Player)
+AND
+NOT DB_AMP_Hints_Mode(0)
+AND
+NOT DB_AMP_Tutorial_Shown(_Player, "CoinVendorFirst")
+AND
+QRY_AMP_ShouldShowHint(2)
+THEN
+OpenMessageBox(_Player, "AMP_Settings016");
+DB_AMP_Tutorial_Shown((CHARACTER)_Player, "CoinVendorFirst");
+
+// button handler
+
+// success - enough gold (personal, not magic pockets)
+IF
+UseStarted((CHARACTER)_Player, (ITEM)_Button)
+AND
+DB_AMP_CoinVendor_Button(_Button, _CoinTemplate, _Price)
+AND
+DB_AMP_CoinVendor_Ready(_Player)
+AND
+GetGold(_Player, _Gold)
+AND
+_Gold >= _Price
+AND
+IntegerProduct(_Price, -1, _MinusPrice)
+THEN
+AddGold(_Player, _MinusPrice);
+TemplateAddTo(_CoinTemplate, _Player, 1, 1);
+PlaySound(_Player, "CrSpell_Cast_MagicClub");
+
+// not enough gold
+IF
+UseStarted((CHARACTER)_Player, (ITEM)_Button)
+AND
+DB_AMP_CoinVendor_Button(_Button, _, _Price)
+AND
+DB_AMP_CoinVendor_Ready(_Player)
+AND
+GetGold(_Player, _Gold)
+AND
+_Gold < _Price
+THEN
+PlaySound(_Player, "UI_HUD_Combine_Error");
+
+EXITSECTION
+
+ENDEXITSECTION

@@ -1,0 +1,239 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// tech status -> tier
+DB_AMP_ShamanRobe_Tech("ARMOURC28_TECH_1", 1);
+DB_AMP_ShamanRobe_Tech("ARMOURC28_TECH_2", 2);
+DB_AMP_ShamanRobe_Tech("ARMOURC28_TECH_3", 3);
+DB_AMP_ShamanRobe_Tech("ARMOURC28_TECH_4", 4);
+
+// tier -> ws bonus statuses
+DB_AMP_ShamanRobe_WSBonus(1, "ARMOURC28_WS_LIGHTNING_1", "ARMOURC28_WS_CRIT_1", "ARMOURC28_THP_1");
+DB_AMP_ShamanRobe_WSBonus(2, "ARMOURC28_WS_LIGHTNING_2", "ARMOURC28_WS_CRIT_2", "ARMOURC28_THP_2");
+DB_AMP_ShamanRobe_WSBonus(3, "ARMOURC28_WS_LIGHTNING_3", "ARMOURC28_WS_CRIT_3", "ARMOURC28_THP_3");
+DB_AMP_ShamanRobe_WSBonus(4, "ARMOURC28_WS_LIGHTNING_4", "ARMOURC28_WS_CRIT_4", "ARMOURC28_THP_4");
+
+// totem spirit passives
+DB_AMP_TotemSpirit("TotemSpirit_Bear");
+DB_AMP_TotemSpirit("TotemSpirit_Eagle");
+DB_AMP_TotemSpirit("TotemSpirit_Elk");
+DB_AMP_TotemSpirit("TotemSpirit_Tiger");
+DB_AMP_TotemSpirit("TotemSpirit_Wolf");
+
+KBSECTION
+
+// equip: tech status applied -> track robe
+IF
+StatusApplied(_Char, _Status, _, _)
+AND
+DB_AMP_ShamanRobe_Tech(_Status, _Tier)
+THEN
+DB_AMP_ShamanRobe_Equipped(_Char, _Tier);
+
+// cache totem on wearer: class passives don't carry into wildshape, so the
+// crit gate reads this flag instead of HasPassive on the beast
+IF
+StatusApplied(_Char, _Status, _, _)
+AND
+DB_AMP_ShamanRobe_Tech(_Status, _Tier)
+AND
+DB_AMP_TotemSpirit(_Totem)
+AND
+HasPassive(_Char, _Totem, 1)
+THEN
+DB_AMP_ShamanRobe_HasTotem((CHARACTER)_Char);
+
+// unequip: tech removed -> delayed check, dodges race with wildshape
+IF
+StatusRemoved(_Char, _Status, _, _)
+AND
+DB_AMP_ShamanRobe_Tech(_Status, _Tier)
+THEN
+ObjectTimerLaunch((GUIDSTRING)_Char, "AMP_ShamanRobe_Unequip_Check", 1000, 0);
+
+// after delay: not in ws and tech gone -> real unequip, clear db
+IF
+ObjectTimerFinished(_Char, "AMP_ShamanRobe_Unequip_Check")
+AND
+DB_AMP_ShamanRobe_Equipped((CHARACTER)_Char, _Tier)
+AND
+HasActiveStatusWithGroup((CHARACTER)_Char, "SG_Polymorph_BeastShape", 0)
+AND
+DB_AMP_ShamanRobe_Tech(_TechStatus, _Tier)
+AND
+HasActiveStatus((CHARACTER)_Char, _TechStatus, 0)
+THEN
+RemoveStatus((CHARACTER)_Char, "ARMOURC28_WS_MARKER");
+NOT DB_AMP_ShamanRobe_Equipped((CHARACTER)_Char, _Tier);
+NOT DB_AMP_ShamanRobe_IsRaging((CHARACTER)_Char);
+NOT DB_AMP_ShamanRobe_HasTotem((CHARACTER)_Char);
+
+// rage tracking: cache rage state in db
+IF
+StatusApplied(_Char, _Status, _, _)
+AND
+DB_AMP_ShamanRobe_Equipped(_Char, _Tier)
+AND
+IsStatusFromGroup(_Status, "SG_Rage", 1)
+THEN
+DB_AMP_ShamanRobe_IsRaging((CHARACTER)_Char);
+
+IF
+StatusRemoved(_Char, _Status, _, _)
+AND
+IsStatusFromGroup(_Status, "SG_Rage", 1)
+AND
+DB_AMP_ShamanRobe_IsRaging((CHARACTER)_Char)
+THEN
+NOT DB_AMP_ShamanRobe_IsRaging((CHARACTER)_Char);
+
+// wildshape enter: marker + conditional bonuses
+IF
+StatusApplied(_Char, _WSStatus, _, _)
+AND
+IsStatusFromGroup(_WSStatus, "SG_Polymorph_BeastShape", 1)
+AND
+DB_AMP_ShamanRobe_Equipped(_Char, _Tier)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_ARCHER_VFX", 0)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_CHALICE_VFX", 0)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_DRAGON_VFX", 0)
+THEN
+ApplyStatus(_Char, "ARMOURC28_WS_MARKER", -1.0, 1, _Char);
+
+// ws enter + raging -> ws lightning (not starry forms)
+IF
+StatusApplied(_Char, _WSStatus, _, _)
+AND
+IsStatusFromGroup(_WSStatus, "SG_Polymorph_BeastShape", 1)
+AND
+DB_AMP_ShamanRobe_Equipped(_Char, _Tier)
+AND
+DB_AMP_ShamanRobe_IsRaging((CHARACTER)_Char)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_ARCHER_VFX", 0)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_CHALICE_VFX", 0)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_DRAGON_VFX", 0)
+AND
+DB_AMP_ShamanRobe_WSBonus(_Tier, _Lightning, _Crit, _Thp)
+THEN
+ApplyStatus(_Char, _Lightning, -1.0, 1, _Char);
+
+// ws enter + totem -> ws crit (not starry forms)
+IF
+StatusApplied(_Char, _WSStatus, _, _)
+AND
+IsStatusFromGroup(_WSStatus, "SG_Polymorph_BeastShape", 1)
+AND
+DB_AMP_ShamanRobe_Equipped(_Char, _Tier)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_ARCHER_VFX", 0)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_CHALICE_VFX", 0)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_STARRY_DRAGON_VFX", 0)
+AND
+DB_AMP_ShamanRobe_HasTotem((CHARACTER)_Char)
+AND
+DB_AMP_ShamanRobe_WSBonus(_Tier, _Lightning, _Crit, _Thp)
+THEN
+ApplyStatus(_Char, _Crit, -1.0, 1, _Char);
+
+// rage on in ws: ws lightning + crit if totem
+IF
+StatusApplied(_Char, _Status, _, _)
+AND
+IsStatusFromGroup(_Status, "SG_Rage", 1)
+AND
+HasActiveStatus(_Char, "ARMOURC28_WS_MARKER", 1)
+AND
+DB_AMP_ShamanRobe_Equipped(_Char, _Tier)
+AND
+DB_AMP_ShamanRobe_WSBonus(_Tier, _Lightning, _Crit, _Thp)
+THEN
+ApplyStatus(_Char, _Lightning, -1.0, 1, _Char);
+
+IF
+StatusApplied(_Char, _Status, _, _)
+AND
+IsStatusFromGroup(_Status, "SG_Rage", 1)
+AND
+HasActiveStatus(_Char, "ARMOURC28_WS_MARKER", 1)
+AND
+DB_AMP_ShamanRobe_Equipped(_Char, _Tier)
+AND
+DB_AMP_ShamanRobe_HasTotem((CHARACTER)_Char)
+AND
+DB_AMP_ShamanRobe_WSBonus(_Tier, _Lightning, _Crit, _Thp)
+THEN
+ApplyStatus(_Char, _Crit, -1.0, 1, _Char);
+
+// rage on (always): thp
+IF
+StatusApplied(_Char, _Status, _, _)
+AND
+IsStatusFromGroup(_Status, "SG_Rage", 1)
+AND
+DB_AMP_ShamanRobe_Equipped(_Char, _Tier)
+AND
+DB_AMP_ShamanRobe_WSBonus(_Tier, _Lightning, _Crit, _Thp)
+THEN
+ApplyStatus(_Char, _Thp, -1.0, 1, _Char);
+
+// rage off in ws: drop ws lightning + crit
+IF
+StatusRemoved(_Char, _Status, _, _)
+AND
+IsStatusFromGroup(_Status, "SG_Rage", 1)
+AND
+HasActiveStatus(_Char, "ARMOURC28_WS_MARKER", 1)
+AND
+DB_AMP_ShamanRobe_Equipped(_Char, _Tier)
+AND
+DB_AMP_ShamanRobe_WSBonus(_Tier, _Lightning, _Crit, _Thp)
+THEN
+RemoveStatus(_Char, _Lightning);
+RemoveStatus(_Char, _Crit);
+
+// wildshape exit: drop bonuses, re-add thp, delayed db check
+IF
+StatusRemoved(_Char, _WSStatus, _, _)
+AND
+IsStatusFromGroup(_WSStatus, "SG_Polymorph_BeastShape", 1)
+AND
+DB_AMP_ShamanRobe_Equipped(_Char, _Tier)
+AND
+DB_AMP_ShamanRobe_WSBonus(_Tier, _Lightning, _Crit, _Thp)
+THEN
+RemoveStatus(_Char, "ARMOURC28_WS_MARKER");
+RemoveStatus(_Char, _Lightning);
+RemoveStatus(_Char, _Crit);
+ApplyStatus(_Char, _Thp, -1.0, 1, _Char);
+ObjectTimerLaunch((GUIDSTRING)_Char, "AMP_ShamanRobe_WSExit_Check", 1000, 0);
+
+// post-ws check: tech gone -> robe removed, clear db
+IF
+ObjectTimerFinished(_Char, "AMP_ShamanRobe_WSExit_Check")
+AND
+DB_AMP_ShamanRobe_Equipped((CHARACTER)_Char, _Tier)
+AND
+DB_AMP_ShamanRobe_Tech(_TechStatus, _Tier)
+AND
+HasActiveStatus((CHARACTER)_Char, _TechStatus, 0)
+AND
+DB_AMP_ShamanRobe_WSBonus(_Tier, _Lightning, _Crit, _Thp)
+THEN
+RemoveStatus((CHARACTER)_Char, "ARMOURC28_WS_MARKER");
+RemoveStatus((CHARACTER)_Char, _Lightning);
+RemoveStatus((CHARACTER)_Char, _Crit);
+NOT DB_AMP_ShamanRobe_Equipped((CHARACTER)_Char, _Tier);
+NOT DB_AMP_ShamanRobe_IsRaging((CHARACTER)_Char);
+NOT DB_AMP_ShamanRobe_HasTotem((CHARACTER)_Char);
+
+EXITSECTION
+ENDEXITSECTION

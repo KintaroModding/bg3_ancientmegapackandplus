@@ -1,0 +1,283 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// base indexes shop pools before this runs, rebuilt at the end
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_ShardTierVer(6)
+THEN
+PROC_AMP_Plus_ShardTierFix();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_ShardTierVer(6)
+THEN
+PROC_AMP_Plus_ShardTierFix();
+
+PROC
+PROC_AMP_Plus_ShardTierFix()
+AND
+DB_AMP_Plus_ShardTierVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_ShardTierVer(_Old);
+
+PROC
+PROC_AMP_Plus_ShardTierFix()
+THEN
+// weapon
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_2_f30e2913-2cc7-49b4-a8e9-597e80ea9ee6, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_2_f30e2913-2cc7-49b4-a8e9-597e80ea9ee6, "SHARDS_2");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_31_f96751fb-f561-4792-8996-5807063832d7, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_31_f96751fb-f561-4792-8996-5807063832d7, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_37_59985e51-6565-46ca-9abc-b96486485507, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_37_59985e51-6565-46ca-9abc-b96486485507, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_38_b8901ba0-e6d0-4cba-ab24-0dbe2b514cc3, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_38_b8901ba0-e6d0-4cba-ab24-0dbe2b514cc3, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_45_441ee3b9-9df9-45cd-bec2-382c64be7e54, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_45_441ee3b9-9df9-45cd-bec2-382c64be7e54, "SHARDS_20");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_50_cf928e93-9594-43b2-8e28-01835ae52881, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_50_cf928e93-9594-43b2-8e28-01835ae52881, "SHARDS_2");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_67_10270d55-9575-4264-8b3a-d727e034028c, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_67_10270d55-9575-4264-8b3a-d727e034028c, "SHARDS_2");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_71_e5d41f31-903f-4f3a-b126-487c250642a5, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_71_e5d41f31-903f-4f3a-b126-487c250642a5, "SHARDS_1");
+
+// mweapon
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_MWeapon_5_da01b87a-d417-4fd0-a65d-818f5e89abd7, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_MWeapon_5_da01b87a-d417-4fd0-a65d-818f5e89abd7, "SHARDS_2");
+
+// armor
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_3_a3d62991-3c30-40b3-8136-25c036363fe8, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_3_a3d62991-3c30-40b3-8136-25c036363fe8, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_5_8f8abcf7-891f-4479-94d5-ffd09d58bad3, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_5_8f8abcf7-891f-4479-94d5-ffd09d58bad3, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_12_3e16c21b-b1d1-4b99-9548-03f28d4deac3, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_12_3e16c21b-b1d1-4b99-9548-03f28d4deac3, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_14_c232e0d1-8866-47ce-8f22-92ae8e0cf114, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_14_c232e0d1-8866-47ce-8f22-92ae8e0cf114, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_16_a00043de-856e-4806-8391-365647268038, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_16_a00043de-856e-4806-8391-365647268038, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_17_e60d4ad7-e78c-4b04-8761-f14e22f6031d, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_17_e60d4ad7-e78c-4b04-8761-f14e22f6031d, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_18_e46285a9-70d3-4b9d-a55c-590625859657, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_18_e46285a9-70d3-4b9d-a55c-590625859657, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_20_e314c18a-dd8c-4245-bebb-d4976c29ebee, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_20_e314c18a-dd8c-4245-bebb-d4976c29ebee, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_21_d3fb2c0c-e569-49c8-b771-429787e802e7, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_21_d3fb2c0c-e569-49c8-b771-429787e802e7, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_22_6f52e98a-2dff-4496-b58e-5d2ba4a312e0, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_22_6f52e98a-2dff-4496-b58e-5d2ba4a312e0, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_24_9d1c60a9-9f1a-4ccf-baeb-de5dca06530c, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_24_9d1c60a9-9f1a-4ccf-baeb-de5dca06530c, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_25_6a9162bc-3fca-4ee6-8497-d90895f5712e, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_25_6a9162bc-3fca-4ee6-8497-d90895f5712e, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_26_29552c4a-7f79-489c-a9d0-f7e304deb146, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_26_29552c4a-7f79-489c-a9d0-f7e304deb146, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_28_fd38ac70-7f82-4eca-9d63-917110824777, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_28_fd38ac70-7f82-4eca-9d63-917110824777, "SHARDS_2");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_35_6435b9a3-4f6e-46a8-819f-b9ad7fb5f9b2, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_35_6435b9a3-4f6e-46a8-819f-b9ad7fb5f9b2, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_36_3e2ab23f-cb47-4678-9df7-7d4cfe38db7b, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_36_3e2ab23f-cb47-4678-9df7-7d4cfe38db7b, "SHARDS_20");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_37_64b87f07-47bc-4fc2-a61f-c0e2d730cd6c, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_37_64b87f07-47bc-4fc2-a61f-c0e2d730cd6c, "SHARDS_2");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_38_94faa72e-eca5-4b3b-93c6-3188a4c00557, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_38_94faa72e-eca5-4b3b-93c6-3188a4c00557, "SHARDS_6");
+
+// head
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_5_1e80ef36-f66c-4dc8-9366-70650a21ce97, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_5_1e80ef36-f66c-4dc8-9366-70650a21ce97, "SHARDS_1");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_6_f4205ae3-db2c-40d5-a6e2-c6ca7f52916e, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_6_f4205ae3-db2c-40d5-a6e2-c6ca7f52916e, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_18_3f237d53-50ea-4cdb-b72e-fb6223e6ea33, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_18_3f237d53-50ea-4cdb-b72e-fb6223e6ea33, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_19_a49f48b1-ae45-4a71-81df-6074bbbd9455, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_19_a49f48b1-ae45-4a71-81df-6074bbbd9455, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_21_57c328f5-5016-435c-9bde-e3828a8b2cc8, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_21_57c328f5-5016-435c-9bde-e3828a8b2cc8, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_22_b00e78b6-4225-491e-bf28-7fffbf64fdaf, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_22_b00e78b6-4225-491e-bf28-7fffbf64fdaf, "SHARDS_2");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_23_2356cba5-4ba4-4363-bc28-982a126159fe, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_23_2356cba5-4ba4-4363-bc28-982a126159fe, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_29_42d4135d-1b26-433b-a1d1-25914f51c651, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_29_42d4135d-1b26-433b-a1d1-25914f51c651, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_55_cb931903-fa54-4661-b0f2-5f07792a8195, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_55_cb931903-fa54-4661-b0f2-5f07792a8195, "SHARDS_20");
+
+// amulet
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_10_9b800d2e-c9fc-41f2-9d11-5c6b3e89a5ac, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_10_9b800d2e-c9fc-41f2-9d11-5c6b3e89a5ac, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_11_da0397ec-691b-4c37-a428-e0fb48a665f9, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_11_da0397ec-691b-4c37-a428-e0fb48a665f9, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_18_9106b353-8980-43cd-b5b1-989863d0e9d8, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_18_9106b353-8980-43cd-b5b1-989863d0e9d8, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_19_dd81fa67-5c9b-4518-a871-166d39e90af7, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_19_dd81fa67-5c9b-4518-a871-166d39e90af7, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_20_84e0da82-c1b6-4233-9751-182f0eab03cb, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_20_84e0da82-c1b6-4233-9751-182f0eab03cb, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_23_bd3ff467-1f19-4bfe-8000-2debfa0e88d2, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_23_bd3ff467-1f19-4bfe-8000-2debfa0e88d2, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_24_37eb40e5-fca7-448f-a6cd-b612fcc6a7ae, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_24_37eb40e5-fca7-448f-a6cd-b612fcc6a7ae, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_26_0cdb9609-e8eb-460b-8dd0-2b8d021c7e8a, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_26_0cdb9609-e8eb-460b-8dd0-2b8d021c7e8a, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_27_3ff8bb8d-f07f-4e2d-8bab-c27051eb6b7b, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_27_3ff8bb8d-f07f-4e2d-8bab-c27051eb6b7b, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_29_d3bec3ee-19a5-40ff-ba01-bc64adf76ac7, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_29_d3bec3ee-19a5-40ff-ba01-bc64adf76ac7, "SHARDS_6");
+
+// ring
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_4_38b04964-19dd-40db-919f-33b7ccb9b279, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_4_38b04964-19dd-40db-919f-33b7ccb9b279, "SHARDS_1");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_16_7e293a3b-66ec-455f-b26a-13463fb56e30, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_16_7e293a3b-66ec-455f-b26a-13463fb56e30, "SHARDS_2");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_20_d5280023-76a7-4e2c-aaf8-c9815b3528a1, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_20_d5280023-76a7-4e2c-aaf8-c9815b3528a1, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_21_981b72b6-4ef3-4301-83a4-abdec5e477ae, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_21_981b72b6-4ef3-4301-83a4-abdec5e477ae, "SHARDS_2");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_22_3b7f418f-0cca-430a-8e1e-df4781e906f9, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_22_3b7f418f-0cca-430a-8e1e-df4781e906f9, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_24_8a9d3ca3-f1fb-4ec9-a80d-a76f175d2091, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_24_8a9d3ca3-f1fb-4ec9-a80d-a76f175d2091, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_25_62f24efd-4ed5-49a2-844c-969056d83818, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_25_62f24efd-4ed5-49a2-844c-969056d83818, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_26_e9ed99c0-5449-456f-abe7-44d13a1aabf2, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_26_e9ed99c0-5449-456f-abe7-44d13a1aabf2, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_28_aa0c4307-b71b-423c-a1ef-6e8e1b25a911, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_28_aa0c4307-b71b-423c-a1ef-6e8e1b25a911, "SHARDS_2");
+
+// gloves
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_1_fa1a14d8-07ad-414f-bf0c-1cb675faa94e, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_1_fa1a14d8-07ad-414f-bf0c-1cb675faa94e, "SHARDS_20");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_8_b95d53db-8ef1-4acc-9383-79ee526ff58d, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_8_b95d53db-8ef1-4acc-9383-79ee526ff58d, "SHARDS_2");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_10_6f2cf524-5515-4472-a01b-335fe116e108, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_10_6f2cf524-5515-4472-a01b-335fe116e108, "SHARDS_1");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_14_95ed2119-926d-4409-ae03-ed1bb66668f6, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_14_95ed2119-926d-4409-ae03-ed1bb66668f6, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_16_8fd0bf29-2839-4fe2-a315-851143f45cfb, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_16_8fd0bf29-2839-4fe2-a315-851143f45cfb, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_21_1d4f48b3-8cbe-4318-bbcc-fccca08505b1, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_21_1d4f48b3-8cbe-4318-bbcc-fccca08505b1, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_24_37aa11b2-0943-490a-99ce-087560d6b199, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_24_37aa11b2-0943-490a-99ce-087560d6b199, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_25_20bed83c-5e1d-48f7-953c-38fab8a12144, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_25_20bed83c-5e1d-48f7-953c-38fab8a12144, "SHARDS_2");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_26_2f03b3c3-dfe9-4720-a72e-bcf55c347807, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_26_2f03b3c3-dfe9-4720-a72e-bcf55c347807, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_27_fa48e82b-5cc8-4165-8400-47dc935e7655, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_27_fa48e82b-5cc8-4165-8400-47dc935e7655, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_28_0019a7ff-347a-4c45-9989-1923a05ae530, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_28_0019a7ff-347a-4c45-9989-1923a05ae530, "SHARDS_6");
+
+// boots
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_9_9e294aa5-364d-494a-b759-0a78c1bf9172, "SHARDS_1");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_9_9e294aa5-364d-494a-b759-0a78c1bf9172, "SHARDS_2");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_10_0911f7cd-1d28-4ae8-aaf9-680e5a9db2c5, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_10_0911f7cd-1d28-4ae8-aaf9-680e5a9db2c5, "SHARDS_20");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_11_53b04fe1-71bf-4381-a4bf-10001d9d316a, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_11_53b04fe1-71bf-4381-a4bf-10001d9d316a, "SHARDS_1");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_13_8f450fa5-f070-4dcf-b97b-bb80b1def888, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_13_8f450fa5-f070-4dcf-b97b-bb80b1def888, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_16_d387b851-1ecd-4245-a8f3-9f96d6d54596, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_16_d387b851-1ecd-4245-a8f3-9f96d6d54596, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_17_599b5b96-24d0-4d52-8dd8-aa1bac44efdf, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_17_599b5b96-24d0-4d52-8dd8-aa1bac44efdf, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_18_f8047d3d-251a-4d28-be95-6f4732b1a3d0, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_18_f8047d3d-251a-4d28-be95-6f4732b1a3d0, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_19_7dbe3427-4c12-4e68-abf0-646f26c2a69d, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_19_7dbe3427-4c12-4e68-abf0-646f26c2a69d, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_20_9b430a34-e640-425f-bb4f-cb49bedb22f2, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_20_9b430a34-e640-425f-bb4f-cb49bedb22f2, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_21_45b262cb-9d98-4891-b206-b1a54cb5d7de, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_21_45b262cb-9d98-4891-b206-b1a54cb5d7de, "SHARDS_6");
+
+// cloak
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_1_3b200ca5-b282-4930-8c6a-d055a068691c, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_1_3b200ca5-b282-4930-8c6a-d055a068691c, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_2_a081971e-2b4f-492a-aba9-da0dcb192c9d, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_2_a081971e-2b4f-492a-aba9-da0dcb192c9d, "SHARDS_2");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_8_b50bc934-173b-45a1-bdba-c22538ff0167, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_8_b50bc934-173b-45a1-bdba-c22538ff0167, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_9_32b1f866-926f-4292-8b00-ff4978df9dbf, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_9_32b1f866-926f-4292-8b00-ff4978df9dbf, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_10_258584e3-b714-4e29-85de-5626c4db46e7, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_10_258584e3-b714-4e29-85de-5626c4db46e7, "SHARDS_2");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_15_2dc52f47-bb62-4bce-8a51-bf3aba1a2ae4, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_15_2dc52f47-bb62-4bce-8a51-bf3aba1a2ae4, "SHARDS_1");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_16_77b4461d-616f-4531-a016-66d787593039, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_16_77b4461d-616f-4531-a016-66d787593039, "SHARDS_1");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_17_9ab6b9ce-d180-4032-9c86-4bb6c2ef6b94, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_17_9ab6b9ce-d180-4032-9c86-4bb6c2ef6b94, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_18_4e70b433-27a3-4290-ae01-0c8673d5433b, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_18_4e70b433-27a3-4290-ae01-0c8673d5433b, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_21_dd00e706-3c06-46b6-b924-0cec64930fae, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_21_dd00e706-3c06-46b6-b924-0cec64930fae, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_22_aee58709-da83-4322-8c29-70ee41ee6742, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_22_aee58709-da83-4322-8c29-70ee41ee6742, "SHARDS_6");
+
+// recovery
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Recovery_1_6d07a9e3-b288-4ec3-86f9-b3360973b879, "SHARDS_20");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Recovery_1_6d07a9e3-b288-4ec3-86f9-b3360973b879, "SHARDS_6");
+
+// damagetype
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Acid_51b26d59-317b-492f-930c-cba1f01afdba, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Acid_51b26d59-317b-492f-930c-cba1f01afdba, "SHARDS_20");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cold_13e45baf-2a4f-4306-bf42-a571c9b2c68e, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cold_13e45baf-2a4f-4306-bf42-a571c9b2c68e, "SHARDS_1");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Fire_b093e9fc-6197-49d0-b70a-601b36753cf3, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Fire_b093e9fc-6197-49d0-b70a-601b36753cf3, "SHARDS_20");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Lightning_afe829dc-6af0-4628-881b-06a2a94fe536, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Lightning_afe829dc-6af0-4628-881b-06a2a94fe536, "SHARDS_1");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Necrotic_63f7f014-d3c2-4ad6-bac0-4f58e139a912, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Necrotic_63f7f014-d3c2-4ad6-bac0-4f58e139a912, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Poison_7c071afa-674f-4826-ae3c-325983cce6e3, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Poison_7c071afa-674f-4826-ae3c-325983cce6e3, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Radiant_3099279e-52d6-43ef-8671-b82c90a91086, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Radiant_3099279e-52d6-43ef-8671-b82c90a91086, "SHARDS_20");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Thunder_0e943ce0-f937-4a0b-a135-060726086420, "SHARDS_2");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Thunder_0e943ce0-f937-4a0b-a135-060726086420, "SHARDS_6");
+NOT DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_63_3aa75833-a259-423e-8be3-aa1866d06873, "SHARDS_6");
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_63_3aa75833-a259-423e-8be3-aa1866d06873, "SHARDS_2");
+DB_AMP_Plus_ShardTierVer(6);
+
+// gear score cache survives a tier swap, so it is dropped here
+PROC
+PROC_AMP_Plus_ShardTierFix()
+THEN
+PROC_AMP_Plus_ShardTierDrainItemShardW();
+
+PROC
+PROC_AMP_Plus_ShardTierDrainItemShardW()
+AND
+DB_AMP_Plus_GS_ItemShardW((ITEM)_Item, (INTEGER)_W)
+THEN
+NOT DB_AMP_Plus_GS_ItemShardW(_Item, _W);
+PROC_AMP_Plus_ShardTierDrainItemShardW();
+
+PROC
+PROC_AMP_Plus_ShardTierFix()
+THEN
+PROC_AMP_Plus_ShardTierDrainShardAcc();
+
+PROC
+PROC_AMP_Plus_ShardTierDrainShardAcc()
+AND
+DB_AMP_Plus_GS_ShardAcc((ITEM)_Item, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_GS_ShardAcc(_Item, _V);
+PROC_AMP_Plus_ShardTierDrainShardAcc();
+
+PROC
+PROC_AMP_Plus_ShardTierFix()
+THEN
+PROC_ToT_RebuildPools("GENERAL");
+
+EXITSECTION
+ENDEXITSECTION

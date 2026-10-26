@@ -1,0 +1,157 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+DB_AMP_DaggerTemplate((ITEMROOT)WPN_Dagger_r_6393dc4b-2d33-4f18-9573-af8574c0e068);
+DB_AMP_DaggerTemplate((ITEMROOT)WPN_Dagger_e_e0ba6e5e-2b78-4e8d-bf3d-28b0dd445a14);
+DB_AMP_DaggerTemplate((ITEMROOT)WPN_Dagger_l_f0d8e3b3-0ca8-4504-b739-3426421caead);
+
+KBSECTION
+
+// attack a locked container with a dagger equipped. tier from the
+// equipped status on the attacker, t4 > t3 > t2 via NOT guards.
+
+IF
+AttackedBy((ITEM)_Chest, _, (CHARACTER)_Attacker, _, _, _, _)
+AND
+IsLocked(_Chest, 1)
+AND
+HasActiveStatus(_Attacker, "AMP_DAGGER_U_EQUIPPED_T4", 1)
+THEN
+PROC_AMP_Dagger_HandleUnlock(_Attacker, _Chest, 4);
+
+IF
+AttackedBy((ITEM)_Chest, _, (CHARACTER)_Attacker, _, _, _, _)
+AND
+IsLocked(_Chest, 1)
+AND
+HasActiveStatus(_Attacker, "AMP_DAGGER_U_EQUIPPED_T3", 1)
+AND
+NOT HasActiveStatus(_Attacker, "AMP_DAGGER_U_EQUIPPED_T4", 1)
+THEN
+PROC_AMP_Dagger_HandleUnlock(_Attacker, _Chest, 3);
+
+IF
+AttackedBy((ITEM)_Chest, _, (CHARACTER)_Attacker, _, _, _, _)
+AND
+IsLocked(_Chest, 1)
+AND
+HasActiveStatus(_Attacker, "AMP_DAGGER_U_EQUIPPED_T2", 1)
+AND
+NOT HasActiveStatus(_Attacker, "AMP_DAGGER_U_EQUIPPED_T3", 1)
+AND
+NOT HasActiveStatus(_Attacker, "AMP_DAGGER_U_EQUIPPED_T4", 1)
+THEN
+PROC_AMP_Dagger_HandleUnlock(_Attacker, _Chest, 2);
+
+// unlock + open the container, then wear the dagger
+
+PROC
+PROC_AMP_Dagger_HandleUnlock((CHARACTER)_Char, (ITEM)_Chest, (INTEGER)_Limit)
+THEN
+Unlock(_Chest);
+Open(_Chest);
+PlayEffect(_Chest, VFX_Script_IronFlask_Poof_01_e770f08f-38d7-a1a7-91ca-380b3444f834, "", 1.0);
+PROC_AMP_Dagger_ApplyWear(_Char, _Limit);
+
+// wear: main hand if it's a dagger
+
+PROC
+PROC_AMP_Dagger_ApplyWear((CHARACTER)_Char, (INTEGER)_Limit)
+AND
+GetEquippedItem(_Char, "Melee Main Weapon", (ITEM)_MainItem)
+AND
+GetTemplate(_MainItem, (ITEMROOT)_MainTemplate)
+AND
+DB_AMP_DaggerTemplate(_MainTemplate)
+THEN
+ApplyStatus(_MainItem, "AMP_DAGGER_U_USE", -1.0, 1, _Char);
+PROC_AMP_Dagger_Increment(_MainItem, _Limit);
+
+// wear: offhand when main hand isn't a dagger
+
+PROC
+PROC_AMP_Dagger_ApplyWear((CHARACTER)_Char, (INTEGER)_Limit)
+AND
+GetEquippedItem(_Char, "Melee Offhand Weapon", (ITEM)_OffItem)
+AND
+GetTemplate(_OffItem, (ITEMROOT)_OffTemplate)
+AND
+DB_AMP_DaggerTemplate(_OffTemplate)
+AND
+NOT QRY_AMP_Dagger_MainHandIsDagger(_Char)
+THEN
+ApplyStatus(_OffItem, "AMP_DAGGER_U_USE", -1.0, 1, _Char);
+PROC_AMP_Dagger_Increment(_OffItem, _Limit);
+
+// wear: offhand when main hand is empty
+
+PROC
+PROC_AMP_Dagger_ApplyWear((CHARACTER)_Char, (INTEGER)_Limit)
+AND
+NOT QRY_AMP_Dagger_HasMainHandItem(_Char)
+AND
+GetEquippedItem(_Char, "Melee Offhand Weapon", (ITEM)_OffItem)
+AND
+GetTemplate(_OffItem, (ITEMROOT)_OffTemplate)
+AND
+DB_AMP_DaggerTemplate(_OffTemplate)
+THEN
+ApplyStatus(_OffItem, "AMP_DAGGER_U_USE", -1.0, 1, _Char);
+PROC_AMP_Dagger_Increment(_OffItem, _Limit);
+
+QRY
+QRY_AMP_Dagger_MainHandIsDagger((CHARACTER)_Char)
+AND
+GetEquippedItem(_Char, "Melee Main Weapon", (ITEM)_MainItem)
+AND
+GetTemplate(_MainItem, (ITEMROOT)_MainTemplate)
+AND
+DB_AMP_DaggerTemplate(_MainTemplate)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Dagger_HasMainHandItem((CHARACTER)_Char)
+AND
+GetEquippedItem(_Char, "Melee Main Weapon", (ITEM)_MainItem)
+THEN
+DB_NOOP(1);
+
+// counter++
+
+PROC
+PROC_AMP_Dagger_Increment((ITEM)_Dagger, (INTEGER)_Limit)
+AND
+DB_AMP_DaggerUses(_Dagger, (INTEGER)_OldCount)
+AND
+IntegerSum(_OldCount, 1, (INTEGER)_NewCount)
+THEN
+NOT DB_AMP_DaggerUses(_Dagger, _OldCount);
+DB_AMP_DaggerUses(_Dagger, _NewCount);
+PROC_AMP_Dagger_CheckLimit(_Dagger, _NewCount, _Limit);
+
+// counter, first use
+
+PROC
+PROC_AMP_Dagger_Increment((ITEM)_Dagger, (INTEGER)_Limit)
+AND
+NOT DB_AMP_DaggerUses(_Dagger, _)
+THEN
+DB_AMP_DaggerUses(_Dagger, 1);
+PROC_AMP_Dagger_CheckLimit(_Dagger, 1, _Limit);
+
+// hit tier limit -> break the dagger
+
+PROC
+PROC_AMP_Dagger_CheckLimit((ITEM)_Dagger, (INTEGER)_Count, (INTEGER)_Limit)
+AND
+_Count >= _Limit
+THEN
+NOT DB_AMP_DaggerUses(_Dagger, _Count);
+PlayEffect(_Dagger, VFX_Script_IronFlask_Poof_01_e770f08f-38d7-a1a7-91ca-380b3444f834, "", 1.0);
+RequestDelete(_Dagger);
+
+EXITSECTION
+
+ENDEXITSECTION

@@ -1,0 +1,36 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// zephra debug spawn helper, remove before release.
+// se console: oe amp_testspawnzephra / oe amp_testkillzephra
+
+KBSECTION
+
+IF
+TextEvent("AMP_TestSpawnZephra")
+AND
+GetHostCharacter(_Host)
+AND
+GetPosition(_Host, _X, _Y, _Z)
+AND
+RealSum(_Z, 3.0, _SZ)
+AND
+CreateAt((GUIDSTRING)AMP_ULTRA_Summon_07_07bdf760-ed25-4461-9883-beb4938d4127, _X, _Y, _SZ, 0, 1, "", (GUIDSTRING)_Mob)
+THEN
+DB_AMP_Zephra_TestSpawn((CHARACTER)_Mob);
+SetRelationTemporaryHostile((CHARACTER)_Mob, _Host);
+EnterCombat(_Mob, _Host);
+PlayEffect(_Mob, (EFFECTRESOURCE)VFX_Script_DestroyAction_Arcane_Gate_01_cde28800-1d22-76f0-fa45-06a56f7c367b, "Dummy_Root", 1.0);
+PlaySound(_Mob, "END_BrainBattle_FinalDecision_Nested_EvilGale_Portal_Tear");
+
+IF
+TextEvent("AMP_TestKillZephra")
+AND
+DB_AMP_Zephra_TestSpawn((CHARACTER)_Mob)
+THEN
+NOT DB_AMP_Zephra_TestSpawn(_Mob);
+RequestDeleteTemporary(_Mob);
+
+EXITSECTION
+
+ENDEXITSECTION

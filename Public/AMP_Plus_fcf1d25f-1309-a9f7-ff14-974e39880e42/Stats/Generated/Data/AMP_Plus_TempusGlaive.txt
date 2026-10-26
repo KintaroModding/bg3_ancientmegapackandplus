@@ -1,0 +1,5 @@
+new entry "WPN_Glaive_l"
+type "Weapon"
+using "WPN_Glaive_l"
+data "DefaultBoosts" "WeaponEnchantment(3);WeaponProperty(Magical);WeaponDamage(2d6,Lightning)"
+data "Boosts" "Ability(Dexterity,4,24);Resistance(Lightning,Immune)"

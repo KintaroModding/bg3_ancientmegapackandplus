@@ -1,0 +1,44 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// DB_ToT_ItemFreq(ShopID, Category, Template, Weight), weight is relative within the category
+// global category ratio, DB_ToT_CatWeight, lives in the AMP_ToT_Shop.txt init block
+
+// COINS (ratio 100:30:10:1)
+DB_ToT_ItemFreq("GENERAL", "COINS", (ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b, 100);
+DB_ToT_ItemFreq("GENERAL", "COINS", (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, 30);
+DB_ToT_ItemFreq("GENERAL", "COINS", (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, 10);
+DB_ToT_ItemFreq("GENERAL", "COINS", (ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1, 1);
+
+// CAPSULES: thematic weight 2, slotted weight 1
+// Thematic (high rotation)
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_Swamp_VoidCapsule_9cc7c34c-568d-43e3-9032-ff2409d3d1b2, 2);
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_Aquatic_VoidCapsule_ca6c58a9-d0f4-4df4-bdb8-93538a248547, 2);
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_Shadowfell_VoidCapsule_091d95c0-2bf0-4f6e-9a04-7c49e7fe1bd9, 2);
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_Arcane_VoidCapsule_79ecd0e9-e036-46f0-8d3e-2f6f3c30d28c, 2);
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_Celestial_VoidCapsule_9ccff182-c01b-4256-93d8-f0d0e794b02a, 2);
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_Nature_VoidCapsule_86da09ce-d855-47a6-a30e-2d0ced02bb5c, 2);
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_Destructive_VoidCapsule_cbd3e5d5-79a3-4e96-8db7-0d59f51e9261, 2);
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_War_VoidCapsule_ec91ffb2-182b-49db-82b6-f311d63d1363, 2);
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_Psionic_VoidCapsule_758e8cab-c712-4068-8fd1-94dbda0f484d, 2);
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_Primal_VoidCapsule_d75c3820-2d6b-4355-8e0d-70af3570399c, 2);
+// Slotted
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_Generic_VoidCapsule_bb84619f-7c56-4a1d-aa8a-d5f0a33ea620, 1);
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_Hat_VoidCapsule_98bdbe88-d3ea-493d-a803-9cc6bcf0b200, 1);
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_Cloak_VoidCapsule_2e11382e-7156-424f-b6cb-4d856db392b5, 1);
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_Cloth_VoidCapsule_a9b47da1-7857-4a91-bdc0-845ecf092b83, 1);
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_Armor_VoidCapsule_15564fed-94e5-4541-a8d6-0ab7fb588439, 1);
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_Shield_VoidCapsule_45538e4d-9d80-42c8-b879-d2aaca220651, 1);
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_Glove_VoidCapsule_f6b3a6af-5168-4408-b463-07814f26e3a5, 1);
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_Boot_VoidCapsule_3750f2b0-8888-498f-ac15-c71af93f973f, 1);
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_Amulet_VoidCapsule_27eeca56-5e80-47b3-8a64-aca99f4e5da4, 1);
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_Ring_VoidCapsule_8ee480e7-b5f2-4c5f-9b22-9a4b1289508a, 1);
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_1H_VoidCapsule_0dc57310-fb72-43e5-a61b-caf1a3a8bbd3, 1);
+DB_ToT_ItemFreq("GENERAL", "CAPSULES", (ITEMROOT)AMP_2H_VoidCapsule_dd892a12-a733-49a0-bec5-cac418bafe79, 1);
+
+// weight 1 shards come from DB_ToT_ShardReg in the AMP_ToT_Shop.txt core, rows here only for other weights
+
+KBSECTION
+EXITSECTION
+ENDEXITSECTION

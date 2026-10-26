@@ -1,0 +1,97 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// no free turn on the round a champion arrives
+// support spawns only, an ambush pursuer starts its own fight
+
+// keyed on the spawn record, the flag status can lose the race
+
+IF
+EnteredCombat((CHARACTER)_Mob, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_UltraMob(_Mob, _)
+AND
+NOT DB_AMP_Plus_MirrorFresh(_Mob, _)
+THEN
+DB_AMP_Plus_MirrorFresh(_Mob, _CombatID);
+
+IF
+CombatRoundStarted((GUIDSTRING)_CombatID, _)
+THEN
+PROC_AMP_Plus_MirrorFirstTurnDrainFresh(_CombatID);
+
+// turn counters see a turn that never played, MirrorPassed marks it until round end
+
+IF
+TurnStarted((CHARACTER)_Mob)
+AND
+DB_AMP_Plus_MirrorFresh(_Mob, (GUIDSTRING)_CombatID)
+THEN
+NOT DB_AMP_Plus_MirrorFresh(_Mob, _CombatID);
+DB_AMP_Plus_MirrorPassed(_Mob, _CombatID);
+EndTurn(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Plus_MirrorFresh(_Mob, (GUIDSTRING)_CombatID)
+THEN
+NOT DB_AMP_Plus_MirrorFresh(_Mob, _CombatID);
+
+IF
+LeftCombat((CHARACTER)_Mob, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_MirrorFresh(_Mob, _CombatID)
+THEN
+NOT DB_AMP_Plus_MirrorFresh(_Mob, _CombatID);
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_MirrorFirstTurnDrainFresh(_CombatID);
+
+IF
+CombatRoundStarted((GUIDSTRING)_CombatID, _)
+THEN
+PROC_AMP_Plus_MirrorFirstTurnDrainPassed(_CombatID);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Plus_MirrorPassed(_Mob, (GUIDSTRING)_CombatID)
+THEN
+NOT DB_AMP_Plus_MirrorPassed(_Mob, _CombatID);
+
+IF
+LeftCombat((CHARACTER)_Mob, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_MirrorPassed(_Mob, _CombatID)
+THEN
+NOT DB_AMP_Plus_MirrorPassed(_Mob, _CombatID);
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_MirrorFirstTurnDrainPassed(_CombatID);
+
+PROC
+PROC_AMP_Plus_MirrorFirstTurnDrainFresh((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_MirrorFresh((CHARACTER)_Mob, _CombatID)
+THEN
+NOT DB_AMP_Plus_MirrorFresh(_Mob, _CombatID);
+PROC_AMP_Plus_MirrorFirstTurnDrainFresh(_CombatID);
+
+PROC
+PROC_AMP_Plus_MirrorFirstTurnDrainPassed((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_MirrorPassed((CHARACTER)_Mob, _CombatID)
+THEN
+NOT DB_AMP_Plus_MirrorPassed(_Mob, _CombatID);
+PROC_AMP_Plus_MirrorFirstTurnDrainPassed(_CombatID);
+
+EXITSECTION
+ENDEXITSECTION

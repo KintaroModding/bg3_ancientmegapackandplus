@@ -1,0 +1,44 @@
+// tag covers wielders whose race has a humanoid body
+
+new entry "WPN_Mace_Deva"
+type "Weapon"
+using "WPN_Mace_Deva"
+data "UseConditions" "IsNotHumanoid(context.Source) or Tagged('CELESTIAL', context.Source)"
+data "PassivesOnEquip" ""
+
+new entry "WPN_Djinni_Scimitar_PlanarAlly"
+type "Weapon"
+using "WPN_Djinni_Scimitar_PlanarAlly"
+data "UseConditions" "IsNotHumanoid(context.Source) or Tagged('ELEMENTAL', context.Source)"
+data "PassivesOnEquip" ""
+
+new entry "WPN_Club_WoodWoad_Conjure"
+type "Weapon"
+using "WPN_Club_WoodWoad_Conjure"
+data "UseConditions" "IsNotHumanoid(context.Source) or Tagged('PLANT', context.Source)"
+
+new entry "WPN_Flail_Air_Myrmidon_ConjureElemental"
+type "Weapon"
+using "WPN_Flail_Air_Myrmidon_ConjureElemental"
+data "UseConditions" "IsNotHumanoid(context.Source) or Tagged('ELEMENTAL', context.Source)"
+
+new entry "WPN_Scimitar_Fire_Myrmidon_ConjureElemental"
+type "Weapon"
+using "WPN_Scimitar_Fire_Myrmidon_ConjureElemental"
+data "UseConditions" "IsNotHumanoid(context.Source) or Tagged('ELEMENTAL', context.Source)"
+
+new entry "WPN_Trident_Water_Myrmidon_ConjureElemental"
+type "Weapon"
+using "WPN_Trident_Water_Myrmidon_ConjureElemental"
+data "UseConditions" "IsNotHumanoid(context.Source) or Tagged('ELEMENTAL', context.Source)"
+
+new entry "WPN_Glaive_Cambion"
+type "Weapon"
+using "WPN_Glaive_Cambion"
+data "UseConditions" "IsNotHumanoid(context.Source) or Tagged('FIEND', context.Source)"
+
+// lootable AMP variant of the myrmidon trident, parent's gate must not reach it
+new entry "WPN_Trident_Water_Myrmidon_ConjureElemental_AMP"
+type "Weapon"
+using "WPN_Trident_Water_Myrmidon_ConjureElemental_AMP"
+data "UseConditions" ""

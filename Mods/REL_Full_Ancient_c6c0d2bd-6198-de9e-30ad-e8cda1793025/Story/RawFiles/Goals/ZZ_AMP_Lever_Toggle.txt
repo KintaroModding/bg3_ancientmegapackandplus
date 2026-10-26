@@ -1,0 +1,69 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// act 1
+DB_AMP_LeverTree((ITEM)AMP_NewYear_Lever_000_50397625-d2ee-46c6-9d57-66cf1424aab6, (ITEM)AMP_NewYear_Tree_001_6e779ef5-0fcb-446d-a793-3c40fdc53484);
+DB_AMP_TreeVisible((ITEM)AMP_NewYear_Tree_001_6e779ef5-0fcb-446d-a793-3c40fdc53484, 1);
+
+// act 1.5
+DB_AMP_LeverTree((ITEM)AMP_NewYear_Lever_000_349de78f-706f-4496-aeae-d5057b180a64, (ITEM)AMP_NewYear_Tree_000_ef352aef-7e06-4495-ae52-42d57322b979);
+DB_AMP_TreeVisible((ITEM)AMP_NewYear_Tree_000_ef352aef-7e06-4495-ae52-42d57322b979, 1);
+
+// act 2
+DB_AMP_LeverTree((ITEM)AMP_NewYear_Lever_000_30fcd29d-a724-468d-b834-e603697bfbef, (ITEM)AMP_NewYear_Tree_000_d85b3456-730c-4070-9635-5f320d21303c);
+DB_AMP_TreeVisible((ITEM)AMP_NewYear_Tree_000_d85b3456-730c-4070-9635-5f320d21303c, 1);
+
+// act 3 rivington
+DB_AMP_LeverTree((ITEM)AMP_NewYear_Lever_000_b83fc71e-c1a3-4171-92b0-f2327e0c7b98, (ITEM)AMP_NewYear_Tree_000_9deb352b-b794-48bd-b1e2-97990e108a22);
+DB_AMP_TreeVisible((ITEM)AMP_NewYear_Tree_000_9deb352b-b794-48bd-b1e2-97990e108a22, 1);
+
+// act 3 port
+DB_AMP_LeverTree((ITEM)AMP_NewYear_Lever_000_de49e444-28e5-4830-b02b-6baa702417c4, (ITEM)AMP_NewYear_Tree_000_1d794222-6974-4d5b-a059-8f23e08db65a);
+DB_AMP_TreeVisible((ITEM)AMP_NewYear_Tree_000_1d794222-6974-4d5b-a059-8f23e08db65a, 1);
+
+KBSECTION
+// lever used - hide tree (cooldown gated)
+IF
+UseStarted(_, (ITEM)_Lever)
+AND
+DB_AMP_LeverTree(_Lever, _Tree)
+AND
+NOT DB_AMP_LeverCooldown(_Lever)
+AND
+DB_AMP_TreeVisible(_Tree, 1)
+THEN
+DebugText(_Lever, "HIDING TREE");
+DB_AMP_LeverCooldown(_Lever);
+ObjectTimerLaunch(_Lever, "AMP_LeverCooldown", 500, 0);
+NOT DB_AMP_TreeVisible(_Tree, 1);
+DB_AMP_TreeVisible(_Tree, 0);
+SetOnStage(_Tree, 0);
+
+// lever used - show tree (cooldown gated)
+IF
+UseStarted(_, (ITEM)_Lever)
+AND
+DB_AMP_LeverTree(_Lever, _Tree)
+AND
+NOT DB_AMP_LeverCooldown(_Lever)
+AND
+DB_AMP_TreeVisible(_Tree, 0)
+THEN
+DebugText(_Lever, "SHOWING TREE");
+DB_AMP_LeverCooldown(_Lever);
+ObjectTimerLaunch(_Lever, "AMP_LeverCooldown", 500, 0);
+NOT DB_AMP_TreeVisible(_Tree, 0);
+DB_AMP_TreeVisible(_Tree, 1);
+SetOnStage(_Tree, 1);
+
+// clear cooldown when timer ends
+IF
+ObjectTimerFinished((ITEM)_Lever, "AMP_LeverCooldown")
+AND
+DB_AMP_LeverCooldown(_Lever)
+THEN
+NOT DB_AMP_LeverCooldown(_Lever);
+
+EXITSECTION
+
+ENDEXITSECTION

@@ -1,0 +1,781 @@
+<?xml version="1.0" encoding="utf-8"?>
+<contentList>
+	<content contentuid="hf4a61c7ag3c81g4255g9b97gc5be6905fed7" version="1">收藏家的板箱</content>
+	<content contentuid="h2f424f79g3918g474eg95e3g0b0965be4c71" version="1">沉重且粗犷。朝里看去，只见无数利刃堆积如山，闪烁着不详的微光。想必这一定是为某场魔法大战准备的物资吧？</content>
+	<content contentuid="h4d386151g8a7bg47ebgafd5gd899cfa1f351" version="1">洞穴屠夫</content>
+	<content contentuid="hef13d409g3605g4bd3g95cagb91684beca1d" version="1">这把匕首曾属于一名狡诈的食人邪术师，他惯常在寒冬诱骗疲惫的旅人进入温暖的洞穴。刀刃闪烁着狂躁的火星，似乎还伴着轻微的嘶嘶声。</content>
+	<content contentuid="hbb34eeb6g2cedg4837gb51fg761db669e4b9" version="1">洞窟裂隙</content>
+	<content contentuid="h2f65e028gbfa5g4c8eg9fb2g4318ed291165" version="1">当一名敌人&lt;b&gt;主要&lt;/b&gt;死于你的&lt;b&gt;[1]&lt;/b&gt;时，&lt;b&gt;[2]&lt;/b&gt;范围内所有&lt;b&gt;非盟友&lt;/b&gt;生物承受&lt;b&gt;[3]&lt;/b&gt;。</content>
+	<content contentuid="h0d17270cg7696g4ab9ga09fg8dbd78ff936e" version="1">迷雾收割</content>
+	<content contentuid="h72cc2160g677fg4a58g9ed8g2010831dce41" version="1">当你以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;对站在云雾中的敌人造成&lt;b&gt;[1]&lt;/b&gt;时，获得&lt;b&gt;[2]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="MAG_CHARGED_LIGHTNING"&gt;闪电充能&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;每回合最多触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h867ec814g91b6g4986gad4ag5fb509f8b1f5" version="1">混乱播种者</content>
+	<content contentuid="hf2fb4a38g9b70g4685ga714g8b124f3037b8" version="1">这件可怖的遗物曾被封印了数个世纪，但一朝被不幸的寻宝者发现，便会将死亡与纷争带往它所踏足的每一片土地。驾驭这柄匕首的力量，便几乎可与巴尔匹敌。</content>
+	<content contentuid="hfabfd3d8g492cg403ag9950gdc4b5216c7a9" version="1">隐秘狂怒</content>
+	<content contentuid="h74d16b4ag7437g4803g8b45g17d1e24b01fd" version="1">以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;达成&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;时，获得&lt;b&gt;[1]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="WEAPON2"&gt;炽烈渴望&lt;/LSTag&gt;。</content>
+	<content contentuid="h6476a934g6ca9g429bg9b05g17aa2ae859b1" version="1">炽烈渴望</content>
+	<content contentuid="he001b08cg9244g40c0gbe05ga28e7e0d234f" version="1">每有一层炽烈渴望，你的法术&lt;LSTag Tooltip="AttackRoll"&gt;攻击检定&lt;/LSTag&gt;便获得&lt;b&gt;+[1]&lt;/b&gt;加成。在累积了&lt;b&gt;[2]&lt;/b&gt;层充能后，你会吸收它们并获得&lt;b&gt;[3]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="WEAPON2_2"&gt;炽烈收割&lt;/LSTag&gt;。&lt;br&gt;仅在一次&lt;LSTag Tooltip="LongRest"&gt;长休&lt;/LSTag&gt;后消失。</content>
+	<content contentuid="h7c696cd9g1d22g48cag9ea0g2281bd4e7667" version="1">炽烈收割</content>
+	<content contentuid="h31e22131g8069g43bdg8034g19c99f7e3838" version="1">法术&lt;LSTag Tooltip="AttackRoll"&gt;攻击检定&lt;/LSTag&gt;具有&lt;LSTag Tooltip="Advantage"&gt;优势&lt;/LSTag&gt;。每有一层此效果，&lt;LSTag Tooltip="SpellDifficultyClass"&gt;法术豁免难度等级&lt;/LSTag&gt;获得&lt;b&gt;+[1]&lt;/b&gt;。&lt;br&gt;&lt;br&gt;以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;达成&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;后，有&lt;b&gt;[2]%&lt;/b&gt;的几率消散。</content>
+	<content contentuid="h58abb0a3g0e06g40acg8bc1gbc95a34f0a4d" version="1">禁忌神庙之匕</content>
+	<content contentuid="hc94642afg346cg441fgb415g3dae98197eac" version="1">相传，在那遥远的群山之中，曾有一座专事灵魂出窍、寄附容器的异端神庙。有一天，教派进行了最后一次、也是最为盛大的祭祀——他们将自己的灵魂全部注入了一柄可怖的匕首之中。此后，这柄匕首便深埋于时间的厚尘之下，不知所踪。然而，无论谁找到它，都将获得那千名武僧灵魂的伟力。</content>
+	<content contentuid="hd17ce16fga0e2g4e10gb519gd7c38d8142c9" version="1">千魂之器</content>
+	<content contentuid="h0db3ce0cg15e0g4939gaaaag908bcdec2de4" version="1">战斗中消耗&lt;LSTag Type="ActionResource" Tooltip="KiPoint"&gt;气点&lt;/LSTag&gt;时，你将&lt;LSTag Type="Status" Tooltip="WEAPON3"&gt;灵魂充盈自身&lt;/LSTag&gt;，持续至你的回合开始。</content>
+	<content contentuid="h8d0ccfd2g3e92g431fga908g9f068d34e48c" version="1">灵魂充盈</content>
+	<content contentuid="hf2dfcc58g2ffeg498cg96f4g93dab4746b7b" version="1">你的&lt;b&gt;徒手攻击&lt;/b&gt;&lt;b&gt;还会&lt;/b&gt;造成&lt;b&gt;[1]&lt;/b&gt;点额外伤害。</content>
+	<content contentuid="h90acf48ag8cffg4e45g9424gde9f3e535069" version="1">成事之匕</content>
+	<content contentuid="h5e3a9f9dg1e2bg4cc2ga780gca1605299f7e" version="1">这把匕首由城中一位罪犯法师亲自加持，曾屡次救下那些因失手而未能“成事”的倒霉刺客。尽管年代久远，它仍保留着大部分的魔力。</content>
+	<content contentuid="h84d8787bg5904g49f9gb7adg55edc0e81094" version="1">赦罪</content>
+	<content contentuid="h83d797c4g41ceg4506g9354g1c036c73b400" version="1">当你以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;或&lt;b&gt;武器攻击&lt;/b&gt;未命中敌人时，对其施加&lt;b&gt;无尽的&lt;/b&gt;&lt;LSTag Type="Status" Tooltip="WEAPON4"&gt;魔力毒素&lt;/LSTag&gt;。</content>
+	<content contentuid="hbe9a6203gc3d6g4e87gb324gf4c9da4f8d98" version="1">魔力毒素</content>
+	<content contentuid="h8bc33c44gc251g4c71g80dbg49b578790a72" version="1">此生物每回合受到&lt;b&gt;[3]&lt;/b&gt;点伤害，且其&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;承受&lt;b&gt;[1]~[2]&lt;/b&gt;减值。&lt;br&gt;如果该生物在回合结束时通过体质&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;&lt;b&gt;([4])&lt;/b&gt;，移除此效果。</content>
+	<content contentuid="hc7c54a0ag2777g471bg8b74gc56ca3768cf7" version="1">裂帷匕首</content>
+	<content contentuid="ha7d793aagb16cg4165g9771g90605ad79595" version="1">这件由一位古代大师打造的奇特遗物，显然能够撕裂魔网本身的织构，并为它的持有者注入魔力。</content>
+	<content contentuid="h96e95a6cga255g4383gb4f8g7d2da3ce29d9" version="1">狂潮之力</content>
+	<content contentuid="ha69c7018ge106g4dc8g8ac7g13e157a55d23" version="1">当你为&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;的&lt;b&gt;伤害骰&lt;/b&gt;掷出&lt;b&gt;[1]&lt;/b&gt;或更低时，将该骰&lt;b&gt;重掷&lt;/b&gt;&lt;b&gt;[2]次&lt;/b&gt;，每次取&lt;b&gt;最佳结果&lt;/b&gt;。每个法术伤害骰都如此处理。</content>
+	<content contentuid="h80bc950eg1b69g4431g9d16g07bb57b8ecf9" version="1">轰鸣魔网</content>
+	<content contentuid="h199b721bgba1ag4aa2gada4g4f82e51715fd" version="1">当你拥有&lt;LSTag Type="Status" Tooltip="MAG_THUNDER_REVERBERATION"&gt;残响&lt;/LSTag&gt;时，你的&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;额外造成&lt;b&gt;[1]&lt;/b&gt;。&lt;br&gt;&lt;br&gt;每回合最多触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="ha36425a3ge126g4263ga493gb51d78e54931" version="1">不赦小魔鬼之匕</content>
+	<content contentuid="h377ab41bg5be0g429cgafabgd946c12a19f2" version="1">这把匕首本质上属于恶魔，它依然凝聚着前任主人的力量，那位主人死于一场毫无意义的战争。</content>
+	<content contentuid="ha3c81a87g6d2eg4a2ag97d9gb5a6628c922b" version="1">小恶魔之幕</content>
+	<content contentuid="he7abbd04g44f5g44e6g9b46gb0748d7abb49" version="1">隐匿期间，你造成&lt;b&gt;[1]&lt;/b&gt;的&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;获得&lt;b&gt;[2]&lt;/b&gt;份额外弹体。</content>
+	<content contentuid="hebe34ed3gd937g4be2g8127gb403433df9bd" version="1">小魔鬼迷雾</content>
+	<content contentuid="h938dd7d3g07b7g4e6agb4dcg05f0c05ebebb" version="1">处于&lt;LSTag Type="Status" Tooltip="BLUR"&gt;朦胧&lt;/LSTag&gt;时，你以造成&lt;b&gt;[1]&lt;/b&gt;的&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;达成&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;所需的数值降低&lt;b&gt;[2]&lt;/b&gt;。</content>
+	<content contentuid="hba7a424ag706dg47bbgb0beg4c57b0943c61" version="1">恶魔之赐</content>
+	<content contentuid="hfe2381bcg7a94g4444gb25bge7edac5461fe" version="1">在战斗中恢复&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;时，获得&lt;LSTag Type="Status" Tooltip="WEAPON6_IMP"&gt;小恶魔之怒&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。&lt;br&gt;每回合只能触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="hca703453gd2ffg4042gaca8g8d8f3d3c9079" version="1">在战斗中恢复&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;时，获得&lt;LSTag Type="Status" Tooltip="WEAPON6_IMP_ENHANCED"&gt;强化小恶魔之怒&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。&lt;br&gt;每回合只能触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="he73a135fg3d67g492dg8f69g8bbddbd5cb89" version="1">小恶魔之怒</content>
+	<content contentuid="hb3a816a9gdb8bg4971ga86ag3eb8db9a51ac" version="1">造成&lt;b&gt;力场伤害&lt;/b&gt;的法术与戏法，射程增加&lt;b&gt;25%&lt;/b&gt;。</content>
+	<content contentuid="h87ed4bc2g9927g43f1gad83g081a3cbe88ad" version="1">强化小魔鬼之怒</content>
+	<content contentuid="h6e3987f8g655dg498dg8792g67e096d0628f" version="1">造成&lt;b&gt;力场伤害&lt;/b&gt;的法术和戏法，射程增加&lt;b&gt;50%&lt;/b&gt;。</content>
+	<content contentuid="ha3c0f0a2g6da0g44f5g90bbgd2f7a5801856" version="1">水萨满之匕</content>
+	<content contentuid="h32a577c3g9036g4083g97b0gcd50567c2eb8" version="1">这把破旧的匕首虽然锈迹斑斑，却泛着清冷的微光——透露出一种超然的希冀，正如一块面包之于贫者。这件遗物的治愈之能，无疑会惠及任何一位陷于生死苦战的法师。</content>
+	<content contentuid="hf9a8522agc359g4208g80c1g32608ecb4ae3" version="1">治愈冲击</content>
+	<content contentuid="h1a1e62f1g72d1g4907g8f85g6616363eee50" version="1">在战斗中以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;治疗自己或一名盟友时，爆出一团治愈云雾，恢复&lt;b&gt;[2]&lt;/b&gt;，影响半径&lt;b&gt;[1]&lt;/b&gt;内的所有生物。&lt;br&gt;&lt;br&gt;每回合最多触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h13f5c0afg3f25g4f9cg845dgd4c440b67f01" version="1">净化</content>
+	<content contentuid="h2cc76118gf3fbg4ef9ga825g46590c041db5" version="1">治疗一名生物时，同时移除其身上的&lt;LSTag Type="Status" Tooltip="HAG_FEVER"&gt;疾病&lt;/LSTag&gt;与&lt;LSTag Type="Status" Tooltip="POISONED"&gt;中毒&lt;/LSTag&gt;。</content>
+	<content contentuid="h1f337d9ag7354g4caag8772gf02e111575ad" version="1">高等净化</content>
+	<content contentuid="h7eb9e330g2055g4e10g9a76g91f784f8ac3c" version="1">治疗一名生物时，同时移除其身上的&lt;LSTag Type="Status" Tooltip="CURSE_ABILITY_CHARISMA"&gt;诅咒&lt;/LSTag&gt;、&lt;LSTag Type="Status" Tooltip="HAG_FEVER"&gt;疾病&lt;/LSTag&gt;与&lt;LSTag Type="Status" Tooltip="POISONED"&gt;中毒&lt;/LSTag&gt;。</content>
+	<content contentuid="h55b351efgccb1g498eg861fg3d51a5d48253" version="1">风暴之匕</content>
+	<content contentuid="hfef916d2gd49dg4e97g8f65g2a169c1d157e" version="1">这件遗物周遭的空间明显波动起伏，仿佛正被一股凛冽的风不断吹拂着。当你紧握住剑柄时，感受到这柄匕首正在开始微微振动。</content>
+	<content contentuid="h6c41932fga5a7g40d9gb63egb27b742391ff" version="1">暴风</content>
+	<content contentuid="h8294c6f3g03a9g4908g8c41gb41d4d110d3a" version="1">在战斗中以任何方式对&lt;b&gt;非大型&lt;/b&gt;生物造成&lt;b&gt;[1]&lt;/b&gt;时，将其击退&lt;b&gt;[2]&lt;/b&gt;。</content>
+	<content contentuid="h934dd8bfg011bg43ecg9c46gb46438345c87" version="1">风暴迅疾</content>
+	<content contentuid="h68ce9f49g6da5g4acegae85g252f2de1130f" version="1">你获得&lt;b&gt;+1&lt;/b&gt;个&lt;LSTag Tooltip="ReactionActionPoint"&gt;反应点&lt;/LSTag&gt;。</content>
+	<content contentuid="h4d6acd88g10edg4479gac84gf9f087af34f4" version="1">天鸦之匕</content>
+	<content contentuid="h35c590ceg9ec9g48c0gb25eg684020a57105" version="1">传说中，一位国王凭借匕首施展法术，化作渡鸦之形巡视他的疆土。有一天，刺客们在他的寝宫中伏击了他，被刺伤的国王当即抓起匕首，从敞开的窗口飞身而出，然而一名刺客却召来了雷暴，以一声霹雳将那渡鸦击落。这柄遗物吸收了雷霆之力，从这位伟大君王的垂死挣扎中汲取了养分。</content>
+	<content contentuid="ha5a8d084ge319g4b07ga351ga976da90975e" version="1">悲鸣雷暴</content>
+	<content contentuid="h3146fb9bg1a62g49a8gb4ffg45d1486bbd9e" version="1">在战斗中使用&lt;LSTag Type="Spell" Tooltip="Projectile_Jump"&gt;跳跃&lt;/LSTag&gt;或&lt;LSTag Type="Spell" Tooltip="Projectile_Fly"&gt;飞行&lt;/LSTag&gt;时，获得&lt;b&gt;[1]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="MAG_CHARGED_LIGHTNING"&gt;闪电充能&lt;/LSTag&gt;。若你已经拥有&lt;LSTag Type="Status" Tooltip="MAG_CHARGED_LIGHTNING"&gt;闪电充能&lt;/LSTag&gt;，则只获得&lt;b&gt;[2]&lt;/b&gt;。&lt;br&gt;&lt;br&gt;每回合最多触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h05cd63c7gda8eg43f0g9736g0effcd60a1ff" version="1">风暴不侵</content>
+	<content contentuid="h684a00aeg1af1g469fga102gba1cc9d3c04f" version="1">在&lt;LSTag Type="Spell" Tooltip="Projectile_Jump"&gt;跳跃&lt;/LSTag&gt;或&lt;LSTag Type="Spell" Tooltip="Projectile_Fly"&gt;飞行&lt;/LSTag&gt;之后，你对&lt;b&gt;[1]&lt;/b&gt;和&lt;b&gt;[2]&lt;/b&gt;&lt;LSTag Tooltip="Immune"&gt;免疫&lt;/LSTag&gt;，持续&lt;b&gt;[3]&lt;/b&gt;回合。</content>
+	<content contentuid="h194f5562g64dbg44bagbf1bg3e45596cb220" version="1">恶毒马夫之匕</content>
+	<content contentuid="h8157ca26g6ec6g4305gb5cfg8d447fd0a61d" version="1">这把匕首曾属于一个卑鄙的车夫。他惯于将富有的乘客灌醉，再残忍地杀害。他的变态行径甚至发展到了请一位隐居的邪术师为他心爱的凶器附魔的地步。</content>
+	<content contentuid="h4b038ad9g67a0g4a99g99f5g1afddd3a164c" version="1">乘虚而入</content>
+	<content contentuid="hac0fcb0ag67c2g403ag834cg37983d22995d" version="1">对&lt;LSTag Type="Status" Tooltip="CHARMED"&gt;魅惑&lt;/LSTag&gt;的敌人，&lt;LSTag Tooltip="AttackRoll"&gt;攻击检定&lt;/LSTag&gt;具有&lt;LSTag Tooltip="Advantage"&gt;优势&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;当你&lt;LSTag Tooltip="AttackRoll"&gt;攻击&lt;/LSTag&gt;一名&lt;LSTag Type="Status" Tooltip="POISONED"&gt;中毒&lt;/LSTag&gt;、&lt;LSTag Type="Status" Tooltip="PARALYZED"&gt;麻痹&lt;/LSTag&gt;、&lt;LSTag Type="Status" Tooltip="SLEEPING"&gt;睡眠&lt;/LSTag&gt;或&lt;LSTag Type="Status" Tooltip="PRONE"&gt;倒地&lt;/LSTag&gt;的敌人时，该敌人承受&lt;b&gt;[1]&lt;/b&gt;，并且必须通过感知&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则陷入&lt;LSTag Type="Status" Tooltip="FRIGHTENED"&gt;恐慌&lt;/LSTag&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合。&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;难度等级&lt;/LSTag&gt;取决于你的&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;每回合最多触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h4f50a2bfg817fg4ddbg9bbcg1241cafe828c" version="1">暗黑恐惧</content>
+	<content contentuid="heece9ca2ga443g4becg823dg98591be0789b" version="1">处于&lt;b&gt;黑暗术云雾&lt;/b&gt;中时，你的&lt;b&gt;[1]&lt;/b&gt;同样会令目标陷入&lt;LSTag Type="Status" Tooltip="FRIGHTENED"&gt;恐慌&lt;/LSTag&gt;状态，持续&lt;b&gt;1&lt;/b&gt;回合。</content>
+	<content contentuid="h85a0b43fge606g47cegbd2dgfd5a8f7543b1" version="1">苦寒匕首</content>
+	<content contentuid="h2c0ff46eg3380g4edeg8be6g670a7b735aff" version="1">这把匕首绝非俗物，它蕴藏着强大的力量。它曾由一位凛冬法师持有，能借助魔法的严寒汲取敌人的精华，甚至将人冻干成一层冰壳。只可惜，唯有那位法师才知晓这件遗物的全部秘密。</content>
+	<content contentuid="h9c03138cg3f50g4050gbde3gb8bb4ef44f83" version="1">冰霜残韵</content>
+	<content contentuid="h001901a6g5650g4240g93ddg0bb5ab7a6c4f" version="1">站在&lt;b&gt;冻结地表&lt;/b&gt;上以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;对一名生物造成伤害时，获得&lt;b&gt;[2]&lt;/b&gt;。另有&lt;b&gt;[1]%&lt;/b&gt;的几率令一名敌人瞬间&lt;b&gt;冻干而死&lt;/b&gt;。</content>
+	<content contentuid="hb4f81d11g5b28g46abg878agc05a6d7400e0" version="1">冰霜魔法</content>
+	<content contentuid="h974b1cb5g5509g4e4dgb97dg26d852b266cb" version="1">声名狼藉的法师匕首</content>
+	<content contentuid="he3042c1agfa4cg45c2gb207gd0f5d1c3cfe0" version="1">正是这把匕首，曾被那位赫赫有名却醉醺醺的酒鬼盖兰用来刺穿了王储的肚子，而他随后也为此搭上了自己的脑袋。这柄匕首已饱经磨损，却依然铭刻着这位战斗法师那不可思议的冒险印记——尽管他的旅途收场得如此狼藉。</content>
+	<content contentuid="hf927f96dg7481g48e3gb807gb73eb1163ba9" version="1">怒气冲冲</content>
+	<content contentuid="h508f6a26g0b38g4871g94e8g3c6b1c2e4e10" version="1">进入&lt;LSTag Type="Status" Tooltip="RAGE"&gt;狂暴&lt;/LSTag&gt;时，恢复你所有&lt;b&gt;[1]&lt;/b&gt;环的&lt;LSTag Tooltip="SpellSlot"&gt;法术位&lt;/LSTag&gt;与&lt;LSTag Type="ActionResource" Tooltip="ChannelOath"&gt;引导誓言&lt;/LSTag&gt;。&lt;br&gt;每场战斗只能触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="he2d895a5g65c7g4206gbfe0g7109dd2851b8" version="1">傲慢代偿</content>
+	<content contentuid="h77322866gdb57g436dgba08g6d275156407f" version="1">曾佩这柄高贵匕首的，是一位令人不快的精灵贵族。他能在三百米开外，顶着狂风以弓箭射落一只苹果，并且同时撰写自传，不断宣称0这对他是何等的轻而易举。他自以为永生不朽，直到最后，在一场与豺狼人的激战中，他不慎失手掉落了自己的匕首——并就此丧命，成为同侪间的一桩笑柄。</content>
+	<content contentuid="h29486460g2d87g4425g9ae2gd67d843b07d4" version="1">暴风之牙</content>
+	<content contentuid="h8a571f0egd0b7g4af2g8701g9a70f41def67" version="1">群山始终在呼唤着扎德罗提克。这位德鲁伊的门徒在自己的同类中始终是个被放逐的异类，从未接受过教团戒律。当他置身荒芜的山峦，在十年间便将这片无人之地变作一座欣欣向荣的乐园，供养着崇拜他的万物生灵。在充满敌意的环境中，他学会了驾驭自然之力以守护他的新王国，尤其钟情于闪电之威。</content>
+	<content contentuid="hefce4f15g9efcg4e06ga24fgea0b6df866fa" version="1">风暴导体</content>
+	<content contentuid="h73c00ac4gaaefg46d6gb884gd3d4a6620773" version="1">以&lt;b&gt;环阶法术&lt;/b&gt;造成&lt;b&gt;[1]&lt;/b&gt;后，你的&lt;b&gt;近战武器攻击&lt;/b&gt;获得额外&lt;b&gt;[2]&lt;/b&gt;加值，持续至回合结束。</content>
+	<content contentuid="h8c0d03cfgdd86g47c2ga45egc8b5df4f126a" version="1">电力场</content>
+	<content contentuid="ha56a673eg94d6g49f3ga259g94bb6d279137" version="1">在目标位置召唤一片&lt;b&gt;[1]&lt;/b&gt;的带电表面，持续&lt;b&gt;[2]&lt;/b&gt;回合。</content>
+	<content contentuid="h14a1b2c3g4d5eg6f7ag8b9cgdef012345678" version="1">风暴之眼</content>
+	<content contentuid="h23b2c3d4g5e6fg7a8bg9c0dgef1234567890" version="1">&lt;LSTag Tooltip="Concentration"&gt;专注&lt;/LSTag&gt;于一个&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;时，你造成&lt;b&gt;[1]&lt;/b&gt;的&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;&lt;b&gt;还会&lt;/b&gt;造成&lt;b&gt;[2]&lt;/b&gt;。</content>
+	<content contentuid="h34c3d4e5g6f7ag8b9cg0d1egf23456789012" version="1">自然的赠礼</content>
+	<content contentuid="h45d4e5f6g7a8bg9c0dg1e2fg345678901234" version="1">战斗中以匕首造成伤害时，恢复一个1环&lt;LSTag Type="Image" Info="SpellSlot"/&gt;&lt;LSTag Tooltip="SpellSlot"&gt;法术位&lt;/LSTag&gt;与一次&lt;LSTag Type="ActionResource" Tooltip="WildShape"&gt;荒野形态&lt;/LSTag&gt;充能。每回合只能触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h9bcbb7f0g8a9ag4da7g991fg84be169b9fe7" version="1">风暴激涌</content>
+	<content contentuid="hea28d758g6065g41c5g8651g9d0ea5440ff2" version="1">你的&lt;b&gt;近战武器攻击&lt;/b&gt;额外造成&lt;b&gt;[1]&lt;/b&gt;点伤害。</content>
+	<content contentuid="h9af698c9g9a41g407cg8719g3f9c45d75716" version="1">悲恸之匕</content>
+	<content contentuid="h3d4ff402g8279g40d5g95fcgf4e2b1fcf6a6" version="1">从前，有个农夫。后来，瘟疫降临了他的土地，夺走了他的妻子。于是他去寻一位邪术师，想请教要如何才能救下自己的孩子。可突然间，那邪术师竟遭到了士兵的袭击！情急之下，农夫不得不抓起近旁的第一把匕首，救下了那位法师。作为报答，邪术师给了他必要的指点，放他离去。然而，国王的绞刑架，却早已候他不至。而瘟疫，也从未停止等待他的孩子们。</content>
+	<content contentuid="h327b5a1fgcadag4412ga052g63f2a31485a5" version="1">禁忌实验</content>
+	<content contentuid="h519afd0ege104g4175g95d8g5fd9771b88a8" version="1">对敌人施加&lt;LSTag Type="Status" Tooltip="FEARED"&gt;恐惧&lt;/LSTag&gt;时，获得&lt;b&gt;[1]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="WEAPON15"&gt;恐惧精粹&lt;/LSTag&gt;。&lt;br&gt;每次&lt;LSTag Tooltip="ShortRest"&gt;短休&lt;/LSTag&gt;只能触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="hd0d0d600g3694g4a52gba1eg5c34edb890d1" version="1">恐惧精粹</content>
+	<content contentuid="hf6e538b7g0290g47d0g8e68g7a1f25821658" version="1">当层数超过&lt;b&gt;[1]&lt;/b&gt;时，恐惧精粹将&lt;b&gt;消失&lt;/b&gt;。在&lt;LSTag Tooltip="LongRest"&gt;长休&lt;/LSTag&gt;后消失。</content>
+	<content contentuid="hdc16e2e2g614bg4487gb568gab37d92deaec" version="1">精粹释放</content>
+	<content contentuid="h236d502ege451g4cdbgbb9eg10a39aec0873" version="1">当你未命中敌人时，消耗一层&lt;LSTag Type="Status" Tooltip="WEAPON15"&gt;恐惧精粹&lt;/LSTag&gt;，若敌人未能通过对抗你&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;的感知&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，则对其施加&lt;LSTag Type="Status" Tooltip="FEARED"&gt;恐惧&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h65e33f54gb36dg4a92gb369g2047ede9d07f" version="1">米尔寇仆从之匕</content>
+	<content contentuid="h5c08b3c0g9717g4fadgaa0age187d2cbe88f" version="1">这把阴森的匕首闪烁着一种不自然的苍白绿光，它想诉说的，远比它前任主人所允许的要多得多。这件遗物只低语着一个词：不悦。</content>
+	<content contentuid="h469e8a17g4a65g423cg8212gd70830b91be1" version="1">米尔寇之不悦</content>
+	<content contentuid="hd7bae408g2c4ag4b61g8d6fga2ca81f3e94c" version="1">当你对敌人造成&lt;b&gt;[1]&lt;/b&gt;伤害时，有&lt;b&gt;[2]%&lt;/b&gt;的几率获得&lt;LSTag Type="Status" Tooltip="WEAPON16"&gt;米尔寇之愤怒&lt;/LSTag&gt;。</content>
+	<content contentuid="h157eb156gce87g42f3gb356gd71f5e22acbf" version="1">米尔寇之愤怒</content>
+	<content contentuid="hb4e0180fg5ddcg42f3ga1fegbe8e0c4de377" version="1">你的下一次法术、武器或徒手攻击&lt;b&gt;必定&lt;/b&gt;造成&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;。</content>
+	<content contentuid="hbc7e4a21g5f3dg48a2gb7c1g9e2f8d4a3b56" version="1">透骨收割</content>
+	<content contentuid="h2d8f5b32g6a4eg49b3gc8d2ga3f9e5b4c678" version="1">对&lt;LSTag Type="Status" Tooltip="CHILL_TOUCH"&gt;冻寒之触&lt;/LSTag&gt;目标造成武器伤害时，恢复一个&lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;附赠动作&lt;/LSTag&gt;。&lt;br&gt;每回合只能触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h275f0cd0gcf0fg47ebgabfegad7e24190e5c" version="1">北盟之匕</content>
+	<content contentuid="h76ca76f3gf256g432bg8ce4g61691cad662b" version="1">据传，这把匕首来自一片遥远的土地，一片据说“能让你冷入骨髓”的土地。无论曾挥舞它的是一位睿智的武僧，还是一名狡诈的法师，有一件事都确凿无疑：这把匕首蕴藏着某种非同凡响的魔法。</content>
+	<content contentuid="hcfde5b34gea4dg46f2gaf3egf0342de3e5ab" version="1">北地魔法</content>
+	<content contentuid="h07493aeagc6ebg482eg825dgb82cfbf49ccf" version="1">击杀一名敌人时，获得&lt;LSTag Type="Status" Tooltip="WEAPON17"&gt;液态萃取&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合，每次击杀均可累积持续时间。&lt;br&gt;每场战斗只能触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="hf5d5f370g2c2bg454agbe17ge40b91510d2b" version="1">液态萃取</content>
+	<content contentuid="h070be6c8ga6a5g438cg8451gd20104297ce4" version="1">你的&lt;LSTag Type="Spell" Tooltip="Projectile_RayOfFrost"&gt;冷冻射线&lt;/LSTag&gt;与&lt;LSTag Type="Spell" Tooltip="Projectile_RayOfFrost_Monk"&gt;山峦寒意&lt;/LSTag&gt;&lt;b&gt;还会&lt;/b&gt;造成&lt;b&gt;[1]&lt;/b&gt;。失去此效果时，你承受&lt;b&gt;[2]&lt;/b&gt;。&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="LongRest"&gt;长休&lt;/LSTag&gt;后不会消散。</content>
+	<content contentuid="hc6836d18g5820g458fga30dg150f194e1999" version="1">无趣者的把戏</content>
+	<content contentuid="hf7db803bge5fdg4bfegafdcg031acbcd1ebf" version="1">在这把神秘的匕首中，囚禁着一个名叫克莱彭的存在。他是谁，又是何时被囚于其中的，永远无人知晓。克莱彭通常会在百无聊赖之际，与匕首的主人们缔结种种魔法交易，并极尽所能地愚弄他们。</content>
+	<content contentuid="hf849eb42gc98fg423bgb728gc32e7402637d" version="1">狡灵交易</content>
+	<content contentuid="he3bf9e09g3261g43baga392g5f8e677463f0" version="1">匕首中的灵魂说服你&lt;b&gt;缔结交易&lt;/b&gt;。每场战斗开始时，你将受到&lt;LSTag Type="Status" Tooltip="WEAPON18_AURA"&gt;痛苦交易&lt;/LSTag&gt;的影响。</content>
+	<content contentuid="h946e3b8eg8660g4a57gb183g8743ba920ecc" version="1">痛苦交易</content>
+	<content contentuid="h76973bbcga2ceg4a92gbd0dg3875ff15d523" version="1">你在&lt;b&gt;[1]&lt;/b&gt;范围内召唤的生物获得&lt;LSTag Type="Status" Tooltip="WEAPON18"&gt;灵体操控&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;战斗结束时消失。</content>
+	<content contentuid="hfe87edc4gd243g4183ga6cbg4b49a8ff43c4" version="1">灵体操控</content>
+	<content contentuid="h4dcef27cgeb53g40d5g89f6g03c08d193ca8" version="1">此生物的&lt;LSTag Tooltip="AttackRoll"&gt;攻击检定&lt;/LSTag&gt;获得&lt;b&gt;+[2]~[3]&lt;/b&gt;。当生物因任何原因失去此效果时，将受到&lt;b&gt;[1]&lt;/b&gt;点伤害。</content>
+	<content contentuid="h1674bcc2g5e68g40a3ga3d1gfeeaa957e46a" version="1">歌者匕首</content>
+	<content contentuid="h3431e424ga804g4300gb113g57502a643da6" version="1">不能说这把匕首的前任主人主业就是唱歌——他用歌声引开人群，而他的同伙则趁机扒窃富家太太们的口袋。当然，完事之后，他们总得潇洒地鞠躬退场，或者拔腿就跑。</content>
+	<content contentuid="h6857d001g9ad7g4409g897dg5d58862ee868" version="1">绝活</content>
+	<content contentuid="h9fb6c682g2da7g4f9aga465gcd98c3c760f7" version="1">当你伤害一名处于&lt;LSTag Type="Status" Tooltip="CHARMED"&gt;魅惑&lt;/LSTag&gt;状态下的生物时，恢复所有&lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;附赠动作&lt;/LSTag&gt;。&lt;br&gt;每回合只能触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="he3e3b8aeg33b2g423fg87f0g1a7686c2c797" version="1">终末逃亡</content>
+	<content contentuid="h0b5d2072g4e9eg4c9cga8f2ge6c5afc49a5e" version="1">令人惊异的是，这把古老的匕首至今仍未碎裂，一股未知的强大魔法维系着它的完整。这件遗物，无疑能将自身及其主人从迫在眉睫的死亡中拯救出来。</content>
+	<content contentuid="h53c029afg6871g486cgb4a9ga7d61fec4892" version="1">无垠绝望</content>
+	<content contentuid="he0d73c57gac63g4c75gba22g4a4afbdd6f93" version="1">如果你使用这把匕首伤害一名敌人，且自身的&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;不高于&lt;b&gt;[1]%&lt;/b&gt;，则获得&lt;LSTag Type="Status" Tooltip="WEAPON20"&gt;愈合之创&lt;/LSTag&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合。&lt;br&gt;每回合只能触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h61c2d02bg7d09g49aagbf19gec4af1a20589" version="1">愈合之创</content>
+	<content contentuid="h19afb3b2g1241g48b5ga442g4d3f2ac1deb5" version="1">每回合结束时，恢复&lt;b&gt;[1]&lt;/b&gt;点生命值。恢复量取决于你的等级和&lt;LSTag Tooltip="SpellcastingAbilityModifier"&gt;施法属性调整值&lt;/LSTag&gt;。受到伤害时消失。</content>
+	<content contentuid="hfc66d82cga684g4688g8ae3g2edae93c3d8f" version="1">奸佞终局</content>
+	<content contentuid="h91868892g5891g4502gbf34g1d1978aa8da1" version="1">彼时，王后尚未诞下子嗣，而一柄匕首却已悄然悬于她头顶，意图断绝王室的血脉。刺客是一名宫廷法师，他被一群四处游历的投机者所蛊惑，深信王后腹中怀着的是一个将令整个王国化为灰烬与血泪的孽种。所幸，这名恶棍最终被侍卫们乱剑刺死，他的灵魂则被囚禁于这柄匕首之中，悬挂在国王寝室的墙壁之上。</content>
+	<content contentuid="h6fb424b9g3425g4da7ga778gf9017a21b90f" version="1">焚咒</content>
+	<content contentuid="had6fa3a4ge7acg431bg8793gb9b0601ed23b" version="1">进入&lt;b&gt;隐匿&lt;/b&gt;时，消耗&lt;b&gt;一个&lt;/b&gt;&lt;b&gt;[2]&lt;/b&gt;环&lt;LSTag Tooltip="SpellSlot"&gt;法术位&lt;/LSTag&gt;并获得&lt;LSTag Type="Status" Tooltip="MAG_GISH_ARCANE_SYNERGY"&gt;奥术协同&lt;/LSTag&gt;。若&lt;LSTag Tooltip="SpellSlot"&gt;法术位&lt;/LSTag&gt;没有被消耗，则不会发生任何事。</content>
+	<content contentuid="h6b581addg254eg4812g9a78g9860122b80fb" version="1">终局</content>
+	<content contentuid="h87aa91a1g3241g424fga034g6484eb34efda" version="1">你的&lt;b&gt;近战武器攻击&lt;/b&gt;造成额外&lt;b&gt;[3]&lt;/b&gt;点伤害。效果随你的&lt;LSTag Tooltip="SpellcastingAbilityModifier"&gt;施法属性调整值&lt;/LSTag&gt;提升。&lt;br&gt;退出隐匿时消失。</content>
+	<content contentuid="h38f658d4gda86g4f08gb9c5g7a7c1af050bd" version="1">小丑匕首</content>
+	<content contentuid="h27a31d58g6647g4a51g9282g76faa19614cd" version="1">据说那小丑是个疯子，甚至有人指摘他修习了黑魔法！他出没于最腌臜的场所，讲些连成年人都得听得汗毛倒竖的笑话。他也曾出入王庭，仅凭他那凌厉如刀的口舌，便足以令贵妇们当场晕厥。然而，他的下场极为惨烈——不过那又是另一桩轶闻了。</content>
+	<content contentuid="hffe392c0g93bcg42edga7deg6b50f6cfec6c" version="1">这才叫幽默</content>
+	<content contentuid="hfc6cc169ga966g4600gbad1g97f15360b6b3" version="1">战斗开始时，获得&lt;LSTag Type="Status" Tooltip="WEAPON22"&gt;上流笑话&lt;/LSTag&gt;。</content>
+	<content contentuid="h0a7a587cgbfdeg45a4gbcb0g6b10ca71c264" version="1">上流笑话</content>
+	<content contentuid="hde0a8252g7954g4900g8019g0ddc38b67fdd" version="1">你的&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;&lt;LSTag Tooltip="AttackRoll"&gt;攻击检定&lt;/LSTag&gt;具有&lt;LSTag Tooltip="Advantage"&gt;优势&lt;/LSTag&gt;，但持用或未持用武器的&lt;LSTag Tooltip="AttackRoll"&gt;攻击检定&lt;/LSTag&gt;具有&lt;LSTag Tooltip="Disadvantage"&gt;劣势&lt;/LSTag&gt;。回合结束时变为&lt;LSTag Type="Status" Tooltip="WEAPON22_2"&gt;下流段子&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;战斗结束时消散。</content>
+	<content contentuid="h7b57179dg9b8dg445ag9763gd614195aff00" version="1">下流段子</content>
+	<content contentuid="ha00567cegd999g45cdg9e0dg68f67e71fc68" version="1">持用或未持用武器的&lt;LSTag Tooltip="AttackRoll"&gt;攻击检定&lt;/LSTag&gt;具有&lt;LSTag Tooltip="Advantage"&gt;优势&lt;/LSTag&gt;，但&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;&lt;LSTag Tooltip="AttackRoll"&gt;攻击检定&lt;/LSTag&gt;具有&lt;LSTag Tooltip="Disadvantage"&gt;劣势&lt;/LSTag&gt;。回合结束时变为&lt;LSTag Type="Status" Tooltip="WEAPON22"&gt;上流笑话&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;战斗结束时消散。</content>
+	<content contentuid="h3037d10agf026g4effg9eddgcbfbd8f1ef9e" version="1">隐形匕首</content>
+	<content contentuid="h1f628b12g2726g4207gad94gf18eb3825d8e" version="1">这把匕首曾是宫廷法师们在皇家图书馆中进行的诸多平凡实验中的一件——他们试图寻找一种点石成金的方法。结果，他们成功地遗失了一把刀刃，而撞见它的，却是某个仆人，用他的脚后跟。</content>
+	<content contentuid="hc52945f5gd345g4dc5ga346g5f841a66aaa4" version="1">如影随形</content>
+	<content contentuid="hb8313bb6gd9e8g461ega641g58cc99775643" version="1">使用这把匕首伤害一名生物，会使你&lt;LSTag Type="Status" Tooltip="INVISIBILITY"&gt;隐形&lt;/LSTag&gt;&lt;b&gt;[1]&lt;/b&gt;回合。&lt;br&gt;每场战斗只能触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h3c8e5a42g7b2fg4a91gb8d3gc4e7f6a5d890" version="1">势如破竹</content>
+	<content contentuid="h4d9f6b53g8c3fg5b02gc9e4gd5f8a7b6e901" version="1">以&lt;b&gt;武器&lt;/b&gt;在&lt;LSTag Tooltip="Advantage"&gt;优势&lt;/LSTag&gt;下攻击时，造成&lt;b&gt;[1]&lt;/b&gt;点伤害。</content>
+	<content contentuid="h93701cd1g8775g4275g8997g7e3e91daad30" version="1">奇智</content>
+	<content contentuid="hdbb669c5g9e25g4e36ga0d1gf5c690d4f24b" version="1">当无罪之人凝视这柄匕首的锋刃时，它会映照出人类所有的恶。而当有罪之人望向那锋刃，他从倒映中看到的，唯有王座上的自己。唯有罪人，才能从这件遗物中获益。</content>
+	<content contentuid="hb1b81a6bg8daag4cf5g980fgfed2ff6375e7" version="1">唯罪是从</content>
+	<content contentuid="h29b8b03cgb922g4a90g88fbge36ee22c0833" version="1">在战斗中对一名敌人施加&lt;b&gt;任意状态&lt;/b&gt;时，有&lt;b&gt;[1]%&lt;/b&gt;的几率获得&lt;b&gt;[2]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="WEAPON24"&gt;原罪&lt;/LSTag&gt;。</content>
+	<content contentuid="he29fb803gc127g44d4g94f5g85eace025297" version="1">原罪</content>
+	<content contentuid="h83acd3a0g52dbg4dabg95e9g8f0d411a9a98" version="1">每有一层此效果，你的&lt;LSTag Tooltip="Intelligence"&gt;智力&lt;/LSTag&gt;、&lt;LSTag Tooltip="Wisdom"&gt;感知&lt;/LSTag&gt;和&lt;LSTag Tooltip="Charisma"&gt;魅力&lt;/LSTag&gt;增加&lt;b&gt;+[1]&lt;/b&gt;，但损失&lt;b&gt;[1]&lt;/b&gt;点&lt;LSTag Tooltip="Constitution"&gt;体质&lt;/LSTag&gt;。&lt;br&gt;累积&lt;b&gt;[2]&lt;/b&gt;层后，将其吸收，恢复所有&lt;LSTag Tooltip="SpellSlot"&gt;法术位&lt;/LSTag&gt;与邪术师&lt;LSTag Tooltip="SpellSlot"&gt;法术位&lt;/LSTag&gt;。</content>
+	<content contentuid="h67a74892gbfb8g41b6g975dgb696d67c6dc9" version="1">罪加一等</content>
+	<content contentuid="h3194cca5gba83g402fga54age240a8e0a5ea" version="1">在战斗中对一名敌人造成伤害时，有&lt;b&gt;[1]%&lt;/b&gt;的几率施加&lt;LSTag Type="Status" Tooltip="HAG_MASKOFREGRET"&gt;悔恨诅咒&lt;/LSTag&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合。</content>
+	<content contentuid="h320fa582g13c1g4adcg8c76gbfba4839b61c" version="1">宿命</content>
+	<content contentuid="h4eabf95dg43b4g4229ga720gf4782e7485ce" version="1">长久以来，它自有其意志；长久以来，它渴求着新的食粮。它能预言未来，能洞悉往昔，甚至能改变存在本身的织构。但它仍旧无所作为——除非你能满足它的胃口。</content>
+	<content contentuid="h35293a19g9ff8g48f8gb8beg10be667f6ade" version="1">永无止饥</content>
+	<content contentuid="h0a97a980g9770g4973g89b2gb8ca29126e6e" version="1">只要你携带这把匕首，它便会不断地索求&lt;b&gt;灵魂&lt;/b&gt;。每一天初始，你都会带着&lt;LSTag Type="Status" Tooltip="WEAPON25"&gt;枯竭的剑柄&lt;/LSTag&gt;，你必须用受诅咒的灵魂&lt;b&gt;填满它&lt;/b&gt;。</content>
+	<content contentuid="h91fe3c4fg188dg40d3g8b28gb3349b84dee0" version="1">灵魂献祭</content>
+	<content contentuid="h7888b01bg177bg4209g89ffgc140a227b1f4" version="1">当你&lt;b&gt;杀死&lt;/b&gt;一名&lt;b&gt;受诅咒&lt;/b&gt;的敌人时，宿命之匕会向握柄中注入一个&lt;b&gt;新鲜灵魂&lt;/b&gt;，并赋予持有者&lt;LSTag Type="Status" Tooltip="WEAPON25_5"&gt;饱和增益&lt;/LSTag&gt;。&lt;br&gt;任何&lt;/b&gt;诅咒皆可。</content>
+	<content contentuid="h7002e61eg22b7g40a3gb416g772952bcc684" version="1">剑柄枯竭</content>
+	<content contentuid="hb9dde03egcecdg4332g87d9gde3bf053eb03" version="1">匕首在榨取你的宿命，你所有掷骰结果减少&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="h19c846ebg90f9g4009gae6bgd03cf2af1ebf" version="1">剑柄将盈</content>
+	<content contentuid="h6750a9ddg8e22g49f8g9b0fgdb3c6a6c1e1e" version="1">匕首仍渴求&lt;b&gt;受诅咒&lt;/b&gt;的灵魂。你所有掷骰结果减少&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="h680c75c3g9b6cg41fegb3b7gd7ae731cb212" version="1">剑柄半满</content>
+	<content contentuid="h33d40138gbc1cg401dg9d6aga5b9a8eca373" version="1">剑柄正以&lt;b&gt;受诅咒&lt;/b&gt;的灵魂为食，对你暂无影响。</content>
+	<content contentuid="h1aece180g5140g4fdcg8e03g6046851cee7f" version="1">剑柄将溢</content>
+	<content contentuid="h73f9d44agb499g4e68gafc9g955ef5ea71cc" version="1">匕首开始改变你的宿命，使你所有掷骰结果增加&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="h5b343bccgdb15g4d2fg8077g1d73dcaeb4fc" version="1">剑柄饱盈</content>
+	<content contentuid="hf795efc2g6a82g472fg8c54g6087fdbfcaaf" version="1">匕首已获滋养，为你施展奇术。你所有掷骰结果增加&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="h3842ee80g33fdg4b58ga807ged171ebd367f" version="1">荣光连枷</content>
+	<content contentuid="h1d052f0bgda8eg4fa3ga622gb966b657cc4e" version="1">这把连枷曾属于早已逝去的兰戈拉斯——他是凯瑟隆的一位尊贵的仆从。当这件兵器最后一次在战场上挥舞时，曾在沙场掀起漫天血泉。那已是两千六百年前的事了，但从此以后，这把连枷便一直保持着完美的状态，随时准备投身于荣耀的战斗。</content>
+	<content contentuid="had173070gb10cg4738g8231g85ff7c79e083" version="1">无上卓越</content>
+	<content contentuid="heda613a1g26d9g4c47gaa50g2190c3271764" version="1">你的近战武器攻击额外造成&lt;b&gt;[1]&lt;/b&gt;点伤害。&lt;br&gt;效果随你的魅力&lt;LSTag Tooltip="AbilityModifier"&gt;调整值&lt;/LSTag&gt;提升。</content>
+	<content contentuid="h5e9a7c64g8d3fg4c12gb9e5gf6a8b7c9d012" version="1">魅力复生</content>
+	<content contentuid="h6f0b8d75g9e4ag5d23gca06ga7b9c8d0e123" version="1">当你的&lt;b&gt;武器&lt;/b&gt;攻击未命中敌人时，恢复一个&lt;LSTag Type="ActionResource" Tooltip="WarlockSpellSlot"&gt;邪术师法术位&lt;/LSTag&gt;以及一个&lt;LSTag Type="ActionResource" Tooltip="SorceryPoint"&gt;术法点&lt;/LSTag&gt;。</content>
+	<content contentuid="h38bc1fc2g3bf7g4ec9gba1ag63d1cc3ffa6b" version="1">恐怖连枷</content>
+	<content contentuid="h4c5f0c8cgf799g4a66gbeb1g5a18e3f565fc" version="1">细微的血迹沿着生锈、苍白的金属链流下，似乎是从握柄里的某个地方渗出来的。尽管年代久远，这把连枷依然极其可靠，一露面便能引起极大的恐惧。</content>
+	<content contentuid="hc6926c82g3d8ag4b56g81fag30f7383e287f" version="1">恐惧至极</content>
+	<content contentuid="hb815c416g915cg45c7gb046ga9e0c1984622" version="1">受到此连枷伤害的敌人必须通过对抗你&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;的感知&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则陷入&lt;LSTag Type="Status" Tooltip="FEARED"&gt;恐惧&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。&lt;br&gt;&lt;br&gt;可以装备在副手。</content>
+	<content contentuid="h2f136d43gd842g4ec6ga6d5ge1c683c220b7" version="1">掠食本能</content>
+	<content contentuid="hd038a6f5g6329g4741g8629g162cad14b0d8" version="1">你的&lt;b&gt;环阶法术&lt;/b&gt;对受&lt;b&gt;恐惧效果&lt;/b&gt;（恐慌、恐惧等）影响的目标自动造成&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;。</content>
+	<content contentuid="h231d8d9dg72dbg4d5aga9f0g2643471fa72e" version="1">神庙秘辛</content>
+	<content contentuid="he3fc3401gb50ag45b6g9f5bg3912e2f6a149" version="1">很久以前，沙漠深处藏着一座隐秘的神庙。但那里供奉的并非神灵，而是一棵树。这棵手无寸铁的古树，却是一处强大的魔力之源——正因如此，神庙的住民们守护着它，并以它的馈赠为食。当蛮族们寻到那座神庙时，他们摧毁了那棵树，但一名精灵设法带着一片树皮逃出生天，而他正是用这片树皮，制成了连枷的核心。</content>
+	<content contentuid="h0e071ed2g0a45g47e9gb7b1g90713f47e60f" version="1">神树核心</content>
+	<content contentuid="h079e6e1eg5248g4e8dgb2b3gb71e049983f4" version="1">在战斗中使用&lt;LSTag Type="ActionResource" Tooltip="ChannelDivinity"&gt;引导神力&lt;/LSTag&gt;或&lt;LSTag Type="ActionResource" Tooltip="ChannelOath"&gt;引导誓言&lt;/LSTag&gt;时，获得&lt;LSTag Type="Status" Tooltip="WEAPON28"&gt;神树之佑&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。&lt;br&gt;每场战斗只能触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h4207b025g87bag4491g865fge8c51a757b94" version="1">神树之佑</content>
+	<content contentuid="hc49e812agaf03g42c2ga5c5g3ee4415cf842" version="1">你的&lt;LSTag Tooltip="AttackRoll"&gt;攻击检定&lt;/LSTag&gt;获得&lt;LSTag Tooltip="Advantage"&gt;优势&lt;/LSTag&gt;。</content>
+	<content contentuid="hefcf6f3bg531ag4141ga907gac25e79a4c58" version="1">幸运猎手</content>
+	<content contentuid="he574f24bgf8bag4217gb8b2gbb5a6eb10933" version="1">在古老的年代，住着一位冒险家：一位好运的、专猎奇兽的猎人。在一次惊彩绝伦的狩猎中，他竟一举捕获了一头豺狼人与一只妖精。然而，后者为了换取自身的自由，向他提出了一个价码——将那头豺狼人变作了一件完美的战争兵器，一把大师级的连枷。</content>
+	<content contentuid="h7532f0e1g0422g4e85g9cb6gdca97646baa8" version="1">豺狼人之怒</content>
+	<content contentuid="h68433983g89acg4be8gb1ecg2eab56e89d01" version="1">使用此武器攻击时，有&lt;b&gt;[1]%&lt;/b&gt;的几率恢复一个&lt;LSTag Tooltip="Action"&gt;动作&lt;/LSTag&gt;。&lt;br&gt;每回合只能触发&lt;b&gt;一次&lt;/b&gt;。&lt;br&gt;可装备于副手。</content>
+	<content contentuid="h3a7b2c1dg4e5fg6a7bg8c9dge0f1a2b3c4d5" version="1">极速好运</content>
+	<content contentuid="h4b8c3d2eg5f6ag7b8cg9d0egf1a2b3c4d5e6" version="1">处于&lt;LSTag Type="Status" Tooltip="HASTE"&gt;加速&lt;/LSTag&gt;或类似效果下时，恢复动作的几率&lt;b&gt;翻倍&lt;/b&gt;。</content>
+	<content contentuid="h07373b07g907ag44d8ga683gb7a23f47cc50" version="1">感召连枷</content>
+	<content contentuid="h8e95a6a3gd12dg4c94g955fg18f584798f00" version="1">一把充满善意的奇特连枷。这把连枷上一次现身，是在地精格拉西的手中——她率领着她的同伴们，完成了一场场伟大的征服。可她究竟是如何将这等遗物弄到手的呢？</content>
+	<content contentuid="h9bbb0183g68c7g4d85ga8a0g56fe8231a8fa" version="1">地精的秘密</content>
+	<content contentuid="h3fc88757ga680g4f10g9b6bgb83861eaa221" version="1">以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;治疗自己或一名盟友时，目标在本场战斗剩余时间内获得&lt;LSTag Type="Status" Tooltip="WEAPON30"&gt;心智清明&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;每回合最多触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h4e7940a6ge832g438dga4b6g0f9df3c5d054" version="1">心智清明</content>
+	<content contentuid="h1aa89788g6336g4b0cg9298g5962720a0969" version="1">此生物的思维更加清晰，能更好地引导自身的攻击。它的&lt;LSTag Tooltip="AttackRoll"&gt;攻击检定&lt;/LSTag&gt;获得&lt;b&gt;+[1]~[2]&lt;/b&gt;加值。&lt;br&gt;&lt;br&gt;战斗结束时消失。</content>
+	<content contentuid="hf7f27059gfa93g4deaga68cg27886b9e1cf3" version="1">以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;治疗自己或一名盟友时，目标在本场战斗剩余时间内获得&lt;LSTag Type="Status" Tooltip="WEAPON30_1"&gt;心智清明&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;每回合最多触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h7ad2e8b7gec1ag45cfga141gc8d6483188b4" version="1">以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;治疗自己或一名盟友时，目标在本场战斗剩余时间内获得&lt;LSTag Type="Status" Tooltip="WEAPON30_2"&gt;心智清明&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;每回合最多触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="hd5cf5c3dga2a9g4d57gac40g395f653bb6f5" version="1">以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;治疗自己或一名盟友时，目标在本场战斗剩余时间内获得&lt;LSTag Type="Status" Tooltip="WEAPON30_4"&gt;心智清明&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;每回合最多触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h0a287038g965ag40a8g9f71g44d04fbaea12" version="1">狂怒神导</content>
+	<content contentuid="h0de30739g2952g4978gad5fg928aeb6b6ed8" version="1">进入&lt;LSTag Type="Status" Tooltip="RAGE"&gt;狂暴&lt;/LSTag&gt;时，完全恢复你的&lt;LSTag Type="ActionResource" Tooltip="ChannelDivinity"&gt;引导神力&lt;/LSTag&gt;与&lt;LSTag Type="ActionResource" Tooltip="ChannelOath"&gt;引导誓言&lt;/LSTag&gt;充能。&lt;br&gt;&lt;br&gt;每场战斗触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h4c1fbe0dg68b2g42c8gaccegbc74e7547936" version="1">屠城连枷</content>
+	<content contentuid="h73c9f754g944cg41e9g8d41gc7dc1b8de309" version="1">这把连枷曾屠戮了一整座村庄，当男人们奔赴战场之际，一个邪恶的邪术师及其喽啰们便对村中的老人与孩童施以凌虐。然而，这把阴邪的兵器此后便不知所踪——而这，或许是最好的结局。</content>
+	<content contentuid="h424d8173gc0b9g449egb473gcd185e61d9ab" version="1">折磨</content>
+	<content contentuid="hf7d3ea82ge0b6g4383gb525g7d77b33c4e6d" version="1">此生物受到&lt;b&gt;所有来源&lt;/b&gt;的伤害额外增加&lt;b&gt;[1]~[2]&lt;/b&gt;点。&lt;br&gt;此效果的持续时间可以叠加。</content>
+	<content contentuid="h9371b575g1805g4baagb1a5g8d9b9d52dcfb" version="1">发狂</content>
+	<content contentuid="h45b54dd4gc5a7g4616g924bgf90908a5f6cb" version="1">当你处于&lt;LSTag Type="Status" Tooltip="MADNESS"&gt;疯狂&lt;/LSTag&gt;状态时，所有其他生物在它们的回合开始时，累积&lt;b&gt;[1]&lt;/b&gt;回合的&lt;LSTag Type="Status" Tooltip="WEAPON31"&gt;折磨&lt;/LSTag&gt;。</content>
+	<content contentuid="h9278214bgfecbg442bg94e1ge0600d09921e" version="1">黑暗血统</content>
+	<content contentuid="h40e99367g790dg4c71g81f2g98c3e9470476" version="1">如果你是&lt;b&gt;兽人&lt;/b&gt;、&lt;b&gt;半兽人&lt;/b&gt;、&lt;b&gt;地精&lt;/b&gt;、&lt;b&gt;豺狼人&lt;/b&gt;、&lt;b&gt;熊地精&lt;/b&gt;、&lt;b&gt;坎比翁&lt;/b&gt;、&lt;b&gt;蛛化精灵&lt;/b&gt;、&lt;b&gt;大地精&lt;/b&gt;、&lt;b&gt;寇涛鱼人&lt;/b&gt;、&lt;b&gt;扎瑞尔提夫林&lt;/b&gt;、&lt;b&gt;灰矮人&lt;/b&gt;或&lt;b&gt;萝丝卓尔&lt;/b&gt;——以&lt;b&gt;这把连枷&lt;/b&gt;攻击会迫使目标通过对抗你&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;的&lt;LSTag Tooltip="Wisdom"&gt;感知&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则受到&lt;LSTag Type="Status" Tooltip="WEAPON31"&gt;折磨诅咒&lt;/LSTag&gt;。</content>
+	<content contentuid="h9450d0c3g83bdg4477g8e54g716260785713" version="1">浅海潮汐</content>
+	<content contentuid="h53e741c2g81f8g4657gaf8cg1f33af6de662" version="1">一个渔夫偶然瞥见沿岸浅海之中泛起一抹金属的寒光，他便在顷刻间发家致富。那块矿石是一种罕有的魔法金属，沿岸的族人用它为他们最出色的战士铸就了一件惊人的兵器。数千年间，它在一代又一代的勇士中辗转流传，直到王朝的末裔在一场旷日之战中被人从背后捅刀，凄惨地战死。</content>
+	<content contentuid="h122107fcg9e76g4983g8d09g65830f0262ae" version="1">深海疗愈</content>
+	<content contentuid="hd313dcecg41aag4fa7g97bfg16d6c6c1bcb1" version="1">当你用这把连枷对一名敌人造成伤害时，为你自身与盟友恢复&lt;b&gt;[1]&lt;/b&gt;点生命值。&lt;br&gt;每回合只能触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="hc7908c41gd1e1g4119ga275g34270625d36d" version="1">海洋动荡</content>
+	<content contentuid="h513d1651g13abg4974g9d9cg6fe8214ac112" version="1">影族连枷</content>
+	<content contentuid="hac4ae76eg0974g46bbgb240g753b82762566" version="1">很久以前，暗影氏族曾雄踞整片大陆——当然，是以一种隐秘的方式。他们将世间万物尽收眼底，而族人也长生不死，皆因他们能从残忍的遗物中汲取力量——那些暗影本身的伟力。可这么一个空前强大的氏族，最终却在内部权斗的猛烈倾轧之下，土崩瓦解。</content>
+	<content contentuid="hc9bfc82egf396g4328g819agadc831c9bfaf" version="1">暗影侵生</content>
+	<content contentuid="hfc82fde7g3f82g4494gaa07g6923e005f318" version="1">在&lt;b&gt;黑暗术云雾&lt;/b&gt;中结束你的回合时，将对所有敌人施加&lt;LSTag Type="Status" Tooltip="AMP_LURKING_HORROR"&gt;潜藏恐惧&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h7e74d784g0afdg469fg8fbdg6d5539b34ff5" version="1">潜藏恐惧</content>
+	<content contentuid="hefcb2386geaeeg4768gba28g37f82119ccc6" version="1">此生物进行&lt;LSTag Tooltip="AttackRoll"&gt;攻击检定&lt;/LSTag&gt;时，必须通过对抗来源的&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;的感知&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则陷入&lt;LSTag Type="Status" Tooltip="FRIGHTENED"&gt;恐慌&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h0acc165bg53e3g4a8cg8f63gf49cba4ca255" version="1">放血镰刀</content>
+	<content contentuid="h8678dbe4g5940g4cebgaf99g20ce45b513a3" version="1">镰刀闪烁着凶戾的红光，仿佛无意间暴露了其中囚禁的、永无餍足的魔法。握柄由某种未知生物的皮所制成，而刀锋本身，则锋利到足以将熊皮切割齐整。</content>
+	<content contentuid="heeab3246g05b0g41f3gbf9ag884ae2e973b9" version="1">放血</content>
+	<content contentuid="h668223cag9f35g4bd6g8bcbg31c223ade27d" version="1">受到此镰刀伤害的生物必须通过对抗你&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;的体质&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则陷入&lt;LSTag Type="Status" Tooltip="WEAPON34"&gt;血流不止&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h9929f0c1gccc2g4c0aga322g3e7e06681a42" version="1">血流不止</content>
+	<content contentuid="h55fe83c1g2dc7g44b0gb1e7g1fb60225a1cc" version="1">此生物每回合受到&lt;b&gt;[1]&lt;/b&gt;点伤害。&lt;br&gt;&lt;br&gt;如果流血持续时间达到&lt;b&gt;[2]&lt;/b&gt;回合或更长，此生物受到&lt;b&gt;[3]&lt;/b&gt;点伤害，随后结束流血。血流不止的魔力允许此效果施加于原本免疫&lt;LSTag Type="Status" Tooltip="BLEEDING"&gt;流血&lt;/LSTag&gt;的生物。</content>
+	<content contentuid="h0bfb421ag7221g4076gb023gd80208c4811d" version="1">受到此镰刀伤害的生物必须通过对抗你&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;的体质&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则陷入&lt;LSTag Type="Status" Tooltip="WEAPON34_2"&gt;血流不止&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h1c107c93gc5f2g4985gb6e3ge314f2246069" version="1">受到此镰刀伤害的生物必须通过对抗你&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;的体质&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则陷入&lt;LSTag Type="Status" Tooltip="WEAPON34_3"&gt;血流不止&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h1164ceb1g507bg4cefgbbc6ge5a91201d9bb" version="1">受到此镰刀伤害的生物必须通过对抗你&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;的体质&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则陷入&lt;LSTag Type="Status" Tooltip="WEAPON34_4"&gt;血流不止&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h79858086g920eg4ec9gb73dg5c19264e113e" version="1">此生物每回合受到&lt;b&gt;[1]&lt;/b&gt;点伤害，并对&lt;b&gt;[4]&lt;/b&gt;具有&lt;LSTag Tooltip="Vulnerable"&gt;易伤&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;如果流血持续时间达到&lt;b&gt;[2]&lt;/b&gt;回合或更长，此生物受到&lt;b&gt;[3]&lt;/b&gt;点伤害，随后结束流血。血流不止的魔力允许此效果施加于原本免疫&lt;LSTag Type="Status" Tooltip="BLEEDING"&gt;流血&lt;/LSTag&gt;的生物。</content>
+	<content contentuid="hf0b23ec1g7963g4933gb151g473e1f1cec86" version="1">轻风镰刀</content>
+	<content contentuid="hfffa93cbg3972g40fag8fa0gda7396b66490" version="1">这把精良的兵器曾属于一位轻风氏族的精灵祭司。这柄被赋予了魔法的镰刀，陪伴她经历了无数次生存考验，却在最后一次试炼中功亏一篑——豺狼人们为了夺取这件诱人的遗物，设下埋伏，将那位可怜的精灵活活拖垮。</content>
+	<content contentuid="h9ec5ebfcgc333g427agaffbg4c50d78eb493" version="1">氏族技艺</content>
+	<content contentuid="h519a0b0ag954ag4120g961agb2c1b52b4e8d" version="1">当你使用此镰刀攻击未命中时，获得&lt;LSTag Type="Status" Tooltip="WEAPON35"&gt;魔法涡流&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合，你的&lt;LSTag Tooltip="ArmourClass"&gt;护甲等级&lt;/LSTag&gt;提高&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="hf8bc2b00gcf36g46f0g940cg95681cb72525" version="1">魔法涡流</content>
+	<content contentuid="h8aca0ecagf7c6g4317g8507gb27e3d4e9353" version="1">&lt;LSTag Tooltip="ArmourClass"&gt;护甲等级&lt;/LSTag&gt;&lt;b&gt;+[1]&lt;/b&gt;</content>
+	<content contentuid="he37bedd0g6d26g4b45gb33bgd9aca2d09151" version="1">不竭之绊</content>
+	<content contentuid="h24c6158fgd2b1g4551ga846g6ae9ad36e5aa" version="1">当你使用此镰刀命中一名敌人时，有&lt;b&gt;[1]%&lt;/b&gt;的几率（若你为&lt;b&gt;精灵&lt;/b&gt;则为&lt;b&gt;[2]%&lt;/b&gt;）恢复你&lt;b&gt;所有&lt;/b&gt;&lt;b&gt;[3]&lt;/b&gt;环的&lt;LSTag Tooltip="SpellSlot"&gt;法术位&lt;/LSTag&gt;。</content>
+	<content contentuid="h6cf3b236ga132g44e4g97bdg77cc6914fd16" version="1">当你使用此镰刀攻击未命中时，获得&lt;LSTag Type="Status" Tooltip="WEAPON35_2"&gt;魔法涡流&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合，你的&lt;LSTag Tooltip="ArmourClass"&gt;护甲等级&lt;/LSTag&gt;提高&lt;b&gt;[2]&lt;/b&gt;。</content>
+	<content contentuid="ha262ecdag9b20g4279g8b68g82d81f29ac3d" version="1">当你使用此镰刀攻击未命中时，获得&lt;LSTag Type="Status" Tooltip="WEAPON35_3"&gt;魔法涡流&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合，你的&lt;LSTag Tooltip="ArmourClass"&gt;护甲等级&lt;/LSTag&gt;提高&lt;b&gt;[2]&lt;/b&gt;。</content>
+	<content contentuid="heb9a84e3g5e98g42fegbea0g3c7e4ffc7e91" version="1">塞伦涅的新月</content>
+	<content contentuid="h3a7cf577g66c2g4816g8113g7c35f3b7f15e" version="1">握柄上塞伦涅的印记，明明白白地昭示着这把镰刀曾属于谁。在月光与群星的照耀下，它的力量非但没有随着岁月衰减，反而愈发强大。仿佛那位女神本人正眷顾着这件遗物的主人，并在其一切冒险中降下赐福。</content>
+	<content contentuid="h6a8e2852g942ag4012g8c70gc68fd0d0e2af" version="1">塞伦涅的祝福</content>
+	<content contentuid="ha12245eeg92afg4a41gb22bgf118af41ef0f" version="1">当你以&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;治疗一名生物时，额外为其恢复&lt;b&gt;[1]&lt;/b&gt;。若你是&lt;b&gt;塞伦涅&lt;/b&gt;的信徒，同时赋予&lt;LSTag Type="Status" Tooltip="RESISTANCE"&gt;抵抗&lt;/LSTag&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合。</content>
+	<content contentuid="hd643de8fg58e6g447bga5fcgac079b7b5177" version="1">月光圣域</content>
+	<content contentuid="hbc711861gd370g4be9g8c9ag70453402aa15" version="1">受到伤害时，你有&lt;b&gt;[1]%&lt;/b&gt;的几率获得&lt;LSTag Type="Status" Tooltip="SANCTUARY"&gt;圣域&lt;/LSTag&gt;效果，持续&lt;b&gt;[2]&lt;/b&gt;回合。如果你是&lt;b&gt;塞伦涅&lt;/b&gt;的信徒，该几率&lt;b&gt;翻倍&lt;/b&gt;。</content>
+	<content contentuid="hfb9465d4g3221g4760gb600gea60dde8be3b" version="1">部落猎镰</content>
+	<content contentuid="h2e39efa0g9f12g4c70g8ecbgbffc11257190" version="1">这件粗糙的杀戮工具，由某只巨兽的骸骨仓促制成，却对持用者的任何敌人都构成了严重威胁。刀刃并不十分锋利，但一股微妙而古老的魔力，能将这件兵器挥扫路径上的一切柔软物体撕成碎片。用来猎杀大型野兽，再趁手不过。</content>
+	<content contentuid="hc28beff0g7e93g42baga238g0d6c789bfa61" version="1">原始弱点</content>
+	<content contentuid="hac783056gf96ag4b95ga7e8g770db7c70057" version="1">以&lt;b&gt;这把镰刀&lt;/b&gt;造成伤害时，迫使目标通过&lt;LSTag Tooltip="Dexterity"&gt;敏捷&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则失去&lt;b&gt;[1]&lt;/b&gt;点&lt;LSTag Tooltip="ArmourClass"&gt;护甲等级&lt;/LSTag&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合。&lt;LSTag Tooltip="DifficultyClass"&gt;难度等级&lt;/LSTag&gt;取决于你的&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;。</content>
+	<content contentuid="h901471a5ga704g4f4eg8bdfgdf38b1587afc" version="1">枯萎</content>
+	<content contentuid="hf5276004gd7a1g44f2g88c0geee03bd4c22e" version="1">&lt;LSTag Tooltip="ArmourClass"&gt;护甲等级&lt;/LSTag&gt;&lt;b&gt;-[1]&lt;/b&gt;</content>
+	<content contentuid="hf68c4a13g6881g4c37g910fg32d7c29a7473" version="1">猎手本能</content>
+	<content contentuid="h6254dda1gf88bg4d1cgb80bgb11537914b70" version="1">你对&lt;b&gt;野兽&lt;/b&gt;、&lt;b&gt;异怪&lt;/b&gt;、&lt;b&gt;龙类&lt;/b&gt;、&lt;b&gt;巨人&lt;/b&gt;与&lt;b&gt;怪兽&lt;/b&gt;的&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;阈值降低&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="h9ca04d0fg5fb0g4104g8545gba63ccfb4358" version="1">黑暗契约</content>
+	<content contentuid="he0e39ee1ge2b0g4857gbc6ag0f55bd0bb766" version="1">有一日，国王的顾问决定将自己的女儿嫁给王储。为此，他联系了一位狡诈的邪术师，与其达成了一桩黑暗的契约——这位顾问必须用一把特定的镰刀杀死一万名无辜者，届时国王便会即刻应允这桩亲事。于是阿塔尼克便开始了漫长的灵魂收割之旅，这趟旅途直到五百年后才告一段落，彼时他的女儿早已香消玉殒，而她的身份，自始至终，仍是一介卑微庶民。</content>
+	<content contentuid="h6f09e55fge3ccg472fg9a08g6d23c51f655b" version="1">黑暗收割</content>
+	<content contentuid="hcbc2e92cg9d0bg4011g898agf1533ff01c3d" version="1">使用此镰刀造成伤害时，额外造成&lt;b&gt;[1]&lt;/b&gt;点伤害，但获得&lt;b&gt;[2]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="WEAPON38"&gt;契约代价&lt;/LSTag&gt;。</content>
+	<content contentuid="haae81825g341ag4b40gb30eg9ec4a1bb45dc" version="1">契约代价</content>
+	<content contentuid="hfcc19b0ag9a88g441agac1ag5b2dc03804c6" version="1">每有一层此效果，你便损失&lt;b&gt;[1]%&lt;/b&gt;的&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;。</content>
+	<content contentuid="hfcf31dcbg164dg4aa3g8eb5g673aaa8c5c94" version="1">灵魂收割者</content>
+	<content contentuid="h2cdd742fg896eg4602gac53g2b654e9f66ed" version="1">使用&lt;b&gt;此镰刀&lt;/b&gt;杀死一名生物时，你的最大&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;提高&lt;b&gt;[1]%&lt;/b&gt;，直至&lt;LSTag Tooltip="LongRest"&gt;长休&lt;/LSTag&gt;。</content>
+	<content contentuid="hf1556b78g6fc8g468ag8e4bgd50eebe8b17d" version="1">已收割灵魂</content>
+	<content contentuid="h413963e2g36cdg49fbg991ag8f3f30fc3838" version="1">每有一层此状态，你的最大&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;增加&lt;b&gt;[1]%&lt;/b&gt;。</content>
+	<content contentuid="h5ff1a908g844eg43b5g9fd1g752ba42082ca" version="1">低喃林语</content>
+	<content contentuid="h23a80a4cg9b51g413aga0f6gb712d9d94142" version="1">德鲁伊们日夜守护着他们的林地，协助他们完成这一使命的，正是这件遗物——据说西凡纳斯本尊亲自赐予了这座林地。这柄魔法镰刀与自然相连共鸣的能力，令学徒们叹为观止，也令许多人垂涎欲滴，心生贪念，迫不及待地想要独占这份力量。最终，一名叛徒正是用同一把镰刀，将整座低语林地砍伐殆尽。</content>
+	<content contentuid="h35925a6ag9396g44ecgb699g442a6d9d5209" version="1">大地伟力</content>
+	<content contentuid="h5a5b39d2gf734g49fagae5eg60f84b56e352" version="1">每回合开始时，自然之力正在苏醒，&lt;LSTag Type="Status" Tooltip="ENSNARED_VINES"&gt;纠缠&lt;/LSTag&gt;半径&lt;b&gt;[1]&lt;/b&gt;内所有未能通过敏捷&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;的敌人。&lt;br&gt;&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;难度等级&lt;/LSTag&gt;取决于你的&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;。</content>
+	<content contentuid="h52e47bc0gd8d1g4b2fga2ebgbdef0a07e488" version="1">纠缠灵光</content>
+	<content contentuid="hf7853902g79adg4e33ga8a8g265f241f5a96" version="1">齐里斯克之牙</content>
+	<content contentuid="h5d104ad8g29d4g4dc2g8a94g2215e6beb160" version="1">齐里斯克是两万年前的一头危险掠食者，彼时正是海什卡大军征伐精灵诸国的时代。齐里斯克十分钟爱兽人的肉，时常劫掠部落的马车，一次便会抓走几千个兽人充当口粮。海什卡很快就得知了此事，并亲自展开了猎杀。他虽未能杀死这头超级掠食者，却设法拔下了它的獠牙——这彻底打消了它再吞食任何兽人的胃口。</content>
+	<content contentuid="h9404f6ebg85c1g4f7dg99fdg65476cbd23cf" version="1">毒腺</content>
+	<content contentuid="h3d614929gb0edg4220g8e68gbd3f812f2add" version="1">受到此镰刀伤害的生物必须通过对抗你&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;的体质&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则被施加&lt;LSTag Type="Status" Tooltip="WEAPON40"&gt;定身毒液&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h8bb1b2c6g2968g497bgb31fg4f1e161f0abc" version="1">定身毒液</content>
+	<content contentuid="hcf22cd19g065eg46c3gaed6g65e47da6dc43" version="1">此生物&lt;b&gt;无法&lt;/b&gt;恢复&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;且&lt;b&gt;无法移动&lt;/b&gt;。</content>
+	<content contentuid="h0d552413g52feg4ca7g8080g13ee881804a6" version="1">远古诅咒</content>
+	<content contentuid="h48ec1dcag04d4g4390g8188gbcd934ed8c2a" version="1">当敌人成为你的&lt;b&gt;环级法术&lt;/b&gt;的目标时，必须通过对抗你&lt;LSTag Tooltip="SpellDifficultyClass"&gt;法术豁免难度等级&lt;/LSTag&gt;的感知&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则承受&lt;b&gt;[1]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="WEAPON40_2"&gt;虚弱诅咒&lt;/LSTag&gt;。</content>
+	<content contentuid="h6343d620g0ee1g4509g9e38g086a4a9bc100" version="1">虚弱诅咒</content>
+	<content contentuid="hc89727cag737ag446dgb54bg8990a80df4b9" version="1">每有一层此效果，此生物便会损失&lt;b&gt;[1]&lt;/b&gt;点体质，并在回合开始时消耗其全部的&lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;附赠动作&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;战斗结束时消失。</content>
+	<content contentuid="h092ede8fgcd63g4ce1gb13eg2fa2d49b86b2" version="1">血月</content>
+	<content contentuid="h07e0801dg9e52g4494gbb3agffef10e183a7" version="1">血月癫狂——在一座不幸的村庄里，人们都这么叫它。那时，一个村民被一头怪狼传染了狂犬病，便将自己的家人和几户近邻吸成了干瘪的骨架。这名村民虽被郡里的守卫诛杀，疫病却早已传染给了其中一名卫兵，而这新生的怪物，反过来又将昔日同僚们的汁液啜饮殆尽。这场瘟疫持续了数十年，直到一位博学的法师想出了法子，将最后一名感染者的污秽灵魂，萃入了一件魔法遗物之中，才一劳永逸地根除了它。而在千万年之后，只有最悍勇无畏的人，才敢尝试去驾驭血月的这股力量。</content>
+	<content contentuid="hb1fdd683g7644g4eeagab7cg91dd4db87be1" version="1">癫血</content>
+	<content contentuid="hca63c5bagd41cg4b8bga112g57fecd6ffa5e" version="1">使用此武器攻击一名敌人时，有&lt;b&gt;[1]%&lt;/b&gt;的几率对该敌人施加&lt;LSTag Type="Status" Tooltip="WEAPON41"&gt;血月癫狂&lt;/LSTag&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合。</content>
+	<content contentuid="hccfe4651gb92fg473eg915dg160cedc4097e" version="1">狂月</content>
+	<content contentuid="h3e15555ag5d7dg4178g924dg837c090aea35" version="1">对敌人施放&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;时，有&lt;b&gt;[1]%&lt;/b&gt;的几率对其施加&lt;LSTag Type="Status" Tooltip="WEAPON41"&gt;血月癫狂&lt;/LSTag&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合。</content>
+	<content contentuid="hf288498dg990dg4b48gb59bga7b760bb89d8" version="1">血月癫狂</content>
+	<content contentuid="ha2733946gf54fg403bg821fg814821a28943" version="1">此生物在回合结束时受到&lt;b&gt;[1]&lt;/b&gt;点伤害。持续时间可以叠加。&lt;br&gt;若此生物在此诅咒激活期间死亡，施加诅咒者获得&lt;LSTag Type="Status" Tooltip="WEAPON41_2"&gt;血月恩典&lt;/LSTag&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合。</content>
+	<content contentuid="hf03c6499gc72dg4880g89d5gac750803f19c" version="1">血月恩典</content>
+	<content contentuid="h7340b90fg5a11g42a1gb228g34ab55a007df" version="1">你在每个回合结束时恢复&lt;b&gt;[1]&lt;/b&gt;点生命。</content>
+	<content contentuid="ha53740b1ga1f5g401dg9f23ga3bd4bbce9ca" version="1">附魔短弓</content>
+	<content contentuid="h59ef134cge6cfg4b53g8697g2c1edb252985" version="1">很久以前，有一位名叫贡多的匠师。贡多以他出神入化的掷矛之技而闻名。据说，他能将一支矛笔直掷上参天橡树的顶端，并以矛尖将其贯穿。  某日，一位皇室传令官来到了村中，宣告一场盛大的比武即将召开，届时，天下最出色的武器大师们将齐聚一堂，为争夺成为王储侍从的资格而一决高下。长话短说，贡多启程赶赴了这场大比武。然而，他刚在城中递交了申请，便得知比武已被一位大臣暗中买通，这位大臣为将自己的儿子捧上侍从之位，蓄意篡改了比武规则，好让大师们拿到对他们最为不利的兵器。   贡多意识到，他极有可能在弓箭比赛中被人坑害——于是他决定自己也不妨耍点花招。他从一位本地法师那里买了一道魔咒，并精心打造了一把精准而又威力无匹的弓。然而，贡多的计谋终究被那位大臣识破，大臣通过权术倾轧，将这位匠师送上了刑场，而那张附魔的弓，则落入了王室的金库之中。</content>
+	<content contentuid="hd2cac7ebg81deg4560ga08cg46442342e743" version="1">精准附魔</content>
+	<content contentuid="hc7fdd2abga82ag419egb7f3geb4218cc22e9" version="1">使用此弓时，你的&lt;LSTag Tooltip="AttackRoll"&gt;攻击检定&lt;/LSTag&gt;获得&lt;b&gt;+[1]~[2]&lt;/b&gt;加值。</content>
+	<content contentuid="h873be208g816dg4780gbe3eg8b10bfb75834" version="1">踉跄射击</content>
+	<content contentuid="h873be208g816dg4780gbe3eg8b10bfb75835" version="1">使用&lt;b&gt;此弓&lt;/b&gt;造成伤害时，目标将陷入&lt;LSTag Type="Status" Tooltip="MAG_ATTACK_DEBUFF"&gt;踉跄&lt;/LSTag&gt;状态，持续&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="ha351b740g9116g4e0fg83f9g030addb50eba" version="1">战争短弓</content>
+	<content contentuid="h7f7c1d09g7962g49aegb3a3ge210cc5be0ad" version="1">无人知晓这件完美的战争利器曾为谁所有，但这把弓无疑是为技艺高超的大师们量身打造的。舒适的握把、精良而趁手的弓弦、完美调校的张力——这把弓上的一切，皆是为真正的射手而生。世人唯有祈愿，这件威严的兵器，能落入一双正直善良的手中。</content>
+	<content contentuid="hf74b814ega24dg489cg994dg325c67be3a22" version="1">杀戮印记</content>
+	<content contentuid="h9ffd2e83ga20fg4a04g8458ge5f27f5150a4" version="1">你对&lt;b&gt;类人生物&lt;/b&gt;、&lt;b&gt;巨人&lt;/b&gt;、&lt;b&gt;不死生物&lt;/b&gt;、&lt;b&gt;构装生物&lt;/b&gt;、&lt;b&gt;天界生物&lt;/b&gt;与&lt;b&gt;邪魔&lt;/b&gt;造成额外&lt;b&gt;[1]&lt;/b&gt;点伤害。</content>
+	<content contentuid="h0a89d709g1851g49f0gb8a0g2f9dd7452894" version="1">精灵短弓</content>
+	<content contentuid="hbcf919b0g092cg4048g8534gba2d11415002" version="1">众所周知，精灵是公认的远程战斗大师。他们的武器享誉整个费伦大陆，而弓箭，更是以精良的工艺与一丝不苟的细节而著称。这把弓铸造于遥远的过去，却至今仍毫未磨损——它的弓弦，仍能将一具地精的身躯整齐地一分为二。弓中蕴藏着一道古老的魔法，赋予了它卓越的战斗性能，对于任何精灵武器的鉴赏家而言，它显然都是不二之选。</content>
+	<content contentuid="h77b8b87bg73ddg4d99g8f2egfb64f87c38c9" version="1">精灵精准</content>
+	<content contentuid="he5652799gd8eeg4ab9g83f8gd2d2a55c26df" version="1">进行远程攻击且掷骰结果不高于&lt;b&gt;[1]&lt;/b&gt;时，重掷该骰子并取新结果。&lt;b&gt;精灵&lt;/b&gt;在不高于&lt;b&gt;[2]&lt;/b&gt;时重掷，并取较高结果。</content>
+	<content contentuid="h4cd3b05ag6092g48d3gbf6cgf508e493732f" version="1">净化之箭</content>
+	<content contentuid="h6ad56500g6738g48e2g8fbbg272e9a4cb909" version="1">如果你是&lt;b&gt;精灵&lt;/b&gt;，使用&lt;b&gt;此弓&lt;/b&gt;造成伤害时，移除目标身上的&lt;b&gt;所有状态&lt;/b&gt;。</content>
+	<content contentuid="h2c483d32gabc6g4992g8c6dg392b1ed9d8fa" version="1">追袭短弓</content>
+	<content contentuid="h947b8ab4g8aa8g4266gb6bcg8929c82561e3" version="1">游牧半人马曾用于劫掠的旧弓之一。这把弓中蕴含着一股奇异的力量，能加速箭矢，令其在飞行中剧烈震颤，从而在任何挡在箭矢路径上的敌人身上撕出豁口。</content>
+	<content contentuid="h32863387g9295g42a0g91efgcc3fcb1c643e" version="1">倒刺追袭</content>
+	<content contentuid="h50542b6dg80a1g4d3eg8deag34c2f748b9f2" version="1">造成远程伤害时，迫使目标通过一次&lt;LSTag Tooltip="Constitution"&gt;体质&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则将承受&lt;LSTag Type="Status" Tooltip="BARBED_ARROW"&gt;撕裂&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。&lt;LSTag Tooltip="DifficultyClass"&gt;难度等级&lt;/LSTag&gt;取决于你的&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;。</content>
+	<content contentuid="h9d1c5e30ga47bg4c82gb6e1g3f8a2d4c5b90" version="1">造成远程伤害时，迫使目标通过一次&lt;LSTag Tooltip="Constitution"&gt;体质&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则将承受&lt;LSTag Type="Status" Tooltip="BARBED_ARROW"&gt;撕裂&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。每次命中还会令目标寒意刺骨，使其&lt;LSTag Tooltip="MovementSpeed"&gt;移动速度&lt;/LSTag&gt;降低，持续&lt;b&gt;[2]&lt;/b&gt;回合。&lt;LSTag Tooltip="DifficultyClass"&gt;难度等级&lt;/LSTag&gt;取决于你的&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;。</content>
+	<content contentuid="hfeb99cb2g0a74g44b0gb1acg632488214cd3" version="1">浮空短弓</content>
+	<content contentuid="he76a5723g3f79g46d5g9e47g2f5dc759a0cb" version="1">卓尔莱纳罗是个独行者，他痴迷于穿行在幽暗地域最为险阻的角落。旅途中，他时常遭遇无从逾越的峡谷与裂隙，而他随身携带的一件魔法遗物，总能助他化险为夷。那枚水晶，是他从一头早已死去的地底生物体内取出的，被镶嵌在他短弓的握柄之中，使他能在短时间内低空悬浮，强化他的跳跃，并减缓他的坠落之势。只可惜，莱纳罗并未时刻保持警觉——在一次露宿时，他被一群狂热的卓尔信徒于睡梦中残忍杀害。</content>
+	<content contentuid="h6a50bba6g59e5g46c5ga988g25b94b4f4171" version="1">浮空水晶</content>
+	<content contentuid="hdd4d2eb8g5eb6g4f3cg8025g5e8c424fe279" version="1">坠落伤害&lt;b&gt;减半&lt;/b&gt;，&lt;b&gt;跳跃距离&lt;/b&gt;增加&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="hddf7aecdg36d0g4f61ga3d2gbc2f75654766" version="1">雷鸣着陆</content>
+	<content contentuid="h2a484a69g60eag44e0g99f4g97146696a729" version="1">&lt;b&gt;可切换功能。&lt;/b&gt;当你跳跃时，对&lt;b&gt;[1]&lt;/b&gt;范围内的所有敌人施加&lt;LSTag Type="Status" Tooltip="MAG_THUNDER_REVERBERATION"&gt;残响&lt;/LSTag&gt;。</content>
+	<content contentuid="h1b86d346g92a4g41e3gbdb6g59e8277b9f9a" version="1">鸿运短弓</content>
+	<content contentuid="hef930158g1900g4187g9b60g0dee13313432" version="1">这把精巧的弓出自皇家军械库，它的辉光极为惹眼，昭示着被施加了强大的魔力。</content>
+	<content contentuid="hbefe8374gc81cg4809ga436g77de0ae50fed" version="1">偷猎短弓</content>
+	<content contentuid="h31014573g3c43g455cga34cg2272179a4432" version="1">偷猎者们结成了一整支帮派，严重妨碍了国王在本地领地上的狩猎。国王辛尼库斯一世下令剿灭这群偷猎者，而匪首将处以五马分尸之刑，以供民众取乐。这场“猎人追缉”的行动并未持续太久——守卫们不过是将训练有素的野猪赶入林中，便当场逮住了几名偷猎者。经过短短几个时辰的骇人酷刑，这帮匪徒就供出了同伙的窝点。偷猎者们的财产，包括这把魔法弓，都被赐给了守卫，以嘉奖他们缉拿罪犯时的机智。</content>
+	<content contentuid="h94d78685g4091g431cg8be6g01e82eaeb637" version="1">驭兽咒术</content>
+	<content contentuid="h69fc6685g4bc5g491fg96bfga40feac287f9" version="1">使用此弓攻击&lt;b&gt;野兽&lt;/b&gt;或&lt;b&gt;邪魔&lt;/b&gt;时，额外造成&lt;b&gt;[1]&lt;/b&gt;点伤害。</content>
+	<content contentuid="h9916e463gf295g4ad2ga77dgdfb3e3a14c07" version="1">原始恐惧</content>
+	<content contentuid="h8776a9b0gf37ag4cdega2b4g9b1dc025f4e7" version="1">被&lt;b&gt;这把弓&lt;/b&gt;伤害的&lt;b&gt;野兽&lt;/b&gt;必须通过对抗你&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;的&lt;LSTag Tooltip="Wisdom"&gt;感知&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则陷入&lt;LSTag Type="Status" Tooltip="FRIGHTENED"&gt;恐慌&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="he9cacadbgcce3g47ebg93deg767cd35fd61b" version="1">舒缓短弓</content>
+	<content contentuid="haf698339gd27dg4abeg8319g04d3f87fd950" version="1">精致的银质弓身，似乎闪烁着皎洁的月之辉光，为所有将此弓握在手中的人带来希望。一件神祇的赠礼，自太古时代被挖掘出土——也许它本应沉眠于此，可它还是重返尘俗，随时准备襄助伟业，并改变千万人的命运。</content>
+	<content contentuid="h790ac3a6g7882g4623g9a62gaa093a702f15" version="1">至高赐福</content>
+	<content contentuid="h9d0669e4g3382g4925gadaeg0b2a6eeaaf44" version="1">使用此弓攻击未命中时，获得&lt;b&gt;[1]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="WEAPON49"&gt;月之轻盈&lt;/LSTag&gt;。</content>
+	<content contentuid="h577256ebg8ee4g4650g8f88g20782d4a038b" version="1">月之轻盈</content>
+	<content contentuid="h8778f0baged93g493cgaf37ged2f41871eb0" version="1">每有一层此效果，远程武器&lt;LSTag Tooltip="AttackRoll"&gt;攻击检定&lt;/LSTag&gt;增加&lt;b&gt;+[1]&lt;/b&gt;。在&lt;LSTag Tooltip="LongRest"&gt;长休&lt;/LSTag&gt;后不会消失。&lt;br&gt;使用远程武器命中后消失。</content>
+	<content contentuid="h13f6d230gb940g4471ga262g67cbb1e27f58" version="1">慵懒短弓</content>
+	<content contentuid="had97b110gc3dcg4993g8401g838ae2110282" version="1">阿尔·迪拉里克时常奉内阁之命外出执行特殊任务，专门解决那些极为复杂的政治纠纷——而这类差事的性质，往往需要武力与计谋并施。曾有一段时间，他在身边聚结了一支强悍的队伍：法师格雷乌斯、强盗舒恩，以及一名来自静谧谷的沉默骑士。他们这支小队屡屡从艰险的冒险中全身而退，皆倚仗法师的加护——这把短弓便是其中之一，即使在低张力下，也能将箭矢以全力射出。</content>
+	<content contentuid="h573c550ageed2g4edeg9bb1g6a5e95dd0246" version="1">增幅射击</content>
+	<content contentuid="h69e40308g5318g4351g85c6gb562ac542cd4" version="1">此弓的&lt;b&gt;伤害骰&lt;/b&gt;结果不会低于&lt;b&gt;[1]&lt;/b&gt;。&lt;br&gt;&lt;LSTag Type="Image" Info="SoftWarning"/&gt;影响此弓伤害的所有额外伤害骰，其结果同样不会低于&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="h33da95b1g649fg4ccag8b95g9bb2d6ed6feb" version="1">雷波短弓</content>
+	<content contentuid="hc7e3bfe3gabc3g457agb3d4gc9c6e64c5c93" version="1">在遥远的过去，一片遥远国度的雪峰之巅上，曾住着一位武僧。无数战士远赴而来，只为求见他，他们知道，他掌握着那些能驯服雷霆与诸般天威的、不为人知的天界秘修法门。但这位武僧拒绝了战士们，因为凡人不应知晓天界的秘密。奥兰部族的一名野蛮人感到深受冒犯，于是在一名邪术师的协助下，对武僧降下诅咒——这道诅咒迫使他不得不下山踏入文明世界寻求医治。而那名邪术师正在此恭候，他以残暴的手段将武僧献祭，并将他的灵魂囚禁在了一件诅咒的容器之中。而这位深受冒犯的蛮族战士，则获得了那位被启迪的武僧的一缕灵魂碎片，并利用这枚碎片强化了他的弓。</content>
+	<content contentuid="h65312303g8a59g41bdgbc90gbb61c1fca8db" version="1">雷鸣射击</content>
+	<content contentuid="hfec8aef8gcdb1g4e73ga30ag5706349c9420" version="1">受到此弓伤害的生物必须通过对抗你&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;的力量&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则被击退&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="h91894a2dgcc01g4625gad4ege68130a747ca" version="1">蛇纹短弓</content>
+	<content contentuid="h071a412dg2e5bg403dg8743g4b89342c4fae" version="1">一层神秘的粘液覆盖在弓箭的握柄上，魔法般地将剧毒加持在每一根由它射出的箭矢之上。</content>
+	<content contentuid="h360e188fgd575g4072ga721g9c24071937b6" version="1">剧毒射击</content>
+	<content contentuid="h55e48d4fgafaag4ddagae7fg35aecdae96cb" version="1">被&lt;b&gt;这把弓&lt;/b&gt;伤害的目标必须通过对抗你&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;的&lt;LSTag Tooltip="Constitution"&gt;体质&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则陷入&lt;LSTag Type="Status" Tooltip="POISONED"&gt;中毒&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h44fa1a79ga731g4f52g89a4gf72547d7c0de" version="1">不歇之弓</content>
+	<content contentuid="h7a0f0e62gd571g4646g9ff0gaf9b91a6f5ec" version="1">这件武器曾属于一位威名远播诸多国度的斗士，出身于游牧民族的他，在幼年时便被一位古代君王掳为奴隶，并被训练成了他的角斗士，在斗技场上供人取乐。这名游牧战士最终成为了这一行当中的佼佼者，尤以擅使弓箭而著称。作为某场比武的奖赏，举办方赠予了他一把特殊的短弓，能助他重振气力，以全盛的姿态再度投身战斗。</content>
+	<content contentuid="hcf0dc91bg1078g4657g8f92gbefbed9d30e8" version="1">坚韧不拔</content>
+	<content contentuid="haed057f5g5aa0g4554gbf3fg9f724ad1f174" version="1">使用此弓对一名生物造成伤害时，恢复一枚&lt;LSTag Type="ActionResource" Tooltip="SuperiorityDie"&gt;卓越骰&lt;/LSTag&gt;与一支&lt;LSTag Type="ActionResource" Tooltip="ArcaneShot"&gt;奥术箭矢&lt;/LSTag&gt;。&lt;br&gt;每场战斗只能触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h28b795b3gb7d0g4e76g98e2g897602f5796c" version="1">使用此弓对一名生物造成伤害时，恢复一枚&lt;LSTag Type="ActionResource" Tooltip="SuperiorityDie"&gt;卓越骰&lt;/LSTag&gt;与一支&lt;LSTag Type="ActionResource" Tooltip="ArcaneShot"&gt;奥术箭矢&lt;/LSTag&gt;。&lt;br&gt;每回合只能触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="h2b5176d2g5bdbg4dcegac6agf57458d92672" version="1">导火索</content>
+	<content contentuid="h03f4b3b4g408bg46c9g9c5bg47db870cd17d" version="1">据信，这件遗物最初由一名半神加持，能让被箭矢射中的人燃起烈火。但历经数千年，它似乎已神力不再，不过依然能对身陷火海的目标造成可怕的伤害。</content>
+	<content contentuid="h1005bfb6g0decg4e6ag8475g499bbfe8ad7d" version="1">残火</content>
+	<content contentuid="h68cd5db0g1d0dg47d4ga587g8f791edefe45" version="1">对处于&lt;LSTag Type="Status" Tooltip="BURNING"&gt;燃烧&lt;/LSTag&gt;状态的目标达成&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;所需的掷骰点数减少&lt;b&gt;[1]&lt;/b&gt;点。&lt;br&gt;&lt;LSTag Type="Image" Info="SoftWarning"/&gt; 此效果对受&lt;LSTag Type="Status" Tooltip="BURNING_HELLFIRE"&gt;地狱火&lt;/LSTag&gt;、&lt;LSTag Type="Status" Tooltip="BURNING_HOLY"&gt;圣火&lt;/LSTag&gt;或类似效果影响的目标同样生效。</content>
+	<content contentuid="h6500e69bg07d4g4f42g9fcfg51044128ca2a" version="1">易燃</content>
+	<content contentuid="h831fe42agccf6g48afg9b19g32d9597dc801" version="1">当你处于&lt;LSTag Type="Status" Tooltip="BURNING"&gt;燃烧&lt;/LSTag&gt;或类似状态时，使用&lt;b&gt;此弓&lt;/b&gt;命中后会让目标陷入&lt;LSTag Type="Status" Tooltip="BURNING"&gt;燃烧&lt;/LSTag&gt;。</content>
+	<content contentuid="h27244d37gc60cg4bbag9bf5g83f6b1b19733" version="1">北地长弓</content>
+	<content contentuid="hf1a54381gafeag4223g8133gf9ef28492fb5" version="1">众所周知，冰天雪地的极北之地到处都是体型超乎想象的怪物。为了在这般恶劣的环境中生存，北方民族不得不穷尽发明，这把长弓便是其中之一。据悉，它是静谧苔原氏族向那些北地的神祇供奉无数次祭品之后，所得到的赐礼。这把弓拥有着不可思议的力量，能重创即便是猎人团体也束手无策的巨型&lt;b&gt;野兽&lt;b&gt;和怪物。</content>
+	<content contentuid="hb673d791g78e3g400cg95dbg13c476cf8422" version="1">怪物杀手</content>
+	<content contentuid="h43150863g0a07g45f3g86f6g0281e44feccb" version="1">使用&lt;b&gt;远程武器攻击&lt;/b&gt;对拥有&lt;b&gt;[3]&lt;/b&gt;点及以上最大&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;的生物造成伤害时，额外造成&lt;b&gt;[1]&lt;/b&gt;点伤害。</content>
+	<content contentuid="hf520faf6gc016g4ca3gaa15ga90e2d914b88" version="1">静谧苔原</content>
+	<content contentuid="hfab321a2g07c8g4531gbe20g19eb550eb938" version="1">处于&lt;LSTag Type="Status" Tooltip="MAGE_ARMOR"&gt;法师护甲&lt;/LSTag&gt;效果下时，&lt;b&gt;这把弓&lt;/b&gt;的射击迫使目标通过对抗你&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;的&lt;LSTag Tooltip="Constitution"&gt;体质&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则陷入&lt;LSTag Type="Status" Tooltip="CHILLED"&gt;寒冷&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h66d0c65ag60ffg4778g8474g053e0a0a7b04" version="1">林地卫士</content>
+	<content contentuid="hd01fa9efg43bbg446egb314gbaa5eea49049" version="1">这片林地从未安宁过，无数人想要挑战自然的平衡，但德鲁伊们总能成功击退一切来犯之敌。有一次，敌人如潮水般滚滚涌来，以至于大德鲁伊开始向西凡纳斯祈求伟大的赠礼，帮他们维系这份平衡。西凡纳斯怜悯了他的仆从们，于是降下众多神兵利器，倾洒于林地之上，令他们能抵御入侵者的猛攻。然而两百年后，林地还是遭到了侵略与劫掠——归因于内斗的阴谋。</content>
+	<content contentuid="hdbe72ff9g56fbg431bgac0eg1db17d78830e" version="1">自然之礼</content>
+	<content contentuid="h251d4a9dg764dg4d9cgb21fg414dfe2a5804" version="1">被此弓伤害的生物必须通过一次&lt;LSTag Tooltip="Dexterity"&gt;敏捷&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则将被&lt;LSTag Type="Status" Tooltip="ENSNARED"&gt;纠缠&lt;/LSTag&gt;。&lt;LSTag Tooltip="DifficultyClass"&gt;难度等级&lt;/LSTag&gt;取决于你的&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;。</content>
+	<content contentuid="ha5b15eebgbbcbg4a6fgbe52g4d3968c8520a" version="1">扎林卡纳之弓</content>
+	<content contentuid="ha4df3587g0b09g41aagb15cg2d8a71544643" version="1">这把以金质合金嵌边的优雅短弓，打造于一个最古老的王国，曾被称为皇家军械库中的“王冠明珠”。它的魔法特性堪称传奇——事实上，据传说，它甚至能汲取被击中者的生命力，用以治愈最严重的伤势。数千年间，它经手无数，却在一位人物手中最为声名显赫：那便是卫队队长安赫姆·扎林卡纳，这把弓也正是以他的名字命名的。</content>
+	<content contentuid="h63380fd2g690cg42a5g8727g0aaa6c39b88a" version="1">生命虹吸</content>
+	<content contentuid="h69f70363gbecag4e1dga1f8g6c2dca2fb5a5" version="1">使用此弓对敌人造成伤害时，恢复&lt;b&gt;[1]%&lt;/b&gt;的&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;。</content>
+	<content contentuid="h48ac05c5g659fg499dg8a64g8a37ad62466c" version="1">苦难收割</content>
+	<content contentuid="h8a9d9349ga5a7g4d75g9dfag9cdf6383a5a2" version="1">当你向敌人施加&lt;b&gt;状态&lt;/b&gt;时，恢复&lt;b&gt;[1]&lt;/b&gt;点生命。</content>
+	<content contentuid="hce3aa73cg6a26g4250ga285gc8fd4ef3463b" version="1">老练短弓</content>
+	<content contentuid="h07d193f9g5071g4114g8111ge025583d4856" version="1">一把来历不明、做工精湛的弓，被赋予了魔法来侍奉它的主人——它为持有者注入一种前所未有的灵巧技艺。它历经战火，几乎总是其历任主人保全性命的关键所在。</content>
+	<content contentuid="h9d853a59g1ee4g4af9gb070ga0a1c69f26ff" version="1">风暴之怒</content>
+	<content contentuid="h528480cegb8acg4edfg8969gf56ecd60b029" version="1">风暴传唤</content>
+	<content contentuid="h4232ba80g1863g4516gbc65g6c6e3960a53a" version="1">如果你信仰&lt;b&gt;塔洛斯&lt;/b&gt;，使用&lt;b&gt;此弓&lt;/b&gt;攻击将会制造一场半径&lt;b&gt;[1]&lt;/b&gt;的&lt;b&gt;带电风暴&lt;/b&gt;。</content>
+	<content contentuid="hb59d7a1cg3e2fg4a8bg9c1dg7e4f3a2b1c0d" version="1">飓风</content>
+	<content contentuid="h2c8e4f3ag1d5bg4c7eg8a9fg6b3d2e1a0f9c" version="1">造成&lt;b&gt;[1]&lt;/b&gt;伤害时，&lt;b&gt;额外&lt;/b&gt;造成&lt;b&gt;[2]&lt;/b&gt;点伤害。如果你信仰&lt;b&gt;塔洛斯&lt;/b&gt;，则追加&lt;b&gt;[3]&lt;/b&gt;点伤害。</content>
+	<content contentuid="h12ac9c00gf348g4ab7gbbbag119d0f0f6fc9" version="1">一击制胜</content>
+	<content contentuid="h5bcb912ag2ae6g4533gb463ga4f0555509eb" version="1">一把威力极大，伤害骇人的短弓。它上一次被使用，是在一位地底侏儒的手中——他猎杀着最强的灰矮人们，并屡屡得手。无人能抵挡这把武器的威力，就连最强大的上古魔法，也无法生成能抵御它箭矢的屏障。至于它之前的主人是谁，又是谁创造了它，则是一个巨大的谜团。</content>
+	<content contentuid="hb45b7353g843ag4d1cg8759g4f0a1dd62beb" version="1">积势</content>
+	<content contentuid="h8d83ffb5g8121g4f69gafe2g9d1768d61e94" version="1">以此弓杀死一名敌人时，获得&lt;b&gt;[1]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="WEAPON60"&gt;绝命一击&lt;/LSTag&gt;。以远程武器达成&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;时，失去&lt;b&gt;[1]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="WEAPON60"&gt;绝命一击&lt;/LSTag&gt;。</content>
+	<content contentuid="h96d8fcc7gfe71g4e46ga473g523776108668" version="1">释势</content>
+	<content contentuid="h30c6356fgd88cg4f6eg99c1ge1b800f0715e" version="1">使用远程武器攻击命中并造成&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;时，失去&lt;b&gt;[1]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="WEAPON60"&gt;绝命一击&lt;/LSTag&gt;。</content>
+	<content contentuid="hfbd8db05g4cadg4039g9880g04eebd602cf0" version="1">绝命一击</content>
+	<content contentuid="h1ca9c680g6599g45edgb0b7ge95c1199900a" version="1">使用远程武器达成&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;时，威力是正常情况下的&lt;b&gt;三倍&lt;/b&gt;。</content>
+	<content contentuid="h3100add4gf324g4691gb19dg64cf02ed76f4" version="1">灵巧长弓</content>
+	<content contentuid="hd62e77aeg1dc8g42e8g8bd6gb3f388831fa8" version="1">很少有人吹嘘自己体魄多么轻健——能在那些最为精准的弓箭手面前，一口气闪开十支齐射的箭矢。然而，这把弓的主人便能做到这一点，因为赋予他如此非凡身法的，正是这把弓。</content>
+	<content contentuid="h3aa80fdeg09ccg4c39gb701gbeae279e88bf" version="1">缩小弓</content>
+	<content contentuid="ha6a4eea6g7d1cg41b5g9092g8813e999cee8" version="1">在古代侏儒语中，“继吉”意为“渺小”。相传，这把弓由侏儒工匠们铸造，融合了完美的机械构造与极其罕有的魔法。从这把弓射出的每一箭，都不可避免地会让受害者缩小，直至与普通侏儒的身材相当。许多侏儒之王后来都曾携带这把缩小弓，在与异族的决斗中登场，甚至在与兽人的作战中，也屡屡凯旋而归。</content>
+	<content contentuid="h06f71e7ag0d93g4abfg8732g610c1b91c227" version="1">众生平等</content>
+	<content contentuid="h2afe884dgf10ag4a50ga5bfge07e17d0cd4f" version="1">使用此弓对一名生物造成伤害时，有&lt;b&gt;[1]%&lt;/b&gt;的几率对其施加&lt;LSTag Type="Status" Tooltip="WEAPON62"&gt;萎缩 I&lt;/LSTag&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合。重复攻击将施加&lt;LSTag Type="Status" Tooltip="WEAPON62_2"&gt;萎缩 II&lt;/LSTag&gt;，持续&lt;b&gt;[3]&lt;/b&gt;回合，以及&lt;LSTag Type="Status" Tooltip="WEAPON62_3"&gt;萎缩 III&lt;/LSTag&gt;，持续&lt;b&gt;[4]&lt;/b&gt;回合。</content>
+	<content contentuid="heba8090cg58ffg4882gb6f7g65154b9f902d" version="1">萎缩 I</content>
+	<content contentuid="hefd0c916g20d8g4a7bg9ea5gba420502386c" version="1">&lt;LSTag Tooltip="ArmourClass"&gt;护甲等级 (AC)&lt;/LSTag&gt; 获得 &lt;b&gt;+[1]&lt;/b&gt;。此生物的&lt;b&gt;重量和体型等级&lt;/b&gt;减少&lt;b&gt;[3]&lt;/b&gt;点。</content>
+	<content contentuid="h2b5bb079g534ag4f9bg8178g4253394e2892" version="1">萎缩 II</content>
+	<content contentuid="hb1b283a1gb81ag489cg8336g248586818133" version="1">&lt;b&gt;+[1]&lt;/b&gt;&lt;LSTag Tooltip="ArmourClass"&gt;护甲等级&lt;/LSTag&gt;。此生物的&lt;b&gt;重量与体型等级&lt;/b&gt;减少&lt;b&gt;[3]&lt;/b&gt;。&lt;br&gt;此效果结束后，施加&lt;LSTag Type="Status" Tooltip="WEAPON62"&gt;萎缩 I&lt;/LSTag&gt;，持续&lt;b&gt;[4]&lt;/b&gt;回合。</content>
+	<content contentuid="h976016edg4289g442agb6fegbf85844099fe" version="1">萎缩 III</content>
+	<content contentuid="ha466ba09g8878g40e3gbf1dgfbf8d7b820e0" version="1">&lt;LSTag Tooltip="ArmourClass"&gt;护甲等级 (AC)&lt;/LSTag&gt; 获得 &lt;b&gt;+[1]&lt;/b&gt;。此生物的&lt;b&gt;重量和体型等级&lt;/b&gt;减少&lt;b&gt;[3]&lt;/b&gt;点。&lt;br&gt;此效果结束后，施加&lt;LSTag Type="Status" Tooltip="WEAPON62"&gt;萎缩 II&lt;/LSTag&gt;，持续&lt;b&gt;[4]&lt;/b&gt;回合。</content>
+	<content contentuid="hea6adb7cg9217g46a7ga5b2ge7be301ec342" version="1">忠诚小圆盾</content>
+	<content contentuid="hf55e70e4g2fedg4c87g9abdgd70f8a054b34" version="1">一面不错的魔法盾牌，曾服侍过不止一位主人。单看外表，便知它身经百战。</content>
+	<content contentuid="h0d3b8215g0699g4f78g87fbg00215a40b79c" version="1">精灵之盾</content>
+	<content contentuid="hbb818f5cg0ebag4041g9389g07c8ddd61a6f" version="1">这面工艺精湛的盾牌，令人联想起某件远古时代的神器。它通常被用于武装列于大军后方的治疗者。</content>
+	<content contentuid="h019ce349gac4dg489ega7ecgb928eff18190" version="1">远古守护</content>
+	<content contentuid="h56689278g8544g4fd1g862fg5ef8d7659d82" version="1">受到伤害时，获得&lt;LSTag Type="Status" Tooltip="PROTECTION_FROM_EVIL_AND_GOOD"&gt;防护善恶&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。若你为&lt;b&gt;精灵&lt;/b&gt;，此效果在闪避攻击时&lt;b&gt;同样&lt;/b&gt;触发。</content>
+	<content contentuid="h548bdd50g75e9g4960gb589g4a151ac91869" version="1">幻象映射</content>
+	<content contentuid="hf984ec70g1d36g4729gacacgacd2b63570bb" version="1">在战斗中被&lt;b&gt;另一&lt;/b&gt;生物治疗时，&lt;b&gt;每场战斗一次&lt;/b&gt;获得&lt;b&gt;[1]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="MIRROR_IMAGE_1"&gt;镜像术&lt;/LSTag&gt;。&lt;b&gt;精灵&lt;/b&gt;额外获得一层。</content>
+	<content contentuid="h8ab79c2dg8944g439eg96b7g4fb4c4aaa96b" version="1">深海之盾</content>
+	<content contentuid="h86394d5fg5855g4772gb148gd74e73d50f28" version="1">这面盾牌散发着海灵与海草的腥咸气息，看起来脆弱不堪，却莫名让望向它的人心生敬畏，唤起对那深海中无底深渊的恐惧。</content>
+	<content contentuid="h63b4b42dg6134g4f6dg9db6gccd1a13bb4f6" version="1">安博里之怒</content>
+	<content contentuid="hf64ba1a8gedecg4714gbe02g71eb3a1d6c7e" version="1">处于&lt;LSTag Type="Status" Tooltip="OFF_BALANCE"&gt;失衡&lt;/LSTag&gt;状态下攻击你的生物，将被&lt;LSTag Type="Status" Tooltip="STUNNED"&gt;震慑&lt;/LSTag&gt;&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="hc1839446g458eg4accgad40gfff88c42aee6" version="1">海之报偿</content>
+	<content contentuid="hf5479219g3b47g47cfg8d46g709499801b39" version="1">受到伤害时，攻击者将陷入&lt;LSTag Type="Status" Tooltip="MAG_FROST"&gt;霜覆&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h7c9a91a9g3499g4c7eg9eb8g75fafec033e4" version="1">兽人之盾</content>
+	<content contentuid="h6390974agadc7g4505g99edg2ef839ccecd5" version="1">它曾属于一位伟大的兽人战士，这并非他收藏中唯一的盾牌，但却是被精灵奴隶加持过的少数之一。这样一面盾牌，无疑能令任何战士实力大增，在战斗中愈发凶悍无匹。</content>
+	<content contentuid="h6e8e5dfcg4e18g4e40g87b3g21b7e3bd5b41" version="1">兽人之怒</content>
+	<content contentuid="hdbe71170gc576g49daga325gb8af2a29e7aa" version="1">如果你是&lt;b&gt;半兽人&lt;/b&gt;，受到伤害时有&lt;b&gt;[1]%&lt;/b&gt;的几率获得&lt;LSTag Type="Status" Tooltip="MAG_CELESTIAL_HASTE"&gt;加速&lt;/LSTag&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合。此&lt;LSTag Type="Status" Tooltip="MAG_CELESTIAL_HASTE"&gt;加速&lt;/LSTag&gt;不会导致&lt;LSTag Type="Status" Tooltip="HASTE_LETHARGY"&gt;迟钝&lt;/LSTag&gt;。</content>
+	<content contentuid="h9549516dg72a3g4acbg82f6g56b6b3778135" version="1">矮人之盾</content>
+	<content contentuid="h893ff14ag34b0g48aagb238g673396e5866a" version="1">这件遗物铸造于山那塔帝国的一座地底城邦之中，极擅应付地下的小规模遭遇战，然而在旷日持久的消耗战中，其效力也同样毫不逊色。</content>
+	<content contentuid="hb8ddda93ge8f1g403agac5dgab177d270768" version="1">鞭梢一闪</content>
+	<content contentuid="habdff6f8ga2d9g47f6gb044g4b1d3763fccf" version="1">如果你是&lt;b&gt;灰矮人&lt;/b&gt;，受到伤害时会&lt;LSTag Type="Status" Tooltip="INVISIBLE"&gt;隐形&lt;/LSTag&gt;&lt;b&gt;[1]&lt;/b&gt;回合。&lt;br&gt;每场战斗只能触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="hbd6f535dg91adg47b2g9694g199486a97e1e" version="1">如果你是&lt;b&gt;灰矮人&lt;/b&gt;，受到伤害时会&lt;LSTag Type="Status" Tooltip="INVISIBLE"&gt;隐形&lt;/LSTag&gt;&lt;b&gt;[1]&lt;/b&gt;回合。&lt;br&gt;每回合只能触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="hab4bd592g35d7g43dag9bbdgde4e2f7c023a" version="1">先祖之忠</content>
+	<content contentuid="h51e65a35g69fbg4379gb31cg84425685f399" version="1">如果你是一名&lt;b&gt;灰矮人&lt;/b&gt;，从所有来源受到的伤害减少&lt;b&gt;[1]&lt;/b&gt;点。</content>
+	<content contentuid="h083551fdg5319g4535g9096g9c30d095e47f" version="1">法师护盾</content>
+	<content contentuid="h9be2d482gda06g4c88g8743g8731dec16aff" version="1">一面毫不起眼的盾牌，尺寸小得几乎像是孩童的玩具，却蕴含着强大的魔法。它很可能是在很久以前，法师公会的一名学生在野外考核中丢失的。</content>
+	<content contentuid="h817cdfb1g6d90g46d1gbc07g8f2a2e76ea43" version="1">精神刚毅</content>
+	<content contentuid="h16eff544g7ccag48eag90f3g4626ce0217c9" version="1">你获得等同于&lt;LSTag Tooltip="Intelligence"&gt;智力&lt;/LSTag&gt;调整值 × &lt;b&gt;[1]&lt;/b&gt;（向下取整）的&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;加值。</content>
+	<content contentuid="h1595d7d2g75b1g43fbg993ag5289e15dd721" version="1">远古壁垒</content>
+	<content contentuid="h77869061g6bedg4142ga821gd2a2bc889caf" version="1">这面盾牌的魔法特性能略微减缓敌人的箭矢与斩击。一件极为实用的装备，由矮人工匠于远古时代所铸造。</content>
+	<content contentuid="h4f983612g1dd9g4438g8379g8d2066277c07" version="1">振动力场</content>
+	<content contentuid="h5ec3cc5eg0d96g4a6bg8a01gefe137b4093d" version="1">灾猎小圆盾</content>
+	<content contentuid="h0757fb9eg6553g4a4fgaec9gd954fa5b52b7" version="1">这面小圆盾本不可能留存至今——它的主人奈罗尼安曾中了一剂影毒，却奇迹般地被一个强大法师所统辖的半身人教团救活。作为回报，那位法师请求这位英雄去肃清盘踞在矿坑中的一只尤为危险的精类，并为此加持了这位灾厄猎人的装备。</content>
+	<content contentuid="hd8dc9cfcg6f0ag4cb0gb460g5a46bdd472e0" version="1">圣洁</content>
+	<content contentuid="hc165313cg6fddg44dagb398geda59edf953f" version="1">对&lt;b&gt;不死生物&lt;/b&gt;、&lt;b&gt;怪兽&lt;/b&gt;、&lt;b&gt;邪魔&lt;/b&gt;或&lt;b&gt;精类&lt;/b&gt;造成伤害时，获得&lt;b&gt;+[1]&lt;/b&gt;&lt;LSTag Tooltip="ArmourClass"&gt;护甲等级&lt;/LSTag&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合。受到敌人伤害时消失。持续时间可叠加。&lt;br&gt;每回合只能触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="hae1192ebg27afg4bbdg8ffbg4775ec1ddfeb" version="1">天罚</content>
+	<content contentuid="hf6d4b8d1g6d63g499cgbd3fg99edac615041" version="1">如果你信仰&lt;b&gt;塞伦涅&lt;/b&gt;、&lt;b&gt;洛山达&lt;/b&gt;或&lt;b&gt;提尔&lt;/b&gt;，攻击你的&lt;b&gt;不死生物&lt;/b&gt;、&lt;b&gt;怪物&lt;/b&gt;、&lt;b&gt;邪魔&lt;/b&gt;和&lt;b&gt;妖精&lt;/b&gt;有&lt;b&gt;[1]%&lt;/b&gt;的几率在完成攻击前就受到神之怒火的惩击。</content>
+	<content contentuid="hfc659dd1g70c3g4a04ga070gba06199108ee" version="1">坚毅小圆盾</content>
+	<content contentuid="hb535fd90g08aeg4687gb78fge31176c84774" version="1">这面以风化橡木制成的盾牌，轻得惊人，却展现出非凡的韧性。据说它能坚振凡人的精神，当战斗愈发激烈时，那橡木心材便会发出一种微弱而沉稳的回响，为疲惫的身躯注入活力。</content>
+	<content contentuid="h03e391a9g179ag4cadg97e9gd0f6eba37b15" version="1">橡木之力</content>
+	<content contentuid="h78708a8bg9818g49dcg8c14g7e71f005109f" version="1">当你的&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;低于&lt;b&gt;[1]%&lt;/b&gt;时，获得&lt;b&gt;+[2]&lt;/b&gt;体质（最高&lt;b&gt;[3]&lt;/b&gt;）。</content>
+	<content contentuid="h082bbc31g28beg4605ga3b6g8691c24cc0ff" version="1">神官骑士圣盾</content>
+	<content contentuid="h3284df96g9c1eg4a48g82d3gc77a1ae36415" version="1">这面暗沉而古老、由久经征战的钢材铸就的盾牌，装饰着一个被遗忘教团的鎏金浮雕。有传言称，这件遗物拥有一种耐人寻味的特性：每当持有者念诵出一道圣洁的祷文，这面盾牌便会充盈起一层微暖的温热，仿佛金属本身，仍记得那些古老的祈福，并在自身内部，重新燃起一道复苏之力的火星。</content>
+	<content contentuid="haaab0955gfed4g4742gb964g7bf75cc87e0f" version="1">治愈火花</content>
+	<content contentuid="h53fca26ag0e25g42c0g90a6g5571f9d64eba" version="1">在战斗中施展&lt;b&gt;圣武士法术&lt;/b&gt;进行治疗时，恢复&lt;b&gt;[1]&lt;/b&gt;次&lt;LSTag Type="ActionResource" Tooltip="LayOnHandsCharge"&gt;圣疗&lt;/LSTag&gt;充能。</content>
+	<content contentuid="h395abfbbg4effg44e6g9a73g1ab2369d05c7" version="1">医者仁心</content>
+	<content contentuid="h48fdd336g17e8g4852g8c1bgf8a5e9b85610" version="1">所有治疗与支援法术不再消耗&lt;LSTag Type="ActionResource" Tooltip="SpellSlot"&gt;法术位&lt;/LSTag&gt;。</content>
+	<content contentuid="h3e4304d0gd503g4d6ega283ge26533048c38" version="1">教徒之盾</content>
+	<content contentuid="h2fecf76agdd90g4fefg960fgc112505e4854" version="1">这面饱经风霜的盾牌，由废木料粗粝地拼凑而成，上面拙劣地描绘着一只奇怪的白色手掌。尽管形貌平平，但那神秘的白光却分明低语着奥术魔法的存在。当命运降下它最残酷的一击时，盾上的徽记便会扭曲那无形的宿命之线，为持有者提供孤注一掷的契机，在生死关头夺得胜利。</content>
+	<content contentuid="hcf998b4fge68eg4306gbee0g7f955a6deabd" version="1">白手印</content>
+	<content contentuid="h2a8c9b3dge45fg4d12ga87cg5e6f2c1d8b9a" version="1">若你的&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;掷骰结果不高于&lt;b&gt;[1]&lt;/b&gt;，则重掷该骰子&lt;b&gt;[2]&lt;/b&gt;次，并取较高结果。</content>
+	<content contentuid="hcb9e8618gf652g442cgbd32gf06f2dbcf9a8" version="1">苍翠之怒</content>
+	<content contentuid="h233a42b9ge342g4537gb64fg9f30f147abcc" version="1">虬结的树枝与被遗忘林地的低语打造了它，与其说是一面盾牌，倒不如说是森林本身的一块碎片。狂野的藤蔓蚀刻于其表面，以一种非自然的能量蜿蜒蠕动。这面盾牌似乎与原始的大地魔法产生了共鸣：当它被举起防御时，那些藤蔓仿佛在遵从一道原始命令，将自己从泥土中撕裂而出，去缠绕并阻碍那些胆敢靠近这面盾牌之人。</content>
+	<content contentuid="hef8eda79g0740g4657g89c3ge7992eb05e29" version="1">怒土之力</content>
+	<content contentuid="h0335b33bgc561g4f14g81b6geeb7a027c8b8" version="1">战斗中每回合，你周围&lt;b&gt;[1]&lt;/b&gt;范围内会从地面升起&lt;b&gt;&lt;LSTag Type="Status" Tooltip="ENSNARED_VINES"&gt;纠缠&lt;/LSTag&gt;藤蔓&lt;/b&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合。&lt;br&gt;&lt;br&gt;&lt;LSTag Type="Image" Info="SoftWarning"/&gt;若附近有火源，藤蔓将立即引燃，形成一片燃烧的积液！</content>
+	<content contentuid="h7c4b2e1agf38dg4a5bg9d2cg3e8f1b5c7d9a" version="1">藤蔓统驭</content>
+	<content contentuid="h9a3d6f2bgc51eg4b8dga12bg4f7e8c3d2a6b" version="1">&lt;LSTag Type="Status" Tooltip="DIFFICULT_TERRAIN_VINES"&gt;纠缠藤蔓&lt;/LSTag&gt;对你无效，站在藤蔓上时，你的&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;触发阈值减少&lt;b&gt;[1]&lt;/b&gt;。若你信仰&lt;b&gt;梅莉凯&lt;/b&gt;，则此数值&lt;b&gt;翻倍&lt;/b&gt;。</content>
+	<content contentuid="h722f22f5gd7f8g4ecfga537ge86e702c0ae7" version="1">钉刺盾</content>
+	<content contentuid="h858cc8a1ga14fg44f5g8a22g19e7dca48563" version="1">这面以粗粝砍削的木板拼凑而成、布满噩梦般数不胜数的黑铁钉刺的盾牌，藏匿着一段黑暗的历史。它由一名可怖的劫城者打造，每一根钉刺，都是以一座市政厅的尖顶锻制而成的。如今，浸染了无数杀戮的回响，这面盾牌再度渴求着鲜血。</content>
+	<content contentuid="hbaea6775g65f4g4897gb020g3faf5f385d3f" version="1">锐利钉刺</content>
+	<content contentuid="h4b7e3c1dgf82ag4d9cga35bg6c2d8e9f1a7b" version="1">当敌人对你发动近战攻击时，必须通过一次&lt;LSTag Tooltip="Constitution"&gt;体质&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则将陷入&lt;LSTag Type="Status" Tooltip="BLEEDING"&gt;流血&lt;/LSTag&gt;状态，持续&lt;b&gt;[1]&lt;/b&gt;回合。&lt;LSTag Tooltip="DifficultyClass"&gt;难度等级&lt;/LSTag&gt;取决于你的&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;。</content>
+	<content contentuid="h3ef06386gd720g4596g99cag442316a111ec" version="1">当敌人以近战攻击你时，其受到&lt;b&gt;[2]&lt;/b&gt;点伤害，且必须通过一次&lt;LSTag Tooltip="Constitution"&gt;体质&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则将陷入&lt;LSTag Type="Status" Tooltip="BLEEDING"&gt;流血&lt;/LSTag&gt;状态，持续&lt;b&gt;[1]&lt;/b&gt;回合。&lt;LSTag Tooltip="DifficultyClass"&gt;难度等级&lt;/LSTag&gt;取决于你的&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;。</content>
+	<content contentuid="hea989852gd46fg4e3bg993bg3704b19da916" version="1">救赎光轮</content>
+	<content contentuid="h0523a561g7bbdg4b9bg9a6fg092a49ee94cf" version="1">这面圆盾以褪色金属铸就，承载着无数场战斗的伤痕，每一处刻痕与凹坑，都是它丰富而恒久的历史印记。传说中，有一位高尚的牧师，在面对无从逾越的逆境时，毅然持定此盾，庇护他的同伴们免受伤害。每一道瑕疵，都是这面盾牌被激活的见证——凭籍神圣干预而得以挽留的生命。</content>
+	<content contentuid="h7e463ac1g07e0g4128gab45g3171f5563f11" version="1">信仰救赎</content>
+	<content contentuid="h5c8e2f3ag7b4dg4c1ega29fg8d1e3b5c6a7d" version="1">受到&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;时，你与&lt;b&gt;[1]&lt;/b&gt;范围内的盟友获得&lt;b&gt;+[2]&lt;/b&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;加值。此效果在受到伤害时消失。</content>
+	<content contentuid="h173947c7g164ag4961g87cag57b2fb44855c" version="1">信仰屏障</content>
+	<content contentuid="h7b265b7cg212dg4d16g900ag74727561979f" version="1">&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;获得&lt;b&gt;+[1]~[2]&lt;/b&gt;加值。&lt;br&gt;&lt;br&gt;当“救赎光轮”的持有者被击中时消失。</content>
+	<content contentuid="h4fa6cb80gb9c6g4654g8605g0c48246c9338" version="1">守护者要塞</content>
+	<content contentuid="h7777a51ag024fg443eg9df7gf416d9a0d303" version="1">这面橡木盾牌承载着&lt;b&gt;洛山达&lt;/b&gt;与&lt;b&gt;塞伦涅&lt;/b&gt;的双重祝福，曾由一位伫立守望于晨昏之界的护卫所持。每当承受打击，这面盾牌便会迸发出圣洁的烈焰，焚烧不洁之人，却令虔信者们毫发无伤，这恰是黎明之主与月之少女之间那份神圣盟约的明证。</content>
+	<content contentuid="hb5ef96f9g6f17g4316gaf4bg0d68cac0c27d" version="1">圣焰灵光</content>
+	<content contentuid="hb2d05e4egb083g44b7gbdb8g0941739c81ee" version="1">受到伤害时，召唤&lt;b&gt;[1]&lt;/b&gt;道&lt;b&gt;圣火&lt;/b&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合。</content>
+	<content contentuid="h9e5b3d1cgf72ag4d6bga83cg2a4c5e7f8b1d" version="1">神圣护佑</content>
+	<content contentuid="h1a7d4e2fg8c3bg4e5dg9f6ag3b8c1d5e9f2a" version="1">你与&lt;b&gt;[1]&lt;/b&gt;范围内信仰&lt;b&gt;洛山达&lt;/b&gt;或&lt;b&gt;塞伦涅&lt;/b&gt;的盟友免疫&lt;LSTag Type="Status" Tooltip="BURNING_HOLY"&gt;圣火&lt;/LSTag&gt;。</content>
+	<content contentuid="h3e061683g7401g401cga9e8g975f5638866c" version="1">爵士之盾</content>
+	<content contentuid="h0ac37f5dg3b9cg4b24g880eg5d02e6a31d9e" version="1">这面外观阴沉的盾牌，外裹一层嵌满铆钉的柔韧黑色皮革，勾勒出一只狮鹫的面容：这是不屈守护的象征。加勒特爵士战斗起来是如此凶悍，连死亡本身都要踌躇于是否将他收割。那些足以击倒凡人的重击，在持盾者钢铁般的守御前，不过是徒然震荡而已。如今，无论谁执起它，都将继承那份传奇的决意。</content>
+	<content contentuid="hee366d3cgac3ag4fe5g9ab1g8b43ab956cb3" version="1">忠贞信仰</content>
+	<content contentuid="hc45aa55bg6c53g4db6g8316g6b8cbd188232" version="1">这面经过抛光的金属盾牌，因无数次的祈祷而润泽如镜，正中心镌刻着一轮灿烂骄阳的徽记。这件被遗忘神殿的遗物，曾为一位不为人知的女祭司所持，她因其毫不动摇的虔诚而闻名。她宛如灯塔的信仰是如此深邃，竟将她内在圣力的一缕余晖，倾注于这面仪式盾牌之中。当那座神殿惨遭洗劫后，这面盾牌的后续持有者们，都感到一种沉静而笃定的决意降临于身，保护他们的心智免受疑虑的侵扰。</content>
+	<content contentuid="hb4cf5dedgc82fg47ddg8dbage1e22e28f666" version="1">祭司之志</content>
+	<content contentuid="h7a244073gc47eg4c1eg9c38g90cbdfc6cff5" version="1">你的&lt;LSTag Tooltip="Concentration"&gt;专注&lt;/LSTag&gt;检定获得&lt;LSTag Tooltip="Advantage"&gt;优势&lt;/LSTag&gt;。</content>
+	<content contentuid="h9914a9c2gfc8eg4836g93bfg688f1ab074cd" version="1">黑墙</content>
+	<content contentuid="h505298e6gd567g4eb4g8e9cg6f052703f22c" version="1">这面巍然巨盾早已被熏得乌黑的金属，乃是山体深处所铸，并灌注了矮人坚忍不拔的刚毅秉性。这厚重而强韧的金属，仿佛能抗下所有攻击的分量，使持有者毫发无损。这面盾牌是实用主义的一曲颂歌，印证着矮人们那铁一般的信条：一面铸造精良的巨盾，即是一位战士所需的全部魔法。</content>
+	<content contentuid="h7377efb8g50ebg4183ga774gbff513c70652" version="1">山峦之心</content>
+	<content contentuid="h7bf5c154g8312g4463g8320g8ff32a1e2fd8" version="1">你受到的所有&lt;b&gt;武器或徒手攻击&lt;/b&gt;伤害减少&lt;b&gt;[1]&lt;/b&gt;点。</content>
+	<content contentuid="h15d9ddc6g7afdg4bcfgbb53ge3c296c7b5de" version="1">魔力海贝</content>
+	<content contentuid="h5954d37cg801bg4362gb066g58abc2769756" version="1">这件奇异的遗物是在水手间流传的传说。它曾属于一位传奇船长——在一次海难后，他失去了整船船员，自己亦险些溺毙，却被一只海灵救下。那海灵将他托在一扇贝壳上，载着他乘风破浪，抵达了最近的岸边。在那之后，船长发现这扇贝壳竟是一枚魔法物品，能为持有者注入海洋的魔力。</content>
+	<content contentuid="h6a049a81g4b24g46f0g8405gde1a13553a7d" version="1">海灵之礼</content>
+	<content contentuid="h2f4a8c5dg9e1bg4d7cga36fg8b5c1e7d3f2a" version="1">当你使用&lt;b&gt;&lt;LSTag Type="Status" Tooltip="AMP_AQUAMANCER_POWER_INFO"&gt;水元素法术&lt;/LSTag&gt;&lt;/b&gt;造成伤害时，获得&lt;LSTag Type="Status" Tooltip="BLADE_WARD"&gt;剑刃防护&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h2470ced7gd344g4a86gb6bbg47af6bfe0171" version="1">深海共鸣</content>
+	<content contentuid="he17584dcgac3cg4cacg85cbgb5cef21c775e" version="1">如果你处于&lt;LSTag Type="Status" Tooltip="WET"&gt;湿润&lt;/LSTag&gt;状态，则所有敌人在你的回合&lt;b&gt;开始时&lt;/b&gt;获得&lt;b&gt;[1]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="MAG_THUNDER_REVERBERATION"&gt;残响&lt;/LSTag&gt;。</content>
+	<content contentuid="h6c07063bgc05eg401fg9296g688e89b0179b" version="1">潮汐掌控</content>
+	<content contentuid="h7c69f93cgcbc1g4331ga3a6gb5de02e7a9b0" version="1">&lt;LSTag Type="Spell" Tooltip="Target_TidalWave"&gt;潮汐波&lt;/LSTag&gt;的基础版本不再消耗&lt;LSTag Type="Image" Info="SpellSlot"/&gt;&lt;LSTag Tooltip="SpellSlot"&gt;法术位&lt;/LSTag&gt;。(&lt;LSTag Type="Image" Info="SoftWarning"/&gt;需要&lt;b&gt;密斯特拉的法术&lt;/b&gt;扩展)</content>
+	<content contentuid="h8c0570adga7a0g4795g8078gde79d86bb1a6" version="1">狡刃之盾</content>
+	<content contentuid="h4903912fgfa90g4ac3g852dg82cbe9015f93" version="1">这件遗物以纤巧的橡木拼接、再以钢带箍束而成。它的上一任持有者，是血犬佣兵团的团长——凯特琳娜·狡刃。她以胆大包天的突袭和出色的单挑能力而闻名。毋庸置疑，她那面在13000年前即被赋予魔法的盾牌，在后一项上为她助力良多。每当一记斩击被完美格挡，这面盾牌便会以震颤作为回应，强化着这位战士下一次的决胜猛攻。凯特琳娜于280年前死于一场酒后斗殴，而这件遗物此后便失落了数个世纪。</content>
+	<content contentuid="h58e25423gb9aeg41b1g9880g02152d0f543e" version="1">决胜震颤</content>
+	<content contentuid="h8c5e38a5g2130g4092ga271g0bac516b3a38" version="1">在战斗中闪避一次攻击时，有&lt;b&gt;[1]%&lt;/b&gt;的几率恢复一枚&lt;LSTag Type="ActionResource" Tooltip="SuperiorityDie"&gt;卓越骰&lt;/LSTag&gt;与一点&lt;LSTag Type="ActionResource" Tooltip="WarPriestActionPoint"&gt;战争祭司&lt;/LSTag&gt;点数。</content>
+	<content contentuid="h7c8d2e1ag4f5bg4a3cg9d6fg2b3e4c5a8d1f" version="1">谐振防御</content>
+	<content contentuid="hc92463a7g7a57g440dg8322gc309723351e4" version="1">&lt;i&gt;可切换特性。&lt;/i&gt;开启后——针对你的近战攻击将对你和攻击者双方施加&lt;LSTag Type="Status" Tooltip="MAG_THUNDER_REVERBERATION"&gt;残响&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h9f8e7d6cg5b4ag4c3dg2e1fg0a9b8c7d6e5f" version="1">妙招</content>
+	<content contentuid="h96fdcb5fg1398g444dg8083gd557e9bee96d" version="1">你对带有&lt;LSTag Type="Status" Tooltip="MAG_THUNDER_REVERBERATION"&gt;残响&lt;/LSTag&gt;的目标，&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;触发阈值减少&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="h9002b0eeg8ffbg4b3dg9c87g59fa9c46adbd" version="1">希望光环</content>
+	<content contentuid="h7e8ed0cfg1a46g4dc5g97f7g4741115beef1" version="1">覆满污垢的银质合金，斑驳脱落的漆面依稀描绘着太阳与彩虹，这一切都分明地见证着它曾拥有过的美好往昔。传说这面盾牌属于一位伟大的骑士，为了深入死者国度的宏伟远征而铸造，曾燃烧着灼烧亵渎血肉的正义魔法之光。它连同世人寄予在它身上的所有希望一道，遗失在了岁月长河之中。</content>
+	<content contentuid="ha966f719g63dbg4a4dga9e5g61cb6f7c5ead" version="1">亵渎灼烧</content>
+	<content contentuid="h6f8e2d1cg4a3bg4c5dg9e7fg1b2c3d4e5a6f" version="1">当&lt;b&gt;不死生物&lt;/b&gt;攻击你时，它们受到&lt;b&gt;[1]&lt;/b&gt;点伤害。若你信仰&lt;b&gt;洛山达&lt;/b&gt;，此伤害翻倍。</content>
+	<content contentuid="h95234de8g904bg4f89gbbbcga40e9c3c5f42" version="1">灵魂壁垒</content>
+	<content contentuid="h9b4e43d6g6fa4g41a4g9410g214458901e05" version="1">战斗开始时，若你身穿&lt;b&gt;重甲&lt;/b&gt;，则你周围会出现&lt;LSTag Type="Status" Tooltip="SPIRIT_GUARDIANS_RADIANT_AURA"&gt;灵体守卫&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="h1a6808b0g2fa5g429aga382g49713e632f18" version="1">高歌猛进</content>
+	<content contentuid="h569dc44cgd90fg4576g9bf9g78391bd79e54" version="1">这面结实的橡木盾蕴含着一股奇特的魔力，与其粗犷的外貌恰成鲜明对比。几个世纪前，它曾由一位美貌与雄辩之才皆无与伦比的战士所持，她不仅以卓绝的武技鼓舞着盟友，更以那声若雷霆的嗓音，将勇气注入哪怕是最为羸弱的心灵之中。历经数不尽的战火，这面盾牌的木质本身，也浸染了这位圣武士激励灵光的一缕残片。</content>
+	<content contentuid="h3f023134gdeb0g4455g9481g9a5f548cf797" version="1">不屈鼓舞</content>
+	<content contentuid="hc2c6831eged7fg477eg9366g234ff0d2b51a" version="1">%%% 已废弃 %%%</content>
+	<content contentuid="hf141f5e9gf72cg4204g9041gabe59811f00d" version="1">勇毅之威</content>
+	<content contentuid="h18915cccge59fg48e7ga036gcbcb4d039ced" version="1">%%% 已废弃 %%%</content>
+	<content contentuid="h07a9a002g7cc1g4595gbc94g30409c5f498a" version="1">圣火传导</content>
+	<content contentuid="h14d333ebg8a6bg4384g8395g9cc03cf075e3" version="1">当你&lt;LSTag Type="Status" Tooltip="BURNING_HOLY"&gt;被圣火燃烧&lt;/LSTag&gt;时，你的武器攻击会对目标施加&lt;LSTag Type="Status" Tooltip="BURNING_HOLY"&gt;圣火燃烧&lt;/LSTag&gt;效果。</content>
+	<content contentuid="h4fa1e7b1g1248g44ddgac57g7cb7ad31f5a1" version="1">神圣之怒</content>
+	<content contentuid="hdf06544eg8b1ag48f9g9629g45f6fbb11dea" version="1">当你&lt;LSTag Type="Status" Tooltip="BURNING_HOLY"&gt;被圣火燃烧&lt;/LSTag&gt;时，你的武器攻击&lt;b&gt;额外&lt;/b&gt;造成&lt;b&gt;[1]&lt;/b&gt;点伤害。</content>
+	<content contentuid="h29dda1e2gfe55g4639g8eb1gbc6b10ddf27b" version="1">昂扬之魂</content>
+	<content contentuid="hd9fc26d6g4fe5g45a2gb7a8gd98e6351c10d" version="1">武器攻击命中敌人时，获得&lt;b&gt;+[1]&lt;/b&gt;&lt;LSTag Tooltip="Charisma"&gt;魅力&lt;/LSTag&gt;（若为牧师则改为&lt;b&gt;+[1]&lt;/b&gt;&lt;LSTag Tooltip="Wisdom"&gt;感知&lt;/LSTag&gt;），持续至回合结束。</content>
+	<content contentuid="h09cb0a26g53f5g406egb923g6b49d37093cd" version="1">武器攻击命中敌人时，获得&lt;b&gt;+[1]&lt;/b&gt;&lt;LSTag Tooltip="Charisma"&gt;魅力&lt;/LSTag&gt;（若为牧师则改为&lt;b&gt;+[1]&lt;/b&gt;&lt;LSTag Tooltip="Wisdom"&gt;感知&lt;/LSTag&gt;），持续至回合结束。可&lt;b&gt;无限叠加&lt;/b&gt;。</content>
+	<content contentuid="h9f268347gc857g4e53g821eg4717bc7ddcf4" version="1">虔诚之盾</content>
+	<content contentuid="h8e2516b8g20d6g4239g968egc9c80adae70d" version="1">当虔诚的信徒科伦托颈部遭受重创、濒临死亡之际，这面盾牌骤然迸发出神圣的辉光，为伤口注入了治愈的能量。但奇迹总有代价。那一缕圣光在明灭间，带着科伦托致命伤的回响，汲取着他的力量。若非他的决意与信仰坚如磐石，那圣光在赐予力量的同时，也早已将他的气力全数抽干。失传了数代之久，科伦托的这件遗物，是一份强而有力的提醒——关于一份毫不动摇的信仰，其代价几何。</content>
+	<content contentuid="hc8893e17g83e3g41f3g87e6g197c2749c2f6" version="1">忠贞不渝</content>
+	<content contentuid="hdc098e6eg0367g4fa8g9bb4ge719a0e9ca58" version="1">你获得等同于&lt;LSTag Tooltip="Wisdom"&gt;感知&lt;/LSTag&gt;调整值 × &lt;b&gt;[1]&lt;/b&gt;的&lt;LSTag Tooltip="Persuasion"&gt;游说&lt;/LSTag&gt;加值。</content>
+	<content contentuid="hdab7429fge27eg4909ga1f8gf54ef1826194" version="1">碎星之盾</content>
+	<content contentuid="h54034efeg8638g43b1g8d61gbda8caa06081" version="1">这面焦黑破碎的盾牌，闪烁着微弱的紫色辉光。传说中，有一颗“众影之星”曾为精灵所捕获，并被击碎为数片，赠予了那个时代的英雄们。其中一枚碎片，授予了传奇半身人，希莱拉，她将其嵌入了自己的盾牌。在与龙的鏖战之后，这面盾牌依旧保留了它的属性，但希莱拉却没能幸存。</content>
+	<content contentuid="h464b8e28g25ecg498fgb4a2g708eb0b9724a" version="1">星影之礼</content>
+	<content contentuid="he773bd54gc9e9g4d90gacf2g65968b50e4fa" version="1">身处&lt;LSTag Type="Spell" Tooltip="Target_Darkness"&gt;黑暗术&lt;/LSTag&gt;云雾中时，每回合获得&lt;b&gt;[1]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="MAG_ZOC_FORCE_CONDUIT"&gt;力场导体&lt;/LSTag&gt;。</content>
+	<content contentuid="h989f020egba6eg4515g8858gd976780a372c" version="1">巨龙之盾</content>
+	<content contentuid="hf168d4cagbe9bg4559ga699ge55ba7d29c2c" version="1">瓦里加·科塔利斯队长曾率领一支运送补给的护卫队，驰援一座被围困的城市。在遭到豺狼人的突袭时，整支部队几乎全军覆没，败局似乎已无可挽回——就在此时，队长的盾牌骤然迸发出绯红的烈焰，转瞬之间将豺狼人首领焚为灰烬，一把扭转战局。传说如此记载，而自那以后，瓦里加·科塔利斯便以“巨龙”之名闻名于世。</content>
+	<content contentuid="h117036ffg9d60g43d8ga779gb88887c38d7c" version="1">龙之怒焰</content>
+	<content contentuid="h71adb52bg6a27g445bga855g32e496f47e61" version="1">在战斗中受到近战伤害时，你将使攻击者陷入&lt;LSTag Type="Status" Tooltip="BURNING"&gt;燃烧&lt;/LSTag&gt;状态。你无视目标对&lt;b&gt;[1]&lt;/b&gt;的&lt;LSTag Tooltip="Immune"&gt;免疫&lt;/LSTag&gt;。</content>
+	<content contentuid="ha5fa5784gdf71g46a0gba31g19fcd09a4ba2" version="1">在战斗中受到近战伤害时，你将使攻击者陷入&lt;LSTag Type="Status" Tooltip="BURNING"&gt;燃烧&lt;/LSTag&gt;状态。</content>
+	<content contentuid="h39d8c755gb93dg4af3g8e1fgb0b11f8195be" version="1">巨龙之道</content>
+	<content contentuid="h70b7bd78gdcb4g4174g8333g1d3f3f4e5858" version="1">受到&lt;b&gt;远程&lt;/b&gt;攻击时，消耗&lt;LSTag Type="ActionResource" Tooltip="ReactionActionPoint"&gt;反应&lt;/LSTag&gt;施展&lt;LSTag Type="Spell" Tooltip="Projectile_Fireball"&gt;火球术&lt;/LSTag&gt;进行反击。</content>
+	<content contentuid="hd3ac88a3g1a6fg41f1g969bg67680bb354db" version="1">精金壁垒</content>
+	<content contentuid="hc6a8de72gf8c9g4436gb19aga90f425a1140" version="1">“人们说，勇气是无法锻造的。但只要你握紧这面精金壁垒，便会感到千场战役的昂扬战魂自你心底升腾而起。没有攻击能觅得裂隙，没有敌人能宣告胜利。这面盾牌，不仅仅是金属所铸，更是矮人那历经数千年淬炼的锻造技艺的化身。” ——铁匠，贝尔加·石锤</content>
+	<content contentuid="h74fd8ffbgec88g448agab6egad83f3955a4a" version="1">天界公义</content>
+	<content contentuid="h8b75dbd8gb959g4a77g9312g842e29b7cff0" version="1">这面瑰丽的金色盾牌闪耀着超凡脱俗的光芒，上面缀着一颗巨大的红宝石，随着天界的能量而搏动。当邪恶胆敢对这位正义之盾的持有者举起兵刃，那枚宝石便会迸发出令人目眩的炽光，令其震慑而迷失方向。自这面盾牌中涌出的公义之力，将彻底挫败恶毒的图谋。</content>
+	<content contentuid="h024f4e81g89c7g498cgad3bg26aee13d60c8" version="1">天界审判</content>
+	<content contentuid="hda9ad075gb0bag4311g8a52g216da0e3dd3b" version="1">%%% 已废弃 %%%</content>
+	<content contentuid="hf99595fcg6303g43a0g8b34g2df34ce0c682" version="1">正义裁决</content>
+	<content contentuid="h53c6972eg4ac0g48c0gb22cgdac1980e560c" version="1">%%% 已废弃 %%%</content>
+	<content contentuid="hcd866abbg23aeg46e1gb0edg56145ad9f7ea" version="1">圣光裁决</content>
+	<content contentuid="h40d5aa6fg51dcg432agbc21gf6b51e427f58" version="1">你所有造成&lt;b&gt;[1]&lt;/b&gt;的攻击与&lt;LSTag Type="Status" Tooltip="AMP_INFO_SPELL"&gt;法术&lt;/LSTag&gt;（除&lt;LSTag Type="Spell" Tooltip="Projectile_MagicMissile"&gt;魔法飞弹&lt;/LSTag&gt;与&lt;LSTag Type="Spell" Tooltip="Target_BoomingBlade"&gt;轰雷剑&lt;/LSTag&gt;外）&lt;b&gt;额外&lt;/b&gt;造成&lt;b&gt;[2]&lt;/b&gt;点伤害。&lt;br&gt;若你为&lt;b&gt;圣武士&lt;/b&gt;，此加值&lt;b&gt;翻倍&lt;/b&gt;。</content>
+	<content contentuid="h8e9d0516g4918g46c2ga2e0g43c5125b164b" version="1">天罚</content>
+	<content contentuid="h21d375c8gfd34g48c6ga03agb97360bf190b" version="1">造成&lt;b&gt;[1]&lt;/b&gt;时，有&lt;b&gt;[2]%&lt;/b&gt;的几率召唤天罚，立即处决目标。</content>
+	<content contentuid="h930a21a7ge77cg4d56g9e71gef6ec7262dda" version="1">灼信</content>
+	<content contentuid="h59ff07efgbdb1g46a4gb3edgc197a8112482" version="1">成功通过一次&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;时，获得&lt;b&gt;[1]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="NECK32"&gt;灼热光粒&lt;/LSTag&gt;，每层提供&lt;b&gt;+[2]&lt;/b&gt;（上限&lt;b&gt;[3]&lt;/b&gt;层）。&lt;br&gt;若你为&lt;b&gt;圣武士&lt;/b&gt;，则获得&lt;b&gt;双倍&lt;/b&gt;层数。</content>
+	<content contentuid="h44f803a1ga731g4a06g8f36g111eaee40421" version="1">应召之盾</content>
+	<content contentuid="h8a5515e7g6091g4158gb4e0g1d816abaee9c" version="1">这面以黑钢锻造的巍然巨盾，是至上真神伟力的一份森然明证。它曾属于教团强大狂徒中的一员——然而，尽管他忠心耿耿，最终却仍死于同僚之手，这件遗物随后被地精们窃走。你是否会挥舞这面圣盾，用它的魔法去对抗至上真神的胁迫？又或者，它的触碰，同样会将你也一并收割？</content>
+	<content contentuid="hbae48642g2217g4451gae01g1af96f6538a1" version="1">死亡圣盾</content>
+	<content contentuid="h085ea3b2ge1c7g4db3gadc1gd1d2be43103f" version="1">在战斗中受到敌人伤害时，获得&lt;LSTag Type="Status" Tooltip="WEAPON90"&gt;至上真神的庇护&lt;/LSTag&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合，几率为&lt;b&gt;[1]%&lt;/b&gt;。</content>
+	<content contentuid="hf21f0f48g92dag40cagab13g816b68edee54" version="1">至上真神的庇护</content>
+	<content contentuid="hcf9dac16g9f09g4eebga4a7g25b5e5c9258b" version="1">对所有伤害具有&lt;LSTag Tooltip="Resistant"&gt;抗性&lt;/LSTag&gt;。</content>
+	<content contentuid="h27055b33g56acg4a6cgb541g2c99277a4b31" version="1">铭心之饰</content>
+	<content contentuid="h56f6c3f3g0a3bg43eag9ce9g6f16ffdae430" version="1">若你带有&lt;b&gt;至上真神的烙印&lt;/b&gt;，受到的伤害减少&lt;b&gt;[1]&lt;/b&gt;点。否则，伤害减少&lt;b&gt;[2]&lt;/b&gt;点。</content>
+	<content contentuid="h982ac6a7g7d5bg411bgbe6cg7ed7cad00dfc" version="1">复仇光盾</content>
+	<content contentuid="ha1fbe756ga976g4dd4g848cg67635f8ab8c2" version="1">这面以精灵的精湛工艺铸就的盾牌，如今的用途已偏离了铸造它的初衷。数千年前，它曾是希望、光明之魂与炽热火焰的象征。然而时光荏苒，另有阴邪的势力染指了这件传奇遗物。他们亵渎了它，将其扭曲为一件报复的工具，承载着湮灭一切生灵的复仇之光。</content>
+	<content contentuid="hb9628f86ga1d1g4af2g800egd2dfe95c1043" version="1">亵渎魔法</content>
+	<content contentuid="hf87215b6gbb59g487fgaf36g9ba492738726" version="1">在战斗中受到敌人伤害时，获得&lt;b&gt;[1]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="WEAPON91"&gt;复仇之光&lt;/LSTag&gt;。</content>
+	<content contentuid="h1d8f1413g6957g474fg85e8g78576040a4af" version="1">复仇之光</content>
+	<content contentuid="hb9865773gb42cg4aa8ga6c8g6b718c022598" version="1">复仇将至，这面盾牌逐渐充满愤怒的光芒。&lt;br&gt;&lt;br&gt;战斗结束时消散。</content>
+	<content contentuid="h4340d5a8g698bg4dc3g965dg4fbbadf9d2fa" version="1">圣光爆裂</content>
+	<content contentuid="h674caf70gcb0fg4e12g8a23g0c4eefb0dba8" version="1">累积&lt;b&gt;[1]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="WEAPON91"&gt;复仇之光&lt;/LSTag&gt;后，将其吸收并释放一股复仇的&lt;LSTag Type="Spell" Tooltip="MAG_Weapon91_AOE"&gt;圣光爆裂&lt;/LSTag&gt;。</content>
+	<content contentuid="hcfefa027gc3c2g4f28g85e0g68341b1a1fcf" version="1">圣光爆裂</content>
+	<content contentuid="h354a8c5ag25d9g4ab6g9408g6378fe09637a" version="1">造成&lt;b&gt;[1]&lt;/b&gt;，影响半径&lt;b&gt;[2]&lt;/b&gt;内的所有生物。</content>
+	<content contentuid="h52d1930agfa1ag4715g8c1bg91f6efbfed26" version="1">暗夜之盾</content>
+	<content contentuid="h66f95366g9ad3g421dg95d0g899b944775df" version="1">这面盾牌以来自费伦最黑暗角落的远古金属所铸，闪烁着一层不祥的、冰冷的火焰。暗哑的黄金漩涡饰满其表面，低语着那些已被遗忘的仪式与邪术契约。传说中，暗夜之盾是由一个走投无路的文明所创造——他们当时正面临灭顶之灾。在万劫不复的边缘摇摇欲坠之际，他们与一个栖息在宇宙至暗处的存在，“黑星”，定下了一桩绝望的交易。那是执掌黑夜与湮灭的沉睡神灵，它以这面伟大的遗物为交换，换取他们灵魂中日益滋长的黑暗。当那宿债降临之时，这面盾牌究竟会赐予你胜利，还是让你被那黑暗星辰彻底吞噬？</content>
+	<content contentuid="h515949a8g242eg47aag8f26g8ac7d21ffa4d" version="1">黑暗蔓延</content>
+	<content contentuid="h8cee345egd969g4048g9386gca9e59f3b6bc" version="1">在战斗中受到敌人伤害时，获得&lt;b&gt;[1]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="WEAPON92"&gt;黑暗纽带&lt;/LSTag&gt;。</content>
+	<content contentuid="hdf199638g952cg4b5fg8100g35290dc3ef47" version="1">黑暗纽带</content>
+	<content contentuid="h9a1fa829gbdc8g4beeg96c2gd085fff54bed" version="1">黑暗正不断蚕食你的灵魂，&lt;b&gt;黑星&lt;/b&gt;正在收取它的代价。&lt;br&gt;&lt;br&gt;在战斗结束时消失。</content>
+	<content contentuid="h8bd0cbd4gc971g48c9gb1a7g97c098249c4d" version="1">汲取黑暗</content>
+	<content contentuid="hca93827dg5facg405cgb85dg641bc324d549" version="1">在累积了&lt;b&gt;[1]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="WEAPON92"&gt;黑暗纽带&lt;/LSTag&gt;后，吸收它们并获得&lt;LSTag Type="Status" Tooltip="WEAPON92_2"&gt;黑星之赐&lt;/LSTag&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合。</content>
+	<content contentuid="h8dd60472g176eg489fgb1a6gf1f0d9603e2e" version="1">黑星之赐</content>
+	<content contentuid="hf628752egea33g435dgbe3dg62dac507f5bd" version="1">所有&lt;LSTag Tooltip="Ability"&gt;属性&lt;/LSTag&gt;增加&lt;b&gt;+[1]&lt;/b&gt;。&lt;br&gt;&lt;br&gt;你受到的所有伤害均被&lt;b&gt;抵消&lt;/b&gt;。&lt;br&gt;你&lt;b&gt;免疫&lt;/b&gt;所有负面状态。&lt;br&gt;击杀一名敌人后此效果消失。</content>
+	<content contentuid="hc00d0cccgad89g4b37g9b4dge9e9617b318b" version="1">海灵手斧</content>
+	<content contentuid="hf1a41ae7g59e3g4140ga39cg5df2845040c1" version="1">在一次风暴中被深海吞没后，这把手斧便成了一位水手灵魂的最终归宿——他的生命，在对未知海岸的追寻中被猝然斩断。满浸着盐与风，这柄武器的每一次挥击，都令空气盈满遥远海洋的气息，将敌人笼罩在清凉与湿润之中，仿佛一道海浪在沙滩上留下了蜿蜒的尾迹。那位寻求安宁的水手之魂，在他的手斧中得到永恒，并赠予来者一份隐匿于时光迷雾之海的，无尽航程的礼物。</content>
+	<content contentuid="hfc1d7beeg84b7g4518ga645gedb8858cefda" version="1">海洋吐息</content>
+	<content contentuid="h9aaa21b8g516eg454bga8d8gbafc73833f55" version="1">站在&lt;b&gt;水面&lt;/b&gt;上造成&lt;b&gt;任何&lt;/b&gt;伤害时，使目标陷入&lt;LSTag Type="Status" Tooltip="WET"&gt;湿润&lt;/LSTag&gt;状态，持续&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="hdf67ef0fgc7b0g4eebgb154ge5157ef3bc88" version="1">盐渍渗透</content>
+	<content contentuid="h3236157dg5e29g4db0gb122g7e7ada80a6f7" version="1">对&lt;LSTag Type="Status" Tooltip="WET"&gt;湿润&lt;/LSTag&gt;目标的&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;触发阈值降低&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="hc94fc082g2a26g4355g921dg887737aaf301" version="1">微光手斧</content>
+	<content contentuid="h6bd8c1a5g66cbg41f5gab1agd7ed65ffa20b" version="1">在一个被遗忘的战争年代，一个名叫阿德里安的战士被敌人的承诺所诱惑，背叛了他的战友。作为惩罚，他的灵魂被封印在了他所挥舞的手斧之中。这件遗物吸收了炽热的信仰之光，以及随之而来的诅咒，由此成为了一道高贵的魔法圣光之源。如今，阿德里安已是自己武器的阶下囚，不断提醒着背叛的代价，将他的痛苦倾注于每一缕阳光之中。</content>
+	<content contentuid="h479ae6b5gc2a2g451bg8dd7g29015acdc95e" version="1">光芒四射</content>
+	<content contentuid="ha697bf10g83e0g48a2g8b3fg8f15022573df" version="1">使用此武器攻击处于&lt;b&gt;光照&lt;/b&gt;中的敌人时，额外造成&lt;b&gt;[1]&lt;/b&gt;点伤害，但自身也受到&lt;b&gt;[2]&lt;/b&gt;点伤害。&lt;br&gt;即便未命中也会触发。</content>
+	<content contentuid="h4ad2738cg1a0eg436cg8b6dg47e119cd7986" version="1">魔咒手斧</content>
+	<content contentuid="h66f53a83g6e71g4a5fgadf6gc589c5b2c0b6" version="1">当费伦大陆被一场阴森的瘟疫所吞噬时，伟大的治疗师米伦创造了这件遗物，试图以此平息疾病。然而，这柄武器却被恶魔般的仇敌秘密地降下了诅咒，使它沦为了一件散播疾苦的工具。米伦，因为自己苦心孤诣的落空而心力交瘁，便将这把手斧藏匿了起来，寄望于这道危险的诅咒会就此被永远遗忘。</content>
+	<content contentuid="h93fed37dg37b6g47d2g8ea5gaf2a3f59182c" version="1">凋零诅咒</content>
+	<content contentuid="hfcb030adgf6deg4030ga521g4b51e4632218" version="1">受到此手斧伤害的目标，承受&lt;b&gt;[1]&lt;/b&gt;层&lt;LSTag Type="Status" Tooltip="WEAPON95"&gt;经久创伤&lt;/LSTag&gt;。</content>
+	<content contentuid="h8c5926fcg3547g453ag8082g299ea66e5ecc" version="1">经久创伤</content>
+	<content contentuid="h2b221fbbg0551g426dgad65g38a51997d42a" version="1">每有一层此效果，该生物损失&lt;b&gt;[1]&lt;/b&gt;点&lt;LSTag Tooltip="MovementSpeed"&gt;移动速度&lt;/LSTag&gt;，且&lt;LSTag Tooltip="AttackRoll"&gt;攻击检定&lt;/LSTag&gt;受到&lt;b&gt;[2]&lt;/b&gt;减值。&lt;br&gt;通过治疗或战斗结束时移除。</content>
+	<content contentuid="h150579fagb1aeg4232g910eg511b98fcb5a6" version="1">永冻手斧</content>
+	<content contentuid="h04f3ced7g696fg4240ga9ccg1f833bd9598c" version="1">这把手斧铸造于冰风谷群山的核心，是远古冰霜巨魔萨满的杰作。传说中，它的刀刃在一座深山湖泊中淬炼而成，那湖水以奇特的魔法特性而闻名。</content>
+	<content contentuid="hccc63cc3ga13bg469dga43ega22bcf51f881" version="1">深湖魔法</content>
+	<content contentuid="h43044996g5183g41f6gb874g1e8d33db3499" version="1">冰霜之握</content>
+	<content contentuid="h45398fe6g92ceg4161g96dbgdc7abbddcbe9" version="1">此生物无法&lt;LSTag Tooltip="MovementSpeed"&gt;移动&lt;/LSTag&gt;，也不能采取&lt;LSTag Type="ActionResource" Tooltip="BonusActionPoint"&gt;附赠动作&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;开始&lt;b&gt;燃烧&lt;/b&gt;时移除此效果。</content>
+	<content contentuid="h429fdf60g3860g47d2gb811g79aa73c23301" version="1">拂晓先驱</content>
+	<content contentuid="he469204dg859fg49abgb76fg34fa6e2367c6" version="1">这把以罕有金属铸就的手斧，曾被无数次初升旭日照耀，闪烁着破晓的色泽，且十分轻盈。它的铸造之秘早已湮灭于万古岁月之中，但据说，它是由那些试图捕捉黑夜化为白昼那一瞬息的大师级铁匠们所创造。</content>
+	<content contentuid="hcb1b62c4g13d0g40e9g8160g159c70e0604e" version="1">曙光初现</content>
+	<content contentuid="hb7ebf895gcd63g4bf2g82a5gb8cce1b303e8" version="1">&lt;b&gt;先攻&lt;/b&gt;&lt;b&gt;+[1]&lt;/b&gt;。</content>
+	<content contentuid="h48eba773g6fc1g4788gb2b4ga3b03e580b68" version="1">祖光手斧</content>
+	<content contentuid="hd6bd2e62g0d7fg4423gba78g8ba2dbbb5393" version="1">这把手斧铸造于不死生物开始自大地深处崛起的年代，曾受到那个时代最强之人的祝福。它散发着温暖的光芒，为持有者在与黑暗力量的战斗中注入力量。这件遗物饰有古老誓言的符文，象征着生命与那些背弃其法则者之间的永恒抗争。</content>
+	<content contentuid="h0c06319eg62cdg4c08g85aegea457414c81b" version="1">先祖祝福</content>
+	<content contentuid="h932edb69g8345g4117g90abgf2859f99098b" version="1">使用此手斧对抗&lt;b&gt;不死生物&lt;/b&gt;时，&lt;b&gt;额外&lt;/b&gt;造成&lt;b&gt;[1]&lt;/b&gt;点伤害。</content>
+	<content contentuid="haa471f90gdd98g461dg88e9gcca5d6b6cc89" version="1">暗杀影斧</content>
+	<content contentuid="h8617515egdf75g4b94g920egccfd8c300a1b" version="1">这柄遗物铸造于被遗忘的地牢深处，那里是光芒无从渗透之地，它汲取了黑暗与隐形的精髓。据信，这把手斧的首任主人是一名刺客，他将自己的一生都献给了那隐匿无踪的行动与致命一击的艺术。手斧上那道原始印记的力量，惊人的保留至今。</content>
+	<content contentuid="h32844664g3c69g4be2g838aga8d31094d74a" version="1">血影印记</content>
+	<content contentuid="h217373f5g29bbg4acagabe9g49c0c34d3718" version="1">在&lt;b&gt;隐匿&lt;/b&gt;状态下使用此手斧攻击时，迫使目标通过一次体质&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则将陷入强化&lt;LSTag Type="Status" Tooltip="BLEEDING"&gt;流血&lt;/LSTag&gt;状态。此效果即使攻击未命中也会触发。&lt;br&gt;&lt;LSTag Tooltip="DifficultyClass"&gt;难度等级&lt;/LSTag&gt;取决于你的&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;。</content>
+	<content contentuid="h04ebddbdg64f0g4420ga01dg95e075ff6672" version="1">嘲弄之歌</content>
+	<content contentuid="h43fe7925g30f3g4a3dg9502gdc8a4def19d5" version="1">这把手斧的握柄，以采伐自无名森林的魔法木材制成。由于那片林中栖满了嘲鸫，这种木材在口耳相传中便被唤作“嘲鸫木”。每一次挥击，都会有一道清脆的回响荡开，吸引注意的同时也迷惑敌人，令他们更易受到攻击。</content>
+	<content contentuid="hb3c1982dg8538g4214gac36gf1fdf3e23872" version="1">魔法之歌</content>
+	<content contentuid="hda42a89fga155g4dcdga28fgc9459bd2dab9" version="1">使用此手斧造成伤害时，将对目标施加&lt;LSTag Type="Status" Tooltip="WEAPON100"&gt;嘲鸫印记&lt;/LSTag&gt;，&lt;b&gt;持续至&lt;/b&gt;其回合开始。</content>
+	<content contentuid="hb573647cg6b95g46ccgbc3bg3a473d6a4b2c" version="1">嘲鸫印记</content>
+	<content contentuid="h828c6f85g9dbfg453dga93ag5728ae251700" version="1">针对此生物的&lt;LSTag Tooltip="AttackRoll"&gt;攻击检定&lt;/LSTag&gt;具有&lt;LSTag Tooltip="Advantage"&gt;优势&lt;/LSTag&gt;。</content>
+	<content contentuid="h92b1f623g7c6cg4b49g91bag7d8c826daba3" version="1">森灵斧</content>
+	<content contentuid="h30dc1113g62edg4a89g901ege413e828f080" version="1">这把手斧由采自一座古老森林深处的铁矿石织就——在那里，狂野的藤蔓缠绕着每一棵树、每一块石。它浸满了至为强悍而执拗之植物的汁液。这件遗物由一位森林之灵创造，旨在守护它的领地免遭入侵，并被赠予了一位漫游于这片土地上的森林精灵。</content>
+	<content contentuid="h1d29c4a9gff5fg432cg99d9g1b9413b160cf" version="1">森林之援</content>
+	<content contentuid="h185fbbcbge774g482fga7a0gc2f9b44e4396" version="1">使用此手斧攻击站立于&lt;b&gt;野性藤蔓&lt;/b&gt;中的目标时，对该目标施加&lt;LSTag Type="Status" Tooltip="ENSNARED"&gt;纠缠&lt;/LSTag&gt;。</content>
+	<content contentuid="h92c1a6a0gdbaeg4d0bgaa6fga05947029977" version="1">巫影手斧</content>
+	<content contentuid="hf530bbeeg4f31g47f8gb7afg2a4e154462eb" version="1">这把斧子上布满符文，那是很久以前，一个贪婪的女巫在深夜中刻下的。随着斧子的每一次打击，无形的暗影触须会缠绕上受害者的身躯，仿佛黑夜本身，已然成为了这件遗物持有者的盟友。</content>
+	<content contentuid="ha9ef8020gf08eg43f2g982fg7dcfca4b26db" version="1">女巫符文</content>
+	<content contentuid="hd03e711bg051cg4517g8eacg584ea9dd96f1" version="1">使用此手斧造成伤害时，对目标施加&lt;LSTag Type="Status" Tooltip="WEAPON102"&gt;暗影藤蔓&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。&lt;br&gt;每回合只能触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="hb1567e17g2753g4c94g9e8eg25b02d60e1a8" version="1">暗影藤蔓</content>
+	<content contentuid="hbd6a2174g3d4dg4c36ga781g71ca7048b4f1" version="1">1&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;&lt;b&gt;-[1]&lt;/b&gt;。&lt;br&gt;针对此生物的&lt;LSTag Tooltip="AttackRoll"&gt;近战法术攻击检定&lt;/LSTag&gt;具有&lt;LSTag Tooltip="Advantage"&gt;优势&lt;/LSTag&gt;。</content>
+	<content contentuid="hfb461524g0202g4a58g9481g133ff0944280" version="1">焦炎旋风</content>
+	<content contentuid="h6a268eb7gd358g4e27g9495g1ac23335b85f" version="1">这柄斧头层层叠叠的刃口，始终闪烁着火炭般的柔光，在击中目标时会骤然引燃，将他们笼罩在一道烈火的光环之中。战士加萨，这柄斧头的首任主人，曾用它来解放自己的族人，将一场场血战化作了烈焰与灰烬的死亡之舞。这柄斧头，不仅是毁灭的兵器，更是不屈求胜意志的象征，足以在战士们的心中点燃那战斗的狂热与坚韧。</content>
+	<content contentuid="h1582351egc1ffg4561g87c5g78404657aae2" version="1">焦炎猛击</content>
+	<content contentuid="h0c759a93g0948g4557gac2agcba217f4353e" version="1">对目标发动焦炎猛击，额外造成&lt;b&gt;[2]&lt;/b&gt;点伤害并可能将其陷入&lt;LSTag Type="Status" Tooltip="BURNING"&gt;燃烧&lt;/LSTag&gt;。</content>
+	<content contentuid="h85fd3cc5g43b6g4649g973bga2e59f9da6da" version="1">炼狱火墙</content>
+	<content contentuid="ha97a0233g4058g4131ga0d1g8ecc2f8326a1" version="1">当你处于&lt;LSTag Type="Status" Tooltip="BURNING"&gt;燃烧&lt;/LSTag&gt;状态时，&lt;b&gt;每场战斗一次&lt;/b&gt;可以施展&lt;LSTag Type="Spell" Tooltip="Wall_WallOfFire_Weapon103"&gt;火墙术&lt;/LSTag&gt;。</content>
+	<content contentuid="h83faba06gc5f9g41f6g8e56gdfd9858a49a9" version="1">永咒手斧</content>
+	<content contentuid="hccc2a9cagb414g4932g8d5dg7b2942fe3620" version="1">几个世纪前，一个名叫菲尔伯特的笨拙法师与时间定下了一桩契约，以换取永生不老的青春。然而，时间欺骗了他——它并未赐予他所渴求的不朽青春，反而诅咒了他所穿戴的一切事物，包括这把斧头，使其触碰的一切都变得衰老腐朽。菲尔伯特还未学会如何控制这些被时间诅咒的遗物，便早早地一命呜呼了，成了他后辈们口中那传奇般的嘲弄对象。</content>
+	<content contentuid="hfed40cdfge606g456agb9e6gd2578222b01a" version="1">时间的欺诳</content>
+	<content contentuid="h94eb2b30g48e9g43d2g8f4agc162c0d0d7a5" version="1">衰老诅咒</content>
+	<content contentuid="h9888ac72g150cg4a7agb0cbg984e6983c893" version="1">每有一层诅咒，&lt;LSTag Tooltip="ArmourClass"&gt;护甲等级&lt;/LSTag&gt;&lt;b&gt;-[1]&lt;/b&gt;。&lt;br&gt;诅咒不会随时间消散。&lt;br&gt;&lt;br&gt;若层数达到&lt;b&gt;[2]&lt;/b&gt;或以上，诅咒将消散，该生物受到&lt;b&gt;[3]&lt;/b&gt;点伤害。</content>
+	<content contentuid="h60183285g34a9g44b2g84a9g8ff2031e7977" version="1">斧王利刃</content>
+	<content contentuid="heaa27defg4292g4877g9e9ag6f2aee322246" version="1">战技回响</content>
+	<content contentuid="h9a115240g4cb4g4854ga776g87005d59446e" version="1">在近战战技中消耗一枚&lt;LSTag Type="ActionResource" Tooltip="SuperiorityDie"&gt;卓越骰&lt;/LSTag&gt;时，恢复该骰并对目标额外造成&lt;b&gt;[1]&lt;/b&gt;点伤害。&lt;br&gt;每场战斗触发一次。</content>
+	<content contentuid="hdaa4bf01g3998g4864ga8f6ga2e7c9d584cb" version="1">当你端详这柄古老的双刃巨斧时，它那饱经风霜的表层，诉说着无数场战斗的往事。这对完美平衡的孪生斧刃，以一种异常坚韧的金属锻就，似乎正与你自身的肉体力量产生共鸣。据剑湾那些武匠们蒙尘的编年史所载，此类兵器曾是为坦帕斯的斗士们所特别铸造的，被赐予了祝福，以强化那些被认定值得挥舞它们的凡人的天生伟力。这柄巨斧那简洁而深邃的符文，暗示着它诞生于人类纪元——彼时的魔法，往往是以优雅而非奢华为用。</content>
+	<content contentuid="h96fb8e7ag8074g47b3ga6d7gba6e3a959c1a" version="1">坦帕斯的洞察</content>
+	<content contentuid="h16e1683cgb95dg431cga739g8735a74fb2ef" version="1">当你拥有&lt;LSTag Type="ActionResource" Tooltip="SuperiorityDie"&gt;卓越骰&lt;/LSTag&gt;时，额外造成&lt;b&gt;[1]&lt;/b&gt;点伤害。</content>
+	<content contentuid="h3247b813g9af7g4042g8e87gc504ed554596" version="1">凤凰三叉戟</content>
+	<content contentuid="ha388d19ag685cg4d72gaeb4g5fe94e3179d9" version="1">当你审视这柄非同寻常的三叉戟时，它的金属变得烫手难耐，而你却发现自己根本无法将它松开。翻阅古老的航海典籍，你发现了散落的记载，提及一个神秘的深海火焰崇拜教派，他们的圣典讲述了那些于海底火山之中铸造的武器。尽管三叉戟的大部分历史仍笼罩在迷雾之中，却有一个奇特的细节吸引了你的注意——那三道尖叉之上，铭刻着代表痛苦、烈焰与超凡的古老符文。或许，这件武器的真正力量，只会向那些甘愿拥抱它那灼烧触碰之人，才会展露真容？</content>
+	<content contentuid="hec36721fg7360g4686g8d24g388c9872e865" version="1">炽焰坚韧</content>
+	<content contentuid="ha8c394d7g6470g4630ga510gec0b977bba69" version="1">处于&lt;LSTag Type="Status" Tooltip="BURNING"&gt;燃烧&lt;/LSTag&gt;状态时，力量与体质获得&lt;b&gt;+[1]&lt;/b&gt;加值。</content>
+	<content contentuid="h0b463924gac2fg4103gb7a3ga5c6741685a5" version="1">凤凰之心</content>
+	<content contentuid="hf47925e3gdba3g4b4bg887fgc55cfdddd4ad" version="1">造成&lt;b&gt;[1]&lt;/b&gt;时，获得&lt;LSTag Type="Status" Tooltip="FIRE_SHIELD_WARM"&gt;火焰护盾&lt;/LSTag&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合。持续时间可叠加。</content>
+	<content contentuid="ha72afd63g3713g4f1egb3d7g52b0ded442ca" version="1">兽语法杖</content>
+	<content contentuid="hdb288b9egaefeg42bbg8bf3gb6a633965731" version="1">凑近细看，空灵的絮语似乎在这柄法杖扭曲的冠顶周围翩翩起舞——这迷人的景象，令人联想起北极光。在钻研它的奇特属性时，你在一份古老的德鲁伊手稿中发现了它矛盾的二元本质：它由一个坚信当以沟通和抉择来维持自然平衡的德鲁伊教圈所铸造。据那本文献所载，那流动的光痕，乃是被历代持有者所裁决的动物精魂，至于它们究竟是作为见证者还是指引者而留下，则不得而知。当你握住它时，你感到自己获得了一份非凡的能力：既能与野兽交流，亦能辨识出它们最深层的腐化。</content>
+	<content contentuid="hcf06effdg2ea3g4ebbg9dd8g7dbb0d12e755" version="1">北极光</content>
+	<content contentuid="hb03b46dage2d8g4ca7gb307gcc773686a5a8" version="1">处于&lt;b&gt;阳光&lt;/b&gt;下造成伤害时，施加&lt;LSTag Type="Status" Tooltip="MAG_RADIANT_RADIATING_ORB"&gt;光耀法球&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。&lt;b&gt;野兽&lt;/b&gt;与&lt;b&gt;怪兽&lt;/b&gt;受到双倍的&lt;LSTag Type="Status" Tooltip="MAG_RADIANT_RADIATING_ORB"&gt;光耀法球&lt;/LSTag&gt;。</content>
+	<content contentuid="h0a7d0839g57fbg41abg988cg6145c2a13bac" version="1">饮烬者</content>
+	<content contentuid="hf9b063e0g969fg40a3g9ebag1f1bd4d028ad" version="1">在你的手中，这柄远古战斧的双生利刃散发出一股令人不安的暖意。当深入它的奥秘时，你目睹了一个奇特的景象——每当劈中燃烧的血肉，这柄战斧的金属便仿佛一位干渴的旅人，贪婪地啜饮着那团火焰。你发现的那张烧焦的羊皮纸碎片暗示着，这件兵器是由一位科苏特的叛教祭司所铸，他坚信，真正驾驭火焰的秘诀，不仅在于挥舞它，更在于吞噬它的精髓。这柄战斧对烈焰的饥渴，至今仍未消歇，而它的创造者那熊熊燃烧的野心是否实现，亦不得而知。</content>
+	<content contentuid="ha48e307agd4b8g420dg8ef6g0bd0bf699230" version="1">火焰收割</content>
+	<content contentuid="hcf2fc634g54abg4552g903egdba2bfe82204" version="1">使用此斧对&lt;LSTag Type="Status" Tooltip="BURNING"&gt;燃烧&lt;/LSTag&gt;状态的敌人造成伤害时，吸收&lt;LSTag Type="Status" Tooltip="BURNING"&gt;燃烧&lt;/LSTag&gt;并恢复&lt;b&gt;[1]&lt;/b&gt;点生命值。</content>
+	<content contentuid="ha20511a3gdd58g42f0gb622g0f5483c64332" version="1">琥珀喷发</content>
+	<content contentuid="h7086eebeg638cg4e0fg9a3bgaeb8a2b4df4f" version="1">当你治疗自身时，触发一次&lt;b&gt;琥珀喷发&lt;/b&gt;，引燃所有附近的敌人。</content>
+	<content contentuid="h6fcc096eg0e89g4988gb261g6f94dac25b14" version="1">雷击巨棒</content>
+	<content contentuid="h3911ce6ag184eg4281gaaf8g0b128477cbbf" version="1">你起初以为它只是根平平无奇的巨棒，却在一场暴风雨中端详它时，发觉它对闪电有着异乎寻常的亲和力。你在一座久已废弃的法师塔档案中展开的研究表明，这件武器是一项旨在引导自然电流的宏大实验的组成部分。那位创造者笔记的大半虽已毁于水渍，却依稀透露出他试图为驻扎在风暴角山脉的一支精英卫队锻造武器。你留意到，沿着它的柄身，蚀刻着繁复的符文——旨在从大地上引导并增幅电能。然而，它们的全部潜力，似乎唯有当站立在曾遭雷劈的地方时，才会觉醒。</content>
+	<content contentuid="hbabfe1cdgffffg4221gaa99gfc17125feefd" version="1">符文释能</content>
+	<content contentuid="h0bfc07eege7adg4367gbb08gb4364e159c33" version="1">对站在&lt;b&gt;带电表面&lt;/b&gt;上的敌人造成伤害时，为巨棒充能&lt;b&gt;2&lt;/b&gt;回合，使其命中时额外造成&lt;b&gt;[1]&lt;/b&gt;点伤害。若目标处于&lt;LSTag Type="Status" Tooltip="WET"&gt;湿润&lt;/LSTag&gt;状态，同时在&lt;b&gt;[2]&lt;/b&gt;半径内创造一片&lt;b&gt;带电表面&lt;/b&gt;。</content>
+	<content contentuid="h251dd4abg4058g424bg9756gfd2232b3caf0" version="1">牧者长矛</content>
+	<content contentuid="h2578aae2g454cg4f1fg9787g29d8f9f96782" version="1">这柄长矛承载着一段离奇的历史，那是你从剑湾农业档案馆里发现的一份牧羊人日记残片中拼凑出来的。这把破碎的武器，似乎曾属于一位声名远扬的牧人，而他曾反复被一位恶作剧的大法师变形为一只绵羊。这位牧羊人非但没有在这奇耻大辱下崩溃，反而不知怎地，设法将这些变形化为了复仇之力的源泉。长矛的锋刃上，隐约蚀刻着绵羊毛的图纹——至于这些花纹究竟是作为装饰，还是嘲讽，则不得而知。矛尖本身闪烁着明亮的桃色闪焰，早已更像是一件以太位面的遗物，而非主物质位面的寻常物件。</content>
+	<content contentuid="hb357244eg867cg4bcfgba0dg43914541a711" version="1">牧者威仪</content>
+	<content contentuid="ha216740ag06bcg4928ga86age5946d278bae" version="1">在战斗中，周围每存在一只&lt;LSTag Type="Status" Tooltip="POLYMORPH_SHEEP"&gt;绵羊&lt;/LSTag&gt;，你的所有伤害来源都会&lt;b&gt;额外&lt;/b&gt;造成&lt;b&gt;[1]&lt;/b&gt;点伤害。</content>
+	<content contentuid="h16c12161g6b0fg4e1dgbcb6g26ca5ac6d8f6" version="1">牧者复仇</content>
+	<content contentuid="hd5eb82a5g2251g4089gb4dcg577513c8797a" version="1">周围每存在一只&lt;LSTag Type="Status" Tooltip="POLYMORPH_SHEEP"&gt;绵羊&lt;/LSTag&gt;，你的所有伤害来源都会&lt;b&gt;额外&lt;/b&gt;造成&lt;b&gt;[1]&lt;/b&gt;点伤害。</content>
+	<content contentuid="he73f6a5egb6adg46eaga7fbgb960b73dedc1" version="1">噬魂者</content>
+	<content contentuid="hb5f95a64g9b2bg4d71g8cb8g5040eca89aae" version="1">在一名已被处决的刽子手那本饱受谴责的日记中，你发现了关于这柄双头斧的、令人不安的记载。日记的作者描述道，这件武器开始“收集”它所杀之人的灵魂，并随着每一次行刑而愈发贪婪。你越是研究它那残忍的锋刃，便越是感知到其中囚禁的亡魂——它们的低语承诺着力量，但却伴随着可怕的代价。在研究中，你揭开了这柄战斧的真相：它本是一场被遗忘的仪式中，由一把受加持的刽子手之刃与一根死灵法师法杖的残余部分熔铸而成。这两件黑暗遗物的结合，创造出了一种饥渴之物，一种不仅以死亡为食，更以受害者之本源为食的存在。</content>
+	<content contentuid="h5dc94cb3gee95g4be8gb602g50e6933b9357" version="1">掘魂</content>
+	<content contentuid="h5933f955g2626g4cb1g903bg72f5349f61ae" version="1">使用噬魂者杀死一名敌人时，获得&lt;b&gt;[1]~[2]&lt;/b&gt;份&lt;LSTag Type="Status" Tooltip="WEAPON111"&gt;玷污的灵魂碎片&lt;/LSTag&gt;。</content>
+	<content contentuid="hfb3896b1g5e6dg446cgb977g357e7e86fcab" version="1">玷污的灵魂碎片</content>
+	<content contentuid="h1e7c0e09ga87eg4161g939ag28115245db59" version="1">你所有&lt;LSTag Tooltip="Abilities"&gt;属性&lt;/LSTag&gt;的数值至少变为&lt;b&gt;[6]&lt;/b&gt;点。&lt;br&gt;斧中的灵魂折磨着你，并有&lt;b&gt;[5]%&lt;/b&gt;的几率对你造成&lt;b&gt;[2]&lt;/b&gt;点伤害。&lt;br&gt;在收集到&lt;b&gt;[3]&lt;/b&gt;份碎片后，将其吸收，并获得&lt;LSTag Type="Status" Tooltip="WEAPON111_2"&gt;噬魂者裁决&lt;/LSTag&gt;，持续&lt;b&gt;[4]&lt;/b&gt;回合。&lt;br&gt;&lt;br&gt;此效果不会随时间或在&lt;LSTag Tooltip="LongRest"&gt;长休&lt;/LSTag&gt;后消失，但若你卸下噬魂者，则会消失。</content>
+	<content contentuid="hc4dc1f4eg6346g4f27gbb5egf345013ca79a" version="1">噬魂者裁决</content>
+	<content contentuid="hd7d75ea9g46aeg497cgbbc6g555b23ed5df0" version="1">你所有&lt;b&gt;成功命中的近战武器&lt;/b&gt;攻击均为&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;。</content>
+	<content contentuid="h19fc6fcbg7a92g4f30g89b9g3f83caf7678a" version="1">裹尸布</content>
+	<content contentuid="hfa6434b4gf0f3g4d5eg866cg2985d4399277" version="1">当你的&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;低于&lt;b&gt;[1]%&lt;/b&gt;时，获得对&lt;b&gt;[2]&lt;/b&gt;的&lt;LSTag Tooltip="Immune"&gt;免疫&lt;/LSTag&gt;。</content>
+	<content contentuid="hebd14abbg3a90g4f8ag8833g4c8397313a25" version="1">凛冬裁决</content>
+	<content contentuid="hd61b959egaa26g45fcg8f54ga3763d9d4f5f" version="1">刚一握住这柄纯净无瑕的长矛，一股彻骨的寒意便沿着你的手指向上蔓延。在冰脉峰修道院的档案馆中，你找到了关于一个古老审判庭的记载，他们便是使用那些被灌注了严冬精粹的武器来下达判决的。你留意到，这柄长矛那异常锋锐的矛尖，尽管始终保持着恒久的冰冷，却从不结霜。一卷仅部分残存的卷轴暗示着，这是那位审判庭刽子手所钟爱的兵器，他深信，真正的正义，正如最严酷的凛冬，应当造成两次打击——先以锋刃，再以极寒。卷轴的其余部分已被时间所侵蚀，将那位刽子手与审判庭的命运，尽数留在了迷雾之中。</content>
+	<content contentuid="hff6aea4fg7fe3g4d97g946egfadc8582d7b0" version="1">寒霜判官</content>
+	<content contentuid="h6f073a23g9a80g40acgb595ge4ccf9036a77" version="1">对一名敌人造成&lt;b&gt;伤害&lt;/b&gt;时，该目标获得&lt;LSTag Type="Status" Tooltip="WEAPON112"&gt;寒霜印记&lt;/LSTag&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合。</content>
+	<content contentuid="hecdd26ebg626cg42ffgb131g605c53ed978d" version="1">寒霜印记</content>
+	<content contentuid="h271bf10fg433dg47edg994ag76d67f254c7b" version="1">此生物受到任意伤害时，额外承受&lt;b&gt;[1]&lt;/b&gt;点伤害。</content>
+	<content contentuid="h6b9b2535g1fdfg4c92gaafdg3c3f6ef198a5" version="1">寒印重击</content>
+	<content contentuid="hb671faddg898bg43b0g80a2g5ea6feeb65b6" version="1">对带有&lt;LSTag Type="Status" Tooltip="WEAPON112"&gt;寒霜印记&lt;/LSTag&gt;的目标，&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;触发阈值降低&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="h27fbcd79g0fc8g4d9eg9ad9g80499422d229" version="1">生命吸取</content>
+	<content contentuid="h4b8cc246g072dg4204g85d1g7ce434d60224" version="1">施加&lt;LSTag Type="Status" Tooltip="WEAPON112"&gt;寒霜印记&lt;/LSTag&gt;时，汲取目标及你自身&lt;b&gt;[1]%&lt;/b&gt;的&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;。</content>
+	<content contentuid="h67b3a31agf1d1g4d6eg8b7cgb1763e11396f" version="1">星界漫游者</content>
+	<content contentuid="h002bdcf4g1300g4da2g8815gb67229bf50f5" version="1">当你端详这柄来自异界的长戟时，它的锋刃竟如星光般闪烁不定，这令你深受震撼。通过向一本破旧的位面魔法书请教，你发现了那些铸造于星界之海无垠虚空中的兵器的零散记载——在那片浩瀚的空寂里，孤独横亘如永恒。这柄长戟那独特的刃首，镌刻着与任何凡间设计皆不匹配的几何图纹，它们反而更像漂浮于现实之间的银色虚空里的抽象轮廓。最耐人寻味的，是一条描述这些遗物曾如何被吉斯洋基人的孤胆斥候们所使用的笔记——斥候们能从星界空间的绝对孤寂之中汲取力量。这件武器抵达主物质位面的初衷，至今仍无人知晓，尽管它那份对孤寂的亲和力，依然留存。</content>
+	<content contentuid="h45feccb3g651ag477bg8b0dg2e7e798e72da" version="1">虚空锋刃</content>
+	<content contentuid="h4ccdd3a7gcae4g4d8fg8719g2159cda197c9" version="1">当&lt;b&gt;[1]&lt;/b&gt;范围内没有&lt;b&gt;盟友&lt;/b&gt;时，&lt;b&gt;所有武器&lt;/b&gt;额外造成&lt;b&gt;[2]&lt;/b&gt;点伤害，且体质增加&lt;b&gt;[3]&lt;/b&gt;&lt;i&gt;（最高&lt;b&gt;[4]&lt;/b&gt;）&lt;/i&gt;。</content>
+	<content contentuid="h7de44226g7a43g4f67g9ecfga5fc7735d9ab" version="1">周围没有盟友，星界漫游者的魔力得到了强化。</content>
+	<content contentuid="hf2bf1c52g1181g493eg9b6ege9dbd747fb77" version="1">莫伊拉之杖</content>
+	<content contentuid="he2dd2836g7097g4808gad61gf43cbf64014a" version="1">当你用手指抚过这柄不起眼的法杖时，你发现了它奇特的吞噬暗影的能力。一本来自烛堡禁书区的落满灰尘的日志，讲述了莫伊拉修女的故事——她曾是麦斯克的一位牧师，却对传统的圣殿崇拜日渐心灰意冷。她在博德之门下方的排污管道中铸造了这柄法杖，并在那一年里最漫长的夜晚，为它注入了暗影的精粹。据日志所载，莫伊拉曾用它潜入并暗中监视其他的神殿，因为她深信，真正的神圣智慧，正藏身于对圣洁与亵渎之奥秘的洞彻之中。最后一篇记载提及了她启程前往斗篷森林，至于她是否在那片幽暗的密林之中寻得了答案，则无人知晓。</content>
+	<content contentuid="h628d7a89gdf10g4644gb338gb4864ebb154d" version="1">啜饮暗影</content>
+	<content contentuid="hc006683eg2124g42acg9fe2ge20f5f6ecbde" version="1">处于&lt;b&gt;隐匿&lt;/b&gt;状态时，你的&lt;LSTag Tooltip="Wisdom"&gt;感知&lt;/LSTag&gt;增加&lt;b&gt;[1]&lt;/b&gt;点。</content>
+	<content contentuid="heb87f113g9798g4d3bgbb3fg407363357e2f" version="1">符文锻砧之遗</content>
+	<content contentuid="hda25b23fgf001g433ag8c20g6931178ab602" version="1">在一座密封的矮人宝库之中，你发现了这柄非凡的战锤，以及传奇机关术士德鲁甘·法铸的零散笔记。你由此得知，这柄锤子，乃是他为解决远征途中法术储备耗尽的古老难题而铸就的。那水晶锤首，看似一枚经过改造的法术池，其上的符文经过精密校准，能将致命一击的能量转化为纯粹的魔法潜能。据德鲁甘最后的笔记所载，他从未完全稳定这项能量转化过程——这柄战锤偶尔会过载，进而引发种种“奇妙”的魔法事故，撕裂魔网的织构。世人不免猜度：这位矮人的脑子，究竟想撕裂些什么？</content>
+	<content contentuid="h4c9b2ec7g4b0bg4211gab6agc00d826c8f4b" version="1">德鲁甘的发明</content>
+	<content contentuid="hce4dee3dg0411g4c3fg8548gb3de43e7e8bd" version="1">使用此战锤杀死一名敌人时，恢复&lt;b&gt;[1]&lt;/b&gt;个&lt;b&gt;[2]&lt;/b&gt;环&lt;LSTag Tooltip="SpellSlot"&gt;法术位&lt;/LSTag&gt;。&lt;br&gt;每回合只能触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="hb8d74321g9e45g4a12gb8c7gd923f84a7b21" version="1">奥术疾速</content>
+	<content contentuid="h7a3c56e8gf214g4d89g9a47g82c4e91b3f65" version="1">处于&lt;LSTag Type="Status" Tooltip="HASTE"&gt;加速&lt;/LSTag&gt;状态时，每回合获得&lt;LSTag Type="Status" Tooltip="MAG_GISH_ARCANE_ACUITY"&gt;奥术敏锐&lt;/LSTag&gt;，持续&lt;b&gt;[1]&lt;/b&gt;回合。</content>
+	<content contentuid="hbacdf2eeg1a5dg4332g8567g534c2f0bdb7b" version="1">灵吸怪之灾</content>
+	<content contentuid="h2fa01c87g9ea4g48b7g9607g1c78a388dbd6" version="1">这柄流光溢彩的巨剑，承载着银白征伐的鲜明烙印——那是一个古老的圣武士兄弟会，曾伫驻守在主物质位面与遥远国度之间的边界之上。你在烛堡深处的研究，揭开了他们长达数世纪之久、抵御夺心魔入侵的警戒行动的记述。你发现，这柄巨剑那独特的十字造型，是特为将持有者自身的精神力引导神圣光辉而打造的——这恰是对灵吸怪们心灵突击的一道直接反制。尽管教团被认为在主脑扎克塔尔汉的大清洗中全军覆没，但他们的兵器，据说却散落在了费伦各地，静候着新一代的勇士，再度扛起古老的使命。</content>
+	<content contentuid="hf09291c6g5148g4cdfgb738g0ee97853fd9b" version="1">心盾辉光</content>
+	<content contentuid="hc32b9cffg78e8g4b38g9561g39977bd0210b" version="1">攻击你的&lt;b&gt;异怪&lt;/b&gt;将受到&lt;b&gt;[1]&lt;/b&gt;点伤害作为反击，并可能陷入&lt;LSTag Type="Status" Tooltip="BLINDED"&gt;目盲&lt;/LSTag&gt;。</content>
+	<content contentuid="h4d1ad31eg8b5ag41f6g881ag518f532f79a6" version="1">幽暗收割者</content>
+	<content contentuid="h474fb34agdee2g4090ga3afgb6f6b73adc65" version="1">这柄长刃戟的存在，让你心中涌起一股无可名状的恐惧，仿佛正被某种古老而深不可测的存在凝视着。在梦境中，你窥见了它使命的片断：一个绝对黑暗的实体，正以这把武器作为它在凡尘俗世中的锚点，来施加它的影响。那极少数敢于提及它的文本，也只是在恐惧的低语中谈及“幽暗之主”，一位晦涩到连祂的名讳都已被时光所湮灭的神祇。你注意到，这柄武器似乎有时会自主行动，以一种绝非寻常刀刃所具备的、饱含智识的方式，来挑选它的祭品。或许，最令人不安的点在于：你并非它真正的持有者，而仅仅是临时容器。</content>
+	<content contentuid="h24707763g53b2g4ba2gb0aag02acbe6b649a" version="1">觅死之召</content>
+	<content contentuid="h1d196118gb487g4b6dgafbbg32ea91a07959" version="1">战斗中&lt;b&gt;每&lt;/b&gt;回合开始时，&lt;b&gt;[1]&lt;/b&gt;范围内的&lt;b&gt;所有&lt;/b&gt;生物必须通过一次体质&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;(&lt;b&gt;[2]&lt;/b&gt;)，否则将被幽暗之主那无从抗拒的意志&lt;b&gt;即刻处决&lt;/b&gt;。&lt;br&gt;&lt;br&gt;&lt;LSTag Type="Image" Info="SoftWarning"/&gt; &lt;b&gt;若持有者倒下，其整支队伍将共享其命运。&lt;/b&gt;</content>
+	<content contentuid="h55d0979bg1c08g4854gb1f6gc6593ad187c8" version="1">你这蠢货！你必须意识到自己已经在劫难逃。幽暗之主的收割者，从不留活口……</content>
+	<content contentuid="h3ba32070g50f3g49adgbcacg6bb4ccfa0725" version="1">死兆长弓</content>
+	<content contentuid="hfd55bbd2ge845g43d1g9ec2ge038a3a71722" version="1">在亡灵之城的古老手稿中，你发现了一则故事：一位骄傲的精灵弓箭手，曾侍奉于艾瑞斯卡宫廷之中。当瘟疫夺走了他的家人时，他便踏上了寻找死亡本身的征途，并向祂发起决斗。那位厄运女士，被他这放肆的傲慢所取悦，便以一个条件应下了这场挑战——倘若他输了，便要用自己的骸骨铸造一把弓，永远束缚于对她的侍奉之中。如今，这件可怖的战利品便躺在你的手中，冰得超乎自然，它的符文，正随着病态的绿光搏动。人们说，自这把弓射出的箭矢，能自行寻觅到它们目标的心魂，留下魔法与时间皆无从愈合的创伤。甚至连巫妖与远古吸血鬼都畏惧这件兵器，因为它承载着死亡本力的一缕碎片。</content>
+	<content contentuid="h1b3f9a10g87cbg484bg859ag80d95bbaed4d" version="1">灵魂穿刺</content>
+	<content contentuid="h948d3126g94a7g44f3g9e74g2e7f979a4fc1" version="1">你无视目标对&lt;b&gt;[1]&lt;/b&gt;的&lt;LSTag Tooltip="Immune"&gt;免疫&lt;/LSTag&gt;。</content>
+	<content contentuid="h1e5778b7gaebdg4387ga0b8gda47c5774543" version="1">碎风巨棒</content>
+	<content contentuid="h7533c02dg5d02g42c1g894fg3804fb89b9b2" version="1">你惊叹于这柄宛若虚空的巨棒——它几乎只存在于主物质位面的边缘，形态永远在流转，如同一场被锁链囚禁的暴风。在有关以太位面之谜的典籍中，你发现了以捕获之风暴所铸造的武器的传说。据说，曾有一位以太位面的大师，将一场狂怒的暴风囚禁在了一根平平无奇的巨棒之中，他深信，纯粹的、原初的元素之怒，远比凡俗的木头与钢铁更为强大。这把巨棒雾蒙蒙的表面，满是被困的烈风在激荡起伏。而当万籁俱寂的时候，你发誓可以听见风暴在它的以太囚笼深处，愤怒地嘶吼咆哮。</content>
+	<content contentuid="h58b0c3eega896g48d7g944bg92e7aa269ce6" version="1">风暴冲击</content>
+	<content contentuid="hc7a94072gf125g4cd8g8fdbg7ae4f2923b1b" version="1">被此巨棒命中时，该生物必须通过对抗你&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;的力量&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则被击退&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="hb8635b48g2544g4820gaa25g32bdda3dd89b" version="1">唤风战锤</content>
+	<content contentuid="hc00f4e8cg924ag4d07ga6bfga8c84185cd1f" version="1">在一座远古山脉图书馆的深处，你发现了一批卷轴，它们提及了风暴之声：一个来自世界之脊的、传奇萨满战士氏族。他们的编年史中，记述了那些于风暴之眼中铸造的战锤：在仪式中，至高萨满会将天堂的闪电导入熔融的金属，而学徒们则高唱着悠远的雷鸣之歌，增幅着其中的附魔。当你端详锤柄上刻印的繁复图纹时，意识到自己手中正握着这样一把战锤。关于风暴之声的最后记载，可追溯至动荡之年，据说，当众神行走于费伦大地之上时，这个氏族便消失无踪了。然而，即便是数个世纪之后的今天，这柄战锤中，仍在共鸣着他们那古老雷霆仪式的回响。</content>
+	<content contentuid="h5669df49gad8ag43bbg8ff5gca00a053219a" version="1">雷鸣先驱</content>
+	<content contentuid="h38b56e53gea55g4264g86c7g95fa380c76eb" version="1">命中时，迫使&lt;b&gt;[1]&lt;/b&gt;范围内的&lt;b&gt;所有&lt;/b&gt;生物通过对抗你&lt;LSTag Tooltip="SpellDifficultyClass"&gt;法术豁免难度等级&lt;/LSTag&gt;的体质&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则承受&lt;b&gt;[2]&lt;/b&gt;。</content>
+	<content contentuid="h05ac72e1g9bc9g45b1ga68ag261bb782cd6e" version="1">完美锋刃</content>
+	<content contentuid="hbdc6d1b2ge750g4ba1g81dfg3bf1c39d8c7e" version="1">在这把剑那完美无瑕的对称之中，藏着一段无与伦比的工艺传说。当你的手指抚过柄头上那古老的矮人符文时，它们浮现出了'卡拉索斯'的印记：一个在深水城铸甲师协会的殿堂之中，仍被敬畏地低语着的名字。在泛黄的古卷与褪色的手稿间，你发现了这位大师的编年史：他对精钢的理解，超越了凡俗的打铁之道。凭借那些失传已久的奥术几何学与原理，他为自己所铸的利刃，注入了一种近乎拥有自我意识的平衡感。你注意到，剑身那独特的护手，似乎会在每一次挥剑之后，主动引导你的动作，仿佛这剑锋本身便在渴望寻觅它的落点。如此卓绝的非魔法工艺，足以揭示为何卡拉索斯的秘密至今仍为人所苦苦追寻——然而，自他步入传奇之后，便再无人能望其项背。</content>
+	<content contentuid="hdf2ebf0fgb817g4b39gbf7cg1b6f683e3e68" version="1">大师劲力</content>
+	<content contentuid="h5796950eg8dddg4694g96b2gcb9ba96d2757" version="1">攻击未命中时，获得&lt;LSTag Type="Status" Tooltip="WEAPON121"&gt;化劲为明&lt;/LSTag&gt;。</content>
+	<content contentuid="hb7bceb91gdfdbg4738g9402g58530ce267df" version="1">化劲为明</content>
+	<content contentuid="h0cc78be5g9b75g4326g9301g993dee9052e0" version="1">你的下一次&lt;b&gt;近战武器攻击&lt;/b&gt;必定为&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;。</content>
+	<content contentuid="h4ac15a70g5492g462cg936agfe413e134cc1" version="1">悲光报偿</content>
+	<content contentuid="h1f66f601g97a9g4efbg922ag51bc5c7e84f6" version="1">在烛堡禁断宝库的深处，藏着一个由颤抖之手写就的、最为凄恻的故事。在那里，在古老的卷轴与已被遗忘的典籍当中，沉睡着大典狱长莱桑德的编年史——他那神圣的十字军圣战，竟从公义沦为了至为幽暗的异端。当教友们试图剥夺他的圣恩时，神圣的仪式却酿成了可怕的事物：一桩圣裁与凡人的愚妄融聚，被永远地束缚在钢铁与灵魂之中。如今，这柄古老的巨锤自它满身的刻痕之中淌下辉光，每一道腐败的印记，都在以天堂本尊的光芒炽烈燃烧，仿佛连漫天星辰都在为它持有者的宿命而悲泣。有人低语，莱桑德至今仍在诸位面间游荡，徘徊于救赎与永罚之间，正借由他当年坠落时所凭籍的同一件器物，来寻觅救赎。</content>
+	<content contentuid="h9441ed43gef5ag4890g98b6g678e6308c0c5" version="1">木已成舟</content>
+	<content contentuid="h3d384de1gb869g4f90gbd86g3e38635f2ff4" version="1">你获得&lt;b&gt;[1]&lt;/b&gt;个&lt;LSTag Type="ActionResource" Tooltip="ReactionActionPoint"&gt;反应点&lt;/LSTag&gt;。当敌人在近战中攻击你时，自动消耗一个&lt;LSTag Type="ActionResource" Tooltip="ReactionActionPoint"&gt;反应&lt;/LSTag&gt;以发动一次&lt;LSTag Type="Spell" Tooltip="Target_Weapon122"&gt;武器攻击&lt;/LSTag&gt;。&lt;br&gt;&lt;LSTag Type="Image" Info="SoftWarning"/&gt;复仇之怒&lt;b&gt;不允许你手动&lt;/b&gt;控制使用此武器发动的反击。</content>
+	<content contentuid="h220213aegb728g4c3eg985bg5291f15490f9" version="1">影主獠牙</content>
+	<content contentuid="h8b968670gb685g4dbcgb1e6gc0391d19e446" version="1">在一本饱经风霜的日志中，你发现了“公正者”达斯汀将军的故事，他那场深入堕影冥界腹地的神圣远征，最终指向了他的覆灭。当你手握这柄可怖的长矛时，它的锋刃永远被蠕行的黑暗所笼罩。你感知到，它曾经的主人那痴迷于征服阴影位面的执念，是如何引来了一头远古阴影巨龙的注意。那头巨龙的“赠礼”，实为一道至为残忍的诅咒，将这件武器与它的持有者一并转化为了暮光的造物。如今，这柄长矛永不止息地饥渴着，正如据说它仍在狩猎的前任主人一般，永恒地困于光与影之间，既非血肉，亦非幽影。在你的掌握之中，它渴望生命本身，每一次穿刺，都威胁着榨干被它所刺穿之人那最深处的精髓。</content>
+	<content contentuid="h9661732fg294bg45b9gb610g3d5d7579445f" version="1">黑暗诅咒</content>
+	<content contentuid="hbd2c3d81g06d8g4138g9d06gfed9ba5f8b37" version="1">处于&lt;LSTag Type="Spell" Tooltip="Target_Darkness"&gt;黑暗术&lt;/LSTag&gt;云雾中时，被你伤害的目标若未能通过对抗你&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;的&lt;LSTag Tooltip="Wisdom"&gt;感知&lt;/LSTag&gt;&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，则被施加&lt;LSTag Type="Status" Tooltip="WEAPON40_2"&gt;虚弱诅咒&lt;/LSTag&gt;。</content>
+	<content contentuid="h92be14f8gdcebg4876gbb55g30b2b016cde9" version="1">影主之饥</content>
+	<content contentuid="hfb730026gca48g4af8ga3fcg96f3d7714cfa" version="1">造成&lt;b&gt;[1]&lt;/b&gt;时，&lt;b&gt;额外&lt;/b&gt;造成&lt;b&gt;[2]&lt;/b&gt;点伤害。</content>
+	<content contentuid="hc8a2ca31g54a7g45fdgaccag1f83f0206cd5" version="1">星界奇点</content>
+	<content contentuid="ha0488aa1g053fg4eedg886dgc8bdbc2656d5" version="1">在星界守望者的古老典籍之中，沉睡着这柄非凡重弩的传说——它是吉斯洋基大奇术师克'拉克斯所铸造的三件神秘器物之一。在“星界汇流”时期，当银色的虚空正以前所未有的力量旋舞时，克'拉克斯发现了攫取坍缩星界池精华的手段，并将它们的异界伟力，束缚于这些用途独一无二的武器之中。当你握着它时，观察到水晶构件扭曲光线的奇景，像极了一片止水上的涟漪。而在至深的黑暗里，细碎的银光微粒会在它的弓臂四周舞动，宛如一片微缩穹苍中的繁星。它的创造者与姊妹兵器的下落，至今仍笼罩在迷雾之中，唯有在星界虚空的传说里，在人们的窃窃低语之间，才偶尔浮现。</content>
+	<content contentuid="h2cf4def9g3c85g4215g9b17gb8da2ae76319" version="1">重力子爆发</content>
+	<content contentuid="h38e4c35bgc9b9g47d8gaa8fge3737836a538" version="1">发射一支特殊弩箭，将&lt;b&gt;[1]&lt;/b&gt;范围内的所有生物与物体拉向落点，除非他们通过对抗你&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;的力量&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;。</content>
+	<content contentuid="h8d65fdebg6f81g4d73ga01cg12959dd3b77b" version="1">授冕者</content>
+	<content contentuid="h406cc204g1a9cg41a1ga3b7g0118b189521e" version="1">在耐瑟瑞尔的薄暮时代，当魔力如流水般淌过整个国度时，一位皇帝命令他麾下最为杰出的奇术师们，锻造七柄卓异的战斧。这些武器皆于古老的星辰之下铸就，每一道锋刃，都将天堂之光攫入了水晶的纹理中，如创世冠冕一般闪耀。它们并非杀戮的工具，而是蜕变的法器——因为那位皇帝，谋求的是通过智慧而非刀兵来赢取疆土。这件武器的刃口上，流转着至为崇高的魔力，足以将最凶悍的敌人转化成最坚定的盟友。在这七柄传奇战斧之中，仅有三柄从帝国的陨灭中幸存，而每一柄，都在书写着它们各自不战而胜的传说，甚至塑造了历史本身的样貌。</content>
+	<content contentuid="ha886ce93gf21ag4a41g9997g3f991fa40e5c" version="1">王权统御</content>
+	<content contentuid="he987de2bg536dg4f50g915dge22d105a7631" version="1">攻击时，迫使目标通过对抗你&lt;LSTag Type="Status" Tooltip="AMP_MANEUVER_SAVE_DC"&gt;战技豁免难度等级&lt;/LSTag&gt;的感知&lt;LSTag Tooltip="SavingThrow"&gt;豁免检定&lt;/LSTag&gt;，否则在&lt;b&gt;[1]&lt;/b&gt;回合内成为你的&lt;LSTag Type="Status" Tooltip="DOMINATE_WEAPON125"&gt;盟友&lt;/LSTag&gt;。&lt;br&gt;&lt;br&gt;每回合最多触发&lt;b&gt;一次&lt;/b&gt;。</content>
+	<content contentuid="ha1df392fg6c0fg4b65g9f1fg827d5c0259b1" version="1">厄运行者</content>
+	<content contentuid="hfd0fd1f8g7bb3g4d0agb0b5g02989cd3d230" version="1">在烛堡禁断档案室最幽暗的藏书之中，记载着拉文娜女士的生平。她高贵的血统，承载着一道如谱系般古老的诅咒。然而，在他人皆试图挣脱自身枷锁时，她却渴望着将它们重塑再造。在兰坦的神圣锻炉之中，在众多大师级工匠的凝望之下，她将自己受诅的精粹，缚于钢铁与暗影里。这柄重锤的表面，负载着反向刻制的诅咒印记——每一道线条，都是她驾驭恶毒之力的证词。尽管这位女士的命运早已湮灭在时光中，但她的造物依然长存，宛如一座信标，指引着那些能将自身的黑暗，转化为神圣使命之人。</content>
+	<content contentuid="h5abe889bgf439g4e21ga3a2gb05fff714f3f" version="1">厄运阔步</content>
+	<content contentuid="h0f6b9d36g1031g4f4cgabb8g72e63e5b9e2b" version="1">处于&lt;b&gt;诅咒&lt;/b&gt;状态&lt;i&gt;（不包括&lt;LSTag Type="Status" Tooltip="HEX_STRENGTH"&gt;脆弱诅咒&lt;/LSTag&gt;！）&lt;/i&gt;时，使用此战锤对生物造成伤害将为你恢复所有&lt;LSTag Tooltip="MovementSpeed"&gt;移动点数&lt;/LSTag&gt;，并对目标造成&lt;b&gt;[1]&lt;/b&gt;点伤害。</content>
+	<content contentuid="h33ace381g958dg42a1g8049g4dcda4b7f443" version="3">当持有者的&lt;LSTag Tooltip="HitPoints"&gt;生命值&lt;/LSTag&gt;在&lt;b&gt;[2]%&lt;/b&gt;或以下且受到伤害时，对攻击者造成&lt;b&gt;[1]&lt;/b&gt;点伤害。</content>
+	<content contentuid="he3d0544fg6a38g4056gb67cg06a42bffb00b" version="1">精金破甲</content>
+	<content contentuid="h08f26462g3ad9g4406g9010g245393fe872d" version="1">以精金的精准度暴露目标的弱点，直至回合结束，使其对&lt;b&gt;[2]&lt;/b&gt;具有&lt;LSTag Tooltip="Vulnerable"&gt;易伤&lt;/LSTag&gt;。该印记在受到&lt;b&gt;[2]&lt;/b&gt;后破碎。</content>
+	<content contentuid="h5f344d66gf446g483aga5f7g120777b7c648" version="1">精金粉碎</content>
+	<content contentuid="ha1471098g992ag4188gaa4dg1460cb80f05a" version="1">以精金的精准度暴露目标的弱点，直至回合结束，使其对&lt;b&gt;[2]&lt;/b&gt;具有&lt;LSTag Tooltip="Vulnerable"&gt;易伤&lt;/LSTag&gt;。该印记在受到&lt;b&gt;[2]&lt;/b&gt;后破碎。</content>
+	<content contentuid="h12ce65bage727g4744gb9a1g8db27f2eaa4b" version="1">被精金破甲</content>
+	<content contentuid="he4ebd5d3g98ffg466ag9e4dg8b8ab424bd6f" version="1">精金已暴露此生物对&lt;b&gt;[1]&lt;/b&gt;的弱点。此&lt;LSTag Tooltip="Vulnerable"&gt;易伤&lt;/LSTag&gt;在受到&lt;b&gt;[1]&lt;/b&gt;时终止。</content>
+	<content contentuid="ha9691ec1g6907g4fc6g9ebbg0087d756ffe0" version="1">被精金粉碎</content>
+	<content contentuid="he59aa490g772eg4b92g88deg53443e64e635" version="1">精金已暴露此生物对&lt;b&gt;[1]&lt;/b&gt;的弱点。此&lt;LSTag Tooltip="Vulnerable"&gt;易伤&lt;/LSTag&gt;在受到&lt;b&gt;[1]&lt;/b&gt;时终止。</content>
+	<content contentuid="h966b10a4ge457g4f3cg9881g05f43da8a3a4" version="1">当你以近战武器攻击命中一个生物时，可以使用你的反应，额外造成&lt;b&gt;[1]&lt;/b&gt;点伤害，并施加&lt;LSTag Type="Status" Tooltip="BURNING_HOLY"&gt;圣火&lt;/LSTag&gt;，持续&lt;b&gt;[2]&lt;/b&gt;回合。</content>
+	<content contentuid="h2a49a04ag7b1fg46e2gb8fbg769e7e1855f9" version="1">月之圣击（重击）</content>
+	<content contentuid="h54164e20g6d89g43e6gb8aeg28c2509d4768" version="1">精金防护</content>
+	<content contentuid="h1c4b4e3dgeb85g43b9gb0f2g9930a5079023" version="1">你受到的&lt;b&gt;物理&lt;/b&gt;伤害减少&lt;b&gt;[1]&lt;/b&gt;。</content>
+	<content contentuid="haee50c24g4cd8g4f7egb3d8gb2694c4191fc" version="1">矮人坚毅</content>
+	<content contentuid="h6a97f973gbe5dg4b16g95ccgf328e68b875a" version="1">如果你是&lt;b&gt;矮人&lt;/b&gt;，则不会受到&lt;b&gt;武器攻击&lt;/b&gt;造成的&lt;LSTag Tooltip="CriticalHit"&gt;重击&lt;/LSTag&gt;。</content>
+</contentList>

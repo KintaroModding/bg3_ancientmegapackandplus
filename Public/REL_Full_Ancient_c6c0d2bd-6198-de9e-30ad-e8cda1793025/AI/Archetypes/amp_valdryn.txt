@@ -1,0 +1,16 @@
+// stalker: point-blank every turn so the dread aura reaches, AoO deters fleeing
+// proactive ACTION is blocked while AMP_VALDRYN_CHARGING
+
+USING melee_smart
+
+MODIFIER_HIT_CHANCE_STUPIDITY                    0.85
+MULTIPLIER_KILL_ENEMY                            1.40
+
+// Stoneskin (flat -1 all dmg) + RollBonus(Save,3): less twitchy about taking hits
+MULTIPLIER_DAMAGE_SELF_NEG                       0.85
+
+// Charge straight in, do not fear opportunity attacks
+ENABLE_MOVEMENT_AVOID_AOO                        0.0
+
+// Strongly prefer ending the turn right next to a target (point-blank -> aura pressure)
+MULTIPLIER_ENDPOS_ENEMIES_NEARBY                 0.20

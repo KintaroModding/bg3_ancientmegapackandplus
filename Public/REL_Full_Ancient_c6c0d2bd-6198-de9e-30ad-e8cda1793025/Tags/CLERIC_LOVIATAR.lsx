@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="0" revision="9" build="204" />
+	<region id="Tags">
+		<node id="Tags">
+			<attribute id="UUID" type="guid" value="0b0fb678-cb85-4a75-9e94-df833c418fe3" />
+			<attribute id="Name" type="FixedString" value="CLERIC_LOVIATAR" />
+			<attribute id="DisplayName" type="TranslatedString" handle="ls::TranslatedStringRepository::s_HandleUnknown" version="0" />
+			<attribute id="DisplayDescription" type="TranslatedString" handle="ls::TranslatedStringRepository::s_HandleUnknown" version="0" />
+			<attribute id="Icon" type="FixedString" value="" />
+			<attribute id="Description" type="LSString" value="Player or NPC is cleric of Loviatar." />
+			<children>
+				<node id="Categories">
+					<children>
+						<node id="Category">
+							<attribute id="Name" type="LSString" value="Dialog" />
+						</node>
+						<node id="Category">
+							<attribute id="Name" type="LSString" value="Class" />
+						</node>
+						<node id="Category">
+							<attribute id="Name" type="LSString" value="CharacterSheet" />
+						</node>
+					</children>
+				</node>
+				<node id="Properties" />
+			</children>
+		</node>
+	</region>
+</save>

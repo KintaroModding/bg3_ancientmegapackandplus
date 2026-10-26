@@ -1,0 +1,300 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// Pure Mind: one-way choice, lives in the save. ring buttons that only help go off via the marker status
+// settings that can go either way stay reachable, only the direction that cannot ease the run passes
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_Settings_PureMind", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+NOT DB_AMP_Plus_PureMind(1)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_PureMind_Ask");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_Settings_PureMind", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_AMP_Plus_PureMind(1)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_PureMind_Locked");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_PureMind_Ask", 1)
+AND
+NOT DB_AMP_Plus_PureMind(1)
+THEN
+DB_AMP_Plus_PureMind(1);
+PROC_AMP_PlayModeEffect(_Host);
+
+// endless gold button sits in the settings container, out of the marker's reach, so the mode is switched off here
+// carried gold stays
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_PureMind_Ask", 1)
+AND
+DB_AMP_Plus_GoldMode_Enabled(1)
+THEN
+NOT DB_AMP_Plus_GoldMode_Enabled(1);
+
+// no mode fact reads as Normal, same as the legitimacy verdict
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_PureMind_Ask", 1)
+AND
+DB_AMP_GameMode((STRING)_Cur)
+THEN
+PROC_AMP_Plus_PureMind_SetFloor(_Cur);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_PureMind_Ask", 1)
+AND
+NOT DB_AMP_GameMode(_)
+THEN
+PROC_AMP_Plus_PureMind_SetFloor("NORMAL");
+
+IF
+DB_AMP_Plus_PureMind(1)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+ApplyStatus(_Player, "AMP_PLUS_PURE_MIND", -1.0, 1, _Player);
+
+// a status applied in the load frame does not stick, wait for the party to settle
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Plus_PureMind(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+RealtimeObjectTimerLaunch(_Host, "AMP_Plus_PureMindSweep", 2000);
+
+IF
+ObjectTimerFinished((GUIDSTRING)_Obj, "AMP_Plus_PureMindSweep")
+AND
+DB_AMP_Plus_PureMind(1)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+ApplyStatus(_Player, "AMP_PLUS_PURE_MIND", -1.0, 1, _Player);
+
+// re-applies the mark if anything strips it. the presence check stops a remove-then-apply refresh from looping
+IF
+StatusRemoved((CHARACTER)_Player, "AMP_PLUS_PURE_MIND", _, _)
+AND
+DB_AMP_Plus_PureMind(1)
+AND
+DB_Players(_Player)
+AND
+HasActiveStatus(_Player, "AMP_PLUS_PURE_MIND", 0)
+THEN
+ApplyStatus(_Player, "AMP_PLUS_PURE_MIND", -1.0, 1, _Player);
+
+// per affix, the one value that cannot ease the run: on for hardships, off for rewards
+// reseeded rather than in init, which does not replay on an existing save. bump the version mark in all four places
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_PureMindStrictVer(2)
+THEN
+PROC_AMP_Plus_PureMindStrictReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_PureMindStrictVer(2)
+THEN
+PROC_AMP_Plus_PureMindStrictReseed();
+
+PROC
+PROC_AMP_Plus_PureMindStrictReseed()
+AND
+DB_AMP_Plus_PureMindStrictVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_PureMindStrictVer(_Old);
+
+PROC
+PROC_AMP_Plus_PureMindStrictReseed()
+THEN
+PROC_AMP_Plus_PureMind_DrainStrict();
+
+PROC
+PROC_AMP_Plus_PureMindStrictReseed()
+THEN
+DB_AMP_Plus_PureMindStrictVer(2);
+DB_AMP_Plus_PureMindStrict("RECKONING", 1);
+DB_AMP_Plus_PureMindStrict("PYRE", 1);
+DB_AMP_Plus_PureMindStrict("PYRE2", 1);
+DB_AMP_Plus_PureMindStrict("BATTLEINSTINCT", 1);
+DB_AMP_Plus_PureMindStrict("ITEMMOVECOST", 1);
+DB_AMP_Plus_PureMindStrict("ANTITHEFT", 1);
+DB_AMP_Plus_PureMindStrict("ANTISTEALTHABUSE", 1);
+DB_AMP_Plus_PureMindStrict("FULLMOON", 1);
+DB_AMP_Plus_PureMindStrict("ECLIPSE", 1);
+DB_AMP_Plus_PureMindStrict("LASTSTAND", 1);
+DB_AMP_Plus_PureMindStrict("UNDYINGWILL", 1);
+DB_AMP_Plus_PureMindStrict("APEX", 1);
+DB_AMP_Plus_PureMindStrict("AVARICE", 0);
+DB_AMP_Plus_PureMindStrict("TOTSHOP", 0);
+DB_AMP_Plus_PureMindStrict("PLANARCHESTS", 0);
+
+PROC
+PROC_AMP_Plus_PureMind_DrainStrict()
+AND
+DB_AMP_Plus_PureMindStrict((STRING)_Id, (INTEGER)_Val)
+THEN
+NOT DB_AMP_Plus_PureMindStrict(_Id, _Val);
+PROC_AMP_Plus_PureMind_DrainStrict();
+
+// two bodies, two ways to answer yes: run not locked, or the value cannot help
+QRY
+QRY_AMP_Plus_Affix_ChangeAllowed((STRING)_Id, (INTEGER)_Val)
+AND
+NOT DB_AMP_Plus_PureMind(1)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Plus_Affix_ChangeAllowed((STRING)_Id, (INTEGER)_Val)
+AND
+DB_AMP_Plus_PureMind(1)
+AND
+DB_AMP_Plus_PureMindStrict(_Id, _Val)
+THEN
+DB_NOOP(1);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_PureMindModeVer(2)
+THEN
+PROC_AMP_Plus_PureMindModeReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_PureMindModeVer(2)
+THEN
+PROC_AMP_Plus_PureMindModeReseed();
+
+PROC
+PROC_AMP_Plus_PureMindModeReseed()
+AND
+DB_AMP_Plus_PureMindModeVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_PureMindModeVer(_Old);
+
+PROC
+PROC_AMP_Plus_PureMindModeReseed()
+THEN
+PROC_AMP_Plus_PureMind_DrainModeRank();
+
+PROC
+PROC_AMP_Plus_PureMindModeReseed()
+THEN
+DB_AMP_Plus_PureMindModeVer(2);
+DB_AMP_Plus_PureMindModeRank("STOCK", 0);
+DB_AMP_Plus_PureMindModeRank("CASUAL", 1);
+DB_AMP_Plus_PureMindModeRank("NORMAL", 2);
+DB_AMP_Plus_PureMindModeRank("HARD", 3);
+
+PROC
+PROC_AMP_Plus_PureMind_DrainModeRank()
+AND
+DB_AMP_Plus_PureMindModeRank((STRING)_Mode, (INTEGER)_Rank)
+THEN
+NOT DB_AMP_Plus_PureMindModeRank(_Mode, _Rank);
+PROC_AMP_Plus_PureMind_DrainModeRank();
+
+PROC
+PROC_AMP_Plus_PureMind_SetFloor((STRING)_Mode)
+AND
+DB_AMP_Plus_PureMindFloor((STRING)_Old)
+THEN
+NOT DB_AMP_Plus_PureMindFloor(_Old);
+
+PROC
+PROC_AMP_Plus_PureMind_SetFloor((STRING)_Mode)
+THEN
+DB_AMP_Plus_PureMindFloor(_Mode);
+
+// base goal writes the mode and cannot be guarded, so this body runs after it and puts the floor back
+// no loop: the floor equals itself and neither body matches
+PROC
+PROC_AMP_SetGameMode((CHARACTER)_Host, (STRING)_Mode)
+AND
+DB_AMP_Plus_PureMind(1)
+AND
+DB_AMP_Plus_PureMindFloor((STRING)_Floor)
+AND
+DB_AMP_Plus_PureMindModeRank(_Mode, (INTEGER)_New)
+AND
+DB_AMP_Plus_PureMindModeRank(_Floor, (INTEGER)_Old)
+AND
+_New < _Old
+THEN
+PROC_AMP_SetGameMode(_Host, _Floor);
+OpenMessageBox(_Host, "AMP_Plus_PureMind_Frozen");
+
+PROC
+PROC_AMP_SetGameMode((CHARACTER)_Host, (STRING)_Mode)
+AND
+DB_AMP_Plus_PureMind(1)
+AND
+DB_AMP_Plus_PureMindFloor((STRING)_Floor)
+AND
+DB_AMP_Plus_PureMindModeRank(_Mode, (INTEGER)_New)
+AND
+DB_AMP_Plus_PureMindModeRank(_Floor, (INTEGER)_Old)
+AND
+_Old < _New
+THEN
+PROC_AMP_Plus_PureMind_SetFloor(_Mode);
+
+// these dials count as touched at any value, so the buttons answer instead of opening
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_Settings_CapCharges", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_AMP_Plus_PureMind(1)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_PureMind_Frozen");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_Settings_CapWindow", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_AMP_Plus_PureMind(1)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_PureMind_Frozen");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_Settings_CapCost", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_AMP_Plus_PureMind(1)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_PureMind_Frozen");
+
+EXITSECTION
+
+ENDEXITSECTION

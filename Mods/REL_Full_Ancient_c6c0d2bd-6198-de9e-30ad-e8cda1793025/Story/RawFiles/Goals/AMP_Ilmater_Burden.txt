@@ -1,0 +1,37 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// casting an ilmater prayer hangs the vulnerable burden on the caster
+
+IF
+CastedSpell((CHARACTER)_Caster, _Spell, _, _, _)
+AND
+DB_Players((CHARACTER)_Caster)
+AND
+IsSubstring(_Spell, "AMP_Ilmater_Prayer_", _Found)
+AND
+_Found == 1
+THEN
+ApplyStatus(_Caster, "AMP_ILMATER_BURDEN", 36.0, 1, _Caster);
+
+// clear after combat
+IF
+CombatEnded(_Combat)
+THEN
+PROC_AMP_Ilmater_RemoveBurden();
+
+PROC
+PROC_AMP_Ilmater_RemoveBurden()
+AND
+DB_Players(_Player)
+AND
+HasActiveStatus(_Player, "AMP_ILMATER_BURDEN", 1)
+THEN
+RemoveStatus(_Player, "AMP_ILMATER_BURDEN", _Player);
+
+EXITSECTION
+
+ENDEXITSECTION

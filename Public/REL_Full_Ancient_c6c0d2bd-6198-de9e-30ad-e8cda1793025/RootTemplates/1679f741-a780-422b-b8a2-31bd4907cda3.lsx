@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="1679f741-a780-422b-b8a2-31bd4907cda3" />
+					<attribute id="Name" type="LSString" value="arc_N_Blood2" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="e508aa16-fd1b-4298-bf4c-062854dbf165" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h7ae932c9g4abfg4233g93eagd1793cf9826b" version="1" />
+					<attribute id="Icon" type="FixedString" value="arc_N_Blood1" />
+					<attribute id="Stats" type="FixedString" value="arc_N_Blood2" />
+					<attribute id="Description" type="TranslatedString" handle="h5780d1dagfc4bg4741gf0a4g1a5689dd548c" version="1" />
+					<children>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="MAG_JEWELRY1_VFX" />
+								</node>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="AMP_SUMMON_MAGIC_ITEM" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

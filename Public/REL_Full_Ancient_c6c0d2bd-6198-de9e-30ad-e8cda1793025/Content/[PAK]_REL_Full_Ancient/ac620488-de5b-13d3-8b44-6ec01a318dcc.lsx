@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="ac620488-de5b-13d3-8b44-6ec01a318dcc" />
+					<attribute id="Name" type="LSString" value="119_Push_Greatclub" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/119_Push_Greatclub.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="119_Push_Greatclub" />
+					<attribute id="BoundsMin" type="fvec3" value="-2 -2 -2" />
+					<attribute id="BoundsMax" type="fvec3" value="2 2 2" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="2.5" />
+					<attribute id="Looping" type="bool" value="True" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="f7148db2-526b-d7ec-5262-293aa5853ef2" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="75301d2e-8f9d-00be-54c7-9c3ab5a570a0" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="74539fe8-5b4b-484b-981c-7d92c4bffaff" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

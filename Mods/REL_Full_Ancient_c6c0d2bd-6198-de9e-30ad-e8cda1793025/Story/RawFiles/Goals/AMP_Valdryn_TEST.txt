@@ -1,0 +1,38 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// valdryn debug spawn, remove before release.
+// se console: osi.textevent("amp_testspawnvaldryn") spawn hostile, ...killvaldryn deletes it
+
+IF
+TextEvent("AMP_TestSpawnValdryn")
+AND
+GetHostCharacter(_Host)
+AND
+GetPosition(_Host, _X, _Y, _Z)
+AND
+RealSum(_Z, 3.0, _SZ)
+AND
+CreateAt((GUIDSTRING)AMP_ULTRA_Summon_04_4c553ed6-ee7a-4598-9d66-1bc064c83f50, _X, _Y, _SZ, 0, 1, "", (GUIDSTRING)_Mob)
+THEN
+DB_AMP_Valdryn_TestSpawn((CHARACTER)_Mob);
+SetRelationTemporaryHostile((CHARACTER)_Mob, _Host);
+EnterCombat(_Mob, _Host);
+PlayEffect(_Mob, (EFFECTRESOURCE)VFX_Script_DestroyAction_Arcane_Gate_01_cde28800-1d22-76f0-fa45-06a56f7c367b, "Dummy_Root", 1.0);
+PlayEffect(_Mob, (EFFECTRESOURCE)Red_Spawn_Overlay_3b6dbb49-4b7c-d3ef-19e4-d6a3941dffa6, "Dummy_Root", 1.0);
+PlaySound(_Mob, "END_BrainBattle_FinalDecision_Nested_EvilGale_Portal_Tear");
+DebugText(_Host, "AMP_Valdryn: TEST spawn -> hostile + combat + VFX");
+
+IF
+TextEvent("AMP_TestKillValdryn")
+AND
+DB_AMP_Valdryn_TestSpawn((CHARACTER)_Mob)
+THEN
+NOT DB_AMP_Valdryn_TestSpawn(_Mob);
+RequestDeleteTemporary(_Mob);
+
+EXITSECTION
+
+ENDEXITSECTION

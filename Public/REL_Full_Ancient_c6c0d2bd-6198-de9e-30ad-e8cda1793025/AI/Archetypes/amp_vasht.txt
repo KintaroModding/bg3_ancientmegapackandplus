@@ -1,0 +1,22 @@
+USING melee
+
+MODIFIER_HIT_CHANCE_STUPIDITY                    0.85
+
+// Killer instinct + opportunistic finisher on low-HP prey
+MULTIPLIER_KILL_ENEMY                            1.75
+MULTIPLIER_TARGET_HEALTH_BIAS                    0.20
+
+// Tears enemy concentration spells off their casters
+MODIFIER_CONCENTRATION_REMOVE_TARGET             0.40
+
+// Permanent Rage = no fear of AoO, self-damage or fall damage
+MULTIPLIER_DAMAGE_SELF_NEG                       0.60
+ENABLE_MOVEMENT_AVOID_AOO                        0.00
+MULTIPLIER_FALL_DAMAGE_SELF                      0.00
+
+// Osiris-marked preferred targets (Illithid, Shielded) + summons treated as real
+MULTIPLIER_TARGET_PREFERRED                      4.00
+MULTIPLIER_TARGET_SUMMON                         1.00
+
+// Astral Leap (5x jump) is worth using for short tactical repositions
+SPELL_JUMP_MINIMUM_DISTANCE                      2.00

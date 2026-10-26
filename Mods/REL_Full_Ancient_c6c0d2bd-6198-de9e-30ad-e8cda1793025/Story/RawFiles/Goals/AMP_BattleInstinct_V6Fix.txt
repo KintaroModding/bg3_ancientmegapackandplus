@@ -1,0 +1,12 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// adds the t4 statuses v6 difficulty introduced; toggle init missed them
+
+DB_AMP_BattleInstinct_StatusList("AMP_BOSS_STANDARD_T4_V4");
+DB_AMP_BattleInstinct_StatusList("AMP_BOSS_IMPOSSIBLE_T4_V4");
+DB_AMP_BattleInstinct_StatusList("AMP_NPC_IMPOSSIBLE_T4_V4");
+
+KBSECTION
+EXITSECTION
+ENDEXITSECTION

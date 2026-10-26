@@ -1,0 +1,115 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// batch 6 - helmet elemental ba / elemental weapon / amulet / reach / recovery
+
+// helmet element shards (nonstack)
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_12_5cfacb3a-29ae-478e-8eae-9974b5225f09, "Helmet", "AMP_SHARD_APPLY_HELMET_12", "Helmet", "AMP_SHARD_HEAD_PRIMALFIRE");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_PRIMALFIRE", "AMP_SHARD_CHAR_PRIMALFIRE");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_13_2772caa8-b566-4338-b45a-6c206cca61f0, "Helmet", "AMP_SHARD_APPLY_HELMET_13", "Helmet", "AMP_SHARD_HEAD_PRIMALFROST");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_PRIMALFROST", "AMP_SHARD_CHAR_PRIMALFROST");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_14_31c3e45d-f5c7-4620-bff2-1344d4798afc, "Helmet", "AMP_SHARD_APPLY_HELMET_14", "Helmet", "AMP_SHARD_HEAD_PRIMALSTORM");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_PRIMALSTORM", "AMP_SHARD_CHAR_PRIMALSTORM");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_15_36ed5bbe-eaad-43f3-a82c-e3770b66b807, "Helmet", "AMP_SHARD_APPLY_HELMET_15", "Helmet", "AMP_SHARD_HEAD_PRIMALTHUNDER");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_PRIMALTHUNDER", "AMP_SHARD_CHAR_PRIMALTHUNDER");
+
+// elemental weapon shards (weapon stackable)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_9_908d9939-3c02-4508-9efd-fee2b95b0da0, "AMP_SHARD_APPLY_MELEE_EW_ACID", "AMP_SHARD_APPLY_RANGED_EW_ACID");
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_10_14894fd0-3b08-4b88-8ebc-bb1e0b1e1bee, "AMP_SHARD_APPLY_MELEE_EW_COLD", "AMP_SHARD_APPLY_RANGED_EW_COLD");
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_11_4ebb240b-8258-4d89-924d-46ce9b13086a, "AMP_SHARD_APPLY_MELEE_EW_FIRE", "AMP_SHARD_APPLY_RANGED_EW_FIRE");
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_12_48de2e33-a21a-4cf5-bffa-a22650787e2f, "AMP_SHARD_APPLY_MELEE_EW_LIGHTNING", "AMP_SHARD_APPLY_RANGED_EW_LIGHTNING");
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_13_75c705a4-7b28-42dd-ae4c-6d667397d458, "AMP_SHARD_APPLY_MELEE_EW_THUNDER", "AMP_SHARD_APPLY_RANGED_EW_THUNDER");
+
+// amulet shard (equipment stackable)
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_1_ff83a7ab-9fff-42c6-ad07-e060ebbd0ea4, "Amulet", "AMP_SHARD_APPLY_AMULET_1", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_ELOQUENCE", "AMP_SHARD_CHAR_ELOQUENCE");
+
+// reach shard (weapon stackable + transfer)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_MWeapon_6_57a57576-72fe-47bf-871a-78fcd054532f, "AMP_SHARD_APPLY_MELEE_REACH", "AMP_SHARD_APPLY_RANGED_REACH");
+DB_AMP_Shard_Transfer("AMP_SHARD_WEAPON_REACH", "AMP_SHARD_CHAR_REACH");
+
+// recovery shard (handled by zzz_arcanizer_shards_recovery.txt)
+DB_AMP_Shard_Recovery((ITEMROOT)AMP_Arcanizer_Shard_Recovery_1_6d07a9e3-b288-4ec3-86f9-b3360973b879);
+
+KBSECTION
+
+// amulet stackable - success
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_Stackable(_Template, "Amulet", _TechStatus, _)
+AND
+GetEquippedItem(_Char, "Amulet", _Item)
+AND
+QRY_AMP_Shard_CanApply(_Item)
+THEN
+PROC_AMP_Shard_IncTotal(_Item);
+ApplyStatus(_Char, _TechStatus, 0.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+// amulet stackable - error
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_Stackable(_Template, "Amulet", _, _)
+AND
+NOT GetEquippedItem(_Char, "Amulet", _)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// amulet nonstack - success
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Amulet", _TechStatus, _, _FinalStatus)
+AND
+GetEquippedItem(_Char, "Amulet", _Item)
+AND
+HasActiveStatus(_Item, _FinalStatus, 0)
+AND
+QRY_AMP_Shard_CanApply(_Item)
+THEN
+PROC_AMP_Shard_IncTotal(_Item);
+ApplyStatus(_Char, _TechStatus, 0.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+// amulet nonstack - error (duplicate)
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Amulet", _, _, _FinalStatus)
+AND
+GetEquippedItem(_Char, "Amulet", _Item)
+AND
+HasActiveStatus(_Item, _FinalStatus, 1)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// amulet nonstack - error (no slot)
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Amulet", _, _, _)
+AND
+NOT GetEquippedItem(_Char, "Amulet", _)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+EXITSECTION
+ENDEXITSECTION

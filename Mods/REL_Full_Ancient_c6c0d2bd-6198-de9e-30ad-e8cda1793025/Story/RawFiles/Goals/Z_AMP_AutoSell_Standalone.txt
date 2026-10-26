@@ -1,0 +1,376 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+// utility queries
+QRY
+QRY_AMP_AS_IsGold((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_Tpl)
+AND
+_Tpl == LOOT_Gold_A_1c3c9c74-34a1-4685-989e-410dc080be6f
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_AS_IsBook((ITEM)_Item)
+AND
+GetBookID(_Item, _)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_AS_PassesValueCheck((ITEM)_Item)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Val)
+AND
+DB_AMP_AS_MaxSellValue(_MaxVal)
+AND
+_Val <= _MaxVal
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_AS_PassesRarityCheck((ITEM)_Item)
+AND
+NOT DB_AMP_AS_RarityProtect(1)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_AS_PassesRarityCheck((ITEM)_Item)
+AND
+DB_AMP_AS_RarityProtect(1)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Val)
+AND
+_Val < 150
+THEN
+DB_NOOP(1);
+
+// category filter
+QRY
+QRY_AMP_AS_CategoryAllowed((ITEM)_Item)
+AND
+IsConsumable(_Item, 1)
+AND
+DB_AMP_AS_SellConsumables(1)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_AS_CategoryAllowed((ITEM)_Item)
+AND
+NOT IsConsumable(_Item, 1)
+AND
+IsEquipable(_Item, 1)
+AND
+DB_AMP_AS_SellEquipment(1)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_AS_CategoryAllowed((ITEM)_Item)
+AND
+NOT IsConsumable(_Item, 1)
+AND
+NOT IsEquipable(_Item, 1)
+AND
+QRY_AMP_AS_IsBook(_Item)
+AND
+DB_AMP_AS_SellBooks(1)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_AS_CategoryAllowed((ITEM)_Item)
+AND
+NOT IsConsumable(_Item, 1)
+AND
+NOT IsEquipable(_Item, 1)
+AND
+NOT QRY_AMP_AS_IsBook(_Item)
+AND
+IsTagged(_Item, ALCH_INGREDIENT_64b824e7-50c5-475a-98c2-52026e372d77, 1)
+AND
+DB_AMP_AS_SellIngredients(1)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_AS_CategoryAllowed((ITEM)_Item)
+AND
+NOT IsConsumable(_Item, 1)
+AND
+NOT IsEquipable(_Item, 1)
+AND
+NOT QRY_AMP_AS_IsBook(_Item)
+AND
+NOT IsTagged(_Item, ALCH_INGREDIENT_64b824e7-50c5-475a-98c2-52026e372d77, 1)
+THEN
+DB_NOOP(1);
+
+// container check
+QRY
+QRY_AMP_AS_ContainerAllowed((ITEM)_Item)
+AND
+NOT DB_AMP_AS_IsFromContainer(1)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_AS_ContainerAllowed((ITEM)_Item)
+AND
+DB_AMP_AS_IsFromContainer(1)
+AND
+DB_AMP_AS_SellContainers(1)
+THEN
+DB_NOOP(1);
+
+// entry: autosell enabled
+IF
+AddedTo((ITEM)_Item, (CHARACTER)_Player, _)
+AND
+DB_AMP_AL_AutoLooted(_Item)
+AND
+NOT DB_AMP_AS_Disabled(1)
+THEN
+DebugText(_Player, "[AS] AutoLooted item -> TrySell");
+NOT DB_AMP_AL_AutoLooted(_Item);
+PROC_AMP_AS_SaveContainerFlag(_Item);
+PROC_AMP_AS_TrySell(_Item, _Player);
+PROC_AMP_AS_ClearContainerFlag();
+
+// entry: autosell disabled, just clean flags
+IF
+AddedTo((ITEM)_Item, (CHARACTER)_Player, _)
+AND
+DB_AMP_AL_AutoLooted(_Item)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+DebugText(_Player, "[AS] AutoSell disabled, clean flags");
+NOT DB_AMP_AL_AutoLooted(_Item);
+PROC_AMP_AS_ClearItemFlags(_Item);
+
+// p1: junk -> always sell
+PROC
+PROC_AMP_AS_TrySell((ITEM)_Item, (CHARACTER)_Player)
+AND
+IsJunk(_Item, 1)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+DB_AMP_AS_SellPercent(_Pct)
+AND
+IntegerProduct(_Value, _Pct, _Mul)
+AND
+IntegerDivide(_Mul, 100, _SellPrice)
+THEN
+DebugText(_Player, "[AS] P1 JUNK -> sell");
+PROC_AMP_AS_SellItem(_Item, _Player, _SellPrice);
+
+// p2: hardcoded protections -> never sell
+PROC
+PROC_AMP_AS_TrySell((ITEM)_Item, (CHARACTER)_Player)
+AND
+NOT IsJunk(_Item, 1)
+AND
+QRY_AMP_AS_IsGold(_Item)
+THEN
+DebugText(_Player, "[AS] P2 Gold -> skip");
+
+PROC
+PROC_AMP_AS_TrySell((ITEM)_Item, (CHARACTER)_Player)
+AND
+NOT IsJunk(_Item, 1)
+AND
+NOT QRY_AMP_AS_IsGold(_Item)
+AND
+IsStoryItem(_Item, 1)
+THEN
+DebugText(_Player, "[AS] P2 Story -> skip");
+
+PROC
+PROC_AMP_AS_TrySell((ITEM)_Item, (CHARACTER)_Player)
+AND
+NOT IsJunk(_Item, 1)
+AND
+NOT QRY_AMP_AS_IsGold(_Item)
+AND
+NOT IsStoryItem(_Item, 1)
+AND
+IsTagged(_Item, FOOD_c86e0114-a5ab-48f6-b497-de321ebff577, 1)
+THEN
+DebugText(_Player, "[AS] P2 Food -> skip");
+
+PROC
+PROC_AMP_AS_TrySell((ITEM)_Item, (CHARACTER)_Player)
+AND
+NOT IsJunk(_Item, 1)
+AND
+NOT QRY_AMP_AS_IsGold(_Item)
+AND
+NOT IsStoryItem(_Item, 1)
+AND
+NOT IsTagged(_Item, FOOD_c86e0114-a5ab-48f6-b497-de321ebff577, 1)
+AND
+IsTagged(_Item, KEY_9851fa99-5538-432a-8e77-c90929a88974, 1)
+THEN
+DebugText(_Player, "[AS] P2 Key -> skip");
+
+// p3: configurable sell
+PROC
+PROC_AMP_AS_TrySell((ITEM)_Item, (CHARACTER)_Player)
+AND
+NOT IsJunk(_Item, 1)
+AND
+NOT QRY_AMP_AS_IsGold(_Item)
+AND
+NOT IsStoryItem(_Item, 1)
+AND
+NOT IsTagged(_Item, FOOD_c86e0114-a5ab-48f6-b497-de321ebff577, 1)
+AND
+NOT IsTagged(_Item, KEY_9851fa99-5538-432a-8e77-c90929a88974, 1)
+AND
+QRY_AMP_AS_CategoryAllowed(_Item)
+AND
+QRY_AMP_AS_ContainerAllowed(_Item)
+AND
+QRY_AMP_AS_PassesValueCheck(_Item)
+AND
+QRY_AMP_AS_PassesRarityCheck(_Item)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+DB_AMP_AS_SellPercent(_Pct)
+AND
+IntegerProduct(_Value, _Pct, _Mul)
+AND
+IntegerDivide(_Mul, 100, _SellPrice)
+THEN
+DebugText(_Player, "[AS] P3 SELL");
+PROC_AMP_AS_SellItem(_Item, _Player, _SellPrice);
+
+// debug: p3 reached but categoryallowed failed
+PROC
+PROC_AMP_AS_TrySell((ITEM)_Item, (CHARACTER)_Player)
+AND
+NOT IsJunk(_Item, 1)
+AND
+NOT QRY_AMP_AS_IsGold(_Item)
+AND
+NOT IsStoryItem(_Item, 1)
+AND
+NOT IsTagged(_Item, FOOD_c86e0114-a5ab-48f6-b497-de321ebff577, 1)
+AND
+NOT IsTagged(_Item, KEY_9851fa99-5538-432a-8e77-c90929a88974, 1)
+AND
+NOT QRY_AMP_AS_CategoryAllowed(_Item)
+THEN
+DebugText(_Player, "[AS] P3 BLOCKED by Category");
+
+// debug: consumable vs sellconsumables state
+PROC
+PROC_AMP_AS_TrySell((ITEM)_Item, (CHARACTER)_Player)
+AND
+NOT IsJunk(_Item, 1)
+AND
+NOT QRY_AMP_AS_IsGold(_Item)
+AND
+NOT IsStoryItem(_Item, 1)
+AND
+NOT IsTagged(_Item, FOOD_c86e0114-a5ab-48f6-b497-de321ebff577, 1)
+AND
+NOT IsTagged(_Item, KEY_9851fa99-5538-432a-8e77-c90929a88974, 1)
+AND
+IsConsumable(_Item, 1)
+AND
+DB_AMP_AS_SellConsumables(0)
+THEN
+DebugText(_Player, "[AS] DEBUG: Consumable + SellConsumables=0");
+
+PROC
+PROC_AMP_AS_TrySell((ITEM)_Item, (CHARACTER)_Player)
+AND
+NOT IsJunk(_Item, 1)
+AND
+NOT QRY_AMP_AS_IsGold(_Item)
+AND
+NOT IsStoryItem(_Item, 1)
+AND
+NOT IsTagged(_Item, FOOD_c86e0114-a5ab-48f6-b497-de321ebff577, 1)
+AND
+NOT IsTagged(_Item, KEY_9851fa99-5538-432a-8e77-c90929a88974, 1)
+AND
+IsConsumable(_Item, 1)
+AND
+DB_AMP_AS_SellConsumables(1)
+THEN
+DebugText(_Player, "[AS] DEBUG: Consumable + SellConsumables=1");
+
+// container flag management
+PROC
+PROC_AMP_AS_SaveContainerFlag((ITEM)_Item)
+AND
+DB_AMP_AL_FromContainer(_Item)
+THEN
+NOT DB_AMP_AL_FromContainer(_Item);
+DB_AMP_AS_IsFromContainer(1);
+
+PROC
+PROC_AMP_AS_SaveContainerFlag((ITEM)_Item)
+AND
+NOT DB_AMP_AL_FromContainer(_Item)
+THEN
+DB_NOOP(1);
+
+PROC
+PROC_AMP_AS_ClearContainerFlag()
+THEN
+SysClear("DB_AMP_AS_IsFromContainer", 1);
+
+PROC
+PROC_AMP_AS_ClearItemFlags((ITEM)_Item)
+AND
+DB_AMP_AL_FromContainer(_Item)
+THEN
+NOT DB_AMP_AL_FromContainer(_Item);
+
+PROC
+PROC_AMP_AS_ClearItemFlags((ITEM)_Item)
+AND
+NOT DB_AMP_AL_FromContainer(_Item)
+THEN
+DB_NOOP(1);
+
+// sell execution
+PROC
+PROC_AMP_AS_SellItem((ITEM)_Item, (CHARACTER)_Player, (INTEGER)_SellPrice)
+AND
+_SellPrice >= 1
+THEN
+DebugText(_Player, "[AS] SOLD for gold");
+AddGoldToMagicPockets(_Player, _SellPrice);
+ObjectTimerLaunch(_Item, "AMP_AS_DeferDelete", 100, 0);
+PlaySound(_Player, "UI_Gen_Coins_01");
+
+PROC
+PROC_AMP_AS_SellItem((ITEM)_Item, (CHARACTER)_Player, (INTEGER)_SellPrice)
+AND
+_SellPrice < 1
+THEN
+DebugText(_Player, "[AS] Sell for minimum 1g");
+AddGoldToMagicPockets(_Player, 1);
+ObjectTimerLaunch(_Item, "AMP_AS_DeferDelete", 100, 0);
+PlaySound(_Player, "UI_Gen_Coins_01");
+
+// deleting in the AddedTo frame null-derefs Wwise for some templates like the milk bottle and barrel, so delete one tick later
+IF
+ObjectTimerFinished((ITEM)_Item, "AMP_AS_DeferDelete")
+THEN
+RequestDelete(_Item);
+
+EXITSECTION
+ENDEXITSECTION

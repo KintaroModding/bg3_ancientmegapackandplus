@@ -1,0 +1,65 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// base force-boss pass reads the roster at combat start behind a hostility gate, so a row is enough
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_ForceBoss(S_UND_Automaton_5038c0f2-0022-4699-82ce-a319b30616bb)
+THEN
+DB_AMP_ForceBoss(S_UND_Automaton_5038c0f2-0022-4699-82ce-a319b30616bb);
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_ForceBoss(S_UND_Automaton_5038c0f2-0022-4699-82ce-a319b30616bb)
+THEN
+DB_AMP_ForceBoss(S_UND_Automaton_5038c0f2-0022-4699-82ce-a319b30616bb);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Bernard")
+THEN
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Bernard");
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Bernard")
+THEN
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Bernard");
+
+IF
+Died(S_UND_Automaton_5038c0f2-0022-4699-82ce-a319b30616bb)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Bernard")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Bernard_Generous");
+
+IF
+Died(S_UND_Automaton_5038c0f2-0022-4699-82ce-a319b30616bb)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Bernard")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Bernard");
+
+EXITSECTION
+
+ENDEXITSECTION

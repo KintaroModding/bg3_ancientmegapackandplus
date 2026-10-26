@@ -1,0 +1,1499 @@
+-- AMP Custom Conditions for UnlockSpellVariant
+-- This file contains custom Khonsu conditions for AMP mod
+
+-- item variants exist because vanilla MAGE_ARMOR self-removes when armored and BLADE_WARD ticks down
+-- check through these, not raw HasStatus
+function IsBladeWarded(entity)
+    entity = entity or context.Target
+    return HasStatus('BLADE_WARD', entity)
+         | HasStatus('MAG_BLADE_WARD', entity)
+         | HasStatus('MAG_MONK_MOUNTAIN_BLADE_WARD', entity)
+end
+
+function IsMageArmored(entity)
+    entity = entity or context.Target
+    return HasStatus('MAGE_ARMOR', entity)
+         | HasStatus('MAG_SELUNITE_MAGE_ARMOR', entity)
+         | HasStatus('LOW_ROLAN_MAGE_ARMOR', entity)
+         | HasStatus('AMP_Hatul_MAGE_ARMOR', entity)
+end
+
+-- the original is true for any id when the context has no spell (surface damage, throw)
+-- it compares CombatAIOverrideSpell, blank for most spells, so the empty match is subtracted
+local _originalIsSpellChildOrVariant = ls.thoth.shared.IsSpellChildOrVariantFromContext
+function IsSpellChildOrVariantFromContext(spellId)
+    if spellId == "" then
+        return _originalIsSpellChildOrVariant(spellId)
+    end
+    return _originalIsSpellChildOrVariant(spellId) & ~_originalIsSpellChildOrVariant("")
+end
+
+-- Helper: combines SpellId + IsSpellChildOrVariantFromContext in one call
+function IsSpellIdOrChild(spellId)
+    return SpellId(spellId) | IsSpellChildOrVariantFromContext(spellId)
+end
+
+-- Check if spell is a leveled spell (spell that is not a cantrip/focus)
+-- Used for UnlockSpellVariant to ensure only leveled spells are affected
+function IsLeveledSpell()
+    return HasSpellFlag(SpellFlags.Spell) & ~HasCantripSpellLevel()
+end
+
+-- Check if spell is a true cantrip excluding all Booming Blade variants
+-- Used for shards that affect cantrips but must NOT trigger on Booming Blade
+function IsTrueCantrip()
+    return IsCantrip() &
+           ~SpellId('Target_BoomingBlade') &
+           ~SpellId('Target_BoomingBladeEx') &
+           ~SpellId('Target_BoomingBlade_ClassSpell')
+end
+
+-- Improvisation shard: a true cantrip whose BI-for-action discount is off cooldown
+-- this turn. Lets the discount fire once per turn instead of once per Bardic die.
+function IsImprovCantrip()
+    return IsTrueCantrip() & ~HasStatus('AMP_SHARD_IMPROVISE_CD', context.Source)
+end
+
+-- Check if spell is any Booming Blade variant
+-- Used for items that exclude Booming Blade from damage rider effects
+function IsBoomingBlade()
+    return SpellId('Target_BoomingBlade')
+         | SpellId('Target_BoomingBladeEx')
+         | SpellId('Target_BoomingBlade_ClassSpell')
+end
+
+-- Check if spell is Barkskin base or any child/variant
+-- Used for AMP_WildRegeneration to apply SpellSlot replacement to all variants
+function IsBarkskin()
+    return IsSpellIdOrChild('Target_Barkskin')
+end
+
+-- Alternative version with more explicit checks
+function IsLeveledSpellStrict()
+    return HasSpellFlag(SpellFlags.Spell) &
+           ConditionResult(context.HitDescription.SpellLevel >= 1) &
+           (HasUseCosts('SpellSlot') | HasUseCosts('WarlockSpellSlot'))
+end
+
+-- Check if spell costs a Bonus Action
+-- Used for Juggler shard to convert Bonus Action spell costs into Action costs
+function IsBonusActionSpell()
+    return HasUseCosts('BonusActionPoint', true)
+end
+
+-- Check if status is a gameplay-affecting status (not technical)
+-- Combines status groups and specific statuses that can't be grouped
+function IsGameplayStatus()
+    return StatusId('BURNING') |
+           StatusId('WET') |
+           StatusId('MAG_FROST') |
+           StatusId('RAY_OF_FROST') |
+           StatusHasStatusGroup(context.StatusId, 'SG_Condition') |
+           StatusHasStatusGroup(context.StatusId, 'SG_Blinded') |
+           StatusHasStatusGroup(context.StatusId, 'SG_Charmed') |
+           StatusHasStatusGroup(context.StatusId, 'SG_Cursed') |
+           StatusHasStatusGroup(context.StatusId, 'SG_Disease') |
+           StatusHasStatusGroup(context.StatusId, 'SG_Frightened') |
+           StatusHasStatusGroup(context.StatusId, 'SG_Invisible') |
+           StatusHasStatusGroup(context.StatusId, 'SG_Poisoned') |
+           StatusHasStatusGroup(context.StatusId, 'SG_Restrained') |
+           StatusHasStatusGroup(context.StatusId, 'SG_Stunned') |
+           StatusHasStatusGroup(context.StatusId, 'SG_Polymorph') |
+           StatusHasStatusGroup(context.StatusId, 'SG_Paralyzed') |
+           StatusHasStatusGroup(context.StatusId, 'SG_Petrified') |
+           StatusHasStatusGroup(context.StatusId, 'SG_Rage') |
+           StatusHasStatusGroup(context.StatusId, 'SG_Taunted') |
+           StatusHasStatusGroup(context.StatusId, 'SG_Dominated') |
+           StatusHasStatusGroup(context.StatusId, 'SG_Confused') |
+           StatusHasStatusGroup(context.StatusId, 'SG_Mad') |
+           StatusHasStatusGroup(context.StatusId, 'SG_HexbladeCurse') |
+           StatusHasStatusGroup(context.StatusId, 'SG_Sleeping')
+end
+
+-- Check if entity size is equal or smaller than specified size
+-- Inverted version of SizeEqualOrGreater for checking own size
+function SizeEqualOrSmaller(size, entity)
+    entity = entity or context.Source
+    return ConditionResult(entity.Size ~= Size.None and entity.Size.value <= size.value)
+end
+
+-- Check if spell is Fireball, Flame Strike or their variants
+-- Used for Fire Mastery effect in AMP_Artificers_Boost22
+function IsFireMasterySpell()
+    return IsSpellIdOrChild('Projectile_Fireball') |
+           IsSpellIdOrChild('Target_FlameStrike')
+end
+
+function IsTeleportSpell()
+    return IsSpellIdOrChild('Target_MistyStep')
+    | IsSpellIdOrChild('Target_MistyStep_3')
+    | IsSpellIdOrChild('Target_MistyStep_4')
+    | IsSpellIdOrChild('Target_MistyStep_Githyanki')
+    | IsSpellIdOrChild('Target_ShadowStep')
+    | IsSpellIdOrChild('Target_SupernaturalAttraction')
+    | IsSpellIdOrChild('Target_WildMagic_Teleport')
+    | IsSpellIdOrChild('Target_EtherealJaunt')
+    | IsSpellIdOrChild('Target_UNI_MistyStep_DrowCommander_Amulet')
+    | IsSpellIdOrChild('Target_UNI_MistyStep_NightWalkers')
+    | IsSpellIdOrChild('Target_UND_MushroomHunter_MistyStep')
+    | IsSpellIdOrChild('Target_LOW_RamazithsTower_MistyStep')
+    | IsSpellIdOrChild('Target_LOW_IronThrone_Omeluum_Teleport')
+    | IsSpellIdOrChild('Target_END_Daisy_Teleport')
+    | IsSpellIdOrChild('Target_END_VossEncounter_GithMistyStep')
+    | IsSpellIdOrChild('Target_WYR_Circus_TeleportBoots_MistyStep')
+    | IsSpellIdOrChild('Target_AMP_EtherealStep')
+    | IsSpellIdOrChild('Target_AMP_EtherealStep_2')
+    | IsSpellIdOrChild('Target_AMP_EtherealStep_3')
+    | IsSpellIdOrChild('Target_AMP_EtherealStep_4')
+    | IsSpellIdOrChild('Target_Shortbow_u')
+    | IsSpellIdOrChild('Target_Shortbow_r')
+    | IsSpellIdOrChild('Target_Shortbow_e')
+    | IsSpellIdOrChild('Target_Shortbow_l')
+    | IsSpellIdOrChild('Target_GatheredSwarm_Bee_Teleport')
+end
+
+-- Check if entity has Constitution score of 0 or lower
+-- Used for death/weakness effects that check creature vitality
+function HasZeroConstitution(entity)
+    entity = entity or context.Target
+    return ConditionResult(entity.Constitution < 1)
+end
+
+-- Alternative version that checks specifically for exactly 0 Constitution
+function HasExactlyZeroConstitution(entity)
+    entity = entity or context.Target
+    return ConditionResult(entity.Constitution == 0)
+end
+
+-- POISON IMMUNITY CHECKS
+
+-- Check if target is undead creature
+-- Returns true if target has UNDEAD tag
+function IsUndead(entity)
+    local entity = entity or context.Target
+    return Tagged('UNDEAD', entity)
+end
+
+-- Check if target is construct creature
+-- Returns true if target has CONSTRUCT tag
+function IsConstruct(entity)
+    local entity = entity or context.Target
+    return Tagged('CONSTRUCT', entity)
+end
+
+-- Check if target is immune to poison damage
+-- Returns true if target has immunity to poison damage type
+function IsImmuneToPoisonDamage(entity)
+    local entity = entity or context.Target
+    return ConditionResult(entity.HasAllResistances({DamageType.Poison}, ResistanceType.Immune))
+end
+
+-- Check if target is resistant to poison damage
+-- Returns true if target has resistance to poison damage type
+function IsResistantToPoisonDamage(entity)
+    local entity = entity or context.Target
+    return ConditionResult(entity.HasAllResistances({DamageType.Poison}, ResistanceType.Resistant))
+end
+
+-- Check if source is immune to cold damage
+-- Returns true if entity has immunity to cold damage type
+function IsImmuneToColdDamage(entity)
+    local entity = entity or context.Source
+    return ConditionResult(entity.HasAllResistances({DamageType.Cold}, ResistanceType.Immune))
+end
+
+function IsResistantToColdDamage(entity)
+    local entity = entity or context.Source
+    return ConditionResult(entity.HasAllResistances({DamageType.Cold}, ResistanceType.Resistant))
+end
+
+-- Check if target is undead or construct
+-- Combines both checks for convenience
+function IsUndeadOrConstruct(entity)
+    local entity = entity or context.Target
+    return Tagged('UNDEAD', entity) | Tagged('CONSTRUCT', entity)
+end
+
+-- Check if damage type was attempted (including 0 damage due to immunity/resistance)
+-- Unlike HasDamageDoneForType which only checks > 0 damage
+function HasDamageDoneForTypeIncludingZero(value)
+    return ConditionResult(context.HitDescription.GetDamageDoneForType(value) >= 0)
+end
+
+-- MAXIMUM HP CHECKS
+
+-- Check if target has maximum HP greater than specified value
+-- Returns true if entity's MaxHP is strictly greater than value
+function HasMaxHPGreaterThan(value, entity)
+    entity = entity or context.Target
+    return ConditionResult(entity.MaxHP > value)
+end
+
+-- Check if target has maximum HP greater than or equal to specified value
+-- Returns true if entity's MaxHP is greater than or equal to value
+function HasMaxHPEqualOrGreaterThan(value, entity)
+    entity = entity or context.Target
+    return ConditionResult(entity.MaxHP >= value)
+end
+
+-- Check if target has maximum HP less than specified value
+-- Returns true if entity's MaxHP is strictly less than value
+function HasMaxHPLessThan(value, entity)
+    entity = entity or context.Target
+    return ConditionResult(entity.MaxHP < value)
+end
+
+-- Check if target has maximum HP less than or equal to specified value
+-- Returns true if entity's MaxHP is less than or equal to value
+function HasMaxHPEqualOrLessThan(value, entity)
+    entity = entity or context.Target
+    return ConditionResult(entity.MaxHP <= value)
+end
+
+-- Check if target has maximum HP equal to specified value
+-- Returns true if entity's MaxHP exactly equals value
+function HasMaxHPEqualTo(value, entity)
+    entity = entity or context.Target
+    return ConditionResult(entity.MaxHP == value)
+end
+
+-- Check if target has maximum HP between two values (inclusive)
+-- Returns true if entity's MaxHP is within the specified range
+function HasMaxHPBetween(minValue, maxValue, entity)
+    entity = entity or context.Target
+    return ConditionResult(entity.MaxHP >= minValue and entity.MaxHP <= maxValue)
+end
+
+-- WARRIOR COMBAT DEBUFFS
+
+function HasWarriorCombatDebuff(entity)
+    entity = entity or context.Target
+    return HasStatus('SG_Stunned', entity) |
+           HasStatus('SG_Frightened', entity) |
+           HasStatus('CRIPPLED', entity) |
+           HasStatus('BLEEDING', entity) |
+           HasStatus('CHEST_TRAUMA', entity) |
+           HasStatus('DAZED', entity) |
+           HasStatus('GAPING_WOUND', entity) |
+           HasStatus('HAMSTRING', entity) |
+           HasStatus('OFF_BALANCED', entity) |
+           HasStatus('SG_Prone', entity) |
+           HasStatus('HINDERED', entity)
+end
+
+-- FIRE SPELL CONDITIONS
+
+function FireProjectileSpellCheck()
+    return SpellDamageTypeIs(DamageType.Fire) & SpellAttackCheck() & HasSpellSpellLevel()
+end
+
+function FireProjectileSpellCheckWithCantrips()
+    return SpellDamageTypeIs(DamageType.Fire) & SpellAttackCheck()
+end
+
+-- RANGED WEAPON ATTACK CHECKS
+
+function AMP_IsRangedWeaponAttack()
+    return IsSpellIdOrChild('Projectile_MainHandAttack')
+    | IsSpellIdOrChild('Projectile_OffhandAttack')
+    | IsSpellIdOrChild('Projectile_SneakAttack')
+    | IsSpellIdOrChild('Projectile_SneakAttack_Rakish')
+    | IsSpellIdOrChild('Projectile_ArcaneShot_Parent')
+    | IsSpellIdOrChild('Projectile_DreadAmbusher')
+    | IsSpellIdOrChild('Target_Volley')
+end
+
+-- RANGED WEAPON ATTACK DISTANCE CHECKS
+
+-- Check if attack is ranged weapon attack beyond specified distance
+-- Used for effects that trigger at long range
+function IsRangedWeaponAttackBeyond(value)
+    return IsRangedWeaponAttack() & ConditionResult(DistanceToTarget() > value)
+end
+
+-- Check if attack is ranged weapon attack within specified distance
+-- Used for effects that trigger at close to medium range
+function IsRangedWeaponAttackWithin(value)
+    return IsRangedWeaponAttack() & ConditionResult(DistanceToTarget() <= value)
+end
+
+-- Check if attack is ranged weapon attack within distance range
+-- Used for effects that trigger within specific distance brackets
+function IsRangedWeaponAttackInRange(minValue, maxValue)
+    local dist = DistanceToTarget()
+    return IsRangedWeaponAttack() & ConditionResult(dist > minValue and dist <= maxValue)
+end
+
+-- MERCENARY CLOAK WEAPON ATTACK CHECKS
+
+function AMP_IsMercenaryWeaponAttack()
+    return IsSpellIdOrChild('Target_MainHandAttack')
+    | IsSpellIdOrChild('Target_OffhandAttack')
+    | IsSpellIdOrChild('Projectile_MainHandAttack')
+    | IsSpellIdOrChild('Projectile_OffhandAttack')
+end
+
+-- LAY ON HANDS SPELL CHECKS
+
+function IsLayOnHandsSpell()
+    return IsSpellIdOrChild('Target_LayOnHands')
+    | SpellId('Target_LayOnHands_SmallHeal')
+    | SpellId('Target_LayOnHands_BigHeal')
+end
+
+-- PACIFIST HEALING SPELL CHECKS
+
+function IsPacifistHealingSpell()
+    return IsSpellIdOrChild('Target_Help')
+    -- Healing spells
+    | IsSpellIdOrChild('Target_CureWounds')
+    | IsSpellIdOrChild('Target_HealingWord')
+    | IsSpellIdOrChild('Shout_PrayerOfHealing')
+    | IsSpellIdOrChild('Shout_HealingWord_Mass')
+    | IsSpellIdOrChild('Target_CureWounds_Mass')
+    | IsSpellIdOrChild('Target_Heal')
+    -- Life Domain and restoration
+    | IsSpellIdOrChild('Shout_PreserveLife')
+    | IsSpellIdOrChild('Shout_Aid')
+    | IsSpellIdOrChild('Target_LesserRestoration')
+    | IsSpellIdOrChild('Target_GreaterRestoration')
+    | IsSpellIdOrChild('Target_RemoveCurse')
+    | IsSpellIdOrChild('Teleportation_Revivify')
+    -- Buff spells
+    | IsSpellIdOrChild('Target_Bless')
+    | IsSpellIdOrChild('Target_ShieldOfFaith')
+    | IsSpellIdOrChild('Target_Sanctuary')
+    | IsSpellIdOrChild('Target_ProtectionFromEvilAndGood')
+    | IsSpellIdOrChild('Target_WardingBond')
+    | IsSpellIdOrChild('Target_Heroism')
+    | IsSpellIdOrChild('Target_EnhanceAbility')
+    | IsSpellIdOrChild('Target_Longstrider')
+    | IsSpellIdOrChild('Target_Resistance')
+    | IsSpellIdOrChild('Target_Guidance')
+    | IsSpellIdOrChild('Target_Haste')
+    | IsSpellIdOrChild('Shout_BeaconOfHope')
+    | IsSpellIdOrChild('Target_DeathWard')
+    | IsSpellIdOrChild('Target_FreedomOfMovement')
+    | IsSpellIdOrChild('Target_Stoneskin')
+    | IsSpellIdOrChild('Target_ProtectionFromPoison')
+    | IsSpellIdOrChild('Target_DispelMagic')
+    | IsSpellIdOrChild('Target_GlobeOfInvulnerability')
+    | IsSpellIdOrChild('Target_CalmEmotions')
+    | IsSpellIdOrChild('Target_GuardianOfFaith')
+    | IsSpellIdOrChild('Shout_HeroesFeast')
+    | IsSpellIdOrChild('Shout_BladeWard')
+    | IsSpellIdOrChild('Target_Counterspell')
+    -- modded healing: RegainHitPoints and no damage, which keeps vampiric spells out
+    | (HasSpellFlag(SpellFlags.Spell) & HasStringInSpellRoll('RegainHitPoints') & ~HasFunctor(StatsFunctorType.DealDamage) & ~HasSpellFlag(SpellFlags.Attack))
+    -- Broad parsing: catch modded buff spells (spell + no damage + not attack + targets allies)
+    | (HasSpellFlag(SpellFlags.Spell) & ~HasFunctor(StatsFunctorType.DealDamage) & ~HasSpellFlag(SpellFlags.Attack) & HasStringInSpellConditions('Ally()'))
+end
+
+-- PACIFIST DAMAGE SPELL CHECKS
+
+function IsPacifistDamageSpell()
+    return IsSpellIdOrChild('Target_OffhandAttack')
+    | IsSpellIdOrChild('Projectile_OffhandAttack')
+    | IsSpellIdOrChild('Target_GreatWeaponMaster_BonusAttack')
+    | IsSpellIdOrChild('Target_PommelStrike')
+    | IsSpellIdOrChild('Target_OpeningAttack')
+    | IsSpellIdOrChild('Target_Exhale_Fire')
+    | IsSpellIdOrChild('Target_HeatMetal_Reapply')
+    | IsSpellIdOrChild('Target_Hex')
+    | IsSpellIdOrChild('Target_Hex_Reapply')
+    | IsSpellIdOrChild('Target_HuntersMark')
+    | IsSpellIdOrChild('Projectile_MobileShooting')
+    | IsSpellIdOrChild('Zone_StarryForm_Dragon_BreathWeapon')
+    | IsSpellIdOrChild('Target_DirtyTrick_Blind')
+    | IsSpellIdOrChild('Target_DirtyTrick_Disarm')
+    | IsSpellIdOrChild('Target_DirtyTrick_Vicious')
+    | IsSpellIdOrChild('Target_HexbladesCurse')
+    | IsSpellIdOrChild('Target_IntoxicatingStrike_BonusAction')
+    | IsSpellIdOrChild('Projectile_StarryForm_Archer_Damage')
+    | IsSpellIdOrChild('Target_VampireBite_Astarion')
+    -- Frenzy and throw attacks
+    | IsSpellIdOrChild('Target_FrenziedStrike')
+    | IsSpellIdOrChild('Throw_FrenziedThrow')
+    | IsSpellIdOrChild('Target_FlamingSphere_Ram')
+    | IsSpellIdOrChild('Target_EnsnaringStrike')
+    | IsSpellIdOrChild('Projectile_EnsnaringStrike')
+    -- Smites (bonus action on hit)
+    | IsSpellIdOrChild('Target_Smite_Searing')
+    | IsSpellIdOrChild('Target_Smite_Thunderous')
+    | IsSpellIdOrChild('Target_Smite_Wrathful')
+    | IsSpellIdOrChild('Target_Smite_Branding')
+    -- Broad parsing: catch modded offensive bonus action spells
+    | (HasSpellFlag(SpellFlags.Attack) & HasUseCosts('BonusActionPoint'))
+    | (HasFunctor(StatsFunctorType.DealDamage) & HasUseCosts('BonusActionPoint') & ~IsPacifistHealingSpell())
+end
+
+-- MELEE RANGE EXTENDED CHECK
+
+function IsWithinMeleeRangeExtended(entity)
+    entity = entity or context.Target
+    if entity == context.Source then
+        return ConditionResult(DistanceToSource() <= 3.0)
+    end
+    return ConditionResult(DistanceToTarget() <= 3.0)
+end
+
+-- ELDRITCH BLAST SPELL CHECK
+
+function IsEldritchBlast()
+    return IsSpellIdOrChild('Projectile_EldritchBlast')
+end
+
+-- SHOCKED STATUS CHECK
+
+function IsShockedOrSimilar(entity)
+    entity = entity or context.Target
+    return HasStatus('SHOCKING_GRASP', entity) |
+           HasStatus('MAG_ELECTROCUTED', entity) |
+           HasStatus('SHOCKED', entity) |
+           HasStatus('SHOCKED_SURFACE', entity)
+end
+
+-- SENTIENT CREATURE CHECK
+
+function IsSentient(entity)
+    entity = entity or context.Target
+
+    local nonSentient = Tagged('CONSTRUCT', entity) |
+                        Tagged('ELEMENTAL', entity) |
+                        Tagged('OOZE', entity) |
+                        Tagged('PLANT', entity) |
+                        Tagged('UNDEAD', entity) |
+                        Tagged('GHOST', entity)
+
+    return Character(entity) & ~nonSentient
+end
+
+-- BURNING STATUS CHECK
+
+function IsBurningStatus()
+    return StatusId('BURNING')
+    | StatusId('BURNING_HELLFIRE')
+    | StatusId('BURNING_HOLY')
+    | StatusId('BURNING_AZER')
+    | StatusId('BURNING_LAVA')
+    | StatusId('MAG_INFERNAL_BURNING')
+    | StatusId('HAV_MAG_INFERNAL_FIRE')
+    | StatusId('MAG_FIRE_HEAT')
+    | StatusId('BURNING_TRAPWALL')
+    | StatusId('AMP_DOOMFLAME_HELLFIRE')
+end
+
+-- same list as IsBurningStatus, read off the entity instead of the event
+function HasBurningStatus(entity)
+    entity = entity or context.Target
+    return HasStatus('BURNING', entity)
+    | HasStatus('BURNING_HELLFIRE', entity)
+    | HasStatus('BURNING_HOLY', entity)
+    | HasStatus('BURNING_AZER', entity)
+    | HasStatus('BURNING_LAVA', entity)
+    | HasStatus('MAG_INFERNAL_BURNING', entity)
+    | HasStatus('HAV_MAG_INFERNAL_FIRE', entity)
+    | HasStatus('MAG_FIRE_HEAT', entity)
+    | HasStatus('BURNING_TRAPWALL', entity)
+    | HasStatus('AMP_DOOMFLAME_HELLFIRE', entity)
+end
+
+-- FORCE DAMAGE SPELL CHECK
+
+function IsForceSpell()
+    return SpellDamageTypeIs(DamageType.Force)
+    | IsSpellIdOrChild('Target_Smite_Banishing')
+    | IsSpellIdOrChild('Projectile_Smite_Banishing')
+    | IsSpellIdOrChild('Projectile_CursedTome_CurriculumofStrategy')
+    | IsSpellIdOrChild('Projectile_Disintegrate')
+    | IsSpellIdOrChild('Projectile_EldritchBlast')
+    | IsSpellIdOrChild('Projectile_MagicMissile')
+    | IsSpellIdOrChild('Projectile_EPI_Disintegrate_GaleGod')
+    | IsSpellIdOrChild('Projectile_Bladesong_Finisher')
+    | IsSpellIdOrChild('Target_KiResonation_Blast')
+end
+
+-- DASH SPELL CHECK
+
+function IsDash()
+    return IsSpellIdOrChild('Shout_Dash')
+    | IsSpellIdOrChild('Shout_Dash_NPC')
+    | IsSpellIdOrChild('Shout_Dash_CunningAction')
+    | IsSpellIdOrChild('Shout_Dash_HookHorror')
+    | IsSpellIdOrChild('Shout_Dash_StepOfTheWind')
+    | IsSpellIdOrChild('Shout_Dash_BonusAction_NPC')
+end
+
+-- RAGE SPELL CHECK
+
+function IsRage()
+    return IsSpellIdOrChild('Shout_Rage')
+    | IsSpellIdOrChild('Shout_Rage_Totem_Bear')
+    | IsSpellIdOrChild('Shout_Rage_Totem_Eagle')
+    | IsSpellIdOrChild('Shout_Rage_Totem_Elk')
+    | IsSpellIdOrChild('Shout_Rage_Totem_Tiger')
+    | IsSpellIdOrChild('Shout_Rage_Totem_Wolf')
+    | IsSpellIdOrChild('Shout_Rage_Frenzy')
+    | IsSpellIdOrChild('Shout_Rage_WildMagic')
+    | IsSpellIdOrChild('Shout_Rage_Boar')
+end
+
+function IsRageWithWildShape()
+    return IsRage() & HasActionResource('WildShape', 1, 0, false, false, context.Source)
+end
+
+-- HEALING SUPPORT SPELL CHECK
+
+function IsHealingSupportSpell()
+    return IsSpellIdOrChild('Target_Bless')
+    | IsSpellIdOrChild('Target_LesserRestoration')
+    | IsSpellIdOrChild('Target_EnhanceAbility')
+    | IsSpellIdOrChild('Target_EnhanceAbility_BearsEndurance')
+    | IsSpellIdOrChild('Target_EnhanceAbility_BullsStrength')
+    | IsSpellIdOrChild('Target_EnhanceAbility_CatsGrace')
+    | IsSpellIdOrChild('Target_EnhanceAbility_EaglesSplendor')
+    | IsSpellIdOrChild('Target_EnhanceAbility_FoxsCunning')
+    | IsSpellIdOrChild('Target_EnhanceAbility_OwlsWisdom')
+    | IsSpellIdOrChild('Target_CalmEmotions')
+    | IsSpellIdOrChild('Shout_Aid')
+    | IsSpellIdOrChild('Target_Barkskin')
+    | IsSpellIdOrChild('Target_ShieldOfFaith')
+    | IsSpellIdOrChild('Target_Sanctuary')
+    | IsSpellIdOrChild('Target_ProtectionFromEvilAndGood')
+    | IsSpellIdOrChild('Target_Heroism')
+    | IsSpellIdOrChild('Target_HealingWord')
+    | IsSpellIdOrChild('Target_CureWounds')
+    | IsSpellIdOrChild('Target_Heal')
+    | IsSpellIdOrChild('Target_CureWounds_Mass')
+    | IsSpellIdOrChild('Target_GreaterRestoration')
+    | IsSpellIdOrChild('Shout_DispelEvilAndGood')
+    | IsSpellIdOrChild('Target_Stoneskin')
+    | IsSpellIdOrChild('Target_FreedomOfMovement')
+    | IsSpellIdOrChild('Target_DeathWard')
+    | IsSpellIdOrChild('Shout_AuraOfVitality')
+    | IsSpellIdOrChild('Teleportation_Revivify')
+    | IsSpellIdOrChild('Target_RemoveCurse')
+    | IsSpellIdOrChild('Target_ProtectionFromEnergy')
+    | IsSpellIdOrChild('Target_ProtectionFromEnergy_Acid')
+    | IsSpellIdOrChild('Target_ProtectionFromEnergy_Cold')
+    | IsSpellIdOrChild('Target_ProtectionFromEnergy_Fire')
+    | IsSpellIdOrChild('Target_ProtectionFromEnergy_Lightning')
+    | IsSpellIdOrChild('Target_ProtectionFromEnergy_Thunder')
+    | IsSpellIdOrChild('Shout_HealingWord_Mass')
+    | IsSpellIdOrChild('Target_Haste')
+    | IsSpellIdOrChild('Target_FeignDeath')
+    | IsSpellIdOrChild('Shout_CrusadersMantle')
+    | IsSpellIdOrChild('Shout_BeaconOfHope')
+    | IsSpellIdOrChild('Target_WardingBond')
+    | IsSpellIdOrChild('Target_ProtectionFromPoison')
+    | IsSpellIdOrChild('Shout_PrayerOfHealing')
+    | IsSpellIdOrChild('Shout_PassWithoutTrace')
+end
+
+-- WARLOCK SPELL SLOT CHECK
+
+function WarlockSlotNotFull(entity)
+    entity = entity or context.Source
+    local warlockLevel = entity.GetClassLevel('Warlock')
+
+    if warlockLevel >= 9 then
+        return ~HasActionResource('WarlockSpellSlot', 100, 5, true, false, entity)
+    elseif warlockLevel >= 7 then
+        return ~HasActionResource('WarlockSpellSlot', 100, 4, true, false, entity)
+    elseif warlockLevel >= 5 then
+        return ~HasActionResource('WarlockSpellSlot', 100, 3, true, false, entity)
+    elseif warlockLevel >= 3 then
+        return ~HasActionResource('WarlockSpellSlot', 100, 2, true, false, entity)
+    else
+        return ~HasActionResource('WarlockSpellSlot', 100, 1, true, false, entity)
+    end
+end
+
+-- WAR WIZARD SPELL CHECKS
+
+function IsWarWizardSpellTier1()
+    return SpellId('Target_FogCloud')
+    | SpellId('Target_Grease')
+    | SpellId('Shout_FalseLife')
+    | SpellId('Zone_ColorSpray')
+    | SpellId('Zone_BurningHands')
+end
+
+function IsWarWizardSpellTier2()
+    return IsWarWizardSpellTier1()
+    | SpellId('Target_ArcaneLock')
+    | SpellId('Target_CrownOfMadness')
+    | SpellId('Target_Darkvision')
+    | SpellId('Target_Knock')
+    | SpellId('Shout_SeeInvisibility')
+    | SpellId('Shout_MirrorImage')
+end
+
+function IsWarWizardSpellTier3()
+    return IsWarWizardSpellTier2()
+    | SpellId('Shout_Blink')
+    | SpellId('Target_Haste')
+    | SpellId('Target_RemoveCurse')
+    | SpellId('Target_Slow')
+    | SpellId('Target_VampiricTouch')
+end
+
+-- SPIRITUAL WEAPON SPELL CHECK
+
+function IsSpiritualWeaponSpell()
+    return IsSpellIdOrChild('Target_SpiritualWeapon')
+    | IsSpellIdOrChild('Target_SpiritualWeapon_Greataxe')
+    | IsSpellIdOrChild('Target_SpiritualWeapon_Greatsword')
+    | IsSpellIdOrChild('Target_SpiritualWeapon_Halberd')
+    | IsSpellIdOrChild('Target_SpiritualWeapon_Maul')
+    | IsSpellIdOrChild('Target_SpiritualWeapon_Spear')
+    | IsSpellIdOrChild('Target_SpiritualWeapon_Trident')
+end
+
+-- BARDIC INSPIRATION SPELL CHECK
+
+function IsBardicInspirationSpell()
+    return IsSpellIdOrChild('Target_BardicInspiration')
+    | IsSpellIdOrChild('Target_BardicInspiration_Combat')
+    | IsSpellIdOrChild('Target_MantleOfInspiration')
+    | IsSpellIdOrChild('Target_MantleOfInspiration_2')
+    | IsSpellIdOrChild('Target_MantleOfInspiration_3')
+    | IsSpellIdOrChild('Target_SCE_TieflingFollowup_BardicInspiration')
+end
+
+-- AQUAMANCER POWER SPELL CHECK
+
+function IsAquamancerPower()
+    return IsSpellIdOrChild('Target_IceStorm')
+    | IsSpellIdOrChild('Target_AMP_WaterWhip_T1_Pull')
+    | IsSpellIdOrChild('Target_AMP_WaterWhip_T1_Prone')
+    | IsSpellIdOrChild('Target_AMP_WaterWhip_T2_Pull')
+    | IsSpellIdOrChild('Target_AMP_WaterWhip_T2_Prone')
+    | IsSpellIdOrChild('Target_AMP_WaterWhip_T3_Pull')
+    | IsSpellIdOrChild('Target_AMP_WaterWhip_T3_Prone')
+    | IsSpellIdOrChild('Target_AMP_WaterWhip_T4_Pull')
+    | IsSpellIdOrChild('Target_AMP_WaterWhip_T4_Prone')
+    | IsSpellIdOrChild('Zone_GustOfWind')
+    | IsSpellIdOrChild('Projectile_BladeOfTheRime')
+    | IsSpellIdOrChild('Target_ControlWater_Container')
+    | IsSpellIdOrChild('Zone_Thunderwave')
+    | IsSpellIdOrChild('Projectile_RayOfFrost')
+    | IsSpellIdOrChild('Target_FreedomOfTheWaves')
+    | IsSpellIdOrChild('Zone_ConeOfCold')
+    | IsSpellIdOrChild('Target_WaterWhip')
+    | IsSpellIdOrChild('Zone_FrostFingers')
+    | IsSpellIdOrChild('Target_Maelstrom')
+    | IsSpellIdOrChild('Projectile_IceKnife')
+    | IsSpellIdOrChild('Target_FreezingSphere')
+    | IsSpellIdOrChild('Target_SnowballStorm')
+    | IsSpellIdOrChild('Zone_GustOfWind_Monk')
+    | IsSpellIdOrChild('Target_TidalWave')
+    | IsSpellIdOrChild('Wall_WallOfIce')
+    | IsSpellIdOrChild('Projectile_RayOfFrost_Monk')
+    | IsSpellIdOrChild('Zone_Thunderwave_Monk')
+end
+
+-- Check if spell is a Selûne domain spell
+-- Used for MAG_Ring44 (Selûne's Silver Ring)
+function IsSeluneSpell()
+    return IsSpellIdOrChild('Shout_SummonMoonblade_Container')
+    | IsSpellIdOrChild('Shout_SummonMoonblade_Fire')
+    | IsSpellIdOrChild('Shout_SummonMoonblade_Cold')
+    | IsSpellIdOrChild('Target_CureWounds')
+    | IsSpellIdOrChild('Shout_DivineFavor')
+    | IsSpellIdOrChild('Target_FaerieFire')
+    | IsSpellIdOrChild('Projectile_GuidingBolt')
+    | IsSpellIdOrChild('Target_HealingWord')
+    | IsSpellIdOrChild('Target_Moonbeam')
+    | IsSpellIdOrChild('Target_Daylight_Container')
+    | IsSpellIdOrChild('Target_Daylight')
+    | IsSpellIdOrChild('Target_Daylight_Enchantment')
+    | IsSpellIdOrChild('Shout_HealingWord_Mass')
+    | IsSpellIdOrChild('Teleportation_Revivify')
+    | IsSpellIdOrChild('Shout_SpiritGuardians')
+    | IsSpellIdOrChild('Shout_SpiritGuardians_Necrotic')
+    | IsSpellIdOrChild('Shout_SpiritGuardians_Radiant')
+    | IsSpellIdOrChild('Target_GuardianOfFaith')
+    | IsSpellIdOrChild('Target_CureWounds_Mass')
+end
+
+-- YTSUKEN'S ROBE SPELL CHECKS
+
+-- Check if spell is Fireball or any of its variants
+-- Used for Ytsuken's Robe toggle - makes Fireball cost Bonus Action
+function IsFireball()
+    return IsSpellIdOrChild('Projectile_Fireball')
+end
+
+-- Check if spell is Chain Lightning or any of its variants
+-- Used for Ytsuken's Robe legendary effect - restores Action Point on cast
+function IsChainLightning()
+    return IsSpellIdOrChild('Projectile_ChainLightning')
+end
+
+function IsShadowStepSpell()
+    return IsSpellIdOrChild('Target_ShadowStep')
+    | IsSpellIdOrChild('Target_ShadowWalk')
+    | IsSpellIdOrChild('Target_SHA_Justiciar_ShadowStep')
+    | IsSpellIdOrChild('Target_MAG_Shadow_Shadowstep')
+    | IsSpellIdOrChild('Target_ShadowStrike_Instant')
+    | IsSpellIdOrChild('Target_LOW_HouseOfGrief_ShadowStep')
+end
+
+-- SHOCKING GRASP SPELL CHECK
+
+-- Check if spell is Shocking Grasp or any of its variants
+-- Includes: base Shocking Grasp and Monk variant
+function IsShockingGrasp()
+    return IsSpellIdOrChild('Target_ShockingGrasp')
+    | IsSpellIdOrChild('Target_ShockingGrasp_Monk')
+end
+
+-- SNEAK ATTACK SPELL CHECK
+
+-- Check if current spell is any Sneak Attack variant (melee, ranged, interrupt, rakish) + children
+function IsSneakAttack()
+    return IsSpellIdOrChild('Target_SneakAttack')
+    | IsSpellIdOrChild('Projectile_SneakAttack')
+    | IsSpellIdOrChild('Interrupt_SneakAttack')
+    | IsSpellIdOrChild('Interrupt_SneakAttack_Critical')
+    | IsSpellIdOrChild('Target_SneakAttack_Rakish')
+    | IsSpellIdOrChild('Projectile_SneakAttack_Rakish')
+    | IsSpellIdOrChild('Interrupt_SneakAttack_Rakish')
+    | IsSpellIdOrChild('Interrupt_SneakAttack_Rakish_Critical')
+end
+
+-- PIRATE GRENADE MARKER SYSTEM
+
+-- Check if grenade slot N is the next free slot for grenade type
+-- Used in SpellProperties IF() to apply correct marker
+function NextPirateGrenadeSlot(grenadeNum, slotNum)
+    local breast = GetItemInEquipmentSlot(EquipmentSlot.Breast, context.Source)
+    for i = 1, slotNum - 1 do
+        if not HasStatus('AMP_PIRATE_G' .. string.format('%02d', grenadeNum) .. '_USED_' .. i, breast).Result then
+            return ConditionResult(false)
+        end
+    end
+    return ~HasStatus('AMP_PIRATE_G' .. string.format('%02d', grenadeNum) .. '_USED_' .. slotNum, breast)
+end
+
+-- Check if character has any grenades left (any slot free)
+-- Used in RequirementConditions to disable spell when all used
+function PirateGrenadeAvailable(grenadeNum, maxUses)
+    local breast = GetItemInEquipmentSlot(EquipmentSlot.Breast, context.Source)
+    for i = 1, maxUses do
+        if not HasStatus('AMP_PIRATE_G' .. string.format('%02d', grenadeNum) .. '_USED_' .. i, breast).Result then
+            return ConditionResult(true)
+        end
+    end
+    return ConditionResult(false)
+end
+
+-- GUIDING BOLT SPELL CHECK
+
+-- MELEE MAIN HAND ATTACK CHECK
+
+-- Matches Target_MainHandAttack and all its children/variants
+-- Used for Reach shard (AMP_SHARD_CHAR_REACH) to increase melee weapon reach
+function AMP_IsMeleeMainHandAttack()
+    return IsSpellIdOrChild('Target_MainHandAttack')
+    | IsSpellIdOrChild('Target_OffhandAttack')
+end
+
+function IsGuidingBolt()
+    return IsSpellIdOrChild('Projectile_GuidingBolt')
+    | IsSpellIdOrChild('Projectile_GuidingBolt_StarMap')
+    | IsSpellIdOrChild('Projectile_GuidingBolt_Free')
+end
+
+-- Check if spell is Inflict Wounds or any of its variants
+-- Used for Zinghi's Tunic (MAG_Armour_C_4) - Necro Nuke rework
+function IsNecroNuke()
+    return IsSpellIdOrChild('Target_InflictWounds')
+    | IsSpellIdOrChild('AMP_Target_InflictWounds')
+end
+
+-- Check if entity is resistant to Necrotic damage
+-- Used for AMP_Target_InflictWounds self-damage condition
+function IsResistantToNecroticDamage(entity)
+    local entity = entity or context.Target
+    return IsResistantToDamageType(DamageType.Necrotic, entity)
+end
+
+-- ABILITY COMPARISON CHECKS
+
+-- Check if entity's Wisdom is greater than their Strength
+-- Used for AMP_CaioShin_WisdomCrit_Passive - restore reaction on crit when Wisdom > Strength
+function IsWisdomGreaterThanStrength(entity)
+    entity = entity or context.Source
+    return ConditionResult(entity.Wisdom > entity.Strength)
+end
+
+-- Check if entity's Charisma is greater than a given value
+-- Usage: AMP_CharismaGreaterThan(22, context.Source)
+function AMP_CharismaGreaterThan(value, entity)
+    entity = entity or context.Source
+    return ConditionResult(entity.Charisma > value)
+end
+
+-- Check if entity's Dexterity is strictly higher than all other abilities
+function IsDexterityHighest(entity)
+    entity = entity or context.Target
+    local dex = entity.Dexterity
+    return ConditionResult(
+        dex > entity.Strength and
+        dex > entity.Constitution and
+        dex > entity.Intelligence and
+        dex > entity.Wisdom and
+        dex > entity.Charisma
+    )
+end
+
+-- Check if entity's Intelligence is strictly higher than all other abilities
+function IsIntelligenceHighest(entity)
+    entity = entity or context.Target
+    local int = entity.Intelligence
+    return ConditionResult(
+        int > entity.Strength and
+        int > entity.Dexterity and
+        int > entity.Constitution and
+        int > entity.Wisdom and
+        int > entity.Charisma
+    )
+end
+
+-- Check if entity's Strength is strictly higher than all other abilities
+-- Used for Force Maul exhaustion check - debuff when STR is not the highest
+function IsStrengthHighest(entity)
+    entity = entity or context.Target
+    local str = entity.Strength
+    return ConditionResult(
+        str > entity.Dexterity and
+        str > entity.Constitution and
+        str > entity.Intelligence and
+        str > entity.Wisdom and
+        str > entity.Charisma
+    )
+end
+
+-- CHILL TOUCH SPELL CHECK
+
+-- Check if spell is Chill Touch or any of its variants
+-- Used for Armour of the Sage Revenant toggle - removes Action Point cost
+function IsChillTouch()
+    return IsSpellIdOrChild('Target_ChillTouch')
+end
+
+-- Self(context.Source) is the same as Self(), entity2 defaults to context.Target
+-- the helpers below name the entity they check
+
+-- OnDamaged: Source is the attacker, Target the owner. Surface damage can have no valid Source
+function IsDamagedByOther()
+    return ConditionResult(context.Source.IsValid and context.Source ~= context.Target)
+end
+
+-- For OnDamaged passive: "I damaged myself" (self-harm, own surface, etc.)
+function IsSelfDamage()
+    return ConditionResult(context.Source.IsValid and context.Source == context.Target)
+end
+
+-- For OnDamage passive: "I'm attacking someone else, not myself"
+-- Source = attacker (passive owner), Target = victim
+function IsAttackingOther()
+    return ConditionResult(context.Target.IsValid and context.Source ~= context.Target)
+end
+
+-- For OnHeal passive: "I'm healing someone else, not myself"
+-- Source = healer (passive owner), Target = heal recipient
+function IsHealingOther()
+    return ConditionResult(context.Target.IsValid and context.Source ~= context.Target)
+end
+
+-- For OnHeal passive: "I'm healing myself"
+function IsSelfHeal()
+    return ConditionResult(context.Source.IsValid and context.Source == context.Target)
+end
+
+-- For OnStatusApplied passive: "status was applied by a different entity"
+-- Source = who applied status, Target = who received status
+function IsStatusFromOther()
+    return ConditionResult(context.Source.IsValid and context.Source ~= context.Target)
+end
+
+-- For OnStatusApplied passive: "I applied this status to myself"
+function IsStatusFromSelf()
+    return ConditionResult(context.Source.IsValid and context.Source == context.Target)
+end
+
+-- For InterruptData: "observer is the one who attacked/cast"
+-- Observer = interrupt owner, Source = attacker/caster, Target = victim
+function IsObserverAttacker()
+    return Self(context.Source, context.Observer)
+end
+
+-- For InterruptData: "observer is the one being attacked/targeted"
+function IsObserverVictim()
+    return Self(context.Target, context.Observer)
+end
+
+-- SLOW STATUS CHECK
+
+function IsSlow(entity)
+    entity = entity or context.Target
+    return HasStatus('SLOW', entity)
+    | HasStatus('TAD_BLACK_HOLE_SLOW', entity)
+    | HasStatus('ABJURE_ENEMY_SLOW', entity)
+    | HasStatus('END_NETHERBRAIN_SLOW', entity)
+    | HasStatus('AMP_GAMBLERS_SLOW_MODIFIED', entity)
+end
+
+-- HASTE STATUS CHECK
+
+-- Check if entity has any variant of Haste status
+-- Includes: base HASTE, Celestial, TAD Mind Sanctuary, Surface, Gambler's modified
+function IsHasted(entity)
+    entity = entity or context.Target
+    return HasStatus('HASTE', entity)
+    | HasStatus('MAG_CELESTIAL_HASTE', entity)
+    | HasStatus('TAD_MIND_SANCTUARY_HASTE', entity)
+    | HasStatus('HASTE_SURFACE', entity)
+    | HasStatus('AMP_GAMBLERS_HASTE_MODIFIED', entity)
+end
+
+-- TIME-AFFECTED CHECK
+
+-- Check if entity has any Haste or Slow variant
+-- Combines IsHasted() and IsSlow() for unified time-manipulation check
+function IsAffectedByTime(entity)
+    entity = entity or context.Target
+    return IsHasted(entity) | IsSlow(entity)
+end
+
+-- FORCE DAMAGE RESISTANCE CHECK
+
+-- Check if entity is resistant to Force damage
+-- Used for N_Force Graviton passive - self-slow bypass
+function IsResistantToForceDamage(entity)
+    local entity = entity or context.Source
+    return IsResistantToDamageType(DamageType.Force, entity)
+end
+
+-- Check if entity is immune to Force damage
+function IsImmuneToForceDamage(entity)
+    local entity = entity or context.Source
+    return IsImmuneToDamageType(DamageType.Force, entity)
+end
+
+-- NECROMANCY CANTRIP CHECK
+
+-- Check if spell is a single-target Necromancy cantrip (Reaper +1 target).
+-- excludes Shout-type focuses: ModifyNumberOfTargets can't add a second self-target.
+function IsNecromancyCantrip()
+    return IsCantrip() & IsSpellOfSchool(SpellSchool.Necromancy) & ~SpellTypeIs(SpellType.Shout)
+end
+
+-- SHIELD SAVING THROW FROM WEAPON ATTACK
+
+-- NATURE ENSNARE STATUS CHECK
+
+function IsNatureEnsnare(entity)
+    entity = entity or context.Target
+    return HasStatus('ENSNARED_VINES', entity)
+    | HasStatus('ENSNARED', entity)
+    | HasStatus('NATURES_WRATH', entity)
+    | HasStatus('ENSNARING_STRIKE_2', entity)
+    | HasStatus('ENSNARING_STRIKE', entity)
+    | HasStatus('WEB', entity)
+end
+
+-- EARTH MYRMIDON WILDSHAPE CHECK
+
+-- Check if spell is Earth Myrmidon Wild Shape or its combat variant
+-- Used for Chauntean Boots of Jubilation legendary - free Earth Myrmidon entry
+function IsEarthMyrmidonWildShape()
+    return IsSpellIdOrChild('Shout_WildShape_Myrmidon_Earth')
+    | IsSpellIdOrChild('Shout_WildShape_Combat_Myrmidon_Earth')
+end
+
+-- PSYCHIC DOMINANCE SPELL CHECK
+
+function IsPsychicDominance()
+    return IsSpellIdOrChild('Target_Sleep')
+    | IsSpellIdOrChild('Target_HideousLaughter')
+    | IsSpellIdOrChild('Target_CrownOfMadness')
+    | IsSpellIdOrChild('Target_HypnoticPattern')
+    | IsSpellIdOrChild('Target_Confusion')
+    | IsSpellIdOrChild('Target_DominatePerson')
+    | IsSpellIdOrChild('Target_DissonantWhispers')
+end
+
+function IsWizard(entity)
+    entity = entity or context.Source
+    return Tagged('WIZARD', entity)
+end
+
+function IsWizardIceStorm(entity)
+    entity = entity or context.Source
+    return Tagged('WIZARD', entity) & IsSpellIdOrChild('Target_IceStorm')
+end
+
+function IsAtheist(entity)
+    entity = entity or context.Source
+    return ~Tagged('CLERIC_MYSTRA', entity) &
+           ~Tagged('CLERIC_SELUNE', entity) &
+           ~Tagged('CLERIC_SHAR', entity) &
+           ~Tagged('CLERIC_TYR', entity) &
+           ~Tagged('CLERIC_TALOS', entity) &
+           ~Tagged('CLERIC_ILMATER', entity) &
+           ~Tagged('CLERIC_LOLTH', entity) &
+           ~Tagged('CLERIC_LOVIATAR', entity) &
+           ~Tagged('CLERIC_LATHANDER', entity) &
+           ~Tagged('CLERIC_MIELIKKI', entity)
+end
+
+function IsBurningAgony()
+    return IsSpellIdOrChild('Projectile_Fireball') |
+           IsSpellIdOrChild('Target_FlameStrike')
+end
+
+-- Check if spell is Hold Person or any of its variants
+-- Used for paralysis-related effects
+function IsParalysis()
+    return IsSpellIdOrChild('Target_HoldPerson')
+end
+
+-- Ring42 Fateweaver: SetRoll interrupt filters
+-- Fatal(5) = offensive only, Balanced(10) = both, Giant(15) = defensive only
+
+function Ring42_Fatal_Interesting()
+    if context.InterruptedRoll.RollCritical ~= RollCritical.None then
+        return ConditionResult(false)
+    end
+    local rollSuccess = context.InterruptedRoll.Total >= context.InterruptedRoll.Difficulty
+    local dc = context.InterruptedRoll.Difficulty
+
+    if HasInterruptedAttack().Result then
+        return ConditionResult(Enemy(context.Observer, context.Source).Result and rollSuccess and dc > 5)
+    end
+    if HasInterruptedSavingThrow().Result then
+        return ConditionResult(Enemy(context.Observer, context.Target).Result and rollSuccess and dc > 5)
+    end
+    return ConditionResult(false)
+end
+
+function Ring42_Balanced_Interesting()
+    if context.InterruptedRoll.RollCritical ~= RollCritical.None then
+        return ConditionResult(false)
+    end
+    local rollSuccess = context.InterruptedRoll.Total >= context.InterruptedRoll.Difficulty
+    local dc = context.InterruptedRoll.Difficulty
+
+    if HasInterruptedAttack().Result then
+        local isEnemy = Enemy(context.Observer, context.Source).Result
+        if isEnemy then
+            return ConditionResult(rollSuccess and dc > 10)
+        end
+        return ConditionResult(not rollSuccess and dc <= 10)
+    end
+    if HasInterruptedSavingThrow().Result then
+        local isEnemy = Enemy(context.Observer, context.Target).Result
+        if isEnemy then
+            return ConditionResult(rollSuccess and dc > 10)
+        end
+        return ConditionResult(not rollSuccess and dc <= 10)
+    end
+    return ConditionResult(false)
+end
+
+function Ring42_Giant_Interesting()
+    if context.InterruptedRoll.RollCritical ~= RollCritical.None then
+        return ConditionResult(false)
+    end
+    local rollSuccess = context.InterruptedRoll.Total >= context.InterruptedRoll.Difficulty
+    local dc = context.InterruptedRoll.Difficulty
+
+    if HasInterruptedAttack().Result then
+        return ConditionResult(not Enemy(context.Observer, context.Source).Result and not rollSuccess and dc <= 15)
+    end
+    if HasInterruptedSavingThrow().Result then
+        return ConditionResult(not Enemy(context.Observer, context.Target).Result and not rollSuccess and dc <= 15)
+    end
+    return ConditionResult(false)
+end
+
+function IsCharismaGEWisdom(entity)
+    entity = entity or context.Source
+    return ConditionResult(entity.Charisma >= entity.Wisdom)
+end
+
+-- THE UNMADE LIBRARY (Boots #8)
+
+-- Checks if the cast spell matches the active school marker on the caster
+-- Default entity = context.Source (OnCast passive context)
+function IsMatchingSchool(entity)
+    entity = entity or context.Source
+    return (HasStatus('AMP_ARCANE_SCHOOL_EVOCATION', entity) & IsSpellOfSchool(SpellSchool.Evocation))
+         | (HasStatus('AMP_ARCANE_SCHOOL_ABJURATION', entity) & IsSpellOfSchool(SpellSchool.Abjuration))
+         | (HasStatus('AMP_ARCANE_SCHOOL_CONJURATION', entity) & IsSpellOfSchool(SpellSchool.Conjuration))
+         | (HasStatus('AMP_ARCANE_SCHOOL_NECROMANCY', entity) & IsSpellOfSchool(SpellSchool.Necromancy))
+         | (HasStatus('AMP_ARCANE_SCHOOL_TRANSMUTATION', entity) & IsSpellOfSchool(SpellSchool.Transmutation))
+         | (HasStatus('AMP_ARCANE_SCHOOL_DIVINATION', entity) & IsSpellOfSchool(SpellSchool.Divination))
+         | (HasStatus('AMP_ARCANE_SCHOOL_ENCHANTMENT', entity) & IsSpellOfSchool(SpellSchool.Enchantment))
+         | (HasStatus('AMP_ARCANE_SCHOOL_ILLUSION', entity) & IsSpellOfSchool(SpellSchool.Illusion))
+end
+
+-- Arcane Recovery spell (includes all child variants)
+function IsArcaneRecovery()
+    return IsSpellIdOrChild('Shout_ArcaneRecovery')
+end
+
+-- Intelligence higher than all other ability scores
+function IsIntelligenceHighest(entity)
+    entity = entity or context.Source
+    return ConditionResult(
+        entity.Intelligence > entity.Strength
+        and entity.Intelligence > entity.Dexterity
+        and entity.Intelligence > entity.Constitution
+        and entity.Intelligence > entity.Wisdom
+        and entity.Intelligence > entity.Charisma
+    )
+end
+
+function IsMeleeAttackSpell()
+    return IsSpellIdOrChild('Target_MainHandAttack')
+    | IsSpellIdOrChild('Target_OffhandAttack')
+    | IsSpellIdOrChild('Target_UnarmedAttack')
+    | IsSpellIdOrChild('Target_UnarmedStrike_Monk')
+    | IsSpellIdOrChild('Target_PommelStrike')
+    | IsSpellIdOrChild('Target_Slash')
+    | IsSpellIdOrChild('Target_Slash_New')
+    | IsSpellIdOrChild('Target_PiercingThrust')
+    | ManeuverAndWeaponActionCheck()
+end
+
+
+-- Ilmater expansion
+-- IsSpellIdOrChild keeps UnlockSpellVariant forms counted as prayers
+function IsAMPIlmaterPrayer()
+    return IsSpellIdOrChild('AMP_Ilmater_Prayer_Communion_1')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Communion_2')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Communion_3')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Communion_4')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Anchoring_1')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Anchoring_2')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Anchoring_3')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Anchoring_4')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Sealing_1')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Sealing_2')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Sealing_3')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Sealing_4')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Temperance_1')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Temperance_2')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Temperance_3')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Temperance_4')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Preaching_1')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Preaching_2')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Preaching_3')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Preaching_4')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Thread_1')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Thread_2')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Thread_3')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Thread_4')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Prophet_1')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Prophet_2')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Prophet_3')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Prophet_4')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Pain_1')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Pain_2')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Pain_3')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Pain_4')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Bone_1')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Bone_2')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Bone_3')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Bone_4')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Martyrdom_1')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Martyrdom_2')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Martyrdom_3')
+         | IsSpellIdOrChild('AMP_Ilmater_Prayer_Martyrdom_4')
+end
+
+
+function IsAMPIlmaterStigmaApplied()
+    return StatusId('AMP_STIGMA_AMULET_1') | StatusId('AMP_STIGMA_AMULET_2') |
+           StatusId('AMP_STIGMA_AMULET_3') | StatusId('AMP_STIGMA_AMULET_4') |
+           StatusId('AMP_STIGMA_RING') |
+           StatusId('AMP_STIGMA_DIADEM_1') | StatusId('AMP_STIGMA_DIADEM_2') |
+           StatusId('AMP_STIGMA_DIADEM_3') | StatusId('AMP_STIGMA_DIADEM_4') |
+           StatusId('AMP_STIGMA_ROBE') |
+           StatusId('AMP_STIGMA_CLOAK') |
+           StatusId('AMP_STIGMA_GLOVES') |
+           StatusId('AMP_STIGMA_BOOTS') |
+           StatusId('AMP_STIGMA_HELMET_1') | StatusId('AMP_STIGMA_HELMET_2') |
+           StatusId('AMP_STIGMA_HELMET_3') | StatusId('AMP_STIGMA_HELMET_4') |
+           StatusId('AMP_STIGMA_MEDIUMARMOR_1') | StatusId('AMP_STIGMA_MEDIUMARMOR_2') |
+           StatusId('AMP_STIGMA_MEDIUMARMOR_3') | StatusId('AMP_STIGMA_MEDIUMARMOR_4') |
+           StatusId('AMP_STIGMA_HEAVYARMOR_1') | StatusId('AMP_STIGMA_HEAVYARMOR_2') |
+           StatusId('AMP_STIGMA_HEAVYARMOR_3') | StatusId('AMP_STIGMA_HEAVYARMOR_4')
+end
+
+
+function HasAnyAMPIlmaterStigma(entity)
+    return HasStatus('AMP_STIGMA_AMULET_1', entity) | HasStatus('AMP_STIGMA_AMULET_2', entity) |
+           HasStatus('AMP_STIGMA_AMULET_3', entity) | HasStatus('AMP_STIGMA_AMULET_4', entity) |
+           HasStatus('AMP_STIGMA_RING', entity) |
+           HasStatus('AMP_STIGMA_DIADEM_1', entity) | HasStatus('AMP_STIGMA_DIADEM_2', entity) |
+           HasStatus('AMP_STIGMA_DIADEM_3', entity) | HasStatus('AMP_STIGMA_DIADEM_4', entity) |
+           HasStatus('AMP_STIGMA_ROBE', entity) |
+           HasStatus('AMP_STIGMA_CLOAK', entity) |
+           HasStatus('AMP_STIGMA_GLOVES', entity) |
+           HasStatus('AMP_STIGMA_BOOTS', entity) |
+           HasStatus('AMP_STIGMA_HELMET_1', entity) | HasStatus('AMP_STIGMA_HELMET_2', entity) |
+           HasStatus('AMP_STIGMA_HELMET_3', entity) | HasStatus('AMP_STIGMA_HELMET_4', entity) |
+           HasStatus('AMP_STIGMA_MEDIUMARMOR_1', entity) | HasStatus('AMP_STIGMA_MEDIUMARMOR_2', entity) |
+           HasStatus('AMP_STIGMA_MEDIUMARMOR_3', entity) | HasStatus('AMP_STIGMA_MEDIUMARMOR_4', entity) |
+           HasStatus('AMP_STIGMA_HEAVYARMOR_1', entity) | HasStatus('AMP_STIGMA_HEAVYARMOR_2', entity) |
+           HasStatus('AMP_STIGMA_HEAVYARMOR_3', entity) | HasStatus('AMP_STIGMA_HEAVYARMOR_4', entity)
+end
+
+
+-- every stigma except the item's own category, else the passive fires off its wearer's own stigma
+
+function HasForeignStigma_Amulet(entity)
+    return HasStatus('AMP_STIGMA_RING', entity) |
+           HasStatus('AMP_STIGMA_DIADEM_1', entity) | HasStatus('AMP_STIGMA_DIADEM_2', entity) |
+           HasStatus('AMP_STIGMA_DIADEM_3', entity) | HasStatus('AMP_STIGMA_DIADEM_4', entity) |
+           HasStatus('AMP_STIGMA_ROBE', entity) |
+           HasStatus('AMP_STIGMA_CLOAK', entity) |
+           HasStatus('AMP_STIGMA_GLOVES', entity) |
+           HasStatus('AMP_STIGMA_BOOTS', entity) |
+           HasStatus('AMP_STIGMA_HELMET_1', entity) | HasStatus('AMP_STIGMA_HELMET_2', entity) |
+           HasStatus('AMP_STIGMA_HELMET_3', entity) | HasStatus('AMP_STIGMA_HELMET_4', entity) |
+           HasStatus('AMP_STIGMA_MEDIUMARMOR_1', entity) | HasStatus('AMP_STIGMA_MEDIUMARMOR_2', entity) |
+           HasStatus('AMP_STIGMA_MEDIUMARMOR_3', entity) | HasStatus('AMP_STIGMA_MEDIUMARMOR_4', entity) |
+           HasStatus('AMP_STIGMA_HEAVYARMOR_1', entity) | HasStatus('AMP_STIGMA_HEAVYARMOR_2', entity) |
+           HasStatus('AMP_STIGMA_HEAVYARMOR_3', entity) | HasStatus('AMP_STIGMA_HEAVYARMOR_4', entity)
+end
+
+function HasForeignStigma_Ring(entity)
+    return HasStatus('AMP_STIGMA_AMULET_1', entity) | HasStatus('AMP_STIGMA_AMULET_2', entity) |
+           HasStatus('AMP_STIGMA_AMULET_3', entity) | HasStatus('AMP_STIGMA_AMULET_4', entity) |
+           HasStatus('AMP_STIGMA_DIADEM_1', entity) | HasStatus('AMP_STIGMA_DIADEM_2', entity) |
+           HasStatus('AMP_STIGMA_DIADEM_3', entity) | HasStatus('AMP_STIGMA_DIADEM_4', entity) |
+           HasStatus('AMP_STIGMA_ROBE', entity) |
+           HasStatus('AMP_STIGMA_CLOAK', entity) |
+           HasStatus('AMP_STIGMA_GLOVES', entity) |
+           HasStatus('AMP_STIGMA_BOOTS', entity) |
+           HasStatus('AMP_STIGMA_HELMET_1', entity) | HasStatus('AMP_STIGMA_HELMET_2', entity) |
+           HasStatus('AMP_STIGMA_HELMET_3', entity) | HasStatus('AMP_STIGMA_HELMET_4', entity) |
+           HasStatus('AMP_STIGMA_MEDIUMARMOR_1', entity) | HasStatus('AMP_STIGMA_MEDIUMARMOR_2', entity) |
+           HasStatus('AMP_STIGMA_MEDIUMARMOR_3', entity) | HasStatus('AMP_STIGMA_MEDIUMARMOR_4', entity) |
+           HasStatus('AMP_STIGMA_HEAVYARMOR_1', entity) | HasStatus('AMP_STIGMA_HEAVYARMOR_2', entity) |
+           HasStatus('AMP_STIGMA_HEAVYARMOR_3', entity) | HasStatus('AMP_STIGMA_HEAVYARMOR_4', entity)
+end
+
+function HasForeignStigma_Diadem(entity)
+    return HasStatus('AMP_STIGMA_AMULET_1', entity) | HasStatus('AMP_STIGMA_AMULET_2', entity) |
+           HasStatus('AMP_STIGMA_AMULET_3', entity) | HasStatus('AMP_STIGMA_AMULET_4', entity) |
+           HasStatus('AMP_STIGMA_RING', entity) |
+           HasStatus('AMP_STIGMA_ROBE', entity) |
+           HasStatus('AMP_STIGMA_CLOAK', entity) |
+           HasStatus('AMP_STIGMA_GLOVES', entity) |
+           HasStatus('AMP_STIGMA_BOOTS', entity) |
+           HasStatus('AMP_STIGMA_HELMET_1', entity) | HasStatus('AMP_STIGMA_HELMET_2', entity) |
+           HasStatus('AMP_STIGMA_HELMET_3', entity) | HasStatus('AMP_STIGMA_HELMET_4', entity) |
+           HasStatus('AMP_STIGMA_MEDIUMARMOR_1', entity) | HasStatus('AMP_STIGMA_MEDIUMARMOR_2', entity) |
+           HasStatus('AMP_STIGMA_MEDIUMARMOR_3', entity) | HasStatus('AMP_STIGMA_MEDIUMARMOR_4', entity) |
+           HasStatus('AMP_STIGMA_HEAVYARMOR_1', entity) | HasStatus('AMP_STIGMA_HEAVYARMOR_2', entity) |
+           HasStatus('AMP_STIGMA_HEAVYARMOR_3', entity) | HasStatus('AMP_STIGMA_HEAVYARMOR_4', entity)
+end
+
+function HasForeignStigma_Robe(entity)
+    return HasStatus('AMP_STIGMA_AMULET_1', entity) | HasStatus('AMP_STIGMA_AMULET_2', entity) |
+           HasStatus('AMP_STIGMA_AMULET_3', entity) | HasStatus('AMP_STIGMA_AMULET_4', entity) |
+           HasStatus('AMP_STIGMA_RING', entity) |
+           HasStatus('AMP_STIGMA_DIADEM_1', entity) | HasStatus('AMP_STIGMA_DIADEM_2', entity) |
+           HasStatus('AMP_STIGMA_DIADEM_3', entity) | HasStatus('AMP_STIGMA_DIADEM_4', entity) |
+           HasStatus('AMP_STIGMA_CLOAK', entity) |
+           HasStatus('AMP_STIGMA_GLOVES', entity) |
+           HasStatus('AMP_STIGMA_BOOTS', entity) |
+           HasStatus('AMP_STIGMA_HELMET_1', entity) | HasStatus('AMP_STIGMA_HELMET_2', entity) |
+           HasStatus('AMP_STIGMA_HELMET_3', entity) | HasStatus('AMP_STIGMA_HELMET_4', entity) |
+           HasStatus('AMP_STIGMA_MEDIUMARMOR_1', entity) | HasStatus('AMP_STIGMA_MEDIUMARMOR_2', entity) |
+           HasStatus('AMP_STIGMA_MEDIUMARMOR_3', entity) | HasStatus('AMP_STIGMA_MEDIUMARMOR_4', entity) |
+           HasStatus('AMP_STIGMA_HEAVYARMOR_1', entity) | HasStatus('AMP_STIGMA_HEAVYARMOR_2', entity) |
+           HasStatus('AMP_STIGMA_HEAVYARMOR_3', entity) | HasStatus('AMP_STIGMA_HEAVYARMOR_4', entity)
+end
+
+function HasForeignStigma_Cloak(entity)
+    return HasStatus('AMP_STIGMA_AMULET_1', entity) | HasStatus('AMP_STIGMA_AMULET_2', entity) |
+           HasStatus('AMP_STIGMA_AMULET_3', entity) | HasStatus('AMP_STIGMA_AMULET_4', entity) |
+           HasStatus('AMP_STIGMA_RING', entity) |
+           HasStatus('AMP_STIGMA_DIADEM_1', entity) | HasStatus('AMP_STIGMA_DIADEM_2', entity) |
+           HasStatus('AMP_STIGMA_DIADEM_3', entity) | HasStatus('AMP_STIGMA_DIADEM_4', entity) |
+           HasStatus('AMP_STIGMA_ROBE', entity) |
+           HasStatus('AMP_STIGMA_GLOVES', entity) |
+           HasStatus('AMP_STIGMA_BOOTS', entity) |
+           HasStatus('AMP_STIGMA_HELMET_1', entity) | HasStatus('AMP_STIGMA_HELMET_2', entity) |
+           HasStatus('AMP_STIGMA_HELMET_3', entity) | HasStatus('AMP_STIGMA_HELMET_4', entity) |
+           HasStatus('AMP_STIGMA_MEDIUMARMOR_1', entity) | HasStatus('AMP_STIGMA_MEDIUMARMOR_2', entity) |
+           HasStatus('AMP_STIGMA_MEDIUMARMOR_3', entity) | HasStatus('AMP_STIGMA_MEDIUMARMOR_4', entity) |
+           HasStatus('AMP_STIGMA_HEAVYARMOR_1', entity) | HasStatus('AMP_STIGMA_HEAVYARMOR_2', entity) |
+           HasStatus('AMP_STIGMA_HEAVYARMOR_3', entity) | HasStatus('AMP_STIGMA_HEAVYARMOR_4', entity)
+end
+
+function HasForeignStigma_Gloves(entity)
+    return HasStatus('AMP_STIGMA_AMULET_1', entity) | HasStatus('AMP_STIGMA_AMULET_2', entity) |
+           HasStatus('AMP_STIGMA_AMULET_3', entity) | HasStatus('AMP_STIGMA_AMULET_4', entity) |
+           HasStatus('AMP_STIGMA_RING', entity) |
+           HasStatus('AMP_STIGMA_DIADEM_1', entity) | HasStatus('AMP_STIGMA_DIADEM_2', entity) |
+           HasStatus('AMP_STIGMA_DIADEM_3', entity) | HasStatus('AMP_STIGMA_DIADEM_4', entity) |
+           HasStatus('AMP_STIGMA_ROBE', entity) |
+           HasStatus('AMP_STIGMA_CLOAK', entity) |
+           HasStatus('AMP_STIGMA_BOOTS', entity) |
+           HasStatus('AMP_STIGMA_HELMET_1', entity) | HasStatus('AMP_STIGMA_HELMET_2', entity) |
+           HasStatus('AMP_STIGMA_HELMET_3', entity) | HasStatus('AMP_STIGMA_HELMET_4', entity) |
+           HasStatus('AMP_STIGMA_MEDIUMARMOR_1', entity) | HasStatus('AMP_STIGMA_MEDIUMARMOR_2', entity) |
+           HasStatus('AMP_STIGMA_MEDIUMARMOR_3', entity) | HasStatus('AMP_STIGMA_MEDIUMARMOR_4', entity) |
+           HasStatus('AMP_STIGMA_HEAVYARMOR_1', entity) | HasStatus('AMP_STIGMA_HEAVYARMOR_2', entity) |
+           HasStatus('AMP_STIGMA_HEAVYARMOR_3', entity) | HasStatus('AMP_STIGMA_HEAVYARMOR_4', entity)
+end
+
+function HasForeignStigma_Boots(entity)
+    return HasStatus('AMP_STIGMA_AMULET_1', entity) | HasStatus('AMP_STIGMA_AMULET_2', entity) |
+           HasStatus('AMP_STIGMA_AMULET_3', entity) | HasStatus('AMP_STIGMA_AMULET_4', entity) |
+           HasStatus('AMP_STIGMA_RING', entity) |
+           HasStatus('AMP_STIGMA_DIADEM_1', entity) | HasStatus('AMP_STIGMA_DIADEM_2', entity) |
+           HasStatus('AMP_STIGMA_DIADEM_3', entity) | HasStatus('AMP_STIGMA_DIADEM_4', entity) |
+           HasStatus('AMP_STIGMA_ROBE', entity) |
+           HasStatus('AMP_STIGMA_CLOAK', entity) |
+           HasStatus('AMP_STIGMA_GLOVES', entity) |
+           HasStatus('AMP_STIGMA_HELMET_1', entity) | HasStatus('AMP_STIGMA_HELMET_2', entity) |
+           HasStatus('AMP_STIGMA_HELMET_3', entity) | HasStatus('AMP_STIGMA_HELMET_4', entity) |
+           HasStatus('AMP_STIGMA_MEDIUMARMOR_1', entity) | HasStatus('AMP_STIGMA_MEDIUMARMOR_2', entity) |
+           HasStatus('AMP_STIGMA_MEDIUMARMOR_3', entity) | HasStatus('AMP_STIGMA_MEDIUMARMOR_4', entity) |
+           HasStatus('AMP_STIGMA_HEAVYARMOR_1', entity) | HasStatus('AMP_STIGMA_HEAVYARMOR_2', entity) |
+           HasStatus('AMP_STIGMA_HEAVYARMOR_3', entity) | HasStatus('AMP_STIGMA_HEAVYARMOR_4', entity)
+end
+
+function HasForeignStigma_Helmet(entity)
+    return HasStatus('AMP_STIGMA_AMULET_1', entity) | HasStatus('AMP_STIGMA_AMULET_2', entity) |
+           HasStatus('AMP_STIGMA_AMULET_3', entity) | HasStatus('AMP_STIGMA_AMULET_4', entity) |
+           HasStatus('AMP_STIGMA_RING', entity) |
+           HasStatus('AMP_STIGMA_DIADEM_1', entity) | HasStatus('AMP_STIGMA_DIADEM_2', entity) |
+           HasStatus('AMP_STIGMA_DIADEM_3', entity) | HasStatus('AMP_STIGMA_DIADEM_4', entity) |
+           HasStatus('AMP_STIGMA_ROBE', entity) |
+           HasStatus('AMP_STIGMA_CLOAK', entity) |
+           HasStatus('AMP_STIGMA_GLOVES', entity) |
+           HasStatus('AMP_STIGMA_BOOTS', entity) |
+           HasStatus('AMP_STIGMA_MEDIUMARMOR_1', entity) | HasStatus('AMP_STIGMA_MEDIUMARMOR_2', entity) |
+           HasStatus('AMP_STIGMA_MEDIUMARMOR_3', entity) | HasStatus('AMP_STIGMA_MEDIUMARMOR_4', entity) |
+           HasStatus('AMP_STIGMA_HEAVYARMOR_1', entity) | HasStatus('AMP_STIGMA_HEAVYARMOR_2', entity) |
+           HasStatus('AMP_STIGMA_HEAVYARMOR_3', entity) | HasStatus('AMP_STIGMA_HEAVYARMOR_4', entity)
+end
+
+function HasForeignStigma_MediumArmor(entity)
+    return HasStatus('AMP_STIGMA_AMULET_1', entity) | HasStatus('AMP_STIGMA_AMULET_2', entity) |
+           HasStatus('AMP_STIGMA_AMULET_3', entity) | HasStatus('AMP_STIGMA_AMULET_4', entity) |
+           HasStatus('AMP_STIGMA_RING', entity) |
+           HasStatus('AMP_STIGMA_DIADEM_1', entity) | HasStatus('AMP_STIGMA_DIADEM_2', entity) |
+           HasStatus('AMP_STIGMA_DIADEM_3', entity) | HasStatus('AMP_STIGMA_DIADEM_4', entity) |
+           HasStatus('AMP_STIGMA_ROBE', entity) |
+           HasStatus('AMP_STIGMA_CLOAK', entity) |
+           HasStatus('AMP_STIGMA_GLOVES', entity) |
+           HasStatus('AMP_STIGMA_BOOTS', entity) |
+           HasStatus('AMP_STIGMA_HELMET_1', entity) | HasStatus('AMP_STIGMA_HELMET_2', entity) |
+           HasStatus('AMP_STIGMA_HELMET_3', entity) | HasStatus('AMP_STIGMA_HELMET_4', entity) |
+           HasStatus('AMP_STIGMA_HEAVYARMOR_1', entity) | HasStatus('AMP_STIGMA_HEAVYARMOR_2', entity) |
+           HasStatus('AMP_STIGMA_HEAVYARMOR_3', entity) | HasStatus('AMP_STIGMA_HEAVYARMOR_4', entity)
+end
+
+function HasForeignStigma_HeavyArmor(entity)
+    return HasStatus('AMP_STIGMA_AMULET_1', entity) | HasStatus('AMP_STIGMA_AMULET_2', entity) |
+           HasStatus('AMP_STIGMA_AMULET_3', entity) | HasStatus('AMP_STIGMA_AMULET_4', entity) |
+           HasStatus('AMP_STIGMA_RING', entity) |
+           HasStatus('AMP_STIGMA_DIADEM_1', entity) | HasStatus('AMP_STIGMA_DIADEM_2', entity) |
+           HasStatus('AMP_STIGMA_DIADEM_3', entity) | HasStatus('AMP_STIGMA_DIADEM_4', entity) |
+           HasStatus('AMP_STIGMA_ROBE', entity) |
+           HasStatus('AMP_STIGMA_CLOAK', entity) |
+           HasStatus('AMP_STIGMA_GLOVES', entity) |
+           HasStatus('AMP_STIGMA_BOOTS', entity) |
+           HasStatus('AMP_STIGMA_HELMET_1', entity) | HasStatus('AMP_STIGMA_HELMET_2', entity) |
+           HasStatus('AMP_STIGMA_HELMET_3', entity) | HasStatus('AMP_STIGMA_HELMET_4', entity) |
+           HasStatus('AMP_STIGMA_MEDIUMARMOR_1', entity) | HasStatus('AMP_STIGMA_MEDIUMARMOR_2', entity) |
+           HasStatus('AMP_STIGMA_MEDIUMARMOR_3', entity) | HasStatus('AMP_STIGMA_MEDIUMARMOR_4', entity)
+end
+
+-- NEGATIVE STATUS CHECK
+
+function HasNegativeStatus(entity)
+    entity = entity or context.Source
+    return HasStatus('SG_Stunned', entity) |
+           HasStatus('SG_Frightened', entity) |
+           HasStatus('SG_Restrained', entity) |
+           HasStatus('SG_Charmed', entity) |
+           HasStatus('SG_Incapacitated', entity) |
+           HasStatus('SG_Paralyzed', entity) |
+           HasStatus('SG_Petrified', entity) |
+           HasStatus('SG_Polymorph', entity) |
+           HasStatus('SG_Confused', entity) |
+           HasStatus('SG_Cursed', entity) |
+           HasStatus('SG_Disease', entity) |
+           HasStatus('SG_Poisoned', entity) |
+           HasStatus('SG_Sleeping', entity) |
+           HasStatus('SG_Dominated', entity) |
+           HasStatus('SG_Mad', entity) |
+           HasStatus('SG_Taunted', entity) |
+           HasStatus('SG_Blinded', entity) |
+           HasStatus('SG_Prone', entity) |
+           HasStatus('BURNING', entity) |
+           HasStatus('BLEEDING', entity) |
+           HasStatus('POISONED', entity) |
+           HasStatus('BLINDED', entity) |
+           HasStatus('MAG_FROST', entity) |
+           HasStatus('MAG_THUNDER_REVERBERATION', entity)
+end
+
+function IsWildMagic(entity)
+    return IsSpellChildOrVariantFromContext('Projectile_WildMagic') |
+           IsSpellChildOrVariantFromContext('Target_WildMagic') |
+           IsSpellChildOrVariantFromContext('Shout_WildMagic')
+end
+
+function IsInflictWounds(entity)
+    return IsSpellChildOrVariantFromContext('Target_InflictWounds') |
+           IsSpellChildOrVariantFromContext('AMP_Target_InflictWounds')
+end
+
+function IsArcaneLock(entity)
+    return IsSpellChildOrVariantFromContext('Target_ArcaneLock')
+end
+
+-- Check if entity stands on a liquid surface (water, blood, oil, poison, lava, grease, etc.)
+-- Used for Thunder Ring T3: liquid-surface aura that applies Reverberation on turn start.
+function IsLiquidSurface(entity)
+    entity = entity or context.Target
+    return InSurface('SurfaceWater', entity) |
+           InSurface('SurfaceWaterElectrified', entity) |
+           InSurface('SurfaceWaterFrozen', entity) |
+           InSurface('SurfaceBlood', entity) |
+           InSurface('SurfaceBloodElectrified', entity) |
+           InSurface('SurfaceBloodFrozen', entity) |
+           InSurface('SurfacePoison', entity) |
+           InSurface('SurfaceOil', entity) |
+           InSurface('SurfaceLava', entity) |
+           InSurface('SurfaceGrease', entity) |
+           InSurface('SurfaceWyvernPoison', entity) |
+           InSurface('SurfaceDeepwater', entity) |
+           InSurface('SurfaceAlcohol', entity) |
+           InSurface('SurfaceBloodSilver', entity) |
+           InSurface('SurfaceCausticBrine', entity) |
+           InSurface('SurfaceSewer', entity)
+end
+
+-- Esoteric Combat (Valdryn) kick gating, ported from KickMaster mod.
+-- Active when: not in beast shape, no melee weapon in main hand, no shield equipped.
+function AMP_KM_CanKick()
+    return ~HasStatus('SG_Polymorph_BeastShape', context.Source)
+         & ~WieldingWeapon('Melee', false, false, context.Source)
+         & ~HasShieldEquipped(context.Source)
+end

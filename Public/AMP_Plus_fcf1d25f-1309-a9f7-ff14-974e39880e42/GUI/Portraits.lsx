@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<save>
+    <version major="4" minor="8" revision="0" build="500"/>
+    <region id="IconUVList">
+        <node id="root">
+            <children>
+                <node id="IconUV">
+                    <attribute id="MapKey" type="FixedString" value="AMP_Crab"/>
+                    <attribute id="U1" type="float" value="0.31298828"/>
+                    <attribute id="U2" type="float" value="0.39013672"/>
+                    <attribute id="V1" type="float" value="0.00048828125"/>
+                    <attribute id="V2" type="float" value="0.097167969"/>
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" type="FixedString" value="AMP_Neva"/>
+                    <attribute id="U1" type="float" value="0.078613281"/>
+                    <attribute id="U2" type="float" value="0.15576172"/>
+                    <attribute id="V1" type="float" value="0.00048828125"/>
+                    <attribute id="V2" type="float" value="0.097167969"/>
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" type="FixedString" value="AMP_Ronin"/>
+                    <attribute id="U1" type="float" value="0.15673828"/>
+                    <attribute id="U2" type="float" value="0.23388672"/>
+                    <attribute id="V1" type="float" value="0.00048828125"/>
+                    <attribute id="V2" type="float" value="0.097167969"/>
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" type="FixedString" value="AMP_Samurai"/>
+                    <attribute id="U1" type="float" value="0.23486328"/>
+                    <attribute id="U2" type="float" value="0.31201172"/>
+                    <attribute id="V1" type="float" value="0.00048828125"/>
+                    <attribute id="V2" type="float" value="0.097167969"/>
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" type="FixedString" value="AMP_Ukra"/>
+                    <attribute id="U1" type="float" value="0.00048828125"/>
+                    <attribute id="U2" type="float" value="0.077636719"/>
+                    <attribute id="V1" type="float" value="0.00048828125"/>
+                    <attribute id="V2" type="float" value="0.097167969"/>
+                </node>
+            </children>
+        </node>
+    </region>
+    <region id="TextureAtlasInfo">
+        <node id="root">
+            <children>
+                <node id="TextureAtlasIconSize">
+                    <attribute id="Height" type="int32" value="100"/>
+                    <attribute id="Width" type="int32" value="80"/>
+                </node>
+                <node id="TextureAtlasPath">
+                    <attribute id="Path" type="string" value="Assets/Textures/Icons/Portraits.dds"/>
+                    <attribute id="UUID" type="FixedString" value="742f8ebb-3243-1a3b-c491-99de8ddfbdc4"/>
+                </node>
+                <node id="TextureAtlasTextureSize">
+                    <attribute id="Height" type="int32" value="1024"/>
+                    <attribute id="Width" type="int32" value="1024"/>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

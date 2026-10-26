@@ -1,0 +1,12 @@
+// Adrienne - ice sorcerer. Every damaging spell = +1 permanent Frostsoul stack.
+// Spell-spam pays off long-term; disrupts enemy concentration to clear the field.
+
+USING mage_smart
+
+MODIFIER_HIT_CHANCE_STUPIDITY                    0.85
+
+// Every damaging spell is also a permanent +1 power stack - lean into damage
+MULTIPLIER_DAMAGE_ENEMY_POS                      1.20
+
+// Strip enemy concentration so her ice spells survive
+MODIFIER_CONCENTRATION_REMOVE_TARGET             0.30

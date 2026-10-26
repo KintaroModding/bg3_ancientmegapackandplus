@@ -1,0 +1,100 @@
+// acid and radiant stay out, they douse the pyre
+// new damage-type params at the tail, indices hold
+
+new entry "AMP_PLUS_PYRE_MARK_DOUSE_RADIANT"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_PLUS_PYRE_MARK_DOUSE_RADIANT"
+data "StackType" "Overwrite"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator;IgnoreResting;ApplyToDead"
+
+new entry "AMP_Pyre_Track_Damage"
+type "PassiveData"
+using "AMP_Pyre_Track_Damage"
+data "StatsFunctors" "ApplyStatus(AMP_PYRE_MARK_DMG,100,0);IF(HasDamageDoneForType(DamageType.Acid) or HasStatus('ACID')):ApplyStatus(AMP_PYRE_MARK_DOUSE,100,0);IF(HasDamageDoneForType(DamageType.Radiant) and not HasDamageDoneForType(DamageType.Acid) and not HasStatus('ACID')):ApplyStatus(AMP_PLUS_PYRE_MARK_DOUSE_RADIANT,100,0)"
+
+new entry "AMP_PYRE_G1"
+type "StatusData"
+using "AMP_PYRE_G1"
+data "DescriptionParams" "1;1d4;2;DealDamage(,Acid);DealDamage(,Radiant);DealDamage(1d4,Fire)"
+data "Boosts" "RollBonus(Attack,1);IF(IsAttack() or IsSpell()):DamageBonus(1d4,Fire);Ability(Constitution,2,99,true)"
+
+new entry "AMP_PYRE_G2"
+type "StatusData"
+using "AMP_PYRE_G2"
+data "DescriptionParams" "1;1d4;2;Distance(3);DealDamage(,Acid);DealDamage(,Radiant);DealDamage(1d4,Fire)"
+data "Boosts" "ProficiencyBonusIncrease(1);IF(IsAttack() or IsSpell()):DamageBonus(1d4,Fire);Ability(Constitution,2,99,true);ActionResource(Movement,3,0);JumpMaxDistanceBonus(3)"
+
+new entry "AMP_PYRE_G3"
+type "StatusData"
+using "AMP_PYRE_G3"
+data "DescriptionParams" "2;1;1d6;3;DealDamage(,Acid);DealDamage(,Radiant);DealDamage(1d6,Fire)"
+data "Boosts" "ProficiencyBonusIncrease(2);AC(1);IF(IsAttack() or IsSpell()):DamageBonus(1d6,Fire);Ability(Constitution,3,99,true);ActionResource(Movement,3,0);JumpMaxDistanceBonus(3)"
+
+new entry "AMP_PYRE_G4"
+type "StatusData"
+using "AMP_PYRE_G4"
+data "DescriptionParams" "3;2;1d6;4;DealDamage(,Acid);DealDamage(,Radiant);DealDamage(1d6,Fire)"
+data "Boosts" "ProficiencyBonusIncrease(3);AC(2);IF(IsAttack() or IsSpell()):DamageBonus(1d6,Fire);Ability(Constitution,4,99,true);ActionResource(Movement,3,0);JumpMaxDistanceBonus(3);ActionResource(BonusActionPoint,1,0)"
+
+new entry "AMP_PYRE_G5"
+type "StatusData"
+using "AMP_PYRE_G5"
+data "DescriptionParams" "4;2;2d4;5;DealDamage(,Acid);DealDamage(,Radiant);DealDamage(1d4,Fire);DealDamage(1d4,Necrotic)"
+data "Boosts" "ProficiencyBonusIncrease(4);AC(2);IF(IsAttack() or IsSpell()):DamageBonus(1d4,Fire);IF(IsAttack() or IsSpell()):DamageBonus(1d4,Necrotic);Ability(Constitution,5,99,true);ActionResource(Movement,3,0);JumpMaxDistanceBonus(3);ActionResource(BonusActionPoint,1,0);MinimumRollResult(Damage,2)"
+
+new entry "AMP_PYRE_G6"
+type "StatusData"
+using "AMP_PYRE_G6"
+data "DescriptionParams" "5;3;2d6;6;DealDamage(,Acid);DealDamage(,Radiant);DealDamage(1d6,Fire);DealDamage(1d6,Necrotic)"
+data "Boosts" "ProficiencyBonusIncrease(5);AC(3);IF(IsAttack() or IsSpell()):DamageBonus(1d6,Fire);IF(IsAttack() or IsSpell()):DamageBonus(1d6,Necrotic);Ability(Constitution,6,99,true);ActionResource(Movement,4,0);JumpMaxDistanceBonus(4);ActionResource(BonusActionPoint,1,0);ActionResource(ReactionActionPoint,1,0);DamageReduction(All,Flat,2);MinimumRollResult(Damage,2)"
+
+new entry "AMP_PYRE_G7"
+type "StatusData"
+using "AMP_PYRE_G7"
+data "DescriptionParams" "6;4;2d6;8;DealDamage(,Acid);DealDamage(,Radiant);DealDamage(1d6,Fire);DealDamage(1d6,Necrotic);DealDamage(1d4,Cold)"
+data "Boosts" "ProficiencyBonusIncrease(6);AC(4);IF(IsAttack() or IsSpell()):DamageBonus(1d6,Fire);IF(IsAttack() or IsSpell()):DamageBonus(1d6,Necrotic);IF(IsAttack() or IsSpell()):DamageBonus(1d4,Cold);Ability(Constitution,8,99,true);ActionResource(Movement,4,0);JumpMaxDistanceBonus(4);ActionResource(BonusActionPoint,1,0);ActionResource(ReactionActionPoint,1,0);DamageReduction(All,Flat,2);MinimumRollResult(Damage,3);Advantage(AllSavingThrows);ScaleMultiplier(1.1)"
+
+new entry "AMP_PYRE_G8"
+type "StatusData"
+using "AMP_PYRE_G8"
+data "DescriptionParams" "8;6;3d6;10;DealDamage(,Acid);DealDamage(,Radiant);DealDamage(1d6,Fire);DealDamage(1d6,Necrotic);DealDamage(1d6,Cold)"
+data "Boosts" "ProficiencyBonusIncrease(8);AC(6);IF(IsAttack() or IsSpell()):DamageBonus(1d6,Fire);IF(IsAttack() or IsSpell()):DamageBonus(1d6,Necrotic);IF(IsAttack() or IsSpell()):DamageBonus(1d6,Cold);Ability(Constitution,10,99,true);ActionResource(Movement,5,0);JumpMaxDistanceBonus(5);ActionResource(BonusActionPoint,1,0);ActionResource(ActionPoint,1,0);ActionResource(ReactionActionPoint,1,0);DamageReduction(All,Flat,3);MinimumRollResult(Damage,3);Advantage(AllSavingThrows);ReduceCriticalAttackThreshold(1);CriticalHitExtraDice(1,MeleeWeaponAttack);CriticalHitExtraDice(1,MeleeOffHandWeaponAttack);CriticalHitExtraDice(1,MeleeSpellAttack);CriticalHitExtraDice(1,RangedSpellAttack);CriticalHitExtraDice(1,MeleeUnarmedAttack);CriticalHitExtraDice(1,RangedUnarmedAttack);CriticalHitExtraDice(1,RangedWeaponAttack);CriticalHitExtraDice(1,RangedOffHandWeaponAttack);ScaleMultiplier(1.15)"
+
+new entry "AMP_PYRE_G9"
+type "StatusData"
+using "AMP_PYRE_G9"
+data "DescriptionParams" "10;8;3d8;14;DealDamage(,Acid);DealDamage(,Radiant);DealDamage(1d6,Fire);DealDamage(1d6,Necrotic);DealDamage(1d6,Cold);DealDamage(1d6,Psychic)"
+data "Boosts" "ProficiencyBonusIncrease(10);AC(8);IF(IsAttack() or IsSpell()):DamageBonus(1d6,Fire);IF(IsAttack() or IsSpell()):DamageBonus(1d6,Necrotic);IF(IsAttack() or IsSpell()):DamageBonus(1d6,Cold);IF(IsAttack() or IsSpell()):DamageBonus(1d6,Psychic);Ability(Constitution,14,99,true);ActionResource(Movement,5,0);JumpMaxDistanceBonus(5);ActionResource(BonusActionPoint,2,0);ActionResource(ActionPoint,1,0);ActionResource(ReactionActionPoint,2,0);DamageReduction(All,Flat,4);MinimumRollResult(Damage,4);Advantage(AllSavingThrows);Advantage(AttackRoll);ReduceCriticalAttackThreshold(2);CriticalHitExtraDice(2,MeleeWeaponAttack);CriticalHitExtraDice(2,MeleeOffHandWeaponAttack);CriticalHitExtraDice(2,MeleeSpellAttack);CriticalHitExtraDice(2,RangedSpellAttack);CriticalHitExtraDice(2,MeleeUnarmedAttack);CriticalHitExtraDice(2,RangedUnarmedAttack);CriticalHitExtraDice(2,RangedWeaponAttack);CriticalHitExtraDice(2,RangedOffHandWeaponAttack);ScaleMultiplier(1.2)"
+
+new entry "AMP_PYRE_G10"
+type "StatusData"
+using "AMP_PYRE_G10"
+data "DescriptionParams" "12;10;3d8;20;DealDamage(,Acid);DealDamage(,Radiant);DealDamage(1d6,Fire);DealDamage(1d6,Necrotic);DealDamage(1d6,Cold);DealDamage(1d6,Psychic);DealDamage(1d4,Thunder)"
+data "Boosts" "ProficiencyBonusIncrease(12);AC(10);IF(IsAttack() or IsSpell()):DamageBonus(1d6,Fire);IF(IsAttack() or IsSpell()):DamageBonus(1d6,Necrotic);IF(IsAttack() or IsSpell()):DamageBonus(1d6,Cold);IF(IsAttack() or IsSpell()):DamageBonus(1d6,Psychic);IF(IsAttack() or IsSpell()):DamageBonus(1d4,Thunder);Ability(Constitution,20,99,true);ActionResource(Movement,6,0);JumpMaxDistanceBonus(6);ActionResource(BonusActionPoint,2,0);ActionResource(ActionPoint,2,0);ActionResource(ReactionActionPoint,2,0);DamageReduction(All,Flat,5);MinimumRollResult(Damage,5);Advantage(AllSavingThrows);Advantage(AttackRoll);ReduceCriticalAttackThreshold(3);CriticalHitExtraDice(3,MeleeWeaponAttack);CriticalHitExtraDice(3,MeleeOffHandWeaponAttack);CriticalHitExtraDice(3,MeleeSpellAttack);CriticalHitExtraDice(3,RangedSpellAttack);CriticalHitExtraDice(3,MeleeUnarmedAttack);CriticalHitExtraDice(3,RangedUnarmedAttack);CriticalHitExtraDice(3,RangedWeaponAttack);CriticalHitExtraDice(3,RangedOffHandWeaponAttack);StatusImmunity(PRONE_ICE);StatusImmunity(SG_Prone);ScaleMultiplier(1.3)"
+
+// heal to full already fails the inherited check, so Conditions is cleared
+new entry "AMP_Pyre_Track_Heal"
+type "PassiveData"
+using "AMP_Pyre_Track_Heal"
+data "Conditions" ""
+
+// context fires on any action, gated to hostile targets. SELF is the actor
+new entry "AMP_PLUS_PYRE_MARK_BURNOUT"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_PLUS_PYRE_MARK_BURNOUT"
+data "StackType" "Overwrite"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator;IgnoreResting;ApplyToDead"
+
+new entry "AMP_Plus_Pyre_Track_Burnout"
+type "PassiveData"
+data "Properties" "IsHidden;OncePerAttack"
+data "StatsFunctorContext" "OnAttack"
+data "Conditions" "(IsAttack() or IsSpell()) and Character() and Enemy() and not Self()"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_PLUS_PYRE_MARK_BURNOUT,100,0)"
+
+new entry "AMP_PYRE_TRACKER"
+type "StatusData"
+using "AMP_PYRE_TRACKER"
+data "Passives" "AMP_Pyre_Track_Damage;AMP_Pyre_Track_CC;AMP_Pyre_Track_Heal;AMP_Pyre_Track_CONFail;AMP_Plus_Pyre_Track_Burnout"

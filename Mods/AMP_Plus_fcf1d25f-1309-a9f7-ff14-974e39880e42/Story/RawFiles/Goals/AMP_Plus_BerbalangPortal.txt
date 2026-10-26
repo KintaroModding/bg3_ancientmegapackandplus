@@ -1,0 +1,36 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// the engine drops status arguments of Spawn on the spawned body, so the portal is applied here
+// two arrival events, a handed-over body answers one and a streamed one the other
+
+IF
+EnteredLevel((CHARACTER)_Mob, AMP_Berbalang_ee164c72-ca83-481c-b072-e4852899bd2e, _)
+AND
+NOT DB_AMP_Plus_BerbalangPortal(_Mob)
+THEN
+DB_AMP_Plus_BerbalangPortal(_Mob);
+ApplyStatus(_Mob, "ASTRAL_PORTAL_VFX", 4.0, 1, _Mob);
+
+IF
+WentOnStage((CHARACTER)_Mob, 1)
+AND
+GetTemplate(_Mob, AMP_Berbalang_ee164c72-ca83-481c-b072-e4852899bd2e)
+AND
+NOT DB_AMP_Plus_BerbalangPortal(_Mob)
+THEN
+DB_AMP_Plus_BerbalangPortal(_Mob);
+ApplyStatus(_Mob, "ASTRAL_PORTAL_VFX", 4.0, 1, _Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Plus_BerbalangPortal(_Mob)
+THEN
+NOT DB_AMP_Plus_BerbalangPortal(_Mob);
+
+EXITSECTION
+ENDEXITSECTION

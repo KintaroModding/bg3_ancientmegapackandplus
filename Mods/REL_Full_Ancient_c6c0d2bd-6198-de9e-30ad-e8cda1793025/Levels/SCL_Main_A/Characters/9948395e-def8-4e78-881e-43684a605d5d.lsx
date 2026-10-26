@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="9948395e-def8-4e78-881e-43684a605d5d" />
+					<attribute id="Name" type="LSString" value="S_SCL_PoachersMastiff01" />
+					<attribute id="LevelName" type="FixedString" value="SCL_Main_A" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="TemplateName" type="FixedString" value="5ab70e1b-1771-450b-8116-d218aa6bc04f" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="Icon" type="FixedString" value="5ed40bd0-b338-7e5a-7cfc-b8e4137ee9b3-SCL_MastiffPoachers_AlphaRing_(Icon_Shadow_Mastiff)" />
+					<attribute id="Equipment" type="FixedString" value="SCL_MastiffPoachers_AlphaRing" />
+					<attribute id="LevelOverride" type="int32" value="8" />
+					<attribute id="IsEquipmentLootable" type="bool" value="False" />
+					<attribute id="Faction" type="guid" value="8b12962b-60e6-4434-9bcd-0073748ce504" />
+					<attribute id="CombatGroupID" type="FixedString" value="8f9446f4-4b86-448d-9aba-3ec349efc8bc" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1.2" />
+							<attribute id="Position" type="fvec3" value="-53.81722 33.05848 34.87937" />
+							<attribute id="RotationQuat" type="fvec4" value="0 -0.7276419 0 0.6859572" />
+						</node>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="6d60bed7-10cc-4b52-8fb7-baa75181cd49" />
+								</node>
+							</children>
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="SCL_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="91450084-e118-ff17-bf5d-ec7212c70b99" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="a36c30af-c66a-25c0-c188-55dc9e11f2f4" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="SCL_SHADOWMASTIFFALPHA_SHADOWBANE" />
+								</node>
+							</children>
+						</node>
+						<node id="Treasures">
+							<children>
+								<node id="TreasureItem">
+									<attribute id="Object" type="FixedString" value="AMP_2Act" />
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

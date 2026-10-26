@@ -1,0 +1,451 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// both spellings stay, GetSurfaceCloudAt returns the Surface-prefixed runtime name
+DB_AMP_StealthAbuse_ExploitSurface("SurfaceDarknessCloud");
+DB_AMP_StealthAbuse_ExploitSurface("SurfaceFogCloud");
+DB_AMP_StealthAbuse_ExploitSurface("DarknessCloud");
+DB_AMP_StealthAbuse_ExploitSurface("FogCloud");
+
+// keep at 0, 1 spams debug text and auto-launches the wizard on level load
+DB_AMP_StealthAbuse_Debug(0);
+
+// own turns hidden in an exploit cloud before sanctions
+DB_AMP_StealthAbuse_Threshold(3);
+
+// normal-mode opt-out via training ring. 0 = on
+DB_AMP_StealthAbuse_Disabled(0);
+
+KBSECTION
+
+// active: always on in hard, on in normal unless the ring disabled it
+QRY
+QRY_AMP_StealthAbuse_Active()
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_StealthAbuse_Active()
+AND
+DB_AMP_Difficulty_Mode("STANDARD")
+AND
+NOT DB_AMP_StealthAbuse_Disabled(1)
+THEN
+DB_NOOP(1);
+
+// helpers: is the player hidden, and standing in an exploit cloud
+QRY
+QRY_AMP_StealthAbuse_Hidden((CHARACTER)_P)
+AND
+IsInvisible(_P,1)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_StealthAbuse_Hidden((CHARACTER)_P)
+AND
+HasActiveStatus(_P,"SNEAKING",1)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_StealthAbuse_InCloud((CHARACTER)_P)
+AND
+GetSurfaceCloudAt(_P,_Surf)
+AND
+DB_AMP_StealthAbuse_ExploitSurface(_Surf)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_StealthAbuse_Qualifies((CHARACTER)_P)
+AND
+QRY_AMP_StealthAbuse_Hidden(_P)
+AND
+QRY_AMP_StealthAbuse_InCloud(_P)
+THEN
+DB_NOOP(1);
+
+// reset the per-player score on a fresh combat
+IF
+EnteredCombat((CHARACTER)_Player,_)
+AND
+DB_Players(_Player)
+AND
+DB_AMP_StealthAbuse_Score(_Player,_Old)
+THEN
+NOT DB_AMP_StealthAbuse_Score(_Player,_Old);
+
+IF
+EnteredCombat((CHARACTER)_Player,_)
+AND
+DB_Players(_Player)
+THEN
+DB_AMP_StealthAbuse_Score(_Player,0);
+
+// track non-player combatants so the arm can sweep them
+IF
+EnteredCombat((CHARACTER)_E, (GUIDSTRING)_C)
+AND
+NOT DB_Players(_E)
+THEN
+DB_AMP_StealthAbuse_Combatant(_E, _C);
+
+// detection: on the player's own turn, count hidden-in-cloud turns.
+// players gate first so every enemy turn bails instantly.
+
+// qualifying turn -> +1
+IF
+TurnStarted((CHARACTER)_P)
+AND
+DB_Players(_P)
+AND
+QRY_AMP_StealthAbuse_Active()
+AND
+QRY_AMP_StealthAbuse_Qualifies(_P)
+THEN
+PROC_AMP_StealthAbuse_Score(_P);
+
+// non-qualifying turn -> decay by 1 (cumulative, not strict-consecutive)
+IF
+TurnStarted((CHARACTER)_P)
+AND
+DB_Players(_P)
+AND
+QRY_AMP_StealthAbuse_Active()
+AND
+NOT QRY_AMP_StealthAbuse_Qualifies(_P)
+AND
+DB_AMP_StealthAbuse_Score(_P,_N)
+AND
+_N > 0
+AND
+IntegerSubtract(_N,1,_Dec)
+THEN
+NOT DB_AMP_StealthAbuse_Score(_P,_N);
+DB_AMP_StealthAbuse_Score(_P,_Dec);
+
+// bump existing score then evaluate
+PROC
+PROC_AMP_StealthAbuse_Score((CHARACTER)_P)
+AND
+DB_AMP_StealthAbuse_Score(_P,_N)
+AND
+IntegerSum(_N,1,_New)
+THEN
+NOT DB_AMP_StealthAbuse_Score(_P,_N);
+DB_AMP_StealthAbuse_Score(_P,_New);
+PROC_AMP_StealthAbuse_Evaluate(_P,_New);
+
+// first time, no score row yet
+PROC
+PROC_AMP_StealthAbuse_Score((CHARACTER)_P)
+AND
+NOT DB_AMP_StealthAbuse_Score(_P,_)
+THEN
+DB_AMP_StealthAbuse_Score(_P,1);
+PROC_AMP_StealthAbuse_Evaluate(_P,1);
+
+// arm sanctions once per combat when the threshold is crossed
+PROC
+PROC_AMP_StealthAbuse_Evaluate((CHARACTER)_P,(INTEGER)_N)
+AND
+DB_AMP_StealthAbuse_Threshold(_T)
+AND
+_N >= _T
+AND
+NOT DB_AMP_StealthFlee_Abuser(_P,_)
+AND
+CombatGetGuidFor(_P,_C)
+THEN
+DB_AMP_StealthFlee_Abuser(_P,_C);
+ApplyStatus(_P,"AMP_STEALTH_ABUSER",-1.0,1,_P);
+DB_AMP_StealthFlee_Combat(_C);
+NOT DB_AMP_StealthFlee_Active(1);
+DB_AMP_StealthFlee_Active(1);
+PROC_AMP_StealthFlee_SweepCombat(_C, _P);
+
+// mark every hostile non-boss in the combat as fleeing (just the telegraph,
+// they don't leave yet). IsEnemy skips summons/familiars/allies/neutrals.
+PROC
+PROC_AMP_StealthFlee_SweepCombat((GUIDSTRING)_C, (CHARACTER)_Abuser)
+AND
+DB_AMP_StealthAbuse_Combatant((CHARACTER)_E, _C)
+AND
+NOT DB_Players(_E)
+AND
+NOT DB_AMP_StealthFlee_Marked(_E)
+AND
+IsEnemy(_E,_Abuser,1)
+AND
+IsCharacter(_E,1)
+AND
+IsBoss(_E,0)
+AND
+NOT IsTagged(_E,(TAG)INANIMATE_a66639f1-15bd-43ae-8f13-fda1270187cc,1)
+THEN
+DB_AMP_StealthFlee_Marked(_E);
+ApplyStatus(_E,"AMP_STEALTH_FLEEING",-1.0,1,_E);
+
+// enemy that joins after the arm is already up
+IF
+EnteredCombat((CHARACTER)_E, (GUIDSTRING)_C)
+AND
+DB_AMP_StealthFlee_Active(1)
+AND
+DB_AMP_StealthFlee_Combat(_C)
+AND
+DB_AMP_StealthFlee_Abuser((CHARACTER)_Abuser,_C)
+AND
+NOT DB_Players(_E)
+AND
+NOT DB_AMP_StealthFlee_Marked(_E)
+AND
+IsEnemy(_E,_Abuser,1)
+AND
+IsCharacter(_E,1)
+AND
+IsBoss(_E,0)
+AND
+NOT IsTagged(_E,(TAG)INANIMATE_a66639f1-15bd-43ae-8f13-fda1270187cc,1)
+THEN
+DB_AMP_StealthFlee_Marked(_E);
+ApplyStatus(_E,"AMP_STEALTH_FLEEING",-1.0,1,_E);
+
+// marked creature physically leaves at the start of its own turn (runs off-stage).
+// cheap gate: the marker db is empty in normal play.
+IF
+TurnStarted((CHARACTER)_E)
+AND
+DB_AMP_StealthFlee_Marked(_E)
+AND
+NOT DB_AMP_StealthFled(_E)
+THEN
+DB_AMP_StealthFled(_E);
+PROC_AMP_StealthFlee_Execute(_E);
+
+// leave combat, lock out, then run off-stage
+PROC
+PROC_AMP_StealthFlee_Execute((CHARACTER)_E)
+THEN
+LeaveCombat(_E);
+SetCanJoinCombat(_E,0);
+SetCanFight(_E,0);
+PROC_DisappearOutOfSight(_E,"Run",1,"GEN_GoOffStage");
+RealtimeObjectTimerLaunch(_E,"AMP_StealthFlee_Fallback",4000);
+
+// fallback: pathing couldn't route the runner, force it off-stage
+IF
+ObjectTimerFinished((CHARACTER)_E,"AMP_StealthFlee_Fallback")
+AND
+IsOnStage(_E,1)
+THEN
+SetOnStage(_E,0);
+
+// cleanup at combat end
+
+// clear marker/fled/tracking for every creature of this combat
+IF
+CombatEnded((GUIDSTRING)_C)
+AND
+DB_AMP_StealthAbuse_Combatant((CHARACTER)_E,_C)
+THEN
+NOT DB_AMP_StealthFlee_Marked(_E);
+NOT DB_AMP_StealthFled(_E);
+NOT DB_AMP_StealthAbuse_Combatant(_E,_C);
+
+IF
+CombatEnded((GUIDSTRING)_C)
+AND
+DB_AMP_StealthFlee_Combat(_C)
+THEN
+NOT DB_AMP_StealthFlee_Combat(_C);
+
+IF
+CombatEnded((GUIDSTRING)_C)
+AND
+DB_AMP_StealthFlee_Abuser((CHARACTER)_P,_C)
+THEN
+NOT DB_AMP_StealthFlee_Abuser(_P,_C);
+RemoveStatus(_P,"AMP_STEALTH_ABUSER",_P);
+
+IF
+CombatEnded((GUIDSTRING)_C)
+AND
+NOT DB_AMP_StealthFlee_Combat(_)
+THEN
+NOT DB_AMP_StealthFlee_Active(1);
+
+// training ring toggle (same TranslatedStringKey pattern as battle instinct / antitheft)
+
+// spell trigger - non-stock
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Settings_AntiStealthAbuse", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+NOT DB_AMP_GameMode("STOCK")
+THEN
+PROC_AMP_StealthAbuse_ShowToggle(_Caster);
+
+// spell trigger - stock, reuse the generic stock message
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Settings_AntiStealthAbuse", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_AMP_GameMode("STOCK")
+THEN
+OpenMessageBox(_Caster, "AMP_Settings028");
+
+// normal mode, currently on
+PROC
+PROC_AMP_StealthAbuse_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_Difficulty_Mode("STANDARD")
+AND
+NOT DB_AMP_StealthAbuse_Disabled(1)
+THEN
+DB_AMP_StealthAbuse_Pending(_Host);
+OpenMessageBoxYesNo(_Host, "AMP_StealthAbuse_AskDisable");
+
+// normal mode, currently off
+PROC
+PROC_AMP_StealthAbuse_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_Difficulty_Mode("STANDARD")
+AND
+DB_AMP_StealthAbuse_Disabled(1)
+THEN
+DB_AMP_StealthAbuse_Pending(_Host);
+OpenMessageBoxYesNo(_Host, "AMP_StealthAbuse_AskEnable");
+
+// hard mode - locked info
+PROC
+PROC_AMP_StealthAbuse_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+THEN
+OpenMessageBox(_Host, "AMP_StealthAbuse_HardLocked");
+
+// casual / no mode - inactive
+PROC
+PROC_AMP_StealthAbuse_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_Difficulty_Mode("NONE")
+THEN
+OpenMessageBox(_Host, "AMP_StealthAbuse_Inactive");
+
+PROC
+PROC_AMP_StealthAbuse_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_Difficulty_Mode("NORMAL")
+THEN
+OpenMessageBox(_Host, "AMP_StealthAbuse_Inactive");
+
+// yes = keep current state (safe default)
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_StealthAbuse_AskDisable", 1)
+AND
+DB_AMP_StealthAbuse_Pending(_Host)
+THEN
+NOT DB_AMP_StealthAbuse_Pending(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_StealthAbuse_AskEnable", 1)
+AND
+DB_AMP_StealthAbuse_Pending(_Host)
+THEN
+NOT DB_AMP_StealthAbuse_Pending(_Host);
+
+// no = flip state
+
+// on -> off
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_StealthAbuse_AskDisable", 0)
+AND
+DB_AMP_StealthAbuse_Pending(_Host)
+AND
+DB_AMP_StealthAbuse_Disabled(0)
+THEN
+NOT DB_AMP_StealthAbuse_Pending(_Host);
+NOT DB_AMP_StealthAbuse_Disabled(0);
+DB_AMP_StealthAbuse_Disabled(1);
+
+// off -> on
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_StealthAbuse_AskEnable", 0)
+AND
+DB_AMP_StealthAbuse_Pending(_Host)
+AND
+DB_AMP_StealthAbuse_Disabled(1)
+THEN
+NOT DB_AMP_StealthAbuse_Pending(_Host);
+NOT DB_AMP_StealthAbuse_Disabled(1);
+DB_AMP_StealthAbuse_Disabled(0);
+
+// clear stale pending on save load
+IF
+SavegameLoaded()
+AND
+DB_AMP_StealthAbuse_Pending(_Host)
+THEN
+NOT DB_AMP_StealthAbuse_Pending(_Host);
+
+// log the cloud-surface string under each player at turn start
+// (no line = no cloud found under the player)
+IF
+TurnStarted((CHARACTER)_P)
+AND
+DB_AMP_StealthAbuse_Debug(1)
+AND
+DB_Players(_P)
+AND
+GetSurfaceCloudAt(_P,_Surf)
+THEN
+DebugText(_P, _Surf);
+
+// log a confirmed qualifying turn (hidden and in an exploit cloud)
+IF
+TurnStarted((CHARACTER)_P)
+AND
+DB_AMP_StealthAbuse_Debug(1)
+AND
+DB_Players(_P)
+AND
+QRY_AMP_StealthAbuse_Active()
+AND
+QRY_AMP_StealthAbuse_Qualifies(_P)
+THEN
+DebugText(_P, "AMP_StealthAbuse: QUALIFYING turn (hidden in exploit cloud)");
+
+// debug only. DB_AMP_Wizard_Done keeps already-configured players, casual included, untouched
+IF
+LevelGameplayStarted(_Level, _)
+AND
+DB_AMP_StealthAbuse_Debug(1)
+AND
+NOT DB_AMP_Wizard_Done(1)
+AND
+DB_AMP_Difficulty_Mode("NONE")
+THEN
+TimerLaunch("AMP_StealthAbuse_DebugWizard", 5000);
+
+IF
+TimerFinished("AMP_StealthAbuse_DebugWizard")
+AND
+DB_AMP_StealthAbuse_Debug(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Wizard_Start");
+
+EXITSECTION
+ENDEXITSECTION

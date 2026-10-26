@@ -1,0 +1,499 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// both Pyres write statuses on the same events in undefined order, so exactly one core may run
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_Pyre2DefVer(2)
+THEN
+PROC_AMP_Plus_Pyre2DefReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_Pyre2DefVer(2)
+THEN
+PROC_AMP_Plus_Pyre2DefReseed();
+
+PROC
+PROC_AMP_Plus_Pyre2DefReseed()
+AND
+DB_AMP_Plus_Pyre2DefVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre2DefVer(_Old);
+
+PROC
+PROC_AMP_Plus_Pyre2DefReseed()
+AND
+DB_AMP_Plus_AffixDef(1, (STRING)_Id, (STRING)_Ask, (INTEGER)_C, (INTEGER)_N, (INTEGER)_H)
+THEN
+NOT DB_AMP_Plus_AffixDef(1, _Id, _Ask, _C, _N, _H);
+
+PROC
+PROC_AMP_Plus_Pyre2DefReseed()
+AND
+DB_AMP_Plus_AffixDef(14, (STRING)_Id, (STRING)_Ask, (INTEGER)_C, (INTEGER)_N, (INTEGER)_H)
+THEN
+NOT DB_AMP_Plus_AffixDef(14, _Id, _Ask, _C, _N, _H);
+
+PROC
+PROC_AMP_Plus_Pyre2DefReseed()
+THEN
+DB_AMP_Plus_Pyre2DefVer(2);
+DB_AMP_Plus_AffixDef(1, "PYRE", "AMP_Plus_Affix_Pyre_Ask", 0, 0, 0);
+DB_AMP_Plus_AffixDef(14, "PYRE2", "AMP_Plus_Affix_Pyre2_Ask", 0, 0, 1);
+
+PROC
+PROC_AMP_Plus_Pyre2DefReseed()
+AND
+DB_AMP_GameMode((STRING)_Mode)
+THEN
+PROC_AMP_Plus_Affix_ApplyDefaults(_Mode);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_Pyre2", _)
+THEN
+DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_Pyre2", "PYRE2");
+
+// OnChanged not Reconcile, which waits for combat end while two live cores cannot coexist
+
+PROC
+PROC_AMP_Plus_Affix_OnChanged((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "PYRE2"
+AND
+_Val == 1
+AND
+DB_AMP_Plus_AffixState("PYRE", 1)
+THEN
+PROC_AMP_Plus_Affix_SetByPlayer("PYRE", 0);
+
+PROC
+PROC_AMP_Plus_Affix_OnChanged((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "PYRE"
+AND
+_Val == 1
+AND
+DB_AMP_Plus_AffixState("PYRE2", 1)
+THEN
+PROC_AMP_Plus_Affix_SetByPlayer("PYRE2", 0);
+
+// swap is no deviation, both off is. Kept as rules on the fact, load order independent
+
+IF
+DB_AMP_Plus_AffixDeviation("PYRE")
+AND
+DB_AMP_Plus_AffixState("PYRE", 1)
+AND
+DB_AMP_Plus_AffixState("PYRE2", 0)
+THEN
+NOT DB_AMP_Plus_AffixDeviation("PYRE");
+
+IF
+DB_AMP_Plus_AffixDeviation("PYRE2")
+AND
+DB_AMP_Plus_AffixState("PYRE", 1)
+AND
+DB_AMP_Plus_AffixState("PYRE2", 0)
+THEN
+NOT DB_AMP_Plus_AffixDeviation("PYRE2");
+
+IF
+DB_AMP_Plus_AffixDeviation("PYRE")
+AND
+DB_AMP_GameMode("NORMAL")
+THEN
+NOT DB_AMP_Plus_AffixDeviation("PYRE");
+
+IF
+DB_AMP_Plus_AffixDeviation("PYRE2")
+AND
+DB_AMP_GameMode("NORMAL")
+THEN
+NOT DB_AMP_Plus_AffixDeviation("PYRE2");
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_GameMode("NORMAL")
+AND
+DB_AMP_Plus_AffixDeviation("PYRE")
+THEN
+NOT DB_AMP_Plus_AffixDeviation("PYRE");
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_GameMode("NORMAL")
+AND
+DB_AMP_Plus_AffixDeviation("PYRE2")
+THEN
+NOT DB_AMP_Plus_AffixDeviation("PYRE2");
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "PYRE2"
+AND
+_Val == 0
+AND
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, _)
+THEN
+PROC_AMP_Plus_Pyre2_Strip(_Char);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "PYRE2"
+AND
+_Val == 0
+THEN
+PROC_AMP_Plus_Pyre2_WipeState();
+
+PROC
+PROC_AMP_Plus_Pyre2_Strip((CHARACTER)_Char)
+THEN
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G1", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G1_B1", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G1_B2", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G1_B3", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G1_B4", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G2", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G2_B1", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G2_B2", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G2_B3", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G2_B4", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G3", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G3_B1", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G3_B2", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G3_B3", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G3_B4", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G4", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G4_B1", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G4_B2", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G4_B3", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G4_B4", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G5_B1", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G5_B2", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G5_B3", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G5_B4", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G6", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G6_B1", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G6_B2", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G6_B3", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G6_B4", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G7", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G7_B1", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G7_B2", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G7_B3", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G7_B4", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G8", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G8_B1", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G8_B2", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G8_B3", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G8_B4", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G9", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G9_B1", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G9_B2", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G9_B3", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G9_B4", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G10", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G10_B1", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G10_B2", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G10_B3", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_G10_B4", NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre2_WipeState()
+THEN
+PROC_AMP_Plus_Pyre2_DrainWipeAvg();
+
+PROC
+PROC_AMP_Plus_Pyre2_WipeState()
+THEN
+PROC_AMP_Plus_Pyre2_DrainWipeWorn();
+
+PROC
+PROC_AMP_Plus_Pyre2_WipeState()
+THEN
+PROC_AMP_Plus_Pyre2_DrainWipeTamed();
+
+PROC
+PROC_AMP_Plus_Pyre2_WipeState()
+THEN
+PROC_AMP_Plus_Pyre2_DrainWipeStage();
+
+PROC
+PROC_AMP_Plus_Pyre2_WipeState()
+THEN
+PROC_AMP_Plus_Pyre2_DrainWipeCap();
+
+PROC
+PROC_AMP_Plus_Pyre2_WipeState()
+THEN
+PROC_AMP_Plus_Pyre2_DrainWipeBase();
+
+PROC
+PROC_AMP_Plus_Pyre2_WipeState()
+THEN
+PROC_AMP_Plus_Pyre2_DrainWipePhase();
+
+PROC
+PROC_AMP_Plus_Pyre2_WipeState()
+THEN
+PROC_AMP_Plus_Pyre2_DrainWipeToolsArmed();
+
+PROC
+PROC_AMP_Plus_Pyre2_WipeState()
+THEN
+PROC_AMP_Plus_Pyre2_DrainWipeToolsTameOK();
+
+PROC
+PROC_AMP_Plus_Pyre2_WipeState()
+THEN
+PROC_AMP_Plus_Pyre2_DrainWipeCapCut();
+
+PROC
+PROC_AMP_Plus_Pyre2_WipeState()
+THEN
+PROC_AMP_Plus_Pyre2_DrainWipeStepCut();
+
+PROC
+PROC_AMP_Plus_Pyre2_WipeState()
+THEN
+PROC_AMP_Plus_Pyre2_DrainWipePartyHP();
+
+PROC
+PROC_AMP_Plus_Pyre2_WipeState()
+THEN
+PROC_AMP_Plus_Pyre2_DrainWipeBrooded();
+
+PROC
+PROC_AMP_Plus_Pyre2_WipeState()
+THEN
+PROC_AMP_Plus_Pyre2_DrainWipeWard();
+
+PROC
+PROC_AMP_Plus_Pyre2_WipeState()
+THEN
+PROC_AMP_Plus_Pyre2_DrainWipeBrood();
+
+PROC
+PROC_AMP_Plus_Pyre2_WipeState()
+THEN
+PROC_AMP_Plus_Pyre2_DrainWipeLastHit();
+
+PROC
+PROC_AMP_Plus_Pyre2_WipeState()
+THEN
+PROC_AMP_Plus_Pyre2_DrainWipeMem();
+
+PROC
+PROC_AMP_Plus_Pyre2_WipeState()
+AND
+DB_AMP_Plus_Pyre2_Bequest((INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Pyre2_Bequest(_N);
+
+// roster last, the family comes off the bodies it names first
+
+PROC
+PROC_AMP_Plus_Pyre2_WipeState()
+THEN
+PROC_AMP_Plus_Pyre2_DrainWipeMember();
+
+PROC
+PROC_AMP_Plus_Pyre2_WipeState()
+THEN
+PROC_AMP_Plus_Pyre2_DrainWipeArmed();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainWipeAvg()
+AND
+DB_AMP_Plus_Pyre2_Avg((GUIDSTRING)_C, (INTEGER)_Sum, (INTEGER)_Cnt)
+THEN
+NOT DB_AMP_Plus_Pyre2_Avg(_C, _Sum, _Cnt);
+PROC_AMP_Plus_Pyre2_DrainWipeAvg();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainWipeWorn()
+AND
+DB_AMP_Plus_Pyre2_Worn((CHARACTER)_Char, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Pyre2_Worn(_Char, _N);
+PROC_AMP_Plus_Pyre2_DrainWipeWorn();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainWipeTamed()
+AND
+DB_AMP_Plus_Pyre2_Tamed((GUIDSTRING)_CombatGuid)
+THEN
+NOT DB_AMP_Plus_Pyre2_Tamed(_CombatGuid);
+PROC_AMP_Plus_Pyre2_DrainWipeTamed();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainWipeStage()
+AND
+DB_AMP_Plus_Pyre_Stage((GUIDSTRING)_CombatGuid, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Pyre_Stage(_CombatGuid, _N);
+PROC_AMP_Plus_Pyre2_DrainWipeStage();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainWipeCap()
+AND
+DB_AMP_Plus_Pyre_Cap((GUIDSTRING)_CombatGuid, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Pyre_Cap(_CombatGuid, _N);
+PROC_AMP_Plus_Pyre2_DrainWipeCap();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainWipeBase()
+AND
+DB_AMP_Plus_Pyre_Base((GUIDSTRING)_CombatGuid, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Pyre_Base(_CombatGuid, _N);
+PROC_AMP_Plus_Pyre2_DrainWipeBase();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainWipePhase()
+AND
+DB_AMP_Plus_Pyre_Phase((GUIDSTRING)_CombatGuid, (STRING)_Phase)
+THEN
+NOT DB_AMP_Plus_Pyre_Phase(_CombatGuid, _Phase);
+PROC_AMP_Plus_Pyre2_DrainWipePhase();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainWipeToolsArmed()
+AND
+DB_AMP_Plus_PyreTools_Armed((GUIDSTRING)_CombatGuid)
+THEN
+NOT DB_AMP_Plus_PyreTools_Armed(_CombatGuid);
+PROC_AMP_Plus_Pyre2_DrainWipeToolsArmed();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainWipeToolsTameOK()
+AND
+DB_AMP_Plus_PyreTools_TameOK((GUIDSTRING)_CombatGuid)
+THEN
+NOT DB_AMP_Plus_PyreTools_TameOK(_CombatGuid);
+PROC_AMP_Plus_Pyre2_DrainWipeToolsTameOK();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainWipeCapCut()
+AND
+DB_AMP_Plus_Pyre2_CapCut((CHARACTER)_Char, (GUIDSTRING)_CombatGuid, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Pyre2_CapCut(_Char, _CombatGuid, _N);
+PROC_AMP_Plus_Pyre2_DrainWipeCapCut();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainWipeStepCut()
+AND
+DB_AMP_Plus_Pyre2_StepCut((CHARACTER)_Char, (GUIDSTRING)_CombatGuid, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Pyre2_StepCut(_Char, _CombatGuid, _N);
+PROC_AMP_Plus_Pyre2_DrainWipeStepCut();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainWipePartyHP()
+AND
+DB_AMP_Plus_Pyre_PartyHP((GUIDSTRING)_CombatGuid, (INTEGER)_Cur, (INTEGER)_Max)
+THEN
+NOT DB_AMP_Plus_Pyre_PartyHP(_CombatGuid, _Cur, _Max);
+PROC_AMP_Plus_Pyre2_DrainWipePartyHP();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainWipeBrooded()
+AND
+DB_AMP_Plus_Pyre2_Brooded((GUIDSTRING)_CombatGuid, (INTEGER)_Round)
+THEN
+NOT DB_AMP_Plus_Pyre2_Brooded(_CombatGuid, _Round);
+PROC_AMP_Plus_Pyre2_DrainWipeBrooded();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainWipeWard()
+AND
+DB_AMP_Plus_Pyre2_Ward((GUIDSTRING)_CombatGuid, (CHARACTER)_Boss)
+THEN
+NOT DB_AMP_Plus_Pyre2_Ward(_CombatGuid, _Boss);
+PROC_AMP_Plus_Pyre2_DrainWipeWard();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainWipeBrood()
+AND
+DB_AMP_Plus_Pyre2_Brood((CHARACTER)_Mob, (GUIDSTRING)_CombatGuid, (INTEGER)_Expire)
+THEN
+NOT DB_AMP_Plus_Pyre2_Brood(_Mob, _CombatGuid, _Expire);
+RequestDeleteTemporary(_Mob);
+PROC_AMP_Plus_Pyre2_DrainWipeBrood();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainWipeLastHit()
+AND
+DB_AMP_Plus_Pyre2_LastHit((CHARACTER)_Defender, (CHARACTER)_Attacker)
+THEN
+NOT DB_AMP_Plus_Pyre2_LastHit(_Defender, _Attacker);
+PROC_AMP_Plus_Pyre2_DrainWipeLastHit();
+
+// single pass, a Bequest pursuer gets its memory row back on retract so a recursive drain never ends
+PROC
+PROC_AMP_Plus_Pyre2_DrainWipeMem()
+AND
+DB_AMP_Plus_Pyre2_Mem((CHARACTER)_Char, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Pyre2_Mem(_Char, _N);
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainWipeMember()
+AND
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, (GUIDSTRING)_CombatGuid)
+THEN
+NOT DB_AMP_Plus_Pyre_Member(_Char, _CombatGuid);
+PROC_AMP_Plus_Pyre2_DrainWipeMember();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainWipeArmed()
+AND
+DB_AMP_Plus_Pyre2_Armed((GUIDSTRING)_CombatGuid)
+THEN
+NOT DB_AMP_Plus_Pyre2_Armed(_CombatGuid);
+PROC_AMP_Plus_Pyre2_DrainWipeArmed();
+
+// touched PYRE with untouched PYRE2 never happens by hand, restores the pick once
+
+PROC
+PROC_AMP_Plus_PyrePickRepair()
+AND
+DB_AMP_Plus_AffixTouched("PYRE")
+AND
+NOT DB_AMP_Plus_AffixTouched("PYRE2")
+AND
+NOT DB_AMP_Plus_PyrePickFix(1)
+THEN
+DB_AMP_Plus_PyrePickFix(1);
+DB_AMP_Plus_AffixTouched("PYRE2");
+PROC_AMP_Plus_Affix_Set("PYRE2", 0);
+PROC_AMP_Plus_Affix_Set("PYRE", 1);
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_AMP_Plus_PyrePickRepair();
+
+IF
+SavegameLoaded()
+THEN
+PROC_AMP_Plus_PyrePickRepair();
+
+EXITSECTION
+ENDEXITSECTION

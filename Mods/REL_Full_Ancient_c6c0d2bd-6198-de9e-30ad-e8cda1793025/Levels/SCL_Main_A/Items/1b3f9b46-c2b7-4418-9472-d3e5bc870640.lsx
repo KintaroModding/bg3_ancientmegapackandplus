@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="1b3f9b46-c2b7-4418-9472-d3e5bc870640" />
+					<attribute id="Name" type="LSString" value="CONT_GEN_Chest_Heavy_A_003" />
+					<attribute id="LevelName" type="FixedString" value="SCL_Main_A" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="0b90bf9d-66fd-4741-be1f-39181efca97a" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="LockDifficultyClassID" type="guid" value="89f0acd4-346f-479d-8b7a-1a3eb5382f6d" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="28.240692 39.044884 -71.29521" />
+							<attribute id="RotationQuat" type="fvec4" value="-0.12317448 -0.52734375 -0.09437657 0.8353621" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="SCL_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="dd1e1bb7-bb53-1e43-015c-679c667858c5" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="c7ad9d7f-f045-0a31-9535-fc8df88840f4" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="Supply_Arrows" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

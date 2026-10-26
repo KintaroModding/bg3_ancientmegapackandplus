@@ -1,0 +1,70 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// ethel doubles are plain CreateAt spawns, so keyed by template
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_EclipseCopyVer(2)
+THEN
+PROC_AMP_Plus_EclipseCopyReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_EclipseCopyVer(2)
+THEN
+PROC_AMP_Plus_EclipseCopyReseed();
+
+PROC
+PROC_AMP_Plus_EclipseCopyReseed()
+AND
+DB_AMP_Plus_EclipseCopyVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_EclipseCopyVer(_Old);
+
+PROC
+PROC_AMP_Plus_EclipseCopyReseed()
+THEN
+PROC_AMP_Plus_EclipseCopyDrainRoot();
+
+PROC
+PROC_AMP_Plus_EclipseCopyDrainRoot()
+AND
+DB_AMP_Plus_EclipseCopyRoot((CHARACTERROOT)_A)
+THEN
+NOT DB_AMP_Plus_EclipseCopyRoot(_A);
+PROC_AMP_Plus_EclipseCopyDrainRoot();
+
+PROC
+PROC_AMP_Plus_EclipseCopyReseed()
+THEN
+DB_AMP_Plus_EclipseCopyVer(2);
+DB_AMP_Plus_EclipseCopyRoot((CHARACTERROOT)Hag_Green_Act1Hag_Double_8c85932d-12dd-4046-a694-6534071470a2);
+
+IF
+StatusApplied((GUIDSTRING)_C, "AMP_ECLIPSE_INFO", _, _)
+AND
+IsCharacter(_C, 1)
+AND
+IsSummon(_C, 1)
+THEN
+PROC_AMP_Plus_StripEclipse((CHARACTER)_C);
+
+IF
+StatusApplied((GUIDSTRING)_C, "AMP_ECLIPSE_INFO", _, _)
+AND
+IsCharacter(_C, 1)
+AND
+GetTemplate((CHARACTER)_C, _Template)
+AND
+DB_AMP_Plus_EclipseCopyRoot((CHARACTERROOT)_Template)
+THEN
+PROC_AMP_Plus_StripEclipse((CHARACTER)_C);
+
+EXITSECTION
+ENDEXITSECTION

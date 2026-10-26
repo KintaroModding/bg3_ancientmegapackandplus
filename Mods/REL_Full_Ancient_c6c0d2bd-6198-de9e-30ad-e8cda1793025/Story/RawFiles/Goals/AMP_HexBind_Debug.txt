@@ -1,0 +1,85 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_AMP_HexBind_Slots("Melee Main Weapon");
+DB_AMP_HexBind_Slots("Melee Offhand Weapon");
+DB_AMP_HexBind_Slots("Ranged Main Weapon");
+DB_AMP_HexBind_Slots("Ranged Offhand Weapon");
+KBSECTION
+
+// block bound/summoned weapon barter exploit: lock them only during active trade.
+// covers hexblade_bind, pact_blade, weapon_bond, summoned items
+
+// trade open: lock all bound/summoned weapons
+IF
+RequestTrade((CHARACTER)_Player, (CHARACTER)_Trader, _, _)
+AND
+DB_Players(_Player)
+THEN
+PROC_AMP_HexBind_LockAll(_Player);
+
+PROC
+PROC_AMP_HexBind_LockAll((CHARACTER)_Player)
+AND
+DB_AMP_HexBind_Slots(_Slot)
+AND
+GetEquippedItem(_Player, _Slot, (ITEM)_Weapon)
+AND
+HasActiveStatus(_Weapon, "HEXBLADE_BIND", 1)
+THEN
+LockUnequip(_Weapon, 1);
+DB_AMP_HexBind_Locked(_Player, _Weapon);
+
+PROC
+PROC_AMP_HexBind_LockAll((CHARACTER)_Player)
+AND
+DB_AMP_HexBind_Slots(_Slot)
+AND
+GetEquippedItem(_Player, _Slot, (ITEM)_Weapon)
+AND
+HasActiveStatus(_Weapon, "PACT_BLADE", 1)
+AND
+NOT DB_AMP_HexBind_Locked(_Player, _Weapon)
+THEN
+LockUnequip(_Weapon, 1);
+DB_AMP_HexBind_Locked(_Player, _Weapon);
+
+PROC
+PROC_AMP_HexBind_LockAll((CHARACTER)_Player)
+AND
+DB_AMP_HexBind_Slots(_Slot)
+AND
+GetEquippedItem(_Player, _Slot, (ITEM)_Weapon)
+AND
+HasActiveStatus(_Weapon, "WEAPON_BOND", 1)
+AND
+NOT DB_AMP_HexBind_Locked(_Player, _Weapon)
+THEN
+LockUnequip(_Weapon, 1);
+DB_AMP_HexBind_Locked(_Player, _Weapon);
+
+PROC
+PROC_AMP_HexBind_LockAll((CHARACTER)_Player)
+AND
+DB_AMP_HexBind_Slots(_Slot)
+AND
+GetEquippedItem(_Player, _Slot, (ITEM)_Weapon)
+AND
+IsSummon(_Weapon, 1)
+AND
+NOT DB_AMP_HexBind_Locked(_Player, _Weapon)
+THEN
+LockUnequip(_Weapon, 1);
+DB_AMP_HexBind_Locked(_Player, _Weapon);
+
+// trade close: unlock everything we locked
+IF
+TradeEnds((CHARACTER)_Player, (CHARACTER)_Trader)
+AND
+DB_AMP_HexBind_Locked(_Player, _Weapon)
+THEN
+LockUnequip(_Weapon, 0);
+NOT DB_AMP_HexBind_Locked(_Player, _Weapon);
+
+EXITSECTION
+ENDEXITSECTION

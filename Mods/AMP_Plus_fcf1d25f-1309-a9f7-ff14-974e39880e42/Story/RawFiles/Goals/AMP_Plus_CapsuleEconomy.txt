@@ -1,0 +1,288 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+// overrides live in DB_AMP_Plus_CapEcon_* and are re-stamped onto the *Active facts after every base rebuild
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_Settings_CapCharges", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+NOT DB_AMP_Plus_PureMind(1)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_CapCharges_06");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapCharges_06", 1)
+THEN
+SysClear("DB_AMP_Plus_CapEcon_Charges", 1);
+DB_AMP_Plus_CapEcon_Charges(6);
+PROC_AMP_Plus_CapEcon_Apply();
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapCharges_06", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_CapCharges_08");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapCharges_08", 1)
+THEN
+SysClear("DB_AMP_Plus_CapEcon_Charges", 1);
+DB_AMP_Plus_CapEcon_Charges(8);
+PROC_AMP_Plus_CapEcon_Apply();
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapCharges_08", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_CapCharges_10");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapCharges_10", 1)
+THEN
+SysClear("DB_AMP_Plus_CapEcon_Charges", 1);
+DB_AMP_Plus_CapEcon_Charges(10);
+PROC_AMP_Plus_CapEcon_Apply();
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapCharges_10", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_CapCharges_16");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapCharges_16", 1)
+THEN
+SysClear("DB_AMP_Plus_CapEcon_Charges", 1);
+DB_AMP_Plus_CapEcon_Charges(16);
+PROC_AMP_Plus_CapEcon_Apply();
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapCharges_16", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_CapCharges_Mode");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapCharges_Mode", 1)
+THEN
+SysClear("DB_AMP_Plus_CapEcon_Charges", 1);
+PROC_AMP_VoidCapsule_RefreshCache();
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapCharges_Mode", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_CapCharges_06");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_Settings_CapWindow", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+NOT DB_AMP_Plus_PureMind(1)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_CapWindow_015");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapWindow_015", 1)
+THEN
+SysClear("DB_AMP_Plus_CapEcon_Window", 1);
+DB_AMP_Plus_CapEcon_Window(15);
+PROC_AMP_Plus_CapEcon_Apply();
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapWindow_015", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_CapWindow_030");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapWindow_030", 1)
+THEN
+SysClear("DB_AMP_Plus_CapEcon_Window", 1);
+DB_AMP_Plus_CapEcon_Window(30);
+PROC_AMP_Plus_CapEcon_Apply();
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapWindow_030", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_CapWindow_060");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapWindow_060", 1)
+THEN
+SysClear("DB_AMP_Plus_CapEcon_Window", 1);
+DB_AMP_Plus_CapEcon_Window(60);
+PROC_AMP_Plus_CapEcon_Apply();
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapWindow_060", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_CapWindow_120");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapWindow_120", 1)
+THEN
+SysClear("DB_AMP_Plus_CapEcon_Window", 1);
+DB_AMP_Plus_CapEcon_Window(120);
+PROC_AMP_Plus_CapEcon_Apply();
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapWindow_120", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_CapWindow_Mode");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapWindow_Mode", 1)
+THEN
+SysClear("DB_AMP_Plus_CapEcon_Window", 1);
+PROC_AMP_VoidCapsule_RefreshCache();
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapWindow_Mode", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_CapWindow_015");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_Settings_CapCost", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+NOT DB_AMP_Plus_PureMind(1)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_CapCost_1");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapCost_1", 1)
+THEN
+SysClear("DB_AMP_Plus_CapEcon_Cost", 1);
+DB_AMP_Plus_CapEcon_Cost(1);
+PROC_AMP_Plus_CapEcon_Apply();
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapCost_1", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_CapCost_2");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapCost_2", 1)
+THEN
+SysClear("DB_AMP_Plus_CapEcon_Cost", 1);
+DB_AMP_Plus_CapEcon_Cost(2);
+PROC_AMP_Plus_CapEcon_Apply();
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapCost_2", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_CapCost_3");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapCost_3", 1)
+THEN
+SysClear("DB_AMP_Plus_CapEcon_Cost", 1);
+DB_AMP_Plus_CapEcon_Cost(3);
+PROC_AMP_Plus_CapEcon_Apply();
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapCost_3", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_CapCost_Mode");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapCost_Mode", 1)
+THEN
+SysClear("DB_AMP_Plus_CapEcon_Cost", 1);
+PROC_AMP_VoidCapsule_RefreshCache();
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_CapCost_Mode", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_CapCost_1");
+
+PROC
+PROC_AMP_Plus_CapEcon_Apply()
+AND
+DB_AMP_Plus_CapEcon_Charges((INTEGER)_Want)
+AND
+DB_AMP_VoidCapsule_ChargesMaxActive((INTEGER)_Cur)
+AND
+_Cur != _Want
+THEN
+NOT DB_AMP_VoidCapsule_ChargesMaxActive(_Cur);
+DB_AMP_VoidCapsule_ChargesMaxActive(_Want);
+
+PROC
+PROC_AMP_Plus_CapEcon_Apply()
+AND
+DB_AMP_Plus_CapEcon_Window((INTEGER)_Want)
+AND
+DB_AMP_VoidCapsule_RerollWindowActive((INTEGER)_Cur)
+AND
+_Cur != _Want
+THEN
+NOT DB_AMP_VoidCapsule_RerollWindowActive(_Cur);
+DB_AMP_VoidCapsule_RerollWindowActive(_Want);
+
+PROC
+PROC_AMP_Plus_CapEcon_Apply()
+AND
+DB_AMP_Plus_CapEcon_Cost((INTEGER)_Want)
+AND
+DB_AMP_VoidCapsule_RerollCostActive((INTEGER)_Cur)
+AND
+_Cur != _Want
+THEN
+NOT DB_AMP_VoidCapsule_RerollCostActive(_Cur);
+DB_AMP_VoidCapsule_RerollCostActive(_Want);
+
+// a mode switch rebuilds the active facts, this puts the override back. _Cur != _Want ends the loop
+IF
+DB_AMP_VoidCapsule_ChargesMaxActive((INTEGER)_Cur)
+AND
+DB_AMP_Plus_CapEcon_Charges((INTEGER)_Want)
+AND
+_Cur != _Want
+THEN
+NOT DB_AMP_VoidCapsule_ChargesMaxActive(_Cur);
+DB_AMP_VoidCapsule_ChargesMaxActive(_Want);
+
+IF
+DB_AMP_VoidCapsule_RerollWindowActive((INTEGER)_Cur)
+AND
+DB_AMP_Plus_CapEcon_Window((INTEGER)_Want)
+AND
+_Cur != _Want
+THEN
+NOT DB_AMP_VoidCapsule_RerollWindowActive(_Cur);
+DB_AMP_VoidCapsule_RerollWindowActive(_Want);
+
+IF
+DB_AMP_VoidCapsule_RerollCostActive((INTEGER)_Cur)
+AND
+DB_AMP_Plus_CapEcon_Cost((INTEGER)_Want)
+AND
+_Cur != _Want
+THEN
+NOT DB_AMP_VoidCapsule_RerollCostActive(_Cur);
+DB_AMP_VoidCapsule_RerollCostActive(_Want);
+
+EXITSECTION
+ENDEXITSECTION

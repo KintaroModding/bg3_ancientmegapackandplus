@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="315afffd-38bf-c8e1-d3ea-bea83d656959" />
+					<attribute id="Name" type="LSString" value="Part_BlueYellowBlink" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/Part_BlueYellowBlink.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="Part_BlueYellowBlink" />
+					<attribute id="BoundsMin" type="fvec3" value="-2 -2 -2" />
+					<attribute id="BoundsMax" type="fvec3" value="2 2 2" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="2.5" />
+					<attribute id="Looping" type="bool" value="False" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="70148014-3c4e-8afa-af1e-9bc00dda86bf" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="540bc5a7-84cc-8987-d1c5-2596adc4235b" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="a81ddf67-e243-0150-2a9a-fc184c1dff51" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

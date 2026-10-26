@@ -1,0 +1,157 @@
+// outside a cast the plain spell save DC has no casting ability and falls to Charisma or its floor
+
+new entry "MAG_Armour_C_21_bonus"
+type "PassiveData"
+using "MAG_Armour_C_21_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom, AMP_Plus_BestSpellDC())):ApplyStatus(ARMOURC21,100, -1)"
+
+new entry "MAG_Armour_G_77_bonus"
+type "PassiveData"
+using "MAG_Armour_G_77_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Constitution, AMP_Plus_BestSpellDC()+2)):ApplyStatus(ARMOURG77, 100, 3)"
+
+new entry "MAG_Armour_G_77_1_bonus"
+type "PassiveData"
+using "MAG_Armour_G_77_1_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Constitution, AMP_Plus_BestSpellDC()-2)):ApplyStatus(ARMOURG77_1, 100, 3)"
+
+new entry "MAG_Armour_G_77_2_bonus"
+type "PassiveData"
+using "MAG_Armour_G_77_2_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Constitution, AMP_Plus_BestSpellDC())):ApplyStatus(ARMOURG77_2, 100, 3)"
+
+new entry "MAG_Armour_G_77_4_bonus"
+type "PassiveData"
+using "MAG_Armour_G_77_4_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Constitution, AMP_Plus_BestSpellDC()+4)):ApplyStatus(ARMOURG77_4, 100, 3)"
+
+new entry "MAG_Armour_H_94_bonus"
+type "PassiveData"
+using "MAG_Armour_H_94_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom, AMP_Plus_BestSpellDC()-4)):ApplyStatus(MAG_ARMOUR_H_94_VFX,100,0)"
+
+new entry "MAG_Armour_H_105_bonus"
+type "PassiveData"
+using "MAG_Armour_H_105_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom, AMP_Plus_BestSpellDC()-2)):ApplyStatus(POLYMORPH_SHEEP,100,1)"
+
+new entry "ARMOURH87_Tidequeen_Check"
+type "PassiveData"
+using "ARMOURH87_Tidequeen_Check"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Dexterity, AMP_Plus_BestSpellDC())):ApplyStatus(WET,100,2)"
+
+new entry "ARMOURH87_Tidequeen_Check_T2"
+type "PassiveData"
+using "ARMOURH87_Tidequeen_Check_T2"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Dexterity, AMP_Plus_BestSpellDC()+1)):ApplyStatus(WET,100,2)"
+
+new entry "ARMOURH87_Tidequeen_Check_T3"
+type "PassiveData"
+using "ARMOURH87_Tidequeen_Check_T3"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Dexterity, AMP_Plus_BestSpellDC()+2)):ApplyStatus(WET,100,2)"
+
+new entry "ARMOURH87_Tidequeen_Check_T4"
+type "PassiveData"
+using "ARMOURH87_Tidequeen_Check_T4"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Dexterity, AMP_Plus_BestSpellDC()+3)):ApplyStatus(WET,100,2)"
+
+new entry "MAG_Neck25_bonus"
+type "PassiveData"
+using "MAG_Neck25_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Constitution,AMP_Plus_BestSpellDC()-3)):ApplyStatus(BLINDED,100,Level/3+1)"
+
+new entry "MAG_Neck25_1_bonus"
+type "PassiveData"
+using "MAG_Neck25_1_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Constitution,AMP_Plus_BestSpellDC()-4)):ApplyStatus(BLINDED,100,Level/4+1)"
+
+new entry "MAG_Neck25_3_bonus"
+type "PassiveData"
+using "MAG_Neck25_3_bonus"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Constitution,AMP_Plus_BestSpellDC()-2)):ApplyStatus(BLINDED,100,Level/2+1)"
+
+new entry "MAG_RING28_ROTTING_FLESH"
+type "StatusData"
+data "StatusType" "BOOST"
+using "MAG_RING28_ROTTING_FLESH"
+data "OnTickRoll" "SavingThrow(Ability.Constitution,AMP_Plus_BestSpellDC()-2)"
+
+new entry "MAG_RING28_ROTTING_FLESH_1"
+type "StatusData"
+data "StatusType" "BOOST"
+using "MAG_RING28_ROTTING_FLESH_1"
+data "OnTickRoll" "SavingThrow(Ability.Constitution,AMP_Plus_BestSpellDC()-4)"
+
+new entry "MAG_RING28_ROTTING_FLESH_3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "MAG_RING28_ROTTING_FLESH_3"
+data "OnTickRoll" "SavingThrow(Ability.Constitution,AMP_Plus_BestSpellDC())"
+
+new entry "MAG_RING28_ROTTING_FLESH_4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "MAG_RING28_ROTTING_FLESH_4"
+data "OnTickRoll" "SavingThrow(Ability.Constitution,AMP_Plus_BestSpellDC()+2)"
+
+new entry "N_Psychic_FearConfusion"
+type "PassiveData"
+using "N_Psychic_FearConfusion"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Wisdom, AMP_Plus_BestSpellDC())):ApplyStatus(CONFUSION,100,2)"
+
+new entry "AMP_FrostMage_Shield_Passive"
+type "PassiveData"
+using "AMP_FrostMage_Shield_Passive"
+data "StatsFunctors" "ApplyStatus(WEAPON34,100,2,,,,not SavingThrow(Ability.Constitution,AMP_Plus_BestSpellDC()-2))"
+
+new entry "AMP_DEATHCLERIC_FETID_ROT_EPIC"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_DEATHCLERIC_FETID_ROT_EPIC"
+data "TickFunctors" "IF(not HasObscuredState(ObscuredState.Clear)):DealDamage(1d4,Necrotic,Magical);IF(not SavingThrow(Ability.Wisdom,AMP_Plus_BestSpellDC())):ApplyStatus(MADNESS,100,1)"
+
+new entry "MAG_Cloak41_3_bonus"
+type "PassiveData"
+using "MAG_Cloak41_3_bonus"
+data "StatsFunctors" "DealDamage(1d4,Cold,Magical,,0,,true,false);IF(not SavingThrow(Ability.Constitution, AMP_Plus_BestSpellDC())):ApplyStatus(FROZEN,100,1)"
+
+new entry "MAG_Cloak41_4_bonus"
+type "PassiveData"
+using "MAG_Cloak41_4_bonus"
+data "StatsFunctors" "DealDamage(2d4,Cold,Magical,,0,,true,false);IF(not SavingThrow(Ability.Constitution, AMP_Plus_BestSpellDC()+2)):ApplyStatus(FROZEN,100,2)"
+
+new entry "CLOAK79"
+type "StatusData"
+data "StatusType" "BOOST"
+using "CLOAK79"
+data "RemoveConditions" "SavingThrow(Ability.Intelligence, AMP_Plus_BestSpellDC())"
+
+new entry "MAG_LATHANDERS_LIGHT_BLIND_AURA_TARGET"
+type "StatusData"
+data "StatusType" "BOOST"
+using "MAG_LATHANDERS_LIGHT_BLIND_AURA_TARGET"
+data "OnTickRoll" "not SavingThrow(Ability.Constitution,AMP_Plus_BestSpellDC()-2)"
+
+new entry "MAG_LATHANDERS_LIGHT_BLIND_AURA_TARGET_FIRST_APPLY"
+type "StatusData"
+data "StatusType" "BOOST"
+using "MAG_LATHANDERS_LIGHT_BLIND_AURA_TARGET_FIRST_APPLY"
+data "OnApplyFunctors" "IF(not SavingThrow(Ability.Constitution, AMP_Plus_BestSpellDC()-2)):ApplyStatus(MAG_LATHANDERS_LIGHT_BLINDED,100,1)"
+
+new entry "CLOAK79_1"
+type "StatusData"
+data "StatusType" "BOOST"
+using "CLOAK79_1"
+data "RemoveConditions" "SavingThrow(Ability.Intelligence, AMP_Plus_BestSpellDC())"
+
+new entry "CLOAK79_2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "CLOAK79_2"
+data "RemoveConditions" "SavingThrow(Ability.Intelligence, AMP_Plus_BestSpellDC())"
+
+new entry "CLOAK79_4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "CLOAK79_4"
+data "RemoveConditions" "SavingThrow(Ability.Intelligence, AMP_Plus_BestSpellDC())"

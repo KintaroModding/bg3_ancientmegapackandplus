@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="6a23b208-724b-4cf2-8500-6d0f9d0392fb" />
+					<attribute id="Name" type="LSString" value="WPN_Trident_r" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="c818edc1-85c4-4c4b-bd62-03ba59265922" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h902cc9degd757g4fb7gb431ga7aa06d34b18" version="1" />
+					<attribute id="Icon" type="FixedString" value="arc_Trident_r" />
+					<attribute id="Stats" type="FixedString" value="WPN_Trident_r" />
+					<attribute id="owner" type="FixedString" value="" />
+					<attribute id="Description" type="TranslatedString" handle="h819a49bege3c2g43a0gbd28gdd981cd3ef0a" version="1" />
+					<attribute id="EquipmentTypeID" type="guid" value="98a38628-79fa-4f24-904e-de54f4ef03ae" />
+					<children>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="MAG_WEAPON1_VFX" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

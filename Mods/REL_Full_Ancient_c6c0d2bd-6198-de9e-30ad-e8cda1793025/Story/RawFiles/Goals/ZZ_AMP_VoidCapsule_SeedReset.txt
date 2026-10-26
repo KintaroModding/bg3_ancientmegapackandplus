@@ -1,0 +1,113 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+// decoy chests before the real reward move the treasuretable shuffle on, against save-scumming
+// DB_AMP_SeedReset_DecoyCube keeps core auto-extract off their loot, else 10x loot
+
+// spawn n decoys
+PROC
+PROC_AMP_SeedReset((CHARACTER)_Owner, (ITEMROOT)_Template)
+AND Random(10, (INTEGER)_Rand)
+AND IntegerSum(_Rand, 1, (INTEGER)_Count)
+THEN
+DB_AMP_SeedReset_Active(_Owner, _Template, _Count);
+PROC_AMP_SeedReset_SpawnDecoy(_Owner, _Template);
+
+// spawn one decoy
+PROC
+PROC_AMP_SeedReset_SpawnDecoy((CHARACTER)_Owner, (ITEMROOT)_Template)
+THEN
+DB_AMP_SeedReset_Spawning(1);
+TemplateAddTo(_Template, _Owner, 1, 0);
+
+// decoy landed: mark, decrement, delete + next
+IF
+AddedTo((ITEM)_Chest, (CHARACTER)_Owner, _)
+AND DB_AMP_SeedReset_Spawning(1)
+AND DB_AMP_SeedReset_Active(_Owner, (ITEMROOT)_Template, (INTEGER)_Count)
+AND GetTemplate(_Chest, _Template)
+AND IntegerSubtract(_Count, 1, (INTEGER)_NewCount)
+THEN
+DB_AMP_SeedReset_DecoyCube(_Chest);
+NOT DB_AMP_SeedReset_Spawning(1);
+NOT DB_AMP_SeedReset_Active(_Owner, _Template, _Count);
+ObjectTimerLaunch(_Chest, "AMP_SeedReset_DelayedDelete", 100, 0);
+PROC_AMP_SeedReset_PlaySpinSound(_Owner);
+PROC_AMP_SeedReset_Next(_Owner, _Template, _NewCount);
+
+// delete decoy chest + clear flag
+IF
+ObjectTimerFinished((ITEM)_Chest, "AMP_SeedReset_DelayedDelete")
+THEN
+NOT DB_AMP_SeedReset_DecoyCube(_Chest);
+RequestDelete(_Chest);
+
+// more decoys or done
+PROC
+PROC_AMP_SeedReset_Next((CHARACTER)_Owner, (ITEMROOT)_Template, (INTEGER)_Remaining)
+AND _Remaining > 0
+THEN
+DB_AMP_SeedReset_Active(_Owner, _Template, _Remaining);
+PROC_AMP_SeedReset_SpawnDecoy(_Owner, _Template);
+
+PROC
+PROC_AMP_SeedReset_Next((CHARACTER)_Owner, (ITEMROOT)_Template, (INTEGER)_Remaining)
+AND _Remaining <= 0
+THEN
+PROC_AMP_SeedReset_Done(_Owner, _Template);
+
+// level-load cleanup of stuck state
+IF
+LevelGameplayStarted(_, _)
+AND DB_AMP_SeedReset_Active((CHARACTER)_O, (ITEMROOT)_T, (INTEGER)_C)
+THEN
+NOT DB_AMP_SeedReset_Active(_O, _T, _C);
+
+IF
+LevelGameplayStarted(_, _)
+AND DB_AMP_SeedReset_Spawning(1)
+THEN
+NOT DB_AMP_SeedReset_Spawning(1);
+
+IF
+LevelGameplayStarted(_, _)
+AND DB_AMP_SeedReset_DecoyCube((ITEM)_Chest)
+THEN
+NOT DB_AMP_SeedReset_DecoyCube(_Chest);
+
+// spin-sound pool: lazy insert on first level load (covers existing saves)
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_SeedReset_SoundCount(_)
+THEN
+DB_AMP_SeedReset_SoundPool(0, "SE_UND_ArcaneTower_Generator_Mechanism_Button");
+DB_AMP_SeedReset_SoundPool(1, "Spell_Cast_Summon_GraspingVine_L4to5II");
+DB_AMP_SeedReset_SoundPool(2, "REF_PUZ_Lever_Floor_A");
+DB_AMP_SeedReset_SoundPool(3, "LOW_SorcerousSundries_FinalConfrontation_MagicBookChime");
+DB_AMP_SeedReset_SoundPool(4, "Action_Impact_Item_Bloodfeeding");
+DB_AMP_SeedReset_SoundPool(5, "END_GameFinale_MystraGaleConfrontation_BadEnding_GaleSpellActivate");
+DB_AMP_SeedReset_SoundPool(6, "END_GameFinale_MystraGaleConfrontation_BadEnding_MystraSpellActivate");
+DB_AMP_SeedReset_SoundPool(7, "INT_EmperorRevealed_OrbExplodes_OrbKick");
+DB_AMP_SeedReset_SoundPool(8, "INT_EmperorRevealed_EmperorPlea_Telekinesis_B");
+DB_AMP_SeedReset_SoundPool(9, "INT_EmperorRevealed_AfterOrpheus_ElderBrainHit");
+DB_AMP_SeedReset_SoundPool(10, "COL_KethericShowdown_CrownController_PlayerUnlockNetherstone");
+DB_AMP_SeedReset_SoundCount(11);
+
+// play a random spin sound to the owner
+PROC
+PROC_AMP_SeedReset_PlaySpinSound((CHARACTER)_Owner)
+AND
+DB_AMP_SeedReset_SoundCount((INTEGER)_N)
+AND
+Random(_N, (INTEGER)_Idx)
+AND
+DB_AMP_SeedReset_SoundPool(_Idx, (STRING)_Snd)
+THEN
+PlaySound(_Owner, _Snd);
+
+EXITSECTION
+ENDEXITSECTION
+

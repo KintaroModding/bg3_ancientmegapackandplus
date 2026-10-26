@@ -1,0 +1,37 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// one wave per fight. base clears the wave record on boss death, which a re-rising boss
+// (hag of the Blushing Mermaid) turns into a farm. record is put back on death
+
+IF
+DB_AMP_MirrorSupport_Fired((CHARACTER)_Boss)
+AND
+NOT DB_AMP_Plus_MirrorWave(_Boss, _)
+AND
+CombatGetGuidFor(_Boss, (GUIDSTRING)_Combat)
+THEN
+DB_AMP_Plus_MirrorWave(_Boss, _Combat);
+
+IF
+Died((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_MirrorWave(_Boss, _)
+THEN
+DB_AMP_MirrorSupport_Fired(_Boss);
+
+IF
+EnteredCombat((CHARACTER)_Boss, (GUIDSTRING)_Combat)
+AND
+DB_AMP_Plus_MirrorWave(_Boss, (GUIDSTRING)_Old)
+AND
+_Old != _Combat
+THEN
+NOT DB_AMP_Plus_MirrorWave(_Boss, _Old);
+NOT DB_AMP_MirrorSupport_Fired(_Boss);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,45 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// charge status - visual indicator of remaining charges.
+// status duration = 6s * charges, shows as a countdown on the capsule.
+
+DB_AMP_VoidCapsule_ChargeToDuration( 1,   6.0);
+DB_AMP_VoidCapsule_ChargeToDuration( 2,  12.0);
+DB_AMP_VoidCapsule_ChargeToDuration( 3,  18.0);
+DB_AMP_VoidCapsule_ChargeToDuration( 4,  24.0);
+DB_AMP_VoidCapsule_ChargeToDuration( 5,  30.0);
+DB_AMP_VoidCapsule_ChargeToDuration( 6,  36.0);
+DB_AMP_VoidCapsule_ChargeToDuration( 7,  42.0);
+DB_AMP_VoidCapsule_ChargeToDuration( 8,  48.0);
+DB_AMP_VoidCapsule_ChargeToDuration( 9,  54.0);
+DB_AMP_VoidCapsule_ChargeToDuration(10,  60.0);
+DB_AMP_VoidCapsule_ChargeToDuration(11,  66.0);
+DB_AMP_VoidCapsule_ChargeToDuration(12,  72.0);
+DB_AMP_VoidCapsule_ChargeToDuration(13,  78.0);
+DB_AMP_VoidCapsule_ChargeToDuration(14,  84.0);
+DB_AMP_VoidCapsule_ChargeToDuration(15,  90.0);
+DB_AMP_VoidCapsule_ChargeToDuration(16,  96.0);
+
+KBSECTION
+
+// re-apply status whenever the charge count db changes
+IF
+DB_AMP_VoidCapsule_Charges((ITEM)_Capsule, (INTEGER)_Count)
+AND
+_Count > 0
+AND
+DB_AMP_VoidCapsule_ChargeToDuration(_Count, (REAL)_Duration)
+THEN
+ApplyStatus(_Capsule, "AMP_VOID_CAPSULE_CHARGES", _Duration, 1, _Capsule);
+
+// strip status on depletion
+IF
+DB_AMP_VoidCapsule_Depleted((ITEM)_Capsule)
+THEN
+RemoveStatus(_Capsule, "AMP_VOID_CAPSULE_CHARGES", _Capsule);
+
+EXITSECTION
+ENDEXITSECTION
+

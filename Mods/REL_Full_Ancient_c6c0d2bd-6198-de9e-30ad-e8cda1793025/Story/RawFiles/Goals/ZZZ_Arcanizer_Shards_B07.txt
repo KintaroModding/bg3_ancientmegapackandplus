@@ -1,0 +1,45 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// arcanizer shards batch 07
+
+// netherese seed (weapon nonstack, legendary)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_14_068218d4-fbab-4dfc-aeca-d0f901f7eb50, "AMP_SHARD_APPLY_MELEE_NETHSEED", "AMP_SHARD_APPLY_RANGED_NETHSEED", "AMP_SHARD_WEAPON_NETHSEED");
+
+// boots nonstack: steadfast
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Boots_12_4bd4f3eb-8e05-4fcb-b478-b3d99f6512b3, "Boots", "AMP_SHARD_APPLY_BOOTS_12", "Boots", "AMP_SHARD_BOOTS_STEADFAST");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_STEADFAST", "AMP_SHARD_CHAR_STEADFAST");
+
+// gloves stackable: fire conduction
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Gloves_11_75828bed-0a9d-4884-be41-6a78aa358c9d, "Gloves", "AMP_SHARD_APPLY_GLOVES_11", "Gloves");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_FIRECONDS", "AMP_SHARD_CHAR_FIRECONDS");
+
+// amulet stackable: juggernaut (STR +1)
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_2_62e35f12-4026-4bd5-9f74-5c1283bd9b45, "Amulet", "AMP_SHARD_APPLY_AMULET_2", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_JUGGERNAUT", "AMP_SHARD_CHAR_JUGGERNAUT");
+
+// amulet stackable: alacrity (DEX +1)
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_3_63f3f727-1497-457f-a0ac-8984f8e1053f, "Amulet", "AMP_SHARD_APPLY_AMULET_3", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_ALACRITY", "AMP_SHARD_CHAR_ALACRITY");
+
+// amulet stackable: fortitude (CON +1)
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_4_f207d9a6-7a7b-42ad-9b56-498b5b8bf559, "Amulet", "AMP_SHARD_APPLY_AMULET_4", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_FORTITUDE", "AMP_SHARD_CHAR_FORTITUDE");
+
+// amulet stackable: acuity (INT +1)
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_5_90aacef6-59e1-4238-bc42-0debcbe76160, "Amulet", "AMP_SHARD_APPLY_AMULET_5", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_ACUITY", "AMP_SHARD_CHAR_ACUITY");
+
+// amulet stackable: sagacity (WIS +1)
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_6_f5d23d81-f020-4098-bf7f-7307841b137b, "Amulet", "AMP_SHARD_APPLY_AMULET_6", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_SAGACITY", "AMP_SHARD_CHAR_SAGACITY");
+
+// amulet stackable: splendor (CHA +1)
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_7_c9827110-2e7c-4066-ba15-9a7affe80616, "Amulet", "AMP_SHARD_APPLY_AMULET_7", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_SPLENDOR", "AMP_SHARD_CHAR_SPLENDOR");
+
+KBSECTION
+
+EXITSECTION
+ENDEXITSECTION

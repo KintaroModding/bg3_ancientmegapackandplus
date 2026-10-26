@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="353e1b64-5af9-4aa1-b43b-8efd66ecaea6" />
+					<attribute id="Name" type="LSString" value="AMP_NewYear_Tree" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="632063c0-c704-4b21-b66e-1cbd9d5f585f" />
+					<attribute id="VisualTemplate" type="FixedString" value="31392a84-7e10-a91f-0d91-38579ee844b4" />
+					<attribute id="SeeThrough" type="bool" value="True" />
+					<children>
+						<node id="Bounds">
+							<children>
+								<node id="Bound">
+									<attribute id="Type" type="uint8" value="0" />
+									<attribute id="Shape" type="uint8" value="1" />
+									<attribute id="Min" type="fvec3" value="-0.87356925 -0.00015640259 -0.8735709" />
+									<attribute id="Max" type="fvec3" value="0.8735709 4.2048244 0.87356925" />
+									<attribute id="Radius" type="float" value="0.8735701" />
+									<attribute id="Height" type="float" value="1.8744339" />
+								</node>
+								<node id="Bound">
+									<attribute id="Type" type="uint8" value="1" />
+									<attribute id="Shape" type="uint8" value="1" />
+									<attribute id="Min" type="fvec3" value="-0.87356925 -0.00015449524 -0.8735709" />
+									<attribute id="Max" type="fvec3" value="0.8735709 4.1803102 0.87356925" />
+									<attribute id="Radius" type="float" value="0.8735701" />
+									<attribute id="Height" type="float" value="1.8744339" />
+								</node>
+								<node id="Bound">
+									<attribute id="Type" type="uint8" value="2" />
+									<attribute id="Shape" type="uint8" value="1" />
+									<attribute id="Min" type="fvec3" value="-0.87356925 -0.00015544891 -0.8735709" />
+									<attribute id="Max" type="fvec3" value="0.8735709 4.193653 0.87356925" />
+									<attribute id="Radius" type="float" value="0.8735701" />
+									<attribute id="Height" type="float" value="1.8744339" />
+								</node>
+							</children>
+						</node>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="NY_TREE" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

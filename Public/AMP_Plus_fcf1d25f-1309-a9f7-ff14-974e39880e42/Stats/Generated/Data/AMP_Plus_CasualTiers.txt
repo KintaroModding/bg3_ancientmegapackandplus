@@ -1,0 +1,74 @@
+// empty tier carriers, grading runs and a tier exists to read while the creature gains nothing
+// no DisplayName or Icon, these must never surface in the UI
+
+new entry "AMP_Plus_NPC_CASUAL_T0_V4"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_Plus_NPC_CASUAL_T0_V4"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator;IgnoreResting"
+
+new entry "AMP_Plus_NPC_CASUAL_T1_V4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_Plus_NPC_CASUAL_T0_V4"
+data "StackId" "AMP_Plus_NPC_CASUAL_T1_V4"
+
+new entry "AMP_Plus_NPC_CASUAL_T2_V4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_Plus_NPC_CASUAL_T0_V4"
+data "StackId" "AMP_Plus_NPC_CASUAL_T2_V4"
+
+new entry "AMP_Plus_NPC_CASUAL_T3_V4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_Plus_NPC_CASUAL_T0_V4"
+data "StackId" "AMP_Plus_NPC_CASUAL_T3_V4"
+
+new entry "AMP_Plus_NPC_CASUAL_T4_V4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_Plus_NPC_CASUAL_T0_V4"
+data "StackId" "AMP_Plus_NPC_CASUAL_T4_V4"
+
+new entry "AMP_Plus_NPC_CASUAL_T5_V4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_Plus_NPC_CASUAL_T0_V4"
+data "StackId" "AMP_Plus_NPC_CASUAL_T5_V4"
+
+new entry "AMP_Plus_BOSS_CASUAL_T0_V4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_Plus_NPC_CASUAL_T0_V4"
+data "StackId" "AMP_Plus_BOSS_CASUAL_T0_V4"
+
+new entry "AMP_Plus_BOSS_CASUAL_T1_V4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_Plus_NPC_CASUAL_T0_V4"
+data "StackId" "AMP_Plus_BOSS_CASUAL_T1_V4"
+
+new entry "AMP_Plus_BOSS_CASUAL_T2_V4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_Plus_NPC_CASUAL_T0_V4"
+data "StackId" "AMP_Plus_BOSS_CASUAL_T2_V4"
+
+new entry "AMP_Plus_BOSS_CASUAL_T3_V4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_Plus_NPC_CASUAL_T0_V4"
+data "StackId" "AMP_Plus_BOSS_CASUAL_T3_V4"
+
+new entry "AMP_Plus_BOSS_CASUAL_T4_V4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_Plus_NPC_CASUAL_T0_V4"
+data "StackId" "AMP_Plus_BOSS_CASUAL_T4_V4"
+
+new entry "AMP_Plus_BOSS_CASUAL_T5_V4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_Plus_NPC_CASUAL_T0_V4"
+data "StackId" "AMP_Plus_BOSS_CASUAL_T5_V4"

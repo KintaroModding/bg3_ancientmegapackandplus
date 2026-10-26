@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="f6df3a8f-fbc7-4bad-85a5-d5f2c4340f95" />
+					<attribute id="Name" type="LSString" value="AMP_ShardVault_Cloaks" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="f946f9c2-9a6b-4e16-8493-4309cb8135e0" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h3f95f75eg8cf1g4dd6g8fcfgdfacbf3a3b91" version="1" />
+					<attribute id="Description" type="TranslatedString" handle="h46e5de82g8c0dg4a20gaffdg07a44718f810" version="1" />
+					<attribute id="Icon" type="FixedString" value="AMP_CONT_Shards" />
+					<attribute id="ContainerAutoAddOnPickup" type="bool" value="False" />
+					<attribute id="Stats" type="FixedString" value="AMP_ShardVault_Cloaks" />
+					<children>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="AMP_ShardVault_Cloaks" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

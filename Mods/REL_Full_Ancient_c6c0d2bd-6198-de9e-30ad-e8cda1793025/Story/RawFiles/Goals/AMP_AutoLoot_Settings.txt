@@ -1,0 +1,912 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// autoloot/autosell settings
+DB_AMP_AutoLoot_Disabled(0);
+DB_AMP_AS_Disabled(1);
+DB_AMP_AL_CampProtect(1);
+DB_AMP_AL_MinValue(0);
+DB_AMP_AS_MaxSellValue(999999);
+DB_AMP_AS_RarityProtect(1);
+DB_AMP_AS_SellPercent(60);
+// loot + sell per category
+DB_AMP_AL_LootConsumables(1);
+DB_AMP_AS_SellConsumables(0);
+DB_AMP_AL_LootEquipment(1);
+DB_AMP_AS_SellEquipment(0);
+DB_AMP_AL_LootBooks(1);
+DB_AMP_AS_SellBooks(0);
+DB_AMP_AL_LootIngredients(1);
+DB_AMP_AS_SellIngredients(0);
+DB_AMP_AL_LootContainers(1);
+DB_AMP_AS_SellContainers(0);
+KBSECTION
+
+// autoloot toggle
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AL_Toggle", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+THEN
+PROC_AMP_AL_ShowToggle(_Caster);
+
+PROC
+PROC_AMP_AL_ShowToggle((CHARACTER)_Host)
+AND
+NOT DB_AMP_AutoLoot_Disabled(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AL_Toggle_AskDisable");
+
+PROC
+PROC_AMP_AL_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_AutoLoot_Disabled(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AL_Toggle_AskEnable");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_Toggle_AskDisable", 1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_Toggle_AskDisable", 0)
+THEN
+NOT DB_AMP_AutoLoot_Disabled(0);
+DB_AMP_AutoLoot_Disabled(1);
+PROC_AMP_AutoLoot_RemoveAll();
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_Toggle_AskEnable", 1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_Toggle_AskEnable", 0)
+THEN
+NOT DB_AMP_AutoLoot_Disabled(1);
+DB_AMP_AutoLoot_Disabled(0);
+PROC_AMP_AutoLoot_AddAll();
+PROC_AMP_PlayModeEffect(_Host);
+
+PROC
+PROC_AMP_AutoLoot_RemoveAll()
+AND
+DB_Players(_P)
+THEN
+RemovePassive(_P, "AMP_AutoLoot_Toggle");
+
+PROC
+PROC_AMP_AutoLoot_AddAll()
+AND
+DB_Players(_P)
+THEN
+AddPassive(_P, "AMP_AutoLoot_Toggle");
+
+// camp chest protection
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AL_CampProtect", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+THEN
+PROC_AMP_AL_ShowCampProtect(_Caster);
+
+PROC
+PROC_AMP_AL_ShowCampProtect((CHARACTER)_Host)
+AND
+DB_AMP_AL_CampProtect(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AL_CampProtect_AskDisable");
+
+PROC
+PROC_AMP_AL_ShowCampProtect((CHARACTER)_Host)
+AND
+NOT DB_AMP_AL_CampProtect(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AL_CampProtect_AskEnable");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_CampProtect_AskDisable", 1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_CampProtect_AskDisable", 0)
+THEN
+NOT DB_AMP_AL_CampProtect(1);
+DB_AMP_AL_CampProtect(0);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_CampProtect_AskEnable", 1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_CampProtect_AskEnable", 0)
+THEN
+NOT DB_AMP_AL_CampProtect(0);
+DB_AMP_AL_CampProtect(1);
+PROC_AMP_PlayModeEffect(_Host);
+
+// autoloot min value, cycle 0/5/10/25. yes=keep, no=next
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AL_MinValue", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_AL_MinValue_00");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_MinValue_00", 1)
+THEN
+SysClear("DB_AMP_AL_MinValue", 1);
+DB_AMP_AL_MinValue(0);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_MinValue_00", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AL_MinValue_05");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_MinValue_05", 1)
+THEN
+SysClear("DB_AMP_AL_MinValue", 1);
+DB_AMP_AL_MinValue(5);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_MinValue_05", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AL_MinValue_10");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_MinValue_10", 1)
+THEN
+SysClear("DB_AMP_AL_MinValue", 1);
+DB_AMP_AL_MinValue(10);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_MinValue_10", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AL_MinValue_25");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_MinValue_25", 1)
+THEN
+SysClear("DB_AMP_AL_MinValue", 1);
+DB_AMP_AL_MinValue(25);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_MinValue_25", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AL_MinValue_00");
+
+// autosell toggle
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AS_Toggle", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+THEN
+PROC_AMP_AS_ShowToggle(_Caster);
+
+PROC
+PROC_AMP_AS_ShowToggle((CHARACTER)_Host)
+AND
+NOT DB_AMP_AS_Disabled(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_Toggle_AskDisable");
+
+PROC
+PROC_AMP_AS_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_Toggle_AskEnable");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_Toggle_AskDisable", 1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_Toggle_AskDisable", 0)
+THEN
+NOT DB_AMP_AS_Disabled(0);
+DB_AMP_AS_Disabled(1);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_Toggle_AskEnable", 1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_Toggle_AskEnable", 0)
+THEN
+NOT DB_AMP_AS_Disabled(1);
+DB_AMP_AS_Disabled(0);
+PROC_AMP_PlayModeEffect(_Host);
+
+// autosell max value, cycle 50/100/200/500/no limit
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AS_MaxValue", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_AS_MaxValue_050");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_MaxValue_050", 1)
+THEN
+SysClear("DB_AMP_AS_MaxSellValue", 1);
+DB_AMP_AS_MaxSellValue(50);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_MaxValue_050", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_MaxValue_100");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_MaxValue_100", 1)
+THEN
+SysClear("DB_AMP_AS_MaxSellValue", 1);
+DB_AMP_AS_MaxSellValue(100);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_MaxValue_100", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_MaxValue_200");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_MaxValue_200", 1)
+THEN
+SysClear("DB_AMP_AS_MaxSellValue", 1);
+DB_AMP_AS_MaxSellValue(200);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_MaxValue_200", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_MaxValue_500");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_MaxValue_500", 1)
+THEN
+SysClear("DB_AMP_AS_MaxSellValue", 1);
+DB_AMP_AS_MaxSellValue(500);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_MaxValue_500", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_MaxValue_NoLimit");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_MaxValue_NoLimit", 1)
+THEN
+SysClear("DB_AMP_AS_MaxSellValue", 1);
+DB_AMP_AS_MaxSellValue(999999);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_MaxValue_NoLimit", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_MaxValue_050");
+
+// rarity protection
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AS_RarityProtect", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+THEN
+PROC_AMP_AS_ShowRarityProtect(_Caster);
+
+PROC
+PROC_AMP_AS_ShowRarityProtect((CHARACTER)_Host)
+AND
+DB_AMP_AS_RarityProtect(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_RarityProtect_AskDisable");
+
+PROC
+PROC_AMP_AS_ShowRarityProtect((CHARACTER)_Host)
+AND
+NOT DB_AMP_AS_RarityProtect(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_RarityProtect_AskEnable");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_RarityProtect_AskDisable", 1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_RarityProtect_AskDisable", 0)
+THEN
+NOT DB_AMP_AS_RarityProtect(1);
+DB_AMP_AS_RarityProtect(0);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_RarityProtect_AskEnable", 1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_RarityProtect_AskEnable", 0)
+THEN
+NOT DB_AMP_AS_RarityProtect(0);
+DB_AMP_AS_RarityProtect(1);
+PROC_AMP_PlayModeEffect(_Host);
+
+// category filters: loot box then sell box, yes=keep no=toggle
+
+// consumables
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AS_FilterConsumables", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+THEN
+PROC_AMP_Filter_ShowLoot_Consumables(_Caster);
+
+PROC
+PROC_AMP_Filter_ShowLoot_Consumables((CHARACTER)_Host)
+AND
+DB_AMP_AL_LootConsumables(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_FilterConsumables_Loot_On");
+
+PROC
+PROC_AMP_Filter_ShowLoot_Consumables((CHARACTER)_Host)
+AND
+NOT DB_AMP_AL_LootConsumables(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_FilterConsumables_Loot_Off");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterConsumables_Loot_On", 1)
+THEN
+PROC_AMP_Filter_ShowSell_Consumables(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterConsumables_Loot_On", 0)
+THEN
+NOT DB_AMP_AL_LootConsumables(1);
+DB_AMP_AL_LootConsumables(0);
+PROC_AMP_Filter_ShowSell_Consumables(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterConsumables_Loot_Off", 1)
+THEN
+PROC_AMP_Filter_ShowSell_Consumables(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterConsumables_Loot_Off", 0)
+THEN
+NOT DB_AMP_AL_LootConsumables(0);
+DB_AMP_AL_LootConsumables(1);
+PROC_AMP_Filter_ShowSell_Consumables(_Host);
+
+PROC
+PROC_AMP_Filter_ShowSell_Consumables((CHARACTER)_Host)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+PROC
+PROC_AMP_Filter_ShowSell_Consumables((CHARACTER)_Host)
+AND
+NOT DB_AMP_AS_Disabled(1)
+AND
+DB_AMP_AS_SellConsumables(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_FilterConsumables_Sell_On");
+
+PROC
+PROC_AMP_Filter_ShowSell_Consumables((CHARACTER)_Host)
+AND
+NOT DB_AMP_AS_Disabled(1)
+AND
+NOT DB_AMP_AS_SellConsumables(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_FilterConsumables_Sell_Off");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterConsumables_Sell_On", 1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterConsumables_Sell_On", 0)
+THEN
+NOT DB_AMP_AS_SellConsumables(1);
+DB_AMP_AS_SellConsumables(0);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterConsumables_Sell_Off", 1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterConsumables_Sell_Off", 0)
+THEN
+NOT DB_AMP_AS_SellConsumables(0);
+DB_AMP_AS_SellConsumables(1);
+PROC_AMP_PlayModeEffect(_Host);
+
+// equipment
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AS_FilterEquipment", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+THEN
+PROC_AMP_Filter_ShowLoot_Equipment(_Caster);
+
+PROC
+PROC_AMP_Filter_ShowLoot_Equipment((CHARACTER)_Host)
+AND
+DB_AMP_AL_LootEquipment(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_FilterEquipment_Loot_On");
+
+PROC
+PROC_AMP_Filter_ShowLoot_Equipment((CHARACTER)_Host)
+AND
+NOT DB_AMP_AL_LootEquipment(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_FilterEquipment_Loot_Off");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterEquipment_Loot_On", 1)
+THEN
+PROC_AMP_Filter_ShowSell_Equipment(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterEquipment_Loot_On", 0)
+THEN
+NOT DB_AMP_AL_LootEquipment(1);
+DB_AMP_AL_LootEquipment(0);
+PROC_AMP_Filter_ShowSell_Equipment(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterEquipment_Loot_Off", 1)
+THEN
+PROC_AMP_Filter_ShowSell_Equipment(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterEquipment_Loot_Off", 0)
+THEN
+NOT DB_AMP_AL_LootEquipment(0);
+DB_AMP_AL_LootEquipment(1);
+PROC_AMP_Filter_ShowSell_Equipment(_Host);
+
+PROC
+PROC_AMP_Filter_ShowSell_Equipment((CHARACTER)_Host)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+PROC
+PROC_AMP_Filter_ShowSell_Equipment((CHARACTER)_Host)
+AND
+NOT DB_AMP_AS_Disabled(1)
+AND
+DB_AMP_AS_SellEquipment(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_FilterEquipment_Sell_On");
+
+PROC
+PROC_AMP_Filter_ShowSell_Equipment((CHARACTER)_Host)
+AND
+NOT DB_AMP_AS_Disabled(1)
+AND
+NOT DB_AMP_AS_SellEquipment(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_FilterEquipment_Sell_Off");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterEquipment_Sell_On", 1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterEquipment_Sell_On", 0)
+THEN
+NOT DB_AMP_AS_SellEquipment(1);
+DB_AMP_AS_SellEquipment(0);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterEquipment_Sell_Off", 1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterEquipment_Sell_Off", 0)
+THEN
+NOT DB_AMP_AS_SellEquipment(0);
+DB_AMP_AS_SellEquipment(1);
+PROC_AMP_PlayModeEffect(_Host);
+
+// books
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AS_FilterBooks", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+THEN
+PROC_AMP_Filter_ShowLoot_Books(_Caster);
+
+PROC
+PROC_AMP_Filter_ShowLoot_Books((CHARACTER)_Host)
+AND
+DB_AMP_AL_LootBooks(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_FilterBooks_Loot_On");
+
+PROC
+PROC_AMP_Filter_ShowLoot_Books((CHARACTER)_Host)
+AND
+NOT DB_AMP_AL_LootBooks(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_FilterBooks_Loot_Off");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterBooks_Loot_On", 1)
+THEN
+PROC_AMP_Filter_ShowSell_Books(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterBooks_Loot_On", 0)
+THEN
+NOT DB_AMP_AL_LootBooks(1);
+DB_AMP_AL_LootBooks(0);
+PROC_AMP_Filter_ShowSell_Books(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterBooks_Loot_Off", 1)
+THEN
+PROC_AMP_Filter_ShowSell_Books(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterBooks_Loot_Off", 0)
+THEN
+NOT DB_AMP_AL_LootBooks(0);
+DB_AMP_AL_LootBooks(1);
+PROC_AMP_Filter_ShowSell_Books(_Host);
+
+PROC
+PROC_AMP_Filter_ShowSell_Books((CHARACTER)_Host)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+PROC
+PROC_AMP_Filter_ShowSell_Books((CHARACTER)_Host)
+AND
+NOT DB_AMP_AS_Disabled(1)
+AND
+DB_AMP_AS_SellBooks(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_FilterBooks_Sell_On");
+
+PROC
+PROC_AMP_Filter_ShowSell_Books((CHARACTER)_Host)
+AND
+NOT DB_AMP_AS_Disabled(1)
+AND
+NOT DB_AMP_AS_SellBooks(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_FilterBooks_Sell_Off");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterBooks_Sell_On", 1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterBooks_Sell_On", 0)
+THEN
+NOT DB_AMP_AS_SellBooks(1);
+DB_AMP_AS_SellBooks(0);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterBooks_Sell_Off", 1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterBooks_Sell_Off", 0)
+THEN
+NOT DB_AMP_AS_SellBooks(0);
+DB_AMP_AS_SellBooks(1);
+PROC_AMP_PlayModeEffect(_Host);
+
+// ingredients
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AS_FilterIngredients", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+THEN
+PROC_AMP_Filter_ShowLoot_Ingredients(_Caster);
+
+PROC
+PROC_AMP_Filter_ShowLoot_Ingredients((CHARACTER)_Host)
+AND
+DB_AMP_AL_LootIngredients(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_FilterIngredients_Loot_On");
+
+PROC
+PROC_AMP_Filter_ShowLoot_Ingredients((CHARACTER)_Host)
+AND
+NOT DB_AMP_AL_LootIngredients(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_FilterIngredients_Loot_Off");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterIngredients_Loot_On", 1)
+THEN
+PROC_AMP_Filter_ShowSell_Ingredients(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterIngredients_Loot_On", 0)
+THEN
+NOT DB_AMP_AL_LootIngredients(1);
+DB_AMP_AL_LootIngredients(0);
+PROC_AMP_Filter_ShowSell_Ingredients(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterIngredients_Loot_Off", 1)
+THEN
+PROC_AMP_Filter_ShowSell_Ingredients(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterIngredients_Loot_Off", 0)
+THEN
+NOT DB_AMP_AL_LootIngredients(0);
+DB_AMP_AL_LootIngredients(1);
+PROC_AMP_Filter_ShowSell_Ingredients(_Host);
+
+PROC
+PROC_AMP_Filter_ShowSell_Ingredients((CHARACTER)_Host)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+PROC
+PROC_AMP_Filter_ShowSell_Ingredients((CHARACTER)_Host)
+AND
+NOT DB_AMP_AS_Disabled(1)
+AND
+DB_AMP_AS_SellIngredients(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_FilterIngredients_Sell_On");
+
+PROC
+PROC_AMP_Filter_ShowSell_Ingredients((CHARACTER)_Host)
+AND
+NOT DB_AMP_AS_Disabled(1)
+AND
+NOT DB_AMP_AS_SellIngredients(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_FilterIngredients_Sell_Off");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterIngredients_Sell_On", 1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterIngredients_Sell_On", 0)
+THEN
+NOT DB_AMP_AS_SellIngredients(1);
+DB_AMP_AS_SellIngredients(0);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterIngredients_Sell_Off", 1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterIngredients_Sell_Off", 0)
+THEN
+NOT DB_AMP_AS_SellIngredients(0);
+DB_AMP_AS_SellIngredients(1);
+PROC_AMP_PlayModeEffect(_Host);
+
+// containers
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AS_FilterContainers", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+THEN
+PROC_AMP_Filter_ShowLoot_Containers(_Caster);
+
+PROC
+PROC_AMP_Filter_ShowLoot_Containers((CHARACTER)_Host)
+AND
+DB_AMP_AL_LootContainers(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_FilterContainers_Loot_On");
+
+PROC
+PROC_AMP_Filter_ShowLoot_Containers((CHARACTER)_Host)
+AND
+NOT DB_AMP_AL_LootContainers(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_FilterContainers_Loot_Off");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterContainers_Loot_On", 1)
+THEN
+PROC_AMP_Filter_ShowSell_Containers(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterContainers_Loot_On", 0)
+THEN
+NOT DB_AMP_AL_LootContainers(1);
+DB_AMP_AL_LootContainers(0);
+PROC_AMP_Filter_ShowSell_Containers(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterContainers_Loot_Off", 1)
+THEN
+PROC_AMP_Filter_ShowSell_Containers(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterContainers_Loot_Off", 0)
+THEN
+NOT DB_AMP_AL_LootContainers(0);
+DB_AMP_AL_LootContainers(1);
+PROC_AMP_Filter_ShowSell_Containers(_Host);
+
+PROC
+PROC_AMP_Filter_ShowSell_Containers((CHARACTER)_Host)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+PROC
+PROC_AMP_Filter_ShowSell_Containers((CHARACTER)_Host)
+AND
+NOT DB_AMP_AS_Disabled(1)
+AND
+DB_AMP_AS_SellContainers(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_FilterContainers_Sell_On");
+
+PROC
+PROC_AMP_Filter_ShowSell_Containers((CHARACTER)_Host)
+AND
+NOT DB_AMP_AS_Disabled(1)
+AND
+NOT DB_AMP_AS_SellContainers(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_FilterContainers_Sell_Off");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterContainers_Sell_On", 1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterContainers_Sell_On", 0)
+THEN
+NOT DB_AMP_AS_SellContainers(1);
+DB_AMP_AS_SellContainers(0);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterContainers_Sell_Off", 1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterContainers_Sell_Off", 0)
+THEN
+NOT DB_AMP_AS_SellContainers(0);
+DB_AMP_AS_SellContainers(1);
+PROC_AMP_PlayModeEffect(_Host);
+
+// camp chest delivery, cycle all/junk/cheap/off. yes=apply no=next
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AL_CampSend", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_AL_CampSend_All");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_CampSend_All", 1)
+THEN
+SysClear("DB_AMP_AL_CampSend", 1);
+DB_AMP_AL_CampSend(1);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_CampSend_All", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AL_CampSend_Junk");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_CampSend_Junk", 1)
+THEN
+SysClear("DB_AMP_AL_CampSend", 1);
+DB_AMP_AL_CampSend(2);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_CampSend_Junk", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AL_CampSend_Cheap");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_CampSend_Cheap", 1)
+THEN
+SysClear("DB_AMP_AL_CampSend", 1);
+DB_AMP_AL_CampSend(3);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_CampSend_Cheap", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AL_CampSend_Off");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_CampSend_Off", 1)
+THEN
+SysClear("DB_AMP_AL_CampSend", 1);
+DB_AMP_AL_CampSend(0);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_CampSend_Off", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AL_CampSend_All");
+
+EXITSECTION
+ENDEXITSECTION

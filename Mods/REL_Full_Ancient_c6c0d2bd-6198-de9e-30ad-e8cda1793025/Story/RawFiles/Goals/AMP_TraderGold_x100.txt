@@ -1,0 +1,66 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// traders excluded from the gold bonus, exploit-prone
+DB_AMP_NoGoldBonus((CHARACTER)S_GLO_Volo_2af25a85-5b9a-4794-85d3-0bd4c4d262fa);
+
+KBSECTION
+
+// a pickpocketed trader, success or fail, never gets the 20k back. hub flag is set in AMP_PickpocketPenalty.txt
+
+PROC
+PROC_DoGenTradeItems((CHARACTER)_Player, (CHARACTER)_Npc)
+AND
+DB_AMP_HubTrader(_Npc)
+AND
+NOT DB_AMP_NoGoldBonus(_Npc)
+AND
+NOT DB_AMP_HubEverStolen(_Npc, _)
+AND
+GetGold(_Npc, (INTEGER)_CurrentGold)
+AND
+_CurrentGold > 0
+AND
+IntegerSubtract(0, _CurrentGold, (INTEGER)_NegGold)
+AND
+NOT DB_AMP_GameMode("STOCK")
+THEN
+AddGold(_Npc, _NegGold);
+AddGold(_Npc, 20000);
+
+PROC
+PROC_DoGenTradeItems((CHARACTER)_Player, (CHARACTER)_Npc)
+AND
+DB_AMP_HubTrader(_Npc)
+AND
+NOT DB_AMP_NoGoldBonus(_Npc)
+AND
+NOT DB_AMP_HubEverStolen(_Npc, _)
+AND
+GetGold(_Npc, (INTEGER)_CurrentGold)
+AND
+_CurrentGold == 0
+AND
+NOT DB_AMP_GameMode("STOCK")
+THEN
+AddGold(_Npc, 20000);
+
+// on death strip their gold so it doesn't drop as loot, hubs only
+IF
+Dying((CHARACTER)_Npc)
+AND
+DB_AMP_HubTrader(_Npc)
+AND
+GetGold(_Npc, (INTEGER)_CurrentGold)
+AND
+_CurrentGold > 0
+AND
+IntegerSubtract(0, _CurrentGold, (INTEGER)_NegGold)
+AND
+NOT DB_AMP_GameMode("STOCK")
+THEN
+AddGold(_Npc, _NegGold);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,186 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// pool idx 10, needs U'kra's idx 9 so the sizes chain 10 -> 11
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_MirrorPool(10, _, _)
+AND
+DB_AMP_MirrorPool(9, _, _)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_OldSize)
+THEN
+DB_AMP_MirrorPool(10, AMP_ULTRA_Summon_11_d5f7dcba-bbc3-4395-9fd2-7d488055e05f, 1);
+NOT DB_AMP_MirrorPool_Size(_OldSize);
+DB_AMP_MirrorPool_Size(11);
+
+IF
+DB_AMP_MirrorChase_Mob((CHARACTER)_Neva, AMP_ULTRA_Summon_11_d5f7dcba-bbc3-4395-9fd2-7d488055e05f)
+THEN
+DB_AMP_Plus_Neva_Alive(_Neva);
+ApplyStatus(_Neva, "AMP_NEVA_MINDS_EYE", -1.0, 1, _Neva);
+ApplyStatus(_Neva, "AMP_NEVA_NIGHT_PACT", -1.0, 1, _Neva);
+
+IF
+TurnStarted((CHARACTER)_Neva)
+AND
+DB_AMP_Plus_Neva_Alive(_Neva)
+AND
+NOT DB_AMP_Plus_Neva_Opened(_Neva)
+THEN
+DB_AMP_Plus_Neva_Opened(_Neva);
+DB_AMP_Plus_Neva_OpenPulse(_Neva);
+
+IF
+DB_AMP_Plus_Neva_OpenPulse((CHARACTER)_Neva)
+AND
+DB_Players((CHARACTER)_P)
+THEN
+ApplyStatus(_P, "AMP_NEVA_MOVED", 12.0, 1, _Neva);
+
+IF
+DB_AMP_Plus_Neva_OpenPulse((CHARACTER)_Neva)
+THEN
+NOT DB_AMP_Plus_Neva_OpenPulse(_Neva);
+
+IF
+TurnStarted((CHARACTER)_C)
+AND
+DB_Players(_C)
+AND
+DB_AMP_Plus_Neva_Alive((CHARACTER)_Neva)
+AND
+CombatGetGuidFor(_C, (GUIDSTRING)_Combat)
+AND
+CombatGetGuidFor(_Neva, _Combat)
+AND
+GetPosition(_C, (REAL)_X, (REAL)_Y, (REAL)_Z)
+THEN
+PROC_AMP_Plus_Neva_Stamp(_C, _X, _Y, _Z);
+
+PROC
+PROC_AMP_Plus_Neva_Stamp((CHARACTER)_C, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+DB_AMP_Plus_Neva_Pos(_C, (REAL)_OX, (REAL)_OY, (REAL)_OZ)
+THEN
+NOT DB_AMP_Plus_Neva_Pos(_C, _OX, _OY, _OZ);
+
+PROC
+PROC_AMP_Plus_Neva_Stamp((CHARACTER)_C, (REAL)_X, (REAL)_Y, (REAL)_Z)
+THEN
+DB_AMP_Plus_Neva_Pos(_C, _X, _Y, _Z);
+
+IF
+TurnEnded((CHARACTER)_C)
+AND
+DB_AMP_Plus_Neva_Pos(_C, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+DB_AMP_Plus_Neva_Alive((CHARACTER)_Neva)
+AND
+GetDistanceToPosition(_C, _X, _Y, _Z, (REAL)_D)
+AND
+_D > 1.0
+THEN
+PROC_AMP_Plus_Neva_Moved(_C, _Neva);
+
+PROC
+PROC_AMP_Plus_Neva_Moved((CHARACTER)_C, (CHARACTER)_Neva)
+AND
+HasActiveStatus(_C, "SNEAKING", 1)
+THEN
+ApplyStatus(_C, "AMP_NEVA_SENSE_TRY", 0.0, 1, _Neva);
+
+PROC
+PROC_AMP_Plus_Neva_Moved((CHARACTER)_C, (CHARACTER)_Neva)
+AND
+HasActiveStatus(_C, "INVISIBLE", 1)
+THEN
+ApplyStatus(_C, "AMP_NEVA_SENSE_TRY", 0.0, 1, _Neva);
+
+PROC
+PROC_AMP_Plus_Neva_Moved((CHARACTER)_C, (CHARACTER)_Neva)
+AND
+NOT HasActiveStatus(_C, "SNEAKING", 1)
+AND
+NOT HasActiveStatus(_C, "INVISIBLE", 1)
+THEN
+ApplyStatus(_C, "AMP_NEVA_MOVED", 12.0, 1, _Neva);
+
+IF
+StatusApplied((CHARACTER)_C, "DOWNED", _, _)
+AND
+DB_Players(_C)
+AND
+DB_AMP_Plus_Neva_Alive((CHARACTER)_Neva)
+THEN
+ApplyStatus(_C, "CHILL_TOUCH", 12.0, 1, _Neva);
+
+IF
+StatusApplied((CHARACTER)_T, "AMP_NEVA_ATROPHY_MARK", (CHARACTER)_Src, _)
+AND
+Random(5, (INTEGER)_R)
+THEN
+PROC_AMP_Plus_Neva_Drain(_T, _R, _Src);
+
+PROC
+PROC_AMP_Plus_Neva_Drain((CHARACTER)_T, (INTEGER)_R, (CHARACTER)_Src)
+AND
+_R == 0
+THEN
+ApplyStatus(_T, "AMP_NEVA_DRAIN_STRENGTH", -1.0, 1, _Src);
+
+PROC
+PROC_AMP_Plus_Neva_Drain((CHARACTER)_T, (INTEGER)_R, (CHARACTER)_Src)
+AND
+_R == 1
+THEN
+ApplyStatus(_T, "AMP_NEVA_DRAIN_DEXTERITY", -1.0, 1, _Src);
+
+PROC
+PROC_AMP_Plus_Neva_Drain((CHARACTER)_T, (INTEGER)_R, (CHARACTER)_Src)
+AND
+_R == 2
+THEN
+ApplyStatus(_T, "AMP_NEVA_DRAIN_INTELLIGENCE", -1.0, 1, _Src);
+
+PROC
+PROC_AMP_Plus_Neva_Drain((CHARACTER)_T, (INTEGER)_R, (CHARACTER)_Src)
+AND
+_R == 3
+THEN
+ApplyStatus(_T, "AMP_NEVA_DRAIN_WISDOM", -1.0, 1, _Src);
+
+PROC
+PROC_AMP_Plus_Neva_Drain((CHARACTER)_T, (INTEGER)_R, (CHARACTER)_Src)
+AND
+_R == 4
+THEN
+ApplyStatus(_T, "AMP_NEVA_DRAIN_CHARISMA", -1.0, 1, _Src);
+
+IF
+Died((CHARACTER)_Neva)
+AND
+DB_AMP_Plus_Neva_Alive(_Neva)
+THEN
+NOT DB_AMP_Plus_Neva_Alive(_Neva);
+
+IF
+Died((CHARACTER)_Neva)
+AND
+DB_AMP_Plus_Neva_Opened(_Neva)
+THEN
+NOT DB_AMP_Plus_Neva_Opened(_Neva);
+
+IF
+Died((CHARACTER)_C)
+AND
+DB_AMP_Plus_Neva_Pos(_C, (REAL)_X, (REAL)_Y, (REAL)_Z)
+THEN
+NOT DB_AMP_Plus_Neva_Pos(_C, _X, _Y, _Z);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="008b9b10-493f-41db-87e0-8a05b92197ef" />
+					<attribute id="Name" type="LSString" value="AMP_RiverCrab_000" />
+					<attribute id="LevelName" type="FixedString" value="WLD_Main_A" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="TemplateName" type="FixedString" value="53dbd49e-4e34-4a51-a8e0-b2946529a1c6" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="AnubisConfigName" type="FixedString" value="GEN_Wander" />
+					<attribute id="VFXScale" type="float" value="0.5" />
+					<attribute id="Faction" type="guid" value="bef56903-2989-ff87-e5e5-1609d163df38" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="0.5" />
+							<attribute id="Position" type="fvec3" value="286.37784 0.35125482 282.9901" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0.4884586 0 0.8725871" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="WLD_Main_A" />
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="OnlyInDifficulty" />
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

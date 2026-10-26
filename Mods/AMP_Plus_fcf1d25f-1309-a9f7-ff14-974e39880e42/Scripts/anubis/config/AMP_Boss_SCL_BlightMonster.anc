@@ -1,0 +1,38 @@
+game.configs.AMP_Boss_SCL_BlightMonster = Config{
+    params={
+        wanderArea = {
+            type = EParamType.String,
+            help = [[Wander trigger for the blight.]],
+            required = false,
+            default = [[S_SCL_BlightCombat2_AmbushTrigger_a071e764-c2dc-4429-b762-adee843de932]]
+        },
+        ambushPos = {
+            type = EParamType.String,
+            help = [[Ambush trigger for the blight.]],
+            required = false,
+            default = [[S_SCL_BlightCombat2_Mound_01_AmbushPos_5f58408a-54be-4be1-8a33-a6d430bddd2c]]
+        },
+        blightVFX = {
+            type = EParamType.String,
+            help = [[Blight VFX.]],
+            required = false,
+            default = [[]]
+        },
+        usesAmbushStatus = {
+            type = EParamType.Bool,
+            help = [[Use ambush statuses.]],
+            required = false,
+            default = false
+        },
+    },
+    root=StateRef{game.roots.DefaultCharacter,
+        combat = StateRef{game.states.AMP_BossCombat},
+        genericBehaviours = StateRef{game.states.CrimesHumanoid},
+        idle = StateRef{game.states.SCL_BlightMonster,
+            ambushPos = params.ambushPos,
+            blightVFX = params.blightVFX,
+            wanderArea = params.wanderArea,
+            usesAmbushStatus = params.usesAmbushStatus,
+        },
+    }
+}

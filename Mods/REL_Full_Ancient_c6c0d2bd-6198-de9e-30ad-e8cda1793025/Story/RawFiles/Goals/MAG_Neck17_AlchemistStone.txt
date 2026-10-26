@@ -1,0 +1,162 @@
+Version 1
+SubGoalCombiner SGC_AND
+
+INITSECTION
+// low tier potions, 60% chance
+DB_NECK17_PotionList_Low(0, (ITEMROOT)CONS_Potion_Healing_A_d47006e9-8a51-453d-b200-9e0d42e9bbab);
+DB_NECK17_PotionList_Low(1, (ITEMROOT)UNI_CONS_Potion_Sleep_A_7090a500-c392-4566-a79f-0c9453323bc8);
+DB_NECK17_PotionList_Low(2, (ITEMROOT)CONS_Potion_Gaseous_Form_A_0138e3a4-4576-45a8-8592-85fa9adaee59);
+DB_NECK17_PotionList_Low(3, (ITEMROOT)CONS_Potion_Antitoxin_f0c7d8bb-85e9-4937-96bb-49ba69d28631);
+DB_NECK17_PotionList_Low(4, (ITEMROOT)CONS_Potion_AnimalSpeaking_A_447ee8a9-9319-4758-9dc7-2d8ba94e45b5);
+DB_NECK17_PotionList_Low(5, (ITEMROOT)ALCH_Solution_Potion_Jump_7406ffa4-930c-437f-b201-57b951e5165f);
+DB_NECK17_PotionList_Low(6, (ITEMROOT)ALCH_Solution_Potion_FeatherFall_179cfdd4-40ef-4f5c-ba6e-8c13f20aadc9);
+DB_NECK17_PotionList_Low(7, (ITEMROOT)ALCH_Solution_Potion_DetectThoughts_91da7fe8-a5f7-4132-9096-e8da4916a42e);
+
+// mid tier potions, 30% chance
+DB_NECK17_PotionList_Mid(0, (ITEMROOT)CONS_Potion_Healing_A_Greater_e3b95c96-dc26-40fe-bfc0-baa05e1abd20);
+DB_NECK17_PotionList_Mid(1, (ITEMROOT)CONS_Potion_Hill_Giant_Strength_c69fb092-2f4f-4688-82b6-7d92405626b1);
+DB_NECK17_PotionList_Mid(2, (ITEMROOT)CONS_Potion_Invisible_A_809d5026-4896-4b3a-986e-95da58da77e2);
+DB_NECK17_PotionList_Mid(3, (ITEMROOT)CONS_Potion_Lightning_Resistance_05257244-ab59-4eab-9745-d1fea7b8cd10);
+DB_NECK17_PotionList_Mid(4, (ITEMROOT)CONS_Potion_Necrotic_Resistance_f3c0aefb-a399-42c6-8d85-7fdceb6d18f5);
+DB_NECK17_PotionList_Mid(5, (ITEMROOT)CONS_Potion_Poison_Resistance_ae28b14c-0881-45fe-8237-9fcb1c951d3d);
+DB_NECK17_PotionList_Mid(6, (ITEMROOT)CONS_Potion_Psychic_Resistance_164ac6f3-8f93-4d74-9f72-e7c49723dedb);
+DB_NECK17_PotionList_Mid(7, (ITEMROOT)CONS_Potion_Speed_ad9f3f24-d755-48b6-aa7b-c34da068209f);
+DB_NECK17_PotionList_Mid(8, (ITEMROOT)CONS_Potion_Fire_Resistance_2608c096-a0f5-4172-ad04-c1b170e10d95);
+DB_NECK17_PotionList_Mid(9, (ITEMROOT)CONS_Potion_Acid_Resistance_491921dd-5c64-45da-a150-7ff7030705f7);
+DB_NECK17_PotionList_Mid(10, (ITEMROOT)ALCH_Solution_Potion_Flying_8b870692-8491-4f1b-9b5c-58cb0b47a62b);
+
+// best tier potions, 8% chance
+DB_NECK17_PotionList_Best(0, (ITEMROOT)CONS_Potion_Healing_A_Superior_df4f3495-abaf-4732-b82f-55bcccd561db);
+DB_NECK17_PotionList_Best(1, (ITEMROOT)CONS_Potion_Heroism_A_bb27cc17-5af9-4d53-818b-3e620f3f59f2);
+DB_NECK17_PotionList_Best(2, (ITEMROOT)CONS_Potion_Cloud_Giant_Strength_e6490cc8-7f81-4aac-95e8-a58ce5e88a31);
+DB_NECK17_PotionList_Best(3, (ITEMROOT)ALCH_Solution_Potion_Rest_Lesser_b0ff8d30-5825-49d4-8cd4-ebf3a3d0a024);
+DB_NECK17_PotionList_Best(4, (ITEMROOT)ALCH_Solution_Potion_Remedy_ae9a9360-7cbe-4f72-8bea-1dd5747c180d);
+
+// supreme tier potions, 2% chance
+DB_NECK17_PotionList_Supreme(0, (ITEMROOT)CONS_Potion_Healing_A_Supreme_7d78f227-e8d4-486d-8121-25cf0bee751d);
+DB_NECK17_PotionList_Supreme(1, (ITEMROOT)CONS_Potion_Invulnerability_7eb0b7b6-97fa-4ff5-a7bb-570ca11a3c64);
+DB_NECK17_PotionList_Supreme(2, (ITEMROOT)ALCH_Solution_Potion_Rest_Greater_4d801c1a-691e-47c8-88e7-78367b4e2c8e);
+
+KBSECTION
+
+// long rest -> roll potions
+IF
+UserCharacterLongRested((CHARACTER)_Player, (INTEGER)_IsFullRest)
+AND
+HasActiveStatus(_Player, "MAG_NECK17_TECHNICAL", 1)
+THEN
+PROC_NECK17_GeneratePotions(_Player);
+
+// generate 3-5 random potions
+PROC
+PROC_NECK17_GeneratePotions((CHARACTER)_Player)
+AND
+Random(3, _ExtraCount)
+AND
+IntegerSum(_ExtraCount, 3, _TotalCount)
+THEN
+DB_NECK17_GenerationCount(_Player, _TotalCount);
+PROC_NECK17_GenerateNext(_Player, 1);
+
+// recurse one potion at a time
+PROC
+PROC_NECK17_GenerateNext((CHARACTER)_Player, (INTEGER)_CurrentCount)
+AND
+DB_NECK17_GenerationCount(_Player, _TotalCount)
+AND
+_CurrentCount <= _TotalCount
+AND
+Random(100, _Roll)
+AND
+IntegerSum(_CurrentCount, 1, _NextCount)
+THEN
+PROC_NECK17_SelectPotionByRoll(_Player, _Roll);
+PROC_NECK17_GenerateNext(_Player, _NextCount);
+
+// done, clear counter
+PROC
+PROC_NECK17_GenerateNext((CHARACTER)_Player, (INTEGER)_CurrentCount)  
+AND
+DB_NECK17_GenerationCount(_Player, _TotalCount)
+AND
+_CurrentCount > _TotalCount
+THEN
+NOT DB_NECK17_GenerationCount(_Player, _TotalCount);
+
+// roll -> tier
+// low 0-59
+PROC
+PROC_NECK17_SelectPotionByRoll((CHARACTER)_Player, (INTEGER)_Roll)
+AND
+_Roll < 60
+AND
+Random(8, _Index)
+THEN
+PROC_NECK17_GiveLowTierPotion(_Player, _Index);
+
+// mid 60-89
+PROC
+PROC_NECK17_SelectPotionByRoll((CHARACTER)_Player, (INTEGER)_Roll)
+AND
+_Roll >= 60
+AND
+_Roll < 90
+AND
+Random(11, _Index)
+THEN
+PROC_NECK17_GiveMidTierPotion(_Player, _Index);
+
+// best 90-97
+PROC
+PROC_NECK17_SelectPotionByRoll((CHARACTER)_Player, (INTEGER)_Roll)
+AND
+_Roll >= 90
+AND
+_Roll < 98
+AND
+Random(5, _Index)
+THEN
+PROC_NECK17_GiveBestTierPotion(_Player, _Index);
+
+// supreme 98-99
+PROC
+PROC_NECK17_SelectPotionByRoll((CHARACTER)_Player, (INTEGER)_Roll)
+AND
+_Roll >= 98
+AND
+Random(3, _Index)
+THEN
+PROC_NECK17_GiveSupremeTierPotion(_Player, _Index);
+
+// hand out the rolled potion
+PROC
+PROC_NECK17_GiveLowTierPotion((CHARACTER)_Player, (INTEGER)_Index)
+AND
+DB_NECK17_PotionList_Low(_Index, _PotionTemplate)
+THEN
+TemplateAddTo(_PotionTemplate, _Player, 1, 1);
+
+PROC
+PROC_NECK17_GiveMidTierPotion((CHARACTER)_Player, (INTEGER)_Index)
+AND
+DB_NECK17_PotionList_Mid(_Index, _PotionTemplate)
+THEN
+TemplateAddTo(_PotionTemplate, _Player, 1, 1);
+
+PROC
+PROC_NECK17_GiveBestTierPotion((CHARACTER)_Player, (INTEGER)_Index)
+AND
+DB_NECK17_PotionList_Best(_Index, _PotionTemplate)
+THEN
+TemplateAddTo(_PotionTemplate, _Player, 1, 1);
+
+PROC
+PROC_NECK17_GiveSupremeTierPotion((CHARACTER)_Player, (INTEGER)_Index)
+AND
+DB_NECK17_PotionList_Supreme(_Index, _PotionTemplate)
+THEN
+TemplateAddTo(_PotionTemplate, _Player, 1, 1);
+
+EXITSECTION
+
+ENDEXITSECTION

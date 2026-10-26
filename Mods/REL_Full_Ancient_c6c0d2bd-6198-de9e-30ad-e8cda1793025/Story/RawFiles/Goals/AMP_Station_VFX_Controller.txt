@@ -1,0 +1,103 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_NOOP(1);
+
+KBSECTION
+// arcanizer station vfx swap. UseStarted/UseFinished fire fastest.
+
+// activate on use start
+IF
+UseStarted((CHARACTER)_Player, (ITEM)_Station)
+AND
+IsTagged((ITEM)_Station, (TAG)AMP_STATION_2_63e37ef0-064c-4065-a939-dc9724b9c85f, 1)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+RemoveStatus((ITEM)_Station, "ARCANIZER_STATION_ATTENTION_VFX");
+ApplyStatus((ITEM)_Station, "ARCANIZER_STATION_ACTIVE_VFX", -1.0, 1);
+
+IF
+UseStarted((CHARACTER)_Player, (ITEM)_Station)
+AND
+IsTagged((ITEM)_Station, (TAG)AMP_STATION_1_e39240da-bf08-4793-bd1f-609c93e4fa56, 1)
+AND
+IsTagged((ITEM)_Station, (TAG)AMP_STATION_2_63e37ef0-064c-4065-a939-dc9724b9c85f, 0)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+RemoveStatus((ITEM)_Station, "ARCANIZER_STATION_ATTENTION_VFX");
+ApplyStatus((ITEM)_Station, "ARCANIZER_STATION_ACTIVE_VFX", -1.0, 1);
+
+// deactivate on use finish
+IF
+UseFinished((CHARACTER)_Player, (ITEM)_Station, (INTEGER)_Success)
+AND
+IsTagged((ITEM)_Station, (TAG)AMP_STATION_2_63e37ef0-064c-4065-a939-dc9724b9c85f, 1)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+RemoveStatus((ITEM)_Station, "ARCANIZER_STATION_ACTIVE_VFX");
+ApplyStatus((ITEM)_Station, "ARCANIZER_STATION_ATTENTION_VFX", -1.0, 1);
+
+IF
+UseFinished((CHARACTER)_Player, (ITEM)_Station, (INTEGER)_Success)
+AND
+IsTagged((ITEM)_Station, (TAG)AMP_STATION_1_e39240da-bf08-4793-bd1f-609c93e4fa56, 1)
+AND
+IsTagged((ITEM)_Station, (TAG)AMP_STATION_2_63e37ef0-064c-4065-a939-dc9724b9c85f, 0)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+RemoveStatus((ITEM)_Station, "ARCANIZER_STATION_ACTIVE_VFX");
+ApplyStatus((ITEM)_Station, "ARCANIZER_STATION_ATTENTION_VFX", -1.0, 1);
+
+// fallback via template events
+
+// backup activate, station 1
+IF
+TemplateUseStarted((CHARACTER)_Player, (ITEMROOT)AMP_Arcanizer_Station_1_6cc268f0-825a-4fea-9c97-ece185de0908, (ITEM)_Station)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+NOT HasActiveStatus((ITEM)_Station, "ARCANIZER_STATION_ACTIVE_VFX", 0)
+THEN
+RemoveStatus((ITEM)_Station, "ARCANIZER_STATION_ATTENTION_VFX");
+ApplyStatus((ITEM)_Station, "ARCANIZER_STATION_ACTIVE_VFX", -1.0, 1);
+
+// backup activate, station 2
+IF
+TemplateUseStarted((CHARACTER)_Player, (ITEMROOT)AMP_Arcanizer_Station_2_63e37ef0-064c-4065-a939-dc9724b9c85f, (ITEM)_Station)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+NOT HasActiveStatus((ITEM)_Station, "ARCANIZER_STATION_ACTIVE_VFX", 0)
+THEN
+RemoveStatus((ITEM)_Station, "ARCANIZER_STATION_ATTENTION_VFX");
+ApplyStatus((ITEM)_Station, "ARCANIZER_STATION_ACTIVE_VFX", -1.0, 1);
+
+// backup deactivate, station 1
+IF
+TemplateUseFinished((CHARACTER)_Player, (ITEMROOT)AMP_Arcanizer_Station_1_6cc268f0-825a-4fea-9c97-ece185de0908, (ITEM)_Station, (INTEGER)_Success)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+HasActiveStatus((ITEM)_Station, "ARCANIZER_STATION_ACTIVE_VFX", 0)
+THEN
+RemoveStatus((ITEM)_Station, "ARCANIZER_STATION_ACTIVE_VFX");
+ApplyStatus((ITEM)_Station, "ARCANIZER_STATION_ATTENTION_VFX", -1.0, 1);
+
+// backup deactivate, station 2
+IF
+TemplateUseFinished((CHARACTER)_Player, (ITEMROOT)AMP_Arcanizer_Station_2_63e37ef0-064c-4065-a939-dc9724b9c85f, (ITEM)_Station, (INTEGER)_Success)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+HasActiveStatus((ITEM)_Station, "ARCANIZER_STATION_ACTIVE_VFX", 0)
+THEN
+RemoveStatus((ITEM)_Station, "ARCANIZER_STATION_ACTIVE_VFX");
+ApplyStatus((ITEM)_Station, "ARCANIZER_STATION_ATTENTION_VFX", -1.0, 1);
+
+EXITSECTION
+
+ENDEXITSECTION

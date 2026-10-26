@@ -1,0 +1,782 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// void capsule core: helpers, cache builder, timers, qrys, reward ux, cleanup.
+// reads config from config_registry + config_balance.
+
+// counter for unique deferredspawn tags (persists across the session)
+DB_AMP_VoidCapsule_DeferredCounter(0);
+
+KBSECTION
+
+// setactionuser - mp-safe actor tracking
+PROC
+PROC_AMP_VoidCapsule_SetActionUser((ITEM)_Capsule, (CHARACTER)_NewActor)
+AND
+DB_AMP_VoidCapsule_ActionUser(_Capsule, (CHARACTER)_OldActor)
+THEN
+NOT DB_AMP_VoidCapsule_ActionUser(_Capsule, _OldActor);
+DB_AMP_VoidCapsule_ActionUser(_Capsule, _NewActor);
+
+PROC
+PROC_AMP_VoidCapsule_SetActionUser((ITEM)_Capsule, (CHARACTER)_NewActor)
+AND
+NOT DB_AMP_VoidCapsule_ActionUser(_Capsule, _)
+THEN
+DB_AMP_VoidCapsule_ActionUser(_Capsule, _NewActor);
+
+// init charges on a fresh capsule (shared by coin/salvage/reroll/shard)
+PROC
+PROC_AMP_VoidCapsule_InitCharges((ITEM)_Capsule)
+AND
+NOT DB_AMP_VoidCapsule_Charges(_Capsule, _)
+AND
+DB_AMP_VoidCapsule_ChargesMaxActive((INTEGER)_Max)
+THEN
+DB_AMP_VoidCapsule_Charges(_Capsule, _Max);
+
+PROC
+PROC_AMP_VoidCapsule_InitCharges((ITEM)_Capsule)
+AND
+DB_AMP_VoidCapsule_Charges(_Capsule, _)
+THEN
+DB_NOOP(1);
+
+// decrement charges
+PROC
+PROC_AMP_VoidCapsule_Decrement((ITEM)_Capsule, (CHARACTER)_Owner)
+AND
+DB_AMP_VoidCapsule_Charges(_Capsule, (INTEGER)_Current)
+AND
+IntegerSubtract(_Current, 1, (INTEGER)_New)
+THEN
+NOT DB_AMP_VoidCapsule_Charges(_Capsule, _Current);
+PROC_AMP_VoidCapsule_DecrementApply(_Capsule, _Owner, _New);
+
+// decrementby - subtract n in one pass (single messagebox)
+PROC
+PROC_AMP_VoidCapsule_DecrementBy((ITEM)_Capsule, (CHARACTER)_Owner, (INTEGER)_Amount)
+AND
+DB_AMP_VoidCapsule_Charges(_Capsule, (INTEGER)_Current)
+AND
+IntegerSubtract(_Current, _Amount, (INTEGER)_New)
+THEN
+NOT DB_AMP_VoidCapsule_Charges(_Capsule, _Current);
+PROC_AMP_VoidCapsule_DecrementApply(_Capsule, _Owner, _New);
+
+// decrementapply - split by outcome
+// charges left (>0): write new value + hint
+PROC
+PROC_AMP_VoidCapsule_DecrementApply((ITEM)_Capsule, (CHARACTER)_Owner, (INTEGER)_New)
+AND
+_New > 0
+THEN
+DB_AMP_VoidCapsule_Charges(_Capsule, _New);
+PROC_AMP_VoidCapsule_ShowMessage(_Owner, _New);
+
+// depleted (<=0): mark + destroy timer
+PROC
+PROC_AMP_VoidCapsule_DecrementApply((ITEM)_Capsule, (CHARACTER)_Owner, (INTEGER)_New)
+AND
+_New <= 0
+THEN
+DB_AMP_VoidCapsule_Depleted(_Capsule);
+ObjectTimerLaunch(_Capsule, "AMP_VoidCapsule_Destroy", 500, 0);
+
+// show remaining-charges message
+PROC
+PROC_AMP_VoidCapsule_ShowMessage((CHARACTER)_Owner, (INTEGER)_Charges)
+AND
+IntegerToString(_Charges, (STRING)_ChargesStr)
+AND
+QRY_AMP_ShouldShowHint(1)
+THEN
+OpenMessageBox(_Owner, _ChargesStr);
+
+// release busy flag via timer (called by cleanup procs)
+PROC
+PROC_AMP_VoidCapsule_ReleaseBusy((ITEM)_Capsule)
+THEN
+ObjectTimerLaunch(_Capsule, "AMP_VoidCapsule_BusyRelease", 500, 0);
+
+// cache builder - refresh triggers
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_AMP_VoidCapsule_RefreshCache();
+
+// settings ui must call refreshcache on difficulty change to rebuild this.
+// no engine gamestarted event; first level-load on a new game covers fresh init.
+
+// refreshcache = clear + build
+PROC
+PROC_AMP_VoidCapsule_RefreshCache()
+THEN
+PROC_AMP_VoidCapsule_ClearActive();
+PROC_AMP_VoidCapsule_BuildActive();
+
+// clearactive - one proc per active db
+PROC
+PROC_AMP_VoidCapsule_ClearActive()
+AND
+DB_AMP_VoidCapsule_ChargesMaxActive((INTEGER)_V)
+THEN
+NOT DB_AMP_VoidCapsule_ChargesMaxActive(_V);
+
+PROC
+PROC_AMP_VoidCapsule_ClearActive()
+AND
+DB_AMP_VoidCapsule_RerollWindowActive((INTEGER)_V)
+THEN
+NOT DB_AMP_VoidCapsule_RerollWindowActive(_V);
+
+PROC
+PROC_AMP_VoidCapsule_ClearActive()
+AND
+DB_AMP_VoidCapsule_RerollCostActive((INTEGER)_V)
+THEN
+NOT DB_AMP_VoidCapsule_RerollCostActive(_V);
+
+PROC
+PROC_AMP_VoidCapsule_ClearActive()
+AND
+DB_AMP_VoidCapsule_PityThresholdActive((INTEGER)_V)
+THEN
+NOT DB_AMP_VoidCapsule_PityThresholdActive(_V);
+
+PROC
+PROC_AMP_VoidCapsule_ClearActive()
+AND
+DB_AMP_VoidCapsule_PityRewardCountActive((INTEGER)_V)
+THEN
+NOT DB_AMP_VoidCapsule_PityRewardCountActive(_V);
+
+PROC
+PROC_AMP_VoidCapsule_ClearActive()
+AND
+DB_AMP_VoidCapsule_PityRewardRarityActive((STRING)_V)
+THEN
+NOT DB_AMP_VoidCapsule_PityRewardRarityActive(_V);
+
+PROC
+PROC_AMP_VoidCapsule_ClearActive()
+AND
+DB_AMP_VoidCapsule_SalvageChanceActive((STRING)_R, (INTEGER)_V)
+THEN
+NOT DB_AMP_VoidCapsule_SalvageChanceActive(_R, _V);
+
+// buildactive - 3 branches per param (mode match / no mode / mode missing -> standard)
+
+// chargesmax
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+DB_AMP_VoidCapsule_ChargesMaxByMode(_M, (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_ChargesMaxActive(_V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+NOT DB_AMP_Difficulty_Mode(_)
+AND
+DB_AMP_VoidCapsule_ChargesMaxByMode("STANDARD", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_ChargesMaxActive(_V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+NOT DB_AMP_VoidCapsule_ChargesMaxByMode(_M, _)
+AND
+DB_AMP_VoidCapsule_ChargesMaxByMode("STANDARD", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_ChargesMaxActive(_V);
+
+// rerollwindow
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+DB_AMP_VoidCapsule_RerollWindowByMode(_M, (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_RerollWindowActive(_V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+NOT DB_AMP_Difficulty_Mode(_)
+AND
+DB_AMP_VoidCapsule_RerollWindowByMode("STANDARD", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_RerollWindowActive(_V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+NOT DB_AMP_VoidCapsule_RerollWindowByMode(_M, _)
+AND
+DB_AMP_VoidCapsule_RerollWindowByMode("STANDARD", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_RerollWindowActive(_V);
+
+// rerollcost
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+DB_AMP_VoidCapsule_RerollCostByMode(_M, (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_RerollCostActive(_V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+NOT DB_AMP_Difficulty_Mode(_)
+AND
+DB_AMP_VoidCapsule_RerollCostByMode("STANDARD", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_RerollCostActive(_V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+NOT DB_AMP_VoidCapsule_RerollCostByMode(_M, _)
+AND
+DB_AMP_VoidCapsule_RerollCostByMode("STANDARD", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_RerollCostActive(_V);
+
+// pitythreshold
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+DB_AMP_VoidCapsule_PityThresholdByMode(_M, (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_PityThresholdActive(_V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+NOT DB_AMP_Difficulty_Mode(_)
+AND
+DB_AMP_VoidCapsule_PityThresholdByMode("STANDARD", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_PityThresholdActive(_V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+NOT DB_AMP_VoidCapsule_PityThresholdByMode(_M, _)
+AND
+DB_AMP_VoidCapsule_PityThresholdByMode("STANDARD", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_PityThresholdActive(_V);
+
+// pityrewardcount
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+DB_AMP_VoidCapsule_PityRewardCountByMode(_M, (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_PityRewardCountActive(_V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+NOT DB_AMP_Difficulty_Mode(_)
+AND
+DB_AMP_VoidCapsule_PityRewardCountByMode("STANDARD", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_PityRewardCountActive(_V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+NOT DB_AMP_VoidCapsule_PityRewardCountByMode(_M, _)
+AND
+DB_AMP_VoidCapsule_PityRewardCountByMode("STANDARD", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_PityRewardCountActive(_V);
+
+// pityrewardrarity (string)
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+DB_AMP_VoidCapsule_PityRewardRarityByMode(_M, (STRING)_V)
+THEN
+DB_AMP_VoidCapsule_PityRewardRarityActive(_V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+NOT DB_AMP_Difficulty_Mode(_)
+AND
+DB_AMP_VoidCapsule_PityRewardRarityByMode("STANDARD", (STRING)_V)
+THEN
+DB_AMP_VoidCapsule_PityRewardRarityActive(_V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+NOT DB_AMP_VoidCapsule_PityRewardRarityByMode(_M, _)
+AND
+DB_AMP_VoidCapsule_PityRewardRarityByMode("STANDARD", (STRING)_V)
+THEN
+DB_AMP_VoidCapsule_PityRewardRarityActive(_V);
+
+// salvagechance: uncommon
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+DB_AMP_VoidCapsule_SalvageChanceByMode(_M, "Uncommon", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_SalvageChanceActive("Uncommon", _V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+NOT DB_AMP_Difficulty_Mode(_)
+AND
+DB_AMP_VoidCapsule_SalvageChanceByMode("STANDARD", "Uncommon", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_SalvageChanceActive("Uncommon", _V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+NOT DB_AMP_VoidCapsule_SalvageChanceByMode(_M, "Uncommon", _)
+AND
+DB_AMP_VoidCapsule_SalvageChanceByMode("STANDARD", "Uncommon", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_SalvageChanceActive("Uncommon", _V);
+
+// salvagechance: rare
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+DB_AMP_VoidCapsule_SalvageChanceByMode(_M, "Rare", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_SalvageChanceActive("Rare", _V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+NOT DB_AMP_Difficulty_Mode(_)
+AND
+DB_AMP_VoidCapsule_SalvageChanceByMode("STANDARD", "Rare", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_SalvageChanceActive("Rare", _V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+NOT DB_AMP_VoidCapsule_SalvageChanceByMode(_M, "Rare", _)
+AND
+DB_AMP_VoidCapsule_SalvageChanceByMode("STANDARD", "Rare", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_SalvageChanceActive("Rare", _V);
+
+// salvagechance: veryrare
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+DB_AMP_VoidCapsule_SalvageChanceByMode(_M, "VeryRare", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_SalvageChanceActive("VeryRare", _V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+NOT DB_AMP_Difficulty_Mode(_)
+AND
+DB_AMP_VoidCapsule_SalvageChanceByMode("STANDARD", "VeryRare", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_SalvageChanceActive("VeryRare", _V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+NOT DB_AMP_VoidCapsule_SalvageChanceByMode(_M, "VeryRare", _)
+AND
+DB_AMP_VoidCapsule_SalvageChanceByMode("STANDARD", "VeryRare", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_SalvageChanceActive("VeryRare", _V);
+
+// salvagechance: legendary
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+DB_AMP_VoidCapsule_SalvageChanceByMode(_M, "Legendary", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_SalvageChanceActive("Legendary", _V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+NOT DB_AMP_Difficulty_Mode(_)
+AND
+DB_AMP_VoidCapsule_SalvageChanceByMode("STANDARD", "Legendary", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_SalvageChanceActive("Legendary", _V);
+
+PROC
+PROC_AMP_VoidCapsule_BuildActive()
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+NOT DB_AMP_VoidCapsule_SalvageChanceByMode(_M, "Legendary", _)
+AND
+DB_AMP_VoidCapsule_SalvageChanceByMode("STANDARD", "Legendary", (INTEGER)_V)
+THEN
+DB_AMP_VoidCapsule_SalvageChanceActive("Legendary", _V);
+
+// spawn reward - deferredspawn with a unique tag
+PROC
+PROC_AMP_VoidCapsule_SpawnReward((CHARACTER)_Owner, (STRING)_Context, (ITEMROOT)_Template, (ITEM)_Capsule)
+AND
+DB_AMP_VoidCapsule_DeferredCounter((INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_Tag)
+THEN
+NOT DB_AMP_VoidCapsule_DeferredCounter(_N);
+DB_AMP_VoidCapsule_DeferredCounter(_Tag);
+DB_AMP_VoidCapsule_DeferredSpawn(_Tag, _Owner, _Context, _Template, _Capsule);
+DB_AMP_VoidCapsule_SeedReset_TagPending(_Tag, _Owner, _Template);
+PROC_AMP_SeedReset(_Owner, _Template);
+
+// seedreset done callback - spawns the real reward when the tag matches
+PROC
+PROC_AMP_SeedReset_Done((CHARACTER)_Owner, (ITEMROOT)_Template)
+AND
+DB_AMP_VoidCapsule_SeedReset_TagPending((INTEGER)_Tag, _Owner, _Template)
+AND
+DB_AMP_VoidCapsule_DeferredSpawn(_Tag, _Owner, (STRING)_Context, _Template, (ITEM)_Capsule)
+THEN
+NOT DB_AMP_VoidCapsule_SeedReset_TagPending(_Tag, _Owner, _Template);
+NOT DB_AMP_VoidCapsule_DeferredSpawn(_Tag, _Owner, _Context, _Template, _Capsule);
+TemplateAddTo(_Template, _Owner, 1, 0);
+DB_AMP_VoidCapsule_PendingReward(_Owner, _Context, _Template, _Capsule);
+
+// no tag pending - seedreset fired without spawnreward
+PROC
+PROC_AMP_SeedReset_Done((CHARACTER)_Owner, (ITEMROOT)_Template)
+AND
+NOT DB_AMP_VoidCapsule_SeedReset_TagPending(_, _Owner, _Template)
+THEN
+DB_NOOP(1);
+
+// qry iscoin
+QRY
+QRY_AMP_VoidCapsule_IsCoin((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+DB_AMP_VoidCapsule_Coin(_T, _)
+THEN
+DB_NOOP(1);
+
+// qry iscontainer - capsule template registered
+QRY
+QRY_AMP_VoidCapsule_IsContainer((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+DB_AMP_VoidCapsule_Container(_T, _)
+THEN
+DB_NOOP(1);
+
+// qry isshard - 5 defs: granular shard dbs + tot registry fallback
+QRY
+QRY_AMP_VoidCapsule_IsShard((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+DB_AMP_Shard_Weapon_Stackable(_T, _, _)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_VoidCapsule_IsShard((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+DB_AMP_Shard_Weapon_NonStack(_T, _, _, _)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_VoidCapsule_IsShard((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+DB_AMP_Shard_Equip_Stackable(_T, _, _, _)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_VoidCapsule_IsShard((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+DB_AMP_Shard_Equip_NonStack(_T, _, _, _, _)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_VoidCapsule_IsShard((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+DB_ToT_ShardReg(_T, _)
+THEN
+DB_NOOP(1);
+
+// qry isrerollitem - inside the reroll window
+QRY
+QRY_AMP_VoidCapsule_IsRerollItem((ITEM)_Item)
+AND
+HasActiveStatus(_Item, "AMP_REROLL_WINDOW", 1)
+AND
+DB_AMP_Reroll_ItemInfo(_Item, _, _)
+THEN
+DB_NOOP(1);
+
+// qry isvalidartifact - equipable + allowed slot + value >= 150
+QRY
+QRY_AMP_VoidCapsule_IsValidArtifact((ITEM)_Item)
+AND
+IsEquipable(_Item, 1)
+AND
+GetEquipmentSlotForItem(_Item, (EQUIPMENTSLOT)_Slot)
+AND
+DB_AMP_VoidCapsule_AllowedSlot(_Slot)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+_Value >= 150
+THEN
+DB_NOOP(1);
+
+// timer - destroy capsule once depleted
+IF
+ObjectTimerFinished((ITEM)_Capsule, "AMP_VoidCapsule_Destroy")
+THEN
+NOT DB_AMP_VoidCapsule_Depleted(_Capsule);
+RequestDelete(_Capsule);
+
+// timer - eject item back to its inventory owner
+// item sits in a container whose top-level holder is a player
+IF
+ObjectTimerFinished((ITEM)_Item, "AMP_VoidCapsule_Eject")
+AND
+GetFirstInventoryOwnerCharacter(_Item, (CHARACTER)_Owner)
+AND
+DB_Players(_Owner)
+THEN
+ToInventory(_Item, _Owner, 1, 1, 0);
+
+// 17. timer - busy release (normal path after flow cleanup)
+IF
+ObjectTimerFinished((ITEM)_Capsule, "AMP_VoidCapsule_BusyRelease")
+AND
+DB_AMP_VoidCapsule_Busy(_Capsule)
+THEN
+NOT DB_AMP_VoidCapsule_Busy(_Capsule);
+
+// 18. timer - busy safety (releases stuck flag - armed by dispatch)
+IF
+ObjectTimerFinished((ITEM)_Capsule, "AMP_VoidCapsule_BusySafety")
+AND
+DB_AMP_VoidCapsule_Busy(_Capsule)
+THEN
+NOT DB_AMP_VoidCapsule_Busy(_Capsule);
+
+// 19. reward ux - usestarted (player opens reward cube)
+IF
+UseStarted((CHARACTER)_Player, (ITEM)_Container)
+AND
+GetTemplate(_Container, (ITEMROOT)_Template)
+AND
+DB_AMP_VoidCapsule_Reward(_, _, _Template)
+AND
+NOT DB_AMP_VoidCapsule_ContainerOpened(_Container)
+THEN
+DB_AMP_VoidCapsule_ContainerOpened(_Container);
+PlaySound(_Player, "SCL_HarperScouts_ShadowCreatures_ImpactRiser_B");
+ObjectTimerLaunch(_Container, "AMP_VoidCapsule_ForceDelete", 5000, 0);
+
+// 20. reward ux - forcedelete timer finished + empty
+IF
+ObjectTimerFinished((ITEM)_Container, "AMP_VoidCapsule_ForceDelete")
+AND
+IsInventoryEmpty(_Container, 1)
+THEN
+NOT DB_AMP_VoidCapsule_ContainerOpened(_Container);
+RequestDelete(_Container);
+
+// forcedelete timer finished but container still has items - leave it alone
+IF
+ObjectTimerFinished((ITEM)_Container, "AMP_VoidCapsule_ForceDelete")
+AND
+NOT IsInventoryEmpty(_Container, 1)
+THEN
+DB_NOOP(1);
+
+// 21. reward ux - auto-delete emptied reward container
+IF
+RemovedFrom((ITEM)_Item, (ITEM)_Container)
+AND
+GetTemplate(_Container, (ITEMROOT)_Template)
+AND
+DB_AMP_VoidCapsule_Reward(_, _, _Template)
+AND
+IsInventoryEmpty(_Container, 1)
+AND
+NOT DB_AMP_VoidCapsule_Deleting(_Container)
+THEN
+DB_AMP_VoidCapsule_Deleting(_Container);
+ObjectTimerLaunch(_Container, "AMP_VoidCapsule_DeleteEmpty", 200, 0);
+
+// deleteempty timer finished + still empty - drop container
+IF
+ObjectTimerFinished((ITEM)_Container, "AMP_VoidCapsule_DeleteEmpty")
+AND
+IsInventoryEmpty(_Container, 1)
+THEN
+NOT DB_AMP_VoidCapsule_Deleting(_Container);
+NOT DB_AMP_VoidCapsule_ContainerOpened(_Container);
+RequestDelete(_Container);
+
+// deleteempty timer finished + not empty - cancel deletion
+IF
+ObjectTimerFinished((ITEM)_Container, "AMP_VoidCapsule_DeleteEmpty")
+AND
+NOT IsInventoryEmpty(_Container, 1)
+THEN
+NOT DB_AMP_VoidCapsule_Deleting(_Container);
+
+// auto-extract covers coin rewards, salvage cubes and reroll respawns, RemovedFrom still fires per item for reroll marking
+// decoy cubes are excluded, their treasuretable loot must not eject to the player
+IF
+AddedTo((ITEM)_Item, (ITEM)_Container, _)
+AND
+GetTemplate(_Container, (ITEMROOT)_Template)
+AND
+DB_AMP_VoidCapsule_Reward(_, _, _Template)
+AND
+NOT DB_AMP_SeedReset_DecoyCube(_Container)
+THEN
+ObjectTimerLaunch(_Item, "AMP_VoidCapsule_Eject", 100, 0);
+
+// 23. level-load cleanup - transient per-flow / per-item flags
+// deferredcounter is intentionally not cleared (unique tags persist across session).
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_VoidCapsule_CoinProcessed((ITEM)_X)
+THEN
+NOT DB_AMP_VoidCapsule_CoinProcessed(_X);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_VoidCapsule_SalvageProcessing((ITEM)_X)
+THEN
+NOT DB_AMP_VoidCapsule_SalvageProcessing(_X);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_VoidCapsule_ShardProcessing((ITEM)_X)
+THEN
+NOT DB_AMP_VoidCapsule_ShardProcessing(_X);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_VoidCapsule_RerollProcessing((ITEM)_X)
+THEN
+NOT DB_AMP_VoidCapsule_RerollProcessing(_X);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_VoidCapsule_Busy((ITEM)_X)
+THEN
+NOT DB_AMP_VoidCapsule_Busy(_X);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_VoidCapsule_ActionUser((ITEM)_X, (CHARACTER)_Y)
+THEN
+NOT DB_AMP_VoidCapsule_ActionUser(_X, _Y);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_VoidCapsule_DeferredSpawn((INTEGER)_T, (CHARACTER)_O, (STRING)_C, (ITEMROOT)_Tpl, (ITEM)_Cap)
+THEN
+NOT DB_AMP_VoidCapsule_DeferredSpawn(_T, _O, _C, _Tpl, _Cap);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_VoidCapsule_SeedReset_TagPending((INTEGER)_T, (CHARACTER)_O, (ITEMROOT)_Tpl)
+THEN
+NOT DB_AMP_VoidCapsule_SeedReset_TagPending(_T, _O, _Tpl);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_VoidCapsule_PendingReward((CHARACTER)_O, (STRING)_C, (ITEMROOT)_Tpl, (ITEM)_Cap)
+THEN
+NOT DB_AMP_VoidCapsule_PendingReward(_O, _C, _Tpl, _Cap);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_VoidCapsule_ContainerOpened((ITEM)_X)
+THEN
+NOT DB_AMP_VoidCapsule_ContainerOpened(_X);
+
+EXITSECTION
+ENDEXITSECTION

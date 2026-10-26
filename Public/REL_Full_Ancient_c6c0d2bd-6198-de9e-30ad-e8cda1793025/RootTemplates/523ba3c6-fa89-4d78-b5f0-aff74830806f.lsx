@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="400" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="523ba3c6-fa89-4d78-b5f0-aff74830806f" />
+					<attribute id="Name" type="LSString" value="AMP_Arcanizer_Pedestal" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="e4d2628f-78b3-4fc5-a8aa-21ac2ced5f0c" />
+					<attribute id="VisualTemplate" type="FixedString" value="6f61387b-afa4-b005-ddc3-b5f2ea89edd5" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="ce2f4176-43e0-76e4-ae27-1f39c7070d9e" />
+					<attribute id="CanClimbOn" type="bool" value="True" />
+					<attribute id="WalkOn" type="bool" value="True" />
+					<attribute id="IsInteractionDisabled" type="bool" value="True" />
+					<children>
+						<node id="Bounds">
+							<children>
+								<node id="Bound">
+									<attribute id="Type" type="uint8" value="0" />
+									<attribute id="Shape" type="uint8" value="1" />
+									<attribute id="Min" type="fvec3" value="-1.9704571 -0.00068342686 -2.0009196" />
+									<attribute id="Max" type="fvec3" value="6.006156 0.74233174 1.991483" />
+									<attribute id="Radius" type="float" value="0.2165065" />
+									<attribute id="Height" type="float" value="1" />
+								</node>
+								<node id="Bound">
+									<attribute id="Type" type="uint8" value="1" />
+									<attribute id="Shape" type="uint8" value="1" />
+									<attribute id="Min" type="fvec3" value="-1.975317 0 -1.994509" />
+									<attribute id="Max" type="fvec3" value="6.057234 0.7504741 1.978481" />
+									<attribute id="Radius" type="float" value="0.433013" />
+									<attribute id="Height" type="float" value="1" />
+								</node>
+								<node id="Bound">
+									<attribute id="Type" type="uint8" value="2" />
+									<attribute id="Shape" type="uint8" value="1" />
+									<attribute id="Min" type="fvec3" value="-2.0078487 0 -1.9934441" />
+									<attribute id="Max" type="fvec3" value="6.0555058 0.753279 1.9733514" />
+									<attribute id="Radius" type="float" value="0.433013" />
+									<attribute id="Height" type="float" value="1" />
+								</node>
+							</children>
+						</node>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="ARCANIZER_PEDESTAL_OVERLAY_VFX" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

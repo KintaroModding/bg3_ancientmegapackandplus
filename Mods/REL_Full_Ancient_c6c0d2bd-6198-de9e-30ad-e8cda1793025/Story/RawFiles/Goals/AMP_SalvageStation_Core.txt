@@ -1,0 +1,197 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// salvage station - converts magical gear into astrum crystals by rarity
+
+// station template
+DB_AMP_SalvageStation((ITEMROOT)AMP_Arcanizer_Station_1_6cc268f0-825a-4fea-9c97-ece185de0908);
+
+// rarity by gold value
+DB_AMP_RarityValueRange("Uncommon", 150, 399);
+DB_AMP_RarityValueRange("Rare", 400, 799);
+DB_AMP_RarityValueRange("VeryRare", 800, 2499);
+DB_AMP_RarityValueRange("Legendary", 2500, 3501);
+
+// recipes: rarity -> output crystal
+DB_AMP_SalvageRecipe("Uncommon", (ITEMROOT)Enchant_Crystal4_faca0315-cb41-4a63-9b37-9afc6a1d1da4);
+DB_AMP_SalvageRecipe("Rare", (ITEMROOT)Enchant_Crystal2_f90f99ba-d30d-4f05-8cde-b90092f128d8);
+DB_AMP_SalvageRecipe("VeryRare", (ITEMROOT)Enchant_Crystal_d09be0fd-f230-47af-a523-c919e41c1261);
+DB_AMP_SalvageRecipe("Legendary", (ITEMROOT)Enchant_Crystal3_98f1085c-1a49-474a-875c-cd0f2d9fdff0);
+
+// allowed equipment slots
+DB_AMP_AllowedSlot("Helmet", EQUIPMENTSLOT.Helmet);
+DB_AMP_AllowedSlot("Breast", EQUIPMENTSLOT.Breast);
+DB_AMP_AllowedSlot("Cloak", EQUIPMENTSLOT.Cloak);
+DB_AMP_AllowedSlot("MeleeMainHand", EQUIPMENTSLOT.MeleeMainHand);
+DB_AMP_AllowedSlot("MeleeOffHand", EQUIPMENTSLOT.MeleeOffHand);
+DB_AMP_AllowedSlot("RangedMainHand", EQUIPMENTSLOT.RangedMainHand);
+DB_AMP_AllowedSlot("Ring", EQUIPMENTSLOT.Ring);
+DB_AMP_AllowedSlot("Boots", EQUIPMENTSLOT.Boots);
+DB_AMP_AllowedSlot("Gloves", EQUIPMENTSLOT.Gloves);
+DB_AMP_AllowedSlot("Amulet", EQUIPMENTSLOT.Amulet);
+DB_AMP_AllowedSlot("MusicalInstrument", EQUIPMENTSLOT.MusicalInstrument);
+
+// cosmetic slots, never salvage
+DB_AMP_SlotBlacklist("Wings", EQUIPMENTSLOT.Wings);
+DB_AMP_SlotBlacklist("Horns", EQUIPMENTSLOT.Horns);
+
+KBSECTION
+
+// track who used the station
+IF
+UseStarted((CHARACTER)_Character, (ITEM)_Station)
+AND
+GetTemplate(_Station, (ITEMROOT)_StationTemplate)
+AND
+DB_AMP_SalvageStation(_StationTemplate)
+THEN
+SysClear("DB_AMP_SalvageStation_LastUser", 1);
+DB_AMP_SalvageStation_LastUser(_Character);
+
+// item dropped into the station -> validate
+IF
+AddedTo(_Item, _Container, _)
+AND
+DB_AMP_SalvageStation((ITEMROOT)_StationTemplate)
+AND
+GetTemplate(_Container, _StationTemplate)
+AND
+NOT DB_AMP_SalvageProcessing(_Item)
+THEN
+// mark processing so we don't loop
+DB_AMP_SalvageProcessing((ITEM)_Item);
+PROC_AMP_ValidateSalvageInput((ITEM)_Item, (ITEM)_Container);
+
+// valid item -> convert
+PROC
+PROC_AMP_ValidateSalvageInput((ITEM)_Item, (ITEM)_Container)
+AND
+QRY_AMP_IsValidMagicalItem(_Item)
+THEN
+PROC_AMP_ProcessSalvageConversion((ITEM)_Item, (ITEM)_Container);
+
+// invalid -> drop the processing flag
+PROC
+PROC_AMP_ValidateSalvageInput((ITEM)_Item, (ITEM)_Container)
+AND
+NOT QRY_AMP_IsValidMagicalItem(_Item)
+AND
+DB_AMP_SalvageProcessing(_Item)
+THEN
+NOT DB_AMP_SalvageProcessing((ITEM)_Item);
+
+// salvageable = equipable, allowed non-blacklisted slot, value >= uncommon floor
+QRY
+QRY_AMP_IsValidMagicalItem((ITEM)_Item)
+AND
+IsEquipable(_Item, 1)
+AND
+GetEquipmentSlotForItem(_Item, (EQUIPMENTSLOT)_Slot)
+AND
+DB_AMP_AllowedSlot(_, _Slot)
+AND
+NOT DB_AMP_SlotBlacklist(_, _Slot)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+DB_AMP_RarityValueRange("Uncommon", _MinValue, _)
+AND
+_Value >= _MinValue
+THEN
+DB_NOOP(1);
+
+// convert: delete item, then reward by rarity to the last user
+PROC
+PROC_AMP_ProcessSalvageConversion((ITEM)_Item, (ITEM)_Station)
+AND
+DB_AMP_SalvageStation_LastUser((CHARACTER)_Player)
+AND
+DB_AMP_SalvageProcessing(_Item)
+THEN
+RequestDelete((ITEM)_Item);
+PROC_AMP_DetermineRarityAndReward(_Item, _Player);
+NOT DB_AMP_SalvageProcessing((ITEM)_Item);
+
+// fallback: no last user, reward the host
+PROC
+PROC_AMP_ProcessSalvageConversion((ITEM)_Item, (ITEM)_Station)
+AND
+NOT DB_AMP_SalvageStation_LastUser(_)
+AND
+GetHostCharacter((CHARACTER)_Player)
+AND
+DB_AMP_SalvageProcessing(_Item)
+THEN
+RequestDelete((ITEM)_Item);
+PROC_AMP_DetermineRarityAndReward(_Item, _Player);
+NOT DB_AMP_SalvageProcessing((ITEM)_Item);
+
+// reward by rarity, highest first
+
+// legendary
+PROC
+PROC_AMP_DetermineRarityAndReward((ITEM)_Item, (CHARACTER)_Player)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+DB_AMP_RarityValueRange("Legendary", _MinLegendary, _)
+AND
+_Value >= _MinLegendary
+AND
+DB_AMP_SalvageRecipe("Legendary", (ITEMROOT)_CrystalTemplate)
+THEN
+TemplateAddTo(_CrystalTemplate, _Player, 1, 1);
+
+// very rare
+PROC
+PROC_AMP_DetermineRarityAndReward((ITEM)_Item, (CHARACTER)_Player)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+DB_AMP_RarityValueRange("VeryRare", _MinVeryRare, _MaxVeryRare)
+AND
+_Value >= _MinVeryRare
+AND
+_Value <= _MaxVeryRare
+AND
+DB_AMP_SalvageRecipe("VeryRare", (ITEMROOT)_CrystalTemplate)
+THEN
+TemplateAddTo(_CrystalTemplate, _Player, 1, 1);
+
+// rare
+PROC
+PROC_AMP_DetermineRarityAndReward((ITEM)_Item, (CHARACTER)_Player)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+DB_AMP_RarityValueRange("Rare", _MinRare, _MaxRare)
+AND
+_Value >= _MinRare
+AND
+_Value <= _MaxRare
+AND
+DB_AMP_SalvageRecipe("Rare", (ITEMROOT)_CrystalTemplate)
+THEN
+TemplateAddTo(_CrystalTemplate, _Player, 1, 1);
+
+// uncommon
+PROC
+PROC_AMP_DetermineRarityAndReward((ITEM)_Item, (CHARACTER)_Player)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+DB_AMP_RarityValueRange("Uncommon", _MinUncommon, _MaxUncommon)
+AND
+_Value >= _MinUncommon
+AND
+_Value <= _MaxUncommon
+AND
+DB_AMP_SalvageRecipe("Uncommon", (ITEMROOT)_CrystalTemplate)
+THEN
+TemplateAddTo(_CrystalTemplate, _Player, 1, 1);
+
+EXITSECTION
+// clear tracking
+SysClear("DB_AMP_SalvageStation_LastUser", 1);
+
+ENDEXITSECTION

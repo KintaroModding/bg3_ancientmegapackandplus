@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<save>
+    <version major="4" minor="8" revision="0" build="200"/>
+    <region id="IconUVList">
+        <node id="root">
+            <children>
+                <node id="IconUV">
+                    <attribute id="MapKey" type="FixedString" value="AMP_Skeleton01"/>
+                    <attribute id="U1" type="float" value="0.00390625"/>
+                    <attribute id="U2" type="float" value="0.62109375"/>
+                    <attribute id="V1" type="float" value="0.00390625"/>
+                    <attribute id="V2" type="float" value="0.77734375"/>
+                </node>
+            </children>
+        </node>
+    </region>
+    <region id="TextureAtlasInfo">
+        <node id="root">
+            <children>
+                <node id="TextureAtlasIconSize">
+                    <attribute id="Height" type="int32" value="100"/>
+                    <attribute id="Width" type="int32" value="80"/>
+                </node>
+                <node id="TextureAtlasPath">
+                    <attribute id="Path" type="string" value="Assets/Textures/Icons/UnitIcons.dds"/>
+                    <attribute id="UUID" type="FixedString" value="0f0e4f4f-927c-1eb8-ec48-da3f28356b98"/>
+                </node>
+                <node id="TextureAtlasTextureSize">
+                    <attribute id="Height" type="int32" value="128"/>
+                    <attribute id="Width" type="int32" value="128"/>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

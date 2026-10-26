@@ -1,0 +1,63 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// tether goal counts foes only on a death, so a soul raised by the last kill stays
+// recheck after the grace and each round start, only living hostiles of the owner count
+
+IF
+StatusApplied((CHARACTER)_Spirit, "MAG_NNECROTIC_SOUL_FLAG", _, _)
+THEN
+RealtimeObjectTimerLaunch(_Spirit, "AMP_Plus_NNecrotic_Settle", 6000);
+
+IF
+ObjectTimerFinished((CHARACTER)_Spirit, "AMP_Plus_NNecrotic_Settle")
+AND
+DB_AMP_NNecrotic_ActiveSoul(_Spirit, (CHARACTER)_Player)
+THEN
+PROC_AMP_Plus_NNecrotic_TryCleanup(_Player);
+
+IF
+CombatRoundStarted(_CombatID, _)
+AND
+DB_AMP_NNecrotic_ActiveSoul(_, (CHARACTER)_Player)
+AND
+DB_Is_InCombat(_Player, _CombatID)
+THEN
+PROC_AMP_Plus_NNecrotic_TryCleanup(_Player);
+
+IF
+Died(_)
+AND
+DB_AMP_NNecrotic_ActiveSoul(_, (CHARACTER)_Player)
+THEN
+PROC_AMP_Plus_NNecrotic_TryCleanup(_Player);
+
+PROC
+PROC_AMP_Plus_NNecrotic_TryCleanup((CHARACTER)_Player)
+AND
+NOT QRY_AMP_NNecrotic_AnyRecentSpawn(_Player)
+AND
+NOT QRY_AMP_Plus_NNecrotic_FoeAlive(_Player)
+THEN
+PROC_AMP_NNecrotic_CleanupAllSpirits(_Player);
+
+QRY
+QRY_AMP_Plus_NNecrotic_FoeAlive((CHARACTER)_Player)
+AND
+DB_AMP_NNecrotic_RealEnemy((CHARACTER)_Other, (GUIDSTRING)_CombatID)
+AND
+DB_Is_InCombat(_Player, _CombatID)
+AND
+NOT DB_PermaDefeated(_Other)
+AND
+IsDead(_Other, 0)
+AND
+IsEnemy(_Player, _Other, 1)
+THEN
+DB_NOOP(1);
+
+EXITSECTION
+ENDEXITSECTION

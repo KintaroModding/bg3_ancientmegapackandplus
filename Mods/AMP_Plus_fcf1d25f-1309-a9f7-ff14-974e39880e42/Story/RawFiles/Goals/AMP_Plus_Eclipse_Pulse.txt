@@ -1,0 +1,68 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// explosions ignore elevation, so saves go out per member
+
+IF
+StatusApplied((CHARACTER)_Boss, "AMP_ECLIPSE_PULSE", _, _)
+AND
+CombatGetGuidFor(_Boss, (GUIDSTRING)_CombatGuid)
+AND
+CombatGetInvolvedPartyMembersCount(_CombatGuid, (INTEGER)_N)
+AND
+_N > 0
+THEN
+PROC_AMP_Plus_EclipsePulse_Iterate(_Boss, _CombatGuid, _N, 1);
+
+PROC
+PROC_AMP_Plus_EclipsePulse_Iterate((CHARACTER)_Boss, (GUIDSTRING)_CombatGuid, (INTEGER)_Total, (INTEGER)_Idx)
+AND
+_Idx <= _Total
+AND
+CombatGetInvolvedPartyMember(_CombatGuid, _Idx, (CHARACTER)_Member)
+AND
+IsEnemy(_Member, _Boss, 1)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_Eclipse_ApplySaves(_Member, _Boss);
+PROC_AMP_Plus_EclipsePulse_Iterate(_Boss, _CombatGuid, _Total, _Next);
+
+PROC
+PROC_AMP_Plus_EclipsePulse_Iterate((CHARACTER)_Boss, (GUIDSTRING)_CombatGuid, (INTEGER)_Total, (INTEGER)_Idx)
+AND
+_Idx <= _Total
+AND
+CombatGetInvolvedPartyMember(_CombatGuid, _Idx, (CHARACTER)_Member)
+AND
+IsEnemy(_Member, _Boss, 0)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_EclipsePulse_Iterate(_Boss, _CombatGuid, _Total, _Next);
+
+PROC
+PROC_AMP_Plus_Eclipse_ApplySaves((CHARACTER)_Member, (CHARACTER)_Boss)
+AND
+DB_AMP_Difficulty_Mode("CASUAL")
+THEN
+ApplyStatus(_Member, "AMP_Plus_ECLIPSE_SAVES_CAS", 6.0, 1, _Boss);
+
+PROC
+PROC_AMP_Plus_Eclipse_ApplySaves((CHARACTER)_Member, (CHARACTER)_Boss)
+AND
+DB_AMP_Difficulty_Mode("STANDARD")
+THEN
+ApplyStatus(_Member, "AMP_ECLIPSE_SAVES", 6.0, 1, _Boss);
+
+PROC
+PROC_AMP_Plus_Eclipse_ApplySaves((CHARACTER)_Member, (CHARACTER)_Boss)
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+THEN
+ApplyStatus(_Member, "AMP_Plus_ECLIPSE_SAVES_HARD", 6.0, 1, _Boss);
+
+EXITSECTION
+ENDEXITSECTION

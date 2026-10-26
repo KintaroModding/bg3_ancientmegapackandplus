@@ -1,0 +1,142 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// mirrors of the base entry rules, which gate on GetHostCharacter
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AL_Toggle", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Host)
+AND
+_Caster != _Host
+THEN
+PROC_AMP_AL_ShowToggle(_Caster);
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AL_CampProtect", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Host)
+AND
+_Caster != _Host
+THEN
+PROC_AMP_AL_ShowCampProtect(_Caster);
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AL_MinValue", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Host)
+AND
+_Caster != _Host
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_AL_MinValue_00");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AS_Toggle", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Host)
+AND
+_Caster != _Host
+THEN
+PROC_AMP_AS_ShowToggle(_Caster);
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AS_MaxValue", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Host)
+AND
+_Caster != _Host
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_AS_MaxValue_050");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AS_RarityProtect", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Host)
+AND
+_Caster != _Host
+THEN
+PROC_AMP_AS_ShowRarityProtect(_Caster);
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AS_FilterConsumables", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Host)
+AND
+_Caster != _Host
+THEN
+PROC_AMP_Filter_ShowLoot_Consumables(_Caster);
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AS_FilterEquipment", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Host)
+AND
+_Caster != _Host
+THEN
+PROC_AMP_Filter_ShowLoot_Equipment(_Caster);
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AS_FilterBooks", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Host)
+AND
+_Caster != _Host
+THEN
+PROC_AMP_Filter_ShowLoot_Books(_Caster);
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AS_FilterIngredients", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Host)
+AND
+_Caster != _Host
+THEN
+PROC_AMP_Filter_ShowLoot_Ingredients(_Caster);
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AS_FilterContainers", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Host)
+AND
+_Caster != _Host
+THEN
+PROC_AMP_Filter_ShowLoot_Containers(_Caster);
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_AL_CampSend", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Host)
+AND
+_Caster != _Host
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_AL_CampSend_All");
+
+EXITSECTION
+ENDEXITSECTION

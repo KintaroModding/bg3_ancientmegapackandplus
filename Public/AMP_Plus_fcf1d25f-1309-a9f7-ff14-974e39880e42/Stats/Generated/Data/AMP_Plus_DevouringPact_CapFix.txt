@@ -1,0 +1,7 @@
+// IgnoreResting is what makes the tier cap hold across rests. Osiris resets the counter on unequip
+
+new entry "AMP_BLADE_DEBUFF"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_BLADE_DEBUFF"
+data "StatusPropertyFlags" "MultiplyEffectsByDuration;FreezeDuration;DisableOverhead;DisableCombatlog;DisablePortraitIndicator;ApplyToDead;IgnoreResting"

@@ -1,0 +1,59 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// hardest mode swaps in the visage kit, he has no boss protection. status also comes off when the mode drops
+// Honour mode's own visage action is parked while the kit is on
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_AMP_Plus_NereHard_Sync();
+
+IF
+SavegameLoaded()
+THEN
+PROC_AMP_Plus_NereHard_Sync();
+
+PROC
+PROC_AMP_Plus_NereHard_Sync()
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+AND
+NOT DB_Dead(S_UND_TheDrowNere_06bf05c5-216b-4eaf-91f5-8f1dd3d57f30)
+AND
+NOT DB_PermaDefeated(S_UND_TheDrowNere_06bf05c5-216b-4eaf-91f5-8f1dd3d57f30)
+THEN
+ApplyStatus(S_UND_TheDrowNere_06bf05c5-216b-4eaf-91f5-8f1dd3d57f30, "AMP_PLUS_NERE_HARD", -1.0, 1, S_UND_TheDrowNere_06bf05c5-216b-4eaf-91f5-8f1dd3d57f30);
+
+PROC
+PROC_AMP_Plus_NereHard_Sync()
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+AND
+HasPassive(S_UND_TheDrowNere_06bf05c5-216b-4eaf-91f5-8f1dd3d57f30, "LegendaryAction_UND_Nere_PsychicMirror", 1)
+THEN
+DB_AMP_Plus_NereHard_ParkedMirror(1);
+RemovePassive(S_UND_TheDrowNere_06bf05c5-216b-4eaf-91f5-8f1dd3d57f30, "LegendaryAction_UND_Nere_PsychicMirror");
+
+PROC
+PROC_AMP_Plus_NereHard_Sync()
+AND
+NOT DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+THEN
+RemoveStatus(S_UND_TheDrowNere_06bf05c5-216b-4eaf-91f5-8f1dd3d57f30, "AMP_PLUS_NERE_HARD", NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_NereHard_Sync()
+AND
+NOT DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+AND
+DB_AMP_Plus_NereHard_ParkedMirror(1)
+THEN
+NOT DB_AMP_Plus_NereHard_ParkedMirror(1);
+AddPassive(S_UND_TheDrowNere_06bf05c5-216b-4eaf-91f5-8f1dd3d57f30, "LegendaryAction_UND_Nere_PsychicMirror");
+
+EXITSECTION
+ENDEXITSECTION

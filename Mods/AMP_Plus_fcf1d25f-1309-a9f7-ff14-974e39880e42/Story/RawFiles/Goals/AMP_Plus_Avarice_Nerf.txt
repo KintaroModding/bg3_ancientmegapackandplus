@@ -1,0 +1,67 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+IF
+DB_AMP_GenMerchantStocked((CHARACTER)_Trader)
+AND
+DB_AMP_TraderAct(_Trader, 1)
+AND
+NOT DB_AMP_Plus_AvariceReNerf(_Trader)
+AND
+Random(3, (INTEGER)_R)
+AND
+IntegerSum(_R, 2, (INTEGER)_Count)
+THEN
+DB_AMP_Plus_AvariceReNerf(_Trader);
+TemplateRemoveFrom(AMP_Capsule_Reward_Generic_1_bc44d261-edfb-424e-ab61-98d16899ab7b, _Trader, 99);
+TemplateAddTo(AMP_Capsule_Reward_Generic_1_bc44d261-edfb-424e-ab61-98d16899ab7b, _Trader, _Count, 0);
+
+IF
+DB_AMP_GenMerchantStocked((CHARACTER)_Trader)
+AND
+DB_AMP_TraderAct(_Trader, 2)
+AND
+NOT DB_AMP_Plus_AvariceReNerf(_Trader)
+AND
+Random(3, (INTEGER)_R)
+AND
+IntegerSum(_R, 2, (INTEGER)_Count)
+THEN
+DB_AMP_Plus_AvariceReNerf(_Trader);
+TemplateRemoveFrom(AMP_Capsule_Reward_Generic_2_7a85cccb-48ed-4948-9d25-03a4b0a79114, _Trader, 99);
+TemplateAddTo(AMP_Capsule_Reward_Generic_2_7a85cccb-48ed-4948-9d25-03a4b0a79114, _Trader, _Count, 0);
+
+IF
+DB_AMP_GenMerchantStocked((CHARACTER)_Trader)
+AND
+DB_AMP_TraderAct(_Trader, 3)
+AND
+NOT DB_AMP_Plus_AvariceReNerf(_Trader)
+AND
+Random(2, (INTEGER)_R)
+AND
+IntegerSum(_R, 1, (INTEGER)_Count)
+THEN
+DB_AMP_Plus_AvariceReNerf(_Trader);
+TemplateRemoveFrom(AMP_Capsule_Reward_Generic_3_007e6a6b-4d51-4a7f-b03a-560e06edd5f6, _Trader, 99);
+TemplateAddTo(AMP_Capsule_Reward_Generic_3_007e6a6b-4d51-4a7f-b03a-560e06edd5f6, _Trader, _Count, 0);
+
+// pre-takes the base per-combat lock so its death roll never fires, base releases it on CombatEnded
+
+IF
+CombatStarted((GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+NOT DB_AMP_PlanarDrop_Done(_CombatGuid)
+AND
+Random(100, (INTEGER)_Roll)
+AND
+_Roll < 60
+THEN
+DB_AMP_PlanarDrop_Done(_CombatGuid);
+
+EXITSECTION
+ENDEXITSECTION

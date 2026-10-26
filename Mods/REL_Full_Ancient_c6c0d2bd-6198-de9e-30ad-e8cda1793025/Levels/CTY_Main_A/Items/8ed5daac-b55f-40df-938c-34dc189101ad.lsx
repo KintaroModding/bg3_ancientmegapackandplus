@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="8ed5daac-b55f-40df-938c-34dc189101ad" />
+					<attribute id="Name" type="LSString" value="S_LOW_MagicItemRamazith_001" />
+					<attribute id="LevelName" type="FixedString" value="CTY_Main_A" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="56906f41-61a3-4c23-aa46-2295e08d9add" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="CanBePickedUp" type="bool" value="True" />
+					<attribute id="IsInteractionDisabled" type="bool" value="True" />
+					<attribute id="Tooltip" type="uint8" value="1" />
+					<attribute id="ActivationGroupId" type="FixedString" value="" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="0 0 0" />
+							<attribute id="RotationQuat" type="fvec4" value="0 -0.90759593 0 0.41984147" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="CTY_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="57e10301-831b-f6cf-1258-a93ddbdfa8a0" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="3c339aec-891c-4261-efe6-ec0b015d7172" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="b79020fc-b456-2ead-cd09-4a3b7f721a32" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="2c154a11-b9d6-bc43-92ad-0fdb5a791460" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="54f669e6-5920-3fe4-5222-54d28cce51d6" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

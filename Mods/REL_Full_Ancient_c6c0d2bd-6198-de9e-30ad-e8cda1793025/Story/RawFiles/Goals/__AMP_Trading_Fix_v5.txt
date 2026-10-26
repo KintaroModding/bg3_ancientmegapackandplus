@@ -1,0 +1,350 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// tracks vanilla table changes through the PROC_SetCustomTradeTreasure intercept
+// original table is clean vanilla for off mode, _amp adds rel_* items for first visits, _none is consumables only for repeats
+// DB_AMP_ToNone maps an _amp table to its _none, DB_AMP_Visited marks traders met on the current table
+
+//region starting _amp tables (all tracked traders)
+
+// act 1 - druid grove
+DB_AMP_CurrentTable((CHARACTER)S_DEN_ServantPlight_005_13db744d-8a48-4131-8801-fd5fc289fdf6, "DEN_Entrance_Trade_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_DEN_Weaponsmith_e2ad06ec-8034-479a-9f69-b86faea6dc79, "DEN_Weaponsmith_Trade_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_DEN_PickpocketTrader_e1fda08b-45d4-41db-84b5-20e9931ba5af, "DEN_Thiefling_Trade_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_GLO_Volo_2af25a85-5b9a-4794-85d3-0bd4c4d262fa, "DEN_Volo_Trade_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_HAG_Hag_c457d064-83fb-4ec6-b74d-1f30dfafd12d, "DEN_Ethel_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_GLO_Prodigy_b6a3a9e9-b6eb-4c19-ab3f-4c431178fe1b, "DEN_Prodigy_AMP");
+
+// act 1 - goblin camp
+DB_AMP_CurrentTable((CHARACTER)S_GOB_Festivities_Trader_3c9f9d17-835c-46bf-929d-240e3b4adb55, "GOB_Festivities_Trader_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_GOB_Quartermaster_646936f3-8d8d-484e-9361-cd1ed484c615, "GOB_Quartermaster_AMP");
+
+// act 1 - risen road / zhentarim
+DB_AMP_CurrentTable((CHARACTER)S_PLA_Refugee_003_bf6a657e-091c-43e5-b18a-a2ca7ca7e511, "PLA_Tollhouse_SuppliesTrader_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_PLA_ZhentDungeon_Zhent03_8f63a70b-93e1-4841-8dea-b1f1542fd3c1, "PLA_ZhentarimTrader_AMP");
+// brem: quest-locked expanded inventory (allowedspecialtrade -> pla_zhentarimtrader -> redirect to extra)
+DB_AMP_SpecialRedirect((CHARACTER)S_PLA_ZhentDungeon_Zhent03_8f63a70b-93e1-4841-8dea-b1f1542fd3c1, "PLA_ZhentarimTrader", "PLA_ZhentarimTrader_Extra_AMP");
+
+// act 1 - moonrise outskirts
+DB_AMP_CurrentTable((CHARACTER)S_MOO_BugBearVendor_8cb1cace-ef98-4387-8b76-2e8efc5cfe89, "MOO_BugBearvendor_Trade_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_MOO_InfernalVendor_511c9413-25fe-449c-a81d-4b09bc20745a, "MOO_InfernalTrader_Trade_AMP");
+
+// act 1 - creche
+DB_AMP_CurrentTable((CHARACTER)S_CRE_Quartermistress_ffb0ec61-5739-4b34-8d27-e61b1f4500ad, "CRE_GithQuartermistress_Trade_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_GLO_Expeditioner_5f4048ba-72ef-43c2-9528-1c9a12f3f82f, "CRE_Expeditioner_Trade_AMP");
+
+// act 1 - underdark
+DB_AMP_CurrentTable((CHARACTER)S_GLO_SocietyOfBrilliance_Hobgoblin_db424bf6-81ad-463d-8974-f73f1df5af09, "UND_SocietyOfBrilliance_Hobgoblin_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_GLO_SocietyOfBrilliance_MindFlayer_1f9937ef-9207-4db6-a833-e4083d571f53, "UND_SocietyOfBrilliance_Mindflayer_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_IRN_Omeluum_df88c3a5-9ee1-4a23-a7b6-34c07cef8a33, "UND_SocietyOfBrilliance_Mindflayer_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_GLO_Derryth_2b537d2a-14c8-43b3-ab71-d537c925a2a7, "UND_MycoVillage_AlchemistDwarf_Trade_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_UND_DuergarRaftCaptain_473ae3b0-d8e9-428d-9129-bbffe449b8ec, "UND_KC_Trader_Weapons_AMP");
+
+// act 1 - barcus (starts at camp after rescue)
+DB_AMP_CurrentTable((CHARACTER)S_FOR_UnfortunateGnome_6e45a00b-bad2-40bb-9403-147b9e92d976, "FOR_UnfortunateGnomeTrader_AMP");
+
+// act 2 - last light inn
+DB_AMP_CurrentTable((CHARACTER)S_HAV_HavenOutcasts_HarperQuartermaster_f769815c-d437-4a45-9ae4-aebd53ec8f7c, "HAV_HarperQuarterMaster_AMP");
+
+// act 3 - wyrm's crossing
+DB_AMP_CurrentTable((CHARACTER)S_WYR_Danthelon_3570c049-effb-4839-aaae-c628b5d01456, "WYR_Danthelon_Trader_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_WYR_Rivington_ArmoryShopkeeper_b0caa965-537c-4d10-a672-4943825b73ea, "WYR_OrinsImpersonation_Smith_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_WYR_Circus_Merchant_60e4431d-dee5-4af4-a05e-65896ec64f2f, "WYR_Circus_KoboldMerchant_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_GLO_SharranInformer_b2cf2efe-ec06-48cd-8fb7-ad596d61164f, "WYR_SharranInformer_Basic_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_WYR_Ironhand_Merchant_6fbabd70-2f22-47aa-8def-78459e662ca6, "WYR_Ironhand_Merchant_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_WYR_SharessCaress_Bartender_ab24945c-268d-4f90-b8ea-bbb11cd50157, "WYR_SharessCaress_Bartender_Trade_AMP");
+DB_AMP_CurrentTable((CHARACTER)WYR_UnfortunateGnome_febf6225-9355-45a9-84ff-40ee4e927fb3, "WYR_UnfortunateGnome_AMP");
+
+// act 3 - lower city
+DB_AMP_CurrentTable((CHARACTER)S_LOW_SteepsTrader_Weapons_3c4ebba4-d2ba-4f07-98ed-bc523845ce3b, "LOW_SteepsTrader_Weapons_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_LOW_SteepsTrader_Armor_dc7d1866-a206-4029-81a4-ad18ffbcf3ea, "LOW_SteepsTrader_Armor_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_LOW_DevilsFee_Helsik_299a1c00-ff53-415e-ad8e-9bcbbae55597, "LOW_InfernalTrade_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_LOW_TempleGuardian_32ec6ad3-c085-4fc5-943b-e2e3a05d9f2b, "LOW_StormshoreTabernacle_Guardian_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_LOW_VoicelessPenitent_f4039bb7-7456-4c35-a45a-20aa2f23ccf5, "LOW_VoicelessPenitent_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_LOW_Guildhall_Bartender_00c74e3b-5880-4525-9558-860e4f7c77e2, "LOW_Guildhall_Bartender_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_LOW_Guildhall_FetchersBrat_002_3352a47c-4259-464d-8047-65bc8a2adff9, "LOW_Guildhall_FetchersBrat_Trade_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_LOW_MurderTribunal_MurderMerchant_68a568cd-1e5e-46f1-9c5f-53d3eed23bd5, "LOW_MurderTribunal_Merchant_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_LOW_FatherCarrion_b003409c-364f-4065-94bf-7436001d890e, "LOW_MysticCarrion_Trade_AMP");
+DB_AMP_CurrentTable((CHARACTER)LOW_Undead_Mummy_FatherCarrion_cfe6ad05-98cc-47ac-b524-f48333cae046, "LOW_MysticCarrion_Trade_AMP");
+// thrumbo: not a trader until beggartakeover, added dynamically
+
+// act 3 - sorcerous sundries (projections)
+DB_AMP_CurrentTable((CHARACTER)S_HAV_RolanHologramSpeaker_1fb677fe-8937-4aba-aab1-3811f239e7d5, "LOW_SorcerousSundries_Trade_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_LOW_LorroakanProjection_7929fdf5-73f4-43e4-9375-13c965685af2, "LOW_SorcerousSundries_Trade_AMP");
+DB_AMP_CurrentTable((CHARACTER)S_LOW_RolanProjection_c6a47d05-5051-42de-86b0-776fe0285cd1, "LOW_SorcerousSundries_Trade_AMP");
+
+//end_region
+
+//region _amp -> _none mappings
+
+// act 1 - grove
+DB_AMP_ToNone("DEN_Entrance_Trade_AMP", "DEN_Entrance_Trade_None");
+DB_AMP_ToNone("DEN_Weaponsmith_Trade_AMP", "DEN_Weaponsmith_Trade_None");
+DB_AMP_ToNone("DEN_Thiefling_Trade_AMP", "DEN_Thiefling_Trade_None");
+DB_AMP_ToNone("DEN_Volo_Trade_AMP", "DEN_Volo_Trade_None");
+DB_AMP_ToNone("DEN_Ethel_AMP", "DEN_Ethel_None");
+DB_AMP_ToNone("DEN_Prodigy_AMP", "DEN_Prodigy_None");
+
+// act 1 - goblin camp
+DB_AMP_ToNone("GOB_Festivities_Trader_AMP", "GOB_Festivities_Trader_None");
+DB_AMP_ToNone("GOB_Quartermaster_AMP", "GOB_Quartermaster_None");
+
+// act 1 - zhent
+DB_AMP_ToNone("PLA_Tollhouse_SuppliesTrader_AMP", "PLA_Tollhouse_SuppliesTrader_None");
+DB_AMP_ToNone("PLA_ZhentarimTrader_AMP", "PLA_ZhentarimTrader_None");
+DB_AMP_ToNone("PLA_ZhentarimTrader_Extra_AMP", "PLA_ZhentarimTrader_Extra_None");
+
+// act 1 - moonrise outskirts
+DB_AMP_ToNone("MOO_BugBearvendor_Trade_AMP", "MOO_BugBearvendor_Trade_None");
+DB_AMP_ToNone("MOO_BugBearVendor_PrivateStash_AMP", "MOO_BugBearVendor_PrivateStash_None");
+DB_AMP_ToNone("MOO_InfernalTrader_Trade_AMP", "MOO_InfernalTrader_Trade_None");
+DB_AMP_ToNone("MOO_InfernalTrader_SpecialStock_AMP", "MOO_InfernalTrader_SpecialStock_None");
+DB_AMP_ToNone("MOO_ZhentQuartermaster_AMP", "MOO_ZhentQuartermaster_None");
+
+// act 1 - creche
+DB_AMP_ToNone("CRE_GithQuartermistress_Trade_AMP", "CRE_GithQuartermistress_Trade_None");
+DB_AMP_ToNone("CRE_Expeditioner_Trade_AMP", "CRE_Expeditioner_Trade_None");
+
+// act 1 - underdark
+DB_AMP_ToNone("UND_SocietyOfBrilliance_Hobgoblin_AMP", "UND_SocietyOfBrilliance_Hobgoblin_None");
+DB_AMP_ToNone("UND_SocietyOfBrilliance_Mindflayer_AMP", "UND_SocietyOfBrilliance_Mindflayer_None");
+DB_AMP_ToNone("UND_MycoVillage_AlchemistDwarf_Trade_AMP", "UND_MycoVillage_AlchemistDwarf_Trade_None");
+DB_AMP_ToNone("UND_MycoVillage_AlchemistDwarf_Trade_Magic_AMP", "UND_MycoVillage_AlchemistDwarf_Trade_Magic_None");
+DB_AMP_ToNone("UND_KC_Trader_Weapons_AMP", "UND_KC_Trader_Weapons_None");
+
+// act 1 - barcus
+DB_AMP_ToNone("FOR_UnfortunateGnomeTrader_AMP", "FOR_UnfortunateGnomeTrader_None");
+
+// act 2 - haven
+DB_AMP_ToNone("HAV_HarperQuarterMaster_AMP", "HAV_HarperQuarterMaster_None");
+DB_AMP_ToNone("HAV_Weaponsmith_Trade_AMP", "HAV_Weaponsmith_Trade_None");
+DB_AMP_ToNone("HAV_Thiefling_Trade_AMP", "HAV_Thiefling_Trade_None");
+DB_AMP_ToNone("HAV_Thiefling_Ide_Trade_AMP", "HAV_Thiefling_Ide_Trade_None");
+DB_AMP_ToNone("HAV_UnfortunateGnome_Trade_AMP", "HAV_UnfortunateGnome_Trade_None");
+
+// act 3 - wyrm's crossing
+DB_AMP_ToNone("WYR_Danthelon_Trader_AMP", "WYR_Danthelon_Trader_None");
+DB_AMP_ToNone("WYR_OrinsImpersonation_Smith_AMP", "WYR_OrinsImpersonation_Smith_None");
+DB_AMP_ToNone("WYR_Circus_KoboldMerchant_AMP", "WYR_Circus_KoboldMerchant_None");
+DB_AMP_ToNone("WYR_SharranInformer_Basic_AMP", "WYR_SharranInformer_Basic_None");
+DB_AMP_ToNone("WYR_SharranInformer_Extended_AMP", "WYR_SharranInformer_Extended_None");
+DB_AMP_ToNone("WYR_Ironhand_Merchant_AMP", "WYR_Ironhand_Merchant_None");
+DB_AMP_ToNone("WYR_Ironhand_Magic_Merchant_AMP", "WYR_Ironhand_Magic_Merchant_None");
+DB_AMP_ToNone("WYR_SharessCaress_Bartender_Trade_AMP", "WYR_SharessCaress_Bartender_Trade_None");
+DB_AMP_ToNone("WYR_SharessCaress_Bartender_Trade_Potent_AMP", "WYR_SharessCaress_Bartender_Trade_Potent_None");
+DB_AMP_ToNone("WYR_UnfortunateGnome_AMP", "WYR_UnfortunateGnome_None");
+DB_AMP_ToNone("WYR_Thiefling_Trade_AMP", "WYR_Thiefling_Trade_None");
+
+// act 3 - lower city
+DB_AMP_ToNone("LOW_SteepsTrader_Weapons_AMP", "LOW_SteepsTrader_Weapons_None");
+DB_AMP_ToNone("LOW_SteepsTrader_Armor_AMP", "LOW_SteepsTrader_Armor_None");
+DB_AMP_ToNone("LOW_InfernalTrade_AMP", "LOW_InfernalTrade_None");
+DB_AMP_ToNone("LOW_DevilsFee_Diabolist_Trade_Magic_AMP", "LOW_DevilsFee_Diabolist_Trade_Magic_None");
+DB_AMP_ToNone("LOW_StormshoreTabernacle_Guardian_AMP", "LOW_StormshoreTabernacle_Guardian_None");
+DB_AMP_ToNone("LOW_VoicelessPenitent_AMP", "LOW_VoicelessPenitent_None");
+DB_AMP_ToNone("LOW_Guildhall_Bartender_AMP", "LOW_Guildhall_Bartender_None");
+DB_AMP_ToNone("LOW_Guildhall_FetchersBrat_Trade_AMP", "LOW_Guildhall_FetchersBrat_Trade_None");
+DB_AMP_ToNone("LOW_MurderTribunal_Merchant_AMP", "LOW_MurderTribunal_Merchant_None");
+DB_AMP_ToNone("LOW_MysticCarrion_Trade_AMP", "LOW_MysticCarrion_Trade_None");
+DB_AMP_ToNone("LOW_SorcerousSundries_Trade_AMP", "LOW_SorcerousSundries_Trade_None");
+DB_AMP_ToNone("LOW_Weaponsmith_Trade_AMP", "LOW_Weaponsmith_Trade_None");
+
+// derryth act 3 (noblestalk variants)
+DB_AMP_ToNone("LOW_Apothecary_Bonecloak_NoNobleStalk_AMP", "LOW_Apothecary_Bonecloak_NoNobleStalk_None");
+DB_AMP_ToNone("LOW_Apothecary_Bonecloak_HasNobleStalk_AMP", "LOW_Apothecary_Bonecloak_HasNobleStalk_None");
+
+//end_region
+
+KBSECTION
+
+//region special redirect intercept (quest-locked traders like brem)
+// when vanilla sets a table that has a special redirect, use redirect target instead
+
+PROC
+PROC_SetCustomTradeTreasure((CHARACTER)_Trader, (STRING)_VanillaTable)
+AND
+DB_AMP_TradingFix_Enabled(1)
+AND
+DB_AMP_SpecialRedirect(_Trader, _VanillaTable, _RedirectAMP)
+AND
+DB_AMP_CurrentTable(_Trader, _OldAMP)
+AND
+_OldAMP != _RedirectAMP
+THEN
+NOT DB_AMP_CurrentTable(_Trader, _OldAMP);
+DB_AMP_CurrentTable(_Trader, _RedirectAMP);
+NOT DB_AMP_Visited(_Trader);
+
+//end_region
+
+//REGION intercept PROC_SetCustomTradeTreasure
+
+PROC
+PROC_SetCustomTradeTreasure((CHARACTER)_Trader, (STRING)_VanillaTable)
+AND
+DB_AMP_TradingFix_Enabled(1)
+AND
+NOT DB_AMP_SpecialRedirect(_Trader, _VanillaTable, _)
+AND
+DB_AMP_CurrentTable(_Trader, _OldAMP)
+AND
+Concatenate(_VanillaTable, "_AMP", _NewAMP)
+AND
+_OldAMP != _NewAMP
+THEN
+NOT DB_AMP_CurrentTable(_Trader, _OldAMP);
+DB_AMP_CurrentTable(_Trader, _NewAMP);
+NOT DB_AMP_Visited(_Trader);
+
+//end_region
+
+//REGION thrumbo special case
+// no trader until the beggar takeover, and vanilla calls SetCustomTradeTreasure directly, bypassing the intercept
+
+PROC
+PROC_LOW_PhilgravesMansion_BeggarTakeover()
+AND
+DB_AMP_TradingFix_Enabled(1)
+THEN
+DB_AMP_CurrentTable((CHARACTER)S_LOW_Thrumbo_c20c1d4e-eea9-473b-b26e-abe5973ba0eb, "LOW_MysticCarrion_Trade_AMP");
+
+//end_region
+
+//region requesttrade handling
+
+// first visit -> _amp table
+IF
+RequestTrade((CHARACTER)_Player, (CHARACTER)_Trader, _, _)
+AND
+DB_AMP_TradingFix_Enabled(1)
+AND
+DB_AMP_CurrentTable(_Trader, _AMPTable)
+AND
+NOT DB_AMP_Visited(_Trader)
+THEN
+SetCustomTradeTreasure(_Trader, _AMPTable);
+
+// repeat visit -> _none table
+IF
+RequestTrade((CHARACTER)_Player, (CHARACTER)_Trader, _, _)
+AND
+DB_AMP_TradingFix_Enabled(1)
+AND
+DB_AMP_CurrentTable(_Trader, _AMPTable)
+AND
+DB_AMP_ToNone(_AMPTable, _NoneTable)
+AND
+DB_AMP_Visited(_Trader)
+THEN
+SetCustomTradeTreasure(_Trader, _NoneTable);
+
+//end_region
+
+//region requestpickpocket handling
+
+// first visit -> _amp table
+IF
+RequestPickpocket((CHARACTER)_Player, (CHARACTER)_Trader)
+AND
+DB_AMP_TradingFix_Enabled(1)
+AND
+DB_AMP_CurrentTable(_Trader, _AMPTable)
+AND
+NOT DB_AMP_Visited(_Trader)
+THEN
+SetCustomTradeTreasure(_Trader, _AMPTable);
+
+// repeat visit -> _none table
+IF
+RequestPickpocket((CHARACTER)_Player, (CHARACTER)_Trader)
+AND
+DB_AMP_TradingFix_Enabled(1)
+AND
+DB_AMP_CurrentTable(_Trader, _AMPTable)
+AND
+DB_AMP_ToNone(_AMPTable, _NoneTable)
+AND
+DB_AMP_Visited(_Trader)
+THEN
+SetCustomTradeTreasure(_Trader, _NoneTable);
+
+//end_region
+
+//REGION mark visited
+// marked on window open, the player already sees the items
+
+// trade opened (first visit)
+IF
+RequestTrade((CHARACTER)_Player, (CHARACTER)_Trader, _, _)
+AND
+DB_AMP_TradingFix_Enabled(1)
+AND
+DB_AMP_CurrentTable(_Trader, _)
+AND
+NOT DB_AMP_Visited(_Trader)
+THEN
+DB_AMP_Visited(_Trader);
+
+// pickpocket opened (first visit)
+IF
+RequestPickpocket((CHARACTER)_Player, (CHARACTER)_Trader)
+AND
+DB_AMP_TradingFix_Enabled(1)
+AND
+DB_AMP_CurrentTable(_Trader, _)
+AND
+NOT DB_AMP_Visited(_Trader)
+THEN
+DB_AMP_Visited(_Trader);
+
+//end_region
+
+//region debug logging
+
+// log table intercept
+PROC
+PROC_SetCustomTradeTreasure((CHARACTER)_Trader, (STRING)_VanillaTable)
+AND
+DB_AMP_TradingFix_Enabled(1)
+AND
+DB_AMP_CurrentTable(_Trader, _)
+AND
+Concatenate("AMP v5: Intercepted table change -> ", _VanillaTable, _Msg)
+THEN
+DebugText(_Trader, _Msg);
+
+// log first visit
+IF
+RequestTrade((CHARACTER)_Player, (CHARACTER)_Trader, _, _)
+AND
+DB_AMP_TradingFix_Enabled(1)
+AND
+DB_AMP_CurrentTable(_Trader, _AMPTable)
+AND
+NOT DB_AMP_Visited(_Trader)
+AND
+Concatenate("AMP v5: First visit -> ", _AMPTable, _Msg)
+THEN
+DebugText(_Trader, _Msg);
+
+// log repeat visit
+IF
+RequestTrade((CHARACTER)_Player, (CHARACTER)_Trader, _, _)
+AND
+DB_AMP_TradingFix_Enabled(1)
+AND
+DB_AMP_CurrentTable(_Trader, _AMPTable)
+AND
+DB_AMP_ToNone(_AMPTable, _NoneTable)
+AND
+DB_AMP_Visited(_Trader)
+AND
+Concatenate("AMP v5: Repeat visit -> ", _NoneTable, _Msg)
+THEN
+DebugText(_Trader, _Msg);
+
+//end_region
+
+EXITSECTION
+
+ENDEXITSECTION

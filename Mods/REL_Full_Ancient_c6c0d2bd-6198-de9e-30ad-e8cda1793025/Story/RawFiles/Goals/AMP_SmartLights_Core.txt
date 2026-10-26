@@ -1,0 +1,69 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// smart lights - aura proximity. ARCANIZER_PLAYER_DETECTOR marks players near projectors
+
+// player enters the projector aura -> turn its light on. source = the projector
+IF
+StatusApplied((CHARACTER)_Player, "ARCANIZER_PLAYER_DETECTOR", (GUIDSTRING)_Source, _)
+AND
+HasActiveStatus(_Source, "ARCANIZER_STATION_SWITCHER", 1)
+AND
+HasActiveStatus(_Source, "ARCANIZER_LIGHT_ACTIVE", 0)
+THEN
+ApplyStatus(_Source, "ARCANIZER_LIGHT_ACTIVE", -1.0, 1, _Player);
+DB_AMP_SmartLight_ActiveLight(_Source, _Player);
+
+// player leaves the aura -> delayed turn-off check
+IF
+StatusRemoved((CHARACTER)_Player, "ARCANIZER_PLAYER_DETECTOR", _, _)
+THEN
+RealtimeObjectTimerLaunch(_Player, "AMP_SmartLights_DelayedTurnOff", 50);
+
+// 50ms later, run the check
+IF
+ObjectTimerFinished((CHARACTER)_Player, "AMP_SmartLights_DelayedTurnOff")
+THEN
+PROC_AMP_SmartLights_CheckTurnOffLights(_Player);
+
+// for each projector this player lit, turn it off if nobody else is near (fixes the two-lamps case)
+PROC
+PROC_AMP_SmartLights_CheckTurnOffLights((CHARACTER)_Player)
+AND
+DB_AMP_SmartLight_ActiveLight(_Projector, _Player)
+AND
+GetDistanceTo(_Player, _Projector, _Distance)
+AND
+_Distance > 10.0
+AND
+NOT QRY_AMP_SmartLights_AnyPlayerNear(_Projector)
+THEN
+RemoveStatus(_Projector, "ARCANIZER_LIGHT_ACTIVE", NULL_00000000-0000-0000-0000-000000000000);
+NOT DB_AMP_SmartLight_ActiveLight(_Projector, _Player);
+
+
+// any player near the projector
+QRY
+QRY_AMP_SmartLights_AnyPlayerNear((GUIDSTRING)_Projector)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+GetDistanceTo(_Player, _Projector, _Distance)
+AND
+_Distance <= 10.0
+THEN
+DB_NOOP(1);
+
+// clear light ownership tracking on long rest
+IF
+LongRestFinished()
+AND
+DB_AMP_SmartLight_ActiveLight(_LightProjector, _Player)
+THEN
+NOT DB_AMP_SmartLight_ActiveLight(_LightProjector, _Player);
+
+EXITSECTION
+
+ENDEXITSECTION

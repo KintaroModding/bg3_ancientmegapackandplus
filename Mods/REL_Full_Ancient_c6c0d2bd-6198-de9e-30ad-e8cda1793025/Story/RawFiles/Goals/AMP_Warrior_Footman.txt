@@ -1,0 +1,189 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_AMP_Footman_Template((CHARACTERROOT)AMP_Footman_71169b70-e316-4bf5-97dc-e4def912b6cd);
+DB_AMP_Footman_Template((CHARACTERROOT)AMP_Footman_Veteran_8959e7cf-a9ee-42f3-9b65-ff90bb0decad);
+DB_AMP_Footman_Template((CHARACTERROOT)AMP_Footman_Champion_5e536448-7006-46cd-bbdb-978f7fa61573);
+DB_AMP_Footman_Template((CHARACTERROOT)AMP_Footman_Elite_58323c54-6b83-43dd-8a3d-89451dbe30c4);
+KBSECTION
+
+// horn anim on summon cast
+IF
+UsingSpell((CHARACTER)_Char, "Target_AMP_Warrior_SummonFootman", _, _, _)
+THEN
+PlayAnimation(_Char, (ANIMATION)CUST_PlayingHorn_01_6a141d35-effe-4c7f-9585-bb153e4c1230, "");
+
+// footman summoned: track, vfx, refresh burden
+IF
+StatusApplied((CHARACTER)_Footman, "AMP_FOOTMAN_SUMMONED", (CHARACTER)_Owner, _)
+THEN
+DB_AMP_Footman_Active(_Footman, _Owner);
+ApplyStatus(_Footman, "AMP_FOOTMAN_SPAWN_VFX", 6.0, 1, _Owner);
+PROC_AMP_Warrior_RefreshBurden(_Owner);
+
+// autopilot by default unless owner has manual control on
+IF
+StatusApplied((CHARACTER)_Footman, "AMP_FOOTMAN_SUMMONED", (CHARACTER)_Owner, _)
+AND
+NOT HasActiveStatus(_Owner, "AMP_WARRIOR_MANUAL_MARKER", 1)
+THEN
+ApplyStatus(_Footman, "AMP_WARRIOR_AUTOPILOT_APPLIED", -1.0, 1, _Owner);
+
+// manual control toggle
+// on -> strip autopilot from owner's footmen
+IF
+StatusApplied((CHARACTER)_Owner, "AMP_WARRIOR_MANUAL_MARKER", _, _)
+AND
+DB_AMP_Footman_Active((CHARACTER)_Footman, _Owner)
+THEN
+RemoveStatus(_Footman, "AMP_WARRIOR_AUTOPILOT_APPLIED", _Owner);
+
+// off -> reapply autopilot
+IF
+StatusRemoved((CHARACTER)_Owner, "AMP_WARRIOR_MANUAL_MARKER", _, _)
+AND
+DB_AMP_Footman_Active((CHARACTER)_Footman, _Owner)
+THEN
+ApplyStatus(_Footman, "AMP_WARRIOR_AUTOPILOT_APPLIED", -1.0, 1, _Owner);
+
+// footman cleanup on leftcombat
+IF
+LeftCombat((CHARACTER)_Footman, _)
+AND
+GetTemplate(_Footman, _Template)
+AND
+DB_AMP_Footman_Template((CHARACTERROOT)_Template)
+AND
+DB_AMP_Footman_Active(_Footman, _Owner)
+AND
+GetPosition(_Footman, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+RealSum(_Y, 1.0, (REAL)_YUp)
+THEN
+PlayEffectAtPosition((EFFECTRESOURCE)VFX_Script_DarkButler_Poof_01_2b59237f-69f1-003b-d44b-d7e31fb79be2, _X, _YUp, _Z, 1.0);
+NOT DB_AMP_Footman_Active(_Footman, _Owner);
+PROC_AMP_Warrior_RefreshBurden(_Owner);
+RequestDeleteTemporary((CHARACTER)_Footman);
+
+// out-of-combat summon poofs at owner turn end. otherwise they're permanent,
+// since the normal cleanup only fires on leftcombat. flag then remove.
+IF
+StatusApplied((CHARACTER)_Footman, "AMP_FOOTMAN_SUMMONED", (CHARACTER)_Owner, _)
+AND
+IsInCombat(_Owner, 0)
+THEN
+DB_AMP_Footman_OutOfCombat(_Footman, _Owner);
+
+// flagged footman joins a fight -> now a normal combat summon, drop flag
+IF
+EnteredCombat((CHARACTER)_Footman, _)
+AND
+DB_AMP_Footman_OutOfCombat((CHARACTER)_Footman, _Owner)
+THEN
+NOT DB_AMP_Footman_OutOfCombat(_Footman, _Owner);
+
+// owner ends turn, no fight started -> poof staged footmen
+IF
+TurnEnded((CHARACTER)_Owner)
+AND
+DB_AMP_Footman_OutOfCombat((CHARACTER)_Footman, _Owner)
+AND
+IsInCombat(_Footman, 0)
+AND
+GetPosition(_Footman, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+RealSum(_Y, 1.0, (REAL)_YUp)
+THEN
+PlayEffectAtPosition((EFFECTRESOURCE)VFX_Script_DarkButler_Poof_01_2b59237f-69f1-003b-d44b-d7e31fb79be2, _X, _YUp, _Z, 1.0);
+NOT DB_AMP_Footman_OutOfCombat(_Footman, _Owner);
+NOT DB_AMP_Footman_Active(_Footman, _Owner);
+PROC_AMP_Warrior_RefreshBurden(_Owner);
+RequestDeleteTemporary((CHARACTER)_Footman);
+
+// footman died: clear db, refresh burden
+IF
+Died((CHARACTER)_Footman)
+AND
+DB_AMP_Footman_Active(_Footman, _Owner)
+THEN
+NOT DB_AMP_Footman_Active(_Footman, _Owner);
+NOT DB_AMP_Footman_OutOfCombat(_Footman, _Owner);
+PROC_AMP_Warrior_RefreshBurden(_Owner);
+
+// owner left combat: clear burden
+IF
+LeftCombat((CHARACTER)_Owner, _)
+AND
+HasActiveStatus(_Owner, "AMP_WARRIOR_COMMAND_BURDEN", 1)
+THEN
+RemoveStatus(_Owner, "AMP_WARRIOR_COMMAND_BURDEN", NULL_00000000-0000-0000-0000-000000000000);
+
+// refresh burden: wipe all, reapply 1 per active footman
+PROC
+PROC_AMP_Warrior_RefreshBurden((CHARACTER)_Owner)
+THEN
+RemoveStatus(_Owner, "AMP_WARRIOR_COMMAND_BURDEN", NULL_00000000-0000-0000-0000-000000000000);
+PROC_AMP_Warrior_ApplyBurdenPerFootman(_Owner);
+
+PROC
+PROC_AMP_Warrior_ApplyBurdenPerFootman((CHARACTER)_Owner)
+AND
+DB_AMP_Footman_Active((CHARACTER)_Footman, _Owner)
+AND
+Exists(_Footman, 1)
+THEN
+ApplyStatus(_Owner, "AMP_WARRIOR_COMMAND_BURDEN", -1.0, 1, _Owner);
+
+// formation: on turn end, if another owner footman within 6m apply formation 1 turn.
+// decays next turn if nobody nearby.
+IF
+TurnEnded((CHARACTER)_Footman)
+AND
+DB_AMP_Footman_Active(_Footman, (CHARACTER)_Owner)
+AND
+DB_AMP_Footman_Active((CHARACTER)_Other, _Owner)
+AND
+_Footman != _Other
+AND
+Exists(_Other, 1)
+AND
+GetDistanceTo(_Footman, _Other, (REAL)_Dist)
+AND
+_Dist <= 6.0
+THEN
+ApplyStatus(_Footman, "AMP_FOOTMAN_FORMATION", 6.0, 1, _Footman);
+
+// force-remove formation on death/leftcombat for tb/edge cases
+IF
+Died((CHARACTER)_Footman)
+AND
+HasActiveStatus(_Footman, "AMP_FOOTMAN_FORMATION", 1)
+THEN
+RemoveStatus(_Footman, "AMP_FOOTMAN_FORMATION", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+LeftCombat((CHARACTER)_Footman, _)
+AND
+HasActiveStatus(_Footman, "AMP_FOOTMAN_FORMATION", 1)
+THEN
+RemoveStatus(_Footman, "AMP_FOOTMAN_FORMATION", NULL_00000000-0000-0000-0000-000000000000);
+
+// manual control charge tick at owner turn end.
+// tick_trigger is a one-shot signal the manual_upkeep passive listens for.
+IF
+TurnEnded((CHARACTER)_Owner)
+AND
+HasActiveStatus(_Owner, "AMP_WARRIOR_MANUAL_MARKER", 1)
+THEN
+ApplyStatus(_Owner, "AMP_WARRIOR_MANUAL_TICK_TRIGGER", 0.0, 1, _Owner);
+
+// charges ran out: marker gone -> strip the cc-immune status too
+IF
+StatusRemoved((CHARACTER)_Char, "AMP_WARRIOR_CCIMMUNE_MARKER", _, _)
+AND
+HasActiveStatus(_Char, "AMP_WARRIOR_CC_IMMUNE", 1)
+THEN
+RemoveStatus(_Char, "AMP_WARRIOR_CC_IMMUNE", NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+ENDEXITSECTION

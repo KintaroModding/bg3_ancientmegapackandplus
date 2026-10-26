@@ -1,0 +1,134 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+// entry from dispatch
+PROC
+PROC_AMP_VoidCapsule_RerollStart((ITEM)_Item, (ITEM)_Capsule, (CHARACTER)_Owner)
+AND
+DB_AMP_Reroll_ItemInfo(_Item, (STRING)_OrigCapsType, (STRING)_OrigCoinType)
+AND
+GetTemplate(_Capsule, (ITEMROOT)_CapsuleTemplate)
+AND
+DB_AMP_VoidCapsule_Container(_CapsuleTemplate, (STRING)_CurrentCapsType)
+AND
+DB_AMP_VoidCapsule_Reward(_CurrentCapsType, _OrigCoinType, (ITEMROOT)_RewardTemplate)
+AND
+DB_AMP_VoidCapsule_RerollCostActive((INTEGER)_Cost)
+THEN
+PROC_AMP_VoidCapsule_InitCharges(_Capsule);
+NOT DB_AMP_VoidCapsule_RerollProcessing(_Item);
+NOT DB_AMP_Reroll_ItemInfo(_Item, _OrigCapsType, _OrigCoinType);
+RemoveStatus(_Item, "AMP_REROLL_WINDOW", _Item);
+RequestDelete(_Item);
+PROC_AMP_VoidCapsule_DecrementBy(_Capsule, _Owner, _Cost);
+PlaySound(_Owner, "CrSpell_Cast_MagicClub");
+PROC_AMP_VoidCapsule_SpawnReward(_Owner, "Reroll", _RewardTemplate, _Capsule);
+PROC_AMP_VoidCapsule_ReleaseBusy(_Capsule);
+
+// mark every reward cube so removedfrom can apply amp_reroll_window
+// seedreset_done (core) sets pendingreward(owner, context, template, capsule)
+// capstype/cointype use a reverse lookup on the cube template, _capsule may already be invalid
+// a reroll that depletes the capsule fires its 500ms destroy timer before the seedreset decoy chain finishes
+// the registry is 1:1 on reward(_,_,_template), the reverse bind is unambiguous
+IF
+AddedTo((ITEM)_Container, (CHARACTER)_Owner, _)
+AND
+GetTemplate(_Container, (ITEMROOT)_Template)
+AND
+DB_AMP_VoidCapsule_PendingReward(_Owner, (STRING)_Context, _Template, (ITEM)_Capsule)
+AND
+DB_AMP_VoidCapsule_Reward((STRING)_CapsType, (STRING)_CoinType, _Template)
+THEN
+NOT DB_AMP_VoidCapsule_PendingReward(_Owner, _Context, _Template, _Capsule);
+DB_AMP_Reroll_ContainerInfo(_Container, _CapsType, _CoinType);
+ObjectTimerLaunch(_Container, "AMP_Reroll_Arm", 500, 0);
+
+// arm timer fired: container is now protected from player additions
+IF
+ObjectTimerFinished((ITEM)_Container, "AMP_Reroll_Arm")
+THEN
+DB_AMP_Reroll_Armed(_Container);
+
+// before arm (treasure loot arriving from treasuretable): auto-extract
+IF
+AddedTo((ITEM)_Item, (ITEM)_Container, _)
+AND
+DB_AMP_Reroll_ContainerInfo(_Container, _, _)
+AND
+NOT DB_AMP_Reroll_Armed(_Container)
+THEN
+ObjectTimerLaunch(_Item, "AMP_VoidCapsule_Eject", 100, 0);
+
+// after arm (player tries to add extra items): eject + flag
+IF
+AddedTo((ITEM)_Item, (ITEM)_Container, _)
+AND
+DB_AMP_Reroll_ContainerInfo(_Container, _, _)
+AND
+DB_AMP_Reroll_Armed(_Container)
+THEN
+DB_AMP_Reroll_Ejecting(_Item);
+ObjectTimerLaunch(_Item, "AMP_VoidCapsule_Eject", 100, 0);
+
+// removedfrom: apply amp_reroll_window to legitimate items
+// not isshard guard: shards from salvage/pity contexts must not be flagged
+// as rerollable. A flagged shard matches IsRerollItem and dispatch fires the reroll proc on insertion
+// the reward lookup has no shards capsule type, so the shard sits broken in the capsule
+IF
+RemovedFrom((ITEM)_Item, (ITEM)_Container)
+AND
+DB_AMP_Reroll_ContainerInfo(_Container, (STRING)_CapsuleType, (STRING)_CoinType)
+AND
+NOT DB_AMP_Reroll_Ejecting(_Item)
+AND
+NOT QRY_AMP_VoidCapsule_IsShard(_Item)
+AND
+DB_AMP_VoidCapsule_RerollWindowActive((INTEGER)_WindowSec)
+AND
+IntegerToReal(_WindowSec, (REAL)_WindowReal)
+THEN
+ApplyStatus(_Item, "AMP_REROLL_WINDOW", _WindowReal, 1, _Item);
+DB_AMP_Reroll_ItemInfo(_Item, _CapsuleType, _CoinType);
+
+// cleanup ejecting flag after eject removal
+IF
+RemovedFrom((ITEM)_Item, (ITEM)_Container)
+AND
+DB_AMP_Reroll_Ejecting(_Item)
+THEN
+NOT DB_AMP_Reroll_Ejecting(_Item);
+
+// level-load cleanup (transient reroll state)
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Reroll_ContainerInfo((ITEM)_Container, (STRING)_CT, (STRING)_CN)
+THEN
+NOT DB_AMP_Reroll_ContainerInfo(_Container, _CT, _CN);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Reroll_Armed((ITEM)_Container)
+THEN
+NOT DB_AMP_Reroll_Armed(_Container);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Reroll_Ejecting((ITEM)_Item)
+THEN
+NOT DB_AMP_Reroll_Ejecting(_Item);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Reroll_ItemInfo((ITEM)_Item, (STRING)_CT, (STRING)_CN)
+THEN
+NOT DB_AMP_Reroll_ItemInfo(_Item, _CT, _CN);
+
+EXITSECTION
+ENDEXITSECTION

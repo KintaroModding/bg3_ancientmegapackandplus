@@ -1,0 +1,48 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// a mid-fight joiner can miss every trigger, so it gets one recast at full hp
+// never repeat: reapplying IncreaseMaxHP refills hp and drip-heals
+
+IF
+DB_AMP_DiffV3_Tracked((CHARACTER)_C, _)
+AND
+IsInCombat(_C, 1)
+AND
+NOT DB_AMP_Plus_ProgSeen(_C)
+THEN
+DB_AMP_Plus_ProgSeen(_C);
+PROC_AMP_ProgV6_RecastOne(_C);
+
+IF
+EnteredCombat((CHARACTER)_C, _)
+AND
+DB_AMP_DiffV3_Tracked(_C, _)
+AND
+NOT DB_AMP_Plus_ProgSeen(_C)
+THEN
+DB_AMP_Plus_ProgSeen(_C);
+
+IF
+TurnStarted((CHARACTER)_C)
+AND
+DB_AMP_DiffV3_Tracked(_C, _)
+AND
+NOT DB_AMP_Plus_ProgSeen(_C)
+THEN
+DB_AMP_Plus_ProgSeen(_C);
+PROC_AMP_ProgV6_RecastOne(_C);
+
+IF
+Died((CHARACTER)_C)
+AND
+DB_AMP_Plus_ProgSeen(_C)
+THEN
+NOT DB_AMP_Plus_ProgSeen(_C);
+
+EXITSECTION
+
+ENDEXITSECTION

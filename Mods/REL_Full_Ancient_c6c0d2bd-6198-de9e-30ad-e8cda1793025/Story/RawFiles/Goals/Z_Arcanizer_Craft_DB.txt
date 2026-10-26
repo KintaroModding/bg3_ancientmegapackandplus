@@ -1,0 +1,601 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// DB_AMP_Recipe(recipeid, type, outputtemplate, minchaos)
+// minchaos is the minimum chaos value, used for difficulty scaling
+
+// DB_AMP_Recipe_Ingredient(recipeid, index 1-5, ingredienttemplate)
+
+// crafting state tracking
+// tracks the current recipe being processed
+DB_AMP_Crafting_Processing("");
+DB_AMP_Crafting_FoundItems(0);
+DB_AMP_Crafting_BlockAutoEject(0);
+
+DB_AMP_ElementalOrb((ITEMROOT)Orb_Radiant_0425090c-c828-4a76-9482-9f5da87ae100, "Radiant");
+DB_AMP_ElementalOrb((ITEMROOT)Orb_Force_45209c6d-d95b-43ab-971f-d10948ca22bb, "Force");
+DB_AMP_ElementalOrb((ITEMROOT)Orb_Lightning_51cfe65a-f30f-4adb-808b-0d90df8d21e4, "Lightning");
+DB_AMP_ElementalOrb((ITEMROOT)Orb_Fire_4c670121-7769-420a-a336-a9a5697889b7, "Fire");
+DB_AMP_ElementalOrb((ITEMROOT)Orb_Cold_ea6f84b1-f167-4a74-8df4-63b80632ffcf, "Cold");
+DB_AMP_ElementalOrb((ITEMROOT)Orb_Necrotic_1565a523-470b-4c96-b7d8-7622ecef6487, "Necrotic");
+DB_AMP_ElementalOrb((ITEMROOT)Orb_Warrior_170f1295-0bca-434a-8637-d8d980e61ab8, "Warrior");
+DB_AMP_ElementalOrb((ITEMROOT)Orb_Acid_b5a4a243-0ed6-457e-9ad2-fe81fa18d8e3, "Acid");
+DB_AMP_ElementalOrb((ITEMROOT)Orb_Thunder_1e9f2ff3-e635-4522-b5e9-240a819ba5ea, "Thunder");
+DB_AMP_ElementalOrb((ITEMROOT)Orb_Psychic_df80e69f-0b2d-49d4-9e92-0284c33c59d9, "Psychic");
+DB_AMP_ElementalOrb((ITEMROOT)Orb_Blood_26777907-8719-4535-86db-3648ab495ee9, "Blood");
+DB_AMP_ElementalOrb((ITEMROOT)Orb_Underdark_b881c55e-f552-4a2b-a69a-f53d88b44b57, "Underdark");
+DB_AMP_ElementalOrb((ITEMROOT)Orb_Poison_d7355ea0-7fa5-4f7c-9287-b17894efe84d, "Poison");
+DB_AMP_ElementalOrb((ITEMROOT)Orb_Diamond_9c3c318b-bd51-49e7-af1e-598d3467bfcd, "Diamond");
+
+// enchanted dust
+// four dust types for different rarity levels
+DB_AMP_Arcanizer_Dust((ITEMROOT)Craft1_2454d5f5-ea62-4c0c-a781-c8c0b275ba04, "FeyDust", 1);
+DB_AMP_Arcanizer_Dust((ITEMROOT)Craft2_ca3214aa-ce66-4d7f-97dc-64af68cd3af8, "NethereseDust", 2);
+DB_AMP_Arcanizer_Dust((ITEMROOT)Craft3_4feac3b3-32e1-4284-848e-fe9f3696c474, "EldritchDust", 3);
+DB_AMP_Arcanizer_Dust((ITEMROOT)Craft4_aed0d644-3863-4aaa-87ba-86740f11ed12, "CelestialDust", 4);
+
+// astrum crystals 
+// core crafting resources/stabilizers
+DB_AMP_Arcanizer_Astrum((ITEMROOT)Enchant_Crystal4_faca0315-cb41-4a63-9b37-9afc6a1d1da4, "AstrumArcanum", 1);
+DB_AMP_Arcanizer_Astrum((ITEMROOT)Enchant_Crystal2_f90f99ba-d30d-4f05-8cde-b90092f128d8, "AstrumEmpyreum", 2);
+DB_AMP_Arcanizer_Astrum((ITEMROOT)Enchant_Crystal_d09be0fd-f230-47af-a523-c919e41c1261, "AstrumOpus", 3);
+DB_AMP_Arcanizer_Astrum((ITEMROOT)Enchant_Crystal3_98f1085c-1a49-474a-875c-cd0f2d9fdff0, "AstrumImmortallis", 4);
+
+// other crafting resources
+// celestial shard and resonance matrix
+DB_AMP_Arcanizer_Resource((ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5, "CelestialShard");
+DB_AMP_Arcanizer_Resource((ITEMROOT)Resonance_Matrix_2c8dfeb6-c86e-4595-b9e9-080aa87bd0b7, "ResonanceMatrix");
+
+// ingots (used for celestial ingot creation)
+DB_AMP_Arcanizer_Ingot((ITEMROOT)LOOT_GEN_Metalbar_Bronze_A_5b386575-5836-40cd-8548-e5c27fd105a1);
+DB_AMP_Arcanizer_Ingot((ITEMROOT)LOOT_GEN_Metalbar_Silver_A_e0803337-e2b1-4528-8d4f-b5814e9a52ec);
+DB_AMP_Arcanizer_Ingot((ITEMROOT)LOOT_GEN_Metalbar_Gold_A_44f47718-9769-4c0e-af75-7789d2f2913d);
+DB_AMP_Arcanizer_Ingot((ITEMROOT)LOOT_GEN_Metalbar_Adamantine_A_ed758113-c69b-4e7f-8b41-036a071df80a);
+DB_AMP_Arcanizer_Ingot((ITEMROOT)LOOT_GEN_Metalbar_Mithral_A_d746d7c3-ed35-4cd4-becc-6ebb3e0a7b46);
+
+// gems (used for elemental orbs creation)
+DB_AMP_Arcanizer_Gem((ITEMROOT)LOOT_GEM_Pearl_A_31d1a9c1-bac0-4738-87ef-23f67b492051, "Pearl");
+DB_AMP_Arcanizer_Gem((ITEMROOT)LOOT_GEM_Ruby_A_b085e96d-e199-467f-b6a8-5d9d44e3cb21, "Ruby");
+DB_AMP_Arcanizer_Gem((ITEMROOT)LOOT_GEM_Sapphire_A_0371fa33-7dae-4980-8468-6d8e99824af6, "Sapphire");
+DB_AMP_Arcanizer_Gem((ITEMROOT)LOOT_GEM_Jacinth_A_7b1ce21b-809f-4965-b52f-53fe10de6b30, "Jacinth");
+DB_AMP_Arcanizer_Gem((ITEMROOT)LOOT_GEM_Topaz_A_55524c47-c62f-45ac-8505-426cb04707c9, "Topaz");
+DB_AMP_Arcanizer_Gem((ITEMROOT)LOOT_GEM_Malachite_A_560e773d-6825-4cbd-83c1-9d8e4f53a704, "Malachite");
+DB_AMP_Arcanizer_Gem((ITEMROOT)LOOT_GEM_Agate_A_75808952-29b8-4840-81e1-fcdd93155ddd, "Agate");
+DB_AMP_Arcanizer_Gem((ITEMROOT)LOOT_GEM_Peridot_A_dc9e7cfb-3702-48c7-aa50-b6ce74250944, "Peridot");
+DB_AMP_Arcanizer_Gem((ITEMROOT)LOOT_Alchemy_Crystal_PurpleFluoriteShard_fef1900a-402c-455f-8c63-87bdaedac6d7, "Crystal_PurpleFluorite_Shard");
+DB_AMP_Arcanizer_Gem((ITEMROOT)LOOT_GEM_Amethyst_A_20626173-dd4d-497e-94f9-b2000a86def9, "Amethyst");
+DB_AMP_Arcanizer_Gem((ITEMROOT)LOOT_GEM_Bloodstone_A_a92ee8db-142f-4a2a-af64-78e3aec36832, "Bloodstone");
+DB_AMP_Arcanizer_Gem((ITEMROOT)LOOT_GEM_Onyx_A_6cbbe9f6-c346-4d6c-b1f1-4cbe6aaf99ef, "Onyx");
+DB_AMP_Arcanizer_Gem((ITEMROOT)LOOT_GEM_Jade_A_94fb73e8-668a-499f-a88f-54d24c6947a7, "Jade");
+DB_AMP_Arcanizer_Gem((ITEMROOT)LOOT_GEM_Diamond_A_440f4817-5d30-4867-a982-5b8094ace403, "Diamond");
+
+// recipe definitions - base resources
+// astrum upgrade paths
+DB_AMP_Recipe("R_ASTRUM_UPGRADE_1", "resource", (ITEMROOT)Enchant_Crystal2_f90f99ba-d30d-4f05-8cde-b90092f128d8, 20); // Arcanum to Empyreum
+DB_AMP_Recipe_Ingredient("R_ASTRUM_UPGRADE_1", 1, (ITEMROOT)Enchant_Crystal4_faca0315-cb41-4a63-9b37-9afc6a1d1da4);
+DB_AMP_Recipe_Ingredient("R_ASTRUM_UPGRADE_1", 2, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+
+DB_AMP_Recipe("R_ASTRUM_UPGRADE_2", "resource", (ITEMROOT)Enchant_Crystal_d09be0fd-f230-47af-a523-c919e41c1261, 30); // Empyreum to Opus
+DB_AMP_Recipe_Ingredient("R_ASTRUM_UPGRADE_2", 1, (ITEMROOT)Enchant_Crystal2_f90f99ba-d30d-4f05-8cde-b90092f128d8);
+DB_AMP_Recipe_Ingredient("R_ASTRUM_UPGRADE_2", 2, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+
+DB_AMP_Recipe("R_ASTRUM_UPGRADE_3", "resource", (ITEMROOT)Enchant_Crystal3_98f1085c-1a49-474a-875c-cd0f2d9fdff0, 40); // Opus to Immortallis
+DB_AMP_Recipe_Ingredient("R_ASTRUM_UPGRADE_3", 1, (ITEMROOT)Enchant_Crystal_d09be0fd-f230-47af-a523-c919e41c1261);
+DB_AMP_Recipe_Ingredient("R_ASTRUM_UPGRADE_3", 2, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+
+// dust upgrade paths
+DB_AMP_Recipe("R_DUST_UPGRADE_1", "resource", (ITEMROOT)Craft2_ca3214aa-ce66-4d7f-97dc-64af68cd3af8, 20); // Fey to Netherese
+DB_AMP_Recipe_Ingredient("R_DUST_UPGRADE_1", 1, (ITEMROOT)Craft1_2454d5f5-ea62-4c0c-a781-c8c0b275ba04);
+DB_AMP_Recipe_Ingredient("R_DUST_UPGRADE_1", 2, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+
+DB_AMP_Recipe("R_DUST_UPGRADE_2", "resource", (ITEMROOT)Craft3_4feac3b3-32e1-4284-848e-fe9f3696c474, 30); // Netherese to Eldritch
+DB_AMP_Recipe_Ingredient("R_DUST_UPGRADE_2", 1, (ITEMROOT)Craft2_ca3214aa-ce66-4d7f-97dc-64af68cd3af8);
+DB_AMP_Recipe_Ingredient("R_DUST_UPGRADE_2", 2, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+
+DB_AMP_Recipe("R_DUST_UPGRADE_3", "resource", (ITEMROOT)Craft4_aed0d644-3863-4aaa-87ba-86740f11ed12, 40); // Eldritch to Celestial
+DB_AMP_Recipe_Ingredient("R_DUST_UPGRADE_3", 1, (ITEMROOT)Craft3_4feac3b3-32e1-4284-848e-fe9f3696c474);
+DB_AMP_Recipe_Ingredient("R_DUST_UPGRADE_3", 2, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+
+// recipe definitions - composite resources
+// celestial ingot (fixed to use one specific shard and one ingot)
+DB_AMP_Recipe("R_CELESTIAL_INGOT", "resource", (ITEMROOT)Celestial_Ingot_6040bb2a-a093-44e0-a823-1143bd94a36e, 30);
+DB_AMP_Recipe_Ingredient("R_CELESTIAL_INGOT", 1, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+// the second ingredient can be any ingot - handled by special code
+
+// astral beacon (fixed to use dark diamond)
+DB_AMP_Recipe("R_ASTRAL_BEACON", "resource", (ITEMROOT)Astral_Beacon_17046b1b-ac49-4001-98a2-d117dec83a86, 50);
+DB_AMP_Recipe_Ingredient("R_ASTRAL_BEACON", 1, (ITEMROOT)Enchant_Crystal_d09be0fd-f230-47af-a523-c919e41c1261); // Opus
+DB_AMP_Recipe_Ingredient("R_ASTRAL_BEACON", 2, (ITEMROOT)LOOT_GEM_Diamond_A_Dark_82d4f21d-11c8-47dd-a69f-dcfb3103ff76); // Dark Diamond
+
+// celestial key (fixed to use resonance matrix)
+DB_AMP_Recipe("R_CELESTIAL_KEY", "resource", (ITEMROOT)Celestial_Key_d7ced4e8-993b-464a-a8b4-2322ec0fd3b2, 60);
+DB_AMP_Recipe_Ingredient("R_CELESTIAL_KEY", 1, (ITEMROOT)Celestial_Ingot_6040bb2a-a093-44e0-a823-1143bd94a36e);
+DB_AMP_Recipe_Ingredient("R_CELESTIAL_KEY", 2, (ITEMROOT)Resonance_Matrix_2c8dfeb6-c86e-4595-b9e9-080aa87bd0b7);
+
+// add recipes for each gem to create corresponding elemental orb
+DB_AMP_Recipe("R_ORB_RADIANT", "resource", (ITEMROOT)Orb_Radiant_0425090c-c828-4a76-9482-9f5da87ae100, 30);
+DB_AMP_Recipe_Ingredient("R_ORB_RADIANT", 1, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+DB_AMP_Recipe_Ingredient("R_ORB_RADIANT", 2, (ITEMROOT)LOOT_GEM_Pearl_A_31d1a9c1-bac0-4738-87ef-23f67b492051);
+
+DB_AMP_Recipe("R_ORB_FORCE", "resource", (ITEMROOT)Orb_Force_45209c6d-d95b-43ab-971f-d10948ca22bb, 30);
+DB_AMP_Recipe_Ingredient("R_ORB_FORCE", 1, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+DB_AMP_Recipe_Ingredient("R_ORB_FORCE", 2, (ITEMROOT)LOOT_GEM_Ruby_A_b085e96d-e199-467f-b6a8-5d9d44e3cb21);
+
+DB_AMP_Recipe("R_ORB_LIGHTNING", "resource", (ITEMROOT)Orb_Lightning_51cfe65a-f30f-4adb-808b-0d90df8d21e4, 30);
+DB_AMP_Recipe_Ingredient("R_ORB_LIGHTNING", 1, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+DB_AMP_Recipe_Ingredient("R_ORB_LIGHTNING", 2, (ITEMROOT)LOOT_GEM_Sapphire_A_0371fa33-7dae-4980-8468-6d8e99824af6);
+
+DB_AMP_Recipe("R_ORB_FIRE", "resource", (ITEMROOT)Orb_Fire_4c670121-7769-420a-a336-a9a5697889b7, 30);
+DB_AMP_Recipe_Ingredient("R_ORB_FIRE", 1, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+DB_AMP_Recipe_Ingredient("R_ORB_FIRE", 2, (ITEMROOT)LOOT_GEM_Jacinth_A_7b1ce21b-809f-4965-b52f-53fe10de6b30);
+
+DB_AMP_Recipe("R_ORB_COLD", "resource", (ITEMROOT)Orb_Cold_ea6f84b1-f167-4a74-8df4-63b80632ffcf, 30);
+DB_AMP_Recipe_Ingredient("R_ORB_COLD", 1, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+DB_AMP_Recipe_Ingredient("R_ORB_COLD", 2, (ITEMROOT)LOOT_GEM_Topaz_A_55524c47-c62f-45ac-8505-426cb04707c9);
+
+DB_AMP_Recipe("R_ORB_NECROTIC", "resource", (ITEMROOT)Orb_Necrotic_1565a523-470b-4c96-b7d8-7622ecef6487, 30);
+DB_AMP_Recipe_Ingredient("R_ORB_NECROTIC", 1, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+DB_AMP_Recipe_Ingredient("R_ORB_NECROTIC", 2, (ITEMROOT)LOOT_GEM_Malachite_A_560e773d-6825-4cbd-83c1-9d8e4f53a704);
+
+DB_AMP_Recipe("R_ORB_WARRIOR", "resource", (ITEMROOT)Orb_Warrior_170f1295-0bca-434a-8637-d8d980e61ab8, 30);
+DB_AMP_Recipe_Ingredient("R_ORB_WARRIOR", 1, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+DB_AMP_Recipe_Ingredient("R_ORB_WARRIOR", 2, (ITEMROOT)LOOT_GEM_Agate_A_75808952-29b8-4840-81e1-fcdd93155ddd);
+
+DB_AMP_Recipe("R_ORB_ACID", "resource", (ITEMROOT)Orb_Acid_b5a4a243-0ed6-457e-9ad2-fe81fa18d8e3, 30);
+DB_AMP_Recipe_Ingredient("R_ORB_ACID", 1, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+DB_AMP_Recipe_Ingredient("R_ORB_ACID", 2, (ITEMROOT)LOOT_GEM_Peridot_A_dc9e7cfb-3702-48c7-aa50-b6ce74250944);
+
+DB_AMP_Recipe("R_ORB_THUNDER", "resource", (ITEMROOT)Orb_Thunder_1e9f2ff3-e635-4522-b5e9-240a819ba5ea, 30);
+DB_AMP_Recipe_Ingredient("R_ORB_THUNDER", 1, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+DB_AMP_Recipe_Ingredient("R_ORB_THUNDER", 2, (ITEMROOT)LOOT_Alchemy_Crystal_PurpleFluoriteShard_fef1900a-402c-455f-8c63-87bdaedac6d7);
+
+DB_AMP_Recipe("R_ORB_PSYCHIC", "resource", (ITEMROOT)Orb_Psychic_df80e69f-0b2d-49d4-9e92-0284c33c59d9, 30);
+DB_AMP_Recipe_Ingredient("R_ORB_PSYCHIC", 1, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+DB_AMP_Recipe_Ingredient("R_ORB_PSYCHIC", 2, (ITEMROOT)LOOT_GEM_Amethyst_A_20626173-dd4d-497e-94f9-b2000a86def9);
+
+DB_AMP_Recipe("R_ORB_BLOOD", "resource", (ITEMROOT)Orb_Blood_26777907-8719-4535-86db-3648ab495ee9, 30);
+DB_AMP_Recipe_Ingredient("R_ORB_BLOOD", 1, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+DB_AMP_Recipe_Ingredient("R_ORB_BLOOD", 2, (ITEMROOT)LOOT_GEM_Bloodstone_A_a92ee8db-142f-4a2a-af64-78e3aec36832);
+
+DB_AMP_Recipe("R_ORB_UNDERDARK", "resource", (ITEMROOT)Orb_Underdark_b881c55e-f552-4a2b-a69a-f53d88b44b57, 30);
+DB_AMP_Recipe_Ingredient("R_ORB_UNDERDARK", 1, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+DB_AMP_Recipe_Ingredient("R_ORB_UNDERDARK", 2, (ITEMROOT)LOOT_GEM_Onyx_A_6cbbe9f6-c346-4d6c-b1f1-4cbe6aaf99ef);
+
+DB_AMP_Recipe("R_ORB_POISON", "resource", (ITEMROOT)Orb_Poison_d7355ea0-7fa5-4f7c-9287-b17894efe84d, 30);
+DB_AMP_Recipe_Ingredient("R_ORB_POISON", 1, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+DB_AMP_Recipe_Ingredient("R_ORB_POISON", 2, (ITEMROOT)LOOT_GEM_Jade_A_94fb73e8-668a-499f-a88f-54d24c6947a7);
+
+DB_AMP_Recipe("R_ORB_DIAMOND", "resource", (ITEMROOT)Orb_Diamond_9c3c318b-bd51-49e7-af1e-598d3467bfcd, 30);
+DB_AMP_Recipe_Ingredient("R_ORB_DIAMOND", 1, (ITEMROOT)Celestial_Shard_833473c8-0255-412d-92e6-1c08e9d629e5);
+DB_AMP_Recipe_Ingredient("R_ORB_DIAMOND", 2, (ITEMROOT)LOOT_GEM_Diamond_A_440f4817-5d30-4867-a982-5b8094ace403);
+
+// tag crafting ingredients
+// tag all crafting resources to assist with detection
+DB_AMP_Arcanizer_Crafting_Tag((TAG)AMP_CRAFTING_INGREDIENT_bd349698-3353-46bf-90cd-345d9930d12b);
+
+// weapon tags
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_SPEAR_fef6b399-19da-4d4b-b1ec-c79dff7f46c3, "Spear");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_STAVE_00a09d42-c23c-48b0-90cc-c67f6cbd9e3d, "Staff");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_GREATAXE_02da79f5-6f13-4f90-9819-102e37693f48, "Greataxe");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_HANDAXE_09dd1e1e-6d9f-4cc6-b514-68e981c80543, "Handaxe");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_HAND_CROSSBOW_1c12ee6d-50e2-459f-90c8-ae56701190ce, "HandCrossbow");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_WARHAMMER_1dff197e-b74c-4173-94d3-e1323239556c, "Warhammer");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_SCIMITAR_206f9701-7b24-4eaf-9ac4-a47746c251e2, "Scimitar");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_MAUL_2503012b-9cc4-491c-a068-282f8cea8707, "Maul");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_HALBERD_2c74855f-769a-43f5-b6db-48c4c47721ff, "Halberd");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_HEAVY_CROSSBOW_2cc23bb9-d777-4265-a34c-333528628b90, "HeavyCrossbow");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_LONGBOW_557d335c-0780-4665-9802-709a7d202dba, "Longbow");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_FLAIL_5d7b1304-6d20-4d60-ba1b-0fbb491bfc18, "Flail");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_BATTLEAXE_7609654e-b213-410d-b08f-6d2930da6411, "Battleaxe");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_DAGGER_7490e5d0-d346-4b0e-80c6-04e977160863, "Dagger");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_GLAIVE_7a15ea4f-cb00-4201-8e7f-024627e3d014, "Glaive");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_SHORTBOW_81197304-7116-4d7b-8ef4-207bbf636682, "Shortbow");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_LONGSWORD_96a99a42-ec5d-4081-9d62-c9e3f0057136, "Longsword");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_CLUB_9b333d67-365f-41fa-80b2-08e86588e9ac, "Club");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_LIGHT_CROSSBOW_a302a8e2-a3f9-41e1-a68c-70a453e65399, "LightCrossbow");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_MORNINGSTAR_aa4cfcea-aee8-44b9-a460-e7231df796b1, "Morningstar");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_GREATCLUB_ab44887d-0eb0-4fef-bd9d-943ea8971aa2, "Greatclub");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_RAPIER_aeaf4e95-38d7-45ec-8900-40bc9e6106b0, "Rapier");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_GREATSWORD_aec4ed1a-993b-491f-a2db-640bf11869c1, "Greatsword");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_JAVELIN_b6e3bfa1-2c63-404f-becb-21d047aacce1, "Javelin");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_SICKLE_bfdc63bd-b8f6-4eac-9363-0c71882ff46f, "Sickle");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_MACE_c29fc6ce-0482-420d-a839-41a0bab95c2d, "Mace");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_TRIDENT_c808f076-4a0f-422a-97db-e985ce35f3f9, "Trident");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_SHORTSWORD_c826fd1e-4780-43d4-b49b-87f30c060fe6, "Shortsword");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_PIKE_ca1a548b-f409-4cad-af5a-dfdd5834c709, "Pike");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_LIGHT_HAMMER_edc46cc0-25d0-4da9-bfcb-edba239edcce, "LightHammer");
+DB_AMP_Arcanizer_WeaponTag((TAG)WPN_WAR_PICK_eed87cdb-c5ee-45c2-9a5a-6949dce87a1e, "WarPick");
+DB_AMP_Arcanizer_WeaponTag((TAG)TORCH_a8139e1a-c593-4e0b-88cd-f703f888db83, "Torch");
+
+// craftable items - amulets
+// radiant amulets (light)
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Radiant1_22af5e09-7567-4574-ba26-61e5638381fe, "Radiant", 1);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Radiant2_ded1eef8-5ed7-4351-80e7-9f449d3a5ad0, "Radiant", 2);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Radiant3_d53cdd0e-07e9-4803-ad54-a67bc1ea6b0f, "Radiant", 3);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Radiant4_2cf290de-081a-46b2-bd7e-41d1b419903c, "Radiant", 4);
+
+// force amulets (force)
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Force1_d5feada7-d980-4297-b35d-4c250808ddf0, "Force", 1);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Force2_0d51403b-dc3e-4cf5-af2a-d29f19e9b6bd, "Force", 2);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Force3_677937db-60d7-4441-8779-b97c7c4539d9, "Force", 3);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Force4_8170d0dc-2b36-4965-9800-1df25a77196f, "Force", 4);
+
+// lightning amulets (lightning)
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Lightning1_087df29c-32b7-4ce9-bd93-f53280442b49, "Lightning", 1);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Lightning2_f12c28f3-15f6-44d8-ad4a-6a53fdd42103, "Lightning", 2);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Lightning3_25d8a381-4b64-447b-985a-cde902ea73b1, "Lightning", 3);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Lightning4_a7f9cc7c-cbc0-4594-bc1c-f777b7322c19, "Lightning", 4);
+
+// fire amulets (fire)
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Fire1_79f1c164-54b0-4658-b34a-660601b30dbb, "Fire", 1);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Fire2_f962aaf5-1001-48f0-a7ad-54f37f26c40f, "Fire", 2);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Fire3_a103f801-dcf4-4e94-b20a-c9394964bf29, "Fire", 3);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Fire4_5ba8218b-38dc-45b6-ad76-cd5a80d73c17, "Fire", 4);
+
+// cold amulets (cold)
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Cold1_83b175d1-d5b1-4605-a28e-003d83432705, "Cold", 1);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Cold2_a43caade-c090-4a18-b23b-d5c0d185caa4, "Cold", 2);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Cold3_f8f06651-06ca-43cc-aa49-add773615617, "Cold", 3);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Cold4_6065d3da-2482-4449-9eca-c6b6aa61a6df, "Cold", 4);
+
+// necrotic amulets (necrotic)
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Necrotic1_800ced76-1344-4d7b-969e-40e67157a3e4, "Necrotic", 1);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Necrotic2_c81f40ea-2967-49e3-8e4d-bf46eea42b50, "Necrotic", 2);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Necrotic3_f3ba58aa-0fb6-4ff5-90db-b46d7b888869, "Necrotic", 3);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Necrotic4_5220a1ce-1459-41ec-86cb-038da3ac616b, "Necrotic", 4);
+
+// warrior amulets (warrior)
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Warrior1_07a868ab-23ce-477a-849a-fc785d878237, "Warrior", 1);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Warrior2_b847422d-ec60-40eb-ad5c-980653c3b49a, "Warrior", 2);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Warrior3_293d4d0e-fff0-44b6-ae26-bcb39060587e, "Warrior", 3);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Warrior4_7bf759ba-62a0-49a3-9a6e-c0fe4aac702d, "Warrior", 4);
+
+// acid amulets (acid)
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Acid1_adfe2c51-d820-474c-b949-814ba370742d, "Acid", 1);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Acid2_42759818-7d05-4265-ae1f-55d358b26c27, "Acid", 2);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Acid3_badac5ee-93ff-41ed-98c9-de32bde4e69e, "Acid", 3);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Acid4_7164d9cc-0ef7-435b-825e-c64dd93b4084, "Acid", 4);
+
+// thunder amulets (thunder)
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Thunder1_e9e70385-f028-40c1-9d61-c51ca45259f7, "Thunder", 1);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Thunder2_451eea74-f72a-4ed2-8398-359050c6ccbb, "Thunder", 2);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Thunder3_8cff169c-11cf-4ef8-b08b-2f785254638c, "Thunder", 3);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Thunder4_e4e55558-d3fa-442b-9252-9baf4579115d, "Thunder", 4);
+
+// psychic amulets (psychic)
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Psychic1_826c184c-643a-415c-8c3e-45255e710c0c, "Psychic", 1);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Psychic2_3c927702-6d5f-463a-84cd-81b6261e8c02, "Psychic", 2);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Psychic3_dc08fa53-d152-4bdd-b3cd-a62122c5bac3, "Psychic", 3);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Psychic4_27ba5ccb-99ae-49ee-85a6-1d3ef821f354, "Psychic", 4);
+
+// blood amulets (blood)
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Blood1_f59e3c5b-faea-4185-a191-be8671c53187, "Blood", 1);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Blood2_1679f741-a780-422b-b8a2-31bd4907cda3, "Blood", 2);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Blood3_c80d1d65-65e6-4c8f-9a93-54b5eafad703, "Blood", 3);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Blood4_2f7ec622-643b-4b11-b6be-9882586cc3f4, "Blood", 4);
+
+// underdark amulets (underdark)
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Underdark1_e9103d54-ff82-47fd-8131-9794c6ff263c, "Underdark", 1);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Underdark2_a34a36e8-b759-497c-8855-4926456b7a56, "Underdark", 2);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Underdark3_080aae45-c964-452b-bc84-c37d574b5775, "Underdark", 3);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Underdark4_84330b3b-5b45-4f65-ab47-9de55f8b49cb, "Underdark", 4);
+
+// poison amulets (poison)
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Poison1_befc9295-dd1a-4427-ae8d-c9d489302986, "Poison", 1);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Poison2_f39dedc6-71ee-40ee-bc6a-05620fe68c68, "Poison", 2);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Poison3_bc6ea2ee-0a1c-412d-9c53-45b8905a47c9, "Poison", 3);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Poison4_aac1412c-f8f1-42f1-8b1e-e02ba4a8dfdf, "Poison", 4);
+
+// diamond amulets (diamond)
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Diamond1_e9591cf8-0ac2-422e-8b8e-2092894c5973, "Diamond", 1);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Diamond2_bbbbe1fd-ac48-42ae-bc9c-c4dd6c04211f, "Diamond", 2);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Diamond3_8d834f49-daf7-4605-a6ec-bf567396fa14, "Diamond", 3);
+DB_AMP_Arcanizer_Craft_Amulet((ITEMROOT)arc_N_Diamond4_ccf6eb46-e91d-44d6-a76f-cd10f0adcc61, "Diamond", 4);
+
+// craftable items - rings
+// radiant (light) rings
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Radiant1_88d8da29-3e54-43eb-9b3a-9b5a7f694eb3, "Radiant", 1);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Radiant2_99d9dcef-a84c-460e-98f8-ae09b02a7519, "Radiant", 2);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Radiant3_e364f1c7-182a-47c6-9d05-202d5ab419dc, "Radiant", 3);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Radiant4_204214ad-3b11-4057-bfa2-7a7721c7e340, "Radiant", 4);
+
+// force rings
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Force1_8d0168cb-ec1b-4a9d-b26f-afe300e4c08d, "Force", 1);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Force2_e7a1d4a0-10c4-4d6a-aeb1-d5d574943084, "Force", 2);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Force3_d0c59f68-43af-4cc4-9c46-88b3605d9c18, "Force", 3);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Force4_41d748ea-9d39-467d-82f4-0528b1b7a2fe, "Force", 4);
+
+// lightning rings
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Lightning1_b87a942b-b281-4407-a37c-2aced5a571a9, "Lightning", 1);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Lightning2_d51e2653-1310-4f48-a51a-b01ec30904c7, "Lightning", 2);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Lightning3_00fa6de0-7cef-4449-aad2-468d1588872a, "Lightning", 3);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Lightning4_b7e6fc7b-fc83-4aae-9b9d-bec8035acb94, "Lightning", 4);
+
+// fire rings
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Fire1_5b2a0db0-fb33-4ba2-b5d4-3cb02892fe12, "Fire", 1);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Fire2_c30ce9f6-a3ca-4fda-9a2b-d24c4f4cce56, "Fire", 2);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Fire3_228df281-c06d-4307-a311-f19bd8411e10, "Fire", 3);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Fire4_8bae43c0-2933-46a9-bce2-c7e89111f63f, "Fire", 4);
+
+// cold rings
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Cold1_86727e8a-2d2a-45c9-95a0-b0b114386941, "Cold", 1);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Cold2_ded35fcc-2394-4bd8-93cb-4657a8fea652, "Cold", 2);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Cold3_39a1316e-08d3-4db7-b466-e102e1b654d9, "Cold", 3);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Cold4_a92bc994-d639-45bd-8b84-38e32096491d, "Cold", 4);
+
+// necrotic rings
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Necrotic1_6178de69-4fa9-4d4b-bfc0-fb7c4e3fc78f, "Necrotic", 1);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Necrotic2_8e9984e4-b64e-4cf2-be66-017c0b0f7316, "Necrotic", 2);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Necrotic3_f9d830cb-8cce-444b-9efb-955c667d1269, "Necrotic", 3);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Necrotic4_64cc1f29-05c3-4049-bad9-e070606e0ae5, "Necrotic", 4);
+
+// warrior rings
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Warrior1_358a1fc0-8a15-4cdc-935c-d484ebe10a1e, "Warrior", 1);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Warrior2_706b4cd8-e2b1-4783-b5ca-4554a5017982, "Warrior", 2);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Warrior3_54de41a2-a570-491a-bea6-2c2c5221fdb2, "Warrior", 3);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Warrior4_0154daae-ef2d-4c49-b251-6cdee1e89657, "Warrior", 4);
+
+// acid rings
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Acid1_c16f9ca9-52c5-450c-aa32-78c4885bcaad, "Acid", 1);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Acid2_ecd4bbe5-8c78-4464-b92c-7b1c6273616d, "Acid", 2);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Acid3_368c22ac-d14f-4747-b535-506042579060, "Acid", 3);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Acid4_fd4e50f9-a445-478b-8976-693605e5430c, "Acid", 4);
+
+// thunder rings
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Thunder1_9234e96d-ca23-4f37-ab63-60f690ee34e7, "Thunder", 1);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Thunder2_23b654ce-ed04-4d4d-9567-2c09990d9245, "Thunder", 2);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Thunder3_d389e167-dd90-4486-992a-da3597af679a, "Thunder", 3);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Thunder4_42c88d0d-90b2-4207-b750-af62b512de40, "Thunder", 4);
+
+// psychic rings
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Psychic1_b810f9c0-3a2d-4b44-bc49-e83d7da1f17f, "Psychic", 1);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Psychic2_4088e360-9be4-4d82-bfbf-4016a0700c0b, "Psychic", 2);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Psychic3_7993f14e-321d-422b-980e-41d1828c79fe, "Psychic", 3);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Psychic4_dec64e78-8cbe-4b2e-a749-cbbf0cccc0dc, "Psychic", 4);
+
+// blood rings
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Blood1_8b952046-729d-4882-b5a7-9b3f75c23c49, "Blood", 1);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Blood2_4638745c-621e-4310-939a-b4000bd1b670, "Blood", 2);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Blood3_0df87d75-3f40-4974-ad8b-b96befe94df4, "Blood", 3);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Blood4_2c194649-8fe6-415e-bb43-d30cfbf901d1, "Blood", 4);
+
+// underdark rings
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Underdark1_ac09a86b-c6c1-4378-ac7c-8151f2e9e080, "Underdark", 1);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Underdark2_fa1b014f-55fd-467e-9af4-caed926a3ff1, "Underdark", 2);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Underdark3_585d236a-2008-4b1d-ba15-28505289dab7, "Underdark", 3);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Underdark4_10b8df11-40eb-42e4-a493-3a9fa14fff7d, "Underdark", 4);
+
+// poison rings
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Poison1_604ae26a-ebe5-4034-9619-12348d0b615c, "Poison", 1);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Poison2_827d78c0-c447-4ea7-b298-a4c6eeb43383, "Poison", 2);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Poison3_11912b99-2358-4d0e-b26b-f936a469f3d8, "Poison", 3);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Poison4_47a3b6c6-7a7d-439d-a0a8-eabd16853891, "Poison", 4);
+
+// diamond rings
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Diamond1_97228f6e-b4a2-4eaa-961c-df6c05226380, "Diamond", 1);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Diamond2_cceef311-a4c0-4a12-b819-fce14364c9b4, "Diamond", 2);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Diamond3_87e90898-d779-40bf-b8a4-53538165687e, "Diamond", 3);
+DB_AMP_Arcanizer_Craft_Ring((ITEMROOT)arc_R_Diamond4_a640c0ca-79ac-4837-a6cd-36653e98453c, "Diamond", 4);
+
+// craftable items - monk gloves
+// monk gloves by rarity
+DB_AMP_Arcanizer_Craft_Gloves((ITEMROOT)arc_G_Monk1_904dce87-b9a7-4273-ace6-deca898e49ea, "Monk", 1);
+DB_AMP_Arcanizer_Craft_Gloves((ITEMROOT)arc_G_Monk2_d672877d-9746-49e9-868b-edf9bf940823, "Monk", 2);
+DB_AMP_Arcanizer_Craft_Gloves((ITEMROOT)arc_G_Monk3_11504b7e-123d-4699-8b54-1dd9edcef879, "Monk", 3);
+DB_AMP_Arcanizer_Craft_Gloves((ITEMROOT)arc_G_Monk4_995302fb-1e5c-4f74-8770-6ba4460715e9, "Monk", 4);
+
+// craftable items - weapons
+// greataxes
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Greataxe_u_ef706071-91e3-43f6-9249-5ac2d4f7a635, "Greataxe", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Greataxe_r_5e37cd8e-dbb1-4d14-b9e2-edf7d182356e, "Greataxe", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Greataxe_e_3d41c1c8-c5f8-4be0-9986-c96ac7256043, "Greataxe", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Greataxe_l_0dea0194-6888-497d-9b39-4aee62ce9f82, "Greataxe", 4);
+
+// greatswords
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Greatsword_u_c5cbdf65-f735-4d7e-8240-42465663cecd, "Greatsword", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Greatsword_r_5b1a1bdb-f5b9-49d2-9b45-1639a09c38b2, "Greatsword", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Greatsword_e_fa13c164-7f0b-4534-a54e-d08a4f57d1cb, "Greatsword", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Greatsword_l_56b1bb54-db3b-4659-a2a2-2266b79c56e4, "Greatsword", 4);
+
+// halberds
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Halberd_u_ef732297-281f-485d-8dd7-32006466df63, "Halberd", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Halberd_r_3685ea78-74aa-4387-bca8-862e90478e58, "Halberd", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Halberd_e_9607084a-7c83-421a-a68b-d6d28687ca94, "Halberd", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Halberd_l_df598ded-fa1a-462e-bd26-a5070f9082a6, "Halberd", 4);
+
+// glaives
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Glaive_u_5294e3e9-6f31-4665-8f67-346eb0e98c4c, "Glaive", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Glaive_r_59647c4d-98fc-4427-b65e-1888d8c5072d, "Glaive", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Glaive_e_dd24bb1c-868d-4751-884a-b512e36e8ef1, "Glaive", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Glaive_l_9f66efd1-35c3-40d8-9343-a27a43e6e018, "Glaive", 4);
+
+// heavy crossbows
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_HeavyCrossbow_u_01ff1902-515c-4b7c-9bf0-bd844e59e5d7, "HeavyCrossbow", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_HeavyCrossbow_r_ec28b0fd-6b73-4fe5-b515-eb57c941dddd, "HeavyCrossbow", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_HeavyCrossbow_e_f59bfb81-10ce-4a85-b5a3-2159dfd7ddbe, "HeavyCrossbow", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_HeavyCrossbow_l_81923880-d3fd-40d6-87d1-5a769936612c, "HeavyCrossbow", 4);
+
+// rapiers
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Rapier_u_b536f42b-74ab-4aac-9815-93ef4ed1bb27, "Rapier", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Rapier_r_22f09765-58db-463d-9772-71201102af65, "Rapier", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Rapier_e_4e3b1c43-1de9-40e4-834c-a2c49e7c45b9, "Rapier", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Rapier_l_ed86e1dd-8329-418f-8996-4c0c7ee04711, "Rapier", 4);
+
+// battleaxes
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Battleaxe_u_7efbdf58-2b09-4927-a051-87bc9994b557, "Battleaxe", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Battleaxe_r_0e7a8865-4ad7-4339-847d-87d4747f4a63, "Battleaxe", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Battleaxe_e_1180cb95-9c7a-487d-a8ae-6f73302d82a4, "Battleaxe", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Battleaxe_l_1729a4f5-8ae7-467e-a65f-93611cf7a576, "Battleaxe", 4);
+
+// warpicks
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_WarPick_u_b7ec7dfd-e7bd-46e3-b8b5-c68a12275b34, "WarPick", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_WarPick_r_22795d9b-70b7-4c3a-88a3-6a8b73cc7460, "WarPick", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_WarPick_e_0488dfe4-3769-4a3f-861c-e295ba949550, "WarPick", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_WarPick_l_3897204c-386f-4381-b871-116337f9f869, "WarPick", 4);
+
+// flails
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Flail_u_8425a212-ad49-4277-9f1f-2ac082657cf9, "Flail", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Flail_r_d8093d3a-0bed-4d12-a1d2-da858ac2bfe3, "Flail", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Flail_e_a75f0c34-7f2b-4be4-8f14-7163711910d1, "Flail", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Flail_l_55c0880c-556c-447b-93bd-e5d174d3d4c7, "Flail", 4);
+
+// hand crossbows
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_HandCrossbow_u_5fac10bd-b468-4a2d-bbf9-7fcc4437a31e, "HandCrossbow", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_HandCrossbow_r_e391a514-4559-442a-b184-c1f77727dfd6, "HandCrossbow", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_HandCrossbow_e_243f11f6-fb30-4273-a82b-61b3d3382d80, "HandCrossbow", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_HandCrossbow_l_3c8ed44c-c7b2-46ed-9ada-a8d096845043, "HandCrossbow", 4);
+
+// longbows
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Longbow_u_98cb1c59-59d8-4971-b215-9e6a216ae427, "Longbow", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Longbow_r_c8f1a2fd-9b34-4b14-9eb9-f53acbe65d81, "Longbow", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Longbow_e_8a313277-e66b-40d6-97bd-48f3e59a1839, "Longbow", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Longbow_l_6e2b6758-e747-45b0-aa6d-86800116a9f7, "Longbow", 4);
+
+// morningstars
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Morningstar_u_19e922ab-3978-4765-bc28-976aacff933f, "Morningstar", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Morningstar_r_de27e750-21c1-4fd4-ab1e-07145eb3e762, "Morningstar", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Morningstar_e_99a76849-724a-441a-bf8e-674ba056adc5, "Morningstar", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Morningstar_l_399ccf28-4bfb-417f-8453-eb5a54fa3e27, "Morningstar", 4);
+
+// warhammers
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Warhammer_u_fb20102b-2e73-4e9a-a13b-e8c0a61d174e, "Warhammer", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Warhammer_r_0b84c1c7-d5af-4195-98c0-517bb75c5822, "Warhammer", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Warhammer_e_15ceea87-7a93-4be9-a3e1-982d11125c64, "Warhammer", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Warhammer_l_dbb18c84-3b11-402c-a2f3-ae75923024ef, "Warhammer", 4);
+
+// longswords
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Longsword_u_a8a583b5-c2fd-44fa-a66a-3c638ee04659, "Longsword", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Longsword_r_0f9b5c63-40f1-48d2-8fc6-e9239915407a, "Longsword", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Longsword_e_69128186-4e51-48be-b5b5-7d0a7792d056, "Longsword", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Longsword_l_6cb10ad8-af82-4cac-b8ae-1a54a4dd33e0, "Longsword", 4);
+
+// tridents
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Trident_u_9ff2a432-9a00-48e9-a6ca-fb7f6680af9e, "Trident", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Trident_r_6a23b208-724b-4cf2-8500-6d0f9d0392fb, "Trident", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Trident_e_affbb0d4-8805-4a6f-84ba-7eeab6cc862e, "Trident", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Trident_l_0c7ef47f-da9f-46b2-be89-03395a907d95, "Trident", 4);
+
+// scimitars
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Scimitar_u_a3b226f6-8bca-4ea9-b869-1101acb0ea2f, "Scimitar", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Scimitar_r_24e71c96-9a0f-4d28-8074-e98bdf3f3407, "Scimitar", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Scimitar_e_b94b9392-f59d-4e6e-891b-5393ff1f22ed, "Scimitar", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Scimitar_l_cd8bdcf2-0d35-4c95-a676-084b58c86a3c, "Scimitar", 4);
+
+// pikes
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Pike_u_cf8f5e89-4ce2-4f1f-93ca-d6ea9843c1f6, "Pike", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Pike_r_4e04021f-122b-4e99-85cb-b1061184e8bc, "Pike", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Pike_e_53678ca8-1f33-4f96-b011-56944441812e, "Pike", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Pike_l_930f6676-5efd-4558-8cea-6e00b3123766, "Pike", 4);
+
+// shortswords
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Shortsword_u_79137aa9-ec3b-4d73-8e3a-415228b24423, "Shortsword", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Shortsword_r_759e74ba-94c3-43aa-a9ba-2e5244487947, "Shortsword", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Shortsword_e_34f2d3f1-8b2b-4161-891f-cf83f79dd2ce, "Shortsword", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Shortsword_l_fcd55e71-0ab7-44f4-a19e-0512e359f3ff, "Shortsword", 4);
+
+// light hammers
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_LightHammer_u_712df7fc-fd4a-43f8-b6b4-6482fb830624, "LightHammer", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_LightHammer_r_2a6427ea-bab8-4124-b6c8-b3454669b422, "LightHammer", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_LightHammer_e_bc026de8-7e37-4f5d-b4d4-92ceae30b380, "LightHammer", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_LightHammer_l_53c22a2f-895a-457d-9eb5-4788791248c3, "LightHammer", 4);
+
+// light crossbows
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_LightCrossbow_u_7483f520-c26a-43b7-80cf-ef7a0e1fea13, "LightCrossbow", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_LightCrossbow_r_1f6b1745-af24-4add-b635-ad607164d95a, "LightCrossbow", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_LightCrossbow_e_96878784-d964-48c8-b1d8-2e0f5c97856a, "LightCrossbow", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_LightCrossbow_l_8299ada5-f224-471d-91d2-5ee89535e3c4, "LightCrossbow", 4);
+
+// maces
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Mace_u_20181d3a-08ed-48a7-bee8-d983c1444490, "Mace", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Mace_r_d14e998f-601c-4070-b6c5-23124446b1b3, "Mace", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Mace_e_150749f9-ffac-4455-bc8c-a095a096f5b2, "Mace", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Mace_l_8eef0570-aba5-432e-9549-b9658ec468bd, "Mace", 4);
+
+// daggers
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Dagger_u_4d7a25aa-18ab-431f-a209-dfeeb29d2770, "Dagger", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Dagger_r_6393dc4b-2d33-4f18-9573-af8574c0e068, "Dagger", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Dagger_e_e0ba6e5e-2b78-4e8d-bf3d-28b0dd445a14, "Dagger", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Dagger_l_f0d8e3b3-0ca8-4504-b739-3426421caead, "Dagger", 4);
+
+// greatclubs
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Greatclub_u_b5c8d24f-f273-44d6-a86e-0ac8b3f5f0b3, "Greatclub", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Greatclub_r_46d1293d-ecbb-4881-9051-610f0c30c1e1, "Greatclub", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Greatclub_e_4add126a-5b99-46cc-b09a-1605d1bc06af, "Greatclub", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Greatclub_l_6f2d2244-ea75-4f36-8d4e-69c33f57255a, "Greatclub", 4);
+
+// handaxes
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Handaxe_u_c65f57a6-ae44-4937-a53f-45e57d1ac044, "Handaxe", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Handaxe_r_09ef8bfb-9ba0-440f-97ba-8ee9573f9661, "Handaxe", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Handaxe_e_bb7ad5ad-d8e2-4aef-859a-c5b70a365c21, "Handaxe", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Handaxe_l_41776e7b-1515-4da2-9ce6-5f16894f601c, "Handaxe", 4);
+
+// shortbows
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Shortbow_u_6fe4a2ca-b8c5-42a1-8f65-aed5828f1b3b, "Shortbow", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Shortbow_r_238c2a3c-5b8d-453b-afe9-a65b3d860c8b, "Shortbow", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Shortbow_e_99ed30c3-c64a-40f6-991d-34cdbf3c0e12, "Shortbow", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Shortbow_l_15c5b19c-04fe-419f-8e5c-3f73a151113b, "Shortbow", 4);
+
+// clubs
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Club_u_6e23853a-b832-487a-a0c7-3d23ea7125d2, "Club", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Club_r_0ad87505-fc23-475b-983b-7dcf0b48fe9e, "Club", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Club_e_fbab9d99-3348-4016-a095-e71acedcc727, "Club", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Club_l_243a4054-8661-4932-b819-7573c0acd31d, "Club", 4);
+
+// torches
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Torch_u_8a7b566d-b348-43f2-a4ce-cfd11c08025c, "Torch", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Torch_r_cbf7ad13-3cb0-4475-8a13-15b06dec6a19, "Torch", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Torch_e_f96b0565-ed17-4c19-af57-ab7333b78894, "Torch", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Torch_l_c752d78f-660a-4843-89ec-57f228d947bf, "Torch", 4);
+
+// javelins
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Javelin_u_940ed932-c053-4e87-b8bf-5beaf3920d48, "Javelin", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Javelin_r_d3dfddc8-ace3-4986-9f81-e6136f932418, "Javelin", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Javelin_e_ef4cc921-8431-48f9-8261-df721d02d64d, "Javelin", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Javelin_l_c2b7eba5-551a-42be-994c-a55e8342283b, "Javelin", 4);
+
+// quarterstaffs
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Quarterstaff_u_70091adf-6590-4fe4-bb6c-416df7c2110a, "Quarterstaff", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Quarterstaff_r_5cafa0ed-6680-4a8a-a512-aae5fba94872, "Quarterstaff", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Quarterstaff_e_1271c151-a599-4c1c-8f9a-f5d4e4dea360, "Quarterstaff", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Quarterstaff_l_db13e1b2-bf74-4635-8dcd-bfa8628efe74, "Quarterstaff", 4);
+
+// spears
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Spear_u_4a1183ce-6978-4750-a713-b3b854398361, "Spear", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Spear_r_96bbb851-7d9e-44e6-9771-7682293566d7, "Spear", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Spear_e_c0418a34-d94f-4b74-8e35-9b23f0a26994, "Spear", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Spear_l_d3a3e4db-e6e4-4438-9cfa-88bad2311e04, "Spear", 4);
+
+// sickles
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Sickle_u_86a095c2-c169-425d-890a-55527cf6381f, "Sickle", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Sickle_r_834d8ddc-cdd8-4142-af42-a3e7f948eafa, "Sickle", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Sickle_e_a2e0812e-d8c0-4567-b1e1-f7e0a062b19d, "Sickle", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Sickle_l_e7fd5cf2-fb3e-4ab0-abbf-786978641a84, "Sickle", 4);
+
+// shields
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)ARM_Shield_u_d7e5767f-2e18-406e-b3e7-1d37e6a3df58, "Shield", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)ARM_Shield_r_b0e0aacc-08bb-4f31-957f-1cef8a75d726, "Shield", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)ARM_Shield_e_6cc82a06-785f-4b86-a9b4-46c48a4b3c7a, "Shield", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)ARM_Shield_l_1b2192c2-665a-4d61-88d0-15ff357ffaab, "Shield", 4);
+
+// mauls
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Maul_u_f117f43c-b185-4dda-a80f-87645bbaaa0a, "Maul", 1);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Maul_r_e390ce32-6f2f-4b2a-a91e-921ce828c3c2, "Maul", 2);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Maul_e_d4af28ee-d328-4d0f-848a-ec6ab09617bf, "Maul", 3);
+DB_AMP_Arcanizer_Craft_Weapon((ITEMROOT)WPN_Maul_l_dd281825-0700-4808-9356-030ce4fbac45, "Maul", 4);
+
+// base item slots
+// define equipment slots for jewelry and armor
+DB_AMP_Arcanizer_BaseItemSlot(EQUIPMENTSLOT.Ring, "Ring");
+DB_AMP_Arcanizer_BaseItemSlot(EQUIPMENTSLOT.Ring2, "Ring");
+DB_AMP_Arcanizer_BaseItemSlot(EQUIPMENTSLOT.Amulet, "Amulet");
+DB_AMP_Arcanizer_BaseItemSlot(EQUIPMENTSLOT.Gloves, "Gloves");
+DB_AMP_Arcanizer_BaseItemSlot(EQUIPMENTSLOT.MeleeOffHand, "Shield");
+
+// special items
+// astral chest and related items
+DB_AMP_Arcanizer_Special_Item((ITEMROOT)AMP_Astral_Chest_9b0bd3b3-3677-4b7a-a4a6-978735f764d2, "AstralChest");
+DB_AMP_Arcanizer_Special_Tag((TAG)ASTRAL_CHEST_KNOCK_d5d006a2-613a-4c2e-87b4-a529c2ce9816, "AstralChestNoKnock");
+KBSECTION
+
+EXITSECTION
+ENDEXITSECTION

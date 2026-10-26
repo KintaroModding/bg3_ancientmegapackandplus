@@ -1,0 +1,35 @@
+Version 1
+SubGoalCombiner SGC_AND
+
+INITSECTION
+
+KBSECTION
+
+// AMP_BOSS_ANTIDEATH_SPENT parks early at prio 20, above antideath 10, and vanilla downed wins on the first KO
+// resurrect then polymorph wipes it, so it is re-applied on later events
+
+// right after vanilla resurrects him
+IF
+Resurrected(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a)
+THEN
+ApplyStatus(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a, "AMP_BOSS_ANTIDEATH_SPENT", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// safety on combat entry, polymorph may have stripped it
+IF
+EnteredCombat(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a, _)
+AND
+HasActiveStatus(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a, "AMP_BOSS_ANTIDEATH_SPENT", 0)
+THEN
+ApplyStatus(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a, "AMP_BOSS_ANTIDEATH_SPENT", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// final guard, every turn start
+IF
+TurnStarted(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a)
+AND
+HasActiveStatus(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a, "AMP_BOSS_ANTIDEATH_SPENT", 0)
+THEN
+ApplyStatus(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a, "AMP_BOSS_ANTIDEATH_SPENT", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+
+ENDEXITSECTION

@@ -1,0 +1,137 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// every _Generous tag needs its own row, base reads the tag it was given
+DB_AMP_BossCoins("AMP_Boss_SteelTitan", (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, 1);
+DB_AMP_BossCoins("AMP_Boss_SteelTitan_Generous", (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, 1);
+DB_AMP_BossCoins("AMP_Boss_MysticCarrion", (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, 1);
+DB_AMP_BossCoins("AMP_Boss_MysticCarrion_Generous", (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, 1);
+DB_AMP_BossCoins("AMP_Boss_Incubus", (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, 1);
+DB_AMP_BossCoins("AMP_Boss_Incubus_Generous", (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, 1);
+
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_SteelTitan");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_MysticCarrion");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Incubus");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_CountingHouse");
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_Act3CoinsVer(1)
+THEN
+PROC_AMP_Plus_Act3Coins_Seed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_Act3CoinsVer(1)
+THEN
+PROC_AMP_Plus_Act3Coins_Seed();
+
+PROC
+PROC_AMP_Plus_Act3Coins_Seed()
+THEN
+DB_AMP_BossCoins("AMP_Boss_SteelTitan", (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, 1);
+DB_AMP_BossCoins("AMP_Boss_SteelTitan_Generous", (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, 1);
+DB_AMP_BossCoins("AMP_Boss_MysticCarrion", (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, 1);
+DB_AMP_BossCoins("AMP_Boss_MysticCarrion_Generous", (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, 1);
+DB_AMP_BossCoins("AMP_Boss_Incubus", (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, 1);
+DB_AMP_BossCoins("AMP_Boss_Incubus_Generous", (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, 1);
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_SteelTitan");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_MysticCarrion");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Incubus");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_CountingHouse");
+DB_AMP_Plus_Act3CoinsVer(1);
+
+IF
+Died(S_LOW_SteelWatcher_Prototype_51db791d-4378-448a-86ba-3e3ae2748db6)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_SteelTitan")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_SteelTitan_Generous");
+
+IF
+Died(S_LOW_SteelWatcher_Prototype_51db791d-4378-448a-86ba-3e3ae2748db6)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_SteelTitan")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_SteelTitan");
+
+IF
+Died(S_LOW_FatherCarrion_b003409c-364f-4065-94bf-7436001d890e)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_MysticCarrion")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_MysticCarrion_Generous");
+
+IF
+Died(S_LOW_FatherCarrion_b003409c-364f-4065-94bf-7436001d890e)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_MysticCarrion")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_MysticCarrion");
+
+IF
+Died(S_LOW_HouseOfHope_Incubus_3947e0e2-3b4c-4a39-ac53-454e95665b26)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Incubus")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Incubus_Generous");
+
+IF
+Died(S_LOW_HouseOfHope_Incubus_3947e0e2-3b4c-4a39-ac53-454e95665b26)
+AND
+DB_Players(_Player)
+AND
+QRY_AMP_BossRewardsEnabled()
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_Incubus")
+THEN
+PROC_AMP_BossRewardGrant(_Player, "AMP_Boss_Incubus");
+
+IF
+Died(S_LOW_CountingHouse_VaultMainGuard_936953b6-059b-4ed6-b03a-5d1b340f8889)
+AND
+DB_Players(_Player)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_Boss_CountingHouse")
+THEN
+DB_NOOP(1);
+
+EXITSECTION
+ENDEXITSECTION

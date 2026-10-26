@@ -1,0 +1,1242 @@
+Version 1
+SubGoalCombiner SGC_AND
+
+INITSECTION
+DB_AMP_Plus_Pyre_DecaySched(0);
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_Pyre_DecaySched(_)
+THEN
+DB_AMP_Plus_Pyre_DecaySched(0);
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_Pyre_DecaySched(_)
+THEN
+DB_AMP_Plus_Pyre_DecaySched(0);
+
+// Osiris bodies only add, a second one over the base would grade twice. The base copy is disarmed instead
+
+// react to the fact, not the event: the base re-arms whenever another creature joins
+
+IF
+DB_AMP_Pyre_BossCombat((GUIDSTRING)_CombatID)
+THEN
+NOT DB_AMP_Pyre_BossCombat(_CombatID);
+
+// Ketheric arena death bloom is an object that joins combat, creature check goes first
+
+QRY
+QRY_AMP_Plus_Pyre_Hostile((CHARACTER)_Char)
+AND
+IsCharacter(_Char, 1)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+IsEnemy(_Player, _Char, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Plus_Pyre_NoFuel((CHARACTER)_Char)
+AND
+GetTemplate(_Char, Quest_COL_Necromite_Summon_fec67606-9665-4942-b5bb-c211e2e03499)
+THEN
+DB_NOOP(1);
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+QRY_AMP_Plus_Affix_On("PYRE")
+AND
+QRY_AMP_Plus_Pyre_Hostile(_Char)
+AND
+NOT QRY_AMP_Plus_Pyre_NoFuel(_Char)
+THEN
+DB_AMP_Plus_Pyre_Member(_Char, _CombatID);
+ApplyStatus(_Char, "AMP_PYRE_TRACKER", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+QRY_AMP_Plus_Affix_On("PYRE")
+AND
+QRY_AMP_Plus_Pyre_Hostile(_Char)
+AND
+QRY_AMP_Plus_Pyre_NoFuel(_Char)
+THEN
+DB_AMP_Plus_Pyre_Member(_Char, _CombatID);
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+QRY_AMP_Plus_Affix_On("PYRE")
+AND
+IsBoss(_Char, 1)
+AND
+NOT DB_AMP_Plus_Pyre_Boss(_CombatID)
+THEN
+DB_AMP_Plus_Pyre_Boss(_CombatID);
+DB_AMP_Plus_Pyre_Pts(_CombatID, 0);
+DB_AMP_Plus_Pyre_Cool(_CombatID, 0);
+DB_AMP_Plus_Pyre_Kills(_CombatID, 0);
+DB_AMP_Plus_Pyre_AcidN(_CombatID, 0);
+DB_AMP_Plus_Pyre_BurnN(_CombatID, 0);
+
+IF
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Boss(_CombatID)
+AND
+DB_AMP_Plus_Pyre_Grade(_CombatID, (INTEGER)_G)
+AND
+_G > 0
+THEN
+PROC_AMP_Plus_Pyre_ApplyOne(_Char, _G);
+
+// sum passed as an argument, re-reading the pool in a second body subtracts twice
+
+PROC
+PROC_AMP_Plus_Pyre_Add((GUIDSTRING)_CombatID, (INTEGER)_D)
+AND
+DB_AMP_Plus_Pyre_Pts(_CombatID, (INTEGER)_Cur)
+AND
+IntegerSum(_Cur, _D, (INTEGER)_Raw)
+THEN
+PROC_AMP_Plus_Pyre_Commit(_CombatID, _Raw);
+
+PROC
+PROC_AMP_Plus_Pyre_Add((GUIDSTRING)_CombatID, (INTEGER)_D)
+AND
+NOT DB_AMP_Plus_Pyre_Pts(_CombatID, _)
+AND
+IntegerSum(0, _D, (INTEGER)_Raw)
+THEN
+PROC_AMP_Plus_Pyre_Commit(_CombatID, _Raw);
+
+PROC
+PROC_AMP_Plus_Pyre_Commit((GUIDSTRING)_CombatID, (INTEGER)_Raw)
+AND
+_Raw >= 0
+THEN
+PROC_AMP_Plus_Pyre_CapMode(_CombatID, _Raw);
+
+PROC
+PROC_AMP_Plus_Pyre_Commit((GUIDSTRING)_CombatID, (INTEGER)_Raw)
+AND
+_Raw < 0
+THEN
+PROC_AMP_Plus_Pyre_Write(_CombatID, 0);
+
+PROC
+PROC_AMP_Plus_Pyre_CapMode((GUIDSTRING)_CombatID, (INTEGER)_Raw)
+AND
+DB_AMP_Difficulty_Mode("CASUAL")
+THEN
+PROC_AMP_Plus_Pyre_CapRamp(_CombatID, _Raw, 4140);
+
+PROC
+PROC_AMP_Plus_Pyre_CapMode((GUIDSTRING)_CombatID, (INTEGER)_Raw)
+AND
+DB_AMP_Difficulty_Mode("STANDARD")
+THEN
+PROC_AMP_Plus_Pyre_CapRamp(_CombatID, _Raw, 2070);
+
+PROC
+PROC_AMP_Plus_Pyre_CapMode((GUIDSTRING)_CombatID, (INTEGER)_Raw)
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+THEN
+PROC_AMP_Plus_Pyre_CapRamp(_CombatID, _Raw, 1035);
+
+PROC
+PROC_AMP_Plus_Pyre_CapMode((GUIDSTRING)_CombatID, (INTEGER)_Raw)
+AND
+NOT DB_AMP_Difficulty_Mode(_)
+THEN
+PROC_AMP_Plus_Pyre_CapRamp(_CombatID, _Raw, 2070);
+
+PROC
+PROC_AMP_Plus_Pyre_CapRamp((GUIDSTRING)_CombatID, (INTEGER)_Raw, (INTEGER)_C)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_L)
+AND
+_L <= 3
+AND
+IntegerProduct(_C, 5, (INTEGER)_X)
+AND
+IntegerDivide(_X, 2, (INTEGER)_Cap)
+THEN
+PROC_AMP_Plus_Pyre_CapSet(_CombatID, _Raw, _Cap);
+
+PROC
+PROC_AMP_Plus_Pyre_CapRamp((GUIDSTRING)_CombatID, (INTEGER)_Raw, (INTEGER)_C)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_L)
+AND
+_L >= 4
+AND
+_L <= 6
+AND
+IntegerProduct(_C, 5, (INTEGER)_X)
+AND
+IntegerDivide(_X, 3, (INTEGER)_Cap)
+THEN
+PROC_AMP_Plus_Pyre_CapSet(_CombatID, _Raw, _Cap);
+
+PROC
+PROC_AMP_Plus_Pyre_CapRamp((GUIDSTRING)_CombatID, (INTEGER)_Raw, (INTEGER)_C)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_L)
+AND
+_L >= 7
+AND
+_L <= 9
+AND
+IntegerProduct(_C, 5, (INTEGER)_X)
+AND
+IntegerDivide(_X, 4, (INTEGER)_Cap)
+THEN
+PROC_AMP_Plus_Pyre_CapSet(_CombatID, _Raw, _Cap);
+
+PROC
+PROC_AMP_Plus_Pyre_CapRamp((GUIDSTRING)_CombatID, (INTEGER)_Raw, (INTEGER)_C)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_L)
+AND
+_L >= 10
+THEN
+PROC_AMP_Plus_Pyre_CapSet(_CombatID, _Raw, _C);
+
+PROC
+PROC_AMP_Plus_Pyre_CapRamp((GUIDSTRING)_CombatID, (INTEGER)_Raw, (INTEGER)_C)
+AND
+NOT DB_AMP_AvgPartyLevel(_)
+THEN
+PROC_AMP_Plus_Pyre_CapSet(_CombatID, _Raw, _C);
+
+PROC
+PROC_AMP_Plus_Pyre_CapSet((GUIDSTRING)_CombatID, (INTEGER)_Raw, (INTEGER)_Cap)
+AND
+_Raw > _Cap
+THEN
+PROC_AMP_Plus_Pyre_Write(_CombatID, _Cap);
+
+PROC
+PROC_AMP_Plus_Pyre_CapSet((GUIDSTRING)_CombatID, (INTEGER)_Raw, (INTEGER)_Cap)
+AND
+_Raw <= _Cap
+THEN
+PROC_AMP_Plus_Pyre_Write(_CombatID, _Raw);
+
+PROC
+PROC_AMP_Plus_Pyre_Write((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre_Pts(_CombatID, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre_Pts(_CombatID, _Old);
+DB_AMP_Plus_Pyre_Pts(_CombatID, _N);
+
+PROC
+PROC_AMP_Plus_Pyre_Write((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+NOT DB_AMP_Plus_Pyre_Pts(_CombatID, _)
+THEN
+DB_AMP_Plus_Pyre_Pts(_CombatID, _N);
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_PYRE_MARK_DMG", _, _)
+AND
+DB_AMP_Plus_Pyre_Member(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Boss(_CombatID)
+THEN
+PROC_AMP_Plus_Pyre_Add(_CombatID, 6);
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_PYRE_MARK_CC", _, _)
+AND
+DB_AMP_Plus_Pyre_Member(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Boss(_CombatID)
+THEN
+PROC_AMP_Plus_Pyre_Add(_CombatID, 40);
+
+// counter read before it is seeded, or a fresh fight pays twice
+
+IF
+Died((CHARACTER)_Dead)
+AND
+DB_AMP_Plus_Pyre_Member(_Dead, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Boss(_CombatID)
+AND
+IsBoss(_Dead, 0)
+AND
+NOT QRY_AMP_Plus_Pyre_NoFuel(_Dead)
+THEN
+PROC_AMP_Plus_Pyre_Kill(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre_Kill((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Kills(_CombatID, (INTEGER)_K)
+AND
+IntegerSum(_K, 1, (INTEGER)_New)
+AND
+IntegerProduct(_K, 26, (INTEGER)_Extra)
+AND
+IntegerSum(53, _Extra, (INTEGER)_Gain)
+THEN
+NOT DB_AMP_Plus_Pyre_Kills(_CombatID, _K);
+DB_AMP_Plus_Pyre_Kills(_CombatID, _New);
+PROC_AMP_Plus_Pyre_Add(_CombatID, _Gain);
+PROC_AMP_Plus_Pyre_Flare(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre_Kill((GUIDSTRING)_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre_Kills(_CombatID, _)
+THEN
+DB_AMP_Plus_Pyre_Kills(_CombatID, 1);
+PROC_AMP_Plus_Pyre_Add(_CombatID, 53);
+PROC_AMP_Plus_Pyre_Flare(_CombatID);
+
+// graded points converted back to stored, a flat award lands three grades apart between Casual and Hard
+
+IF
+Died((CHARACTER)_Dead)
+AND
+DB_AMP_Plus_Pyre_Member(_Dead, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Boss(_CombatID)
+AND
+IsBoss(_Dead, 1)
+THEN
+PROC_AMP_Plus_Pyre_BossFlare(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre_BossFlare((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Difficulty_Mode("CASUAL")
+THEN
+PROC_AMP_Plus_Pyre_BossFlareRamp(_CombatID, 1600);
+
+PROC
+PROC_AMP_Plus_Pyre_BossFlare((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Difficulty_Mode("STANDARD")
+THEN
+PROC_AMP_Plus_Pyre_BossFlareRamp(_CombatID, 800);
+
+PROC
+PROC_AMP_Plus_Pyre_BossFlare((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+THEN
+PROC_AMP_Plus_Pyre_BossFlareRamp(_CombatID, 400);
+
+PROC
+PROC_AMP_Plus_Pyre_BossFlareRamp((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_L)
+AND
+_L <= 3
+AND
+IntegerProduct(_N, 5, (INTEGER)_X)
+AND
+IntegerDivide(_X, 2, (INTEGER)_R)
+THEN
+PROC_AMP_Plus_Pyre_BossFlareSet(_CombatID, _R);
+
+PROC
+PROC_AMP_Plus_Pyre_BossFlareRamp((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_L)
+AND
+_L >= 4
+AND
+_L <= 6
+AND
+IntegerProduct(_N, 5, (INTEGER)_X)
+AND
+IntegerDivide(_X, 3, (INTEGER)_R)
+THEN
+PROC_AMP_Plus_Pyre_BossFlareSet(_CombatID, _R);
+
+PROC
+PROC_AMP_Plus_Pyre_BossFlareRamp((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_L)
+AND
+_L >= 7
+AND
+_L <= 9
+AND
+IntegerProduct(_N, 5, (INTEGER)_X)
+AND
+IntegerDivide(_X, 4, (INTEGER)_R)
+THEN
+PROC_AMP_Plus_Pyre_BossFlareSet(_CombatID, _R);
+
+PROC
+PROC_AMP_Plus_Pyre_BossFlareRamp((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_L)
+AND
+_L >= 10
+THEN
+PROC_AMP_Plus_Pyre_BossFlareSet(_CombatID, _N);
+
+PROC
+PROC_AMP_Plus_Pyre_BossFlareRamp((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+NOT DB_AMP_AvgPartyLevel(_)
+THEN
+PROC_AMP_Plus_Pyre_BossFlareSet(_CombatID, _N);
+
+PROC
+PROC_AMP_Plus_Pyre_BossFlareSet((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre_Pts(_CombatID, (INTEGER)_Cur)
+AND
+_Cur < _N
+THEN
+PROC_AMP_Plus_Pyre_Write(_CombatID, _N);
+
+PROC
+PROC_AMP_Plus_Pyre_BossFlareSet((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre_Pts(_CombatID, (INTEGER)_Cur)
+THEN
+DB_AMP_Plus_Pyre_Flared(_CombatID);
+PROC_AMP_Plus_Pyre_Regrade(_CombatID, _Cur);
+
+PROC
+PROC_AMP_Plus_Pyre_Flare((GUIDSTRING)_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre_Flared(_CombatID)
+AND
+DB_AMP_Plus_Pyre_Pts(_CombatID, (INTEGER)_N)
+THEN
+DB_AMP_Plus_Pyre_Flared(_CombatID);
+PROC_AMP_Plus_Pyre_Regrade(_CombatID, _N);
+
+IF
+TurnStarted((GUIDSTRING)_Obj)
+AND
+CombatGetGuidFor(_Obj, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Flared(_CombatID)
+THEN
+NOT DB_AMP_Plus_Pyre_Flared(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre_AddCool((GUIDSTRING)_CombatID, (INTEGER)_A)
+AND
+DB_AMP_Plus_Pyre_Cool(_CombatID, (INTEGER)_Cur)
+AND
+IntegerSum(_Cur, _A, (INTEGER)_New)
+THEN
+NOT DB_AMP_Plus_Pyre_Cool(_CombatID, _Cur);
+DB_AMP_Plus_Pyre_Cool(_CombatID, _New);
+
+PROC
+PROC_AMP_Plus_Pyre_AddCool((GUIDSTRING)_CombatID, (INTEGER)_A)
+AND
+NOT DB_AMP_Plus_Pyre_Cool(_CombatID, _)
+THEN
+DB_AMP_Plus_Pyre_Cool(_CombatID, _A);
+
+// highest count down: counting up lets one hit fall through every body
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_PYRE_MARK_DOUSE", _, _)
+AND
+DB_AMP_Plus_Pyre_Member(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Boss(_CombatID)
+THEN
+PROC_AMP_Plus_Pyre_Acid(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre_Acid((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_AcidN(_CombatID, 2)
+AND
+DB_AMP_Plus_Pyre_Pts(_CombatID, (INTEGER)_N)
+AND
+IntegerProduct(_N, 15, (INTEGER)_X)
+AND
+IntegerDivide(_X, 200, (INTEGER)_Pct)
+AND
+IntegerSum(_Pct, 45, (INTEGER)_A)
+THEN
+NOT DB_AMP_Plus_Pyre_AcidN(_CombatID, 2);
+DB_AMP_Plus_Pyre_AcidN(_CombatID, 3);
+PROC_AMP_Plus_Pyre_AddCool(_CombatID, _A);
+
+PROC
+PROC_AMP_Plus_Pyre_Acid((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_AcidN(_CombatID, 1)
+AND
+DB_AMP_Plus_Pyre_Pts(_CombatID, (INTEGER)_N)
+AND
+IntegerProduct(_N, 15, (INTEGER)_X)
+AND
+IntegerDivide(_X, 200, (INTEGER)_Pct)
+AND
+IntegerSum(_Pct, 45, (INTEGER)_A)
+THEN
+NOT DB_AMP_Plus_Pyre_AcidN(_CombatID, 1);
+DB_AMP_Plus_Pyre_AcidN(_CombatID, 2);
+PROC_AMP_Plus_Pyre_AddCool(_CombatID, _A);
+
+PROC
+PROC_AMP_Plus_Pyre_Acid((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_AcidN(_CombatID, 0)
+AND
+DB_AMP_Plus_Pyre_Pts(_CombatID, (INTEGER)_N)
+AND
+IntegerProduct(_N, 11, (INTEGER)_X)
+AND
+IntegerDivide(_X, 16, (INTEGER)_Kept)
+THEN
+NOT DB_AMP_Plus_Pyre_AcidN(_CombatID, 0);
+DB_AMP_Plus_Pyre_AcidN(_CombatID, 1);
+PROC_AMP_Plus_Pyre_Write(_CombatID, _Kept);
+PROC_AMP_Plus_Pyre_Regrade(_CombatID, _Kept);
+
+PROC
+PROC_AMP_Plus_Pyre_Acid((GUIDSTRING)_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre_AcidN(_CombatID, _)
+AND
+DB_AMP_Plus_Pyre_Pts(_CombatID, (INTEGER)_N)
+AND
+IntegerProduct(_N, 11, (INTEGER)_X)
+AND
+IntegerDivide(_X, 16, (INTEGER)_Kept)
+THEN
+DB_AMP_Plus_Pyre_AcidN(_CombatID, 1);
+PROC_AMP_Plus_Pyre_Write(_CombatID, _Kept);
+PROC_AMP_Plus_Pyre_Regrade(_CombatID, _Kept);
+
+// own marker status, one name cannot carry two prices
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_PLUS_PYRE_MARK_DOUSE_RADIANT", _, _)
+AND
+DB_AMP_Plus_Pyre_Member(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Boss(_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre_RadDone(_CombatID)
+AND
+DB_AMP_Plus_Pyre_Pts(_CombatID, (INTEGER)_N)
+AND
+IntegerProduct(_N, 5, (INTEGER)_X)
+AND
+IntegerDivide(_X, 100, (INTEGER)_Pct)
+AND
+IntegerSum(_Pct, 23, (INTEGER)_A)
+THEN
+DB_AMP_Plus_Pyre_RadDone(_CombatID);
+PROC_AMP_Plus_Pyre_AddCool(_CombatID, _A);
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_PYRE_MARK_HEAL", _, _)
+AND
+DB_AMP_Plus_Pyre_Member(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Boss(_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre_HealDone(_CombatID)
+AND
+DB_AMP_Plus_Pyre_Pts(_CombatID, (INTEGER)_N)
+AND
+IntegerProduct(_N, 5, (INTEGER)_X)
+AND
+IntegerDivide(_X, 200, (INTEGER)_Pct)
+AND
+IntegerSum(_Pct, 30, (INTEGER)_A)
+THEN
+DB_AMP_Plus_Pyre_HealDone(_CombatID);
+PROC_AMP_Plus_Pyre_AddCool(_CombatID, _A);
+
+// same highest-first order as the acid
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_PLUS_PYRE_MARK_BURNOUT", _, _)
+AND
+DB_AMP_Plus_Pyre_Member(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Boss(_CombatID)
+THEN
+PROC_AMP_Plus_Pyre_Burnout(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre_Burnout((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_BurnN(_CombatID, 2)
+AND
+DB_AMP_Plus_Pyre_Pts(_CombatID, (INTEGER)_N)
+AND
+IntegerProduct(_N, 8, (INTEGER)_X)
+AND
+IntegerDivide(_X, 100, (INTEGER)_A)
+THEN
+NOT DB_AMP_Plus_Pyre_BurnN(_CombatID, 2);
+DB_AMP_Plus_Pyre_BurnN(_CombatID, 3);
+PROC_AMP_Plus_Pyre_AddCool(_CombatID, _A);
+
+PROC
+PROC_AMP_Plus_Pyre_Burnout((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_BurnN(_CombatID, 1)
+AND
+DB_AMP_Plus_Pyre_Pts(_CombatID, (INTEGER)_N)
+AND
+IntegerProduct(_N, 8, (INTEGER)_X)
+AND
+IntegerDivide(_X, 100, (INTEGER)_A)
+THEN
+NOT DB_AMP_Plus_Pyre_BurnN(_CombatID, 1);
+DB_AMP_Plus_Pyre_BurnN(_CombatID, 2);
+PROC_AMP_Plus_Pyre_AddCool(_CombatID, _A);
+
+PROC
+PROC_AMP_Plus_Pyre_Burnout((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_BurnN(_CombatID, 0)
+AND
+DB_AMP_Plus_Pyre_Pts(_CombatID, (INTEGER)_N)
+AND
+IntegerProduct(_N, 8, (INTEGER)_X)
+AND
+IntegerDivide(_X, 100, (INTEGER)_A)
+THEN
+NOT DB_AMP_Plus_Pyre_BurnN(_CombatID, 0);
+DB_AMP_Plus_Pyre_BurnN(_CombatID, 1);
+PROC_AMP_Plus_Pyre_AddCool(_CombatID, _A);
+
+PROC
+PROC_AMP_Plus_Pyre_Burnout((GUIDSTRING)_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre_BurnN(_CombatID, _)
+AND
+DB_AMP_Plus_Pyre_Pts(_CombatID, (INTEGER)_N)
+AND
+IntegerProduct(_N, 8, (INTEGER)_X)
+AND
+IntegerDivide(_X, 100, (INTEGER)_A)
+THEN
+DB_AMP_Plus_Pyre_BurnN(_CombatID, 1);
+PROC_AMP_Plus_Pyre_AddCool(_CombatID, _A);
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_PYRE_MARK_CON", _, _)
+AND
+DB_AMP_Plus_Pyre_Member(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Boss(_CombatID)
+THEN
+PROC_AMP_Plus_Pyre_AddCool(_CombatID, 5);
+
+// buffer is zeroed, not retracted, so the fallback body below stays inert
+
+IF
+CombatRoundStarted((GUIDSTRING)_CombatID, _)
+AND
+DB_AMP_Plus_Pyre_Boss(_CombatID)
+THEN
+PROC_AMP_Plus_Pyre_RoundTick(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre_RoundTick((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Cool(_CombatID, (INTEGER)_C)
+AND
+IntegerSubtract(0, _C, (INTEGER)_Neg)
+THEN
+NOT DB_AMP_Plus_Pyre_Cool(_CombatID, _C);
+DB_AMP_Plus_Pyre_Cool(_CombatID, 0);
+PROC_AMP_Plus_Pyre_Add(_CombatID, _Neg);
+PROC_AMP_Plus_Pyre_Decay(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre_RoundTick((GUIDSTRING)_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre_Cool(_CombatID, _)
+THEN
+DB_AMP_Plus_Pyre_Cool(_CombatID, 0);
+PROC_AMP_Plus_Pyre_Decay(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre_Decay((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Pts(_CombatID, (INTEGER)_N)
+AND
+IntegerProduct(_N, 7, (INTEGER)_X)
+AND
+IntegerDivide(_X, 10, (INTEGER)_Kept)
+THEN
+PROC_AMP_Plus_Pyre_Write(_CombatID, _Kept);
+PROC_AMP_Plus_Pyre_RoundReset(_CombatID);
+PROC_AMP_Plus_Pyre_Regrade(_CombatID, _Kept);
+
+PROC
+PROC_AMP_Plus_Pyre_RoundReset((GUIDSTRING)_CombatID)
+THEN
+NOT DB_AMP_Plus_Pyre_RadDone(_CombatID);
+NOT DB_AMP_Plus_Pyre_HealDone(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre_RoundReset((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_AcidN(_CombatID, (INTEGER)_A)
+THEN
+NOT DB_AMP_Plus_Pyre_AcidN(_CombatID, _A);
+DB_AMP_Plus_Pyre_AcidN(_CombatID, 0);
+
+PROC
+PROC_AMP_Plus_Pyre_RoundReset((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_BurnN(_CombatID, (INTEGER)_B)
+THEN
+NOT DB_AMP_Plus_Pyre_BurnN(_CombatID, _B);
+DB_AMP_Plus_Pyre_BurnN(_CombatID, 0);
+
+PROC
+PROC_AMP_Plus_Pyre_RoundReset((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Kills(_CombatID, (INTEGER)_K)
+THEN
+NOT DB_AMP_Plus_Pyre_Kills(_CombatID, _K);
+DB_AMP_Plus_Pyre_Kills(_CombatID, 0);
+
+PROC
+PROC_AMP_Plus_Pyre_Regrade((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_L)
+THEN
+PROC_AMP_Plus_Pyre_Ramp(_CombatID, _N, _L);
+
+PROC
+PROC_AMP_Plus_Pyre_Regrade((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+NOT DB_AMP_AvgPartyLevel(_)
+THEN
+PROC_AMP_Plus_Pyre_Mode(_CombatID, _N);
+
+PROC
+PROC_AMP_Plus_Pyre_Ramp((GUIDSTRING)_CombatID, (INTEGER)_N, (INTEGER)_L)
+AND
+_L <= 3
+AND
+IntegerProduct(_N, 2, (INTEGER)_X)
+AND
+IntegerDivide(_X, 5, (INTEGER)_R)
+THEN
+PROC_AMP_Plus_Pyre_Mode(_CombatID, _R);
+
+PROC
+PROC_AMP_Plus_Pyre_Ramp((GUIDSTRING)_CombatID, (INTEGER)_N, (INTEGER)_L)
+AND
+_L >= 4
+AND
+_L <= 6
+AND
+IntegerProduct(_N, 3, (INTEGER)_X)
+AND
+IntegerDivide(_X, 5, (INTEGER)_R)
+THEN
+PROC_AMP_Plus_Pyre_Mode(_CombatID, _R);
+
+PROC
+PROC_AMP_Plus_Pyre_Ramp((GUIDSTRING)_CombatID, (INTEGER)_N, (INTEGER)_L)
+AND
+_L >= 7
+AND
+_L <= 9
+AND
+IntegerProduct(_N, 4, (INTEGER)_X)
+AND
+IntegerDivide(_X, 5, (INTEGER)_R)
+THEN
+PROC_AMP_Plus_Pyre_Mode(_CombatID, _R);
+
+PROC
+PROC_AMP_Plus_Pyre_Ramp((GUIDSTRING)_CombatID, (INTEGER)_N, (INTEGER)_L)
+AND
+_L >= 10
+THEN
+PROC_AMP_Plus_Pyre_Mode(_CombatID, _N);
+
+PROC
+PROC_AMP_Plus_Pyre_Mode((GUIDSTRING)_CombatID, (INTEGER)_R)
+AND
+DB_AMP_Difficulty_Mode("CASUAL")
+AND
+IntegerDivide(_R, 2, (INTEGER)_Eff)
+THEN
+PROC_AMP_Plus_Pyre_Ladder(_CombatID, _Eff);
+
+PROC
+PROC_AMP_Plus_Pyre_Mode((GUIDSTRING)_CombatID, (INTEGER)_R)
+AND
+DB_AMP_Difficulty_Mode("STANDARD")
+THEN
+PROC_AMP_Plus_Pyre_Ladder(_CombatID, _R);
+
+PROC
+PROC_AMP_Plus_Pyre_Mode((GUIDSTRING)_CombatID, (INTEGER)_R)
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+AND
+IntegerProduct(_R, 2, (INTEGER)_Eff)
+THEN
+PROC_AMP_Plus_Pyre_Ladder(_CombatID, _Eff);
+
+
+PROC
+PROC_AMP_Plus_Pyre_Ladder((GUIDSTRING)_CombatID, (INTEGER)_E)
+AND
+_E >= 1800
+THEN
+PROC_AMP_Plus_Pyre_SetGrade(_CombatID, 10);
+
+PROC
+PROC_AMP_Plus_Pyre_Ladder((GUIDSTRING)_CombatID, (INTEGER)_E)
+AND
+_E >= 1350
+AND
+_E < 1800
+THEN
+PROC_AMP_Plus_Pyre_SetGrade(_CombatID, 9);
+
+PROC
+PROC_AMP_Plus_Pyre_Ladder((GUIDSTRING)_CombatID, (INTEGER)_E)
+AND
+_E >= 1000
+AND
+_E < 1350
+THEN
+PROC_AMP_Plus_Pyre_SetGrade(_CombatID, 8);
+
+PROC
+PROC_AMP_Plus_Pyre_Ladder((GUIDSTRING)_CombatID, (INTEGER)_E)
+AND
+_E >= 780
+AND
+_E < 1000
+THEN
+PROC_AMP_Plus_Pyre_SetGrade(_CombatID, 7);
+
+PROC
+PROC_AMP_Plus_Pyre_Ladder((GUIDSTRING)_CombatID, (INTEGER)_E)
+AND
+_E >= 660
+AND
+_E < 780
+THEN
+PROC_AMP_Plus_Pyre_SetGrade(_CombatID, 6);
+
+PROC
+PROC_AMP_Plus_Pyre_Ladder((GUIDSTRING)_CombatID, (INTEGER)_E)
+AND
+_E >= 540
+AND
+_E < 660
+THEN
+PROC_AMP_Plus_Pyre_SetGrade(_CombatID, 5);
+
+PROC
+PROC_AMP_Plus_Pyre_Ladder((GUIDSTRING)_CombatID, (INTEGER)_E)
+AND
+_E >= 420
+AND
+_E < 540
+THEN
+PROC_AMP_Plus_Pyre_SetGrade(_CombatID, 4);
+
+PROC
+PROC_AMP_Plus_Pyre_Ladder((GUIDSTRING)_CombatID, (INTEGER)_E)
+AND
+_E >= 300
+AND
+_E < 420
+THEN
+PROC_AMP_Plus_Pyre_SetGrade(_CombatID, 3);
+
+PROC
+PROC_AMP_Plus_Pyre_Ladder((GUIDSTRING)_CombatID, (INTEGER)_E)
+AND
+_E >= 180
+AND
+_E < 300
+THEN
+PROC_AMP_Plus_Pyre_SetGrade(_CombatID, 2);
+
+PROC
+PROC_AMP_Plus_Pyre_Ladder((GUIDSTRING)_CombatID, (INTEGER)_E)
+AND
+_E >= 80
+AND
+_E < 180
+THEN
+PROC_AMP_Plus_Pyre_SetGrade(_CombatID, 1);
+
+PROC
+PROC_AMP_Plus_Pyre_Ladder((GUIDSTRING)_CombatID, (INTEGER)_E)
+AND
+_E < 80
+THEN
+PROC_AMP_Plus_Pyre_SetGrade(_CombatID, 0);
+
+// idempotent, repeated recomputes must not re-fire overhead text and effect
+
+PROC
+PROC_AMP_Plus_Pyre_SetGrade((GUIDSTRING)_CombatID, (INTEGER)_G)
+AND
+DB_AMP_Plus_Pyre_Grade(_CombatID, (INTEGER)_Cur)
+AND
+_Cur == _G
+THEN
+DB_NOOP(1);
+
+PROC
+PROC_AMP_Plus_Pyre_SetGrade((GUIDSTRING)_CombatID, (INTEGER)_G)
+AND
+DB_AMP_Plus_Pyre_Grade(_CombatID, (INTEGER)_Cur)
+AND
+NOT _Cur == _G
+THEN
+NOT DB_AMP_Plus_Pyre_Grade(_CombatID, _Cur);
+DB_AMP_Plus_Pyre_Grade(_CombatID, _G);
+PROC_AMP_Plus_Pyre_ApplyAll(_CombatID, _G);
+
+PROC
+PROC_AMP_Plus_Pyre_SetGrade((GUIDSTRING)_CombatID, (INTEGER)_G)
+AND
+NOT DB_AMP_Plus_Pyre_Grade(_CombatID, _)
+THEN
+DB_AMP_Plus_Pyre_Grade(_CombatID, _G);
+PROC_AMP_Plus_Pyre_ApplyAll(_CombatID, _G);
+
+PROC
+PROC_AMP_Plus_Pyre_ApplyAll((GUIDSTRING)_CombatID, (INTEGER)_G)
+AND
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, _CombatID)
+AND
+IsDead(_Char, 0)
+THEN
+PROC_AMP_Plus_Pyre_ApplyOne(_Char, _G);
+
+PROC
+PROC_AMP_Plus_Pyre_ApplyOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 0
+THEN
+PROC_AMP_Plus_Pyre_Clear(_Char);
+
+PROC
+PROC_AMP_Plus_Pyre_ApplyOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 1
+THEN
+ApplyStatus(_Char, "AMP_PYRE_G1", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre_ApplyOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 2
+THEN
+ApplyStatus(_Char, "AMP_PYRE_G2", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre_ApplyOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 3
+THEN
+ApplyStatus(_Char, "AMP_PYRE_G3", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre_ApplyOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 4
+THEN
+ApplyStatus(_Char, "AMP_PYRE_G4", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre_ApplyOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 5
+THEN
+ApplyStatus(_Char, "AMP_PYRE_G5", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre_ApplyOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 6
+THEN
+ApplyStatus(_Char, "AMP_PYRE_G6", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre_ApplyOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 7
+THEN
+ApplyStatus(_Char, "AMP_PYRE_G7", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre_ApplyOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 8
+THEN
+ApplyStatus(_Char, "AMP_PYRE_G8", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre_ApplyOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 9
+THEN
+ApplyStatus(_Char, "AMP_PYRE_G9", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre_ApplyOne((CHARACTER)_Char, (INTEGER)_G)
+AND
+_G == 10
+THEN
+ApplyStatus(_Char, "AMP_PYRE_G10", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Pyre_Clear((CHARACTER)_Char)
+THEN
+RemoveStatus(_Char, "AMP_PYRE_G1", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PYRE_G2", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PYRE_G3", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PYRE_G4", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PYRE_G5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PYRE_G6", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PYRE_G7", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PYRE_G8", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PYRE_G9", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PYRE_G10", NULL_00000000-0000-0000-0000-000000000000);
+
+// persist, then cleanup, inside one rule: the base splits them across two and cleanup can wipe the pool first
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Boss(_CombatID)
+THEN
+PROC_AMP_Plus_Pyre_Persist(_CombatID);
+PROC_AMP_Plus_Pyre_EndCleanup(_CombatID);
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre_Boss(_CombatID)
+THEN
+PROC_AMP_Plus_Pyre_EndCleanup(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre_Persist((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Pts(_CombatID, (INTEGER)_N)
+AND
+_N > 0
+THEN
+PROC_AMP_Plus_Pyre_StoreAll(_CombatID, _N);
+NOT DB_AMP_Plus_Pyre_DecaySched(0);
+DB_AMP_Plus_Pyre_DecaySched(1);
+TimerCancel("AMP_Plus_Pyre_Memory");
+TimerLaunch("AMP_Plus_Pyre_Memory", 900000);
+
+PROC
+PROC_AMP_Plus_Pyre_StoreAll((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, _CombatID)
+AND
+IsDead(_Char, 0)
+AND
+QRY_AMP_Plus_Pyre_Hostile(_Char)
+THEN
+PROC_AMP_Plus_Pyre_SetMem(_Char, _N);
+
+PROC
+PROC_AMP_Plus_Pyre_SetMem((CHARACTER)_Char, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre_Mem(_Char, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre_Mem(_Char, _Old);
+DB_AMP_Plus_Pyre_Mem(_Char, _N);
+
+PROC
+PROC_AMP_Plus_Pyre_SetMem((CHARACTER)_Char, (INTEGER)_N)
+AND
+NOT DB_AMP_Plus_Pyre_Mem(_Char, _)
+THEN
+DB_AMP_Plus_Pyre_Mem(_Char, _N);
+
+PROC
+PROC_AMP_Plus_Pyre_EndCleanup((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre_DrainEndMember(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre_EndCleanup((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Pts(_CombatID, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Pyre_Pts(_CombatID, _N);
+
+PROC
+PROC_AMP_Plus_Pyre_EndCleanup((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Grade(_CombatID, (INTEGER)_G)
+THEN
+NOT DB_AMP_Plus_Pyre_Grade(_CombatID, _G);
+
+PROC
+PROC_AMP_Plus_Pyre_EndCleanup((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Cool(_CombatID, (INTEGER)_C)
+THEN
+NOT DB_AMP_Plus_Pyre_Cool(_CombatID, _C);
+
+PROC
+PROC_AMP_Plus_Pyre_EndCleanup((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Kills(_CombatID, (INTEGER)_K)
+THEN
+NOT DB_AMP_Plus_Pyre_Kills(_CombatID, _K);
+
+PROC
+PROC_AMP_Plus_Pyre_EndCleanup((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_AcidN(_CombatID, (INTEGER)_A)
+THEN
+NOT DB_AMP_Plus_Pyre_AcidN(_CombatID, _A);
+
+PROC
+PROC_AMP_Plus_Pyre_EndCleanup((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_BurnN(_CombatID, (INTEGER)_B)
+THEN
+NOT DB_AMP_Plus_Pyre_BurnN(_CombatID, _B);
+
+PROC
+PROC_AMP_Plus_Pyre_EndCleanup((GUIDSTRING)_CombatID)
+THEN
+NOT DB_AMP_Plus_Pyre_RadDone(_CombatID);
+NOT DB_AMP_Plus_Pyre_HealDone(_CombatID);
+NOT DB_AMP_Plus_Pyre_Flared(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre_EndCleanup((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Boss(_CombatID)
+THEN
+NOT DB_AMP_Plus_Pyre_Boss(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre_DrainEndMember((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, _CombatID)
+THEN
+NOT DB_AMP_Plus_Pyre_Member(_Char, _CombatID);
+RemoveStatus(_Char, "AMP_PYRE_TRACKER", NULL_00000000-0000-0000-0000-000000000000);
+PROC_AMP_Plus_Pyre_Clear(_Char);
+PROC_AMP_Plus_Pyre_DrainEndMember(_CombatID);
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+QRY_AMP_Plus_Affix_On("PYRE")
+AND
+QRY_AMP_Plus_Pyre_Hostile(_Char)
+AND
+DB_AMP_Plus_Pyre_Mem(_Char, (INTEGER)_N)
+AND
+_N > 0
+THEN
+PROC_AMP_Plus_Pyre_Restore(_CombatID, _N);
+
+IF
+EnteredCombat((CHARACTER)_Char, _)
+AND
+DB_AMP_Plus_Pyre_Mem(_Char, _)
+AND
+DB_AMP_Plus_Pyre_DecaySched(1)
+THEN
+TimerCancel("AMP_Plus_Pyre_Memory");
+NOT DB_AMP_Plus_Pyre_DecaySched(1);
+DB_AMP_Plus_Pyre_DecaySched(0);
+
+PROC
+PROC_AMP_Plus_Pyre_Restore((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+NOT DB_AMP_Plus_Pyre_Boss(_CombatID)
+THEN
+DB_AMP_Plus_Pyre_Boss(_CombatID);
+DB_AMP_Plus_Pyre_Pts(_CombatID, 0);
+DB_AMP_Plus_Pyre_Cool(_CombatID, 0);
+DB_AMP_Plus_Pyre_Kills(_CombatID, 0);
+DB_AMP_Plus_Pyre_AcidN(_CombatID, 0);
+DB_AMP_Plus_Pyre_BurnN(_CombatID, 0);
+
+PROC
+PROC_AMP_Plus_Pyre_Restore((GUIDSTRING)_CombatID, (INTEGER)_N)
+AND
+DB_AMP_Plus_Pyre_Pts(_CombatID, (INTEGER)_Cur)
+AND
+_Cur < _N
+THEN
+PROC_AMP_Plus_Pyre_Write(_CombatID, _N);
+PROC_AMP_Plus_Pyre_Regrade(_CombatID, _N);
+
+IF
+TimerFinished("AMP_Plus_Pyre_Memory")
+AND
+DB_AMP_Plus_Pyre_DecaySched(1)
+THEN
+NOT DB_AMP_Plus_Pyre_DecaySched(1);
+DB_AMP_Plus_Pyre_DecaySched(0);
+PROC_AMP_Plus_Pyre_ForgetAll();
+
+PROC
+PROC_AMP_Plus_Pyre_ForgetAll()
+THEN
+PROC_AMP_Plus_Pyre_DrainForgetMem();
+
+PROC
+PROC_AMP_Plus_Pyre_DrainForgetMem()
+AND
+DB_AMP_Plus_Pyre_Mem((CHARACTER)_Char, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Pyre_Mem(_Char, _N);
+PROC_AMP_Plus_Pyre_DrainForgetMem();
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "PYRE"
+AND
+_Val == 0
+AND
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, _)
+THEN
+RemoveStatus(_Char, "AMP_PYRE_TRACKER", NULL_00000000-0000-0000-0000-000000000000);
+PROC_AMP_Plus_Pyre_Clear(_Char);
+
+EXITSECTION
+ENDEXITSECTION

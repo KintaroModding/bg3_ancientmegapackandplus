@@ -1,0 +1,24 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+DB_AMP_Cloak47_WSStatus("CLOAK47_2");
+DB_AMP_Cloak47_WSStatus("CLOAK47_3_2");
+DB_AMP_Cloak47_WSStatus("CLOAK47_4_2");
+
+KBSECTION
+
+// combat ends in beast ws with cloak on -> refund wildshape charge
+IF
+LeftCombat(_Char, _)
+AND
+HasActiveStatus(_Char, "WILDSHAPE_ACTIVE", 1)
+AND
+DB_AMP_Cloak47_WSStatus(_Status)
+AND
+HasActiveStatus(_Char, _Status, 1)
+THEN
+ApplyStatus(_Char, "CLOAK47_COMBAT_RESTORE", 0.0, 1, _Char);
+
+EXITSECTION
+ENDEXITSECTION

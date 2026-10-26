@@ -1,0 +1,499 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_GS_Ver(2)
+THEN
+PROC_AMP_Plus_GS_Reseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_GS_Ver(2)
+THEN
+PROC_AMP_Plus_GS_Reseed();
+
+PROC
+PROC_AMP_Plus_GS_Reseed()
+AND
+DB_AMP_Plus_GS_Ver((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_GS_Ver(_Old);
+
+PROC
+PROC_AMP_Plus_GS_Reseed()
+THEN
+PROC_AMP_Plus_GS_DrainBand();
+
+PROC
+PROC_AMP_Plus_GS_Reseed()
+THEN
+PROC_AMP_Plus_GS_DrainShardW();
+
+PROC
+PROC_AMP_Plus_GS_Reseed()
+THEN
+PROC_AMP_Plus_GS_DrainSlot();
+
+PROC
+PROC_AMP_Plus_GS_Reseed()
+THEN
+PROC_AMP_Plus_GS_DrainTier();
+
+// own band table: shard limit and salvage disagree on where legendary ends
+PROC
+PROC_AMP_Plus_GS_Reseed()
+THEN
+DB_AMP_Plus_GS_Ver(2);
+DB_AMP_Plus_GS_Band("Common", 0, 149, 1);
+DB_AMP_Plus_GS_Band("Uncommon", 150, 399, 3);
+DB_AMP_Plus_GS_Band("Rare", 400, 799, 5);
+DB_AMP_Plus_GS_Band("VeryRare", 800, 2499, 10);
+DB_AMP_Plus_GS_Band("Legendary", 2500, 9999999, 25);
+DB_AMP_Plus_GS_ShardW("SHARDS_20", 2);
+DB_AMP_Plus_GS_ShardW("SHARDS_6", 3);
+DB_AMP_Plus_GS_ShardW("SHARDS_2", 5);
+DB_AMP_Plus_GS_ShardW("SHARDS_1", 10);
+DB_AMP_Plus_GS_Slot("Helmet");
+DB_AMP_Plus_GS_Slot("Breast");
+DB_AMP_Plus_GS_Slot("Cloak");
+DB_AMP_Plus_GS_Slot("Boots");
+DB_AMP_Plus_GS_Slot("Gloves");
+DB_AMP_Plus_GS_Slot("Amulet");
+DB_AMP_Plus_GS_Slot("Ring");
+DB_AMP_Plus_GS_Slot("Ring2");
+DB_AMP_Plus_GS_Slot("MusicalInstrument");
+DB_AMP_Plus_GS_Slot("Melee Main Weapon");
+DB_AMP_Plus_GS_Slot("Melee Offhand Weapon");
+DB_AMP_Plus_GS_Slot("Ranged Main Weapon");
+DB_AMP_Plus_GS_Slot("Ranged Offhand Weapon");
+DB_AMP_Plus_GS_Tier(0, 299, 1);
+DB_AMP_Plus_GS_Tier(300, 699, 2);
+DB_AMP_Plus_GS_Tier(700, 1199, 3);
+DB_AMP_Plus_GS_Tier(1200, 1799, 4);
+DB_AMP_Plus_GS_Tier(1800, 9999999, 5);
+
+PROC
+PROC_AMP_Plus_GS_DrainBand()
+AND
+DB_AMP_Plus_GS_Band((STRING)_R, (INTEGER)_Min, (INTEGER)_Max, (INTEGER)_W)
+THEN
+NOT DB_AMP_Plus_GS_Band(_R, _Min, _Max, _W);
+PROC_AMP_Plus_GS_DrainBand();
+
+PROC
+PROC_AMP_Plus_GS_DrainShardW()
+AND
+DB_AMP_Plus_GS_ShardW((STRING)_T, (INTEGER)_W)
+THEN
+NOT DB_AMP_Plus_GS_ShardW(_T, _W);
+PROC_AMP_Plus_GS_DrainShardW();
+
+PROC
+PROC_AMP_Plus_GS_DrainSlot()
+AND
+DB_AMP_Plus_GS_Slot((STRING)_S)
+THEN
+NOT DB_AMP_Plus_GS_Slot(_S);
+PROC_AMP_Plus_GS_DrainSlot();
+
+PROC
+PROC_AMP_Plus_GS_DrainTier()
+AND
+DB_AMP_Plus_GS_Tier((INTEGER)_Min, (INTEGER)_Max, (INTEGER)_B)
+THEN
+NOT DB_AMP_Plus_GS_Tier(_Min, _Max, _B);
+PROC_AMP_Plus_GS_DrainTier();
+
+PROC
+PROC_AMP_Plus_GS_ItemAdd((CHARACTER)_Char, (ITEM)_Item)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+DB_AMP_Plus_GS_Band(_, (INTEGER)_Min, (INTEGER)_Max, (INTEGER)_W)
+AND
+_Value >= _Min
+AND
+_Value <= _Max
+AND
+DB_AMP_Plus_GS_Acc(_Char, (INTEGER)_Sum)
+AND
+IntegerSum(_Sum, _W, (INTEGER)_New)
+THEN
+NOT DB_AMP_Plus_GS_Acc(_Char, _Sum);
+DB_AMP_Plus_GS_Acc(_Char, _New);
+
+// rare, not very rare: that act owns no very rare gear
+PROC
+PROC_AMP_Plus_GS_ItemAdd((CHARACTER)_Char, (ITEM)_Item)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+DB_AMP_Plus_GS_Band(_, (INTEGER)_Min, (INTEGER)_Max, (INTEGER)_W)
+AND
+_Value >= _Min
+AND
+_Value <= _Max
+AND
+_W >= 5
+AND
+DB_AMP_Plus_GS_VRAcc(_Char, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_N2)
+THEN
+NOT DB_AMP_Plus_GS_VRAcc(_Char, _N);
+DB_AMP_Plus_GS_VRAcc(_Char, _N2);
+
+PROC
+PROC_AMP_Plus_GS_ItemAdd((CHARACTER)_Char, (ITEM)_Item)
+THEN
+PROC_AMP_Plus_GS_ShardsInto(_Char, _Item);
+
+PROC
+PROC_AMP_Plus_GS_ShardsInto((CHARACTER)_Char, (ITEM)_Item)
+AND
+NOT DB_AMP_Plus_GS_ItemShardW(_Item, _)
+THEN
+PROC_AMP_Plus_GS_CalcShards(_Item);
+
+PROC
+PROC_AMP_Plus_GS_ShardsInto((CHARACTER)_Char, (ITEM)_Item)
+AND
+DB_AMP_Plus_GS_ItemShardW(_Item, (INTEGER)_W)
+AND
+_W > 0
+AND
+DB_AMP_Plus_GS_ShardSum(_Char, (INTEGER)_Sum)
+AND
+IntegerSum(_Sum, _W, (INTEGER)_New)
+THEN
+NOT DB_AMP_Plus_GS_ShardSum(_Char, _Sum);
+DB_AMP_Plus_GS_ShardSum(_Char, _New);
+
+PROC
+PROC_AMP_Plus_GS_CalcShards((ITEM)_Item)
+AND
+DB_AMP_Plus_GS_ShardAcc(_Item, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_GS_ShardAcc(_Item, _Old);
+
+PROC
+PROC_AMP_Plus_GS_CalcShards((ITEM)_Item)
+THEN
+DB_AMP_Plus_GS_ShardAcc(_Item, 0);
+
+// stacking shards carry both rows, so count them once
+PROC
+PROC_AMP_Plus_GS_CalcShards((ITEM)_Item)
+AND
+DB_AMP_Shard_RecoveryMap((STRING)_Marker, (ITEMROOT)_Template)
+AND
+HasActiveStatus(_Item, _Marker, 1)
+AND
+NOT DB_AMP_Shard_Count(_Item, _Marker, _)
+AND
+DB_ToT_ShardReg(_Template, (STRING)_Tier)
+AND
+DB_AMP_Plus_GS_ShardW(_Tier, (INTEGER)_W)
+AND
+DB_AMP_Plus_GS_ShardAcc(_Item, (INTEGER)_Sum)
+AND
+IntegerSum(_Sum, _W, (INTEGER)_New)
+THEN
+NOT DB_AMP_Plus_GS_ShardAcc(_Item, _Sum);
+DB_AMP_Plus_GS_ShardAcc(_Item, _New);
+
+PROC
+PROC_AMP_Plus_GS_CalcShards((ITEM)_Item)
+AND
+DB_AMP_Shard_Count(_Item, (STRING)_Marker, (INTEGER)_Count)
+AND
+DB_AMP_Shard_RecoveryMap(_Marker, (ITEMROOT)_Template)
+AND
+DB_ToT_ShardReg(_Template, (STRING)_Tier)
+AND
+DB_AMP_Plus_GS_ShardW(_Tier, (INTEGER)_W)
+AND
+IntegerProduct(_W, _Count, (INTEGER)_Add)
+AND
+DB_AMP_Plus_GS_ShardAcc(_Item, (INTEGER)_Sum)
+AND
+IntegerSum(_Sum, _Add, (INTEGER)_New)
+THEN
+NOT DB_AMP_Plus_GS_ShardAcc(_Item, _Sum);
+DB_AMP_Plus_GS_ShardAcc(_Item, _New);
+
+PROC
+PROC_AMP_Plus_GS_CalcShards((ITEM)_Item)
+AND
+DB_AMP_Plus_GS_ShardAcc(_Item, (INTEGER)_Sum)
+THEN
+DB_AMP_Plus_GS_ItemShardW(_Item, _Sum);
+
+IF
+StatusApplied((ITEM)_Item, (STRING)_Marker, _, _)
+AND
+DB_AMP_Shard_RecoveryMap(_Marker, _)
+AND
+DB_AMP_Plus_GS_ItemShardW(_Item, (INTEGER)_W)
+THEN
+NOT DB_AMP_Plus_GS_ItemShardW(_Item, _W);
+
+IF
+StatusRemoved((ITEM)_Item, (STRING)_Marker, _, _)
+AND
+DB_AMP_Shard_RecoveryMap(_Marker, _)
+AND
+DB_AMP_Plus_GS_ItemShardW(_Item, (INTEGER)_W)
+THEN
+NOT DB_AMP_Plus_GS_ItemShardW(_Item, _W);
+
+// gear is a peak that only rises, shards are read live
+
+PROC
+PROC_AMP_Plus_GS_Personal((CHARACTER)_Char)
+AND
+DB_AMP_Plus_GS_Acc(_Char, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_GS_Acc(_Char, _Old);
+
+PROC
+PROC_AMP_Plus_GS_Personal((CHARACTER)_Char)
+AND
+DB_AMP_Plus_GS_VRAcc(_Char, (INTEGER)_OldVR)
+THEN
+NOT DB_AMP_Plus_GS_VRAcc(_Char, _OldVR);
+
+PROC
+PROC_AMP_Plus_GS_Personal((CHARACTER)_Char)
+AND
+DB_AMP_Plus_GS_ShardSum(_Char, (INTEGER)_OldSh)
+THEN
+NOT DB_AMP_Plus_GS_ShardSum(_Char, _OldSh);
+
+PROC
+PROC_AMP_Plus_GS_Personal((CHARACTER)_Char)
+THEN
+DB_AMP_Plus_GS_Acc(_Char, 0);
+DB_AMP_Plus_GS_VRAcc(_Char, 0);
+DB_AMP_Plus_GS_ShardSum(_Char, 0);
+PROC_AMP_Plus_GS_SlotSweep(_Char);
+
+PROC
+PROC_AMP_Plus_GS_SlotSweep((CHARACTER)_Char)
+AND
+DB_AMP_Plus_GS_Slot((STRING)_Slot)
+AND
+GetEquippedItem(_Char, _Slot, (ITEM)_Item)
+THEN
+PROC_AMP_Plus_GS_ItemAdd(_Char, _Item);
+
+PROC
+PROC_AMP_Plus_GS_Personal((CHARACTER)_Char)
+AND
+DB_AMP_Plus_GS_Acc(_Char, (INTEGER)_Score)
+AND
+NOT DB_AMP_Plus_GS_Peak(_Char, _)
+THEN
+DB_AMP_Plus_GS_Peak(_Char, _Score);
+
+PROC
+PROC_AMP_Plus_GS_Personal((CHARACTER)_Char)
+AND
+DB_AMP_Plus_GS_Acc(_Char, (INTEGER)_Score)
+AND
+DB_AMP_Plus_GS_Peak(_Char, (INTEGER)_Peak)
+AND
+_Score > _Peak
+THEN
+NOT DB_AMP_Plus_GS_Peak(_Char, _Peak);
+DB_AMP_Plus_GS_Peak(_Char, _Score);
+
+// breaker gate is current, not peak
+
+PROC
+PROC_AMP_Plus_GS_Personal((CHARACTER)_Char)
+AND
+DB_AMP_Plus_GS_VRAcc(_Char, (INTEGER)_N)
+AND
+_N >= 4
+AND
+NOT DB_AMP_Plus_GS_Breaker(_Char)
+THEN
+DB_AMP_Plus_GS_Breaker(_Char);
+
+PROC
+PROC_AMP_Plus_GS_Personal((CHARACTER)_Char)
+AND
+DB_AMP_Plus_GS_VRAcc(_Char, (INTEGER)_N)
+AND
+_N <= 3
+AND
+DB_AMP_Plus_GS_Breaker(_Char)
+THEN
+NOT DB_AMP_Plus_GS_Breaker(_Char);
+
+IF
+CombatStarted((GUIDSTRING)_CombatGuid)
+THEN
+PROC_AMP_Plus_GS_Party(_CombatGuid);
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatGuid)
+AND
+IsPlayer(_Char, 1)
+AND
+DB_AMP_Plus_GS_Party(_CombatGuid, _)
+THEN
+PROC_AMP_Plus_GS_Party(_CombatGuid);
+
+PROC
+PROC_AMP_Plus_GS_Party((GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_Plus_GS_PartyAcc(_CombatGuid, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_GS_PartyAcc(_CombatGuid, _Old);
+
+PROC
+PROC_AMP_Plus_GS_Party((GUIDSTRING)_CombatGuid)
+AND
+CombatGetInvolvedPartyMembersCount(_CombatGuid, (INTEGER)_N)
+AND
+_N > 0
+THEN
+DB_AMP_Plus_GS_PartyAcc(_CombatGuid, 0);
+PROC_AMP_Plus_GS_PartyIter(_CombatGuid, _N, 1);
+
+PROC
+PROC_AMP_Plus_GS_PartyIter((GUIDSTRING)_CombatGuid, (INTEGER)_Total, (INTEGER)_Idx)
+AND
+_Idx > _Total
+THEN
+PROC_AMP_Plus_GS_PartyStore(_CombatGuid);
+
+PROC
+PROC_AMP_Plus_GS_PartyIter((GUIDSTRING)_CombatGuid, (INTEGER)_Total, (INTEGER)_Idx)
+AND
+_Idx <= _Total
+AND
+CombatGetInvolvedPartyMember(_CombatGuid, _Idx, (CHARACTER)_Member)
+AND
+IsSummon(_Member, 0)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_GS_Personal(_Member);
+PROC_AMP_Plus_GS_AddPeak(_CombatGuid, _Member);
+PROC_AMP_Plus_GS_PartyIter(_CombatGuid, _Total, _Next);
+
+PROC
+PROC_AMP_Plus_GS_PartyIter((GUIDSTRING)_CombatGuid, (INTEGER)_Total, (INTEGER)_Idx)
+AND
+_Idx <= _Total
+AND
+CombatGetInvolvedPartyMember(_CombatGuid, _Idx, (CHARACTER)_Member)
+AND
+IsSummon(_Member, 1)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_GS_PartyIter(_CombatGuid, _Total, _Next);
+
+PROC
+PROC_AMP_Plus_GS_AddPeak((GUIDSTRING)_CombatGuid, (CHARACTER)_Member)
+AND
+DB_AMP_Plus_GS_Peak(_Member, (INTEGER)_Peak)
+AND
+DB_AMP_Plus_GS_ShardSum(_Member, (INTEGER)_Shards)
+AND
+IntegerSum(_Peak, _Shards, (INTEGER)_Personal)
+AND
+DB_AMP_Plus_GS_PartyAcc(_CombatGuid, (INTEGER)_Sum)
+AND
+IntegerSum(_Sum, _Personal, (INTEGER)_New)
+THEN
+NOT DB_AMP_Plus_GS_PartyAcc(_CombatGuid, _Sum);
+DB_AMP_Plus_GS_PartyAcc(_CombatGuid, _New);
+
+PROC
+PROC_AMP_Plus_GS_PartyStore((GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_Plus_GS_PartyAcc(_CombatGuid, (INTEGER)_New)
+AND
+NOT DB_AMP_Plus_GS_Party(_CombatGuid, _)
+THEN
+DB_AMP_Plus_GS_Party(_CombatGuid, _New);
+PROC_AMP_Plus_GS_SetBonus(_CombatGuid, _New);
+PROC_AMP_Plus_GS_Log(_CombatGuid, _New);
+
+PROC
+PROC_AMP_Plus_GS_PartyStore((GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_Plus_GS_PartyAcc(_CombatGuid, (INTEGER)_New)
+AND
+DB_AMP_Plus_GS_Party(_CombatGuid, (INTEGER)_Old)
+AND
+_New > _Old
+THEN
+NOT DB_AMP_Plus_GS_Party(_CombatGuid, _Old);
+DB_AMP_Plus_GS_Party(_CombatGuid, _New);
+PROC_AMP_Plus_GS_SetBonus(_CombatGuid, _New);
+PROC_AMP_Plus_GS_Log(_CombatGuid, _New);
+
+PROC
+PROC_AMP_Plus_GS_Log((GUIDSTRING)_CombatGuid, (INTEGER)_Score)
+AND
+IntegerToString(_Score, (STRING)_ScoreStr)
+AND
+Concatenate("AMP_Plus gear score: ", _ScoreStr, (STRING)_Line)
+THEN
+DebugText(_CombatGuid, _Line);
+
+IF
+CombatEnded((GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_Plus_GS_Party(_CombatGuid, (INTEGER)_Score)
+THEN
+NOT DB_AMP_Plus_GS_Party(_CombatGuid, _Score);
+
+IF
+CombatEnded((GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_Plus_GS_PartyAcc(_CombatGuid, (INTEGER)_Sum)
+THEN
+NOT DB_AMP_Plus_GS_PartyAcc(_CombatGuid, _Sum);
+
+// stored, not queried, no returning query exists in this mod
+
+PROC
+PROC_AMP_Plus_GS_SetBonus((GUIDSTRING)_CombatGuid, (INTEGER)_Score)
+AND
+DB_AMP_Plus_GS_Bonus(_CombatGuid, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_GS_Bonus(_CombatGuid, _Old);
+
+PROC
+PROC_AMP_Plus_GS_SetBonus((GUIDSTRING)_CombatGuid, (INTEGER)_Score)
+AND
+DB_AMP_Plus_GS_Tier((INTEGER)_Min, (INTEGER)_Max, (INTEGER)_B)
+AND
+_Score >= _Min
+AND
+_Score <= _Max
+THEN
+DB_AMP_Plus_GS_Bonus(_CombatGuid, _B);
+
+IF
+CombatEnded((GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_Plus_GS_Bonus(_CombatGuid, (INTEGER)_B)
+THEN
+NOT DB_AMP_Plus_GS_Bonus(_CombatGuid, _B);
+
+EXITSECTION
+ENDEXITSECTION

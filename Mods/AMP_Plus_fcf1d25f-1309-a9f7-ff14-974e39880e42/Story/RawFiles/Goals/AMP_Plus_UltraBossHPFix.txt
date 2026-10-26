@@ -1,0 +1,65 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// max-hp buffs do not scale current hp, so the heal waits on a timer for them to settle
+// heal only a boss still alive when due, topping a corpse up stands it back on its feet
+IF
+StatusApplied((CHARACTER)_Boss, "AMP_ULTRA_BOSS_OVERLAY", _, _)
+AND
+NOT DB_AMP_Plus_UltraHPFixed(_Boss)
+THEN
+DB_AMP_Plus_UltraHPFixed(_Boss);
+RealtimeObjectTimerLaunch(_Boss, "AMP_Plus_UltraHPFix", 2000);
+
+IF
+ObjectTimerFinished((CHARACTER)_Boss, "AMP_Plus_UltraHPFix")
+AND
+IsDead(_Boss, 0)
+AND
+GetMaxHitpoints(_Boss, (INTEGER)_MaxHP)
+THEN
+SetHitpoints(_Boss, _MaxHP);
+
+// pursuers miss the overlay heal, longer delay covers the hp-scale status that lands after
+IF
+DB_AMP_Plus_ChaseActive((CHARACTER)_Mob, _)
+THEN
+RealtimeObjectTimerLaunch(_Mob, "AMP_Plus_ChaseHealSpawn", 2500);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Plus_ChaseHealSpawn")
+AND
+IsDead(_Mob, 0)
+AND
+GetMaxHitpoints(_Mob, (INTEGER)_MaxHP)
+THEN
+SetHitpoints(_Mob, _MaxHP);
+
+// reshuffle blinks the mob out of combat for a tick, hence the delay and re-check
+IF
+LeftCombat((CHARACTER)_Mob, _)
+AND
+DB_AMP_Plus_ChaseActive(_Mob, _)
+AND
+IsDead(_Mob, 0)
+THEN
+RealtimeObjectTimerLaunch(_Mob, "AMP_Plus_ChaseHealOOC", 4000);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Plus_ChaseHealOOC")
+AND
+DB_AMP_Plus_ChaseActive(_Mob, _)
+AND
+IsDead(_Mob, 0)
+AND
+IsInCombat(_Mob, 0)
+AND
+GetMaxHitpoints(_Mob, (INTEGER)_MaxHP)
+THEN
+SetHitpoints(_Mob, _MaxHP);
+
+EXITSECTION
+ENDEXITSECTION

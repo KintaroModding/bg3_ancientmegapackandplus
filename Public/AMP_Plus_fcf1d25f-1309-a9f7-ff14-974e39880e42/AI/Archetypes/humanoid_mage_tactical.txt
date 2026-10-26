@@ -1,0 +1,104 @@
+USING mage
+
+// ELITE MAGE TACTICAL AI - Arcane Dominance Specialist
+// Unparalleled battlefield control through superior spell selection and resource management
+
+// Masterful arcane assessment
+- MODIFIER_HIT_CHANCE_STUPIDITY                  0.35
+// Exceptional spell targeting and save DC evaluation
+
+// Concentration protection supremacy
+MODIFIER_CONCENTRATION_REMOVE_SELF              15.00
+// Extreme priority on maintaining concentration effects
++ MODIFIER_CONCENTRATION_REMOVE_TARGET           0.65
+// Aggressively targets enemy concentration spells
+
+// Tactical spell selection superiority
++ MULTIPLIER_KILL_ENEMY                          0.40
+// Strong focus on eliminating priority threats
+MULTIPLIER_TARGET_HEALTH_BIAS                    0.35
+// High preference for vulnerable targets
+MULTIPLIER_TARGET_PREFERRED                      4.20
+// Overwhelming focus on designated priority targets
+
+// Arcane control specialization
+MULTIPLIER_CONTROL_ENEMY_POS                     1.65
+// Extremely values control spells (Hold Person, etc.)
+MULTIPLIER_BOOST_ENEMY_POS                       1.70
+// Prioritizes debuffing dangerous enemies
+MULTIPLIER_DOT_ENEMY_NEG                         1.35
+// Values damage over time for consistent pressure
+
+// Elite spellcaster positioning
+MULTIPLIER_ENDPOS_ENEMIES_NEARBY              -1.00
+// Maintains extended minimum safe distance
+ENDPOS_ENEMIES_NEARBY_MAX_DISTANCE             15.00
+// Considers threats from significantly longer distances
+
+// Superior evasive tactics
+MULTIPLIER_FALLBACK_ENEMIES_NEARBY            -1.00
+// Aggressive repositioning when threatened
+FALLBACK_ENEMIES_NEARBY_MAX_DISTANCE             19.00
+// Considers much longer retreat distances when necessary
+
+// Advanced defensive awareness
+MULTIPLIER_ENDPOS_ALLIES_NEARBY                 -0.50
+// Strongly avoids clustering with allies
+MULTIPLIER_DAMAGE_SELF_NEG                       2.00
+// Highly values avoiding damage to maintain concentration
+MULTIPLIER_ENDPOS_NOT_IN_DANGEROUS_SURFACE       0.40
+// Very careful about avoiding dangerous surfaces
+
+// Arcane vision optimization
+MULTIPLIER_ENEMY_HEIGHT_DIFFERENCE               0.08
+// Values height advantage for spell coverage
+MULTIPLIER_ENDPOS_NOT_IN_SMOKE                   0.50
+// Extremely avoids positions with obscured vision
+MULTIPLIER_BOOST_SIGHT_RANGE                     0.20
+// Highly values abilities that enhance perception
+
+// Tactical mobility mastery
+ENABLE_MOVEMENT_AVOID_AOO                        1.00
+// Reduced penalty for teleport/jump repositioning
+MULTIPLIER_BOOST_IGNORE_AOO                      0.06
+// Values abilities that bypass opportunity attacks
+
+// Spell economy optimization
+MULTIPLIER_FIRST_ACTION_BUFF                     3.00
+// Extremely high priority on initial protective/utility spells
+MULTIPLIER_BOOST_SELF_POS                        1.60
+// Very highly values self-protection spells
+MULTIPLIER_BOOST_ALLY_POS                        1.40
+// Prioritizes protecting valuable allies
+
+// Advanced target distribution
+MULTIPLIER_TARGET_HOSTILE_COUNT_ONE              0.80
+// Prefers targets not already engaged by allies
+MULTIPLIER_TARGET_HOSTILE_COUNT_TWO_OR_MORE      0.60
+// Avoids redundant targeting unless using AoE spells
+MULTIPLIER_TARGET_SUMMON                         0.35
+// Low priority on summons compared to actual threats
+
+// Environmental manipulation expertise
+MULTIPLIER_USABLE_ITEM                           0.70
+// Tactically utilizes environmental objects
+MULTIPLIER_ENDPOS_NOT_IN_AIHINT                  0.60
+// Strongly prefers tactically advantageous positions
+MULTIPLIER_COMBO_SCORE_INTERACTION               1.30
+// Highly values elemental combinations
+MULTIPLIER_COMBO_SCORE_POSITIONING               0.85
+// Values positioning for elemental combos
+
+// Resource management mastery
+MULTIPLIER_ACTION_RESOURCE_COST                  0.025
+// More careful management of limited spell slots
+MULTIPLIER_CANNOT_EXECUTE_THIS_TURN              0.15
+// Better at planning multi-turn sequences
+MULTIPLIER_PLANNED_ACTION_WITH_MOVE_SPELL        1.90
+// Highly values combined movement-spell sequences
+
+// Enhanced aura awareness
+MULTIPLIER_POS_IN_AURA                           0.55
+// Strong tactical awareness of aura effects
+MODIFIER_OWN_AURA                                0.60
+// Maximizes benefits from own aura effects

@@ -1,0 +1,33 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// total seeded at zero, else the migration locks it to the rarity cap and the next shard is refused
+
+IF
+StatusApplied((ITEM)_Weapon, "AMP_SHARD_WEAPON_ARCHITECT", _, _)
+AND
+NOT DB_AMP_Shard_TotalCount(_Weapon, _)
+THEN
+DB_AMP_Shard_TotalCount(_Weapon, 0);
+
+// own apply path: a row in the generic weapon table would feed the limit popup for a flow it never takes
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_103_9e6f84af-41a9-4c64-9257-311f2419ea26, (STRING)_Melee, (STRING)_Ranged)
+THEN
+NOT DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_103_9e6f84af-41a9-4c64-9257-311f2419ea26, _Melee, _Ranged);
+
+IF
+SavegameLoaded()
+AND
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_103_9e6f84af-41a9-4c64-9257-311f2419ea26, (STRING)_Melee, (STRING)_Ranged)
+THEN
+NOT DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_103_9e6f84af-41a9-4c64-9257-311f2419ea26, _Melee, _Ranged);
+
+EXITSECTION
+ENDEXITSECTION

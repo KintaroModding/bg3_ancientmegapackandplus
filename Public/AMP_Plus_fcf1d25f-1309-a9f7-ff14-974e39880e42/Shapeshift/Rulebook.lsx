@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<save>
+    <version major="4" minor="8" revision="0" build="0"/>
+    <region id="Rulebook">
+        <node id="root">
+            <children>
+                <node id="Rule">
+                    <attribute id="ApplyTagsFromTemplate" type="bool" value="true"/>
+                    <attribute id="ApplyVisual" type="bool" value="true"/>
+                    <attribute id="ChangeBodyType" type="bool" value="true"/>
+                    <attribute id="ChangeIcon" type="bool" value="true"/>
+                    <attribute id="ChangeRace" type="bool" value="false"/>
+                    <attribute id="IgnoreCustomLooks" type="bool" value="false"/>
+                    <attribute id="KillEntityAtZeroHP" type="bool" value="false"/>
+                    <attribute id="RemoveOldTags" type="bool" value="true"/>
+                    <attribute id="RetainDisplayName" type="bool" value="true"/>
+                    <attribute id="RuleName" type="LSString" value="AMP_MirrorPlayer"/>
+                    <attribute id="UUID" type="guid" value="b84d1c00-e637-4b52-9666-0a2693157e03"/>
+                    <attribute id="UseShapeshiftIdentity" type="bool" value="true"/>
+                    <children>
+                        <node id="Weight">
+                            <attribute id="type" type="uint8" value="4"/>
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

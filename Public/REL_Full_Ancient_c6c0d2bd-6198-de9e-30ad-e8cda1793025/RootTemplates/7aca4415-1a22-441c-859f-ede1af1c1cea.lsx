@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="400" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="7aca4415-1a22-441c-859f-ede1af1c1cea" />
+					<attribute id="Name" type="LSString" value="AMP_Arcanizer_Reward_3" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="1c06086f-255f-47d4-8c63-fc0c6177ebc9" />
+					<attribute id="Scale" type="float" value="0.5" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h20644f50g217bg6535gf5c5ge326343888ec" version="1" />
+					<attribute id="Stats" type="FixedString" value="AMP_Arcanizer_Reward_3" />
+					<attribute id="Description" type="TranslatedString" handle="hc659cb95g515eg3079g2139ga2d35be27ec4" version="1" />
+					<children>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="AMP_Arcanizer_3" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

@@ -1,0 +1,53 @@
+// Universal Darkness Response AI Archetype
+// Makes AI actively engage targets in darkness instead of becoming helpless
+
+USING melee
+
+// Perception and darkness behavior adjustments
+MULTIPLIER_DARKNESS_HEAVY                       2.00
+// Makes AI prefer dark areas rather than avoid them
+
+MULTIPLIER_DARKNESS_LIGHT                       0.50
+// Reduced preference for dimly lit areas
+
+MULTIPLIER_DARKNESS_CLEAR                       0.10
+// Low preference for well-lit areas
+
+MULTIPLIER_ENDPOS_NOT_IN_SMOKE                  0.00
+// Completely ignores penalties for ending turn in smoke/darkness
+
+// Aggressive positioning parameters
+MULTIPLIER_ENDPOS_ENEMIES_NEARBY               0.10
+// Encourages ending turn closer to enemies even in darkness
+
+// Minimum distance AI tries to keep from enemies
+
+ENDPOS_ENEMIES_NEARBY_MAX_DISTANCE              30.00
+// Maximum range for enemy proximity consideration
+
+// Pursuit behavior
+MULTIPLIER_FALLBACK_ENEMIES_NEARBY              0.40
+// More aggressive pursuit of enemies
+
+// Combat effectiveness in darkness
+MODIFIER_HIT_CHANCE_STUPIDITY                   1.20
+// Significantly overestimates hit chances, offsetting disadvantage
+
+// Tactical options in darkness
+MULTIPLIER_USABLE_ITEM                          1.40
+// More likely to use environmental items and AoE effects
+
+// MULTIPLIER_BLIND                                0.00
+// Lower priority on blinding (redundant in darkness)
+
+MULTIPLIER_DOT_ENEMY_NEG                        1.30
+// Higher priority on damage-over-time effects
+
+MULTIPLIER_KILL_ENEMY                           1.45
+// Higher priority on finishing targets
+
+MAX_DISTANCE_TO_CLOSEST_ENEMY                   30.0
+// Increased awareness range to prevent kiting
+
+MULTIPLIER_MOVEMENT_SURFACE							0.00
+MULTIPLIER_ENDPOS_NOT_IN_DANGEROUS_SURFACE			0.00

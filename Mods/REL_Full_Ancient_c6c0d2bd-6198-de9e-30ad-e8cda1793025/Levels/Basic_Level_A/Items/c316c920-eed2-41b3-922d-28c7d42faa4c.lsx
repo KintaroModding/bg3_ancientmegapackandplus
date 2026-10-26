@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="c316c920-eed2-41b3-922d-28c7d42faa4c" />
+					<attribute id="Name" type="LSString" value="AMP_Cursed_Spore_000" />
+					<attribute id="LevelName" type="FixedString" value="Basic_Level_A" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="ec2ffd1d-2f0f-420a-989d-ea6d1c5bfee9" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="DisplayName" type="TranslatedString" handle="hbca9c14dgd592g0cb6g05f0gca17c0a06737" version="1" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="0.3" />
+							<attribute id="Position" type="fvec3" value="-2.4608688 -3.5762787E-07 1.0486107" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0 0 1" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="Basic_Level_A" />
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

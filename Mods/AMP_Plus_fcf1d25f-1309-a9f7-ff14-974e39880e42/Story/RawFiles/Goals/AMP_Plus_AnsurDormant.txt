@@ -1,0 +1,38 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// the region kills him a beat after spawn, so grading lands on a corpse and is dropped. Graded again on Resurrected
+
+IF
+Died(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a)
+AND
+DB_State_Current(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a, "WYR_SkeletalDragon", "Dead")
+THEN
+PROC_AMP_Plus_AnsurDormant_Clear((CHARACTER)S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_State_Current(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a, "WYR_SkeletalDragon", "Dead")
+AND
+IsDead(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a, 1)
+AND
+DB_AMP_DiffV3_Tracked((CHARACTER)S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a, _)
+THEN
+PROC_AMP_Plus_AnsurDormant_Clear((CHARACTER)S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a);
+
+PROC
+PROC_AMP_Plus_AnsurDormant_Clear((CHARACTER)_Ansur)
+THEN
+PROC_AMP_DiffV3_UntrackCreature(_Ansur);
+PROC_AMP_DiffV3_RemoveFromCreature(_Ansur);
+PROC_AMP_DiffV3_RemoveProgression(_Ansur);
+RemoveStatus(_Ansur, "AMP_ULTRA_BOSS_OVERLAY", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Ansur, "AMP_ULTRA_NPC_OVERLAY", NULL_00000000-0000-0000-0000-000000000000);
+NOT DB_AMP_Plus_UltraHPFixed(_Ansur);
+
+EXITSECTION
+ENDEXITSECTION

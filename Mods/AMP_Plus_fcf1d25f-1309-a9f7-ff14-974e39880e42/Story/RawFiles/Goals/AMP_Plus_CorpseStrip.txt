@@ -1,0 +1,106 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// story items are skipped, the base rule weighs gold value alone
+// dropping the base threshold row stops its rule, the slot proc cannot fire with _MinValue unbound
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_CorpseStrip_MinValue(_Value)
+THEN
+NOT DB_AMP_CorpseStrip_MinValue(_Value);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_CorpseStrip_MinValue(_)
+THEN
+DB_AMP_Plus_CorpseStrip_MinValue(150);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_CorpseStrip_Excluded(_)
+THEN
+DB_AMP_Plus_CorpseStrip_Excluded((CHARACTER)S_DEN_Apprentice_7cabf226-e34b-4556-8903-a45d0fe26caf);
+
+// Orin's netherstone scene reaches for the dagger on her body, stripped there the run loses the stone
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_CorpseStrip_Excluded((CHARACTER)S_GLO_Orin_bf24e0ec-a3a6-4905-bd2d-45dc8edf8101)
+THEN
+DB_AMP_Plus_CorpseStrip_Excluded((CHARACTER)S_GLO_Orin_bf24e0ec-a3a6-4905-bd2d-45dc8edf8101);
+
+// names match as substrings, one row covers a family of variants
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_CorpseStrip_Keep(_)
+THEN
+DB_AMP_Plus_CorpseStrip_Keep("MAG_TrueName");
+DB_AMP_Plus_CorpseStrip_Keep("MAG_Voltedge");
+
+IF
+Died((CHARACTER)_NPC)
+AND
+IsPlayer(_NPC, 0)
+AND
+NOT DB_AMP_GameMode("STOCK")
+THEN
+PROC_AMP_Plus_CorpseStrip(_NPC);
+
+PROC
+PROC_AMP_Plus_CorpseStrip((CHARACTER)_NPC)
+THEN
+PROC_AMP_Plus_CorpseStrip_Slot(_NPC, "Breast");
+PROC_AMP_Plus_CorpseStrip_Slot(_NPC, "Melee Main Weapon");
+PROC_AMP_Plus_CorpseStrip_Slot(_NPC, "Melee Offhand Weapon");
+PROC_AMP_Plus_CorpseStrip_Slot(_NPC, "Ranged Main Weapon");
+PROC_AMP_Plus_CorpseStrip_Slot(_NPC, "Ranged Offhand Weapon");
+PROC_AMP_Plus_CorpseStrip_Slot(_NPC, "Helmet");
+PROC_AMP_Plus_CorpseStrip_Slot(_NPC, "Gloves");
+PROC_AMP_Plus_CorpseStrip_Slot(_NPC, "Boots");
+PROC_AMP_Plus_CorpseStrip_Slot(_NPC, "Cloak");
+PROC_AMP_Plus_CorpseStrip_Slot(_NPC, "Amulet");
+PROC_AMP_Plus_CorpseStrip_Slot(_NPC, "Ring");
+PROC_AMP_Plus_CorpseStrip_Slot(_NPC, "Ring2");
+
+PROC
+PROC_AMP_Plus_CorpseStrip_Slot((CHARACTER)_NPC, (STRING)_Slot)
+AND
+GetEquippedItem(_NPC, _Slot, (ITEM)_Item)
+AND
+NOT IsStoryItem(_Item, 1)
+AND
+NOT QRY_AMP_Plus_CorpseStrip_Keep(_Item)
+AND
+DB_AMP_Plus_CorpseStrip_MinValue(_MinValue)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+_Value >= _MinValue
+AND
+NOT DB_AMP_Plus_CorpseStrip_Excluded(_NPC)
+THEN
+RequestDelete(_Item);
+
+
+QRY
+QRY_AMP_Plus_CorpseStrip_Keep((ITEM)_Item)
+AND
+GetStatString(_Item, (STRING)_Stat)
+AND
+DB_AMP_Plus_CorpseStrip_Keep((STRING)_Pattern)
+AND
+IsSubstring(_Stat, _Pattern, 1)
+THEN
+DB_NOOP(1);
+
+EXITSECTION
+ENDEXITSECTION

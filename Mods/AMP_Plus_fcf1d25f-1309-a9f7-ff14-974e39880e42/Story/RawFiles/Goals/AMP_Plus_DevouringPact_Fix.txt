@@ -1,0 +1,131 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// base cleans only the character, the weapon keeps the buff
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_PactTableVer(2)
+THEN
+PROC_AMP_Plus_PactTableReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_PactTableVer(2)
+THEN
+PROC_AMP_Plus_PactTableReseed();
+
+PROC
+PROC_AMP_Plus_PactTableReseed()
+AND
+DB_AMP_Plus_PactTableVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_PactTableVer(_Old);
+
+PROC
+PROC_AMP_Plus_PactTableReseed()
+THEN
+PROC_AMP_Plus_Pact_DrainMark();
+
+PROC
+PROC_AMP_Plus_PactTableReseed()
+THEN
+PROC_AMP_Plus_Pact_DrainBuff();
+
+PROC
+PROC_AMP_Plus_PactTableReseed()
+THEN
+DB_AMP_Plus_PactTableVer(2);
+DB_AMP_Plus_PactMark("AMP_PACT_RECLAIM_MARK_1");
+DB_AMP_Plus_PactMark("AMP_PACT_RECLAIM_MARK_2");
+DB_AMP_Plus_PactMark("AMP_PACT_RECLAIM_MARK_3");
+DB_AMP_Plus_PactMark("AMP_PACT_RECLAIM_MARK_4");
+DB_AMP_Plus_PactBuff("AMP_BLADE_WEAPON_BUFF_1");
+DB_AMP_Plus_PactBuff("AMP_BLADE_WEAPON_BUFF_2");
+DB_AMP_Plus_PactBuff("AMP_BLADE_WEAPON_BUFF_3");
+DB_AMP_Plus_PactBuff("AMP_BLADE_WEAPON_BUFF_4");
+
+PROC
+PROC_AMP_Plus_Pact_DrainMark()
+AND
+DB_AMP_Plus_PactMark((STRING)_A)
+THEN
+NOT DB_AMP_Plus_PactMark(_A);
+PROC_AMP_Plus_Pact_DrainMark();
+
+PROC
+PROC_AMP_Plus_Pact_DrainBuff()
+AND
+DB_AMP_Plus_PactBuff((STRING)_A)
+THEN
+NOT DB_AMP_Plus_PactBuff(_A);
+PROC_AMP_Plus_Pact_DrainBuff();
+
+IF
+StatusApplied((ITEM)_Weapon, (STRING)_Buff, _, _)
+AND
+DB_AMP_Plus_PactBuff(_Buff)
+THEN
+DB_AMP_Plus_PactWeapon(_Weapon);
+
+IF
+AddedTo((ITEM)_Weapon, (GUIDSTRING)_Holder, _)
+AND
+DB_AMP_Plus_PactWeapon(_Weapon)
+AND
+GetInventoryOwner(_Holder, (CHARACTER)_Owner)
+AND
+HasActiveStatus(_Owner, "AMP_PACT_RECLAIM_MARK_1", 0)
+AND
+HasActiveStatus(_Owner, "AMP_PACT_RECLAIM_MARK_2", 0)
+AND
+HasActiveStatus(_Owner, "AMP_PACT_RECLAIM_MARK_3", 0)
+AND
+HasActiveStatus(_Owner, "AMP_PACT_RECLAIM_MARK_4", 0)
+THEN
+PROC_AMP_Plus_StripPactWeapon(_Weapon);
+
+// reset the stamp counter for a re-equip
+IF
+StatusRemoved((CHARACTER)_Char, (STRING)_Mark, _, _)
+AND
+DB_AMP_Plus_PactMark(_Mark)
+THEN
+PROC_AMP_Plus_OnPactUnequip(_Char);
+
+PROC
+PROC_AMP_Plus_OnPactUnequip((CHARACTER)_Char)
+THEN
+PROC_AMP_Plus_Pact_DrainWeapon(_Char);
+
+PROC
+PROC_AMP_Plus_OnPactUnequip((CHARACTER)_Char)
+THEN
+RemoveStatus(_Char, "AMP_BLADE_DEBUFF");
+
+PROC
+PROC_AMP_Plus_Pact_DrainWeapon((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PactWeapon((ITEM)_Weapon)
+AND
+IsInInventoryOf(_Weapon, _Char, 1)
+THEN
+PROC_AMP_Plus_StripPactWeapon(_Weapon);
+PROC_AMP_Plus_Pact_DrainWeapon(_Char);
+
+PROC
+PROC_AMP_Plus_StripPactWeapon((ITEM)_Weapon)
+THEN
+RemoveStatus(_Weapon, "AMP_BLADE_WEAPON_BUFF_1");
+RemoveStatus(_Weapon, "AMP_BLADE_WEAPON_BUFF_2");
+RemoveStatus(_Weapon, "AMP_BLADE_WEAPON_BUFF_3");
+RemoveStatus(_Weapon, "AMP_BLADE_WEAPON_BUFF_4");
+NOT DB_AMP_Plus_PactWeapon(_Weapon);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,101 @@
+new entry "MAG_Armour_H_125_2_bonus"
+type "PassiveData"
+using "MAG_Armour_H_125_2_bonus"
+data "StatsFunctors" "DealDamage(1d4,Radiant,Magical,,0,,true,false);ApplyStatus(MAG_ARMOUR_H_125_2_VFX,100,0)"
+
+new entry "MAG_Neck8_bonus"
+type "PassiveData"
+using "MAG_Neck8_bonus"
+data "StatsFunctors" "DealDamage(Level*2, Necrotic,Magical,,0,,true,false)"
+
+new entry "Interrupt_SixFingerStrike_1"
+type "InterruptData"
+using "Interrupt_SixFingerStrike_1"
+data "Properties" "IF(HasStatus('SG_Incapacitated',context.Target) or HasStatus('SG_Stunned',context.Target) or HasStatus('SG_Prone',context.Target) or HasStatus('SG_Paralyzed',context.Target)):DealDamage(2d4,Force,Magical,,0,,true,false);IF(not HasStatus('SG_Incapacitated',context.Target) and not HasStatus('SG_Stunned',context.Target) and not HasStatus('SG_Prone',context.Target) and not HasStatus('SG_Paralyzed',context.Target)):DealDamage(1d4,Force,Magical,,0,,true,false)"
+
+new entry "MAG_Ring58_bonus"
+type "PassiveData"
+using "MAG_Ring58_bonus"
+data "StatsFunctors" "ApplyStatus(SELF,RING58,100,1);DealDamage(1d4, Force,Magical,,0,,true,false)"
+
+new entry "MAG_Ring58_1_bonus"
+type "PassiveData"
+using "MAG_Ring58_1_bonus"
+data "StatsFunctors" "DealDamage(1d10, Force,Magical,,0,,true,false)"
+
+new entry "MAG_Weapon10_bonus"
+type "PassiveData"
+using "MAG_Weapon10_bonus"
+data "StatsFunctors" "DealDamage(1d4,Necrotic,Magical,,0,,true,false);IF(not SavingThrow(Ability.Wisdom, ManeuverSaveDC())):ApplyStatus(FRIGHTENED,100,1);ApplyStatus(WEAPON10_VFX,100,1)"
+
+new entry "MAG_Weapon38_bonus"
+type "PassiveData"
+using "MAG_Weapon38_bonus"
+data "StatsFunctors" "DealDamage(1d6,Necrotic,Magical,,0,,true,false);ApplyStatus(SELF,WEAPON38,100,1)"
+
+new entry "MAG_Weapon55_bonus_1"
+type "PassiveData"
+using "MAG_Weapon55_bonus_1"
+data "StatsFunctors" "DealDamage(1d4,Cold,Magical,,0,,true,false)"
+
+new entry "MAG_Weapon89_LightsVerdict_Passive"
+type "PassiveData"
+using "MAG_Weapon89_LightsVerdict_Passive"
+data "Conditions" "HasDamageDoneForType(DamageType.Radiant) and not MagicMissileSpellCheck() and not AMP_Plus_IsBoomingBlade() and Enemy() and (IsAttack() or IsSpell())"
+data "StatsFunctors" "DealDamage(1,Radiant,Magical,,0,,true,false);IF(Tagged('PALADIN', context.Source)):DealDamage(1,Radiant,Magical,,0,,true,false)"
+
+new entry "MAG_Weapon94_bonus"
+type "PassiveData"
+using "MAG_Weapon94_bonus"
+data "StatsFunctors" "DealDamage(SELF,1,Radiant,Magical);DealDamage(1d4,Radiant,Magical,,0,,true,false)"
+
+
+new entry "MAG_Weapon123_ShadowHunger"
+type "PassiveData"
+using "MAG_Weapon123_ShadowHunger"
+data "StatsFunctors" "DealDamage(1d8,Necrotic,Magical,,0,,true,false)"
+
+new entry "MAG_Weapon126_bonus"
+type "PassiveData"
+using "MAG_Weapon126_bonus"
+data "StatsFunctors" "RestoreResource(SELF,Movement, 100%, 0);DealDamage(1d4,Force,Magical,,0,,true,false)"
+
+new entry "AMP_Shard_FistProc_LIGHTNING_VR"
+type "PassiveData"
+using "AMP_Shard_FistProc_LIGHTNING_VR"
+data "StatsFunctors" "DealDamage(1d4,Lightning,Magical,,0,,true,false)"
+
+new entry "AMP_Shard_FistProc_LIGHTNING_L"
+type "PassiveData"
+using "AMP_Shard_FistProc_LIGHTNING_L"
+data "StatsFunctors" "DealDamage(1d6,Lightning,Magical,,0,,true,false)"
+
+new entry "AMP_Shard_FistProc_CONCUSSIVE_VR"
+type "PassiveData"
+using "AMP_Shard_FistProc_CONCUSSIVE_VR"
+data "StatsFunctors" "DealDamage(1d6,Bludgeoning,Magical,,0,,true,false)"
+
+new entry "AMP_Shard_FistProc_CONCUSSIVE_L"
+type "PassiveData"
+using "AMP_Shard_FistProc_CONCUSSIVE_L"
+data "StatsFunctors" "DealDamage(1d8,Bludgeoning,Magical,,0,,true,false)"
+
+new entry "AMP_Celestial_Gloves_Passive"
+type "PassiveData"
+using "AMP_Celestial_Gloves_Passive"
+data "StatsFunctors" "DealDamage(20,Radiant,Magical,,0,,true,false)"
+
+new entry "AMP_Ergo_Gloves_Passive"
+type "PassiveData"
+using "AMP_Ergo_Gloves_Passive"
+data "StatsFunctors" "DealDamage(1d6,Acid,,,0,,true,false);IF(not RollDieAgainstDC(DiceType.d100,40)):ApplyStatus(AMP_ERGO_CURSE,100,-1)"
+
+new entry "MAG_Cloak97_Sweeping_Passive"
+type "PassiveData"
+using "MAG_Cloak97_Sweeping_Passive"
+data "StatsFunctors" "DealDamage(MainMeleeWeapon,MainWeaponDamageType,,,0,,true,false)"
+
+new entry "WoodWoad_MagicClub"
+type "PassiveData"
+using "WoodWoad_MagicClub"
+data "StatsFunctors" "DealDamage(3d4, MainMeleeWeaponDamageType,Magical,,0,,true,false)"

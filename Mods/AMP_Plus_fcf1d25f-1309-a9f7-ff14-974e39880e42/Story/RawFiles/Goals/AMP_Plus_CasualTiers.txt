@@ -1,0 +1,76 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// engine skips grading while the mode is NONE, so Casual gets tier maps that point at empty carriers
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_DiffV3_TierMap("CASUAL", 0, _)
+THEN
+DB_AMP_DiffV3_TierMap("CASUAL", 0, "AMP_Plus_NPC_CASUAL_T0_V4");
+DB_AMP_DiffV3_TierMap("CASUAL", 1, "AMP_Plus_NPC_CASUAL_T1_V4");
+DB_AMP_DiffV3_TierMap("CASUAL", 2, "AMP_Plus_NPC_CASUAL_T2_V4");
+DB_AMP_DiffV3_TierMap("CASUAL", 3, "AMP_Plus_NPC_CASUAL_T3_V4");
+DB_AMP_DiffV3_TierMap("CASUAL", 4, "AMP_Plus_NPC_CASUAL_T4_V4");
+DB_AMP_DiffV3_TierMap("CASUAL", 5, "AMP_Plus_NPC_CASUAL_T5_V4");
+DB_AMP_DiffV3_BossTierMap("CASUAL", 0, "AMP_Plus_BOSS_CASUAL_T0_V4");
+DB_AMP_DiffV3_BossTierMap("CASUAL", 1, "AMP_Plus_BOSS_CASUAL_T1_V4");
+DB_AMP_DiffV3_BossTierMap("CASUAL", 2, "AMP_Plus_BOSS_CASUAL_T2_V4");
+DB_AMP_DiffV3_BossTierMap("CASUAL", 3, "AMP_Plus_BOSS_CASUAL_T3_V4");
+DB_AMP_DiffV3_BossTierMap("CASUAL", 4, "AMP_Plus_BOSS_CASUAL_T4_V4");
+DB_AMP_DiffV3_BossTierMap("CASUAL", 5, "AMP_Plus_BOSS_CASUAL_T5_V4");
+
+// base writes NONE in its Casual branch of PROC_AMP_SetGameMode, rewritten after rather than stopped
+
+PROC
+PROC_AMP_Plus_CasualTiers_Assert()
+AND
+DB_AMP_GameMode("CASUAL")
+AND
+DB_AMP_Difficulty_Mode("NONE")
+THEN
+NOT DB_AMP_Difficulty_Mode("NONE");
+DB_AMP_Difficulty_Mode("CASUAL");
+
+PROC
+PROC_AMP_Plus_CasualTiers_Assert()
+AND
+DB_AMP_GameMode("STOCK")
+AND
+DB_AMP_Difficulty_Mode("CASUAL")
+THEN
+NOT DB_AMP_Difficulty_Mode("CASUAL");
+DB_AMP_Difficulty_Mode("NONE");
+
+IF
+DB_AMP_GameMode(_)
+THEN
+PROC_AMP_Plus_CasualTiers_Assert();
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_AMP_Plus_CasualTiers_Assert();
+
+// ledger records kills under any mode but NONE, so Casual kills are taken back as written or they cash out on a switch to Normal
+
+IF
+DB_AMP_BossProgression_Applied((STRING)_Key)
+AND
+DB_AMP_GameMode("CASUAL")
+THEN
+NOT DB_AMP_BossProgression_Applied(_Key);
+
+IF
+DB_AMP_BossProgression_KillTier((STRING)_Key, (INTEGER)_Tier)
+AND
+DB_AMP_GameMode("CASUAL")
+THEN
+NOT DB_AMP_BossProgression_KillTier(_Key, _Tier);
+
+EXITSECTION
+ENDEXITSECTION

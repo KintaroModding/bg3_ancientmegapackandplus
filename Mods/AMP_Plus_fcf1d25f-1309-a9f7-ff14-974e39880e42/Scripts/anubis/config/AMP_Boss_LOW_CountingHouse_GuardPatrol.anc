@@ -1,0 +1,55 @@
+game.configs.AMP_Boss_LOW_CountingHouse_GuardPatrol = Config{
+    params={
+        convoPartner = {
+            type = EParamType.String,
+            help = [[Conversation partner in case of the idle AD involving 2 cashguards]],
+            required = false,
+        },
+        guardSpot = {
+            type = EParamType.String,
+            help = [[Guard spot]],
+            required = false,
+            default = [[S_LOW_CountingHouse_GuardSpot_VaultMainGuard_805fdc62-63e1-4512-87a6-3737a437168d]]
+        },
+        patrolSpline = {
+            type = EParamType.String,
+            help = [[Spline that the guard patrols]],
+            required = false,
+            default = [[S_LOW_CountingHouse_DummyPatrolSpline_d9cb176a-111b-4f83-80d3-7b3e8d76c081]]
+        },
+        extraAlarmFlag = {
+            type = EParamType.String,
+            help = [[Alarm flag]],
+            required = false,
+        },
+        idleAD = {
+            type = EParamType.String,
+            help = [[Idle AD]],
+            required = false,
+        },
+        alarmFlag = {
+            type = EParamType.String,
+            help = [[Alarm flag]],
+            required = false,
+            default = [[LOW_CountingHouse_State_AlarmTriggered_LowerArea_5635184f-98e9-438b-8b80-249d38ba07c3]]
+        },
+    },
+    root=StateRef{game.roots.DefaultCharacter,
+        combat = StateRef{game.states.AMP_BossCombat},
+        genericBehaviours = StateRef{game.states.CrimesHumanoid},
+        idle = StateRef{game.states.LOW_CountingHouse_GuardPatrol,
+            alarmFlag = params.alarmFlag,
+            convoPartner = params.convoPartner,
+            extraAlarmFlag = params.extraAlarmFlag,
+            guardSpot = params.guardSpot,
+            idleAD = params.idleAD,
+            patrolSpline = params.patrolSpline,
+            patrolState = StateRef{game.states.GEN_Patrol,
+                patrolActions = StateRef{game.states.LOW_CountingHouse_GuardPatrolADs,
+                    idleAD = params.idleAD,
+                },
+                patrolSpline = params.patrolSpline,
+            },
+        },
+    }
+}

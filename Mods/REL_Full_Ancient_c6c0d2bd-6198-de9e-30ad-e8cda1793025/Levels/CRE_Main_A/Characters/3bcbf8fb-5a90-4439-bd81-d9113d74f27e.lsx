@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="3bcbf8fb-5a90-4439-bd81-d9113d74f27e" />
+					<attribute id="Name" type="LSString" value="S_CRE_HiddenCheckpointMainGuard" />
+					<attribute id="LevelName" type="FixedString" value="CRE_Main_A" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="TemplateName" type="FixedString" value="74672dc8-497c-4d9c-92b7-7347ab643e43" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h8c312251g6ae5g4c68g8eaeg92fd12ca6eb7" version="5" />
+					<attribute id="Icon" type="FixedString" value="8ca61b9f-fc79-f33e-329b-764aac9accaa-CRE_HiddenCheckpointMainGuard_(Icon_Githyanki_Female)" />
+					<attribute id="Stats" type="FixedString" value="Githyanki_Raider" />
+					<attribute id="Equipment" type="FixedString" value="CRE_HiddenCheckpointMainGuard" />
+					<attribute id="LevelOverride" type="int32" value="5" />
+					<attribute id="CharacterVisualResourceID" type="FixedString" value="8ca61b9f-fc79-f33e-329b-764aac9accaa" />
+					<attribute id="IsEquipmentLootable" type="bool" value="False" />
+					<attribute id="CanBePickedUp" type="bool" value="False" />
+					<attribute id="AnubisConfigName" type="FixedString" value="CRE_UpperGuards_HiddenGuard" />
+					<attribute id="Faction" type="guid" value="5a532d4a-4eb5-4969-8fc8-9c12bf956c06" />
+					<attribute id="Archetype" type="FixedString" value="gith_melee_tactical" />
+					<attribute id="CombatGroupID" type="FixedString" value="559796d1-4027-4633-aa43-2c807a41549a" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="1396.06 4.507325 -839.4633" />
+							<attribute id="RotationQuat" type="fvec4" value="0 -0.7887195 0 0.6147532" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="CRE_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="0cdf52f2-9453-df63-13c3-cfad8fbdbd2a" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="3937977e-b5d9-5124-508e-c3654c9d9e03" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="f0401175-a301-9626-cfe5-925fce9a0f8e" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="Treasures">
+							<children>
+								<node id="TreasureItem">
+									<attribute id="Object" type="FixedString" value="CRE_Supplies_Gith_NPC" />
+								</node>
+								<node id="TreasureItem">
+									<attribute id="Object" type="FixedString" value="AMP_GithGeneral_50_Rare" />
+								</node>
+							</children>
+						</node>
+						<node id="TradeTreasures">
+							<children>
+								<node id="TreasureItem">
+									<attribute id="Object" type="FixedString" value="Empty" />
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

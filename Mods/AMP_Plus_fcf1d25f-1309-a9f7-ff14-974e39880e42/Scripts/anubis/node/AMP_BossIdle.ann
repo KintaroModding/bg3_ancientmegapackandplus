@@ -1,0 +1,47 @@
+game.states.AMP_BossIdle = State{function ()
+    description = [[Restless out-of-combat idle. The boss runs around its spawn point and
+        keeps turning, so it is far more likely to spot the party than a statue facing a wall.]]
+
+    modules = { "shared.moveto" }
+
+    params.WanderRadius = {type = EParamType.Number, required=false, default=12.0, help=[[
+        Radius of a single wander leg, in meters.
+    ]]}
+
+    params.LeashRadius = {type = EParamType.Number, required=false, default=20.0, help=[[
+        Distance from the spawn point past which the boss runs back instead of wandering.
+    ]]}
+
+    params.SteerSize = {type = EParamType.Number, required=false, default=2.0, help=[[
+        Multiplier of the random look-around offset. Larger means wider turns.
+    ]]}
+
+    local anchorPos = nil
+
+    self.OnEnter = function()
+        anchorPos = me.Position
+    end
+
+    nodes.ReturnToAnchor = Action {
+        function()
+            mod.moveto.MoveToPoint(anchorPos, MovementSpeed.Run, me)
+        end,
+
+        Valid = function()
+            return anchorPos ~= nil
+               and GetDistance2DTo(me, anchorPos) > params.LeashRadius
+        end
+    }
+
+    nodes.Restless = Action {
+        function()
+            Wander(params.WanderRadius, 2.0, MovementSpeed.Run, nil, false)
+
+            local steerTarget = me.Position + (me.ForwardDirection * (params.SteerSize + 1.0))
+            local offset = Vector3(math.random()*2.0-1.0, 0.0, math.random()*2.0-1.0) * params.SteerSize
+            SteerTo(steerTarget + offset)
+
+            Sleep(math.random(1, 2))
+        end
+    }
+end}

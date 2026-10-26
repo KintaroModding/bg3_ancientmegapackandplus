@@ -1,0 +1,39 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// voss anti-exploit at the mountain pass: cliff pushes, forced disarm of his silver sword, free xp off the parked dragon
+
+IF
+AttackedBy(S_GLO_GithKnight_2adce2df-0799-49dc-b867-ba7ca21e9aea, (CHARACTER)_AttackerOwner, _, _, _, _, _)
+AND
+DB_CurrentLevel("WLD_Main_A")
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+AND
+DB_Players(_AttackerOwner)
+AND
+NOT DB_Dead(S_GLO_GithKnight_2adce2df-0799-49dc-b867-ba7ca21e9aea)
+AND
+NOT DB_PermaDefeated(S_GLO_GithKnight_2adce2df-0799-49dc-b867-ba7ca21e9aea)
+THEN
+UseSpell(S_GLO_GithKnight_2adce2df-0799-49dc-b867-ba7ca21e9aea, "Shout_GLO_Voss_TeleportOut", S_GLO_GithKnight_2adce2df-0799-49dc-b867-ba7ca21e9aea, NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+Unequipped((ITEM)_VossWeapon, S_GLO_GithKnight_2adce2df-0799-49dc-b867-ba7ca21e9aea)
+AND
+DB_CurrentLevel("WLD_Main_A")
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+AND
+NOT DB_Dead(S_GLO_GithKnight_2adce2df-0799-49dc-b867-ba7ca21e9aea)
+AND
+NOT DB_PermaDefeated(S_GLO_GithKnight_2adce2df-0799-49dc-b867-ba7ca21e9aea)
+THEN
+ToInventory(_VossWeapon, S_GLO_GithKnight_2adce2df-0799-49dc-b867-ba7ca21e9aea, 1, 0, 0);
+Equip(S_GLO_GithKnight_2adce2df-0799-49dc-b867-ba7ca21e9aea, _VossWeapon, 0, 0, 0);
+
+EXITSECTION
+
+ENDEXITSECTION

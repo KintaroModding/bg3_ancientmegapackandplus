@@ -1,0 +1,194 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+// Yes keeps, No flips, same as the AutoLoot toggle
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_LM_Toggle", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+THEN
+PROC_AMP_LM_ShowToggle(_Caster);
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_LM_Toggle", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+NOT _Caster == _Host
+THEN
+PROC_AMP_LM_ShowToggle(_Caster);
+
+PROC
+PROC_AMP_LM_ShowToggle((CHARACTER)_Player)
+AND
+NOT DB_AMP_LM_Disabled(1)
+THEN
+OpenMessageBoxYesNo(_Player, "AMP_LM_Toggle_AskDisable");
+
+PROC
+PROC_AMP_LM_ShowToggle((CHARACTER)_Player)
+AND
+DB_AMP_LM_Disabled(1)
+THEN
+OpenMessageBoxYesNo(_Player, "AMP_LM_Toggle_AskEnable");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_LM_Toggle_AskDisable", 1)
+THEN
+DB_NOOP(1);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_LM_Toggle_AskDisable", 0)
+THEN
+NOT DB_AMP_LM_Disabled(0);
+DB_AMP_LM_Disabled(1);
+PROC_AMP_LM_RemoveAll();
+PROC_AMP_PlayModeEffect(_Player);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_LM_Toggle_AskEnable", 1)
+THEN
+DB_NOOP(1);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_LM_Toggle_AskEnable", 0)
+THEN
+NOT DB_AMP_LM_Disabled(1);
+DB_AMP_LM_Disabled(0);
+PROC_AMP_LM_AddAll();
+PROC_AMP_PlayModeEffect(_Player);
+
+// no re-fire when a negated condition's fact is retracted, so grant here
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_Toggle_AskEnable", 0)
+AND
+NOT DB_AMP_LM_Disabled(1)
+THEN
+PROC_AMP_LM_AddAll();
+
+// keyed on the GenerousLoot box, not the step counter, which races base
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_GenerousLoot_AskEnable", _)
+AND
+DB_AMP_Wizard_Active(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_LM_Toggle_AskDisable");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_GenerousLoot_AskDisable", _)
+AND
+DB_AMP_Wizard_Active(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_LM_Toggle_AskDisable");
+
+// one party state, toggle a passive only while it disagrees or the switching echoes
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_LM_Filing(_)
+THEN
+DB_AMP_Plus_LM_Filing(1);
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_LM_Filing(_)
+THEN
+DB_AMP_Plus_LM_Filing(1);
+
+IF
+StatusApplied((CHARACTER)_P, "AMP_LM_ACTIVE", _, _)
+AND
+DB_Players(_P)
+AND
+NOT DB_AMP_Plus_LM_Adopting(_P)
+THEN
+NOT DB_AMP_Plus_LM_Filing(0);
+DB_AMP_Plus_LM_Filing(1);
+PROC_AMP_Plus_LM_SpreadOn(_P);
+
+IF
+StatusRemoved((CHARACTER)_P, "AMP_LM_ACTIVE", _, _)
+AND
+DB_Players(_P)
+AND
+NOT DB_AMP_Plus_LM_Adopting(_P)
+THEN
+NOT DB_AMP_Plus_LM_Filing(1);
+DB_AMP_Plus_LM_Filing(0);
+PROC_AMP_Plus_LM_SpreadOff(_P);
+
+PROC
+PROC_AMP_Plus_LM_SpreadOn((CHARACTER)_P)
+AND
+DB_Players(_Other)
+AND
+NOT _Other == _P
+AND
+DB_AMP_LM_PassiveGranted(_Other)
+AND
+HasActiveStatus(_Other, "AMP_LM_ACTIVE", 0)
+THEN
+TogglePassive(_Other, "AMP_LM_Toggle");
+
+PROC
+PROC_AMP_Plus_LM_SpreadOff((CHARACTER)_P)
+AND
+DB_Players(_Other)
+AND
+NOT _Other == _P
+AND
+DB_AMP_LM_PassiveGranted(_Other)
+AND
+HasActiveStatus(_Other, "AMP_LM_ACTIVE", 1)
+THEN
+TogglePassive(_Other, "AMP_LM_Toggle");
+
+// late joiner starts switched on, hold it apart until it matches the group
+
+IF
+DB_AMP_LM_PassiveGranted((CHARACTER)_P)
+THEN
+DB_AMP_Plus_LM_Adopting(_P);
+ObjectTimerLaunch(_P, "AMP_Plus_LM_Adopt", 500);
+
+IF
+ObjectTimerFinished((CHARACTER)_P, "AMP_Plus_LM_Adopt")
+THEN
+NOT DB_AMP_Plus_LM_Adopting(_P);
+PROC_AMP_Plus_LM_Adopt(_P);
+
+PROC
+PROC_AMP_Plus_LM_Adopt((CHARACTER)_P)
+AND
+DB_AMP_Plus_LM_Filing(0)
+AND
+HasActiveStatus(_P, "AMP_LM_ACTIVE", 1)
+THEN
+TogglePassive(_P, "AMP_LM_Toggle");
+
+PROC
+PROC_AMP_LM_RemoveAll()
+AND
+DB_Players(_P)
+THEN
+RemovePassive(_P, "AMP_LM_Toggle");
+RemoveStatus(_P, "AMP_LM_ACTIVE");
+
+PROC
+PROC_AMP_LM_AddAll()
+AND
+DB_Players(_P)
+THEN
+AddPassive(_P, "AMP_LM_Toggle");
+
+EXITSECTION
+ENDEXITSECTION

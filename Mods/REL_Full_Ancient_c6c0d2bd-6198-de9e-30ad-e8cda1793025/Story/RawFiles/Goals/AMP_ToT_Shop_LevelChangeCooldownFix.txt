@@ -1,0 +1,25 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// ms delay before restoring restock cooldown, must outlast core's clear on level start
+DB_AMP_ToTShop_CDRestoreDelay(500);
+
+// restock cooldown, 30 min
+DB_AMP_ToTShop_CDDuration(1800000);
+
+KBSECTION
+
+// timers do not survive save or transition, so no cross-level cooldown restore
+// refresh gate lives in ZZZZ_AMP_ToT_Shop_RefreshHotfix.txt
+
+// stub rule so the section isn't empty
+IF
+DB_AMP_ToTShop_CDPending((CHARACTER)_Host)
+AND
+NOT DB_AMP_ToTShop_CDRestoreDelay(_)
+THEN
+NOT DB_AMP_ToTShop_CDPending(_Host);
+
+EXITSECTION
+ENDEXITSECTION

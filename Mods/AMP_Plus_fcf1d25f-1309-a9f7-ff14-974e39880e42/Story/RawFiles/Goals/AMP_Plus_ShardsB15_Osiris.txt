@@ -1,0 +1,480 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// index order is the Random() draw order
+DB_AMP_Plus_ShardTemenos(0, "AMP_SHARD_TEMENOS_WATER");
+DB_AMP_Plus_ShardTemenos(1, "AMP_SHARD_TEMENOS_STORM");
+DB_AMP_Plus_ShardTemenos(2, "AMP_SHARD_TEMENOS_ICE");
+DB_AMP_Plus_ShardTemenos(3, "AMP_SHARD_TEMENOS_BLOOD");
+DB_AMP_Plus_ShardTemenos(4, "AMP_SHARD_TEMENOS_FIRE");
+DB_AMP_Plus_ShardTemenos(5, "AMP_SHARD_TEMENOS_GREASE");
+DB_AMP_Plus_ShardTemenos(6, "AMP_SHARD_TEMENOS_POISON");
+DB_AMP_Plus_ShardTemenos(7, "AMP_SHARD_TEMENOS_ACID");
+DB_AMP_Plus_ShardTemenos(8, "AMP_SHARD_TEMENOS_ALCOHOL");
+DB_AMP_Plus_ShardTemenos(9, "AMP_SHARD_TEMENOS_WEB");
+DB_AMP_Plus_ShardTemenos(10, "AMP_SHARD_TEMENOS_VINES");
+DB_AMP_Plus_ShardTemenos(11, "AMP_SHARD_TEMENOS_BLOOM");
+DB_AMP_Plus_ShardTemenos(12, "AMP_SHARD_TEMENOS_BRINE");
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_ShardRecurrence_WatchVer(5)
+THEN
+PROC_AMP_Plus_ShardRecurrence_Seed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_ShardRecurrence_WatchVer(5)
+THEN
+PROC_AMP_Plus_ShardRecurrence_Seed();
+
+PROC
+PROC_AMP_Plus_ShardRecurrence_Seed()
+AND
+DB_AMP_Plus_ShardRecurrence_WatchVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_ShardRecurrence_WatchVer(_Old);
+
+PROC
+PROC_AMP_Plus_ShardRecurrence_Seed()
+THEN
+PROC_AMP_Plus_ShardRecurrence_DrainWatch();
+
+PROC
+PROC_AMP_Plus_ShardRecurrence_Seed()
+THEN
+PROC_AMP_Plus_ShardRecurrence_DrainToll();
+
+PROC
+PROC_AMP_Plus_ShardRecurrence_Seed()
+THEN
+DB_AMP_Plus_ShardRecurrence_Watch("UND_BLISS_SPORES");
+DB_AMP_Plus_ShardRecurrence_Watch("CRE_MAG_LATHANDER_PUZZLE_BOON");
+DB_AMP_Plus_ShardRecurrence_Watch("DEN_SILVANUS_BLESSING");
+DB_AMP_Plus_ShardRecurrence_Watch("SHA_ALTAR_BUFF");
+DB_AMP_Plus_ShardRecurrence_Watch("LOW_STORMSHORETABERNACLE_GODBLESSED");
+DB_AMP_Plus_ShardRecurrence_Watch("WYR_NYMPHGROTTO_RAPTURE");
+DB_AMP_Plus_ShardRecurrence_Watch("SCL_PLAQUES_INT_PASS");
+DB_AMP_Plus_ShardRecurrence_Watch("SCL_PLAQUES_WIS_PASS");
+DB_AMP_Plus_ShardRecurrence_Watch("SCL_PLAQUES_CHA_PASS");
+DB_AMP_Plus_ShardRecurrence_Toll("UND_BLISS_SPORES", "AMP_SHARD_RECURRENCE_TOLL_1");
+DB_AMP_Plus_ShardRecurrence_Toll("CRE_MAG_LATHANDER_PUZZLE_BOON", "AMP_SHARD_RECURRENCE_TOLL_2");
+DB_AMP_Plus_ShardRecurrence_Toll("DEN_SILVANUS_BLESSING", "AMP_SHARD_RECURRENCE_TOLL_3");
+DB_AMP_Plus_ShardRecurrence_Toll("SHA_ALTAR_BUFF", "AMP_SHARD_RECURRENCE_TOLL_4");
+DB_AMP_Plus_ShardRecurrence_Toll("LOW_STORMSHORETABERNACLE_GODBLESSED", "AMP_SHARD_RECURRENCE_TOLL_5");
+DB_AMP_Plus_ShardRecurrence_Toll("WYR_NYMPHGROTTO_RAPTURE", "AMP_SHARD_RECURRENCE_TOLL_6");
+DB_AMP_Plus_ShardRecurrence_Toll("SCL_PLAQUES_INT_PASS", "AMP_SHARD_RECURRENCE_TOLL_7");
+DB_AMP_Plus_ShardRecurrence_Toll("SCL_PLAQUES_WIS_PASS", "AMP_SHARD_RECURRENCE_TOLL_8");
+DB_AMP_Plus_ShardRecurrence_Toll("SCL_PLAQUES_CHA_PASS", "AMP_SHARD_RECURRENCE_TOLL_9");
+DB_AMP_Plus_ShardRecurrence_WatchVer(5);
+
+PROC
+PROC_AMP_Plus_ShardRecurrence_Seed()
+AND
+DB_Players((CHARACTER)_Char)
+AND
+DB_AMP_Plus_ShardRecurrence_Toll((STRING)_Boon, (STRING)_Old)
+AND
+HasActiveStatus(_Char, _Old, 1)
+THEN
+RemoveStatus(_Char, _Old, _Char);
+DB_AMP_Plus_ShardRecurrence_Charged(_Char, _Boon, "AMP_SHARD_RECURRENCE_TOLL_HP");
+PROC_AMP_Plus_ShardRecurrence_Rebuild(_Char);
+
+PROC
+PROC_AMP_Plus_ShardRecurrence_DrainWatch()
+AND
+DB_AMP_Plus_ShardRecurrence_Watch((STRING)_Status)
+THEN
+NOT DB_AMP_Plus_ShardRecurrence_Watch(_Status);
+PROC_AMP_Plus_ShardRecurrence_DrainWatch();
+
+PROC
+PROC_AMP_Plus_ShardRecurrence_DrainToll()
+AND
+DB_AMP_Plus_ShardRecurrence_Toll((STRING)_Status, (STRING)_Toll)
+THEN
+NOT DB_AMP_Plus_ShardRecurrence_Toll(_Status, _Toll);
+PROC_AMP_Plus_ShardRecurrence_DrainToll();
+
+// the pick lives on the helmet status, character statuses are rebuilt on every load
+
+IF
+StatusApplied((ITEM)_Item, "AMP_SHARD_HEAD_RECURRENCE", (CHARACTER)_Causee, _)
+AND
+DB_Players(_Causee)
+AND
+IsEquipped(_Item, 1)
+AND
+GetInventoryOwner(_Item, (CHARACTER)_Char)
+THEN
+PROC_AMP_Plus_ShardRecurrence_ForgetPick(_Item);
+PROC_AMP_Plus_ShardRecurrence_OfferPick(_Char);
+
+IF
+StatusRemoved((ITEM)_Item, "AMP_SHARD_HEAD_RECURRENCE", _, _)
+THEN
+PROC_AMP_Plus_ShardRecurrence_ForgetPick(_Item);
+
+IF
+StatusRemoved((ITEM)_Item, "AMP_SHARD_HEAD_RECURRENCE", _, _)
+AND
+GetInventoryOwner(_Item, (CHARACTER)_Char)
+AND
+DB_AMP_Plus_ShardRecurrence_ChoiceOpen(_Char)
+THEN
+NOT DB_AMP_Plus_ShardRecurrence_ChoiceOpen(_Char);
+RemoveSpell(_Char, "Shout_AMP_Plus_Recurrence_TollChoice", 1);
+
+IF
+Equipped((ITEM)_Item, (CHARACTER)_Char)
+AND
+HasActiveStatus(_Item, "AMP_SHARD_HEAD_RECURRENCE", 1)
+AND
+NOT DB_AMP_Plus_ShardRecurrence_Pick(_Item, _)
+THEN
+PROC_AMP_Plus_ShardRecurrence_OfferPick(_Char);
+
+IF
+SavegameLoaded()
+AND
+DB_Players((CHARACTER)_Char)
+AND
+GetEquippedItem(_Char, "Helmet", (ITEM)_Item)
+AND
+HasActiveStatus(_Item, "AMP_SHARD_HEAD_RECURRENCE", 1)
+AND
+NOT DB_AMP_Plus_ShardRecurrence_Pick(_Item, _)
+THEN
+PROC_AMP_Plus_ShardRecurrence_OfferPick(_Char);
+
+PROC
+PROC_AMP_Plus_ShardRecurrence_ForgetPick((ITEM)_Item)
+AND
+DB_AMP_Plus_ShardRecurrence_Pick(_Item, (STRING)_Toll)
+THEN
+NOT DB_AMP_Plus_ShardRecurrence_Pick(_Item, _Toll);
+
+PROC
+PROC_AMP_Plus_ShardRecurrence_OfferPick((CHARACTER)_Char)
+AND
+NOT DB_AMP_Plus_ShardRecurrence_ChoiceOpen(_Char)
+THEN
+DB_AMP_Plus_ShardRecurrence_ChoiceOpen(_Char);
+AddSpell(_Char, "Shout_AMP_Plus_Recurrence_TollChoice", 0, 1);
+
+IF
+UsingSpell((CHARACTER)_Char, "Shout_AMP_Plus_Recurrence_Pick_HP", _, _, _)
+THEN
+PROC_AMP_Plus_ShardRecurrence_TakePick(_Char, "AMP_SHARD_RECURRENCE_TOLL_HP");
+
+IF
+UsingSpell((CHARACTER)_Char, "Shout_AMP_Plus_Recurrence_Pick_AC", _, _, _)
+THEN
+PROC_AMP_Plus_ShardRecurrence_TakePick(_Char, "AMP_SHARD_RECURRENCE_TOLL_AC");
+
+// removing the spell mid-shout cancels the cast, withdraw after the animation
+
+PROC
+PROC_AMP_Plus_ShardRecurrence_TakePick((CHARACTER)_Char, (STRING)_Toll)
+AND
+GetEquippedItem(_Char, "Helmet", (ITEM)_Item)
+AND
+HasActiveStatus(_Item, "AMP_SHARD_HEAD_RECURRENCE", 1)
+AND
+NOT DB_AMP_Plus_ShardRecurrence_Pick(_Item, _)
+THEN
+DB_AMP_Plus_ShardRecurrence_Pick(_Item, _Toll);
+ObjectTimerLaunch(_Char, "AMP_Plus_ShardRecurrence_ClosePick", 3000);
+PROC_AMP_Plus_ShardRecurrence_Switch(_Char, _Toll);
+PROC_AMP_Plus_ShardRecurrence_Rebuild(_Char);
+
+PROC
+PROC_AMP_Plus_ShardRecurrence_Switch((CHARACTER)_Char, (STRING)_Toll)
+AND
+DB_AMP_Plus_ShardRecurrence_Charged(_Char, (STRING)_Boon, (STRING)_Old)
+AND
+_Old != _Toll
+THEN
+NOT DB_AMP_Plus_ShardRecurrence_Charged(_Char, _Boon, _Old);
+DB_AMP_Plus_ShardRecurrence_Charged(_Char, _Boon, _Toll);
+PROC_AMP_Plus_ShardRecurrence_Switch(_Char, _Toll);
+
+IF
+ObjectTimerFinished((CHARACTER)_Char, "AMP_Plus_ShardRecurrence_ClosePick")
+THEN
+NOT DB_AMP_Plus_ShardRecurrence_ChoiceOpen(_Char);
+RemoveSpell(_Char, "Shout_AMP_Plus_Recurrence_TollChoice", 1);
+
+// rest strips these boons before it ends, so read at start and lay back at end
+
+IF
+LongRestStarted()
+AND
+DB_Players((CHARACTER)_Char)
+AND
+HasActiveStatus(_Char, "AMP_SHARD_CHAR_RECURRENCE", 1)
+AND
+DB_AMP_Plus_ShardRecurrence_Watch((STRING)_Status)
+AND
+HasActiveStatus(_Char, _Status, 1)
+THEN
+DB_AMP_Plus_ShardRecurrence_Kept(_Char, _Status);
+
+IF
+LongRestFinished()
+THEN
+PROC_AMP_Plus_ShardRecurrence_DrainKeptReturn();
+
+PROC
+PROC_AMP_Plus_ShardRecurrence_DrainKeptReturn()
+AND
+DB_AMP_Plus_ShardRecurrence_Kept((CHARACTER)_Char, (STRING)_Status)
+THEN
+NOT DB_AMP_Plus_ShardRecurrence_Kept(_Char, _Status);
+PROC_AMP_Plus_ShardRecurrence_Return(_Char, _Status);
+PROC_AMP_Plus_ShardRecurrence_DrainKeptReturn();
+
+PROC
+PROC_AMP_Plus_ShardRecurrence_Return((CHARACTER)_Char, (STRING)_Status)
+AND
+HasActiveStatus(_Char, "AMP_SHARD_CHAR_RECURRENCE", 1)
+AND
+HasActiveStatus(_Char, _Status, 0)
+THEN
+ApplyStatus(_Char, _Status, -1.0, 1, _Char);
+PROC_AMP_Plus_ShardRecurrence_Charge(_Char, _Status);
+PROC_AMP_Plus_ShardRecurrence_Rebuild(_Char);
+
+PROC
+PROC_AMP_Plus_ShardRecurrence_Charge((CHARACTER)_Char, (STRING)_Status)
+AND
+GetEquippedItem(_Char, "Helmet", (ITEM)_Item)
+AND
+DB_AMP_Plus_ShardRecurrence_Pick(_Item, (STRING)_Toll)
+THEN
+DB_AMP_Plus_ShardRecurrence_Charged(_Char, _Status, _Toll);
+
+PROC
+PROC_AMP_Plus_ShardRecurrence_Charge((CHARACTER)_Char, (STRING)_Status)
+AND
+NOT DB_AMP_Plus_ShardRecurrence_Charged(_Char, _Status, _)
+THEN
+DB_AMP_Plus_ShardRecurrence_Charged(_Char, _Status, "AMP_SHARD_RECURRENCE_TOLL_HP");
+
+// no StackId: strip all, lay one back per boon, a second apart or AC keeps the removal
+
+IF
+StatusRemoved((CHARACTER)_Char, (STRING)_Status, _, _)
+AND
+DB_AMP_Plus_ShardRecurrence_Charged(_Char, _Status, (STRING)_Toll)
+THEN
+NOT DB_AMP_Plus_ShardRecurrence_Charged(_Char, _Status, _Toll);
+PROC_AMP_Plus_ShardRecurrence_Rebuild(_Char);
+
+PROC
+PROC_AMP_Plus_ShardRecurrence_Rebuild((CHARACTER)_Char)
+THEN
+RemoveStatus(_Char, "AMP_SHARD_RECURRENCE_TOLL_HP", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_SHARD_RECURRENCE_TOLL_AC", NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_Plus_ShardRecurrence_Rebuilding(_Char);
+ObjectTimerLaunch(_Char, "AMP_Plus_ShardRecurrence_Rebuild", 1000);
+
+IF
+ObjectTimerFinished((CHARACTER)_Char, "AMP_Plus_ShardRecurrence_Rebuild")
+AND
+DB_AMP_Plus_ShardRecurrence_Rebuilding(_Char)
+THEN
+NOT DB_AMP_Plus_ShardRecurrence_Rebuilding(_Char);
+PROC_AMP_Plus_ShardRecurrence_LayTolls(_Char);
+
+PROC
+PROC_AMP_Plus_ShardRecurrence_LayTolls((CHARACTER)_Char)
+AND
+DB_AMP_Plus_ShardRecurrence_Charged(_Char, _, (STRING)_Toll)
+THEN
+ApplyStatus(_Char, _Toll, -1.0, 1, _Char);
+
+IF
+LongRestCancelled()
+THEN
+PROC_AMP_Plus_ShardRecurrence_DrainKept();
+
+PROC
+PROC_AMP_Plus_ShardRecurrence_DrainKept()
+AND
+DB_AMP_Plus_ShardRecurrence_Kept((CHARACTER)_Char, (STRING)_Status)
+THEN
+NOT DB_AMP_Plus_ShardRecurrence_Kept(_Char, _Status);
+PROC_AMP_Plus_ShardRecurrence_DrainKept();
+
+// UND_BOOOALBLESSING has no StackId and ignores rest: strip, hand back one
+
+IF
+LongRestFinished()
+AND
+DB_Players((CHARACTER)_Char)
+AND
+NOT DB_AMP_Plus_ShardRecurrence_Destacked(_Char)
+AND
+HasActiveStatus(_Char, "UND_BOOOALBLESSING", 1)
+THEN
+DB_AMP_Plus_ShardRecurrence_Destacked(_Char);
+PROC_AMP_Plus_ShardRecurrence_Destack(_Char, 12);
+
+PROC
+PROC_AMP_Plus_ShardRecurrence_Destack((CHARACTER)_Char, (INTEGER)_Left)
+AND
+_Left > 0
+AND
+IntegerSubtract(_Left, 1, (INTEGER)_Next)
+THEN
+RemoveStatus(_Char, "UND_BOOOALBLESSING", NULL_00000000-0000-0000-0000-000000000000);
+PROC_AMP_Plus_ShardRecurrence_Destack(_Char, _Next);
+
+PROC
+PROC_AMP_Plus_ShardRecurrence_Destack((CHARACTER)_Char, (INTEGER)_Left)
+AND
+_Left <= 0
+THEN
+ApplyStatus(_Char, "UND_BOOOALBLESSING", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+
+// Trepanation reads a marker, not Ally(): a maddened wearer has no allies left
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+HasActiveStatus(_Char, "AMP_SHARD_CHAR_TREPANATION", 1)
+AND
+CombatGetInvolvedPartyMembersCount(_CombatID, (INTEGER)_N)
+AND
+_N > 0
+THEN
+PROC_AMP_Plus_ShardTrepanation_Mark(_Char, _CombatID, _N, 1);
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+HasActiveStatus(_Char, "AMP_SHARD_CHAR_TREPANATION", 1)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+ApplyStatus(_Player, "AMP_SHARD_TREPANATION_FRIEND", -1.0, 1, _Char);
+
+PROC
+PROC_AMP_Plus_ShardTrepanation_Mark((CHARACTER)_Char, (GUIDSTRING)_CombatID, (INTEGER)_Total, (INTEGER)_Idx)
+AND
+_Idx <= _Total
+AND
+CombatGetInvolvedPartyMember(_CombatID, _Idx, (CHARACTER)_Member)
+AND
+IsEnemy(_Member, _Char, 0)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+ApplyStatus(_Member, "AMP_SHARD_TREPANATION_FRIEND", -1.0, 1, _Char);
+PROC_AMP_Plus_ShardTrepanation_Mark(_Char, _CombatID, _Total, _Next);
+
+PROC
+PROC_AMP_Plus_ShardTrepanation_Mark((CHARACTER)_Char, (GUIDSTRING)_CombatID, (INTEGER)_Total, (INTEGER)_Idx)
+AND
+_Idx <= _Total
+AND
+CombatGetInvolvedPartyMember(_CombatID, _Idx, (CHARACTER)_Member)
+AND
+IsEnemy(_Member, _Char, 1)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_ShardTrepanation_Mark(_Char, _CombatID, _Total, _Next);
+
+
+IF
+EnteredCombat((CHARACTER)_Char, _)
+AND
+HasActiveStatus(_Char, "AMP_SHARD_CHAR_TEMENOS", 1)
+AND
+Random(13, (INTEGER)_Idx)
+AND
+DB_AMP_Plus_ShardTemenos(_Idx, (STRING)_Status)
+THEN
+ApplyStatus(_Char, _Status, -1.0, 1, _Char);
+
+
+// Reprieve: stats mark the kill, the cooldown reset lives only here
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_SHARD_REPRIEVE_TRIGGER", _, _)
+THEN
+ResetCooldowns(_Char);
+
+// whoever was already in the fight is caught on their own turn
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+HasActiveStatus(_Char, "AMP_SHARD_CHAR_MORTAR", 1)
+AND
+NOT DB_AMP_Plus_ShardMortar_Combat(_CombatID)
+THEN
+DB_AMP_Plus_ShardMortar_Combat(_CombatID);
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_ShardMortar_Combat(_CombatID)
+THEN
+ApplyStatus(_Char, "AMP_SHARD_MORTAR_MARK", -1.0, 1, _Char);
+
+IF
+TurnStarted((CHARACTER)_Char)
+AND
+CombatGetGuidFor(_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_ShardMortar_Combat(_CombatID)
+AND
+HasActiveStatus(_Char, "AMP_SHARD_MORTAR_MARK", 0)
+THEN
+ApplyStatus(_Char, "AMP_SHARD_MORTAR_MARK", -1.0, 1, _Char);
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_ShardMortar_Combat(_CombatID)
+THEN
+NOT DB_AMP_Plus_ShardMortar_Combat(_CombatID);
+
+// tesseract rolls its table anew each time, a table generated straight into a character rolls once
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_SHARD_LAMB_GIFT_UNCOMMON", _, _)
+THEN
+RemoveStatus(_Char, "AMP_SHARD_LAMB_GIFT_UNCOMMON", _Char);
+TemplateAddTo((ITEMROOT)AMP_Capsule_Reward_Shards_Uncommon_ba33bd2b-59ed-4205-bba8-39312df94109, _Char, 1, 0);
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_SHARD_LAMB_GIFT_RARE", _, _)
+THEN
+RemoveStatus(_Char, "AMP_SHARD_LAMB_GIFT_RARE", _Char);
+TemplateAddTo((ITEMROOT)AMP_Capsule_Reward_Shards_Rare_a165c989-b06a-4271-afb2-790874d5b37b, _Char, 1, 0);
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_SHARD_LAMB_GIFT_VERYRARE", _, _)
+THEN
+RemoveStatus(_Char, "AMP_SHARD_LAMB_GIFT_VERYRARE", _Char);
+TemplateAddTo((ITEMROOT)AMP_Capsule_Reward_Shards_VeryRare_76b07b2c-8cf9-46fc-92ab-5d9f31005523, _Char, 1, 0);
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_SHARD_LAMB_GIFT_LEGENDARY", _, _)
+THEN
+RemoveStatus(_Char, "AMP_SHARD_LAMB_GIFT_LEGENDARY", _Char);
+TemplateAddTo((ITEMROOT)AMP_Capsule_Reward_Shards_Legendary_71c048a2-2ec7-4a23-ac59-e080282ebe45, _Char, 1, 0);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,335 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// game mode core: casual / normal / hard / stock select.
+// replaces the old difficulty dialog chain.
+
+// disabled scaled flow
+// NOT DB_AMP_Difficulty_Chosen(0);
+// DB_AMP_Difficulty_Chosen(1);
+// NOT DB_AMP_Difficulty_Asked(0);
+// DB_AMP_Difficulty_Asked(1);
+
+// standard tier maps - npc/boss split, 6 tiers
+DB_AMP_DiffV3_TierMap("STANDARD", 0, "AMP_NPC_STANDARD_T0_V4");
+DB_AMP_DiffV3_TierMap("STANDARD", 1, "AMP_NPC_STANDARD_T1_V4");
+DB_AMP_DiffV3_TierMap("STANDARD", 2, "AMP_NPC_STANDARD_T2_V4");
+DB_AMP_DiffV3_TierMap("STANDARD", 3, "AMP_NPC_STANDARD_T3_V4");
+DB_AMP_DiffV3_TierMap("STANDARD", 4, "AMP_NPC_STANDARD_T4_V4");
+DB_AMP_DiffV3_TierMap("STANDARD", 5, "AMP_NPC_STANDARD_T5_V4");
+DB_AMP_DiffV3_BossTierMap("STANDARD", 0, "AMP_BOSS_STANDARD_T0_V4");
+DB_AMP_DiffV3_BossTierMap("STANDARD", 1, "AMP_BOSS_STANDARD_T1_V4");
+DB_AMP_DiffV3_BossTierMap("STANDARD", 2, "AMP_BOSS_STANDARD_T2_V4");
+DB_AMP_DiffV3_BossTierMap("STANDARD", 3, "AMP_BOSS_STANDARD_T3_V4");
+DB_AMP_DiffV3_BossTierMap("STANDARD", 4, "AMP_BOSS_STANDARD_T4_V4");
+DB_AMP_DiffV3_BossTierMap("STANDARD", 5, "AMP_BOSS_STANDARD_T5_V4");
+DB_AMP_DiffV3_PlayerDebuff("STANDARD", "AMP_DIFFICULTY_PLAYER_STANDARD");
+DB_AMP_DiffV3_AllTargets("AMP_NPC_STANDARD_T0_V4");
+DB_AMP_DiffV3_AllTargets("AMP_NPC_STANDARD_T1_V4");
+DB_AMP_DiffV3_AllTargets("AMP_NPC_STANDARD_T2_V4");
+DB_AMP_DiffV3_AllTargets("AMP_NPC_STANDARD_T3_V4");
+DB_AMP_DiffV3_AllTargets("AMP_NPC_STANDARD_T4_V4");
+DB_AMP_DiffV3_AllTargets("AMP_NPC_STANDARD_T5_V4");
+DB_AMP_DiffV3_AllBosses("AMP_BOSS_STANDARD_T0_V4");
+DB_AMP_DiffV3_AllBosses("AMP_BOSS_STANDARD_T1_V4");
+DB_AMP_DiffV3_AllBosses("AMP_BOSS_STANDARD_T2_V4");
+DB_AMP_DiffV3_AllBosses("AMP_BOSS_STANDARD_T3_V4");
+DB_AMP_DiffV3_AllBosses("AMP_BOSS_STANDARD_T4_V4");
+DB_AMP_DiffV3_AllBosses("AMP_BOSS_STANDARD_T5_V4");
+
+// standard boss-progression statuses, per tier
+DB_AMP_BossProgression_PlayerStatus("STANDARD", "AMP_BOSS_PROGRESS_STANDARD");
+DB_AMP_BossProgression_EnemyNPCTierStatus("STANDARD", 0, "AMP_PROG_NPC_STANDARD_T0_V5");
+DB_AMP_BossProgression_EnemyNPCTierStatus("STANDARD", 1, "AMP_PROG_NPC_STANDARD_T1_V5");
+DB_AMP_BossProgression_EnemyNPCTierStatus("STANDARD", 2, "AMP_PROG_NPC_STANDARD_T2_V5");
+DB_AMP_BossProgression_EnemyNPCTierStatus("STANDARD", 3, "AMP_PROG_NPC_STANDARD_T3_V5");
+DB_AMP_BossProgression_EnemyNPCTierStatus("STANDARD", 4, "AMP_PROG_NPC_STANDARD_T4_V5");
+DB_AMP_BossProgression_EnemyNPCTierStatus("STANDARD", 5, "AMP_PROG_NPC_STANDARD_T5_V5");
+DB_AMP_BossProgression_EnemyBossTierStatus("STANDARD", 0, "AMP_PROG_BOSS_STANDARD_T0_V5");
+DB_AMP_BossProgression_EnemyBossTierStatus("STANDARD", 1, "AMP_PROG_BOSS_STANDARD_T1_V5");
+DB_AMP_BossProgression_EnemyBossTierStatus("STANDARD", 2, "AMP_PROG_BOSS_STANDARD_T2_V5");
+DB_AMP_BossProgression_EnemyBossTierStatus("STANDARD", 3, "AMP_PROG_BOSS_STANDARD_T3_V5");
+DB_AMP_BossProgression_EnemyBossTierStatus("STANDARD", 4, "AMP_PROG_BOSS_STANDARD_T4_V5");
+DB_AMP_BossProgression_EnemyBossTierStatus("STANDARD", 5, "AMP_PROG_BOSS_STANDARD_T5_V5");
+
+// default mode, so the first SetGameMode has an old value to match
+DB_AMP_Difficulty_Mode("NONE");
+
+DB_AMP_GameMode_Asked(0);
+
+KBSECTION
+// t5 standard back-compat: the init dbs don't re-seed on old saves, so add them once on level load
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_DiffV3_TierMap("STANDARD", 5, _)
+THEN
+DB_AMP_DiffV3_TierMap("STANDARD", 5, "AMP_NPC_STANDARD_T5_V4");
+DB_AMP_DiffV3_BossTierMap("STANDARD", 5, "AMP_BOSS_STANDARD_T5_V4");
+DB_AMP_DiffV3_AllTargets("AMP_NPC_STANDARD_T5_V4");
+DB_AMP_DiffV3_AllBosses("AMP_BOSS_STANDARD_T5_V4");
+DB_AMP_BossProgression_EnemyNPCTierStatus("STANDARD", 5, "AMP_PROG_NPC_STANDARD_T5_V5");
+DB_AMP_BossProgression_EnemyBossTierStatus("STANDARD", 5, "AMP_PROG_BOSS_STANDARD_T5_V5");
+
+// new game: auto-prompt on TUT_Avernus_C
+
+IF
+LevelGameplayStarted("TUT_Avernus_C", _)
+AND
+NOT DB_AMP_GameMode(_)
+AND
+NOT DB_AMP_Wizard_Exists(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+TimerLaunch("AMP_GameMode_NewGame_Delay", 15000);
+
+// existing save loaded on avernus - same prompt
+IF
+LevelGameplayStarted("TUT_Avernus_C", _)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+_Mode != "NONE"
+AND
+NOT DB_AMP_GameMode(_)
+AND
+NOT DB_AMP_Wizard_Exists(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+TimerLaunch("AMP_GameMode_NewGame_Delay", 15000);
+
+// training ring trigger
+
+// not stock - normal flow
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Settings_GameMode", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+NOT DB_AMP_GameMode("STOCK")
+THEN
+PROC_AMP_GameMode_ShowMB1(_Caster);
+
+// stock - locked, just show the info box
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Settings_GameMode", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_AMP_GameMode("STOCK")
+THEN
+OpenMessageBox(_Caster, "AMP_Settings027");
+
+// messagebox chain - normal/casual/hard/stock
+
+// show mb1
+PROC
+PROC_AMP_GameMode_ShowMB1((CHARACTER)_Host)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Settings023");
+
+// mb1 normal: yes -> normal
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings023", 1)
+THEN
+PROC_AMP_SetGameMode(_Host, "NORMAL");
+
+// mb1 no -> mb2
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings023", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Settings024");
+
+// mb2 casual: yes -> casual
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings024", 1)
+THEN
+PROC_AMP_SetGameMode(_Host, "CASUAL");
+
+// mb2 no -> mb3
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings024", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Settings025");
+
+// mb3 hard: yes -> hard
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings025", 1)
+THEN
+PROC_AMP_SetGameMode(_Host, "HARD");
+
+// mb3 no -> mb4 stock
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings025", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Settings026");
+
+// mb4 stock: yes -> stock
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings026", 1)
+THEN
+PROC_AMP_SetGameMode(_Host, "STOCK");
+
+// mb4 no -> loop back to mb1
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings026", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Settings023");
+
+// set game mode
+
+// clear the old gamemode fact first so they don't pile up on switch
+PROC
+PROC_AMP_SetGameMode((CHARACTER)_Host, (STRING)_NewMode)
+AND
+DB_AMP_GameMode((STRING)_OldGameMode)
+THEN
+NOT DB_AMP_GameMode(_OldGameMode);
+
+PROC
+PROC_AMP_SetGameMode((CHARACTER)_Host, (STRING)_Mode)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+// wipe standard statuses for old saves that predate this mode
+RemoveStatus(_Player, "AMP_DIFFICULTY_PLAYER_STANDARD", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_BOSS_PROGRESS_STANDARD", NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_SetGameMode((CHARACTER)_Host, "CASUAL")
+AND
+DB_AMP_Difficulty_Mode((STRING)_OldMode)
+THEN
+NOT DB_AMP_Difficulty_Mode(_OldMode);
+DB_AMP_Difficulty_Mode("NONE");
+DB_AMP_GameMode("CASUAL");
+PROC_AMP_PlayModeEffect(_Host);
+
+PROC
+PROC_AMP_SetGameMode((CHARACTER)_Host, "NORMAL")
+AND
+DB_AMP_Difficulty_Mode((STRING)_OldMode)
+THEN
+NOT DB_AMP_Difficulty_Mode(_OldMode);
+DB_AMP_Difficulty_Mode("STANDARD");
+DB_AMP_GameMode("NORMAL");
+PROC_AMP_PlayModeEffect(_Host);
+
+PROC
+PROC_AMP_SetGameMode((CHARACTER)_Host, "HARD")
+AND
+DB_AMP_Difficulty_Mode((STRING)_OldMode)
+THEN
+NOT DB_AMP_Difficulty_Mode(_OldMode);
+DB_AMP_Difficulty_Mode("IMPOSSIBLE");
+DB_AMP_GameMode("HARD");
+PROC_AMP_PlayModeEffect(_Host);
+
+PROC
+PROC_AMP_SetGameMode((CHARACTER)_Host, "STOCK")
+AND
+DB_AMP_Difficulty_Mode((STRING)_OldMode)
+THEN
+NOT DB_AMP_Difficulty_Mode(_OldMode);
+DB_AMP_Difficulty_Mode("NONE");
+DB_AMP_GameMode("STOCK");
+DB_AMP_BattleInstinct_Disabled(1);
+DB_AMP_ItemMoveCost_Disabled(1);
+DB_AMP_Wizard_Done(1);
+PROC_AMP_PlayModeEffect(_Host);
+
+// timer callback - shared by both avernus prompts
+
+IF
+TimerFinished("AMP_GameMode_NewGame_Delay")
+AND
+NOT DB_AMP_GameMode(_)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+PROC_AMP_GameMode_ShowMB1(_Host);
+
+// per-mode vfx
+
+// on a character
+PROC
+PROC_AMP_PlayModeEffect((CHARACTER)_Target)
+AND
+DB_AMP_GameMode("CASUAL")
+THEN
+PlayEffect(_Target, AMP_Casual_Root_ee4dfead-266e-f4f9-488a-760263d06cdd, "", 1.0);
+
+PROC
+PROC_AMP_PlayModeEffect((CHARACTER)_Target)
+AND
+DB_AMP_GameMode("NORMAL")
+THEN
+PlayEffect(_Target, AMP_Despawn_Root_35e54274-b567-d2e5-5e00-24a3c1b7f90c, "", 1.0);
+
+PROC
+PROC_AMP_PlayModeEffect((CHARACTER)_Target)
+AND
+DB_AMP_GameMode("HARD")
+THEN
+PlayEffect(_Target, AMP_Hardcore_Root_c0c2bcea-f874-43c7-f65f-a85add211fc8, "", 1.0);
+
+PROC
+PROC_AMP_PlayModeEffect((CHARACTER)_Target)
+AND
+DB_AMP_GameMode("STOCK")
+THEN
+PlayEffect(_Target, AMP_Despawn_Root_35e54274-b567-d2e5-5e00-24a3c1b7f90c, "", 1.0);
+
+PROC
+PROC_AMP_PlayModeEffect((CHARACTER)_Target)
+AND
+NOT DB_AMP_GameMode(_)
+THEN
+PlayEffect(_Target, AMP_Despawn_Root_35e54274-b567-d2e5-5e00-24a3c1b7f90c, "", 1.0);
+
+// at a position
+PROC
+PROC_AMP_PlayModeEffectAtPos((REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+DB_AMP_GameMode("CASUAL")
+THEN
+PlayEffectAtPosition(AMP_Casual_Root_ee4dfead-266e-f4f9-488a-760263d06cdd, _X, _Y, _Z, 1.0);
+
+PROC
+PROC_AMP_PlayModeEffectAtPos((REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+DB_AMP_GameMode("NORMAL")
+THEN
+PlayEffectAtPosition(AMP_Despawn_Root_35e54274-b567-d2e5-5e00-24a3c1b7f90c, _X, _Y, _Z, 1.0);
+
+PROC
+PROC_AMP_PlayModeEffectAtPos((REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+DB_AMP_GameMode("HARD")
+THEN
+PlayEffectAtPosition(AMP_Hardcore_Root_c0c2bcea-f874-43c7-f65f-a85add211fc8, _X, _Y, _Z, 1.0);
+
+PROC
+PROC_AMP_PlayModeEffectAtPos((REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+DB_AMP_GameMode("STOCK")
+THEN
+PlayEffectAtPosition(AMP_Despawn_Root_35e54274-b567-d2e5-5e00-24a3c1b7f90c, _X, _Y, _Z, 1.0);
+
+PROC
+PROC_AMP_PlayModeEffectAtPos((REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+NOT DB_AMP_GameMode(_)
+THEN
+PlayEffectAtPosition(AMP_Despawn_Root_35e54274-b567-d2e5-5e00-24a3c1b7f90c, _X, _Y, _Z, 1.0);
+
+EXITSECTION
+
+ENDEXITSECTION

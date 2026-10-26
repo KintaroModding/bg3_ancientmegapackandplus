@@ -1,0 +1,47 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+// coin to reward. coin + capsule -> reward cube via the shared spawnreward path.
+// entered from dispatch rule 1.
+
+// entry from dispatch
+PROC
+PROC_AMP_VoidCapsule_CoinStart((ITEM)_Coin, (ITEM)_Capsule, (CHARACTER)_Actor)
+AND
+GetTemplate(_Coin, (ITEMROOT)_CoinTemplate)
+AND
+DB_AMP_VoidCapsule_Coin(_CoinTemplate, (STRING)_CoinType)
+AND
+GetTemplate(_Capsule, (ITEMROOT)_CapsuleTemplate)
+AND
+DB_AMP_VoidCapsule_Container(_CapsuleTemplate, (STRING)_CapsuleType)
+THEN
+PROC_AMP_VoidCapsule_InitCharges(_Capsule);
+PROC_AMP_VoidCapsule_CoinGenerate(_Coin, _Capsule, _CoinType, _CapsuleType, _Actor);
+
+// mapping exists -> burn coin, spawn reward
+PROC
+PROC_AMP_VoidCapsule_CoinGenerate((ITEM)_Coin, (ITEM)_Capsule, (STRING)_CoinType, (STRING)_CapsuleType, (CHARACTER)_Owner)
+AND
+DB_AMP_VoidCapsule_Reward(_CapsuleType, _CoinType, (ITEMROOT)_RewardTemplate)
+THEN
+NOT DB_AMP_VoidCapsule_CoinProcessed(_Coin);
+RequestDelete(_Coin);
+PROC_AMP_VoidCapsule_Decrement(_Capsule, _Owner);
+PROC_AMP_VoidCapsule_SpawnReward(_Owner, "Coin", _RewardTemplate, _Capsule);
+PROC_AMP_VoidCapsule_ReleaseBusy(_Capsule);
+
+// no mapping -> hand the coin back, allow retry
+PROC
+PROC_AMP_VoidCapsule_CoinGenerate((ITEM)_Coin, (ITEM)_Capsule, (STRING)_CoinType, (STRING)_CapsuleType, (CHARACTER)_Owner)
+AND
+NOT DB_AMP_VoidCapsule_Reward(_CapsuleType, _CoinType, _)
+THEN
+ToInventory(_Coin, _Owner, 1, 1, 0);
+NOT DB_AMP_VoidCapsule_CoinProcessed(_Coin);
+PROC_AMP_VoidCapsule_ReleaseBusy(_Capsule);
+
+EXITSECTION
+ENDEXITSECTION

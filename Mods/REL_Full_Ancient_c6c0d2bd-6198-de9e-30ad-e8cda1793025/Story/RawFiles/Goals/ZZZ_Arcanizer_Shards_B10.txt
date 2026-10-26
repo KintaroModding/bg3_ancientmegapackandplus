@@ -1,0 +1,440 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// ARCANIZER SHARDS - BATCH 10 (CASTER, 70 shards)
+
+// UNCOMMON (SHARDS_20)
+
+// 01 Lens (Cloak UC, Stackable) - Abjuration pulse aura -> ally TempHP
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Cloak_7_0b207746-72a1-42d8-b1c7-629118cdcbd2, "Cloak", "AMP_SHARD_APPLY_CLOAK_7", "Cloak");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_LENS", "AMP_SHARD_CHAR_LENS");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_LENS", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_7_0b207746-72a1-42d8-b1c7-629118cdcbd2);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_7_0b207746-72a1-42d8-b1c7-629118cdcbd2, "SHARDS_20");
+
+// 02 Knucklebones (Ring UC, Stackable) - Wild Magic -> +5 next spell success
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_13_3576a818-3320-473a-ab3e-549dbfbe550e, "Ring", "AMP_SHARD_APPLY_RING_13", "Ring");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_BONES", "AMP_SHARD_CHAR_BONES");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_BONES", (ITEMROOT)AMP_Arcanizer_Shard_Ring_13_3576a818-3320-473a-ab3e-549dbfbe550e);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_13_3576a818-3320-473a-ab3e-549dbfbe550e, "SHARDS_20");
+
+// 03 Adept (Helmet UC, Stackable) - Short Rest restores L1 spell slot [series: Adept->Magister->Archmage]
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Head_17_743087d3-1daf-43d6-9644-b403980116c3, "Helmet", "AMP_SHARD_APPLY_HELMET_17", "Helmet");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_EXPERT", "AMP_SHARD_CHAR_EXPERT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_EXPERT", (ITEMROOT)AMP_Arcanizer_Shard_Head_17_743087d3-1daf-43d6-9644-b403980116c3);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_17_743087d3-1daf-43d6-9644-b403980116c3, "SHARDS_20");
+
+// 04 Bridge (Gloves UC, NonStack) - Inflict Wounds range extended to 6m
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_14_95ed2119-926d-4409-ae03-ed1bb66668f6, "Gloves", "AMP_SHARD_APPLY_GLOVES_14", "Gloves", "AMP_SHARD_GLOVES_BRIDGE");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_BRIDGE", "AMP_SHARD_CHAR_BRIDGE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_BRIDGE", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_14_95ed2119-926d-4409-ae03-ed1bb66668f6);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_14_95ed2119-926d-4409-ae03-ed1bb66668f6, "SHARDS_20");
+
+// 05 Kobold (Cloak UC, Stackable) - In shadow: +2 spell saves; in sunlight: disadvantage on saves
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Cloak_8_b50bc934-173b-45a1-bdba-c22538ff0167, "Cloak", "AMP_SHARD_APPLY_CLOAK_8", "Cloak");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_KOBOLD", "AMP_SHARD_CHAR_KOBOLD");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_KOBOLD", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_8_b50bc934-173b-45a1-bdba-c22538ff0167);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_8_b50bc934-173b-45a1-bdba-c22538ff0167, "SHARDS_20");
+
+// 06 Frenzy (Amulet UC, NonStack) - HP < 50%: advantage on attacks; HP > 50%: disadvantage
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Amulet_8_e535d6d7-643c-4422-ac35-6923999d78fb, "Amulet", "AMP_SHARD_APPLY_AMULET_8", "Amulet", "AMP_SHARD_AMULET_FRENZY");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_FRENZY", "AMP_SHARD_CHAR_FRENZY");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_FRENZY", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_8_e535d6d7-643c-4422-ac35-6923999d78fb);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_8_e535d6d7-643c-4422-ac35-6923999d78fb, "SHARDS_20");
+
+// 07 Opening (Helmet UC, Stackable) - Turn 1: +3 spell success; subsequent turns: -1 [Hubris pattern]
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Head_18_3f237d53-50ea-4cdb-b72e-fb6223e6ea33, "Helmet", "AMP_SHARD_APPLY_HELMET_18", "Helmet");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_OPENING", "AMP_SHARD_CHAR_OPENING");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_OPENING", (ITEMROOT)AMP_Arcanizer_Shard_Head_18_3f237d53-50ea-4cdb-b72e-fb6223e6ea33);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_18_3f237d53-50ea-4cdb-b72e-fb6223e6ea33, "SHARDS_20");
+
+// 08 Repulse (Cloak UC, Stackable) - On melee damage received: push attacker 2m
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Cloak_9_32b1f866-926f-4292-8b00-ff4978df9dbf, "Cloak", "AMP_SHARD_APPLY_CLOAK_9", "Cloak");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_REPEL", "AMP_SHARD_CHAR_REPEL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_REPEL", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_9_32b1f866-926f-4292-8b00-ff4978df9dbf);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_9_32b1f866-926f-4292-8b00-ff4978df9dbf, "SHARDS_20");
+
+// 09 Tribute (Amulet UC, Stackable) - 1% chance to gain Inspiration when enemy fails a mental save
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_9_a8c94c46-5e0a-41aa-bd90-b8b40ed298e4, "Amulet", "AMP_SHARD_APPLY_AMULET_9", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_TRIBUTE", "AMP_SHARD_CHAR_TRIBUTE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_TRIBUTE", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_9_a8c94c46-5e0a-41aa-bd90-b8b40ed298e4);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_9_a8c94c46-5e0a-41aa-bd90-b8b40ed298e4, "SHARDS_20");
+
+// 10 Leech (Amulet UC, Stackable) - Spell/cantrip damage -> heal 1 HP
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_10_9b800d2e-c9fc-41f2-9d11-5c6b3e89a5ac, "Amulet", "AMP_SHARD_APPLY_AMULET_10", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_LEECH", "AMP_SHARD_CHAR_LEECH");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_LEECH", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_10_9b800d2e-c9fc-41f2-9d11-5c6b3e89a5ac);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_10_9b800d2e-c9fc-41f2-9d11-5c6b3e89a5ac, "SHARDS_20");
+
+// 24 Glass Cannon (Ring UC, Stackable) - -1 spell crit threshold; stunned on taking damage
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_14_20cf8542-3378-4fac-b7b3-0678f0e7c0c0, "Ring", "AMP_SHARD_APPLY_RING_14", "Ring");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_GLASS", "AMP_SHARD_CHAR_GLASS");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_GLASS", (ITEMROOT)AMP_Arcanizer_Shard_Ring_14_20cf8542-3378-4fac-b7b3-0678f0e7c0c0);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_14_20cf8542-3378-4fac-b7b3-0678f0e7c0c0, "SHARDS_20");
+
+// 25 Pack (Amulet UC, Stackable) - Summons gain +1 extra crit damage die
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_11_da0397ec-691b-4c37-a428-e0fb48a665f9, "Amulet", "AMP_SHARD_APPLY_AMULET_11", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_PACK", "AMP_SHARD_CHAR_PACK");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_PACK", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_11_da0397ec-691b-4c37-a428-e0fb48a665f9);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_11_da0397ec-691b-4c37-a428-e0fb48a665f9, "SHARDS_20");
+
+// 26 Chameleon (Armor UC, NonStack) - Cast Transmutation spell/cantrip -> +5 TempHP
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_27_c112ebf5-e1e7-483c-bacb-527940650b78, "Armor", "AMP_SHARD_APPLY_ARMOR_27", "Breast", "AMP_SHARD_ARMOR_CHAMELEON");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_CHAMELEON", "AMP_SHARD_CHAR_CHAMELEON");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_CHAMELEON", (ITEMROOT)AMP_Arcanizer_Shard_Armor_27_c112ebf5-e1e7-483c-bacb-527940650b78);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_27_c112ebf5-e1e7-483c-bacb-527940650b78, "SHARDS_20");
+
+// 27 Finisher (Helmet UC, Stackable) - Spell damage on enemy < 30% HP -> gain Potent Magic charge
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Head_19_a49f48b1-ae45-4a71-81df-6074bbbd9455, "Helmet", "AMP_SHARD_APPLY_HELMET_19", "Helmet");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_EXECUTIONER", "AMP_SHARD_CHAR_EXECUTIONER");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_EXECUTIONER", (ITEMROOT)AMP_Arcanizer_Shard_Head_19_a49f48b1-ae45-4a71-81df-6074bbbd9455);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_19_a49f48b1-ae45-4a71-81df-6074bbbd9455, "SHARDS_20");
+
+// 28 Pendulum (Amulet UC, NonStack) - Start of turn: gain Ambition or Knowledge (50/50 RNG)
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Amulet_12_c7185abe-ac60-4a8c-bbad-d66c5b93b9e3, "Amulet", "AMP_SHARD_APPLY_AMULET_12", "Amulet", "AMP_SHARD_AMULET_PENDULUM");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_PENDULUM", "AMP_SHARD_CHAR_PENDULUM");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_PENDULUM", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_12_c7185abe-ac60-4a8c-bbad-d66c5b93b9e3);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_12_c7185abe-ac60-4a8c-bbad-d66c5b93b9e3, "SHARDS_20");
+
+// 29 Edge (Ring UC, NonStack) - HP = 1: attacks always crit
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_15_8f9df3fd-f739-4808-90c0-b9c0425afc90, "Ring", "AMP_SHARD_APPLY_RING_15", "Ring", "AMP_SHARD_RING_EDGE");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_EDGE", "AMP_SHARD_CHAR_EDGE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_EDGE", (ITEMROOT)AMP_Arcanizer_Shard_Ring_15_8f9df3fd-f739-4808-90c0-b9c0425afc90);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_15_8f9df3fd-f739-4808-90c0-b9c0425afc90, "SHARDS_20");
+
+// 30 Resonance (Cloak UC, Stackable)
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Cloak_10_258584e3-b714-4e29-85de-5626c4db46e7, "Cloak", "AMP_SHARD_APPLY_CLOAK_10", "Cloak");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_RESONANCE", "AMP_SHARD_CHAR_RESONANCE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_RESONANCE", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_10_258584e3-b714-4e29-85de-5626c4db46e7);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_10_258584e3-b714-4e29-85de-5626c4db46e7, "SHARDS_20");
+
+// 31 Magnet (Gloves UC, NonStack) - Force damage on distant enemy -> pull toward caster
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_15_32ad7da5-3c63-4288-a155-18d79fee054b, "Gloves", "AMP_SHARD_APPLY_GLOVES_15", "Gloves", "AMP_SHARD_GLOVES_MAGNET");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_MAGNET", "AMP_SHARD_CHAR_MAGNET");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_MAGNET", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_15_32ad7da5-3c63-4288-a155-18d79fee054b);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_15_32ad7da5-3c63-4288-a155-18d79fee054b, "SHARDS_20");
+
+// 32 Stance (Helmet UC, Stackable) - End turn without attacking -> +2 AC until next turn
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Head_20_8c965e9b-01ca-4235-939d-5d7c2b19108c, "Helmet", "AMP_SHARD_APPLY_HELMET_20", "Helmet");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_STANCE", "AMP_SHARD_CHAR_STANCE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_STANCE", (ITEMROOT)AMP_Arcanizer_Shard_Head_20_8c965e9b-01ca-4235-939d-5d7c2b19108c);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_20_8c965e9b-01ca-4235-939d-5d7c2b19108c, "SHARDS_20");
+
+// 33 Juggler (Gloves UC, NonStack) - Toggle: cantrips cost Action Point instead of Bonus Action (swap)
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_16_8fd0bf29-2839-4fe2-a315-851143f45cfb, "Gloves", "AMP_SHARD_APPLY_GLOVES_16", "Gloves", "AMP_SHARD_GLOVES_JUGGLER");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_JUGGLER", "AMP_SHARD_CHAR_JUGGLER");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_JUGGLER", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_16_8fd0bf29-2839-4fe2-a315-851143f45cfb);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_16_8fd0bf29-2839-4fe2-a315-851143f45cfb, "SHARDS_20");
+
+// 34 Sunrise (Helmet UC, Stackable) - Heal ally with a spell -> apply sunlight for 2 turns
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Head_21_57c328f5-5016-435c-9bde-e3828a8b2cc8, "Helmet", "AMP_SHARD_APPLY_HELMET_21", "Helmet");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_SUNRISE", "AMP_SHARD_CHAR_SUNRISE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_SUNRISE", (ITEMROOT)AMP_Arcanizer_Shard_Head_21_57c328f5-5016-435c-9bde-e3828a8b2cc8);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_21_57c328f5-5016-435c-9bde-e3828a8b2cc8, "SHARDS_20");
+
+// 35 Deadbolt (Ring UC, NonStack) - Arcane Lock free (no spell slot cost)
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_16_7e293a3b-66ec-455f-b26a-13463fb56e30, "Ring", "AMP_SHARD_APPLY_RING_16", "Ring", "AMP_SHARD_RING_BOLT");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_BOLT", "AMP_SHARD_CHAR_BOLT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_BOLT", (ITEMROOT)AMP_Arcanizer_Shard_Ring_16_7e293a3b-66ec-455f-b26a-13463fb56e30);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_16_7e293a3b-66ec-455f-b26a-13463fb56e30, "SHARDS_20");
+
+// SERIES ACOLYTES (Helmet UC, NonStack x 8, shared StackId AMP_SHARD_DISCIPLE in Stats)
+
+// 36 Acolytes - Stoic (Ilmater): Tag CLERIC_ILMATER; Vulnerable: Slashing
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_22_b00e78b6-4225-491e-bf28-7fffbf64fdaf, "Helmet", "AMP_SHARD_APPLY_HELMET_22", "Helmet", "AMP_SHARD_HEAD_DISCIPLE_STOIC");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_DISCIPLE_STOIC", "AMP_SHARD_CHAR_DISCIPLE_STOIC");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_DISCIPLE_STOIC", (ITEMROOT)AMP_Arcanizer_Shard_Head_22_b00e78b6-4225-491e-bf28-7fffbf64fdaf);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_22_b00e78b6-4225-491e-bf28-7fffbf64fdaf, "SHARDS_20");
+
+// 37 Acolytes - Spider Queen (Lolth): Tag CLERIC_LOLTH; no crit vs drow/drider/spider
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_23_2356cba5-4ba4-4363-bc28-982a126159fe, "Helmet", "AMP_SHARD_APPLY_HELMET_23", "Helmet", "AMP_SHARD_HEAD_DISCIPLE_SPIDER");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_DISCIPLE_SPIDER", "AMP_SHARD_CHAR_DISCIPLE_SPIDER");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_DISCIPLE_SPIDER", (ITEMROOT)AMP_Arcanizer_Shard_Head_23_2356cba5-4ba4-4363-bc28-982a126159fe);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_23_2356cba5-4ba4-4363-bc28-982a126159fe, "SHARDS_20");
+
+// 38 Acolytes - Lash (Loviatar): Tag CLERIC_LOVIATAR; deal 100 Slashing at full HP
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_24_9d04dfc3-eb6a-4130-9f11-678d4a848ac0, "Helmet", "AMP_SHARD_APPLY_HELMET_24", "Helmet", "AMP_SHARD_HEAD_DISCIPLE_SCOURGE");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_DISCIPLE_SCOURGE", "AMP_SHARD_CHAR_DISCIPLE_SCOURGE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_DISCIPLE_SCOURGE", (ITEMROOT)AMP_Arcanizer_Shard_Head_24_9d04dfc3-eb6a-4130-9f11-678d4a848ac0);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_24_9d04dfc3-eb6a-4130-9f11-678d4a848ac0, "SHARDS_20");
+
+// 39 Acolytes - Weave (Mystra): Tag CLERIC_MYSTRA; lose all L1 slots at start of turn
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_25_96249b5b-2441-4025-95cb-9b4e9965f46d, "Helmet", "AMP_SHARD_APPLY_HELMET_25", "Helmet", "AMP_SHARD_HEAD_DISCIPLE_WEAVE");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_DISCIPLE_WEAVE", "AMP_SHARD_CHAR_DISCIPLE_WEAVE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_DISCIPLE_WEAVE", (ITEMROOT)AMP_Arcanizer_Shard_Head_25_96249b5b-2441-4025-95cb-9b4e9965f46d);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_25_96249b5b-2441-4025-95cb-9b4e9965f46d, "SHARDS_20");
+
+// 40 Acolytes - Full Moon (Selune): Tag CLERIC_SELUNE; -1 attack and spell DC each turn
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_26_a72554d1-aae4-46f6-a313-055cb001b7bb, "Helmet", "AMP_SHARD_APPLY_HELMET_26", "Helmet", "AMP_SHARD_HEAD_DISCIPLE_MOON");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_DISCIPLE_MOON", "AMP_SHARD_CHAR_DISCIPLE_MOON");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_DISCIPLE_MOON", (ITEMROOT)AMP_Arcanizer_Shard_Head_26_a72554d1-aae4-46f6-a313-055cb001b7bb);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_26_a72554d1-aae4-46f6-a313-055cb001b7bb, "SHARDS_20");
+
+// 41 Acolytes - Twilight (Shar): Tag CLERIC_SHAR; stunned in sunlight
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_27_e48c676e-b759-489f-aff0-b2dcd2705cbf, "Helmet", "AMP_SHARD_APPLY_HELMET_27", "Helmet", "AMP_SHARD_HEAD_DISCIPLE_DUSK");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_DISCIPLE_DUSK", "AMP_SHARD_CHAR_DISCIPLE_DUSK");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_DISCIPLE_DUSK", (ITEMROOT)AMP_Arcanizer_Shard_Head_27_e48c676e-b759-489f-aff0-b2dcd2705cbf);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_27_e48c676e-b759-489f-aff0-b2dcd2705cbf, "SHARDS_20");
+
+// 42 Acolytes - Tablet (Tyr): Tag CLERIC_TYR; die if you kill a non-hostile creature
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_28_176fb6ee-63ed-4ad3-8c8c-66e0da9b7478, "Helmet", "AMP_SHARD_APPLY_HELMET_28", "Helmet", "AMP_SHARD_HEAD_DISCIPLE_TABLET");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_DISCIPLE_TABLET", "AMP_SHARD_CHAR_DISCIPLE_TABLET");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_DISCIPLE_TABLET", (ITEMROOT)AMP_Arcanizer_Shard_Head_28_176fb6ee-63ed-4ad3-8c8c-66e0da9b7478);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_28_176fb6ee-63ed-4ad3-8c8c-66e0da9b7478, "SHARDS_20");
+
+// 43 Acolytes - Tempest (Talos): Tag CLERIC_TALOS; Vulnerable: Lightning
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_29_42d4135d-1b26-433b-a1d1-25914f51c651, "Helmet", "AMP_SHARD_APPLY_HELMET_29", "Helmet", "AMP_SHARD_HEAD_DISCIPLE_STORM");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_DISCIPLE_STORM", "AMP_SHARD_CHAR_DISCIPLE_STORM");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_DISCIPLE_STORM", (ITEMROOT)AMP_Arcanizer_Shard_Head_29_42d4135d-1b26-433b-a1d1-25914f51c651);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_29_42d4135d-1b26-433b-a1d1-25914f51c651, "SHARDS_20");
+
+// 44 Blind Seer (Helmet UC, Stackable) - Always Blinded; restore L1 spell slot at start of turn
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Head_30_e7bfb08c-6134-400b-b1f0-90c6acf36a41, "Helmet", "AMP_SHARD_APPLY_HELMET_30", "Helmet");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_BLINDMAN", "AMP_SHARD_CHAR_BLINDMAN");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_BLINDMAN", (ITEMROOT)AMP_Arcanizer_Shard_Head_30_e7bfb08c-6134-400b-b1f0-90c6acf36a41);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_30_e7bfb08c-6134-400b-b1f0-90c6acf36a41, "SHARDS_20");
+
+// 45 Root (Boots UC, NonStack) - Cannot move in combat; spell/cantrip range doubled
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Boots_13_8f450fa5-f070-4dcf-b97b-bb80b1def888, "Boots", "AMP_SHARD_APPLY_BOOTS_13", "Boots", "AMP_SHARD_BOOTS_ROOT");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_ROOT", "AMP_SHARD_CHAR_ROOT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_BOOTS_ROOT", (ITEMROOT)AMP_Arcanizer_Shard_Boots_13_8f450fa5-f070-4dcf-b97b-bb80b1def888);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_13_8f450fa5-f070-4dcf-b97b-bb80b1def888, "SHARDS_20");
+
+// RARE (SHARDS_6)
+
+// 46 Improvise (Amulet Rare, NonStack) - Toggle: cantrips cost Bardic Inspiration instead of Action
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Amulet_13_cd1b171f-d6f6-4b15-902d-592246e77027, "Amulet", "AMP_SHARD_APPLY_AMULET_13", "Amulet", "AMP_SHARD_AMULET_IMPROVISE");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_IMPROVISE", "AMP_SHARD_CHAR_IMPROVISE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_IMPROVISE", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_13_cd1b171f-d6f6-4b15-902d-592246e77027);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_13_cd1b171f-d6f6-4b15-902d-592246e77027, "SHARDS_6");
+
+// 47 Magister (Helmet Rare, Stackable) - Short Rest restores L2 spell slot [series: Adept->Magister->Archmage]
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Head_31_8fbfd649-b7e9-4f00-a1f7-37d580471c6b, "Helmet", "AMP_SHARD_APPLY_HELMET_31", "Helmet");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_MAGISTER", "AMP_SHARD_CHAR_MAGISTER");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_MAGISTER", (ITEMROOT)AMP_Arcanizer_Shard_Head_31_8fbfd649-b7e9-4f00-a1f7-37d580471c6b);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_31_8fbfd649-b7e9-4f00-a1f7-37d580471c6b, "SHARDS_6");
+
+// 48 Reserve (Gloves Rare, NonStack) - Miss with a leveled spell -> free cantrip this turn
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_17_c6d77966-55d3-46d5-9ee7-692474c4575f, "Gloves", "AMP_SHARD_APPLY_GLOVES_17", "Gloves", "AMP_SHARD_GLOVES_BACKUP");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_BACKUP", "AMP_SHARD_CHAR_BACKUP");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_BACKUP", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_17_c6d77966-55d3-46d5-9ee7-692474c4575f);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_17_c6d77966-55d3-46d5-9ee7-692474c4575f, "SHARDS_6");
+
+// 49 Pyre (Cloak Rare, NonStack) - While Burning: advantage on attack rolls
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Cloak_11_1b4def65-8634-4a31-9a7b-fb169c439e9d, "Cloak", "AMP_SHARD_APPLY_CLOAK_11", "Cloak", "AMP_SHARD_CLOAK_BONFIRE");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_BONFIRE", "AMP_SHARD_CHAR_BONFIRE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_BONFIRE", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_11_1b4def65-8634-4a31-9a7b-fb169c439e9d);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_11_1b4def65-8634-4a31-9a7b-fb169c439e9d, "SHARDS_6");
+
+// 50 Metamorph (Armor Rare, NonStack) - On damage: -2 DEX, +1 all other stats (max 6 stacks)
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_28_fd38ac70-7f82-4eca-9d63-917110824777, "Armor", "AMP_SHARD_APPLY_ARMOR_28", "Breast", "AMP_SHARD_ARMOR_METAMORPH");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_METAMORPH", "AMP_SHARD_CHAR_METAMORPH");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_METAMORPH", (ITEMROOT)AMP_Arcanizer_Shard_Armor_28_fd38ac70-7f82-4eca-9d63-917110824777);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_28_fd38ac70-7f82-4eca-9d63-917110824777, "SHARDS_6");
+
+// 51 Shutter (Cloak Rare, Stackable) - Enemy fails mental save -> Blade Ward for 2 turns
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Cloak_12_ba269118-1caf-4b27-8ccd-efcf144917c4, "Cloak", "AMP_SHARD_APPLY_CLOAK_12", "Cloak");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_SHUTTER", "AMP_SHARD_CHAR_SHUTTER");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_SHUTTER", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_12_ba269118-1caf-4b27-8ccd-efcf144917c4);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_12_ba269118-1caf-4b27-8ccd-efcf144917c4, "SHARDS_6");
+DB_AMP_Shard_ExternalStatus("AMP_SHARD_CHAR_SHUTTER", "BLADE_WARD");
+
+// 52 Fulcrum (Helmet Rare, Stackable) - While Concentrating: +1 spell success
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Head_32_537f33f1-f0d3-4ac0-92ca-59d212964b0a, "Helmet", "AMP_SHARD_APPLY_HELMET_32", "Helmet");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_AXIS", "AMP_SHARD_CHAR_AXIS");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_AXIS", (ITEMROOT)AMP_Arcanizer_Shard_Head_32_537f33f1-f0d3-4ac0-92ca-59d212964b0a);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_32_537f33f1-f0d3-4ac0-92ca-59d212964b0a, "SHARDS_6");
+
+// 53 Sidestep (Boots Rare, NonStack) - While under Arcane Armour: no opportunity attacks
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Boots_14_fc21c6c3-1693-487c-ab22-e3758db36890, "Boots", "AMP_SHARD_APPLY_BOOTS_14", "Boots", "AMP_SHARD_BOOTS_DODGE");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_DODGE", "AMP_SHARD_CHAR_DODGE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_BOOTS_DODGE", (ITEMROOT)AMP_Arcanizer_Shard_Boots_14_fc21c6c3-1693-487c-ab22-e3758db36890);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_14_fc21c6c3-1693-487c-ab22-e3758db36890, "SHARDS_6");
+
+// 54 Voice (Cloak Rare, NonStack) - Immunity to Silenced; Vulnerable to Thunder
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Cloak_13_8b92016e-6fda-4e1a-939b-c57e4a266b88, "Cloak", "AMP_SHARD_APPLY_CLOAK_13", "Cloak", "AMP_SHARD_CLOAK_VOICE");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_VOICE", "AMP_SHARD_CHAR_VOICE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_VOICE", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_13_8b92016e-6fda-4e1a-939b-c57e4a266b88);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_13_8b92016e-6fda-4e1a-939b-c57e4a266b88, "SHARDS_6");
+
+// 55 Precision (Ring Rare, Stackable) - -1 spell crit threshold (no downside)
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_17_9f3e37b8-ea0c-4082-9a09-e04af4ec8d23, "Ring", "AMP_SHARD_APPLY_RING_17", "Ring");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_AIM", "AMP_SHARD_CHAR_AIM");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_AIM", (ITEMROOT)AMP_Arcanizer_Shard_Ring_17_9f3e37b8-ea0c-4082-9a09-e04af4ec8d23);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_17_9f3e37b8-ea0c-4082-9a09-e04af4ec8d23, "SHARDS_6");
+
+// 56 Evoker (Armor Rare, NonStack) - Cast Evocation spell/cantrip -> +5 TempHP
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_29_213c77f6-a05b-4c4d-916d-af5743e1e992, "Armor", "AMP_SHARD_APPLY_ARMOR_29", "Breast", "AMP_SHARD_ARMOR_EVOCATOR");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_EVOCATOR", "AMP_SHARD_CHAR_EVOCATOR");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_EVOCATOR", (ITEMROOT)AMP_Arcanizer_Shard_Armor_29_213c77f6-a05b-4c4d-916d-af5743e1e992);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_29_213c77f6-a05b-4c4d-916d-af5743e1e992, "SHARDS_6");
+
+// 57 Deceiver (Cloak Rare, NonStack) - Cast Illusion spell -> become Invisible for 1 turn
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Cloak_14_0a683123-0b36-4145-8ca2-763809f49bf4, "Cloak", "AMP_SHARD_APPLY_CLOAK_14", "Cloak", "AMP_SHARD_CLOAK_LIAR");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_LIAR", "AMP_SHARD_CHAR_LIAR");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_LIAR", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_14_0a683123-0b36-4145-8ca2-763809f49bf4);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_14_0a683123-0b36-4145-8ca2-763809f49bf4, "SHARDS_6");
+
+// 58 Wither (Helmet Rare, Stackable) - Necromancy spells/cantrips deal +1 Necrotic damage
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Head_33_70a79128-9619-48db-b466-e92b78c27026, "Helmet", "AMP_SHARD_APPLY_HELMET_33", "Helmet");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_DECAY", "AMP_SHARD_CHAR_DECAY");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_DECAY", (ITEMROOT)AMP_Arcanizer_Shard_Head_33_70a79128-9619-48db-b466-e92b78c27026);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_33_70a79128-9619-48db-b466-e92b78c27026, "SHARDS_6");
+
+// 59 Quipster (Amulet Rare, NonStack) - Unlock Cutting Words interrupt (reaction)
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Amulet_14_e699deee-6fe5-44fb-8dd3-434a655323d6, "Amulet", "AMP_SHARD_APPLY_AMULET_14", "Amulet", "AMP_SHARD_AMULET_QUIP");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_QUIP", "AMP_SHARD_CHAR_QUIP");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_QUIP", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_14_e699deee-6fe5-44fb-8dd3-434a655323d6);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_14_e699deee-6fe5-44fb-8dd3-434a655323d6, "SHARDS_6");
+
+// 60 Singularity (Ring Rare, NonStack) - End of turn: pull all enemies within 30m toward you
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_18_1bc15202-b4f8-47d6-8d85-0cf7857f05ce, "Ring", "AMP_SHARD_APPLY_RING_18", "Ring", "AMP_SHARD_RING_SINGULARITY");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_SINGULARITY", "AMP_SHARD_CHAR_SINGULARITY");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_SINGULARITY", (ITEMROOT)AMP_Arcanizer_Shard_Ring_18_1bc15202-b4f8-47d6-8d85-0cf7857f05ce);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_18_1bc15202-b4f8-47d6-8d85-0cf7857f05ce, "SHARDS_6");
+
+// 61 Miniaturizer (Gloves Rare, NonStack) - Heal an enemy with a spell -> Reduce them
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_18_1a847ae4-b26e-4701-8669-f77591f78393, "Gloves", "AMP_SHARD_APPLY_GLOVES_18", "Gloves", "AMP_SHARD_GLOVES_MINIATURIZER");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_MINIATURIZER", "AMP_SHARD_CHAR_MINIATURIZER");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_MINIATURIZER", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_18_1a847ae4-b26e-4701-8669-f77591f78393);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_18_1a847ae4-b26e-4701-8669-f77591f78393, "SHARDS_6");
+
+// 62 Scorch (Gloves Rare, NonStack) - Fire spell damage -> gain Heat (MAG_FIRE_HEAT) for 2 turns, once/turn
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_19_5d4dfea3-86ad-45b0-baba-a150f05287b9, "Gloves", "AMP_SHARD_APPLY_GLOVES_19", "Gloves", "AMP_SHARD_GLOVES_SCORCHER");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_SCORCHER", "AMP_SHARD_CHAR_SCORCHER");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_SCORCHER", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_19_5d4dfea3-86ad-45b0-baba-a150f05287b9);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_19_5d4dfea3-86ad-45b0-baba-a150f05287b9, "SHARDS_6");
+
+// 63 Ice and Fire (Ring Rare, NonStack)
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_19_8a9632be-510c-425b-ab73-63bf5cf84fdd, "Ring", "AMP_SHARD_APPLY_RING_19", "Ring", "AMP_SHARD_RING_ICEFIRE");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_ICEFIRE", "AMP_SHARD_CHAR_ICEFIRE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_ICEFIRE", (ITEMROOT)AMP_Arcanizer_Shard_Ring_19_8a9632be-510c-425b-ab73-63bf5cf84fdd);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_19_8a9632be-510c-425b-ab73-63bf5cf84fdd, "SHARDS_6");
+
+// 64 Janus (Amulet Rare, Stackable)
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_15_f8785f10-19c5-4a65-8d17-5922c9097b9b, "Amulet", "AMP_SHARD_APPLY_AMULET_15", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_TWOFACED", "AMP_SHARD_CHAR_TWOFACED");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_TWOFACED", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_15_f8785f10-19c5-4a65-8d17-5922c9097b9b);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_15_f8785f10-19c5-4a65-8d17-5922c9097b9b, "SHARDS_6");
+
+// VERY RARE (SHARDS_2)
+
+// 65 Archmage (Helmet VR, Stackable) - Short Rest restores L3 spell slot [series: Adept->Magister->Archmage]
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Head_34_9c783703-a4f9-4971-b3a6-582dd920b5d6, "Helmet", "AMP_SHARD_APPLY_HELMET_34", "Helmet");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_ARCHMAGE", "AMP_SHARD_CHAR_ARCHMAGE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_ARCHMAGE", (ITEMROOT)AMP_Arcanizer_Shard_Head_34_9c783703-a4f9-4971-b3a6-582dd920b5d6);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_34_9c783703-a4f9-4971-b3a6-582dd920b5d6, "SHARDS_2");
+
+// 66 Yoke (Cloak VR, Stackable) - Aura 3m: enemies take +1d4 extra damage from all sources
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Cloak_15_2dc52f47-bb62-4bce-8a51-bf3aba1a2ae4, "Cloak", "AMP_SHARD_APPLY_CLOAK_15", "Cloak");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_YOKE", "AMP_SHARD_CHAR_YOKE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_YOKE", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_15_2dc52f47-bb62-4bce-8a51-bf3aba1a2ae4);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_15_2dc52f47-bb62-4bce-8a51-bf3aba1a2ae4, "SHARDS_2");
+
+// 67 Shadow (Cloak VR, NonStack) - In shadow: resistance to all damage except Radiant and Force
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Cloak_16_77b4461d-616f-4531-a016-66d787593039, "Cloak", "AMP_SHARD_APPLY_CLOAK_16", "Cloak", "AMP_SHARD_CLOAK_SHADOW");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_SHADOW", "AMP_SHARD_CHAR_CLOAK_SHADOW");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_SHADOW", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_16_77b4461d-616f-4531-a016-66d787593039);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_16_77b4461d-616f-4531-a016-66d787593039, "SHARDS_2");
+
+// LEGENDARY (SHARDS_1)
+
+// 68 Echo (Amulet Leg, NonStack) - Cast cantrip (not Booming Blade) -> restore 1 Action Point, once/turn
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Amulet_16_643f1348-7f7b-4f37-aca5-c6044d2a3320, "Amulet", "AMP_SHARD_APPLY_AMULET_16", "Amulet", "AMP_SHARD_AMULET_BIFURCATE");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_BIFURCATE", "AMP_SHARD_CHAR_BIFURCATE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_BIFURCATE", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_16_643f1348-7f7b-4f37-aca5-c6044d2a3320);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_16_643f1348-7f7b-4f37-aca5-c6044d2a3320, "SHARDS_1");
+
+// 69 Architect (Weapon Leg, Stackable) - Increases enchantment slot limit by 1 on the weapon
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_ARCHITECT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_ARCHITECT", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_103_9e6f84af-41a9-4c64-9257-311f2419ea26);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_103_9e6f84af-41a9-4c64-9257-311f2419ea26, "SHARDS_1");
+
+// 70 Slinger (Gloves Leg, NonStack) - Throw action uses Bonus Action instead of Action
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_20_2a588640-17b9-4536-83e1-c5e3e99603ff, "Gloves", "AMP_SHARD_APPLY_GLOVES_20", "Gloves", "AMP_SHARD_GLOVES_SLINGER");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_SLINGER", "AMP_SHARD_CHAR_SLINGER");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_SLINGER", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_20_2a588640-17b9-4536-83e1-c5e3e99603ff);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_20_2a588640-17b9-4536-83e1-c5e3e99603ff, "SHARDS_1");
+
+KBSECTION
+
+// pack: owner has the shard -> tag the summon with crit dice. no StackId so packs stack.
+
+IF
+CharacterJoinedParty((CHARACTER)_Summon)
+AND
+IsSummon(_Summon, 1)
+AND
+CharacterGetOwner(_Summon, (CHARACTER)_Owner)
+AND
+HasActiveStatus(_Owner, "AMP_SHARD_CHAR_PACK", 1)
+THEN
+ApplyStatus(_Summon, "AMP_SHARD_PACK_CRITDICE", -1.0, 1, _Owner);
+
+// architect: +1 shard slot on the weapon. DB_AMP_Shard_ItemSlotOverride holds the bonus.
+
+// stacking: bump override. must come before the first-apply rule.
+IF
+StatusApplied((ITEM)_Weapon, "AMP_SHARD_WEAPON_ARCHITECT", _, _)
+AND
+DB_AMP_Shard_ItemSlotOverride(_Weapon, _OldBonus)
+AND
+IntegerSum(_OldBonus, 1, _NewBonus)
+THEN
+NOT DB_AMP_Shard_ItemSlotOverride(_Weapon, _OldBonus);
+DB_AMP_Shard_ItemSlotOverride(_Weapon, _NewBonus);
+
+// first apply on melee weapon: record override
+IF
+StatusApplied((ITEM)_Weapon, "AMP_SHARD_WEAPON_ARCHITECT", _, _)
+AND
+NOT DB_AMP_Shard_ItemSlotOverride(_Weapon, _)
+THEN
+DB_AMP_Shard_ItemSlotOverride(_Weapon, 1);
+
+// marker removed: decrement override
+IF
+StatusRemoved((ITEM)_Weapon, "AMP_SHARD_WEAPON_ARCHITECT", _, _)
+AND
+DB_AMP_Shard_ItemSlotOverride(_Weapon, _OldBonus)
+AND
+_OldBonus > 1
+AND
+IntegerSubtract(_OldBonus, 1, _NewBonus)
+THEN
+NOT DB_AMP_Shard_ItemSlotOverride(_Weapon, _OldBonus);
+DB_AMP_Shard_ItemSlotOverride(_Weapon, _NewBonus);
+
+IF
+StatusRemoved((ITEM)_Weapon, "AMP_SHARD_WEAPON_ARCHITECT", _, _)
+AND
+DB_AMP_Shard_ItemSlotOverride(_Weapon, 1)
+THEN
+NOT DB_AMP_Shard_ItemSlotOverride(_Weapon, 1);
+
+// CanApply override: item with a slot bonus allows up to limit+bonus shards
+QRY
+QRY_AMP_Shard_CanApply((ITEM)_Item)
+AND
+ItemGetGoldValue(_Item, _Value)
+AND
+DB_AMP_Shard_PriceRange(_Rarity, _Min, _Max)
+AND
+_Value >= _Min
+AND
+_Value <= _Max
+AND
+DB_AMP_Shard_SlotLimit(_Rarity, _Limit)
+AND
+DB_AMP_Shard_TotalCount(_Item, _Current)
+AND
+DB_AMP_Shard_ItemSlotOverride(_Item, _Bonus)
+AND
+IntegerSum(_Limit, _Bonus, _EffectiveLimit)
+AND
+_Current < _EffectiveLimit
+THEN
+DB_NOOP(1);
+
+EXITSECTION
+ENDEXITSECTION

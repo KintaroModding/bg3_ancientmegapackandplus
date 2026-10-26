@@ -1,0 +1,74 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// base rolls a flat 5 percent once per fight (Z_AMP_GenerousLoot_PlanarDrop.txt), no seam to hook
+// fight is marked done on entry so the base guard fails and only this roll happens
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatGuid)
+AND
+NOT DB_AMP_PlanarDrop_Done(_CombatGuid)
+THEN
+DB_AMP_PlanarDrop_Done(_CombatGuid);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_PlanarPct(_)
+THEN
+DB_AMP_Plus_PlanarPct(2);
+
+PROC
+PROC_AMP_Plus_PlanarRate_Set((INTEGER)_Pct)
+AND
+DB_AMP_Plus_PlanarPct((INTEGER)_Old)
+AND
+NOT _Old == _Pct
+THEN
+NOT DB_AMP_Plus_PlanarPct(_Old);
+DB_AMP_Plus_PlanarPct(_Pct);
+
+IF
+DB_AMP_GameMode("CASUAL")
+THEN
+PROC_AMP_Plus_PlanarRate_Set(5);
+
+IF
+DB_AMP_GameMode("NORMAL")
+THEN
+PROC_AMP_Plus_PlanarRate_Set(2);
+
+IF
+DB_AMP_GameMode("HARD")
+THEN
+PROC_AMP_Plus_PlanarRate_Set(1);
+
+IF
+Died((CHARACTER)_Creature)
+AND
+IsPlayer(_Creature, 0)
+AND
+QRY_AMP_Plus_Affix_On("AVARICE")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+CombatGetGuidFor(_Host, (GUIDSTRING)_CombatGuid)
+AND
+NOT DB_AMP_Plus_PlanarDone(_CombatGuid)
+AND
+GetLevel(_Host, (INTEGER)_Lvl)
+AND
+Random(100, (INTEGER)_Roll)
+AND
+DB_AMP_Plus_PlanarPct((INTEGER)_Pct)
+AND
+_Roll < _Pct
+THEN
+DB_AMP_Plus_PlanarDone(_CombatGuid);
+PROC_AMP_PlanarDrop_Grant(_Creature, _Lvl);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="e903a41f-8ef7-46dc-a847-7d0ec2804d08" />
+					<attribute id="Name" type="LSString" value="S_FOR_OwlBear" />
+					<attribute id="LevelName" type="FixedString" value="WLD_Main_A" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="TemplateName" type="FixedString" value="6cd57ec0-7f04-452c-8fb9-31cae384b916" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="DisplayName" type="TranslatedString" handle="hcd2e2670g6cf4g4a71gaf71gbead69b2856a" version="2" />
+					<attribute id="Icon" type="FixedString" value="8e0be4df-0e27-883c-01cc-de128882f941-EQP_Unarmed_(Icon_Owlbear)" />
+					<attribute id="Stats" type="FixedString" value="FOR_Owlbear" />
+					<attribute id="Equipment" type="FixedString" value="EQP_Unarmed" />
+					<attribute id="CanClimbLadders" type="bool" value="True" />
+					<attribute id="BloodSurfaceType" type="FixedString" value="SurfaceNone" />
+					<attribute id="ExplodedResourceID" type="FixedString" value="00000000-0000-0000-0000-000000000000" />
+					<attribute id="CanOpenDoors" type="bool" value="False" />
+					<attribute id="LevelOverride" type="int32" value="5" />
+					<attribute id="VocalAttackResourceID" type="FixedString" value="cb0fa8bd-2a11-8a49-434d-ed0191e556b6" />
+					<attribute id="VocalDeathResourceID" type="FixedString" value="ae04b29d-665e-3633-3925-26a109cc121f" />
+					<attribute id="VocalDodgeResourceID" type="FixedString" value="9b560a92-5f59-c441-e7d6-707df3596844" />
+					<attribute id="VocalPainResourceID" type="FixedString" value="158e2f62-3b84-781a-3639-5c66834b45f9" />
+					<attribute id="VocalAnticipationResourceID" type="FixedString" value="fbd33ba8-c902-c896-c7b6-92cc3369267e" />
+					<attribute id="VocalFallResourceID" type="FixedString" value="1417f063-4833-3a63-f895-2c60c72c5763" />
+					<attribute id="VocalShoutResourceID" type="FixedString" value="7fa88ae1-2184-dbd2-77ac-bc71c97f2c35" />
+					<attribute id="VocalAlertResourceID" type="FixedString" value="92ffe7a4-8170-799c-3839-19d30d8920e0" />
+					<attribute id="VocalAngryResourceID" type="FixedString" value="2561010c-0a93-6f64-843a-42c68fb81201" />
+					<attribute id="VocalAwakeResourceID" type="FixedString" value="f3d6d068-fa42-214d-8bd8-c69e49be69d8" />
+					<attribute id="VocalBoredResourceID" type="FixedString" value="9d789c5e-1553-fcdc-2912-910612a5c12e" />
+					<attribute id="VocalRebornResourceID" type="FixedString" value="afdff95b-722b-6aca-3dce-77e910ba6fa4" />
+					<attribute id="VocalRelaxedResourceID" type="FixedString" value="050017ec-7c79-0c65-c9a3-460fe649dc6a" />
+					<attribute id="CharacterVisualResourceID" type="FixedString" value="8e0be4df-0e27-883c-01cc-de128882f941" />
+					<attribute id="CanBeTeleported" type="bool" value="True" />
+					<attribute id="IsLootable" type="bool" value="True" />
+					<attribute id="AnubisConfigName" type="FixedString" value="FOR_OwlBear" />
+					<attribute id="Faction" type="guid" value="784be375-5641-e659-e4ea-a3ac17480d28" />
+					<attribute id="Archetype" type="FixedString" value="owlbear" />
+					<attribute id="IsBoss" type="bool" value="True" />
+					<attribute id="CombatGroupID" type="FixedString" value="e53d2d42-421c-fab8-47ff-6b52975793ce" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1.1" />
+							<attribute id="Position" type="fvec3" value="-354.2657 -2.719501 -117.1987" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0.9017168 0 -0.4323272" />
+						</node>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="04a90774-cd81-4173-8918-1c0f7dc8ec2a" />
+								</node>
+							</children>
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="WLD_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="303db700-f9db-a9ea-293a-3af3066f58b1" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="4cb58f54-1958-3680-6f13-02bf6ab55b84" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="SkillList">
+							<children>
+								<node id="Skill">
+									<attribute id="Skill" type="FixedString" value="Target_Claws_Owlbear" />
+									<attribute id="SpellCastingAbility" type="uint8" value="0" />
+									<attribute id="LearningStrategy" type="uint8" value="0" />
+									<attribute id="ScoreModifier" type="float" value="1" />
+									<attribute id="StartRound" type="int32" value="0" />
+									<attribute id="FallbackStartRound" type="int32" value="-1" />
+									<attribute id="MinimumImpact" type="int32" value="0" />
+									<attribute id="OnlyCastOnSelf" type="bool" value="False" />
+									<attribute id="AIFlags" type="uint16" value="0" />
+									<children>
+										<node id="SourceConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+										<node id="TargetConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Skill">
+									<attribute id="Skill" type="FixedString" value="Projectile_Jump_Owlbear" />
+									<attribute id="SpellCastingAbility" type="uint8" value="0" />
+									<attribute id="LearningStrategy" type="uint8" value="0" />
+									<attribute id="ScoreModifier" type="float" value="1" />
+									<attribute id="StartRound" type="int32" value="0" />
+									<attribute id="FallbackStartRound" type="int32" value="-1" />
+									<attribute id="MinimumImpact" type="int32" value="0" />
+									<attribute id="OnlyCastOnSelf" type="bool" value="False" />
+									<attribute id="AIFlags" type="uint16" value="0" />
+									<children>
+										<node id="SourceConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+										<node id="TargetConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Skill">
+									<attribute id="Skill" type="FixedString" value="Shout_FOR_Owlbear_Enrage" />
+									<attribute id="SpellCastingAbility" type="uint8" value="0" />
+									<attribute id="LearningStrategy" type="uint8" value="0" />
+									<attribute id="ScoreModifier" type="float" value="1" />
+									<attribute id="StartRound" type="int32" value="0" />
+									<attribute id="FallbackStartRound" type="int32" value="-1" />
+									<attribute id="MinimumImpact" type="int32" value="0" />
+									<attribute id="OnlyCastOnSelf" type="bool" value="False" />
+									<attribute id="AIFlags" type="uint16" value="0" />
+									<children>
+										<node id="ExcludeInNPCLoadout">
+											<attribute id="Object" type="guid" value="db8515f8-3741-4242-a05a-f9f93e1a912c" />
+										</node>
+										<node id="SourceConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags">
+													<children>
+														<node id="Tag">
+															<attribute id="Object" type="guid" value="33aa698c-aea0-43e2-bd16-582aa718fd3e" />
+														</node>
+													</children>
+												</node>
+											</children>
+										</node>
+										<node id="TargetConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Skill">
+									<attribute id="Skill" type="FixedString" value="Shout_FOR_Owlbear_Enrage_Hardcore" />
+									<attribute id="SpellCastingAbility" type="uint8" value="0" />
+									<attribute id="LearningStrategy" type="uint8" value="0" />
+									<attribute id="ScoreModifier" type="float" value="1" />
+									<attribute id="StartRound" type="int32" value="0" />
+									<attribute id="FallbackStartRound" type="int32" value="-1" />
+									<attribute id="MinimumImpact" type="int32" value="0" />
+									<attribute id="OnlyCastOnSelf" type="bool" value="False" />
+									<attribute id="AIFlags" type="uint16" value="0" />
+									<children>
+										<node id="OnlyInNPCLoadout">
+											<attribute id="Object" type="guid" value="db8515f8-3741-4242-a05a-f9f93e1a912c" />
+										</node>
+										<node id="SourceConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags">
+													<children>
+														<node id="Tag">
+															<attribute id="Object" type="guid" value="33aa698c-aea0-43e2-bd16-582aa718fd3e" />
+														</node>
+													</children>
+												</node>
+											</children>
+										</node>
+										<node id="TargetConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="ItemList" />
+						<node id="Treasures">
+							<children>
+								<node id="TreasureItem">
+									<attribute id="Object" type="FixedString" value="AMP_Owlbear" />
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams">
+							<attribute id="MovementTiltToRemap" type="FixedString" value="1df9c9ee-8dd8-ebeb-3b1a-83d31f141f0a" />
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

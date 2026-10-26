@@ -1,0 +1,118 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+EnteredCombat((CHARACTER)_Mob, _)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_11_d5f7dcba-bbc3-4395-9fd2-7d488055e05f)
+AND
+NOT DB_AMP_Neva_Greeted(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Neva_Greeting_70be7a13-3868-4fbb-a5de-8dfd26822f6c, _Mob)
+THEN
+DB_AMP_Neva_Greeted(_Mob);
+DB_AMP_Neva_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Neva_BarkUnlock", 5000);
+
+// fallback for a missed EnteredCombat
+IF
+TurnStarted((CHARACTER)_Mob)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_11_d5f7dcba-bbc3-4395-9fd2-7d488055e05f)
+AND
+NOT DB_AMP_Neva_Greeted(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Neva_Greeting_70be7a13-3868-4fbb-a5de-8dfd26822f6c, _Mob)
+THEN
+DB_AMP_Neva_Greeted(_Mob);
+DB_AMP_Neva_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Neva_BarkUnlock", 5000);
+
+// one attempt only, a failed dialog start would retry every turn and flood the log
+IF
+TurnStarted((CHARACTER)_Mob)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_11_d5f7dcba-bbc3-4395-9fd2-7d488055e05f)
+AND
+NOT DB_AMP_Neva_Greeted(_Mob)
+THEN
+DB_AMP_Neva_Greeted(_Mob);
+
+IF
+UsingSpell((CHARACTER)_Mob, _, _, _, _)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_11_d5f7dcba-bbc3-4395-9fd2-7d488055e05f)
+AND
+NOT DB_AMP_Neva_BarkLock(_Mob)
+AND
+Random(3, (INTEGER)_Roll)
+AND
+_Roll == 0
+THEN
+DB_AMP_Neva_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Neva_BarkDelay", 1500);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Neva_BarkDelay")
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_11_d5f7dcba-bbc3-4395-9fd2-7d488055e05f)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Neva_Casts_9dd265b4-5056-4127-99d7-6da337451456, _Mob)
+THEN
+RealtimeObjectTimerLaunch(_Mob, "AMP_Neva_BarkUnlock", 10000);
+
+IF
+HitpointsChanged((CHARACTER)_Mob, (REAL)_Pct)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_11_d5f7dcba-bbc3-4395-9fd2-7d488055e05f)
+AND
+_Pct <= 40.0
+AND
+NOT DB_AMP_Neva_LowHP(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Neva_LowHP_83e8b5a7-7e33-4485-a50e-452a6a1ce86c, _Mob)
+THEN
+DB_AMP_Neva_LowHP(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_11_d5f7dcba-bbc3-4395-9fd2-7d488055e05f)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Neva_Death_f46bd99f-f4d3-48be-812b-a86ba8bfa983, _Mob)
+THEN
+DB_NOOP(1);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Neva_BarkUnlock")
+AND
+DB_AMP_Neva_BarkLock(_Mob)
+THEN
+NOT DB_AMP_Neva_BarkLock(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Neva_Greeted(_Mob)
+THEN
+NOT DB_AMP_Neva_Greeted(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Neva_BarkLock(_Mob)
+THEN
+NOT DB_AMP_Neva_BarkLock(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Neva_LowHP(_Mob)
+THEN
+NOT DB_AMP_Neva_LowHP(_Mob);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="35e54274-b567-d2e5-5e00-24a3c1b7f90c" />
+					<attribute id="Name" type="LSString" value="AMP_Despawn_Root" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/AMP_Despawn_Root.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="AMP_Despawn_Root" />
+					<attribute id="BoundsMin" type="fvec3" value="-20 -20 -20" />
+					<attribute id="BoundsMax" type="fvec3" value="20 20 20" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="3" />
+					<attribute id="Looping" type="bool" value="False" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="39f6fbef-4b40-0bdb-e513-aff7232349a8" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="7d365265-8eef-0644-e7a6-e194848400ff" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="b197d2f9-785a-6d86-5d91-0d3eac96be73" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="89366a41-1992-0541-c2f2-d523b9e69742" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="fc8e5aad-b345-8eca-457e-3bab9d6e1b92" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

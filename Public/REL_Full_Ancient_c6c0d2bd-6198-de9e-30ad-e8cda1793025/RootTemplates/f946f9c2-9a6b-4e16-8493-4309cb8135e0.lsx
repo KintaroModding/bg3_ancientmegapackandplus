@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="f946f9c2-9a6b-4e16-8493-4309cb8135e0" />
+					<attribute id="Name" type="LSString" value="OBJ_PARA_Bag" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="8e036eac-fc9c-4d16-9265-f71eacc9f3e9" />
+					<attribute id="ReadinessFlags" type="uint32" value="140" />
+					<attribute id="Flag" type="uint8" value="0" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="83a4b4b8-eb67-1f19-b2f7-d3fc905dd39e" />
+					<attribute id="Scale" type="float" value="0.1" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h334f24a9g42b0g462egb3bfg2ac564acce71" version="1" />
+					<attribute id="WalkThrough" type="bool" value="True" />
+					<attribute id="Icon" type="FixedString" value="PARA_Bag" />
+					<attribute id="Stats" type="FixedString" value="OBJ_PARA_Bag" />
+					<attribute id="TreasureOnDestroy" type="bool" value="False" />
+					<attribute id="CanBePickedUp" type="bool" value="True" />
+					<attribute id="Tooltip" type="uint8" value="2" />
+					<attribute id="InventoryType" type="uint8" value="29" />
+					<attribute id="Description" type="TranslatedString" handle="hf1e530c1gcc9ag4a78gae3dg3bffb1076854" version="1" />
+					<attribute id="IsInspector" type="bool" value="False" />
+					<children>
+						<node id="OnDestroyActions" />
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="PARA_Bag1" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

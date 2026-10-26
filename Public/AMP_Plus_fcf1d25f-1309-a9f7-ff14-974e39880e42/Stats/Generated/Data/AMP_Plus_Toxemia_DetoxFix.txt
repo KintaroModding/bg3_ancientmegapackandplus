@@ -1,0 +1,7 @@
+// context.Target, not Source: StatusOnEquip has no reliable causee
+
+new entry "AMP_TOXEMIA_DETOX_TECH"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_TOXEMIA_DETOX_TECH"
+data "TickFunctors" "IF(HasStatus('AMP_ANCIENTCHAOS',context.Target)):RemoveStatus(SELF, AMP_TOXEMIA);IF(HasPassive('SculptSpells',context.Target) and HasStatus('AMP_ANCIENTCHAOS',context.Target)):CreateExplosion(SELF, AMP_Toxemia_Cleanse_Explosion)"

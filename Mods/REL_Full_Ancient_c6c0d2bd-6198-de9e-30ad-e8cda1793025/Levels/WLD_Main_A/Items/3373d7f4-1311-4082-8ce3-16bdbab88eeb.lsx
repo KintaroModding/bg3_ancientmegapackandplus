@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="3373d7f4-1311-4082-8ce3-16bdbab88eeb" />
+					<attribute id="Name" type="LSString" value="S_DEN_BeachChest" />
+					<attribute id="LevelName" type="FixedString" value="WLD_Main_A" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="8c5f95d0-64d7-48ce-a871-48cd43c1e019" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="288.04956 -0.21001281 447.20316" />
+							<attribute id="RotationQuat" type="fvec4" value="0.19366673 0.030778803 0.2737689 0.9415925" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="WLD_RangerCamp_F" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="8f9087f3-7f42-ed15-c35e-b60a953ccea7" />
+												</node>
+											</children>
+										</node>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="WLD_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="d092dace-9f6c-2013-dac7-91de3fe17459" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="b17711dd-2de4-1d48-f79e-cf58c6a19d27" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="Exploration_Major_Ingredients" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

@@ -1,0 +1,71 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// base breaks the vow on any cast event, weapon attacks included
+// entry renamed on hand-out so base stops matching, wildcard check still blocks a re-roll
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_KRONETH_OBLIGATION_SILENCE", _, _)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_KRONETH_OBLIGATION_SILENCE")
+THEN
+NOT DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_KRONETH_OBLIGATION_SILENCE");
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_Plus_KRONETH_SILENCE");
+NOT DB_AMP_Kroneth_VowBroken(_Char);
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_Plus_KRONETH_VOW_BROKEN", _, _)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_Plus_KRONETH_SILENCE")
+AND
+NOT DB_AMP_Kroneth_VowBroken(_Char)
+THEN
+DB_AMP_Kroneth_VowBroken(_Char);
+
+IF
+LeftCombat((CHARACTER)_Char, _)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_Plus_KRONETH_SILENCE")
+AND
+NOT DB_AMP_Kroneth_VowBroken(_Char)
+THEN
+PROC_AMP_Plus_KrSilenceEnd(_Char);
+
+IF
+LeftCombat((CHARACTER)_Char, _)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_Plus_KRONETH_SILENCE")
+AND
+DB_AMP_Kroneth_VowBroken(_Char)
+AND
+NOT HasActiveStatus(_Char, "AMP_GRAND_DESIGN_WARD", 1)
+THEN
+PROC_AMP_Plus_KrSilenceEnd(_Char);
+RemoveStatus(_Char, "AMP_HUMBLED_KRONETH", NULL_00000000-0000-0000-0000-000000000000);
+ApplyStatus(_Char, "AMP_KRONETH_CURSE", -1.0, 1, _Char);
+ApplyStatus(_Char, "AMP_KRONETH_JUDGEMENT", -1.0, 1, _Char);
+
+IF
+LeftCombat((CHARACTER)_Char, _)
+AND
+DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_Plus_KRONETH_SILENCE")
+AND
+DB_AMP_Kroneth_VowBroken(_Char)
+AND
+HasActiveStatus(_Char, "AMP_GRAND_DESIGN_WARD", 1)
+THEN
+PROC_AMP_Plus_KrSilenceEnd(_Char);
+
+PROC
+PROC_AMP_Plus_KrSilenceEnd((CHARACTER)_Char)
+THEN
+NOT DB_AMP_Kroneth_ActiveObligation(_Char, "AMP_Plus_KRONETH_SILENCE");
+NOT DB_AMP_Kroneth_VowBroken(_Char);
+NOT DB_AMP_Kroneth_Counter(_Char, 0);
+RemoveStatus(_Char, "AMP_Plus_KRONETH_VOW_BROKEN", NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+ENDEXITSECTION

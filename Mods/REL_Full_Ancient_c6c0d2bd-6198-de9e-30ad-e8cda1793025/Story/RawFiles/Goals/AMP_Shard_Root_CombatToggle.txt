@@ -1,0 +1,18 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// rooted shard: apply combat-only sub-status on combat start.
+// the combat sub-status self-removes on combat end via RemoveEvents.
+
+IF
+EnteredCombat((CHARACTER)_Char, _)
+AND
+HasActiveStatus(_Char, "AMP_SHARD_CHAR_ROOT", 1)
+THEN
+ApplyStatus(_Char, "AMP_SHARD_CHAR_ROOT_COMBAT", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+ENDEXITSECTION

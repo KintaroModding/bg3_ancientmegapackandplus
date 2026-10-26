@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="7e400adb-f8f0-cb88-6f4b-c494559fab62" />
+					<attribute id="Name" type="LSString" value="AMP_Generic_AC_Status" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/AMP_Generic_AC_Status.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="AMP_Generic_AC_Status" />
+					<attribute id="BoundsMin" type="fvec3" value="-1.1547005 -1.1547005 -1.1547005" />
+					<attribute id="BoundsMax" type="fvec3" value="1.1547005 1.1547005 1.1547005" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="2.5" />
+					<attribute id="Looping" type="bool" value="True" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="7d540446-04ba-008c-35e7-9ba9f3683259" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="1a1a7099-9c46-4d5f-8f00-a249af1dc519" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="2ab81814-a0d1-863c-c8a7-93aa0289c93d" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

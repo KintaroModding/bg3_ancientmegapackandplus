@@ -1,0 +1,43 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// stock mode: yank amp-only bosses out of the world on level enter.
+// off-stage then RequestDeleteTemporary. footmen are summons, left alone.
+
+// vludber
+IF
+EnteredLevel((CHARACTER)_Char, (ROOT)_Template, _Level)
+AND
+DB_AMP_GameMode("STOCK")
+AND
+DB_AMP_Vludber_Template((CHARACTERROOT)_Template)
+THEN
+SetOnStage(_Char, 0);
+RequestDeleteTemporary(_Char);
+
+// kelcidon cat - the CTY_Main_A instance
+IF
+LevelGameplayStarted("CTY_Main_A", _)
+AND
+DB_AMP_GameMode("STOCK")
+AND
+Exists(AMP_Cat_000_336eb3d3-4b0f-4967-8138-ba436353d610, 1)
+THEN
+SetOnStage(AMP_Cat_000_336eb3d3-4b0f-4967-8138-ba436353d610, 0);
+RequestDeleteTemporary((CHARACTER)AMP_Cat_000_336eb3d3-4b0f-4967-8138-ba436353d610);
+
+// grym stays vanilla - strip the amp spells so the drone/pull hooks never fire
+IF
+LevelGameplayStarted("WLD_Main_A", _)
+AND
+DB_AMP_GameMode("STOCK")
+THEN
+RemoveSpell((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255, "Shout_AMP_Grym_SummonDrones", 0);
+RemoveSpell((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255, "Target_AMP_AdamantineGolem_Pull", 0);
+
+EXITSECTION
+
+ENDEXITSECTION

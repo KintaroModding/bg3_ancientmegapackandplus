@@ -1,0 +1,7 @@
+game.configs.AMP_Boss_DefaultMonster = Config{
+    root=StateRef{game.roots.DefaultCharacter,
+        combat = StateRef{game.states.AMP_BossCombat},
+        genericBehaviours = StateRef{game.states.CrimesHumanoid},
+        idle = StateRef{game.states.Dummy},
+    }
+}

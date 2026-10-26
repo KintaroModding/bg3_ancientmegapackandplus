@@ -1,0 +1,16 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+// training ring reset-cooldowns button
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_TrainingRing_ResetCooldowns", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+THEN
+ResetCooldowns(_Caster);
+PROC_AMP_PlayModeEffect(_Caster);
+
+EXITSECTION
+ENDEXITSECTION

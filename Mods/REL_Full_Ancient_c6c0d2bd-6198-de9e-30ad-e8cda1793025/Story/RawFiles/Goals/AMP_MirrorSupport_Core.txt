@@ -1,0 +1,1417 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// ultra-only mirror support, a stats watcher applies AMP_MIRROR_TRIGGER once the boss is cc'd and under 80% hp
+
+// pool: DB_AMP_MirrorPool(index, template, count). count 1 = solo, >1 = horde ring.
+// weight by duplicating index entries with the same template.
+
+DB_AMP_MirrorPool(0, AMP_ULTRA_Summon_01_6b432bff-5bf9-4295-8c54-faba8515b33f, 1);
+DB_AMP_MirrorPool(1, AMP_Ysatiy_92506335-12dd-4e4b-848c-f33fd8cc39fa, 1);
+DB_AMP_MirrorPool(2, AMP_ULTRA_Summon_03_3cfb7f5b-8ba4-4e0a-905d-9d19bf84558b, 1);
+DB_AMP_MirrorPool(3, AMP_ULTRA_Summon_04_4c553ed6-ee7a-4598-9d66-1bc064c83f50, 1);
+DB_AMP_MirrorPool(4, AMP_ULTRA_Summon_05_f8560efd-1d3c-4dcc-8b4e-b36f2cc79684, 1);
+DB_AMP_MirrorPool(5, AMP_ULTRA_Summon_06_171ecf1c-df60-427b-a38b-09607737482d, 1);
+DB_AMP_MirrorPool(6, AMP_ULTRA_Summon_07_07bdf760-ed25-4461-9883-beb4938d4127, 1);
+DB_AMP_MirrorPool(7, AMP_Vludber_11eef355-dc6a-4d04-a072-417b70f569cd, 1);
+DB_AMP_MirrorPool(8, AMP_ULTRA_Summon_09_1fa91153-3ab3-4e21-bdeb-85122afad286, 1);
+DB_AMP_MirrorPool_Size(9);
+
+// mirror doppelganger class-boost map: classtag -> shar class-double status on the clone
+DB_AMP_MirrorDoppel_ClassData((TAG)BARBARIAN_02913f9a-f696-40cf-acdf-32032afab32c,"SHA_TORTURETRIAL_DOUBLE_BARBARIAN");
+DB_AMP_MirrorDoppel_ClassData((TAG)BARD_d93434bd-6b71-4789-b128-ee24156057cc,"SHA_TORTURETRIAL_DOUBLE_BARD");
+DB_AMP_MirrorDoppel_ClassData((TAG)CLERIC_1671b4bf-4f47-4bb7-9cb9-80bb1f6009d5,"SHA_TORTURETRIAL_DOUBLE_CLERIC");
+DB_AMP_MirrorDoppel_ClassData((TAG)DRUID_44ac4317-4d38-4d28-80e2-94024c6e42f0,"SHA_TORTURETRIAL_DOUBLE_DRUID");
+DB_AMP_MirrorDoppel_ClassData((TAG)FIGHTER_1ae7017c-4884-4a43-bc4a-742fa0d201c0,"SHA_TORTURETRIAL_DOUBLE_FIGHTER");
+DB_AMP_MirrorDoppel_ClassData((TAG)PALADIN_6d85ab2d-5c23-498c-a61e-98f05a00177a,"SHA_TORTURETRIAL_DOUBLE_PALADIN");
+DB_AMP_MirrorDoppel_ClassData((TAG)MONK_e1e460bb-d0ae-4452-8529-c9e176558731,"SHA_TORTURETRIAL_DOUBLE_MONK");
+DB_AMP_MirrorDoppel_ClassData((TAG)RANGER_37a733c1-a862-4157-b92a-9cff46232c6a,"SHA_TORTURETRIAL_DOUBLE_RANGER");
+DB_AMP_MirrorDoppel_ClassData((TAG)ROGUE_f8a0608b-666c-4be6-a49c-03b369c10bd2,"SHA_TORTURETRIAL_DOUBLE_ROGUE");
+DB_AMP_MirrorDoppel_ClassData((TAG)SORCERER_18266c0b-efbc-4c80-8784-ada4a37218d7,"SHA_TORTURETRIAL_DOUBLE_SORCERER");
+DB_AMP_MirrorDoppel_ClassData((TAG)WARLOCK_5804f55a-93f7-4281-9512-8d548a9e2a22,"SHA_TORTURETRIAL_DOUBLE_WARLOCK");
+DB_AMP_MirrorDoppel_ClassData((TAG)WIZARD_6fe3ae27-dc6c-4fc9-9245-710c790c396c,"SHA_TORTURETRIAL_DOUBLE_WIZARD");
+
+// equipment slots to copy from the mirrored player
+DB_AMP_MirrorDoppel_Slot("Helmet");
+DB_AMP_MirrorDoppel_Slot("Breast");
+DB_AMP_MirrorDoppel_Slot("Cloak");
+DB_AMP_MirrorDoppel_Slot("Gloves");
+DB_AMP_MirrorDoppel_Slot("Boots");
+DB_AMP_MirrorDoppel_Slot("Amulet");
+DB_AMP_MirrorDoppel_Slot("Ring");
+DB_AMP_MirrorDoppel_Slot("Ring2");
+DB_AMP_MirrorDoppel_Slot("Melee Main Weapon");
+DB_AMP_MirrorDoppel_Slot("Melee Offhand Weapon");
+DB_AMP_MirrorDoppel_Slot("Ranged Main Weapon");
+DB_AMP_MirrorDoppel_Slot("Ranged Offhand Weapon");
+DB_AMP_MirrorDoppel_Slot("MusicalInstrument");
+
+KBSECTION
+// back-compat: re-seed the pool + maps on existing saves (insert missing indices)
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_MirrorPool(0, _, _)
+THEN
+DB_AMP_MirrorPool(0, AMP_ULTRA_Summon_01_6b432bff-5bf9-4295-8c54-faba8515b33f, 1);
+DB_AMP_MirrorPool_Size(1);
+
+// idx 1 (vasht)
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_MirrorPool(1, _, _)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_OldPoolSize)
+THEN
+DB_AMP_MirrorPool(1, AMP_Ysatiy_92506335-12dd-4e4b-848c-f33fd8cc39fa, 1);
+NOT DB_AMP_MirrorPool_Size(_OldPoolSize);
+DB_AMP_MirrorPool_Size(2);
+
+// idx 2 (adrienne)
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_MirrorPool(2, _, _)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_OldPoolSize)
+THEN
+DB_AMP_MirrorPool(2, AMP_ULTRA_Summon_03_3cfb7f5b-8ba4-4e0a-905d-9d19bf84558b, 1);
+NOT DB_AMP_MirrorPool_Size(_OldPoolSize);
+DB_AMP_MirrorPool_Size(3);
+
+// idx 3 (valdryn)
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_MirrorPool(3, _, _)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_OldPoolSize)
+THEN
+DB_AMP_MirrorPool(3, AMP_ULTRA_Summon_04_4c553ed6-ee7a-4598-9d66-1bc064c83f50, 1);
+NOT DB_AMP_MirrorPool_Size(_OldPoolSize);
+DB_AMP_MirrorPool_Size(4);
+
+// idx 4 (mirror doppelganger)
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_MirrorPool(4, _, _)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_OldPoolSize)
+THEN
+DB_AMP_MirrorPool(4, AMP_ULTRA_Summon_05_f8560efd-1d3c-4dcc-8b4e-b36f2cc79684, 1);
+NOT DB_AMP_MirrorPool_Size(_OldPoolSize);
+DB_AMP_MirrorPool_Size(5);
+
+// idx 5 (tickhara)
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_MirrorPool(5, _, _)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_OldPoolSize)
+THEN
+DB_AMP_MirrorPool(5, AMP_ULTRA_Summon_06_171ecf1c-df60-427b-a38b-09607737482d, 1);
+NOT DB_AMP_MirrorPool_Size(_OldPoolSize);
+DB_AMP_MirrorPool_Size(6);
+
+// idx 6 (zephra)
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_MirrorPool(6, _, _)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_OldPoolSize)
+THEN
+DB_AMP_MirrorPool(6, AMP_ULTRA_Summon_07_07bdf760-ed25-4461-9883-beb4938d4127, 1);
+NOT DB_AMP_MirrorPool_Size(_OldPoolSize);
+DB_AMP_MirrorPool_Size(7);
+
+// idx 7 (vludber)
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_MirrorPool(7, _, _)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_OldPoolSize)
+THEN
+DB_AMP_MirrorPool(7, AMP_Vludber_11eef355-dc6a-4d04-a072-417b70f569cd, 1);
+NOT DB_AMP_MirrorPool_Size(_OldPoolSize);
+DB_AMP_MirrorPool_Size(8);
+
+// idx 8 (kavir)
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_MirrorPool(8, _, _)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_OldPoolSize)
+THEN
+DB_AMP_MirrorPool(8, AMP_ULTRA_Summon_09_1fa91153-3ab3-4e21-bdeb-85122afad286, 1);
+NOT DB_AMP_MirrorPool_Size(_OldPoolSize);
+DB_AMP_MirrorPool_Size(9);
+
+// seed class-boost map
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_MirrorDoppel_ClassData(_, _)
+THEN
+DB_AMP_MirrorDoppel_ClassData((TAG)BARBARIAN_02913f9a-f696-40cf-acdf-32032afab32c,"SHA_TORTURETRIAL_DOUBLE_BARBARIAN");
+DB_AMP_MirrorDoppel_ClassData((TAG)BARD_d93434bd-6b71-4789-b128-ee24156057cc,"SHA_TORTURETRIAL_DOUBLE_BARD");
+DB_AMP_MirrorDoppel_ClassData((TAG)CLERIC_1671b4bf-4f47-4bb7-9cb9-80bb1f6009d5,"SHA_TORTURETRIAL_DOUBLE_CLERIC");
+DB_AMP_MirrorDoppel_ClassData((TAG)DRUID_44ac4317-4d38-4d28-80e2-94024c6e42f0,"SHA_TORTURETRIAL_DOUBLE_DRUID");
+DB_AMP_MirrorDoppel_ClassData((TAG)FIGHTER_1ae7017c-4884-4a43-bc4a-742fa0d201c0,"SHA_TORTURETRIAL_DOUBLE_FIGHTER");
+DB_AMP_MirrorDoppel_ClassData((TAG)PALADIN_6d85ab2d-5c23-498c-a61e-98f05a00177a,"SHA_TORTURETRIAL_DOUBLE_PALADIN");
+DB_AMP_MirrorDoppel_ClassData((TAG)MONK_e1e460bb-d0ae-4452-8529-c9e176558731,"SHA_TORTURETRIAL_DOUBLE_MONK");
+DB_AMP_MirrorDoppel_ClassData((TAG)RANGER_37a733c1-a862-4157-b92a-9cff46232c6a,"SHA_TORTURETRIAL_DOUBLE_RANGER");
+DB_AMP_MirrorDoppel_ClassData((TAG)ROGUE_f8a0608b-666c-4be6-a49c-03b369c10bd2,"SHA_TORTURETRIAL_DOUBLE_ROGUE");
+DB_AMP_MirrorDoppel_ClassData((TAG)SORCERER_18266c0b-efbc-4c80-8784-ada4a37218d7,"SHA_TORTURETRIAL_DOUBLE_SORCERER");
+DB_AMP_MirrorDoppel_ClassData((TAG)WARLOCK_5804f55a-93f7-4281-9512-8d548a9e2a22,"SHA_TORTURETRIAL_DOUBLE_WARLOCK");
+DB_AMP_MirrorDoppel_ClassData((TAG)WIZARD_6fe3ae27-dc6c-4fc9-9245-710c790c396c,"SHA_TORTURETRIAL_DOUBLE_WIZARD");
+
+// seed equipment slots
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_MirrorDoppel_Slot(_)
+THEN
+DB_AMP_MirrorDoppel_Slot("Helmet");
+DB_AMP_MirrorDoppel_Slot("Breast");
+DB_AMP_MirrorDoppel_Slot("Cloak");
+DB_AMP_MirrorDoppel_Slot("Gloves");
+DB_AMP_MirrorDoppel_Slot("Boots");
+DB_AMP_MirrorDoppel_Slot("Amulet");
+DB_AMP_MirrorDoppel_Slot("Ring");
+DB_AMP_MirrorDoppel_Slot("Ring2");
+DB_AMP_MirrorDoppel_Slot("Melee Main Weapon");
+DB_AMP_MirrorDoppel_Slot("Melee Offhand Weapon");
+DB_AMP_MirrorDoppel_Slot("Ranged Main Weapon");
+DB_AMP_MirrorDoppel_Slot("Ranged Offhand Weapon");
+DB_AMP_MirrorDoppel_Slot("MusicalInstrument");
+
+// trigger: stats watcher applied AMP_MIRROR_TRIGGER on a boss -> spawn, once per boss
+
+IF
+StatusApplied((CHARACTER)_Boss, "AMP_MIRROR_TRIGGER", _, _)
+AND
+NOT DB_AMP_MirrorSupport_Fired(_Boss)
+AND
+NOT DB_AMP_MirrorChase_Mob(_, _)
+AND
+IsBoss(_Boss, 1)
+AND
+IsInCombat(_Boss, 1)
+AND
+IsDead(_Boss, 0)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_Boss, _Host, 1)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_PoolSize)
+AND
+_PoolSize > 0
+THEN
+DB_AMP_MirrorSupport_Fired(_Boss);
+PROC_AMP_MirrorSupport_Spawn(_Boss);
+
+// spawn dispatcher: pick (party-size) distinct pool bosses, clamped to pool size + 8
+// ring slots. distinct via random start + window. each pick reuses spawnsolo.
+
+PROC
+PROC_AMP_MirrorSupport_Spawn((CHARACTER)_Boss)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_Size)
+AND
+CombatGetGuidFor(_Boss, (GUIDSTRING)_CombatGuid)
+AND
+CombatGetInvolvedPartyMembersCount(_CombatGuid, (INTEGER)_PartyN)
+AND
+GetPosition(_Boss, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+Random(_Size, (INTEGER)_Start)
+THEN
+PROC_AMP_MirrorSupport_CountReal(_Boss, _CombatGuid, _PartyN, 1, 0, _Size, _Start, _BX, _BY, _BZ);
+
+// count only real (non-summon) party members. player summons (familiars, conjures,
+// acid slimes) must not inflate the spawn count. idx is 1-based over involved members.
+
+// done iterating -> hand the real count to resolvecount
+PROC
+PROC_AMP_MirrorSupport_CountReal((CHARACTER)_Boss, (GUIDSTRING)_CombatGuid, (INTEGER)_Total, (INTEGER)_Idx, (INTEGER)_Acc, (INTEGER)_Size, (INTEGER)_Start, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Idx > _Total
+THEN
+PROC_AMP_MirrorSupport_ResolveCount(_Boss, _Acc, _Size, _Start, _BX, _BY, _BZ);
+
+// member is not a summon -> count it, advance
+PROC
+PROC_AMP_MirrorSupport_CountReal((CHARACTER)_Boss, (GUIDSTRING)_CombatGuid, (INTEGER)_Total, (INTEGER)_Idx, (INTEGER)_Acc, (INTEGER)_Size, (INTEGER)_Start, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Idx <= _Total
+AND
+CombatGetInvolvedPartyMember(_CombatGuid, _Idx, (CHARACTER)_Member)
+AND
+IsSummon(_Member, 0)
+AND
+IntegerSum(_Acc, 1, (INTEGER)_Acc2)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Idx2)
+THEN
+PROC_AMP_MirrorSupport_CountReal(_Boss, _CombatGuid, _Total, _Idx2, _Acc2, _Size, _Start, _BX, _BY, _BZ);
+
+// member is a summon -> skip, advance without counting
+PROC
+PROC_AMP_MirrorSupport_CountReal((CHARACTER)_Boss, (GUIDSTRING)_CombatGuid, (INTEGER)_Total, (INTEGER)_Idx, (INTEGER)_Acc, (INTEGER)_Size, (INTEGER)_Start, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Idx <= _Total
+AND
+CombatGetInvolvedPartyMember(_CombatGuid, _Idx, (CHARACTER)_Member)
+AND
+IsSummon(_Member, 1)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Idx2)
+THEN
+PROC_AMP_MirrorSupport_CountReal(_Boss, _CombatGuid, _Total, _Idx2, _Acc, _Size, _Start, _BX, _BY, _BZ);
+
+// clamp wanted count to pool size
+PROC
+PROC_AMP_MirrorSupport_ResolveCount((CHARACTER)_Boss, (INTEGER)_PartyN, (INTEGER)_Size, (INTEGER)_Start, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_PartyN <= _Size
+THEN
+PROC_AMP_MirrorSupport_CapEight(_Boss, _PartyN, _Size, _Start, _BX, _BY, _BZ);
+
+PROC
+PROC_AMP_MirrorSupport_ResolveCount((CHARACTER)_Boss, (INTEGER)_PartyN, (INTEGER)_Size, (INTEGER)_Start, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_PartyN > _Size
+THEN
+PROC_AMP_MirrorSupport_CapEight(_Boss, _Size, _Size, _Start, _BX, _BY, _BZ);
+
+// clamp to 8 ring slots, seed loop state
+PROC
+PROC_AMP_MirrorSupport_CapEight((CHARACTER)_Boss, (INTEGER)_Count, (INTEGER)_Size, (INTEGER)_Start, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Count <= 8
+THEN
+DB_AMP_MirrorSpawn_State(_Boss, _Start, _Size, _Count, 0, _BX, _BY, _BZ);
+PROC_AMP_MirrorSupport_Loop(_Boss);
+
+PROC
+PROC_AMP_MirrorSupport_CapEight((CHARACTER)_Boss, (INTEGER)_Count, (INTEGER)_Size, (INTEGER)_Start, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Count > 8
+THEN
+DB_AMP_MirrorSpawn_State(_Boss, _Start, _Size, 8, 0, _BX, _BY, _BZ);
+PROC_AMP_MirrorSupport_Loop(_Boss);
+
+// loop k=0..count-1: idx=(start+k) mod size -> distinct entry -> spawn at slot k
+PROC
+PROC_AMP_MirrorSupport_Loop((CHARACTER)_Boss)
+AND
+DB_AMP_MirrorSpawn_State(_Boss, (INTEGER)_Start, (INTEGER)_Size, (INTEGER)_Count, (INTEGER)_K, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_K < _Count
+AND
+IntegerSum(_Start, _K, (INTEGER)_Tmp)
+AND
+IntegerModulo(_Tmp, _Size, (INTEGER)_Idx)
+AND
+DB_AMP_MirrorPool(_Idx, (GUIDSTRING)_Template, (INTEGER)_PoolCount)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(_Idx)
+AND
+IntegerSum(_K, 1, (INTEGER)_K2)
+THEN
+PROC_AMP_MirrorSupport_SpawnPick(_Boss, _Template, _PoolCount, _K, _BX, _BY, _BZ);
+NOT DB_AMP_MirrorSpawn_State(_Boss, _Start, _Size, _Count, _K, _BX, _BY, _BZ);
+DB_AMP_MirrorSpawn_State(_Boss, _Start, _Size, _Count, _K2, _BX, _BY, _BZ);
+PROC_AMP_MirrorSupport_Loop(_Boss);
+
+// disabled pool entry (toggled off in settings) -> advance k, no spawn
+PROC
+PROC_AMP_MirrorSupport_Loop((CHARACTER)_Boss)
+AND
+DB_AMP_MirrorSpawn_State(_Boss, (INTEGER)_Start, (INTEGER)_Size, (INTEGER)_Count, (INTEGER)_K, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_K < _Count
+AND
+IntegerSum(_Start, _K, (INTEGER)_TmpD)
+AND
+IntegerModulo(_TmpD, _Size, (INTEGER)_IdxD)
+AND
+DB_AMP_MirrorBoss_Disabled(_IdxD)
+AND
+IntegerSum(_K, 1, (INTEGER)_K2D)
+THEN
+NOT DB_AMP_MirrorSpawn_State(_Boss, _Start, _Size, _Count, _K, _BX, _BY, _BZ);
+DB_AMP_MirrorSpawn_State(_Boss, _Start, _Size, _Count, _K2D, _BX, _BY, _BZ);
+PROC_AMP_MirrorSupport_Loop(_Boss);
+
+PROC
+PROC_AMP_MirrorSupport_Loop((CHARACTER)_Boss)
+AND
+DB_AMP_MirrorSpawn_State(_Boss, (INTEGER)_Start, (INTEGER)_Size, (INTEGER)_Count, (INTEGER)_K, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_K >= _Count
+THEN
+NOT DB_AMP_MirrorSpawn_State(_Boss, _Start, _Size, _Count, _K, _BX, _BY, _BZ);
+
+// per-pick router: solo -> ring slot, horde -> spawnhorde
+PROC
+PROC_AMP_MirrorSupport_SpawnPick((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_PoolCount, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_PoolCount == 1
+THEN
+PROC_AMP_MirrorSupport_SpawnAtSlot(_Boss, _Template, _Slot, _BX, _BY, _BZ);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnPick((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_PoolCount, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_PoolCount > 1
+THEN
+PROC_AMP_MirrorSupport_SpawnHorde(_Boss, _Template, _PoolCount, _BX, _BY, _BZ);
+
+// ring slots: offset base pos, hand off to spawnsolo (adds +3 z + specials)
+PROC
+PROC_AMP_MirrorSupport_SpawnAtSlot((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Slot == 0
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _BX, _BY, _BZ);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtSlot((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Slot == 1
+AND
+RealSum(_BX, 2.0, (REAL)_SX1)
+AND
+RealSum(_BZ, 2.0, (REAL)_SZ1)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _SX1, _BY, _SZ1);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtSlot((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Slot == 2
+AND
+RealSum(_BX, 2.5, (REAL)_SX2)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _SX2, _BY, _BZ);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtSlot((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Slot == 3
+AND
+RealSum(_BX, 2.0, (REAL)_SX3)
+AND
+RealSum(_BZ, -2.0, (REAL)_SZ3)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _SX3, _BY, _SZ3);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtSlot((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Slot == 4
+AND
+RealSum(_BZ, -2.5, (REAL)_SZ4)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _BX, _BY, _SZ4);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtSlot((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Slot == 5
+AND
+RealSum(_BX, -2.0, (REAL)_SX5)
+AND
+RealSum(_BZ, -2.0, (REAL)_SZ5)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _SX5, _BY, _SZ5);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtSlot((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Slot == 6
+AND
+RealSum(_BX, -2.5, (REAL)_SX6)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _SX6, _BY, _BZ);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtSlot((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Slot == 7
+AND
+RealSum(_BX, -2.0, (REAL)_SX7)
+AND
+RealSum(_BZ, 2.0, (REAL)_SZ7)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _SX7, _BY, _SZ7);
+
+// solo spawn, 3m behind boss
+
+// default solo (any non-vasht entry) - arcane gate vfx
+PROC
+PROC_AMP_MirrorSupport_SpawnSolo((CHARACTER)_Boss, (GUIDSTRING)_Template, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+NOT _Template == AMP_Ysatiy_92506335-12dd-4e4b-848c-f33fd8cc39fa
+AND
+RealSum(_BZ, 3.0, (REAL)_SZ)
+AND
+CreateAt(_Template, _BX, _BY, _SZ, 0, 1, "", (GUIDSTRING)_Mob)
+THEN
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, _Boss);
+DB_AMP_MirrorChase_Mob((CHARACTER)_Mob, _Template);
+
+// vasht solo - red spawn overlay vfx + leap/frenzy
+PROC
+PROC_AMP_MirrorSupport_SpawnSolo((CHARACTER)_Boss, (GUIDSTRING)_Template, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Template == AMP_Ysatiy_92506335-12dd-4e4b-848c-f33fd8cc39fa
+AND
+RealSum(_BZ, 3.0, (REAL)_SZ)
+AND
+CreateAt(_Template, _BX, _BY, _SZ, 0, 1, "", (GUIDSTRING)_Mob)
+THEN
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, _Boss);
+DB_AMP_MirrorChase_Mob((CHARACTER)_Mob, _Template);
+ApplyStatus(_Mob, "AMP_VASHT_ASTRAL_LEAP", -1.0, 1, _Mob);
+ApplyStatus(_Mob, "AMP_VASHT_FRENZY", -1.0, 1, _Mob);
+
+// horde spawn: N mobs in a 2.5m ring around boss (8 directions)
+
+PROC
+PROC_AMP_MirrorSupport_SpawnHorde((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Count, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+THEN
+PROC_AMP_MirrorSupport_SpawnHordeIter(_Boss, _Template, _Count, 0, _BX, _BY, _BZ);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnHordeIter((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Count, (INTEGER)_Idx, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Idx >= _Count
+THEN
+DB_NOOP(1);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnHordeIter((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Count, (INTEGER)_Idx, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Idx < _Count
+AND
+IntegerSum(_Idx, 1, (INTEGER)_NextIdx)
+THEN
+PROC_AMP_MirrorSupport_SpawnAtDir(_Boss, _Template, _Idx, _BX, _BY, _BZ);
+PROC_AMP_MirrorSupport_SpawnHordeIter(_Boss, _Template, _Count, _NextIdx, _BX, _BY, _BZ);
+
+// 8 direction offsets
+PROC
+PROC_AMP_MirrorSupport_SpawnAtDir((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Dir, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Dir == 0
+AND
+RealSum(_BZ, 2.5, (REAL)_SZ)
+AND
+CreateAt(_Template, _BX, _BY, _SZ, 0, 1, "", (GUIDSTRING)_Mob)
+THEN
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, _Boss);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtDir((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Dir, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Dir == 1
+AND
+RealSum(_BX, 2.0, (REAL)_SX)
+AND
+RealSum(_BZ, 2.0, (REAL)_SZ)
+AND
+CreateAt(_Template, _SX, _BY, _SZ, 0, 1, "", (GUIDSTRING)_Mob)
+THEN
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, _Boss);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtDir((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Dir, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Dir == 2
+AND
+RealSum(_BX, 2.5, (REAL)_SX)
+AND
+CreateAt(_Template, _SX, _BY, _BZ, 0, 1, "", (GUIDSTRING)_Mob)
+THEN
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, _Boss);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtDir((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Dir, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Dir == 3
+AND
+RealSum(_BX, 2.0, (REAL)_SX)
+AND
+RealSum(_BZ, -2.0, (REAL)_SZ)
+AND
+CreateAt(_Template, _SX, _BY, _SZ, 0, 1, "", (GUIDSTRING)_Mob)
+THEN
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, _Boss);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtDir((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Dir, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Dir == 4
+AND
+RealSum(_BZ, -2.5, (REAL)_SZ)
+AND
+CreateAt(_Template, _BX, _BY, _SZ, 0, 1, "", (GUIDSTRING)_Mob)
+THEN
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, _Boss);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtDir((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Dir, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Dir == 5
+AND
+RealSum(_BX, -2.0, (REAL)_SX)
+AND
+RealSum(_BZ, -2.0, (REAL)_SZ)
+AND
+CreateAt(_Template, _SX, _BY, _SZ, 0, 1, "", (GUIDSTRING)_Mob)
+THEN
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, _Boss);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtDir((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Dir, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Dir == 6
+AND
+RealSum(_BX, -2.5, (REAL)_SX)
+AND
+CreateAt(_Template, _SX, _BY, _BZ, 0, 1, "", (GUIDSTRING)_Mob)
+THEN
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, _Boss);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtDir((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Dir, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Dir == 7
+AND
+RealSum(_BX, -2.0, (REAL)_SX)
+AND
+RealSum(_BZ, 2.0, (REAL)_SZ)
+AND
+CreateAt(_Template, _SX, _BY, _SZ, 0, 1, "", (GUIDSTRING)_Mob)
+THEN
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, _Boss);
+
+// post-spawn: flag + visible buff + faction
+
+IF
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, (CHARACTER)_Boss)
+AND
+GetFaction(_Boss, (FACTION)_BossFaction)
+THEN
+ApplyStatus(_Mob, "AMP_MIRROR_SUPPORT_FLAG", -1.0, 1, _Boss);
+ApplyStatus(_Mob, "AMP_MIRROR_DIVINE_SUPPORT", -1.0, 1, _Boss);
+ApplyStatus(_Mob, "AMP_MIRROR_WRATH", -1.0, 1, _Boss);
+ApplyStatus(_Mob, "AMP_ULTRA_SPAWN_VFX", 6.0, 1, _Boss);
+SetFaction(_Mob, _BossFaction);
+// CreateAt mobs are non-temporary, a normal death leaves a lootable corpse. unlootable from spawn
+SetCharacterLootable(_Mob, 0);
+RealtimeObjectTimerLaunch(_Mob, "AMP_MirrorStripDelay", 1500);
+
+// pull mob into combat via any player participant
+IF
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, (CHARACTER)_Boss)
+AND
+IsInCombat(_Boss, 1)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+IsInCombat(_Player, 1)
+THEN
+EnterCombat(_Mob, _Player);
+
+// final-tier surge (hard only): top-tier pursuers get a lasting buff.
+// eff = (npc + party*2)/3; >=12 = t4+.
+
+IF
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, _)
+AND
+DB_AMP_GameMode("HARD")
+AND
+GetLevel(_Mob, (INTEGER)_NpcLvl)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_PartyLvl)
+AND
+IntegerProduct(_PartyLvl, 2, (INTEGER)_Weighted)
+AND
+IntegerSum(_NpcLvl, _Weighted, (INTEGER)_Sum)
+AND
+IntegerDivide(_Sum, 3, (INTEGER)_EffLvl)
+AND
+_EffLvl >= 12
+THEN
+ApplyStatus(_Mob, "AMP_MIRROR_ENDGAME", -1.0, 1, _Mob);
+
+// seed early-summon hp-scale map (on level start so it lands on old saves).
+// party level -> hidden maxhp debuff. lvl 8+ has no entry = full-strength boss.
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Ultra_HPScaleMap(1, _)
+THEN
+DB_AMP_Ultra_HPScaleMap(1, "AMP_ULTRA_HPSCALE_1");
+DB_AMP_Ultra_HPScaleMap(2, "AMP_ULTRA_HPSCALE_2");
+DB_AMP_Ultra_HPScaleMap(3, "AMP_ULTRA_HPSCALE_3");
+DB_AMP_Ultra_HPScaleMap(4, "AMP_ULTRA_HPSCALE_4");
+DB_AMP_Ultra_HPScaleMap(5, "AMP_ULTRA_HPSCALE_5");
+DB_AMP_Ultra_HPScaleMap(6, "AMP_ULTRA_HPSCALE_6");
+DB_AMP_Ultra_HPScaleMap(7, "AMP_ULTRA_HPSCALE_7");
+
+// early-summon hp scaling: cut maxhp by party level, once per mob
+
+IF
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, _)
+AND
+NOT DB_AMP_Ultra_HPScaled(_Mob)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+DB_AMP_Ultra_HPScaleMap(_Lvl, (STRING)_Status)
+THEN
+DB_AMP_Ultra_HPScaled((CHARACTER)_Mob);
+ApplyStatus(_Mob, _Status, -1.0, 1, _Mob);
+
+// wrath: pursuer shrugs off cc/taunts from npcs (not players/companions/summons).
+// player + companion control still lands.
+
+PROC
+PROC_AMP_MirrorWrath_StripCC((CHARACTER)_Mob, (STRING)_Status, (STRING)_Group)
+AND
+IsStatusFromGroup(_Status, _Group, 1)
+THEN
+RemoveStatus(_Mob, _Status);
+
+IF
+StatusApplied((CHARACTER)_Mob, _Status, (CHARACTER)_Causer, _)
+AND
+DB_AMP_MirrorSupport_Spawned(_Mob, _)
+AND
+NOT DB_Players(_Causer)
+AND
+NOT DB_PartOfTheTeam(_Causer)
+AND
+IsSummon(_Causer, 0)
+THEN
+PROC_AMP_MirrorWrath_StripCC(_Mob, _Status, "SG_Charmed");
+PROC_AMP_MirrorWrath_StripCC(_Mob, _Status, "SG_Incapacitated");
+PROC_AMP_MirrorWrath_StripCC(_Mob, _Status, "SG_Mad");
+PROC_AMP_MirrorWrath_StripCC(_Mob, _Status, "SG_Polymorph");
+PROC_AMP_MirrorWrath_StripCC(_Mob, _Status, "SG_Frightened");
+PROC_AMP_MirrorWrath_StripCC(_Mob, _Status, "SG_Prone");
+PROC_AMP_MirrorWrath_StripCC(_Mob, _Status, "SG_Restrained");
+PROC_AMP_MirrorWrath_StripCC(_Mob, _Status, "SG_Taunted");
+
+// mirror doppelganger: summon_05 enters combat -> assume look+gear of a random party member
+
+IF
+EnteredCombat((CHARACTER)_Mob, (GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_MirrorChase_Mob(_Mob, AMP_ULTRA_Summon_05_f8560efd-1d3c-4dcc-8b4e-b36f2cc79684)
+AND
+NOT DB_AMP_MirrorDoppel_Current(_Mob, _)
+THEN
+PROC_AMP_MirrorDoppel_PickPlayer(_Mob, _CombatGuid);
+
+// pick a real party member to copy, never a summon. re-roll until non-summon.
+// host is always a non-summon player so this terminates.
+PROC
+PROC_AMP_MirrorDoppel_PickPlayer((CHARACTER)_Mob, (GUIDSTRING)_CombatGuid)
+AND
+CombatGetInvolvedPartyMembersCount(_CombatGuid, (INTEGER)_NumPM)
+AND
+_NumPM > 0
+AND
+Random(_NumPM, (INTEGER)_Idx)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Idx1)
+AND
+CombatGetInvolvedPartyMember(_CombatGuid, _Idx1, (CHARACTER)_Player)
+AND
+IsSummon(_Player, 0)
+THEN
+PROC_AMP_MirrorDoppel_Assume(_Mob, _Player);
+
+PROC
+PROC_AMP_MirrorDoppel_PickPlayer((CHARACTER)_Mob, (GUIDSTRING)_CombatGuid)
+AND
+CombatGetInvolvedPartyMembersCount(_CombatGuid, (INTEGER)_NumPM)
+AND
+_NumPM > 0
+AND
+Random(_NumPM, (INTEGER)_Idx)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Idx1)
+AND
+CombatGetInvolvedPartyMember(_CombatGuid, _Idx1, (CHARACTER)_Player)
+AND
+IsSummon(_Player, 1)
+THEN
+PROC_AMP_MirrorDoppel_PickPlayer(_Mob, _CombatGuid);
+
+// assume a player's form: copy appearance + gear + class boost
+PROC
+PROC_AMP_MirrorDoppel_Assume((CHARACTER)_Mob, (CHARACTER)_Player)
+AND
+GetArmourSet(_Player, (ARMOURSET)_ArmSet)
+THEN
+DB_AMP_MirrorDoppel_Current(_Mob, _Player);
+Transform(_Mob, _Player, (SHAPESHIFTRULE)AMP_MirrorPlayer_b84d1c00-e637-4b52-9666-0a2693157e03);
+ApplyStatus(_Mob, "AMP_MIRROR_INFORM", -1.0, 1, _Mob);
+PlayEffect(_Mob, (EFFECTRESOURCE)VFX_Script_Doppelganger_Poof_01_e78795e5-b5ff-c96c-d6c0-4da52fd527ba, "Dummy_Root", 1.0);
+PROC_AMP_MirrorDoppel_CopyGear(_Mob, _Player);
+SetArmourSet(_Mob, _ArmSet);
+PROC_AMP_MirrorDoppel_ApplyClass(_Mob, _Player);
+
+// apply shar class-double boost for each class tag the player has (multiclass-safe)
+PROC
+PROC_AMP_MirrorDoppel_ApplyClass((CHARACTER)_Mob, (CHARACTER)_Player)
+AND
+DB_AMP_MirrorDoppel_ClassData((TAG)_ClassTag, (STRING)_Status)
+AND
+IsTagged(_Player, _ClassTag, 1)
+THEN
+ApplyStatus(_Mob, _Status, -1.0, 1, _Mob);
+
+// manual gear copy: CopyCharacterEquipment won't equip on this mob, so per slot
+// read the player item, add its template to the clone and force-equip.
+PROC
+PROC_AMP_MirrorDoppel_CopyGear((CHARACTER)_Mob, (CHARACTER)_Player)
+AND
+DB_AMP_MirrorDoppel_Slot((STRING)_Slot)
+THEN
+PROC_AMP_MirrorDoppel_CopySlot(_Mob, _Player, _Slot);
+
+PROC
+PROC_AMP_MirrorDoppel_CopySlot((CHARACTER)_Mob, (CHARACTER)_Player, (STRING)_Slot)
+AND
+GetEquippedItem(_Player, _Slot, (ITEM)_PItem)
+AND
+GetTemplate(_PItem, (GUIDSTRING)_Tmpl)
+THEN
+TemplateAddTo((ITEMROOT)_Tmpl, _Mob, 1, 0);
+
+// equip copied gear as it lands (TemplateAddTo not queryable same-tick)
+IF
+AddedTo((ITEM)_Item, (CHARACTER)_Mob, _)
+AND
+DB_AMP_MirrorDoppel_Current(_Mob, _)
+THEN
+Equip(_Mob, _Item, 0, 0, 1);
+DB_AMP_MirrorDoppel_Item(_Mob, _Item);
+
+// delete copied gear (anti-dupe on death, anti-pileup on re-assume)
+PROC
+PROC_AMP_MirrorDoppel_ClearGear((CHARACTER)_Mob)
+AND
+DB_AMP_MirrorDoppel_Item(_Mob, (ITEM)_Item)
+THEN
+RequestDelete(_Item);
+NOT DB_AMP_MirrorDoppel_Item(_Mob, _Item);
+
+// doppelganger form-break cycle: shatter -> reveal -> re-assume, carrying hp% across.
+// Breaking db is a per-beat cooldown guard.
+
+// form-break on damage disabled per design: clone keeps its form, no re-randomize on hit.
+
+// break: snapshot hp%, strip class boost + form, play reveal, queue re-assume
+PROC
+PROC_AMP_MirrorDoppel_Break((CHARACTER)_Mob)
+AND
+DB_AMP_MirrorDoppel_Current(_Mob, (CHARACTER)_OldPlayer)
+AND
+GetHitpointsPercentage(_Mob, (REAL)_HPPct)
+THEN
+DB_AMP_MirrorDoppel_Breaking(_Mob);
+DB_AMP_MirrorDoppel_HP(_Mob, _HPPct);
+PROC_AMP_MirrorDoppel_StripClass(_Mob);
+PROC_AMP_MirrorDoppel_ClearGear(_Mob);
+NOT DB_AMP_MirrorDoppel_Current(_Mob, _OldPlayer);
+RemoveTransforms(_Mob);
+UseSpell(_Mob, "Shout_AMP_MirrorShatter", _Mob, _Mob, 1);
+ObjectTimerLaunch(_Mob, "AMP_MirrorDoppel_Reassume", 2000, 0);
+
+// remove every class-double status from the previous form
+PROC
+PROC_AMP_MirrorDoppel_StripClass((CHARACTER)_Mob)
+AND
+DB_AMP_MirrorDoppel_ClassData(_, (STRING)_Status)
+THEN
+RemoveStatus(_Mob, _Status);
+
+// re-assume after the reveal beat: fresh random member, then restore hp
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_MirrorDoppel_Reassume")
+AND
+DB_AMP_MirrorChase_Mob(_Mob, AMP_ULTRA_Summon_05_f8560efd-1d3c-4dcc-8b4e-b36f2cc79684)
+AND
+IsDead(_Mob, 0)
+AND
+CombatGetGuidFor(_Mob, (GUIDSTRING)_CombatGuid)
+THEN
+PROC_AMP_MirrorDoppel_PickPlayer(_Mob, _CombatGuid);
+PROC_AMP_MirrorDoppel_RestoreHP(_Mob);
+
+// restore carried hp% and lift the break cooldown
+PROC
+PROC_AMP_MirrorDoppel_RestoreHP((CHARACTER)_Mob)
+AND
+DB_AMP_MirrorDoppel_HP(_Mob, (REAL)_HPPct)
+THEN
+SetHitpointsPercentage(_Mob, _HPPct);
+NOT DB_AMP_MirrorDoppel_HP(_Mob, _HPPct);
+NOT DB_AMP_MirrorDoppel_Breaking(_Mob);
+
+// active aggro: sees-loop fallback if entercombat didn't take
+
+IF
+DB_Sees((CHARACTER)_Mob, (CHARACTER)_Player)
+AND
+DB_AMP_MirrorSupport_Spawned(_Mob, _)
+AND
+DB_Players(_Player)
+AND
+NOT IsInCombat(_Mob, 1)
+THEN
+SetRelationTemporaryHostile(_Mob, _Player);
+EnterCombat(_Mob, _Player);
+
+// re-apply faction each round (setfaction reverts otherwise)
+
+IF
+CombatRoundStarted((GUIDSTRING)_CombatID, _)
+AND
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, (CHARACTER)_Boss)
+AND
+IsDead(_Mob, 0)
+AND
+IsDead(_Boss, 0)
+AND
+GetFaction(_Boss, (FACTION)_BossFaction)
+THEN
+SetFaction(_Mob, _BossFaction);
+
+// boss died: clear fired flag only. mob persists, must be killed by player.
+
+IF
+Died((CHARACTER)_Boss)
+AND
+DB_AMP_MirrorSupport_Fired(_Boss)
+THEN
+NOT DB_AMP_MirrorSupport_Fired(_Boss);
+
+// permanent FactionOverride force_hostile, or the pursuers drift neutral once the boss faction is gone
+
+IF
+Died((CHARACTER)_Boss)
+AND
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, _Boss)
+AND
+IsDead(_Mob, 0)
+THEN
+ApplyStatus(_Mob, "AMP_FORCE_HOSTILE", -1.0, 1, _Mob);
+
+// debug cleanup: force-kill all mirror mobs (textevent "mirrorclear")
+PROC
+PROC_AMP_MirrorSupport_CleanupBoss((CHARACTER)_Boss)
+AND
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, _Boss)
+AND
+GetPosition(_Mob, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+RealSum(_Y, 1.0, (REAL)_YUp)
+THEN
+PlayEffectAtPosition(VFX_Script_DarkButler_Poof_01_2b59237f-69f1-003b-d44b-d7e31fb79be2, _X, _YUp, _Z, 1.0);
+NOT DB_AMP_MirrorSupport_Spawned(_Mob, _Boss);
+Die(_Mob, DEATHTYPE.Necrotic, NULL_00000000-0000-0000-0000-000000000000, 0, 1, 0.0);
+
+PROC
+PROC_AMP_MirrorSupport_CleanupBoss((CHARACTER)_Boss)
+THEN
+NOT DB_AMP_MirrorSupport_Fired(_Boss);
+
+// mob died: db cleanup + offstage the corpse after 3s (flag has ApplyToDead)
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_MirrorSupport_Spawned(_Mob, (CHARACTER)_Boss)
+THEN
+NOT DB_AMP_MirrorSupport_Spawned(_Mob, _Boss);
+
+// doppelganger: clear per-clone tracking on death
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_MirrorDoppel_Current(_Mob, (CHARACTER)_Player)
+THEN
+NOT DB_AMP_MirrorDoppel_Current(_Mob, _Player);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_MirrorDoppel_Item(_Mob, _)
+THEN
+PROC_AMP_MirrorDoppel_ClearGear(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_MirrorDoppel_Breaking(_Mob)
+THEN
+NOT DB_AMP_MirrorDoppel_Breaking(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_MirrorDoppel_HP(_Mob, (REAL)_HPPct)
+THEN
+NOT DB_AMP_MirrorDoppel_HP(_Mob, _HPPct);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+HasActiveStatus(_Mob, "AMP_MIRROR_SUPPORT_FLAG", 1)
+THEN
+RealtimeObjectTimerLaunch(_Mob, "AMP_MirrorOffstage", 3000);
+
+// strip loot while the mob is alive, dead or deleted ones respawn items on the floor
+// corpse inventory is not reliably iterable. IsEquipped(_,0) spares equipped gear
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_MirrorStripDelay")
+THEN
+IterateInventory(_Mob, "AMP_MirrorStrip", "");
+
+IF
+EntityEvent((ITEM)_Item, "AMP_MirrorStrip")
+AND
+IsEquipped(_Item, 0)
+THEN
+RequestDelete(_Item);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_MirrorOffstage")
+THEN
+SetOnStage(_Mob, 0);
+
+// level change recreates the pursuer at the host, cross-level teleport of CreateAt mobs is flaky
+
+// generic pursuer (non-vasht) - arcane gate vfx
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_MirrorChase_Mob((CHARACTER)_OldMob, (GUIDSTRING)_Template)
+AND
+NOT _Template == AMP_Ysatiy_92506335-12dd-4e4b-848c-f33fd8cc39fa
+AND
+IsDead(_OldMob, 0)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+GetPosition(_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+AND
+RealSum(_HZ, 2.0, (REAL)_SZ)
+AND
+CreateAt(_Template, _HX, _HY, _SZ, 0, 1, "", (GUIDSTRING)_NewMob)
+THEN
+NOT DB_AMP_MirrorChase_Mob(_OldMob, _Template);
+Die(_OldMob, DEATHTYPE.Necrotic, NULL_00000000-0000-0000-0000-000000000000, 0, 1, 0.0);
+DB_AMP_MirrorChase_Mob((CHARACTER)_NewMob, _Template);
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_NewMob, (CHARACTER)_NewMob);
+ApplyStatus(_NewMob, "AMP_FORCE_HOSTILE", -1.0, 1, _NewMob);
+EnterCombat(_NewMob, _Host);
+
+// vasht pursuer - red spawn overlay vfx + leap/frenzy reapplied
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_MirrorChase_Mob((CHARACTER)_OldMob, (GUIDSTRING)_Template)
+AND
+_Template == AMP_Ysatiy_92506335-12dd-4e4b-848c-f33fd8cc39fa
+AND
+IsDead(_OldMob, 0)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+GetPosition(_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+AND
+RealSum(_HZ, 2.0, (REAL)_SZ)
+AND
+CreateAt(_Template, _HX, _HY, _SZ, 0, 1, "", (GUIDSTRING)_NewMob)
+THEN
+NOT DB_AMP_MirrorChase_Mob(_OldMob, _Template);
+Die(_OldMob, DEATHTYPE.Necrotic, NULL_00000000-0000-0000-0000-000000000000, 0, 1, 0.0);
+DB_AMP_MirrorChase_Mob((CHARACTER)_NewMob, _Template);
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_NewMob, (CHARACTER)_NewMob);
+ApplyStatus(_NewMob, "AMP_VASHT_ASTRAL_LEAP", -1.0, 1, _NewMob);
+ApplyStatus(_NewMob, "AMP_VASHT_FRENZY", -1.0, 1, _NewMob);
+ApplyStatus(_NewMob, "AMP_FORCE_HOSTILE", -1.0, 1, _NewMob);
+EnterCombat(_NewMob, _Host);
+
+// chase end: pursuer killed -> drop chase record (stops respawns)
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_MirrorChase_Mob(_Mob, (GUIDSTRING)_Template)
+THEN
+NOT DB_AMP_MirrorChase_Mob(_Mob, _Template);
+PROC_AMP_MirrorChase_OnDeath(_Mob);
+
+// active chase, event-based: host leaves combat -> teleport pursuer to host;
+// host goes to camp -> pursuer follows.
+
+PROC
+PROC_AMP_MirrorChase_TeleportToHost((CHARACTER)_Mob)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsDead(_Host, 0)
+AND
+GetPosition(_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+AND
+RealSum(_HZ, 3.0, (REAL)_SZ)
+THEN
+TeleportToPosition(_Mob, _HX, _HY, _SZ, "", 0, 0, 0, 0, 1);
+ApplyStatus(_Mob, "AMP_FORCE_HOSTILE", -1.0, 1, _Mob);
+ApplyStatus(_Mob, "AMP_ULTRA_SPAWN_VFX", 6.0, 1, _Mob);
+EnterCombat(_Mob, _Host);
+
+// host exits combat -> pursuer warps in
+IF
+LeftCombat((CHARACTER)_Host, _)
+AND
+GetHostCharacter(_Host)
+AND
+DB_AMP_MirrorChase_Mob((CHARACTER)_Mob, _)
+AND
+IsDead(_Mob, 0)
+AND
+NOT IsInCombat(_Mob, 1)
+AND
+IsDead(_Host, 0)
+THEN
+PROC_AMP_MirrorChase_TeleportToHost(_Mob);
+
+// host goes to camp -> pursuer follows
+IF
+TeleportedToCamp((CHARACTER)_Host)
+AND
+GetHostCharacter(_Host)
+AND
+DB_AMP_MirrorChase_Mob((CHARACTER)_Mob, _)
+AND
+IsDead(_Mob, 0)
+AND
+IsDead(_Host, 0)
+THEN
+PROC_AMP_MirrorChase_TeleportToHost(_Mob);
+
+// loot gate: track last attacker, grant only on player/companion kill.
+// chasm-push, surface dot, suicide, banish or any non-player kill = no loot.
+
+IF
+AttackedBy((CHARACTER)_Mob, (CHARACTER)_Owner, _, _, _, _, _)
+AND
+DB_AMP_MirrorChase_Mob(_Mob, _)
+AND
+DB_AMP_MirrorChase_LastAttacker(_Mob, (CHARACTER)_Old)
+THEN
+NOT DB_AMP_MirrorChase_LastAttacker(_Mob, _Old);
+DB_AMP_MirrorChase_LastAttacker(_Mob, _Owner);
+
+IF
+AttackedBy((CHARACTER)_Mob, (CHARACTER)_Owner, _, _, _, _, _)
+AND
+DB_AMP_MirrorChase_Mob(_Mob, _)
+AND
+NOT DB_AMP_MirrorChase_LastAttacker(_Mob, _)
+THEN
+DB_AMP_MirrorChase_LastAttacker(_Mob, _Owner);
+
+// player kill -> loot
+PROC
+PROC_AMP_MirrorChase_OnDeath((CHARACTER)_Mob)
+AND
+DB_AMP_MirrorChase_LastAttacker(_Mob, (CHARACTER)_Attacker)
+AND
+DB_Players(_Attacker)
+THEN
+PROC_AMP_MirrorLoot_Roll(_Mob);
+NOT DB_AMP_MirrorChase_LastAttacker(_Mob, _Attacker);
+
+// companion kill -> loot
+PROC
+PROC_AMP_MirrorChase_OnDeath((CHARACTER)_Mob)
+AND
+DB_AMP_MirrorChase_LastAttacker(_Mob, (CHARACTER)_Attacker)
+AND
+DB_PartOfTheTeam(_Attacker)
+AND
+NOT DB_Players(_Attacker)
+THEN
+PROC_AMP_MirrorLoot_Roll(_Mob);
+NOT DB_AMP_MirrorChase_LastAttacker(_Mob, _Attacker);
+
+// non-player kill -> cleanup only, no loot
+PROC
+PROC_AMP_MirrorChase_OnDeath((CHARACTER)_Mob)
+AND
+DB_AMP_MirrorChase_LastAttacker(_Mob, (CHARACTER)_Attacker)
+AND
+NOT DB_Players(_Attacker)
+AND
+NOT DB_PartOfTheTeam(_Attacker)
+THEN
+NOT DB_AMP_MirrorChase_LastAttacker(_Mob, _Attacker);
+
+// no attacker recorded -> no loot
+PROC
+PROC_AMP_MirrorChase_OnDeath((CHARACTER)_Mob)
+AND
+NOT DB_AMP_MirrorChase_LastAttacker(_Mob, _)
+THEN
+DB_NOOP(1);
+
+// re-apply faction on pursuer LeftCombat too, so it doesn't drift neutral while idle
+
+IF
+LeftCombat((CHARACTER)_Mob, _)
+AND
+DB_AMP_MirrorSupport_Spawned(_Mob, (CHARACTER)_Boss)
+AND
+IsDead(_Mob, 0)
+AND
+IsDead(_Boss, 0)
+AND
+GetFaction(_Boss, (FACTION)_BossFaction)
+THEN
+SetFaction(_Mob, _BossFaction);
+
+// debug textevent "mirror": force spawn on any tracked boss in combat (skips cc+hp gates)
+
+IF
+TextEvent("mirror")
+AND
+DB_AMP_DiffV3_Tracked((CHARACTER)_Boss, _)
+AND
+IsBoss(_Boss, 1)
+AND
+IsInCombat(_Boss, 1)
+AND
+IsDead(_Boss, 0)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_PoolSize)
+AND
+_PoolSize > 0
+THEN
+NOT DB_AMP_MirrorSupport_Fired(_Boss);
+DB_AMP_MirrorSupport_Fired(_Boss);
+PROC_AMP_MirrorSupport_Spawn(_Boss);
+
+// debug textevent "mirrorclear": cleanup all mirror mobs without killing boss
+
+IF
+TextEvent("mirrorclear")
+AND
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, (CHARACTER)_Boss)
+THEN
+PROC_AMP_MirrorSupport_CleanupBoss(_Boss);
+
+// debug textevent "ultraforce": instant ultra activation, skips the messagebox
+
+IF
+TextEvent("ultraforce")
+AND
+NOT DB_AMP_Ultra_Active(1)
+THEN
+PROC_AMP_Ultra_Activate();
+
+// debug textevent "vasht": spawn vasht at host via spawnsolo
+
+IF
+TextEvent("vasht")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+GetPosition(_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Host, AMP_Ysatiy_92506335-12dd-4e4b-848c-f33fd8cc39fa, _HX, _HY, _HZ);
+
+// debug textevent "adri": spawn adrienne at host via spawnsolo
+
+IF
+TextEvent("adri")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+GetPosition(_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Host, AMP_ULTRA_Summon_03_3cfb7f5b-8ba4-4e0a-905d-9d19bf84558b, _HX, _HY, _HZ);
+
+// debug textevent "doom": spawn doomflame at host via spawnsolo
+
+IF
+TextEvent("doom")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+GetPosition(_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Host, AMP_ULTRA_Summon_01_6b432bff-5bf9-4295-8c54-faba8515b33f, _HX, _HY, _HZ);
+
+// debug textevent "kavir": spawn kavir at host via spawnsolo
+
+IF
+TextEvent("kavir")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+GetPosition(_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Host, AMP_ULTRA_Summon_09_1fa91153-3ab3-4e21-bdeb-85122afad286, _HX, _HY, _HZ);
+
+// ultra mini-boss loot: on a genuine player kill, roll random(100) -> weighted reward to host
+
+PROC
+PROC_AMP_MirrorLoot_Roll((CHARACTER)_Mob)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+Random(100, (INTEGER)_Roll)
+THEN
+PROC_AMP_MirrorLoot_Grant(_Host, _Roll);
+
+// 0-29: nothing
+PROC
+PROC_AMP_MirrorLoot_Grant((CHARACTER)_Host, (INTEGER)_Roll)
+AND
+_Roll < 30
+THEN
+DB_NOOP(1);
+
+// 30-51: shadowfell coin x1
+PROC
+PROC_AMP_MirrorLoot_Grant((CHARACTER)_Host, (INTEGER)_Roll)
+AND
+_Roll >= 30
+AND
+_Roll < 52
+THEN
+TemplateAddTo(AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d, _Host, 1, 1);
+
+// 52-69: void capsule x1
+PROC
+PROC_AMP_MirrorLoot_Grant((CHARACTER)_Host, (INTEGER)_Roll)
+AND
+_Roll >= 52
+AND
+_Roll < 70
+THEN
+TemplateAddTo(AMP_Generic_VoidCapsule_bb84619f-7c56-4a1d-aa8a-d5f0a33ea620, _Host, 1, 1);
+
+// 70-83: void capsule x2
+PROC
+PROC_AMP_MirrorLoot_Grant((CHARACTER)_Host, (INTEGER)_Roll)
+AND
+_Roll >= 70
+AND
+_Roll < 84
+THEN
+TemplateAddTo(AMP_Generic_VoidCapsule_bb84619f-7c56-4a1d-aa8a-d5f0a33ea620, _Host, 2, 1);
+
+// 84-94: astral coin x1
+PROC
+PROC_AMP_MirrorLoot_Grant((CHARACTER)_Host, (INTEGER)_Roll)
+AND
+_Roll >= 84
+AND
+_Roll < 95
+THEN
+TemplateAddTo(AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, _Host, 1, 1);
+
+// 95-97: astral coin x2
+PROC
+PROC_AMP_MirrorLoot_Grant((CHARACTER)_Host, (INTEGER)_Roll)
+AND
+_Roll >= 95
+AND
+_Roll < 98
+THEN
+TemplateAddTo(AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80, _Host, 2, 1);
+
+// 98-99: celestial coin x1 (jackpot)
+PROC
+PROC_AMP_MirrorLoot_Grant((CHARACTER)_Host, (INTEGER)_Roll)
+AND
+_Roll >= 98
+THEN
+TemplateAddTo(AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1, _Host, 1, 1);
+
+// debug: mirror doppelganger test spawn/kill via textevent. remove before release.
+IF
+TextEvent("AMP_TestSpawnMirror")
+AND
+GetHostCharacter(_Host)
+AND
+GetPosition(_Host, _X, _Y, _Z)
+AND
+RealSum(_Z, 3.0, _SZ)
+AND
+CreateAt((GUIDSTRING)AMP_ULTRA_Summon_05_f8560efd-1d3c-4dcc-8b4e-b36f2cc79684, _X, _Y, _SZ, 0, 1, "", (GUIDSTRING)_Mob)
+THEN
+DB_AMP_MirrorDoppel_TestSpawn((CHARACTER)_Mob);
+DB_AMP_MirrorChase_Mob((CHARACTER)_Mob, AMP_ULTRA_Summon_05_f8560efd-1d3c-4dcc-8b4e-b36f2cc79684);
+SetRelationTemporaryHostile((CHARACTER)_Mob, _Host);
+EnterCombat(_Mob, _Host);
+SetCharacterLootable(_Mob, 0);
+RealtimeObjectTimerLaunch(_Mob, "AMP_MirrorStripDelay", 1500);
+
+IF
+TextEvent("AMP_TestKillMirror")
+AND
+DB_AMP_MirrorDoppel_TestSpawn((CHARACTER)_Mob)
+THEN
+NOT DB_AMP_MirrorDoppel_TestSpawn(_Mob);
+SetOnStage(_Mob, 0);
+
+// debug: transform the test mob straight into the host. mine = our rule, vanilla = shar control.
+IF
+TextEvent("AMP_TestMorphMine")
+AND
+DB_AMP_MirrorDoppel_TestSpawn((CHARACTER)_Mob)
+AND
+GetHostCharacter(_Host)
+THEN
+DebugText(_Mob, "MORPH-MINE: Transform called");
+Transform(_Mob, _Host, (SHAPESHIFTRULE)AMP_MirrorPlayer_b84d1c00-e637-4b52-9666-0a2693157e03);
+CopyCharacterEquipment(_Mob, _Host);
+
+IF
+TextEvent("AMP_TestMorphVanilla")
+AND
+DB_AMP_MirrorDoppel_TestSpawn((CHARACTER)_Mob)
+AND
+GetHostCharacter(_Host)
+THEN
+DebugText(_Mob, "MORPH-VANILLA: Transform called");
+Transform(_Mob, _Host, (SHAPESHIFTRULE)SHA_MirrorTrialDouble_07ec0764-5890-4d16-8522-4b838a741982);
+CopyCharacterEquipment(_Mob, _Host);
+
+EXITSECTION
+
+ENDEXITSECTION

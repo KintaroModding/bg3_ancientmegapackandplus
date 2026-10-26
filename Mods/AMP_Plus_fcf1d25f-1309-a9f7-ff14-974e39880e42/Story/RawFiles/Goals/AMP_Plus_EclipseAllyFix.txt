@@ -1,0 +1,226 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// HasInfo stays set: base RemoveInfo clears it and the auto-apply ping-pongs
+PROC
+PROC_AMP_Plus_StripEclipse((CHARACTER)_C)
+THEN
+RemoveStatus(_C, "AMP_ECLIPSE_INFO", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_ECLIPSE_INFO_NECROTIC", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_ECLIPSE_INFO_FIRE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_ECLIPSE_INFO_LIGHTNING", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_ECLIPSE_INFO_FORCE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_ECLIPSE_INFO_ACID", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_ECLIPSE_INFO_POISON", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_ECLIPSE_INFO_PSYCHIC", NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_Eclipse_HasInfo(_C);
+RemoveStatus(_C, "AMP_ECLIPSE_RESOURCE_USER", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_ECLIPSE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_ECLIPSE_NECROTIC", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_ECLIPSE_FIRE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_ECLIPSE_LIGHTNING", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_ECLIPSE_FORCE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_ECLIPSE_ACID", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_ECLIPSE_POISON", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_ECLIPSE_PSYCHIC", NULL_00000000-0000-0000-0000-000000000000);
+NOT DB_AMP_Plus_EclipseDormant(_C);
+
+// reversible: a permanent strip kills the comeback
+PROC
+PROC_AMP_Plus_StripEclipseDormant((CHARACTER)_C)
+THEN
+PROC_AMP_Plus_StripEclipse(_C);
+DB_AMP_Plus_EclipseDormant(_C);
+
+// one rule per carrier variant
+IF
+StatusApplied((CHARACTER)_C, "AMP_ECLIPSE_INFO", _, _)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+NOT _C == _Host
+AND
+IsEnemy(_C, _Host, 0)
+THEN
+PROC_AMP_Plus_StripEclipseDormant(_C);
+
+IF
+StatusApplied((CHARACTER)_C, "AMP_ECLIPSE_INFO_NECROTIC", _, _)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+NOT _C == _Host
+AND
+IsEnemy(_C, _Host, 0)
+THEN
+PROC_AMP_Plus_StripEclipseDormant(_C);
+
+IF
+StatusApplied((CHARACTER)_C, "AMP_ECLIPSE_INFO_FIRE", _, _)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+NOT _C == _Host
+AND
+IsEnemy(_C, _Host, 0)
+THEN
+PROC_AMP_Plus_StripEclipseDormant(_C);
+
+IF
+StatusApplied((CHARACTER)_C, "AMP_ECLIPSE_INFO_LIGHTNING", _, _)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+NOT _C == _Host
+AND
+IsEnemy(_C, _Host, 0)
+THEN
+PROC_AMP_Plus_StripEclipseDormant(_C);
+
+IF
+StatusApplied((CHARACTER)_C, "AMP_ECLIPSE_INFO_FORCE", _, _)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+NOT _C == _Host
+AND
+IsEnemy(_C, _Host, 0)
+THEN
+PROC_AMP_Plus_StripEclipseDormant(_C);
+
+IF
+StatusApplied((CHARACTER)_C, "AMP_ECLIPSE_INFO_ACID", _, _)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+NOT _C == _Host
+AND
+IsEnemy(_C, _Host, 0)
+THEN
+PROC_AMP_Plus_StripEclipseDormant(_C);
+
+IF
+StatusApplied((CHARACTER)_C, "AMP_ECLIPSE_INFO_POISON", _, _)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+NOT _C == _Host
+AND
+IsEnemy(_C, _Host, 0)
+THEN
+PROC_AMP_Plus_StripEclipseDormant(_C);
+
+IF
+StatusApplied((CHARACTER)_C, "AMP_ECLIPSE_INFO_PSYCHIC", _, _)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+NOT _C == _Host
+AND
+IsEnemy(_C, _Host, 0)
+THEN
+PROC_AMP_Plus_StripEclipseDormant(_C);
+
+IF
+CharacterJoinedParty((CHARACTER)_C)
+AND
+IsBoss(_C, 1)
+THEN
+PROC_AMP_Plus_StripEclipse(_C);
+
+IF
+EnteredCombat((CHARACTER)_C, _)
+AND
+DB_PartOfTheTeam(_C)
+AND
+IsBoss(_C, 1)
+THEN
+PROC_AMP_Plus_StripEclipse(_C);
+
+// two-way on purpose, keyed on hostility since DB_PartOfTheTeam misses transformed allies
+IF
+CombatRoundStarted((GUIDSTRING)_CombatID, _)
+THEN
+PROC_AMP_Plus_EclipseHostilityReconcile();
+
+PROC
+PROC_AMP_Plus_EclipseHostilityReconcile()
+AND
+DB_AMP_Eclipse_HasInfo((CHARACTER)_C)
+AND
+NOT DB_AMP_Plus_EclipseDormant(_C)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_C, _Host, 0)
+THEN
+PROC_AMP_Plus_StripEclipseDormant(_C);
+
+// same-frame body swap wipes the carrier, HasInfo stays set
+// runs ahead of the dormant restore
+PROC
+PROC_AMP_Plus_EclipseHostilityReconcile()
+AND
+DB_AMP_Eclipse_HasInfo((CHARACTER)_C)
+AND
+NOT DB_AMP_Plus_EclipseDormant(_C)
+AND
+QRY_AMP_Plus_Affix_On("ECLIPSE")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_C, _Host, 1)
+AND
+HasActiveStatus(_C, "AMP_ECLIPSE_INFO", 0)
+AND
+HasActiveStatus(_C, "AMP_ECLIPSE_INFO_NECROTIC", 0)
+AND
+HasActiveStatus(_C, "AMP_ECLIPSE_INFO_FIRE", 0)
+AND
+HasActiveStatus(_C, "AMP_ECLIPSE_INFO_LIGHTNING", 0)
+AND
+HasActiveStatus(_C, "AMP_ECLIPSE_INFO_FORCE", 0)
+AND
+HasActiveStatus(_C, "AMP_ECLIPSE_INFO_ACID", 0)
+AND
+HasActiveStatus(_C, "AMP_ECLIPSE_INFO_POISON", 0)
+AND
+HasActiveStatus(_C, "AMP_ECLIPSE_INFO_PSYCHIC", 0)
+THEN
+PROC_AMP_Eclipse_ApplyInfo(_C);
+ApplyStatus(_C, "AMP_ECLIPSE_RESOURCE_USER", -1.0, 1, _C);
+
+// apply-time strip gates on IsEnemy=0 so it cannot re-fire here
+PROC
+PROC_AMP_Plus_EclipseHostilityReconcile()
+THEN
+PROC_AMP_Plus_EclipseDrainDormant();
+
+PROC
+PROC_AMP_Plus_EclipseDrainDormant()
+AND
+DB_AMP_Plus_EclipseDormant((CHARACTER)_C)
+AND
+QRY_AMP_Plus_Affix_On("ECLIPSE")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_C, _Host, 1)
+THEN
+NOT DB_AMP_Plus_EclipseDormant(_C);
+PROC_AMP_Eclipse_ApplyInfo(_C);
+ApplyStatus(_C, "AMP_ECLIPSE_RESOURCE_USER", -1.0, 1, _C);
+PROC_AMP_Plus_EclipseDrainDormant();
+
+IF
+Died((CHARACTER)_C)
+AND
+DB_AMP_Plus_EclipseDormant(_C)
+THEN
+NOT DB_AMP_Plus_EclipseDormant(_C);
+
+EXITSECTION
+ENDEXITSECTION

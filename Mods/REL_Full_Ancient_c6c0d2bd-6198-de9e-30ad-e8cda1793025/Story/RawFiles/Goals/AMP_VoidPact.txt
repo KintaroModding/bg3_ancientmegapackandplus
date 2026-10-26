@@ -1,0 +1,66 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+DB_AMP_VoidPact_Offered(0);
+
+KBSECTION
+
+// hard mode on nautiloid -> 10s timer
+IF
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+AND
+DB_AMP_VoidPact_Offered(0)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+GetRegion(_Host, (STRING)_Region)
+AND
+_Region == "TUT_Avernus_C"
+THEN
+NOT DB_AMP_VoidPact_Offered(0);
+DB_AMP_VoidPact_Offered(1);
+TimerLaunch("AMP_VoidPact_Delay", 10000);
+
+// timer -> offer the pact
+IF
+TimerFinished("AMP_VoidPact_Delay")
+AND
+DB_AMP_VoidPact_Offered(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+NOT DB_AMP_VoidPact_Offered(1);
+DB_AMP_VoidPact_Offered(2);
+OpenMessageBoxYesNo(_Host, "AMP_VoidPact_Offer");
+
+// yes -> capsules to host, curse applied to party below
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_VoidPact_Offer", 1)
+AND
+DB_AMP_VoidPact_Offered(2)
+THEN
+NOT DB_AMP_VoidPact_Offered(2);
+DB_AMP_VoidPact_Offered(3);
+DB_AMP_VoidPact_Accepted(1);
+GenerateTreasure(_Host, "AMP_VoidPact_Capsules", 1, _Host);
+
+// hp curse on every party member
+IF
+DB_AMP_VoidPact_Accepted(1)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+ApplyStatus(_Player, "AMP_VOIDPACT_HP_CURSE", -1.0, 1, _Player);
+
+// no -> just advance state
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_VoidPact_Offer", 0)
+AND
+DB_AMP_VoidPact_Offered(2)
+THEN
+NOT DB_AMP_VoidPact_Offered(2);
+DB_AMP_VoidPact_Offered(3);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,97 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// replaces base AMP_FORCE_HOSTILE: it makes pursuers infight and its SetFaction loop can hard-lock
+
+// pool mobs already carry Evil NPC by RootTemplate, this just pins it against re-eval drift
+PROC
+PROC_AMP_Plus_ApplyPursuerFaction((CHARACTER)_Mob)
+AND
+NOT DB_Players(_Mob)
+THEN
+ApplyStatus(_Mob, "AMP_Plus_PURSUER_HOSTILE", -1.0, 1, _Mob);
+
+// base applies AMP_FORCE_HOSTILE on boss death, chase respawn and teleport re-engage, strip it
+IF
+StatusApplied((CHARACTER)_Mob, "AMP_FORCE_HOSTILE", _, _)
+AND
+DB_AMP_Plus_UltraMob(_Mob, _)
+AND
+NOT DB_Players(_Mob)
+THEN
+RemoveStatus(_Mob, "AMP_FORCE_HOSTILE", NULL_00000000-0000-0000-0000-000000000000);
+PROC_AMP_Plus_ApplyPursuerFaction(_Mob);
+
+// console: oe AMP_UltraSpawnBatch
+IF
+TextEvent("AMP_UltraSpawnBatch")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsDead(_Host, 0)
+AND
+GetPosition(_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+THEN
+PROC_AMP_Plus_UltraSpawnSized(_Host, _HX, _HY, _HZ);
+
+
+// base SetFaction copies the parent's faction with no hostility check, a recruited boss flips the mob to the player's side
+// the override wins over SetFaction and persists. mob == boss is skipped
+IF
+DB_AMP_Plus_UltraMob((CHARACTER)_Mob, (CHARACTER)_Boss)
+AND
+NOT _Mob == _Boss
+AND
+NOT DB_Players(_Mob)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_Boss, _Host, 0)
+THEN
+PROC_AMP_Plus_ApplyPursuerFaction(_Mob);
+
+// belt: parent is a party member, force hostile whatever its faction reads
+IF
+DB_AMP_Plus_UltraMob((CHARACTER)_Mob, (CHARACTER)_Boss)
+AND
+NOT _Mob == _Boss
+AND
+NOT DB_Players(_Mob)
+AND
+DB_Players(_Boss)
+THEN
+PROC_AMP_Plus_ApplyPursuerFaction(_Mob);
+
+// insurance for standalone batch mobs, the nets above skip mob == boss
+// keyed on chase records, the base registration record is gone after spawn
+IF
+EnteredCombat((CHARACTER)_Mob, (GUIDSTRING)_C)
+AND
+DB_AMP_Plus_ChaseActive(_Mob, _)
+AND
+NOT DB_Players(_Mob)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_Mob, _Host, 0)
+THEN
+PROC_AMP_Plus_ApplyPursuerFaction(_Mob);
+
+IF
+EnteredCombat((CHARACTER)_Mob, (GUIDSTRING)_C)
+AND
+DB_AMP_Plus_Chase(_Mob, _)
+AND
+NOT DB_Players(_Mob)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_Mob, _Host, 0)
+THEN
+PROC_AMP_Plus_ApplyPursuerFaction(_Mob);
+
+EXITSECTION
+ENDEXITSECTION

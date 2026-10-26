@@ -1,0 +1,21 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// void marker on player -> spawn a random void capsule
+IF
+StatusApplied(_Player, "ARMOUR_H_83_VOID_MARKER", _, _)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+QRY_GetRandom("DB_AMP_VoidCapsule_Container", 2, "DB_AMP_H83_RandomCapsule")
+AND
+DB_AMP_H83_RandomCapsule((ITEMROOT)_Template, (STRING)_Type)
+THEN
+NOT DB_AMP_H83_RandomCapsule(_Template, _Type);
+TemplateAddTo(_Template, _Player, 1, 1);
+
+EXITSECTION
+
+ENDEXITSECTION

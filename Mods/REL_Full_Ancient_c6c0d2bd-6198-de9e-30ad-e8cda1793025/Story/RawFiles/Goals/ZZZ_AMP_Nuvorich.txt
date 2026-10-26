@@ -1,0 +1,19 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// nuvorich shard - random reward on killing blow
+
+KBSECTION
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_NUVORICH_TRIGGER", _, _)
+AND
+DB_Players(_Char)
+THEN
+TemplateAddTo((ITEMROOT)AMP_Capsule_Reward_Generic_1_bc44d261-edfb-424e-ab61-98d16899ab7b, _Char, 1, 1);
+ApplyStatus(_Char, "AMP_NUVORICH_VFX", 0.0, 1, _Char);
+RemoveStatus(_Char, "AMP_NUVORICH_TRIGGER");
+
+EXITSECTION
+ENDEXITSECTION

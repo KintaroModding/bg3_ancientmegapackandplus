@@ -1,0 +1,39 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// ranged animation only resolves with a bow in hand
+IF
+CastedSpell((CHARACTER)_Caster, "AMP_Tickhara_StarArrow", _, _, _)
+THEN
+RealtimeObjectTimerLaunch(_Caster, "AMP_Plus_TickharaBowStow", 1000);
+
+IF
+ObjectTimerFinished((CHARACTER)_Caster, "AMP_Plus_TickharaBowStow")
+AND
+GetEquippedItem(_Caster, "Ranged Main Weapon", (ITEM)_Bow)
+AND
+NOT DB_AMP_Plus_TickharaBow(_Caster, _Bow)
+THEN
+DB_AMP_Plus_TickharaBow(_Caster, _Bow);
+Unequip(_Caster, _Bow);
+
+IF
+TurnStarted((CHARACTER)_Caster)
+AND
+DB_AMP_Plus_TickharaBow(_Caster, (ITEM)_Bow)
+THEN
+NOT DB_AMP_Plus_TickharaBow(_Caster, _Bow);
+Equip(_Caster, _Bow, 1, 0, 0);
+
+IF
+Died((CHARACTER)_Caster)
+AND
+DB_AMP_Plus_TickharaBow(_Caster, (ITEM)_Bow)
+THEN
+NOT DB_AMP_Plus_TickharaBow(_Caster, _Bow);
+
+EXITSECTION
+ENDEXITSECTION

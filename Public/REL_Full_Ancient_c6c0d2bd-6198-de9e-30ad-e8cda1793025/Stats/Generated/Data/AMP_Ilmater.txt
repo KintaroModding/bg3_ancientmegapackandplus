@@ -1,0 +1,2297 @@
+// Ilmater expansion, Stigma mechanic
+
+
+// STIGMA: base status + 10 variants
+
+new entry "AMP_STIGMA_BASE"
+type "StatusData"
+data "StatusType" "BOOST"
+data "DisplayName" "hfee86ed4g0537g4aecg9f15gb7f03e53b7ac;1"
+data "Description" "h1f7cdec7g145eg4e03g9b5dgbd3b94a17d33;1"
+data "Icon" "AMP_STIGMATA"
+data "FormatColor" "White"
+data "StackId" "AMP_STIGMA"
+data "StackType" "Ignore"
+data "TickType" "StartTurn"
+data "OnApplyFunctors" "ApplyStatus(BLEEDING,100,1)"
+data "TickFunctors" "IF(Combat()):ApplyStatus(BLEEDING,100,1)"
+data "Boosts" "DownedStatus(AMP_STIGMA_DOWNED,10)"
+data "StatusPropertyFlags" "ForceOverhead"
+data "StatusEffect" "a73c531b-5059-47ed-9d0d-ef79094a2176"
+data "ApplyEffect" "c1ca06e2-9e10-4fc6-8aff-b149fb97bd34"
+
+new entry "AMP_STIGMA_HEALED_MARKER"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_STIGMA_HEALED_MARKER"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;ApplyToDead"
+data "RemoveEvents" "OnCombatEnded"
+
+
+// Equip markers per slot. Removal makes Osiris clear Stigmas via DB_AMP_Ilmater_StigmaLink
+
+new entry "AMP_ILMATER_AMULET_EQUIPPED"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_AMULET_EQUIPPED"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+new entry "AMP_ILMATER_RING_EQUIPPED"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_RING_EQUIPPED"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+new entry "AMP_ILMATER_DIADEM_EQUIPPED"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_DIADEM_EQUIPPED"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+new entry "AMP_ILMATER_ROBE_EQUIPPED"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_ROBE_EQUIPPED"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+new entry "AMP_ILMATER_CLOAK_EQUIPPED"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_CLOAK_EQUIPPED"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+new entry "AMP_ILMATER_GLOVES_EQUIPPED"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_GLOVES_EQUIPPED"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+new entry "AMP_ILMATER_BOOTS_EQUIPPED"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_BOOTS_EQUIPPED"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+new entry "AMP_ILMATER_HELMET_EQUIPPED"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_HELMET_EQUIPPED"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+new entry "AMP_ILMATER_MEDIUMARMOR_EQUIPPED"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_MEDIUMARMOR_EQUIPPED"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+new entry "AMP_ILMATER_HEAVYARMOR_EQUIPPED"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_HEAVYARMOR_EQUIPPED"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+
+// Tier markers, only Diadem and Boots. Osiris reads caster tier from them
+
+new entry "AMP_ILMATER_DIADEM_T2_EQUIPPED"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_DIADEM_T2_EQUIPPED"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+new entry "AMP_ILMATER_DIADEM_T3_EQUIPPED"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_DIADEM_T3_EQUIPPED"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+new entry "AMP_ILMATER_DIADEM_T4_EQUIPPED"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_DIADEM_T4_EQUIPPED"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+new entry "AMP_ILMATER_BOOTS_T1_EQUIPPED"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_BOOTS_T1_EQUIPPED"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+new entry "AMP_ILMATER_BOOTS_T2_EQUIPPED"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_BOOTS_T2_EQUIPPED"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+new entry "AMP_ILMATER_BOOTS_T3_EQUIPPED"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_BOOTS_T3_EQUIPPED"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+new entry "AMP_ILMATER_BOOTS_T4_EQUIPPED"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_BOOTS_T4_EQUIPPED"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+
+new entry "AMP_ILMATER_PROVIDENCE_REGEN_T2"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_PROVIDENCE_REGEN"
+data "TickType" "StartTurn"
+data "TickFunctors" "IF(Combat() and HasHPPercentageWithoutTemporaryHPLessThan(100,context.Target)):RegainHitPoints(1d4)"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting"
+data "RemoveConditions" "not HasAnyAMPIlmaterStigma(context.Target)"
+data "RemoveEvents" "OnStatusRemoved"
+
+new entry "AMP_ILMATER_PROVIDENCE_REGEN_T3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_PROVIDENCE_REGEN_T2"
+data "TickFunctors" "IF(Combat() and HasHPPercentageWithoutTemporaryHPLessThan(100,context.Target)):RegainHitPoints(1d6)"
+
+new entry "AMP_ILMATER_PROVIDENCE_REGEN_T4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_PROVIDENCE_REGEN_T2"
+data "TickFunctors" "IF(Combat() and HasHPPercentageWithoutTemporaryHPLessThan(100,context.Target)):RegainHitPoints(1d8)"
+
+
+new entry "AMP_ILMATER_RETRIBUTION_MARKER_T4"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_RETRIBUTION_MARKER"
+data "Passives" "AMP_Ilmater_Retribution_Hidden_Passive_4"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting"
+data "RemoveConditions" "not HasAnyAMPIlmaterStigma(context.Target)"
+data "RemoveEvents" "OnStatusRemoved"
+
+
+new entry "AMP_ILMATER_PROPHET_MARKER_T1"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_PROPHET_MARKER"
+data "Passives" "AMP_Ilmater_Prophet_Hidden_Passive_T1"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting"
+data "RemoveConditions" "not HasAnyAMPIlmaterStigma(context.Target)"
+data "RemoveEvents" "OnStatusRemoved"
+
+new entry "AMP_ILMATER_PROPHET_MARKER_T2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_PROPHET_MARKER_T1"
+data "Passives" "AMP_Ilmater_Prophet_Hidden_Passive_T2"
+
+new entry "AMP_ILMATER_PROPHET_MARKER_T3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_PROPHET_MARKER_T1"
+data "Passives" "AMP_Ilmater_Prophet_Hidden_Passive_T3"
+
+new entry "AMP_ILMATER_PROPHET_MARKER_T4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_PROPHET_MARKER_T1"
+data "Passives" "AMP_Ilmater_Prophet_Hidden_Passive_T4"
+
+
+// Prophet trigger, 0-duration. Osiris turns it into GiveInspirationPoints
+new entry "AMP_ILMATER_PROPHET_INSPIRATION_TRIGGER"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_PROPHET_INSPIRATION_TRIGGER"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting"
+
+
+new entry "AMP_STIGMA_AMULET"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_BASE"
+data "DisplayName" "hf276f7c3g35f1g4529gbed8g23bad5823075;1"
+data "Description" "ha88bfc36gb669g403fg9722g5c56ef0c8bd5;1"
+
+
+new entry "AMP_STIGMA_RING"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_BASE"
+data "DisplayName" "h0dbd5b46g768eg4a48gbc28g9d039588d51d;1"
+data "Description" "he27f4f01g134fg4511ga3a5g7641a778a843;1"
+data "Boosts" "DownedStatus(AMP_STIGMA_DOWNED,10);Attribute(Grounded)"
+
+
+new entry "AMP_STIGMA_DIADEM"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_BASE"
+data "DisplayName" "hf978dd37g285bg4363ga1ccg4b710f257836;1"
+data "Description" "hcb8a6c1cg9bf1g4123g9254g8c889b6b0780;1"
+data "Boosts" "DownedStatus(AMP_STIGMA_DOWNED,10);SpellResistance(Resistant)"
+
+
+new entry "AMP_STIGMA_ROBE"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_BASE"
+data "DisplayName" "h6723d47eg8406g42f8ga152gd2062bfe4fe5;1"
+data "Description" "h73e31ca9g5287g4082ga79eg818df753b75e;1"
+data "Boosts" "DownedStatus(AMP_STIGMA_DOWNED,10);StatusImmunity(SG_Frightened);StatusImmunity(SG_Charmed);StatusImmunity(SG_Sleeping)"
+
+
+new entry "AMP_STIGMA_CLOAK"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_BASE"
+data "DisplayName" "ha006f772g45beg4be0gbe6dg624ea8eca2a3;1"
+data "Description" "h287be20bgedb9g436dga58dga2986567ca16;1"
+data "DescriptionParams" "10"
+data "Boosts" "DownedStatus(AMP_STIGMA_DOWNED,10);Reroll(Attack,10,false)"
+
+
+new entry "AMP_STIGMA_GLOVES"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_BASE"
+data "DisplayName" "hcaa962d3g8d49g4f4cg88deg617305a137a6;1"
+data "Description" "h1a29a71eg57e8g455dg9538g9938a3af856c;1"
+data "Boosts" "DownedStatus(AMP_STIGMA_DOWNED,10);ActionResource(BonusActionPoint,1,0)"
+
+
+new entry "AMP_STIGMA_BOOTS"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_BASE"
+data "DisplayName" "h8ec7b9f4gd0ffg4d0fg9ddeg7cd5b582e86a;1"
+data "Description" "h7733e85cg431fg4c0bga99cg5a77e8ef66c2;1"
+
+
+new entry "AMP_STIGMA_HELMET"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_BASE"
+data "DisplayName" "hf300bbacgdf22g4e15g95ffg47c19fa9e17f;1"
+data "Description" "h69e827a2g883bg4f1aga257g132c233e6160;1"
+data "DescriptionParams" "DealDamage(,Radiant)"
+
+
+new entry "AMP_STIGMA_MEDIUMARMOR"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_BASE"
+data "DisplayName" "hac5a30dbgdabag483bgb7f5ge056bcbfae6b;1"
+data "Description" "h17eba199g2448g4967gb756gf77b9f017462;1"
+data "Boosts" "DownedStatus(AMP_STIGMA_DOWNED,10);Resistance(Slashing,Resistant);Resistance(Piercing,Resistant);Resistance(Bludgeoning,Resistant);Resistance(Fire,Vulnerable);Resistance(Cold,Vulnerable);Resistance(Lightning,Vulnerable);Resistance(Thunder,Vulnerable);Resistance(Acid,Vulnerable);Resistance(Poison,Vulnerable);Resistance(Necrotic,Vulnerable);Resistance(Radiant,Vulnerable);Resistance(Psychic,Vulnerable);Resistance(Force,Vulnerable)"
+
+
+new entry "AMP_STIGMA_HEAVYARMOR"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_BASE"
+data "DisplayName" "hb4c66339g7bd6g4780g84b4gb1b507bbb913;1"
+data "Description" "h5de54cc6gcbc1g465dgb655g80b547f166cf;1"
+data "Boosts" "DownedStatus(AMP_STIGMA_DOWNED,10);CriticalHit(AttackTarget,Success,Never)"
+
+
+// Stigma Downed (auto-revive) + Surge (Action Surge)
+
+new entry "AMP_STIGMA_DOWNED"
+type "StatusData"
+data "StatusType" "DOWNED"
+using "SURVIVAL_INSTINCT_DOWNED"
+data "DisplayName" "h2202817cg14afg4411gabfbg1ed16011f20c;1"
+data "Description" "h76dc967cgb340g4594gb706g84ced26870ed;1"
+data "Icon" "PassiveFeature_RelentlessEndurance"
+data "OnApplyFunctors" "RemoveStatus(AMP_STIGMA_AMULET);RemoveStatus(AMP_STIGMA_RING);RemoveStatus(AMP_STIGMA_DIADEM);RemoveStatus(AMP_STIGMA_ROBE);RemoveStatus(AMP_STIGMA_CLOAK);RemoveStatus(AMP_STIGMA_GLOVES);RemoveStatus(AMP_STIGMA_BOOTS);RemoveStatus(AMP_STIGMA_HELMET);RemoveStatus(AMP_STIGMA_MEDIUMARMOR);RemoveStatus(AMP_STIGMA_HEAVYARMOR);RemoveStatus(AMP_STIGMA_AMULET_1);RemoveStatus(AMP_STIGMA_AMULET_2);RemoveStatus(AMP_STIGMA_AMULET_3);RemoveStatus(AMP_STIGMA_AMULET_4);RemoveStatus(AMP_STIGMA_DIADEM_1);RemoveStatus(AMP_STIGMA_DIADEM_2);RemoveStatus(AMP_STIGMA_DIADEM_3);RemoveStatus(AMP_STIGMA_DIADEM_4);RemoveStatus(AMP_STIGMA_HELMET_1);RemoveStatus(AMP_STIGMA_HELMET_2);RemoveStatus(AMP_STIGMA_HELMET_3);RemoveStatus(AMP_STIGMA_HELMET_4);RemoveStatus(AMP_STIGMA_MEDIUMARMOR_1);RemoveStatus(AMP_STIGMA_MEDIUMARMOR_2);RemoveStatus(AMP_STIGMA_MEDIUMARMOR_3);RemoveStatus(AMP_STIGMA_MEDIUMARMOR_4);RemoveStatus(AMP_STIGMA_HEAVYARMOR_1);RemoveStatus(AMP_STIGMA_HEAVYARMOR_2);RemoveStatus(AMP_STIGMA_HEAVYARMOR_3);RemoveStatus(AMP_STIGMA_HEAVYARMOR_4);RemoveStatus(AMP_STIGMA_HEALED_MARKER);RegainHitPoints(MaxHP/2,Guaranteed);ApplyStatus(ACTION_SURGE,100,1)"
+data "StatusGroups" "SG_Incapacitated"
+data "ApplyEffect" "f40e4c72-3971-4f14-9c43-9a44c0251a5d"
+
+
+// Veil (inherits Globe of Invulnerability)
+
+new entry "AMP_VEIL"
+type "StatusData"
+data "StatusType" "BOOST"
+using "GLOBE_OF_INVULNERABILITY"
+data "DisplayName" "h930158d8gd417g4acfg8758gf632f35ca50a;1"
+data "Description" "hd9c269f9g0a25g4434g94e4geef8b343be80;1"
+data "Icon" "Spell_Abjuration_Sanctuary"
+data "FormatColor" "White"
+data "StackId" "AMP_VEIL"
+
+
+new entry "AMP_VEIL_OVERSHADOWING"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_VEIL"
+data "RemoveEvents" "OnAttack"
+
+
+// Heal statuses, no StackId so procs stay independent
+
+new entry "AMP_ILMATER_HEAL_T2"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog"
+data "OnApplyFunctors" "RegainHitPoints(1d4)"
+data "ApplyEffect" "f40e4c72-3971-4f14-9c43-9a44c0251a5d"
+
+
+new entry "AMP_ILMATER_HEAL_T3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_HEAL_T2"
+data "OnApplyFunctors" "RegainHitPoints(1d6)"
+
+
+new entry "AMP_ILMATER_HEAL_T4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_HEAL_T2"
+data "OnApplyFunctors" "RegainHitPoints(1d8)"
+
+
+new entry "AMP_ILMATER_ECHO_HEAL_T2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_HEAL_T2"
+data "OnApplyFunctors" "RegainHitPoints(1d4)"
+
+
+new entry "AMP_ILMATER_ECHO_HEAL_T3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_HEAL_T2"
+data "OnApplyFunctors" "RegainHitPoints(1d4)"
+
+
+new entry "AMP_ILMATER_ECHO_HEAL_T4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_HEAL_T2"
+data "OnApplyFunctors" "RegainHitPoints(1d6)"
+
+
+new entry "AMP_ILMATER_LITANY_HEAL_MARKER_T2"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_LITANY_HEAL_MARKER"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+
+new entry "AMP_ILMATER_LITANY_HEAL_MARKER_T3"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_LITANY_HEAL_MARKER"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+
+new entry "AMP_ILMATER_LITANY_HEAL_MARKER_T4"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_LITANY_HEAL_MARKER"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+
+// Mysteries of Suffering (common set passive)
+
+new entry "AMP_Ilmater_Mysteries_Passive"
+type "PassiveData"
+data "DisplayName" "he4674180gb494g4048g9359g8fb0104fa720;1"
+data "Description" "h0fcf3abdgfcc0g40efg8f61gbc7eab47fa16;2"
+data "Icon" "PassiveFeature_Generic_Threat"
+data "Properties" "Highlighted"
+
+
+// Prayer base template (SpellData)
+
+new entry "AMP_Ilmater_Prayer_Base"
+type "SpellData"
+data "SpellType" "Target"
+data "Level" "0"
+data "SpellSchool" "Abjuration"
+data "TargetRadius" "2"
+data "TargetConditions" "Character() and Ally()"
+data "UseCosts" "ActionPoint:1"
+data "SpellFlags" "HasVerbalComponent;HasSomaticComponent;IsSpell"
+data "VerbalIntent" "Utility"
+data "CastTextEvent" "Cast"
+data "SpellAnimation" "dd86aa43-8189-4d9f-9a5c-454b5fe4a197,,;,,;af94aac1-d8eb-4ccb-9520-694ade11b61c,,;f5db4001-b136-4c48-9aa4-026c4a7dd3b7,,;cc5b0caf-3ed1-4711-a50d-11dc3f1fdc6a,,;,,;1715b877-4512-472e-9bd0-fd568a112e90,,;54ae8856-36b2-4f70-8bd3-c2a760f93fd5,,;8ce3e582-e8bb-4d2f-9c5c-46c70c9b87c0,,"
+data "PrepareSound" "Spell_Prepare_Buff_Gen_L1to3_01"
+data "PrepareLoopSound" "Spell_Prepare_Buff_Gen_L1to3_01_Loop"
+data "CastSound" "Spell_Cast_Buff_FeignDeath_L1to3"
+data "TargetSound" "CrSpell_Impact_Cloaker_Phantasms"
+data "VocalComponentSound" "Vocal_Component_Stabilize"
+data "MaximumTargets" "1"
+data "MemoryCost" "0"
+data "PrepareEffect" "ed0eca36-bb47-4a0f-a6ab-cea918becc0c"
+data "CastEffect" "53e0e991-333e-4676-a84a-a1a1b677c2f3"
+data "TargetEffect" "6d8d4da9-0c0e-473e-b598-19f721be0679"
+data "Cooldown" "OncePerRestPerItem"
+
+
+// VESSEL: The Chosen One's Palms (Prayer of Communion)
+
+new entry "AMP_ILMATER_COMMUNION_THP_1"
+type "StatusData"
+data "StatusType" "BOOST"
+using "MAG_TEMPORARY_HP"
+data "StackPriority" "8"
+data "Boosts" "TemporaryHP(8)"
+
+
+new entry "AMP_ILMATER_COMMUNION_THP_2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "MAG_TEMPORARY_HP"
+data "StackPriority" "14"
+data "Boosts" "TemporaryHP(14)"
+
+
+new entry "AMP_ILMATER_COMMUNION_THP_3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "MAG_TEMPORARY_HP"
+data "StackPriority" "30"
+data "Boosts" "TemporaryHP(30)"
+
+
+new entry "AMP_ILMATER_COMMUNION_THP_4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "MAG_TEMPORARY_HP"
+data "StackPriority" "50"
+data "Boosts" "TemporaryHP(50)"
+
+
+new entry "AMP_STIGMA_AMULET_1"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_AMULET"
+data "Passives" "AMP_STIGMA_AMULET_1_THP_Trigger"
+
+
+new entry "AMP_STIGMA_AMULET_2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_AMULET"
+data "Passives" "AMP_STIGMA_AMULET_2_THP_Trigger"
+
+
+new entry "AMP_STIGMA_AMULET_3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_AMULET"
+data "Passives" "AMP_STIGMA_AMULET_3_THP_Trigger"
+
+
+new entry "AMP_STIGMA_AMULET_4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_AMULET"
+data "Passives" "AMP_STIGMA_AMULET_4_THP_Trigger"
+
+
+new entry "AMP_STIGMA_AMULET_1_THP_Trigger"
+type "PassiveData"
+data "Properties" "IsHidden"
+data "StatsFunctorContext" "OnCombatStarted"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_ILMATER_COMMUNION_THP_1,100,-1)"
+
+new entry "AMP_STIGMA_AMULET_2_THP_Trigger"
+type "PassiveData"
+data "Properties" "IsHidden"
+data "StatsFunctorContext" "OnCombatStarted"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_ILMATER_COMMUNION_THP_2,100,-1)"
+
+new entry "AMP_STIGMA_AMULET_3_THP_Trigger"
+type "PassiveData"
+data "Properties" "IsHidden"
+data "StatsFunctorContext" "OnCombatStarted"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_ILMATER_COMMUNION_THP_3,100,-1)"
+
+new entry "AMP_STIGMA_AMULET_4_THP_Trigger"
+type "PassiveData"
+data "Properties" "IsHidden"
+data "StatsFunctorContext" "OnCombatStarted"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_ILMATER_COMMUNION_THP_4,100,-1)"
+
+
+new entry "AMP_Ilmater_Prayer_Communion_1"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Base"
+data "RequirementConditions" "Tagged('CLERIC_ILMATER',context.Source) or Tagged('PALADIN_ILMATER',context.Source)"
+data "DisplayName" "hd2a09feege148g4cfbg93a2g8a135ebb55c8;1"
+data "Description" "hc57b7667gd054g4c8bg9c73g4bef4b67852b;1"
+data "DescriptionParams" "8;3"
+data "TargetConditions" "Character() and Ally() and not Self()"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_AMULET_1,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_AMULET_1,100,-1)"
+data "Icon" "AMP_StigmaPray"
+data "Cooldown" "OncePerRestPerItem"
+
+
+new entry "AMP_Ilmater_Prayer_Communion_2"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Communion_1"
+data "DescriptionParams" "14;3"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_AMULET_2,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_AMULET_2,100,-1)"
+
+
+new entry "AMP_Ilmater_Prayer_Communion_3"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Communion_1"
+data "DescriptionParams" "30;3"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_AMULET_3,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_AMULET_3,100,-1)"
+
+
+new entry "AMP_Ilmater_Prayer_Communion_4"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Communion_1"
+data "DescriptionParams" "50;3"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_AMULET_4,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_AMULET_4,100,-1)"
+data "Cooldown" "OncePerCombat"
+
+
+new entry "AMP_ILMATER_ANOINTING_HEAL_2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_HEAL_T2"
+data "OnApplyFunctors" "RegainHitPoints(2d4)"
+
+
+new entry "AMP_ILMATER_ANOINTING_HEAL_3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_HEAL_T2"
+data "OnApplyFunctors" "RegainHitPoints(3d4)"
+
+
+new entry "AMP_ILMATER_ANOINTING_HEAL_4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_HEAL_T2"
+data "OnApplyFunctors" "RegainHitPoints(4d4)"
+
+
+new entry "AMP_Ilmater_Anointing_Passive_2"
+type "PassiveData"
+data "DisplayName" "h64608e9agf5d8g4d15g88e2gcc2dc1c053ce;1"
+data "Description" "hdab8b19eg861eg4a47ga33bg8a97e71be29f;1"
+data "DescriptionParams" "RegainHitPoints(2d4)"
+data "Properties" "Highlighted;OncePerTurn"
+data "StatsFunctorContext" "OnHeal"
+data "Conditions" "HasAnyAMPIlmaterStigma(context.Target) and HasHPPercentageWithoutTemporaryHPLessThan(50, context.Target)"
+data "StatsFunctors" "ApplyStatus(AMP_ILMATER_ANOINTING_HEAL_2,100,0)"
+
+
+new entry "AMP_Ilmater_Anointing_Passive_3"
+type "PassiveData"
+using "AMP_Ilmater_Anointing_Passive_2"
+data "DescriptionParams" "RegainHitPoints(3d4)"
+data "StatsFunctors" "ApplyStatus(AMP_ILMATER_ANOINTING_HEAL_3,100,0)"
+
+
+new entry "AMP_Ilmater_Anointing_Passive_4"
+type "PassiveData"
+using "AMP_Ilmater_Anointing_Passive_2"
+data "DescriptionParams" "RegainHitPoints(4d4)"
+data "StatsFunctors" "ApplyStatus(AMP_ILMATER_ANOINTING_HEAL_4,100,0)"
+
+
+new entry "AMP_ILMATER_TRANSFERENCE_HEAL_3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_HEAL_T2"
+data "OnApplyFunctors" "RegainHitPoints(1d4)"
+
+
+new entry "AMP_ILMATER_TRANSFERENCE_HEAL_4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_HEAL_T2"
+data "OnApplyFunctors" "RegainHitPoints(1d8)"
+
+
+new entry "AMP_Ilmater_Transference_Passive_3"
+type "PassiveData"
+data "DisplayName" "h704f0951gb2dag4a44g80d1gb0e426c169d6;1"
+data "Description" "hca3f058fg51c6g48d5g9016ge5b0d9346fdf;1"
+data "DescriptionParams" "RegainHitPoints(1d4)"
+data "Properties" "Highlighted"
+data "StatsFunctorContext" "OnAttack"
+data "Conditions" "HasForeignStigma_Amulet(context.Target) and IsSpell() and Ally() and not Self()"
+data "StatsFunctors" "ApplyStatus(AMP_ILMATER_TRANSFERENCE_HEAL_3,100,0)"
+
+
+new entry "AMP_Ilmater_Transference_Passive_4"
+type "PassiveData"
+using "AMP_Ilmater_Transference_Passive_3"
+data "DescriptionParams" "RegainHitPoints(1d8)"
+data "StatsFunctors" "ApplyStatus(AMP_ILMATER_TRANSFERENCE_HEAL_4,100,0)"
+
+
+new entry "AMP_Ilmater_Amulet"
+type "Armor"
+using "ARM_Amulet"
+data "RootTemplate" "1592aee9-4449-4cb8-bbf6-cac030bd4278"
+data "Rarity" "Uncommon"
+data "ValueOverride" "200"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive"
+data "StatusOnEquip" "AMP_ILMATER_AMULET_EQUIPPED"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Communion_1)"
+
+
+new entry "AMP_Ilmater_Amulet_2"
+type "Armor"
+using "AMP_Ilmater_Amulet"
+data "Rarity" "Rare"
+data "ValueOverride" "500"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Anointing_Passive_2"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Communion_2)"
+
+
+new entry "AMP_Ilmater_Amulet_3"
+type "Armor"
+using "AMP_Ilmater_Amulet"
+data "Rarity" "VeryRare"
+data "ValueOverride" "1000"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Anointing_Passive_3;AMP_Ilmater_Transference_Passive_3"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Communion_3)"
+
+
+new entry "AMP_Ilmater_Amulet_4"
+type "Armor"
+using "AMP_Ilmater_Amulet"
+data "Rarity" "Legendary"
+data "ValueOverride" "3000"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Anointing_Passive_4;AMP_Ilmater_Transference_Passive_4"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Communion_4)"
+
+
+// VESSEL: Ring of the Red Window (Prayer of Anchoring)
+
+new entry "AMP_Ilmater_Prayer_Anchoring_1"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Base"
+data "RequirementConditions" "Tagged('CLERIC_ILMATER',context.Source) or Tagged('PALADIN_ILMATER',context.Source)"
+data "DisplayName" "h1be40b5eg9920g48d9g8d67g9be62215e4ea;1"
+data "Description" "h4fc474e9g9706g4be1gaf96g5fff6f77c1c2;1"
+data "DescriptionParams" "3"
+data "TargetConditions" "Character() and Ally() and not Self()"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_RING,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_RING,100,-1)"
+data "Icon" "AMP_StigmaPray"
+data "Cooldown" "OncePerRestPerItem"
+
+
+new entry "AMP_Ilmater_Prayer_Anchoring_2"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Anchoring_1"
+
+
+new entry "AMP_Ilmater_Prayer_Anchoring_3"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Anchoring_1"
+
+
+new entry "AMP_Ilmater_Prayer_Anchoring_4"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Anchoring_1"
+data "Cooldown" "OncePerCombat"
+
+
+new entry "AMP_ILMATER_RING_ENEMY_DISADV"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_RING_ENEMY_DISADV"
+data "StackType" "Ignore"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
+data "Boosts" "Disadvantage(AttackRoll)"
+
+
+new entry "AMP_ILMATER_RING_PROJECTOR_T2"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_Ilmater_Ring_Projector"
+data "StackType" "Ignore"
+data "AuraRadius" "2"
+data "AuraStatuses" "TARGET:IF(Enemy() and Character()):ApplyStatus(AMP_ILMATER_RING_ENEMY_DISADV)"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
+
+
+new entry "AMP_ILMATER_RING_PROJECTOR_T3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_RING_PROJECTOR_T2"
+data "AuraRadius" "3"
+
+
+new entry "AMP_ILMATER_RING_PROJECTOR_T4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_RING_PROJECTOR_T2"
+data "AuraRadius" "4"
+
+
+new entry "AMP_ILMATER_RING_AURA_T2"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_Ilmater_Ring_Aura"
+data "AuraRadius" "30"
+data "AuraStatuses" "TARGET:IF((Ally() or Self()) and Character() and HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_ILMATER_RING_PROJECTOR_T2)"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator;IgnoreResting"
+
+
+new entry "AMP_ILMATER_RING_AURA_T3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_RING_AURA_T2"
+data "AuraStatuses" "TARGET:IF((Ally() or Self()) and Character() and HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_ILMATER_RING_PROJECTOR_T3)"
+
+
+new entry "AMP_ILMATER_RING_AURA_T4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_RING_AURA_T2"
+data "AuraStatuses" "TARGET:IF((Ally() or Self()) and Character() and HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_ILMATER_RING_PROJECTOR_T4)"
+
+
+new entry "AMP_Ilmater_WatchfulEye_Passive_2"
+type "PassiveData"
+data "DisplayName" "h5dce7526g7620g44e2ga4aag85840ae4c10f;1"
+data "Description" "h169d6248gd129g45ccg90begf0901c22ce37;1"
+data "DescriptionParams" "Distance(2)"
+data "Properties" "Highlighted"
+data "StatsFunctorContext" "OnCreate;OnLongRest"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_ILMATER_RING_AURA_T2,100,-1)"
+
+
+new entry "AMP_Ilmater_WatchfulEye_Passive_3"
+type "PassiveData"
+using "AMP_Ilmater_WatchfulEye_Passive_2"
+data "DescriptionParams" "Distance(3)"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_ILMATER_RING_AURA_T3,100,-1)"
+
+
+new entry "AMP_Ilmater_WatchfulEye_Passive_4"
+type "PassiveData"
+using "AMP_Ilmater_WatchfulEye_Passive_2"
+data "DescriptionParams" "Distance(4)"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_ILMATER_RING_AURA_T4,100,-1)"
+
+
+new entry "Projectile_AMP_Ilmater_Flare_3"
+type "SpellData"
+data "SpellType" "Projectile"
+data "TargetRadius" "5"
+data "AreaRadius" "5"
+data "ExplodeRadius" "5"
+data "SpellSuccess" "DealDamage(1d6,Radiant,Magical)"
+data "TargetConditions" "Enemy() and Character() and not Dead()"
+data "Trajectories" "c63c4527-1bdf-4635-ad59-7d7e2f666fa3"
+data "SpellFlags" "ImmediateCast"
+data "TooltipDamageList" "DealDamage(1d6,Radiant)"
+
+
+new entry "Projectile_AMP_Ilmater_Flare_4"
+type "SpellData"
+data "SpellType" "Projectile"
+using "Projectile_AMP_Ilmater_Flare_3"
+data "SpellSuccess" "DealDamage(2d6,Radiant,Magical)"
+data "TooltipDamageList" "DealDamage(2d6,Radiant)"
+
+
+new entry "AMP_Ilmater_Flare_Passive_3"
+type "PassiveData"
+data "DisplayName" "hef68ab12g48b8g48f3gaab4g34e92d95bd69;1"
+data "Description" "h032d0083g0b9dg41aag93c2geb8799985b1d;1"
+data "DescriptionParams" "DealDamage(1d6,Radiant);Distance(5)"
+data "Properties" "Highlighted"
+data "StatsFunctorContext" "OnAttack"
+data "Conditions" "HasForeignStigma_Ring(context.Target) and IsSpell() and Ally() and not Self()"
+data "StatsFunctors" "CreateExplosion(Projectile_AMP_Ilmater_Flare_3)"
+
+
+new entry "AMP_Ilmater_Flare_Passive_4"
+type "PassiveData"
+using "AMP_Ilmater_Flare_Passive_3"
+data "DescriptionParams" "DealDamage(2d6,Radiant);Distance(5)"
+data "StatsFunctors" "CreateExplosion(Projectile_AMP_Ilmater_Flare_4)"
+
+
+new entry "AMP_Ilmater_Ring"
+type "Armor"
+using "_Ring_Magic"
+data "RootTemplate" "c68d9583-4379-47fb-a4b1-9a13a8dcf94f"
+data "Rarity" "Uncommon"
+data "ValueOverride" "150"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive"
+data "StatusOnEquip" "AMP_ILMATER_RING_EQUIPPED"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Anchoring_1)"
+
+
+new entry "AMP_Ilmater_Ring_2"
+type "Armor"
+using "AMP_Ilmater_Ring"
+data "Rarity" "Rare"
+data "ValueOverride" "400"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_WatchfulEye_Passive_2"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Anchoring_2)"
+
+
+new entry "AMP_Ilmater_Ring_3"
+type "Armor"
+using "AMP_Ilmater_Ring"
+data "Rarity" "VeryRare"
+data "ValueOverride" "800"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_WatchfulEye_Passive_3;AMP_Ilmater_Flare_Passive_3"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Anchoring_3)"
+
+
+new entry "AMP_Ilmater_Ring_4"
+type "Armor"
+using "AMP_Ilmater_Ring"
+data "Rarity" "Legendary"
+data "ValueOverride" "2500"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_WatchfulEye_Passive_4;AMP_Ilmater_Flare_Passive_4"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Anchoring_4)"
+
+
+// VESSEL: Diadem of the Nameless (Prayer of Sealing)
+
+new entry "AMP_Ilmater_DiademConcBreak_Hidden_Passive"
+type "PassiveData"
+data "Properties" "IsHidden"
+data "StatsFunctorContext" "OnDamaged"
+data "Conditions" "IsSpell() and IsConcentrating(context.Source)"
+data "StatsFunctors" "BreakConcentration(SWAP)"
+
+
+new entry "AMP_STIGMA_DIADEM_1"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_DIADEM"
+data "Passives" "AMP_Ilmater_DiademConcBreak_Hidden_Passive"
+
+
+new entry "AMP_STIGMA_DIADEM_2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_DIADEM"
+data "Passives" "AMP_Ilmater_DiademConcBreak_Hidden_Passive"
+
+
+new entry "AMP_STIGMA_DIADEM_3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_DIADEM"
+data "Passives" "AMP_Ilmater_DiademConcBreak_Hidden_Passive"
+
+
+new entry "AMP_STIGMA_DIADEM_4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_DIADEM"
+data "Passives" "AMP_Ilmater_DiademConcBreak_Hidden_Passive"
+
+
+new entry "AMP_Ilmater_Prayer_Sealing_1"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Base"
+data "RequirementConditions" "Tagged('CLERIC_ILMATER',context.Source) or Tagged('PALADIN_ILMATER',context.Source)"
+data "DisplayName" "h0485d806ga62ag4383g8adag4a3e16100b68;1"
+data "Description" "h6563f422gbbbag45a5gbaa6gc2c072937855;1"
+data "DescriptionParams" "3"
+data "TargetConditions" "Character() and Ally() and not Self()"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_DIADEM_1,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_DIADEM_1,100,-1)"
+data "Icon" "AMP_StigmaPray"
+data "Cooldown" "OncePerRestPerItem"
+
+
+new entry "AMP_Ilmater_Prayer_Sealing_2"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Sealing_1"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_DIADEM_2,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_DIADEM_2,100,-1)"
+
+
+new entry "AMP_Ilmater_Prayer_Sealing_3"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Sealing_1"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_DIADEM_3,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_DIADEM_3,100,-1)"
+
+
+new entry "AMP_Ilmater_Prayer_Sealing_4"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Sealing_1"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_DIADEM_4,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_DIADEM_4,100,-1)"
+data "Cooldown" "OncePerCombat"
+
+
+new entry "AMP_Ilmater_Providence_Passive_2"
+type "PassiveData"
+data "DisplayName" "hf014f324g802eg48adgb67ag8a0718ce6527;1"
+data "Description" "h01e2ea8bg21a0g45e0g80bfg6fe71f4a599c;1"
+data "DescriptionParams" "RegainHitPoints(1d4)"
+data "Properties" "Highlighted"
+
+
+new entry "AMP_Ilmater_Providence_Passive_3"
+type "PassiveData"
+using "AMP_Ilmater_Providence_Passive_2"
+data "DescriptionParams" "RegainHitPoints(1d6)"
+
+
+new entry "AMP_Ilmater_Providence_Passive_4"
+type "PassiveData"
+using "AMP_Ilmater_Providence_Passive_2"
+data "DescriptionParams" "RegainHitPoints(1d8)"
+
+
+new entry "Projectile_AMP_Ilmater_Radiance"
+type "SpellData"
+data "SpellType" "Projectile"
+data "TargetRadius" "9"
+data "AreaRadius" "9"
+data "ExplodeRadius" "9"
+data "SpellSuccess" "ApplyStatus(MAG_RADIANT_RADIATING_ORB,100,1);ApplyStatus(MAG_RADIANT_RADIATING_ORB_DURATION_TECHNICAL,100,1)"
+data "TargetConditions" "Enemy() and Character() and not Dead()"
+data "Trajectories" "c63c4527-1bdf-4635-ad59-7d7e2f666fa3"
+data "SpellFlags" "ImmediateCast"
+
+
+new entry "AMP_Ilmater_Radiance_Passive_3"
+type "PassiveData"
+data "DisplayName" "he1620065g2489g437fg8ed2g8feddadbaa4f;1"
+data "Description" "h51fb3e6ag3d89g40f3gbc91g084b57ae8117;1"
+data "DescriptionParams" "Distance(9);1"
+data "Properties" "Highlighted"
+data "StatsFunctorContext" "OnHeal"
+data "Conditions" "Ally() and HasForeignStigma_Diadem(context.Target)"
+data "StatsFunctors" "CreateExplosion(Projectile_AMP_Ilmater_Radiance)"
+
+
+new entry "AMP_Ilmater_Retribution_Passive_4"
+type "PassiveData"
+data "DisplayName" "h2c9ba5c8gd3eag4439ga279gcef4135ab295;1"
+data "Description" "h87807a1dg751cg4d15gb050g25798e6739cd;1"
+data "DescriptionParams" "3"
+data "Properties" "Highlighted"
+
+
+new entry "AMP_Ilmater_Retribution_Hidden_Passive_4"
+type "PassiveData"
+data "Properties" "IsHidden"
+data "StatsFunctorContext" "OnDamaged"
+data "Conditions" "IsMeleeAttack() and Enemy() and Combat() and HasLastAttackTriggered()"
+data "StatsFunctors" "UseSpell(SWAP,Target_Smite_Divine_3,true,true,true)"
+
+
+// not RollDieAgainstDC(d100, N) = N% trigger
+new entry "AMP_Ilmater_Prophet_Hidden_Passive_T1"
+type "PassiveData"
+data "Properties" "IsHidden"
+data "StatsFunctorContext" "OnStatusApplied"
+data "Conditions" "IsGameplayStatus() and Combat() and not RollDieAgainstDC(DiceType.d100,1)"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_ILMATER_PROPHET_INSPIRATION_TRIGGER,100,0)"
+
+new entry "AMP_Ilmater_Prophet_Hidden_Passive_T2"
+type "PassiveData"
+using "AMP_Ilmater_Prophet_Hidden_Passive_T1"
+
+new entry "AMP_Ilmater_Prophet_Hidden_Passive_T3"
+type "PassiveData"
+using "AMP_Ilmater_Prophet_Hidden_Passive_T1"
+data "Conditions" "IsGameplayStatus() and Combat() and not RollDieAgainstDC(DiceType.d100,2)"
+
+new entry "AMP_Ilmater_Prophet_Hidden_Passive_T4"
+type "PassiveData"
+using "AMP_Ilmater_Prophet_Hidden_Passive_T1"
+data "Conditions" "IsGameplayStatus() and Combat() and not RollDieAgainstDC(DiceType.d100,3)"
+
+
+new entry "AMP_Ilmater_Diadem"
+type "Armor"
+using "ARM_Circlet"
+data "RootTemplate" "dce9184a-36f4-4c03-93e7-6c5514d54ffb"
+data "Rarity" "Uncommon"
+data "ValueOverride" "300"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive"
+data "StatusOnEquip" "AMP_ILMATER_DIADEM_EQUIPPED"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Sealing_1)"
+
+
+new entry "AMP_Ilmater_Diadem_2"
+type "Armor"
+using "AMP_Ilmater_Diadem"
+data "Rarity" "Rare"
+data "ValueOverride" "600"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Providence_Passive_2"
+data "StatusOnEquip" "AMP_ILMATER_DIADEM_EQUIPPED;AMP_ILMATER_DIADEM_T2_EQUIPPED"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Sealing_2)"
+
+
+new entry "AMP_Ilmater_Diadem_3"
+type "Armor"
+using "AMP_Ilmater_Diadem"
+data "Rarity" "VeryRare"
+data "ValueOverride" "1200"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Providence_Passive_3;AMP_Ilmater_Radiance_Passive_3"
+data "StatusOnEquip" "AMP_ILMATER_DIADEM_EQUIPPED;AMP_ILMATER_DIADEM_T3_EQUIPPED"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Sealing_3)"
+
+
+new entry "AMP_Ilmater_Diadem_4"
+type "Armor"
+using "AMP_Ilmater_Diadem"
+data "Rarity" "Legendary"
+data "ValueOverride" "3500"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Providence_Passive_4;AMP_Ilmater_Radiance_Passive_3;AMP_Ilmater_Retribution_Passive_4"
+data "StatusOnEquip" "AMP_ILMATER_DIADEM_EQUIPPED;AMP_ILMATER_DIADEM_T4_EQUIPPED"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Sealing_4)"
+
+
+// VESSEL: Robe of the Yellow Rose (Prayer of Temperance)
+
+new entry "AMP_Ilmater_Prayer_Temperance_1"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Base"
+data "RequirementConditions" "Tagged('CLERIC_ILMATER',context.Source) or Tagged('PALADIN_ILMATER',context.Source)"
+data "DisplayName" "h3291b2c1g47fag4d8dga3b9g7738a5e930ae;1"
+data "Description" "h588067c8g59c6g4888gbf93gf5b827b293e3;1"
+data "DescriptionParams" "3"
+data "TargetConditions" "Character() and Ally() and not Self()"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_ROBE,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_ROBE,100,-1)"
+data "Icon" "AMP_StigmaPray"
+data "Cooldown" "OncePerRestPerItem"
+
+
+new entry "AMP_Ilmater_Prayer_Temperance_2"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Temperance_1"
+
+
+new entry "AMP_Ilmater_Prayer_Temperance_3"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Temperance_1"
+
+
+new entry "AMP_Ilmater_Prayer_Temperance_4"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Temperance_1"
+data "Cooldown" "OncePerCombat"
+
+
+new entry "AMP_ILMATER_AEGIS_THP_2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "MAG_TEMPORARY_HP"
+data "StackPriority" "5"
+data "Boosts" "TemporaryHP(5)"
+
+
+new entry "AMP_ILMATER_AEGIS_THP_3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "MAG_TEMPORARY_HP"
+data "StackPriority" "8"
+data "Boosts" "TemporaryHP(8)"
+
+
+new entry "AMP_ILMATER_AEGIS_THP_4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "MAG_TEMPORARY_HP"
+data "StackPriority" "15"
+data "Boosts" "TemporaryHP(15)"
+
+
+new entry "AMP_Ilmater_Aegis_Passive_2"
+type "PassiveData"
+data "DisplayName" "he3750c21gd324g4c0cga6c3g15a91a71c751;1"
+data "Description" "ha91b3e72gc922g4e7eg8f3bg902b8cba92c9;1"
+data "DescriptionParams" "5"
+data "Properties" "Highlighted;OncePerTurn"
+data "StatsFunctorContext" "OnHeal"
+data "Conditions" "IsSpell() and Ally()"
+data "StatsFunctors" "ApplyStatus(AMP_ILMATER_AEGIS_THP_2,100,-1)"
+
+
+new entry "AMP_Ilmater_Aegis_Passive_3"
+type "PassiveData"
+using "AMP_Ilmater_Aegis_Passive_2"
+data "DescriptionParams" "8"
+data "StatsFunctors" "ApplyStatus(AMP_ILMATER_AEGIS_THP_3,100,-1)"
+
+
+new entry "AMP_Ilmater_Aegis_Passive_4"
+type "PassiveData"
+using "AMP_Ilmater_Aegis_Passive_2"
+data "DescriptionParams" "15"
+data "StatsFunctors" "ApplyStatus(AMP_ILMATER_AEGIS_THP_4,100,-1)"
+
+
+new entry "Projectile_AMP_Ilmater_Overflow_3"
+type "SpellData"
+data "SpellType" "Projectile"
+data "TargetRadius" "3"
+data "AreaRadius" "3"
+data "ExplodeRadius" "3"
+data "SpellSuccess" "ApplyStatus(BLEEDING,100,2)"
+data "TargetConditions" "Enemy() and Character() and not Dead()"
+data "Trajectories" "f346b284-854e-4dd9-b87c-3938f5178265"
+data "SpellFlags" "ImmediateCast"
+
+
+new entry "Projectile_AMP_Ilmater_Overflow_4"
+type "SpellData"
+data "SpellType" "Projectile"
+using "Projectile_AMP_Ilmater_Overflow_3"
+data "TargetRadius" "4"
+data "AreaRadius" "4"
+data "ExplodeRadius" "4"
+
+
+new entry "AMP_Ilmater_Overflow_Passive_3"
+type "PassiveData"
+data "DisplayName" "h4e3901a9gf73eg43fag8269gb01aba1d5ad9;1"
+data "Description" "hc8979171ga0dbg4b49g93e1ge646b1615bc7;1"
+data "DescriptionParams" "Distance(3);2"
+data "Properties" "Highlighted"
+data "StatsFunctorContext" "OnHeal"
+data "Conditions" "IsSpell() and Ally() and HasForeignStigma_Robe(context.Target)"
+data "StatsFunctors" "CreateExplosion(Projectile_AMP_Ilmater_Overflow_3)"
+
+
+new entry "AMP_Ilmater_Overflow_Passive_4"
+type "PassiveData"
+using "AMP_Ilmater_Overflow_Passive_3"
+data "DescriptionParams" "Distance(4);2"
+data "StatsFunctors" "CreateExplosion(Projectile_AMP_Ilmater_Overflow_4)"
+
+
+new entry "AMP_ILMATER_OVERSHADOWING_TRACKER"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_OVERSHADOWING_TRACKER"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog"
+data "RemoveEvents" "OnCombatEnded"
+
+
+new entry "AMP_Ilmater_Overshadowing_Passive_4"
+type "PassiveData"
+data "DisplayName" "hd8073a1dg8b45g4d94gb0fbgab9aa6b5b975;1"
+data "Description" "h94077583g9095g4e2dg9155g11de53c2fe8f;1"
+data "DescriptionParams" "1"
+data "Properties" "Highlighted"
+data "StatsFunctorContext" "OnStatusApplied"
+data "Conditions" "StatusId('BLEEDING') and not HasStatus('AMP_ILMATER_OVERSHADOWING_TRACKER', context.Target)"
+data "StatsFunctors" "ApplyStatus(AMP_ILMATER_OVERSHADOWING_TRACKER,100,-1);ApplyStatus(AMP_VEIL_OVERSHADOWING,100,1)"
+
+
+new entry "AMP_Ilmater_Robe"
+type "Armor"
+using "_Armor_Magic_Robe"
+data "RootTemplate" "92834f35-9262-4ad8-b8e1-7bf65c55c322"
+data "Rarity" "Uncommon"
+data "ValueOverride" "200"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive"
+data "StatusOnEquip" "AMP_ILMATER_ROBE_EQUIPPED"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Temperance_1)"
+
+
+new entry "AMP_Ilmater_Robe_2"
+type "Armor"
+using "AMP_Ilmater_Robe"
+data "Rarity" "Rare"
+data "ValueOverride" "500"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Aegis_Passive_2"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Temperance_2)"
+
+
+new entry "AMP_Ilmater_Robe_3"
+type "Armor"
+using "AMP_Ilmater_Robe"
+data "Rarity" "VeryRare"
+data "ValueOverride" "1000"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Aegis_Passive_3;AMP_Ilmater_Overflow_Passive_3"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Temperance_3)"
+
+
+new entry "AMP_Ilmater_Robe_4"
+type "Armor"
+using "AMP_Ilmater_Robe"
+data "Rarity" "Legendary"
+data "ValueOverride" "3000"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Aegis_Passive_4;AMP_Ilmater_Overflow_Passive_4;AMP_Ilmater_Overshadowing_Passive_4"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Temperance_4)"
+
+
+// LITANY: Cloak of the Sixth Pit (Prayer of Preaching)
+
+new entry "AMP_Ilmater_Prayer_Preaching_1"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Base"
+data "RequirementConditions" "Tagged('CLERIC_ILMATER',context.Source) or Tagged('PALADIN_ILMATER',context.Source)"
+data "DisplayName" "hfbb763e7g28ebg4567ga43egd4f691356c44;1"
+data "Description" "h5ab9ffcagb507g4b24ga0ebg8344f796ee0b;1"
+data "DescriptionParams" "10"
+data "TargetConditions" "Character() and Ally()"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_CLOAK,100,2)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_CLOAK,100,2)"
+data "Icon" "AMP_StigmaPray"
+data "Cooldown" "OncePerTurn"
+
+
+new entry "AMP_Ilmater_Prayer_Preaching_2"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Preaching_1"
+
+
+new entry "AMP_Ilmater_Prayer_Preaching_3"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Preaching_1"
+
+
+new entry "AMP_Ilmater_Prayer_Preaching_4"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Preaching_1"
+
+
+new entry "AMP_Ilmater_EchoOfLitany_Passive_2"
+type "PassiveData"
+data "DisplayName" "h37440c03gd8d0g427bgb367gbe00cda68072;1"
+data "Description" "hcaec3c13gce0fg423dgb3c8ga84078063f09;1"
+data "DescriptionParams" "RegainHitPoints(1d4)"
+data "Properties" "Highlighted"
+data "StatsFunctorContext" "OnHeal"
+data "Conditions" "IsSpell() and Ally() and HasAnyAMPIlmaterStigma(context.Target)"
+data "StatsFunctors" "ApplyStatus(AMP_ILMATER_LITANY_HEAL_MARKER_T2,100,0)"
+
+
+new entry "AMP_Ilmater_EchoOfLitany_Passive_3"
+type "PassiveData"
+using "AMP_Ilmater_EchoOfLitany_Passive_2"
+data "DescriptionParams" "RegainHitPoints(1d4)"
+data "StatsFunctors" "ApplyStatus(AMP_ILMATER_LITANY_HEAL_MARKER_T3,100,0)"
+
+
+new entry "AMP_Ilmater_EchoOfLitany_Passive_4"
+type "PassiveData"
+using "AMP_Ilmater_EchoOfLitany_Passive_2"
+data "DescriptionParams" "RegainHitPoints(1d6)"
+data "StatsFunctors" "ApplyStatus(AMP_ILMATER_LITANY_HEAL_MARKER_T4,100,0)"
+
+
+new entry "AMP_ILMATER_UNBROKEN_TRACKER"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_UNBROKEN_TRACKER"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog"
+data "TickType" "StartTurn"
+data "TickFunctors" "ApplyStatus(SELF,AMP_ILMATER_UNBROKEN_READY,100,1)"
+data "RemoveEvents" "OnCombatEnded"
+
+
+new entry "AMP_ILMATER_UNBROKEN_READY"
+type "StatusData"
+data "StatusType" "BOOST"
+data "DisplayName" "hc1099961g837dg4f07g835dg29354c564e8e;1"
+data "Description" "h10827197g9b16g49efg80f0gb3659e7cf09e;1"
+data "Icon" "PassiveFeature_Generic_Holy"
+data "StackId" "AMP_ILMATER_UNBROKEN_READY"
+data "Boosts" "UnlockSpellVariant(IsAMPIlmaterPrayer(),ModifyUseCosts(Replace,ActionPoint,0,0,ActionPoint),ModifyIconGlow(),ModifyTooltipDescription())"
+data "RemoveEvents" "OnSpellCast"
+data "RemoveConditions" "IsAMPIlmaterPrayer()"
+
+
+new entry "AMP_Ilmater_Unbroken_Passive_3"
+type "PassiveData"
+data "DisplayName" "h8c0bb278g5366g477egb282g74fb81cd196a;1"
+data "Description" "h02a45500gcb81g412bgb482gaa1a44e98675;1"
+data "Properties" "Highlighted"
+data "StatsFunctorContext" "OnCast"
+data "Conditions" "Combat() and IsAMPIlmaterPrayer() and not HasStatus('AMP_ILMATER_UNBROKEN_TRACKER',context.Source)"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_ILMATER_UNBROKEN_TRACKER,100,-1)"
+
+
+new entry "AMP_Ilmater_Unbroken_Passive_4"
+type "PassiveData"
+using "AMP_Ilmater_Unbroken_Passive_3"
+
+
+new entry "AMP_Ilmater_Cloak"
+type "Armor"
+using "ARM_Cloak"
+data "RootTemplate" "0b3d3349-3503-4770-980f-ee54aa013b8f"
+data "Rarity" "Uncommon"
+data "ValueOverride" "150"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive"
+data "StatusOnEquip" "AMP_ILMATER_CLOAK_EQUIPPED"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Preaching_1)"
+
+
+new entry "AMP_Ilmater_Cloak_2"
+type "Armor"
+using "AMP_Ilmater_Cloak"
+data "Rarity" "Rare"
+data "ValueOverride" "400"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_EchoOfLitany_Passive_2"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Preaching_2)"
+
+
+new entry "AMP_Ilmater_Cloak_3"
+type "Armor"
+using "AMP_Ilmater_Cloak"
+data "Rarity" "VeryRare"
+data "ValueOverride" "800"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_EchoOfLitany_Passive_3;AMP_Ilmater_Unbroken_Passive_3"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Preaching_3)"
+
+
+new entry "AMP_Ilmater_Cloak_4"
+type "Armor"
+using "AMP_Ilmater_Cloak"
+data "Rarity" "Legendary"
+data "ValueOverride" "2500"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_EchoOfLitany_Passive_4;AMP_Ilmater_Unbroken_Passive_4"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Preaching_4)"
+
+
+// LITANY: The Stayed Hands (Prayer of the Thread)
+
+new entry "AMP_Ilmater_Prayer_Thread_1"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Base"
+data "RequirementConditions" "Tagged('CLERIC_ILMATER',context.Source) or Tagged('PALADIN_ILMATER',context.Source)"
+data "DisplayName" "h6d417677g3000g442ag8bdbgd53711711f5e;1"
+data "Description" "hcabf8dadg427dg40ffga5f9g55c66edafeb3;1"
+data "TargetConditions" "Character() and Ally()"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_GLOVES,100,2)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_GLOVES,100,2)"
+data "Icon" "AMP_StigmaPray"
+data "Cooldown" "OncePerTurn"
+
+
+new entry "AMP_Ilmater_Prayer_Thread_2"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Thread_1"
+
+
+new entry "AMP_Ilmater_Prayer_Thread_3"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Thread_1"
+
+
+new entry "AMP_Ilmater_Prayer_Thread_4"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Thread_1"
+
+
+new entry "AMP_Ilmater_RightHand_Passive_2"
+type "PassiveData"
+data "DisplayName" "h90f2e021g6cddg4457gbdaeg316c46a4b2f1;1"
+data "Description" "heaf12cd9gf119g4eb5g87bcg034ad71406c5;1"
+data "Properties" "Highlighted"
+data "StatsFunctorContext" "OnHeal"
+data "Conditions" "IsSpell() and Ally() and HasForeignStigma_Gloves(context.Target)"
+data "StatsFunctors" "RestoreResource(BonusActionPoint,1,0)"
+
+
+new entry "AMP_ILMATER_ANNUNCIATION_HEAL"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_HEAL_T2"
+data "OnApplyFunctors" "RegainHitPoints(1d8)"
+
+
+new entry "AMP_Ilmater_Annunciation_Passive_3"
+type "PassiveData"
+data "DisplayName" "hf4ef1a67gf6ccg452fg960bgc253a717995a;1"
+data "Description" "hcec3e7b1g6332g4aa9gbbdege0e87f27b4b7;1"
+data "DescriptionParams" "RegainHitPoints(1d8)"
+data "Properties" "Highlighted;OncePerAttack"
+data "StatsFunctorContext" "OnStatusApply"
+data "Conditions" "StatusId('BLESS')"
+data "StatsFunctors" "ApplyStatus(AMP_ILMATER_ANNUNCIATION_HEAL,100,0)"
+
+
+new entry "AMP_Ilmater_Rapture_Passive_4"
+type "PassiveData"
+data "DisplayName" "h1d8b62bcg7030g4e62g95d6gc3a4a319fce6;1"
+data "Description" "hd11a19b4g7beeg4befga2cagbac4c4ee9b50;1"
+data "Properties" "Highlighted;OncePerTurn"
+data "StatsFunctorContext" "OnHeal"
+data "Conditions" "IsSpell() and Ally()"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_ILMATER_RAPTURE_READY,100,1)"
+
+
+// Rapture ready: free Action cost for next Evocation spell. Snaps off on
+// casting any Evocation spell. 1 turn natural expiry if unused.
+new entry "AMP_ILMATER_RAPTURE_READY"
+type "StatusData"
+data "StatusType" "BOOST"
+data "DisplayName" "hbf53c64ag4647g4c82g964bg577c2a79066f;1"
+data "Description" "ha82830a1g1e72g4a47g8cc1g8199e69a6e0c;1"
+data "Icon" "PassiveFeature_Generic_Arcane"
+data "StackId" "AMP_ILMATER_RAPTURE_READY"
+data "Boosts" "UnlockSpellVariant(IsSpellOfSchool(SpellSchool.Evocation),ModifyUseCosts(Replace,ActionPoint,0,0,ActionPoint),ModifyIconGlow(),ModifyTooltipDescription())"
+data "RemoveEvents" "OnSpellCast"
+data "RemoveConditions" "IsSpellOfSchool(SpellSchool.Evocation)"
+
+
+new entry "AMP_Ilmater_Gloves"
+type "Armor"
+using "ARM_Gloves_Leather"
+data "RootTemplate" "885a23d9-e5ac-4764-a13e-a6eecd41995d"
+data "Rarity" "Uncommon"
+data "ValueOverride" "150"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive"
+data "StatusOnEquip" "AMP_ILMATER_GLOVES_EQUIPPED"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Thread_1)"
+
+
+new entry "AMP_Ilmater_Gloves_2"
+type "Armor"
+using "AMP_Ilmater_Gloves"
+data "Rarity" "Rare"
+data "ValueOverride" "400"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_RightHand_Passive_2"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Thread_2)"
+
+
+new entry "AMP_Ilmater_Gloves_3"
+type "Armor"
+using "AMP_Ilmater_Gloves"
+data "Rarity" "VeryRare"
+data "ValueOverride" "800"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_RightHand_Passive_2;AMP_Ilmater_Annunciation_Passive_3"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Thread_3)"
+
+
+new entry "AMP_Ilmater_Gloves_4"
+type "Armor"
+using "AMP_Ilmater_Gloves"
+data "Rarity" "Legendary"
+data "ValueOverride" "2500"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_RightHand_Passive_2;AMP_Ilmater_Annunciation_Passive_3;AMP_Ilmater_Rapture_Passive_4"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Thread_4)"
+
+
+// LITANY: Boots of the Trackless Vigil (Prayer of the Prophet)
+
+new entry "AMP_Ilmater_Prayer_Prophet_1"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Base"
+data "RequirementConditions" "Tagged('CLERIC_ILMATER',context.Source) or Tagged('PALADIN_ILMATER',context.Source)"
+data "DisplayName" "h3d3b9140gdb46g4568g9380g6fd6f0881a20;1"
+data "Description" "h114f980cgf2bfg4421gba49g4b112de78434;1"
+data "TargetConditions" "Character() and Ally()"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_BOOTS,100,2)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_BOOTS,100,2)"
+data "Icon" "AMP_StigmaPray"
+data "Cooldown" "OncePerTurn"
+
+
+new entry "AMP_Ilmater_Prayer_Prophet_2"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Prophet_1"
+
+
+new entry "AMP_Ilmater_Prayer_Prophet_3"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Prophet_1"
+
+
+new entry "AMP_Ilmater_Prayer_Prophet_4"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Prophet_1"
+
+
+new entry "AMP_ILMATER_QUICKENING_HEAL_2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_HEAL_T2"
+data "OnApplyFunctors" "RegainHitPoints(1d6);ApplyStatus(BLEEDING,100,2)"
+
+
+new entry "AMP_ILMATER_QUICKENING_HEAL_3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_HEAL_T2"
+data "OnApplyFunctors" "RegainHitPoints(1d8);ApplyStatus(BLEEDING,100,2)"
+
+
+new entry "AMP_ILMATER_QUICKENING_HEAL_4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_HEAL_T2"
+data "OnApplyFunctors" "RegainHitPoints(1d10);ApplyStatus(BLEEDING,100,2)"
+
+
+new entry "AMP_Ilmater_Quickening_Passive_2"
+type "PassiveData"
+data "DisplayName" "hac53b42bg2791g4d25gb833g1a10f224aa49;1"
+data "Description" "ha0aa171agbfadg4883ga42dg233f2a618b26;1"
+data "DescriptionParams" "RegainHitPoints(1d6);2"
+data "Properties" "Highlighted"
+data "StatsFunctorContext" "OnStatusApplied"
+data "Conditions" "StatusId('MAG_MOMENTUM')"
+data "StatsFunctors" "ApplyStatus(AMP_ILMATER_QUICKENING_HEAL_2,100,0)"
+
+
+new entry "AMP_Ilmater_Quickening_Passive_3"
+type "PassiveData"
+using "AMP_Ilmater_Quickening_Passive_2"
+data "DescriptionParams" "RegainHitPoints(1d8);2"
+data "StatsFunctors" "ApplyStatus(AMP_ILMATER_QUICKENING_HEAL_3,100,0)"
+
+
+new entry "AMP_Ilmater_Quickening_Passive_4"
+type "PassiveData"
+using "AMP_Ilmater_Quickening_Passive_2"
+data "DescriptionParams" "RegainHitPoints(1d10);2"
+data "StatsFunctors" "ApplyStatus(AMP_ILMATER_QUICKENING_HEAL_4,100,0)"
+
+
+new entry "AMP_ILMATER_EDIFICATION_BUFF"
+type "StatusData"
+data "StatusType" "BOOST"
+data "DisplayName" "h218de24fgc3d9g4a09g9f53g79897cbfc78f;1"
+data "Description" "he616a513g9adeg467cg9e54gebe5d50f7202;1"
+data "DescriptionParams" "2"
+data "Icon" "Spell_Divination_Guidance"
+data "FormatColor" "White"
+data "StackId" "AMP_ILMATER_EDIFICATION_BUFF"
+data "StackType" "Additive"
+data "Boosts" "RollBonus(SkillCheck,2)"
+
+
+new entry "AMP_Ilmater_Edification_Passive_3"
+type "PassiveData"
+data "DisplayName" "h4d3e8939g0b3dg42bbgad84g0b84a896afca;1"
+data "Description" "h0e7fb2a8g4ee4g43degaa93g128de55780bb;1"
+data "DescriptionParams" "2;1;50"
+data "Properties" "Highlighted"
+data "StatsFunctorContext" "OnStatusApply"
+data "Conditions" "IsGameplayStatus() and HasForeignStigma_Boots(context.Target) and not StatusDurationEqualOrMoreThan(context.Target,'AMP_ILMATER_EDIFICATION_BUFF',50)"
+data "StatsFunctors" "ApplyStatus(AMP_ILMATER_EDIFICATION_BUFF,100,1)"
+
+
+new entry "AMP_Ilmater_Edification_Passive_4"
+type "PassiveData"
+using "AMP_Ilmater_Edification_Passive_3"
+
+
+new entry "AMP_Ilmater_Boots"
+type "Armor"
+using "ARM_Boots_Leather"
+data "RootTemplate" "369c688e-b80e-4aaf-9cc6-414682d67e4b"
+data "Rarity" "Uncommon"
+data "ValueOverride" "150"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive"
+data "StatusOnEquip" "AMP_ILMATER_BOOTS_EQUIPPED;AMP_ILMATER_BOOTS_T1_EQUIPPED"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Prophet_1)"
+
+
+new entry "AMP_Ilmater_Boots_2"
+type "Armor"
+using "AMP_Ilmater_Boots"
+data "Rarity" "Rare"
+data "ValueOverride" "400"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Quickening_Passive_2"
+data "StatusOnEquip" "AMP_ILMATER_BOOTS_EQUIPPED;AMP_ILMATER_BOOTS_T2_EQUIPPED"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Prophet_2)"
+
+
+new entry "AMP_Ilmater_Boots_3"
+type "Armor"
+using "AMP_Ilmater_Boots"
+data "Rarity" "VeryRare"
+data "ValueOverride" "800"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Quickening_Passive_3;AMP_Ilmater_Edification_Passive_3"
+data "StatusOnEquip" "AMP_ILMATER_BOOTS_EQUIPPED;AMP_ILMATER_BOOTS_T3_EQUIPPED"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Prophet_3)"
+
+
+new entry "AMP_Ilmater_Boots_4"
+type "Armor"
+using "AMP_Ilmater_Boots"
+data "Rarity" "Legendary"
+data "ValueOverride" "2500"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Quickening_Passive_4;AMP_Ilmater_Edification_Passive_4"
+data "StatusOnEquip" "AMP_ILMATER_BOOTS_EQUIPPED;AMP_ILMATER_BOOTS_T4_EQUIPPED"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Prophet_4)"
+
+
+// WOUND: Helmet of the Third Day (Prayer of Pain)
+
+new entry "AMP_Ilmater_PainRetaliate_Passive_1"
+type "PassiveData"
+data "Properties" "IsHidden"
+data "StatsFunctorContext" "OnDamaged"
+data "Conditions" "IsMeleeAttack()"
+data "StatsFunctors" "DealDamage(SWAP,1d4,Radiant);ApplyStatus(SWAP,BLEEDING,100,1)"
+
+
+new entry "AMP_Ilmater_PainRetaliate_Passive_2"
+type "PassiveData"
+using "AMP_Ilmater_PainRetaliate_Passive_1"
+data "StatsFunctors" "DealDamage(SWAP,1d6,Radiant);ApplyStatus(SWAP,BLEEDING,100,2)"
+
+
+new entry "AMP_Ilmater_PainRetaliate_Passive_3"
+type "PassiveData"
+using "AMP_Ilmater_PainRetaliate_Passive_1"
+data "StatsFunctors" "DealDamage(SWAP,1d8,Radiant);ApplyStatus(SWAP,BLEEDING,100,2)"
+
+
+new entry "AMP_Ilmater_PainRetaliate_Passive_4"
+type "PassiveData"
+using "AMP_Ilmater_PainRetaliate_Passive_1"
+data "StatsFunctors" "DealDamage(SWAP,1d10,Radiant);ApplyStatus(SWAP,BLEEDING,100,3)"
+
+
+new entry "AMP_STIGMA_HELMET_1"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_HELMET"
+data "Passives" "AMP_Ilmater_PainRetaliate_Passive_1"
+
+
+new entry "AMP_STIGMA_HELMET_2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_HELMET"
+data "Passives" "AMP_Ilmater_PainRetaliate_Passive_2"
+
+
+new entry "AMP_STIGMA_HELMET_3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_HELMET"
+data "Passives" "AMP_Ilmater_PainRetaliate_Passive_3"
+
+
+new entry "AMP_STIGMA_HELMET_4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_HELMET"
+data "Passives" "AMP_Ilmater_PainRetaliate_Passive_4"
+
+
+new entry "AMP_Ilmater_Prayer_Pain_1"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Base"
+data "RequirementConditions" "Tagged('CLERIC_ILMATER',context.Source) or Tagged('PALADIN_ILMATER',context.Source)"
+data "DisplayName" "h3ef6da9ag196cg4155g8907gbee026700df2;1"
+data "Description" "he089a645gd3ebg4816gbc50g41bd81236502;1"
+data "DescriptionParams" "DealDamage(1d4,Radiant);1;3"
+data "TargetConditions" "Character() and (Ally() or Self())"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_HELMET_1,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_HELMET_1,100,-1)"
+data "Icon" "AMP_StigmaPray"
+data "Cooldown" "OncePerRestPerItem"
+
+
+new entry "AMP_Ilmater_Prayer_Pain_2"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Pain_1"
+data "DescriptionParams" "DealDamage(1d6,Radiant);2;3"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_HELMET_2,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_HELMET_2,100,-1)"
+
+
+new entry "AMP_Ilmater_Prayer_Pain_3"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Pain_1"
+data "DescriptionParams" "DealDamage(1d8,Radiant);2;3"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_HELMET_3,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_HELMET_3,100,-1)"
+
+
+new entry "AMP_Ilmater_Prayer_Pain_4"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Pain_1"
+data "DescriptionParams" "DealDamage(1d10,Radiant);3;3"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_HELMET_4,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_HELMET_4,100,-1)"
+data "Cooldown" "OncePerCombat"
+
+
+new entry "AMP_Ilmater_Bloodflow_Passive_2"
+type "PassiveData"
+data "DisplayName" "ha881c3d1g5da2g4ebbg9cb6gd054bbdda871;1"
+data "Description" "h3d6ff5d6g98beg4becga84dg2db1847bc06b;1"
+data "DescriptionParams" "1"
+data "Properties" "Highlighted"
+data "StatsFunctorContext" "OnTurn"
+data "Conditions" "HasStatus('BLEEDING', context.Source) and Combat()"
+data "StatsFunctors" "RestoreResource(SELF,SpellSlot,1,1)"
+
+
+new entry "AMP_Ilmater_Bloodflow_Passive_3"
+type "PassiveData"
+using "AMP_Ilmater_Bloodflow_Passive_2"
+data "DescriptionParams" "1"
+
+
+new entry "AMP_Ilmater_Bloodflow_Passive_4"
+type "PassiveData"
+using "AMP_Ilmater_Bloodflow_Passive_2"
+data "DescriptionParams" "2"
+data "StatsFunctors" "RestoreResource(SELF,SpellSlot,1,2)"
+
+
+new entry "AMP_Ilmater_Mortification_Passive_3"
+type "PassiveData"
+data "DisplayName" "hcb7d57c2g7b3dg41fegb674gafabfcb5f9b5;1"
+data "Description" "h4a0728e9g6c3fg485cga882g9da5aeab2c1b;1"
+data "DescriptionParams" "DealDamage(,Slashing)"
+data "Properties" "Highlighted"
+data "Boosts" "Resistance(Slashing,Immune)"
+
+
+new entry "AMP_Ilmater_Mortification_Passive_4"
+type "PassiveData"
+using "AMP_Ilmater_Mortification_Passive_3"
+
+
+new entry "AMP_Ilmater_Investiture_Passive_4"
+type "PassiveData"
+data "DisplayName" "h0734ab39ge5a3g4b5eg8bacgd20da9b30a8a;1"
+data "Description" "h0e8d4807g3b7fg49cagac3cg0b6a6b8c5c69;1"
+data "DescriptionParams" "DealDamage(,Slashing);1;20;2"
+data "Properties" "Highlighted"
+data "StatsFunctorContext" "OnDamage"
+data "Conditions" "IsDamageTypeSlashing() and IsMeleeWeaponAttack()"
+data "StatsFunctors" "IF(HasStatus('BLESS',context.Source) and RollDieAgainstDC(DiceType.d100,81)):ApplyStatus(SELF,AMP_VEIL,100,2);IF(not HasStatus('BLESS',context.Source)):ApplyStatus(SELF,BLESS,100,1)"
+
+
+new entry "AMP_Ilmater_Helmet"
+type "Armor"
+using "ARM_Helmet_Metal"
+data "RootTemplate" "e4351b06-a482-464e-a865-f028aede6ea1"
+data "Rarity" "Uncommon"
+data "ValueOverride" "300"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive"
+data "StatusOnEquip" "AMP_ILMATER_HELMET_EQUIPPED"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Pain_1)"
+
+
+new entry "AMP_Ilmater_Helmet_2"
+type "Armor"
+using "AMP_Ilmater_Helmet"
+data "Rarity" "Rare"
+data "ValueOverride" "600"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Bloodflow_Passive_2"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Pain_2)"
+
+
+new entry "AMP_Ilmater_Helmet_3"
+type "Armor"
+using "AMP_Ilmater_Helmet"
+data "Rarity" "VeryRare"
+data "ValueOverride" "1200"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Bloodflow_Passive_3;AMP_Ilmater_Mortification_Passive_3"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Pain_3)"
+
+
+new entry "AMP_Ilmater_Helmet_4"
+type "Armor"
+using "AMP_Ilmater_Helmet"
+data "Rarity" "Legendary"
+data "ValueOverride" "3500"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Bloodflow_Passive_4;AMP_Ilmater_Mortification_Passive_4;AMP_Ilmater_Investiture_Passive_4"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Pain_4)"
+
+
+// WOUND: Deserter's Armour (Prayer of the Bone)
+
+new entry "AMP_STIGMA_MEDIUMARMOR_1"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_MEDIUMARMOR"
+data "Boosts" "DownedStatus(AMP_STIGMA_DOWNED,10);Resistance(Slashing,Resistant);Resistance(Piercing,Resistant);Resistance(Bludgeoning,Resistant);Resistance(Fire,Vulnerable);Resistance(Cold,Vulnerable);Resistance(Lightning,Vulnerable);Resistance(Thunder,Vulnerable);Resistance(Acid,Vulnerable);Resistance(Poison,Vulnerable);Resistance(Necrotic,Vulnerable);Resistance(Radiant,Vulnerable);Resistance(Psychic,Vulnerable);Resistance(Force,Vulnerable);DamageReduction(All,Flat,1)"
+
+
+new entry "AMP_STIGMA_MEDIUMARMOR_2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_MEDIUMARMOR"
+data "Boosts" "DownedStatus(AMP_STIGMA_DOWNED,10);Resistance(Slashing,Resistant);Resistance(Piercing,Resistant);Resistance(Bludgeoning,Resistant);Resistance(Fire,Vulnerable);Resistance(Cold,Vulnerable);Resistance(Lightning,Vulnerable);Resistance(Thunder,Vulnerable);Resistance(Acid,Vulnerable);Resistance(Poison,Vulnerable);Resistance(Necrotic,Vulnerable);Resistance(Radiant,Vulnerable);Resistance(Psychic,Vulnerable);Resistance(Force,Vulnerable);DamageReduction(All,Flat,2)"
+
+
+new entry "AMP_STIGMA_MEDIUMARMOR_3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_MEDIUMARMOR"
+data "Boosts" "DownedStatus(AMP_STIGMA_DOWNED,10);Resistance(Slashing,Resistant);Resistance(Piercing,Resistant);Resistance(Bludgeoning,Resistant);Resistance(Fire,Vulnerable);Resistance(Cold,Vulnerable);Resistance(Lightning,Vulnerable);Resistance(Thunder,Vulnerable);Resistance(Acid,Vulnerable);Resistance(Poison,Vulnerable);Resistance(Necrotic,Vulnerable);Resistance(Radiant,Vulnerable);Resistance(Psychic,Vulnerable);Resistance(Force,Vulnerable);DamageReduction(All,Flat,3)"
+data "Passives" "AMP_Ilmater_Judgement_Hidden_Passive_3"
+
+
+new entry "AMP_STIGMA_MEDIUMARMOR_4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_MEDIUMARMOR"
+data "Boosts" "DownedStatus(AMP_STIGMA_DOWNED,10);Resistance(Slashing,Resistant);Resistance(Piercing,Resistant);Resistance(Bludgeoning,Resistant);Resistance(Fire,Vulnerable);Resistance(Cold,Vulnerable);Resistance(Lightning,Vulnerable);Resistance(Thunder,Vulnerable);Resistance(Acid,Vulnerable);Resistance(Poison,Vulnerable);Resistance(Necrotic,Vulnerable);Resistance(Radiant,Vulnerable);Resistance(Psychic,Vulnerable);Resistance(Force,Vulnerable);DamageReduction(All,Flat,4)"
+data "Passives" "AMP_Ilmater_Judgement_Hidden_Passive_4"
+
+
+new entry "AMP_Ilmater_Prayer_Bone_1"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Base"
+data "RequirementConditions" "Tagged('CLERIC_ILMATER',context.Source) or Tagged('PALADIN_ILMATER',context.Source)"
+data "DisplayName" "h0f8cea44g6fe9g4f64ga716g7133eb52c3eb;1"
+data "Description" "ha496bb24g01ccg420agbc0dgd6671695a37e;1"
+data "DescriptionParams" "1"
+data "TargetConditions" "Character() and (Ally() or Self())"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_MEDIUMARMOR_1,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_MEDIUMARMOR_1,100,-1)"
+data "Icon" "AMP_StigmaPray"
+data "Cooldown" "OncePerRestPerItem"
+
+
+new entry "AMP_Ilmater_Prayer_Bone_2"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Bone_1"
+data "DescriptionParams" "2"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_MEDIUMARMOR_2,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_MEDIUMARMOR_2,100,-1)"
+
+
+new entry "AMP_Ilmater_Prayer_Bone_3"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Bone_1"
+data "DescriptionParams" "3"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_MEDIUMARMOR_3,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_MEDIUMARMOR_3,100,-1)"
+
+
+new entry "AMP_Ilmater_Prayer_Bone_4"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Bone_1"
+data "DescriptionParams" "4"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_MEDIUMARMOR_4,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_MEDIUMARMOR_4,100,-1)"
+data "Cooldown" "OncePerCombat"
+
+
+new entry "AMP_ILMATER_RECOMPENSE_HEAL_2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_HEAL_T2"
+data "OnApplyFunctors" "RegainHitPoints(1d4)"
+
+
+new entry "AMP_ILMATER_RECOMPENSE_HEAL_3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_HEAL_T2"
+data "OnApplyFunctors" "RegainHitPoints(1d6)"
+
+
+new entry "AMP_ILMATER_RECOMPENSE_HEAL_4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_HEAL_T2"
+data "OnApplyFunctors" "RegainHitPoints(1d8)"
+
+
+new entry "AMP_ILMATER_RECOMPENSE_MARKER_T2"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_RECOMPENSE_MARKER"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+
+new entry "AMP_ILMATER_RECOMPENSE_MARKER_T3"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_RECOMPENSE_MARKER"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+
+new entry "AMP_ILMATER_RECOMPENSE_MARKER_T4"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_RECOMPENSE_MARKER"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+
+new entry "AMP_Ilmater_Recompense_Passive_2"
+type "PassiveData"
+data "DisplayName" "h07bb763fg4990g4c52g9eadg06c9bc4e04eb;1"
+data "Description" "h5896ff0dgdc69g4110gb701g947982bdee62;1"
+data "DescriptionParams" "RegainHitPoints(1d4)"
+data "Properties" "Highlighted"
+data "StatsFunctorContext" "OnDamage"
+data "Conditions" "IsMeleeWeaponAttack() and HasStatus('BLEEDING', context.Target)"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_ILMATER_RECOMPENSE_HEAL_2,100,0);ApplyStatus(SELF,AMP_ILMATER_RECOMPENSE_MARKER_T2,100,0)"
+
+
+new entry "AMP_Ilmater_Recompense_Passive_3"
+type "PassiveData"
+using "AMP_Ilmater_Recompense_Passive_2"
+data "DescriptionParams" "RegainHitPoints(1d6)"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_ILMATER_RECOMPENSE_HEAL_3,100,0);ApplyStatus(SELF,AMP_ILMATER_RECOMPENSE_MARKER_T3,100,0)"
+
+
+new entry "AMP_Ilmater_Recompense_Passive_4"
+type "PassiveData"
+using "AMP_Ilmater_Recompense_Passive_2"
+data "DescriptionParams" "RegainHitPoints(1d8)"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_ILMATER_RECOMPENSE_HEAL_4,100,0);ApplyStatus(SELF,AMP_ILMATER_RECOMPENSE_MARKER_T4,100,0)"
+
+
+new entry "AMP_Ilmater_Judgement_Passive_3"
+type "PassiveData"
+data "DisplayName" "hbddd19c9ge026g4cebg88cbg1465d6430c39;1"
+data "Description" "h942c86d9g6068g491eg9988g9b22697db9c7;1"
+data "DescriptionParams" "DealDamage(1d4,Radiant)"
+data "Properties" "Highlighted"
+data "Boosts" "IF(IsMeleeWeaponAttack() and HasAnyAMPIlmaterStigma(context.Source)):CharacterWeaponDamage(1d4,Radiant)"
+
+
+new entry "AMP_Ilmater_Judgement_Passive_4"
+type "PassiveData"
+using "AMP_Ilmater_Judgement_Passive_3"
+data "DescriptionParams" "DealDamage(1d6,Radiant)"
+data "Boosts" "IF(IsMeleeWeaponAttack() and HasAnyAMPIlmaterStigma(context.Source)):CharacterWeaponDamage(1d6,Radiant)"
+
+
+new entry "AMP_Ilmater_Judgement_Hidden_Passive_3"
+type "PassiveData"
+data "Properties" "IsHidden"
+data "Boosts" "IF(IsMeleeWeaponAttack()):CharacterWeaponDamage(1d4,Radiant)"
+
+
+new entry "AMP_Ilmater_Judgement_Hidden_Passive_4"
+type "PassiveData"
+using "AMP_Ilmater_Judgement_Hidden_Passive_3"
+data "Boosts" "IF(IsMeleeWeaponAttack()):CharacterWeaponDamage(1d6,Radiant)"
+
+
+new entry "AMP_Ilmater_MediumArmor"
+type "Armor"
+using "ARM_ChainShirt_Body"
+data "RootTemplate" "18379279-89c2-4a83-94f8-f290b99148bc"
+data "Rarity" "Uncommon"
+data "ValueOverride" "200"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive"
+data "StatusOnEquip" "AMP_ILMATER_MEDIUMARMOR_EQUIPPED"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Bone_1);Ability(Wisdom,1)"
+
+
+new entry "AMP_Ilmater_MediumArmor_2"
+type "Armor"
+using "AMP_Ilmater_MediumArmor"
+data "Rarity" "Rare"
+data "ValueOverride" "500"
+data "ArmorClass" "14"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Recompense_Passive_2"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Bone_2);Ability(Wisdom,1)"
+
+
+new entry "AMP_Ilmater_MediumArmor_3"
+type "Armor"
+using "AMP_Ilmater_MediumArmor"
+data "Rarity" "VeryRare"
+data "ValueOverride" "1000"
+data "ArmorClass" "15"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Recompense_Passive_3;AMP_Ilmater_Judgement_Passive_3"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Bone_3);Ability(Wisdom,1)"
+
+
+new entry "AMP_Ilmater_MediumArmor_4"
+type "Armor"
+using "AMP_Ilmater_MediumArmor"
+data "Rarity" "Legendary"
+data "ValueOverride" "3000"
+data "ArmorClass" "16"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Recompense_Passive_4;AMP_Ilmater_Judgement_Passive_4"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Bone_4);Ability(Wisdom,1)"
+
+
+// WOUND: Armour of the Noble Heart (Prayer of Martyrdom)
+
+new entry "AMP_STIGMA_HEAVYARMOR_1"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_HEAVYARMOR"
+data "Boosts" "DownedStatus(AMP_STIGMA_DOWNED,10);CriticalHit(AttackTarget,Success,Never)"
+
+
+new entry "AMP_STIGMA_HEAVYARMOR_2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_HEAVYARMOR"
+data "Boosts" "DownedStatus(AMP_STIGMA_DOWNED,10);CriticalHit(AttackTarget,Success,Never)"
+
+
+new entry "AMP_STIGMA_HEAVYARMOR_3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_HEAVYARMOR"
+data "Boosts" "DownedStatus(AMP_STIGMA_DOWNED,10);CriticalHit(AttackTarget,Success,Never)"
+
+
+new entry "AMP_STIGMA_HEAVYARMOR_4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_STIGMA_HEAVYARMOR"
+data "Boosts" "DownedStatus(AMP_STIGMA_DOWNED,10);CriticalHit(AttackTarget,Success,Never)"
+
+
+new entry "AMP_Ilmater_Prayer_Martyrdom_1"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Base"
+data "RequirementConditions" "Tagged('CLERIC_ILMATER',context.Source) or Tagged('PALADIN_ILMATER',context.Source)"
+data "DisplayName" "h03b48f3dgfe1eg4730g9c4fgd78dd425ee4d;1"
+data "Description" "hca4d7e8age3edg4ea7ga954gbbd87e2de72e;1"
+data "TargetConditions" "Character() and (Ally() or Self())"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_HEAVYARMOR_1,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_HEAVYARMOR_1,100,-1)"
+data "Icon" "AMP_StigmaPray"
+data "Cooldown" "OncePerRestPerItem"
+
+
+new entry "AMP_Ilmater_Prayer_Martyrdom_2"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Martyrdom_1"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_HEAVYARMOR_2,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_HEAVYARMOR_2,100,-1)"
+
+
+new entry "AMP_Ilmater_Prayer_Martyrdom_3"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Martyrdom_1"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_HEAVYARMOR_3,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_HEAVYARMOR_3,100,-1)"
+
+
+new entry "AMP_Ilmater_Prayer_Martyrdom_4"
+type "SpellData"
+data "SpellType" "Target"
+using "AMP_Ilmater_Prayer_Martyrdom_1"
+data "SpellProperties" "IF(HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(BLESS,100,3);IF(not HasAnyAMPIlmaterStigma(context.Target)):ApplyStatus(AMP_STIGMA_HEAVYARMOR_4,100,-1)"
+data "TooltipStatusApply" "ApplyStatus(AMP_STIGMA_HEAVYARMOR_4,100,-1)"
+data "Cooldown" "OncePerCombat"
+
+
+new entry "AMP_ILMATER_INTERCESSION_HEAL_2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_HEAL_T2"
+data "OnApplyFunctors" "RegainHitPoints(1d6)"
+
+
+new entry "AMP_ILMATER_INTERCESSION_HEAL_3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_HEAL_T2"
+data "OnApplyFunctors" "RegainHitPoints(1d8)"
+
+
+new entry "AMP_ILMATER_INTERCESSION_HEAL_4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_ILMATER_HEAL_T2"
+data "OnApplyFunctors" "RegainHitPoints(1d10)"
+
+
+new entry "AMP_ILMATER_INTERCESSION_MARKER_T2"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_INTERCESSION_MARKER"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+
+new entry "AMP_ILMATER_INTERCESSION_MARKER_T3"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_INTERCESSION_MARKER"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+
+new entry "AMP_ILMATER_INTERCESSION_MARKER_T4"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_ILMATER_INTERCESSION_MARKER"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog;IgnoreResting;ApplyToDead"
+
+
+new entry "AMP_Ilmater_Intercession_Passive_2"
+type "PassiveData"
+data "DisplayName" "h8cae410egba28g4c49gafecgb40188e96ee9;1"
+data "Description" "he552a9c6ga7e3g469bg985eg3c11df493ed8;1"
+data "DescriptionParams" "RegainHitPoints(1d6)"
+data "Properties" "Highlighted"
+data "StatsFunctorContext" "OnAttack"
+data "Conditions" "IsKillingBlow() and Character()"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_ILMATER_INTERCESSION_HEAL_2,100,0);ApplyStatus(SELF,AMP_ILMATER_INTERCESSION_MARKER_T2,100,0)"
+
+
+new entry "AMP_Ilmater_Intercession_Passive_3"
+type "PassiveData"
+using "AMP_Ilmater_Intercession_Passive_2"
+data "DescriptionParams" "RegainHitPoints(1d8)"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_ILMATER_INTERCESSION_HEAL_3,100,0);ApplyStatus(SELF,AMP_ILMATER_INTERCESSION_MARKER_T3,100,0)"
+
+
+new entry "AMP_Ilmater_Intercession_Passive_4"
+type "PassiveData"
+using "AMP_Ilmater_Intercession_Passive_2"
+data "DescriptionParams" "RegainHitPoints(1d10)"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_ILMATER_INTERCESSION_HEAL_4,100,0);ApplyStatus(SELF,AMP_ILMATER_INTERCESSION_MARKER_T4,100,0)"
+
+
+new entry "AMP_Ilmater_SacredFlame_Passive_3"
+type "PassiveData"
+data "DisplayName" "hd3116e7egbd96g4df9ga55fgf63cc147995b;1"
+data "Description" "h14c2c5e0ge6b9g4e47gad04g1fb9725932c6;1"
+data "Properties" "Highlighted"
+data "StatsFunctorContext" "OnDamaged"
+data "Conditions" "IsAttack() and HasForeignStigma_HeavyArmor(context.Target)"
+data "StatsFunctors" "IF(HasStatus('BLEEDING',context.Source)):ApplyStatus(SWAP,BURNING_HOLY,100,2);IF(not HasStatus('BLEEDING',context.Source)):ApplyStatus(SWAP,BLEEDING,100,2)"
+
+
+new entry "AMP_Ilmater_SacredFlame_Passive_4"
+type "PassiveData"
+using "AMP_Ilmater_SacredFlame_Passive_3"
+
+
+new entry "AMP_Ilmater_Smiting_Passive_4"
+type "PassiveData"
+data "DisplayName" "h6f3bd143gb1d0g410cga5f8g398cedec2826;1"
+data "Description" "hb064218fg734ag488egae8cg68a7904ca041;1"
+data "DescriptionParams" "4"
+data "Properties" "Highlighted"
+data "StatsFunctorContext" "OnDamage"
+data "Conditions" "IsMeleeWeaponAttack() and HasStatus('BURNING_HOLY', context.Target)"
+data "StatsFunctors" "IF(not UndeadOrFiend(context.Target)):DealDamage(5d8,Radiant,Magical,,0,,true,false);IF(UndeadOrFiend(context.Target)):DealDamage(6d8,Radiant,Magical,,0,,true,false);ApplyStatus(INTERRUPT_SMITE_DIVINE_VFX,100,0)"
+
+
+new entry "AMP_Ilmater_HeavyArmor"
+type "Armor"
+using "ARM_Plate_Body"
+data "RootTemplate" "c2d1fb78-c8d7-432a-851e-69e786d3e690"
+data "Rarity" "Uncommon"
+data "ValueOverride" "200"
+data "ArmorClass" "16"
+data "MinLevel" "0"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive"
+data "StatusOnEquip" "AMP_ILMATER_HEAVYARMOR_EQUIPPED"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Martyrdom_1);Disadvantage(Skill,Stealth)"
+
+
+new entry "AMP_Ilmater_HeavyArmor_2"
+type "Armor"
+using "AMP_Ilmater_HeavyArmor"
+data "Rarity" "Rare"
+data "ValueOverride" "500"
+data "ArmorClass" "17"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Intercession_Passive_2"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Martyrdom_2);Disadvantage(Skill,Stealth)"
+
+
+new entry "AMP_Ilmater_HeavyArmor_3"
+type "Armor"
+using "AMP_Ilmater_HeavyArmor"
+data "Rarity" "VeryRare"
+data "ValueOverride" "1000"
+data "ArmorClass" "18"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Intercession_Passive_3;AMP_Ilmater_SacredFlame_Passive_3"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Martyrdom_3);Disadvantage(Skill,Stealth)"
+
+
+new entry "AMP_Ilmater_HeavyArmor_4"
+type "Armor"
+using "AMP_Ilmater_HeavyArmor"
+data "Rarity" "Legendary"
+data "ValueOverride" "3000"
+data "ArmorClass" "19"
+data "PassivesOnEquip" "AMP_Ilmater_Mysteries_Passive;AMP_Ilmater_Intercession_Passive_4;AMP_Ilmater_SacredFlame_Passive_4;AMP_Ilmater_Smiting_Passive_4"
+data "Boosts" "UnlockSpell(AMP_Ilmater_Prayer_Martyrdom_4);Disadvantage(Skill,Stealth)"
+
+
+new entry "AMP_ILMATER_BURDEN"
+type "StatusData"
+data "StatusType" "BOOST"
+data "DisplayName" "h9a5ffd91g5c96g4948g8a94g9518dde0e21c;1"
+data "Description" "hbc06e368gfcf0g4c3dgb446g382e14c92a57;1"
+data "Icon" "PassiveFeature_Generic_Threat"
+data "StackId" "AMP_ILMATER_BURDEN"
+data "Passives" "AMP_Ilmater_Burden_Trigger"
+data "TickType" "StartTurn"
+data "TickFunctors" "IF(HasHPPercentageWithoutTemporaryHPMoreThan(50, context.Target)):ApplyStatus(AMP_ILMATER_BURDEN_ACTIVE,100,1);IF(not HasHPPercentageWithoutTemporaryHPMoreThan(50, context.Target)):RemoveStatus(AMP_ILMATER_BURDEN_ACTIVE)"
+data "OnRemoveFunctors" "RemoveStatus(AMP_ILMATER_BURDEN_ACTIVE)"
+data "StatusGroups" "SG_RemoveOnRespec"
+data "ManagedStatusEffectType" "Negative"
+
+new entry "AMP_Ilmater_Burden_Trigger"
+type "PassiveData"
+data "DisplayName" "h9a5ffd91g5c96g4948g8a94g9518dde0e21c;1"
+data "Description" "hbc06e368gfcf0g4c3dgb446g382e14c92a57;1"
+data "Properties" "IsHidden"
+data "StatsFunctorContext" "OnDamaged;OnTurn"
+data "StatsFunctors" "IF(HasHPPercentageWithoutTemporaryHPMoreThan(50, context.Target)):ApplyStatus(AMP_ILMATER_BURDEN_ACTIVE,100,1);IF(not HasHPPercentageWithoutTemporaryHPMoreThan(50, context.Target)):RemoveStatus(AMP_ILMATER_BURDEN_ACTIVE)"
+
+new entry "AMP_ILMATER_BURDEN_ACTIVE"
+type "StatusData"
+data "StatusType" "BOOST"
+data "DisplayName" "h9a5ffd91g5c96g4948g8a94g9518dde0e21c;1"
+data "Description" "hbc06e368gfcf0g4c3dgb446g382e14c92a57;1"
+data "Icon" "PassiveFeature_Generic_Threat"
+data "StackId" "AMP_ILMATER_BURDEN_ACTIVE"
+data "Boosts" "Resistance(All,Vulnerable)"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
+data "StatusGroups" "SG_RemoveOnRespec"

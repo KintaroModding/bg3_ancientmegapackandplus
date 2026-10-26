@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="011bd6ef-d3fc-437c-b9a5-5a66670e9f75" />
+					<attribute id="Name" type="LSString" value="AMP_HardChest" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="9b0bd3b3-3677-4b7a-a4a6-978735f764d2" />
+					<attribute id="VisualTemplate" type="FixedString" value="dd135124-f7bc-4419-8f52-6092f4bf6919" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="b0280521-3f17-2674-c513-864df34bf0f0" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h5e831e6bg9efcg454fg9a23ge8764de14b02" version="1" />
+					<attribute id="Description" type="TranslatedString" handle="h1b5513afgaff8g4479gb7e6g2695a23187fe" version="1" />
+					<attribute id="LockDifficultyClassID" type="guid" value="00000000-0000-0000-0000-000000000000" />
+					<children>
+						<node id="Bounds">
+							<children>
+								<node id="Bound">
+									<attribute id="Type" type="uint8" value="0" />
+									<attribute id="Shape" type="uint8" value="1" />
+									<attribute id="Min" type="fvec3" value="-0.6248357 0.00085031986 -0.4409774" />
+									<attribute id="Max" type="fvec3" value="0.6272824 0.7582694 0.4409774" />
+									<attribute id="Radius" type="float" value="0.2540385" />
+									<attribute id="Height" type="float" value="1.1683" />
+								</node>
+								<node id="Bound">
+									<attribute id="Type" type="uint8" value="1" />
+									<attribute id="Shape" type="uint8" value="1" />
+									<attribute id="Min" type="fvec3" value="-0.6248357 0.00085031986 -0.4409774" />
+									<attribute id="Max" type="fvec3" value="0.6272824 0.7582694 0.4409774" />
+									<attribute id="Radius" type="float" value="0.508077" />
+									<attribute id="Height" type="float" value="1.1683" />
+								</node>
+								<node id="Bound">
+									<attribute id="Type" type="uint8" value="2" />
+									<attribute id="Shape" type="uint8" value="1" />
+									<attribute id="Min" type="fvec3" value="-0.6248357 0.00085031986 -0.4409774" />
+									<attribute id="Max" type="fvec3" value="0.6272824 0.7582694 0.4409774" />
+									<attribute id="Radius" type="float" value="0.508077" />
+									<attribute id="Height" type="float" value="1.1683" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="REL_Goblin_Lootbox" />
+								</node>
+							</children>
+						</node>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="DEBRIS_THRESHOLD_GREATER" />
+								</node>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="GUARDIAN_OF_FAITH_SHIELD_VFX" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

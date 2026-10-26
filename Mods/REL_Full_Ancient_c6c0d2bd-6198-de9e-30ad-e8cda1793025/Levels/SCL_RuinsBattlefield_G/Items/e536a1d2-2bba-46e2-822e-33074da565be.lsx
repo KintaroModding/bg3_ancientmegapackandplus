@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="e536a1d2-2bba-46e2-822e-33074da565be" />
+					<attribute id="Name" type="LSString" value="DEC_Dungeon_Skeleton_Crawling_B_004" />
+					<attribute id="LevelName" type="FixedString" value="SCL_RuinsBattlefield_G" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="b2b385a3-affa-40b0-b87a-7a0f45375bbd" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="-187.7617 31.59763 1.984791" />
+							<attribute id="RotationQuat" type="fvec4" value="-0.02133614 -0.4931469 -0.03759204 0.868872" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object">
+											<attribute id="MapKey" type="FixedString" value="SCL_RuinsBattlefield_G" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="83ea6cac-3c8d-91e7-9ab4-7fee45d0f5c9" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="229cda40-8652-5bf2-8678-4603bd111d28" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="f197748c-dd55-f17b-cc3f-f319e61e90ab" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="72466549-3568-46be-4b74-f7d3e134eda7" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

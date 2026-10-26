@@ -1,0 +1,48 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// restock rides an object timer that freezes in turn-based, global timers still tick
+// backup timer drives PickWeighted when the chain stalled, otherwise it sees nothing and nothing doubles
+
+// arm backup timer on shop open
+IF
+UseStarted((CHARACTER)_Player, (ITEM)_Container)
+AND
+DB_ToT_Shop_Enabled(1)
+AND
+DB_ToT_Shop_Activated(1)
+AND
+DB_ToT_Shop((STRING)_ShopID, _Container)
+AND
+DB_Players(_Player)
+THEN
+TimerLaunch("AMP_ToT_Shop_TB_RestockTick", 5000);
+
+// still restocking -> spawn next and rearm
+IF
+TimerFinished("AMP_ToT_Shop_TB_RestockTick")
+AND
+DB_ToT_Shop_RestockTarget((STRING)_ShopID, (ITEM)_Container)
+AND
+DB_ToT_Shop_SpawnCounter(_ShopID, (INTEGER)_Count)
+AND
+DB_ToT_Shop_MaxStock(_ShopID, (INTEGER)_Max)
+AND
+_Count < _Max
+THEN
+PROC_ToT_Shop_PickWeighted(_ShopID, _Container, 0);
+TimerLaunch("AMP_ToT_Shop_TB_RestockTick", 500);
+
+// restock done or never started -> nothing to do
+IF
+TimerFinished("AMP_ToT_Shop_TB_RestockTick")
+AND
+NOT DB_ToT_Shop_RestockTarget(_, _)
+THEN
+DB_NOOP(1);
+
+EXITSECTION
+ENDEXITSECTION

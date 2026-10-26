@@ -1,0 +1,75 @@
+Version 1
+SubGoalCombiner SGC_AND
+
+INITSECTION
+DB_AMP_Vludber_Template((CHARACTERROOT)AMP_Vludber_11eef355-dc6a-4d04-a072-417b70f569cd);
+DB_AMP_Vludber_MockerySpell("Target_ViciousMockery");
+
+KBSECTION
+
+// vicious mockery on vludber curses the caster
+IF
+UsingSpellOnTarget((CHARACTER)_Caster, (GUIDSTRING)_Target, _Spell, _, _, _)
+AND
+IsCharacter(_Target, 1)
+AND
+GetTemplate((CHARACTER)_Target, _Template)
+AND
+DB_AMP_Vludber_Template((CHARACTERROOT)_Template)
+AND
+DB_AMP_Vludber_MockerySpell(_Spell)
+THEN
+ApplyStatus(_Caster, "AMP_VLUDBER_DICE_CURSE", 18.0, 1, (CHARACTER)_Target);
+
+// hit marker -> lose 10% max hp
+IF
+StatusApplied((GUIDSTRING)_Vludber, "AMP_VLUDBER_HIT_MARKER", _, _)
+AND
+IsCharacter(_Vludber, 1)
+AND
+GetTemplate((CHARACTER)_Vludber, _Template)
+AND
+DB_AMP_Vludber_Template((CHARACTERROOT)_Template)
+AND
+GetHitpoints(_Vludber, (INTEGER)_CurrentHP)
+AND
+GetMaxHitpoints(_Vludber, (INTEGER)_MaxHP)
+AND
+IntegerProduct(_MaxHP, 10, _Numerator)
+AND
+IntegerDivide(_Numerator, 100, _Loss)
+AND
+IntegerSubtract(_CurrentHP, _Loss, _NewHP)
+THEN
+SetHitpoints((CHARACTER)_Vludber, _NewHP);
+RemoveStatus(_Vludber, "AMP_VLUDBER_HIT_MARKER", NULL_00000000-0000-0000-0000-000000000000);
+
+// below 33% hp -> final prep status
+IF
+TurnStarted((CHARACTER)_Vludber)
+AND
+GetTemplate(_Vludber, _Template)
+AND
+DB_AMP_Vludber_Template((CHARACTERROOT)_Template)
+AND
+GetHitpointsPercentage(_Vludber, (REAL)_HP)
+AND
+_HP < 33.0
+AND
+HasActiveStatus(_Vludber, "AMP_VLUDBER_FINAL_PREP", 0)
+THEN
+ApplyStatus(_Vludber, "AMP_VLUDBER_FINAL_PREP", -1.0, 1, _Vludber);
+
+// combat end cleanup
+IF
+LeftCombat((CHARACTER)_Vludber, _CombatID)
+AND
+GetTemplate(_Vludber, _Template)
+AND
+DB_AMP_Vludber_Template((CHARACTERROOT)_Template)
+THEN
+RemoveStatus(_Vludber, "AMP_VLUDBER_FINAL_PREP", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Vludber, "AMP_VLUDBER_HIT_MARKER", NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+ENDEXITSECTION

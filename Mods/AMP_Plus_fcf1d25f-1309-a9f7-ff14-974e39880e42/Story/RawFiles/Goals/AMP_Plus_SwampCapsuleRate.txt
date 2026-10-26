@@ -1,0 +1,33 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// covers template and shop clone, either load order ends at weight one
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_ToT_ItemFreq((STRING)_ShopID, "CAPSULES", (ITEMROOT)AMP_Swamp_VoidCapsule_9cc7c34c-568d-43e3-9032-ff2409d3d1b2, (INTEGER)_W)
+AND
+_W > 1
+THEN
+NOT DB_ToT_ItemFreq(_ShopID, "CAPSULES", (ITEMROOT)AMP_Swamp_VoidCapsule_9cc7c34c-568d-43e3-9032-ff2409d3d1b2, _W);
+DB_ToT_ItemFreq(_ShopID, "CAPSULES", (ITEMROOT)AMP_Swamp_VoidCapsule_9cc7c34c-568d-43e3-9032-ff2409d3d1b2, 1);
+PROC_ToT_RebuildPools("GENERAL");
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_ToT_ItemFreq((STRING)_ShopID, "CAPSULES", (ITEMROOT)AMP_Swamp_VoidCapsule_ToTShop_397ace98-fc45-4454-829b-110c16cb7ce8, (INTEGER)_W)
+AND
+_W > 1
+THEN
+NOT DB_ToT_ItemFreq(_ShopID, "CAPSULES", (ITEMROOT)AMP_Swamp_VoidCapsule_ToTShop_397ace98-fc45-4454-829b-110c16cb7ce8, _W);
+DB_ToT_ItemFreq(_ShopID, "CAPSULES", (ITEMROOT)AMP_Swamp_VoidCapsule_ToTShop_397ace98-fc45-4454-829b-110c16cb7ce8, 1);
+PROC_ToT_RebuildPools("GENERAL");
+
+EXITSECTION
+
+ENDEXITSECTION

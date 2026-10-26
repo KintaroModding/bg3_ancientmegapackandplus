@@ -1,0 +1,9 @@
+game.configs.AMP_Boss_WYR_SkeletalDragon = Config{
+    root=StateRef{game.roots.DefaultCharacter,
+        combat = StateRef{game.states.AMP_BossCombat,
+            CustomFallback = [[WYR_DRAGONFALLBACK]],
+        },
+        genericBehaviours = StateRef{game.states.CrimesHumanoid},
+        idle = StateRef{game.states.Dummy},
+    }
+}

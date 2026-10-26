@@ -1,0 +1,350 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+// weights are the wanted share over the category size, base multiplies by entry count
+// RerollsSinceLR is mirrored: a rise is kept, a fall is put back
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_ToTMixVer(1)
+THEN
+PROC_AMP_Plus_ToTMix_Reseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_ToTMixVer(1)
+THEN
+PROC_AMP_Plus_ToTMix_Reseed();
+
+PROC
+PROC_AMP_Plus_ToTMix_Reseed()
+AND
+DB_AMP_Plus_ToTMixVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_ToTMixVer(_Old);
+
+PROC
+PROC_AMP_Plus_ToTMix_Reseed()
+THEN
+PROC_AMP_Plus_ToTMix_DrainCat();
+PROC_AMP_Plus_ToTMix_DrainTier();
+
+PROC
+PROC_AMP_Plus_ToTMix_Reseed()
+AND
+DB_AMP_Plus_ToTMix_Shards((INTEGER)_S)
+THEN
+NOT DB_AMP_Plus_ToTMix_Shards(_S);
+
+// Cat is per mille of all slots, Tier is percent of the shard share
+PROC
+PROC_AMP_Plus_ToTMix_Reseed()
+THEN
+DB_AMP_Plus_ToTMixVer(1);
+DB_AMP_Plus_ToTMix_Cat("COINS", 250);
+DB_AMP_Plus_ToTMix_Cat("CAPSULES", 400);
+DB_AMP_Plus_ToTMix_Shards(350);
+DB_AMP_Plus_ToTMix_Tier(1, "SHARDS_20", 89);
+DB_AMP_Plus_ToTMix_Tier(1, "SHARDS_6", 10);
+DB_AMP_Plus_ToTMix_Tier(1, "SHARDS_2", 1);
+DB_AMP_Plus_ToTMix_Tier(1, "SHARDS_1", 0);
+DB_AMP_Plus_ToTMix_Tier(2, "SHARDS_20", 60);
+DB_AMP_Plus_ToTMix_Tier(2, "SHARDS_6", 37);
+DB_AMP_Plus_ToTMix_Tier(2, "SHARDS_2", 3);
+DB_AMP_Plus_ToTMix_Tier(2, "SHARDS_1", 0);
+DB_AMP_Plus_ToTMix_Tier(3, "SHARDS_20", 20);
+DB_AMP_Plus_ToTMix_Tier(3, "SHARDS_6", 65);
+DB_AMP_Plus_ToTMix_Tier(3, "SHARDS_2", 14);
+DB_AMP_Plus_ToTMix_Tier(3, "SHARDS_1", 1);
+DB_AMP_Plus_ToTMix_Tier(4, "SHARDS_20", 0);
+DB_AMP_Plus_ToTMix_Tier(4, "SHARDS_6", 55);
+DB_AMP_Plus_ToTMix_Tier(4, "SHARDS_2", 44);
+DB_AMP_Plus_ToTMix_Tier(4, "SHARDS_1", 1);
+DB_AMP_Plus_ToTMix_Tier(5, "SHARDS_20", 0);
+DB_AMP_Plus_ToTMix_Tier(5, "SHARDS_6", 20);
+DB_AMP_Plus_ToTMix_Tier(5, "SHARDS_2", 75);
+DB_AMP_Plus_ToTMix_Tier(5, "SHARDS_1", 5);
+DB_AMP_Plus_ToTMix_Tier(6, "SHARDS_20", 0);
+DB_AMP_Plus_ToTMix_Tier(6, "SHARDS_6", 0);
+DB_AMP_Plus_ToTMix_Tier(6, "SHARDS_2", 80);
+DB_AMP_Plus_ToTMix_Tier(6, "SHARDS_1", 20);
+TimerLaunch("AMP_Plus_ToTMix_Apply", 100);
+
+PROC
+PROC_AMP_Plus_ToTMix_DrainCat()
+AND
+DB_AMP_Plus_ToTMix_Cat((STRING)_C, (INTEGER)_S)
+THEN
+NOT DB_AMP_Plus_ToTMix_Cat(_C, _S);
+PROC_AMP_Plus_ToTMix_DrainCat();
+
+PROC
+PROC_AMP_Plus_ToTMix_DrainTier()
+AND
+DB_AMP_Plus_ToTMix_Tier((INTEGER)_P, (STRING)_T, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_ToTMix_Tier(_P, _T, _N);
+PROC_AMP_Plus_ToTMix_DrainTier();
+
+IF
+DB_ToT_CatSize("GENERAL", _, _)
+THEN
+TimerLaunch("AMP_Plus_ToTMix_Apply", 100);
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+TimerLaunch("AMP_Plus_ToTMix_Apply", 1000);
+
+// lands before the first pick of a restock
+IF
+UseStarted((CHARACTER)_Player, (ITEM)_Box)
+AND
+DB_ToT_Shop("GENERAL", _Box)
+AND
+DB_Players(_Player)
+THEN
+TimerLaunch("AMP_Plus_ToTMix_Apply", 50);
+PROC_AMP_Plus_ToTRoll_Init();
+PROC_AMP_Plus_ToTRoll_Arm();
+
+IF
+TimerFinished("AMP_Plus_ToTMix_Apply")
+THEN
+PROC_AMP_Plus_ToTMix_Apply();
+
+PROC
+PROC_AMP_Plus_ToTMix_Apply()
+THEN
+PROC_AMP_Plus_PChest_PoolCalc();
+
+PROC
+PROC_AMP_Plus_ToTMix_Apply()
+AND
+DB_AMP_Plus_ToTMix_Cat((STRING)_Cat, (INTEGER)_Share)
+AND
+DB_ToT_CatSize("GENERAL", _Cat, (INTEGER)_N)
+AND
+_N > 0
+AND
+IntegerProduct(_Share, 1000, (INTEGER)_T)
+AND
+IntegerDivide(_T, _N, (INTEGER)_W)
+THEN
+PROC_AMP_Plus_ToTMix_SetW(_Cat, _W);
+
+PROC
+PROC_AMP_Plus_ToTMix_Apply()
+AND
+DB_AMP_Plus_PChest_PoolNow((INTEGER)_Pool)
+AND
+DB_AMP_Plus_ToTMix_Shards((INTEGER)_Share)
+AND
+DB_AMP_Plus_ToTMix_Tier(_Pool, (STRING)_Tier, (INTEGER)_Pct)
+AND
+DB_ToT_CatSize("GENERAL", _Tier, (INTEGER)_N)
+AND
+_N > 0
+AND
+IntegerProduct(_Share, _Pct, (INTEGER)_A)
+AND
+IntegerProduct(_A, 10, (INTEGER)_T)
+AND
+IntegerDivide(_T, _N, (INTEGER)_W)
+THEN
+PROC_AMP_Plus_ToTMix_SetW(_Tier, _W);
+
+PROC
+PROC_AMP_Plus_ToTMix_Apply()
+THEN
+PROC_ToT_Rebuild("GENERAL");
+
+// new row in before the old ones come out, so no category is missing or doubled
+PROC
+PROC_AMP_Plus_ToTMix_SetW((STRING)_Cat, (INTEGER)_W)
+AND
+NOT DB_ToT_CatWeight("GENERAL", _Cat, _W)
+THEN
+DB_ToT_CatWeight("GENERAL", _Cat, _W);
+
+PROC
+PROC_AMP_Plus_ToTMix_SetW((STRING)_Cat, (INTEGER)_W)
+THEN
+PROC_AMP_Plus_ToTMix_DropW(_Cat, _W);
+
+PROC
+PROC_AMP_Plus_ToTMix_DropW((STRING)_Cat, (INTEGER)_W)
+AND
+DB_ToT_CatWeight("GENERAL", _Cat, (INTEGER)_V)
+AND
+_V != _W
+THEN
+NOT DB_ToT_CatWeight("GENERAL", _Cat, _V);
+PROC_AMP_Plus_ToTMix_DropW(_Cat, _W);
+
+// created from events only, a NOT-clause rule would wake on every retraction
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_ToTRoll_Used(_)
+AND
+DB_ToT_Shop_RerollsSinceLR((INTEGER)_C)
+THEN
+DB_AMP_Plus_ToTRoll_Used(_C);
+
+PROC
+PROC_AMP_Plus_ToTRoll_Init()
+AND
+NOT DB_AMP_Plus_ToTRoll_Used(_)
+AND
+DB_ToT_Shop_RerollsSinceLR((INTEGER)_C)
+THEN
+DB_AMP_Plus_ToTRoll_Used(_C);
+
+IF
+DB_ToT_Shop_RerollsSinceLR((INTEGER)_C)
+AND
+DB_AMP_Plus_ToTRoll_Used((INTEGER)_M)
+AND
+_C > _M
+THEN
+PROC_AMP_Plus_ToTRoll_Adopt(_C);
+
+IF
+DB_ToT_Shop_RerollsSinceLR((INTEGER)_C)
+AND
+DB_AMP_Plus_ToTRoll_Used((INTEGER)_M)
+AND
+_C < _M
+THEN
+TimerLaunch("AMP_Plus_ToTRoll_Restore", 100);
+
+PROC
+PROC_AMP_Plus_ToTRoll_Adopt((INTEGER)_C)
+AND
+DB_AMP_Plus_ToTRoll_Used((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_ToTRoll_Used(_Old);
+
+PROC
+PROC_AMP_Plus_ToTRoll_Adopt((INTEGER)_C)
+THEN
+DB_AMP_Plus_ToTRoll_Used(_C);
+PROC_AMP_Plus_ToTRoll_Arm();
+
+IF
+TimerFinished("AMP_Plus_ToTRoll_Restore")
+THEN
+PROC_AMP_Plus_ToTRoll_Restore();
+
+PROC
+PROC_AMP_Plus_ToTRoll_Restore()
+AND
+DB_AMP_Plus_ToTRoll_Used((INTEGER)_M)
+AND
+DB_ToT_Shop_RerollsSinceLR((INTEGER)_C)
+AND
+_C != _M
+THEN
+PROC_AMP_Plus_ToTRoll_SetCycle(_M);
+
+PROC
+PROC_AMP_Plus_ToTRoll_SetCycle((INTEGER)_N)
+AND
+NOT DB_ToT_Shop_RerollsSinceLR(_N)
+THEN
+DB_ToT_Shop_RerollsSinceLR(_N);
+
+PROC
+PROC_AMP_Plus_ToTRoll_SetCycle((INTEGER)_N)
+THEN
+PROC_AMP_Plus_ToTRoll_DropCycle(_N);
+
+PROC
+PROC_AMP_Plus_ToTRoll_DropCycle((INTEGER)_N)
+AND
+DB_ToT_Shop_RerollsSinceLR((INTEGER)_V)
+AND
+_V != _N
+THEN
+NOT DB_ToT_Shop_RerollsSinceLR(_V);
+PROC_AMP_Plus_ToTRoll_DropCycle(_N);
+
+// clock sits on one carrier, GetHostCharacter follows whoever the player controls
+PROC
+PROC_AMP_Plus_ToTRoll_Arm()
+AND
+DB_AMP_Plus_ToTRoll_Carrier((CHARACTER)_Char)
+AND
+NOT DB_Players(_Char)
+THEN
+NOT DB_AMP_Plus_ToTRoll_Carrier(_Char);
+RemoveStatus(_Char, "AMP_PLUS_TOT_ROLL_REGEN");
+
+PROC
+PROC_AMP_Plus_ToTRoll_Arm()
+AND
+DB_AMP_Plus_ToTRoll_Carrier((CHARACTER)_Char)
+AND
+HasAppliedStatus(_Char, "AMP_PLUS_TOT_ROLL_REGEN", 0)
+THEN
+NOT DB_AMP_Plus_ToTRoll_Carrier(_Char);
+
+PROC
+PROC_AMP_Plus_ToTRoll_Arm()
+AND
+NOT DB_AMP_Plus_ToTRoll_Carrier(_)
+AND
+DB_AMP_Plus_ToTRoll_Used((INTEGER)_M)
+AND
+_M > 0
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+DB_AMP_Plus_ToTRoll_Carrier(_Host);
+ApplyStatus(_Host, "AMP_PLUS_TOT_ROLL_REGEN", 360.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// re-arm waits, the status may still read as applied during its removal event
+IF
+StatusRemoved((CHARACTER)_Char, "AMP_PLUS_TOT_ROLL_REGEN", _, _)
+AND
+DB_AMP_Plus_ToTRoll_Carrier(_Char)
+THEN
+NOT DB_AMP_Plus_ToTRoll_Carrier(_Char);
+PROC_AMP_Plus_ToTRoll_Return();
+TimerLaunch("AMP_Plus_ToTRoll_Rearm", 200);
+
+IF
+TimerFinished("AMP_Plus_ToTRoll_Rearm")
+THEN
+PROC_AMP_Plus_ToTRoll_Arm();
+
+// mirror comes out first and goes back last, so the watch rules never fire
+PROC
+PROC_AMP_Plus_ToTRoll_Return()
+AND
+DB_AMP_Plus_ToTRoll_Used((INTEGER)_M)
+AND
+_M > 0
+AND
+IntegerSubtract(_M, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Plus_ToTRoll_Used(_M);
+PROC_AMP_Plus_ToTRoll_SetCycle(_Next);
+DB_AMP_Plus_ToTRoll_Used(_Next);
+PROC_AMP_Plus_ToTRoll_MarkAll();
+
+PROC
+PROC_AMP_Plus_ToTRoll_MarkAll()
+AND
+DB_ToT_Shop_Activated(1)
+AND
+DB_ToT_Shop("GENERAL", (ITEM)_Box)
+THEN
+DB_ToT_Shop_NeedsRestock(_Box);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,198 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// devouring pact boots - rarity x pact detection (12 combos)
+
+// equip: check pact on StatusApplied
+// chain
+IF
+StatusApplied(_Character, "AMP_PACT_RECLAIM_MARK_1", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasPassive(_Character, "PactOfTheChain", 1)
+THEN
+ApplyStatus(_Character, "AMP_DEVOURING_PACT_CHAIN_1", -1.0, 1, _Character);
+
+IF
+StatusApplied(_Character, "AMP_PACT_RECLAIM_MARK_2", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasPassive(_Character, "PactOfTheChain", 1)
+THEN
+ApplyStatus(_Character, "AMP_DEVOURING_PACT_CHAIN_2", -1.0, 1, _Character);
+
+IF
+StatusApplied(_Character, "AMP_PACT_RECLAIM_MARK_3", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasPassive(_Character, "PactOfTheChain", 1)
+THEN
+ApplyStatus(_Character, "AMP_DEVOURING_PACT_CHAIN_3", -1.0, 1, _Character);
+
+IF
+StatusApplied(_Character, "AMP_PACT_RECLAIM_MARK_4", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasPassive(_Character, "PactOfTheChain", 1)
+THEN
+ApplyStatus(_Character, "AMP_DEVOURING_PACT_CHAIN_4", -1.0, 1, _Character);
+
+// blade (PactOfTheBlade)
+IF
+StatusApplied(_Character, "AMP_PACT_RECLAIM_MARK_1", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasPassive(_Character, "PactOfTheBlade", 1)
+THEN
+ApplyStatus(_Character, "AMP_DEVOURING_PACT_BLADE_1", -1.0, 1, _Character);
+
+IF
+StatusApplied(_Character, "AMP_PACT_RECLAIM_MARK_2", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasPassive(_Character, "PactOfTheBlade", 1)
+THEN
+ApplyStatus(_Character, "AMP_DEVOURING_PACT_BLADE_2", -1.0, 1, _Character);
+
+IF
+StatusApplied(_Character, "AMP_PACT_RECLAIM_MARK_3", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasPassive(_Character, "PactOfTheBlade", 1)
+THEN
+ApplyStatus(_Character, "AMP_DEVOURING_PACT_BLADE_3", -1.0, 1, _Character);
+
+IF
+StatusApplied(_Character, "AMP_PACT_RECLAIM_MARK_4", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasPassive(_Character, "PactOfTheBlade", 1)
+THEN
+ApplyStatus(_Character, "AMP_DEVOURING_PACT_BLADE_4", -1.0, 1, _Character);
+
+// blade via hexblade, only if no regular PactOfTheBlade
+IF
+StatusApplied(_Character, "AMP_PACT_RECLAIM_MARK_1", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasPassive(_Character, "PactOfTheBlade_Hex", 1)
+AND
+NOT HasPassive(_Character, "PactOfTheBlade", 1)
+THEN
+ApplyStatus(_Character, "AMP_DEVOURING_PACT_BLADE_1", -1.0, 1, _Character);
+
+IF
+StatusApplied(_Character, "AMP_PACT_RECLAIM_MARK_2", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasPassive(_Character, "PactOfTheBlade_Hex", 1)
+AND
+NOT HasPassive(_Character, "PactOfTheBlade", 1)
+THEN
+ApplyStatus(_Character, "AMP_DEVOURING_PACT_BLADE_2", -1.0, 1, _Character);
+
+IF
+StatusApplied(_Character, "AMP_PACT_RECLAIM_MARK_3", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasPassive(_Character, "PactOfTheBlade_Hex", 1)
+AND
+NOT HasPassive(_Character, "PactOfTheBlade", 1)
+THEN
+ApplyStatus(_Character, "AMP_DEVOURING_PACT_BLADE_3", -1.0, 1, _Character);
+
+IF
+StatusApplied(_Character, "AMP_PACT_RECLAIM_MARK_4", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasPassive(_Character, "PactOfTheBlade_Hex", 1)
+AND
+NOT HasPassive(_Character, "PactOfTheBlade", 1)
+THEN
+ApplyStatus(_Character, "AMP_DEVOURING_PACT_BLADE_4", -1.0, 1, _Character);
+
+// tome
+IF
+StatusApplied(_Character, "AMP_PACT_RECLAIM_MARK_1", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasPassive(_Character, "PactOfTheTome", 1)
+THEN
+ApplyStatus(_Character, "AMP_DEVOURING_PACT_TOME_1", -1.0, 1, _Character);
+
+IF
+StatusApplied(_Character, "AMP_PACT_RECLAIM_MARK_2", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasPassive(_Character, "PactOfTheTome", 1)
+THEN
+ApplyStatus(_Character, "AMP_DEVOURING_PACT_TOME_2", -1.0, 1, _Character);
+
+IF
+StatusApplied(_Character, "AMP_PACT_RECLAIM_MARK_3", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasPassive(_Character, "PactOfTheTome", 1)
+THEN
+ApplyStatus(_Character, "AMP_DEVOURING_PACT_TOME_3", -1.0, 1, _Character);
+
+IF
+StatusApplied(_Character, "AMP_PACT_RECLAIM_MARK_4", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasPassive(_Character, "PactOfTheTome", 1)
+THEN
+ApplyStatus(_Character, "AMP_DEVOURING_PACT_TOME_4", -1.0, 1, _Character);
+// end equip
+
+// unequip: remove all bonuses
+IF
+StatusRemoved(_Character, "AMP_PACT_RECLAIM_MARK_1", _, _)
+THEN
+RemoveStatus(_Character, "AMP_DEVOURING_PACT_CHAIN_1", _Character);
+RemoveStatus(_Character, "AMP_DEVOURING_PACT_BLADE_1", _Character);
+RemoveStatus(_Character, "AMP_DEVOURING_PACT_TOME_1", _Character);
+
+IF
+StatusRemoved(_Character, "AMP_PACT_RECLAIM_MARK_2", _, _)
+THEN
+RemoveStatus(_Character, "AMP_DEVOURING_PACT_CHAIN_2", _Character);
+RemoveStatus(_Character, "AMP_DEVOURING_PACT_BLADE_2", _Character);
+RemoveStatus(_Character, "AMP_DEVOURING_PACT_TOME_2", _Character);
+
+IF
+StatusRemoved(_Character, "AMP_PACT_RECLAIM_MARK_3", _, _)
+THEN
+RemoveStatus(_Character, "AMP_DEVOURING_PACT_CHAIN_3", _Character);
+RemoveStatus(_Character, "AMP_DEVOURING_PACT_BLADE_3", _Character);
+RemoveStatus(_Character, "AMP_DEVOURING_PACT_TOME_3", _Character);
+
+IF
+StatusRemoved(_Character, "AMP_PACT_RECLAIM_MARK_4", _, _)
+THEN
+RemoveStatus(_Character, "AMP_DEVOURING_PACT_CHAIN_4", _Character);
+RemoveStatus(_Character, "AMP_DEVOURING_PACT_BLADE_4", _Character);
+RemoveStatus(_Character, "AMP_DEVOURING_PACT_TOME_4", _Character);
+// end unequip
+
+EXITSECTION
+
+ENDEXITSECTION

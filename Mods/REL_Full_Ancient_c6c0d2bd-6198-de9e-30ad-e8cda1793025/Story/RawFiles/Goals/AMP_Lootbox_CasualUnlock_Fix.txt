@@ -1,0 +1,42 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// casual: auto-unlock the astral knock-chest on open
+IF
+TemplateOpening((ITEMROOT)_Template, (ITEM)_Chest, (CHARACTER)_Character)
+AND
+DB_AMP_GameMode("CASUAL")
+AND
+IsTagged(_Chest, (TAG)ASTRAL_CHEST_KNOCK_d5d006a2-613a-4c2e-87b4-a529c2ce9816, 1)
+THEN
+Unlock(_Chest);
+Open(_Chest);
+
+// same on attack
+IF
+AttackedBy((ITEM)_Chest, _, _, _, _, _, _)
+AND
+DB_AMP_GameMode("CASUAL")
+AND
+IsTagged(_Chest, (TAG)ASTRAL_CHEST_KNOCK_d5d006a2-613a-4c2e-87b4-a529c2ce9816, 1)
+THEN
+Unlock(_Chest);
+Open(_Chest);
+
+// same on lockpick start
+IF
+StartedLockpicking((CHARACTER)_Character, (ITEM)_Chest)
+AND
+DB_AMP_GameMode("CASUAL")
+AND
+IsTagged(_Chest, (TAG)ASTRAL_CHEST_KNOCK_d5d006a2-613a-4c2e-87b4-a529c2ce9816, 1)
+THEN
+Unlock(_Chest);
+Open(_Chest);
+
+EXITSECTION
+
+ENDEXITSECTION

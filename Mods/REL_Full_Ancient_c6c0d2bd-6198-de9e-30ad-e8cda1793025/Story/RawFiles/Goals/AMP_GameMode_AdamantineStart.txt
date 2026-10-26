@@ -1,0 +1,41 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// casual: hand all 6 adamantine molds once on mode select (new + existing saves)
+
+IF
+DB_AMP_GameMode("CASUAL")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+NOT DB_AMP_AdamantineMoldsGiven(1)
+THEN
+DB_AMP_AdamantineMoldsGiven(1);
+TemplateAddTo((ITEMROOT)UNI_LOOT_AdamantineForge_LongswordMold_348649e0-e74c-4968-9613-fe3712796dd6, _Host, 1, 1);
+TemplateAddTo((ITEMROOT)UNI_LOOT_AdamantineForge_MaceMold_a1cd6c84-84bc-4546-b052-a58e38faf4a5, _Host, 1, 1);
+TemplateAddTo((ITEMROOT)UNI_LOOT_AdamantineForge_ScalemailMold_e0dd88fa-b057-499a-b2fd-fe8e92a856df, _Host, 1, 1);
+TemplateAddTo((ITEMROOT)UNI_LOOT_AdamantineForge_ScimitarMold_fecf2955-a5a2-42e5-86f3-4bf87b3d0e2a, _Host, 1, 1);
+TemplateAddTo((ITEMROOT)UNI_LOOT_AdamantineForge_ShieldMold_8e2c856e-6317-40f3-89a4-b195b70b9fa1, _Host, 1, 1);
+TemplateAddTo((ITEMROOT)UNI_LOOT_AdamantineForge_SplintMold_e3526b0a-b74f-43c5-9466-334c08de88fe, _Host, 1, 1);
+
+// stock: same molds at start
+IF
+DB_AMP_GameMode("STOCK")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+NOT DB_AMP_AdamantineMoldsGiven(1)
+THEN
+DB_AMP_AdamantineMoldsGiven(1);
+TemplateAddTo((ITEMROOT)UNI_LOOT_AdamantineForge_LongswordMold_348649e0-e74c-4968-9613-fe3712796dd6, _Host, 1, 1);
+TemplateAddTo((ITEMROOT)UNI_LOOT_AdamantineForge_MaceMold_a1cd6c84-84bc-4546-b052-a58e38faf4a5, _Host, 1, 1);
+TemplateAddTo((ITEMROOT)UNI_LOOT_AdamantineForge_ScalemailMold_e0dd88fa-b057-499a-b2fd-fe8e92a856df, _Host, 1, 1);
+TemplateAddTo((ITEMROOT)UNI_LOOT_AdamantineForge_ScimitarMold_fecf2955-a5a2-42e5-86f3-4bf87b3d0e2a, _Host, 1, 1);
+TemplateAddTo((ITEMROOT)UNI_LOOT_AdamantineForge_ShieldMold_8e2c856e-6317-40f3-89a4-b195b70b9fa1, _Host, 1, 1);
+TemplateAddTo((ITEMROOT)UNI_LOOT_AdamantineForge_SplintMold_e3526b0a-b74f-43c5-9466-334c08de88fe, _Host, 1, 1);
+
+EXITSECTION
+ENDEXITSECTION

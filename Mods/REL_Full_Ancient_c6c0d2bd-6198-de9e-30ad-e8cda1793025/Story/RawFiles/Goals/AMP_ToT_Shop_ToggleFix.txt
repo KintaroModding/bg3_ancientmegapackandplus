@@ -1,0 +1,22 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// core never clears the opposite DB_ToT_Shop_Activated value, so clear first then write
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings018", 1)
+THEN
+SysClear("DB_ToT_Shop_Activated", 1);
+DB_ToT_Shop_Activated(1);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings018", 0)
+THEN
+SysClear("DB_ToT_Shop_Activated", 1);
+DB_ToT_Shop_Activated(0);
+
+EXITSECTION
+ENDEXITSECTION

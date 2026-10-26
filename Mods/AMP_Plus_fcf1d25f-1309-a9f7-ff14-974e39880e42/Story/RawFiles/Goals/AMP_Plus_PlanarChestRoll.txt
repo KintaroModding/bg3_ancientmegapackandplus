@@ -1,0 +1,1136 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// Interplanar chest roll on first touch, pool from the regular fighters' gear score
+// loot comes as tesseracts to keep campaign prices, the chest's own table drops nothing
+
+// version-marked tables, a changed number reaches saves with the old one
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_PChest_Ver(6)
+THEN
+PROC_AMP_Plus_PChest_Reseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_PChest_Ver(6)
+THEN
+PROC_AMP_Plus_PChest_Reseed();
+
+PROC
+PROC_AMP_Plus_PChest_Reseed()
+THEN
+PROC_AMP_Plus_PChest_DrainVer();
+PROC_AMP_Plus_PChest_DrainBand();
+PROC_AMP_Plus_PChest_DrainCount();
+PROC_AMP_Plus_PChest_DrainRar();
+PROC_AMP_Plus_PChest_DrainCap();
+PROC_AMP_Plus_PChest_DrainCapSize();
+PROC_AMP_Plus_PChest_DrainCapGrp();
+PROC_AMP_Plus_PChest_DrainCapGrpSize();
+PROC_AMP_Plus_PChest_DrainCapList();
+PROC_AMP_Plus_PChest_DrainCoinChance();
+PROC_AMP_Plus_PChest_DrainCoin();
+PROC_AMP_Plus_PChest_DrainPresenceCap();
+PROC_AMP_Plus_PChest_DrainPresenceMin();
+PROC_AMP_Plus_PChest_DrainLvlBand();
+PROC_AMP_Plus_PChest_DrainQty();
+PROC_AMP_Plus_PChest_DrainFortuneOdds();
+PROC_AMP_Plus_PChest_DrainFortuneRegion();
+PROC_AMP_Plus_PChest_DrainArch();
+PROC_AMP_Plus_PChest_DrainAQty();
+PROC_AMP_Plus_PChest_DrainABump();
+PROC_AMP_Plus_PChest_Seed();
+
+PROC
+PROC_AMP_Plus_PChest_DrainVer()
+AND
+DB_AMP_Plus_PChest_Ver((INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_PChest_Ver(_V);
+PROC_AMP_Plus_PChest_DrainVer();
+
+PROC
+PROC_AMP_Plus_PChest_DrainBand()
+AND
+DB_AMP_Plus_PChest_Band((INTEGER)_Lo, (INTEGER)_Hi, (INTEGER)_P)
+THEN
+NOT DB_AMP_Plus_PChest_Band(_Lo, _Hi, _P);
+PROC_AMP_Plus_PChest_DrainBand();
+
+PROC
+PROC_AMP_Plus_PChest_DrainCount()
+AND
+DB_AMP_Plus_PChest_Count((INTEGER)_P, (STRING)_K, (INTEGER)_I, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_PChest_Count(_P, _K, _I, _N);
+PROC_AMP_Plus_PChest_DrainCount();
+
+PROC
+PROC_AMP_Plus_PChest_DrainRar()
+AND
+DB_AMP_Plus_PChest_Rar((INTEGER)_P, (STRING)_K, (INTEGER)_Lo, (INTEGER)_Hi, (ITEMROOT)_T)
+THEN
+NOT DB_AMP_Plus_PChest_Rar(_P, _K, _Lo, _Hi, _T);
+PROC_AMP_Plus_PChest_DrainRar();
+
+PROC
+PROC_AMP_Plus_PChest_DrainCap()
+AND
+DB_AMP_Plus_PChest_Cap((INTEGER)_I, (ITEMROOT)_T)
+THEN
+NOT DB_AMP_Plus_PChest_Cap(_I, _T);
+PROC_AMP_Plus_PChest_DrainCap();
+
+PROC
+PROC_AMP_Plus_PChest_DrainCapSize()
+AND
+DB_AMP_Plus_PChest_CapSize((INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_PChest_CapSize(_N);
+PROC_AMP_Plus_PChest_DrainCapSize();
+
+PROC
+PROC_AMP_Plus_PChest_DrainCapGrp()
+AND
+DB_AMP_Plus_PChest_CapGrp((INTEGER)_P, (INTEGER)_Lo, (INTEGER)_Hi, (STRING)_G)
+THEN
+NOT DB_AMP_Plus_PChest_CapGrp(_P, _Lo, _Hi, _G);
+PROC_AMP_Plus_PChest_DrainCapGrp();
+
+PROC
+PROC_AMP_Plus_PChest_DrainCapGrpSize()
+AND
+DB_AMP_Plus_PChest_CapGrpSize((STRING)_G, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_PChest_CapGrpSize(_G, _N);
+PROC_AMP_Plus_PChest_DrainCapGrpSize();
+
+PROC
+PROC_AMP_Plus_PChest_DrainCapList()
+AND
+DB_AMP_Plus_PChest_CapList((STRING)_G, (INTEGER)_I, (ITEMROOT)_T)
+THEN
+NOT DB_AMP_Plus_PChest_CapList(_G, _I, _T);
+PROC_AMP_Plus_PChest_DrainCapList();
+
+PROC
+PROC_AMP_Plus_PChest_DrainCoinChance()
+AND
+DB_AMP_Plus_PChest_CoinChance((INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_PChest_CoinChance(_N);
+PROC_AMP_Plus_PChest_DrainCoinChance();
+
+PROC
+PROC_AMP_Plus_PChest_DrainCoin()
+AND
+DB_AMP_Plus_PChest_Coin((INTEGER)_P, (INTEGER)_Lo, (INTEGER)_Hi, (ITEMROOT)_T)
+THEN
+NOT DB_AMP_Plus_PChest_Coin(_P, _Lo, _Hi, _T);
+PROC_AMP_Plus_PChest_DrainCoin();
+
+PROC
+PROC_AMP_Plus_PChest_DrainPresenceCap()
+AND
+DB_AMP_Plus_PChest_PresenceCap((INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_PChest_PresenceCap(_N);
+PROC_AMP_Plus_PChest_DrainPresenceCap();
+
+PROC
+PROC_AMP_Plus_PChest_DrainPresenceMin()
+AND
+DB_AMP_Plus_PChest_PresenceMin((INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_PChest_PresenceMin(_N);
+PROC_AMP_Plus_PChest_DrainPresenceMin();
+
+PROC
+PROC_AMP_Plus_PChest_DrainLvlBand()
+AND
+DB_AMP_Plus_PChest_LvlBand((INTEGER)_Lo, (INTEGER)_Hi, (INTEGER)_F, (INTEGER)_C)
+THEN
+NOT DB_AMP_Plus_PChest_LvlBand(_Lo, _Hi, _F, _C);
+PROC_AMP_Plus_PChest_DrainLvlBand();
+
+PROC
+PROC_AMP_Plus_PChest_DrainQty()
+AND
+DB_AMP_Plus_PChest_Qty((INTEGER)_P, (STRING)_K, (INTEGER)_Lo, (INTEGER)_Hi, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_PChest_Qty(_P, _K, _Lo, _Hi, _N);
+PROC_AMP_Plus_PChest_DrainQty();
+
+PROC
+PROC_AMP_Plus_PChest_DrainFortuneOdds()
+AND
+DB_AMP_Plus_PChest_FortuneOdds((INTEGER)_Lo, (INTEGER)_Hi, (STRING)_F)
+THEN
+NOT DB_AMP_Plus_PChest_FortuneOdds(_Lo, _Hi, _F);
+PROC_AMP_Plus_PChest_DrainFortuneOdds();
+
+PROC
+PROC_AMP_Plus_PChest_DrainFortuneRegion()
+AND
+DB_AMP_Plus_PChest_FortuneRegion((STRING)_R)
+THEN
+NOT DB_AMP_Plus_PChest_FortuneRegion(_R);
+PROC_AMP_Plus_PChest_DrainFortuneRegion();
+
+PROC
+PROC_AMP_Plus_PChest_DrainArch()
+AND
+DB_AMP_Plus_PChest_Arch((STRING)_Set, (STRING)_F, (STRING)_G, (INTEGER)_Lo, (INTEGER)_Hi, (STRING)_A)
+THEN
+NOT DB_AMP_Plus_PChest_Arch(_Set, _F, _G, _Lo, _Hi, _A);
+PROC_AMP_Plus_PChest_DrainArch();
+
+PROC
+PROC_AMP_Plus_PChest_DrainAQty()
+AND
+DB_AMP_Plus_PChest_AQty((STRING)_A, (STRING)_K, (INTEGER)_Lo, (INTEGER)_Hi, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_PChest_AQty(_A, _K, _Lo, _Hi, _N);
+PROC_AMP_Plus_PChest_DrainAQty();
+
+PROC
+PROC_AMP_Plus_PChest_DrainABump()
+AND
+DB_AMP_Plus_PChest_ABump((STRING)_A, (STRING)_K)
+THEN
+NOT DB_AMP_Plus_PChest_ABump(_A, _K);
+PROC_AMP_Plus_PChest_DrainABump();
+
+// Arch rows range over Random(1000), AQty/Rar/CapGrp/Coin over Random(100)
+// pool 7 is the legendary chest's own, outside the gear and level pools
+
+PROC
+PROC_AMP_Plus_PChest_Seed()
+THEN
+DB_AMP_Plus_PChest_Ver(6);
+DB_AMP_Plus_PChest_FortuneOdds(0, 20, "LUCKY");
+DB_AMP_Plus_PChest_FortuneOdds(20, 80, "EVEN");
+DB_AMP_Plus_PChest_FortuneOdds(80, 100, "UNLUCKY");
+DB_AMP_Plus_PChest_FortuneRegion("WLD_Main_A");
+DB_AMP_Plus_PChest_FortuneRegion("SCL_Main_A");
+DB_AMP_Plus_PChest_FortuneRegion("BGO_Main_A");
+DB_AMP_Plus_PChest_FortuneRegion("CTY_Main_A");
+DB_AMP_Plus_PChest_Arch("NORMAL", "EVEN", "LOW", 0, 150, "TAUNT");
+DB_AMP_Plus_PChest_Arch("NORMAL", "EVEN", "LOW", 150, 500, "COMMON");
+DB_AMP_Plus_PChest_Arch("NORMAL", "EVEN", "LOW", 500, 650, "CAPS");
+DB_AMP_Plus_PChest_Arch("NORMAL", "EVEN", "LOW", 650, 800, "SHARDS");
+DB_AMP_Plus_PChest_Arch("NORMAL", "EVEN", "LOW", 800, 920, "ARMORY");
+DB_AMP_Plus_PChest_Arch("NORMAL", "EVEN", "LOW", 920, 975, "COINS");
+DB_AMP_Plus_PChest_Arch("NORMAL", "EVEN", "LOW", 975, 995, "TREASURE");
+DB_AMP_Plus_PChest_Arch("NORMAL", "EVEN", "LOW", 995, 1000, "LEGEND");
+DB_AMP_Plus_PChest_Arch("NORMAL", "EVEN", "HIGH", 0, 150, "TAUNT");
+DB_AMP_Plus_PChest_Arch("NORMAL", "EVEN", "HIGH", 150, 500, "COMMON");
+DB_AMP_Plus_PChest_Arch("NORMAL", "EVEN", "HIGH", 500, 680, "CAPS");
+DB_AMP_Plus_PChest_Arch("NORMAL", "EVEN", "HIGH", 680, 860, "SHARDS");
+DB_AMP_Plus_PChest_Arch("NORMAL", "EVEN", "HIGH", 860, 920, "ARMORY");
+DB_AMP_Plus_PChest_Arch("NORMAL", "EVEN", "HIGH", 920, 975, "COINS");
+DB_AMP_Plus_PChest_Arch("NORMAL", "EVEN", "HIGH", 975, 995, "TREASURE");
+DB_AMP_Plus_PChest_Arch("NORMAL", "EVEN", "HIGH", 995, 1000, "LEGEND");
+DB_AMP_Plus_PChest_Arch("NORMAL", "LUCKY", "LOW", 0, 50, "TAUNT");
+DB_AMP_Plus_PChest_Arch("NORMAL", "LUCKY", "LOW", 50, 300, "COMMON");
+DB_AMP_Plus_PChest_Arch("NORMAL", "LUCKY", "LOW", 300, 500, "CAPS");
+DB_AMP_Plus_PChest_Arch("NORMAL", "LUCKY", "LOW", 500, 700, "SHARDS");
+DB_AMP_Plus_PChest_Arch("NORMAL", "LUCKY", "LOW", 700, 840, "ARMORY");
+DB_AMP_Plus_PChest_Arch("NORMAL", "LUCKY", "LOW", 840, 950, "COINS");
+DB_AMP_Plus_PChest_Arch("NORMAL", "LUCKY", "LOW", 950, 990, "TREASURE");
+DB_AMP_Plus_PChest_Arch("NORMAL", "LUCKY", "LOW", 990, 1000, "LEGEND");
+DB_AMP_Plus_PChest_Arch("NORMAL", "LUCKY", "HIGH", 0, 50, "TAUNT");
+DB_AMP_Plus_PChest_Arch("NORMAL", "LUCKY", "HIGH", 50, 300, "COMMON");
+DB_AMP_Plus_PChest_Arch("NORMAL", "LUCKY", "HIGH", 300, 530, "CAPS");
+DB_AMP_Plus_PChest_Arch("NORMAL", "LUCKY", "HIGH", 530, 760, "SHARDS");
+DB_AMP_Plus_PChest_Arch("NORMAL", "LUCKY", "HIGH", 760, 840, "ARMORY");
+DB_AMP_Plus_PChest_Arch("NORMAL", "LUCKY", "HIGH", 840, 950, "COINS");
+DB_AMP_Plus_PChest_Arch("NORMAL", "LUCKY", "HIGH", 950, 990, "TREASURE");
+DB_AMP_Plus_PChest_Arch("NORMAL", "LUCKY", "HIGH", 990, 1000, "LEGEND");
+DB_AMP_Plus_PChest_Arch("NORMAL", "UNLUCKY", "LOW", 0, 480, "TAUNT");
+DB_AMP_Plus_PChest_Arch("NORMAL", "UNLUCKY", "LOW", 480, 780, "COMMON");
+DB_AMP_Plus_PChest_Arch("NORMAL", "UNLUCKY", "LOW", 780, 860, "CAPS");
+DB_AMP_Plus_PChest_Arch("NORMAL", "UNLUCKY", "LOW", 860, 930, "SHARDS");
+DB_AMP_Plus_PChest_Arch("NORMAL", "UNLUCKY", "LOW", 930, 980, "ARMORY");
+DB_AMP_Plus_PChest_Arch("NORMAL", "UNLUCKY", "LOW", 980, 995, "COINS");
+DB_AMP_Plus_PChest_Arch("NORMAL", "UNLUCKY", "LOW", 995, 999, "TREASURE");
+DB_AMP_Plus_PChest_Arch("NORMAL", "UNLUCKY", "LOW", 999, 1000, "LEGEND");
+DB_AMP_Plus_PChest_Arch("NORMAL", "UNLUCKY", "HIGH", 0, 480, "TAUNT");
+DB_AMP_Plus_PChest_Arch("NORMAL", "UNLUCKY", "HIGH", 480, 780, "COMMON");
+DB_AMP_Plus_PChest_Arch("NORMAL", "UNLUCKY", "HIGH", 780, 875, "CAPS");
+DB_AMP_Plus_PChest_Arch("NORMAL", "UNLUCKY", "HIGH", 875, 960, "SHARDS");
+DB_AMP_Plus_PChest_Arch("NORMAL", "UNLUCKY", "HIGH", 960, 980, "ARMORY");
+DB_AMP_Plus_PChest_Arch("NORMAL", "UNLUCKY", "HIGH", 980, 995, "COINS");
+DB_AMP_Plus_PChest_Arch("NORMAL", "UNLUCKY", "HIGH", 995, 999, "TREASURE");
+DB_AMP_Plus_PChest_Arch("NORMAL", "UNLUCKY", "HIGH", 999, 1000, "LEGEND");
+DB_AMP_Plus_PChest_Arch("HARD", "EVEN", "LOW", 0, 250, "TAUNT");
+DB_AMP_Plus_PChest_Arch("HARD", "EVEN", "LOW", 250, 400, "COMMON");
+DB_AMP_Plus_PChest_Arch("HARD", "EVEN", "LOW", 400, 570, "CAPS");
+DB_AMP_Plus_PChest_Arch("HARD", "EVEN", "LOW", 570, 750, "SHARDS");
+DB_AMP_Plus_PChest_Arch("HARD", "EVEN", "LOW", 750, 870, "ARMORY");
+DB_AMP_Plus_PChest_Arch("HARD", "EVEN", "LOW", 870, 960, "COINS");
+DB_AMP_Plus_PChest_Arch("HARD", "EVEN", "LOW", 960, 990, "TREASURE");
+DB_AMP_Plus_PChest_Arch("HARD", "EVEN", "LOW", 990, 1000, "LEGEND");
+DB_AMP_Plus_PChest_Arch("HARD", "EVEN", "HIGH", 0, 250, "TAUNT");
+DB_AMP_Plus_PChest_Arch("HARD", "EVEN", "HIGH", 250, 400, "COMMON");
+DB_AMP_Plus_PChest_Arch("HARD", "EVEN", "HIGH", 400, 600, "CAPS");
+DB_AMP_Plus_PChest_Arch("HARD", "EVEN", "HIGH", 600, 810, "SHARDS");
+DB_AMP_Plus_PChest_Arch("HARD", "EVEN", "HIGH", 810, 870, "ARMORY");
+DB_AMP_Plus_PChest_Arch("HARD", "EVEN", "HIGH", 870, 960, "COINS");
+DB_AMP_Plus_PChest_Arch("HARD", "EVEN", "HIGH", 960, 990, "TREASURE");
+DB_AMP_Plus_PChest_Arch("HARD", "EVEN", "HIGH", 990, 1000, "LEGEND");
+DB_AMP_Plus_PChest_Arch("HARD", "LUCKY", "LOW", 0, 100, "TAUNT");
+DB_AMP_Plus_PChest_Arch("HARD", "LUCKY", "LOW", 100, 220, "COMMON");
+DB_AMP_Plus_PChest_Arch("HARD", "LUCKY", "LOW", 220, 430, "CAPS");
+DB_AMP_Plus_PChest_Arch("HARD", "LUCKY", "LOW", 430, 650, "SHARDS");
+DB_AMP_Plus_PChest_Arch("HARD", "LUCKY", "LOW", 650, 800, "ARMORY");
+DB_AMP_Plus_PChest_Arch("HARD", "LUCKY", "LOW", 800, 940, "COINS");
+DB_AMP_Plus_PChest_Arch("HARD", "LUCKY", "LOW", 940, 985, "TREASURE");
+DB_AMP_Plus_PChest_Arch("HARD", "LUCKY", "LOW", 985, 1000, "LEGEND");
+DB_AMP_Plus_PChest_Arch("HARD", "LUCKY", "HIGH", 0, 100, "TAUNT");
+DB_AMP_Plus_PChest_Arch("HARD", "LUCKY", "HIGH", 100, 220, "COMMON");
+DB_AMP_Plus_PChest_Arch("HARD", "LUCKY", "HIGH", 220, 460, "CAPS");
+DB_AMP_Plus_PChest_Arch("HARD", "LUCKY", "HIGH", 460, 710, "SHARDS");
+DB_AMP_Plus_PChest_Arch("HARD", "LUCKY", "HIGH", 710, 800, "ARMORY");
+DB_AMP_Plus_PChest_Arch("HARD", "LUCKY", "HIGH", 800, 940, "COINS");
+DB_AMP_Plus_PChest_Arch("HARD", "LUCKY", "HIGH", 940, 985, "TREASURE");
+DB_AMP_Plus_PChest_Arch("HARD", "LUCKY", "HIGH", 985, 1000, "LEGEND");
+DB_AMP_Plus_PChest_Arch("HARD", "UNLUCKY", "LOW", 0, 550, "TAUNT");
+DB_AMP_Plus_PChest_Arch("HARD", "UNLUCKY", "LOW", 550, 700, "COMMON");
+DB_AMP_Plus_PChest_Arch("HARD", "UNLUCKY", "LOW", 700, 800, "CAPS");
+DB_AMP_Plus_PChest_Arch("HARD", "UNLUCKY", "LOW", 800, 900, "SHARDS");
+DB_AMP_Plus_PChest_Arch("HARD", "UNLUCKY", "LOW", 900, 950, "ARMORY");
+DB_AMP_Plus_PChest_Arch("HARD", "UNLUCKY", "LOW", 950, 985, "COINS");
+DB_AMP_Plus_PChest_Arch("HARD", "UNLUCKY", "LOW", 985, 997, "TREASURE");
+DB_AMP_Plus_PChest_Arch("HARD", "UNLUCKY", "LOW", 997, 1000, "LEGEND");
+DB_AMP_Plus_PChest_Arch("HARD", "UNLUCKY", "HIGH", 0, 550, "TAUNT");
+DB_AMP_Plus_PChest_Arch("HARD", "UNLUCKY", "HIGH", 550, 700, "COMMON");
+DB_AMP_Plus_PChest_Arch("HARD", "UNLUCKY", "HIGH", 700, 815, "CAPS");
+DB_AMP_Plus_PChest_Arch("HARD", "UNLUCKY", "HIGH", 815, 930, "SHARDS");
+DB_AMP_Plus_PChest_Arch("HARD", "UNLUCKY", "HIGH", 930, 950, "ARMORY");
+DB_AMP_Plus_PChest_Arch("HARD", "UNLUCKY", "HIGH", 950, 985, "COINS");
+DB_AMP_Plus_PChest_Arch("HARD", "UNLUCKY", "HIGH", 985, 997, "TREASURE");
+DB_AMP_Plus_PChest_Arch("HARD", "UNLUCKY", "HIGH", 997, 1000, "LEGEND");
+DB_AMP_Plus_PChest_AQty("TAUNT", "CAP", 0, 100, 1);
+DB_AMP_Plus_PChest_AQty("TAUNT", "ITEM", 0, 55, 0);
+DB_AMP_Plus_PChest_AQty("TAUNT", "ITEM", 55, 100, 1);
+DB_AMP_Plus_PChest_AQty("TAUNT", "SHARD", 0, 45, 0);
+DB_AMP_Plus_PChest_AQty("TAUNT", "SHARD", 45, 100, 1);
+DB_AMP_Plus_PChest_AQty("COMMON", "ITEM", 0, 30, 1);
+DB_AMP_Plus_PChest_AQty("COMMON", "ITEM", 30, 75, 2);
+DB_AMP_Plus_PChest_AQty("COMMON", "ITEM", 75, 100, 3);
+DB_AMP_Plus_PChest_AQty("COMMON", "SHARD", 0, 35, 2);
+DB_AMP_Plus_PChest_AQty("COMMON", "SHARD", 35, 75, 3);
+DB_AMP_Plus_PChest_AQty("COMMON", "SHARD", 75, 95, 4);
+DB_AMP_Plus_PChest_AQty("COMMON", "SHARD", 95, 100, 5);
+DB_AMP_Plus_PChest_AQty("COMMON", "CAP", 0, 10, 2);
+DB_AMP_Plus_PChest_AQty("COMMON", "CAP", 10, 40, 3);
+DB_AMP_Plus_PChest_AQty("COMMON", "CAP", 40, 75, 4);
+DB_AMP_Plus_PChest_AQty("COMMON", "CAP", 75, 95, 5);
+DB_AMP_Plus_PChest_AQty("COMMON", "CAP", 95, 100, 6);
+DB_AMP_Plus_PChest_AQty("CAPS", "CAP", 0, 15, 6);
+DB_AMP_Plus_PChest_AQty("CAPS", "CAP", 15, 35, 7);
+DB_AMP_Plus_PChest_AQty("CAPS", "CAP", 35, 57, 8);
+DB_AMP_Plus_PChest_AQty("CAPS", "CAP", 57, 75, 9);
+DB_AMP_Plus_PChest_AQty("CAPS", "CAP", 75, 87, 10);
+DB_AMP_Plus_PChest_AQty("CAPS", "CAP", 87, 96, 12);
+DB_AMP_Plus_PChest_AQty("CAPS", "CAP", 96, 100, 15);
+DB_AMP_Plus_PChest_AQty("CAPS", "SHARD", 0, 30, 0);
+DB_AMP_Plus_PChest_AQty("CAPS", "SHARD", 30, 80, 1);
+DB_AMP_Plus_PChest_AQty("CAPS", "SHARD", 80, 100, 2);
+DB_AMP_Plus_PChest_AQty("SHARDS", "SHARD", 0, 20, 4);
+DB_AMP_Plus_PChest_AQty("SHARDS", "SHARD", 20, 50, 5);
+DB_AMP_Plus_PChest_AQty("SHARDS", "SHARD", 50, 75, 6);
+DB_AMP_Plus_PChest_AQty("SHARDS", "SHARD", 75, 90, 7);
+DB_AMP_Plus_PChest_AQty("SHARDS", "SHARD", 90, 97, 9);
+DB_AMP_Plus_PChest_AQty("SHARDS", "SHARD", 97, 100, 12);
+DB_AMP_Plus_PChest_AQty("SHARDS", "CAP", 0, 30, 0);
+DB_AMP_Plus_PChest_AQty("SHARDS", "CAP", 30, 70, 1);
+DB_AMP_Plus_PChest_AQty("SHARDS", "CAP", 70, 100, 2);
+DB_AMP_Plus_PChest_AQty("ARMORY", "ITEM", 0, 35, 3);
+DB_AMP_Plus_PChest_AQty("ARMORY", "ITEM", 35, 75, 4);
+DB_AMP_Plus_PChest_AQty("ARMORY", "ITEM", 75, 95, 5);
+DB_AMP_Plus_PChest_AQty("ARMORY", "ITEM", 95, 100, 6);
+DB_AMP_Plus_PChest_AQty("ARMORY", "CAP", 0, 50, 1);
+DB_AMP_Plus_PChest_AQty("ARMORY", "CAP", 50, 100, 2);
+DB_AMP_Plus_PChest_AQty("ARMORY", "SHARD", 0, 50, 0);
+DB_AMP_Plus_PChest_AQty("ARMORY", "SHARD", 50, 100, 1);
+DB_AMP_Plus_PChest_AQty("COINS", "COIN", 0, 55, 1);
+DB_AMP_Plus_PChest_AQty("COINS", "COIN", 55, 85, 2);
+DB_AMP_Plus_PChest_AQty("COINS", "COIN", 85, 100, 3);
+DB_AMP_Plus_PChest_AQty("COINS", "CAP", 0, 50, 1);
+DB_AMP_Plus_PChest_AQty("COINS", "CAP", 50, 100, 2);
+DB_AMP_Plus_PChest_AQty("COINS", "SHARD", 0, 50, 0);
+DB_AMP_Plus_PChest_AQty("COINS", "SHARD", 50, 100, 1);
+DB_AMP_Plus_PChest_AQty("TREASURE", "ITEM", 0, 50, 3);
+DB_AMP_Plus_PChest_AQty("TREASURE", "ITEM", 50, 100, 4);
+DB_AMP_Plus_PChest_AQty("TREASURE", "SHARD", 0, 40, 4);
+DB_AMP_Plus_PChest_AQty("TREASURE", "SHARD", 40, 80, 5);
+DB_AMP_Plus_PChest_AQty("TREASURE", "SHARD", 80, 100, 6);
+DB_AMP_Plus_PChest_AQty("TREASURE", "CAP", 0, 40, 6);
+DB_AMP_Plus_PChest_AQty("TREASURE", "CAP", 40, 80, 8);
+DB_AMP_Plus_PChest_AQty("TREASURE", "CAP", 80, 100, 10);
+DB_AMP_Plus_PChest_AQty("TREASURE", "COIN", 0, 70, 1);
+DB_AMP_Plus_PChest_AQty("TREASURE", "COIN", 70, 100, 2);
+DB_AMP_Plus_PChest_AQty("LEGEND", "COIN", 0, 100, 1);
+DB_AMP_Plus_PChest_AQty("LEGEND", "SHARD", 0, 30, 3);
+DB_AMP_Plus_PChest_AQty("LEGEND", "SHARD", 30, 70, 4);
+DB_AMP_Plus_PChest_AQty("LEGEND", "SHARD", 70, 100, 5);
+DB_AMP_Plus_PChest_AQty("LEGEND", "CAP", 0, 40, 2);
+DB_AMP_Plus_PChest_AQty("LEGEND", "CAP", 40, 80, 3);
+DB_AMP_Plus_PChest_AQty("LEGEND", "CAP", 80, 100, 4);
+DB_AMP_Plus_PChest_AQty("LEGEND", "ITEM", 0, 60, 0);
+DB_AMP_Plus_PChest_AQty("LEGEND", "ITEM", 60, 90, 1);
+DB_AMP_Plus_PChest_AQty("LEGEND", "ITEM", 90, 100, 2);
+DB_AMP_Plus_PChest_ABump("ARMORY", "ITEM");
+DB_AMP_Plus_PChest_ABump("SHARDS", "SHARD");
+DB_AMP_Plus_PChest_ABump("TREASURE", "CAP");
+DB_AMP_Plus_PChest_ABump("TREASURE", "COIN");
+DB_AMP_Plus_PChest_ABump("TREASURE", "ITEM");
+DB_AMP_Plus_PChest_ABump("TREASURE", "SHARD");
+DB_AMP_Plus_PChest_PresenceCap(10);
+DB_AMP_Plus_PChest_PresenceMin(3);
+DB_AMP_Plus_PChest_LvlBand(0, 5, 1, 2);
+DB_AMP_Plus_PChest_LvlBand(5, 8, 2, 3);
+DB_AMP_Plus_PChest_LvlBand(8, 11, 3, 5);
+DB_AMP_Plus_PChest_LvlBand(11, 100, 4, 6);
+DB_AMP_Plus_PChest_Band(0, 4, 1);
+DB_AMP_Plus_PChest_Band(4, 6, 2);
+DB_AMP_Plus_PChest_Band(6, 9, 3);
+DB_AMP_Plus_PChest_Band(9, 12, 4);
+DB_AMP_Plus_PChest_Band(12, 15, 5);
+DB_AMP_Plus_PChest_Band(15, 100, 6);
+DB_AMP_Plus_PChest_Rar(1, "ITEM", 0, 94, (ITEMROOT)AMP_Capsule_Reward_Generic_1_bc44d261-edfb-424e-ab61-98d16899ab7b);
+DB_AMP_Plus_PChest_Rar(1, "ITEM", 94, 99, (ITEMROOT)AMP_Capsule_Reward_Generic_2_7a85cccb-48ed-4948-9d25-03a4b0a79114);
+DB_AMP_Plus_PChest_Rar(1, "ITEM", 99, 100, (ITEMROOT)AMP_Capsule_Reward_Generic_3_007e6a6b-4d51-4a7f-b03a-560e06edd5f6);
+DB_AMP_Plus_PChest_Rar(2, "ITEM", 0, 70, (ITEMROOT)AMP_Capsule_Reward_Generic_1_bc44d261-edfb-424e-ab61-98d16899ab7b);
+DB_AMP_Plus_PChest_Rar(2, "ITEM", 70, 98, (ITEMROOT)AMP_Capsule_Reward_Generic_2_7a85cccb-48ed-4948-9d25-03a4b0a79114);
+DB_AMP_Plus_PChest_Rar(2, "ITEM", 98, 100, (ITEMROOT)AMP_Capsule_Reward_Generic_3_007e6a6b-4d51-4a7f-b03a-560e06edd5f6);
+DB_AMP_Plus_PChest_Rar(3, "ITEM", 0, 25, (ITEMROOT)AMP_Capsule_Reward_Generic_1_bc44d261-edfb-424e-ab61-98d16899ab7b);
+DB_AMP_Plus_PChest_Rar(3, "ITEM", 25, 90, (ITEMROOT)AMP_Capsule_Reward_Generic_2_7a85cccb-48ed-4948-9d25-03a4b0a79114);
+DB_AMP_Plus_PChest_Rar(3, "ITEM", 90, 99, (ITEMROOT)AMP_Capsule_Reward_Generic_3_007e6a6b-4d51-4a7f-b03a-560e06edd5f6);
+DB_AMP_Plus_PChest_Rar(3, "ITEM", 99, 100, (ITEMROOT)AMP_Capsule_Reward_Generic_4_55bf5412-1ab8-460f-9bbb-e8b860454ad9);
+DB_AMP_Plus_PChest_Rar(4, "ITEM", 0, 60, (ITEMROOT)AMP_Capsule_Reward_Generic_2_7a85cccb-48ed-4948-9d25-03a4b0a79114);
+DB_AMP_Plus_PChest_Rar(4, "ITEM", 60, 99, (ITEMROOT)AMP_Capsule_Reward_Generic_3_007e6a6b-4d51-4a7f-b03a-560e06edd5f6);
+DB_AMP_Plus_PChest_Rar(4, "ITEM", 99, 100, (ITEMROOT)AMP_Capsule_Reward_Generic_4_55bf5412-1ab8-460f-9bbb-e8b860454ad9);
+DB_AMP_Plus_PChest_Rar(5, "ITEM", 0, 20, (ITEMROOT)AMP_Capsule_Reward_Generic_2_7a85cccb-48ed-4948-9d25-03a4b0a79114);
+DB_AMP_Plus_PChest_Rar(5, "ITEM", 20, 92, (ITEMROOT)AMP_Capsule_Reward_Generic_3_007e6a6b-4d51-4a7f-b03a-560e06edd5f6);
+DB_AMP_Plus_PChest_Rar(5, "ITEM", 92, 100, (ITEMROOT)AMP_Capsule_Reward_Generic_4_55bf5412-1ab8-460f-9bbb-e8b860454ad9);
+DB_AMP_Plus_PChest_Rar(6, "ITEM", 0, 65, (ITEMROOT)AMP_Capsule_Reward_Generic_3_007e6a6b-4d51-4a7f-b03a-560e06edd5f6);
+DB_AMP_Plus_PChest_Rar(6, "ITEM", 65, 100, (ITEMROOT)AMP_Capsule_Reward_Generic_4_55bf5412-1ab8-460f-9bbb-e8b860454ad9);
+DB_AMP_Plus_PChest_Rar(1, "SHARD", 0, 89, (ITEMROOT)AMP_Capsule_Reward_Shards_Uncommon_ba33bd2b-59ed-4205-bba8-39312df94109);
+DB_AMP_Plus_PChest_Rar(1, "SHARD", 89, 99, (ITEMROOT)AMP_Capsule_Reward_Shards_Rare_a165c989-b06a-4271-afb2-790874d5b37b);
+DB_AMP_Plus_PChest_Rar(1, "SHARD", 99, 100, (ITEMROOT)AMP_Capsule_Reward_Shards_VeryRare_76b07b2c-8cf9-46fc-92ab-5d9f31005523);
+DB_AMP_Plus_PChest_Rar(2, "SHARD", 0, 60, (ITEMROOT)AMP_Capsule_Reward_Shards_Uncommon_ba33bd2b-59ed-4205-bba8-39312df94109);
+DB_AMP_Plus_PChest_Rar(2, "SHARD", 60, 97, (ITEMROOT)AMP_Capsule_Reward_Shards_Rare_a165c989-b06a-4271-afb2-790874d5b37b);
+DB_AMP_Plus_PChest_Rar(2, "SHARD", 97, 100, (ITEMROOT)AMP_Capsule_Reward_Shards_VeryRare_76b07b2c-8cf9-46fc-92ab-5d9f31005523);
+DB_AMP_Plus_PChest_Rar(3, "SHARD", 0, 20, (ITEMROOT)AMP_Capsule_Reward_Shards_Uncommon_ba33bd2b-59ed-4205-bba8-39312df94109);
+DB_AMP_Plus_PChest_Rar(3, "SHARD", 20, 85, (ITEMROOT)AMP_Capsule_Reward_Shards_Rare_a165c989-b06a-4271-afb2-790874d5b37b);
+DB_AMP_Plus_PChest_Rar(3, "SHARD", 85, 99, (ITEMROOT)AMP_Capsule_Reward_Shards_VeryRare_76b07b2c-8cf9-46fc-92ab-5d9f31005523);
+DB_AMP_Plus_PChest_Rar(3, "SHARD", 99, 100, (ITEMROOT)AMP_Capsule_Reward_Shards_Legendary_71c048a2-2ec7-4a23-ac59-e080282ebe45);
+DB_AMP_Plus_PChest_Rar(4, "SHARD", 0, 55, (ITEMROOT)AMP_Capsule_Reward_Shards_Rare_a165c989-b06a-4271-afb2-790874d5b37b);
+DB_AMP_Plus_PChest_Rar(4, "SHARD", 55, 99, (ITEMROOT)AMP_Capsule_Reward_Shards_VeryRare_76b07b2c-8cf9-46fc-92ab-5d9f31005523);
+DB_AMP_Plus_PChest_Rar(4, "SHARD", 99, 100, (ITEMROOT)AMP_Capsule_Reward_Shards_Legendary_71c048a2-2ec7-4a23-ac59-e080282ebe45);
+DB_AMP_Plus_PChest_Rar(5, "SHARD", 0, 20, (ITEMROOT)AMP_Capsule_Reward_Shards_Rare_a165c989-b06a-4271-afb2-790874d5b37b);
+DB_AMP_Plus_PChest_Rar(5, "SHARD", 20, 95, (ITEMROOT)AMP_Capsule_Reward_Shards_VeryRare_76b07b2c-8cf9-46fc-92ab-5d9f31005523);
+DB_AMP_Plus_PChest_Rar(5, "SHARD", 95, 100, (ITEMROOT)AMP_Capsule_Reward_Shards_Legendary_71c048a2-2ec7-4a23-ac59-e080282ebe45);
+DB_AMP_Plus_PChest_Rar(6, "SHARD", 0, 80, (ITEMROOT)AMP_Capsule_Reward_Shards_VeryRare_76b07b2c-8cf9-46fc-92ab-5d9f31005523);
+DB_AMP_Plus_PChest_Rar(6, "SHARD", 80, 100, (ITEMROOT)AMP_Capsule_Reward_Shards_Legendary_71c048a2-2ec7-4a23-ac59-e080282ebe45);
+DB_AMP_Plus_PChest_Rar(7, "ITEM", 0, 70, (ITEMROOT)AMP_Capsule_Reward_Generic_3_007e6a6b-4d51-4a7f-b03a-560e06edd5f6);
+DB_AMP_Plus_PChest_Rar(7, "ITEM", 70, 100, (ITEMROOT)AMP_Capsule_Reward_Generic_4_55bf5412-1ab8-460f-9bbb-e8b860454ad9);
+DB_AMP_Plus_PChest_Rar(7, "SHARD", 0, 85, (ITEMROOT)AMP_Capsule_Reward_Shards_VeryRare_76b07b2c-8cf9-46fc-92ab-5d9f31005523);
+DB_AMP_Plus_PChest_Rar(7, "SHARD", 85, 100, (ITEMROOT)AMP_Capsule_Reward_Shards_Legendary_71c048a2-2ec7-4a23-ac59-e080282ebe45);
+DB_AMP_Plus_PChest_CapGrp(1, 0, 96, "GENERIC");
+DB_AMP_Plus_PChest_CapGrp(1, 96, 99, "THEME");
+DB_AMP_Plus_PChest_CapGrp(1, 99, 100, "SLOT");
+DB_AMP_Plus_PChest_CapGrp(2, 0, 70, "GENERIC");
+DB_AMP_Plus_PChest_CapGrp(2, 70, 99, "THEME");
+DB_AMP_Plus_PChest_CapGrp(2, 99, 100, "SLOT");
+DB_AMP_Plus_PChest_CapGrp(3, 0, 30, "GENERIC");
+DB_AMP_Plus_PChest_CapGrp(3, 30, 98, "THEME");
+DB_AMP_Plus_PChest_CapGrp(3, 98, 100, "SLOT");
+DB_AMP_Plus_PChest_CapGrp(4, 0, 75, "THEME");
+DB_AMP_Plus_PChest_CapGrp(4, 75, 100, "SLOT");
+DB_AMP_Plus_PChest_CapGrp(5, 0, 50, "THEME");
+DB_AMP_Plus_PChest_CapGrp(5, 50, 100, "SLOT");
+DB_AMP_Plus_PChest_CapGrp(6, 0, 30, "THEME");
+DB_AMP_Plus_PChest_CapGrp(6, 30, 100, "SLOT");
+DB_AMP_Plus_PChest_CapGrp(7, 0, 100, "SLOT");
+DB_AMP_Plus_PChest_CapGrpSize("GENERIC", 1);
+DB_AMP_Plus_PChest_CapList("GENERIC", 0, (ITEMROOT)AMP_Generic_VoidCapsule_bb84619f-7c56-4a1d-aa8a-d5f0a33ea620);
+DB_AMP_Plus_PChest_CapGrpSize("THEME", 10);
+DB_AMP_Plus_PChest_CapList("THEME", 0, (ITEMROOT)AMP_Aquatic_VoidCapsule_ca6c58a9-d0f4-4df4-bdb8-93538a248547);
+DB_AMP_Plus_PChest_CapList("THEME", 1, (ITEMROOT)AMP_Shadowfell_VoidCapsule_091d95c0-2bf0-4f6e-9a04-7c49e7fe1bd9);
+DB_AMP_Plus_PChest_CapList("THEME", 2, (ITEMROOT)AMP_Arcane_VoidCapsule_79ecd0e9-e036-46f0-8d3e-2f6f3c30d28c);
+DB_AMP_Plus_PChest_CapList("THEME", 3, (ITEMROOT)AMP_Celestial_VoidCapsule_9ccff182-c01b-4256-93d8-f0d0e794b02a);
+DB_AMP_Plus_PChest_CapList("THEME", 4, (ITEMROOT)AMP_Nature_VoidCapsule_86da09ce-d855-47a6-a30e-2d0ced02bb5c);
+DB_AMP_Plus_PChest_CapList("THEME", 5, (ITEMROOT)AMP_Destructive_VoidCapsule_cbd3e5d5-79a3-4e96-8db7-0d59f51e9261);
+DB_AMP_Plus_PChest_CapList("THEME", 6, (ITEMROOT)AMP_War_VoidCapsule_ec91ffb2-182b-49db-82b6-f311d63d1363);
+DB_AMP_Plus_PChest_CapList("THEME", 7, (ITEMROOT)AMP_Psionic_VoidCapsule_758e8cab-c712-4068-8fd1-94dbda0f484d);
+DB_AMP_Plus_PChest_CapList("THEME", 8, (ITEMROOT)AMP_Primal_VoidCapsule_d75c3820-2d6b-4355-8e0d-70af3570399c);
+DB_AMP_Plus_PChest_CapList("THEME", 9, (ITEMROOT)AMP_Swamp_VoidCapsule_9cc7c34c-568d-43e3-9032-ff2409d3d1b2);
+DB_AMP_Plus_PChest_CapGrpSize("SLOT", 11);
+DB_AMP_Plus_PChest_CapList("SLOT", 0, (ITEMROOT)AMP_Hat_VoidCapsule_98bdbe88-d3ea-493d-a803-9cc6bcf0b200);
+DB_AMP_Plus_PChest_CapList("SLOT", 1, (ITEMROOT)AMP_Amulet_VoidCapsule_27eeca56-5e80-47b3-8a64-aca99f4e5da4);
+DB_AMP_Plus_PChest_CapList("SLOT", 2, (ITEMROOT)AMP_Ring_VoidCapsule_8ee480e7-b5f2-4c5f-9b22-9a4b1289508a);
+DB_AMP_Plus_PChest_CapList("SLOT", 3, (ITEMROOT)AMP_Cloak_VoidCapsule_2e11382e-7156-424f-b6cb-4d856db392b5);
+DB_AMP_Plus_PChest_CapList("SLOT", 4, (ITEMROOT)AMP_Cloth_VoidCapsule_a9b47da1-7857-4a91-bdc0-845ecf092b83);
+DB_AMP_Plus_PChest_CapList("SLOT", 5, (ITEMROOT)AMP_Armor_VoidCapsule_15564fed-94e5-4541-a8d6-0ab7fb588439);
+DB_AMP_Plus_PChest_CapList("SLOT", 6, (ITEMROOT)AMP_Shield_VoidCapsule_45538e4d-9d80-42c8-b879-d2aaca220651);
+DB_AMP_Plus_PChest_CapList("SLOT", 7, (ITEMROOT)AMP_Glove_VoidCapsule_f6b3a6af-5168-4408-b463-07814f26e3a5);
+DB_AMP_Plus_PChest_CapList("SLOT", 8, (ITEMROOT)AMP_Boot_VoidCapsule_3750f2b0-8888-498f-ac15-c71af93f973f);
+DB_AMP_Plus_PChest_CapList("SLOT", 9, (ITEMROOT)AMP_1H_VoidCapsule_0dc57310-fb72-43e5-a61b-caf1a3a8bbd3);
+DB_AMP_Plus_PChest_CapList("SLOT", 10, (ITEMROOT)AMP_2H_VoidCapsule_dd892a12-a733-49a0-bec5-cac418bafe79);
+DB_AMP_Plus_PChest_Coin(1, 0, 97, (ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b);
+DB_AMP_Plus_PChest_Coin(1, 97, 100, (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d);
+DB_AMP_Plus_PChest_Coin(2, 0, 95, (ITEMROOT)AMP_FeyCoin_c304469f-6132-4304-a5a2-882a2820be3b);
+DB_AMP_Plus_PChest_Coin(2, 95, 100, (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d);
+DB_AMP_Plus_PChest_Coin(3, 0, 97, (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d);
+DB_AMP_Plus_PChest_Coin(3, 97, 100, (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80);
+DB_AMP_Plus_PChest_Coin(4, 0, 95, (ITEMROOT)AMP_ShadowfellCoin_67131136-f11d-4b27-9017-23162629310d);
+DB_AMP_Plus_PChest_Coin(4, 95, 100, (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80);
+DB_AMP_Plus_PChest_Coin(5, 0, 97, (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80);
+DB_AMP_Plus_PChest_Coin(5, 97, 100, (ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1);
+DB_AMP_Plus_PChest_Coin(6, 0, 75, (ITEMROOT)AMP_AstralCoin_6696e8d1-d87f-401d-a4b3-ce2966ea5b80);
+DB_AMP_Plus_PChest_Coin(6, 75, 100, (ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1);
+DB_AMP_Plus_PChest_Coin(7, 0, 100, (ITEMROOT)AMP_CelestialCoin_4dbb1100-ae2a-4107-b69a-099285172cd1);
+
+QRY
+QRY_AMP_Plus_PChest_Is((ITEM)_Chest)
+AND
+GetTemplate(_Chest, (ITEMROOT)_T)
+AND
+DB_AMP_Lootbox_Template(_T)
+AND
+GetRegion(_Chest, (STRING)_R)
+AND
+_R != "TUT_Avernus_C"
+AND
+_R != "TUT_Avernus_D"
+THEN
+DB_NOOP(1);
+
+PROC
+PROC_AMP_Plus_GS_PartyStore((GUIDSTRING)_CombatGuid)
+AND
+CombatGetInvolvedPartyMembersCount(_CombatGuid, (INTEGER)_Total)
+THEN
+PROC_AMP_Plus_PChest_Mark(_CombatGuid, _Total, 1);
+
+PROC
+PROC_AMP_Plus_PChest_Mark((GUIDSTRING)_CombatGuid, (INTEGER)_Total, (INTEGER)_Idx)
+AND
+_Idx <= _Total
+AND
+CombatGetInvolvedPartyMember(_CombatGuid, _Idx, (CHARACTER)_Member)
+AND
+DB_PartOfTheTeam(_Member)
+THEN
+DB_AMP_Plus_PChest_InFight(_CombatGuid, _Member);
+DB_AMP_Plus_PChest_TeamFight(_CombatGuid);
+
+PROC
+PROC_AMP_Plus_PChest_Mark((GUIDSTRING)_CombatGuid, (INTEGER)_Total, (INTEGER)_Idx)
+AND
+_Idx <= _Total
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_PChest_Mark(_CombatGuid, _Total, _Next);
+
+IF
+CombatEnded((GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_Plus_PChest_TeamFight(_CombatGuid)
+THEN
+NOT DB_AMP_Plus_PChest_TeamFight(_CombatGuid);
+PROC_AMP_Plus_PChest_FightEnd(_CombatGuid);
+
+PROC
+PROC_AMP_Plus_PChest_FightEnd((GUIDSTRING)_CombatGuid)
+AND
+DB_PartOfTheTeam((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PChest_InFight(_CombatGuid, _Char)
+THEN
+DB_AMP_Plus_PChest_Step(_Char, 1);
+
+PROC
+PROC_AMP_Plus_PChest_FightEnd((GUIDSTRING)_CombatGuid)
+AND
+DB_PartOfTheTeam((CHARACTER)_Char)
+AND
+NOT DB_AMP_Plus_PChest_InFight(_CombatGuid, _Char)
+AND
+DB_AMP_Plus_PChest_Presence(_Char, (INTEGER)_N)
+THEN
+DB_AMP_Plus_PChest_Step(_Char, 0);
+
+PROC
+PROC_AMP_Plus_PChest_FightEnd((GUIDSTRING)_CombatGuid)
+THEN
+PROC_AMP_Plus_PChest_DrainInFight(_CombatGuid);
+PROC_AMP_Plus_PChest_ApplySteps();
+
+PROC
+PROC_AMP_Plus_PChest_DrainInFight((GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_Plus_PChest_InFight(_CombatGuid, (CHARACTER)_Char)
+THEN
+NOT DB_AMP_Plus_PChest_InFight(_CombatGuid, _Char);
+PROC_AMP_Plus_PChest_DrainInFight(_CombatGuid);
+
+PROC
+PROC_AMP_Plus_PChest_ApplySteps()
+AND
+DB_AMP_Plus_PChest_Step((CHARACTER)_Char, (INTEGER)_Up)
+THEN
+NOT DB_AMP_Plus_PChest_Step(_Char, _Up);
+PROC_AMP_Plus_PChest_Bump(_Char, _Up);
+PROC_AMP_Plus_PChest_ApplySteps();
+
+PROC
+PROC_AMP_Plus_PChest_Bump((CHARACTER)_Char, (INTEGER)_Up)
+AND
+_Up > 0
+AND
+NOT DB_AMP_Plus_PChest_Presence(_Char, _)
+THEN
+DB_AMP_Plus_PChest_Presence(_Char, 0);
+
+PROC
+PROC_AMP_Plus_PChest_Bump((CHARACTER)_Char, (INTEGER)_Up)
+AND
+_Up > 0
+AND
+DB_AMP_Plus_PChest_Presence(_Char, (INTEGER)_N)
+AND
+DB_AMP_Plus_PChest_PresenceCap((INTEGER)_Cap)
+AND
+_N < _Cap
+AND
+IntegerSum(_N, 1, (INTEGER)_N2)
+THEN
+NOT DB_AMP_Plus_PChest_Presence(_Char, _N);
+DB_AMP_Plus_PChest_Presence(_Char, _N2);
+
+PROC
+PROC_AMP_Plus_PChest_Bump((CHARACTER)_Char, (INTEGER)_Up)
+AND
+_Up < 1
+AND
+DB_AMP_Plus_PChest_Presence(_Char, (INTEGER)_N)
+AND
+_N > 0
+AND
+IntegerSubtract(_N, 1, (INTEGER)_N2)
+THEN
+NOT DB_AMP_Plus_PChest_Presence(_Char, _N);
+DB_AMP_Plus_PChest_Presence(_Char, _N2);
+
+// Casual opens these chests by script on spawn, so Opened rolls too
+
+IF
+Opened((ITEM)_Chest)
+AND
+QRY_AMP_Plus_PChest_Is(_Chest)
+THEN
+PROC_AMP_Plus_PChest_Roll(_Chest);
+
+IF
+UseStarted((CHARACTER)_P, (ITEM)_Chest)
+AND
+QRY_AMP_Plus_PChest_Is(_Chest)
+THEN
+PROC_AMP_Plus_PChest_Roll(_Chest);
+
+IF
+TemplateOpening(_, (ITEM)_Chest, (CHARACTER)_P)
+AND
+QRY_AMP_Plus_PChest_Is(_Chest)
+THEN
+PROC_AMP_Plus_PChest_Roll(_Chest);
+
+IF
+StartedLockpicking((CHARACTER)_P, (ITEM)_Chest)
+AND
+QRY_AMP_Plus_PChest_Is(_Chest)
+THEN
+PROC_AMP_Plus_PChest_Roll(_Chest);
+
+IF
+AttackedBy((ITEM)_Chest, _, _, _, _, _, _)
+AND
+QRY_AMP_Plus_PChest_Is(_Chest)
+THEN
+PROC_AMP_Plus_PChest_Roll(_Chest);
+
+PROC
+PROC_AMP_Plus_PChest_Roll((ITEM)_Chest)
+AND
+NOT DB_AMP_Plus_PChest_Rolled(_Chest)
+THEN
+DB_AMP_Plus_PChest_Rolled(_Chest);
+PROC_AMP_Plus_PChest_Fill(_Chest);
+
+PROC
+PROC_AMP_Plus_PChest_Fill((ITEM)_Chest)
+AND
+IsInventoryEmpty(_Chest, 1)
+THEN
+PROC_AMP_Plus_PChest_PoolCalc();
+PROC_AMP_Plus_PChest_FillFromPool(_Chest);
+PlaySound(_Chest, "CrSpell_Cast_MagicClub");
+
+PROC
+PROC_AMP_Plus_PChest_PoolCalc()
+THEN
+PROC_AMP_Plus_PChest_DrainScratch();
+DB_AMP_Plus_PChest_Acc(0, 0);
+
+PROC
+PROC_AMP_Plus_PChest_PoolCalc()
+AND
+DB_AMP_Plus_PChest_PresenceMin((INTEGER)_Min)
+AND
+DB_PartOfTheTeam((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PChest_Presence(_Char, (INTEGER)_N)
+AND
+_N >= _Min
+THEN
+PROC_AMP_Plus_PChest_AddHead(_Char);
+
+PROC
+PROC_AMP_Plus_PChest_PoolCalc()
+AND
+DB_AMP_Plus_PChest_Acc((INTEGER)_Sum, (INTEGER)_Cnt)
+AND
+_Cnt > 0
+AND
+IntegerProduct(_Sum, 4, (INTEGER)_Sum4)
+AND
+IntegerDivide(_Sum4, _Cnt, (INTEGER)_E)
+AND
+DB_AMP_Plus_GearLvlBand((INTEGER)_Min, (INTEGER)_Max, (INTEGER)_G)
+AND
+_E >= _Min
+AND
+_E <= _Max
+AND
+DB_AMP_Plus_PChest_Band((INTEGER)_Lo, (INTEGER)_Hi, (INTEGER)_Pool)
+AND
+_G >= _Lo
+AND
+_G < _Hi
+THEN
+DB_AMP_Plus_PChest_PoolNow(_Pool);
+
+PROC
+PROC_AMP_Plus_PChest_PoolCalc()
+AND
+NOT DB_AMP_Plus_PChest_PoolNow(_)
+AND
+DB_AMP_Plus_GearLevel((INTEGER)_G)
+AND
+DB_AMP_Plus_PChest_Band((INTEGER)_Lo, (INTEGER)_Hi, (INTEGER)_Pool)
+AND
+_G >= _Lo
+AND
+_G < _Hi
+THEN
+DB_AMP_Plus_PChest_PoolNow(_Pool);
+
+PROC
+PROC_AMP_Plus_PChest_PoolCalc()
+AND
+NOT DB_AMP_Plus_PChest_PoolNow(_)
+THEN
+DB_AMP_Plus_PChest_PoolNow(1);
+
+PROC
+PROC_AMP_Plus_PChest_PoolCalc()
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_L)
+AND
+DB_AMP_Plus_PChest_LvlBand((INTEGER)_Lo, (INTEGER)_Hi, (INTEGER)_Floor, _)
+AND
+_L >= _Lo
+AND
+_L < _Hi
+AND
+DB_AMP_Plus_PChest_PoolNow((INTEGER)_Pool)
+AND
+_Pool < _Floor
+THEN
+NOT DB_AMP_Plus_PChest_PoolNow(_Pool);
+DB_AMP_Plus_PChest_PoolNow(_Floor);
+
+PROC
+PROC_AMP_Plus_PChest_PoolCalc()
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_L)
+AND
+DB_AMP_Plus_PChest_LvlBand((INTEGER)_Lo, (INTEGER)_Hi, _, (INTEGER)_Ceil)
+AND
+_L >= _Lo
+AND
+_L < _Hi
+AND
+DB_AMP_Plus_PChest_PoolNow((INTEGER)_Pool)
+AND
+_Pool > _Ceil
+THEN
+NOT DB_AMP_Plus_PChest_PoolNow(_Pool);
+DB_AMP_Plus_PChest_PoolNow(_Ceil);
+
+// weighs items and shards with the gear score's tables and cache, per-character figures untouched
+
+PROC
+PROC_AMP_Plus_PChest_AddHead((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PChest_Acc((INTEGER)_Sum, (INTEGER)_Cnt)
+AND
+IntegerSum(_Cnt, 1, (INTEGER)_Cnt2)
+THEN
+NOT DB_AMP_Plus_PChest_Acc(_Sum, _Cnt);
+DB_AMP_Plus_PChest_Acc(_Sum, _Cnt2);
+
+PROC
+PROC_AMP_Plus_PChest_AddHead((CHARACTER)_Char)
+AND
+DB_AMP_Plus_GS_Slot((STRING)_Slot)
+AND
+GetEquippedItem(_Char, _Slot, (ITEM)_Item)
+THEN
+PROC_AMP_Plus_PChest_WornItem(_Item);
+
+PROC
+PROC_AMP_Plus_PChest_WornItem((ITEM)_Item)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+DB_AMP_Plus_GS_Band(_, (INTEGER)_Lo, (INTEGER)_Hi, (INTEGER)_W)
+AND
+_Value >= _Lo
+AND
+_Value <= _Hi
+THEN
+PROC_AMP_Plus_PChest_AddScore(_W);
+
+PROC
+PROC_AMP_Plus_PChest_WornItem((ITEM)_Item)
+AND
+NOT DB_AMP_Plus_GS_ItemShardW(_Item, _)
+THEN
+PROC_AMP_Plus_GS_CalcShards(_Item);
+
+PROC
+PROC_AMP_Plus_PChest_WornItem((ITEM)_Item)
+AND
+DB_AMP_Plus_GS_ItemShardW(_Item, (INTEGER)_W)
+AND
+_W > 0
+THEN
+PROC_AMP_Plus_PChest_AddScore(_W);
+
+PROC
+PROC_AMP_Plus_PChest_AddScore((INTEGER)_W)
+AND
+DB_AMP_Plus_PChest_Acc((INTEGER)_Sum, (INTEGER)_Cnt)
+AND
+IntegerSum(_Sum, _W, (INTEGER)_Sum2)
+THEN
+NOT DB_AMP_Plus_PChest_Acc(_Sum, _Cnt);
+DB_AMP_Plus_PChest_Acc(_Sum2, _Cnt);
+
+PROC
+PROC_AMP_Plus_PChest_DrainScratch()
+AND
+DB_AMP_Plus_PChest_Acc((INTEGER)_S, (INTEGER)_C)
+THEN
+NOT DB_AMP_Plus_PChest_Acc(_S, _C);
+PROC_AMP_Plus_PChest_DrainScratch();
+
+PROC
+PROC_AMP_Plus_PChest_DrainScratch()
+AND
+DB_AMP_Plus_PChest_PoolNow((INTEGER)_P)
+THEN
+NOT DB_AMP_Plus_PChest_PoolNow(_P);
+PROC_AMP_Plus_PChest_DrainScratch();
+
+PROC
+PROC_AMP_Plus_PChest_FillFromPool((ITEM)_Chest)
+AND
+DB_AMP_Plus_PChest_PoolNow((INTEGER)_Pool)
+THEN
+PROC_AMP_Plus_PChest_Fortune(_Chest);
+PROC_AMP_Plus_PChest_PickArch(_Chest, _Pool);
+
+PROC
+PROC_AMP_Plus_PChest_Fortune((ITEM)_Chest)
+AND
+GetRegion(_Chest, (STRING)_Region)
+AND
+DB_AMP_Plus_PChest_FortuneRegion(_Region)
+AND
+NOT DB_AMP_Plus_PChest_FortuneRolled(_Region)
+THEN
+DB_AMP_Plus_PChest_FortuneRolled(_Region);
+PROC_AMP_Plus_PChest_FortuneRoll();
+
+PROC
+PROC_AMP_Plus_PChest_Fortune((ITEM)_Chest)
+AND
+NOT DB_AMP_Plus_PChest_Fortune(_)
+THEN
+PROC_AMP_Plus_PChest_FortuneRoll();
+
+PROC
+PROC_AMP_Plus_PChest_FortuneRoll()
+AND
+DB_AMP_Plus_PChest_Fortune((STRING)_Old)
+THEN
+NOT DB_AMP_Plus_PChest_Fortune(_Old);
+
+PROC
+PROC_AMP_Plus_PChest_FortuneRoll()
+AND
+Random(100, (INTEGER)_R)
+AND
+DB_AMP_Plus_PChest_FortuneOdds((INTEGER)_Lo, (INTEGER)_Hi, (STRING)_F)
+AND
+_R >= _Lo
+AND
+_R < _Hi
+THEN
+DB_AMP_Plus_PChest_Fortune(_F);
+
+PROC
+PROC_AMP_Plus_PChest_PickArch((ITEM)_Chest, (INTEGER)_Pool)
+AND
+DB_AMP_GameMode("HARD")
+AND
+DB_AMP_Plus_PChest_Fortune((STRING)_F)
+THEN
+PROC_AMP_Plus_PChest_PickArchIn(_Chest, _Pool, "HARD", _F);
+
+PROC
+PROC_AMP_Plus_PChest_PickArch((ITEM)_Chest, (INTEGER)_Pool)
+AND
+NOT DB_AMP_GameMode("HARD")
+AND
+DB_AMP_Plus_PChest_Fortune((STRING)_F)
+THEN
+PROC_AMP_Plus_PChest_PickArchIn(_Chest, _Pool, "NORMAL", _F);
+
+PROC
+PROC_AMP_Plus_PChest_PickArchIn((ITEM)_Chest, (INTEGER)_Pool, (STRING)_Set, (STRING)_F)
+AND
+_Pool <= 3
+THEN
+PROC_AMP_Plus_PChest_RollArch(_Chest, _Pool, _Set, _F, "LOW");
+
+PROC
+PROC_AMP_Plus_PChest_PickArchIn((ITEM)_Chest, (INTEGER)_Pool, (STRING)_Set, (STRING)_F)
+AND
+_Pool > 3
+THEN
+PROC_AMP_Plus_PChest_RollArch(_Chest, _Pool, _Set, _F, "HIGH");
+
+PROC
+PROC_AMP_Plus_PChest_RollArch((ITEM)_Chest, (INTEGER)_Pool, (STRING)_Set, (STRING)_F, (STRING)_G)
+AND
+Random(1000, (INTEGER)_R)
+AND
+DB_AMP_Plus_PChest_Arch(_Set, _F, _G, (INTEGER)_Lo, (INTEGER)_Hi, (STRING)_A)
+AND
+_R >= _Lo
+AND
+_R < _Hi
+THEN
+PROC_AMP_Plus_PChest_OpenArch(_Chest, _Pool, _A);
+
+PROC
+PROC_AMP_Plus_PChest_OpenArch((ITEM)_Chest, (INTEGER)_Pool, (STRING)_A)
+AND
+_A == "LEGEND"
+THEN
+PROC_AMP_Plus_PChest_Contents(_Chest, 7, _A);
+
+PROC
+PROC_AMP_Plus_PChest_OpenArch((ITEM)_Chest, (INTEGER)_Pool, (STRING)_A)
+AND
+_A != "LEGEND"
+THEN
+PROC_AMP_Plus_PChest_Contents(_Chest, _Pool, _A);
+
+PROC
+PROC_AMP_Plus_PChest_Contents((ITEM)_Chest, (INTEGER)_Pool, (STRING)_A)
+THEN
+PROC_AMP_Plus_PChest_RollQty(_Chest, _Pool, _A, "ITEM");
+PROC_AMP_Plus_PChest_RollQty(_Chest, _Pool, _A, "SHARD");
+PROC_AMP_Plus_PChest_RollQty(_Chest, _Pool, _A, "CAP");
+PROC_AMP_Plus_PChest_RollQty(_Chest, _Pool, _A, "COIN");
+
+PROC
+PROC_AMP_Plus_PChest_RollQty((ITEM)_Chest, (INTEGER)_Pool, (STRING)_A, (STRING)_Kind)
+AND
+Random(100, (INTEGER)_R)
+AND
+DB_AMP_Plus_PChest_AQty(_A, _Kind, (INTEGER)_Lo, (INTEGER)_Hi, (INTEGER)_N)
+AND
+_R >= _Lo
+AND
+_R < _Hi
+AND
+_N > 0
+THEN
+PROC_AMP_Plus_PChest_SpawnArchKind(_Chest, _Pool, _A, _Kind, _N);
+
+PROC
+PROC_AMP_Plus_PChest_SpawnArchKind((ITEM)_Chest, (INTEGER)_Pool, (STRING)_A, (STRING)_Kind, (INTEGER)_N)
+AND
+NOT DB_AMP_Plus_PChest_ABump(_A, _Kind)
+THEN
+PROC_AMP_Plus_PChest_SpawnKind(_Chest, _Pool, _Kind, _N);
+
+PROC
+PROC_AMP_Plus_PChest_SpawnArchKind((ITEM)_Chest, (INTEGER)_Pool, (STRING)_A, (STRING)_Kind, (INTEGER)_N)
+AND
+DB_AMP_Plus_PChest_ABump(_A, _Kind)
+AND
+_Pool < 6
+AND
+IntegerSum(_Pool, 1, (INTEGER)_Up)
+THEN
+PROC_AMP_Plus_PChest_SpawnKind(_Chest, _Up, _Kind, _N);
+
+PROC
+PROC_AMP_Plus_PChest_SpawnArchKind((ITEM)_Chest, (INTEGER)_Pool, (STRING)_A, (STRING)_Kind, (INTEGER)_N)
+AND
+DB_AMP_Plus_PChest_ABump(_A, _Kind)
+AND
+_Pool >= 6
+THEN
+PROC_AMP_Plus_PChest_SpawnKind(_Chest, _Pool, _Kind, _N);
+
+PROC
+PROC_AMP_Plus_PChest_SpawnKind((ITEM)_Chest, (INTEGER)_Pool, (STRING)_Kind, (INTEGER)_N)
+AND
+_Kind == "CAP"
+THEN
+PROC_AMP_Plus_PChest_SpawnCaps(_Chest, _Pool, _N);
+
+PROC
+PROC_AMP_Plus_PChest_SpawnKind((ITEM)_Chest, (INTEGER)_Pool, (STRING)_Kind, (INTEGER)_N)
+AND
+_Kind == "COIN"
+THEN
+PROC_AMP_Plus_PChest_SpawnCoins(_Chest, _Pool, _N);
+
+PROC
+PROC_AMP_Plus_PChest_SpawnKind((ITEM)_Chest, (INTEGER)_Pool, (STRING)_Kind, (INTEGER)_N)
+AND
+_Kind != "CAP"
+AND
+_Kind != "COIN"
+THEN
+PROC_AMP_Plus_PChest_SpawnTiered(_Chest, _Pool, _Kind, _N);
+
+PROC
+PROC_AMP_Plus_PChest_SpawnTiered((ITEM)_Chest, (INTEGER)_Pool, (STRING)_Kind, (INTEGER)_N)
+AND
+_N > 0
+AND
+Random(100, (INTEGER)_R)
+AND
+DB_AMP_Plus_PChest_Rar(_Pool, _Kind, (INTEGER)_Lo, (INTEGER)_Hi, (ITEMROOT)_Tpl)
+AND
+_R >= _Lo
+AND
+_R < _Hi
+AND
+IntegerSubtract(_N, 1, (INTEGER)_N2)
+THEN
+TemplateAddTo(_Tpl, _Chest, 1, 0);
+PROC_AMP_Plus_PChest_SpawnTiered(_Chest, _Pool, _Kind, _N2);
+
+PROC
+PROC_AMP_Plus_PChest_SpawnCaps((ITEM)_Chest, (INTEGER)_Pool, (INTEGER)_N)
+AND
+_N > 0
+AND
+Random(100, (INTEGER)_R)
+AND
+DB_AMP_Plus_PChest_CapGrp(_Pool, (INTEGER)_Lo, (INTEGER)_Hi, (STRING)_Grp)
+AND
+_R >= _Lo
+AND
+_R < _Hi
+AND
+DB_AMP_Plus_PChest_CapGrpSize(_Grp, (INTEGER)_Size)
+AND
+Random(_Size, (INTEGER)_I)
+AND
+DB_AMP_Plus_PChest_CapList(_Grp, _I, (ITEMROOT)_Tpl)
+AND
+IntegerSubtract(_N, 1, (INTEGER)_N2)
+THEN
+TemplateAddTo(_Tpl, _Chest, 1, 0);
+PROC_AMP_Plus_PChest_SpawnCaps(_Chest, _Pool, _N2);
+
+PROC
+PROC_AMP_Plus_PChest_SpawnCoins((ITEM)_Chest, (INTEGER)_Pool, (INTEGER)_N)
+AND
+_N > 0
+AND
+Random(100, (INTEGER)_R)
+AND
+DB_AMP_Plus_PChest_Coin(_Pool, (INTEGER)_Lo, (INTEGER)_Hi, (ITEMROOT)_Tpl)
+AND
+_R >= _Lo
+AND
+_R < _Hi
+AND
+IntegerSubtract(_N, 1, (INTEGER)_N2)
+THEN
+TemplateAddTo(_Tpl, _Chest, 1, 0);
+PROC_AMP_Plus_PChest_SpawnCoins(_Chest, _Pool, _N2);
+
+// base ejects cube contents only to a carrier, so tesseracts open into the chest itself
+
+IF
+ObjectTimerFinished((ITEM)_Item, "AMP_VoidCapsule_Eject")
+AND
+GetDirectInventoryOwner(_Item, (GUIDSTRING)_Cube)
+AND
+DB_AMP_Plus_PChest_Rolled((ITEM)_Chest)
+AND
+GetDirectInventoryOwner(_Cube, _Chest)
+AND
+GetStackAmount(_Item, (INTEGER)_Count, _)
+THEN
+ToInventory(_Item, _Chest, _Count, 0, 0);
+
+// ZZ_AMP_Poof_Chest.txt removes emptied chests, the mark goes with them
+
+IF
+ObjectTimerFinished((ITEM)_Chest, "AMP_DeleteEmptyChest")
+AND
+DB_AMP_Plus_PChest_Rolled(_Chest)
+AND
+IsInventoryEmpty(_Chest, 1)
+THEN
+NOT DB_AMP_Plus_PChest_Rolled(_Chest);
+
+EXITSECTION
+ENDEXITSECTION

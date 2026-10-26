@@ -1,0 +1,29 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// v3: aura-based darkness fix gutted. AMP_DARKNESS_FIX_HERO gone from stats,
+// replaced by AMP_Darkness_V3.txt. old rules left commented below for reference.
+
+//IF
+//CombatStarted(_CombatID)
+//AND
+//DB_Players((CHARACTER)_Player)
+//AND
+//HasActiveStatus(_Player, "AMP_DARKNESS_FIX_HERO", 0)
+//THEN
+//ApplyStatus(_Player, "AMP_DARKNESS_FIX_HERO", -1.0, 1, _Player);
+
+//IF
+//LeftCombat((CHARACTER)_Player, _CombatID)
+//AND
+//DB_Players(_Player)
+//AND
+//HasActiveStatus(_Player, "AMP_DARKNESS_FIX_HERO", 1)
+//THEN
+//RemoveStatus(_Player, "AMP_DARKNESS_FIX_HERO", _Player);
+
+EXITSECTION
+
+ENDEXITSECTION

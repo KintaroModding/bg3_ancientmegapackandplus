@@ -1,0 +1,103 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// base needs Gale in the active party, this covers camp
+
+// IsPartyMember is false for a benched companion, so use not-active-party
+
+IF
+DialogEnded(Gale_InParty2_6beb1b10-845f-49fa-6d6d-f425eaa42574, _)
+AND
+NOT DB_AMP_GaleVoidGift_Done("M1")
+AND
+DB_AMP_GameMode("HARD")
+AND
+DB_GlobalFlag((FLAG)ORI_Gale_Knows_LearnedBackstory_0a9731cf-4769-249f-818d-b4c6e542083d)
+AND
+IsPartyMember((CHARACTER)S_Player_Gale_ad9af97d-75da-406a-ae13-7071c563f604, 0, 0)
+AND
+NOT DB_Avatars((CHARACTER)S_Player_Gale_ad9af97d-75da-406a-ae13-7071c563f604)
+AND
+GetHostCharacter(_Host)
+AND
+Random(2, _Extra)
+THEN
+DB_AMP_GaleVoidGift_Done("M1");
+PROC_AMP_GaleVoidGift_Grant(_Host, _Extra);
+
+PROC
+PROC_ORI_Gale_ConsumedMagicItem()
+AND
+NOT DB_AMP_GaleVoidGift_Done("M2")
+AND
+DB_AMP_GameMode("HARD")
+AND
+IsPartyMember((CHARACTER)S_Player_Gale_ad9af97d-75da-406a-ae13-7071c563f604, 0, 0)
+AND
+NOT DB_Avatars((CHARACTER)S_Player_Gale_ad9af97d-75da-406a-ae13-7071c563f604)
+AND
+GetHostCharacter(_Host)
+AND
+Random(2, _Extra)
+THEN
+DB_AMP_GaleVoidGift_Done("M2");
+PROC_AMP_GaleVoidGift_Grant(_Host, _Extra);
+
+IF
+DialogEnded(CAMP_Gale_CRD_SpellTeaching_4d0a0d4e-0812-98c1-f2a6-94013578ce97, _)
+AND
+NOT DB_AMP_GaleVoidGift_Done("M3")
+AND
+DB_AMP_GameMode("HARD")
+AND
+IsPartyMember((CHARACTER)S_Player_Gale_ad9af97d-75da-406a-ae13-7071c563f604, 0, 0)
+AND
+NOT DB_Avatars((CHARACTER)S_Player_Gale_ad9af97d-75da-406a-ae13-7071c563f604)
+AND
+GetHostCharacter(_Host)
+AND
+Random(2, _Extra)
+THEN
+DB_AMP_GaleVoidGift_Done("M3");
+PROC_AMP_GaleVoidGift_Grant(_Host, _Extra);
+
+IF
+DialogEnded(GLO_Elminster_OM_Gale_COM_03aeee07-c0d2-9e46-8785-93d3cc52c0f4, _)
+AND
+NOT DB_AMP_GaleVoidGift_Done("M4")
+AND
+DB_AMP_GameMode("HARD")
+AND
+IsPartyMember((CHARACTER)S_Player_Gale_ad9af97d-75da-406a-ae13-7071c563f604, 0, 0)
+AND
+NOT DB_Avatars((CHARACTER)S_Player_Gale_ad9af97d-75da-406a-ae13-7071c563f604)
+AND
+GetHostCharacter(_Host)
+AND
+Random(2, _Extra)
+THEN
+DB_AMP_GaleVoidGift_Done("M4");
+PROC_AMP_GaleVoidGift_Grant(_Host, _Extra);
+
+IF
+DialogEnded(CAMP_Gale_SD_AfterElminsterVisit_bfc9590f-5480-5920-9af8-0b018e9fc43b, _)
+AND
+NOT DB_AMP_GaleVoidGift_Done("M5")
+AND
+DB_AMP_GameMode("HARD")
+AND
+IsPartyMember((CHARACTER)S_Player_Gale_ad9af97d-75da-406a-ae13-7071c563f604, 0, 0)
+AND
+NOT DB_Avatars((CHARACTER)S_Player_Gale_ad9af97d-75da-406a-ae13-7071c563f604)
+AND
+GetHostCharacter(_Host)
+AND
+Random(2, _Extra)
+THEN
+DB_AMP_GaleVoidGift_Done("M5");
+PROC_AMP_GaleVoidGift_Grant(_Host, _Extra);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,404 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_AffixDef(1, _, _, _, _, _)
+THEN
+DB_AMP_Plus_AffixDef(1, "PYRE", "AMP_Plus_Affix_Pyre_Ask", 0, 1, 1);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_AffixDef(2, _, _, _, _, _)
+THEN
+DB_AMP_Plus_AffixDef(2, "BATTLEINSTINCT", "AMP_Plus_Affix_BattleInstinct_Ask", 0, 1, 1);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_AffixDef(3, _, _, _, _, _)
+THEN
+DB_AMP_Plus_AffixDef(3, "ITEMMOVECOST", "AMP_Plus_Affix_ItemMoveCost_Ask", 0, 1, 1);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_AffixDef(4, _, _, _, _, _)
+THEN
+DB_AMP_Plus_AffixDef(4, "ANTITHEFT", "AMP_Plus_Affix_AntiTheft_Ask", 0, 1, 1);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_AffixDef(5, _, _, _, _, _)
+THEN
+DB_AMP_Plus_AffixDef(5, "ANTISTEALTHABUSE", "AMP_Plus_Affix_AntiStealth_Ask", 0, 1, 1);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_AffixDef(6, _, _, _, _, _)
+THEN
+DB_AMP_Plus_AffixDef(6, "AVARICE", "AMP_Plus_Affix_Avarice_Ask", 0, 0, 0);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_AffixDef(7, _, _, _, _, _)
+THEN
+DB_AMP_Plus_AffixDef(7, "TOTSHOP", "AMP_Plus_Affix_ToTShop_Ask", 0, 0, 0);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_AffixDef(8, _, _, _, _, _)
+THEN
+DB_AMP_Plus_AffixDef(8, "FULLMOON", "AMP_Plus_Affix_FullMoon_Ask", 0, 0, 0);
+
+// Eclipse defaults 0/0/1, base activates it only in the Hard branch
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_AffixDef(9, _, _, _, _, _)
+THEN
+DB_AMP_Plus_AffixDef(9, "ECLIPSE", "AMP_Plus_Affix_Eclipse_Ask", 0, 0, 1);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_AffixDef(10, _, _, _, _, _)
+THEN
+DB_AMP_Plus_AffixDef(10, "LASTSTAND", "AMP_Plus_Affix_LastStand_Ask", 0, 1, 1);
+
+// watcher passive is baked into six Hard tier statuses, the override clears it, granted from here
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_LastStandMap("AMP_NPC_IMPOSSIBLE_T3_V4", _)
+THEN
+DB_AMP_Plus_LastStandMap("AMP_NPC_IMPOSSIBLE_T3_V4", "AMP_Diff_LastStand_NPC_T3");
+DB_AMP_Plus_LastStandMap("AMP_NPC_IMPOSSIBLE_T4_V4", "AMP_Diff_LastStand_NPC_T4");
+DB_AMP_Plus_LastStandMap("AMP_NPC_IMPOSSIBLE_T5_V4", "AMP_Diff_LastStand_NPC_T5");
+DB_AMP_Plus_LastStandMap("AMP_BOSS_IMPOSSIBLE_T3_V4", "AMP_Diff_LastStand_Boss_T3");
+DB_AMP_Plus_LastStandMap("AMP_BOSS_IMPOSSIBLE_T4_V4", "AMP_Diff_LastStand_Boss_T4");
+DB_AMP_Plus_LastStandMap("AMP_BOSS_IMPOSSIBLE_T5_V4", "AMP_Diff_LastStand_Boss_T5");
+DB_AMP_Plus_LastStandMap("AMP_NPC_STANDARD_T3_V4", "AMP_Plus_LS_Watch_NPC_STD_T3");
+DB_AMP_Plus_LastStandMap("AMP_NPC_STANDARD_T4_V4", "AMP_Plus_LS_Watch_NPC_STD_T4");
+DB_AMP_Plus_LastStandMap("AMP_NPC_STANDARD_T5_V4", "AMP_Plus_LS_Watch_NPC_STD_T5");
+DB_AMP_Plus_LastStandMap("AMP_BOSS_STANDARD_T3_V4", "AMP_Plus_LS_Watch_BOSS_STD_T3");
+DB_AMP_Plus_LastStandMap("AMP_BOSS_STANDARD_T4_V4", "AMP_Plus_LS_Watch_BOSS_STD_T4");
+DB_AMP_Plus_LastStandMap("AMP_BOSS_STANDARD_T5_V4", "AMP_Plus_LS_Watch_BOSS_STD_T5");
+DB_AMP_Plus_LastStandMap("AMP_Plus_NPC_CASUAL_T3_V4", "AMP_Plus_LS_Watch_NPC_CAS_T3");
+DB_AMP_Plus_LastStandMap("AMP_Plus_NPC_CASUAL_T4_V4", "AMP_Plus_LS_Watch_NPC_CAS_T4");
+DB_AMP_Plus_LastStandMap("AMP_Plus_NPC_CASUAL_T5_V4", "AMP_Plus_LS_Watch_NPC_CAS_T5");
+DB_AMP_Plus_LastStandMap("AMP_Plus_BOSS_CASUAL_T3_V4", "AMP_Plus_LS_Watch_BOSS_CAS_T3");
+DB_AMP_Plus_LastStandMap("AMP_Plus_BOSS_CASUAL_T4_V4", "AMP_Plus_LS_Watch_BOSS_CAS_T4");
+DB_AMP_Plus_LastStandMap("AMP_Plus_BOSS_CASUAL_T5_V4", "AMP_Plus_LS_Watch_BOSS_CAS_T5");
+
+IF
+DB_AMP_DiffV3_Tracked((CHARACTER)_C, (STRING)_Status)
+AND
+DB_AMP_Plus_LastStandMap(_Status, (STRING)_Passive)
+AND
+QRY_AMP_Plus_Affix_On("LASTSTAND")
+THEN
+AddPassive(_C, _Passive);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_AffixDef(11, _, _, _, _, _)
+THEN
+DB_AMP_Plus_AffixDef(11, "UNDYINGWILL", "AMP_Plus_Affix_UndyingWill_Ask", 0, 0, 1);
+
+// Hard line stays with ZZ_AMP_Boss_AntiDeath_Reset.txt. Ketheric, Cazador and Orin are never armed
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_UndyingTier("AMP_BOSS_STANDARD_T3_V4")
+THEN
+DB_AMP_Plus_UndyingTier("AMP_BOSS_STANDARD_T3_V4");
+DB_AMP_Plus_UndyingTier("AMP_BOSS_STANDARD_T4_V4");
+DB_AMP_Plus_UndyingTier("AMP_BOSS_STANDARD_T5_V4");
+DB_AMP_Plus_UndyingTier("AMP_Plus_BOSS_CASUAL_T3_V4");
+DB_AMP_Plus_UndyingTier("AMP_Plus_BOSS_CASUAL_T4_V4");
+DB_AMP_Plus_UndyingTier("AMP_Plus_BOSS_CASUAL_T5_V4");
+
+IF
+EnteredCombat((CHARACTER)_Boss, _)
+AND
+QRY_AMP_Plus_Affix_On("UNDYINGWILL")
+AND
+NOT DB_AMP_AntiDeath_Excluded(_Boss)
+AND
+DB_AMP_DiffV3_Tracked(_Boss, (STRING)_Status)
+AND
+DB_AMP_Plus_UndyingTier(_Status)
+AND
+HasActiveStatus(_Boss, "AMP_BOSS_ANTIDEATH_CHARGE", 0)
+AND
+HasActiveStatus(_Boss, "AMP_Plus_ANTIDEATH_CHARGE_STD", 0)
+AND
+HasActiveStatus(_Boss, "AMP_Plus_ANTIDEATH_CHARGE_CAS", 0)
+THEN
+PROC_AMP_Plus_Undying_Arm(_Boss);
+
+IF
+StatusApplied((CHARACTER)_Boss, "AMP_BOSS_ANTIDEATH_CHARGE", _, _)
+AND
+NOT QRY_AMP_Plus_Affix_On("UNDYINGWILL")
+THEN
+RemoveStatus(_Boss, "AMP_BOSS_ANTIDEATH_CHARGE", NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Undying_Arm((CHARACTER)_Boss)
+AND
+DB_AMP_Difficulty_Mode("CASUAL")
+THEN
+ApplyStatus(_Boss, "AMP_Plus_ANTIDEATH_CHARGE_CAS", -1.0, 1, _Boss);
+
+PROC
+PROC_AMP_Plus_Undying_Arm((CHARACTER)_Boss)
+AND
+DB_AMP_Difficulty_Mode("STANDARD")
+THEN
+ApplyStatus(_Boss, "AMP_Plus_ANTIDEATH_CHARGE_STD", -1.0, 1, _Boss);
+
+PROC
+PROC_AMP_Plus_Undying_Arm((CHARACTER)_Boss)
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+THEN
+ApplyStatus(_Boss, "AMP_BOSS_ANTIDEATH_CHARGE", -1.0, 1, _Boss);
+
+// legacy facts exist as 0 and 1, retract the opposite first. Five store disabled, two enabled
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "PYRE"
+AND
+_Val == 1
+THEN
+NOT DB_AMP_Pyre_Disabled(1);
+DB_AMP_Pyre_Disabled(0);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "PYRE"
+AND
+_Val == 0
+THEN
+NOT DB_AMP_Pyre_Disabled(0);
+DB_AMP_Pyre_Disabled(1);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "BATTLEINSTINCT"
+AND
+_Val == 1
+THEN
+NOT DB_AMP_BattleInstinct_Disabled(1);
+DB_AMP_BattleInstinct_Disabled(0);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "BATTLEINSTINCT"
+AND
+_Val == 0
+THEN
+NOT DB_AMP_BattleInstinct_Disabled(0);
+DB_AMP_BattleInstinct_Disabled(1);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "ITEMMOVECOST"
+AND
+_Val == 1
+THEN
+NOT DB_AMP_ItemMoveCost_Disabled(1);
+DB_AMP_ItemMoveCost_Disabled(0);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "ITEMMOVECOST"
+AND
+_Val == 0
+THEN
+NOT DB_AMP_ItemMoveCost_Disabled(0);
+DB_AMP_ItemMoveCost_Disabled(1);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "ANTITHEFT"
+AND
+_Val == 1
+THEN
+NOT DB_AMP_AntiTheft_Disabled(1);
+DB_AMP_AntiTheft_Disabled(0);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "ANTITHEFT"
+AND
+_Val == 0
+THEN
+NOT DB_AMP_AntiTheft_Disabled(0);
+DB_AMP_AntiTheft_Disabled(1);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "ANTISTEALTHABUSE"
+AND
+_Val == 1
+THEN
+NOT DB_AMP_StealthAbuse_Disabled(1);
+DB_AMP_StealthAbuse_Disabled(0);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "ANTISTEALTHABUSE"
+AND
+_Val == 0
+THEN
+NOT DB_AMP_StealthAbuse_Disabled(0);
+DB_AMP_StealthAbuse_Disabled(1);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "AVARICE"
+AND
+_Val == 1
+THEN
+DB_AMP_GenerousLoot_Enabled(1);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "AVARICE"
+AND
+_Val == 0
+THEN
+NOT DB_AMP_GenerousLoot_Enabled(1);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "TOTSHOP"
+AND
+_Val == 1
+THEN
+DB_ToT_Shop_Activated(1);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "TOTSHOP"
+AND
+_Val == 0
+THEN
+NOT DB_ToT_Shop_Activated(1);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "FULLMOON"
+AND
+_Val == 1
+THEN
+NOT DB_AMP_Plus_FullMoon_Disabled(1);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "FULLMOON"
+AND
+_Val == 0
+THEN
+DB_AMP_Plus_FullMoon_Disabled(1);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "ECLIPSE"
+AND
+_Val == 1
+AND
+NOT DB_AMP_Eclipse_Active(1)
+THEN
+DB_AMP_Eclipse_Active(1);
+PROC_AMP_Eclipse_ApplyToAllBosses();
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "ECLIPSE"
+AND
+_Val == 0
+AND
+DB_AMP_Eclipse_Active(1)
+THEN
+NOT DB_AMP_Eclipse_Active(1);
+PROC_AMP_Eclipse_CleanupAllBosses();
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "LASTSTAND"
+AND
+_Val == 1
+AND
+DB_AMP_DiffV3_Tracked((CHARACTER)_C, (STRING)_Status)
+AND
+DB_AMP_Plus_LastStandMap(_Status, (STRING)_Passive)
+THEN
+AddPassive(_C, _Passive);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "LASTSTAND"
+AND
+_Val == 0
+AND
+DB_AMP_DiffV3_Tracked((CHARACTER)_C, (STRING)_Status)
+AND
+DB_AMP_Plus_LastStandMap(_Status, (STRING)_Passive)
+THEN
+RemovePassive(_C, _Passive);
+
+// re-arming waits for EnteredCombat, a mid-fight grant would be a second life
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "UNDYINGWILL"
+AND
+_Val == 0
+AND
+DB_AMP_DiffV3_Tracked((CHARACTER)_C, _)
+THEN
+RemoveStatus(_C, "AMP_BOSS_ANTIDEATH_CHARGE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_Plus_ANTIDEATH_CHARGE_STD", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_Plus_ANTIDEATH_CHARGE_CAS", NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+ENDEXITSECTION

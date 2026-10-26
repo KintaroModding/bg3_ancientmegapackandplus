@@ -1,0 +1,185 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_AMP_BattleInstinct_Disabled(0);
+
+DB_AMP_BattleInstinct_StatusList("AMP_BOSS_STANDARD_T1_V4");
+DB_AMP_BattleInstinct_StatusList("AMP_BOSS_STANDARD_T2_V4");
+DB_AMP_BattleInstinct_StatusList("AMP_BOSS_STANDARD_T3_V4");
+DB_AMP_BattleInstinct_StatusList("AMP_NPC_IMPOSSIBLE_T3_V4");
+DB_AMP_BattleInstinct_StatusList("AMP_BOSS_IMPOSSIBLE_T1_V4");
+DB_AMP_BattleInstinct_StatusList("AMP_BOSS_IMPOSSIBLE_T2_V4");
+DB_AMP_BattleInstinct_StatusList("AMP_BOSS_IMPOSSIBLE_T3_V4");
+
+KBSECTION
+// battle instinct active check
+
+// hard: always on, toggle ignored
+QRY
+QRY_AMP_BattleInstinct_Active()
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+THEN
+DB_NOOP(1);
+
+// normal: on unless disabled
+QRY
+QRY_AMP_BattleInstinct_Active()
+AND
+DB_AMP_Difficulty_Mode("STANDARD")
+AND
+NOT DB_AMP_BattleInstinct_Disabled(1)
+THEN
+DB_NOOP(1);
+
+// apply battle instinct on combat start to eligible creatures
+IF
+EnteredCombat((CHARACTER)_Creature, _)
+AND
+DB_AMP_DiffV3_Tracked(_Creature, (STRING)_Status)
+AND
+DB_AMP_BattleInstinct_StatusList(_Status)
+AND
+QRY_AMP_BattleInstinct_Active()
+THEN
+ApplyStatus(_Creature, "AMP_BATTLE_INSTINCT", 6.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// settings ring toggle
+
+// spell trigger - non-stock
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Settings_BattleInstinct", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+NOT DB_AMP_GameMode("STOCK")
+THEN
+PROC_AMP_BattleInstinct_ShowToggle(_Caster);
+
+// spell trigger - stock
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Settings_BattleInstinct", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_AMP_GameMode("STOCK")
+THEN
+OpenMessageBox(_Caster, "AMP_Settings028");
+
+// normal mode, currently on
+PROC
+PROC_AMP_BattleInstinct_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_Difficulty_Mode("STANDARD")
+AND
+NOT DB_AMP_BattleInstinct_Disabled(1)
+THEN
+DB_AMP_BattleInstinct_Pending(_Host);
+OpenMessageBoxYesNo(_Host, "AMP_BattleInstinct_AskDisable");
+
+// normal mode, currently off
+PROC
+PROC_AMP_BattleInstinct_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_Difficulty_Mode("STANDARD")
+AND
+DB_AMP_BattleInstinct_Disabled(1)
+THEN
+DB_AMP_BattleInstinct_Pending(_Host);
+OpenMessageBoxYesNo(_Host, "AMP_BattleInstinct_AskEnable");
+
+// hard mode - locked info
+PROC
+PROC_AMP_BattleInstinct_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+THEN
+OpenMessageBox(_Host, "AMP_BattleInstinct_HardLocked");
+
+// casual / no mode - inactive
+PROC
+PROC_AMP_BattleInstinct_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_Difficulty_Mode("NONE")
+THEN
+OpenMessageBox(_Host, "AMP_BattleInstinct_Inactive");
+
+PROC
+PROC_AMP_BattleInstinct_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_Difficulty_Mode("NORMAL")
+THEN
+OpenMessageBox(_Host, "AMP_BattleInstinct_Inactive");
+
+// yes = keep current state (safe default)
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_BattleInstinct_AskDisable", 1)
+AND
+DB_AMP_BattleInstinct_Pending(_Host)
+THEN
+NOT DB_AMP_BattleInstinct_Pending(_Host);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_BattleInstinct_AskEnable", 1)
+AND
+DB_AMP_BattleInstinct_Pending(_Host)
+THEN
+NOT DB_AMP_BattleInstinct_Pending(_Host);
+PROC_AMP_PlayModeEffect(_Host);
+
+// no = flip state
+
+// on -> off, strip from active creatures
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_BattleInstinct_AskDisable", 0)
+AND
+DB_AMP_BattleInstinct_Pending(_Host)
+AND
+DB_AMP_BattleInstinct_Disabled(0)
+THEN
+NOT DB_AMP_BattleInstinct_Pending(_Host);
+NOT DB_AMP_BattleInstinct_Disabled(0);
+DB_AMP_BattleInstinct_Disabled(1);
+PROC_AMP_BattleInstinct_RemoveAll();
+PROC_AMP_PlayModeEffect(_Host);
+
+// off -> on
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_BattleInstinct_AskEnable", 0)
+AND
+DB_AMP_BattleInstinct_Pending(_Host)
+AND
+DB_AMP_BattleInstinct_Disabled(1)
+THEN
+NOT DB_AMP_BattleInstinct_Pending(_Host);
+NOT DB_AMP_BattleInstinct_Disabled(1);
+DB_AMP_BattleInstinct_Disabled(0);
+PROC_AMP_PlayModeEffect(_Host);
+
+// clear stale pending on save load
+IF
+SavegameLoaded()
+AND
+DB_AMP_BattleInstinct_Pending(_Host)
+THEN
+NOT DB_AMP_BattleInstinct_Pending(_Host);
+
+// strip battle instinct from all tracked creatures
+PROC
+PROC_AMP_BattleInstinct_RemoveAll()
+AND
+DB_AMP_DiffV3_Tracked((CHARACTER)_Creature, (STRING)_Status)
+AND
+DB_AMP_BattleInstinct_StatusList(_Status)
+AND
+HasActiveStatus(_Creature, "AMP_BATTLE_INSTINCT", 1)
+THEN
+RemoveStatus(_Creature, "AMP_BATTLE_INSTINCT", NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+ENDEXITSECTION

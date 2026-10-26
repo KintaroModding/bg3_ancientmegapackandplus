@@ -1,0 +1,40 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// arcanizer shards batch 04 - helmet stackable fix
+
+KBSECTION
+
+// helmet stackable - success
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_Stackable(_Template, "Helmet", _TechStatus, _)
+AND
+GetEquippedItem(_Char, "Helmet", _Item)
+AND
+QRY_AMP_Shard_CanApply(_Item)
+THEN
+PROC_AMP_Shard_IncTotal(_Item);
+ApplyStatus(_Char, _TechStatus, 0.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+// helmet stackable - error
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_Stackable(_Template, "Helmet", _, _)
+AND
+NOT GetEquippedItem(_Char, "Helmet", _)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+EXITSECTION
+
+ENDEXITSECTION

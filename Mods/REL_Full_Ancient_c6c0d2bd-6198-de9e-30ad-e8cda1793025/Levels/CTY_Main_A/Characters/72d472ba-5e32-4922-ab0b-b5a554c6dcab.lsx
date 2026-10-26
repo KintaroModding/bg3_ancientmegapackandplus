@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="72d472ba-5e32-4922-ab0b-b5a554c6dcab" />
+					<attribute id="Name" type="LSString" value="S_LOW_BhaalTemple_Reaper_01" />
+					<attribute id="LevelName" type="FixedString" value="CTY_Main_A" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="TemplateName" type="FixedString" value="46fda5d4-5701-4375-8647-c513967b835b" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h99215a39ge2deg4501gb39dga2508b34b3eb" version="2" />
+					<attribute id="Icon" type="FixedString" value="ac8f61a9-1a73-3406-45db-273a94813fb8-EQP_LOW_ReaperOfBhaal_(Icon_Human_Female)" />
+					<attribute id="LevelOverride" type="int32" value="12" />
+					<attribute id="VocalIdleCombat1ResourceID" type="FixedString" value="f3adacd8-9725-416c-a587-0084141d16cb" />
+					<attribute id="CharacterVisualResourceID" type="FixedString" value="ac8f61a9-1a73-3406-45db-273a94813fb8" />
+					<attribute id="Faction" type="guid" value="d0c6137f-2da9-480a-80ae-8325ea8ebd0e" />
+					<attribute id="CombatGroupID" type="FixedString" value="29a6f636-d2fc-e98a-eedd-bc9cfea4ace8" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="65.909904 -53.393467 1000.6364" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0.8314621 0 0.5555815" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="CTY_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="57e10301-831b-f6cf-1258-a93ddbdfa8a0" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="f3fa5d1e-9961-43fa-8bf1-aae0cf2f32ba" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="15190bd3-ac45-7b51-89ae-c36023e2d26a" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="9379c404-68a3-5af2-e717-7aaf7768a222" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="SpeakerGroupList">
+							<children>
+								<node id="SpeakerGroup">
+									<attribute id="Object" type="guid" value="b2d71478-e165-6893-1afc-311586215f72" />
+								</node>
+							</children>
+						</node>
+						<node id="TradeTreasures">
+							<children>
+								<node id="TreasureItem">
+									<attribute id="Object" type="FixedString" value="LOW_CountingHouse_BhaalCultist" />
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

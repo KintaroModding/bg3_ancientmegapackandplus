@@ -1,0 +1,272 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// ultra: secret overlay mode, offered on first kill at lvl 8 and again at 12.
+// permanent once accepted, stacks on top of whatever difficulty is set.
+
+KBSECTION
+
+// phase 1 - offer at lvl 8+ on first kill
+
+IF
+Died((CHARACTER)_Creature)
+AND
+IsPlayer(_Creature, 0)
+AND
+NOT DB_AMP_Ultra_Active(1)
+AND
+NOT DB_AMP_Ultra_Offered1(1)
+AND
+NOT DB_AMP_Ultra_Pending(_)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+GetLevel(_Host, (INTEGER)_Lvl)
+AND
+_Lvl >= 8
+THEN
+DB_AMP_Ultra_Offered1(1);
+DB_AMP_Ultra_Pending(_Host);
+PROC_AMP_Ultra_PlayOfferFanfare(_Host);
+OpenMessageBoxYesNo(_Host, "AMP_Ultra_Offer_1");
+
+// phase 2 - re-offer at lvl 12+ if phase 1 was declined
+
+IF
+Died((CHARACTER)_Creature)
+AND
+IsPlayer(_Creature, 0)
+AND
+NOT DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_Ultra_Offered1(1)
+AND
+NOT DB_AMP_Ultra_Offered2(1)
+AND
+NOT DB_AMP_Ultra_Pending(_)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+GetLevel(_Host, (INTEGER)_Lvl)
+AND
+_Lvl >= 12
+THEN
+DB_AMP_Ultra_Offered2(1);
+DB_AMP_Ultra_Pending(_Host);
+PROC_AMP_Ultra_PlayOfferFanfare(_Host);
+OpenMessageBoxYesNo(_Host, "AMP_Ultra_Offer_2");
+
+// messagebox handlers
+
+// phase 1 yes
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Ultra_Offer_1", 1)
+AND
+DB_AMP_Ultra_Pending(_Host)
+THEN
+NOT DB_AMP_Ultra_Pending(_Host);
+RealtimeObjectTimerLaunch(_Host, "AMP_Ultra_Guitar", 100);
+PROC_AMP_Ultra_Activate();
+
+// phase 2 yes
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Ultra_Offer_2", 1)
+AND
+DB_AMP_Ultra_Pending(_Host)
+THEN
+NOT DB_AMP_Ultra_Pending(_Host);
+RealtimeObjectTimerLaunch(_Host, "AMP_Ultra_Guitar", 100);
+PROC_AMP_Ultra_Activate();
+
+// phase 1 no
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Ultra_Offer_1", 0)
+AND
+DB_AMP_Ultra_Pending(_Host)
+THEN
+NOT DB_AMP_Ultra_Pending(_Host);
+
+// phase 2 no
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Ultra_Offer_2", 0)
+AND
+DB_AMP_Ultra_Pending(_Host)
+THEN
+NOT DB_AMP_Ultra_Pending(_Host);
+
+// save/loaded while the offer box was open - reset so it can fire again
+IF
+SavegameLoaded()
+AND
+DB_AMP_Ultra_Pending(_Host)
+AND
+NOT DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_Ultra_Offered1(1)
+AND
+NOT DB_AMP_Ultra_Offered2(1)
+THEN
+NOT DB_AMP_Ultra_Pending(_Host);
+NOT DB_AMP_Ultra_Offered1(1);
+
+IF
+SavegameLoaded()
+AND
+DB_AMP_Ultra_Pending(_Host)
+AND
+NOT DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_Ultra_Offered2(1)
+THEN
+NOT DB_AMP_Ultra_Pending(_Host);
+NOT DB_AMP_Ultra_Offered2(1);
+
+// activation - overlay onto everything already tracked + all players
+
+PROC
+PROC_AMP_Ultra_Activate()
+THEN
+DB_AMP_Ultra_Active(1);
+PROC_AMP_Ultra_ApplyToAllPlayers();
+PROC_AMP_Ultra_ApplyToAllTracked();
+
+// player debuff to all current players
+PROC
+PROC_AMP_Ultra_ApplyToAllPlayers()
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+ApplyStatus(_Player, "AMP_ULTRA_PLAYER_DEBUFF", -1.0, 1, _Player);
+
+// overlay onto tracked bosses
+PROC
+PROC_AMP_Ultra_ApplyToAllTracked()
+AND
+DB_AMP_DiffV3_Tracked((CHARACTER)_Creature, (STRING)_Status)
+AND
+IsBoss(_Creature, 1)
+THEN
+ApplyStatus(_Creature, "AMP_ULTRA_BOSS_OVERLAY", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// overlay onto tracked non-bosses
+PROC
+PROC_AMP_Ultra_ApplyToAllTracked()
+AND
+DB_AMP_DiffV3_Tracked((CHARACTER)_Creature, (STRING)_Status)
+AND
+IsBoss(_Creature, 0)
+THEN
+ApplyStatus(_Creature, "AMP_ULTRA_NPC_OVERLAY", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// newly tracked enemies get the overlay too
+
+IF
+DB_AMP_DiffV3_Tracked((CHARACTER)_Creature, (STRING)_Status)
+AND
+DB_AMP_Ultra_Active(1)
+AND
+IsBoss(_Creature, 1)
+THEN
+ApplyStatus(_Creature, "AMP_ULTRA_BOSS_OVERLAY", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+DB_AMP_DiffV3_Tracked((CHARACTER)_Creature, (STRING)_Status)
+AND
+DB_AMP_Ultra_Active(1)
+AND
+IsBoss(_Creature, 0)
+THEN
+ApplyStatus(_Creature, "AMP_ULTRA_NPC_OVERLAY", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// Apostle polymorph strips the ultra overlay and mirror watchers, the reactive apply only fires on first tracking
+// delay lets the polymorph's own strip pass finish before the re-apply
+
+IF
+StatusApplied((CHARACTER)_Creature, "MOO_KETHERIC_APOSTLEFORM", _, _)
+AND
+DB_AMP_Ultra_Active(1)
+THEN
+RealtimeObjectTimerLaunch(_Creature, "AMP_Myrkul_ReOverlay", 1000);
+
+IF
+ObjectTimerFinished((CHARACTER)_Creature, "AMP_Myrkul_ReOverlay")
+THEN
+SetIsBoss(_Creature, 1);
+ApplyStatus(_Creature, "AMP_ULTRA_BOSS_OVERLAY", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// new party member gets the player debuff
+
+IF
+DB_Players((CHARACTER)_Player)
+AND
+DB_AMP_Ultra_Active(1)
+THEN
+ApplyStatus(_Player, "AMP_ULTRA_PLAYER_DEBUFF", -1.0, 1, _Player);
+
+// offer fanfare - drums speeding up, then whoosh + gong
+
+PROC
+PROC_AMP_Ultra_PlayOfferFanfare((CHARACTER)_Host)
+THEN
+PlaySound(_Host, "GOB_M_Rig_DFLT_CUST_Playing_Drum");
+RealtimeObjectTimerLaunch(_Host, "AMP_Ultra_S2", 400);
+RealtimeObjectTimerLaunch(_Host, "AMP_Ultra_S3", 700);
+RealtimeObjectTimerLaunch(_Host, "AMP_Ultra_S4", 900);
+RealtimeObjectTimerLaunch(_Host, "AMP_Ultra_S5", 1050);
+RealtimeObjectTimerLaunch(_Host, "AMP_Ultra_S6", 1150);
+RealtimeObjectTimerLaunch(_Host, "AMP_Ultra_S7", 1350);
+RealtimeObjectTimerLaunch(_Host, "AMP_Ultra_S8", 1600);
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_Ultra_S2")
+THEN
+PlaySound(_Host, "GOB_M_Rig_DFLT_CUST_Playing_Drum");
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_Ultra_S3")
+THEN
+PlaySound(_Host, "GOB_M_Rig_DFLT_CUST_Playing_Drum");
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_Ultra_S4")
+THEN
+PlaySound(_Host, "GOB_M_Rig_DFLT_CUST_Playing_Drum");
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_Ultra_S5")
+THEN
+PlaySound(_Host, "GOB_M_Rig_DFLT_CUST_Playing_Drum");
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_Ultra_S6")
+THEN
+PlaySound(_Host, "GOB_M_Rig_DFLT_CUST_Playing_Drum");
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_Ultra_S7")
+THEN
+PlaySound(_Host, "CoinHalberd_Foley_Pierce_Whoosh");
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_Ultra_S8")
+THEN
+PlaySound(_Host, "II_Gong");
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_Ultra_Guitar")
+THEN
+PlaySound(_Host, "ORI_Karlach_AvatarOverdrive_Overdrive_Guitar");
+
+// debug: "ultra" textevent to test fanfare + box
+
+IF
+TextEvent("ultra")
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+DB_AMP_Ultra_Pending(_Host);
+PROC_AMP_Ultra_PlayOfferFanfare(_Host);
+OpenMessageBoxYesNo(_Host, "AMP_Ultra_Offer_1");
+
+EXITSECTION
+ENDEXITSECTION

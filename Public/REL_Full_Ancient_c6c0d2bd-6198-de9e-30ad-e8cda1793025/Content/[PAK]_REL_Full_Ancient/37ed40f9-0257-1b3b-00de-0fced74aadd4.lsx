@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="37ed40f9-0257-1b3b-00de-0fced74aadd4" />
+					<attribute id="Name" type="LSString" value="122_FallenPaladin_Maul" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/122_FallenPaladin_Maul.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="122_FallenPaladin_Maul" />
+					<attribute id="BoundsMin" type="fvec3" value="-2 -2 -2" />
+					<attribute id="BoundsMax" type="fvec3" value="2 2 2" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="2.5" />
+					<attribute id="Looping" type="bool" value="True" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="a89316d1-049a-718d-f57b-e3baa58b89b8" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="896e37d3-64c3-aa57-4e14-fc4331a5c154" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="49a27791-da88-a56b-025c-c3f89a37ed74" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="f4b0c482-e50c-f4a1-a545-ce8b95acccda" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="0c5ef267-581e-3d1e-6645-20626faa15ab" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

@@ -1,0 +1,36 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// net for drains stuck after fights that never formally end: wipe and reload, teleport out
+// runs on everyone, RemoveStatus is a no-op without the status. drains are ours, not vanilla TAD_DRAIN_*
+// separate goal so existing saves pick it up on load
+
+IF
+CombatEnded(_)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+RemoveStatus(_Player, "AMP_NEVA_DRAIN_STRENGTH", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_NEVA_DRAIN_DEXTERITY", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_NEVA_DRAIN_INTELLIGENCE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_NEVA_DRAIN_WISDOM", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_NEVA_DRAIN_CHARISMA", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+SavegameLoaded()
+AND
+DB_Players((CHARACTER)_Player)
+AND
+IsInCombat(_Player, 0)
+THEN
+RemoveStatus(_Player, "AMP_NEVA_DRAIN_STRENGTH", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_NEVA_DRAIN_DEXTERITY", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_NEVA_DRAIN_INTELLIGENCE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_NEVA_DRAIN_WISDOM", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_NEVA_DRAIN_CHARISMA", NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,665 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_AMP_AL_ProtectedItem((ITEM)S_CRE_BloodOfLathander_e26f0c19-6185-43a7-b7f7-7155b936c59c);
+DB_AMP_AL_Busy(0);
+KBSECTION
+
+// level load: delayed reset of runtime flags (3s, avoid conflicts)
+IF
+LevelGameplayStarted(_, _)
+THEN
+TimerLaunch("AMP_AL_LevelCleanup", 3000);
+
+IF
+TimerFinished("AMP_AL_LevelCleanup")
+THEN
+SysClear("DB_AMP_AL_Busy", 1);
+DB_AMP_AL_Busy(0);
+SysClear("DB_AMP_AL_ActivePlayer", 1);
+SysClear("DB_AMP_AL_IteratingContainer", 1);
+DB_AMP_AL_IteratingContainer(0);
+SysClear("DB_AMP_AL_PendingCorpse", 1);
+SysClear("DB_AMP_AL_JustDropped", 1);
+SysClear("DB_AMP_AL_AutoLooted", 1);
+SysClear("DB_AMP_AL_FromContainer", 1);
+SysClear("DB_AMP_AS_IsFromContainer", 1);
+SysClear("DB_AMP_AL_PendingVFX", 3);
+SysClear("DB_AMP_AL_CorpseVFXPos", 4);
+
+// grant the toggle passive to all players
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_Players(_P)
+AND
+NOT DB_AMP_AL_PassiveGranted(_P)
+AND
+NOT DB_AMP_AutoLoot_Disabled(1)
+THEN
+DB_AMP_AL_PassiveGranted(_P);
+AddPassive(_P, "AMP_AutoLoot_Toggle");
+
+IF
+DB_Players(_P)
+AND
+NOT DB_AMP_AL_PassiveGranted(_P)
+AND
+NOT DB_AMP_AutoLoot_Disabled(1)
+THEN
+DB_AMP_AL_PassiveGranted(_P);
+AddPassive(_P, "AMP_AutoLoot_Toggle");
+
+// at least one player has the autoloot aura up
+QRY
+QRY_AMP_AL_AnyPlayerHasAura()
+AND
+DB_Players(_P)
+AND
+HasActiveStatus(_P, "AMP_AL_AURA", 1)
+THEN
+DB_NOOP(1);
+
+// container is a voidcapsule (pickup whole)
+QRY
+QRY_AMP_AL_IsVoidCapsule((ITEM)_Container)
+AND
+GetTemplate(_Container, (ITEMROOT)_Tpl)
+AND
+DB_AMP_VoidCapsule_Container(_Tpl, _)
+THEN
+DB_NOOP(1);
+
+// npc ownership
+QRY
+QRY_AMP_AL_IsNPCOwned((ITEM)_Item)
+AND
+GetOwner(_Item, _Owner)
+AND
+QRY_CrimeIsNPCOwner((CHARACTER)_Owner)
+THEN
+DB_NOOP(1);
+
+// corpse items owned by npc faction
+QRY
+QRY_AMP_AL_IsCorpseOwned((CHARACTER)_Corpse)
+AND
+QRY_CrimeIsNPCOwner(_Corpse)
+THEN
+DB_NOOP(1);
+
+// camp chest protection
+QRY
+QRY_AMP_AL_ContainerAllowed((ITEM)_Container)
+AND
+NOT DB_AMP_AL_CampProtect(1)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_AL_ContainerAllowed((ITEM)_Container)
+AND
+DB_AMP_AL_CampProtect(1)
+AND
+NOT DB_Camp_UserCampChest(_, _Container)
+THEN
+DB_NOOP(1);
+
+// loot category filter. story items excluded in every branch.
+
+// food: always loot
+QRY
+QRY_AMP_AL_ShouldLoot((ITEM)_Item)
+AND
+NOT IsStoryItem(_Item, 1)
+AND
+IsTagged(_Item, FOOD_c86e0114-a5ab-48f6-b497-de321ebff577, 1)
+THEN
+DB_NOOP(1);
+
+// keys: always loot
+QRY
+QRY_AMP_AL_ShouldLoot((ITEM)_Item)
+AND
+NOT IsStoryItem(_Item, 1)
+AND
+NOT IsTagged(_Item, FOOD_c86e0114-a5ab-48f6-b497-de321ebff577, 1)
+AND
+IsTagged(_Item, KEY_9851fa99-5538-432a-8e77-c90929a88974, 1)
+THEN
+DB_NOOP(1);
+
+// consumable: loot if lootconsumables=1
+QRY
+QRY_AMP_AL_ShouldLoot((ITEM)_Item)
+AND
+NOT IsStoryItem(_Item, 1)
+AND
+NOT IsTagged(_Item, FOOD_c86e0114-a5ab-48f6-b497-de321ebff577, 1)
+AND
+NOT IsTagged(_Item, KEY_9851fa99-5538-432a-8e77-c90929a88974, 1)
+AND
+IsConsumable(_Item, 1)
+AND
+DB_AMP_AL_LootConsumables(1)
+THEN
+DB_NOOP(1);
+
+// equipment: loot if lootequipment=1
+QRY
+QRY_AMP_AL_ShouldLoot((ITEM)_Item)
+AND
+NOT IsStoryItem(_Item, 1)
+AND
+NOT IsTagged(_Item, FOOD_c86e0114-a5ab-48f6-b497-de321ebff577, 1)
+AND
+NOT IsTagged(_Item, KEY_9851fa99-5538-432a-8e77-c90929a88974, 1)
+AND
+NOT IsConsumable(_Item, 1)
+AND
+IsEquipable(_Item, 1)
+AND
+DB_AMP_AL_LootEquipment(1)
+THEN
+DB_NOOP(1);
+
+// book: loot if lootbooks=1
+QRY
+QRY_AMP_AL_ShouldLoot((ITEM)_Item)
+AND
+NOT IsStoryItem(_Item, 1)
+AND
+NOT IsTagged(_Item, FOOD_c86e0114-a5ab-48f6-b497-de321ebff577, 1)
+AND
+NOT IsTagged(_Item, KEY_9851fa99-5538-432a-8e77-c90929a88974, 1)
+AND
+NOT IsConsumable(_Item, 1)
+AND
+NOT IsEquipable(_Item, 1)
+AND
+GetBookID(_Item, _)
+AND
+DB_AMP_AL_LootBooks(1)
+THEN
+DB_NOOP(1);
+
+// ingredient: loot if lootingredients=1
+QRY
+QRY_AMP_AL_ShouldLoot((ITEM)_Item)
+AND
+NOT IsStoryItem(_Item, 1)
+AND
+NOT IsTagged(_Item, FOOD_c86e0114-a5ab-48f6-b497-de321ebff577, 1)
+AND
+NOT IsTagged(_Item, KEY_9851fa99-5538-432a-8e77-c90929a88974, 1)
+AND
+NOT IsConsumable(_Item, 1)
+AND
+NOT IsEquipable(_Item, 1)
+AND
+NOT GetBookID(_Item, _)
+AND
+IsTagged(_Item, ALCH_INGREDIENT_64b824e7-50c5-475a-98c2-52026e372d77, 1)
+AND
+DB_AMP_AL_LootIngredients(1)
+THEN
+DB_NOOP(1);
+
+// everything else: always loot
+QRY
+QRY_AMP_AL_ShouldLoot((ITEM)_Item)
+AND
+NOT IsStoryItem(_Item, 1)
+AND
+NOT IsTagged(_Item, FOOD_c86e0114-a5ab-48f6-b497-de321ebff577, 1)
+AND
+NOT IsTagged(_Item, KEY_9851fa99-5538-432a-8e77-c90929a88974, 1)
+AND
+NOT IsConsumable(_Item, 1)
+AND
+NOT IsEquipable(_Item, 1)
+AND
+NOT GetBookID(_Item, _)
+AND
+NOT IsTagged(_Item, ALCH_INGREDIENT_64b824e7-50c5-475a-98c2-52026e372d77, 1)
+THEN
+DB_NOOP(1);
+
+// debug: catch any amp_al_marker application
+IF
+StatusApplied((ITEM)_AnyItem, "AMP_AL_MARKER", (CHARACTER)_Src, _)
+THEN
+DebugText(_Src, "[AL] MARKER on ITEM");
+
+IF
+StatusApplied((CHARACTER)_AnyChar, "AMP_AL_MARKER", (CHARACTER)_Src, _)
+THEN
+DebugText(_Src, "[AL] MARKER on CHARACTER");
+
+// drop protection: don't re-grab items the player just dropped
+IF
+TextEvent("altest")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsCharacter(_Host, 1)
+THEN
+DebugText(_Host, "[AL] TextEvent altest fired");
+ApplyStatus(_Host, "AMP_AL_AURA", 6.0, 1);
+
+IF
+DroppedBy((ITEM)_Item, (CHARACTER)_Player)
+AND
+DB_Players(_Player)
+THEN
+DB_AMP_AL_JustDropped(_Item);
+ObjectTimerLaunch(_Item, "AMP_AL_DropCooldown", 3000);
+
+IF
+ObjectTimerFinished((ITEM)_Item, "AMP_AL_DropCooldown")
+AND
+DB_AMP_AL_JustDropped(_Item)
+THEN
+NOT DB_AMP_AL_JustDropped(_Item);
+
+// ground item: immediate vfx, pickup guaranteed
+IF
+StatusApplied((ITEM)_Item, "AMP_AL_MARKER", (CHARACTER)_Player, _)
+AND
+IsContainer(_Item, 0)
+AND
+NOT DB_AMP_AL_JustDropped(_Item)
+AND
+Exists(_Item, 1)
+AND
+GetCanPickUp(_Item, 1)
+AND
+IsDestroyed(_Item, 0)
+AND
+IsInCombat(_Player, 0)
+AND
+NOT QRY_AMP_AL_IsNPCOwned(_Item)
+AND
+NOT DB_AMP_AL_ProtectedItem(_Item)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Total)
+AND
+GetStackAmount(_Item, (INTEGER)_Count, _)
+AND
+IntegerDivide(_Total, _Count, (INTEGER)_PerUnit)
+AND
+DB_AMP_AL_MinValue(_MinVal)
+AND
+_PerUnit >= _MinVal
+AND
+QRY_AMP_AL_ShouldLoot(_Item)
+AND
+GetPosition(_Item, (REAL)_X, (REAL)_Y, (REAL)_Z)
+THEN
+DebugText(_Player, "[AL] Ground pickup");
+PlayEffectAtPosition(AMP_Autoloot_Marker_af1b6860-8b91-5f0a-9553-831bc6c8e10d, _X, _Y, _Z, 1.0);
+DB_AMP_AL_AutoLooted(_Item);
+ToInventory(_Item, _Player, _Count, 0, 0);
+PROC_AMP_AL_CampSend_Mark(_Item, _Player);
+
+// ground gold: bypass the minvalue filter
+IF
+StatusApplied((ITEM)_Item, "AMP_AL_MARKER", (CHARACTER)_Player, _)
+AND
+IsContainer(_Item, 0)
+AND
+NOT DB_AMP_AL_JustDropped(_Item)
+AND
+Exists(_Item, 1)
+AND
+GetCanPickUp(_Item, 1)
+AND
+IsDestroyed(_Item, 0)
+AND
+IsInCombat(_Player, 0)
+AND
+NOT QRY_AMP_AL_IsNPCOwned(_Item)
+AND
+NOT DB_AMP_AL_ProtectedItem(_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+_T == LOOT_Gold_A_1c3c9c74-34a1-4685-989e-410dc080be6f
+AND
+GetStackAmount(_Item, (INTEGER)_Count, _)
+AND
+GetPosition(_Item, (REAL)_X, (REAL)_Y, (REAL)_Z)
+THEN
+DebugText(_Player, "[AL] Ground gold pickup");
+PlayEffectAtPosition(AMP_Autoloot_Marker_af1b6860-8b91-5f0a-9553-831bc6c8e10d, _X, _Y, _Z, 1.0);
+DB_AMP_AL_AutoLooted(_Item);
+ToInventory(_Item, _Player, _Count, 0, 0);
+PROC_AMP_AL_CampSend_Mark(_Item, _Player);
+
+// voidcapsule: pickup whole container
+IF
+StatusApplied((ITEM)_Container, "AMP_AL_MARKER", (CHARACTER)_Player, _)
+AND
+IsContainer(_Container, 1)
+AND
+QRY_AMP_AL_IsVoidCapsule(_Container)
+AND
+NOT DB_AMP_AL_JustDropped(_Container)
+AND
+GetCanPickUp(_Container, 1)
+AND
+Exists(_Container, 1)
+AND
+IsDestroyed(_Container, 0)
+AND
+IsInCombat(_Player, 0)
+AND
+NOT QRY_AMP_AL_IsNPCOwned(_Container)
+AND
+NOT DB_ToT_Shop(_, _Container)
+AND
+GetPosition(_Container, (REAL)_X, (REAL)_Y, (REAL)_Z)
+THEN
+DebugText(_Player, "[AL] B2a VoidCapsule pickup");
+PlayEffectAtPosition(AMP_Autoloot_Marker_af1b6860-8b91-5f0a-9553-831bc6c8e10d, _X, _Y, _Z, 1.0);
+DB_AMP_AL_AutoLooted(_Container);
+ToInventory(_Container, _Player, 1, 0, 0);
+PROC_AMP_AL_CampSend_Mark(_Container, _Player);
+
+// non-capsule container: iterate contents, vfx only fires if something is grabbed
+IF
+StatusApplied((ITEM)_Container, "AMP_AL_MARKER", (CHARACTER)_Player, _)
+AND
+IsContainer(_Container, 1)
+AND
+NOT QRY_AMP_AL_IsVoidCapsule(_Container)
+AND
+NOT IsLocked(_Container, 1)
+AND
+IsInCombat(_Player, 0)
+AND
+DB_AMP_AL_Busy(0)
+AND
+NOT DB_AMP_AL_ContainerDone(_Container)
+AND
+QRY_AMP_AL_ContainerAllowed(_Container)
+AND
+NOT DB_ToT_Shop(_, _Container)
+AND
+DB_AMP_AL_LootContainers(1)
+AND
+GetPosition(_Container, (REAL)_X, (REAL)_Y, (REAL)_Z)
+THEN
+DebugText(_Player, "[AL] B2b Container iterate start");
+SysClear("DB_AMP_AL_PendingVFX", 3);
+DB_AMP_AL_PendingVFX(_X, _Y, _Z);
+NOT DB_AMP_AL_Busy(0);
+DB_AMP_AL_Busy(1);
+TimerLaunch("AMP_AL_BusyTimeout", 5000);
+DB_AMP_AL_ActivePlayer(_Player);
+DB_AMP_AL_IteratingContainer(1);
+DB_AMP_AL_ContainerDone(_Container);
+IterateInventory(_Container, "AMP_AL_GrabItem", "AMP_AL_IterDone");
+
+// two triggers feed one proc: 2s after combat end, and a marker on the corpse
+// MoveAllLootableItemsTo already respects npc owner protection
+
+// corpse loot proc. vfx deferred to removedfrom so it only fires if something moves.
+PROC
+PROC_AMP_AL_LootCorpse((CHARACTER)_Corpse, (CHARACTER)_Player)
+AND
+IsDead(_Corpse, 1)
+AND
+Exists(_Corpse, 1)
+AND
+NOT DB_Players(_Corpse)
+AND
+NOT DB_OwnedCorpse(_Corpse, _)
+AND
+IsPartyMember(_Corpse, 1, 0)
+AND
+IsAlly(_Corpse, _Player, 0)
+AND
+GetPosition(_Corpse, (REAL)_X, (REAL)_Y, (REAL)_Z)
+THEN
+DebugText(_Player, "[AL] Corpse loot attempt");
+DB_AMP_AL_CorpseVFXPos(_Corpse, _X, _Y, _Z);
+DB_AMP_AL_CampSendCorpse(_Corpse, _Player);
+MoveAllLootableItemsTo(_Corpse, _Player, 1, 1, 0, 0);
+ObjectTimerLaunch(_Corpse, "AMP_AL_CorpseVFXCleanup", 1000);
+
+// vfx on first item leaving the corpse
+IF
+RemovedFrom(_Item, (CHARACTER)_Corpse)
+AND
+DB_AMP_AL_CorpseVFXPos(_Corpse, _X, _Y, _Z)
+THEN
+PlayEffectAtPosition(AMP_Autoloot_Marker_af1b6860-8b91-5f0a-9553-831bc6c8e10d, _X, _Y, _Z, 1.0);
+NOT DB_AMP_AL_CorpseVFXPos(_Corpse, _X, _Y, _Z);
+
+// nothing moved (empty corpse): drop stale entry
+IF
+ObjectTimerFinished((CHARACTER)_Corpse, "AMP_AL_CorpseVFXCleanup")
+AND
+DB_AMP_AL_CorpseVFXPos(_Corpse, _X, _Y, _Z)
+THEN
+NOT DB_AMP_AL_CorpseVFXPos(_Corpse, _X, _Y, _Z);
+
+// died in combat -> queue for post-combat
+IF
+Died((CHARACTER)_Corpse)
+AND
+NOT DB_AMP_AutoLoot_Disabled(1)
+AND
+NOT IsPlayer(_Corpse, 1)
+AND
+NOT DB_Players(_Corpse)
+AND
+NOT DB_OwnedCorpse(_Corpse, _)
+AND
+IsPartyMember(_Corpse, 1, 0)
+AND
+QRY_AMP_AL_AnyPlayerHasAura()
+THEN
+DB_AMP_AL_PendingCorpse(_Corpse);
+DebugText(_Corpse, "[AL] Died -> queued");
+
+// post-combat: process pending corpses
+IF
+CombatEnded(_)
+AND
+NOT DB_AMP_AutoLoot_Disabled(1)
+AND
+QRY_AMP_AL_AnyPlayerHasAura()
+THEN
+TimerLaunch("AMP_AL_PostCombatLoot", 2000);
+
+// close (<=15m) -> loot + drop from queue
+IF
+TimerFinished("AMP_AL_PostCombatLoot")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsCharacter(_Host, 1)
+AND
+IsInCombat(_Host, 0)
+AND
+NOT DB_AMP_AutoLoot_Disabled(1)
+AND
+DB_AMP_AL_PendingCorpse((CHARACTER)_Corpse)
+AND
+GetDistanceTo(_Host, _Corpse, (REAL)_Dist)
+AND
+_Dist <= 15.0
+THEN
+NOT DB_AMP_AL_PendingCorpse(_Corpse);
+PROC_AMP_AL_LootCorpse(_Corpse, _Host);
+
+// far (>15m) -> drop from queue, aura grabs it when player approaches
+IF
+TimerFinished("AMP_AL_PostCombatLoot")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsCharacter(_Host, 1)
+AND
+NOT DB_AMP_AutoLoot_Disabled(1)
+AND
+DB_AMP_AL_PendingCorpse((CHARACTER)_Corpse)
+AND
+GetDistanceTo(_Host, _Corpse, (REAL)_Dist)
+AND
+_Dist > 15.0
+THEN
+NOT DB_AMP_AL_PendingCorpse(_Corpse);
+
+// drop stale pending entries
+IF
+TimerFinished("AMP_AL_PostCombatLoot")
+AND
+DB_AMP_AL_PendingCorpse((CHARACTER)_Corpse)
+AND
+Exists(_Corpse, 0)
+THEN
+NOT DB_AMP_AL_PendingCorpse(_Corpse);
+
+// environmental corpse loot via marker (aura proximity)
+IF
+StatusApplied((CHARACTER)_Corpse, "AMP_AL_MARKER", (CHARACTER)_Player, _)
+AND
+IsDead(_Corpse, 1)
+AND
+IsInCombat(_Player, 0)
+AND
+NOT DB_Players(_Corpse)
+AND
+NOT DB_OwnedCorpse(_Corpse, _)
+AND
+IsPartyMember(_Corpse, 1, 0)
+AND
+IsAlly(_Corpse, _Player, 0)
+THEN
+PROC_AMP_AL_LootCorpse(_Corpse, _Player);
+
+// iterate handler: grab one container item
+IF
+EntityEvent((ITEM)_Item, "AMP_AL_GrabItem")
+AND
+DB_AMP_AL_ActivePlayer(_Player)
+AND
+Exists(_Item, 1)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Total)
+AND
+GetStackAmount(_Item, (INTEGER)_Count, _)
+AND
+IntegerDivide(_Total, _Count, (INTEGER)_PerUnit)
+AND
+DB_AMP_AL_MinValue(_MinVal)
+AND
+_PerUnit >= _MinVal
+AND
+QRY_AMP_AL_ShouldLoot(_Item)
+THEN
+DebugText(_Player, "[AL] GrabItem OK");
+PROC_AMP_AL_PendingVFX_Fire();
+DB_AMP_AL_AutoLooted(_Item);
+PROC_AMP_AL_MarkFromContainer(_Item);
+ToInventory(_Item, _Player, _Count, 0, 0);
+PROC_AMP_AL_CampSend_Mark(_Item, _Player);
+
+// container gold: bypass the minvalue filter
+IF
+EntityEvent((ITEM)_Item, "AMP_AL_GrabItem")
+AND
+DB_AMP_AL_ActivePlayer(_Player)
+AND
+Exists(_Item, 1)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+_T == LOOT_Gold_A_1c3c9c74-34a1-4685-989e-410dc080be6f
+AND
+GetStackAmount(_Item, (INTEGER)_Count, _)
+THEN
+DebugText(_Player, "[AL] GrabItem gold");
+PROC_AMP_AL_PendingVFX_Fire();
+DB_AMP_AL_AutoLooted(_Item);
+PROC_AMP_AL_MarkFromContainer(_Item);
+ToInventory(_Item, _Player, _Count, 0, 0);
+PROC_AMP_AL_CampSend_Mark(_Item, _Player);
+
+// container flag
+PROC
+PROC_AMP_AL_MarkFromContainer((ITEM)_Item)
+AND
+DB_AMP_AL_IteratingContainer(1)
+THEN
+DB_AMP_AL_FromContainer(_Item);
+
+PROC
+PROC_AMP_AL_MarkFromContainer((ITEM)_Item)
+AND
+NOT DB_AMP_AL_IteratingContainer(1)
+THEN
+DB_NOOP(1);
+
+// iterate complete
+IF
+EntityEvent(_, "AMP_AL_IterDone")
+AND
+DB_AMP_AL_ActivePlayer(_Player)
+THEN
+DebugText(_Player, "[AL] IterDone - busy reset");
+SysClear("DB_AMP_AL_PendingVFX", 3);
+TimerCancel("AMP_AL_BusyTimeout");
+NOT DB_AMP_AL_Busy(1);
+DB_AMP_AL_Busy(0);
+SysClear("DB_AMP_AL_IteratingContainer", 1);
+DB_AMP_AL_IteratingContainer(0);
+PROC_AMP_AL_ClearActivePlayer();
+
+// busy safety timeout: force reset if iterdone never fires
+IF
+TimerFinished("AMP_AL_BusyTimeout")
+AND
+DB_AMP_AL_Busy(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsCharacter(_Host, 1)
+THEN
+DebugText(_Host, "[AL] BUSY TIMEOUT - forced reset");
+SysClear("DB_AMP_AL_PendingVFX", 3);
+NOT DB_AMP_AL_Busy(1);
+DB_AMP_AL_Busy(0);
+SysClear("DB_AMP_AL_IteratingContainer", 1);
+DB_AMP_AL_IteratingContainer(0);
+PROC_AMP_AL_ClearActivePlayer();
+
+// deferred vfx: fires once on first actual pickup
+PROC
+PROC_AMP_AL_PendingVFX_Fire()
+AND
+DB_AMP_AL_PendingVFX((REAL)_X, (REAL)_Y, (REAL)_Z)
+THEN
+PlayEffectAtPosition(AMP_Autoloot_Marker_af1b6860-8b91-5f0a-9553-831bc6c8e10d, _X, _Y, _Z, 1.0);
+SysClear("DB_AMP_AL_PendingVFX", 3);
+
+// cleanup
+PROC
+PROC_AMP_AL_ClearActivePlayer()
+AND
+DB_AMP_AL_ActivePlayer(_Player)
+THEN
+NOT DB_AMP_AL_ActivePlayer(_Player);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_AL_ContainerDone((ITEM)_Container)
+THEN
+NOT DB_AMP_AL_ContainerDone(_Container);
+
+EXITSECTION
+ENDEXITSECTION

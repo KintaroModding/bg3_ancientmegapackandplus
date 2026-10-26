@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="902a435c-5c09-4029-abac-7a3650f80340" />
+					<attribute id="Name" type="LSString" value="AMP_Kyzr_Cloak_Summon_1" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="ParentTemplateId" type="FixedString" value="e29c34ab-0863-4775-b8af-964fa90451d2" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h27c25299g8afag98b7g8129gb38de883090f" version="1" />
+					<attribute id="Stats" type="FixedString" value="Skeleton_Strong" />
+					<attribute id="Equipment" type="FixedString" value="EQP_Mace_Rusty_Shield_Rusty" />
+					<attribute id="LevelOverride" type="int32" value="3" />
+					<attribute id="CharacterVisualResourceID" type="FixedString" value="a1c4f4f0-e063-f40e-0a30-eb146dec51eb" />
+					<attribute id="IsLootable" type="bool" value="False" />
+					<attribute id="IsEquipmentLootable" type="bool" value="False" />
+					<attribute id="HasPlayerApprovalRating" type="bool" value="False" />
+					<attribute id="Title" type="TranslatedString" handle="h4803f272g69b9gbb2egac8age5287b2e3813" version="6" />
+					<attribute id="Archetype" type="FixedString" value="melee_stupid" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="ff16e8ab-e8e6-4acb-a105-aae53a9d510e" />
+								</node>
+							</children>
+						</node>
+						<node id="SkillList">
+							<children>
+								<node id="Skill">
+									<attribute id="Skill" type="FixedString" value="Projectile_Jump" />
+									<attribute id="SpellCastingAbility" type="uint8" value="0" />
+									<attribute id="LearningStrategy" type="uint8" value="0" />
+									<attribute id="ScoreModifier" type="float" value="1" />
+									<attribute id="StartRound" type="int32" value="0" />
+									<attribute id="FallbackStartRound" type="int32" value="-1" />
+									<attribute id="MinimumImpact" type="int32" value="0" />
+									<attribute id="OnlyCastOnSelf" type="bool" value="False" />
+									<attribute id="AIFlags" type="uint16" value="0" />
+									<children>
+										<node id="SourceConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+										<node id="TargetConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

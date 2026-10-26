@@ -1,0 +1,47 @@
+// a target that refuses the status is retried every pass, and summoned allies are immune to SG_Condition
+// gate reads the immunity inside AuraStatuses, as vanilla AURA_OF_TERROR does. only clauses reaching an ally need it
+
+new entry "SJ03_03"
+type "StatusData"
+using "SJ03_03"
+data "AuraStatuses" "TARGET:IF(Character() and not Dead() and not IsImmuneToStatus('SG_Incapacitated',context.Target) and not IsImmuneToStatus('SG_Condition',context.Target) and not IsImmuneToStatus('SG_Paralyzed',context.Target)):ApplyStatus(SJ03_03_01)"
+
+new entry "NECK27_DRENCH_AURA_T4"
+type "StatusData"
+using "NECK27_DRENCH_AURA_T4"
+data "AuraStatuses" "TARGET:IF(not Self() and Character() and not Dead() and Combat()):ApplyStatus(NECK27_DRENCH_TICK_T4);TARGET:IF(Character() and not Dead() and HasStatus('WET') and Combat() and not IsImmuneToStatus('SG_Condition',context.Target)):ApplyStatus(NECK27_WATERLOGGED)"
+
+new entry "AMP_SHADOW_AURA_TECH_T2"
+type "StatusData"
+using "AMP_SHADOW_AURA_TECH_T2"
+data "AuraStatuses" "TARGET:IF(Enemy() and InSurface('SurfaceDarknessCloud') and (HasStatus('AMP_ANCIENTCHAOS',context.Source) or HasStatus('AMP_KOY_PRIMORDIALCHAOS',context.Source))):ApplyStatus(AMP_SHADOW_UNDERDARK_T2);TARGET:IF(Ally() and InSurface('SurfaceDarknessCloud') and (HasStatus('AMP_ANCIENTCHAOS',context.Source) or HasStatus('AMP_KOY_PRIMORDIALCHAOS',context.Source)) and not IsImmuneToStatus('SG_Condition',context.Target) and not IsImmuneToStatus('SG_Surface',context.Target)):ApplyStatus(AMP_SHADOW_ALLY_T2)"
+
+new entry "AMP_SHADOW_AURA_TECH_T3"
+type "StatusData"
+using "AMP_SHADOW_AURA_TECH_T3"
+data "AuraStatuses" "TARGET:IF(Enemy() and InSurface('SurfaceDarknessCloud') and (HasStatus('AMP_ANCIENTCHAOS',context.Source) or HasStatus('AMP_KOY_PRIMORDIALCHAOS',context.Source))):ApplyStatus(AMP_SHADOW_UNDERDARK_T3);TARGET:IF(Ally() and InSurface('SurfaceDarknessCloud') and (HasStatus('AMP_ANCIENTCHAOS',context.Source) or HasStatus('AMP_KOY_PRIMORDIALCHAOS',context.Source)) and not IsImmuneToStatus('SG_Condition',context.Target) and not IsImmuneToStatus('SG_Surface',context.Target)):ApplyStatus(AMP_SHADOW_ALLY_T3)"
+
+new entry "AMP_SHADOW_AURA_TECH_T4"
+type "StatusData"
+using "AMP_SHADOW_AURA_TECH_T4"
+data "AuraStatuses" "TARGET:IF(Enemy() and InSurface('SurfaceDarknessCloud') and (HasStatus('AMP_ANCIENTCHAOS',context.Source) or HasStatus('AMP_KOY_PRIMORDIALCHAOS',context.Source))):ApplyStatus(AMP_SHADOW_UNDERDARK_T4);TARGET:IF(Ally() and InSurface('SurfaceDarknessCloud') and (HasStatus('AMP_ANCIENTCHAOS',context.Source) or HasStatus('AMP_KOY_PRIMORDIALCHAOS',context.Source)) and not IsImmuneToStatus('SG_Condition',context.Target) and not IsImmuneToStatus('SG_Surface',context.Target)):ApplyStatus(AMP_SHADOW_ALLY_T4)"
+
+new entry "AMP_SHADOW_SORC_SUMMON_AURA"
+type "StatusData"
+using "AMP_SHADOW_SORC_SUMMON_AURA"
+data "AuraStatuses" "TARGET:IF((Tagged('HOUNDOFILLOMEN_SUMMON') or Tagged('SUMMON')) and Tagged('MONSTROSITY') and Ally() and not IsImmuneToStatus('SG_Condition',context.Target)):ApplyStatus(AMP_SHADOW_SORC_SUMMON_MARKER)"
+
+new entry "AMP_SHADOW_SORC_SUMMON_AURA_3"
+type "StatusData"
+using "AMP_SHADOW_SORC_SUMMON_AURA_3"
+data "AuraStatuses" "TARGET:IF((Tagged('HOUNDOFILLOMEN_SUMMON') or Tagged('SUMMON')) and Tagged('MONSTROSITY') and Ally() and not IsImmuneToStatus('SG_Condition',context.Target)):ApplyStatus(AMP_SHADOW_SORC_SUMMON_MARKER_3)"
+
+new entry "AMP_SHADOW_SORC_SUMMON_AURA_4"
+type "StatusData"
+using "AMP_SHADOW_SORC_SUMMON_AURA_4"
+data "AuraStatuses" "TARGET:IF((Tagged('HOUNDOFILLOMEN_SUMMON') or Tagged('SUMMON')) and Tagged('MONSTROSITY') and Ally() and not IsImmuneToStatus('SG_Condition',context.Target)):ApplyStatus(AMP_SHADOW_SORC_SUMMON_MARKER_4)"
+
+new entry "RAPHAEL_TRACKER_AURA"
+type "StatusData"
+using "RAPHAEL_TRACKER_AURA"
+data "AuraStatuses" "TARGET:IF(Character() and Tagged('LOW_HOUSEOFHOPE_IDENTIFY_RAPHAEL') and not IsImmuneToStatus('SG_Condition',context.Target)):ApplyStatus(RAPHAEL_TRACKER)"

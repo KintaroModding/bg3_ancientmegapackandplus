@@ -1,0 +1,191 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// clearing each write keeps the score at one, the threshold of three is never reached
+
+IF
+DB_AMP_StealthAbuse_Score((CHARACTER)_P, (INTEGER)_N)
+AND
+NOT QRY_AMP_Plus_Affix_On("ANTISTEALTHABUSE")
+THEN
+NOT DB_AMP_StealthAbuse_Score(_P, _N);
+
+// base evaluates the new count before the write is dropped, so the switch also wipes existing scores
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "ANTISTEALTHABUSE"
+AND
+_Val == 0
+THEN
+PROC_AMP_Plus_StealthAbuse_DrainScore();
+
+PROC
+PROC_AMP_Plus_StealthAbuse_DrainScore()
+AND
+DB_AMP_StealthAbuse_Score((CHARACTER)_P, (INTEGER)_N)
+THEN
+NOT DB_AMP_StealthAbuse_Score(_P, _N);
+PROC_AMP_Plus_StealthAbuse_DrainScore();
+
+IF
+DB_AMP_StealthFlee_Marked((CHARACTER)_E)
+AND
+NOT QRY_AMP_Plus_Affix_On("ANTISTEALTHABUSE")
+THEN
+NOT DB_AMP_StealthFlee_Marked(_E);
+
+IF
+StatusApplied((CHARACTER)_C, "AMP_STEALTH_FLEEING", _, _)
+AND
+NOT QRY_AMP_Plus_Affix_On("ANTISTEALTHABUSE")
+THEN
+RemoveStatus(_C, "AMP_STEALTH_FLEEING", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+StatusApplied((CHARACTER)_C, "AMP_STEALTH_ABUSER", _, _)
+AND
+NOT QRY_AMP_Plus_Affix_On("ANTISTEALTHABUSE")
+THEN
+RemoveStatus(_C, "AMP_STEALTH_ABUSER", NULL_00000000-0000-0000-0000-000000000000);
+
+QRY
+QRY_AMP_StealthAbuse_Active()
+AND
+QRY_AMP_Plus_Affix_On("ANTISTEALTHABUSE")
+THEN
+DB_NOOP(1);
+
+// base spares only engine-flagged bosses, a story creature taken off stage ends the story
+
+PROC
+PROC_AMP_Plus_FleeSpare((CHARACTER)_E)
+THEN
+NOT DB_AMP_StealthFlee_Marked(_E);
+NOT DB_AMP_StealthFled(_E);
+RemoveStatus(_E, "AMP_STEALTH_FLEEING", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+DB_AMP_StealthFlee_Marked((CHARACTER)_E)
+AND
+DB_CurrentLevel("END_Main")
+THEN
+PROC_AMP_Plus_FleeSpare(_E);
+
+IF
+DB_AMP_StealthFlee_Marked((CHARACTER)_E)
+AND
+HasActiveStatus(_E, "AMP_ULTRA_BOSS_OVERLAY", 1)
+THEN
+PROC_AMP_Plus_FleeSpare(_E);
+
+IF
+DB_AMP_StealthFlee_Marked((CHARACTER)_E)
+AND
+DB_AMP_ForceBoss(_E)
+THEN
+PROC_AMP_Plus_FleeSpare(_E);
+
+IF
+StatusApplied((CHARACTER)_E, "AMP_STEALTH_FLEEING", _, _)
+AND
+NOT DB_AMP_StealthFlee_Marked(_E)
+THEN
+RemoveStatus(_E, "AMP_STEALTH_FLEEING", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+DB_AMP_StealthFlee_Active(1)
+AND
+NOT QRY_AMP_Plus_Affix_On("ANTISTEALTHABUSE")
+THEN
+NOT DB_AMP_StealthFlee_Active(1);
+
+IF
+DB_AMP_StealthFlee_Combat((GUIDSTRING)_C)
+AND
+NOT QRY_AMP_Plus_Affix_On("ANTISTEALTHABUSE")
+THEN
+NOT DB_AMP_StealthFlee_Combat(_C);
+
+IF
+DB_AMP_StealthFlee_Abuser((CHARACTER)_P, (GUIDSTRING)_C)
+AND
+NOT QRY_AMP_Plus_Affix_On("ANTISTEALTHABUSE")
+THEN
+NOT DB_AMP_StealthFlee_Abuser(_P, _C);
+
+IF
+DB_AMP_StealthFled((CHARACTER)_E)
+AND
+NOT QRY_AMP_Plus_Affix_On("ANTISTEALTHABUSE")
+THEN
+NOT DB_AMP_StealthFled(_E);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "ANTISTEALTHABUSE"
+AND
+_Val == 0
+AND
+DB_AMP_StealthFlee_Active(1)
+THEN
+NOT DB_AMP_StealthFlee_Active(1);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "ANTISTEALTHABUSE"
+AND
+_Val == 0
+THEN
+PROC_AMP_Plus_StealthAbuse_DrainFleeCombat();
+
+PROC
+PROC_AMP_Plus_StealthAbuse_DrainFleeCombat()
+AND
+DB_AMP_StealthFlee_Combat((GUIDSTRING)_C)
+THEN
+NOT DB_AMP_StealthFlee_Combat(_C);
+PROC_AMP_Plus_StealthAbuse_DrainFleeCombat();
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "ANTISTEALTHABUSE"
+AND
+_Val == 0
+THEN
+PROC_AMP_Plus_StealthAbuse_DrainAbuser();
+
+PROC
+PROC_AMP_Plus_StealthAbuse_DrainAbuser()
+AND
+DB_AMP_StealthFlee_Abuser((CHARACTER)_P, (GUIDSTRING)_C)
+THEN
+NOT DB_AMP_StealthFlee_Abuser(_P, _C);
+PROC_AMP_Plus_StealthAbuse_DrainAbuser();
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "ANTISTEALTHABUSE"
+AND
+_Val == 0
+THEN
+PROC_AMP_Plus_StealthAbuse_DrainMarked();
+
+PROC
+PROC_AMP_Plus_StealthAbuse_DrainMarked()
+AND
+DB_AMP_StealthFlee_Marked((CHARACTER)_E)
+THEN
+PROC_AMP_Plus_FleeSpare(_E);
+PROC_AMP_Plus_StealthAbuse_DrainMarked();
+
+EXITSECTION
+ENDEXITSECTION

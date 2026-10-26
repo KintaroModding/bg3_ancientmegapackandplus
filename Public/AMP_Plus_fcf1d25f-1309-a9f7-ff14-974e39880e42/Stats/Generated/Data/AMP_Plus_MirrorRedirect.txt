@@ -1,0 +1,33 @@
+// watchers raise AMP_PLUS_MIRROR_TRIGGER instead of AMP_MIRROR_TRIGGER, so the base spawn never fires
+
+new entry "AMP_Mirror_OnCC_Watcher"
+type "PassiveData"
+using "AMP_Mirror_OnCC_Watcher"
+data "Conditions" "(StatusHasStatusGroup(context.StatusId,'SG_Charmed') or StatusHasStatusGroup(context.StatusId,'SG_Incapacitated') or StatusHasStatusGroup(context.StatusId,'SG_Stunned') or StatusHasStatusGroup(context.StatusId,'SG_Mad') or StatusHasStatusGroup(context.StatusId,'SG_Polymorph') or StatusHasStatusGroup(context.StatusId,'SG_Frightened') or StatusHasStatusGroup(context.StatusId,'SG_Prone') or StatusHasStatusGroup(context.StatusId,'SG_Restrained') or StatusId('SURPRISED') or StatusId('DISARMED') or StatusId('DISARM') or StatusId('COMMAND_FLEE') or StatusId('COMMAND_APPROACH') or IsSlow()) and HasHPPercentageLessThan(70,context.Target)"
+data "StatsFunctors" "ApplyStatus(AMP_PLUS_MIRROR_TRIGGER,100,1)"
+
+new entry "AMP_Mirror_OnTurn_Watcher"
+type "PassiveData"
+using "AMP_Mirror_OnTurn_Watcher"
+data "Conditions" "(HasStatus('SG_Charmed',context.Target) or HasStatus('SG_Incapacitated',context.Target) or HasStatus('SG_Mad',context.Target) or HasStatus('SG_Polymorph',context.Target) or HasStatus('SG_Stunned',context.Target) or HasStatus('SG_Frightened',context.Target) or HasStatus('SG_Prone',context.Target) or HasStatus('SG_Restrained',context.Target) or HasStatus('SURPRISED',context.Target) or HasStatus('SLOW',context.Target) or HasStatus('DISARM',context.Target) or HasStatus('COMMAND_FLEE',context.Target) or HasStatus('COMMAND_APPROACH',context.Target)) and HasHPPercentageLessThan(55,context.Target)"
+data "StatsFunctors" "ApplyStatus(AMP_PLUS_MIRROR_TRIGGER,100,1)"
+
+new entry "AMP_PLUS_MIRROR_TRIGGER"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_MIRROR_TRIGGER"
+data "StackId" "AMP_PLUS_MIRROR_TRIGGER"
+
+// Osiris reads this signal and strips the mini-bosses' loose consumables before cleanup
+new entry "AMP_Plus_Mirror_LowHP_Watcher"
+type "PassiveData"
+data "Properties" "IsHidden;OncePerCombat"
+data "StatsFunctorContext" "OnDamaged;OnTurn"
+data "Conditions" "HasHPPercentageLessThan(5,context.Target)"
+data "StatsFunctors" "ApplyStatus(AMP_PLUS_MIRROR_STRIP_SIGNAL,100,1)"
+
+new entry "AMP_PLUS_MIRROR_STRIP_SIGNAL"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_PLUS_MIRROR_STRIP_SIGNAL"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator;IgnoreResting;ApplyToDead"

@@ -1,0 +1,832 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// nonstack rows add a final status as the last column
+// transfer(markeronitem, effectoncharacter), externalstatus(charstatus, vanillastatustoremove)
+
+// weapon shards, stackable - elemental
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Fire_b093e9fc-6197-49d0-b70a-601b36753cf3, "AMP_SHARD_APPLY_MELEE_FIRE", "AMP_SHARD_APPLY_RANGED_FIRE");
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Cold_13e45baf-2a4f-4306-bf42-a571c9b2c68e, "AMP_SHARD_APPLY_MELEE_COLD", "AMP_SHARD_APPLY_RANGED_COLD");
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Lightning_afe829dc-6af0-4628-881b-06a2a94fe536, "AMP_SHARD_APPLY_MELEE_LIGHTNING", "AMP_SHARD_APPLY_RANGED_LIGHTNING");
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Thunder_0e943ce0-f937-4a0b-a135-060726086420, "AMP_SHARD_APPLY_MELEE_THUNDER", "AMP_SHARD_APPLY_RANGED_THUNDER");
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Acid_51b26d59-317b-492f-930c-cba1f01afdba, "AMP_SHARD_APPLY_MELEE_ACID", "AMP_SHARD_APPLY_RANGED_ACID");
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Poison_7c071afa-674f-4826-ae3c-325983cce6e3, "AMP_SHARD_APPLY_MELEE_POISON", "AMP_SHARD_APPLY_RANGED_POISON");
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Necrotic_63f7f014-d3c2-4ad6-bac0-4f58e139a912, "AMP_SHARD_APPLY_MELEE_NECROTIC", "AMP_SHARD_APPLY_RANGED_NECROTIC");
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Radiant_3099279e-52d6-43ef-8671-b82c90a91086, "AMP_SHARD_APPLY_MELEE_RADIANT", "AMP_SHARD_APPLY_RANGED_RADIANT");
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Psychic_728e48e8-16cf-4444-a2ac-2dc51d0507ad, "AMP_SHARD_APPLY_MELEE_PSYCHIC", "AMP_SHARD_APPLY_RANGED_PSYCHIC");
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Force_a29a0058-2554-4e00-913a-1358eec9b13c, "AMP_SHARD_APPLY_MELEE_FORCE", "AMP_SHARD_APPLY_RANGED_FORCE");
+// utility
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_2_f30e2913-2cc7-49b4-a8e9-597e80ea9ee6, "AMP_SHARD_APPLY_MELEE_ACCURACY", "AMP_SHARD_APPLY_RANGED_ACCURACY");
+
+// weapon shards, non-stackable
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_1_d6b577f4-91eb-4015-bf1e-2b3bcd656d70, "AMP_SHARD_APPLY_MELEE_THROWN", "AMP_SHARD_APPLY_RANGED_THROWN", "AMP_SHARD_WEAPON_THROWN");
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_3_2d044324-8d55-4a3f-a05b-916617fa9b3e, "AMP_SHARD_APPLY_MELEE_FINESSE", "AMP_SHARD_APPLY_RANGED_FINESSE", "AMP_SHARD_WEAPON_FINESSE");
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_4_901321e8-47f5-4ed5-8d09-6d2039283401, "AMP_SHARD_APPLY_MELEE_MAGIC", "AMP_SHARD_APPLY_RANGED_MAGIC", "AMP_SHARD_WEAPON_MAGIC");
+// special effects
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_MWeapon_1_65352de8-0e22-4d65-b92b-3818d4bd3e9c, "AMP_SHARD_APPLY_MELEE_SPIRIT", "AMP_SHARD_APPLY_RANGED_SPIRIT", "AMP_SHARD_WEAPON_SPIRIT");
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_MWeapon_2_c0a66367-bc82-41c7-8b22-a0563f092eea, "AMP_SHARD_APPLY_MELEE_BLOODSUCKER", "AMP_SHARD_APPLY_RANGED_BLOODSUCKER", "AMP_SHARD_WEAPON_BLOODSUCKER");
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_5_c971df9e-e047-448f-a188-b3ee4102bcbe, "AMP_SHARD_APPLY_MELEE_THUNDERCALLER", "AMP_SHARD_APPLY_RANGED_THUNDERCALLER", "AMP_SHARD_WEAPON_THUNDERCALLER");
+
+// equipment shards, stackable - armor
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Armor_3_a3d62991-3c30-40b3-8136-25c036363fe8, "Armor", "AMP_SHARD_APPLY_ARMOR_3", "Breast");
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Armor_6_4ff81ff2-6904-4c16-8bae-9feb3ce1680c, "Armor", "AMP_SHARD_APPLY_ARMOR_6", "Breast");
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Armor_9_247f636c-c103-42c6-bdce-290d7134298c, "Armor", "AMP_SHARD_APPLY_ARMOR_9", "Breast");
+// ring
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_1_f19117a0-8960-4457-acf0-b2da03a0d919, "Ring", "AMP_SHARD_APPLY_RING_1", "Ring");
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_2_d5188e9b-a3c7-4a6b-b336-96deee113148, "Ring", "AMP_SHARD_APPLY_RING_2", "Ring");
+// gloves
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Gloves_1_fa1a14d8-07ad-414f-bf0c-1cb675faa94e, "Gloves", "AMP_SHARD_APPLY_GLOVES_1", "Gloves");
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Gloves_2_99069903-c62a-4d40-b014-603317db3d18, "Gloves", "AMP_SHARD_APPLY_GLOVES_2", "Gloves");
+// cloak
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Cloak_1_3b200ca5-b282-4930-8c6a-d055a068691c, "Cloak", "AMP_SHARD_APPLY_CLOAK_1", "Cloak");
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Cloak_5_e5bbba00-8740-49bd-9cda-18f9d5f9eb90, "Cloak", "AMP_SHARD_APPLY_CLOAK_5", "Cloak");
+// boots - surface immunities
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Boots_2_8d5ac97d-5b12-432b-8dff-efb31a7c42c2, "Boots", "AMP_SHARD_APPLY_BOOTS_2", "Boots");
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Boots_3_eb06ce8e-4f52-46ab-9fbd-5fb54cbb6150, "Boots", "AMP_SHARD_APPLY_BOOTS_3", "Boots");
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Boots_4_6dc1384f-8d17-4f27-9ece-8479665fdc11, "Boots", "AMP_SHARD_APPLY_BOOTS_4", "Boots");
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Boots_5_f4fbaee4-8f08-4432-ab2b-40b34dcdc921, "Boots", "AMP_SHARD_APPLY_BOOTS_5", "Boots");
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Boots_6_1214ea63-d0e7-4fd7-811a-fe0c9264f23b, "Boots", "AMP_SHARD_APPLY_BOOTS_6", "Boots");
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Boots_7_917c57ad-f743-4e00-b16e-520f4ff58b9a, "Boots", "AMP_SHARD_APPLY_BOOTS_7", "Boots");
+
+// equipment shards, non-stackable - armor
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_1_52f83898-88f0-4140-b83f-fc175f6c673b, "Armor", "AMP_SHARD_APPLY_ARMOR_1", "Breast", "AMP_SHARD_ARMOR_NOCRIT");
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Armor_2_cf7c5356-3552-43ee-a50b-d690f4ea78ba, "Armor", "AMP_SHARD_APPLY_ARMOR_2", "Breast");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_4_8d741b5a-c668-47f6-9a5a-42d0322206e1, "Armor", "AMP_SHARD_APPLY_ARMOR_4", "Breast", "AMP_SHARD_ARMOR_INDOM");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_5_8f8abcf7-891f-4479-94d5-ffd09d58bad3, "Armor", "AMP_SHARD_APPLY_ARMOR_5", "Breast", "AMP_SHARD_ARMOR_AC20");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_7_ee2bf8b4-3988-4d15-b46f-7284fbe98445, "Armor", "AMP_SHARD_APPLY_ARMOR_7", "Breast", "AMP_SHARD_ARMOR_SHADOW");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_8_03172a9e-7009-42e5-ba17-cc147985bda6, "Armor", "AMP_SHARD_APPLY_ARMOR_8", "Breast", "AMP_SHARD_ARMOR_SHADOW_GREATER");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_10_a1bf4ace-c2bf-4839-b70b-e9b113217548, "Armor", "AMP_SHARD_APPLY_ARMOR_10", "Breast", "AMP_SHARD_ARMOR_DEVOTEE");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_11_07edecab-dcc7-4cd0-a89d-b9907783cfe0, "Armor", "AMP_SHARD_APPLY_ARMOR_11", "Breast", "AMP_SHARD_ARMOR_ARCANUM");
+// ring
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_3_dd21cbf2-850e-4b2b-b7af-c0b0f07b487f, "Ring", "AMP_SHARD_APPLY_RING_3", "Ring", "AMP_SHARD_RING_MAXHEAL");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_4_38b04964-19dd-40db-919f-33b7ccb9b279, "Ring", "AMP_SHARD_APPLY_RING_4", "Ring", "AMP_SHARD_RING_SPELLRES");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_5_75184286-df49-4fdf-812a-48820e440bf0, "Ring", "AMP_SHARD_APPLY_RING_5", "Ring", "AMP_SHARD_RING_CONC");
+// gloves
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_3_49fd65f2-10af-4e52-aa3a-361645a2bc38, "Gloves", "AMP_SHARD_APPLY_GLOVES_3", "Gloves", "AMP_SHARD_GLOVES_PIERCE");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_4_d5750e5a-8247-43d5-872f-3c1bc1f4be36, "Gloves", "AMP_SHARD_APPLY_GLOVES_4", "Gloves", "AMP_SHARD_GLOVES_HUNTERSMARK");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_5_429201d8-afe0-49d4-9848-265273e036a5, "Gloves", "AMP_SHARD_APPLY_GLOVES_5", "Gloves", "AMP_SHARD_GLOVES_LAYONHANDS");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_6_eda9f33c-9e79-4b41-a96c-10d1a9042cff, "Gloves", "AMP_SHARD_APPLY_GLOVES_6", "Gloves", "AMP_SHARD_GLOVES_DISCHARGER");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_7_a27b2265-237e-4f5e-a938-9e1c899cc5d1, "Gloves", "AMP_SHARD_APPLY_GLOVES_7", "Gloves", "AMP_SHARD_GLOVES_WILDVINE");
+// helmet
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_1_bf038b64-8083-4997-88c0-140972478c74, "Helmet", "AMP_SHARD_APPLY_HELMET_1", "Helmet", "AMP_SHARD_HEAD_BLIND");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_2_78230eef-2716-4d51-8f0f-99a57b93895b, "Helmet", "AMP_SHARD_APPLY_HELMET_2", "Helmet", "AMP_SHARD_HEAD_POINTBLANK");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_3_ec594e30-e633-4b53-8f02-3559ed68a6a9, "Helmet", "AMP_SHARD_APPLY_HELMET_3", "Helmet", "AMP_SHARD_HEAD_MINSAVE");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_4_48f52d1d-617a-48f2-a599-21d480741626, "Helmet", "AMP_SHARD_APPLY_HELMET_4", "Helmet", "AMP_SHARD_HEAD_GREATMIND");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_5_1e80ef36-f66c-4dc8-9366-70650a21ce97, "Helmet", "AMP_SHARD_APPLY_HELMET_5", "Helmet", "AMP_SHARD_HEAD_VOIDRITE");
+// cloak
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Cloak_2_a081971e-2b4f-492a-aba9-da0dcb192c9d, "Cloak", "AMP_SHARD_APPLY_CLOAK_2", "Cloak", "AMP_SHARD_CLOAK_DEXSAVE");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Cloak_3_069ad0ea-6ce2-414a-b243-84f5427b0e2a, "Cloak", "AMP_SHARD_APPLY_CLOAK_3", "Cloak", "AMP_SHARD_CLOAK_REFLECT");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Cloak_4_a64ba3da-1532-4eb9-be08-846fc5379363, "Cloak", "AMP_SHARD_APPLY_CLOAK_4", "Cloak", "AMP_SHARD_CLOAK_NOAOO");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Cloak_6_a9a2364c-815a-46ed-85a3-7f61b9bc4731, "Cloak", "AMP_SHARD_APPLY_CLOAK_6", "Cloak", "AMP_SHARD_CLOAK_WARDFLARE");
+// boots
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Boots_1_57bbfc40-8622-46a4-9b86-0f8feb58e129, "Boots", "AMP_SHARD_APPLY_BOOTS_1", "Boots", "AMP_SHARD_BOOTS_SKYWALKER");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Boots_8_a01643f4-97dc-48e8-bfef-15463c649443, "Boots", "AMP_SHARD_APPLY_BOOTS_8", "Boots", "AMP_SHARD_BOOTS_LONGSTRIDER");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Boots_9_9e294aa5-364d-494a-b759-0a78c1bf9172, "Boots", "AMP_SHARD_APPLY_BOOTS_9", "Boots", "AMP_SHARD_BOOTS_FREEDOM");
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Boots_10_0911f7cd-1d28-4ae8-aaf9-680e5a9db2c5, "Boots", "AMP_SHARD_APPLY_BOOTS_10", "Boots", "AMP_SHARD_BOOTS_FEATHERFALL");
+
+// item marker -> character effect. armor
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_NOCRIT", "AMP_SHARD_CHAR_NOCRIT");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_INTAC", "AMP_SHARD_CHAR_INTAC");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_AC1", "AMP_SHARD_CHAR_AC1");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_INDOM", "AMP_SHARD_CHAR_INDOM");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_AC20", "AMP_SHARD_CHAR_AC20");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_DEMIGOD", "AMP_SHARD_CHAR_DEMIGOD");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_SHADOW", "AMP_SHARD_CHAR_SHADOW");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_SHADOW_GREATER", "AMP_SHARD_CHAR_SHADOW_GREATER");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_BRAWLER", "AMP_SHARD_CHAR_BRAWLER");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_DEVOTEE", "AMP_SHARD_CHAR_DEVOTEE");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_ARCANUM", "AMP_SHARD_CHAR_ARCANUM");
+// ring
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_SPELLPOWER", "AMP_SHARD_CHAR_SPELLPOWER");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_CRIT", "AMP_SHARD_CHAR_CRIT");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_MAXHEAL", "AMP_SHARD_CHAR_MAXHEAL");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_SPELLRES", "AMP_SHARD_CHAR_SPELLRES");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_CONC", "AMP_SHARD_CHAR_CONC");
+// gloves
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_SLEIGHT", "AMP_SHARD_CHAR_SLEIGHT");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_ATTACK", "AMP_SHARD_CHAR_ATTACK");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_PIERCE", "AMP_SHARD_CHAR_PIERCE");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_HUNTERSMARK", "AMP_SHARD_CHAR_HUNTERSMARK");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_LAYONHANDS", "AMP_SHARD_CHAR_LAYONHANDS");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_DISCHARGER", "AMP_SHARD_CHAR_DISCHARGER");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_WILDVINE", "AMP_SHARD_CHAR_WILDVINE");
+// helmet
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_BLIND", "AMP_SHARD_CHAR_BLIND");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_POINTBLANK", "AMP_SHARD_CHAR_POINTBLANK");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_MINSAVE", "AMP_SHARD_CHAR_MINSAVE");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_GREATMIND", "AMP_SHARD_CHAR_GREATMIND");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_VOIDRITE", "AMP_SHARD_CHAR_VOIDRITE");
+// cloak
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_STEALTH", "AMP_SHARD_CHAR_STEALTH");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_DEXSAVE", "AMP_SHARD_CHAR_DEXSAVE");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_REFLECT", "AMP_SHARD_CHAR_REFLECT");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_NOAOO", "AMP_SHARD_CHAR_NOAOO");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_ELEMENTAL", "AMP_SHARD_CHAR_ELEMENTAL");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_WARDFLARE", "AMP_SHARD_CHAR_WARDFLARE");
+// boots
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_SKYWALKER", "AMP_SHARD_CHAR_SKYWALKER");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_FIRE", "AMP_SHARD_CHAR_BOOTS_FIRE");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_WATER", "AMP_SHARD_CHAR_BOOTS_WATER");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_ICE", "AMP_SHARD_CHAR_BOOTS_ICE");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_ACID", "AMP_SHARD_CHAR_BOOTS_ACID");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_GREASE", "AMP_SHARD_CHAR_BOOTS_GREASE");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_STINK", "AMP_SHARD_CHAR_BOOTS_STINK");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_LONGSTRIDER", "AMP_SHARD_CHAR_LONGSTRIDER");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_FREEDOM", "AMP_SHARD_CHAR_FREEDOM");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_FEATHERFALL", "AMP_SHARD_CHAR_FEATHERFALL");
+// weapon -> character
+DB_AMP_Shard_Transfer("AMP_SHARD_WEAPON_SPIRIT", "AMP_SHARD_CHAR_SPIRIT");
+DB_AMP_Shard_Transfer("AMP_SHARD_WEAPON_BLOODSUCKER", "AMP_SHARD_PASSIVE_BLOODSUCKER_GRANT");
+
+// vanilla statuses to strip on unequip
+DB_AMP_Shard_ExternalStatus("AMP_SHARD_CHAR_ARCANUM", "MAGE_ARMOR");
+
+KBSECTION
+
+// apply status n times (stackable shards)
+PROC
+PROC_AMP_ApplyShardEffectN((CHARACTER)_Char, (STRING)_Status, (INTEGER)_Count)
+AND
+_Count > 0
+AND
+IntegerSubtract(_Count, 1, _NewCount)
+THEN
+ApplyStatus(_Char, _Status, -1.0, 1, _Char);
+PROC_AMP_ApplyShardEffectN(_Char, _Status, _NewCount);
+
+PROC
+PROC_AMP_ApplyShardEffectN((CHARACTER)_Char, (STRING)_Status, (INTEGER)_Count)
+AND
+_Count <= 0
+THEN
+DB_NOOP(1);
+
+// weapon shards, stackable
+
+// melee equipped - ok
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Weapon_Stackable(_Template, _MeleeStatus, _)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Melee Main Weapon", _Weapon)
+AND
+QRY_AMP_Shard_CanApply(_Weapon)
+THEN
+PROC_AMP_Shard_IncTotal(_Weapon);
+ApplyStatus(_Char, _MeleeStatus, 0.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+// ranged fallback - ok
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Weapon_Stackable(_Template, _, _RangedStatus)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 0)
+AND
+HasRangedWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Ranged Main Weapon", _Weapon)
+AND
+QRY_AMP_Shard_CanApply(_Weapon)
+THEN
+PROC_AMP_Shard_IncTotal(_Weapon);
+ApplyStatus(_Char, _RangedStatus, 0.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+// no weapon - error
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Weapon_Stackable(_Template, _, _)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 0)
+AND
+HasRangedWeaponEquipped(_Char, "Mainhand", 0)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// weapon shards, non-stackable
+
+// melee, no dupe - ok
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Weapon_NonStack(_Template, _MeleeStatus, _, _FinalStatus)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Melee Main Weapon", _Weapon)
+AND
+HasActiveStatus(_Weapon, _FinalStatus, 0)
+AND
+QRY_AMP_Shard_CanApply(_Weapon)
+THEN
+PROC_AMP_Shard_IncTotal(_Weapon);
+ApplyStatus(_Char, _MeleeStatus, 0.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+// melee, dupe - error
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Weapon_NonStack(_Template, _, _, _FinalStatus)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Melee Main Weapon", _Weapon)
+AND
+HasActiveStatus(_Weapon, _FinalStatus, 1)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// ranged, no dupe - ok
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Weapon_NonStack(_Template, _, _RangedStatus, _FinalStatus)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 0)
+AND
+HasRangedWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Ranged Main Weapon", _Weapon)
+AND
+HasActiveStatus(_Weapon, _FinalStatus, 0)
+AND
+QRY_AMP_Shard_CanApply(_Weapon)
+THEN
+PROC_AMP_Shard_IncTotal(_Weapon);
+ApplyStatus(_Char, _RangedStatus, 0.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+// ranged, dupe - error
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Weapon_NonStack(_Template, _, _, _FinalStatus)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 0)
+AND
+HasRangedWeaponEquipped(_Char, "Mainhand", 1)
+AND
+GetEquippedItem(_Char, "Ranged Main Weapon", _Weapon)
+AND
+HasActiveStatus(_Weapon, _FinalStatus, 1)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// no weapon - error
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Weapon_NonStack(_Template, _, _, _)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 0)
+AND
+HasRangedWeaponEquipped(_Char, "Mainhand", 0)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// equipment shards, stackable
+
+// armor - ok
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_Stackable(_Template, "Armor", _TechStatus, _)
+AND
+GetEquippedItem(_Char, "Breast", _Item)
+AND
+QRY_AMP_Shard_CanApply(_Item)
+THEN
+PROC_AMP_Shard_IncTotal(_Item);
+ApplyStatus(_Char, _TechStatus, 0.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+// armor - no slot
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_Stackable(_Template, "Armor", _, _)
+AND
+NOT GetEquippedItem(_Char, "Breast", _)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// ring - ok
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_Stackable(_Template, "Ring", _TechStatus, _)
+AND
+GetEquippedItem(_Char, "Ring", _Item)
+AND
+QRY_AMP_Shard_CanApply(_Item)
+THEN
+PROC_AMP_Shard_IncTotal(_Item);
+ApplyStatus(_Char, _TechStatus, 0.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+// ring - no slot
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_Stackable(_Template, "Ring", _, _)
+AND
+NOT GetEquippedItem(_Char, "Ring", _)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// gloves - ok
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_Stackable(_Template, "Gloves", _TechStatus, _)
+AND
+GetEquippedItem(_Char, "Gloves", _Item)
+AND
+QRY_AMP_Shard_CanApply(_Item)
+THEN
+PROC_AMP_Shard_IncTotal(_Item);
+ApplyStatus(_Char, _TechStatus, 0.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+// gloves - no slot
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_Stackable(_Template, "Gloves", _, _)
+AND
+NOT GetEquippedItem(_Char, "Gloves", _)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// cloak - ok
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_Stackable(_Template, "Cloak", _TechStatus, _)
+AND
+GetEquippedItem(_Char, "Cloak", _Item)
+AND
+QRY_AMP_Shard_CanApply(_Item)
+THEN
+PROC_AMP_Shard_IncTotal(_Item);
+ApplyStatus(_Char, _TechStatus, 0.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+// cloak - no slot
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_Stackable(_Template, "Cloak", _, _)
+AND
+NOT GetEquippedItem(_Char, "Cloak", _)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// boots - ok
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_Stackable(_Template, "Boots", _TechStatus, _)
+AND
+GetEquippedItem(_Char, "Boots", _Item)
+AND
+QRY_AMP_Shard_CanApply(_Item)
+THEN
+PROC_AMP_Shard_IncTotal(_Item);
+ApplyStatus(_Char, _TechStatus, 0.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+// boots - no slot
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_Stackable(_Template, "Boots", _, _)
+AND
+NOT GetEquippedItem(_Char, "Boots", _)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// equipment shards, non-stackable
+
+// armor - ok
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Armor", _TechStatus, _, _FinalStatus)
+AND
+GetEquippedItem(_Char, "Breast", _Item)
+AND
+HasActiveStatus(_Item, _FinalStatus, 0)
+AND
+QRY_AMP_Shard_CanApply(_Item)
+THEN
+PROC_AMP_Shard_IncTotal(_Item);
+ApplyStatus(_Char, _TechStatus, 0.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+// armor - dupe
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Armor", _, _, _FinalStatus)
+AND
+GetEquippedItem(_Char, "Breast", _Item)
+AND
+HasActiveStatus(_Item, _FinalStatus, 1)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// armor - error (no slot)
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Armor", _, _, _)
+AND
+NOT GetEquippedItem(_Char, "Breast", _)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// ring - success
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Ring", _TechStatus, _, _FinalStatus)
+AND
+GetEquippedItem(_Char, "Ring", _Item)
+AND
+HasActiveStatus(_Item, _FinalStatus, 0)
+AND
+QRY_AMP_Shard_CanApply(_Item)
+THEN
+PROC_AMP_Shard_IncTotal(_Item);
+ApplyStatus(_Char, _TechStatus, 0.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+// ring - error (duplicate)
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Ring", _, _, _FinalStatus)
+AND
+GetEquippedItem(_Char, "Ring", _Item)
+AND
+HasActiveStatus(_Item, _FinalStatus, 1)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// ring - error (no slot)
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Ring", _, _, _)
+AND
+NOT GetEquippedItem(_Char, "Ring", _)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// gloves - success
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Gloves", _TechStatus, _, _FinalStatus)
+AND
+GetEquippedItem(_Char, "Gloves", _Item)
+AND
+HasActiveStatus(_Item, _FinalStatus, 0)
+AND
+QRY_AMP_Shard_CanApply(_Item)
+THEN
+PROC_AMP_Shard_IncTotal(_Item);
+ApplyStatus(_Char, _TechStatus, 0.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+// gloves - error (duplicate)
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Gloves", _, _, _FinalStatus)
+AND
+GetEquippedItem(_Char, "Gloves", _Item)
+AND
+HasActiveStatus(_Item, _FinalStatus, 1)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// gloves - error (no slot)
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Gloves", _, _, _)
+AND
+NOT GetEquippedItem(_Char, "Gloves", _)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// helmet - success
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Helmet", _TechStatus, _, _FinalStatus)
+AND
+GetEquippedItem(_Char, "Helmet", _Item)
+AND
+HasActiveStatus(_Item, _FinalStatus, 0)
+AND
+QRY_AMP_Shard_CanApply(_Item)
+THEN
+PROC_AMP_Shard_IncTotal(_Item);
+ApplyStatus(_Char, _TechStatus, 0.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+// helmet - error (duplicate)
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Helmet", _, _, _FinalStatus)
+AND
+GetEquippedItem(_Char, "Helmet", _Item)
+AND
+HasActiveStatus(_Item, _FinalStatus, 1)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// helmet - error (no slot)
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Helmet", _, _, _)
+AND
+NOT GetEquippedItem(_Char, "Helmet", _)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// cloak - success
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Cloak", _TechStatus, _, _FinalStatus)
+AND
+GetEquippedItem(_Char, "Cloak", _Item)
+AND
+HasActiveStatus(_Item, _FinalStatus, 0)
+AND
+QRY_AMP_Shard_CanApply(_Item)
+THEN
+PROC_AMP_Shard_IncTotal(_Item);
+ApplyStatus(_Char, _TechStatus, 0.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+// cloak - error (duplicate)
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Cloak", _, _, _FinalStatus)
+AND
+GetEquippedItem(_Char, "Cloak", _Item)
+AND
+HasActiveStatus(_Item, _FinalStatus, 1)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// cloak - error (no slot)
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Cloak", _, _, _)
+AND
+NOT GetEquippedItem(_Char, "Cloak", _)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// boots - success
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Boots", _TechStatus, _, _FinalStatus)
+AND
+GetEquippedItem(_Char, "Boots", _Item)
+AND
+HasActiveStatus(_Item, _FinalStatus, 0)
+AND
+QRY_AMP_Shard_CanApply(_Item)
+THEN
+PROC_AMP_Shard_IncTotal(_Item);
+ApplyStatus(_Char, _TechStatus, 0.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+// boots - error (duplicate)
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Boots", _, _, _FinalStatus)
+AND
+GetEquippedItem(_Char, "Boots", _Item)
+AND
+HasActiveStatus(_Item, _FinalStatus, 1)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// boots - error (no slot)
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)_Template, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+DB_AMP_Shard_Equip_NonStack(_Template, "Boots", _, _, _)
+AND
+NOT GetEquippedItem(_Char, "Boots", _)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+// status transfer system
+
+// statusapplied - increment count and apply effect
+IF
+StatusApplied((ITEM)_Item, _ItemStatus, _Causee, _)
+AND
+DB_AMP_Shard_Transfer(_ItemStatus, _CharStatus)
+AND
+IsEquipped(_Item, 1)
+AND
+GetInventoryOwner(_Item, _Char)
+AND
+DB_AMP_Shard_Count(_Item, _ItemStatus, _OldCount)
+AND
+IntegerSum(_OldCount, 1, _NewCount)
+THEN
+NOT DB_AMP_Shard_Count(_Item, _ItemStatus, _OldCount);
+DB_AMP_Shard_Count(_Item, _ItemStatus, _NewCount);
+ApplyStatus(_Char, _CharStatus, -1.0, 1, _Char);
+
+// statusapplied - first application
+IF
+StatusApplied((ITEM)_Item, _ItemStatus, _Causee, _)
+AND
+DB_AMP_Shard_Transfer(_ItemStatus, _CharStatus)
+AND
+IsEquipped(_Item, 1)
+AND
+GetInventoryOwner(_Item, _Char)
+AND
+NOT DB_AMP_Shard_Count(_Item, _ItemStatus, _)
+THEN
+DB_AMP_Shard_Count(_Item, _ItemStatus, 1);
+ApplyStatus(_Char, _CharStatus, -1.0, 1, _Char);
+
+// DB_AMP_Shard_Count is matched first so a non-shard equip exits before the full DB_AMP_Shard_Transfer join
+IF
+Equipped((ITEM)_Item, (CHARACTER)_Char)
+AND
+DB_AMP_Shard_Count(_Item, _ItemStatus, _Count)
+AND
+DB_AMP_Shard_Transfer(_ItemStatus, _CharStatus)
+AND
+HasActiveStatus(_Item, _ItemStatus, 1)
+THEN
+PROC_AMP_ApplyShardEffectN(_Char, _CharStatus, _Count);
+
+// unequipped - remove all effects
+IF
+Unequipped((ITEM)_Item, (CHARACTER)_Char)
+AND
+DB_AMP_Shard_Count(_Item, _ItemStatus, _)
+AND
+DB_AMP_Shard_Transfer(_ItemStatus, _CharStatus)
+THEN
+RemoveStatus(_Char, _CharStatus, _Char);
+
+// unequipped - remove external vanilla statuses
+IF
+Unequipped((ITEM)_Item, (CHARACTER)_Char)
+AND
+DB_AMP_Shard_Count(_Item, _ItemStatus, _)
+AND
+DB_AMP_Shard_Transfer(_ItemStatus, _CharStatus)
+AND
+DB_AMP_Shard_ExternalStatus(_CharStatus, _ExternalStatus)
+THEN
+RemoveStatus(_Char, _ExternalStatus, _Char);
+
+// statusremoved - decrement count
+IF
+StatusRemoved((ITEM)_Item, _ItemStatus, _, _)
+AND
+DB_AMP_Shard_Transfer(_ItemStatus, _)
+AND
+DB_AMP_Shard_Count(_Item, _ItemStatus, _Count)
+AND
+_Count > 1
+AND
+IntegerSubtract(_Count, 1, _NewCount)
+THEN
+NOT DB_AMP_Shard_Count(_Item, _ItemStatus, _Count);
+DB_AMP_Shard_Count(_Item, _ItemStatus, _NewCount);
+PROC_AMP_Shard_DecTotal(_Item);
+
+// statusremoved - last one, clear count
+IF
+StatusRemoved((ITEM)_Item, _ItemStatus, _, _)
+AND
+DB_AMP_Shard_Transfer(_ItemStatus, _)
+AND
+DB_AMP_Shard_Count(_Item, _ItemStatus, 1)
+THEN
+NOT DB_AMP_Shard_Count(_Item, _ItemStatus, 1);
+PROC_AMP_Shard_DecTotal(_Item);
+
+EXITSECTION
+
+ENDEXITSECTION

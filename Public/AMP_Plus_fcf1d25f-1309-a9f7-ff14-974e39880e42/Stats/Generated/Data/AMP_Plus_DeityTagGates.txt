@@ -1,0 +1,57 @@
+// deity gates read all three tag forms: cleric, paladin and the bare god tag
+
+new entry "MAG_Weapon77_DivineProtection"
+type "PassiveData"
+using "MAG_Weapon77_DivineProtection"
+data "Boosts" "IF(Tagged('LATHANDER',context.Source) or Tagged('CLERIC_LATHANDER',context.Source) or Tagged('PALADIN_LATHANDER',context.Source) or Tagged('SELUNE',context.Source) or Tagged('CLERIC_SELUNE',context.Source) or Tagged('PALADIN_SELUNE',context.Source)):IgnoreSurfaceCover(SurfaceHolyFire);IF(Tagged('LATHANDER',context.Source) or Tagged('CLERIC_LATHANDER',context.Source) or Tagged('PALADIN_LATHANDER',context.Source) or Tagged('SELUNE',context.Source) or Tagged('CLERIC_SELUNE',context.Source) or Tagged('PALADIN_SELUNE',context.Source)):StatusImmunity(BURNING_HOLY)"
+
+new entry "MAG_WEAPON77_DIVINE_PROTECTION_AURA"
+type "StatusData"
+data "StatusType" "BOOST"
+using "MAG_WEAPON77_DIVINE_PROTECTION_AURA"
+data "AuraStatuses" "TARGET:IF(Ally() and not Self() and Character() and (Tagged('LATHANDER',context.Target) or Tagged('CLERIC_LATHANDER',context.Target) or Tagged('PALADIN_LATHANDER',context.Target) or Tagged('SELUNE',context.Target) or Tagged('CLERIC_SELUNE',context.Target) or Tagged('PALADIN_SELUNE',context.Target))):ApplyStatus(MAG_WEAPON77_DIVINE_PROTECTION_EFFECT)"
+
+new entry "MAG_Weapon83_bonus_1"
+type "PassiveData"
+using "MAG_Weapon83_bonus_1"
+data "StatsFunctors" "IF(not Tagged('LATHANDER') and not Tagged('CLERIC_LATHANDER') and not Tagged('PALADIN_LATHANDER')):DealDamage(SWAP,1, Radiant,Magical);IF(Tagged('LATHANDER') or Tagged('CLERIC_LATHANDER') or Tagged('PALADIN_LATHANDER')):DealDamage(SWAP,2, Radiant,Magical)"
+
+new entry "MAG_Weapon83_bonus"
+type "PassiveData"
+using "MAG_Weapon83_bonus"
+data "StatsFunctors" "IF(not Tagged('LATHANDER') and not Tagged('CLERIC_LATHANDER') and not Tagged('PALADIN_LATHANDER')):DealDamage(SWAP,1d4, Radiant,Magical);IF(Tagged('LATHANDER') or Tagged('CLERIC_LATHANDER') or Tagged('PALADIN_LATHANDER')):DealDamage(SWAP,2d4, Radiant,Magical)"
+
+new entry "MAG_Weapon83_bonus_3"
+type "PassiveData"
+using "MAG_Weapon83_bonus_3"
+data "StatsFunctors" "IF(not Tagged('LATHANDER') and not Tagged('CLERIC_LATHANDER') and not Tagged('PALADIN_LATHANDER')):DealDamage(SWAP,1d6, Radiant,Magical);IF(Tagged('LATHANDER') or Tagged('CLERIC_LATHANDER') or Tagged('PALADIN_LATHANDER')):DealDamage(SWAP,2d6, Radiant,Magical)"
+
+new entry "MAG_Weapon83_bonus_4"
+type "PassiveData"
+using "MAG_Weapon83_bonus_4"
+data "StatsFunctors" "IF(not Tagged('LATHANDER') and not Tagged('CLERIC_LATHANDER') and not Tagged('PALADIN_LATHANDER')):DealDamage(SWAP,2d6, Radiant,Magical);IF(Tagged('LATHANDER') or Tagged('CLERIC_LATHANDER') or Tagged('PALADIN_LATHANDER')):DealDamage(SWAP,4d6, Radiant,Magical)"
+
+new entry "MAG_Armour_G_67_3_bonus"
+type "PassiveData"
+using "MAG_Armour_G_67_3_bonus"
+data "Boosts" "IF(IsSpell() and IsInSunlight(context.Source)):ReduceCriticalAttackThreshold(1);IF(IsDamageTypeRadiant() and (Tagged('LATHANDER',context.Source) or Tagged('CLERIC_LATHANDER',context.Source) or Tagged('PALADIN_LATHANDER',context.Source))):DamageBonus(1d6,Radiant,Magical)"
+
+new entry "MAG_Armour_G_67_4_bonus"
+type "PassiveData"
+using "MAG_Armour_G_67_4_bonus"
+data "Boosts" "IF(IsSpell() and IsInSunlight(context.Source)):ReduceCriticalAttackThreshold(1);IF(IsDamageTypeRadiant() and (Tagged('LATHANDER',context.Source) or Tagged('CLERIC_LATHANDER',context.Source) or Tagged('PALADIN_LATHANDER',context.Source))):DamageBonus(1d8,Radiant,Magical);IF(HasStatus('AURA_OF_COURAGE',context.Target)):Disadvantage(AttackTarget)"
+
+new entry "MAG_Weapon70_DivinePunishment"
+type "PassiveData"
+using "MAG_Weapon70_DivinePunishment"
+data "Conditions" "(Tagged('UNDEAD',context.Source) or Tagged('MONSTROSITY',context.Source) or Tagged('FIEND',context.Source) or Tagged('FEY',context.Source)) and (Tagged('PALADIN_SELUNE') or Tagged('CLERIC_SELUNE') or Tagged('SELUNE') or Tagged('CLERIC_LATHANDER') or Tagged('PALADIN_LATHANDER') or Tagged('LATHANDER') or Tagged('PALADIN_TYR') or Tagged('CLERIC_TYR') or Tagged('TYR')) and not RollDieAgainstDC(DiceType.d100,5)"
+
+new entry "MAG_Weapon59_StormSummoner"
+type "PassiveData"
+using "MAG_Weapon59_StormSummoner"
+data "Conditions" "IsRangedWeaponAttack() and (Tagged('CLERIC_TALOS',context.Source) or Tagged('PALADIN_TALOS',context.Source) or Tagged('TALOS',context.Source))"
+
+new entry "MAG_Weapon59_ThunderEcho"
+type "PassiveData"
+using "MAG_Weapon59_ThunderEcho"
+data "StatsFunctors" "IF(not Tagged('CLERIC_TALOS',context.Source) and not Tagged('PALADIN_TALOS',context.Source) and not Tagged('TALOS',context.Source)):DealDamage(1d4,Lightning,,,0,,true,false);IF(Tagged('CLERIC_TALOS',context.Source) or Tagged('PALADIN_TALOS',context.Source) or Tagged('TALOS',context.Source)):DealDamage(2d4,Lightning,,,0,,true,false)"

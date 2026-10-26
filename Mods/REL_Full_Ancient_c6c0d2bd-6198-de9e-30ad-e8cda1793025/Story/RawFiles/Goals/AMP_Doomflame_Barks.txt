@@ -1,0 +1,115 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// doomflame combat barks
+
+IF
+EnteredCombat((CHARACTER)_Mob, _)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_01_6b432bff-5bf9-4295-8c54-faba8515b33f)
+AND
+NOT DB_AMP_Doomflame_Greeted(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Doomflame_Greeting_b00c77fb-d986-4790-9186-d790ba60a2ea, _Mob)
+THEN
+DB_AMP_Doomflame_Greeted(_Mob);
+DB_AMP_Doomflame_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Doomflame_BarkUnlock", 5000);
+
+IF
+TurnStarted((CHARACTER)_Mob)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_01_6b432bff-5bf9-4295-8c54-faba8515b33f)
+AND
+NOT DB_AMP_Doomflame_Greeted(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Doomflame_Greeting_b00c77fb-d986-4790-9186-d790ba60a2ea, _Mob)
+THEN
+DB_AMP_Doomflame_Greeted(_Mob);
+DB_AMP_Doomflame_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Doomflame_BarkUnlock", 5000);
+
+IF
+UsingSpell((CHARACTER)_Mob, _, _, _, _)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_01_6b432bff-5bf9-4295-8c54-faba8515b33f)
+AND
+IsDead(_Mob, 0)
+AND
+NOT DB_AMP_Doomflame_BarkLock(_Mob)
+AND
+Random(3, (INTEGER)_Roll)
+AND
+_Roll == 0
+THEN
+DB_AMP_Doomflame_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Doomflame_BarkDelay", 1500);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Doomflame_BarkDelay")
+AND
+DB_AMP_Doomflame_BarkLock(_Mob)
+AND
+IsDead(_Mob, 0)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Doomflame_Casts_fcaf838b-9482-443b-bd2d-bf77e59710db, _Mob)
+THEN
+RealtimeObjectTimerLaunch(_Mob, "AMP_Doomflame_BarkUnlock", 10000);
+
+IF
+ObjectTimerFinished((CHARACTER)_Mob, "AMP_Doomflame_BarkUnlock")
+AND
+DB_AMP_Doomflame_BarkLock(_Mob)
+THEN
+NOT DB_AMP_Doomflame_BarkLock(_Mob);
+
+IF
+HitpointsChanged((CHARACTER)_Mob, (REAL)_Pct)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_01_6b432bff-5bf9-4295-8c54-faba8515b33f)
+AND
+_Pct <= 40.0
+AND
+NOT DB_AMP_Doomflame_LowHP(_Mob)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Doomflame_LowHP_dda61b79-8d53-4800-bcf3-079ef9408bb5, _Mob)
+THEN
+DB_AMP_Doomflame_LowHP(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+GetTemplate(_Mob, AMP_ULTRA_Summon_01_6b432bff-5bf9-4295-8c54-faba8515b33f)
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Doomflame_Death_15a13481-baef-4f56-82c9-79c3d59b83d0, _Mob)
+THEN
+DB_NOOP(1);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Doomflame_Greeted(_Mob)
+THEN
+NOT DB_AMP_Doomflame_Greeted(_Mob);
+DB_AMP_Doomflame_BarkLock(_Mob);
+RealtimeObjectTimerLaunch(_Mob, "AMP_Doomflame_BarkUnlock", 5000);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Doomflame_BarkLock(_Mob)
+THEN
+NOT DB_AMP_Doomflame_BarkLock(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Doomflame_LowHP(_Mob)
+THEN
+NOT DB_AMP_Doomflame_LowHP(_Mob);
+
+EXITSECTION
+
+ENDEXITSECTION

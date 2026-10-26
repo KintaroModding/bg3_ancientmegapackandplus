@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="400" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="53dbd49e-4e34-4a51-a8e0-b2946529a1c6" />
+					<attribute id="Name" type="LSString" value="AMP_RiverCrab" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="ParentTemplateId" type="FixedString" value="483d7ddf-fa40-4b61-8f67-9e5371a16fa0" />
+					<attribute id="Scale" type="float" value="0.7" />
+					<attribute id="DisplayName" type="TranslatedString" handle="hb530473fg08acg4a78g9563g9fcff0f30d1a" version="1" />
+					<attribute id="Stats" type="FixedString" value="AMP_RiverCrab" />
+					<attribute id="SpellSet" type="FixedString" value="CommonSummonActions" />
+					<attribute id="BloodType" type="FixedString" value="Acid" />
+					<attribute id="ForceLifetimeDeath" type="bool" value="True" />
+					<attribute id="DeathEffect" type="guid" value="7c895695-f164-43a6-a7cf-05407c711314" />
+					<attribute id="BloodSurfaceType" type="FixedString" value="SurfaceGrease" />
+					<attribute id="CanWalkThroughDoors" type="bool" value="True" />
+					<attribute id="LevelOverride" type="int32" value="1" />
+					<attribute id="Faction" type="guid" value="64321d50-d516-b1b2-cfac-2eb773de1ff6" />
+					<attribute id="Archetype" type="FixedString" value="beast" />
+					<attribute id="SwarmGroup" type="FixedString" value="RiverCrabs" />
+					<attribute id="IsBoss" type="bool" value="False" />
+					<attribute id="StartCombatRange" type="float" value="30" />
+					<children>
+						<node id="OnlyInDifficulty">
+							<children>
+								<node id="ModifierOptionID">
+									<attribute id="Object" type="guid" value="53303f9b-28b6-4f5a-bb47-befe7350d9db" />
+								</node>
+							</children>
+						</node>
+						<node id="SkillList">
+							<children>
+								<node id="Skill">
+									<attribute id="Skill" type="FixedString" value="Target_AMP_CrabClaw" />
+									<attribute id="SpellCastingAbility" type="uint8" value="0" />
+									<attribute id="LearningStrategy" type="uint8" value="0" />
+									<attribute id="ScoreModifier" type="float" value="1" />
+									<attribute id="StartRound" type="int32" value="0" />
+									<attribute id="FallbackStartRound" type="int32" value="-1" />
+									<attribute id="MinimumImpact" type="int32" value="0" />
+									<attribute id="OnlyCastOnSelf" type="bool" value="False" />
+									<attribute id="AIFlags" type="uint16" value="0" />
+									<children>
+										<node id="SourceConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+										<node id="TargetConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="Treasures">
+							<children>
+								<node id="TreasureItem">
+									<attribute id="Object" type="FixedString" value="GEN_Seashell" />
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams">
+							<attribute id="MovementAcceleration" type="float" value="50" />
+							<attribute id="MovementSpeedWalk" type="float" value="10" />
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

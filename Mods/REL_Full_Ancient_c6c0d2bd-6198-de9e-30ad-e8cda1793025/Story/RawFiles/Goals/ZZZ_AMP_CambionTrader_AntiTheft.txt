@@ -1,0 +1,100 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// coal templates
+// DB_GLO_GlobalItems_ThiefGloves_Coal(0,(ITEMROOT)LOOT_GEN_Charcoal_A_99cc464d-8d7e-493a-bc63-fdfd365e813d);
+// DB_GLO_GlobalItems_ThiefGloves_Coal(1,LOOT_GEN_Charcoal_B_ee1edb85-6c14-4f26-9ccc-0443a3f37324);
+// DB_GLO_GlobalItems_ThiefGloves_Coal(2,LOOT_GEN_Charcoal_C_4c95f360-eda0-4cf8-87f4-12147a5b9d67);
+// DB_GLO_GlobalItems_ThiefGloves_Coal(3,LOOT_GEN_Charcoal_D_84630063-62f4-4e9a-a578-0b5808e90e3f);
+// DB_GLO_GlobalItems_ThiefGloves_Coal(4,LOOT_GEN_Charcoal_E_e409b155-a938-46b5-aaf9-5b493f90e6fd);
+
+KBSECTION
+// random disappearance limit for a new trader
+/*
+IF
+TradeEnds((CHARACTER)_Player, (CHARACTER)_Trader)
+AND
+DB_Players(_Player)
+AND
+IsTagged(_Trader, (TAG)AMP_CAMBION_TRADER_98836f66-be23-4195-8601-71767084db0c, 1)
+AND
+NOT DB_AMP_CambionTrader_TradeLimit(_Trader, _)
+AND
+Random(10, _RandomValue)
+AND
+IntegerSum(_RandomValue, 1, _TradeLimit)
+THEN
+DB_AMP_CambionTrader_TradeLimit(_Trader, _TradeLimit);
+DB_AMP_CambionTrader_TradeCount(_Trader, 1);
+
+// bump trade counter
+IF
+TradeEnds((CHARACTER)_Player, (CHARACTER)_Trader)
+AND
+DB_Players(_Player)
+AND
+IsTagged(_Trader, (TAG)AMP_CAMBION_TRADER_98836f66-be23-4195-8601-71767084db0c, 1)
+AND
+DB_AMP_CambionTrader_TradeLimit(_Trader, _Limit)
+AND
+DB_AMP_CambionTrader_TradeCount(_Trader, _CurrentCount)
+AND
+IntegerSum(_CurrentCount, 1, _NewCount)
+THEN
+NOT DB_AMP_CambionTrader_TradeCount(_Trader, _CurrentCount);
+DB_AMP_CambionTrader_TradeCount(_Trader, _NewCount);
+
+// disappear once at the limit
+IF
+DB_AMP_CambionTrader_TradeCount((CHARACTER)_Trader, _Count)
+AND
+DB_AMP_CambionTrader_TradeLimit(_Trader, _Limit)
+AND
+_Count >= _Limit
+THEN
+PlaySound(_Trader, "UniqueNPC_GLO_Nightsong_Gen_LaughterManiacal");
+// mark and start timer
+DB_AMP_CambionTrader_DisappearPending(_Trader, 1);
+ObjectTimerLaunch(_Trader, "AMP_CambionDisappear", 1000, 0);
+
+// timer done - remove trader
+IF
+ObjectTimerFinished((CHARACTER)_Trader, "AMP_CambionDisappear")
+AND
+DB_AMP_CambionTrader_DisappearPending(_Trader, 1)
+AND
+DB_AMP_CambionTrader_TradeCount(_Trader, _Count)
+AND
+DB_AMP_CambionTrader_TradeLimit(_Trader, _Limit)
+THEN
+PlayEffect(_Trader, (EFFECTRESOURCE)VFX_Script_Djinni_Teleport_7c79ada5-e179-5d0b-0557-29fca6201742, "", 1.0);
+PlayEffect(_Trader, (EFFECTRESOURCE)VFX_Cinematic_Tentacle_Teleport_ChosenThree_01_542c6b3a-3226-7ae6-45f6-cdc8c2e6814f, "Body", 1.0);
+SetOnStage(_Trader, 0);
+// cleanup
+NOT DB_AMP_CambionTrader_TradeCount(_Trader, _Count);
+NOT DB_AMP_CambionTrader_TradeLimit(_Trader, _Limit);
+NOT DB_AMP_CambionTrader_DisappearPending(_Trader, 1);
+
+// pickpocket from cambion trader -> swap stolen item for coal
+IF
+CharacterPickpocketSuccess((CHARACTER)_Player, (CHARACTER)_NPC, (ITEM)_Item, _, _, _)
+AND
+DB_Players(_Player)
+AND
+IsTagged(_NPC, (TAG)AMP_CAMBION_TRADER_98836f66-be23-4195-8601-71767084db0c, 1)
+AND
+Random(5, _Random)
+AND
+DB_GLO_GlobalItems_ThiefGloves_Coal(_Random, _CoalTemplate)
+AND
+CreateAtObject(_CoalTemplate, _Player, 0, 0, "", 0, _CoalItem)
+THEN
+PlaySound(_Player, "CrSpell_Cast_Raphael_BeguilingRebuke");
+PlaySound(_Player, "COL_MizorasRescue_Mizora_Clapping_A");
+RequestDelete(_Item);
+ToInventory(_CoalItem, _Player, 1, 1, 1);
+PlaySound(_NPC, "UniqueNPC_GLO_Nightsong_Gen_LaughterManiacal");
+*/
+EXITSECTION
+
+ENDEXITSECTION

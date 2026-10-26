@@ -1,0 +1,36 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// original trade tables stay clean so other mods add there, that is off mode
+
+// 1 = on (default), 0 = off for compat with other mods
+DB_AMP_TradingFix_Enabled(1);
+
+KBSECTION
+// settings toggle via settings container spell
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Settings_TradingFix", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_Settings013");
+
+// yes -> on
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings013", 1)
+THEN
+NOT DB_AMP_TradingFix_Enabled(0);
+DB_AMP_TradingFix_Enabled(1);
+DebugText(_Player, "AMP Trading Fix: ON");
+
+// no -> off (compat)
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings013", 0)
+THEN
+NOT DB_AMP_TradingFix_Enabled(1);
+DB_AMP_TradingFix_Enabled(0);
+DebugText(_Player, "AMP Trading Fix: OFF - Compatibility mode");
+
+EXITSECTION
+
+ENDEXITSECTION

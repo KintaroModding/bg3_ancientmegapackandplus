@@ -1,0 +1,21 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_AMP_DarkUrge_Cloak_RewardItem((ITEM)S_ORI_DarkUrge_CloakReward_88ddc51d-2f1c-4871-9c5b-550ff0437cfc);
+
+KBSECTION
+
+IF
+AddedTo((ITEM)_Item, (CHARACTER)_Player, _)
+AND
+IsPlayer(_Player, 1)
+AND
+DB_AMP_DarkUrge_Cloak_RewardItem(_Item)
+AND
+QRY_OnlyOnce("HIDDEN_WLD_Boosters_AMP_DarkUrge_Cloak")
+THEN
+RequestDelete(_Item);
+QuestUpdate(_Player, "HIDDEN_WLD_Boosters", "AMP_DarkUrge_Cloak");
+
+EXITSECTION
+ENDEXITSECTION

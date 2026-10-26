@@ -1,0 +1,100 @@
+new entry "AMP_FROST_DESTRUCTION_TECH_1"
+type "PassiveData"
+using "AMP_FROST_DESTRUCTION_TECH_1"
+data "StatsFunctors" "DealDamage(SELF,Cause.MaxHP*5/100,Force,Magical,,0,,true,false)"
+
+new entry "AMP_FROST_DESTRUCTION_TECH_2"
+type "PassiveData"
+using "AMP_FROST_DESTRUCTION_TECH_2"
+data "StatsFunctors" "DealDamage(SELF,Cause.MaxHP*10/100,Force,Magical,,0,,true,false)"
+
+new entry "AMP_FROST_DESTRUCTION_TECH_3"
+type "PassiveData"
+using "AMP_FROST_DESTRUCTION_TECH_3"
+data "StatsFunctors" "DealDamage(SELF,Cause.MaxHP*15/100,Force,Magical,,0,,true,false)"
+
+new entry "AMP_FROST_DESTRUCTION_TECH_4"
+type "PassiveData"
+using "AMP_FROST_DESTRUCTION_TECH_4"
+data "StatsFunctors" "DealDamage(SELF,Cause.MaxHP*20/100,Force,Magical,,0,,true,false)"
+
+// tooltips read share and damage type from here
+
+new entry "AMP_FROST_DESTRUCTION_1"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_FROST_DESTRUCTION_1"
+data "DescriptionParams" "5;DealDamage(,Force)"
+
+new entry "AMP_FROST_DESTRUCTION_2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_FROST_DESTRUCTION_2"
+data "DescriptionParams" "10;DealDamage(,Force)"
+
+new entry "AMP_FROST_DESTRUCTION_3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_FROST_DESTRUCTION_3"
+data "DescriptionParams" "15;DealDamage(,Force)"
+
+new entry "AMP_FROST_DESTRUCTION_4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_FROST_DESTRUCTION_4"
+data "DescriptionParams" "20;DealDamage(,Force)"
+
+// AMP_Plus_IsEldritchBlast() also matches third-party blast overhauls
+// both fields stay in this entry, a same-named entry elsewhere would drop one
+
+new entry "MAG_Neck14_bonus"
+type "PassiveData"
+using "MAG_Neck14_bonus"
+data "DescriptionParams" "2"
+data "Conditions" "AMP_Plus_IsEldritchBlast()"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Strength,AMP_Plus_PotencyDC())):ApplyStatus(AMP_FROST_DESTRUCTION_4,100,2)"
+
+new entry "MAG_Neck14_3_bonus"
+type "PassiveData"
+using "MAG_Neck14_3_bonus"
+data "DescriptionParams" "2"
+data "Conditions" "AMP_Plus_IsEldritchBlast()"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Strength,AMP_Plus_PotencyDC())):ApplyStatus(AMP_FROST_DESTRUCTION_3,100,2)"
+
+new entry "MAG_Neck14_2_bonus"
+type "PassiveData"
+using "MAG_Neck14_2_bonus"
+data "DescriptionParams" "2"
+data "Conditions" "AMP_Plus_IsEldritchBlast()"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Strength,AMP_Plus_PotencyDC())):ApplyStatus(AMP_FROST_DESTRUCTION_2,100,2)"
+
+new entry "MAG_Neck14_1_bonus"
+type "PassiveData"
+using "MAG_Neck14_1_bonus"
+data "DescriptionParams" "2"
+data "Conditions" "AMP_Plus_IsEldritchBlast()"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Strength,AMP_Plus_PotencyDC())):ApplyStatus(AMP_FROST_DESTRUCTION_1,100,2)"
+
+new entry "AMP_Frost_Destruction_Explosion_1"
+type "SpellData"
+data "SpellType" "Projectile"
+using "AMP_Frost_Destruction_Explosion_1"
+data "SpellProperties" "IF(not SavingThrow(Ability.Strength,12)):ApplyStatus(AMP_FROST_DESTRUCTION_1,100,2)"
+
+new entry "AMP_Frost_Destruction_Explosion_2"
+type "SpellData"
+data "SpellType" "Projectile"
+using "AMP_Frost_Destruction_Explosion_2"
+data "SpellProperties" "IF(not SavingThrow(Ability.Strength,12)):ApplyStatus(AMP_FROST_DESTRUCTION_2,100,2)"
+
+new entry "AMP_Frost_Destruction_Explosion_3"
+type "SpellData"
+data "SpellType" "Projectile"
+using "AMP_Frost_Destruction_Explosion_3"
+data "SpellProperties" "IF(not SavingThrow(Ability.Strength,12)):ApplyStatus(AMP_FROST_DESTRUCTION_3,100,3)"
+
+new entry "AMP_Frost_Destruction_Explosion_4"
+type "SpellData"
+data "SpellType" "Projectile"
+using "AMP_Frost_Destruction_Explosion_4"
+data "SpellProperties" "IF(not SavingThrow(Ability.Strength,12)):ApplyStatus(AMP_FROST_DESTRUCTION_4,100,3)"

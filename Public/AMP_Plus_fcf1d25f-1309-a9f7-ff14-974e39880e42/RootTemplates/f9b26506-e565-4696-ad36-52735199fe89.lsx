@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="f9b26506-e565-4696-ad36-52735199fe89" />
+					<attribute id="Name" type="LSString" value="AMP_ShardVault_Rings" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="f946f9c2-9a6b-4e16-8493-4309cb8135e0" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h4c070805g95a7g44fagb162g652f16610c56" version="1" />
+					<attribute id="Description" type="TranslatedString" handle="hbad514acgdb5eg4f0bg966bgee037959834d" version="1" />
+					<attribute id="Icon" type="FixedString" value="AMP_CONT_Shards" />
+					<attribute id="ContainerAutoAddOnPickup" type="bool" value="False" />
+					<attribute id="Stats" type="FixedString" value="AMP_ShardVault_Rings" />
+					<children>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="AMP_ShardVault_Rings" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

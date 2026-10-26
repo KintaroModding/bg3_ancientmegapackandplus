@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="4d55abd6-2913-4e47-b4f3-55c4cda69bd3" />
+					<attribute id="Name" type="LSString" value="PUZ_MF_Explosive_Contraption_A_004" />
+					<attribute id="LevelName" type="FixedString" value="TUT_Avernus_C" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="24e01b77-0a74-410d-869f-919918f20278" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="CanShootThrough" type="bool" value="False" />
+					<attribute id="WalkThrough" type="bool" value="False" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="-30.99715 17.8735 -387.0022" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0 0 1" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object">
+											<attribute id="MapKey" type="FixedString" value="TUT_Avernus_C" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="93696ccc-9a3e-b35c-1c1e-b3477a9c7ddd" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="5d30771b-b636-4bbe-204d-5e9289627191" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="a33937aa-c269-6049-9959-b652b5378370" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

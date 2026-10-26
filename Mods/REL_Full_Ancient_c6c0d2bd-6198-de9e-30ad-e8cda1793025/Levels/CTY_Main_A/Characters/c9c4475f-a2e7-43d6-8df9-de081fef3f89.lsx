@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="c9c4475f-a2e7-43d6-8df9-de081fef3f89" />
+					<attribute id="Name" type="LSString" value="S_LOW_HouseOfHope_RaphaelCambion06" />
+					<attribute id="LevelName" type="FixedString" value="CTY_Main_A" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="TemplateName" type="FixedString" value="38440539-7630-42fd-a163-0a9383e56fd5" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="Icon" type="FixedString" value="ac636079-8ba0-5ffd-58f1-057b184df7fa-LOW_HouseOfHope_Cambion_(Icon_Cambion_Male)" />
+					<attribute id="LevelOverride" type="int32" value="12" />
+					<attribute id="CharacterVisualResourceID" type="FixedString" value="ac636079-8ba0-5ffd-58f1-057b184df7fa" />
+					<attribute id="Faction" type="guid" value="65b207f5-756f-4980-ace1-b418ed8f477b" />
+					<attribute id="IsBoss" type="bool" value="True" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="-6493.2812 3.6873016 2878.241" />
+							<attribute id="RotationQuat" type="fvec4" value="0 -0.85748893 0 0.51450247" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="CTY_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="57e10301-831b-f6cf-1258-a93ddbdfa8a0" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="768d583d-19b5-6224-9186-101e156924ec" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="f0152f74-81e8-4380-e65d-6e2442d0f789" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="LOW_HOUSEOFHOPE_AEGIS" />
+								</node>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="LOW_RAPHAEL_CAMBION_06" />
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

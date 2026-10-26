@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="70baea23-075a-49cf-8cba-37860ed6d3c5" />
+					<attribute id="Name" type="LSString" value="S_CRE_GateLever" />
+					<attribute id="LevelName" type="FixedString" value="CRE_Main_A" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="d24a6767-10d1-49ab-a956-d004c1d34fa9" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="78.854866 10.632999 47.82193" />
+							<attribute id="RotationQuat" type="fvec4" value="0 1 0 1.9828465E-06" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="CRE_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="0cdf52f2-9453-df63-13c3-cfad8fbdbd2a" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="384cefc7-c793-0ef6-7f8a-7d47946d212e" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="80e8bbba-408f-d7b7-d175-6eac419a7565" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

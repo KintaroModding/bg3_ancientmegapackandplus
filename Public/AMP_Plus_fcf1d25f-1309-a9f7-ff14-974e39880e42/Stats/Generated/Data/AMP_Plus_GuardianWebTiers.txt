@@ -1,0 +1,21 @@
+// one passive per tier, a shared one repeats the lower tier's DC
+
+new entry "AMP_RusMage_GuardianWeb_1_Passive"
+type "PassiveData"
+using "AMP_RusMage_GuardianWeb_1_Passive"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Dexterity, ManeuverSaveDC()-2)):ApplyStatus(WEB,100,2)"
+
+new entry "AMP_Plus_RusMage_GuardianWeb_2_Passive"
+type "PassiveData"
+using "AMP_RusMage_GuardianWeb_1_Passive"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Dexterity, ManeuverSaveDC())):ApplyStatus(WEB,100,2)"
+
+new entry "AMP_RusMage_CrossbowMain_2"
+type "Weapon"
+using "AMP_RusMage_CrossbowMain_2"
+data "PassivesOnEquip" "AMP_Plus_RusMage_GuardianWeb_2_Passive"
+
+new entry "AMP_RusMage_GuardianWeb_4_Passive"
+type "PassiveData"
+using "AMP_RusMage_GuardianWeb_4_Passive"
+data "StatsFunctors" "IF(not SavingThrow(Ability.Dexterity, ManeuverSaveDC()+4)):ApplyStatus(WEB,100,2)"

@@ -1,0 +1,55 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// bump the version when the numbers change
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_ShardSlotVer(2)
+THEN
+PROC_AMP_Plus_ShardSlotReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_ShardSlotVer(2)
+THEN
+PROC_AMP_Plus_ShardSlotReseed();
+
+// bodies run in order: stamp, rows, table
+PROC
+PROC_AMP_Plus_ShardSlotReseed()
+AND
+DB_AMP_Plus_ShardSlotVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_ShardSlotVer(_Old);
+
+PROC
+PROC_AMP_Plus_ShardSlotReseed()
+THEN
+PROC_AMP_Plus_ShardSlotDrainLimit();
+
+PROC
+PROC_AMP_Plus_ShardSlotReseed()
+THEN
+DB_AMP_Plus_ShardSlotVer(2);
+DB_AMP_Shard_SlotLimit("Common", 6);
+DB_AMP_Shard_SlotLimit("Uncommon", 5);
+DB_AMP_Shard_SlotLimit("Rare", 4);
+DB_AMP_Shard_SlotLimit("VeryRare", 3);
+DB_AMP_Shard_SlotLimit("Legendary", 2);
+
+PROC
+PROC_AMP_Plus_ShardSlotDrainLimit()
+AND
+DB_AMP_Shard_SlotLimit((STRING)_Rarity, (INTEGER)_N)
+THEN
+NOT DB_AMP_Shard_SlotLimit(_Rarity, _N);
+PROC_AMP_Plus_ShardSlotDrainLimit();
+
+EXITSECTION
+ENDEXITSECTION

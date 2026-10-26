@@ -1,0 +1,13 @@
+// restated on the concentration form so the immunity does not depend on inheritance across mods
+
+new entry "AMP_NECROMANCER_UNDEAD_FORM"
+type "StatusData"
+data "StatusType" "POLYMORPHED"
+using "AMP_NECROMANCER_UNDEAD_FORM"
+data "Boosts" "Resistance(Poison,Immune);Resistance(Necrotic,Resistant);StatusImmunity(SG_Paralyzed);StatusImmunity(SG_Poisoned);StatusImmunity(BLEEDING);StatusImmunity(SLEEPING);StatusImmunity(GAPING_WOUND);StatusImmunity(CHEST_TRAUMA);StatusImmunity(DAZED);StatusImmunity(SG_Charmed);StatusImmunity(CHILL_TOUCH);Tag(UNDEAD); BlockRegainHP(Living;Construct)"
+
+new entry "AMP_NECROTIC_UNDEAD_CONCENTRATION"
+type "StatusData"
+data "StatusType" "POLYMORPHED"
+using "AMP_NECROTIC_UNDEAD_CONCENTRATION"
+data "Boosts" "Resistance(Poison,Immune);Resistance(Necrotic,Resistant);StatusImmunity(SG_Paralyzed);StatusImmunity(SG_Poisoned);StatusImmunity(BLEEDING);StatusImmunity(SLEEPING);StatusImmunity(GAPING_WOUND);StatusImmunity(CHEST_TRAUMA);StatusImmunity(DAZED);StatusImmunity(SG_Charmed);StatusImmunity(CHILL_TOUCH);Tag(UNDEAD); BlockRegainHP(Living;Construct)"

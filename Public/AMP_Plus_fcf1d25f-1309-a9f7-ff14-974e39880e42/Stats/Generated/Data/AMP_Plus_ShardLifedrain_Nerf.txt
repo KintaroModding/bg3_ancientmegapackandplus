@@ -1,0 +1,10 @@
+new entry "AMP_Shard_Passive_Lifedrain"
+type "PassiveData"
+using "AMP_Shard_Passive_Lifedrain"
+data "StatsFunctors" "DealDamage(SELF,2,Necrotic,Magical,,0,,true,true,false,true)"
+
+new entry "AMP_SHARD_WEAPON_LIFEDRAIN"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_SHARD_WEAPON_LIFEDRAIN"
+data "DescriptionParams" "1;DealDamage(2,Necrotic)"

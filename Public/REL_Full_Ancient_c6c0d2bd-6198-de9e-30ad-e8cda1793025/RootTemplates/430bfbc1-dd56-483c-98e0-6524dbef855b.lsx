@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="430bfbc1-dd56-483c-98e0-6524dbef855b" />
+					<attribute id="Name" type="LSString" value="AMP_Drone" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="ParentTemplateId" type="FixedString" value="d243badc-a763-4d9e-8037-2da9c3e39d5e" />
+					<attribute id="Scale" type="float" value="0.5" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h2cf72d4dg240cg2c2bg717dg2d25c2883891" version="1" />
+					<attribute id="Icon" type="FixedString" value="AMP_Drone" />
+					<attribute id="Stats" type="FixedString" value="AMP_Drone" />
+					<attribute id="Equipment" type="FixedString" value="" />
+					<attribute id="BloodType" type="FixedString" value="Mithral" />
+					<attribute id="DeathEffect" type="guid" value="dd3e0ae1-9b21-4fc5-902e-7b329dd90359" />
+					<attribute id="CanWalkThroughDoors" type="bool" value="True" />
+					<attribute id="LevelOverride" type="int32" value="1" />
+					<attribute id="CharacterVisualResourceID" type="FixedString" value="9a07b8f0-4e6f-8f9f-7fdf-f01e4d872b0b" />
+					<attribute id="IsLootable" type="bool" value="False" />
+					<attribute id="CanBePickpocketed" type="bool" value="False" />
+					<attribute id="VFXScale" type="float" value="0.5" />
+					<attribute id="Title" type="TranslatedString" handle="h42c08157g41ecgba41g322egc03607409da2" version="12" />
+					<attribute id="Faction" type="guid" value="40a90873-e3f0-478c-99f9-11e71f068f55" />
+					<attribute id="Archetype" type="FixedString" value="melee" />
+					<attribute id="SwarmGroup" type="FixedString" value="Drones" />
+					<children>
+						<node id="EquipmentTypes">
+							<children>
+								<node id="">
+									<attribute id="Object" type="guid" value="4135c6a5-78b6-4c6d-85df-f77df52ce775" />
+								</node>
+								<node id="">
+									<attribute id="Object" type="guid" value="08d178fa-97a1-421c-987f-ec8093405b7c" />
+								</node>
+								<node id="">
+									<attribute id="Object" type="guid" value="085e9e10-bf57-45de-86c2-63b830d7599b" />
+								</node>
+								<node id="">
+									<attribute id="Object" type="guid" value="0ab1deb9-c2fb-491a-b97a-e877b5118a5f" />
+								</node>
+							</children>
+						</node>
+						<node id="SkillList">
+							<children>
+								<node id="Skill">
+									<attribute id="Skill" type="FixedString" value="Target_AMP_Drone_Spotlight" />
+									<attribute id="SpellCastingAbility" type="uint8" value="0" />
+									<attribute id="LearningStrategy" type="uint8" value="0" />
+									<attribute id="ScoreModifier" type="float" value="2" />
+									<attribute id="StartRound" type="int32" value="0" />
+									<attribute id="FallbackStartRound" type="int32" value="-1" />
+									<attribute id="MinimumImpact" type="int32" value="0" />
+									<attribute id="OnlyCastOnSelf" type="bool" value="False" />
+									<attribute id="AIFlags" type="uint16" value="0" />
+									<children>
+										<node id="SourceConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+										<node id="TargetConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Skill">
+									<attribute id="Skill" type="FixedString" value="Shout_Dash_BonusAction_NPC" />
+									<attribute id="SpellCastingAbility" type="uint8" value="0" />
+									<attribute id="LearningStrategy" type="uint8" value="0" />
+									<attribute id="ScoreModifier" type="float" value="1" />
+									<attribute id="StartRound" type="int32" value="0" />
+									<attribute id="FallbackStartRound" type="int32" value="-1" />
+									<attribute id="MinimumImpact" type="int32" value="0" />
+									<attribute id="OnlyCastOnSelf" type="bool" value="False" />
+									<attribute id="AIFlags" type="uint16" value="0" />
+									<children>
+										<node id="SourceConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+										<node id="TargetConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Skill">
+									<attribute id="Skill" type="FixedString" value="Projectile_AMP_Drone_Fly" />
+									<attribute id="SpellCastingAbility" type="uint8" value="0" />
+									<attribute id="LearningStrategy" type="uint8" value="0" />
+									<attribute id="ScoreModifier" type="float" value="1" />
+									<attribute id="StartRound" type="int32" value="0" />
+									<attribute id="FallbackStartRound" type="int32" value="-1" />
+									<attribute id="MinimumImpact" type="int32" value="0" />
+									<attribute id="OnlyCastOnSelf" type="bool" value="False" />
+									<attribute id="AIFlags" type="uint16" value="0" />
+									<children>
+										<node id="SourceConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+										<node id="TargetConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="SEE_INVISIBILITY" />
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams">
+							<attribute id="MovementAcceleration" type="float" value="30" />
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

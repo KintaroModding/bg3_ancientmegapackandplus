@@ -1,0 +1,1179 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// bump DB_AMP_Plus_StorySkipLvlVer when the rows change
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_StorySkipLvlVer(3)
+THEN
+PROC_AMP_Plus_StorySkipLvlReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_StorySkipLvlVer(3)
+THEN
+PROC_AMP_Plus_StorySkipLvlReseed();
+
+PROC
+PROC_AMP_Plus_StorySkipLvlReseed()
+AND
+DB_AMP_Plus_StorySkipLvlVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_StorySkipLvlVer(_Old);
+
+PROC
+PROC_AMP_Plus_StorySkipLvlReseed()
+THEN
+PROC_AMP_Plus_StorySkipLvlDrainAct3Level();
+
+PROC
+PROC_AMP_Plus_StorySkipLvlReseed()
+THEN
+PROC_AMP_Plus_StorySkipLvlDrainOkState();
+
+PROC
+PROC_AMP_Plus_StorySkipLvlReseed()
+THEN
+PROC_AMP_Plus_StorySkipLvlDrainSpareGroup();
+
+PROC
+PROC_AMP_Plus_StorySkipLvlReseed()
+THEN
+PROC_AMP_Plus_StorySkipLvlDrainQuest();
+
+PROC
+PROC_AMP_Plus_StorySkipLvlReseed()
+THEN
+DB_AMP_Plus_StorySkipLvlVer(3);
+DB_AMP_Plus_StorySkip_Act3Level("CTY_Main_A");
+DB_AMP_Plus_StorySkip_Act3Level("BGO_Main_A");
+DB_AMP_Plus_Act1Finale_OkState("DEN_State_Peace");
+DB_AMP_Plus_Act1Finale_OkState("DEN_State_RitualStopped");
+DB_AMP_Plus_Act1Finale_OkState("DEN_State_PostDruidAttack");
+DB_AMP_Plus_Act1Finale_OkState("DEN_State_GoblinHuntVictory");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "PLA_ZhentDungeon_DefeatCounter");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "PLA_ZhentDungeon_DefeatCounter");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "PLA_ZhentDungeon_FF");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "PLA_ZhentDungeon_FF");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "GOB_Festivities_Kids");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "GOB_Festivities_Kids");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "HAG_Hagspawn_MayrinaAndHusband");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "HAG_Hagspawn_MayrinaAndHusband");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "UND_PermaDefeatedGnomeWorkers");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "UND_PermaDefeatedGnomeWorkers");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "UND_MyconidCircle_KillCounter");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "UND_MyconidCircle_KillCounter");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "UND_BroodingSovereign_DefeatCounter_Spaw");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "UND_BroodingSovereign_DefeatCounter_Spaw");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "UND_BroodingSovereign_DefeatCounter_Glut");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "UND_BroodingSovereign_DefeatCounter_Glut");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "UND_BroodingSovereign_KillCounter_LoneDuergar");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "UND_BroodingSovereign_KillCounter_LoneDuergar");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "UND_FearfulRothe_Rothe");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "UND_FearfulRothe_Rothe");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "PLA_Backgrounds_Soldier_TavernFists");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "PLA_Backgrounds_Soldier_TavernFists");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "PLA_FlamingFists");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "PLA_FlamingFists");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "CAMP_GoblinHuntCelebration_BetrayalFight");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "CAMP_GoblinHuntCelebration_BetrayalFight");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "CAMP_HalsinsRevenge");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "CAMP_HalsinsRevenge");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "TUT_LowerDeck_ImpsDefeated");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "TUT_LowerDeck_ImpsDefeated");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "TUT_Helm_Devils");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "TUT_Helm_Devils");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "CRA_IntDevourer");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "CRA_IntDevourer");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "Act1_HauntedOne_BrynnaAndrickKilled");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "Act1_HauntedOne_BrynnaAndrickKilled");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "GLO_Backgrounds_Outlander_OutpostSpiders");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "GLO_Backgrounds_Outlander_OutpostSpiders");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "DEN_Apprentice_DefeatCounter");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "DEN_Apprentice_DefeatCounter");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "DEN_Apprentice_TadpoleSceneCombat");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "DEN_Apprentice_TadpoleSceneCombat");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "DEN_DruidAttack_Druids");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "DEN_DruidAttack_NonDruids");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "DEN_AttackOnDen_DruidFight");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "DEN_ShadowDruid_DenouncingDefeatCounter");
+DB_AMP_Plus_Act1Finale_SpareGroup("Good", "DEN_AttackOnDen_RaiderCombat");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "GOB_FestivitiesArea");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "GOB_GoblinThroneGeneral");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "GOB_WolfPens_DefeatCounter");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "GOB_GoblinHunt_Leaders");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "GOB_GoblinKing_ScryingRoom");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "GOB_Checkpoint_Guards");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "GOB_Checkpoint_Backup");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "GOB_BrandingParty");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "GOB_WarMapArea");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "GOB_WolfPens_Backup");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "GOB_HappyTorturers_Torturers");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "GOB_HappyTorturers_Defeated");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "GOB_HappyTorturers_Spike");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "GOB_SpiderNest_Goblins");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "GOB_PreparingRaiders");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "DEN_RaidingParty_Goblins");
+DB_AMP_Plus_Act1Finale_SpareGroup("Evil", "DEN_AttackOnDen_RaiderCombat");
+DB_AMP_Plus_Act1Finale_Quest("Good", 1, "DEN_Conflict", "LeftSafe");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 1, "DEN_Conflict", "Betrayal");
+DB_AMP_Plus_Act1Finale_Quest("Good", 1, "DEN_Conflict_SUB_Ritual", "FightEndedGood");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 1, "DEN_Conflict_SUB_Ritual", "Ritual_StartedAoD");
+DB_AMP_Plus_Act1Finale_Quest("Good", 1, "DEN_Conflict_SUB_Goblin", "LearnedLeaving");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 1, "DEN_Conflict_SUB_Goblin", "Goblin_StartedAoD");
+DB_AMP_Plus_Act1Finale_Quest("Good", 1, "DEN_Conflict_SUB_AoD", "CelebrationTieflings");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 1, "DEN_Conflict_SUB_AoD", "CelebrationGoblins");
+DB_AMP_Plus_Act1Finale_Quest("Good", 1, "DEN_Conflict_SUB_Murder", "KaghaTurnedGood");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 1, "DEN_Conflict_SUB_Murder", "Murder_StartedAoD");
+DB_AMP_Plus_Act1Finale_Quest("Good", 1, "DEN_Conflict_SUB_Halsin", "LeftSafe_MetHalsin");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 1, "DEN_Conflict_SUB_Halsin", "Betrayal_DruidDead_Halsin");
+DB_AMP_Plus_Act1Finale_Quest("Good", 1, "DEN_SnakeCourt", "ParentThankful");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 1, "DEN_SnakeCourt", "ParentDevastated");
+DB_AMP_Plus_Act1Finale_Quest("Good", 1, "DEN_IdolTheft", "GaveIdol");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 1, "DEN_IdolTheft", "JoinedRaiders");
+DB_AMP_Plus_Act1Finale_Quest("Good", 1, "DEN_CapturedGoblin", "Saved");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 1, "DEN_CapturedGoblin", "DiedSpiders");
+DB_AMP_Plus_Act1Finale_Quest("Good", 1, "DEN_Thieflings", "DoneOutsmartedKids");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 1, "DEN_Thieflings", "DoneAngeredThieflings");
+DB_AMP_Plus_Act1Finale_Quest("Good", 1, "DEN_HarpyMeal", "DoneKidFled_NoThank");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 1, "DEN_HarpyMeal", "DoneKidDied");
+DB_AMP_Plus_Act1Finale_Quest("Good", 1, "DEN_RobbedAdventurer", "ReturnedLocketReward");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 1, "DEN_RobbedAdventurer", "NoLocketReturn");
+DB_AMP_Plus_Act1Finale_Quest("Good", 1, "DEN_FindingDoni", "ReturnedRikka");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 1, "DEN_FindingDoni", "BetrayedTieflings");
+DB_AMP_Plus_Act1Finale_Quest("Good", 1, "DEN_VoloAdventure", "VoloCamp");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 1, "DEN_VoloAdventure", "VoloDead");
+DB_AMP_Plus_Act1Finale_Quest("Good", 1, "GLO_Tadpole_SUB_Druid", "GoToMoonrise");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 1, "GLO_Tadpole_SUB_Druid", "Betrayal_DruidDead_Halsin");
+DB_AMP_Plus_Act1Finale_Quest("Good", 1, "GLO_Tadpole_SUB_Apprentice", "SavedHalsin_BeforeTadpoled");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 1, "GLO_Tadpole_SUB_Apprentice", "ApprenticeDied_Tadpoled");
+DB_AMP_Plus_Act1Finale_Quest("Good", 1, "GLO_Tadpole_SUB_Priestess", "PriestessTurnedHostile");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 1, "GLO_Tadpole_SUB_Priestess", "PriestessTurnedHostile");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "GLO_DoubtingArtist", "ConvincedKerri_OskarGivesSketchbook");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "GLO_DoubtingArtist", "LetKerriKillOskar");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "HAG_HagSpawn", "LeftHusband");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "HAG_HagSpawn", "KilledMayrina");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "GLO_Tadpole_SUB_Hag", "HagTriedTadpoleHeal");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "GLO_Tadpole_SUB_Hag", "HagHostile");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "FOR_UnfortunateGnome", "GnomeToCamp");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "FOR_UnfortunateGnome", "GnomeDied");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "FOR_IncompleteMasterwork", "ObtainedGreatsword");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "FOR_IncompleteMasterwork", "ObtainedGreatsword");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "FOR_DangerousBook", "FinishedTome");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "FOR_DangerousBook", "FinishedTome");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "FOR_DangerousBook_SUB_EvilTome", "EvilTome_COMPLETE");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "FOR_DangerousBook_SUB_EvilTome", "EvilTome_COMPLETE");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "FOR_DangerousBook_SUB_UseTome", "LearnedSpell");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "FOR_DangerousBook_SUB_UseTome", "LearnedSpell");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "CHA_Chapel", "Exit");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "CHA_Chapel", "Exit");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "PLA_ZhentShipment", "Rewarded_ZhentReturned");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "PLA_ZhentShipment", "Rewarded_SentToBG");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "PLA_StuckHalfElf", "ReturnedGold");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "PLA_StuckHalfElf", "KeptGold");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "PLA_PaladinsOfTyr", "PaladinsPermadefeated");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "PLA_PaladinsOfTyr", "PaladinsPermadefeated");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "GLO_Tadpole_SUB_Society", "GotTheRing");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "GLO_Tadpole_SUB_Society", "Hostile");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "GLO_Tadpole_SUB_Creche", "UsedPurifier");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "GLO_Tadpole_SUB_Creche", "CrecheExploded");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "UND_GnomeRescue", "ThankedFreed_Barcus");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "UND_GnomeRescue", "GnomesExecuted");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "UND_CaveIn", "RevealedAbsolute");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "UND_CaveIn", "FreedNere");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "UND_CaveIn_SUB_Eye", "KilledEye");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "UND_CaveIn_SUB_Eye", "Eye_MainClosed");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "UND_CaveIn_SUB_Smokepowder", "Smokepowder_CaveInCleared");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "UND_CaveIn_SUB_Smokepowder", "Smokepowder_CaveInCleared");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "UND_DuergarPoison", "GnomeCured");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "UND_DuergarPoison", "GnomeDied");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "UND_MushroomHunter", "ReportedToDerryth_BaelenIsAlive");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "UND_MushroomHunter", "DerrythDied");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "UND_MyconidCircle", "GotReward");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "UND_MyconidCircle", "SpawDead");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "UND_MyconidRevenge", "Rewarded");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "UND_MyconidRevenge", "RewardedGlut");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "UND_BroodingSovereign", "RefusedCircle");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "UND_BroodingSovereign", "Rewarded");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "UND_LoneDuergar", "GaveBoots_Reward");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "UND_LoneDuergar", "SargeDead");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "UND_AdamantineForge", "ItemPickedUp");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "UND_AdamantineForge", "ItemPickedUp");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "UND_AdamantineForge_SUB_Rubble", "DestroyedRubble");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "UND_AdamantineForge_SUB_Rubble", "DestroyedRubble");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "CRE_BloodOfLathander", "AvoidedLathanderTrap");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "CRE_BloodOfLathander", "AvoidedLathanderTrap");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "CRE_Hatchery", "GaveGithyankiEgg");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "CRE_Hatchery", "GaveGithyankiEgg");
+DB_AMP_Plus_Act1Finale_Quest("Good", 2, "CRE_ReclaimTheNest", "ReportedBack");
+DB_AMP_Plus_Act1Finale_Quest("Evil", 2, "CRE_ReclaimTheNest", "ReportedBack");
+
+PROC
+PROC_AMP_Plus_StorySkipLvlDrainAct3Level()
+AND
+DB_AMP_Plus_StorySkip_Act3Level((STRING)_A)
+THEN
+NOT DB_AMP_Plus_StorySkip_Act3Level(_A);
+PROC_AMP_Plus_StorySkipLvlDrainAct3Level();
+
+PROC
+PROC_AMP_Plus_StorySkipLvlDrainOkState()
+AND
+DB_AMP_Plus_Act1Finale_OkState((STRING)_S)
+THEN
+NOT DB_AMP_Plus_Act1Finale_OkState(_S);
+PROC_AMP_Plus_StorySkipLvlDrainOkState();
+
+PROC
+PROC_AMP_Plus_StorySkipLvlDrainSpareGroup()
+AND
+DB_AMP_Plus_Act1Finale_SpareGroup((STRING)_T, (STRING)_G)
+THEN
+NOT DB_AMP_Plus_Act1Finale_SpareGroup(_T, _G);
+PROC_AMP_Plus_StorySkipLvlDrainSpareGroup();
+
+PROC
+PROC_AMP_Plus_StorySkipLvlDrainQuest()
+AND
+DB_AMP_Plus_Act1Finale_Quest((STRING)_T, (INTEGER)_W, (STRING)_Q, (STRING)_St)
+THEN
+NOT DB_AMP_Plus_Act1Finale_Quest(_T, _W, _Q, _St);
+PROC_AMP_Plus_StorySkipLvlDrainQuest();
+
+//REGION Snake Court (DEN_SnakeCourt, Act 1) - vanilla debug resolvers in Act1_DEN_ShadowDruid.txt
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_SnakeCourt", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel(_Level)
+AND
+_Level != "WLD_Main_A"
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_StorySkip_WrongAct");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_SnakeCourt", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel("WLD_Main_A")
+AND
+GetFlag(DEN_ShadowDruid_State_SnakesCourtDone_cf58dd01-e058-42b8-b1f1-976250296ce6, NULL_00000000-0000-0000-0000-000000000000, 1)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_StorySkip_Done");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_SnakeCourt", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel("WLD_Main_A")
+AND
+GetFlag(DEN_ShadowDruid_State_SnakesCourtDone_cf58dd01-e058-42b8-b1f1-976250296ce6, NULL_00000000-0000-0000-0000-000000000000, 0)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_StorySkip_SnakeCourt_AskFree");
+
+// reunion step runs on a timer so the court journal entries settle first
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_StorySkip_SnakeCourt_AskFree", 1)
+AND
+GetFlag(DEN_ShadowDruid_State_SnakesCourtDone_cf58dd01-e058-42b8-b1f1-976250296ce6, NULL_00000000-0000-0000-0000-000000000000, 0)
+THEN
+SetFlag(DEN_ShadowDruid_Debug_ResolveKidAlive_dfcf720f-16ce-b7e6-bfeb-d111b90b2f0f, _Host);
+TimerLaunch("AMP_Plus_StorySkip_SnakeCourt_Thankful", 3000);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_StorySkip_SnakeCourt_AskFree", 0)
+AND
+GetFlag(DEN_ShadowDruid_State_SnakesCourtDone_cf58dd01-e058-42b8-b1f1-976250296ce6, NULL_00000000-0000-0000-0000-000000000000, 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_StorySkip_SnakeCourt_AskDie");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_StorySkip_SnakeCourt_AskDie", 1)
+AND
+GetFlag(DEN_ShadowDruid_State_SnakesCourtDone_cf58dd01-e058-42b8-b1f1-976250296ce6, NULL_00000000-0000-0000-0000-000000000000, 0)
+THEN
+SetFlag(DEN_ShadowDruid_Debug_ResolveKidDie_76076244-4ddf-f7e1-c288-6572d72bf3c1, _Host);
+TimerLaunch("AMP_Plus_StorySkip_SnakeCourt_Devastated", 3000);
+
+// engine grants the step XP itself
+IF
+TimerFinished("AMP_Plus_StorySkip_SnakeCourt_Thankful")
+AND
+GetHostCharacter(_Host)
+THEN
+QuestUpdate(_Host, "DEN_SnakeCourt", "ParentThankful");
+
+IF
+TimerFinished("AMP_Plus_StorySkip_SnakeCourt_Devastated")
+AND
+GetHostCharacter(_Host)
+THEN
+QuestUpdate(_Host, "DEN_SnakeCourt", "ParentDevastated");
+
+//END_REGION
+
+//REGION Arcane Tower (WLD_Main_A) - peaceful Bernard route, Act1_UND_ArcaneTower.txt
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_ArcaneTower", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel(_Level)
+AND
+_Level != "WLD_Main_A"
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_StorySkip_WrongAct");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_ArcaneTower", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel("WLD_Main_A")
+AND
+GetFlag(UND_Automaton_State_Serving_7a876651-c549-9b90-6a8a-37b25380beea, S_UND_Automaton_5038c0f2-0022-4699-82ce-a319b30616bb, 1)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_StorySkip_Done");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_ArcaneTower", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel("WLD_Main_A")
+AND
+GetFlag(UND_Automaton_State_Serving_7a876651-c549-9b90-6a8a-37b25380beea, S_UND_Automaton_5038c0f2-0022-4699-82ce-a319b30616bb, 0)
+AND
+NOT QRY_AMP_Plus_StorySkip_ArcaneTowerOpen(_Caster)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_StorySkip_ArcaneTower_Blocked");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_ArcaneTower", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel("WLD_Main_A")
+AND
+QRY_AMP_Plus_StorySkip_ArcaneTowerOpen(_Caster)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_StorySkip_ArcaneTower_Ask");
+
+// instances are moved, not copied, or the tower holds duplicates
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_StorySkip_ArcaneTower_Ask", 1)
+AND
+QRY_AMP_Plus_StorySkip_ArcaneTowerOpen(_Host)
+THEN
+SetFlag(Debug_UND_ArcaneTower_NoCinematic_02fd3624-c182-4a64-9ca5-87dc3c6f289d, NULL_00000000-0000-0000-0000-000000000000, 0, 1);
+SetFlag(UND_ArcaneTower_MainPowerOn_9423ae80-9b08-4fda-95c6-1832f753ca2b, NULL_00000000-0000-0000-0000-000000000000, 0, 1);
+SetFlag(UND_Automaton_State_Serving_7a876651-c549-9b90-6a8a-37b25380beea, S_UND_Automaton_5038c0f2-0022-4699-82ce-a319b30616bb, 0, 1);
+SetFlag(UND_Automaton_State_MetParty_b59fd40b-6191-4f5a-9136-9962478ba0e9, NULL_00000000-0000-0000-0000-000000000000, 0, 1);
+SetFlag(UND_Automaton_Event_ShowSecret_6ff79fa0-b72f-4b9b-bfb4-907c39dcc13d, S_UND_Automaton_5038c0f2-0022-4699-82ce-a319b30616bb, 0, 1);
+SetFlag(UND_ArcaneTower_Knows_PoemBerserk_173a2d4b-6a43-429b-a4d8-0d22b73ca3ea, NULL_00000000-0000-0000-0000-000000000000, 0, 1);
+SetFlag(UND_ArcaneTower_Knows_PoemGift_9ca1ce84-cbe4-4dc4-aa95-651e55482020, NULL_00000000-0000-0000-0000-000000000000, 0, 1);
+SetFlag(UND_ArcaneTower_Knows_PoemPeace_c50a156f-5a2f-4c00-bd4e-b8fdf5cf87a2, NULL_00000000-0000-0000-0000-000000000000, 0, 1);
+SetFlag(UND_ArcaneTower_Knows_PoemSecret_a13865ed-6c65-4e3b-bde6-592a832feb75, NULL_00000000-0000-0000-0000-000000000000, 0, 1);
+SetFlag(UND_ArcaneTower_Knows_PoemLove_faa7d932-b56e-484f-b26e-ae6b77bdd464, NULL_00000000-0000-0000-0000-000000000000, 0, 1);
+SetFlag(UND_ArcaneTower_Knows_PetGrave_2f615d8f-084f-fb7c-851b-9406059bc9ab, NULL_00000000-0000-0000-0000-000000000000, 0, 1);
+SetFlag(GLO_OrpheusChapters_State_ReadOrpheusChapter1_c8fa6c18-6491-48b6-9197-43285a07f9c9, NULL_00000000-0000-0000-0000-000000000000, 0, 1);
+QuestUpdate(_Host, "HIDDEN_WLD_Boosters", "UND_ArcaneTower_Activated");
+PROC_PeacefulResolve(S_UND_Automaton_5038c0f2-0022-4699-82ce-a319b30616bb);
+ToInventory(S_UND_ArcaneTower_TimmaskSpore_001_36ab6ea3-6953-433e-ba45-8158fe838388, _Host, 1, 1, 1);
+ToInventory(S_UND_ArcaneTower_TongueOfMadness_001_61f3bb4e-f087-4af1-91c3-7c7f6d1e3c0b, _Host, 1, 1, 1);
+ToInventory(S_UND_ArcaneTower_SecretRing_a5903973-28eb-4d41-a0b9-478680492145, _Host, 1, 1, 1);
+
+QRY
+QRY_AMP_Plus_StorySkip_ArcaneTowerOpen((CHARACTER)_Player)
+AND
+QuestUpdateIsUnlocked(_Player, "GLO_Tadpole", "AskedToDrink", 0)
+AND
+IsDead((CHARACTER)S_UND_Automaton_5038c0f2-0022-4699-82ce-a319b30616bb, 0)
+AND
+IsInCombat((CHARACTER)S_UND_Automaton_5038c0f2-0022-4699-82ce-a319b30616bb, 0)
+AND
+IsEnemy((CHARACTER)S_UND_Automaton_5038c0f2-0022-4699-82ce-a319b30616bb, _Player, 0)
+AND
+GetFlag(UND_Automaton_State_Serving_7a876651-c549-9b90-6a8a-37b25380beea, S_UND_Automaton_5038c0f2-0022-4699-82ce-a319b30616bb, 0)
+AND
+GetFlag(UND_Automaton_State_Berserk_d872f9ad-ac0b-99b5-48b4-0f80c562ee92, S_UND_Automaton_5038c0f2-0022-4699-82ce-a319b30616bb, 0)
+AND
+GetFlag(UND_Automaton_State_Deactivated_4967548f-8f43-4020-be0f-d127209a7502, S_UND_Automaton_5038c0f2-0022-4699-82ce-a319b30616bb, 0)
+THEN
+DB_NOOP(1);
+
+//END_REGION
+
+//REGION Act 3 level gate: wrong-region info boxes
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_Presses", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel(_Level)
+AND
+NOT DB_AMP_Plus_StorySkip_Act3Level(_Level)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_StorySkip_WrongAct");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_Murders", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel(_Level)
+AND
+NOT DB_AMP_Plus_StorySkip_Act3Level(_Level)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_StorySkip_WrongAct");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_DevilsFee", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel(_Level)
+AND
+NOT DB_AMP_Plus_StorySkip_Act3Level(_Level)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_StorySkip_WrongAct");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_Dribbles", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel(_Level)
+AND
+NOT DB_AMP_Plus_StorySkip_Act3Level(_Level)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_StorySkip_WrongAct");
+
+//END_REGION
+
+//REGION Stop the Presses (LOW_StopTheGazette) - Act3b_LOW_BaldursMouthGazette.txt
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_Presses", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel(_Level)
+AND
+DB_AMP_Plus_StorySkip_Act3Level(_Level)
+AND
+GetFlag(LOW_BaldursMouth_State_PositiveArticlePublished_14071582-0c75-40e5-9121-251d6a9524e4, NULL_00000000-0000-0000-0000-000000000000, 1)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_StorySkip_Done");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_Presses", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel(_Level)
+AND
+DB_AMP_Plus_StorySkip_Act3Level(_Level)
+AND
+GetFlag(LOW_BaldursMouth_State_NegativeArticlePublished_baa834bc-8237-4081-8699-297743dc54d2, NULL_00000000-0000-0000-0000-000000000000, 1)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_StorySkip_Done");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_Presses", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel(_Level)
+AND
+DB_AMP_Plus_StorySkip_Act3Level(_Level)
+AND
+GetFlag(LOW_BaldursMouth_State_DestroyedPrinter_8bc8e697-d0bd-475e-8cc4-53c1c86c98cb, NULL_00000000-0000-0000-0000-000000000000, 1)
+AND
+GetFlag(LOW_BaldursMouth_State_PositiveArticlePublished_14071582-0c75-40e5-9121-251d6a9524e4, NULL_00000000-0000-0000-0000-000000000000, 0)
+AND
+GetFlag(LOW_BaldursMouth_State_NegativeArticlePublished_baa834bc-8237-4081-8699-297743dc54d2, NULL_00000000-0000-0000-0000-000000000000, 0)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_StorySkip_Done");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_Presses", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel(_Level)
+AND
+DB_AMP_Plus_StorySkip_Act3Level(_Level)
+AND
+GetFlag(LOW_BaldursMouth_State_PositiveArticlePublished_14071582-0c75-40e5-9121-251d6a9524e4, NULL_00000000-0000-0000-0000-000000000000, 0)
+AND
+GetFlag(LOW_BaldursMouth_State_NegativeArticlePublished_baa834bc-8237-4081-8699-297743dc54d2, NULL_00000000-0000-0000-0000-000000000000, 0)
+AND
+GetFlag(LOW_BaldursMouth_State_DestroyedPrinter_8bc8e697-d0bd-475e-8cc4-53c1c86c98cb, NULL_00000000-0000-0000-0000-000000000000, 0)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_StorySkip_Presses_Ask");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_StorySkip_Presses_Ask", 1)
+AND
+GetFlag(LOW_BaldursMouth_State_PositiveArticlePublished_14071582-0c75-40e5-9121-251d6a9524e4, NULL_00000000-0000-0000-0000-000000000000, 0)
+AND
+GetFlag(LOW_BaldursMouth_State_NegativeArticlePublished_baa834bc-8237-4081-8699-297743dc54d2, NULL_00000000-0000-0000-0000-000000000000, 0)
+THEN
+PROC_GlobalClearFlagAndCache(LOW_BaldursMouth_State_NegativeArticleStarted_b1f2debb-9174-441f-9b1e-0e3bc9aba3eb);
+PROC_GlobalSetFlagAndCache(LOW_BaldursMouth_State_EttvardsBusy_fbbe9492-8c01-4600-8a33-3d69cb9aa49a);
+PROC_GlobalSetFlagAndCache(LOW_BaldursMouth_State_PlayerChangedPaper_a8bf8c49-52a9-458b-9cde-bbc6f8f4514a);
+PROC_GlobalSetFlagAndCache(LOW_BaldursMouth_State_PositiveArticlePublished_14071582-0c75-40e5-9121-251d6a9524e4);
+PROC_GLO_Gazette_DoPrinting();
+
+//END_REGION
+
+//REGION Investigate the Murders / Murder Tribunal (LOW_FindBhaalTemple) - Act3b_LOW_MurderTribunal.txt
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_Murders", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel(_Level)
+AND
+DB_AMP_Plus_StorySkip_Act3Level(_Level)
+AND
+GetFlag(LOW_MurderTribunal_State_TrialResolved_f3fe8b2d-50ea-3b9c-91ea-13f18f60d617, NULL_00000000-0000-0000-0000-000000000000, 1)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_StorySkip_Done");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_Murders", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel(_Level)
+AND
+DB_AMP_Plus_StorySkip_Act3Level(_Level)
+AND
+GetFlag(LOW_MurderTribunal_State_TrialResolved_f3fe8b2d-50ea-3b9c-91ea-13f18f60d617, NULL_00000000-0000-0000-0000-000000000000, 0)
+AND
+GetFlag(LOW_MurderTribunal_State_StartedBaptism_9231a565-3cf9-4754-a9c4-db02e7f0eeb8, NULL_00000000-0000-0000-0000-000000000000, 0)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_StorySkip_Murders_AskPeace");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_Murders", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel(_Level)
+AND
+DB_AMP_Plus_StorySkip_Act3Level(_Level)
+AND
+GetFlag(LOW_MurderTribunal_State_TrialResolved_f3fe8b2d-50ea-3b9c-91ea-13f18f60d617, NULL_00000000-0000-0000-0000-000000000000, 0)
+AND
+GetFlag(LOW_MurderTribunal_State_StartedBaptism_9231a565-3cf9-4754-a9c4-db02e7f0eeb8, NULL_00000000-0000-0000-0000-000000000000, 1)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_StorySkip_Murders_AskKill");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_StorySkip_Murders_AskPeace", 1)
+AND
+GetFlag(LOW_MurderTribunal_State_TrialResolved_f3fe8b2d-50ea-3b9c-91ea-13f18f60d617, NULL_00000000-0000-0000-0000-000000000000, 0)
+AND
+GetFlag(LOW_MurderTribunal_State_StartedBaptism_9231a565-3cf9-4754-a9c4-db02e7f0eeb8, NULL_00000000-0000-0000-0000-000000000000, 0)
+THEN
+PROC_LOW_MurderTribunal_SetValeriaChained(0);
+SetFlag(LOW_MurderTribunal_Knows_BhaalTempleLocation_0a45cd29-8ae1-43bb-9ef6-b95af1dc6e55, NULL_00000000-0000-0000-0000-000000000000, 0);
+SetFlag(LOW_MurderTribunal_Knows_ValeriaToldBhaalTempleLocation_34265520-1ba8-007c-560d-7926f5de38ea, NULL_00000000-0000-0000-0000-000000000000, 0);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_StorySkip_Murders_AskPeace", 0)
+AND
+GetFlag(LOW_MurderTribunal_State_TrialResolved_f3fe8b2d-50ea-3b9c-91ea-13f18f60d617, NULL_00000000-0000-0000-0000-000000000000, 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_StorySkip_Murders_AskKill");
+
+// vanilla PermaDefeated cascade resolves the tribunal
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_StorySkip_Murders_AskKill", 1)
+AND
+GetFlag(LOW_MurderTribunal_State_TrialResolved_f3fe8b2d-50ea-3b9c-91ea-13f18f60d617, NULL_00000000-0000-0000-0000-000000000000, 0)
+THEN
+Die((CHARACTER)S_LOW_MurderTribunal_Sarevok_ae9f784a-ea64-4297-95a7-8377e85231b6, DEATHTYPE.DoT, NULL_00000000-0000-0000-0000-000000000000, 1, 0);
+SetFlag(LOW_MurderTribunal_Knows_BhaalTempleLocation_0a45cd29-8ae1-43bb-9ef6-b95af1dc6e55, NULL_00000000-0000-0000-0000-000000000000, 0);
+
+//END_REGION
+
+//REGION Devil's Fee ritual (LOW_HelsikDeal) - Act3b_LOW_DevilsFee.txt
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_DevilsFee", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel(_Level)
+AND
+DB_AMP_Plus_StorySkip_Act3Level(_Level)
+AND
+GetFlag(LOW_DevilsFee_State_RitualAlreadyDone_3bc4c164-0e98-fbc7-0cef-f244e390b3b4, NULL_00000000-0000-0000-0000-000000000000, 1)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_StorySkip_Done");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_DevilsFee", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel(_Level)
+AND
+DB_AMP_Plus_StorySkip_Act3Level(_Level)
+AND
+GetFlag(LOW_DevilsFee_State_RitualAlreadyDone_3bc4c164-0e98-fbc7-0cef-f244e390b3b4, NULL_00000000-0000-0000-0000-000000000000, 0)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_StorySkip_DevilsFee_Ask");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_StorySkip_DevilsFee_Ask", 1)
+AND
+GetFlag(LOW_DevilsFee_State_RitualAlreadyDone_3bc4c164-0e98-fbc7-0cef-f244e390b3b4, NULL_00000000-0000-0000-0000-000000000000, 0)
+THEN
+SetFlag(Debug_LOW_DevilsFee_GetAllRitualItems_b3f7b949-551e-ded5-3c1d-94479f2fe57b, _Host);
+SetFlag(LOW_DevilsFee_Event_OpeningPortal_4dfbe814-2457-40ae-bead-b997d0724af2, NULL_00000000-0000-0000-0000-000000000000, 1);
+SetFlag(LOW_DevilsFee_State_RitualAlreadyDone_3bc4c164-0e98-fbc7-0cef-f244e390b3b4, NULL_00000000-0000-0000-0000-000000000000, 0);
+
+//END_REGION
+
+//REGION Find Dribbles the Clown (WYR_Clown) - Act3_WYR_Circus.txt
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_Dribbles", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel(_Level)
+AND
+DB_AMP_Plus_StorySkip_Act3Level(_Level)
+AND
+GetFlag(WYR_Circus_Ringmaster_State_Rewarded_7a42ebcf-255e-853b-bad6-30cf36746c10, NULL_00000000-0000-0000-0000-000000000000, 1)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_StorySkip_Done");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_Dribbles", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel(_Level)
+AND
+DB_AMP_Plus_StorySkip_Act3Level(_Level)
+AND
+GetFlag(WYR_Circus_State_Gone_151fd307-4cb8-44ba-8998-40e1d748b707, NULL_00000000-0000-0000-0000-000000000000, 1)
+AND
+GetFlag(WYR_Circus_Ringmaster_State_Rewarded_7a42ebcf-255e-853b-bad6-30cf36746c10, NULL_00000000-0000-0000-0000-000000000000, 0)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_StorySkip_Done");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_Dribbles", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel(_Level)
+AND
+DB_AMP_Plus_StorySkip_Act3Level(_Level)
+AND
+GetFlag(WYR_Circus_Ringmaster_State_Rewarded_7a42ebcf-255e-853b-bad6-30cf36746c10, NULL_00000000-0000-0000-0000-000000000000, 0)
+AND
+GetFlag(WYR_Circus_State_Gone_151fd307-4cb8-44ba-8998-40e1d748b707, NULL_00000000-0000-0000-0000-000000000000, 0)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_StorySkip_Dribbles_Ask");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_StorySkip_Dribbles_Ask", 1)
+AND
+GetFlag(WYR_Circus_Ringmaster_State_Rewarded_7a42ebcf-255e-853b-bad6-30cf36746c10, NULL_00000000-0000-0000-0000-000000000000, 0)
+THEN
+PROC_GlobalSetFlagAndCache(WYR_Circus_Knows_ClownDead_b0651ffa-2c1d-41b9-b4e8-1af9677db7e0);
+PROC_GlobalSetFlagAndCache(WYR_Circus_State_GotDribblesQuest_780f6847-84a7-ff3e-f8bb-670d625c1a87);
+TimerLaunch("AMP_Plus_StorySkip_Dribbles_Found", 2000);
+
+IF
+TimerFinished("AMP_Plus_StorySkip_Dribbles_Found")
+AND
+GetHostCharacter(_Host)
+THEN
+QuestUpdate(_Host, "WYR_Clown", "FoundAll");
+TimerLaunch("AMP_Plus_StorySkip_Dribbles_Reward", 2000);
+
+IF
+TimerFinished("AMP_Plus_StorySkip_Dribbles_Reward")
+AND
+GetHostCharacter(_Host)
+THEN
+PROC_GlobalSetFlagAndCache(WYR_Circus_State_BroughtDribblesCorpse_71ec5626-017c-000a-2a83-8c4f255b74e9);
+PROC_GlobalSetFlagAndCache(WYR_Circus_Ringmaster_State_Rewarded_7a42ebcf-255e-853b-bad6-30cf36746c10);
+
+//END_REGION
+
+//REGION Skip Lockpicking toggle (all acts) - reactive auto-unlock, casual pattern in AMP_Lootbox_CasualUnlock_Fix.txt
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_UnlockAll", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+NOT DB_AMP_Plus_StorySkip_UnlockAllActive(1)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_StorySkip_UnlockAll_AskEnable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_UnlockAll", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_AMP_Plus_StorySkip_UnlockAllActive(1)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_StorySkip_UnlockAll_AskDisable");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_StorySkip_UnlockAll_AskEnable", 1)
+AND
+NOT DB_AMP_Plus_StorySkip_UnlockAllActive(1)
+THEN
+DB_AMP_Plus_StorySkip_UnlockAllActive(1);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_StorySkip_UnlockAll_AskDisable", 1)
+THEN
+NOT DB_AMP_Plus_StorySkip_UnlockAllActive(1);
+
+// three entry points to a locked object: pick, open, bash
+IF
+StartedLockpicking((CHARACTER)_Character, (ITEM)_Item)
+AND
+DB_AMP_Plus_StorySkip_UnlockAllActive(1)
+THEN
+Unlock(_Item);
+Open(_Item);
+
+IF
+TemplateOpening(_, (ITEM)_Item, _)
+AND
+DB_AMP_Plus_StorySkip_UnlockAllActive(1)
+AND
+IsLocked(_Item, 1)
+THEN
+Unlock(_Item);
+Open(_Item);
+
+IF
+AttackedBy((ITEM)_Item, _, _, _, _, _, _)
+AND
+DB_AMP_Plus_StorySkip_UnlockAllActive(1)
+AND
+IsLocked(_Item, 1)
+THEN
+Unlock(_Item);
+Open(_Item);
+
+//END_REGION
+
+
+//REGION Act 1 finale (WLD_Main_A): one button folds the whole act into a chosen outcome
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_Act1Finale", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel(_Level)
+AND
+_Level != "WLD_Main_A"
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_StorySkip_WrongAct");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_Act1Finale", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel("WLD_Main_A")
+AND
+DB_AMP_Plus_Act1Finale_Done(1)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_StorySkip_Done");
+
+// grove is mid-cascade, jumping now would strand the running state machine
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_Act1Finale", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel("WLD_Main_A")
+AND
+NOT DB_AMP_Plus_Act1Finale_Done(1)
+AND
+DB_State_Current(S_DEN_RangerDen_SUB_50062397-bf9c-4765-9cbc-e40b5148f211, "DEN", _State)
+AND
+NOT DB_AMP_Plus_Act1Finale_OkState(_State)
+THEN
+OpenMessageBox(_Caster, "AMP_Plus_Act1Finale_Unstable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_StorySkip_Act1Finale", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_CurrentLevel("WLD_Main_A")
+AND
+NOT DB_AMP_Plus_Act1Finale_Done(1)
+AND
+DB_State_Current(S_DEN_RangerDen_SUB_50062397-bf9c-4765-9cbc-e40b5148f211, "DEN", _State)
+AND
+DB_AMP_Plus_Act1Finale_OkState(_State)
+THEN
+PROC_AMP_Plus_Act1Finale_ClearChoices();
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_Act1Finale_AskWarning");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_Act1Finale_AskWarning", 1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_Act1Finale_AskSave");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_Act1Finale_AskWarning", 0)
+THEN
+PROC_AMP_Plus_Act1Finale_ClearChoices();
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_Act1Finale_AskSave", 1)
+THEN
+DB_AMP_Plus_Act1Finale_Tone("Good");
+OpenMessageBoxYesNo(_Host, "AMP_Plus_Act1Finale_AskHalsin");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_Act1Finale_AskSave", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_Act1Finale_AskRaid");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_Act1Finale_AskRaid", 1)
+THEN
+DB_AMP_Plus_Act1Finale_Tone("Evil");
+OpenMessageBoxYesNo(_Host, "AMP_Plus_Act1Finale_AskSweep");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_Act1Finale_AskRaid", 0)
+THEN
+PROC_AMP_Plus_Act1Finale_ClearChoices();
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_Act1Finale_AskHalsin", 1)
+THEN
+DB_AMP_Plus_Act1Finale_Flag("Halsin");
+OpenMessageBoxYesNo(_Host, "AMP_Plus_Act1Finale_AskKagha");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_Act1Finale_AskHalsin", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_Act1Finale_AskKagha");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_Act1Finale_AskKagha", 1)
+THEN
+DB_AMP_Plus_Act1Finale_Flag("Kagha");
+OpenMessageBoxYesNo(_Host, "AMP_Plus_Act1Finale_AskSweep");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_Act1Finale_AskKagha", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_Act1Finale_AskSweep");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_Act1Finale_AskSweep", 1)
+THEN
+DB_AMP_Plus_Act1Finale_Flag("Sweep");
+OpenMessageBoxYesNo(_Host, "AMP_Plus_Act1Finale_AskLoot");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_Act1Finale_AskSweep", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_Act1Finale_AskLoot");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_Act1Finale_AskLoot", 1)
+THEN
+DB_AMP_Plus_Act1Finale_Flag("Loot");
+OpenMessageBoxYesNo(_Host, "AMP_Plus_Act1Finale_AskXP");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_Act1Finale_AskLoot", 0)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Plus_Act1Finale_AskXP");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_Act1Finale_AskXP", 1)
+THEN
+DB_AMP_Plus_Act1Finale_Flag("XP");
+PROC_AMP_Plus_Act1Finale_Run(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_Act1Finale_AskXP", 0)
+THEN
+PROC_AMP_Plus_Act1Finale_Run(_Host);
+
+// waves: vanilla cascades place their journal steps before the sweep writes terminal ones
+// the kill pass lands after the grove settles
+PROC
+PROC_AMP_Plus_Act1Finale_Run((CHARACTER)_Host)
+THEN
+DB_AMP_Plus_Act1Finale_Done(1);
+OpenMessageBox(_Host, "AMP_Plus_Act1Finale_Running");
+TimerLaunch("AMP_Plus_Act1Finale_W1", 2000);
+TimerLaunch("AMP_Plus_Act1Finale_W2", 5000);
+TimerLaunch("AMP_Plus_Act1Finale_W3", 8000);
+TimerLaunch("AMP_Plus_Act1Finale_W4", 11000);
+TimerLaunch("AMP_Plus_Act1Finale_W5", 14000);
+TimerLaunch("AMP_Plus_Act1Finale_W6", 17000);
+TimerLaunch("AMP_Plus_Act1Finale_W7", 20000);
+
+IF
+TimerFinished("AMP_Plus_Act1Finale_W1")
+AND
+GetHostCharacter(_Host)
+AND
+DB_AMP_Plus_Act1Finale_Tone("Good")
+THEN
+PROC_DEN_DEBUG_TieflingRefugees_KillGoblinLeadership(_Host);
+SetFlag(GLO_Halsin_Debug_LeadersDead_4037ac74-9e75-4339-abbb-9b7e83c70bc9, _Host);
+PROC_DEN_TieflingRefugees_SetGoblinHuntVictoryState();
+PROC_State_Progress(S_DEN_RangerDen_SUB_50062397-bf9c-4765-9cbc-e40b5148f211, "DEN", "DEN_State_GoblinHuntVictory");
+
+IF
+TimerFinished("AMP_Plus_Act1Finale_W1")
+AND
+GetHostCharacter(_Host)
+AND
+DB_AMP_Plus_Act1Finale_Tone("Evil")
+THEN
+PROC_DEN_RaidingParty_DebugResolveConfrontation();
+SetFlag(DEN_AttackOnDen_Debug_Start_10b6026f-b246-7f88-aa40-a653fe08d861, NULL_00000000-0000-0000-0000-000000000000, 0);
+
+IF
+TimerFinished("AMP_Plus_Act1Finale_W2")
+AND
+GetHostCharacter(_Host)
+AND
+DB_AMP_Plus_Act1Finale_Tone("Good")
+THEN
+PROC_DEN_TieflingRefugees_DebugLeave();
+PROC_State_Progress(S_DEN_RangerDen_SUB_50062397-bf9c-4765-9cbc-e40b5148f211, "DEN", "DEN_State_TieflingsGone");
+
+IF
+TimerFinished("AMP_Plus_Act1Finale_W2")
+AND
+GetHostCharacter(_Host)
+AND
+DB_AMP_Plus_Act1Finale_Tone("Good")
+AND
+DB_AMP_Plus_Act1Finale_Flag("Halsin")
+THEN
+SetFlag(GLO_Halsin_Debug_FallbackCamp_ea15c83c-777d-4d1d-a8df-3b2f25e3b4d6, _Host);
+
+// Kagha survives only when the player asked for it
+IF
+TimerFinished("AMP_Plus_Act1Finale_W2")
+AND
+GetHostCharacter(_Host)
+AND
+DB_AMP_Plus_Act1Finale_Tone("Good")
+AND
+NOT DB_AMP_Plus_Act1Finale_Flag("Kagha")
+THEN
+SetFlag(GLO_Halsin_Debug_KillKagha_4ce8cf64-a300-47f2-8d47-40e883a72d12, _Host);
+
+IF
+TimerFinished("AMP_Plus_Act1Finale_W2")
+AND
+GetHostCharacter(_Host)
+AND
+DB_AMP_Plus_Act1Finale_Tone("Evil")
+THEN
+PROC_DEN_AttackOnDen_DebugRaiderVictory();
+PROC_State_Progress(S_DEN_RangerDen_SUB_50062397-bf9c-4765-9cbc-e40b5148f211, "DEN", "DEN_State_RaiderVictory");
+
+IF
+TimerFinished("AMP_Plus_Act1Finale_W3")
+AND
+GetHostCharacter(_Host)
+AND
+DB_AMP_Plus_Act1Finale_Flag("Sweep")
+AND
+DB_AMP_Plus_Act1Finale_Tone(_Tone)
+THEN
+PROC_AMP_Plus_Act1Finale_KillSweep(_Host, _Tone);
+
+PROC
+PROC_AMP_Plus_Act1Finale_KillSweep((CHARACTER)_Host, (STRING)_Tone)
+AND
+DB_GLO_DefeatCounter(_C, _Group)
+AND
+NOT DB_AMP_Plus_Act1Finale_SpareGroup(_Tone, _Group)
+AND
+NOT DB_PermaDefeated((CHARACTER)_C)
+AND
+IsPlayer(_C, 0)
+AND
+GetRegion(_C, "WLD_Main_A")
+THEN
+PROC_ForceStopDialog(_C);
+Die(_C, DEATHTYPE.DoT, _Host, 1, 1);
+
+IF
+TimerFinished("AMP_Plus_Act1Finale_W4")
+AND
+GetHostCharacter(_Host)
+AND
+DB_AMP_Plus_Act1Finale_Tone(_Tone)
+THEN
+PROC_AMP_Plus_Act1Finale_QuestSweep(_Host, _Tone, 1);
+
+IF
+TimerFinished("AMP_Plus_Act1Finale_W5")
+AND
+GetHostCharacter(_Host)
+AND
+DB_AMP_Plus_Act1Finale_Tone(_Tone)
+THEN
+PROC_AMP_Plus_Act1Finale_QuestSweep(_Host, _Tone, 2);
+
+PROC
+PROC_AMP_Plus_Act1Finale_QuestSweep((CHARACTER)_Host, (STRING)_Tone, (INTEGER)_Wave)
+AND
+DB_AMP_Plus_Act1Finale_Quest(_Tone, _Wave, (STRING)_Quest, (STRING)_Step)
+AND
+QuestIsClosed(_Quest, 0)
+THEN
+QuestUpdate(_Host, _Quest, _Step);
+
+IF
+TimerFinished("AMP_Plus_Act1Finale_W6")
+AND
+GetHostCharacter(_Host)
+AND
+DB_AMP_Plus_Act1Finale_Flag("Loot")
+THEN
+GenerateTreasure(_Host, "AMP_Plus_Act1Finale_Loot", 5, _Host);
+
+IF
+TimerFinished("AMP_Plus_Act1Finale_W6")
+AND
+DB_AMP_Plus_Act1Finale_Flag("XP")
+AND
+DB_Players((CHARACTER)_P)
+AND
+GetLevel(_P, (INTEGER)_Lvl)
+AND
+_Lvl < 6
+AND
+IntegerSubtract(6, _Lvl, (INTEGER)_Diff)
+THEN
+PROC_LevelUpBy(_P, _Diff);
+
+IF
+TimerFinished("AMP_Plus_Act1Finale_W7")
+THEN
+PROC_AMP_Plus_Act1Finale_ClearChoices();
+
+PROC
+PROC_AMP_Plus_Act1Finale_ClearChoices()
+AND
+DB_AMP_Plus_Act1Finale_Tone((STRING)_T)
+THEN
+NOT DB_AMP_Plus_Act1Finale_Tone(_T);
+
+PROC
+PROC_AMP_Plus_Act1Finale_ClearChoices()
+THEN
+PROC_AMP_Plus_Act1Finale_DrainFlag();
+
+PROC
+PROC_AMP_Plus_Act1Finale_DrainFlag()
+AND
+DB_AMP_Plus_Act1Finale_Flag((STRING)_K)
+THEN
+NOT DB_AMP_Plus_Act1Finale_Flag(_K);
+PROC_AMP_Plus_Act1Finale_DrainFlag();
+
+//END_REGION
+
+
+EXITSECTION
+ENDEXITSECTION

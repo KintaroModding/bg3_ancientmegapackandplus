@@ -1,0 +1,884 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// columns: tier, playerMin, playerMax, lvlMin, lvlMax, count
+// tier is spawn intensity, not the game mode
+
+DB_AMP_Plus_SpawnIntensity_Size(2);
+
+DB_AMP_Plus_PCAcc(0);
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_PCAcc(_)
+THEN
+DB_AMP_Plus_PCAcc(0);
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_PCAcc(_)
+THEN
+DB_AMP_Plus_PCAcc(0);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_SpawnIntensity_Size(_)
+THEN
+DB_AMP_Plus_SpawnIntensity_Size(2);
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_SpawnIntensity_Size(_)
+THEN
+DB_AMP_Plus_SpawnIntensity_Size(2);
+
+// bump the version when the rows change
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_SizeTableVer(2)
+THEN
+PROC_AMP_Plus_SizeTableReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_SizeTableVer(2)
+THEN
+PROC_AMP_Plus_SizeTableReseed();
+
+// ordered bodies: stamp, rows, table
+PROC
+PROC_AMP_Plus_SizeTableReseed()
+AND
+DB_AMP_Plus_SizeTableVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_SizeTableVer(_Old);
+
+PROC
+PROC_AMP_Plus_SizeTableReseed()
+THEN
+PROC_AMP_Plus_SizeTableDrainRows();
+
+PROC
+PROC_AMP_Plus_SizeTableDrainRows()
+AND
+DB_AMP_Plus_UltraSizeTable((INTEGER)_T, (INTEGER)_PMin, (INTEGER)_PMax, (INTEGER)_LMin, (INTEGER)_LMax, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_UltraSizeTable(_T, _PMin, _PMax, _LMin, _LMax, _N);
+PROC_AMP_Plus_SizeTableDrainRows();
+
+PROC
+PROC_AMP_Plus_SizeTableReseed()
+THEN
+DB_AMP_Plus_SizeTableVer(2);
+// tier 1 = Casual
+DB_AMP_Plus_UltraSizeTable(1, 1, 1, 1, 4, 1);
+DB_AMP_Plus_UltraSizeTable(1, 1, 1, 5, 7, 1);
+DB_AMP_Plus_UltraSizeTable(1, 1, 1, 8, 11, 1);
+DB_AMP_Plus_UltraSizeTable(1, 1, 1, 12, 15, 1);
+DB_AMP_Plus_UltraSizeTable(1, 1, 1, 16, 999, 2);
+DB_AMP_Plus_UltraSizeTable(1, 2, 2, 1, 4, 1);
+DB_AMP_Plus_UltraSizeTable(1, 2, 2, 5, 7, 1);
+DB_AMP_Plus_UltraSizeTable(1, 2, 2, 8, 11, 2);
+DB_AMP_Plus_UltraSizeTable(1, 2, 2, 12, 15, 2);
+DB_AMP_Plus_UltraSizeTable(1, 2, 2, 16, 999, 3);
+DB_AMP_Plus_UltraSizeTable(1, 3, 4, 1, 4, 1);
+DB_AMP_Plus_UltraSizeTable(1, 3, 4, 5, 7, 1);
+DB_AMP_Plus_UltraSizeTable(1, 3, 4, 8, 11, 1);
+DB_AMP_Plus_UltraSizeTable(1, 3, 4, 12, 15, 2);
+DB_AMP_Plus_UltraSizeTable(1, 3, 4, 16, 999, 3);
+DB_AMP_Plus_UltraSizeTable(1, 5, 999, 1, 4, 1);
+DB_AMP_Plus_UltraSizeTable(1, 5, 999, 5, 7, 2);
+DB_AMP_Plus_UltraSizeTable(1, 5, 999, 8, 11, 3);
+DB_AMP_Plus_UltraSizeTable(1, 5, 999, 12, 15, 4);
+DB_AMP_Plus_UltraSizeTable(1, 5, 999, 16, 999, 6);
+// tier 2 = Normal
+DB_AMP_Plus_UltraSizeTable(2, 1, 1, 1, 4, 1);
+DB_AMP_Plus_UltraSizeTable(2, 1, 1, 5, 7, 2);
+DB_AMP_Plus_UltraSizeTable(2, 1, 1, 8, 11, 3);
+DB_AMP_Plus_UltraSizeTable(2, 1, 1, 12, 15, 4);
+DB_AMP_Plus_UltraSizeTable(2, 1, 1, 16, 999, 5);
+DB_AMP_Plus_UltraSizeTable(2, 2, 2, 1, 4, 1);
+DB_AMP_Plus_UltraSizeTable(2, 2, 2, 5, 7, 2);
+DB_AMP_Plus_UltraSizeTable(2, 2, 2, 8, 11, 3);
+DB_AMP_Plus_UltraSizeTable(2, 2, 2, 12, 15, 5);
+DB_AMP_Plus_UltraSizeTable(2, 2, 2, 16, 999, 7);
+DB_AMP_Plus_UltraSizeTable(2, 3, 4, 1, 4, 1);
+DB_AMP_Plus_UltraSizeTable(2, 3, 4, 5, 7, 1);
+DB_AMP_Plus_UltraSizeTable(2, 3, 4, 8, 11, 2);
+DB_AMP_Plus_UltraSizeTable(2, 3, 4, 12, 15, 3);
+DB_AMP_Plus_UltraSizeTable(2, 3, 4, 16, 999, 5);
+DB_AMP_Plus_UltraSizeTable(2, 5, 999, 1, 4, 2);
+DB_AMP_Plus_UltraSizeTable(2, 5, 999, 5, 7, 4);
+DB_AMP_Plus_UltraSizeTable(2, 5, 999, 8, 11, 6);
+DB_AMP_Plus_UltraSizeTable(2, 5, 999, 12, 15, 8);
+DB_AMP_Plus_UltraSizeTable(2, 5, 999, 16, 999, 12);
+// tier 3 = Hard
+DB_AMP_Plus_UltraSizeTable(3, 1, 1, 1, 4, 2);
+DB_AMP_Plus_UltraSizeTable(3, 1, 1, 5, 7, 3);
+DB_AMP_Plus_UltraSizeTable(3, 1, 1, 8, 11, 4);
+DB_AMP_Plus_UltraSizeTable(3, 1, 1, 12, 15, 6);
+DB_AMP_Plus_UltraSizeTable(3, 1, 1, 16, 999, 7);
+DB_AMP_Plus_UltraSizeTable(3, 2, 2, 1, 4, 2);
+DB_AMP_Plus_UltraSizeTable(3, 2, 2, 5, 7, 3);
+DB_AMP_Plus_UltraSizeTable(3, 2, 2, 8, 11, 5);
+DB_AMP_Plus_UltraSizeTable(3, 2, 2, 12, 15, 7);
+DB_AMP_Plus_UltraSizeTable(3, 2, 2, 16, 999, 8);
+DB_AMP_Plus_UltraSizeTable(3, 3, 4, 1, 4, 1);
+DB_AMP_Plus_UltraSizeTable(3, 3, 4, 5, 7, 2);
+DB_AMP_Plus_UltraSizeTable(3, 3, 4, 8, 11, 3);
+DB_AMP_Plus_UltraSizeTable(3, 3, 4, 12, 15, 5);
+DB_AMP_Plus_UltraSizeTable(3, 3, 4, 16, 999, 7);
+DB_AMP_Plus_UltraSizeTable(3, 5, 999, 1, 4, 3);
+DB_AMP_Plus_UltraSizeTable(3, 5, 999, 5, 7, 6);
+DB_AMP_Plus_UltraSizeTable(3, 5, 999, 8, 11, 8);
+DB_AMP_Plus_UltraSizeTable(3, 5, 999, 12, 15, 10);
+DB_AMP_Plus_UltraSizeTable(3, 5, 999, 16, 999, 14);
+
+// three ordered rules, each resolves before the next reads the count
+
+PROC
+PROC_AMP_Plus_UltraSpawnSized((CHARACTER)_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+AND
+DB_AMP_Plus_PCAcc((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_PCAcc(_Old);
+DB_AMP_Plus_PCAcc(0);
+
+PROC
+PROC_AMP_Plus_UltraSpawnSized((CHARACTER)_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+THEN
+PROC_AMP_Plus_CountPlayers();
+
+// the hardest settings name a quarry before the ambush is placed
+PROC
+PROC_AMP_Plus_UltraSpawnSized((CHARACTER)_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+AND
+NOT QRY_AMP_Plus_CampGuard()
+THEN
+PROC_AMP_Plus_UMax_MarkPick(_Host);
+
+PROC
+PROC_AMP_Plus_UltraSpawnSized((CHARACTER)_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+AND
+NOT QRY_AMP_Plus_CampGuard()
+AND
+NOT DB_AMP_Plus_UMax_Hunted(_)
+AND
+DB_AMP_Plus_PCAcc((INTEGER)_Players)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+DB_AMP_Plus_SpawnIntensity_Size((INTEGER)_Tier)
+AND
+DB_AMP_Plus_UltraSizeTable(_Tier, (INTEGER)_PMin, (INTEGER)_PMax, (INTEGER)_LMin, (INTEGER)_LMax, (INTEGER)_N)
+AND
+_Players >= _PMin
+AND
+_Players <= _PMax
+AND
+_Lvl >= _LMin
+AND
+_Lvl <= _LMax
+THEN
+PROC_AMP_Plus_UltraSpawnN(0, _N, _Host, _HX, _HY, _HZ);
+
+PROC
+PROC_AMP_Plus_UltraSpawnSized((CHARACTER)_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+AND
+NOT QRY_AMP_Plus_CampGuard()
+AND
+DB_AMP_Plus_UMax_Hunted((CHARACTER)_Quarry)
+AND
+IsDead(_Quarry, 0)
+AND
+GetPosition(_Quarry, (REAL)_QX, (REAL)_QY, (REAL)_QZ)
+AND
+DB_AMP_Plus_PCAcc((INTEGER)_Players)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+DB_AMP_Plus_SpawnIntensity_Size((INTEGER)_Tier)
+AND
+DB_AMP_Plus_UltraSizeTable(_Tier, (INTEGER)_PMin, (INTEGER)_PMax, (INTEGER)_LMin, (INTEGER)_LMax, (INTEGER)_N)
+AND
+_Players >= _PMin
+AND
+_Players <= _PMax
+AND
+_Lvl >= _LMin
+AND
+_Lvl <= _LMax
+THEN
+PROC_AMP_Plus_UltraSpawnN(0, _N, _Host, _QX, _QY, _QZ);
+
+PROC
+PROC_AMP_Plus_CountPlayers()
+AND
+DB_Players((CHARACTER)_P)
+AND
+DB_AMP_Plus_PCAcc((INTEGER)_C)
+AND
+IntegerSum(_C, 1, (INTEGER)_C2)
+THEN
+NOT DB_AMP_Plus_PCAcc(_C);
+DB_AMP_Plus_PCAcc(_C2);
+
+PROC
+PROC_AMP_Plus_UltraSpawnN((INTEGER)_K, (INTEGER)_N, (CHARACTER)_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+AND
+_K < _N
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_Size)
+AND
+_Size > 0
+AND
+Random(_Size, (INTEGER)_Idx)
+THEN
+PROC_AMP_Plus_UltraSpawnPick(_K, _N, _Idx, _Host, _HX, _HY, _HZ);
+
+PROC
+PROC_AMP_Plus_UltraSpawnN((INTEGER)_K, (INTEGER)_N, (CHARACTER)_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+AND
+_K >= _N
+THEN
+DB_NOOP(1);
+
+// base record goes in after the pursuer registration so spawn hooks fire, then the intercept clears it
+PROC
+PROC_AMP_Plus_UltraSpawnPick((INTEGER)_K, (INTEGER)_N, (INTEGER)_Idx, (CHARACTER)_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+AND
+DB_AMP_MirrorPool(_Idx, (GUIDSTRING)_Template, _)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(_Idx)
+AND
+Random(5, (INTEGER)_Rx)
+AND
+Random(5, (INTEGER)_Rz)
+AND
+IntegerToReal(_Rx, (REAL)_Rxf)
+AND
+IntegerToReal(_Rz, (REAL)_Rzf)
+AND
+RealSum(_HX, _Rxf, (REAL)_SX0)
+AND
+RealSum(_SX0, -2.0, (REAL)_SX)
+AND
+RealSum(_HZ, _Rzf, (REAL)_SZ0)
+AND
+RealSum(_SZ0, 1.0, (REAL)_SZ)
+AND
+IntegerSum(_K, 1, (INTEGER)_K2)
+AND
+CreateAt(_Template, _SX, _HY, _SZ, 0, 1, "", (GUIDSTRING)_Mob)
+THEN
+DB_AMP_Plus_ChaseActive((CHARACTER)_Mob, _Template);
+DB_AMP_MirrorChase_Mob((CHARACTER)_Mob, _Template);
+DB_AMP_MirrorSupport_Spawned((CHARACTER)_Mob, (CHARACTER)_Mob);
+PROC_AMP_Plus_ApplyPursuerFaction(_Mob);
+ApplyStatus(_Mob, "AMP_ULTRA_SPAWN_VFX", 6.0, 1, _Mob);
+EnterCombat(_Mob, _Host);
+PROC_AMP_Plus_UltraSpawnN(_K2, _N, _Host, _HX, _HY, _HZ);
+
+PROC
+PROC_AMP_Plus_UltraSpawnPick((INTEGER)_K, (INTEGER)_N, (INTEGER)_Idx, (CHARACTER)_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+AND
+DB_AMP_MirrorBoss_Disabled(_Idx)
+THEN
+PROC_AMP_Plus_UltraSpawnN(_K, _N, _Host, _HX, _HY, _HZ);
+
+PROC
+PROC_AMP_Plus_MirrorSpawnSized((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_PCAcc((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_PCAcc(_Old);
+DB_AMP_Plus_PCAcc(0);
+
+PROC
+PROC_AMP_Plus_MirrorSpawnSized((CHARACTER)_Boss)
+THEN
+PROC_AMP_Plus_CountPlayers();
+
+PROC
+PROC_AMP_Plus_MirrorSpawnSized((CHARACTER)_Boss)
+THEN
+PROC_AMP_Plus_TgtIndexBuild(_Boss);
+
+PROC
+PROC_AMP_Plus_MirrorSpawnSized((CHARACTER)_Boss)
+AND
+NOT QRY_AMP_Plus_CampGuard()
+AND
+DB_AMP_Plus_PCAcc((INTEGER)_Players)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+DB_AMP_Plus_SpawnIntensity_Size((INTEGER)_Tier)
+AND
+DB_AMP_Plus_UltraSizeTable(_Tier, (INTEGER)_PMin, (INTEGER)_PMax, (INTEGER)_LMin, (INTEGER)_LMax, (INTEGER)_N)
+AND
+_Players >= _PMin
+AND
+_Players <= _PMax
+AND
+_Lvl >= _LMin
+AND
+_Lvl <= _LMax
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_Size)
+AND
+_Size > 0
+AND
+GetPosition(_Boss, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+THEN
+PROC_AMP_Plus_MirrorRandSpawn(_Boss, _N, _Size, _BX, _BY, _BZ);
+
+// overrides the base contiguous CapEight/Loop window, each slot rolls from the whole pool
+// 16 slots: 8 base inner, 8 outer below
+
+PROC
+PROC_AMP_Plus_MirrorRandSpawn((CHARACTER)_Boss, (INTEGER)_Count, (INTEGER)_Size, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Count <= 16
+THEN
+PROC_AMP_Plus_MirrorRandSeedB(_Boss, _Count, _Size, _BX, _BY, _BZ);
+
+PROC
+PROC_AMP_Plus_MirrorRandSpawn((CHARACTER)_Boss, (INTEGER)_Count, (INTEGER)_Size, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Count > 16
+THEN
+PROC_AMP_Plus_MirrorRandSeedB(_Boss, 16, _Size, _BX, _BY, _BZ);
+
+// a ring puts the batch inside a single area spell, so one slot takes one target
+// slots past the party size wrap to another side of the same target
+
+PROC
+PROC_AMP_Plus_TgtIndexBuild((CHARACTER)_Boss)
+THEN
+PROC_AMP_Plus_TgtDrainIdx(_Boss);
+
+PROC
+PROC_AMP_Plus_TgtDrainIdx((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_TgtIdx(_Boss, (INTEGER)_I, (CHARACTER)_P)
+THEN
+NOT DB_AMP_Plus_TgtIdx(_Boss, _I, _P);
+PROC_AMP_Plus_TgtDrainIdx(_Boss);
+
+PROC
+PROC_AMP_Plus_TgtIndexBuild((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_TgtCount(_Boss, (INTEGER)_C)
+THEN
+NOT DB_AMP_Plus_TgtCount(_Boss, _C);
+
+PROC
+PROC_AMP_Plus_TgtIndexBuild((CHARACTER)_Boss)
+THEN
+DB_AMP_Plus_TgtCount(_Boss, 0);
+
+// a companion left elsewhere on the level must not pull a mini-boss to him
+
+PROC
+PROC_AMP_Plus_TgtIndexBuild((CHARACTER)_Boss)
+AND
+DB_Players((CHARACTER)_P)
+AND
+IsDead(_P, 0)
+AND
+GetDistanceTo(_P, _Boss, (REAL)_Dist)
+AND
+_Dist <= 30.0
+AND
+DB_AMP_Plus_TgtCount(_Boss, (INTEGER)_C)
+AND
+IntegerSum(_C, 1, (INTEGER)_C2)
+THEN
+DB_AMP_Plus_TgtIdx(_Boss, _C, _P);
+NOT DB_AMP_Plus_TgtCount(_Boss, _C);
+DB_AMP_Plus_TgtCount(_Boss, _C2);
+
+// pass number picks the side so repeat mobs on one target do not share a square
+
+PROC
+PROC_AMP_Plus_SpawnAtTarget((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+DB_AMP_Plus_TgtCount(_Boss, (INTEGER)_PC)
+AND
+_PC > 0
+AND
+IntegerModulo(_Slot, _PC, (INTEGER)_Ti)
+AND
+DB_AMP_Plus_TgtIdx(_Boss, _Ti, (CHARACTER)_P)
+AND
+IntegerDivide(_Slot, _PC, (INTEGER)_Pass)
+AND
+IntegerModulo(_Pass, 4, (INTEGER)_Side)
+AND
+GetPosition(_P, (REAL)_PX, (REAL)_PY, (REAL)_PZ)
+THEN
+PROC_AMP_Plus_SpawnBySide(_Boss, _Template, _Side, _PX, _PY, _PZ);
+
+PROC
+PROC_AMP_Plus_SpawnAtTarget((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+NOT DB_AMP_Plus_TgtCount(_Boss, _)
+THEN
+PROC_AMP_MirrorSupport_SpawnAtSlot(_Boss, _Template, _Slot, _BX, _BY, _BZ);
+
+PROC
+PROC_AMP_Plus_SpawnAtTarget((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+DB_AMP_Plus_TgtCount(_Boss, 0)
+THEN
+PROC_AMP_MirrorSupport_SpawnAtSlot(_Boss, _Template, _Slot, _BX, _BY, _BZ);
+
+PROC
+PROC_AMP_Plus_SpawnBySide((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Side, (REAL)_PX, (REAL)_PY, (REAL)_PZ)
+AND
+_Side == 0
+AND
+RealSum(_PX, 1.5, (REAL)_SX)
+AND
+RealSum(_PZ, 1.5, (REAL)_SZ)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _SX, _PY, _SZ);
+
+PROC
+PROC_AMP_Plus_SpawnBySide((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Side, (REAL)_PX, (REAL)_PY, (REAL)_PZ)
+AND
+_Side == 1
+AND
+RealSum(_PX, -1.5, (REAL)_SX)
+AND
+RealSum(_PZ, -1.5, (REAL)_SZ)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _SX, _PY, _SZ);
+
+PROC
+PROC_AMP_Plus_SpawnBySide((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Side, (REAL)_PX, (REAL)_PY, (REAL)_PZ)
+AND
+_Side == 2
+AND
+RealSum(_PX, 1.5, (REAL)_SX)
+AND
+RealSum(_PZ, -1.5, (REAL)_SZ)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _SX, _PY, _SZ);
+
+PROC
+PROC_AMP_Plus_SpawnBySide((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Side, (REAL)_PX, (REAL)_PY, (REAL)_PZ)
+AND
+_Side == 3
+AND
+RealSum(_PX, -1.5, (REAL)_SX)
+AND
+RealSum(_PZ, 1.5, (REAL)_SZ)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _SX, _PY, _SZ);
+
+IF
+Died((CHARACTER)_Boss)
+THEN
+PROC_AMP_Plus_TgtDrainIdx(_Boss);
+
+IF
+Died((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_TgtCount(_Boss, (INTEGER)_C)
+THEN
+NOT DB_AMP_Plus_TgtCount(_Boss, _C);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtSlot((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Slot == 8
+AND
+RealSum(_BX, 4.0, (REAL)_SX)
+AND
+RealSum(_BZ, 4.0, (REAL)_SZ)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _SX, _BY, _SZ);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtSlot((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Slot == 9
+AND
+RealSum(_BX, 4.5, (REAL)_SX)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _SX, _BY, _BZ);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtSlot((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Slot == 10
+AND
+RealSum(_BX, 4.0, (REAL)_SX)
+AND
+RealSum(_BZ, -4.0, (REAL)_SZ)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _SX, _BY, _SZ);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtSlot((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Slot == 11
+AND
+RealSum(_BZ, -4.5, (REAL)_SZ)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _BX, _BY, _SZ);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtSlot((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Slot == 12
+AND
+RealSum(_BX, -4.0, (REAL)_SX)
+AND
+RealSum(_BZ, -4.0, (REAL)_SZ)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _SX, _BY, _SZ);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtSlot((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Slot == 13
+AND
+RealSum(_BX, -4.5, (REAL)_SX)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _SX, _BY, _BZ);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtSlot((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Slot == 14
+AND
+RealSum(_BX, -4.0, (REAL)_SX)
+AND
+RealSum(_BZ, 4.0, (REAL)_SZ)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _SX, _BY, _SZ);
+
+PROC
+PROC_AMP_MirrorSupport_SpawnAtSlot((CHARACTER)_Boss, (GUIDSTRING)_Template, (INTEGER)_Slot, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_Slot == 15
+AND
+RealSum(_BZ, 4.5, (REAL)_SZ)
+THEN
+PROC_AMP_MirrorSupport_SpawnSolo(_Boss, _Template, _BX, _BY, _SZ);
+
+// state: (boss, effectiveCount, poolSize, spawned_k, bx, by, bz)
+PROC
+PROC_AMP_Plus_MirrorRandSeed((CHARACTER)_Boss, (INTEGER)_Eff, (INTEGER)_Size, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+THEN
+DB_AMP_Plus_RandState(_Boss, _Eff, _Size, 0, _BX, _BY, _BZ);
+PROC_AMP_Plus_MirrorRandStep(_Boss);
+
+PROC
+PROC_AMP_Plus_MirrorRandStep((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_RandState(_Boss, (INTEGER)_Eff, (INTEGER)_Size, (INTEGER)_K, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_K < _Eff
+AND
+Random(_Size, (INTEGER)_Idx)
+THEN
+PROC_AMP_Plus_MirrorRandTry(_Boss, _Idx);
+
+PROC
+PROC_AMP_Plus_MirrorRandStep((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_RandState(_Boss, (INTEGER)_Eff, (INTEGER)_Size, (INTEGER)_K, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_K >= _Eff
+THEN
+NOT DB_AMP_Plus_RandState(_Boss, _Eff, _Size, _K, _BX, _BY, _BZ);
+
+PROC
+PROC_AMP_Plus_MirrorRandTry((CHARACTER)_Boss, (INTEGER)_Idx)
+AND
+DB_AMP_Plus_RandState(_Boss, (INTEGER)_Eff, (INTEGER)_Size, (INTEGER)_K, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+NOT DB_AMP_MirrorBoss_Disabled(_Idx)
+AND
+DB_AMP_MirrorPool(_Idx, (GUIDSTRING)_Template, _)
+AND
+IntegerSum(_K, 1, (INTEGER)_K2)
+THEN
+PROC_AMP_MirrorSupport_SpawnAtSlot(_Boss, _Template, _K, _BX, _BY, _BZ);
+NOT DB_AMP_Plus_RandState(_Boss, _Eff, _Size, _K, _BX, _BY, _BZ);
+DB_AMP_Plus_RandState(_Boss, _Eff, _Size, _K2, _BX, _BY, _BZ);
+PROC_AMP_Plus_MirrorRandStep(_Boss);
+
+PROC
+PROC_AMP_Plus_MirrorRandTry((CHARACTER)_Boss, (INTEGER)_Idx)
+AND
+DB_AMP_Plus_RandState(_Boss, (INTEGER)_Eff, (INTEGER)_Size, (INTEGER)_K, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+DB_AMP_MirrorBoss_Disabled(_Idx)
+AND
+IntegerSum(_K, 1, (INTEGER)_K2)
+THEN
+NOT DB_AMP_Plus_RandState(_Boss, _Eff, _Size, _K, _BX, _BY, _BZ);
+DB_AMP_Plus_RandState(_Boss, _Eff, _Size, _K2, _BX, _BY, _BZ);
+PROC_AMP_Plus_MirrorRandStep(_Boss);
+
+// enabled-only picker: a full-pool roll loses a slot per disabled entry it lands on
+// bag: a picked entry leaves, a batch larger than the pool refills it
+
+PROC
+PROC_AMP_Plus_MirrorRandSeedB((CHARACTER)_Boss, (INTEGER)_Eff, (INTEGER)_Size, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+THEN
+PROC_AMP_Plus_EnPoolClear(_Boss);
+DB_AMP_Plus_EnCount(_Boss, 0);
+PROC_AMP_Plus_EnPoolBuild(_Boss, 0, _Size);
+PROC_AMP_Plus_MirrorRandStartB(_Boss, _Eff, _Size, _BX, _BY, _BZ);
+
+PROC
+PROC_AMP_Plus_EnPoolBuild((CHARACTER)_Boss, (INTEGER)_I, (INTEGER)_Size)
+AND
+_I < _Size
+AND
+NOT DB_AMP_MirrorBoss_Disabled(_I)
+AND
+DB_AMP_MirrorPool(_I, _, _)
+AND
+DB_AMP_Plus_EnCount(_Boss, (INTEGER)_EC)
+AND
+IntegerSum(_EC, 1, (INTEGER)_EC2)
+AND
+IntegerSum(_I, 1, (INTEGER)_I2)
+THEN
+DB_AMP_Plus_EnPool(_Boss, _EC, _I);
+NOT DB_AMP_Plus_EnCount(_Boss, _EC);
+DB_AMP_Plus_EnCount(_Boss, _EC2);
+PROC_AMP_Plus_EnPoolBuild(_Boss, _I2, _Size);
+
+PROC
+PROC_AMP_Plus_EnPoolBuild((CHARACTER)_Boss, (INTEGER)_I, (INTEGER)_Size)
+AND
+_I < _Size
+AND
+DB_AMP_MirrorBoss_Disabled(_I)
+AND
+IntegerSum(_I, 1, (INTEGER)_I2)
+THEN
+PROC_AMP_Plus_EnPoolBuild(_Boss, _I2, _Size);
+
+// slot with no pool entry is skipped so the walk cannot stall
+PROC
+PROC_AMP_Plus_EnPoolBuild((CHARACTER)_Boss, (INTEGER)_I, (INTEGER)_Size)
+AND
+_I < _Size
+AND
+NOT DB_AMP_MirrorBoss_Disabled(_I)
+AND
+NOT DB_AMP_MirrorPool(_I, _, _)
+AND
+IntegerSum(_I, 1, (INTEGER)_I2)
+THEN
+PROC_AMP_Plus_EnPoolBuild(_Boss, _I2, _Size);
+
+PROC
+PROC_AMP_Plus_EnPoolBuild((CHARACTER)_Boss, (INTEGER)_I, (INTEGER)_Size)
+AND
+_I >= _Size
+THEN
+DB_NOOP(1);
+
+// state carries the pool size, the list shrinks with every pick
+PROC
+PROC_AMP_Plus_MirrorRandStartB((CHARACTER)_Boss, (INTEGER)_Eff, (INTEGER)_Size, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+DB_AMP_Plus_EnCount(_Boss, (INTEGER)_EC)
+AND
+_EC > 0
+THEN
+DB_AMP_Plus_RandStateB(_Boss, _Eff, _Size, 0, _BX, _BY, _BZ);
+PROC_AMP_Plus_MirrorRandStepB(_Boss);
+
+PROC
+PROC_AMP_Plus_MirrorRandStartB((CHARACTER)_Boss, (INTEGER)_Eff, (INTEGER)_Size, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+DB_AMP_Plus_EnCount(_Boss, (INTEGER)_EC)
+AND
+_EC <= 0
+THEN
+PROC_AMP_Plus_EnPoolClear(_Boss);
+
+PROC
+PROC_AMP_Plus_MirrorRandStepB((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_RandStateB(_Boss, (INTEGER)_Eff, (INTEGER)_Size, (INTEGER)_K, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_K < _Eff
+AND
+DB_AMP_Plus_EnCount(_Boss, (INTEGER)_EC)
+AND
+_EC > 0
+AND
+Random(_EC, (INTEGER)_J)
+AND
+DB_AMP_Plus_EnPool(_Boss, _J, (INTEGER)_Idx)
+AND
+DB_AMP_MirrorPool(_Idx, (GUIDSTRING)_Template, _)
+AND
+IntegerSum(_K, 1, (INTEGER)_K2)
+THEN
+PROC_AMP_Plus_SpawnAtTarget(_Boss, _Template, _K, _BX, _BY, _BZ);
+NOT DB_AMP_Plus_RandStateB(_Boss, _Eff, _Size, _K, _BX, _BY, _BZ);
+DB_AMP_Plus_RandStateB(_Boss, _Eff, _Size, _K2, _BX, _BY, _BZ);
+PROC_AMP_Plus_BagTake(_Boss, _J);
+PROC_AMP_Plus_MirrorRandStepB(_Boss);
+
+PROC
+PROC_AMP_Plus_MirrorRandStepB((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_RandStateB(_Boss, (INTEGER)_Eff, (INTEGER)_Size, (INTEGER)_K, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_K < _Eff
+AND
+DB_AMP_Plus_EnCount(_Boss, (INTEGER)_EC)
+AND
+_EC <= 0
+THEN
+PROC_AMP_Plus_BagRefill(_Boss, _Size);
+
+PROC
+PROC_AMP_Plus_MirrorRandStepB((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_RandStateB(_Boss, (INTEGER)_Eff, (INTEGER)_Size, (INTEGER)_K, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+AND
+_K >= _Eff
+THEN
+NOT DB_AMP_Plus_RandStateB(_Boss, _Eff, _Size, _K, _BX, _BY, _BZ);
+PROC_AMP_Plus_EnPoolClear(_Boss);
+
+// three ordered rules, the count falls only in the last one
+
+PROC
+PROC_AMP_Plus_BagTake((CHARACTER)_Boss, (INTEGER)_J)
+AND
+DB_AMP_Plus_EnCount(_Boss, (INTEGER)_EC)
+AND
+IntegerSubtract(_EC, 1, (INTEGER)_Last)
+AND
+NOT _J == _Last
+AND
+DB_AMP_Plus_EnPool(_Boss, _J, (INTEGER)_IdxJ)
+AND
+DB_AMP_Plus_EnPool(_Boss, _Last, (INTEGER)_IdxLast)
+THEN
+NOT DB_AMP_Plus_EnPool(_Boss, _J, _IdxJ);
+NOT DB_AMP_Plus_EnPool(_Boss, _Last, _IdxLast);
+DB_AMP_Plus_EnPool(_Boss, _J, _IdxLast);
+
+PROC
+PROC_AMP_Plus_BagTake((CHARACTER)_Boss, (INTEGER)_J)
+AND
+DB_AMP_Plus_EnCount(_Boss, (INTEGER)_EC)
+AND
+IntegerSubtract(_EC, 1, (INTEGER)_Last)
+AND
+_J == _Last
+AND
+DB_AMP_Plus_EnPool(_Boss, _J, (INTEGER)_IdxJ)
+THEN
+NOT DB_AMP_Plus_EnPool(_Boss, _J, _IdxJ);
+
+PROC
+PROC_AMP_Plus_BagTake((CHARACTER)_Boss, (INTEGER)_J)
+AND
+DB_AMP_Plus_EnCount(_Boss, (INTEGER)_EC)
+AND
+IntegerSubtract(_EC, 1, (INTEGER)_EC2)
+THEN
+NOT DB_AMP_Plus_EnCount(_Boss, _EC);
+DB_AMP_Plus_EnCount(_Boss, _EC2);
+
+// second rule reads what the first wrote, an all-disabled pool ends the batch here
+PROC
+PROC_AMP_Plus_BagRefill((CHARACTER)_Boss, (INTEGER)_Size)
+THEN
+PROC_AMP_Plus_EnPoolClear(_Boss);
+DB_AMP_Plus_EnCount(_Boss, 0);
+PROC_AMP_Plus_EnPoolBuild(_Boss, 0, _Size);
+
+PROC
+PROC_AMP_Plus_BagRefill((CHARACTER)_Boss, (INTEGER)_Size)
+AND
+DB_AMP_Plus_EnCount(_Boss, (INTEGER)_EC)
+AND
+_EC > 0
+THEN
+PROC_AMP_Plus_MirrorRandStepB(_Boss);
+
+PROC
+PROC_AMP_Plus_EnPoolClear((CHARACTER)_Boss)
+THEN
+PROC_AMP_Plus_EnPoolDrainRows(_Boss);
+
+PROC
+PROC_AMP_Plus_EnPoolDrainRows((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_EnPool(_Boss, (INTEGER)_J, (INTEGER)_Idx)
+THEN
+NOT DB_AMP_Plus_EnPool(_Boss, _J, _Idx);
+PROC_AMP_Plus_EnPoolDrainRows(_Boss);
+
+PROC
+PROC_AMP_Plus_EnPoolClear((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_EnCount(_Boss, (INTEGER)_EC)
+THEN
+NOT DB_AMP_Plus_EnCount(_Boss, _EC);
+
+// debug batch: vludber in slot 0, six random after. console: oe AMP_UltraBossBatch
+// lock keeps a multi-boss combat to one batch, the second rule releases it
+IF
+TextEvent("AMP_UltraBossBatch")
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+DB_Is_InCombat(_Host, (GUIDSTRING)_CombatID)
+AND
+DB_Is_InCombat(_Boss, _CombatID)
+AND
+IsBoss(_Boss, 1)
+AND
+IsDead((CHARACTER)_Boss, 0)
+AND
+NOT DB_AMP_Plus_UltraDbgLock(1)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_Size)
+AND
+_Size > 0
+AND
+GetPosition(_Boss, (REAL)_BX, (REAL)_BY, (REAL)_BZ)
+THEN
+DB_AMP_Plus_UltraDbgLock(1);
+PROC_AMP_MirrorSupport_SpawnAtSlot(_Boss, AMP_Vludber_11eef355-dc6a-4d04-a072-417b70f569cd, 0, _BX, _BY, _BZ);
+DB_AMP_Plus_RandState(_Boss, 7, _Size, 1, _BX, _BY, _BZ);
+PROC_AMP_Plus_MirrorRandStep(_Boss);
+
+IF
+TextEvent("AMP_UltraBossBatch")
+AND
+DB_AMP_Plus_UltraDbgLock(1)
+THEN
+NOT DB_AMP_Plus_UltraDbgLock(1);
+
+EXITSECTION
+ENDEXITSECTION

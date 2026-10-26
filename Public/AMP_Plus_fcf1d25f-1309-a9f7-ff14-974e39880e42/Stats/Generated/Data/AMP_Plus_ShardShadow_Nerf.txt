@@ -1,0 +1,6 @@
+// both events are listened to, obscurity alone misses movement and reports another entity
+new entry "AMP_Shard_Cloak_Shadow_Passive"
+type "PassiveData"
+using "AMP_Shard_Cloak_Shadow_Passive"
+data "StatsFunctorContext" "OnObscurityChanged;OnMovedDistance;OnCreate;OnCombatStarted;OnTurn"
+data "StatsFunctors" "IF(HasObscuredState(ObscuredState.HeavilyObscured) or HasObscuredState(ObscuredState.HeavilyObscured,context.Source)):ApplyStatus(SELF,AMP_SHARD_SHADOW_RESIST,100,-1);IF(not HasObscuredState(ObscuredState.HeavilyObscured) and not HasObscuredState(ObscuredState.HeavilyObscured,context.Source)):RemoveStatus(SELF,AMP_SHARD_SHADOW_RESIST)"

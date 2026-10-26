@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="2ea1f4d3-ff20-4cf8-b181-2c0faac8c073" />
+					<attribute id="Name" type="LSString" value="S_HAV_Siege_W2_Vine_03" />
+					<attribute id="LevelName" type="FixedString" value="SCL_Main_A" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="TemplateName" type="FixedString" value="1ec072e4-9e76-4a3c-8fe5-7f26bf5ec974" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="LevelOverride" type="int32" value="4" />
+					<attribute id="AnubisConfigName" type="FixedString" value="HAV_Siege_Enemy" />
+					<attribute id="Faction" type="guid" value="b0b8d20c-89f8-4433-bd62-5cbcbae2e9bc" />
+					<attribute id="AiHint" type="guid" value="79318bcf-5e74-4868-be70-a605012be342" />
+					<attribute id="StayInAiHints" type="bool" value="True" />
+					<attribute id="CombatGroupID" type="FixedString" value="26d8b49a-3b9f-d511-ad32-bc764d2d7600" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="-24.758537 26.962347 151.6344" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0 0 1" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="SCL_Main_A" />
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="Treasures">
+							<children>
+								<node id="TreasureItem">
+									<attribute id="Object" type="FixedString" value="Monster_Blight" />
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

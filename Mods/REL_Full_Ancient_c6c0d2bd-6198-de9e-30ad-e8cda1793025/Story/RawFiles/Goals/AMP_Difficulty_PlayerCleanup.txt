@@ -1,0 +1,37 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+// hotfix: strip difficulty statuses off hirelings/custom companions that got
+// buffed before landing in DB_Players. new goal so it runs on existing saves.
+
+// when a char enters DB_Players, clean up difficulty
+IF
+DB_Players((CHARACTER)_Char)
+AND
+IsPlayer(_Char, 1)
+AND
+DB_AMP_DiffV3_Tracked(_Char, (STRING)_Status)
+THEN
+NOT DB_AMP_DiffV3_Tracked(_Char, _Status);
+NOT DB_AMP_DiffV3_Known(_Char);
+PROC_AMP_DiffV3_RemoveFromCreature(_Char);
+PROC_AMP_DiffV3_RemoveProgression(_Char);
+
+// safety sweep on level load, catch any players still tracked
+IF
+LevelGameplayStarted((STRING)_Level, (INTEGER)_)
+AND
+DB_Players((CHARACTER)_Char)
+AND
+DB_AMP_DiffV3_Tracked(_Char, (STRING)_Status)
+THEN
+NOT DB_AMP_DiffV3_Tracked(_Char, _Status);
+NOT DB_AMP_DiffV3_Known(_Char);
+PROC_AMP_DiffV3_RemoveFromCreature(_Char);
+PROC_AMP_DiffV3_RemoveProgression(_Char);
+
+EXITSECTION
+
+ENDEXITSECTION

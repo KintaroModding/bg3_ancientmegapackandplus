@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="f1f7e7da-1406-2f52-93f1-1e3e7443e418" />
+					<attribute id="Name" type="LSString" value="WaterProof" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/WaterProof.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="WaterProof" />
+					<attribute id="BoundsMin" type="fvec3" value="-4 -4 -4" />
+					<attribute id="BoundsMax" type="fvec3" value="4 4 4" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="3" />
+					<attribute id="Looping" type="bool" value="True" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="b5751e1e-1a40-9411-7cb7-2deb90128d66" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="0f16b580-83ca-8bf1-94e5-1efee0350102" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="4d21a9be-2f8d-3641-0f10-cbf5e926bdee" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

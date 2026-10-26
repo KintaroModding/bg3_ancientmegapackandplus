@@ -1,0 +1,19 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// catch die->resurrect creatures that skip EnteredLevel/WentOnStage/EnteredCombat.
+// e.g. ansur (S_WYR_SkeletalDragon) starts dead, script-resurrected mid-fight.
+
+IF
+Resurrected((CHARACTER)_Creature)
+AND
+QRY_AMP_DiffV3_ShouldBuff(_Creature)
+THEN
+DB_AMP_DiffV3_Known(_Creature);
+PROC_AMP_DiffV3_ApplyIfActive(_Creature);
+
+EXITSECTION
+
+ENDEXITSECTION

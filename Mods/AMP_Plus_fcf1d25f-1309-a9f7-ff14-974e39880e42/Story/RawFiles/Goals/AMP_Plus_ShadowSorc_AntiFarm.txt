@@ -1,0 +1,89 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// tier cap comes from the summon aura the helmet grants on equip
+IF
+TurnStarted((CHARACTER)_C)
+AND
+DB_Players(_C)
+AND
+IsInCombat(_C, 1)
+AND
+HasActiveStatus(_C, "AMP_SHADOW_SORC_OBSCURITY", 1)
+AND
+HasActiveStatus(_C, "AMP_SHADOW_SORC_CAPPED", 0)
+THEN
+PROC_AMP_Plus_ShadowSorc_Count(_C);
+
+PROC
+PROC_AMP_Plus_ShadowSorc_Count((CHARACTER)_C)
+AND
+DB_AMP_Plus_ShadowSorc_Gen(_C, (INTEGER)_Old)
+AND
+IntegerSum(_Old, 1, (INTEGER)_New)
+THEN
+NOT DB_AMP_Plus_ShadowSorc_Gen(_C, _Old);
+DB_AMP_Plus_ShadowSorc_Gen(_C, _New);
+PROC_AMP_Plus_ShadowSorc_CheckCap(_C, _New);
+
+PROC
+PROC_AMP_Plus_ShadowSorc_Count((CHARACTER)_C)
+AND
+NOT DB_AMP_Plus_ShadowSorc_Gen(_C, _)
+THEN
+DB_AMP_Plus_ShadowSorc_Gen(_C, 1);
+PROC_AMP_Plus_ShadowSorc_CheckCap(_C, 1);
+
+// veryrare, cap 20
+PROC
+PROC_AMP_Plus_ShadowSorc_CheckCap((CHARACTER)_C, (INTEGER)_Cur)
+AND
+HasActiveStatus(_C, "AMP_SHADOW_SORC_SUMMON_AURA_3", 1)
+AND
+_Cur >= 20
+THEN
+ApplyStatus(_C, "AMP_SHADOW_SORC_CAPPED", -1.0, 1, _C);
+
+// rare, cap 15
+PROC
+PROC_AMP_Plus_ShadowSorc_CheckCap((CHARACTER)_C, (INTEGER)_Cur)
+AND
+HasActiveStatus(_C, "AMP_SHADOW_SORC_SUMMON_AURA_3", 0)
+AND
+HasActiveStatus(_C, "AMP_SHADOW_SORC_SUMMON_AURA", 1)
+AND
+_Cur >= 15
+THEN
+ApplyStatus(_C, "AMP_SHADOW_SORC_CAPPED", -1.0, 1, _C);
+
+// uncommon, neither aura, cap 10
+PROC
+PROC_AMP_Plus_ShadowSorc_CheckCap((CHARACTER)_C, (INTEGER)_Cur)
+AND
+HasActiveStatus(_C, "AMP_SHADOW_SORC_SUMMON_AURA_3", 0)
+AND
+HasActiveStatus(_C, "AMP_SHADOW_SORC_SUMMON_AURA", 0)
+AND
+_Cur >= 10
+THEN
+ApplyStatus(_C, "AMP_SHADOW_SORC_CAPPED", -1.0, 1, _C);
+
+IF
+LongRestFinished()
+THEN
+PROC_AMP_Plus_ShadowSorc_DrainGen();
+
+PROC
+PROC_AMP_Plus_ShadowSorc_DrainGen()
+AND
+DB_AMP_Plus_ShadowSorc_Gen((CHARACTER)_C, _Old)
+THEN
+NOT DB_AMP_Plus_ShadowSorc_Gen(_C, _Old);
+RemoveStatus(_C, "AMP_SHADOW_SORC_CAPPED", _C);
+PROC_AMP_Plus_ShadowSorc_DrainGen();
+
+EXITSECTION
+ENDEXITSECTION

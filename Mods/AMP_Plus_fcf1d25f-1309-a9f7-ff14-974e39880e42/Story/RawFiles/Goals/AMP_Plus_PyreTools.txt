@@ -1,0 +1,501 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// StatusApplied, not UsingSpell: an interrupted cast would still count as a press
+
+// version gate at the head of the chain: the old Pyre answers the same events, a lower gate lets both count
+
+PROC
+PROC_AMP_Plus_PyreTools_Arm((GUIDSTRING)_CombatGuid)
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+NOT DB_AMP_Plus_PyreTools_Armed(_CombatGuid)
+THEN
+DB_AMP_Plus_PyreTools_Armed(_CombatGuid);
+
+PROC
+PROC_AMP_Plus_PyreTools_Arm((GUIDSTRING)_CombatGuid)
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+CombatGetInvolvedPartyMembersCount(_CombatGuid, (INTEGER)_N)
+AND
+_N > 0
+THEN
+PROC_AMP_Plus_PyreTools_ArmIter(_CombatGuid, _N, 1);
+
+PROC
+PROC_AMP_Plus_PyreTools_ArmIter((GUIDSTRING)_CombatGuid, (INTEGER)_Total, (INTEGER)_Idx)
+AND
+_Idx <= _Total
+AND
+CombatGetInvolvedPartyMember(_CombatGuid, _Idx, (CHARACTER)_Member)
+AND
+IsSummon(_Member, 0)
+AND
+IsPlayer(_Member, 1)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_PyreTools_ArmOne(_Member);
+PROC_AMP_Plus_PyreTools_ArmIter(_CombatGuid, _Total, _Next);
+
+PROC
+PROC_AMP_Plus_PyreTools_ArmIter((GUIDSTRING)_CombatGuid, (INTEGER)_Total, (INTEGER)_Idx)
+AND
+_Idx <= _Total
+AND
+CombatGetInvolvedPartyMember(_CombatGuid, _Idx, (CHARACTER)_Member)
+AND
+IsSummon(_Member, 1)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_PyreTools_ArmIter(_CombatGuid, _Total, _Next);
+
+PROC
+PROC_AMP_Plus_PyreTools_ArmIter((GUIDSTRING)_CombatGuid, (INTEGER)_Total, (INTEGER)_Idx)
+AND
+_Idx <= _Total
+AND
+CombatGetInvolvedPartyMember(_CombatGuid, _Idx, (CHARACTER)_Member)
+AND
+IsSummon(_Member, 0)
+AND
+IsPlayer(_Member, 0)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_PyreTools_ArmIter(_CombatGuid, _Total, _Next);
+
+PROC
+PROC_AMP_Plus_PyreTools_ArmOne((CHARACTER)_Char)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE_TOOLS", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// carrier stays apart from AMP_PLUS_PYRE_TOOLS, that name is in every button's requirement
+
+PROC
+PROC_AMP_Plus_PyreTools_ArmOne((CHARACTER)_Char)
+AND
+DB_AMP_Plus_Pyre2_BandNow((INTEGER)_B)
+AND
+IntegerToString(_B, (STRING)_BStr)
+AND
+Concatenate("AMP_PLUS_PYRE_DC_B", _BStr, (STRING)_Status)
+THEN
+ApplyStatus(_Char, _Status, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_PyreTools_ArmOne((CHARACTER)_Char)
+AND
+NOT DB_AMP_Plus_Pyre2_BandNow(_)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE_DC_B3", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_PyreTools_ArmOne((CHARACTER)_Char)
+AND
+DB_AMP_Plus_GS_Breaker(_Char)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE_BREAKER_OK", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_PyreTools_ArmOne((CHARACTER)_Char)
+AND
+CombatGetGuidFor(_Char, (GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_Plus_PyreTools_TameOK(_CombatGuid)
+AND
+NOT DB_AMP_Plus_Pyre2_Tamed(_CombatGuid)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE_TAMER_OK", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_PyreTools_TameOpen((GUIDSTRING)_CombatGuid)
+THEN
+DB_AMP_Plus_PyreTools_TameOK(_CombatGuid);
+PROC_AMP_Plus_PyreTools_TameWalk(_CombatGuid, "OPEN");
+
+PROC
+PROC_AMP_Plus_PyreTools_TameWalk((GUIDSTRING)_CombatGuid, (STRING)_Mode)
+AND
+CombatGetInvolvedPartyMembersCount(_CombatGuid, (INTEGER)_N)
+AND
+_N > 0
+THEN
+PROC_AMP_Plus_PyreTools_TameIter(_CombatGuid, _Mode, _N, 1);
+
+PROC
+PROC_AMP_Plus_PyreTools_TameIter((GUIDSTRING)_CombatGuid, (STRING)_Mode, (INTEGER)_Total, (INTEGER)_Idx)
+AND
+_Idx <= _Total
+AND
+CombatGetInvolvedPartyMember(_CombatGuid, _Idx, (CHARACTER)_Member)
+AND
+IsSummon(_Member, 0)
+AND
+IsPlayer(_Member, 1)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_PyreTools_TameSet(_Member, _Mode);
+PROC_AMP_Plus_PyreTools_TameIter(_CombatGuid, _Mode, _Total, _Next);
+
+PROC
+PROC_AMP_Plus_PyreTools_TameIter((GUIDSTRING)_CombatGuid, (STRING)_Mode, (INTEGER)_Total, (INTEGER)_Idx)
+AND
+_Idx <= _Total
+AND
+CombatGetInvolvedPartyMember(_CombatGuid, _Idx, (CHARACTER)_Member)
+AND
+IsSummon(_Member, 1)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_PyreTools_TameIter(_CombatGuid, _Mode, _Total, _Next);
+
+PROC
+PROC_AMP_Plus_PyreTools_TameIter((GUIDSTRING)_CombatGuid, (STRING)_Mode, (INTEGER)_Total, (INTEGER)_Idx)
+AND
+_Idx <= _Total
+AND
+CombatGetInvolvedPartyMember(_CombatGuid, _Idx, (CHARACTER)_Member)
+AND
+IsSummon(_Member, 0)
+AND
+IsPlayer(_Member, 0)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_PyreTools_TameIter(_CombatGuid, _Mode, _Total, _Next);
+
+PROC
+PROC_AMP_Plus_PyreTools_TameSet((CHARACTER)_Char, (STRING)_Mode)
+AND
+_Mode == "OPEN"
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE_TAMER_OK", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_PyreTools_TameSet((CHARACTER)_Char, (STRING)_Mode)
+AND
+_Mode == "SHUT"
+THEN
+RemoveStatus(_Char, "AMP_PLUS_PYRE_TAMER_OK", NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_PyreTools_TameIter((GUIDSTRING)_CombatGuid, (INTEGER)_Total, (INTEGER)_Idx)
+AND
+_Idx <= _Total
+AND
+CombatGetInvolvedPartyMember(_CombatGuid, _Idx, (CHARACTER)_Member)
+AND
+IsSummon(_Member, 1)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_PyreTools_TameIter(_CombatGuid, _Total, _Next);
+
+PROC
+PROC_AMP_Plus_PyreTools_TameIter((GUIDSTRING)_CombatGuid, (INTEGER)_Total, (INTEGER)_Idx)
+AND
+_Idx <= _Total
+AND
+CombatGetInvolvedPartyMember(_CombatGuid, _Idx, (CHARACTER)_Member)
+AND
+IsSummon(_Member, 0)
+AND
+IsPlayer(_Member, 0)
+AND
+IntegerSum(_Idx, 1, (INTEGER)_Next)
+THEN
+PROC_AMP_Plus_PyreTools_TameIter(_CombatGuid, _Total, _Next);
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_Plus_PyreTools_Armed(_CombatGuid)
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+IsPlayer(_Char, 1)
+AND
+IsSummon(_Char, 0)
+THEN
+PROC_AMP_Plus_PyreTools_ArmOne(_Char);
+
+IF
+TurnStarted((CHARACTER)_Char)
+AND
+IsPlayer(_Char, 1)
+AND
+IsSummon(_Char, 0)
+AND
+CombatGetGuidFor(_Char, (GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatGuid)
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+HasActiveStatus(_Char, "AMP_PLUS_PYRE_TOOLS", 0)
+THEN
+PROC_AMP_Plus_PyreTools_ArmOne(_Char);
+
+IF
+StatusApplied((CHARACTER)_Target, "AMP_PLUS_PYRE_DOUSE_MARK", _, _)
+AND
+CombatGetGuidFor(_Target, (GUIDSTRING)_CombatGuid)
+THEN
+PROC_AMP_Plus_PyreTools_Douse(_Target, _CombatGuid);
+
+PROC
+PROC_AMP_Plus_PyreTools_Douse((CHARACTER)_Target, (GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_Plus_Pyre_Member(_Target, _CombatGuid)
+THEN
+PROC_AMP_Plus_Pyre2_AddCapCut(_Target, _CombatGuid);
+
+PROC
+PROC_AMP_Plus_PyreTools_Douse((CHARACTER)_Target, (GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_Plus_Pyre_Member(_Target, _CombatGuid)
+AND
+DB_AMP_Plus_Pyre_Base(_CombatGuid, (INTEGER)_B)
+THEN
+PROC_AMP_Plus_Pyre2_ShowEqOn(_Target, _CombatGuid, _B);
+
+PROC
+PROC_AMP_Plus_PyreTools_Douse((CHARACTER)_Target, (GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_Plus_Pyre_Member((CHARACTER)_Char, _CombatGuid)
+AND
+NOT _Char == _Target
+THEN
+PROC_AMP_Plus_Pyre2_AddStepCut(_Char, _CombatGuid);
+
+// dress the roster once, after both counts are written
+
+PROC
+PROC_AMP_Plus_PyreTools_Douse((CHARACTER)_Target, (GUIDSTRING)_CombatGuid)
+THEN
+PROC_AMP_Plus_Pyre2_Redress(_CombatGuid);
+
+// marker comes off once read, a leftover swallows the next press on the same creature
+
+PROC
+PROC_AMP_Plus_PyreTools_Douse((CHARACTER)_Target, (GUIDSTRING)_CombatGuid)
+THEN
+RemoveStatus(_Target, "AMP_PLUS_PYRE_DOUSE_MARK", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_PLUS_PYRE_BREAK_MARK", _, _)
+AND
+CombatGetGuidFor(_Char, (GUIDSTRING)_CombatGuid)
+THEN
+PROC_AMP_Plus_PyreTools_Break(_Char, _CombatGuid);
+
+PROC
+PROC_AMP_Plus_PyreTools_Break((CHARACTER)_Char, (GUIDSTRING)_CombatGuid)
+THEN
+PROC_AMP_Plus_PyreTools_Quench(_CombatGuid, 0);
+PROC_AMP_Plus_PyreTools_Toll(_Char);
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_PLUS_PYRE_TAME_MARK", _, _)
+AND
+CombatGetGuidFor(_Char, (GUIDSTRING)_CombatGuid)
+THEN
+PROC_AMP_Plus_PyreTools_Tame(_CombatGuid);
+
+// halve what each creature wears. The fight's step is already shared out and would come off twice
+
+PROC
+PROC_AMP_Plus_PyreTools_Tame((GUIDSTRING)_CombatGuid)
+AND
+NOT DB_AMP_Plus_Pyre2_Tamed(_CombatGuid)
+THEN
+DB_AMP_Plus_Pyre2_Tamed(_CombatGuid);
+
+PROC
+PROC_AMP_Plus_PyreTools_Tame((GUIDSTRING)_CombatGuid)
+THEN
+PROC_AMP_Plus_Pyre2_SetPhase(_CombatGuid, "BROKEN");
+PROC_AMP_Plus_Pyre2_Redress(_CombatGuid);
+
+PROC
+PROC_AMP_Plus_PyreTools_Tame((GUIDSTRING)_CombatGuid)
+THEN
+PROC_AMP_Plus_PyreTools_TameWalk(_CombatGuid, "SHUT");
+
+// write the phase too, or the growth rule climbs back within a round
+
+PROC
+PROC_AMP_Plus_PyreTools_Quench((GUIDSTRING)_CombatGuid, (INTEGER)_Step)
+AND
+DB_AMP_Plus_Pyre_Cap(_CombatGuid, (INTEGER)_Cap)
+THEN
+NOT DB_AMP_Plus_Pyre_Cap(_CombatGuid, _Cap);
+
+PROC
+PROC_AMP_Plus_PyreTools_Quench((GUIDSTRING)_CombatGuid, (INTEGER)_Step)
+THEN
+DB_AMP_Plus_Pyre_Cap(_CombatGuid, _Step);
+PROC_AMP_Plus_Pyre2_SetStage(_CombatGuid, _Step);
+PROC_AMP_Plus_Pyre2_SetPhase(_CombatGuid, "BROKEN");
+
+PROC
+PROC_AMP_Plus_PyreTools_Toll((CHARACTER)_Char)
+AND
+Random(100, (INTEGER)_Roll)
+AND
+_Roll < 50
+THEN
+PROC_AMP_Plus_PyreTools_Draw(_Char);
+
+PROC
+PROC_AMP_Plus_PyreTools_Draw((CHARACTER)_Char)
+THEN
+PROC_AMP_Plus_PyreTools_DrainCand(_Char);
+
+PROC
+PROC_AMP_Plus_PyreTools_Draw((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PyreTools_CandN(_Char, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_PyreTools_CandN(_Char, _N);
+
+PROC
+PROC_AMP_Plus_PyreTools_Draw((CHARACTER)_Char)
+THEN
+DB_AMP_Plus_PyreTools_CandN(_Char, 0);
+
+// numbering in its own procedure: walking and counting in one body numbers every slot zero
+PROC
+PROC_AMP_Plus_PyreTools_Draw((CHARACTER)_Char)
+AND
+DB_AMP_Plus_GS_Slot((STRING)_Slot)
+AND
+GetEquippedItem(_Char, _Slot, (ITEM)_Item)
+AND
+IsStoryItem(_Item, 0)
+THEN
+PROC_AMP_Plus_PyreTools_Offer(_Char, _Item);
+
+PROC
+PROC_AMP_Plus_PyreTools_Offer((CHARACTER)_Char, (ITEM)_Item)
+AND
+DB_AMP_Plus_PyreTools_CandN(_Char, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Plus_PyreTools_CandN(_Char, _N);
+DB_AMP_Plus_PyreTools_CandN(_Char, _Next);
+DB_AMP_Plus_PyreTools_Cand(_Char, _N, _Item);
+
+PROC
+PROC_AMP_Plus_PyreTools_Draw((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PyreTools_CandN(_Char, (INTEGER)_N)
+AND
+_N > 0
+AND
+Random(_N, (INTEGER)_Pick)
+AND
+DB_AMP_Plus_PyreTools_Cand(_Char, _Pick, (ITEM)_Item)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE_BREAK_LOSS", 0.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+RequestDelete(_Item);
+
+PROC
+PROC_AMP_Plus_PyreTools_Draw((CHARACTER)_Char)
+THEN
+PROC_AMP_Plus_PyreTools_DrainCand(_Char);
+
+PROC
+PROC_AMP_Plus_PyreTools_Draw((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PyreTools_CandN(_Char, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_PyreTools_CandN(_Char, _N);
+
+IF
+CombatEnded((GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_Plus_PyreTools_Armed(_CombatGuid)
+THEN
+NOT DB_AMP_Plus_PyreTools_Armed(_CombatGuid);
+
+IF
+CombatEnded((GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_Plus_PyreTools_TameOK(_CombatGuid)
+THEN
+NOT DB_AMP_Plus_PyreTools_TameOK(_CombatGuid);
+
+IF
+CombatEnded((GUIDSTRING)_CombatGuid)
+AND
+DB_AMP_Plus_Pyre_Phase(_CombatGuid, (STRING)_Phase)
+THEN
+NOT DB_AMP_Plus_Pyre_Phase(_CombatGuid, _Phase);
+
+
+// counted in turn ends, not a duration: a status hung on its bearer's own turn would expire before the turn it costs
+// second ending is checked before the first is recorded, rules on one event see each other's writes
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_PLUS_PYRE_TAME_SPENT", _, _)
+AND
+DB_AMP_Plus_PyreTools_Spent(_Char, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_PyreTools_Spent(_Char, _N);
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_PLUS_PYRE_TAME_SPENT", _, _)
+THEN
+DB_AMP_Plus_PyreTools_Spent(_Char, 0);
+
+IF
+TurnEnded((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PyreTools_Spent(_Char, 1)
+THEN
+NOT DB_AMP_Plus_PyreTools_Spent(_Char, 1);
+RemoveStatus(_Char, "AMP_PLUS_PYRE_TAME_SPENT");
+
+IF
+TurnEnded((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PyreTools_Spent(_Char, 0)
+THEN
+NOT DB_AMP_Plus_PyreTools_Spent(_Char, 0);
+DB_AMP_Plus_PyreTools_Spent(_Char, 1);
+
+IF
+CombatEnded(_)
+THEN
+PROC_AMP_Plus_PyreTools_DrainSpent();
+
+PROC
+PROC_AMP_Plus_PyreTools_DrainCand((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PyreTools_Cand(_Char, (INTEGER)_Idx, (ITEM)_Item)
+THEN
+NOT DB_AMP_Plus_PyreTools_Cand(_Char, _Idx, _Item);
+PROC_AMP_Plus_PyreTools_DrainCand(_Char);
+
+PROC
+PROC_AMP_Plus_PyreTools_DrainSpent()
+AND
+DB_AMP_Plus_PyreTools_Spent((CHARACTER)_Char, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_PyreTools_Spent(_Char, _N);
+PROC_AMP_Plus_PyreTools_DrainSpent();
+
+EXITSECTION
+ENDEXITSECTION

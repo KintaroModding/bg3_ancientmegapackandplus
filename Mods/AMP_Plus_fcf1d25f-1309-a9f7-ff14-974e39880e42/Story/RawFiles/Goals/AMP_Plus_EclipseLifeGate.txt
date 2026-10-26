@@ -1,0 +1,25 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// body change is a fresh phase and base re-grants, so clear it
+
+IF
+ObjectTransformed((CHARACTER)_C, _)
+AND
+DB_AMP_Eclipse_HasInfo(_C)
+THEN
+RemoveStatus(_C, "AMP_PLUS_ECLIPSE_SPENT", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+ShapeshiftChanged((CHARACTER)_C, _, _, _)
+AND
+DB_AMP_Eclipse_HasInfo(_C)
+THEN
+RemoveStatus(_C, "AMP_PLUS_ECLIPSE_SPENT", NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+
+ENDEXITSECTION

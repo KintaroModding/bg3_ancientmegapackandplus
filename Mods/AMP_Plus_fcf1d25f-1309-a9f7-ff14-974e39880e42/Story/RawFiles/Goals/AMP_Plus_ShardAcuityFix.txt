@@ -1,0 +1,118 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// head and amulet shards share a character status name, so the head row is repointed in the transfer table
+// the engine re-fires worn-item statuses on load: rebuild waits, strip and reapply in separate ticks
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_ShardSurgeVer(1)
+THEN
+PROC_AMP_Plus_ShardSurgeRemap();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_ShardSurgeVer(1)
+THEN
+PROC_AMP_Plus_ShardSurgeRemap();
+
+PROC
+PROC_AMP_Plus_ShardSurgeRemap()
+THEN
+NOT DB_AMP_Shard_Transfer("AMP_SHARD_HELMET_ACUITY", "AMP_SHARD_CHAR_ACUITY");
+DB_AMP_Shard_Transfer("AMP_SHARD_HELMET_ACUITY", "AMP_SHARD_CHAR_ARCANE_SURGE");
+DB_AMP_Plus_ShardSurgeVer(1);
+TimerLaunch("AMP_Plus_ShardSurgeStrip", 6000);
+
+// rebuild wearers of either shard, a strip alone would take a both-wearer's amulet stacks down
+IF
+TimerFinished("AMP_Plus_ShardSurgeStrip")
+THEN
+PROC_AMP_Plus_ShardSurgeStrip();
+
+PROC
+PROC_AMP_Plus_ShardSurgeStrip()
+AND
+DB_AMP_Shard_Count((ITEM)_Item, "AMP_SHARD_HELMET_ACUITY", _)
+AND
+IsEquipped(_Item, 1)
+AND
+GetInventoryOwner(_Item, (CHARACTER)_Char)
+THEN
+DB_AMP_Plus_ShardSurgeDirty(_Char);
+
+PROC
+PROC_AMP_Plus_ShardSurgeStrip()
+AND
+DB_AMP_Shard_Count((ITEM)_Item, "AMP_SHARD_AMULET_ACUITY", _)
+AND
+IsEquipped(_Item, 1)
+AND
+GetInventoryOwner(_Item, (CHARACTER)_Char)
+THEN
+DB_AMP_Plus_ShardSurgeDirty(_Char);
+
+PROC
+PROC_AMP_Plus_ShardSurgeStrip()
+AND
+DB_AMP_Plus_ShardSurgeDirty((CHARACTER)_Char)
+THEN
+RemoveStatus(_Char, "AMP_SHARD_CHAR_ACUITY", _Char);
+RemoveStatus(_Char, "AMP_SHARD_CHAR_ARCANE_SURGE", _Char);
+
+PROC
+PROC_AMP_Plus_ShardSurgeStrip()
+THEN
+TimerLaunch("AMP_Plus_ShardSurgeRebuild", 1000);
+
+IF
+TimerFinished("AMP_Plus_ShardSurgeRebuild")
+THEN
+PROC_AMP_Plus_ShardSurgeRebuild();
+
+PROC
+PROC_AMP_Plus_ShardSurgeRebuild()
+AND
+DB_AMP_Shard_Count((ITEM)_Item, "AMP_SHARD_AMULET_ACUITY", (INTEGER)_Count)
+AND
+IsEquipped(_Item, 1)
+AND
+GetInventoryOwner(_Item, (CHARACTER)_Char)
+AND
+DB_AMP_Plus_ShardSurgeDirty(_Char)
+THEN
+PROC_AMP_ApplyShardEffectN(_Char, "AMP_SHARD_CHAR_ACUITY", _Count);
+
+PROC
+PROC_AMP_Plus_ShardSurgeRebuild()
+AND
+DB_AMP_Shard_Count((ITEM)_Item, "AMP_SHARD_HELMET_ACUITY", (INTEGER)_Count)
+AND
+IsEquipped(_Item, 1)
+AND
+GetInventoryOwner(_Item, (CHARACTER)_Char)
+AND
+DB_AMP_Plus_ShardSurgeDirty(_Char)
+THEN
+PROC_AMP_ApplyShardEffectN(_Char, "AMP_SHARD_CHAR_ARCANE_SURGE", _Count);
+
+PROC
+PROC_AMP_Plus_ShardSurgeRebuild()
+THEN
+PROC_AMP_Plus_ShardSurgeDrainDirty();
+
+PROC
+PROC_AMP_Plus_ShardSurgeDrainDirty()
+AND
+DB_AMP_Plus_ShardSurgeDirty((CHARACTER)_Char)
+THEN
+NOT DB_AMP_Plus_ShardSurgeDirty(_Char);
+PROC_AMP_Plus_ShardSurgeDrainDirty();
+
+EXITSECTION
+ENDEXITSECTION

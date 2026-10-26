@@ -1,0 +1,43 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_AMP_DiffV3_CleanupActive(1);
+KBSECTION
+
+// pause cleanup during level transitions to avoid mass-died spam
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+NOT DB_AMP_DiffV3_CleanupActive(1);
+DB_AMP_DiffV3_CleanupActive(0);
+TimerLaunch("AMP_DiffV3_CleanupResume", 100000);
+
+IF
+TimerFinished("AMP_DiffV3_CleanupResume")
+THEN
+NOT DB_AMP_DiffV3_CleanupActive(0);
+DB_AMP_DiffV3_CleanupActive(1);
+
+// remove dead creatures from tracking dbs (only when active)
+
+IF
+Died((CHARACTER)_Creature)
+AND
+DB_AMP_DiffV3_CleanupActive(1)
+AND
+DB_AMP_DiffV3_Known(_Creature)
+THEN
+NOT DB_AMP_DiffV3_Known(_Creature);
+
+IF
+Died((CHARACTER)_Creature)
+AND
+DB_AMP_DiffV3_CleanupActive(1)
+AND
+DB_AMP_DiffV3_Tracked(_Creature, (STRING)_Status)
+THEN
+NOT DB_AMP_DiffV3_Tracked(_Creature, _Status);
+
+EXITSECTION
+ENDEXITSECTION

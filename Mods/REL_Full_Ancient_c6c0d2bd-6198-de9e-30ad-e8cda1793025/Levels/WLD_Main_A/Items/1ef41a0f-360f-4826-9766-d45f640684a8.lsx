@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="1ef41a0f-360f-4826-9766-d45f640684a8" />
+					<attribute id="Name" type="LSString" value="S_UND_FairyRings_Skeleton_000" />
+					<attribute id="LevelName" type="FixedString" value="WLD_Main_A" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="4eea1b0f-aa2e-4135-8da0-11cf61cf83cf" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="WalkThrough" type="bool" value="True" />
+					<attribute id="InventoryType" type="uint8" value="7" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="83.04457 14.9756 -241.3214" />
+							<attribute id="RotationQuat" type="fvec4" value="-0.1312518 0.5507632 0.02220561 0.823978" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="WLD_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="53403475-3141-4317-fa26-9f114ae0c2d9" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="5f9b755a-cbf1-e713-ca01-617aa522b1e1" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="ef7f111e-8915-f586-3ee0-1a48c46f9ed1" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="OnUsePeaceActions">
+							<children>
+								<node id="Action">
+									<attribute id="ActionType" type="int32" value="1" />
+									<children>
+										<node id="Attributes">
+											<attribute id="Animation" type="FixedString" value="" />
+											<attribute id="Conditions" type="LSString" value="" />
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="Gold_Pocket_Modest" />
+								</node>
+							</children>
+						</node>
+						<node id="ItemList" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="400" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="ac5098b6-83fe-4bce-9b9c-b563334768d7" />
+					<attribute id="Name" type="LSString" value="AMP_CambionT" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="ParentTemplateId" type="FixedString" value="9ddd4e4b-f7ce-4873-acfc-7b37e718b284" />
+					<attribute id="DisplayName" type="TranslatedString" handle="he83b9ae8g9392g1af1geedfgbfa00fbb2dce" version="1" />
+					<attribute id="Icon" type="FixedString" value="b02891fa-3672-1b3e-8d89-c940d32557b4-_(Icon_Mizora_Cambion)" />
+					<attribute id="Stats" type="FixedString" value="Cambion" />
+					<attribute id="SpellSet" type="FixedString" value="CommonSummonFlyActions" />
+					<attribute id="DefaultDialog" type="FixedString" value="700cd9e0-3e24-605e-d7e5-e90bcda8ee3b" />
+					<attribute id="VocalLaughterResourceID" type="FixedString" value="71d81811-9692-4d28-8d7c-87fe56e870eb" />
+					<attribute id="CharacterVisualResourceID" type="FixedString" value="7e74ecce-5f79-092d-8a62-4d36a4d06012" />
+					<attribute id="IsLootable" type="bool" value="False" />
+					<attribute id="IsEquipmentLootable" type="bool" value="False" />
+					<attribute id="CanBePickpocketed" type="bool" value="False" />
+					<attribute id="IsTradable" type="uint8" value="0" />
+					<attribute id="AnubisConfigName" type="FixedString" value="DefaultCharacter" />
+					<attribute id="GeneratePortrait" type="LSString" value="AMP_CambionT" />
+					<attribute id="IsBoss" type="bool" value="False" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="3806477c-65a7-4100-9f92-be4c12c4fa4f" />
+								</node>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="98836f66-be23-4195-8601-71767084db0c" />
+								</node>
+							</children>
+						</node>
+						<node id="Bounds">
+							<children>
+								<node id="Bound">
+									<attribute id="Type" type="uint8" value="0" />
+									<attribute id="Shape" type="uint8" value="2" />
+									<attribute id="Min" type="fvec3" value="-0.40751 -0.00135875 -0.1058585" />
+									<attribute id="Max" type="fvec3" value="0.40751 1.93354 0.0630085" />
+									<attribute id="Radius" type="float" value="0.249" />
+									<attribute id="Height" type="float" value="2" />
+								</node>
+								<node id="Bound">
+									<attribute id="Type" type="uint8" value="1" />
+									<attribute id="Shape" type="uint8" value="2" />
+									<attribute id="Min" type="fvec3" value="-0.81502 -0.00135875 -0.211717" />
+									<attribute id="Max" type="fvec3" value="0.81502 1.93354 0.126017" />
+									<attribute id="Radius" type="float" value="0.2" />
+									<attribute id="Height" type="float" value="2" />
+								</node>
+								<node id="Bound">
+									<attribute id="Type" type="uint8" value="2" />
+									<attribute id="Shape" type="uint8" value="2" />
+									<attribute id="Min" type="fvec3" value="-0.81502 -0.00135875 -0.211717" />
+									<attribute id="Max" type="fvec3" value="0.81502 1.93354 0.126017" />
+									<attribute id="Radius" type="float" value="0.499" />
+									<attribute id="Height" type="float" value="2" />
+								</node>
+							</children>
+						</node>
+						<node id="EquipmentTypes">
+							<children>
+								<node id="">
+									<attribute id="Object" type="guid" value="d2141ff0-1368-4c35-b438-e9cd208182f8" />
+								</node>
+								<node id="">
+									<attribute id="Object" type="guid" value="cb322434-365d-47bf-8357-e2f202dfb129" />
+								</node>
+							</children>
+						</node>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="DISINTEGRATE_DEATH" />
+								</node>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="INVULNERABLE_NOT_SHOWN" />
+								</node>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="GROUNDED" />
+								</node>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="AMP_CAMBION_TRADER_WARNING" />
+								</node>
+							</children>
+						</node>
+						<node id="TradeTreasures">
+							<children>
+								<node id="TreasureItem">
+									<attribute id="Object" type="FixedString" value="AMP_Dothrophenia" />
+								</node>
+							</children>
+						</node>
+						<node id="PickingPhysics">
+							<children>
+								<node id="PickingPhysicsTemplates">
+									<attribute id="MapKey" type="FixedString" value="CharacterSittingPicking" />
+									<attribute id="MapValue" type="FixedString" value="17d6a1c8-e453-fbda-5769-38f4d950a50a" />
+								</node>
+								<node id="PickingPhysicsTemplates">
+									<attribute id="MapKey" type="FixedString" value="CharacterDeadPicking" />
+									<attribute id="MapValue" type="FixedString" value="4ddf2cdf-7ee2-1248-3780-0c36ee5e21b3" />
+								</node>
+								<node id="PickingPhysicsTemplates">
+									<attribute id="MapKey" type="FixedString" value="CharacterLyingPicking" />
+									<attribute id="MapValue" type="FixedString" value="6323b0ce-dab3-6e85-bebc-301aceb84602" />
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

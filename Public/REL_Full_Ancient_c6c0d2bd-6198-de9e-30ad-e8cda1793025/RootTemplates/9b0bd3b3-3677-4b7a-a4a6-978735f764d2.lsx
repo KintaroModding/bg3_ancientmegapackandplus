@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="10" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="9b0bd3b3-3677-4b7a-a4a6-978735f764d2" />
+					<attribute id="Name" type="LSString" value="AMP_Astral_Chest" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="0b90bf9d-66fd-4741-be1f-39181efca97a" />
+					<attribute id="VisualTemplate" type="FixedString" value="1f407cd2-6535-0d56-6bd9-323c441365d8" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h79a6c379g0061g401eg88abg8f3e25d8448b" version="1" />
+					<attribute id="Icon" type="FixedString" value="Astral_Chest" />
+					<attribute id="Stats" type="FixedString" value="AMP_Astral_Chest" />
+					<attribute id="LockDifficultyClassID" type="int32" value="99" />
+					<attribute id="Key" type="FixedString" value="NO_KEY" />
+					<attribute id="BloodSurfaceType" type="FixedString" value="SurfaceHolyFire" />
+					<attribute id="Description" type="TranslatedString" handle="h0bc7ff86gf654g4c05g86dag626da8a21376" version="1" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="d5d006a2-613a-4c2e-87b4-a529c2ce9816" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="AMP_Astral_Chest_01" />
+								</node>
+							</children>
+						</node>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="DEBRIS_THRESHOLD_GREATER" />
+								</node>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="AMP_ASTRAL_CHEST_VFX" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

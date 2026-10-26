@@ -1,0 +1,168 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// boss progression, stack tier = player tier at kill, kept in DB_AMP_BossProgression_KillTier(Key, Tier)
+
+// boss registry - keys from DB_OnlyOnce (AMP_BossRewards)
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Ethel");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_DrorRagzlin");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Minthara");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_PriestessGut");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Spectator");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_PhaseSpider");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Kagha");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Ketheric");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Gerringothe");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_MalusThorm");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Thisobald");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Balthazar");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Yurgir");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Orin");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Gortash");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Raphael");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Cazador");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Sarevok");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Ansur");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Viconia");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Lorroakan");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Zhalk");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Owlbear");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Bulette");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Grym");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Wargaz");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_ShamblingMound");
+DB_AMP_BossProgression_BossKey("HIDDEN_WLD_Boosters_AMP_Boss_Nightsong");
+
+// mode -> player marker status
+DB_AMP_BossProgression_PlayerStatus("IMPOSSIBLE", "AMP_BOSS_PROGRESS_IMPOSSIBLE");
+
+// v5 tier statuses registered in AMP_Difficulty_V3.txt + AMP_GameMode_Core.txt
+
+KBSECTION
+// block 1: level load scan (existing-save compat)
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_AMP_BossProgression_Scan();
+
+PROC
+PROC_AMP_BossProgression_Scan()
+AND
+DB_AMP_BossProgression_BossKey((STRING)_Key)
+AND
+DB_OnlyOnce(_Key)
+AND
+NOT DB_AMP_BossProgression_Applied(_Key)
+THEN
+DB_AMP_BossProgression_Applied(_Key);
+
+// dead, Z_AMP_Difficulty_ProgV6.txt recasts on level load
+// PROC
+// PROC_AMP_BossProgression_Scan()
+// AND
+// DB_AMP_Difficulty_Mode((STRING)_Mode)
+// AND
+// _Mode != "NONE"
+// THEN
+// PROC_AMP_BossProgression_ReapplyPlayers(_Mode);
+
+// dead, Z_AMP_Difficulty_ProgV6.txt takes the insert and recast
+// IF
+// DB_OnlyOnce((STRING)_Key)
+// AND
+// DB_AMP_BossProgression_BossKey(_Key)
+// AND
+// NOT DB_AMP_BossProgression_Applied(_Key)
+// AND
+// DB_AMP_Difficulty_Mode((STRING)_Mode)
+// AND
+// _Mode != "NONE"
+// AND
+// DB_AMP_CurrentTier((INTEGER)_Tier)
+// AND
+// DB_AMP_BossProgression_PlayerStatus(_Mode, (STRING)_StatusName)
+// THEN
+// DB_AMP_BossProgression_Applied(_Key);
+// DB_AMP_BossProgression_KillTier(_Key, _Tier);
+// PROC_AMP_BossProgression_ApplyPlayerStatusToAll(_StatusName);
+// PROC_AMP_BossProgression_BuffAllTrackedWithTier(_Mode, _Tier);
+
+// block 3: apply player statuses
+
+PROC
+PROC_AMP_BossProgression_ApplyPlayerStatusToAll((STRING)_StatusName)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+ApplyStatus(_Player, _StatusName, -1.0, 1, _Player);
+
+// reapply for mode, used on scan + difficulty change
+PROC
+PROC_AMP_BossProgression_ReapplyPlayers((STRING)_Mode)
+AND
+DB_AMP_BossProgression_PlayerStatus(_Mode, (STRING)_StatusName)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+DB_AMP_BossProgression_Applied((STRING)_Key)
+THEN
+ApplyStatus(_Player, _StatusName, -1.0, 1, _Player);
+
+// stub procs, ApplyByEffLevel still calls them
+PROC
+PROC_AMP_BossProgression_BuffNPC((CHARACTER)_Creature)
+THEN
+DB_NOOP(1);
+
+PROC
+PROC_AMP_BossProgression_BuffBoss((CHARACTER)_Creature)
+THEN
+DB_NOOP(1);
+
+// block 4b: dead code, was called from the now-disabled block 2
+
+// dead, Z_AMP_Difficulty_ProgV6.txt strips and applies per boss on DB_Players insert
+// IF
+// DB_Players((CHARACTER)_Player)
+// THEN
+// // cleanup + reapply
+// DB_NOOP(1);
+
+//IF
+//DB_Players((CHARACTER)_Player)
+//AND
+//DB_AMP_Difficulty_Mode((STRING)_Mode)
+//AND
+//_Mode != "NONE"
+//AND
+//DB_AMP_BossProgression_PlayerStatus(_Mode, (STRING)_StatusName)
+//AND
+//DB_AMP_BossProgression_Applied((STRING)_Key)
+//THEN
+//ApplyStatus(_Player, _StatusName, -1.0, 1, _Player);
+
+// dead, Z_AMP_Difficulty_ProgV6.txt recasts on DB_AMP_Difficulty_Mode insert
+// IF
+// DB_AMP_Difficulty_Mode((STRING)_NewMode)
+// THEN
+// PROC_AMP_BossProgression_RemoveAllPlayerStatuses();
+
+//IF
+//DB_AMP_Difficulty_Mode((STRING)_NewMode)
+//AND
+//_NewMode != "NONE"
+//THEN
+//PROC_AMP_BossProgression_ReapplyPlayers(_NewMode);
+
+PROC
+PROC_AMP_BossProgression_RemoveAllPlayerStatuses()
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+RemoveStatus(_Player, "AMP_BOSS_PROGRESS_IMPOSSIBLE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_BOSS_PROGRESS_STANDARD", NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+
+ENDEXITSECTION

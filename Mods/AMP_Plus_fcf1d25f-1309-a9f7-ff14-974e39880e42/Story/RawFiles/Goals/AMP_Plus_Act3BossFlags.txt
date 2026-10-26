@@ -1,0 +1,40 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+DB_AMP_ForceBoss(S_LOW_SteelWatcher_Prototype_51db791d-4378-448a-86ba-3e3ae2748db6);
+
+DB_AMP_ForceBoss(S_LOW_FatherCarrion_b003409c-364f-4065-94bf-7436001d890e);
+
+DB_AMP_ForceBoss(S_LOW_HouseOfHope_Incubus_3947e0e2-3b4c-4a39-ac53-454e95665b26);
+
+// vault has no boss of its own, main guard carries the flag
+DB_AMP_ForceBoss(S_LOW_CountingHouse_VaultMainGuard_936953b6-059b-4ed6-b03a-5d1b340f8889);
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_Act3FlagsVer(1)
+THEN
+PROC_AMP_Plus_Act3Flags_Seed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_Act3FlagsVer(1)
+THEN
+PROC_AMP_Plus_Act3Flags_Seed();
+
+PROC
+PROC_AMP_Plus_Act3Flags_Seed()
+THEN
+DB_AMP_ForceBoss(S_LOW_SteelWatcher_Prototype_51db791d-4378-448a-86ba-3e3ae2748db6);
+DB_AMP_ForceBoss(S_LOW_FatherCarrion_b003409c-364f-4065-94bf-7436001d890e);
+DB_AMP_ForceBoss(S_LOW_HouseOfHope_Incubus_3947e0e2-3b4c-4a39-ac53-454e95665b26);
+DB_AMP_ForceBoss(S_LOW_CountingHouse_VaultMainGuard_936953b6-059b-4ed6-b03a-5d1b340f8889);
+DB_AMP_Plus_Act3FlagsVer(1);
+
+EXITSECTION
+ENDEXITSECTION

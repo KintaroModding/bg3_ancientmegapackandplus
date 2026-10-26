@@ -1,0 +1,304 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// altar: trade astrum crystal for resonance matrix. direct template checks, no flags
+
+DB_AMP_Altar_Tag((TAG)AMP_ALTAR01_daf044dd-a6f1-450e-94ad-5f7770aa35b3);
+
+// base success chance per crystal, depleting-mine model
+DB_AMP_Altar_BaseChance("Arcanum", 50);
+DB_AMP_Altar_BaseChance("Empyreum", 75);
+DB_AMP_Altar_BaseChance("Opus", 85);
+DB_AMP_Altar_BaseChance("Immortalis", 100);
+
+// pct reduction per success
+DB_AMP_Altar_Diminishing("Arcanum", 30);
+DB_AMP_Altar_Diminishing("Empyreum", 25);
+DB_AMP_Altar_Diminishing("Opus", 10);
+DB_AMP_Altar_Diminishing("Immortalis", 10);
+
+DB_AMP_Altar_Output((ITEMROOT)AMP_Resonance_Matrix_2c8dfeb6-c86e-4595-b9e9-080aa87bd0b7);
+
+DB_AMP_Altar_Tutorial_Shown(0);
+DB_AMP_Cheat_Mode(0);
+DB_AMP_Cheat_Settings_Asked(0);
+
+KBSECTION
+
+// altar vfx on open
+IF
+UseStarted((CHARACTER)_Player, (ITEM)_Altar)
+AND
+DB_AMP_Altar_Tag((TAG)_AltarTag)
+AND
+IsTagged(_Altar, _AltarTag, 1)
+AND
+DB_Players(_Player)
+THEN
+ApplyStatus(_Altar, "ARCANIZER_ALTAR_ACTIVE_VFX", -1.0, 1);
+SysClear("DB_AMP_Altar_LastUser", 1);
+DB_AMP_Altar_LastUser(_Player);
+// PROC_AMP_CheckFirstTimeUse(_Player);
+
+// altar vfx off on close
+IF
+UseFinished((CHARACTER)_Player, (ITEM)_Altar, (INTEGER)_Success)
+AND
+DB_AMP_Altar_Tag((TAG)_AltarTag)
+AND
+IsTagged(_Altar, _AltarTag, 1)
+THEN
+RemoveStatus(_Altar, "ARCANIZER_ALTAR_ACTIVE_VFX");
+
+// dead: old altar tutorial, replaced by voidcapsule
+/*
+// mode 0: show tutorial always
+PROC
+PROC_AMP_CheckFirstTimeUse((CHARACTER)_Player)
+AND
+DB_AMP_Hints_Mode(0)
+AND
+QRY_AMP_ShouldShowHint(2)
+THEN
+OpenMessageBox(_Player, "AMP_Altar01");
+
+// modes 1,3,4: show once
+PROC
+PROC_AMP_CheckFirstTimeUse((CHARACTER)_Player)
+AND
+NOT DB_AMP_Hints_Mode(0)
+AND
+DB_AMP_Altar_Tutorial_Shown(0)
+AND
+QRY_AMP_ShouldShowHint(2)
+THEN
+OpenMessageBox(_Player, "AMP_Altar01");
+NOT DB_AMP_Altar_Tutorial_Shown(0);
+DB_AMP_Altar_Tutorial_Shown(1);
+PROC_AMP_ShowCheatModeSettings(_Player);
+*/
+
+// dead: cheat mode settings moved to training ring
+/*
+PROC
+PROC_AMP_ShowCheatModeSettings((CHARACTER)_Player)
+AND
+DB_AMP_Cheat_Settings_Asked(0)
+THEN
+NOT DB_AMP_Cheat_Settings_Asked(0);
+DB_AMP_Cheat_Settings_Asked(1);
+ObjectTimerLaunch(_Player, "AMP_Cheat_Settings_Delay", 2000, 0);
+
+IF
+ObjectTimerFinished((CHARACTER)_Player, "AMP_Cheat_Settings_Delay")
+THEN
+OpenMessageBoxYesNo(_Player, "AMP_Altar04");
+
+// yes = keep fair play
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Altar04", 1)
+AND
+DB_AMP_Cheat_Mode(1)
+THEN
+NOT DB_AMP_Cheat_Mode(1);
+DB_AMP_Cheat_Mode(0);
+
+// no = enable cheater mode
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Altar04", 0)
+AND
+DB_AMP_Cheat_Mode(0)
+THEN
+NOT DB_AMP_Cheat_Mode(0);
+DB_AMP_Cheat_Mode(1);
+*/
+
+// crystal added to altar -> process directly
+IF
+AddedTo((ITEM)_Crystal, (ITEM)_Altar, _)
+AND
+DB_AMP_Altar_Tag((TAG)_AltarTag)
+AND
+IsTagged(_Altar, _AltarTag, 1)
+THEN
+PROC_AMP_CheckAndProcessCrystal(_Crystal, _Altar);
+
+// arcanum (uncommon, green)
+PROC
+PROC_AMP_CheckAndProcessCrystal((ITEM)_Crystal, (ITEM)_Altar)
+AND
+GetTemplate(_Crystal, (ITEMROOT)Enchant_Crystal4_faca0315-cb41-4a63-9b37-9afc6a1d1da4)
+THEN
+PROC_AMP_ExchangeCrystal(_Crystal, _Altar, "Arcanum");
+
+// empyreum (rare, blue)
+PROC
+PROC_AMP_CheckAndProcessCrystal((ITEM)_Crystal, (ITEM)_Altar)
+AND
+GetTemplate(_Crystal, (ITEMROOT)Enchant_Crystal2_f90f99ba-d30d-4f05-8cde-b90092f128d8)
+THEN
+PROC_AMP_ExchangeCrystal(_Crystal, _Altar, "Empyreum");
+
+// opus (very rare, yellow)
+PROC
+PROC_AMP_CheckAndProcessCrystal((ITEM)_Crystal, (ITEM)_Altar)
+AND
+GetTemplate(_Crystal, (ITEMROOT)Enchant_Crystal_d09be0fd-f230-47af-a523-c919e41c1261)
+THEN
+PROC_AMP_ExchangeCrystal(_Crystal, _Altar, "Opus");
+
+// immortalis (legendary, red)
+PROC
+PROC_AMP_CheckAndProcessCrystal((ITEM)_Crystal, (ITEM)_Altar)
+AND
+GetTemplate(_Crystal, (ITEMROOT)Enchant_Crystal3_98f1085c-1a49-474a-875c-cd0f2d9fdff0)
+THEN
+PROC_AMP_ExchangeCrystal(_Crystal, _Altar, "Immortalis");
+
+// cheat mode: always succeed
+PROC
+PROC_AMP_ExchangeCrystal((ITEM)_Crystal, (ITEM)_Altar, (STRING)_CrystalType)
+AND
+DB_AMP_Cheat_Mode(1)
+AND
+DB_AMP_Altar_LastUser((CHARACTER)_Player)
+AND
+DB_AMP_Altar_Output((ITEMROOT)_OutputTemplate)
+THEN
+RequestDelete(_Crystal);
+TemplateAddTo(_OutputTemplate, _Player, 1, 1);
+ApplyStatus(_Altar, "ARCANIZER_ALTAR_SUCCESS_VFX", 0.0, 1);
+// PROC_AMP_CheckFirstTimeSuccess(_Player);
+
+// normal mode: roll with diminishing returns
+PROC
+PROC_AMP_ExchangeCrystal((ITEM)_Crystal, (ITEM)_Altar, (STRING)_CrystalType)
+AND
+DB_AMP_Cheat_Mode(0)
+AND
+DB_AMP_Altar_LastUser((CHARACTER)_Player)
+AND
+DB_AMP_Altar_BaseChance(_CrystalType, (INTEGER)_BaseChance)
+AND
+DB_AMP_Altar_Diminishing(_CrystalType, (INTEGER)_DiminishingRate)
+THEN
+PROC_AMP_CalculateAndRoll(_Crystal, _Altar, _CrystalType, _Player, _BaseChance, _DiminishingRate);
+
+// get success count for this altar + crystal type
+PROC
+PROC_AMP_CalculateAndRoll((ITEM)_Crystal, (ITEM)_Altar, (STRING)_CrystalType, (CHARACTER)_Player, (INTEGER)_BaseChance, (INTEGER)_DiminishingRate)
+AND
+DB_AMP_Altar_Successes(_Altar, _CrystalType, (INTEGER)_SuccessCount)
+THEN
+PROC_AMP_ApplyDiminishing(_Crystal, _Altar, _CrystalType, _Player, _BaseChance, _DiminishingRate, _SuccessCount);
+
+// no prior successes -> 0
+PROC
+PROC_AMP_CalculateAndRoll((ITEM)_Crystal, (ITEM)_Altar, (STRING)_CrystalType, (CHARACTER)_Player, (INTEGER)_BaseChance, (INTEGER)_DiminishingRate)
+AND
+NOT DB_AMP_Altar_Successes(_Altar, _CrystalType, _)
+THEN
+PROC_AMP_ApplyDiminishing(_Crystal, _Altar, _CrystalType, _Player, _BaseChance, _DiminishingRate, 0);
+
+// fresh -> base chance
+PROC
+PROC_AMP_ApplyDiminishing((ITEM)_Crystal, (ITEM)_Altar, (STRING)_CrystalType, (CHARACTER)_Player, (INTEGER)_BaseChance, (INTEGER)_DiminishingRate, 0)
+THEN
+PROC_AMP_RollForSuccess(_Crystal, _Altar, _CrystalType, _Player, _BaseChance);
+
+// prior successes -> apply diminishing
+PROC
+PROC_AMP_ApplyDiminishing((ITEM)_Crystal, (ITEM)_Altar, (STRING)_CrystalType, (CHARACTER)_Player, (INTEGER)_BaseChance, (INTEGER)_DiminishingRate, (INTEGER)_SuccessCount)
+AND
+_SuccessCount > 0
+THEN
+PROC_AMP_CalculateMultiplicative(_Crystal, _Altar, _CrystalType, _Player, _BaseChance, _DiminishingRate, _SuccessCount);
+
+// chance = base * ((100-rate)/100)^count. one success
+PROC
+PROC_AMP_CalculateMultiplicative((ITEM)_Crystal, (ITEM)_Altar, (STRING)_CrystalType, (CHARACTER)_Player, (INTEGER)_CurrentChance, (INTEGER)_DiminishingRate, 1)
+AND
+IntegerSubtract(100, _DiminishingRate, (INTEGER)_Multiplier)
+AND
+IntegerProduct(_CurrentChance, _Multiplier, (INTEGER)_Product)
+AND
+IntegerDivide(_Product, 100, (INTEGER)_NewChance)
+AND
+IntegerMax(_NewChance, 1, (INTEGER)_FinalChance)
+THEN
+PROC_AMP_RollForSuccess(_Crystal, _Altar, _CrystalType, _Player, _FinalChance);
+
+// multiple successes -> iterate
+PROC
+PROC_AMP_CalculateMultiplicative((ITEM)_Crystal, (ITEM)_Altar, (STRING)_CrystalType, (CHARACTER)_Player, (INTEGER)_CurrentChance, (INTEGER)_DiminishingRate, (INTEGER)_RemainingCount)
+AND
+_RemainingCount > 1
+AND
+IntegerSubtract(100, _DiminishingRate, (INTEGER)_Multiplier)
+AND
+IntegerProduct(_CurrentChance, _Multiplier, (INTEGER)_Product)
+AND
+IntegerDivide(_Product, 100, (INTEGER)_NewChance)
+AND
+IntegerSubtract(_RemainingCount, 1, (INTEGER)_NextCount)
+THEN
+PROC_AMP_CalculateMultiplicative(_Crystal, _Altar, _CrystalType, _Player, _NewChance, _DiminishingRate, _NextCount);
+
+// success: give matrix, bump counter
+PROC
+PROC_AMP_RollForSuccess((ITEM)_Crystal, (ITEM)_Altar, (STRING)_CrystalType, (CHARACTER)_Player, (INTEGER)_Chance)
+AND
+Random(100, (INTEGER)_Roll)
+AND
+_Roll <= _Chance
+AND
+DB_AMP_Altar_Output((ITEMROOT)_OutputTemplate)
+THEN
+RequestDelete(_Crystal);
+TemplateAddTo(_OutputTemplate, _Player, 1, 1);
+ApplyStatus(_Altar, "ARCANIZER_ALTAR_SUCCESS_VFX", 0.0, 1);
+PROC_AMP_IncrementSuccessCount(_Altar, _CrystalType);
+// PROC_AMP_CheckFirstTimeSuccess(_Player);
+
+// fail: delete crystal
+PROC
+PROC_AMP_RollForSuccess((ITEM)_Crystal, (ITEM)_Altar, (STRING)_CrystalType, (CHARACTER)_Player, (INTEGER)_Chance)
+AND
+Random(100, (INTEGER)_Roll)
+AND
+_Roll > _Chance
+THEN
+RequestDelete(_Crystal);
+
+// bump success counter
+PROC
+PROC_AMP_IncrementSuccessCount((ITEM)_Altar, (STRING)_CrystalType)
+AND
+DB_AMP_Altar_Successes(_Altar, _CrystalType, (INTEGER)_CurrentCount)
+AND
+IntegerSum(_CurrentCount, 1, (INTEGER)_NewCount)
+THEN
+NOT DB_AMP_Altar_Successes(_Altar, _CrystalType, _CurrentCount);
+DB_AMP_Altar_Successes(_Altar, _CrystalType, _NewCount);
+
+// first success for this type
+PROC
+PROC_AMP_IncrementSuccessCount((ITEM)_Altar, (STRING)_CrystalType)
+AND
+NOT DB_AMP_Altar_Successes(_Altar, _CrystalType, _)
+THEN
+DB_AMP_Altar_Successes(_Altar, _CrystalType, 1);
+
+// dead: old altar success tutorial, replaced by voidcapsule
+/*
+PROC
+PROC_AMP_CheckFirstTimeSuccess((CHARACTER)_Player)
+AND
+QRY_AMP_ShouldShowHint(1)
+THEN
+OpenMessageBox(_Player, "AMP_Altar02");
+*/
+
+EXITSECTION
+
+ENDEXITSECTION

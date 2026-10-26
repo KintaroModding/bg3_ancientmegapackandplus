@@ -1,0 +1,21 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// heat hits cap -> glow the weapon ~3 turns. stats can't catch the crossing so drive it here.
+IF
+StatusApplied((CHARACTER)_Player, "AMP_LASER_HEAT", _, _)
+AND
+GetStatusTurns(_Player, "AMP_LASER_HEAT", _Turns)
+AND
+_Turns > 4
+AND
+GetEquippedItem(_Player, "Ranged Main Weapon", (ITEM)_Item)
+AND
+NOT HasActiveStatus(_Item, "AMP_LASER_STOKER_HEAT_VFX", 1)
+THEN
+ApplyStatus(_Item, "AMP_LASER_STOKER_HEAT_VFX", 18.0, 1, _Player);
+
+EXITSECTION
+ENDEXITSECTION

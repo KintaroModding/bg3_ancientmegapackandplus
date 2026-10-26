@@ -1,0 +1,49 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// architect skips the slot gate and count bump, always inserts even on a full weapon
+// slot-limit bump lives in ZZZ_Arcanizer_Shards_B10.txt
+
+// melee weapon
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)AMP_Arcanizer_Shard_Weapon_103_9e6f84af-41a9-4c64-9257-311f2419ea26, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 1)
+THEN
+ApplyStatus(_Char, "AMP_SHARD_APPLY_MELEE_ARCHITECT", 0.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+// ranged weapon
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)AMP_Arcanizer_Shard_Weapon_103_9e6f84af-41a9-4c64-9257-311f2419ea26, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 0)
+AND
+HasRangedWeaponEquipped(_Char, "Mainhand", 1)
+THEN
+ApplyStatus(_Char, "AMP_SHARD_APPLY_RANGED_ARCHITECT", 0.0, 1, _Char);
+PlaySound(_Char, "CrSpell_Cast_MagicClub");
+RequestDelete(_Instance);
+
+// no weapon equipped
+IF
+TemplateUseStarted((CHARACTER)_Char, (ITEMROOT)AMP_Arcanizer_Shard_Weapon_103_9e6f84af-41a9-4c64-9257-311f2419ea26, (ITEM)_Instance)
+AND
+HasActiveStatus(_Instance, "TOT_SHOP_ITEM", 0)
+AND
+HasMeleeWeaponEquipped(_Char, "Mainhand", 0)
+AND
+HasRangedWeaponEquipped(_Char, "Mainhand", 0)
+THEN
+PlaySound(_Char, "UI_HUD_Combine_Error");
+
+EXITSECTION
+ENDEXITSECTION

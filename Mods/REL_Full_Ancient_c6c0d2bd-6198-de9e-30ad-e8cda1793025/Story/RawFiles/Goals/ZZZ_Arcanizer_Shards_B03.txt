@@ -1,0 +1,34 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// arcanizer shards - batch 03
+
+// armor_13: agathys (nonstack)
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_13_fa0ceaef-0f14-4514-9e00-d2d8585c5ab3, "Armor", "AMP_SHARD_APPLY_ARMOR_13", "Breast", "AMP_SHARD_ARMOR_AGATHYS");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_AGATHYS", "AMP_SHARD_CHAR_AGATHYS");
+DB_AMP_Shard_ExternalStatus("AMP_SHARD_CHAR_AGATHYS", "ARMOR_OF_AGATHYS");
+
+// ring_10: ancient chaos (stackable)
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_10_cdfadb35-e40a-435d-a767-aeae07108803, "Ring", "AMP_SHARD_APPLY_RING_10", "Ring");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_ANCIENTCHAOS", "AMP_SHARD_CHAR_ANCIENTCHAOS");
+DB_AMP_Shard_ExternalStatus("AMP_SHARD_CHAR_ANCIENTCHAOS", "AMP_ANCIENTCHAOS");
+
+// ring_11: reverberation (stackable)
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_11_5bb5e89e-5e54-41a6-a664-add12c818c25, "Ring", "AMP_SHARD_APPLY_RING_11", "Ring");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_REVERB", "AMP_SHARD_CHAR_REVERB");
+DB_AMP_Shard_ExternalStatus("AMP_SHARD_CHAR_REVERB", "MAG_THUNDER_REVERBERATION");
+DB_AMP_Shard_ExternalStatus("AMP_SHARD_CHAR_REVERB", "MAG_THUNDER_REVERBERATION_DURATION_TECHNICAL");
+
+// gloves_9: bone chill (nonstack)
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_9_ee2e4ee0-2f10-449c-9aac-1d5ff4568948, "Gloves", "AMP_SHARD_APPLY_GLOVES_9", "Gloves", "AMP_SHARD_GLOVES_BONECHILL");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_BONECHILL", "AMP_SHARD_CHAR_BONECHILL");
+
+// head_10: momentum surge (nonstack)
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_10_305e6cdf-f804-44a4-98eb-4c83c2f5d9eb, "Helmet", "AMP_SHARD_APPLY_HEAD_10", "Helmet", "AMP_SHARD_HEAD_MOMENTUM");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_MOMENTUM", "AMP_SHARD_CHAR_MOMENTUM");
+
+KBSECTION
+
+EXITSECTION
+ENDEXITSECTION

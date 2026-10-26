@@ -1,0 +1,50 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+DB_AMP_Kroneth_ResolveFixDelay(1500);
+
+KBSECTION
+
+// fixes saves where the chaos-ending bearer got the curse re-applied
+// (polymorph re-equip / reload re-fired the equip status). chaos ending stays clean.
+
+// on save load, delay a sweep so statuses settle first
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Kroneth_ResolveFixDelay((INTEGER)_Delay)
+THEN
+TimerCancel("AMP_Kroneth_ResolveFix_Timer");
+TimerLaunch("AMP_Kroneth_ResolveFix_Timer", _Delay);
+
+// sweep: chaos-ending player carrying the re-applied curse
+IF
+TimerFinished("AMP_Kroneth_ResolveFix_Timer")
+AND
+DB_Players((CHARACTER)_Player)
+AND
+HasActiveStatus(_Player, "AMP_INCARNATE_KRONETH", 1)
+AND
+HasActiveStatus(_Player, "AMP_KRONETH_CURSE", 1)
+THEN
+PROC_AMP_Kroneth_ResolveFix_Clean(_Player);
+
+// live guard: curse lands on an already chaos-resolved character
+IF
+StatusApplied((CHARACTER)_Player, "AMP_KRONETH_CURSE", _, _)
+AND
+HasActiveStatus(_Player, "AMP_INCARNATE_KRONETH", 1)
+THEN
+PROC_AMP_Kroneth_ResolveFix_Clean(_Player);
+
+PROC
+PROC_AMP_Kroneth_ResolveFix_Clean((CHARACTER)_Player)
+THEN
+RemoveStatus(_Player, "AMP_KRONETH_CURSE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_KRONETH_JUDGEMENT", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_KRONETH_AUTOCRIT", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_KRONETH_CRITMISS", NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+ENDEXITSECTION

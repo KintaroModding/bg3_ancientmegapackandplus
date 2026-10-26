@@ -1,0 +1,290 @@
+Version 1
+SubGoalCombiner SGC_AND
+
+INITSECTION
+DB_KELCIDON_Cat((CHARACTER)AMP_Cat_000_336eb3d3-4b0f-4967-8138-ba436353d610);
+DB_KELCIDON_ScratchTemplate((CHARACTERROOT)DogFamiliar_Scratch_Summon_b5deaa14-03b5-41c6-8372-7a9d758b4dfb);
+DB_KELCIDON_Wall((ITEM)AMP_Energy_Wall_000_49b9d1c6-c324-45af-ac85-c6231b4f435d);
+DB_KELCIDON_Wall((ITEM)AMP_Energy_Wall_001_1e675e7e-c288-4416-b30f-1be928b407af);
+DB_KELCIDON_Level("CTY_Main_A");
+DB_KELCIDON_Level("Basic_Level_A");
+DB_KELCIDON_ThrowSpell("Throw_Throw");
+DB_KELCIDON_ThrowSpell("Throw_Telekinesis");
+DB_KELCIDON_ThrowSpell("Throw_Telekinesis_Recast");
+DB_KELCIDON_ThrowSpell("Throw_Telekinesis_6");
+DB_KELCIDON_ThrowSpell("Throw_Telekinesis_WildMagic");
+DB_KELCIDON_ThrowSpell("Throw_MAG_Throw_Telekinesis");
+DB_KELCIDON_ThrowSpell("Throw_MAG_Throw_Githborn_Telekinesis");
+DB_KELCIDON_ThrowSpell("Throw_MAG_Neck42");
+DB_KELCIDON_ThrowSpell("Throw_Telekinesis_Skilthiryx");
+DB_KELCIDON_ThrowSpell("Throw_Telekinesis_Recast_Skilthiryx");
+DB_KELCIDON_ThrowSpell("Throw_Telekinesis_Skilthiryx_3");
+DB_KELCIDON_ThrowSpell("Throw_Telekinesis_Skilthiryx_2");
+DB_KELCIDON_ThrowSpell("Throw_Telekinesis_Skilthiryx_1");
+
+KBSECTION
+
+// level load: hide walls, shield cat
+IF
+LevelGameplayStarted(_Level, _)
+AND
+DB_KELCIDON_Level(_Level)
+AND
+DB_KELCIDON_Cat((CHARACTER)_Cat)
+THEN
+ApplyStatus(_Cat, "KELCIDON_PREBATTLE_INVULNERABILITY", -1.0, 1, _Cat);
+
+IF
+LevelGameplayStarted(_Level, _)
+AND
+DB_KELCIDON_Level(_Level)
+AND
+DB_KELCIDON_Wall((ITEM)_Wall)
+THEN
+SetOnStage(_Wall, 0);
+
+// combat start
+IF
+EnteredCombat((CHARACTER)_Cat, _CombatID)
+AND
+DB_KELCIDON_Cat(_Cat)
+THEN
+RemoveStatus(_Cat, "KELCIDON_PREBATTLE_INVULNERABILITY", NULL_00000000-0000-0000-0000-000000000000);
+PlayEffect(_Cat, VFX_Passive_Interrupt_Projected_Ward_01_33c3c5b9-ca4f-0e29-22df-238ee5b7fbc1, "BodyFX", 1.0);
+ApplyStatus(_Cat, "KELCIDON_BOSS_STATS", -1.0, 1, _Cat);
+ApplyStatus(_Cat, "KELCIDON_DIVINE_WRATH", -1.0, 1, _Cat);
+ApplyStatus(_Cat, "KELCIDON_WATCHER_AURA", -1.0, 1, _Cat);
+ApplyStatus(_Cat, "KELCIDON_NIGHTMARE_ENGINE", -1.0, 1, _Cat);
+PROC_KELCIDON_ShowWalls();
+PROC_KELCIDON_ApplyNightmareAll(_Cat);
+DB_KELCIDON_Humiliated(0);
+
+// combat end cleanup
+IF
+LeftCombat((CHARACTER)_Cat, _CombatID)
+AND
+DB_KELCIDON_Cat(_Cat)
+THEN
+RemoveStatus(_Cat, "KELCIDON_BOSS_STATS", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Cat, "KELCIDON_DIVINE_WRATH", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Cat, "KELCIDON_RISING_POWER", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Cat, "KELCIDON_WATCHER_AURA", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Cat, "KELCIDON_NIGHTMARE_ENGINE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Cat, "KELCIDON_HUMILIATED", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Cat, "KELCIDON_PRIDE_RESTORED", NULL_00000000-0000-0000-0000-000000000000);
+NOT DB_KELCIDON_Humiliated(0);
+NOT DB_KELCIDON_Humiliated(1);
+NOT DB_KELCIDON_Resetting(1);
+PROC_KELCIDON_RemoveNightmareAll();
+PROC_KELCIDON_HideWalls();
+
+// wall show/hide
+PROC
+PROC_KELCIDON_ShowWalls()
+AND
+DB_KELCIDON_Wall((ITEM)_Wall)
+THEN
+SetOnStage(_Wall, 1);
+
+PROC
+PROC_KELCIDON_HideWalls()
+AND
+DB_KELCIDON_Wall((ITEM)_Wall)
+THEN
+SetOnStage(_Wall, 0);
+
+// nightmare application (replaces aura)
+PROC
+PROC_KELCIDON_ApplyNightmareAll((CHARACTER)_Cat)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+HasActiveStatus(_Player, "KELCIDON_NIGHTMARE", 0)
+AND
+HasActiveStatus(_Player, "KELCIDON_AWAKENED", 0)
+THEN
+ApplyStatus(_Player, "KELCIDON_NIGHTMARE", -1.0, 1, _Cat);
+
+// pulse each cat turn: reapply nightmare + afk check
+IF
+StatusApplied(_Cat, "KELCIDON_NIGHTMARE_PULSE", _, _)
+AND
+DB_KELCIDON_Cat((CHARACTER)_Cat)
+THEN
+PROC_KELCIDON_ApplyNightmareAll(_Cat);
+PROC_KELCIDON_DragAFK();
+
+// drag afk players (no damage 2+ turns) to the cat
+PROC
+PROC_KELCIDON_DragAFK()
+AND
+DB_Players((CHARACTER)_Player)
+AND
+IsDead(_Player, 0)
+AND
+HasActiveStatus(_Player, "KELCIDON_PLAYER_DAMAGED", 0)
+THEN
+PlayEffect(_Player, VFX_Script_DestroyAction_Arcane_Gate_01_cde28800-1d22-76f0-fa45-06a56f7c367b, "Root", 1.0);
+TeleportToPosition(_Player, -740.677, 0.0, 591.152, "", 1, 1, 1, 0, 1);
+
+PROC
+PROC_KELCIDON_RemoveNightmareAll()
+AND
+DB_Players((CHARACTER)_Player)
+AND
+HasActiveStatus(_Player, "KELCIDON_NIGHTMARE", 1)
+THEN
+RemoveStatus(_Player, "KELCIDON_NIGHTMARE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "KELCIDON_AWAKENED", NULL_00000000-0000-0000-0000-000000000000);
+
+// nightmare wake: shove ally to free them
+IF
+UsingSpellOnTarget((CHARACTER)_Pusher, (GUIDSTRING)_Target, "Target_Shove", _, _, _)
+AND
+IsCharacter(_Target, 1)
+AND
+HasActiveStatus((CHARACTER)_Target, "KELCIDON_NIGHTMARE", 1)
+AND
+NOT DB_KELCIDON_Cat((CHARACTER)_Target)
+THEN
+RemoveStatus((CHARACTER)_Target, "KELCIDON_NIGHTMARE", NULL_00000000-0000-0000-0000-000000000000);
+ApplyStatus((CHARACTER)_Target, "KELCIDON_AWAKENED", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// humiliation detection
+// shove the cat
+IF
+UsingSpellOnTarget((CHARACTER)_Player, (GUIDSTRING)_Cat, "Target_Shove", _, _, _)
+AND
+DB_KELCIDON_Cat((CHARACTER)_Cat)
+THEN
+PROC_KELCIDON_Humiliate((CHARACTER)_Cat);
+
+// vicious mockery
+IF
+UsingSpellOnTarget((CHARACTER)_Player, (GUIDSTRING)_Cat, "Target_ViciousMockery", _, _, _)
+AND
+DB_KELCIDON_Cat((CHARACTER)_Cat)
+THEN
+PROC_KELCIDON_Humiliate((CHARACTER)_Cat);
+
+// giant's boot kick
+IF
+UsingSpellOnTarget((CHARACTER)_Player, (GUIDSTRING)_Cat, "Target_BootOfTheGiants", _, _, _)
+AND
+DB_KELCIDON_Cat((CHARACTER)_Cat)
+THEN
+PROC_KELCIDON_Humiliate((CHARACTER)_Cat);
+
+// make cat wet
+IF
+StatusApplied((GUIDSTRING)_Cat, "WET", _, _)
+AND
+DB_KELCIDON_Cat((CHARACTER)_Cat)
+THEN
+PROC_KELCIDON_Humiliate((CHARACTER)_Cat);
+
+// scratch attacks the cat
+IF
+AttackedBy((GUIDSTRING)_Cat, (CHARACTER)_Attacker, _, _, _, _, _)
+AND
+DB_KELCIDON_Cat((CHARACTER)_Cat)
+AND
+GetTemplate(_Attacker, _Template)
+AND
+DB_KELCIDON_ScratchTemplate((CHARACTERROOT)_Template)
+THEN
+PROC_KELCIDON_Humiliate((CHARACTER)_Cat);
+
+// throw/telekinesis at the cat
+IF
+UsingSpellOnTarget((CHARACTER)_Player, (GUIDSTRING)_Cat, _Spell, _, _, _)
+AND
+DB_KELCIDON_Cat((CHARACTER)_Cat)
+AND
+DB_KELCIDON_ThrowSpell(_Spell)
+THEN
+PROC_KELCIDON_Humiliate((CHARACTER)_Cat);
+
+// guard: don't reapply if already humiliated. same stackid without stacktype
+// would overwrite -> statusremoved -> death rule -> die.
+PROC
+PROC_KELCIDON_Humiliate((CHARACTER)_Cat)
+AND
+NOT DB_KELCIDON_Humiliated(1)
+THEN
+ApplyStatus(_Cat, "KELCIDON_HUMILIATED", 54.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+NOT DB_KELCIDON_Humiliated(0);
+DB_KELCIDON_Humiliated(1);
+
+// counter reset on damage
+IF
+StatusApplied((GUIDSTRING)_Cat, "KELCIDON_DAMAGED_THIS_TURN", _, _)
+AND
+DB_KELCIDON_Cat((CHARACTER)_Cat)
+AND
+DB_KELCIDON_Humiliated(1)
+AND
+HasActiveStatus(_Cat, "KELCIDON_HUMILIATED", 1)
+THEN
+DB_KELCIDON_Resetting(1);
+RemoveStatus(_Cat, "KELCIDON_HUMILIATED", NULL_00000000-0000-0000-0000-000000000000);
+
+// after reset removal -> reapply fresh + flash.
+// don't clear resetting here, death rule also fires on statusremoved
+IF
+StatusRemoved((GUIDSTRING)_Cat, "KELCIDON_HUMILIATED", _, _)
+AND
+DB_KELCIDON_Cat((CHARACTER)_Cat)
+AND
+DB_KELCIDON_Resetting(1)
+THEN
+ApplyStatus(_Cat, "KELCIDON_HUMILIATED", 54.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+ApplyStatus(_Cat, "KELCIDON_PRIDE_RESTORED", 6.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+PlayEffect(_Cat, VFX_Passive_Interrupt_Projected_Ward_01_33c3c5b9-ca4f-0e29-22df-238ee5b7fbc1, "BodyFX", 1.0);
+
+// clear resetting flag once fresh humiliated is applied
+IF
+StatusApplied((GUIDSTRING)_Cat, "KELCIDON_HUMILIATED", _, _)
+AND
+DB_KELCIDON_Cat((CHARACTER)_Cat)
+AND
+DB_KELCIDON_Resetting(1)
+THEN
+NOT DB_KELCIDON_Resetting(1);
+
+// death trigger. gated: cat in combat (cleanup removals shouldn't kill) and
+// at least one player in combat (no afk-kill from camp).
+IF
+StatusRemoved((GUIDSTRING)_Cat, "KELCIDON_HUMILIATED", _, _)
+AND
+DB_KELCIDON_Cat((CHARACTER)_Cat)
+AND
+DB_KELCIDON_Humiliated(1)
+AND
+NOT DB_KELCIDON_Resetting(1)
+AND
+IsInCombat(_Cat, 1)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+IsInCombat(_Player, 1)
+THEN
+Die((CHARACTER)_Cat, DEATHTYPE.Disintegrate, NULL_00000000-0000-0000-0000-000000000000, 1, 0);
+
+// restore prebattle invuln after combat
+IF
+LeftCombat((CHARACTER)_Cat, _CombatID)
+AND
+DB_KELCIDON_Cat(_Cat)
+THEN
+ObjectTimerLaunch(_Cat, "KELCIDON_Restore_Shield", 2000, 0);
+
+IF
+ObjectTimerFinished((GUIDSTRING)_Cat, "KELCIDON_Restore_Shield")
+AND
+DB_KELCIDON_Cat((CHARACTER)_Cat)
+THEN
+ApplyStatus(_Cat, "KELCIDON_PREBATTLE_INVULNERABILITY", -1.0, 1, _Cat);
+
+EXITSECTION
+ENDEXITSECTION

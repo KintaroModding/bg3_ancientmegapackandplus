@@ -1,0 +1,16 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// UltraMob record is written by every spawn path. the MirrorChase record is volatile
+IF
+DB_AMP_Plus_UltraMob((CHARACTER)_Mob, _)
+AND
+GetTemplate(_Mob, AMP_Ysatiy_92506335-12dd-4e4b-848c-f33fd8cc39fa)
+THEN
+ApplyStatus(_Mob, "SEE_INVISIBILITY", -1.0, 1, _Mob);
+
+EXITSECTION
+ENDEXITSECTION

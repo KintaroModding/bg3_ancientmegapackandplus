@@ -1,0 +1,69 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+IsBoss(_Char, 1)
+AND
+NOT DB_AMP_Plus_Starlight_BossCombat(_CombatID)
+THEN
+DB_AMP_Plus_Starlight_BossCombat(_CombatID);
+PROC_AMP_Plus_Starlight_ArmCombat(_CombatID);
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Starlight_BossCombat(_CombatID)
+AND
+DB_Players(_Char)
+THEN
+PROC_AMP_Plus_Starlight_ArmOne(_Char);
+
+PROC
+PROC_AMP_Plus_Starlight_ArmCombat((GUIDSTRING)_CombatID)
+AND
+DB_Players(_P)
+AND
+CombatGetGuidFor(_P, _CombatID)
+THEN
+PROC_AMP_Plus_Starlight_ArmOne(_P);
+
+PROC
+PROC_AMP_Plus_Starlight_ArmOne((CHARACTER)_P)
+AND
+HasActiveStatus(_P, "AMP_PLUS_STARLIGHT_WORN", 1)
+AND
+NOT DB_AMP_Plus_Starlight_Armed(_P)
+THEN
+DB_AMP_Plus_Starlight_Armed(_P);
+ApplyStatus(_P, "AMP_PLUS_STARLIGHT_PURPOSE", -1.0, 1);
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Starlight_BossCombat(_CombatID)
+THEN
+NOT DB_AMP_Plus_Starlight_BossCombat(_CombatID);
+PROC_AMP_Plus_Starlight_Clear();
+
+PROC
+PROC_AMP_Plus_Starlight_Clear()
+THEN
+PROC_AMP_Plus_Starlight_DrainArmed();
+
+PROC
+PROC_AMP_Plus_Starlight_DrainArmed()
+AND
+DB_AMP_Plus_Starlight_Armed((CHARACTER)_P)
+THEN
+NOT DB_AMP_Plus_Starlight_Armed(_P);
+RemoveStatus(_P, "AMP_PLUS_STARLIGHT_PURPOSE");
+PROC_AMP_Plus_Starlight_DrainArmed();
+
+EXITSECTION
+
+ENDEXITSECTION

@@ -1,0 +1,104 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+/*
+// any container with this tag becomes an arcanizer
+DB_AMP_Arcanizer_Tag((TAG)ARCANIZER_MAIN_c4302d38-d7a9-4522-8912-e8c3f53766f5);
+
+// ownership tracking
+// initialize tracking for who owns the arcanizer
+DB_AMP_Arcanizer_Owner((CHARACTER)NULL_00000000-0000-0000-0000-000000000000);
+
+// chaos system definitions
+// the chaos status to be applied to the arcanizer owner
+DB_AMP_Arcanizer_ChaosStatus("AMP_CHAOS_STATUS");
+// default chaos value (100%*6) - the engine divides by 6 for some reason
+// db_amp_arcanizer_chaos_base(60);
+*/
+KBSECTION
+/*
+// section 1: arcanizer acquisition
+
+// detect when arcanizer-tagged container is added to player's inventory
+IF
+TemplateAddedTo((ITEMROOT)AMP_Arcanizer_8b0d5eb7-fe0c-448c-a159-645a27a6afc0, _, (CHARACTER)_Character, _)
+AND
+IsPlayer(_Character, 1)
+THEN
+PROC_AMP_InitializeArcanizer(_Character);
+
+// initialize arcanizer for player and show ownership message
+PROC
+PROC_AMP_InitializeArcanizer((CHARACTER)_Character)
+AND
+_Character != NULL_00000000-0000-0000-0000-000000000000
+AND
+DB_AMP_Arcanizer_ChaosStatus(_StatusID)
+THEN
+// set new owner and remove old owner if any
+NOT DB_AMP_Arcanizer_Owner();
+DB_AMP_Arcanizer_Owner(_Character);
+// apply chaos status with base value 100
+ApplyStatus(_Character, _StatusID, 600.0, 1, _Character);
+// openmessagebox(_character, "amp_arcanizer_message_takepossession");
+PlayEffect(_Character, VFX_Status_LOW_ORIN_DEATHBRINGER_ACTIVE_Root_01_5aeff525-42b9-00bf-cd1c-a464b71aa3e7, "", 1.0);
+
+// handle null character case
+PROC
+PROC_AMP_InitializeArcanizer((CHARACTER)_Character)
+AND
+_Character == NULL_00000000-0000-0000-0000-000000000000
+THEN
+DebugBreak("Attempting to initialize Arcanizer with NULL character");
+
+// section 2: arcanizer removal
+
+// handle when player removes arcanizer from inventory
+IF
+TemplateRemovedFrom((ITEMROOT)AMP_Arcanizer_8b0d5eb7-fe0c-448c-a159-645a27a6afc0, _, (CHARACTER)_Character)
+AND
+DB_AMP_Arcanizer_Owner(_Character)
+AND
+_Character != NULL_00000000-0000-0000-0000-000000000000
+THEN
+PROC_AMP_RemoveArcanizer(_Character);
+
+// reset ownership when arcanizer is removed
+PROC
+PROC_AMP_RemoveArcanizer((CHARACTER)_Character)
+AND
+DB_AMP_Arcanizer_ChaosStatus(_StatusID)
+THEN
+// remove old owner
+NOT DB_AMP_Arcanizer_Owner(_Character);
+// set to null
+DB_AMP_Arcanizer_Owner((CHARACTER)NULL_00000000-0000-0000-0000-000000000000);
+// remove chaos status
+RemoveStatus(_Character, _StatusID, _Character);
+// openmessagebox(_character, "amp_arcanizer_message_leavepossession");
+
+// section 3: arcanizer usage
+
+// handle using the arcanizer (authorized access)
+IF
+UseStarted((CHARACTER)_Character, (ITEM)_Container)
+AND
+GetTemplate(_Container, AMP_Arcanizer_8b0d5eb7-fe0c-448c-a159-645a27a6afc0)
+AND
+DB_AMP_Arcanizer_Owner(_Character)
+AND
+_Character != NULL_00000000-0000-0000-0000-000000000000
+THEN
+// ensure arcanizer is always accessible before use
+Unlock(_Container, NULL_00000000-0000-0000-0000-000000000000); 
+PROC_AMP_UseArcanizer(_Character, _Container);
+
+// open arcanizer with visual effect
+PROC
+PROC_AMP_UseArcanizer((CHARACTER)_Character, (ITEM)_Container)
+THEN
+Open(_Container);
+PlaySound(_Character, "VFX_Script_SCL_BrainPuzzle_Selected");
+*/
+EXITSECTION
+ENDEXITSECTION

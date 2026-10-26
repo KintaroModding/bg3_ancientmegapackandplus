@@ -1,0 +1,77 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+// brute-force sweep, hirelings get buffed before DB_Players/DB_PartOfTheTeam fires and tracked cleanup misses re-applies
+
+// 1. level load sweep: strip any difficulty npc/boss status from players
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+DB_AMP_DiffV3_AllTargets((STRING)_Status)
+AND
+HasActiveStatus(_Player, _Status, 1)
+THEN
+RemoveStatus(_Player, _Status, NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+DB_AMP_DiffV3_AllBosses((STRING)_Status)
+AND
+HasActiveStatus(_Player, _Status, 1)
+THEN
+RemoveStatus(_Player, _Status, NULL_00000000-0000-0000-0000-000000000000);
+
+// 1b. also strip progression statuses from players
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+PROC_AMP_DiffV3_RemoveProgression(_Player);
+
+// 2. player enters combat with a difficulty buff -> strip it
+IF
+EnteredCombat((CHARACTER)_Char, _)
+AND
+IsPlayer(_Char, 1)
+AND
+DB_AMP_DiffV3_Tracked(_Char, (STRING)_Status)
+THEN
+NOT DB_AMP_DiffV3_Tracked(_Char, _Status);
+NOT DB_AMP_DiffV3_Known(_Char);
+PROC_AMP_DiffV3_RemoveFromCreature(_Char);
+PROC_AMP_DiffV3_RemoveProgression(_Char);
+
+// 3. new DB_Players entry -> brute-force strip all npc statuses, not just tracked
+IF
+DB_Players((CHARACTER)_Player)
+AND
+DB_AMP_DiffV3_AllTargets((STRING)_Status)
+AND
+HasActiveStatus(_Player, _Status, 1)
+THEN
+RemoveStatus(_Player, _Status, NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+DB_Players((CHARACTER)_Player)
+AND
+DB_AMP_DiffV3_AllBosses((STRING)_Status)
+AND
+HasActiveStatus(_Player, _Status, 1)
+THEN
+RemoveStatus(_Player, _Status, NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+DB_Players((CHARACTER)_Player)
+THEN
+PROC_AMP_DiffV3_RemoveProgression(_Player);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,222 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// spawn status args no-op, the flag is applied on EnteredLevel
+// OurSpirit tracks spawns by template, EnteredCombat fires before the flag
+IF
+EnteredLevel((CHARACTER)_Spirit, Spirit_Weak_7811ecf3-2657-4820-99e8-8c6844e147e1, _)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+HasActiveStatus(_Player, "MAG_NNECROTIC_TETHER_OWNER", 1)
+AND
+IsInCombat(_Player, 1)
+THEN
+DB_AMP_NNecrotic_OurSpirit(_Spirit);
+DB_AMP_NNecrotic_RecentSpawn(_Spirit);
+RealtimeObjectTimerLaunch(_Spirit, "AMP_NNecrotic_GraceEnd", 5000);
+DB_AMP_NNecrotic_DBG("EnteredLevel", _Spirit);
+
+// grace ended -> cleanup can fire for this spirit
+IF
+ObjectTimerFinished((CHARACTER)_Spirit, "AMP_NNecrotic_GraceEnd")
+AND
+DB_AMP_NNecrotic_RecentSpawn(_Spirit)
+THEN
+NOT DB_AMP_NNecrotic_RecentSpawn(_Spirit);
+
+// EnteredCombat can beat EnteredLevel and register the spirit as a real enemy, so un-register it here
+IF
+EnteredLevel((CHARACTER)_Spirit, Spirit_Weak_7811ecf3-2657-4820-99e8-8c6844e147e1, _)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+HasActiveStatus(_Player, "MAG_NNECROTIC_TETHER_OWNER", 1)
+AND
+IsInCombat(_Player, 1)
+AND
+DB_AMP_NNecrotic_RealEnemy(_Spirit, (GUIDSTRING)_CombatID)
+THEN
+NOT DB_AMP_NNecrotic_RealEnemy(_Spirit, _CombatID);
+
+IF
+EnteredLevel((CHARACTER)_Spirit, Spirit_Weak_7811ecf3-2657-4820-99e8-8c6844e147e1, _)
+AND
+NOT DB_AMP_NNecrotic_ActiveSoul(_Spirit, _)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+HasActiveStatus(_Player, "MAG_NNECROTIC_TETHER_OWNER", 1)
+AND
+IsInCombat(_Player, 1)
+THEN
+DB_AMP_NNecrotic_DBG("ApplyFlag", _Spirit);
+ApplyStatus(_Spirit, "MAG_NNECROTIC_SOUL_FLAG", -1.0, 1, _Player);
+
+// t3+ (pact): apply PARTY_ALLY with player as source -> persistent ally faction.
+// SetFaction call reverts (engine restores BaseFaction on round transition), so use the status.
+IF
+StatusApplied((CHARACTER)_Spirit, "MAG_NNECROTIC_SOUL_FLAG", (CHARACTER)_Player, _)
+AND
+HasActiveStatus(_Player, "MAG_NNECROTIC_TETHER_OWNER", 1)
+AND
+HasActiveStatus(_Player, "MAG_NNECROTIC_PACT_MARKER", 1)
+THEN
+DB_AMP_NNecrotic_ActiveSoul(_Spirit, _Player);
+ApplyStatus(_Spirit, "MAG_NNECROTIC_PARTY_ALLY", -1.0, 1, _Player);
+
+// t1/t2 (no pact): apply AMP_FORCE_HOSTILE. sees-loop below adds active aggro per pair.
+IF
+StatusApplied((CHARACTER)_Spirit, "MAG_NNECROTIC_SOUL_FLAG", (CHARACTER)_Player, _)
+AND
+HasActiveStatus(_Player, "MAG_NNECROTIC_TETHER_OWNER", 1)
+AND
+NOT HasActiveStatus(_Player, "MAG_NNECROTIC_PACT_MARKER", 1)
+THEN
+DB_AMP_NNecrotic_ActiveSoul(_Spirit, _Player);
+DB_AMP_NNecrotic_HostileSoul(_Spirit);
+ApplyStatus(_Spirit, "AMP_FORCE_HOSTILE", -1.0, 1, _Player);
+
+// wizard owner: apply ARMOURH126 buff for 1 turn
+IF
+StatusApplied((CHARACTER)_Spirit, "MAG_NNECROTIC_SOUL_FLAG", (CHARACTER)_Player, _)
+AND
+HasActiveStatus(_Player, "MAG_NNECROTIC_TETHER_OWNER", 1)
+AND
+HasActiveStatus(_Player, "MAG_NNECROTIC_WIZ_MARKER", 1)
+THEN
+ApplyStatus(_Spirit, "ARMOURH126", 6.0, 1, _Player);
+
+// t1/t2 aggro: hostile spirit sees a non-spirit non-player npc -> force them into combat together
+IF
+DB_Sees((CHARACTER)_Spirit, (CHARACTER)_Other)
+AND
+DB_AMP_NNecrotic_HostileSoul(_Spirit)
+AND
+NOT DB_Players(_Other)
+AND
+NOT DB_AMP_NNecrotic_OurSpirit(_Other)
+AND
+NOT DB_PermaDefeated(_Other)
+AND
+GetFaction(_Spirit, _SpiritFaction)
+AND
+GetFaction(_Other, _OtherFaction)
+THEN
+SetHostileAndEnterCombat(_SpiritFaction, _OtherFaction, _Spirit, _Other);
+
+// hostile spirits keep combat open forever, poof them when only spirits and players are left
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+IsCharacter(_Char, 1)
+AND
+NOT DB_Players(_Char)
+AND
+NOT DB_AMP_NNecrotic_OurSpirit(_Char)
+THEN
+DB_AMP_NNecrotic_RealEnemy(_Char, _CombatID);
+
+IF
+LeftCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_NNecrotic_RealEnemy(_Char, _CombatID)
+THEN
+NOT DB_AMP_NNecrotic_RealEnemy(_Char, _CombatID);
+
+IF
+Died((CHARACTER)_Char)
+AND
+DB_AMP_NNecrotic_RealEnemy(_Char, (GUIDSTRING)_CombatID)
+THEN
+NOT DB_AMP_NNecrotic_RealEnemy(_Char, _CombatID);
+
+QRY
+QRY_AMP_NNecrotic_RealEnemyAlive((CHARACTER)_Player)
+AND
+DB_AMP_NNecrotic_RealEnemy((CHARACTER)_Other, (GUIDSTRING)_CombatID)
+AND
+DB_Is_InCombat(_Player, _CombatID)
+AND
+NOT DB_PermaDefeated(_Other)
+THEN
+DB_NOOP(1);
+
+// true if any of the player's spirits is still in grace (keeps cleanup from firing early)
+QRY
+QRY_AMP_NNecrotic_AnyRecentSpawn((CHARACTER)_Player)
+AND
+DB_AMP_NNecrotic_ActiveSoul((CHARACTER)_Spirit, _Player)
+AND
+DB_AMP_NNecrotic_RecentSpawn(_Spirit)
+THEN
+DB_NOOP(1);
+
+// no real enemies left in combat -> poof all spirits (5s grace covers reaction-kills)
+IF
+Died(_Dead)
+AND
+DB_AMP_NNecrotic_ActiveSoul(_AnySpirit, (CHARACTER)_Player)
+AND
+NOT QRY_AMP_NNecrotic_AnyRecentSpawn(_Player)
+AND
+DB_Is_InCombat(_Player, _)
+AND
+NOT QRY_AMP_NNecrotic_RealEnemyAlive(_Player)
+THEN
+PROC_AMP_NNecrotic_CleanupAllSpirits(_Player);
+
+PROC
+PROC_AMP_NNecrotic_CleanupAllSpirits((CHARACTER)_Player)
+AND
+DB_AMP_NNecrotic_ActiveSoul((CHARACTER)_Spirit, _Player)
+AND
+GetPosition(_Spirit, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+RealSum(_Y, 1.0, (REAL)_YUp)
+THEN
+PlayEffectAtPosition((EFFECTRESOURCE)VFX_Script_DarkButler_Poof_01_2b59237f-69f1-003b-d44b-d7e31fb79be2, _X, _YUp, _Z, 1.0);
+NOT DB_AMP_NNecrotic_ActiveSoul(_Spirit, _Player);
+NOT DB_AMP_NNecrotic_HostileSoul(_Spirit);
+NOT DB_AMP_NNecrotic_OurSpirit(_Spirit);
+NOT DB_AMP_NNecrotic_RecentSpawn(_Spirit);
+RequestDeleteTemporary((CHARACTER)_Spirit);
+
+// player-owner leaves combat -> clean all their spirits.
+// don't trigger on the spirit's own LeftCombat - engine boots neutral spirits out early.
+IF
+LeftCombat((CHARACTER)_Player, _)
+AND
+DB_Players(_Player)
+AND
+DB_AMP_NNecrotic_ActiveSoul((CHARACTER)_Spirit, _Player)
+AND
+GetPosition(_Spirit, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+RealSum(_Y, 1.0, (REAL)_YUp)
+THEN
+PlayEffectAtPosition((EFFECTRESOURCE)VFX_Script_DarkButler_Poof_01_2b59237f-69f1-003b-d44b-d7e31fb79be2, _X, _YUp, _Z, 1.0);
+NOT DB_AMP_NNecrotic_ActiveSoul(_Spirit, _Player);
+NOT DB_AMP_NNecrotic_HostileSoul(_Spirit);
+NOT DB_AMP_NNecrotic_OurSpirit(_Spirit);
+NOT DB_AMP_NNecrotic_RecentSpawn(_Spirit);
+RequestDeleteTemporary(_Spirit);
+
+// clean db on death
+IF
+Died((CHARACTER)_Spirit)
+AND
+DB_AMP_NNecrotic_ActiveSoul(_Spirit, (CHARACTER)_Player)
+THEN
+NOT DB_AMP_NNecrotic_ActiveSoul(_Spirit, _Player);
+NOT DB_AMP_NNecrotic_HostileSoul(_Spirit);
+NOT DB_AMP_NNecrotic_OurSpirit(_Spirit);
+NOT DB_AMP_NNecrotic_RecentSpawn(_Spirit);
+
+EXITSECTION
+
+ENDEXITSECTION

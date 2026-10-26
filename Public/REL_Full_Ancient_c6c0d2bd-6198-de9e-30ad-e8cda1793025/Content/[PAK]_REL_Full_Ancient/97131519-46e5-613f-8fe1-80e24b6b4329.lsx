@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="97131519-46e5-613f-8fe1-80e24b6b4329" />
+					<attribute id="Name" type="LSString" value="BonusActionBlock" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/BonusActionBlock.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="BonusActionBlock" />
+					<attribute id="BoundsMin" type="fvec3" value="-3 -3 -3" />
+					<attribute id="BoundsMax" type="fvec3" value="3 3 3" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="2" />
+					<attribute id="Looping" type="bool" value="True" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="afdb5c21-37b8-1c51-4f23-0431e4169b78" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="35616aa2-cdec-342a-943c-74b0fd665ecf" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="bf272981-98bd-04b2-f4bb-e4e5e0fa6604" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

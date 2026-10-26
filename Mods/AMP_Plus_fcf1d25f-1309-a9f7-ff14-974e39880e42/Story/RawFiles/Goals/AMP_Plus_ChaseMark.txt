@@ -1,0 +1,86 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// synced rather than edge-applied, fast travel out of combat skips the edge
+// whole party, not the host: the host follows whoever is steered
+
+PROC
+PROC_AMP_Plus_ChaseMarkSync((CHARACTER)_Player)
+AND
+DB_AMP_Plus_ChasePending(_)
+AND
+HasActiveStatus(_Player, "AMP_PLUS_CHASE_MARK", 0)
+THEN
+ApplyStatus(_Player, "AMP_PLUS_CHASE_MARK", -1.0, 1, _Player);
+
+PROC
+PROC_AMP_Plus_ChaseMarkSync((CHARACTER)_Player)
+AND
+DB_AMP_Plus_UltraRestOwed(1)
+AND
+HasActiveStatus(_Player, "AMP_PLUS_CHASE_MARK", 0)
+THEN
+ApplyStatus(_Player, "AMP_PLUS_CHASE_MARK", -1.0, 1, _Player);
+
+PROC
+PROC_AMP_Plus_ChaseMarkSync((CHARACTER)_Player)
+AND
+NOT DB_AMP_Plus_ChasePending(_)
+AND
+NOT DB_AMP_Plus_UltraRestOwed(1)
+AND
+HasActiveStatus(_Player, "AMP_PLUS_CHASE_MARK", 1)
+THEN
+RemoveStatus(_Player, "AMP_PLUS_CHASE_MARK", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+DB_AMP_Plus_ChasePending((GUIDSTRING)_Template)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+PROC_AMP_Plus_ChaseMarkSync(_Player);
+
+IF
+DB_AMP_Plus_UltraRestOwed(_)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+PROC_AMP_Plus_ChaseMarkSync(_Player);
+
+IF
+DB_AMP_Plus_ChaseActive((CHARACTER)_Mob, _)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+PROC_AMP_Plus_ChaseMarkSync(_Player);
+
+IF
+LeftCombat((CHARACTER)_Host, _)
+AND
+GetHostCharacter(_Host)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+PROC_AMP_Plus_ChaseMarkSync(_Player);
+
+// delayed, touching the status in the load frame silently fails
+IF
+LevelGameplayStarted(_, _)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+RealtimeObjectTimerLaunch(_Host, "AMP_Plus_ChaseMarkSync", 2000);
+
+IF
+ObjectTimerFinished((GUIDSTRING)_Obj, "AMP_Plus_ChaseMarkSync")
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+PROC_AMP_Plus_ChaseMarkSync(_Player);
+
+EXITSECTION
+
+ENDEXITSECTION

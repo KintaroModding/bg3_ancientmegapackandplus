@@ -1,0 +1,190 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+QRY
+QRY_AMP_Plus_UltraMax()
+AND
+DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_Plus_SpawnIntensity_Size(3)
+AND
+DB_AMP_Plus_SpawnIntensity_Freq(3)
+AND
+DB_AMP_Plus_SpawnIntensity_Chase(3)
+THEN
+DB_NOOP(1);
+
+// Size: marked on spawn, unmarked by its first turn, so only a kill in the opening burst pays
+// the second mark stops the re-firing spawn record handing back a spent mark
+
+IF
+DB_AMP_Plus_UltraMob((CHARACTER)_Mob, _)
+AND
+QRY_AMP_Plus_UltraMax()
+AND
+NOT DB_AMP_Plus_UMax_Unacted(_Mob)
+AND
+NOT DB_AMP_Plus_UMax_Acted(_Mob)
+THEN
+DB_AMP_Plus_UMax_Unacted(_Mob);
+
+IF
+TurnStarted((GUIDSTRING)_Mob)
+AND
+DB_AMP_Plus_UMax_Unacted((CHARACTER)_Mob)
+THEN
+NOT DB_AMP_Plus_UMax_Unacted(_Mob);
+DB_AMP_Plus_UMax_Acted(_Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Plus_UMax_Unacted(_Mob)
+THEN
+NOT DB_AMP_Plus_UMax_Unacted(_Mob);
+PROC_AMP_Plus_UMax_Answer(_Mob);
+
+PROC
+PROC_AMP_Plus_UMax_Answer((CHARACTER)_Mob)
+AND
+DB_Players((CHARACTER)_P)
+AND
+IsDead(_P, 0)
+AND
+GetDistanceTo(_P, _Mob, (REAL)_Dist)
+AND
+_Dist <= 6.0
+THEN
+ApplyStatus(_P, "AMP_PLUS_UMAX_ANSWER", 1.0, 1, _Mob);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Plus_UMax_Acted(_Mob)
+THEN
+NOT DB_AMP_Plus_UMax_Acted(_Mob);
+
+// Freq: second wave, one per fight and only for a boss that brought support
+
+IF
+DB_AMP_Plus_UltraMob((CHARACTER)_Mob, (CHARACTER)_Boss)
+AND
+NOT _Mob == _Boss
+AND
+QRY_AMP_Plus_UltraMax()
+AND
+CombatGetGuidFor(_Boss, (GUIDSTRING)_Cb)
+AND
+NOT DB_AMP_Plus_UMax_WaveOwed(_Boss, _Cb)
+AND
+NOT DB_AMP_Plus_UMax_WaveDone(_Boss, _Cb)
+THEN
+DB_AMP_Plus_UMax_WaveOwed(_Boss, _Cb);
+
+IF
+CombatRoundStarted((GUIDSTRING)_C, (INTEGER)_Round)
+AND
+_Round >= 3
+THEN
+PROC_AMP_Plus_UMax_DrainWaveDue(_C);
+
+IF
+CombatEnded((GUIDSTRING)_C)
+THEN
+PROC_AMP_Plus_UMax_DrainWaveOwed(_C);
+
+IF
+CombatEnded((GUIDSTRING)_C)
+THEN
+PROC_AMP_Plus_UMax_DrainWaveDone(_C);
+
+// single pass: retracting an owed wave re-opens it while the boss is in the fight
+PROC
+PROC_AMP_Plus_UMax_DrainWaveDue((GUIDSTRING)_C)
+AND
+DB_AMP_Plus_UMax_WaveOwed((CHARACTER)_Boss, _C)
+AND
+IsDead(_Boss, 0)
+THEN
+NOT DB_AMP_Plus_UMax_WaveOwed(_Boss, _C);
+DB_AMP_Plus_UMax_WaveDone(_Boss, _C);
+PROC_AMP_Plus_MirrorSpawnSized(_Boss);
+
+// single pass, a recursive drain here never empties the table
+PROC
+PROC_AMP_Plus_UMax_DrainWaveOwed((GUIDSTRING)_C)
+AND
+DB_AMP_Plus_UMax_WaveOwed((CHARACTER)_Boss, _C)
+THEN
+NOT DB_AMP_Plus_UMax_WaveOwed(_Boss, _C);
+
+PROC
+PROC_AMP_Plus_UMax_DrainWaveDone((GUIDSTRING)_C)
+AND
+DB_AMP_Plus_UMax_WaveDone((CHARACTER)_Boss, _C)
+THEN
+NOT DB_AMP_Plus_UMax_WaveDone(_Boss, _C);
+PROC_AMP_Plus_UMax_DrainWaveDone(_C);
+
+// Chase: the quarry mark, only killing the pursuer lifts it
+
+PROC
+PROC_AMP_Plus_UMax_MarkPick((CHARACTER)_Host)
+AND
+QRY_AMP_Plus_UltraMax()
+AND
+NOT DB_AMP_Plus_UMax_Hunted(_)
+THEN
+PROC_AMP_Plus_TgtIndexBuild(_Host);
+
+PROC
+PROC_AMP_Plus_UMax_MarkPick((CHARACTER)_Host)
+AND
+QRY_AMP_Plus_UltraMax()
+AND
+NOT DB_AMP_Plus_UMax_Hunted(_)
+AND
+DB_AMP_Plus_TgtCount(_Host, (INTEGER)_PC)
+AND
+_PC > 0
+AND
+Random(_PC, (INTEGER)_J)
+AND
+DB_AMP_Plus_TgtIdx(_Host, _J, (CHARACTER)_P)
+THEN
+DB_AMP_Plus_UMax_Hunted(_P);
+ApplyStatus(_P, "AMP_PLUS_UMAX_HUNTED", -1.0, 1, _P);
+
+IF
+Died((CHARACTER)_Mob)
+AND
+DB_AMP_Plus_ChaseActive(_Mob, _)
+AND
+DB_AMP_Plus_UMax_Hunted((CHARACTER)_P)
+THEN
+NOT DB_AMP_Plus_UMax_Hunted(_P);
+RemoveStatus(_P, "AMP_PLUS_UMAX_HUNTED", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+Died((CHARACTER)_P)
+AND
+DB_AMP_Plus_UMax_Hunted(_P)
+THEN
+NOT DB_AMP_Plus_UMax_Hunted(_P);
+RemoveStatus(_P, "AMP_PLUS_UMAX_HUNTED", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Plus_UMax_Hunted((CHARACTER)_P)
+AND
+NOT QRY_AMP_Plus_UltraMax()
+THEN
+NOT DB_AMP_Plus_UMax_Hunted(_P);
+RemoveStatus(_P, "AMP_PLUS_UMAX_HUNTED", NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+ENDEXITSECTION

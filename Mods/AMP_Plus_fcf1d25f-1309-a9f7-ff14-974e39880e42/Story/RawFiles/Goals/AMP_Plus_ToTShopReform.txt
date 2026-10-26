@@ -1,0 +1,104 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// re-asserts what AMP_GameMode_ToTShop.txt and AMP_GameMode_EconomyHotfix.txt write per mode
+// level start too, mode switch order between those goals is not guaranteed
+
+PROC
+PROC_AMP_Plus_ToTReform_Apply()
+AND
+DB_AMP_GameMode("CASUAL")
+AND
+DB_ToT_Shop_SellPercent((INTEGER)_OldPct)
+AND
+NOT _OldPct == 50
+THEN
+NOT DB_ToT_Shop_SellPercent(_OldPct);
+DB_ToT_Shop_SellPercent(50);
+
+PROC
+PROC_AMP_Plus_ToTReform_Apply()
+AND
+DB_AMP_GameMode("NORMAL")
+AND
+DB_ToT_Shop_SellPercent((INTEGER)_OldPct)
+AND
+NOT _OldPct == 35
+THEN
+NOT DB_ToT_Shop_SellPercent(_OldPct);
+DB_ToT_Shop_SellPercent(35);
+
+PROC
+PROC_AMP_Plus_ToTReform_Apply()
+AND
+DB_AMP_GameMode("HARD")
+AND
+DB_ToT_Shop_SellPercent((INTEGER)_OldPct)
+AND
+NOT _OldPct == 25
+THEN
+NOT DB_ToT_Shop_SellPercent(_OldPct);
+DB_ToT_Shop_SellPercent(25);
+
+PROC
+PROC_AMP_Plus_ToTReform_Apply()
+AND
+DB_AMP_GameMode("CASUAL")
+AND
+DB_ToT_Shop_MaxStock("GENERAL", (INTEGER)_OldMax)
+AND
+NOT _OldMax == 30
+THEN
+NOT DB_ToT_Shop_MaxStock("GENERAL", _OldMax);
+DB_ToT_Shop_MaxStock("GENERAL", 30);
+
+PROC
+PROC_AMP_Plus_ToTReform_Apply()
+AND
+DB_AMP_GameMode("NORMAL")
+AND
+DB_ToT_Shop_MaxStock("GENERAL", (INTEGER)_OldMax)
+AND
+NOT _OldMax == 20
+THEN
+NOT DB_ToT_Shop_MaxStock("GENERAL", _OldMax);
+DB_ToT_Shop_MaxStock("GENERAL", 20);
+
+PROC
+PROC_AMP_Plus_ToTReform_Apply()
+AND
+DB_AMP_GameMode("HARD")
+AND
+DB_ToT_Shop_MaxStock("GENERAL", (INTEGER)_OldMax)
+AND
+NOT _OldMax == 10
+THEN
+NOT DB_ToT_Shop_MaxStock("GENERAL", _OldMax);
+DB_ToT_Shop_MaxStock("GENERAL", 10);
+
+IF
+DB_AMP_GameMode(_)
+THEN
+PROC_AMP_Plus_ToTReform_Apply();
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_AMP_Plus_ToTReform_Apply();
+
+// restock overwrites the stock size, put back before the first spawn tick
+IF
+DB_ToT_Shop_RestockTarget(_, _)
+THEN
+TimerLaunch("AMP_Plus_ToTReform_Stock", 50);
+
+IF
+TimerFinished("AMP_Plus_ToTReform_Stock")
+THEN
+PROC_AMP_Plus_ToTReform_Apply();
+
+EXITSECTION
+ENDEXITSECTION

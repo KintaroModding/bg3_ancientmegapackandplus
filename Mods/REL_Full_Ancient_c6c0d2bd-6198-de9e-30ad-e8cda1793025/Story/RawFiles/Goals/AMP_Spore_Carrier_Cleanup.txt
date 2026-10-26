@@ -1,0 +1,31 @@
+Version 1
+SubGoalCombiner SGC_AND
+
+INITSECTION
+
+KBSECTION
+
+// stale carrier links survive act transitions, save load and console deletes and cause phantom infections on rest
+
+// at rest start, before the main script reads links on finish
+IF
+LongRestStarted()
+AND
+DB_AMP_Spore_Carrier((CHARACTER)_Player, (ITEM)_SporeItem)
+AND
+NOT GetTemplate(_SporeItem, (ITEMROOT)AMP_Cursed_Spore_ec2ffd1d-2f0f-420a-989d-ea6d1c5bfee9)
+THEN
+NOT DB_AMP_Spore_Carrier(_Player, _SporeItem);
+
+// also at level start so existing saves get cleaned without waiting for a rest
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Spore_Carrier((CHARACTER)_Player, (ITEM)_SporeItem)
+AND
+NOT GetTemplate(_SporeItem, (ITEMROOT)AMP_Cursed_Spore_ec2ffd1d-2f0f-420a-989d-ea6d1c5bfee9)
+THEN
+NOT DB_AMP_Spore_Carrier(_Player, _SporeItem);
+
+EXITSECTION
+ENDEXITSECTION

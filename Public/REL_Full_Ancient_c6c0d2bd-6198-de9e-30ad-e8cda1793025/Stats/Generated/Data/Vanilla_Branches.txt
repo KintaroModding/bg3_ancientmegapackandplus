@@ -1,0 +1,395 @@
+// MONK SOUL REJUVENATION ARMOR BRANCH
+
+// REBALANCE OVERRIDE (adds to Arcanizer_Tags rebalance - removes AC(2) boost)
+new entry "MAG_Monk_SoulRejunevation_Armor"
+type "Armor"
+using "MAG_Monk_SoulRejunevation_Armor"
+data "Boosts" "AC(2)"
+
+// UNCOMMON VERSION - no AC boost, no healing passive
+new entry "MAG_Monk_SoulRejunevation_Armor_1"
+type "Armor"
+using "MAG_Monk_SoulRejunevation_Armor"
+data "ValueOverride" "200"
+data "Rarity" "Uncommon"
+data "ComboCategory" "d1"
+data "PassivesOnEquip" "MAG_Monk_Magic_ArmorEx_Passive"
+data "Boosts" ""
+
+// RARE VERSION - AC(1) boost, keeps healing
+new entry "MAG_Monk_SoulRejunevation_Armor_2"
+type "Armor"
+using "MAG_Monk_SoulRejunevation_Armor"
+data "ValueOverride" "500"
+data "Rarity" "Rare"
+data "ComboCategory" "d2"
+data "Boosts" "AC(1)"
+
+// CHARGED LIGHTNING ELECTROCUTE ARMOR BRANCH
+
+// UNCOMMON VERSION - AC 13, no damage reduction
+new entry "MAG_ChargedLightning_Electrocute_Armor_1"
+type "Armor"
+using "MAG_ChargedLightning_Electrocute_Armor"
+data "ArmorClass" "13"
+data "ValueOverride" "200"
+data "Rarity" "Uncommon"
+data "ComboCategory" "d1"
+data "PassivesOnEquip" "MAG_ChargedLightning_Electrocute_Armor_Passive"
+
+// CHARGED LIGHTNING QUARTERSTAFF BRANCH
+
+// UNCOMMON VERSION - 1 charge per hit, no enchantment
+new entry "MAG_ChargedLightning_Quarterstaff_1"
+type "Weapon"
+using "MAG_ChargedLightning_Quarterstaff"
+data "ValueOverride" "250"
+data "Rarity" "Uncommon"
+data "ComboCategory" "d1"
+data "PassivesOnEquip" "MAG_ChargedLightning_Charge_OnSpellDamage_Passive_1"
+
+// RARE = VANILLA (MAG_ChargedLightning_Quarterstaff)
+
+// VERYRARE VERSION - 3 charges per hit, +2 enchant
+new entry "MAG_ChargedLightning_Quarterstaff_3"
+type "Weapon"
+using "MAG_ChargedLightning_Quarterstaff"
+data "ValueOverride" "1100"
+data "Rarity" "VeryRare"
+data "ComboCategory" "d3"
+data "DefaultBoosts" "WeaponEnchantment(2);WeaponProperty(Magical)"
+data "PassivesOnEquip" "MAG_ChargedLightning_Charge_OnSpellDamage_Passive_3"
+
+// LEGENDARY VERSION - 4 charges per hit, +3 enchant, Lightning Piercing
+new entry "MAG_ChargedLightning_Quarterstaff_4"
+type "Weapon"
+using "MAG_ChargedLightning_Quarterstaff"
+data "ValueOverride" "3300"
+data "Rarity" "Legendary"
+data "ComboCategory" "d4"
+data "DefaultBoosts" "WeaponEnchantment(3);WeaponProperty(Magical)"
+data "PassivesOnEquip" "MAG_ChargedLightning_Charge_OnSpellDamage_Passive_4;MAG_ChargedLightning_LightningPiercing_Passive"
+
+// PASSIVES
+
+// UNCOMMON - 1 charge per spell hit
+new entry "MAG_ChargedLightning_Charge_OnSpellDamage_Passive_1"
+type "PassiveData"
+using "MAG_ChargedLightning_Charge_OnSpellDamage_Passive"
+data "DescriptionParams" "1"
+data "StatsFunctors" "IF(not HasStatus('MAG_CHARGED_LIGHTNING', context.Source)):ApplyStatus(SELF, MAG_CHARGED_LIGHTNING_LIGHTNING_DAMAGE_ONCE_TECHNICAL,100, 0);IF(Character()):ApplyStatus(SELF, MAG_CHARGED_LIGHTNING_GENERATE_CHARGE_FX, 100, 0);IF(Character() and not IsDischargingLightning(context.Source)):ApplyStatus(SELF, MAG_CHARGED_LIGHTNING,100, 1);ApplyStatus(SELF, MAG_CHARGED_LIGHTNING_DURATION_TECHNICAL, 100, 1)"
+
+// VERYRARE - 3 charges per spell hit
+new entry "MAG_ChargedLightning_Charge_OnSpellDamage_Passive_3"
+type "PassiveData"
+using "MAG_ChargedLightning_Charge_OnSpellDamage_Passive"
+data "DescriptionParams" "3"
+data "StatsFunctors" "IF(not HasStatus('MAG_CHARGED_LIGHTNING', context.Source)):ApplyStatus(SELF, MAG_CHARGED_LIGHTNING_LIGHTNING_DAMAGE_ONCE_TECHNICAL,100, 0);IF(Character()):ApplyStatus(SELF, MAG_CHARGED_LIGHTNING_GENERATE_CHARGE_FX, 100, 0);IF(Character() and not IsDischargingLightning(context.Source)):ApplyStatus(SELF, MAG_CHARGED_LIGHTNING,100, 3);ApplyStatus(SELF, MAG_CHARGED_LIGHTNING_DURATION_TECHNICAL, 100, 1)"
+
+// LEGENDARY - 4 charges per spell hit
+new entry "MAG_ChargedLightning_Charge_OnSpellDamage_Passive_4"
+type "PassiveData"
+using "MAG_ChargedLightning_Charge_OnSpellDamage_Passive"
+data "DescriptionParams" "4"
+data "StatsFunctors" "IF(not HasStatus('MAG_CHARGED_LIGHTNING', context.Source)):ApplyStatus(SELF, MAG_CHARGED_LIGHTNING_LIGHTNING_DAMAGE_ONCE_TECHNICAL,100, 0);IF(Character()):ApplyStatus(SELF, MAG_CHARGED_LIGHTNING_GENERATE_CHARGE_FX, 100, 0);IF(Character() and not IsDischargingLightning(context.Source)):ApplyStatus(SELF, MAG_CHARGED_LIGHTNING,100, 4);ApplyStatus(SELF, MAG_CHARGED_LIGHTNING_DURATION_TECHNICAL, 100, 1)"
+
+// LEGENDARY BONUS - ignore lightning resistance/immunity
+new entry "MAG_ChargedLightning_LightningPiercing_Passive"
+type "PassiveData"
+data "DisplayName" "h7b3112e7ge514g429bgba11g94f44eac2239;1"
+data "Description" "h3d3e39b3g4cb9g4fedgb28eg8828df18d536;1"
+data "DescriptionParams" "DealDamage(,Lightning)"
+data "Properties" "Highlighted"
+data "Boosts" "IgnoreResistance(Lightning,Resistant);IgnoreResistance(Lightning,Immune)"
+
+// HELLDUSK PLATE ARMOR BRANCH
+
+// REBALANCE (moved from Vanilla_Rebalance.txt - must be before dupe)
+new entry "MAG_EndGame_Plate_Armor"
+type "Armor"
+using "MAG_EndGame_Plate_Armor"
+data "ValueOverride" "3000"
+data "Rarity" "Legendary"
+data "ComboCategory" "d4"
+data "MinLevel" "1"
+data "Unique" ""
+
+// EPIC VERSION - AC 19, no damage reduction
+new entry "MAG_EndGame_Plate_Armor_3"
+type "Armor"
+using "MAG_EndGame_Plate_Armor"
+data "ArmorClass" "19"
+data "ValueOverride" "1100"
+data "Rarity" "VeryRare"
+data "ComboCategory" "d3"
+data "PassivesOnEquip" "MAG_MAG_EndGame_Plate_Armor_Passive"
+
+// HELLDUSK HALFPLATE BRANCH
+
+// REBALANCE (moved from Vanilla_Rebalance.txt - must be before dupe)
+new entry "MAG_EndGame_HalfPlate"
+type "Armor"
+using "MAG_EndGame_HalfPlate"
+data "ValueOverride" "3000"
+data "Rarity" "Legendary"
+data "ValueLevel" "11"
+data "ComboCategory" "d4"
+data "PassivesOnEquip" "MAG_ExoticMaterial_MediumArmor_Passive;MAG_EndGame_HalfPlate_Passive"
+data "MinLevel" "1"
+data "Unique" ""
+
+new entry "MAG_EndGame_HalfPlate_Passive"
+type "PassiveData"
+data "DisplayName" "hb78d23c4g6026g49fbgb340g97e01e894b12;1"
+data "Description" "h85e45291g3924g4571g9a04g362602d28595;1"
+data "Properties" "Highlighted"
+data "Boosts" "IgnoreLeaveAttackRange()"
+
+// UNCOMMON VERSION - AC 13, no saving throw bonus
+new entry "MAG_EndGame_HalfPlate_1"
+type "Armor"
+using "MAG_EndGame_HalfPlate"
+data "ArmorClass" "13"
+data "ValueOverride" "200"
+data "Rarity" "Uncommon"
+data "ComboCategory" "d1"
+data "Boosts" ""
+
+// RARE VERSION - AC 15, no saving throw bonus
+new entry "MAG_EndGame_HalfPlate_2"
+type "Armor"
+using "MAG_EndGame_HalfPlate"
+data "ArmorClass" "15"
+data "ValueOverride" "500"
+data "Rarity" "Rare"
+data "ComboCategory" "d2"
+data "Boosts" ""
+
+// VERYRARE VERSION - AC 16, no saving throw bonus
+new entry "MAG_EndGame_HalfPlate_3"
+type "Armor"
+using "MAG_EndGame_HalfPlate"
+data "ArmorClass" "16"
+data "ValueOverride" "1100"
+data "Rarity" "VeryRare"
+data "ComboCategory" "d3"
+data "Boosts" ""
+
+// FLAME ENAMELLED ARMOUR BRANCH
+
+// VERYRARE = VANILLA (MAG_FlamingFist_Flame_Armor)
+
+// UNCOMMON VERSION - AC 14, no initiative, no fire shield
+new entry "MAG_FlamingFist_Flame_Armor_1"
+type "Armor"
+using "MAG_FlamingFist_Flame_Armor"
+data "ArmorClass" "14"
+data "ValueOverride" "200"
+data "Rarity" "Uncommon"
+data "ComboCategory" "d1"
+data "Boosts" "IF(not HasPassive('MediumArmorMaster', context.Source)):Disadvantage(Skill,Stealth)"
+data "PassivesOnEquip" "MAG_LesserFlamingDispersion_Passive"
+
+// RARE VERSION - AC 15, no initiative, keeps fire shield
+new entry "MAG_FlamingFist_Flame_Armor_2"
+type "Armor"
+using "MAG_FlamingFist_Flame_Armor"
+data "ArmorClass" "15"
+data "ValueOverride" "500"
+data "Rarity" "Rare"
+data "ComboCategory" "d2"
+data "PassivesOnEquip" "MAG_LesserFlamingDispersion_Passive"
+
+// SERPENT SCALE ARMOR BRANCH
+
+// REBALANCE (moved from Vanilla_Rebalance.txt - reverted to Rare)
+new entry "MAG_CKM_SerpenScale_Armor"
+type "Armor"
+using "MAG_CKM_SerpenScale_Armor"
+data "ValueOverride" "500"
+data "Rarity" "Rare"
+data "ComboCategory" "d2"
+data "ArmorClass" "16"
+data "PassivesOnEquip" "MAG_ExoticMaterial_MediumArmor_Passive;ARM_Ambusher_2_Passive"
+data "Unique" ""
+
+// UNCOMMON VERSION - AC 14
+new entry "MAG_CKM_SerpenScale_Armor_1"
+type "Armor"
+using "MAG_CKM_SerpenScale_Armor"
+data "ArmorClass" "14"
+data "ValueOverride" "200"
+data "Rarity" "Uncommon"
+data "ComboCategory" "d1"
+
+// DEVILS BLACKSMITH SCALEMAIL BRANCH
+
+// REBALANCE (moved from Vanilla_Rebalance.txt - reverted to Rare)
+new entry "MAG_DevilsBlackmith_ScaleMail"
+type "Armor"
+using "MAG_DevilsBlackmith_ScaleMail"
+data "ValueOverride" "500"
+data "Rarity" "Rare"
+data "ComboCategory" "d2"
+data "ArmorClass" "15"
+data "Unique" ""
+
+// UNCOMMON VERSION - AC 15
+new entry "MAG_DevilsBlackmith_ScaleMail_1"
+type "Armor"
+using "MAG_DevilsBlackmith_ScaleMail"
+data "ArmorClass" "14"
+data "ValueOverride" "200"
+data "Rarity" "Uncommon"
+data "ComboCategory" "d1"
+
+// ELVEN CHAIN ARMOR BRANCH
+
+// REBALANCE (moved from Vanilla_Rebalance.txt - must be before dupe)
+new entry "MAG_PHB_ElvenChain_Armor"
+type "Armor"
+using "MAG_PHB_ElvenChain_Armor"
+data "ValueOverride" "1000"
+data "Rarity" "VeryRare"
+data "ValueLevel" "10"
+data "ComboCategory" "d3"
+data "ArmorClass" "16"
+data "Unique" ""
+
+// UNCOMMON VERSION - AC 13, no Elven Dexterity
+new entry "MAG_PHB_ElvenChain_Armor_1"
+type "Armor"
+using "MAG_PHB_ElvenChain_Armor"
+data "ArmorClass" "13"
+data "ValueOverride" "200"
+data "Rarity" "Uncommon"
+data "ComboCategory" "d1"
+data "PassivesOnEquip" "MAG_PHB_ElvenChain_Armor_Passive;MAG_FlexibleArmor_Defense_Passive"
+
+// RARE VERSION - AC 14
+new entry "MAG_PHB_ElvenChain_Armor_2"
+type "Armor"
+using "MAG_PHB_ElvenChain_Armor"
+data "ArmorClass" "14"
+data "ValueOverride" "500"
+data "Rarity" "Rare"
+data "ComboCategory" "d2"
+
+// DWARVEN SPLINTMAIL BRANCH
+
+// REBALANCE (moved from Vanilla_Rebalance.txt - must be before dupe)
+new entry "ARM_Splint_Body_Dwarven"
+type "Armor"
+using "ARM_Splint_Body_Dwarven"
+data "ValueOverride" "500"
+data "Rarity" "Rare"
+data "ComboCategory" "d2"
+data "Boosts" "Disadvantage(Skill,Stealth);Ability(Constitution, 2, 18, true)"
+data "Unique" ""
+
+// SAREVOK'S SWORD OF CHAOS BRANCH
+
+// REBALANCE (moved from Vanilla_Rebalance.txt - must be before dupe)
+new entry "MAG_BG_Sarevok_OfChaos_Greatsword"
+type "Weapon"
+using "MAG_BG_Sarevok_OfChaos_Greatsword"
+data "ValueOverride" "1100"
+data "ComboCategory" "d3"
+data "ValueLevel" "7"
+data "Unique" ""
+data "PassivesOnEquip" "MAG_Sarevok_OfChaos_Greatsword_Leeching_Passive;MAG_Sarevok_Bloodletting_Passive"
+
+new entry "MAG_Sarevok_OfChaos_Greatsword_Leeching_Passive"
+type "PassiveData"
+data "DisplayName" "hfbbf7b00g95ccg437dg8165geee81ae81bb4;2"
+data "Description" "h12d1fc66gaf35g42e1gb46bgece6f8930a1f;2"
+data "DescriptionParams" "RegainHitPoints(1d6)"
+data "StatsFunctorContext" "OnDamage"
+data "Conditions" "AttackedWithPassiveSourceWeapon() and not Item()"
+data "StatsFunctors" "ApplyStatus(SELF,MAG_SAREVOK_HEAL,100,0)"
+
+new entry "MAG_SAREVOK_HEAL"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "MAG_REGAIN_HP"
+data "StatusPropertyFlags" "DisableOverhead;DisablePortraitIndicator;DisableCombatlog"
+data "OnApplyFunctors" "RegainHitPoints(1d6)"
+data "ApplyEffect" "f40e4c72-3971-4f14-9c43-9a44c0251a5d"
+
+new entry "MAG_Sarevok_Bloodletting_Passive"
+type "PassiveData"
+data "DisplayName" "h14276ff4gd0c3g4752g8fe2g5273a03b0110;1"
+data "Description" "ha924f608g787eg4bacg80bag125a6355ce63;1"
+data "DescriptionParams" "2"
+data "Properties" "Highlighted"
+data "StatsFunctorContext" "OnDamage"
+data "Conditions" "AttackedWithPassiveSourceWeapon() and not Item()"
+data "StatsFunctors" "ApplyStatus(BLEEDING,100,2,,,,not SavingThrow(Ability.Constitution,ManeuverSaveDC()))"
+
+// RARE VERSION - 1 HP heal, enchantment +1, no bleeding
+new entry "MAG_BG_Sarevok_OfChaos_Greatsword_2"
+type "Weapon"
+using "MAG_BG_Sarevok_OfChaos_Greatsword"
+data "ValueOverride" "500"
+data "Rarity" "Rare"
+data "ComboCategory" "d2"
+data "DefaultBoosts" "WeaponEnchantment(1);WeaponProperty(Magical)"
+data "PassivesOnEquip" "MAG_Sarevok_OfChaos_Greatsword_Leeching_Passive_2"
+
+new entry "MAG_Sarevok_OfChaos_Greatsword_Leeching_Passive_2"
+type "PassiveData"
+using "MAG_Sarevok_OfChaos_Greatsword_Leeching_Passive"
+data "DescriptionParams" "RegainHitPoints(1)"
+data "StatsFunctors" "ApplyStatus(SELF,MAG_SAREVOK_HEAL_2,100,0)"
+
+new entry "MAG_SAREVOK_HEAL_2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "MAG_SAREVOK_HEAL"
+data "OnApplyFunctors" "RegainHitPoints(1)"
+
+// DWARVEN SPLINT ARMOR BRANCH
+
+// UNCOMMON VERSION - no Constitution bonus, AC 17
+new entry "ARM_Splint_Body_Dwarven_1"
+type "Armor"
+using "ARM_Splint_Body_Dwarven"
+data "ArmorClass" "17"
+data "ValueOverride" "200"
+data "Rarity" "Uncommon"
+data "ComboCategory" "d1"
+data "Boosts" "Disadvantage(Skill,Stealth)"
+
+// HatulExpansion: Sarevok's Sword of Chaos (Legendary tier)
+
+new entry "MAG_BG_Sarevok_OfChaos_Greatsword_3"
+type "Weapon"
+using "MAG_BG_Sarevok_OfChaos_Greatsword"
+data "Rarity" "Legendary"
+data "ComboCategory" "d4"
+data "ValueOverride" "3300"
+data "Damage" "2d10"
+data "DefaultBoosts" "WeaponEnchantment(3);WeaponProperty(Magical);WeaponDamage(1d6, Necrotic)"
+data "PassivesOnEquip" "MAG_Sarevok_OfChaos_Greatsword_Leeching_Passive_3;AMP_Hatul_Bhaal_Edge_Passive"
+data "Unique" ""
+
+new entry "AMP_Hatul_Bhaal_Edge_Passive"
+type "PassiveData"
+using "ImprovedCritical"
+data "DisplayName" "h45bc72b6gcd3bg4f8eg924dgc4f37c0df813;1"
+data "Description" "h02ecd566g559fg46e7g8dacg40660387ad0a;1"
+data "DescriptionParams" "1"
+data "Boosts" "ReduceCriticalAttackThreshold(1)"
+
+new entry "MAG_Sarevok_OfChaos_Greatsword_Leeching_Passive_3"
+type "PassiveData"
+using "MAG_Sarevok_OfChaos_Greatsword_Leeching_Passive"
+data "Description" "h7653de21gc306g4cd8gaa37ga04a122b5e11;1"
+data "DescriptionParams" "RegainHitPoints(1d10)"
+data "StatsFunctors" "ApplyStatus(SELF,MAG_SAREVOK_HEAL_3,100,0)"
+
+new entry "MAG_SAREVOK_HEAL_3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "MAG_SAREVOK_HEAL"
+data "OnApplyFunctors" "RegainHitPoints(1d10)"

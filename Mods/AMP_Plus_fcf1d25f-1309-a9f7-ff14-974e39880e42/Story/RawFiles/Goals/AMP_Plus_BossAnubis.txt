@@ -1,0 +1,121 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// guard finds bosses by Anubis config name, so each config is swapped in from here
+// swap goes through the shared config stack, not DEV_EnableAnubis, so a story override on the stack still wins
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_BossAnubisVer(2)
+THEN
+PROC_AMP_Plus_BossAnubisSeed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_BossAnubisVer(2)
+THEN
+PROC_AMP_Plus_BossAnubisSeed();
+
+PROC
+PROC_AMP_Plus_BossAnubisSeed()
+AND
+DB_AMP_Plus_BossAnubisVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_BossAnubisVer(_Old);
+
+PROC
+PROC_AMP_Plus_BossAnubisSeed()
+THEN
+PROC_AMP_Plus_BossAnubisDrainMap();
+
+PROC
+PROC_AMP_Plus_BossAnubisDrainMap()
+AND
+DB_AMP_Plus_BossAnubisMap((CHARACTER)_Char, (STRING)_Vanilla, (STRING)_Amp)
+THEN
+NOT DB_AMP_Plus_BossAnubisMap(_Char, _Vanilla, _Amp);
+PROC_AMP_Plus_BossAnubisDrainMap();
+
+PROC
+PROC_AMP_Plus_BossAnubisSeed()
+THEN
+DB_AMP_Plus_BossAnubisVer(2);
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_TUT_Helm_Devil_005_ed103005-fd71-457d-ae6c-39654bbd8f2e, "DefaultCharacter", "AMP_Boss_DefaultCharacter");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_HAG_Hag_c457d064-83fb-4ec6-b74d-1f30dfafd12d, "HAG_Hag", "AMP_Boss_HAG_Hag");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_GOB_GoblinKing_11337af0-6a57-426b-a820-c4b00923dd54, "GOB_GoblinKing", "AMP_Boss_GOB_GoblinKing");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_GOB_DrowCommander_25721313-0c15-4935-8176-9f134385451b, "GLO_DrowCommander_Act1", "AMP_Boss_GLO_DrowCommander_Act1");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_GOB_GoblinPriest_b983c336-9a14-4e9b-adb9-4689e7e0afa9, "GOB_Branding_Priest", "AMP_Boss_GOB_Branding_Priest");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_DEN_DruidLeader_95eb2b0b-a522-4ea5-8167-c5f4d1418156, "DEN_DruidLeader", "AMP_Boss_DEN_DruidLeader");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_FOR_OwlBear_e903a41f-8ef7-46dc-a847-7d0ec2804d08, "FOR_OwlBear", "AMP_Boss_FOR_OwlBear");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_FOR_Bottomless_SpiderQueen_e6b2f3ba-2d02-4507-8680-6047322e1a4b, "FOR_BottomlessSpiderQueen", "AMP_Boss_FOR_BottomlessSpiderQueen");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_UND_PetrifiedDrow_Spectator_39ff8241-fadd-4fbe-ab89-fc5a8b7638a0, "UND_PetrifiedDrow_Spectator", "AMP_Boss_UND_PetrifiedDrow_Spectator");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_UND_Bulette_307934b5-6fb5-4fdc-a7ff-433a7ba175b3, "UND_Bulette", "AMP_Boss_UND_Bulette");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255, "UND_KethericCity_Elemental_1", "AMP_Boss_UND_KethericCity_Elemental_1");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_UND_TheDrowNere_06bf05c5-216b-4eaf-91f5-8f1dd3d57f30, "UND_DrowNere", "AMP_Boss_UND_DrowNere");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_UND_Automaton_5038c0f2-0022-4699-82ce-a319b30616bb, "UND_Automaton", "AMP_Boss_UND_Automaton");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_CRE_Templar_378ac93e-03a0-40b4-904c-f37989ac7a8c, "CRE_ChainOfCommand_Templar", "AMP_Boss_CRE_ChainOfCommand_Templar");
+
+PROC
+PROC_AMP_Plus_BossAnubisSeed()
+THEN
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_MOO_Ketheric_e9918f3e-5b87-40a3-a9bd-61545151573f, "MOO_Ketheric", "AMP_Boss_MOO_Ketheric");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_TWN_Tollhouse_TollhouseMaster_3b460226-8ca2-4bbc-9bd7-8bb947aa2c06, "Tollhouse_TollhouseMaster", "AMP_Boss_Tollhouse_TollhouseMaster");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_TWN_Hospital_Surgeon_e58b8b34-038b-4858-b817-c2a8096a9381, "TWN_Hospital_Surgeon", "AMP_Boss_TWN_Hospital_Surgeon");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_TWN_Distillery_Brewer_4d9e3db3-9a78-4f4b-8101-1dd73c0f3be5, "TWN_Distillery_Brewer", "AMP_Boss_TWN_Distillery_Brewer");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_SHA_Necromancer_53651a9f-7ea8-444f-ba2d-224390b72f7d, "SHA_Necromancer_Chosen_Act2", "AMP_Boss_SHA_Necromancer_Chosen_Act2");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_GLO_Orthon_1dc8091d-2af6-4d33-9268-998ef266d19c, "SHA_Orthon", "AMP_Boss_SHA_Orthon");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_SCL_BlightCombat2_Mound_01_1b294fe0-f1a1-4e81-9d4c-8d86bbda7d2b, "SCL_BlightMonster", "AMP_Boss_SCL_BlightMonster");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_GLO_Nightsong_6c55edb0-901b-4ba4-b9e8-3475a8392d9b, "SHA_Nightsong", "AMP_Boss_SHA_Nightsong");
+
+PROC
+PROC_AMP_Plus_BossAnubisSeed()
+THEN
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_GLO_Orin_bf24e0ec-a3a6-4905-bd2d-45dc8edf8101, "SCL_Orin", "AMP_Boss_SCL_Orin");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_GLO_Gortash_b878a854-f790-4999-95c4-3f20f00f65ac, "SCL_Gortash", "AMP_Boss_SCL_Gortash");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_GLO_Monitor_f65becd6-5cd7-4c88-b85e-6dd06b60f7b8, "GLO_Monitor", "AMP_Boss_GLO_Monitor");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_GLO_Cazador_2f1880e6-1297-4ca3-a79c-9fabc7f179d3, "DefaultMonster", "AMP_Boss_DefaultMonster");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_LOW_HouseOfHope_Incubus_3947e0e2-3b4c-4a39-ac53-454e95665b26, "DefaultMonster", "AMP_Boss_DefaultMonster");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a, "DefaultMonster", "AMP_Boss_WYR_SkeletalDragon");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_LOW_MurderTribunal_Sarevok_ae9f784a-ea64-4297-95a7-8377e85231b6, "LOW_MurderTribunal", "AMP_Boss_LOW_MurderTribunal");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_LOW_Viconia_b1ea974d-96fb-47ca-b6d9-9c85fcb69313, "LOW_Viconia", "AMP_Boss_LOW_Viconia");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_LOW_Lorroakan_a9d4b71d-b0ef-429e-8210-6dc8be986ee9, "LOW_SorcerousSundries_Lorroakan", "AMP_Boss_LOW_SorcerousSundries_Lorroakan");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_LOW_FatherCarrion_b003409c-364f-4065-94bf-7436001d890e, "LOW_PhilgravesMansion_MysticCarrion", "AMP_Boss_LOW_PhilgravesMansion_MysticCarrion");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_LOW_CountingHouse_VaultMainGuard_936953b6-059b-4ed6-b03a-5d1b340f8889, "LOW_CountingHouse_GuardPatrol", "AMP_Boss_LOW_CountingHouse_GuardPatrol");
+DB_AMP_Plus_BossAnubisMap((CHARACTER)S_LOW_SteelWatcher_Prototype_51db791d-4378-448a-86ba-3e3ae2748db6, "DefaultConstruct", "AMP_Boss_DefaultConstruct");
+
+// config read doubles as the is-loaded test, other acts are skipped until their level loads
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Plus_BossAnubisMap((CHARACTER)_Char, (STRING)_Vanilla, (STRING)_Amp)
+AND
+GetAnubisConfig(_Char, _Vanilla)
+THEN
+PROC_SetAnubisConfig(_Char, _Amp);
+
+IF
+SavegameLoaded()
+AND
+DB_AMP_Plus_BossAnubisMap((CHARACTER)_Char, (STRING)_Vanilla, (STRING)_Amp)
+AND
+GetAnubisConfig(_Char, _Vanilla)
+THEN
+PROC_SetAnubisConfig(_Char, _Amp);
+
+IF
+EnteredCombat((CHARACTER)_Char, _)
+AND
+DB_AMP_Plus_BossAnubisMap(_Char, (STRING)_Vanilla, (STRING)_Amp)
+AND
+GetAnubisConfig(_Char, _Vanilla)
+THEN
+PROC_SetAnubisConfig(_Char, _Amp);
+
+EXITSECTION
+ENDEXITSECTION

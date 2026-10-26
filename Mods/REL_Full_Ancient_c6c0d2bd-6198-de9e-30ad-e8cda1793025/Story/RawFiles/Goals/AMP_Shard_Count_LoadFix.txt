@@ -1,0 +1,44 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+DB_AMP_Shard_CountFix_Enabled(1);
+
+KBSECTION
+
+// StatusApplied refires on worn items at save load, the core counter would count each as a new shard
+// real applications carry a player causee, so the increment is taken back for any other causee
+
+IF
+StatusApplied((ITEM)_Item, (STRING)_ItemStatus, (CHARACTER)_Causee, _)
+AND
+DB_AMP_Shard_CountFix_Enabled(1)
+AND
+DB_AMP_Shard_Transfer(_ItemStatus, _)
+AND
+NOT DB_Players(_Causee)
+AND
+DB_AMP_Shard_Count(_Item, _ItemStatus, (INTEGER)_Count)
+AND
+_Count > 1
+AND
+IntegerSubtract(_Count, 1, (INTEGER)_New)
+THEN
+NOT DB_AMP_Shard_Count(_Item, _ItemStatus, _Count);
+DB_AMP_Shard_Count(_Item, _ItemStatus, _New);
+
+IF
+StatusApplied((ITEM)_Item, (STRING)_ItemStatus, (CHARACTER)_Causee, _)
+AND
+DB_AMP_Shard_CountFix_Enabled(1)
+AND
+DB_AMP_Shard_Transfer(_ItemStatus, _)
+AND
+NOT DB_Players(_Causee)
+AND
+DB_AMP_Shard_Count(_Item, _ItemStatus, 1)
+THEN
+NOT DB_AMP_Shard_Count(_Item, _ItemStatus, 1);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,43 @@
+USING rogue_smart
+
+// The opening is the kill, not the buff. Illusion and invisibility come after.
+MULTIPLIER_FIRST_ACTION_BUFF                    1.00
+MULTIPLIER_FIRST_ACTION_INVISIBILITY            0.10
+MULTIPLIER_INVISIBLE                            0.15
+
+// strike is melee, so the landing has to sit inside reach
+// max distance spans the whole hop: past it spots tie and the teleport lands anywhere
+MULTIPLIER_ENDPOS_ENEMIES_NEARBY                0.20
+ENDPOS_ENEMIES_NEARBY_MAX_DISTANCE              9.00
+ENABLE_MOVEMENT_AVOID_AOO                       1.00
+
+// Wind Step is an approach, the default 6m floor blocks short hops onto a nearby target
+// landing is chosen for the strike planned behind it, leave penalty stays at vanilla
+SPELL_TELEPORT_MINIMUM_DISTANCE                 3.00
+MULTIPLIER_PLANNED_ACTION_WITH_MOVE_SPELL       2.50
+MULTIPLIER_POSITION_LEAVE                      -1.00
+
+// Picks the one she can drop this round and commits to it.
+MULTIPLIER_KILL_ENEMY                           2.00
+MULTIPLIER_TARGET_HEALTH_BIAS                   0.25
+MULTIPLIER_KILL_TARGET_HEALTH_BIAS              0.20
+MULTIPLIER_DAMAGE_ENEMY_POS                     1.35
+
+// Field control is a side tool, kept for the half of the fight she survives into.
+MULTIPLIER_CONTROL_ENEMY_POS                    0.80
+MULTIPLIER_BOOST_ENEMY_POS                      0.90
+MODIFIER_CONCENTRATION_REMOVE_TARGET            0.40
+
+// Glass cannon: protective of her own skin
+MULTIPLIER_DAMAGE_SELF_NEG                      3.00
+
+// A precise duelist: drinks potions, but never throws
+USE_INVENTORY_ITEMS_ENABLED                     1
+THROW_INVENTORY_ITEM_LIMIT                       0
+MULTIPLIER_USABLE_ITEM                          0.00
+WEAPON_PICKUP_MODIFIER                          0.00
+
+// Her own sleet lies under every fight: crossing it costs her nothing, and only the tile
+// she lands on is weighed.
+MULTIPLIER_MOVEMENT_SURFACE                     0.00
+MULTIPLIER_ENDPOS_NOT_IN_DANGEROUS_SURFACE      0.15

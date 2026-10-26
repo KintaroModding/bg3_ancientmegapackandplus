@@ -1,0 +1,24 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// arcanizer shards batch 05
+
+// weapon nonstack: faerie fire
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_7_75386591-b3de-48fe-8af0-d6b98faedd5a, "AMP_SHARD_APPLY_MELEE_WEAPON_7", "AMP_SHARD_APPLY_RANGED_WEAPON_7", "AMP_SHARD_WEAPON_FAERIEFIRE");
+
+// weapon stackable: enchantment
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_8_d9e7ace9-cb69-46f9-a7f7-b42ef1a2bb8f, "AMP_SHARD_APPLY_MELEE_WEAPON_8", "AMP_SHARD_APPLY_RANGED_WEAPON_8");
+
+// head stackable: reaction
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Head_11_4ca77a96-c585-4615-8494-e0a914d48858, "Helmet", "AMP_SHARD_APPLY_HELMET_11", "Helmet");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_REACTION", "AMP_SHARD_CHAR_REACTION");
+
+// gloves stackable: critdice
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Gloves_10_6f2cf524-5515-4472-a01b-335fe116e108, "Gloves", "AMP_SHARD_APPLY_GLOVES_10", "Gloves");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_CRITDICE", "AMP_SHARD_CHAR_CRITDICE");
+
+KBSECTION
+
+EXITSECTION
+ENDEXITSECTION

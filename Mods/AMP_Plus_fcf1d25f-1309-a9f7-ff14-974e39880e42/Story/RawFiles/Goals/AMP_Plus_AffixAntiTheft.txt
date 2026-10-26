@@ -1,0 +1,83 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// activity query passes for all of Hard before the off switch is read, so effects are undone instead
+
+IF
+DB_AMP_HostilityPending((CHARACTER)_Npc, (CHARACTER)_Player, (FACTION)_Fac)
+AND
+NOT QRY_AMP_Plus_Affix_On("ANTITHEFT")
+THEN
+NOT DB_AMP_HostilityPending(_Npc, _Player, _Fac);
+
+IF
+DB_AMP_HubEverStolen((CHARACTER)_Npc, (CHARACTER)_Player)
+AND
+NOT QRY_AMP_Plus_Affix_On("ANTITHEFT")
+THEN
+NOT DB_AMP_HubEverStolen(_Npc, _Player);
+
+// base rule fires on the same event, so this waits on a short timer
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+TimerLaunch("AMP_Plus_AT_CrimeSweep", 3000);
+
+IF
+TimerFinished("AMP_Plus_AT_CrimeSweep")
+AND
+NOT QRY_AMP_Plus_Affix_On("ANTITHEFT")
+THEN
+PROC_AMP_Plus_AT_ClearCrime();
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "ANTITHEFT"
+AND
+_Val == 0
+THEN
+PROC_AMP_Plus_AT_ClearCrime();
+
+PROC
+PROC_AMP_Plus_AT_ClearCrime()
+AND
+DB_AMP_HubTrader((CHARACTER)_Npc)
+AND
+Exists(_Npc, 1)
+THEN
+CharacterDisableCrime(_Npc, "EmptyPocketNoticed");
+CharacterDisableCrime(_Npc, "Theft");
+
+// base rumour call cannot be stopped, attitude is paid back. Hard only, elsewhere it would be a gift
+
+IF
+CharacterPickpocketSuccess((CHARACTER)_Thief, (CHARACTER)_Victim, _, _, _, _)
+AND
+NOT QRY_AMP_Plus_Affix_On("ANTITHEFT")
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+AND
+DB_AMP_TraderAct(_Victim, (INTEGER)_Act)
+AND
+DB_AMP_TraderAct((CHARACTER)_Other, _Act)
+AND
+_Other != _Victim
+THEN
+AddAttitudeTowardsPlayer(_Other, _Thief, 5);
+
+// base query has no Casual body, this one answers for the switch alone in every mode
+
+QRY
+QRY_AMP_AntiTheft_Active()
+AND
+QRY_AMP_Plus_Affix_On("ANTITHEFT")
+THEN
+DB_NOOP(1);
+
+EXITSECTION
+ENDEXITSECTION

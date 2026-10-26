@@ -1,0 +1,19 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// IsShard checks four registries, the reclamation shard has its own, so this fifth overload covers it
+
+QRY
+QRY_AMP_VoidCapsule_IsShard((ITEM)_Item)
+AND
+GetTemplate(_Item, (ITEMROOT)_T)
+AND
+DB_AMP_Shard_Recovery(_T)
+THEN
+DB_NOOP(1);
+
+EXITSECTION
+ENDEXITSECTION

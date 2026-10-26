@@ -1,0 +1,219 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_Pyre2_BroodVer(2)
+THEN
+PROC_AMP_Plus_Pyre2_BroodReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_Pyre2_BroodVer(2)
+THEN
+PROC_AMP_Plus_Pyre2_BroodReseed();
+
+PROC
+PROC_AMP_Plus_Pyre2_BroodReseed()
+THEN
+PROC_AMP_Plus_Pyre2_DrainBroodSpawn();
+
+PROC
+PROC_AMP_Plus_Pyre2_BroodReseed()
+THEN
+DB_AMP_Plus_Pyre2_BroodVer(2);
+DB_AMP_Plus_Pyre_Spawn(8, AMP_Plus_PyreBrood_Quasit_57e080a5-32d4-4a7f-857f-402d5cb8bfe9, 4);
+DB_AMP_Plus_Pyre_Spawn(9, AMP_Plus_PyreBrood_Berbalang_84a0aa49-3547-4c98-a35a-1919d6353dd1, 3);
+DB_AMP_Plus_Pyre_Spawn(10, AMP_Plus_PyreBrood_Spectator_601ca55a-024d-4536-a197-1456cd36e0cf, 2);
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainBroodSpawn()
+AND
+DB_AMP_Plus_Pyre_Spawn((INTEGER)_S, (GUIDSTRING)_T, (INTEGER)_L)
+THEN
+NOT DB_AMP_Plus_Pyre_Spawn(_S, _T, _L);
+PROC_AMP_Plus_Pyre2_DrainBroodSpawn();
+
+// two bodies on purpose: the first records whom this round's guard belongs to, the second spawns from that one entry
+// reading the anchors and creating in one body would spawn a creature per anchor
+
+IF
+CombatRoundStarted((GUIDSTRING)_CombatID, (INTEGER)_Round)
+AND
+DB_AMP_Plus_Pyre2_Armed(_CombatID)
+AND
+NOT DB_AMP_Plus_Pyre_Phase(_CombatID, "BROKEN")
+AND
+DB_AMP_Plus_Pyre_Stage(_CombatID, (INTEGER)_S)
+AND
+DB_AMP_Plus_Pyre_Spawn(_S, (GUIDSTRING)_Template, (INTEGER)_Life)
+AND
+NOT DB_AMP_Plus_Pyre2_Brooded(_CombatID, _Round)
+THEN
+PROC_AMP_Plus_Pyre2_BroodOpen(_CombatID, _Template, _Life, _Round);
+
+PROC
+PROC_AMP_Plus_Pyre2_BroodOpen((GUIDSTRING)_CombatID, (GUIDSTRING)_Template, (INTEGER)_Life, (INTEGER)_Round)
+AND
+DB_AMP_Plus_Pyre2_Ward(_CombatID, (CHARACTER)_Old)
+THEN
+NOT DB_AMP_Plus_Pyre2_Ward(_CombatID, _Old);
+
+PROC
+PROC_AMP_Plus_Pyre2_BroodOpen((GUIDSTRING)_CombatID, (GUIDSTRING)_Template, (INTEGER)_Life, (INTEGER)_Round)
+AND
+DB_AMP_Plus_Pyre2_Anchor((CHARACTER)_Boss, _CombatID)
+AND
+IsDead(_Boss, 0)
+THEN
+PROC_AMP_Plus_Pyre2_SetWard(_CombatID, _Boss);
+
+PROC
+PROC_AMP_Plus_Pyre2_SetWard((GUIDSTRING)_CombatID, (CHARACTER)_Boss)
+AND
+NOT DB_AMP_Plus_Pyre2_Ward(_CombatID, _)
+THEN
+DB_AMP_Plus_Pyre2_Ward(_CombatID, _Boss);
+
+PROC
+PROC_AMP_Plus_Pyre2_BroodOpen((GUIDSTRING)_CombatID, (GUIDSTRING)_Template, (INTEGER)_Life, (INTEGER)_Round)
+AND
+DB_AMP_Plus_Pyre2_Ward(_CombatID, (CHARACTER)_Boss)
+AND
+GetPosition(_Boss, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+IntegerSum(_Round, _Life, (INTEGER)_Expire)
+AND
+IntegerProduct(_Life, 6, (INTEGER)_Ticks)
+AND
+IntegerToReal(_Ticks, (REAL)_Stay)
+AND
+RealSum(_Z, 2.0, (REAL)_SZ)
+AND
+CreateAt(_Template, _X, _Y, _SZ, 1, 1, "", (GUIDSTRING)_Mob)
+THEN
+DB_AMP_Plus_Pyre2_Brooded(_CombatID, _Round);
+DB_AMP_Plus_Pyre2_Brood((CHARACTER)_Mob, _CombatID, _Expire);
+PROC_AMP_Plus_Pyre2_BroodDress((CHARACTER)_Mob, _Boss, _Stay);
+PROC_AMP_Plus_Pyre2_BroodScale((CHARACTER)_Mob);
+PROC_AMP_Plus_Pyre2_BroodEngage((CHARACTER)_Mob, _CombatID);
+
+// status is put on the body from here, the spawn functor's status arguments are silently dropped
+
+PROC
+PROC_AMP_Plus_Pyre2_BroodDress((CHARACTER)_Mob, (CHARACTER)_Boss, (REAL)_Stay)
+AND
+GetFaction(_Boss, (FACTION)_Colours)
+THEN
+SetFaction(_Mob, _Colours);
+ApplyStatus(_Mob, "ASTRAL_PORTAL_VFX", 4.0, 1, _Mob);
+ApplyStatus(_Mob, "AMP_PLUS_PYRE_BROOD", _Stay, 1, _Mob);
+SetCharacterLootable(_Mob, 0);
+
+PROC
+PROC_AMP_Plus_Pyre2_BroodScale((CHARACTER)_Mob)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+DB_AMP_Ultra_HPScaleMap(_Lvl, _)
+AND
+IntegerToString(_Lvl, (STRING)_LStr)
+AND
+Concatenate("AMP_PLUS_PYRE_BROOD_HP_", _LStr, (STRING)_Status)
+THEN
+ApplyStatus(_Mob, _Status, -1.0, 1, _Mob);
+
+PROC
+PROC_AMP_Plus_Pyre2_BroodEngage((CHARACTER)_Mob, (GUIDSTRING)_CombatID)
+AND
+CombatGetInvolvedPartyMembersCount(_CombatID, (INTEGER)_N)
+AND
+_N > 0
+AND
+CombatGetInvolvedPartyMember(_CombatID, 1, (CHARACTER)_Member)
+THEN
+EnterCombat(_Mob, _Member);
+
+// deletion is not a death, nothing it leaves behind feeds the fire
+
+IF
+CombatRoundStarted((GUIDSTRING)_CombatID, (INTEGER)_Round)
+THEN
+PROC_AMP_Plus_Pyre2_DrainBroodExpired(_CombatID, _Round);
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainBroodExpired((GUIDSTRING)_CombatID, (INTEGER)_Round)
+AND
+DB_AMP_Plus_Pyre2_Brood((CHARACTER)_Mob, _CombatID, (INTEGER)_Expire)
+AND
+_Round >= _Expire
+THEN
+NOT DB_AMP_Plus_Pyre2_Brood(_Mob, _CombatID, _Expire);
+RequestDeleteTemporary(_Mob);
+PROC_AMP_Plus_Pyre2_DrainBroodExpired(_CombatID, _Round);
+
+// not deleted inside the combat end: the engine is still taking the fight apart and a removed participant can crash it
+// set aside, deleted a beat later. the bin outlives a save so a load picks it up
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_DrainBroodToBin(_CombatID);
+
+IF
+SavegameLoaded()
+AND
+DB_AMP_Plus_Pyre2_BroodBin(_)
+THEN
+TimerLaunch("AMP_Plus_Pyre2_BroodBin", 1000);
+
+IF
+TimerFinished("AMP_Plus_Pyre2_BroodBin")
+THEN
+PROC_AMP_Plus_Pyre2_DrainBroodBin();
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Ward(_CombatID, (CHARACTER)_Boss)
+THEN
+NOT DB_AMP_Plus_Pyre2_Ward(_CombatID, _Boss);
+
+IF
+CombatEnded((GUIDSTRING)_CombatID)
+THEN
+PROC_AMP_Plus_Pyre2_DrainBroodRounds(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainBroodToBin((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Brood((CHARACTER)_Mob, _CombatID, (INTEGER)_Expire)
+THEN
+NOT DB_AMP_Plus_Pyre2_Brood(_Mob, _CombatID, _Expire);
+DB_AMP_Plus_Pyre2_BroodBin(_Mob);
+TimerLaunch("AMP_Plus_Pyre2_BroodBin", 1000);
+PROC_AMP_Plus_Pyre2_DrainBroodToBin(_CombatID);
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainBroodBin()
+AND
+DB_AMP_Plus_Pyre2_BroodBin((CHARACTER)_Mob)
+THEN
+NOT DB_AMP_Plus_Pyre2_BroodBin(_Mob);
+RequestDeleteTemporary(_Mob);
+PROC_AMP_Plus_Pyre2_DrainBroodBin();
+
+PROC
+PROC_AMP_Plus_Pyre2_DrainBroodRounds((GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_Pyre2_Brooded(_CombatID, (INTEGER)_Round)
+THEN
+NOT DB_AMP_Plus_Pyre2_Brooded(_CombatID, _Round);
+PROC_AMP_Plus_Pyre2_DrainBroodRounds(_CombatID);
+
+EXITSECTION
+ENDEXITSECTION

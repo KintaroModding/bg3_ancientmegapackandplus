@@ -1,0 +1,11 @@
+new entry "Target_MAG_HuntersMark"
+type "SpellData"
+data "SpellType" "Target"
+using "Target_MAG_HuntersMark"
+data "Cooldown" "OncePerCombat"
+
+new entry "Target_MAG_HuntersMark_Grymskull"
+type "SpellData"
+data "SpellType" "Target"
+using "Target_MAG_HuntersMark_Grymskull"
+data "Cooldown" "OncePerCombat"

@@ -1,0 +1,133 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// base level 8/12 auto-offer has no game-mode check, casual can end up with ultra on
+// rollback is not the kill switch, ultra can be taken again on normal or hard
+
+PROC
+PROC_AMP_Plus_UltraCasualOff()
+THEN
+NOT DB_AMP_Ultra_Active(1);
+
+PROC
+PROC_AMP_Plus_UltraCasualOff()
+AND
+DB_Players((CHARACTER)_P)
+THEN
+RemoveStatus(_P, "AMP_ULTRA_PLAYER_DEBUFF", NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_UltraCasualOff()
+AND
+DB_AMP_DiffV3_Tracked((CHARACTER)_C, _)
+THEN
+RemoveStatus(_C, "AMP_ULTRA_BOSS_OVERLAY", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_C, "AMP_ULTRA_NPC_OVERLAY", NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_UltraCasualOff()
+THEN
+PROC_AMP_Plus_UltraCasual_DrainChasePending();
+
+PROC
+PROC_AMP_Plus_UltraCasual_DrainChasePending()
+AND
+DB_AMP_Plus_ChasePending((GUIDSTRING)_T)
+THEN
+NOT DB_AMP_Plus_ChasePending(_T);
+PROC_AMP_Plus_UltraCasual_DrainChasePending();
+
+PROC
+PROC_AMP_Plus_UltraCasualOff()
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+RemoveStatus(_Host, "AMP_PLUS_ULTRAOFF_UNLOCK", NULL_00000000-0000-0000-0000-000000000000);
+OpenMessageBox(_Host, "AMP_Settings_Ultra_Unavailable");
+
+PROC
+PROC_AMP_Plus_UltraCasualOff()
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+RemoveStatus(_Player, "AMP_PLUS_CHASE_MARK", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_GameMode("CASUAL")
+THEN
+PROC_AMP_Plus_UltraCasualOff();
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_GameMode("STOCK")
+THEN
+PROC_AMP_Plus_UltraCasualOff();
+
+// both insertion orders trigger it, the queued flag keeps it to a single rollback
+
+IF
+DB_AMP_GameMode("CASUAL")
+AND
+DB_AMP_Ultra_Active(1)
+AND
+NOT DB_AMP_Plus_UltraCasualOffQueued(1)
+THEN
+DB_AMP_Plus_UltraCasualOffQueued(1);
+
+IF
+DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_GameMode("CASUAL")
+AND
+NOT DB_AMP_Plus_UltraCasualOffQueued(1)
+THEN
+DB_AMP_Plus_UltraCasualOffQueued(1);
+
+IF
+DB_AMP_GameMode("STOCK")
+AND
+DB_AMP_Ultra_Active(1)
+AND
+NOT DB_AMP_Plus_UltraCasualOffQueued(1)
+THEN
+DB_AMP_Plus_UltraCasualOffQueued(1);
+
+IF
+DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_GameMode("STOCK")
+AND
+NOT DB_AMP_Plus_UltraCasualOffQueued(1)
+THEN
+DB_AMP_Plus_UltraCasualOffQueued(1);
+
+IF
+DB_AMP_Plus_UltraCasualOffQueued(1)
+THEN
+NOT DB_AMP_Plus_UltraCasualOffQueued(1);
+PROC_AMP_Plus_UltraCasualOff();
+
+// 500ms re-kill timer is lost if the save lands before it fires, so rerun on load
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Ultra_Active(1)
+AND
+DB_AMP_Plus_Ultra_Disabled(1)
+THEN
+PROC_AMP_Plus_UltraOff_Execute();
+
+EXITSECTION
+
+ENDEXITSECTION

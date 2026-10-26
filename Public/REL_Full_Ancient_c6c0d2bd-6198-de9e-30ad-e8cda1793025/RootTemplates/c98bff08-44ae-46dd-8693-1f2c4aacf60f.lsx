@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="c98bff08-44ae-46dd-8693-1f2c4aacf60f" />
+					<attribute id="Name" type="LSString" value="AMP_RusMage_Shortsword" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="1e172d76-3433-4ee7-ae1a-9e7d8ae0f12b" />
+					<attribute id="VisualTemplate" type="FixedString" value="297c0fd7-b241-1ea0-2d65-94eb15b9b5b4" />
+					<attribute id="DisplayName" type="TranslatedString" handle="ha3ff7ac9g46c8g5482g471bg2752f145992a" version="1" />
+					<attribute id="Icon" type="FixedString" value="AMP_RusMage_Shortsword" />
+					<attribute id="Stats" type="FixedString" value="AMP_RusMage_Shortsword_4" />
+					<attribute id="Description" type="TranslatedString" handle="h55f3b3f6g21cegd2a5g2b5cgcd540246deed" version="1" />
+					<children>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="AMP_RUSMAGE_SWORD_VFX" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

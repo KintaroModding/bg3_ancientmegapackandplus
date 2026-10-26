@@ -1,0 +1,259 @@
+// Boosts cleared, discount lives in a hidden passive gated by the cooldown marker
+new entry "AMP_SHARD_IMPROVISE_ACTIVE"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_SHARD_IMPROVISE_ACTIVE"
+data "Boosts" ""
+data "Passives" "AMP_Shard_Improvise_Discount_Passive;AMP_Shard_Improvise_CD_Passive"
+
+new entry "AMP_Shard_Improvise_Discount_Passive"
+type "PassiveData"
+data "DisplayName" "hb42900c8g9aa6g43efg864ag98ce9b635df4;1"
+data "Properties" "IsHidden"
+data "BoostContext" "OnCreate;OnEquip;OnStatusApplied;OnStatusRemoved;OnTurn"
+data "BoostConditions" "not HasStatus('AMP_SHARD_IMPROVISE_CD',context.Source)"
+data "Boosts" "UnlockSpellVariant(AMP_Plus_IsImprovCantrip(),ModifyUseCosts(Replace,BardicInspiration,1,0,ActionPoint),ModifyIconGlow(),ModifyTooltipDescription())"
+
+new entry "AMP_Shard_Dyn_GLOVES_28"
+type "PassiveData"
+using "AMP_Shard_Dyn_GLOVES_28"
+data "Boosts" "AC(1)"
+
+// SetStatusDuration leaves the overflowed boost size, so re-apply at the cap
+new entry "AMP_Shard_Armor_Metamorph_Cap_Passive"
+type "PassiveData"
+using "AMP_Shard_Armor_Metamorph_Cap_Passive"
+data "StatsFunctors" "RemoveStatus(SELF,AMP_METAMORPH_STACK);ApplyStatus(SELF,AMP_METAMORPH_STACK,100,6)"
+
+new entry "AMP_SHARD_AMULET_LEECH"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_SHARD_AMULET_LEECH"
+data "Description" "h6d4141f6g2fe3g48f0g8c3eg5bc8fc52c4bf;1"
+
+new entry "AMP_SHARD_CHAR_LEECH"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_SHARD_CHAR_LEECH"
+data "Description" "h6d4141f6g2fe3g48f0g8c3eg5bc8fc52c4bf;1"
+
+new entry "AMP_SHARD_CHAR_DODGE"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_SHARD_CHAR_DODGE"
+data "Boosts" ""
+data "Passives" "AMP_Plus_Shard_Dodge_MageArmour_Passive"
+
+new entry "AMP_Plus_Shard_Dodge_MageArmour_Passive"
+type "PassiveData"
+data "Properties" "IsHidden"
+data "BoostContext" "OnEquip;OnCreate;OnStatusApplied;OnStatusRemoved"
+data "BoostConditions" "IsMageArmored(context.Source)"
+data "Boosts" "IgnoreLeaveAttackRange()"
+
+new entry "AMP_Arcanizer_Shard_Cloak_11_Passive"
+type "PassiveData"
+using "AMP_Arcanizer_Shard_Cloak_11_Passive"
+data "Icon" "Spell_Evocation_FlameBlade"
+
+new entry "AMP_SHARD_CHAR_REACTION"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_SHARD_CHAR_REACTION"
+data "StackId" "AMP_SHARD_CHAR_REACTION"
+data "Boosts" "Initiative(5)"
+data "Passives" "AMP_Plus_Shard_Celerity_Opening"
+
+new entry "AMP_Plus_Shard_Celerity_Opening"
+type "PassiveData"
+data "Properties" "IsHidden"
+data "StatsFunctorContext" "OnCombatStarted"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_PLUS_SHARD_CELERITY_SURGE,100,1)"
+
+new entry "AMP_PLUS_SHARD_CELERITY_SURGE"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_PLUS_SHARD_CELERITY_SURGE"
+data "Boosts" "ActionResource(ReactionActionPoint,1,0)"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator;IgnoreResting"
+
+new entry "AMP_SHARD_CHAR_MINDSHACKLE"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_SHARD_CHAR_MINDSHACKLE"
+data "Boosts" ""
+data "Passives" "AMP_Shard_Ring_MindShackle_Passive;AMP_Plus_Shard_MindShackle_Reaction"
+
+new entry "AMP_Plus_Shard_MindShackle_Reaction"
+type "PassiveData"
+data "Properties" "IsHidden"
+data "BoostContext" "OnCreate;OnEquip;OnStatusApplied;OnStatusRemoved;OnTurn"
+data "BoostConditions" "IsConcentrating(context.Source)"
+data "Boosts" "ActionResource(ReactionActionPoint,1,0)"
+
+// silence, not paralysis: three status groups let any anti-control source cancel it
+new entry "AMP_Shard_Ring_MindShackle_Passive"
+type "PassiveData"
+using "AMP_Shard_Ring_MindShackle_Passive"
+data "StatsFunctors" "ApplyStatus(SILENCED,100,1)"
+
+new entry "AMP_Arcanizer_Shard_Ring_12_Passive"
+type "PassiveData"
+using "AMP_Arcanizer_Shard_Ring_12_Passive"
+data "Description" "h5c32fc59g32d8g41fdgbb85gbe541f9202a5;1"
+data "DescriptionParams" "1"
+
+// shout cantrips excluded, forcing a target list on a self-cast makes them uncastable
+new entry "AMP_SHARD_CHAR_RING_21"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_SHARD_CHAR_RING_21"
+data "Boosts" "UnlockSpellVariant(AMP_Plus_IsTrueCantrip() and not SpellTypeIs(SpellType.Shout),ModifyNumberOfTargets(AdditiveBase,1,true),ModifyTooltipDescription())"
+
+new entry "AMP_SHARD_HEAD_REACTION"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_SHARD_HEAD_REACTION"
+data "Description" "h8d2f49e2g8c86g426bga1f6gad188bffd72a;1"
+data "DescriptionParams" "1;5"
+
+new entry "AMP_SHARD_RING_MINDSHACKLE"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_SHARD_RING_MINDSHACKLE"
+data "Description" "hc81ef10eg94bcg4009gb898g7dd43b99acca;1"
+data "DescriptionParams" "1"
+
+new entry "AMP_Arcanizer_Shard_Cloak_7_Passive"
+type "PassiveData"
+using "AMP_Arcanizer_Shard_Cloak_7_Passive"
+data "DescriptionParams" "5;Distance(9)"
+
+new entry "AMP_Arcanizer_Shard_Head_11_Passive"
+type "PassiveData"
+using "AMP_Arcanizer_Shard_Head_11_Passive"
+data "Description" "h0bfcf721g4c87g4269ga652g88b304074f27;1"
+data "DescriptionParams" "1;5"
+
+// target-radius boost cannot be read off the weapon, so the status rides the wearer
+// third variant covers melee strikes outside the two hand attacks
+new entry "AMP_SHARD_CHAR_REACH"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_SHARD_CHAR_REACH"
+data "Boosts" "UnlockSpellVariant(AMP_Plus_ReachMainHand(),ModifyTargetRadius(AdditiveBase,1),ModifyTooltipDescription());UnlockSpellVariant(AMP_Plus_ReachOffHand(),ModifyTargetRadius(AdditiveBase,1),ModifyTooltipDescription());UnlockSpellVariant(AMP_Plus_ReachMeleeSpell(),ModifyTargetRadius(AdditiveBase,1),ModifyTooltipDescription())"
+
+new entry "AMP_SHARD_WEAPON_REACH"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_SHARD_WEAPON_REACH"
+data "Description" "he4b27aa5g8f33g4ceeg93f3g42dba3065ec2;1"
+
+// own name, the old one is also defined by the amulet intelligence shard and the later one wins
+// routing row is in AMP_Plus_ShardAcuityFix
+new entry "AMP_SHARD_CHAR_ARCANE_SURGE"
+type "StatusData"
+data "StatusType" "BOOST"
+data "DisplayName" "h002bc247g50aag4e2fga451g0a6186915d89;1"
+data "Passives" "AMP_Shard_Passive_Acuity"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator;IgnoreResting;ApplyToDead"
+
+new entry "Interrupt_AMP_Plus_ShardIndom"
+type "InterruptData"
+using "Interrupt_Indomitable"
+data "Cost" "AMP_Plus_ShardIndomCharge:1"
+data "EnableCondition" "HasActionResource('AMP_Plus_ShardIndomCharge', 1, 0, false, false, context.Source) and not HasStatus('SG_Polymorph');"
+
+new entry "AMP_Plus_ShardIndom_Refresh"
+type "PassiveData"
+data "Properties" "IsHidden"
+data "StatsFunctorContext" "OnCombatStarted"
+data "StatsFunctors" "RestoreResource(SELF,AMP_Plus_ShardIndomCharge,100%,0)"
+
+new entry "AMP_SHARD_CHAR_INDOM"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_SHARD_CHAR_INDOM"
+data "Boosts" "UnlockInterrupt(Interrupt_AMP_Plus_ShardIndom);ActionResource(AMP_Plus_ShardIndomCharge,1,0)"
+data "Passives" "AMP_Plus_ShardIndom_Refresh"
+
+new entry "AMP_SHARD_ARMOR_INDOM"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_SHARD_ARMOR_INDOM"
+data "Description" "he225aab1gd5cag40fbg91aag4dc07510edf4;1"
+
+new entry "AMP_Shard_Improvise_CD_Passive"
+type "PassiveData"
+using "AMP_Shard_Improvise_CD_Passive"
+data "Conditions" "AMP_Plus_IsImprovCantrip()"
+
+new entry "AMP_Shard_Amulet_Bifurcate_Passive"
+type "PassiveData"
+using "AMP_Shard_Amulet_Bifurcate_Passive"
+data "Conditions" "AMP_Plus_IsTrueCantrip() and Combat()"
+
+new entry "AMP_SHARD_BACKUP_FREE_CANTRIP"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_SHARD_BACKUP_FREE_CANTRIP"
+data "Boosts" "UnlockSpellVariant(AMP_Plus_IsTrueCantrip(),ModifyUseCosts(Replace,ActionPoint,0,0,ActionPoint),ModifyIconGlow(),ModifyTooltipDescription())"
+
+
+// waits for the Bonus Action to be gone, nothing to restore before
+new entry "AMP_SHARD_MOMENTUM_Passive"
+type "PassiveData"
+using "AMP_SHARD_MOMENTUM_Passive"
+data "Conditions" "HasStatus('MAG_MOMENTUM',context.Source) and not HasActionResource('BonusActionPoint',1,0,false,false,context.Source)"
+
+new entry "AMP_SHARD_WEAPON_SEVER_Proc"
+type "PassiveData"
+using "AMP_SHARD_WEAPON_SEVER_Proc"
+data "Conditions" "AttackedWithPassiveSourceWeapon() and HasDamageEffectFlag(DamageFlags.Hit)"
+
+// shown chance follows DB_AMP_VoidCapsule_ReclamationChanceActive
+new entry "AMP_Arcanizer_Shard_ReclaimRoll_Info"
+type "PassiveData"
+using "AMP_Arcanizer_Shard_ReclaimRoll_Info"
+data "DescriptionParams" "20"
+
+new entry "AMP_SHARD_LENS_TEMPHP"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_SHARD_LENS_TEMPHP"
+data "Icon" "Spell_Abjuration_ArmorOfAgathys"
+data "StatusPropertyFlags" "IgnoreResting"
+
+new entry "AMP_SHARD_JUGGLER_ACTIVE"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_SHARD_JUGGLER_ACTIVE"
+data "DisplayName" "ha302bfc6g5252g4f11gb8b5gf7107ebfba34;1"
+
+// status only grants the toggle, a replaced carrier takes its passive off the hotbar
+new entry "AMP_SHARD_CHAR_JUGGLER"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_SHARD_CHAR_JUGGLER"
+data "StackType" "Ignore"
+data "OnRemoveFunctors" "RemoveStatus(AMP_SHARD_JUGGLER_ACTIVE)"
+
+new entry "AMP_SHARD_CHAR_IMPROVISE"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_SHARD_CHAR_IMPROVISE"
+data "StackType" "Ignore"
+data "OnRemoveFunctors" "RemoveStatus(AMP_SHARD_IMPROVISE_ACTIVE)"
+
+// no status ticks, or the two statuses re-apply each other every turn
+new entry "AMP_Shard_Amulet_TwoFaced_Passive"
+type "PassiveData"
+using "AMP_Shard_Amulet_TwoFaced_Passive"
+data "Conditions" "(IsSpell() or IsAttack()) and Enemy() and Combat()"
+data "StatsFunctors" "IF(HasDamageDoneForType(DamageType.Necrotic)):ApplyStatus(BURNING_HOLY,100,1);IF(HasDamageDoneForType(DamageType.Radiant)):ApplyStatus(AMP_DEATHCLERIC_FETID_ROT,100,1)"
+
+new entry "AMP_Shard_Ring_IceFire_Passive"
+type "PassiveData"
+using "AMP_Shard_Ring_IceFire_Passive"
+data "Conditions" "(IsSpell() or IsAttack()) and Enemy() and Combat()"
+data "StatsFunctors" "IF(HasDamageDoneForType(DamageType.Fire)):ApplyStatus(MAG_FROST,100,1);IF(HasDamageDoneForType(DamageType.Fire)):RemoveStatus(BURNING);IF(HasDamageDoneForType(DamageType.Cold)):ApplyStatus(BURNING,100,1);GROUND:IF(HasDamageDoneForType(DamageType.Cold)):CreateSurface(2,2,Fire)"

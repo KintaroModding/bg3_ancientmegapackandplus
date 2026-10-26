@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="963e7cf1-3d67-4980-963d-65e7267ff0cf" />
+					<attribute id="Name" type="LSString" value="AMP_Flag_ToT_Quests_000" />
+					<attribute id="LevelName" type="FixedString" value="CRE_Main_A" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="e1e8b555-d27c-4e5d-8229-961f7e236db9" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="0.2" />
+							<attribute id="Position" type="fvec3" value="1068.3306 2.2276766 -782.81555" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0 0 1" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="CRE_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="0cdf52f2-9453-df63-13c3-cfad8fbdbd2a" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="3937977e-b5d9-5124-508e-c3654c9d9e03" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="a5d20a63-3edb-28a3-6325-d867331c564a" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="INVISIBLE" />
+								</node>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="AMP_BOSS_REWARDS_DISABLED_AURA" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

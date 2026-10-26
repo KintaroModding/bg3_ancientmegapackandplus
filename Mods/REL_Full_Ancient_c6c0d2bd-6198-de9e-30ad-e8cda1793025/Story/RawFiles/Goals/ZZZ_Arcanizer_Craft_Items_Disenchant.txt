@@ -1,0 +1,263 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+/*
+// arcanizer recycling system
+// minimal tracking database for recycling
+DB_AMP_Recycling_Processing(0);
+*/
+KBSECTION
+/*
+// main entry point
+// detect when a crafted item is added to the arcanizer
+IF
+AddedTo((ITEM)_Item, (ITEM)_Container, _)
+AND
+DB_AMP_Arcanizer_Tag((TAG)_ArcanTag)
+AND
+IsTagged(_Container, _ArcanTag, 1)
+AND
+DB_AMP_Arcanizer_Owner((CHARACTER)_Owner)
+AND
+_Owner != NULL_00000000-0000-0000-0000-000000000000
+AND
+DB_AMP_Recycling_Processing(0)
+AND
+Exists(_Item, 1)
+THEN
+PROC_AMP_CheckForRecycling(_Item, _Owner);
+
+// check for a crafted item (try each database)
+PROC
+PROC_AMP_CheckForRecycling((ITEM)_Item, (CHARACTER)_Owner)
+AND
+GetTemplate(_Item, (ITEMROOT)_Template)
+THEN
+PROC_AMP_CheckAmulet(_Item, _Template, _Owner);
+
+// start with checking for crafted amulet
+PROC
+PROC_AMP_CheckAmulet((ITEM)_Item, (ITEMROOT)_Template, (CHARACTER)_Owner)
+AND
+DB_AMP_Arcanizer_Craft_Amulet(_Template, _, (INTEGER)_Level)
+THEN
+NOT DB_AMP_Recycling_Processing(0);
+DB_AMP_Recycling_Processing(1);
+PROC_AMP_RecycleItemByLevel(_Item, _Owner, _Level);
+
+// if not amulet, check for ring
+PROC
+PROC_AMP_CheckAmulet((ITEM)_Item, (ITEMROOT)_Template, (CHARACTER)_Owner)
+AND
+NOT DB_AMP_Arcanizer_Craft_Amulet(_Template, _, _)
+THEN
+PROC_AMP_CheckRing(_Item, _Template, _Owner);
+
+// check for crafted ring
+PROC
+PROC_AMP_CheckRing((ITEM)_Item, (ITEMROOT)_Template, (CHARACTER)_Owner)
+AND
+DB_AMP_Arcanizer_Craft_Ring(_Template, _, (INTEGER)_Level)
+THEN
+NOT DB_AMP_Recycling_Processing(0);
+DB_AMP_Recycling_Processing(1);
+PROC_AMP_RecycleItemByLevel(_Item, _Owner, _Level);
+
+// if not ring, check for gloves
+PROC
+PROC_AMP_CheckRing((ITEM)_Item, (ITEMROOT)_Template, (CHARACTER)_Owner)
+AND
+NOT DB_AMP_Arcanizer_Craft_Ring(_Template, _, _)
+THEN
+PROC_AMP_CheckGloves(_Item, _Template, _Owner);
+
+// check for crafted gloves
+PROC
+PROC_AMP_CheckGloves((ITEM)_Item, (ITEMROOT)_Template, (CHARACTER)_Owner)
+AND
+DB_AMP_Arcanizer_Craft_Gloves(_Template, _, (INTEGER)_Level)
+THEN
+NOT DB_AMP_Recycling_Processing(0);
+DB_AMP_Recycling_Processing(1);
+PROC_AMP_RecycleItemByLevel(_Item, _Owner, _Level);
+
+// if not gloves, check for weapon
+PROC
+PROC_AMP_CheckGloves((ITEM)_Item, (ITEMROOT)_Template, (CHARACTER)_Owner)
+AND
+NOT DB_AMP_Arcanizer_Craft_Gloves(_Template, _, _)
+THEN
+PROC_AMP_CheckWeapon(_Item, _Template, _Owner);
+
+// check for crafted weapon
+PROC
+PROC_AMP_CheckWeapon((ITEM)_Item, (ITEMROOT)_Template, (CHARACTER)_Owner)
+AND
+DB_AMP_Arcanizer_Craft_Weapon(_Template, _, (INTEGER)_Level)
+THEN
+NOT DB_AMP_Recycling_Processing(0);
+DB_AMP_Recycling_Processing(1);
+PROC_AMP_RecycleItemByLevel(_Item, _Owner, _Level);
+
+// recycling logic based on level
+// main recycling processor by item level (1=uncommon, 2=rare, 3=very rare, 4=legendary)
+PROC
+PROC_AMP_RecycleItemByLevel((ITEM)_Item, (CHARACTER)_Owner, (INTEGER)_Level)
+AND
+_Level == 1
+THEN
+PROC_AMP_RecycleUncommon(_Item, _Owner);
+
+PROC
+PROC_AMP_RecycleItemByLevel((ITEM)_Item, (CHARACTER)_Owner, (INTEGER)_Level)
+AND
+_Level == 2
+THEN
+PROC_AMP_RecycleRare(_Item, _Owner);
+
+PROC
+PROC_AMP_RecycleItemByLevel((ITEM)_Item, (CHARACTER)_Owner, (INTEGER)_Level)
+AND
+_Level == 3
+THEN
+PROC_AMP_RecycleVeryRare(_Item, _Owner);
+
+PROC
+PROC_AMP_RecycleItemByLevel((ITEM)_Item, (CHARACTER)_Owner, (INTEGER)_Level)
+AND
+_Level == 4
+THEN
+PROC_AMP_RecycleLegendary(_Item, _Owner);
+
+// recycling by rarity
+// uncommon -> 1 astrum arcanum + 1 fey dust
+PROC
+PROC_AMP_RecycleUncommon((ITEM)_Item, (CHARACTER)_Owner)
+AND
+DB_AMP_Arcanizer_Resource_Map("AstrumArcanum", (ITEMROOT)_AstrumTemplate, _)
+AND
+DB_AMP_Arcanizer_Resource_Map("FeyDust", (ITEMROOT)_DustTemplate, _)
+AND
+IntegerToString(1, _RewardValue)
+AND
+Concatenate("Recycled: Generated ", _RewardValue, _TempMsg1)
+AND
+Concatenate(_TempMsg1, " Astrum Arcanum and ", _TempMsg2)
+AND
+Concatenate(_TempMsg2, _RewardValue, _TempMsg3)
+AND
+Concatenate(_TempMsg3, " Fey Dust", _DebugMsg)
+THEN
+TemplateAddTo(_AstrumTemplate, _Owner, 1, 1);
+TemplateAddTo(_DustTemplate, _Owner, 1, 1);
+DebugText(_Owner, _DebugMsg);
+PROC_AMP_FinishRecycling(_Item);
+
+// rare -> 1 astrum empyreum + 1 netherese dust
+PROC
+PROC_AMP_RecycleRare((ITEM)_Item, (CHARACTER)_Owner)
+AND
+DB_AMP_Arcanizer_Resource_Map("AstrumEmpyreum", (ITEMROOT)_AstrumTemplate, _)
+AND
+DB_AMP_Arcanizer_Resource_Map("NethereseDust", (ITEMROOT)_DustTemplate, _)
+AND
+IntegerToString(1, _RewardValue)
+AND
+Concatenate("Recycled: Generated ", _RewardValue, _TempMsg1)
+AND
+Concatenate(_TempMsg1, " Astrum Empyreum and ", _TempMsg2)
+AND
+Concatenate(_TempMsg2, _RewardValue, _TempMsg3)
+AND
+Concatenate(_TempMsg3, " Netherese Dust", _DebugMsg)
+THEN
+TemplateAddTo(_AstrumTemplate, _Owner, 1, 1);
+TemplateAddTo(_DustTemplate, _Owner, 1, 1);
+DebugText(_Owner, _DebugMsg);
+PROC_AMP_FinishRecycling(_Item);
+
+// very rare -> 1 astrum opus + 1 eldritch dust
+PROC
+PROC_AMP_RecycleVeryRare((ITEM)_Item, (CHARACTER)_Owner)
+AND
+DB_AMP_Arcanizer_Resource_Map("AstrumOpus", (ITEMROOT)_AstrumTemplate, _)
+AND
+DB_AMP_Arcanizer_Resource_Map("EldritchDust", (ITEMROOT)_DustTemplate, _)
+AND
+IntegerToString(1, _RewardValue)
+AND
+Concatenate("Recycled: Generated ", _RewardValue, _TempMsg1)
+AND
+Concatenate(_TempMsg1, " Astrum Opus and ", _TempMsg2)
+AND
+Concatenate(_TempMsg2, _RewardValue, _TempMsg3)
+AND
+Concatenate(_TempMsg3, " Eldritch Dust", _DebugMsg)
+THEN
+TemplateAddTo(_AstrumTemplate, _Owner, 1, 1);
+TemplateAddTo(_DustTemplate, _Owner, 1, 1);
+DebugText(_Owner, _DebugMsg);
+PROC_AMP_FinishRecycling(_Item);
+
+// legendary -> 1 astrum immortallis + 1 celestial dust
+PROC
+PROC_AMP_RecycleLegendary((ITEM)_Item, (CHARACTER)_Owner)
+AND
+DB_AMP_Arcanizer_Resource_Map("AstrumImmortallis", (ITEMROOT)_AstrumTemplate, _)
+AND
+DB_AMP_Arcanizer_Resource_Map("CelestialDust", (ITEMROOT)_DustTemplate, _)
+AND
+IntegerToString(1, _RewardValue)
+AND
+Concatenate("Recycled: Generated ", _RewardValue, _TempMsg1)
+AND
+Concatenate(_TempMsg1, " Astrum Immortallis and ", _TempMsg2)
+AND
+Concatenate(_TempMsg2, _RewardValue, _TempMsg3)
+AND
+Concatenate(_TempMsg3, " Celestial Dust", _DebugMsg)
+THEN
+TemplateAddTo(_AstrumTemplate, _Owner, 1, 1);
+TemplateAddTo(_DustTemplate, _Owner, 1, 1);
+DebugText(_Owner, _DebugMsg);
+PROC_AMP_FinishRecycling(_Item);
+
+// finalize recycling
+// clean up after recycling
+PROC
+PROC_AMP_FinishRecycling((ITEM)_Item)
+THEN
+ObjectTimerLaunch(_Item, "AMP_DeleteRecycledItem", 250, 0);
+
+// handle actual item deletion after timer
+IF
+ObjectTimerFinished((ITEM)_Item, "AMP_DeleteRecycledItem")
+AND
+Exists(_Item, 1)
+THEN
+RequestDelete(_Item);
+NOT DB_AMP_Recycling_Processing(1);
+DB_AMP_Recycling_Processing(0);
+DebugText(NULL_00000000-0000-0000-0000-000000000000, "Recycling process completed");
+
+// reset recycling state at game load (precaution)
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Recycling_Processing(1)
+THEN
+NOT DB_AMP_Recycling_Processing(1);
+DB_AMP_Recycling_Processing(0);
+
+// safety check in case we need to reset from 0 state
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Recycling_Processing(0)
+AND 
+NOT DB_AMP_Recycling_Processing(1)
+THEN
+DB_AMP_Recycling_Processing(0);
+*/
+EXITSECTION
+ENDEXITSECTION

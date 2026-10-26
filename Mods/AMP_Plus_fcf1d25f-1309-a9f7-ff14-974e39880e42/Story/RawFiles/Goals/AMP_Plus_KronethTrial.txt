@@ -1,0 +1,561 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_KrSpellMigrated(2)
+THEN
+DB_AMP_Plus_KrSpellMigrated(2);
+TimerLaunch("AMP_Plus_KrSpellMigrate", 7000);
+
+IF
+TimerFinished("AMP_Plus_KrSpellMigrate")
+THEN
+PROC_AMP_Plus_KrSpellMigrate();
+
+PROC
+PROC_AMP_Plus_KrSpellMigrate()
+AND
+DB_PartyMembers((CHARACTER)_Char)
+AND
+HasActiveStatus(_Char, "AMP_KRONETH_JUDGEMENT", 1)
+THEN
+RemoveStatus(_Char, "AMP_KRONETH_JUDGEMENT", NULL_00000000-0000-0000-0000-000000000000);
+ApplyStatus(_Char, "AMP_KRONETH_JUDGEMENT", -1.0, 1, _Char);
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_KronethTrial", _, _, _)
+AND
+HasActiveStatus(_Caster, "AMP_KRONETH_JUDGEMENT", 1)
+AND
+NOT DB_AMP_Plus_KrDeck(_Caster, _)
+AND
+Random(10, (INTEGER)_Roll)
+THEN
+DB_AMP_Plus_KrDeck(_Caster, _Roll);
+PROC_AMP_Plus_KrDeal(_Caster, _Roll);
+PROC_AMP_Plus_KrBegin(_Caster);
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_KronethTrial", _, _, _)
+AND
+HasActiveStatus(_Caster, "AMP_KRONETH_JUDGEMENT", 1)
+AND
+DB_AMP_Plus_KrDeck(_Caster, _)
+THEN
+PROC_AMP_Plus_KrBegin(_Caster);
+
+PROC
+PROC_AMP_Plus_KrDeal((CHARACTER)_Char, 0)
+THEN
+DB_AMP_Plus_KrOrder(_Char, 1, 3);
+DB_AMP_Plus_KrOrder(_Char, 2, 4);
+DB_AMP_Plus_KrOrder(_Char, 3, 1);
+DB_AMP_Plus_KrOrder(_Char, 4, 7);
+DB_AMP_Plus_KrOrder(_Char, 5, 11);
+DB_AMP_Plus_KrOrder(_Char, 6, 9);
+
+PROC
+PROC_AMP_Plus_KrDeal((CHARACTER)_Char, 1)
+THEN
+DB_AMP_Plus_KrOrder(_Char, 1, 6);
+DB_AMP_Plus_KrOrder(_Char, 2, 8);
+DB_AMP_Plus_KrOrder(_Char, 3, 2);
+DB_AMP_Plus_KrOrder(_Char, 4, 5);
+DB_AMP_Plus_KrOrder(_Char, 5, 1);
+DB_AMP_Plus_KrOrder(_Char, 6, 9);
+
+PROC
+PROC_AMP_Plus_KrDeal((CHARACTER)_Char, 2)
+THEN
+DB_AMP_Plus_KrOrder(_Char, 1, 9);
+DB_AMP_Plus_KrOrder(_Char, 2, 1);
+DB_AMP_Plus_KrOrder(_Char, 3, 3);
+DB_AMP_Plus_KrOrder(_Char, 4, 11);
+DB_AMP_Plus_KrOrder(_Char, 5, 6);
+DB_AMP_Plus_KrOrder(_Char, 6, 2);
+
+PROC
+PROC_AMP_Plus_KrDeal((CHARACTER)_Char, 3)
+THEN
+DB_AMP_Plus_KrOrder(_Char, 1, 4);
+DB_AMP_Plus_KrOrder(_Char, 2, 8);
+DB_AMP_Plus_KrOrder(_Char, 3, 7);
+DB_AMP_Plus_KrOrder(_Char, 4, 2);
+DB_AMP_Plus_KrOrder(_Char, 5, 5);
+DB_AMP_Plus_KrOrder(_Char, 6, 3);
+
+PROC
+PROC_AMP_Plus_KrDeal((CHARACTER)_Char, 4)
+THEN
+DB_AMP_Plus_KrOrder(_Char, 1, 6);
+DB_AMP_Plus_KrOrder(_Char, 2, 9);
+DB_AMP_Plus_KrOrder(_Char, 3, 5);
+DB_AMP_Plus_KrOrder(_Char, 4, 3);
+DB_AMP_Plus_KrOrder(_Char, 5, 11);
+DB_AMP_Plus_KrOrder(_Char, 6, 8);
+
+PROC
+PROC_AMP_Plus_KrDeal((CHARACTER)_Char, 5)
+THEN
+DB_AMP_Plus_KrOrder(_Char, 1, 2);
+DB_AMP_Plus_KrOrder(_Char, 2, 4);
+DB_AMP_Plus_KrOrder(_Char, 3, 8);
+DB_AMP_Plus_KrOrder(_Char, 4, 7);
+DB_AMP_Plus_KrOrder(_Char, 5, 9);
+DB_AMP_Plus_KrOrder(_Char, 6, 1);
+
+PROC
+PROC_AMP_Plus_KrDeal((CHARACTER)_Char, 6)
+THEN
+DB_AMP_Plus_KrOrder(_Char, 1, 3);
+DB_AMP_Plus_KrOrder(_Char, 2, 9);
+DB_AMP_Plus_KrOrder(_Char, 3, 11);
+DB_AMP_Plus_KrOrder(_Char, 4, 5);
+DB_AMP_Plus_KrOrder(_Char, 5, 6);
+DB_AMP_Plus_KrOrder(_Char, 6, 7);
+
+PROC
+PROC_AMP_Plus_KrDeal((CHARACTER)_Char, 7)
+THEN
+DB_AMP_Plus_KrOrder(_Char, 1, 8);
+DB_AMP_Plus_KrOrder(_Char, 2, 5);
+DB_AMP_Plus_KrOrder(_Char, 3, 1);
+DB_AMP_Plus_KrOrder(_Char, 4, 4);
+DB_AMP_Plus_KrOrder(_Char, 5, 2);
+DB_AMP_Plus_KrOrder(_Char, 6, 11);
+
+PROC
+PROC_AMP_Plus_KrDeal((CHARACTER)_Char, 8)
+THEN
+DB_AMP_Plus_KrOrder(_Char, 1, 6);
+DB_AMP_Plus_KrOrder(_Char, 2, 3);
+DB_AMP_Plus_KrOrder(_Char, 3, 7);
+DB_AMP_Plus_KrOrder(_Char, 4, 2);
+DB_AMP_Plus_KrOrder(_Char, 5, 9);
+DB_AMP_Plus_KrOrder(_Char, 6, 4);
+
+PROC
+PROC_AMP_Plus_KrDeal((CHARACTER)_Char, 9)
+THEN
+DB_AMP_Plus_KrOrder(_Char, 1, 4);
+DB_AMP_Plus_KrOrder(_Char, 2, 11);
+DB_AMP_Plus_KrOrder(_Char, 3, 5);
+DB_AMP_Plus_KrOrder(_Char, 4, 8);
+DB_AMP_Plus_KrOrder(_Char, 5, 1);
+DB_AMP_Plus_KrOrder(_Char, 6, 6);
+
+PROC
+PROC_AMP_Plus_KrBegin((CHARACTER)_Char)
+AND
+DB_AMP_Plus_KrPos(_Char, (INTEGER)_Pos)
+THEN
+NOT DB_AMP_Plus_KrPos(_Char, _Pos);
+
+PROC
+PROC_AMP_Plus_KrBegin((CHARACTER)_Char)
+THEN
+PROC_AMP_Plus_KrForget(_Char);
+DB_AMP_Plus_KrPos(_Char, 1);
+OpenMessageBox(_Char, "AMP_Plus_KronethTrial_Intro");
+
+IF
+MessageBoxClosed((CHARACTER)_Char, "AMP_Plus_KronethTrial_Intro")
+THEN
+PROC_AMP_Plus_KrShow(_Char);
+
+PROC
+PROC_AMP_Plus_KrShow((CHARACTER)_Char)
+AND
+DB_AMP_Plus_KrPos(_Char, (INTEGER)_Pos)
+AND
+DB_AMP_Plus_KrOrder(_Char, _Pos, (INTEGER)_Q)
+THEN
+PROC_AMP_Plus_KrAsk(_Char, _Q);
+
+PROC
+PROC_AMP_Plus_KrAsk((CHARACTER)_Char, 1)
+THEN
+OpenMessageBoxYesNo(_Char, "AMP_Plus_KronethQ01");
+
+PROC
+PROC_AMP_Plus_KrAsk((CHARACTER)_Char, 2)
+THEN
+OpenMessageBoxYesNo(_Char, "AMP_Plus_KronethQ02");
+
+PROC
+PROC_AMP_Plus_KrAsk((CHARACTER)_Char, 3)
+THEN
+OpenMessageBoxYesNo(_Char, "AMP_Plus_KronethQ03");
+
+PROC
+PROC_AMP_Plus_KrAsk((CHARACTER)_Char, 4)
+THEN
+OpenMessageBoxYesNo(_Char, "AMP_Plus_KronethQ04");
+
+PROC
+PROC_AMP_Plus_KrAsk((CHARACTER)_Char, 5)
+THEN
+OpenMessageBoxYesNo(_Char, "AMP_Plus_KronethQ05");
+
+PROC
+PROC_AMP_Plus_KrAsk((CHARACTER)_Char, 6)
+THEN
+OpenMessageBoxYesNo(_Char, "AMP_Plus_KronethQ06");
+
+PROC
+PROC_AMP_Plus_KrAsk((CHARACTER)_Char, 7)
+THEN
+OpenMessageBoxYesNo(_Char, "AMP_Plus_KronethQ07");
+
+PROC
+PROC_AMP_Plus_KrAsk((CHARACTER)_Char, 8)
+THEN
+OpenMessageBoxYesNo(_Char, "AMP_Plus_KronethQ08");
+
+PROC
+PROC_AMP_Plus_KrAsk((CHARACTER)_Char, 9)
+THEN
+OpenMessageBoxYesNo(_Char, "AMP_Plus_KronethQ09");
+
+PROC
+PROC_AMP_Plus_KrAsk((CHARACTER)_Char, 11)
+THEN
+OpenMessageBoxYesNo(_Char, "AMP_Plus_KronethQ11");
+
+// button direction: 1 pride, 2 humility, 3 ruin
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethQ01", 1)
+THEN
+PROC_AMP_Plus_KrAnswer(_Char, 1);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethQ01", 0)
+THEN
+PROC_AMP_Plus_KrAnswer(_Char, 2);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethQ02", 1)
+THEN
+PROC_AMP_Plus_KrAnswer(_Char, 2);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethQ02", 0)
+THEN
+PROC_AMP_Plus_KrAnswer(_Char, 1);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethQ03", 1)
+THEN
+PROC_AMP_Plus_KrAnswer(_Char, 1);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethQ03", 0)
+THEN
+PROC_AMP_Plus_KrAnswer(_Char, 3);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethQ04", 1)
+THEN
+PROC_AMP_Plus_KrAnswer(_Char, 3);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethQ04", 0)
+THEN
+PROC_AMP_Plus_KrAnswer(_Char, 2);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethQ05", 1)
+THEN
+PROC_AMP_Plus_KrAnswer(_Char, 1);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethQ05", 0)
+THEN
+PROC_AMP_Plus_KrAnswer(_Char, 2);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethQ06", 1)
+THEN
+PROC_AMP_Plus_KrAnswer(_Char, 3);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethQ06", 0)
+THEN
+PROC_AMP_Plus_KrAnswer(_Char, 2);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethQ07", 1)
+THEN
+PROC_AMP_Plus_KrAnswer(_Char, 2);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethQ07", 0)
+THEN
+PROC_AMP_Plus_KrAnswer(_Char, 1);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethQ08", 1)
+THEN
+PROC_AMP_Plus_KrAnswer(_Char, 3);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethQ08", 0)
+THEN
+PROC_AMP_Plus_KrAnswer(_Char, 1);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethQ09", 1)
+THEN
+PROC_AMP_Plus_KrAnswer(_Char, 2);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethQ09", 0)
+THEN
+PROC_AMP_Plus_KrAnswer(_Char, 3);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethQ11", 1)
+THEN
+PROC_AMP_Plus_KrAnswer(_Char, 1);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethQ11", 0)
+THEN
+PROC_AMP_Plus_KrAnswer(_Char, 2);
+
+// two same answers in a row open that door, a changed one sends the room back
+// empty-memory body sits last so the write above cannot satisfy it
+
+PROC
+PROC_AMP_Plus_KrAnswer((CHARACTER)_Char, (INTEGER)_Dir)
+AND
+DB_AMP_Plus_KrLast(_Char, (INTEGER)_Last)
+AND
+_Last == _Dir
+THEN
+PROC_AMP_Plus_KrCommit(_Char, _Dir);
+
+PROC
+PROC_AMP_Plus_KrAnswer((CHARACTER)_Char, (INTEGER)_Dir)
+AND
+DB_AMP_Plus_KrLast(_Char, (INTEGER)_Last)
+AND
+_Last != _Dir
+THEN
+NOT DB_AMP_Plus_KrLast(_Char, _Last);
+DB_AMP_Plus_KrLast(_Char, _Dir);
+PROC_AMP_Plus_KrLoop(_Char);
+
+PROC
+PROC_AMP_Plus_KrAnswer((CHARACTER)_Char, (INTEGER)_Dir)
+AND
+NOT DB_AMP_Plus_KrLast(_Char, _)
+THEN
+DB_AMP_Plus_KrLast(_Char, _Dir);
+PROC_AMP_Plus_KrNext(_Char);
+
+PROC
+PROC_AMP_Plus_KrForget((CHARACTER)_Char)
+AND
+DB_AMP_Plus_KrLast(_Char, (INTEGER)_Last)
+THEN
+NOT DB_AMP_Plus_KrLast(_Char, _Last);
+
+PROC
+PROC_AMP_Plus_KrCommit((CHARACTER)_Char, 1)
+THEN
+OpenMessageBoxYesNo(_Char, "AMP_Plus_KronethTerm_Pride");
+
+PROC
+PROC_AMP_Plus_KrCommit((CHARACTER)_Char, 2)
+THEN
+OpenMessageBoxYesNo(_Char, "AMP_Plus_KronethTerm_Humility");
+
+PROC
+PROC_AMP_Plus_KrCommit((CHARACTER)_Char, 3)
+THEN
+OpenMessageBoxYesNo(_Char, "AMP_Plus_KronethTerm_Ruin");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethTerm_Pride", 1)
+THEN
+PROC_AMP_Plus_KrClear(_Char);
+PROC_AMP_Plus_KrApplyPride(_Char);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethTerm_Humility", 1)
+THEN
+PROC_AMP_Plus_KrClear(_Char);
+PROC_AMP_Plus_KrApplyHumility(_Char);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethTerm_Ruin", 1)
+THEN
+PROC_AMP_Plus_KrClear(_Char);
+PROC_AMP_Plus_KrApplyRuin(_Char);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethTerm_Pride", 0)
+THEN
+PROC_AMP_Plus_KrForget(_Char);
+PROC_AMP_Plus_KrLoop(_Char);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethTerm_Humility", 0)
+THEN
+PROC_AMP_Plus_KrForget(_Char);
+PROC_AMP_Plus_KrLoop(_Char);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Char, "AMP_Plus_KronethTerm_Ruin", 0)
+THEN
+PROC_AMP_Plus_KrForget(_Char);
+PROC_AMP_Plus_KrLoop(_Char);
+
+PROC
+PROC_AMP_Plus_KrLoop((CHARACTER)_Char)
+AND
+Random(3, (INTEGER)_Roll)
+THEN
+PROC_AMP_Plus_KrLoopBox(_Char, _Roll);
+
+PROC
+PROC_AMP_Plus_KrLoopBox((CHARACTER)_Char, 0)
+THEN
+OpenMessageBox(_Char, "AMP_Plus_KronethLoop_A");
+
+PROC
+PROC_AMP_Plus_KrLoopBox((CHARACTER)_Char, 1)
+THEN
+OpenMessageBox(_Char, "AMP_Plus_KronethLoop_B");
+
+PROC
+PROC_AMP_Plus_KrLoopBox((CHARACTER)_Char, 2)
+THEN
+OpenMessageBox(_Char, "AMP_Plus_KronethLoop_C");
+
+IF
+MessageBoxClosed((CHARACTER)_Char, "AMP_Plus_KronethLoop_A")
+THEN
+PROC_AMP_Plus_KrNext(_Char);
+
+IF
+MessageBoxClosed((CHARACTER)_Char, "AMP_Plus_KronethLoop_B")
+THEN
+PROC_AMP_Plus_KrNext(_Char);
+
+IF
+MessageBoxClosed((CHARACTER)_Char, "AMP_Plus_KronethLoop_C")
+THEN
+PROC_AMP_Plus_KrNext(_Char);
+
+// position travels as a parameter, not a fact another body just wrote
+
+PROC
+PROC_AMP_Plus_KrNext((CHARACTER)_Char)
+AND
+DB_AMP_Plus_KrPos(_Char, (INTEGER)_Pos)
+THEN
+PROC_AMP_Plus_KrStep(_Char, _Pos);
+
+PROC
+PROC_AMP_Plus_KrStep((CHARACTER)_Char, (INTEGER)_Pos)
+AND
+_Pos < 6
+AND
+IntegerSum(_Pos, 1, (INTEGER)_NextPos)
+THEN
+NOT DB_AMP_Plus_KrPos(_Char, _Pos);
+DB_AMP_Plus_KrPos(_Char, _NextPos);
+PROC_AMP_Plus_KrShow(_Char);
+
+PROC
+PROC_AMP_Plus_KrStep((CHARACTER)_Char, (INTEGER)_Pos)
+AND
+_Pos >= 6
+THEN
+NOT DB_AMP_Plus_KrPos(_Char, _Pos);
+DB_AMP_Plus_KrPos(_Char, 1);
+PROC_AMP_Plus_KrShow(_Char);
+
+PROC
+PROC_AMP_Plus_KrClear((CHARACTER)_Char)
+THEN
+PROC_AMP_Plus_KrDrainOrder(_Char);
+
+PROC
+PROC_AMP_Plus_KrClear((CHARACTER)_Char)
+AND
+DB_AMP_Plus_KrDeck(_Char, (INTEGER)_Deck)
+THEN
+NOT DB_AMP_Plus_KrDeck(_Char, _Deck);
+
+PROC
+PROC_AMP_Plus_KrClear((CHARACTER)_Char)
+AND
+DB_AMP_Plus_KrPos(_Char, (INTEGER)_Pos)
+THEN
+NOT DB_AMP_Plus_KrPos(_Char, _Pos);
+
+PROC
+PROC_AMP_Plus_KrClear((CHARACTER)_Char)
+THEN
+PROC_AMP_Plus_KrForget(_Char);
+
+PROC
+PROC_AMP_Plus_KrDrainOrder((CHARACTER)_Char)
+AND
+DB_AMP_Plus_KrOrder(_Char, (INTEGER)_Pos, (INTEGER)_Q)
+THEN
+NOT DB_AMP_Plus_KrOrder(_Char, _Pos, _Q);
+PROC_AMP_Plus_KrDrainOrder(_Char);
+
+PROC
+PROC_AMP_Plus_KrApplyHumility((CHARACTER)_Char)
+THEN
+RemoveStatus(_Char, "AMP_KRONETH_CURSE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_KRONETH_JUDGEMENT", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_KRONETH_AUTOCRIT", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_KRONETH_CRITMISS", NULL_00000000-0000-0000-0000-000000000000);
+ApplyStatus(_Char, "AMP_HUMBLED_KRONETH", -1.0, 1, _Char);
+OpenMessageBox(_Char, "AMP_Plus_KronethEnd_Humility");
+
+PROC
+PROC_AMP_Plus_KrApplyRuin((CHARACTER)_Char)
+THEN
+RemoveStatus(_Char, "AMP_KRONETH_CURSE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_KRONETH_JUDGEMENT", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_KRONETH_AUTOCRIT", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_KRONETH_CRITMISS", NULL_00000000-0000-0000-0000-000000000000);
+ApplyStatus(_Char, "AMP_INCARNATE_KRONETH", -1.0, 1, _Char);
+OpenMessageBox(_Char, "AMP_Plus_KronethEnd_Ruin");
+
+PROC
+PROC_AMP_Plus_KrApplyPride((CHARACTER)_Char)
+AND
+NOT HasActiveStatus(_Char, "AMP_GRAND_DESIGN_WARD", 1)
+THEN
+RemoveStatus(_Char, "AMP_KRONETH_JUDGEMENT", NULL_00000000-0000-0000-0000-000000000000);
+ApplyStatus(_Char, "AMP_DAMNED_KRONETH", -1.0, 1, _Char);
+OpenMessageBox(_Char, "AMP_Plus_KronethEnd_Pride");
+
+PROC
+PROC_AMP_Plus_KrApplyPride((CHARACTER)_Char)
+AND
+HasActiveStatus(_Char, "AMP_GRAND_DESIGN_WARD", 1)
+THEN
+RemoveStatus(_Char, "AMP_KRONETH_CURSE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_KRONETH_JUDGEMENT", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_KRONETH_AUTOCRIT", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_KRONETH_CRITMISS", NULL_00000000-0000-0000-0000-000000000000);
+ApplyStatus(_Char, "AMP_HUMBLED_KRONETH", -1.0, 1, _Char);
+OpenMessageBox(_Char, "AMP_Plus_KronethEnd_Humility");
+
+EXITSECTION
+ENDEXITSECTION

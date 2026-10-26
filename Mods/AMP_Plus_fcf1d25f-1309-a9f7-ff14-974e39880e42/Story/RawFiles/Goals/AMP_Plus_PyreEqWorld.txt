@@ -1,0 +1,554 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+QRY
+QRY_AMP_Plus_PyreEq_Carrier((CHARACTER)_Char)
+AND
+NOT DB_Players(_Char)
+AND
+NOT DB_PartOfTheTeam(_Char)
+AND
+NOT DB_AMP_Difficulty_Excluded(_Char)
+AND
+IsPlayer(_Char, 0)
+AND
+IsSummon(_Char, 0)
+AND
+IsDead(_Char, 0)
+AND
+QRY_AMP_Plus_Pyre_Hostile(_Char)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Plus_PyreEq_Carrier((CHARACTER)_Char)
+AND
+IsSummon(_Char, 1)
+AND
+CharacterGetOwner(_Char, (CHARACTER)_Owner)
+AND
+NOT DB_Players(_Owner)
+AND
+NOT DB_PartOfTheTeam(_Owner)
+AND
+NOT DB_AMP_Difficulty_Excluded(_Char)
+AND
+IsPlayer(_Char, 0)
+AND
+IsDead(_Char, 0)
+AND
+QRY_AMP_Plus_Pyre_Hostile(_Char)
+THEN
+DB_NOOP(1);
+
+// known body first, then unknown. A newcomer registered first gets stamped twice
+// an unknown body can still wear an older, higher figure, clear it first
+
+PROC
+PROC_AMP_Plus_PyreEq_Learn((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PyreEq_Known(_Char)
+THEN
+PROC_AMP_Plus_PyreEq_Stamp(_Char);
+
+PROC
+PROC_AMP_Plus_PyreEq_Learn((CHARACTER)_Char)
+AND
+NOT DB_AMP_Plus_PyreEq_Known(_Char)
+THEN
+DB_AMP_Plus_PyreEq_Known(_Char);
+PROC_AMP_Plus_PyreEq_Restamp(_Char);
+
+IF
+EnteredLevel((CHARACTER)_Char, _, _)
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+QRY_AMP_Plus_PyreEq_Carrier(_Char)
+THEN
+PROC_AMP_Plus_PyreEq_Learn(_Char);
+
+// Spawns and creatures that step out of hiding never send EnteredLevel.
+
+IF
+WentOnStage((CHARACTER)_Char, 1)
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+QRY_AMP_Plus_PyreEq_Carrier(_Char)
+THEN
+PROC_AMP_Plus_PyreEq_Learn(_Char);
+
+IF
+EnteredCombat((CHARACTER)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_AMP_Plus_PyreEq_Known(_Char)
+AND
+NOT DB_AMP_Plus_Pyre2_Armed(_CombatID)
+THEN
+PROC_AMP_Plus_PyreEq_Clear(_Char);
+
+IF
+LeftCombat((CHARACTER)_Char, _)
+AND
+DB_AMP_Plus_PyreEq_Known(_Char)
+THEN
+PROC_AMP_Plus_PyreEq_Stamp(_Char);
+
+IF
+Resurrected((CHARACTER)_Char)
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+QRY_AMP_Plus_PyreEq_Carrier(_Char)
+THEN
+PROC_AMP_Plus_PyreEq_Learn(_Char);
+
+// form change drops boost statuses
+
+IF
+ObjectTransformed((CHARACTER)_Char, _)
+AND
+DB_AMP_Plus_PyreEq_Known(_Char)
+THEN
+PROC_AMP_Plus_PyreEq_Restamp(_Char);
+
+IF
+ShapeshiftChanged((CHARACTER)_Char, _, _, _)
+AND
+DB_AMP_Plus_PyreEq_Known(_Char)
+THEN
+PROC_AMP_Plus_PyreEq_Restamp(_Char);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+DB_AMP_DiffV3_Known((CHARACTER)_Char)
+AND
+IsOnStage(_Char, 1)
+AND
+QRY_AMP_Plus_PyreEq_Carrier(_Char)
+AND
+NOT DB_AMP_Plus_PyreEq_Known(_Char)
+THEN
+DB_AMP_Plus_PyreEq_Known(_Char);
+
+IF
+SavegameLoaded()
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+DB_AMP_DiffV3_Known((CHARACTER)_Char)
+AND
+IsOnStage(_Char, 1)
+AND
+QRY_AMP_Plus_PyreEq_Carrier(_Char)
+AND
+NOT DB_AMP_Plus_PyreEq_Known(_Char)
+THEN
+DB_AMP_Plus_PyreEq_Known(_Char);
+
+// line off before the record goes, or the corpse keeps it
+
+PROC
+PROC_AMP_Plus_PyreEq_Forget((CHARACTER)_Char)
+THEN
+PROC_AMP_Plus_PyreEq_Clear(_Char);
+NOT DB_AMP_Plus_PyreEq_Known(_Char);
+
+IF
+Died((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PyreEq_Known(_Char)
+THEN
+PROC_AMP_Plus_PyreEq_Forget(_Char);
+
+IF
+DB_PartOfTheTeam((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PyreEq_Known(_Char)
+THEN
+PROC_AMP_Plus_PyreEq_Forget(_Char);
+
+IF
+WentOnStage((CHARACTER)_Char, 0)
+AND
+DB_AMP_Plus_PyreEq_Known(_Char)
+THEN
+NOT DB_AMP_Plus_PyreEq_Known(_Char);
+
+PROC
+PROC_AMP_Plus_PyreEq_Reconcile()
+THEN
+PROC_AMP_Plus_PyreEq_DrainStale();
+
+PROC
+PROC_AMP_Plus_PyreEq_DrainStale()
+AND
+DB_AMP_Plus_PyreEq_Known((CHARACTER)_Char)
+AND
+NOT QRY_AMP_Plus_PyreEq_Carrier(_Char)
+THEN
+PROC_AMP_Plus_PyreEq_Forget(_Char);
+PROC_AMP_Plus_PyreEq_DrainStale();
+
+PROC
+PROC_AMP_Plus_PyreEq_Reconcile()
+AND
+DB_AMP_Plus_PyreEq_Known((CHARACTER)_Char)
+THEN
+PROC_AMP_Plus_PyreEq_Stamp(_Char);
+
+IF
+CombatEnded(_)
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+THEN
+PROC_AMP_Plus_PyreEq_Reconcile();
+
+IF
+LevelGameplayStarted(_, _)
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+THEN
+PROC_AMP_Plus_PyreEq_Reconcile();
+
+IF
+SavegameLoaded()
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+THEN
+PROC_AMP_Plus_PyreEq_Reconcile();
+
+IF
+DB_AMP_Plus_GS_Bonus((GUIDSTRING)_Combat, (INTEGER)_N)
+AND
+NOT DB_AMP_Plus_PyreEq_Gear(_)
+THEN
+DB_AMP_Plus_PyreEq_Gear(_N);
+PROC_AMP_Plus_PyreEq_Recalc();
+
+IF
+DB_AMP_Plus_GS_Bonus((GUIDSTRING)_Combat, (INTEGER)_N)
+AND
+DB_AMP_Plus_PyreEq_Gear((INTEGER)_Old)
+AND
+_N > _Old
+THEN
+NOT DB_AMP_Plus_PyreEq_Gear(_Old);
+DB_AMP_Plus_PyreEq_Gear(_N);
+PROC_AMP_Plus_PyreEq_Recalc();
+
+PROC
+PROC_AMP_Plus_GS_ResetAll()
+AND
+DB_AMP_Plus_PyreEq_Gear((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_PyreEq_Gear(_Old);
+
+PROC
+PROC_AMP_Plus_GS_ResetAll()
+THEN
+PROC_AMP_Plus_PyreEq_Recalc();
+
+// affix setter raises nothing on an unchanged value, so answer the mode fact
+
+IF
+DB_AMP_GameMode(_)
+THEN
+PROC_AMP_Plus_PyreEq_Recalc();
+
+// answers the seeded fact: goal order on the core's load event is not fixed
+
+IF
+DB_AMP_Plus_Pyre_ModeBase(_, _)
+THEN
+PROC_AMP_Plus_PyreEq_Recalc();
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_AMP_Plus_PyreEq_Recalc();
+
+IF
+SavegameLoaded()
+THEN
+PROC_AMP_Plus_PyreEq_Recalc();
+
+// empty register on switch-on, read the roster like a load. Must stay above the spreading body
+
+PROC
+PROC_AMP_Plus_Affix_OnChanged((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "PYRE2"
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+DB_AMP_DiffV3_Known((CHARACTER)_Char)
+AND
+IsOnStage(_Char, 1)
+AND
+QRY_AMP_Plus_PyreEq_Carrier(_Char)
+AND
+NOT DB_AMP_Plus_PyreEq_Known(_Char)
+THEN
+DB_AMP_Plus_PyreEq_Known(_Char);
+
+PROC
+PROC_AMP_Plus_Affix_OnChanged((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "PYRE2"
+THEN
+PROC_AMP_Plus_PyreEq_Recalc();
+
+PROC
+PROC_AMP_Plus_PyreEq_Recalc()
+AND
+NOT QRY_AMP_Plus_Affix_On("PYRE2")
+THEN
+PROC_AMP_Plus_PyreEq_ClearAll();
+
+PROC
+PROC_AMP_Plus_PyreEq_Recalc()
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+DB_AMP_GameMode((STRING)_Mode)
+AND
+DB_AMP_Plus_Pyre_ModeBase(_Mode, (INTEGER)_Base)
+AND
+DB_AMP_Plus_PyreEq_Gear((INTEGER)_Gear)
+AND
+IntegerSum(_Base, _Gear, (INTEGER)_Raw)
+THEN
+PROC_AMP_Plus_PyreEq_Clamp(_Raw);
+
+PROC
+PROC_AMP_Plus_PyreEq_Recalc()
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+DB_AMP_GameMode((STRING)_Mode)
+AND
+DB_AMP_Plus_Pyre_ModeBase(_Mode, (INTEGER)_Base)
+AND
+NOT DB_AMP_Plus_PyreEq_Gear(_)
+THEN
+PROC_AMP_Plus_PyreEq_Clamp(_Base);
+
+PROC
+PROC_AMP_Plus_PyreEq_Recalc()
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+DB_AMP_GameMode((STRING)_Mode)
+AND
+NOT DB_AMP_Plus_Pyre_ModeBase(_Mode, _)
+THEN
+PROC_AMP_Plus_PyreEq_ClearAll();
+
+PROC
+PROC_AMP_Plus_PyreEq_Clamp((INTEGER)_Raw)
+AND
+DB_AMP_GameMode("CASUAL")
+AND
+DB_AMP_Plus_Pyre2_Cfg("CASUALSTAGE", (INTEGER)_Cap)
+THEN
+PROC_AMP_Plus_PyreEq_Write(_Raw, _Cap);
+
+PROC
+PROC_AMP_Plus_PyreEq_Clamp((INTEGER)_Raw)
+AND
+NOT DB_AMP_GameMode("CASUAL")
+AND
+DB_AMP_Plus_Pyre2_Cfg("MAXSTAGE", (INTEGER)_Cap)
+THEN
+PROC_AMP_Plus_PyreEq_Write(_Raw, _Cap);
+
+PROC
+PROC_AMP_Plus_PyreEq_Write((INTEGER)_Raw, (INTEGER)_Cap)
+AND
+_Raw > _Cap
+THEN
+PROC_AMP_Plus_PyreEq_Store(_Cap);
+
+PROC
+PROC_AMP_Plus_PyreEq_Write((INTEGER)_Raw, (INTEGER)_Cap)
+AND
+_Raw <= _Cap
+THEN
+PROC_AMP_Plus_PyreEq_Store(_Raw);
+
+PROC
+PROC_AMP_Plus_PyreEq_Store((INTEGER)_N)
+AND
+DB_AMP_Plus_PyreEq_World((INTEGER)_Old)
+AND
+NOT _Old == _N
+THEN
+NOT DB_AMP_Plus_PyreEq_World(_Old);
+DB_AMP_Plus_PyreEq_World(_N);
+PROC_AMP_Plus_PyreEq_Spread(_Old, _N);
+
+PROC
+PROC_AMP_Plus_PyreEq_Store((INTEGER)_N)
+AND
+NOT DB_AMP_Plus_PyreEq_World(_)
+THEN
+DB_AMP_Plus_PyreEq_World(_N);
+PROC_AMP_Plus_PyreEq_Spread(0, _N);
+
+// one stack id with priority per step: a fall needs the old line removed
+
+PROC
+PROC_AMP_Plus_PyreEq_Spread((INTEGER)_Old, (INTEGER)_New)
+AND
+_New > _Old
+AND
+DB_AMP_Plus_PyreEq_Known((CHARACTER)_Char)
+THEN
+PROC_AMP_Plus_PyreEq_Stamp(_Char);
+
+PROC
+PROC_AMP_Plus_PyreEq_Spread((INTEGER)_Old, (INTEGER)_New)
+AND
+_New < _Old
+AND
+DB_AMP_Plus_PyreEq_Known((CHARACTER)_Char)
+THEN
+PROC_AMP_Plus_PyreEq_Restamp(_Char);
+
+PROC
+PROC_AMP_Plus_PyreEq_Restamp((CHARACTER)_Char)
+THEN
+PROC_AMP_Plus_PyreEq_Stamp(_Char);
+
+PROC
+PROC_AMP_Plus_PyreEq_ClearAll()
+AND
+DB_AMP_Plus_PyreEq_Known((CHARACTER)_Char)
+THEN
+PROC_AMP_Plus_PyreEq_Clear(_Char);
+
+PROC
+PROC_AMP_Plus_PyreEq_Stamp((CHARACTER)_Char)
+AND
+NOT QRY_AMP_Plus_Affix_On("PYRE2")
+THEN
+PROC_AMP_Plus_PyreEq_Clear(_Char);
+
+PROC
+PROC_AMP_Plus_PyreEq_Stamp((CHARACTER)_Char)
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+IsInCombat(_Char, 1)
+AND
+NOT QRY_AMP_Plus_Pyre2_Burning(_Char)
+THEN
+PROC_AMP_Plus_PyreEq_Clear(_Char);
+
+PROC
+PROC_AMP_Plus_PyreEq_Stamp((CHARACTER)_Char)
+AND
+QRY_AMP_Plus_Affix_On("PYRE2")
+AND
+IsInCombat(_Char, 0)
+THEN
+PROC_AMP_Plus_PyreEq_Show(_Char);
+
+PROC
+PROC_AMP_Plus_PyreEq_Show((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PyreEq_World(1)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE2_EQ1", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_PyreEq_Show((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PyreEq_World(2)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE2_EQ2", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_PyreEq_Show((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PyreEq_World(3)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE2_EQ3", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_PyreEq_Show((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PyreEq_World(4)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE2_EQ4", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_PyreEq_Show((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PyreEq_World(5)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE2_EQ5", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_PyreEq_Show((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PyreEq_World(6)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE2_EQ6", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_PyreEq_Show((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PyreEq_World(7)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE2_EQ7", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_PyreEq_Show((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PyreEq_World(8)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE2_EQ8", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_PyreEq_Show((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PyreEq_World(9)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE2_EQ9", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_PyreEq_Show((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PyreEq_World(10)
+THEN
+ApplyStatus(_Char, "AMP_PLUS_PYRE2_EQ10", -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// absent figure means nothing is worn, skips ten calls per body
+
+PROC
+PROC_AMP_Plus_PyreEq_Clear((CHARACTER)_Char)
+AND
+DB_AMP_Plus_PyreEq_World(_)
+THEN
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_EQ1", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_EQ2", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_EQ3", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_EQ4", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_EQ5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_EQ6", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_EQ7", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_EQ8", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_EQ9", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Char, "AMP_PLUS_PYRE2_EQ10", NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+ENDEXITSECTION

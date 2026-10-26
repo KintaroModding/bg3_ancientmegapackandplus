@@ -1,0 +1,56 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// roster bosses missing IsBoss get it forced at combat start
+// must init before Z_AMP_Pyre and AMP_Difficulty*, they read IsBoss on the same EnteredCombat tick
+
+DB_AMP_ForceBoss(S_HAG_Hag_c457d064-83fb-4ec6-b74d-1f30dfafd12d);
+DB_AMP_ForceBoss(S_GOB_GoblinKing_11337af0-6a57-426b-a820-c4b00923dd54);
+DB_AMP_ForceBoss(S_GOB_GoblinPriest_b983c336-9a14-4e9b-adb9-4689e7e0afa9);
+DB_AMP_ForceBoss(S_GOB_DrowCommander_25721313-0c15-4935-8176-9f134385451b);
+DB_AMP_ForceBoss(S_CRE_Templar_378ac93e-03a0-40b4-904c-f37989ac7a8c);
+DB_AMP_ForceBoss(S_TUT_Helm_Devil_005_ed103005-fd71-457d-ae6c-39654bbd8f2e);
+DB_AMP_ForceBoss(S_FOR_OwlBear_e903a41f-8ef7-46dc-a847-7d0ec2804d08);
+DB_AMP_ForceBoss(S_FOR_Bottomless_SpiderQueen_e6b2f3ba-2d02-4507-8680-6047322e1a4b);
+DB_AMP_ForceBoss(S_DEN_DruidLeader_95eb2b0b-a522-4ea5-8167-c5f4d1418156);
+DB_AMP_ForceBoss(S_UND_Bulette_307934b5-6fb5-4fdc-a7ff-433a7ba175b3);
+DB_AMP_ForceBoss(S_UND_PetrifiedDrow_Spectator_39ff8241-fadd-4fbe-ab89-fc5a8b7638a0);
+DB_AMP_ForceBoss(S_UND_KethericCity_AdamantineGolem_2a5997fc-5f2a-4a13-b309-bed16da3b255);
+DB_AMP_ForceBoss(S_MOO_Ketheric_e9918f3e-5b87-40a3-a9bd-61545151573f);
+DB_AMP_ForceBoss(S_SCL_BlightCombat2_Mound_01_1b294fe0-f1a1-4e81-9d4c-8d86bbda7d2b);
+DB_AMP_ForceBoss(S_TWN_Tollhouse_TollhouseMaster_3b460226-8ca2-4bbc-9bd7-8bb947aa2c06);
+DB_AMP_ForceBoss(S_TWN_Hospital_Surgeon_e58b8b34-038b-4858-b817-c2a8096a9381);
+DB_AMP_ForceBoss(S_TWN_Distillery_Brewer_4d9e3db3-9a78-4f4b-8101-1dd73c0f3be5);
+DB_AMP_ForceBoss(S_SHA_Necromancer_53651a9f-7ea8-444f-ba2d-224390b72f7d);
+DB_AMP_ForceBoss(S_GLO_Nightsong_6c55edb0-901b-4ba4-b9e8-3475a8392d9b);
+DB_AMP_ForceBoss(S_GLO_Orthon_1dc8091d-2af6-4d33-9268-998ef266d19c);
+DB_AMP_ForceBoss(S_GLO_Orin_bf24e0ec-a3a6-4905-bd2d-45dc8edf8101);
+DB_AMP_ForceBoss(S_GLO_Gortash_b878a854-f790-4999-95c4-3f20f00f65ac);
+DB_AMP_ForceBoss(S_GLO_Monitor_f65becd6-5cd7-4c88-b85e-6dd06b60f7b8);
+DB_AMP_ForceBoss(S_GLO_Cazador_2f1880e6-1297-4ca3-a79c-9fabc7f179d3);
+DB_AMP_ForceBoss(S_LOW_MurderTribunal_Sarevok_ae9f784a-ea64-4297-95a7-8377e85231b6);
+DB_AMP_ForceBoss(S_LOW_Viconia_b1ea974d-96fb-47ca-b6d9-9c85fcb69313);
+DB_AMP_ForceBoss(S_LOW_Lorroakan_a9d4b71d-b0ef-429e-8210-6dc8be986ee9);
+DB_AMP_ForceBoss(S_WYR_SkeletalDragon_67770922-5e0a-40c5-b3f0-67e8eb50493a);
+
+KBSECTION
+
+// IsEnemy and non-party gate: recruited Minthara and the freed Nightsong ally must not become bosses
+IF
+EnteredCombat((CHARACTER)_C, _)
+AND
+DB_AMP_ForceBoss(_C)
+AND
+IsBoss(_C, 0)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_C, _Host, 1)
+AND
+IsPartyMember(_C, 1, 0)
+THEN
+SetIsBoss(_C, 1);
+
+EXITSECTION
+
+ENDEXITSECTION

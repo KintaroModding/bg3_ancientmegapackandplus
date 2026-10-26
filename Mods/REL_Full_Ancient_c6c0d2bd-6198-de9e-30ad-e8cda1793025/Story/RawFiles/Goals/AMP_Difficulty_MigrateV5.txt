@@ -1,0 +1,69 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// one-time migration, flat progression stacks become t2 tier stacks and killtier backfills to 2
+
+KBSECTION
+
+// fire on level load if not yet migrated and progression exists
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_DiffV5_Migrated(1)
+AND
+DB_AMP_BossProgression_Applied((STRING)_AnyKey)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+_Mode != "NONE"
+THEN
+DB_AMP_DiffV5_Migrated(1);
+PROC_AMP_DiffV5_AssignKillTiers();
+PROC_AMP_DiffV5_ReapplyV5ToTracked(_Mode);
+
+// already migrated or no progression, just set the flag
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_DiffV5_Migrated(1)
+AND
+NOT DB_AMP_BossProgression_Applied(_)
+THEN
+DB_AMP_DiffV5_Migrated(1);
+
+// killtier=2 for all bosses killed before v5
+PROC
+PROC_AMP_DiffV5_AssignKillTiers()
+AND
+DB_AMP_BossProgression_Applied((STRING)_Key)
+AND
+NOT DB_AMP_BossProgression_KillTier(_Key, _)
+THEN
+DB_AMP_BossProgression_KillTier(_Key, 2);
+
+// reapply v5 progression to all tracked, lazy apply reads killtier
+PROC
+PROC_AMP_DiffV5_ReapplyV5ToTracked((STRING)_Mode)
+AND
+DB_AMP_DiffV3_Tracked((CHARACTER)_Creature, (STRING)_Status)
+AND
+IsBoss(_Creature, 0)
+AND
+IsDead(_Creature, 0)
+THEN
+PROC_AMP_BossProgression_BuffNPC(_Creature);
+
+PROC
+PROC_AMP_DiffV5_ReapplyV5ToTracked((STRING)_Mode)
+AND
+DB_AMP_DiffV3_Tracked((CHARACTER)_Creature, (STRING)_Status)
+AND
+IsBoss(_Creature, 1)
+AND
+IsDead(_Creature, 0)
+THEN
+PROC_AMP_BossProgression_BuffBoss(_Creature);
+
+EXITSECTION
+
+ENDEXITSECTION

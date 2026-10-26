@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="9048bf9d-0b10-7e56-e891-28dd2ce577f8" />
+					<attribute id="Name" type="LSString" value="AdvantageOnSpells" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/AdvantageOnSpells.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="AdvantageOnSpells" />
+					<attribute id="BoundsMin" type="fvec3" value="-2 -2 -2" />
+					<attribute id="BoundsMax" type="fvec3" value="2 2 2" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="1" />
+					<attribute id="Looping" type="bool" value="True" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="0caa5a80-ab69-4d21-8d4f-571b28569c44" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="2da9f86e-cc5f-ace2-d87c-d484c50733b5" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="5e8a5f65-ceeb-55b8-80be-23a638e5ab17" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="8da58aa9-f985-f994-f2eb-b10766de73f7" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="f7fc084b-d098-0d9a-8033-1cb61c3beb37" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

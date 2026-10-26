@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="8c953bb7-a4b8-461e-bed8-9d82a3cf3789" />
+					<attribute id="Name" type="LSString" value="AMP_Generic_VoidCapsule_ToTShop" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="854da6d0-ecfd-450d-82b4-cdff387c4349" />
+					<attribute id="VisualTemplate" type="FixedString" value="ab8be1ca-10d0-708e-f320-445c713f637e" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="6e37ab53-77f6-6c38-155a-b2b2db23af9d" />
+					<attribute id="Scale" type="float" value="0.1" />
+					<attribute id="DisplayName" type="TranslatedString" handle="hb6672599gf1adg4706g1ef3g388213829ac4" version="1" />
+					<attribute id="Icon" type="FixedString" value="AMP_Generic_VoidCapsule" />
+					<attribute id="Stats" type="FixedString" value="AMP_Generic_VoidCapsule_Shop" />
+					<attribute id="DefaultState" type="FixedString" value="" />
+					<attribute id="Tooltip" type="uint8" value="2" />
+					<attribute id="InventoryMoveSound" type="FixedString" value="20ccc1fb-74d2-4b07-8258-2e407e564ad6" />
+					<attribute id="DropSound" type="FixedString" value="20ccc1fb-74d2-4b07-8258-2e407e564ad6" />
+					<attribute id="PickupSound" type="FixedString" value="5af65d00-938f-43a8-811c-097034563d9e" />
+					<attribute id="UseSound" type="FixedString" value="432cf505-f336-4df4-ab9f-2acc5ac23e94" />
+					<attribute id="InventoryType" type="uint8" value="49" />
+					<attribute id="Description" type="TranslatedString" handle="ha4ba5c26gcef2ge57dg5005g0155f665279a" version="1" />
+					<children>
+						<node id="InventoryList" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

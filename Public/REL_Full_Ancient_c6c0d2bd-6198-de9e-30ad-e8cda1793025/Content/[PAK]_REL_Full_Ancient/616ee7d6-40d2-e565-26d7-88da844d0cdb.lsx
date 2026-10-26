@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="7" revision="1" build="3" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="616ee7d6-40d2-e565-26d7-88da844d0cdb" />
+					<attribute id="Name" type="LSString" value="Ancient_Glow" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/Ancient_Glow.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="Ancient_Glow" />
+					<attribute id="BoundsMin" type="fvec3" value="-1.154701 -0.1547005 -1.154701" />
+					<attribute id="BoundsMax" type="fvec3" value="1.154701 2.154701 1.154701" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="1" />
+					<attribute id="Looping" type="bool" value="True" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="4a4dc4f6-6e30-113b-40df-c4f260863d21" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="dc37c116-c43b-e9fd-4f52-b601ccff8766" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="39fc2f65-2734-a360-1921-389e5c0d87c7" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

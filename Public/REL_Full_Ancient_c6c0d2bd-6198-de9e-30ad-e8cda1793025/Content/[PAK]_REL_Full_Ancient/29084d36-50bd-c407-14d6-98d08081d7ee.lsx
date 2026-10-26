@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="29084d36-50bd-c407-14d6-98d08081d7ee" />
+					<attribute id="Name" type="LSString" value="SJ02_Protection" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/SJ02_Protection.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="SJ02_Protection" />
+					<attribute id="BoundsMin" type="fvec3" value="-2 -2 -2" />
+					<attribute id="BoundsMax" type="fvec3" value="2 2 2" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="2.1" />
+					<attribute id="Looping" type="bool" value="False" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="7239c788-aee2-c07e-e1c0-6d1cd80a07fc" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="57a9be19-813b-a8f9-c9d9-d7b01057f667" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="0c5ef267-581e-3d1e-6645-20626faa15ab" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="ebfbf452-11ae-460a-96e5-5d1afaae10c3" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="8d1f3492-8311-4fe1-86b3-2d019ad43f60" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="6328e2e6-6e47-4a38-b009-0c4077e3ae1f" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

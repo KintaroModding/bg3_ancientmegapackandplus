@@ -1,0 +1,16 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// casual: drop Visited right after insert so every visit stays "first visit" (_AMP table, never _None)
+IF
+DB_AMP_Visited((CHARACTER)_Trader)
+AND
+DB_AMP_GameMode("CASUAL")
+THEN
+NOT DB_AMP_Visited(_Trader);
+
+EXITSECTION
+ENDEXITSECTION

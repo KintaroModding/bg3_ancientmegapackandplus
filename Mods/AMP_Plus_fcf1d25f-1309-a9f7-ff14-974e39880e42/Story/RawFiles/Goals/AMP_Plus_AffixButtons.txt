@@ -1,0 +1,133 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_Reckoning", _)
+THEN
+DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_Reckoning", "RECKONING");
+DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_FormerPyre", "PYRE");
+DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_BattleInstinct", "BATTLEINSTINCT");
+DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_ItemMoveCost", "ITEMMOVECOST");
+DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_AntiTheft", "ANTITHEFT");
+DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_AntiStealth", "ANTISTEALTHABUSE");
+DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_Avarice", "AVARICE");
+DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_ToTShop", "TOTSHOP");
+DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_FullMoon", "FULLMOON");
+DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_Eclipse", "ECLIPSE");
+DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_LastStand", "LASTSTAND");
+DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_UndyingWill", "UNDYINGWILL");
+DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_PlanarChests", "PLANARCHESTS");
+DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_Apex", "APEX");
+
+IF
+UsingSpell((CHARACTER)_C, (STRING)_Spell, _, _, _)
+AND
+DB_AMP_Plus_AffixBtn(_Spell, (STRING)_Id)
+AND
+IsPlayer(_C, 1)
+AND
+NOT DB_AMP_Plus_AffixBtnPending(_C, _)
+AND
+NOT DB_AMP_Plus_AffixCursor(_C, _)
+AND
+QRY_AMP_Plus_Affix_On(_Id)
+THEN
+DB_AMP_Plus_AffixBtnPending(_C, _Id);
+OpenMessageBoxYesNo(_C, "AMP_Plus_Affix_BtnDisable");
+
+IF
+UsingSpell((CHARACTER)_C, (STRING)_Spell, _, _, _)
+AND
+DB_AMP_Plus_AffixBtn(_Spell, (STRING)_Id)
+AND
+IsPlayer(_C, 1)
+AND
+NOT DB_AMP_Plus_AffixBtnPending(_C, _)
+AND
+NOT DB_AMP_Plus_AffixCursor(_C, _)
+AND
+NOT QRY_AMP_Plus_Affix_On(_Id)
+AND
+DB_AMP_Plus_AffixDef(_, _Id, (STRING)_AskKey, _, _, _)
+THEN
+DB_AMP_Plus_AffixBtnPending(_C, _Id);
+OpenMessageBoxYesNo(_C, _AskKey);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, "AMP_Plus_Affix_BtnDisable", 1)
+AND
+DB_AMP_Plus_AffixBtnPending(_C, (STRING)_Id)
+THEN
+NOT DB_AMP_Plus_AffixBtnPending(_C, _Id);
+PROC_AMP_Plus_Affix_SetByPlayer(_Id, 0);
+PROC_AMP_PlayModeEffect(_C);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, "AMP_Plus_Affix_BtnDisable", 0)
+AND
+DB_AMP_Plus_AffixBtnPending(_C, (STRING)_Id)
+THEN
+NOT DB_AMP_Plus_AffixBtnPending(_C, _Id);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, (STRING)_AskKey, 1)
+AND
+DB_AMP_Plus_AffixBtnPending(_C, (STRING)_Id)
+AND
+DB_AMP_Plus_AffixDef(_, _Id, _AskKey, _, _, _)
+THEN
+NOT DB_AMP_Plus_AffixBtnPending(_C, _Id);
+PROC_AMP_Plus_Affix_SetByPlayer(_Id, 1);
+PROC_AMP_PlayModeEffect(_C);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_C, (STRING)_AskKey, 0)
+AND
+DB_AMP_Plus_AffixBtnPending(_C, (STRING)_Id)
+AND
+DB_AMP_Plus_AffixDef(_, _Id, _AskKey, _, _, _)
+THEN
+NOT DB_AMP_Plus_AffixBtnPending(_C, _Id);
+
+IF
+SavegameLoaded()
+THEN
+PROC_AMP_Plus_AffixBtn_DrainPending();
+
+PROC
+PROC_AMP_Plus_AffixBtn_DrainPending()
+AND
+DB_AMP_Plus_AffixBtnPending((CHARACTER)_C, (STRING)_Id)
+THEN
+NOT DB_AMP_Plus_AffixBtnPending(_C, _Id);
+PROC_AMP_Plus_AffixBtn_DrainPending();
+
+// old Pyre row swept, a name that is another's plus a character shares its ring row
+
+IF
+DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_Pyre", (STRING)_Id)
+THEN
+NOT DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_Pyre", _Id);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_FormerPyre", _)
+THEN
+DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_FormerPyre", "PYRE");
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_FormerPyre", _)
+THEN
+DB_AMP_Plus_AffixBtn("Shout_AMP_Plus_Affix_FormerPyre", "PYRE");
+
+EXITSECTION
+
+ENDEXITSECTION

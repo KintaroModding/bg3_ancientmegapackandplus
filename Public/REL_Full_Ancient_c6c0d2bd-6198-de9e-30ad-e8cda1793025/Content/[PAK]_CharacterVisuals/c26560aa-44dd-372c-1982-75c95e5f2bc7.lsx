@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="c26560aa-44dd-372c-1982-75c95e5f2bc7" />
+					<attribute id="Name" type="LSString" value="WEAPON91" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/WEAPON91.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="WEAPON91" />
+					<attribute id="BoundsMin" type="fvec3" value="-3 -3 -3" />
+					<attribute id="BoundsMax" type="fvec3" value="3 3 3" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="5" />
+					<attribute id="Looping" type="bool" value="True" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="5874a588-b4ad-4a78-a823-8f5f739555be" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="70148014-3c4e-8afa-af1e-9bc00dda86bf" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="11b7b087-60cf-2e14-367d-f1c60d9b91b3" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="63298f49-23aa-bbbc-6e1d-5e7d4174a710" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="c30fda98-968f-14ce-64e4-a1797cebcb4e" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="b1af97b5-28f7-43e1-a48b-9f994c0fd10a" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="6357af48-38dc-4bb1-9dda-468f9a44c3df" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

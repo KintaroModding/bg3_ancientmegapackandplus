@@ -1,0 +1,82 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+CharacterJoinedParty((CHARACTER)_Summon)
+AND
+IsSummon(_Summon, 1)
+AND
+CharacterGetOwner(_Summon, (CHARACTER)_Owner)
+THEN
+DB_AMP_Plus_PackSummon(_Owner, _Summon);
+
+IF
+CharacterLeftParty((CHARACTER)_Summon)
+AND
+DB_AMP_Plus_PackSummon((CHARACTER)_Owner, _Summon)
+THEN
+NOT DB_AMP_Plus_PackSummon(_Owner, _Summon);
+
+IF
+CharacterLeftParty((CHARACTER)_Summon)
+AND
+DB_AMP_Plus_PackGiven(_Summon, (INTEGER)_Given)
+THEN
+NOT DB_AMP_Plus_PackGiven(_Summon, _Given);
+
+// join rule grants one die, this adds the rest
+IF
+CharacterJoinedParty((CHARACTER)_Summon)
+AND
+IsSummon(_Summon, 1)
+AND
+CharacterGetOwner(_Summon, (CHARACTER)_Owner)
+AND
+HasActiveStatus(_Owner, "AMP_SHARD_CHAR_PACK", 1)
+AND
+GetEquippedItem(_Owner, "Amulet", (ITEM)_Amulet)
+AND
+DB_AMP_Shard_Count(_Amulet, "AMP_SHARD_AMULET_PACK", _Count)
+AND
+IntegerSubtract(_Count, 1, (INTEGER)_Extra)
+THEN
+PROC_AMP_ApplyShardEffectN(_Summon, "AMP_SHARD_PACK_CRITDICE", _Extra);
+DB_AMP_Plus_PackGiven(_Summon, _Count);
+
+IF
+StatusApplied((ITEM)_Amulet, "AMP_SHARD_AMULET_PACK", (CHARACTER)_Owner, _)
+AND
+DB_AMP_Plus_PackSummon(_Owner, (CHARACTER)_Summon)
+THEN
+PROC_AMP_Plus_PackTopUp(_Owner, _Summon, _Amulet);
+
+PROC
+PROC_AMP_Plus_PackTopUp((CHARACTER)_Owner, (CHARACTER)_Summon, (ITEM)_Amulet)
+AND
+DB_AMP_Shard_Count(_Amulet, "AMP_SHARD_AMULET_PACK", _Count)
+AND
+DB_AMP_Plus_PackGiven(_Summon, (INTEGER)_Given)
+AND
+_Count > _Given
+AND
+IntegerSubtract(_Count, _Given, (INTEGER)_Extra)
+THEN
+NOT DB_AMP_Plus_PackGiven(_Summon, _Given);
+DB_AMP_Plus_PackGiven(_Summon, _Count);
+PROC_AMP_ApplyShardEffectN(_Summon, "AMP_SHARD_PACK_CRITDICE", _Extra);
+
+PROC
+PROC_AMP_Plus_PackTopUp((CHARACTER)_Owner, (CHARACTER)_Summon, (ITEM)_Amulet)
+AND
+DB_AMP_Shard_Count(_Amulet, "AMP_SHARD_AMULET_PACK", _Count)
+AND
+NOT DB_AMP_Plus_PackGiven(_Summon, _)
+THEN
+DB_AMP_Plus_PackGiven(_Summon, _Count);
+PROC_AMP_ApplyShardEffectN(_Summon, "AMP_SHARD_PACK_CRITDICE", _Count);
+
+EXITSECTION
+ENDEXITSECTION

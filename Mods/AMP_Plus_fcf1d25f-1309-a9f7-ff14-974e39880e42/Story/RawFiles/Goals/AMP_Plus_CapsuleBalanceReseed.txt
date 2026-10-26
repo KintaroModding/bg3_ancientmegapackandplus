@@ -1,0 +1,163 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// an empty table leaves capsules with no charge ceiling and empty reward cubes
+// cache is rebuilt last, the base builds it at level start before this reseed runs
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_CapBalVer(3)
+THEN
+PROC_AMP_Plus_CapBalReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_CapBalVer(3)
+THEN
+PROC_AMP_Plus_CapBalReseed();
+
+PROC
+PROC_AMP_Plus_CapBalReseed()
+AND
+DB_AMP_Plus_CapBalVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_CapBalVer(_Old);
+
+PROC
+PROC_AMP_Plus_CapBalReseed()
+THEN
+PROC_AMP_Plus_CapBalDrainChargesMax();
+
+PROC
+PROC_AMP_Plus_CapBalReseed()
+THEN
+PROC_AMP_Plus_CapBalDrainRerollWindow();
+
+PROC
+PROC_AMP_Plus_CapBalReseed()
+THEN
+PROC_AMP_Plus_CapBalDrainRerollCost();
+
+PROC
+PROC_AMP_Plus_CapBalReseed()
+THEN
+PROC_AMP_Plus_CapBalDrainSalvageChance();
+
+PROC
+PROC_AMP_Plus_CapBalReseed()
+THEN
+PROC_AMP_Plus_CapBalDrainPityThreshold();
+
+PROC
+PROC_AMP_Plus_CapBalReseed()
+THEN
+PROC_AMP_Plus_CapBalDrainPityRewardCount();
+
+PROC
+PROC_AMP_Plus_CapBalReseed()
+THEN
+PROC_AMP_Plus_CapBalDrainPityRewardRarity();
+
+PROC
+PROC_AMP_Plus_CapBalReseed()
+THEN
+DB_AMP_Plus_CapBalVer(3);
+DB_AMP_VoidCapsule_ChargesMaxByMode("NONE",       16);
+DB_AMP_VoidCapsule_ChargesMaxByMode("STANDARD",    8);
+DB_AMP_VoidCapsule_ChargesMaxByMode("IMPOSSIBLE", 10);
+DB_AMP_VoidCapsule_RerollWindowByMode("NONE",       60);
+DB_AMP_VoidCapsule_RerollWindowByMode("STANDARD",   60);
+DB_AMP_VoidCapsule_RerollWindowByMode("IMPOSSIBLE", 30);
+DB_AMP_VoidCapsule_RerollCostByMode("NONE",       1);
+DB_AMP_VoidCapsule_RerollCostByMode("STANDARD",   2);
+DB_AMP_VoidCapsule_RerollCostByMode("IMPOSSIBLE", 2);
+DB_AMP_VoidCapsule_SalvageChanceByMode("NONE",       "Uncommon",    5);
+DB_AMP_VoidCapsule_SalvageChanceByMode("NONE",       "Rare",       25);
+DB_AMP_VoidCapsule_SalvageChanceByMode("NONE",       "VeryRare",   50);
+DB_AMP_VoidCapsule_SalvageChanceByMode("NONE",       "Legendary", 100);
+DB_AMP_VoidCapsule_SalvageChanceByMode("STANDARD",   "Uncommon",   20);
+DB_AMP_VoidCapsule_SalvageChanceByMode("STANDARD",   "Rare",       45);
+DB_AMP_VoidCapsule_SalvageChanceByMode("STANDARD",   "VeryRare",   70);
+DB_AMP_VoidCapsule_SalvageChanceByMode("STANDARD",   "Legendary", 100);
+DB_AMP_VoidCapsule_SalvageChanceByMode("IMPOSSIBLE", "Uncommon",   25);
+DB_AMP_VoidCapsule_SalvageChanceByMode("IMPOSSIBLE", "Rare",       50);
+DB_AMP_VoidCapsule_SalvageChanceByMode("IMPOSSIBLE", "VeryRare",   75);
+DB_AMP_VoidCapsule_SalvageChanceByMode("IMPOSSIBLE", "Legendary", 100);
+DB_AMP_VoidCapsule_PityThresholdByMode("NONE",       0);
+DB_AMP_VoidCapsule_PityThresholdByMode("STANDARD",   0);
+DB_AMP_VoidCapsule_PityThresholdByMode("IMPOSSIBLE", 0);
+DB_AMP_VoidCapsule_PityRewardCountByMode("NONE",       0);
+DB_AMP_VoidCapsule_PityRewardCountByMode("STANDARD",   0);
+DB_AMP_VoidCapsule_PityRewardCountByMode("IMPOSSIBLE", 0);
+DB_AMP_VoidCapsule_PityRewardRarityByMode("NONE",       "VeryRare");
+DB_AMP_VoidCapsule_PityRewardRarityByMode("STANDARD",   "Rare");
+DB_AMP_VoidCapsule_PityRewardRarityByMode("IMPOSSIBLE", "Uncommon");
+
+PROC
+PROC_AMP_Plus_CapBalReseed()
+THEN
+PROC_AMP_VoidCapsule_RefreshCache();
+
+PROC
+PROC_AMP_Plus_CapBalDrainChargesMax()
+AND
+DB_AMP_VoidCapsule_ChargesMaxByMode((STRING)_M, (INTEGER)_V)
+THEN
+NOT DB_AMP_VoidCapsule_ChargesMaxByMode(_M, _V);
+PROC_AMP_Plus_CapBalDrainChargesMax();
+
+PROC
+PROC_AMP_Plus_CapBalDrainRerollWindow()
+AND
+DB_AMP_VoidCapsule_RerollWindowByMode((STRING)_M, (INTEGER)_V)
+THEN
+NOT DB_AMP_VoidCapsule_RerollWindowByMode(_M, _V);
+PROC_AMP_Plus_CapBalDrainRerollWindow();
+
+PROC
+PROC_AMP_Plus_CapBalDrainRerollCost()
+AND
+DB_AMP_VoidCapsule_RerollCostByMode((STRING)_M, (INTEGER)_V)
+THEN
+NOT DB_AMP_VoidCapsule_RerollCostByMode(_M, _V);
+PROC_AMP_Plus_CapBalDrainRerollCost();
+
+PROC
+PROC_AMP_Plus_CapBalDrainSalvageChance()
+AND
+DB_AMP_VoidCapsule_SalvageChanceByMode((STRING)_M, (STRING)_R, (INTEGER)_V)
+THEN
+NOT DB_AMP_VoidCapsule_SalvageChanceByMode(_M, _R, _V);
+PROC_AMP_Plus_CapBalDrainSalvageChance();
+
+PROC
+PROC_AMP_Plus_CapBalDrainPityThreshold()
+AND
+DB_AMP_VoidCapsule_PityThresholdByMode((STRING)_M, (INTEGER)_V)
+THEN
+NOT DB_AMP_VoidCapsule_PityThresholdByMode(_M, _V);
+PROC_AMP_Plus_CapBalDrainPityThreshold();
+
+PROC
+PROC_AMP_Plus_CapBalDrainPityRewardCount()
+AND
+DB_AMP_VoidCapsule_PityRewardCountByMode((STRING)_M, (INTEGER)_V)
+THEN
+NOT DB_AMP_VoidCapsule_PityRewardCountByMode(_M, _V);
+PROC_AMP_Plus_CapBalDrainPityRewardCount();
+
+PROC
+PROC_AMP_Plus_CapBalDrainPityRewardRarity()
+AND
+DB_AMP_VoidCapsule_PityRewardRarityByMode((STRING)_M, (STRING)_R)
+THEN
+NOT DB_AMP_VoidCapsule_PityRewardRarityByMode(_M, _R);
+PROC_AMP_Plus_CapBalDrainPityRewardRarity();
+
+EXITSECTION
+ENDEXITSECTION

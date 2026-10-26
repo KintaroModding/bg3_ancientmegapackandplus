@@ -1,0 +1,61 @@
+-- turn timeout measures silence, not wall time: reaction animations eat the engine timer
+-- held while the fight is paused and restarted after each reaction, both signalled from story code
+-- never removed outside a hold, it is the only guard against an AI that stops deciding
+game.states.AMP_BossCombat = State{function ()
+    description = [[DefaultCombat with a turn timeout that is held while the party reacts.]]
+
+    params.TurnTimeout = {type = EParamType.Number, required=false, default=30.0, help=[[
+        Seconds of silence before the engine force-ends this NPC's turn.
+    ]]}
+
+    -- passed straight through to DefaultCombat, so a config that set them keeps them
+    params.customCombat = {type = EParamType.State, required=false, default=nil, help=[[
+        Custom combat behaviour that can override the AI
+    ]]}
+
+    params.CustomFallback = {type = EParamType.String, required=false, default="FALLBACK", help=[[
+        Custom Action to override the Fallback behaviour
+    ]]}
+
+    helpers.Arm = function()
+        if me.IsInCombat then
+            SetCombatTimeout(me, params.TurnTimeout)
+        end
+    end
+
+    -- repairing a stalled turn rebuilds this tree, which drops the override with it
+    self.OnInit = function()
+        helpers.Arm()
+    end
+
+    self.Valid = function()
+        return me.IsInCombat
+    end
+
+    nodes.DefaultCombat = Proxy {
+        game.states.DefaultCombat,
+
+        params = {
+            customCombat = params.customCombat,
+            CustomFallback = params.CustomFallback,
+        },
+    }
+
+    events.TurnStarted = function()
+        helpers.Arm()
+    end
+
+    events.TurnEnded = function()
+        ResetCombatTimeout(me)
+    end
+
+    events.EntityEvent = function(ev)
+        if ev.TargetEntity == me then
+            if ev.Event == "AMP_Plus_TimerHold" then
+                SetCombatTimeout(me, -1.0)
+            elseif ev.Event == "AMP_Plus_TimerKick" then
+                helpers.Arm()
+            end
+        end
+    end
+end}

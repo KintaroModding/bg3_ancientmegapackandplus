@@ -1,0 +1,1033 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_AMP_Wizard_Exists(1);
+DB_AMP_Wizard_Done(0);
+KBSECTION
+
+// amp master wizard: first-run setup on nautiloid. chains all settings in order;
+// the actual changes live in the per-setting scripts, here we just advance.
+
+// 30s after nautiloid load
+
+IF
+LevelGameplayStarted("TUT_Avernus_C", _)
+AND
+NOT DB_AMP_Wizard_Done(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+TimerLaunch("AMP_MasterWizard", 30000);
+
+IF
+TimerFinished("AMP_MasterWizard")
+AND
+NOT DB_AMP_Wizard_Done(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Wizard_Start");
+
+// text event: launch wizard from anywhere
+
+IF
+TextEvent("ampw")
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Wizard_Start");
+
+// settings container spell button
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Settings_Wizard", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Wizard_Start");
+
+// start: yes=keep defaults, no=configure
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Wizard_Start", 1)
+THEN
+NOT DB_AMP_Wizard_Done(0);
+DB_AMP_Wizard_Done(1);
+PROC_AMP_SetGameMode(_Host, "NORMAL");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Wizard_Start", 0)
+THEN
+NOT DB_AMP_Wizard_Done(0);
+DB_AMP_Wizard_Done(1);
+DB_AMP_Wizard_Active(1);
+DB_AMP_Wizard_Step(0);
+PROC_AMP_Wizard_RunStep(_Host, 0);
+
+// step router
+
+// step 0: gamemode (3 mb chain)
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 0
+THEN
+PROC_AMP_GameMode_ShowMB1(_Host);
+
+// step 1: hints (6 mb chain). set CurrentPlayer so settings_core no-handlers can chain
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 1
+THEN
+SysClear("DB_AMP_Settings_CurrentPlayer", 1);
+DB_AMP_Settings_CurrentPlayer(_Host);
+SysClear("DB_AMP_Settings_CurrentChoice", 2);
+DB_AMP_Settings_CurrentChoice(_Host, 0);
+OpenMessageBoxYesNo(_Host, "AMP_Settings001");
+
+// step 2: autoloot umbrella. yes=configure, no=skip loot block -> step 10
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 2
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Wizard_AutoLootUmbrella");
+
+// step 3: autoloot campprotect (skip if autoloot off)
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 3
+AND
+NOT DB_AMP_AutoLoot_Disabled(1)
+THEN
+PROC_AMP_AL_ShowCampProtect(_Host);
+
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 3
+AND
+DB_AMP_AutoLoot_Disabled(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 4: autoloot minvalue (skip if autoloot off)
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 4
+AND
+NOT DB_AMP_AutoLoot_Disabled(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AL_MinValue_00");
+
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 4
+AND
+DB_AMP_AutoLoot_Disabled(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 5: filter consumables (skip if autoloot off)
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 5
+AND
+NOT DB_AMP_AutoLoot_Disabled(1)
+THEN
+PROC_AMP_Filter_ShowLoot_Consumables(_Host);
+
+// autoloot off but autosell on: still show the sell filter
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 5
+AND
+DB_AMP_AutoLoot_Disabled(1)
+AND
+NOT DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Filter_ShowSell_Consumables(_Host);
+
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 5
+AND
+DB_AMP_AutoLoot_Disabled(1)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 6: filter equipment (skip if autoloot off)
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 6
+AND
+NOT DB_AMP_AutoLoot_Disabled(1)
+THEN
+PROC_AMP_Filter_ShowLoot_Equipment(_Host);
+
+// autoloot off but autosell on: still show the sell filter
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 6
+AND
+DB_AMP_AutoLoot_Disabled(1)
+AND
+NOT DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Filter_ShowSell_Equipment(_Host);
+
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 6
+AND
+DB_AMP_AutoLoot_Disabled(1)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 7: filter books (skip if autoloot off)
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 7
+AND
+NOT DB_AMP_AutoLoot_Disabled(1)
+THEN
+PROC_AMP_Filter_ShowLoot_Books(_Host);
+
+// autoloot off but autosell on: still show the sell filter
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 7
+AND
+DB_AMP_AutoLoot_Disabled(1)
+AND
+NOT DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Filter_ShowSell_Books(_Host);
+
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 7
+AND
+DB_AMP_AutoLoot_Disabled(1)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 8: filter ingredients (skip if autoloot off)
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 8
+AND
+NOT DB_AMP_AutoLoot_Disabled(1)
+THEN
+PROC_AMP_Filter_ShowLoot_Ingredients(_Host);
+
+// autoloot off but autosell on: still show the sell filter
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 8
+AND
+DB_AMP_AutoLoot_Disabled(1)
+AND
+NOT DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Filter_ShowSell_Ingredients(_Host);
+
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 8
+AND
+DB_AMP_AutoLoot_Disabled(1)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 9: filter containers (skip if autoloot off)
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 9
+AND
+NOT DB_AMP_AutoLoot_Disabled(1)
+THEN
+PROC_AMP_Filter_ShowLoot_Containers(_Host);
+
+// autoloot off but autosell on: still show the sell filter
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 9
+AND
+DB_AMP_AutoLoot_Disabled(1)
+AND
+NOT DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Filter_ShowSell_Containers(_Host);
+
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 9
+AND
+DB_AMP_AutoLoot_Disabled(1)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 10: autosell umbrella. yes=configure, no=skip sell block -> step 13
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 10
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Wizard_AutoSellUmbrella");
+
+// step 11: autosell maxvalue (skip if autosell off)
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 11
+AND
+NOT DB_AMP_AS_Disabled(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_AS_MaxValue_050");
+
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 11
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 12: autosell rarityprotect (skip if autosell off)
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 12
+AND
+NOT DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_AS_ShowRarityProtect(_Host);
+
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 12
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 13: tradingfix
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 13
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Settings013");
+
+// step 14: battleinstinct
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 14
+THEN
+PROC_AMP_BattleInstinct_ShowToggle(_Host);
+
+// step 15: itemmovecost
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 15
+THEN
+PROC_AMP_ItemMoveCost_ShowToggle(_Host);
+
+// step 16: totshop
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 16
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_Settings018");
+
+// step 17: generous loot (master toggle for richer loot/rewards)
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 17
+THEN
+PROC_AMP_GenerousLoot_ShowToggle(_Host);
+
+// step 18: done
+PROC
+PROC_AMP_Wizard_RunStep((CHARACTER)_Host, (INTEGER)_Step)
+AND
+_Step == 18
+THEN
+NOT DB_AMP_Wizard_Active(1);
+SysClear("DB_AMP_Wizard_Step", 1);
+PROC_AMP_PlayModeEffect(_Host);
+
+// advance to next step (called after each setting completes)
+
+PROC
+PROC_AMP_Wizard_Next((CHARACTER)_Host)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(_Current)
+AND
+IntegerSum(_Current, 1, _Next)
+THEN
+NOT DB_AMP_Wizard_Step(_Current);
+DB_AMP_Wizard_Step(_Next);
+PROC_AMP_Wizard_RunStep(_Host, _Next);
+
+// jump straight to a target step (umbrella skip-block answers)
+PROC
+PROC_AMP_Wizard_GoTo((CHARACTER)_Host, (INTEGER)_Target)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(_Current)
+THEN
+NOT DB_AMP_Wizard_Step(_Current);
+DB_AMP_Wizard_Step(_Target);
+PROC_AMP_Wizard_RunStep(_Host, _Target);
+
+// hooks: each setting's mb closing -> advance
+
+// step 0: gamemode (any of 3 options)
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings023", 1)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(0)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings024", 1)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(0)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings025", 1)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(0)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 1: hints (any of 6 modes)
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings001", 1)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings002", 1)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings003", 1)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings004", 1)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings005", 1)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings006", 1)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 2: autoloot umbrella. yes=configure, no=skip to step 10
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Wizard_AutoLootUmbrella", 1)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(2)
+THEN
+PROC_AMP_AL_ShowToggle(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Wizard_AutoLootUmbrella", 0)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(2)
+THEN
+PROC_AMP_Wizard_GoTo(_Host, 10);
+
+// step 2: autoloot toggle (both answers advance)
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_Toggle_AskDisable", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(2)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_Toggle_AskEnable", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(2)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 3: campprotect (both answers advance)
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_CampProtect_AskDisable", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(3)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_CampProtect_AskEnable", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(3)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 4: minvalue (yes on any option advances)
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_MinValue_00", 1)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(4)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_MinValue_05", 1)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(4)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_MinValue_10", 1)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(4)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AL_MinValue_25", 1)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(4)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// steps 5-9 category filters: loot mb -> sell mb. advance after sell, or after
+// loot if autosell is off.
+
+// step 5 consumables: advance after loot mb if autosell off
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterConsumables_Loot_On", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(5)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterConsumables_Loot_Off", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(5)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 5 consumables: advance after sell mb
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterConsumables_Sell_On", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(5)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterConsumables_Sell_Off", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(5)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 6 equipment: advance after loot mb if autosell off
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterEquipment_Loot_On", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(6)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterEquipment_Loot_Off", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(6)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 6 equipment: advance after sell mb
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterEquipment_Sell_On", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(6)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterEquipment_Sell_Off", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(6)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 7 books: advance after loot mb if autosell off
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterBooks_Loot_On", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(7)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterBooks_Loot_Off", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(7)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 7 books: advance after sell mb
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterBooks_Sell_On", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(7)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterBooks_Sell_Off", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(7)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 8 ingredients: advance after loot mb if autosell off
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterIngredients_Loot_On", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(8)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterIngredients_Loot_Off", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(8)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 8 ingredients: advance after sell mb
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterIngredients_Sell_On", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(8)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterIngredients_Sell_Off", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(8)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 9 containers: advance after loot mb if autosell off
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterContainers_Loot_On", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(9)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterContainers_Loot_Off", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(9)
+AND
+DB_AMP_AS_Disabled(1)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 9 containers: advance after sell mb
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterContainers_Sell_On", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(9)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_FilterContainers_Sell_Off", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(9)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 10: autosell umbrella. yes=configure, no=skip to step 13
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Wizard_AutoSellUmbrella", 1)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(10)
+THEN
+PROC_AMP_AS_ShowToggle(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Wizard_AutoSellUmbrella", 0)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(10)
+THEN
+PROC_AMP_Wizard_GoTo(_Host, 13);
+
+// step 10: autosell toggle
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_Toggle_AskDisable", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(10)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_Toggle_AskEnable", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(10)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 11: maxvalue (yes on any advances)
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_MaxValue_050", 1)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(11)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_MaxValue_100", 1)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(11)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_MaxValue_200", 1)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(11)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_MaxValue_500", 1)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(11)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_MaxValue_NoLimit", 1)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(11)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 12: rarityprotect
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_RarityProtect_AskDisable", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(12)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_AS_RarityProtect_AskEnable", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(12)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 13: tradingfix
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings013", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(13)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 14: battleinstinct
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_BattleInstinct_AskDisable", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(14)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_BattleInstinct_AskEnable", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(14)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxClosed((CHARACTER)_Host, "AMP_BattleInstinct_HardLocked")
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(14)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxClosed((CHARACTER)_Host, "AMP_BattleInstinct_Inactive")
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(14)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 15: itemmovecost
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_ItemMoveCost_AskDisable", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(15)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_ItemMoveCost_AskEnable", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(15)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxClosed((CHARACTER)_Host, "AMP_ItemMoveCost_HardLocked")
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(15)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxClosed((CHARACTER)_Host, "AMP_ItemMoveCost_Inactive")
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(15)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 16: totshop
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Settings018", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(16)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+// step 17: generous loot (both answers advance)
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_GenerousLoot_AskEnable", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(17)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_GenerousLoot_AskDisable", _)
+AND
+DB_AMP_Wizard_Active(1)
+AND
+DB_AMP_Wizard_Step(17)
+THEN
+PROC_AMP_Wizard_Next(_Host);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,158 @@
+// CharacterUnarmedDamage ignores IF(), so a conditioned unarmed half stays DamageBonus
+
+new entry "MAG_Armour_C_28_bonus"
+type "PassiveData"
+using "MAG_Armour_C_28_bonus"
+data "Boosts" "IF(HasStatus('SG_Rage',context.Source) and IsMeleeWeaponAttack()):CharacterWeaponDamage(1d8,Lightning);IF(HasStatus('SG_Rage',context.Source) and IsMeleeUnarmedAttack()):DamageBonus(1d8,Lightning);IF(HasStatus('SG_Rage',context.Source) and IsAttackType(AttackType.MeleeSpellAttack)):DamageBonus(1d8,Lightning)"
+
+new entry "MAG_Armour_C_28_1_bonus"
+type "PassiveData"
+using "MAG_Armour_C_28_1_bonus"
+data "Boosts" "IF(HasStatus('SG_Rage',context.Source) and IsMeleeWeaponAttack()):CharacterWeaponDamage(1d6,Lightning);IF(HasStatus('SG_Rage',context.Source) and IsMeleeUnarmedAttack()):DamageBonus(1d6,Lightning);IF(HasStatus('SG_Rage',context.Source) and IsAttackType(AttackType.MeleeSpellAttack)):DamageBonus(1d6,Lightning)"
+
+new entry "MAG_Armour_C_28_3_bonus"
+type "PassiveData"
+using "MAG_Armour_C_28_3_bonus"
+data "Boosts" "IF(HasStatus('SG_Rage',context.Source) and IsMeleeWeaponAttack()):CharacterWeaponDamage(1d10,Lightning);IF(HasStatus('SG_Rage',context.Source) and IsMeleeUnarmedAttack()):DamageBonus(1d10,Lightning);IF(HasStatus('SG_Rage',context.Source) and IsAttackType(AttackType.MeleeSpellAttack)):DamageBonus(1d10,Lightning)"
+
+new entry "MAG_Armour_C_28_4_bonus"
+type "PassiveData"
+using "MAG_Armour_C_28_4_bonus"
+data "Boosts" "IF(HasStatus('SG_Rage',context.Source) and IsMeleeWeaponAttack()):CharacterWeaponDamage(1d12,Lightning);IF(HasStatus('SG_Rage',context.Source) and IsMeleeUnarmedAttack()):DamageBonus(1d12,Lightning);IF(HasStatus('SG_Rage',context.Source) and IsAttackType(AttackType.MeleeSpellAttack)):DamageBonus(1d12,Lightning)"
+
+new entry "MAG_Armour_C_29_lowHP"
+type "PassiveData"
+using "MAG_Armour_C_29_lowHP"
+data "Boosts" "IF(HasHPPercentageEqualOrLessThan(30,context.Source) and IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(1d4,Thunder);IF(HasHPPercentageEqualOrLessThan(30,context.Source) and IsUnarmedAttack()):DamageBonus(1d4,Thunder);IF(HasHPPercentageEqualOrLessThan(30,context.Source) and IsSpellAttack()):DamageBonus(1d4,Thunder)"
+
+new entry "MAG_Armour_C_29_2_lowHP"
+type "PassiveData"
+using "MAG_Armour_C_29_2_lowHP"
+data "Boosts" "IF(HasHPPercentageEqualOrLessThan(40,context.Source) and IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(1d6,Thunder);IF(HasHPPercentageEqualOrLessThan(40,context.Source) and IsUnarmedAttack()):DamageBonus(1d6,Thunder);IF(HasHPPercentageEqualOrLessThan(40,context.Source) and IsSpellAttack()):DamageBonus(1d6,Thunder)"
+
+new entry "MAG_Armour_C_29_3_lowHP"
+type "PassiveData"
+using "MAG_Armour_C_29_3_lowHP"
+data "Boosts" "IF(HasHPPercentageEqualOrLessThan(50,context.Source) and IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(1d8,Thunder);IF(HasHPPercentageEqualOrLessThan(50,context.Source) and IsUnarmedAttack()):DamageBonus(1d8,Thunder);IF(HasHPPercentageEqualOrLessThan(50,context.Source) and IsSpellAttack()):DamageBonus(1d8,Thunder)"
+
+new entry "MAG_Armour_C_29_4_lowHP"
+type "PassiveData"
+using "MAG_Armour_C_29_4_lowHP"
+data "Boosts" "IF(HasHPPercentageEqualOrLessThan(50,context.Source) and IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(2d8,Thunder);IF(HasHPPercentageEqualOrLessThan(50,context.Source) and IsUnarmedAttack()):DamageBonus(2d8,Thunder);IF(HasHPPercentageEqualOrLessThan(50,context.Source) and IsSpellAttack()):DamageBonus(2d8,Thunder)"
+
+
+new entry "ARMOURG63_2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "ARMOURG63_2"
+data "Boosts" "IF(IsMeleeWeaponAttack()):CharacterWeaponDamage(15+Level, Thunder);IF(IsUnarmedAttack()):CharacterUnarmedDamage(15+Level, Thunder)"
+
+new entry "N_WARRIOR3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "N_WARRIOR3"
+data "Boosts" "IF(IsWeaponAttack() or IsUnarmedAttack()):RollBonus(Attack,1);IF(IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(1);IF(IsUnarmedAttack()):DamageBonus(1)"
+
+new entry "N_BLOOD1"
+type "StatusData"
+data "StatusType" "BOOST"
+using "N_BLOOD1"
+data "Boosts" "IF(IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(2d4);IF(IsUnarmedAttack()):CharacterUnarmedDamage(2d4);IF(IsSpellAttack()):DamageBonus(2d4)"
+
+new entry "N_BLOOD2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "N_BLOOD2"
+data "Boosts" "IF(IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(3d6);IF(IsUnarmedAttack()):CharacterUnarmedDamage(3d6);IF(IsSpellAttack()):DamageBonus(3d6)"
+
+new entry "N_BLOOD3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "N_BLOOD3"
+data "Boosts" "IF(IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(5d8);IF(IsUnarmedAttack()):CharacterUnarmedDamage(5d8);IF(IsSpellAttack()):DamageBonus(5d8)"
+
+new entry "N_BLOOD4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "N_BLOOD4"
+data "Boosts" "IF(IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(8d10);IF(IsUnarmedAttack()):DamageBonus(8d10);IF(IsSpellAttack()):DamageBonus(8d10)"
+
+// legs partition the base gate, a shared "or IsSpell()" pays one spell three times
+new entry "N_POISON_VENOM_SURGE"
+type "StatusData"
+data "StatusType" "BOOST"
+using "N_POISON_VENOM_SURGE"
+data "Boosts" "IF(IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(1,Poison);IF(IsUnarmedAttack()):DamageBonus(1,Poison);IF(IsSpellAttack() or IsSpell()):DamageBonus(1,Poison)"
+
+new entry "N_POISON_VENOM_SURGE_T2"
+type "StatusData"
+data "StatusType" "BOOST"
+using "N_POISON_VENOM_SURGE_T2"
+data "Boosts" "IF(IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(2,Poison);IF(IsUnarmedAttack()):DamageBonus(2,Poison);IF(IsSpellAttack() or IsSpell()):DamageBonus(2,Poison)"
+
+new entry "N_POISON_VENOM_SURGE_T3"
+type "StatusData"
+data "StatusType" "BOOST"
+using "N_POISON_VENOM_SURGE_T3"
+data "Boosts" "IF(IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(3,Poison);IF(IsUnarmedAttack()):DamageBonus(3,Poison);IF(IsSpellAttack() or IsSpell()):DamageBonus(3,Poison)"
+
+new entry "N_POISON_VENOM_SURGE_T4"
+type "StatusData"
+data "StatusType" "BOOST"
+using "N_POISON_VENOM_SURGE_T4"
+data "Boosts" "IF(IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(4,Poison);IF(IsUnarmedAttack()):DamageBonus(4,Poison);IF(IsSpellAttack() or IsSpell()):DamageBonus(4,Poison)"
+
+new entry "R_Radiant4_bonus2"
+type "PassiveData"
+using "R_Radiant4_bonus2"
+data "Boosts" "IF(IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(3,Radiant);IF(IsUnarmedAttack()):CharacterUnarmedDamage(3,Radiant);IF(IsSpellAttack()):DamageBonus(3,Radiant)"
+
+new entry "G_Monk2_bonus_extra"
+type "PassiveData"
+using "G_Monk2_bonus_extra"
+data "Boosts" "IF(HasStatus('SG_Paralyzed',context.Target) and IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(1d4,Psychic);IF(HasStatus('SG_Paralyzed',context.Target) and IsUnarmedAttack()):DamageBonus(1d4,Psychic);IF(HasStatus('SG_Paralyzed',context.Target) and (IsSpellAttack() or IsSpell())):DamageBonus(1d4,Psychic)"
+
+new entry "AMP_EnhanceShaman_Amulet_Passive"
+type "PassiveData"
+using "AMP_EnhanceShaman_Amulet_Passive"
+data "Boosts" "IF(HasStatus('SG_Rage',context.Source) and IsMeleeWeaponAttack()):CharacterWeaponDamage(1d4,Lightning);IF(HasStatus('SG_Rage',context.Source) and IsMeleeUnarmedAttack()):DamageBonus(1d4,Lightning);IF(HasStatus('SG_Rage',context.Source) and IsAttackType(AttackType.MeleeSpellAttack)):DamageBonus(1d4,Lightning)"
+
+new entry "AMP_EnhanceShaman_Amulet_1_Passive"
+type "PassiveData"
+using "AMP_EnhanceShaman_Amulet_1_Passive"
+data "Boosts" "IF(HasStatus('SG_Rage',context.Source) and IsMeleeWeaponAttack()):CharacterWeaponDamage(1,Lightning);IF(HasStatus('SG_Rage',context.Source) and IsMeleeUnarmedAttack()):DamageBonus(1,Lightning);IF(HasStatus('SG_Rage',context.Source) and IsAttackType(AttackType.MeleeSpellAttack)):DamageBonus(1,Lightning)"
+
+new entry "AMP_EnhanceShaman_Amulet_3_Passive"
+type "PassiveData"
+using "AMP_EnhanceShaman_Amulet_3_Passive"
+data "Boosts" "IF(HasStatus('SG_Rage',context.Source) and IsMeleeWeaponAttack()):CharacterWeaponDamage(1d6,Lightning);IF(HasStatus('SG_Rage',context.Source) and IsMeleeUnarmedAttack()):DamageBonus(1d6,Lightning);IF(HasStatus('SG_Rage',context.Source) and IsAttackType(AttackType.MeleeSpellAttack)):DamageBonus(1d6,Lightning)"
+
+new entry "AMP_AllOrNothing_Passive"
+type "PassiveData"
+using "AMP_AllOrNothing_Passive"
+data "Boosts" "RollBonus(Attack,3);SpellSaveDC(3);IF(not MagicMissileSpellCheck() and not ((HasDamageDoneForType(DamageType.Lightning) or HasDamageDoneForType(DamageType.Fire)) and not IsAttack() and not IsSpell()) and IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(3);IF(not MagicMissileSpellCheck() and not ((HasDamageDoneForType(DamageType.Lightning) or HasDamageDoneForType(DamageType.Fire)) and not IsAttack() and not IsSpell()) and IsUnarmedAttack()):DamageBonus(3);IF(not MagicMissileSpellCheck() and not ((HasDamageDoneForType(DamageType.Lightning) or HasDamageDoneForType(DamageType.Fire)) and not IsAttack() and not IsSpell()) and not IsWeaponAttack() and not IsUnarmedAttack()):DamageBonus(3)"
+
+new entry "AMP_AllOrNothing_Passive_2"
+type "PassiveData"
+using "AMP_AllOrNothing_Passive_2"
+data "Boosts" "RollBonus(Attack,5);SpellSaveDC(5);IF(not MagicMissileSpellCheck() and not ((HasDamageDoneForType(DamageType.Lightning) or HasDamageDoneForType(DamageType.Fire)) and not IsAttack() and not IsSpell()) and IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(5);IF(not MagicMissileSpellCheck() and not ((HasDamageDoneForType(DamageType.Lightning) or HasDamageDoneForType(DamageType.Fire)) and not IsAttack() and not IsSpell()) and IsUnarmedAttack()):DamageBonus(5);IF(not MagicMissileSpellCheck() and not ((HasDamageDoneForType(DamageType.Lightning) or HasDamageDoneForType(DamageType.Fire)) and not IsAttack() and not IsSpell()) and not IsWeaponAttack() and not IsUnarmedAttack()):DamageBonus(5)"
+
+new entry "AMP_AllOrNothing_Passive_3"
+type "PassiveData"
+using "AMP_AllOrNothing_Passive_3"
+data "Boosts" "RollBonus(Attack,7);SpellSaveDC(7);IF(not MagicMissileSpellCheck() and not ((HasDamageDoneForType(DamageType.Lightning) or HasDamageDoneForType(DamageType.Fire)) and not IsAttack() and not IsSpell()) and IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(7);IF(not MagicMissileSpellCheck() and not ((HasDamageDoneForType(DamageType.Lightning) or HasDamageDoneForType(DamageType.Fire)) and not IsAttack() and not IsSpell()) and IsUnarmedAttack()):DamageBonus(7);IF(not MagicMissileSpellCheck() and not ((HasDamageDoneForType(DamageType.Lightning) or HasDamageDoneForType(DamageType.Fire)) and not IsAttack() and not IsSpell()) and not IsWeaponAttack() and not IsUnarmedAttack()):DamageBonus(7)"
+
+new entry "AMP_AllOrNothing_Passive_4"
+type "PassiveData"
+using "AMP_AllOrNothing_Passive_4"
+data "Boosts" "RollBonus(Attack,10);SpellSaveDC(10);IF(not MagicMissileSpellCheck() and not ((HasDamageDoneForType(DamageType.Lightning) or HasDamageDoneForType(DamageType.Fire)) and not IsAttack() and not IsSpell()) and IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(10);IF(not MagicMissileSpellCheck() and not ((HasDamageDoneForType(DamageType.Lightning) or HasDamageDoneForType(DamageType.Fire)) and not IsAttack() and not IsSpell()) and IsUnarmedAttack()):DamageBonus(10);IF(not MagicMissileSpellCheck() and not ((HasDamageDoneForType(DamageType.Lightning) or HasDamageDoneForType(DamageType.Fire)) and not IsAttack() and not IsSpell()) and not IsWeaponAttack() and not IsUnarmedAttack()):DamageBonus(10)"
+
+new entry "AMP_RusMage_Curse_ExtraDamage_Passive"
+type "PassiveData"
+using "AMP_RusMage_Curse_ExtraDamage_Passive"
+data "Boosts" "IF(HasStatus('AMP_RUSMAGE_CURSE_EXTRA_DAMAGE', context.Target, context.Source) and IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(1d4, Necrotic);IF(HasStatus('AMP_RUSMAGE_CURSE_EXTRA_DAMAGE', context.Target, context.Source) and IsUnarmedAttack()):DamageBonus(1d4, Necrotic);IF(HasStatus('AMP_RUSMAGE_CURSE_EXTRA_DAMAGE', context.Target, context.Source) and IsSpellAttack()):DamageBonus(1d4, Necrotic)"
+
+new entry "MAG_Cloak76_bonus"
+type "PassiveData"
+using "MAG_Cloak76_bonus"
+data "Boosts" "IF((HasStatus('WET',context.Source) or HasStatus('ACID',context.Source)) and IsWeaponAttack() and not IsUnarmedAttack()):CharacterWeaponDamage(1,Acid);IF((HasStatus('WET',context.Source) or HasStatus('ACID',context.Source)) and IsUnarmedAttack()):DamageBonus(1,Acid)"

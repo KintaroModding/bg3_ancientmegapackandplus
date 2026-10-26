@@ -1,0 +1,238 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// dropping this row switches off the AMP_Vludber_Boss rule that binds the spell from it
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Vludber_MockerySpell(_Spell)
+THEN
+NOT DB_AMP_Vludber_MockerySpell(_Spell);
+
+IF
+CombatRoundStarted((GUIDSTRING)_CombatID, _)
+AND
+DB_Is_InCombat(_Vludber, _CombatID)
+AND
+GetTemplate(_Vludber, _Template)
+AND
+DB_AMP_Vludber_Template((CHARACTERROOT)_Template)
+AND
+DB_Is_InCombat(_Char, _CombatID)
+AND
+IsCharacter(_Char, 1)
+AND
+IsDead((CHARACTER)_Char, 0)
+AND
+HasActiveStatus(_Char, "AMP_VLUDBER_WHY_NO_LAUGH", 0)
+THEN
+ApplyStatus(_Char, "AMP_VLUDBER_WHY_NO_LAUGH", -1.0, 1, _Vludber);
+
+IF
+EnteredCombat((GUIDSTRING)_Char, (GUIDSTRING)_CombatID)
+AND
+DB_Is_InCombat(_Vludber, _CombatID)
+AND
+GetTemplate(_Vludber, _Template)
+AND
+DB_AMP_Vludber_Template((CHARACTERROOT)_Template)
+AND
+IsCharacter(_Char, 1)
+AND
+IsDead((CHARACTER)_Char, 0)
+AND
+HasActiveStatus(_Char, "AMP_VLUDBER_WHY_NO_LAUGH", 0)
+THEN
+ApplyStatus(_Char, "AMP_VLUDBER_WHY_NO_LAUGH", -1.0, 1, _Vludber);
+
+IF
+EnteredCombat((GUIDSTRING)_Vludber, (GUIDSTRING)_CombatID)
+AND
+GetTemplate(_Vludber, _Template)
+AND
+DB_AMP_Vludber_Template((CHARACTERROOT)_Template)
+AND
+DB_Is_InCombat(_Char, _CombatID)
+AND
+IsCharacter(_Char, 1)
+AND
+IsDead((CHARACTER)_Char, 0)
+AND
+HasActiveStatus(_Char, "AMP_VLUDBER_WHY_NO_LAUGH", 0)
+THEN
+ApplyStatus(_Char, "AMP_VLUDBER_WHY_NO_LAUGH", -1.0, 1, _Vludber);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_VludberDisrobe_Ver(2)
+THEN
+PROC_AMP_Plus_VludberDisrobe_Reseed();
+
+PROC
+PROC_AMP_Plus_VludberDisrobe_Reseed()
+THEN
+PROC_AMP_Plus_VludberDisrobe_DrainSlot();
+
+PROC
+PROC_AMP_Plus_VludberDisrobe_Reseed()
+AND
+DB_AMP_Plus_VludberDisrobe_Ver(_Ver)
+THEN
+NOT DB_AMP_Plus_VludberDisrobe_Ver(_Ver);
+
+PROC
+PROC_AMP_Plus_VludberDisrobe_Reseed()
+THEN
+DB_AMP_Plus_VludberDisrobe_Slot("Helmet");
+DB_AMP_Plus_VludberDisrobe_Slot("Breast");
+DB_AMP_Plus_VludberDisrobe_Slot("Cloak");
+DB_AMP_Plus_VludberDisrobe_Slot("Gloves");
+DB_AMP_Plus_VludberDisrobe_Slot("Boots");
+DB_AMP_Plus_VludberDisrobe_Slot("Amulet");
+DB_AMP_Plus_VludberDisrobe_Slot("Ring");
+DB_AMP_Plus_VludberDisrobe_Slot("Ring2");
+DB_AMP_Plus_VludberDisrobe_Slot("Underwear");
+DB_AMP_Plus_VludberDisrobe_Ver(2);
+
+PROC
+PROC_AMP_Plus_VludberDisrobe_DrainSlot()
+AND
+DB_AMP_Plus_VludberDisrobe_Slot(_Slot)
+THEN
+NOT DB_AMP_Plus_VludberDisrobe_Slot(_Slot);
+PROC_AMP_Plus_VludberDisrobe_DrainSlot();
+
+// clear the queue first, a second cast over pending rows unequips nothing
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_VLUDBER_CHAOS_DISROBE", _, _)
+THEN
+PROC_AMP_Plus_VludberDisrobe_DrainQueue(_Char);
+
+PROC
+PROC_AMP_Plus_VludberDisrobe_DrainQueue((CHARACTER)_Char)
+AND
+DB_AMP_Plus_VludberDropping(_Char, _Item, _X, _Y, _Z)
+THEN
+NOT DB_AMP_Plus_VludberDropping(_Char, _Item, _X, _Y, _Z);
+PROC_AMP_Plus_VludberDisrobe_DrainQueue(_Char);
+
+// rarity read off gold value, same scale as DB_AMP_Arcanizer_RarityValueRange. legendary band stays on
+
+IF
+StatusApplied((CHARACTER)_Char, "AMP_VLUDBER_CHAOS_DISROBE", _, _)
+AND
+IsCharacter(_Char, 1)
+AND
+GetPosition(_Char, _X, _Y, _Z)
+AND
+DB_AMP_Plus_VludberDisrobe_Slot(_Slot)
+AND
+GetEquippedItem((CHARACTER)_Char, _Slot, _Item)
+AND
+ItemGetGoldValue(_Item, (INTEGER)_Value)
+AND
+DB_AMP_Arcanizer_RarityValueRange("Legendary", (INTEGER)_MinLegendary, _)
+AND
+_Value < _MinLegendary
+THEN
+DB_AMP_Plus_VludberDropping(_Char, _Item, _X, _Y, _Z);
+RealtimeObjectTimerLaunch(_Char, "AMP_Plus_VludberDisrobe", 500);
+
+IF
+ObjectTimerFinished((CHARACTER)_Char, "AMP_Plus_VludberDisrobe")
+AND
+DB_AMP_Plus_VludberDropping(_Char, _Item, _X, _Y, _Z)
+THEN
+Unequip((CHARACTER)_Char, (ITEM)_Item);
+
+IF
+Unequipped((ITEM)_Item, (CHARACTER)_Char)
+AND
+DB_AMP_Plus_VludberDropping(_Char, _Item, _X, _Y, _Z)
+THEN
+NOT DB_AMP_Plus_VludberDropping(_Char, _Item, _X, _Y, _Z);
+ScatterAt(_Item, _X, _Y, _Z, 2.0);
+
+// spaced by a timer, a queue of casts collapses into one visible throw
+
+IF
+CastedSpell((CHARACTER)_Vludber, "AMP_Vludber_FinalPerformance", _, _, _)
+AND
+GetTemplate(_Vludber, _Template)
+AND
+DB_AMP_Vludber_Template((CHARACTERROOT)_Template)
+AND
+NOT DB_AMP_Plus_VludberVolley(_Vludber, _)
+THEN
+DB_AMP_Plus_VludberVolley(_Vludber, 3);
+RealtimeObjectTimerLaunch(_Vludber, "AMP_Plus_VludberVolley", 2500);
+
+IF
+ObjectTimerFinished((CHARACTER)_Vludber, "AMP_Plus_VludberVolley")
+AND
+DB_AMP_Plus_VludberVolley(_Vludber, (INTEGER)_Left)
+AND
+_Left > 0
+AND
+IsDead((CHARACTER)_Vludber, 0)
+AND
+IntegerSubtract(_Left, 1, _Next)
+THEN
+NOT DB_AMP_Plus_VludberVolley(_Vludber, _Left);
+DB_AMP_Plus_VludberVolley(_Vludber, _Next);
+UseSpell(_Vludber, "Shout_AMP_Vludber_ChaosVolley", _Vludber, _Vludber, 1);
+RealtimeObjectTimerLaunch(_Vludber, "AMP_Plus_VludberVolley", 2500);
+
+IF
+ObjectTimerFinished((CHARACTER)_Vludber, "AMP_Plus_VludberVolley")
+AND
+DB_AMP_Plus_VludberVolley(_Vludber, 0)
+THEN
+NOT DB_AMP_Plus_VludberVolley(_Vludber, 0);
+
+IF
+LeftCombat((CHARACTER)_Vludber, _)
+AND
+DB_AMP_Plus_VludberVolley(_Vludber, (INTEGER)_Left)
+THEN
+NOT DB_AMP_Plus_VludberVolley(_Vludber, _Left);
+RealtimeObjectTimerCancel(_Vludber, "AMP_Plus_VludberVolley");
+
+IF
+Died((CHARACTER)_Vludber)
+AND
+DB_AMP_Plus_VludberVolley(_Vludber, (INTEGER)_Left)
+THEN
+NOT DB_AMP_Plus_VludberVolley(_Vludber, _Left);
+RealtimeObjectTimerCancel(_Vludber, "AMP_Plus_VludberVolley");
+
+// delayed, fired at once the line talks over its own cast
+
+IF
+TurnStarted((CHARACTER)_Vludber)
+AND
+GetTemplate(_Vludber, _Template)
+AND
+DB_AMP_Vludber_Template((CHARACTERROOT)_Template)
+AND
+HasActiveStatus(_Vludber, "AMP_VLUDBER_CHAOS_MASTER", 1)
+AND
+IsDead((CHARACTER)_Vludber, 0)
+THEN
+RealtimeObjectTimerLaunch(_Vludber, "AMP_Plus_VludberChaosBark", 1800);
+
+IF
+ObjectTimerFinished((CHARACTER)_Vludber, "AMP_Plus_VludberChaosBark")
+AND
+QRY_StartDialog((DIALOGRESOURCE)AMP_Bark_Vludber_Chaos_c8ec0815-b371-4521-9e4f-db9bbf0eab22, _Vludber)
+THEN
+DB_NOOP(1);
+
+EXITSECTION
+ENDEXITSECTION

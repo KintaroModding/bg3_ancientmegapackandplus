@@ -1,0 +1,146 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// economy hotfix - re-forces the right values on every load
+
+// tot shop sell% and max stock
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_GameMode("CASUAL")
+AND
+DB_ToT_Shop_SellPercent((INTEGER)_OldPct)
+AND
+_OldPct != 30
+THEN
+NOT DB_ToT_Shop_SellPercent(_OldPct);
+DB_ToT_Shop_SellPercent(30);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_GameMode("CASUAL")
+AND
+DB_ToT_Shop_MaxStock("GENERAL", (INTEGER)_OldMax)
+AND
+_OldMax != 5
+THEN
+NOT DB_ToT_Shop_MaxStock("GENERAL", _OldMax);
+DB_ToT_Shop_MaxStock("GENERAL", 5);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_GameMode("HARD")
+AND
+DB_ToT_Shop_SellPercent((INTEGER)_OldPct)
+AND
+_OldPct != 80
+THEN
+NOT DB_ToT_Shop_SellPercent(_OldPct);
+DB_ToT_Shop_SellPercent(80);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_GameMode("HARD")
+AND
+DB_ToT_Shop_MaxStock("GENERAL", (INTEGER)_OldMax)
+AND
+_OldMax != 12
+THEN
+NOT DB_ToT_Shop_MaxStock("GENERAL", _OldMax);
+DB_ToT_Shop_MaxStock("GENERAL", 12);
+
+// lootbox config
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_GameMode("HARD")
+AND
+DB_AMP_Lootbox_LevelConfig("WLD_Main_A", (INTEGER)_Min, (INTEGER)_Max)
+AND
+_Max != 4
+THEN
+NOT DB_AMP_Lootbox_LevelConfig("WLD_Main_A", _Min, _Max);
+DB_AMP_Lootbox_LevelConfig("WLD_Main_A", 2, 4);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_GameMode("HARD")
+AND
+DB_AMP_Lootbox_LevelConfig("SCL_Main_A", (INTEGER)_Min, (INTEGER)_Max)
+AND
+_Max != 4
+THEN
+NOT DB_AMP_Lootbox_LevelConfig("SCL_Main_A", _Min, _Max);
+DB_AMP_Lootbox_LevelConfig("SCL_Main_A", 2, 4);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_GameMode("HARD")
+AND
+DB_AMP_Lootbox_LevelConfig("BGO_Main_A", (INTEGER)_Min, (INTEGER)_Max)
+AND
+_Max != 4
+THEN
+NOT DB_AMP_Lootbox_LevelConfig("BGO_Main_A", _Min, _Max);
+DB_AMP_Lootbox_LevelConfig("BGO_Main_A", 2, 4);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_GameMode("HARD")
+AND
+DB_AMP_Lootbox_LevelConfig("CTY_Main_A", (INTEGER)_Min, (INTEGER)_Max)
+AND
+_Max != 5
+THEN
+NOT DB_AMP_Lootbox_LevelConfig("CTY_Main_A", _Min, _Max);
+DB_AMP_Lootbox_LevelConfig("CTY_Main_A", 2, 5);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_GameMode("HARD")
+AND
+DB_AMP_Lootbox_LevelConfig("IRN_Main_A", (INTEGER)_Min, (INTEGER)_Max)
+AND
+_Max != 1
+THEN
+NOT DB_AMP_Lootbox_LevelConfig("IRN_Main_A", _Min, _Max);
+DB_AMP_Lootbox_LevelConfig("IRN_Main_A", 0, 1);
+
+// voidcapsule shard-coin chance on hard - was wrongly 90, should be 70
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_VoidCapsule_ShardCoinChanceByMode("IMPOSSIBLE", (INTEGER)_OldVal)
+AND
+_OldVal != 70
+THEN
+NOT DB_AMP_VoidCapsule_ShardCoinChanceByMode("IMPOSSIBLE", _OldVal);
+DB_AMP_VoidCapsule_ShardCoinChanceByMode("IMPOSSIBLE", 70);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_GameMode("HARD")
+AND
+DB_AMP_VoidCapsule_ShardCoinChanceActive((INTEGER)_OldActive)
+AND
+_OldActive != 70
+THEN
+NOT DB_AMP_VoidCapsule_ShardCoinChanceActive(_OldActive);
+DB_AMP_VoidCapsule_ShardCoinChanceActive(70);
+
+EXITSECTION
+
+ENDEXITSECTION

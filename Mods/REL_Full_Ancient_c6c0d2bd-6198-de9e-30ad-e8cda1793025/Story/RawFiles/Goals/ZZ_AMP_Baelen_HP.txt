@@ -1,0 +1,27 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// bump baelen's hardcoded hp 4 -> 40 so he survives stray aoe during the puzzle.
+// vanilla sets hp=4 + blockselfhealing in quest init; 1s timer lets that land first.
+
+IF
+LevelGameplayStarted("WLD_Main_A", _)
+AND
+Exists(S_GLO_Baelen_711bd763-780d-4132-9662-3a8a06da6b1b, 1)
+AND
+NOT DB_AMP_GameMode("STOCK")
+THEN
+RealtimeObjectTimerLaunch(S_GLO_Baelen_711bd763-780d-4132-9662-3a8a06da6b1b, "AMP_Baelen_HP", 1000);
+
+IF
+ObjectTimerFinished((GUIDSTRING)S_GLO_Baelen_711bd763-780d-4132-9662-3a8a06da6b1b, "AMP_Baelen_HP")
+AND
+Exists(S_GLO_Baelen_711bd763-780d-4132-9662-3a8a06da6b1b, 1)
+THEN
+PROC_SetHitpoints_BlockSelfHealing(S_GLO_Baelen_711bd763-780d-4132-9662-3a8a06da6b1b, 40);
+
+EXITSECTION
+ENDEXITSECTION

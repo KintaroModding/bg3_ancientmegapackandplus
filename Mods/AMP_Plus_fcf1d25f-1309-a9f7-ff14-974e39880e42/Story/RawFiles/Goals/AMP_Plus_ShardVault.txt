@@ -1,0 +1,94 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+IF
+CastedSpell((CHARACTER)_Player, "Shout_AMP_ShardVault", _, _, _)
+AND
+IsPlayer(_Player, 1)
+THEN
+TemplateAddTo((ITEMROOT)AMP_ShardVault_Master_a7d5e493-1840-4db8-9ccb-09f0a6c0e1c4, _Player, 1, 0);
+PROC_AMP_PlayModeEffect(_Player);
+
+IF
+TemplateAddedTo((ITEMROOT)AMP_ShardVault_Master_a7d5e493-1840-4db8-9ccb-09f0a6c0e1c4, (ITEM)_Chest, (GUIDSTRING)_Owner, _)
+THEN
+DB_AMP_ShardVault_Spawned(_Chest);
+
+IF
+TemplateAddedTo((ITEMROOT)AMP_ShardVault_Weapons_3e1adac5-0103-4bc6-a911-85181e8434bd, (ITEM)_Chest, (GUIDSTRING)_Owner, _)
+THEN
+DB_AMP_ShardVault_Spawned(_Chest);
+
+IF
+TemplateAddedTo((ITEMROOT)AMP_ShardVault_Armor_98640ae5-79ea-4342-92ab-fbed536d03fa, (ITEM)_Chest, (GUIDSTRING)_Owner, _)
+THEN
+DB_AMP_ShardVault_Spawned(_Chest);
+
+IF
+TemplateAddedTo((ITEMROOT)AMP_ShardVault_Amulets_b4f3e3bb-8c28-458c-b28a-ea94b08425d9, (ITEM)_Chest, (GUIDSTRING)_Owner, _)
+THEN
+DB_AMP_ShardVault_Spawned(_Chest);
+
+IF
+TemplateAddedTo((ITEMROOT)AMP_ShardVault_Rings_f9b26506-e565-4696-ad36-52735199fe89, (ITEM)_Chest, (GUIDSTRING)_Owner, _)
+THEN
+DB_AMP_ShardVault_Spawned(_Chest);
+
+IF
+TemplateAddedTo((ITEMROOT)AMP_ShardVault_Gloves_49705af8-e2bc-45d3-a344-0b748c182adf, (ITEM)_Chest, (GUIDSTRING)_Owner, _)
+THEN
+DB_AMP_ShardVault_Spawned(_Chest);
+
+IF
+TemplateAddedTo((ITEMROOT)AMP_ShardVault_Helmets_1f22054d-916d-4a69-bd80-db96f21b1ade, (ITEM)_Chest, (GUIDSTRING)_Owner, _)
+THEN
+DB_AMP_ShardVault_Spawned(_Chest);
+
+IF
+TemplateAddedTo((ITEMROOT)AMP_ShardVault_Cloaks_f6df3a8f-fbc7-4bad-85a5-d5f2c4340f95, (ITEM)_Chest, (GUIDSTRING)_Owner, _)
+THEN
+DB_AMP_ShardVault_Spawned(_Chest);
+
+IF
+TemplateAddedTo((ITEMROOT)AMP_ShardVault_Boots_efe6f1cd-cc2a-4714-ab2b-82747c033fbc, (ITEM)_Chest, (GUIDSTRING)_Owner, _)
+THEN
+DB_AMP_ShardVault_Spawned(_Chest);
+
+// Para_Spawned: Loot Manager skips it, base lifecycle deletes marked chests
+IF
+DB_AMP_ShardVault_Spawned((ITEM)_Chest)
+AND
+NOT DB_AMP_Para_Spawned(_Chest)
+THEN
+DB_AMP_Para_Spawned(_Chest);
+DB_AMP_LM_NoSort(_Chest);
+
+// event order is not guaranteed, cancel a route queued before the mark
+IF
+DB_AMP_ShardVault_Spawned((ITEM)_Chest)
+AND
+DB_AMP_LM_Pending(_Chest, (INTEGER)_Type)
+THEN
+NOT DB_AMP_LM_Pending(_Chest, _Type);
+ObjectTimerCancel(_Chest, "AMP_LM_Route");
+DB_AMP_LM_NoSort(_Chest);
+
+IF
+RemovedFrom((ITEM)_Shard, (ITEM)_Chest)
+AND
+DB_AMP_ShardVault_Spawned(_Chest)
+THEN
+DB_AMP_LM_NoSort(_Shard);
+
+IF
+DestroyedBy((ITEM)_Chest, _, _, _)
+AND
+DB_AMP_ShardVault_Spawned(_Chest)
+THEN
+NOT DB_AMP_ShardVault_Spawned(_Chest);
+NOT DB_AMP_LM_NoSort(_Chest);
+
+EXITSECTION
+ENDEXITSECTION

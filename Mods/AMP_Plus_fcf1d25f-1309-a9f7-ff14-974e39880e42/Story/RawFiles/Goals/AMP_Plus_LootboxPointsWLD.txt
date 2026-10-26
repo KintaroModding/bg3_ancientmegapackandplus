@@ -1,0 +1,117 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// a gap in the indices stops the spawner, count must equal the last index
+// rows live here, not in INITSECTION: a second count row makes the spawner recurse per row
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_LootboxWLDVer(2)
+THEN
+PROC_AMP_Plus_LootboxWLDReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_LootboxWLDVer(2)
+THEN
+PROC_AMP_Plus_LootboxWLDReseed();
+
+PROC
+PROC_AMP_Plus_LootboxWLDReseed()
+AND
+DB_AMP_Plus_LootboxWLDVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_LootboxWLDVer(_Old);
+
+PROC
+PROC_AMP_Plus_LootboxWLDReseed()
+THEN
+PROC_AMP_Plus_LootboxWLDDrainCount();
+PROC_AMP_Plus_LootboxWLDDrainPos();
+
+PROC
+PROC_AMP_Plus_LootboxWLDDrainCount()
+AND
+DB_AMP_Lootbox_PositionCount("WLD_Main_A", (INTEGER)_N)
+THEN
+NOT DB_AMP_Lootbox_PositionCount("WLD_Main_A", _N);
+PROC_AMP_Plus_LootboxWLDDrainCount();
+
+PROC
+PROC_AMP_Plus_LootboxWLDDrainPos()
+AND
+DB_AMP_Lootbox_Position("WLD_Main_A", (INTEGER)_I, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+_I > 47
+THEN
+NOT DB_AMP_Lootbox_Position("WLD_Main_A", _I, _X, _Y, _Z);
+PROC_AMP_Plus_LootboxWLDDrainPos();
+
+PROC
+PROC_AMP_Plus_LootboxWLDReseed()
+THEN
+DB_AMP_Plus_LootboxWLDVer(2);
+DB_AMP_Lootbox_PositionCount("WLD_Main_A", 102);
+DB_AMP_Lootbox_Position("WLD_Main_A", 48, 62.0, 4.0, 225.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 49, 39.0, 0.0, 220.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 50, 0.0, 0.0, 214.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 51, 53.0, 21.0, 355.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 52, 86.0, 15.0, 385.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 53, 114.0, 13.0, 403.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 54, 163.0, 43.0, 355.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 55, 162.0, 16.0, 328.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 56, 145.0, 1.0, 281.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 57, 207.0, 1.0, 243.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 58, 270.0, 11.0, 276.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 59, 311.0, 0.0, 278.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 60, 263.0, 24.0, 358.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 61, 220.0, 22.0, 340.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 62, 206.0, 27.0, 374.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 63, 172.0, 37.0, 448.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 64, 256.0, 35.0, 454.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 65, 241.0, 22.0, 531.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 66, 317.0, 19.0, 518.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 67, 74.0, 26.0, 544.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 68, 44.0, 34.0, 591.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 69, 6.0, 43.0, 627.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 70, -131.0, 25.0, 468.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 71, -39.0, 26.0, 450.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 72, -28.0, 11.0, 316.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 73, -353.0, 10.0, 583.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 74, -420.0, -12.0, 599.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 75, -569.0, 23.0, 379.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 76, -607.0, 23.0, 451.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 77, -589.0, 1.0, 375.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 78, -610.0, 4.0, 370.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 79, -661.0, 14.0, 287.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 80, -629.0, 12.0, 271.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 81, -613.0, -8.0, 214.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 82, -628.0, -10.0, 236.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 83, -541.0, -6.0, 227.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 84, -673.0, 12.0, 456.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 85, -687.0, 0.0, -363.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 86, -445.0, 27.0, -533.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 87, -456.0, 29.0, -539.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 88, -451.0, 30.0, -520.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 89, -671.0, 0.0, -402.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 90, -560.0, -1.0, -365.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 91, -547.0, 0.0, -369.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 92, -655.0, 1.0, -206.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 93, -336.0, 2.0, -121.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 94, -457.0, 3.0, -177.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 95, -402.0, 11.0, 324.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 96, -445.0, 11.0, 295.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 97, 426.0, 27.0, 48.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 98, 393.0, 24.0, 45.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 99, 284.0, 54.0, 26.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 100, 177.0, -12.0, 78.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 101, 180.0, -12.0, 78.0);
+DB_AMP_Lootbox_Position("WLD_Main_A", 102, 182.0, -12.0, 78.0);
+
+EXITSECTION
+
+ENDEXITSECTION

@@ -1,0 +1,302 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_FullMoonInfoVer(2)
+THEN
+PROC_AMP_Plus_FullMoonInfoReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_FullMoonInfoVer(2)
+THEN
+PROC_AMP_Plus_FullMoonInfoReseed();
+
+PROC
+PROC_AMP_Plus_FullMoonInfoReseed()
+AND
+DB_AMP_Plus_FullMoonInfoVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_FullMoonInfoVer(_Old);
+
+PROC
+PROC_AMP_Plus_FullMoonInfoReseed()
+THEN
+PROC_AMP_Plus_FullMoonDrainInfo();
+
+PROC
+PROC_AMP_Plus_FullMoonDrainInfo()
+AND
+DB_AMP_Plus_FullMoonInfo((STRING)_A)
+THEN
+NOT DB_AMP_Plus_FullMoonInfo(_A);
+PROC_AMP_Plus_FullMoonDrainInfo();
+
+PROC
+PROC_AMP_Plus_FullMoonInfoReseed()
+THEN
+DB_AMP_Plus_FullMoonInfoVer(2);
+DB_AMP_Plus_FullMoonInfo("AMP_ECLIPSE_INFO");
+DB_AMP_Plus_FullMoonInfo("AMP_ECLIPSE_INFO_NECROTIC");
+DB_AMP_Plus_FullMoonInfo("AMP_ECLIPSE_INFO_FIRE");
+DB_AMP_Plus_FullMoonInfo("AMP_ECLIPSE_INFO_LIGHTNING");
+DB_AMP_Plus_FullMoonInfo("AMP_ECLIPSE_INFO_FORCE");
+DB_AMP_Plus_FullMoonInfo("AMP_ECLIPSE_INFO_ACID");
+DB_AMP_Plus_FullMoonInfo("AMP_ECLIPSE_INFO_POISON");
+DB_AMP_Plus_FullMoonInfo("AMP_ECLIPSE_INFO_PSYCHIC");
+
+// seeded guard stops a load from resetting the toggle
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_FullMoon_DefaultSeeded(1)
+THEN
+DB_AMP_Plus_FullMoon_DefaultSeeded(1);
+DB_AMP_Plus_FullMoon_Disabled(1);
+
+IF
+StatusApplied((CHARACTER)_Boss, _Info, _, _)
+AND
+DB_AMP_Plus_FullMoonInfo(_Info)
+AND
+NOT DB_AMP_Plus_FullMoonWatch(_Boss)
+AND
+NOT DB_AMP_Plus_FullMoon_Disabled(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_Boss, _Host, 1)
+THEN
+DB_AMP_Plus_FullMoonWatch(_Boss);
+ApplyStatus(_Boss, "AMP_FULLMOON_WATCH", -1.0, 1, _Boss);
+
+IF
+StatusApplied((CHARACTER)_Boss, "AMP_FULLMOON_PENDING", _, _)
+AND
+NOT DB_AMP_Plus_FullMoon_Disabled(1)
+AND
+Random(13, (INTEGER)_Roll)
+THEN
+RemoveStatus(_Boss, "AMP_FULLMOON_PENDING");
+PROC_AMP_Plus_FullMoon_Apply(_Boss, _Roll);
+
+PROC
+PROC_AMP_Plus_FullMoon_Apply((CHARACTER)_Boss, (INTEGER)_Roll)
+AND
+_Roll == 0
+THEN
+ApplyStatus(_Boss, "AMP_FULLMOON_BLUDGEONING", -1.0, 1, _Boss);
+
+PROC
+PROC_AMP_Plus_FullMoon_Apply((CHARACTER)_Boss, (INTEGER)_Roll)
+AND
+_Roll == 1
+THEN
+ApplyStatus(_Boss, "AMP_FULLMOON_PIERCING", -1.0, 1, _Boss);
+
+PROC
+PROC_AMP_Plus_FullMoon_Apply((CHARACTER)_Boss, (INTEGER)_Roll)
+AND
+_Roll == 2
+THEN
+ApplyStatus(_Boss, "AMP_FULLMOON_SLASHING", -1.0, 1, _Boss);
+
+PROC
+PROC_AMP_Plus_FullMoon_Apply((CHARACTER)_Boss, (INTEGER)_Roll)
+AND
+_Roll == 3
+THEN
+ApplyStatus(_Boss, "AMP_FULLMOON_ACID", -1.0, 1, _Boss);
+
+PROC
+PROC_AMP_Plus_FullMoon_Apply((CHARACTER)_Boss, (INTEGER)_Roll)
+AND
+_Roll == 4
+THEN
+ApplyStatus(_Boss, "AMP_FULLMOON_COLD", -1.0, 1, _Boss);
+
+PROC
+PROC_AMP_Plus_FullMoon_Apply((CHARACTER)_Boss, (INTEGER)_Roll)
+AND
+_Roll == 5
+THEN
+ApplyStatus(_Boss, "AMP_FULLMOON_FIRE", -1.0, 1, _Boss);
+
+PROC
+PROC_AMP_Plus_FullMoon_Apply((CHARACTER)_Boss, (INTEGER)_Roll)
+AND
+_Roll == 6
+THEN
+ApplyStatus(_Boss, "AMP_FULLMOON_FORCE", -1.0, 1, _Boss);
+
+PROC
+PROC_AMP_Plus_FullMoon_Apply((CHARACTER)_Boss, (INTEGER)_Roll)
+AND
+_Roll == 7
+THEN
+ApplyStatus(_Boss, "AMP_FULLMOON_LIGHTNING", -1.0, 1, _Boss);
+
+PROC
+PROC_AMP_Plus_FullMoon_Apply((CHARACTER)_Boss, (INTEGER)_Roll)
+AND
+_Roll == 8
+THEN
+ApplyStatus(_Boss, "AMP_FULLMOON_NECROTIC", -1.0, 1, _Boss);
+
+PROC
+PROC_AMP_Plus_FullMoon_Apply((CHARACTER)_Boss, (INTEGER)_Roll)
+AND
+_Roll == 9
+THEN
+ApplyStatus(_Boss, "AMP_FULLMOON_POISON", -1.0, 1, _Boss);
+
+PROC
+PROC_AMP_Plus_FullMoon_Apply((CHARACTER)_Boss, (INTEGER)_Roll)
+AND
+_Roll == 10
+THEN
+ApplyStatus(_Boss, "AMP_FULLMOON_PSYCHIC", -1.0, 1, _Boss);
+
+PROC
+PROC_AMP_Plus_FullMoon_Apply((CHARACTER)_Boss, (INTEGER)_Roll)
+AND
+_Roll == 11
+THEN
+ApplyStatus(_Boss, "AMP_FULLMOON_RADIANT", -1.0, 1, _Boss);
+
+PROC
+PROC_AMP_Plus_FullMoon_Apply((CHARACTER)_Boss, (INTEGER)_Roll)
+AND
+_Roll == 12
+THEN
+ApplyStatus(_Boss, "AMP_FULLMOON_THUNDER", -1.0, 1, _Boss);
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_Settings_FullMoon", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+NOT DB_AMP_Plus_FullMoon_Disabled(1)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_FullMoon_AskDisable");
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Plus_Settings_FullMoon", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+AND
+DB_AMP_Plus_FullMoon_Disabled(1)
+THEN
+OpenMessageBoxYesNo(_Caster, "AMP_Plus_FullMoon_AskEnable");
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_FullMoon_AskDisable", 1)
+THEN
+DB_AMP_Plus_FullMoon_Disabled(1);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_Plus_FullMoon_AskEnable", 1)
+AND
+DB_AMP_Plus_FullMoon_Disabled(1)
+THEN
+NOT DB_AMP_Plus_FullMoon_Disabled(1);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+DB_AMP_Plus_FullMoon_Disabled(1)
+THEN
+PROC_AMP_Plus_FullMoonDrainWatch();
+
+PROC
+PROC_AMP_Plus_FullMoonDrainWatch()
+AND
+DB_AMP_Plus_FullMoonWatch((CHARACTER)_Boss)
+THEN
+NOT DB_AMP_Plus_FullMoonWatch(_Boss);
+RemoveStatus(_Boss, "AMP_FULLMOON_WATCH", NULL_00000000-0000-0000-0000-000000000000);
+PROC_AMP_Plus_FullMoonDrainWatch();
+
+// apostle form is a fresh body in a fight that never ends
+// strip phase one, hand watchers back, or both gates stay spent
+IF
+StatusApplied((CHARACTER)_Boss, "MOO_KETHERIC_APOSTLEFORM", _, _)
+THEN
+PROC_AMP_Plus_FullMoon_PhaseReset(_Boss);
+
+// read before the strip below clears the eclipse marker
+PROC
+PROC_AMP_Plus_FullMoon_PhaseReset((CHARACTER)_Boss)
+AND
+DB_AMP_Eclipse_HasInfo(_Boss)
+THEN
+DB_AMP_Plus_FullMoonRearmEclipse(_Boss);
+
+PROC
+PROC_AMP_Plus_FullMoon_PhaseReset((CHARACTER)_Boss)
+THEN
+RemoveStatus(_Boss, "AMP_FULLMOON_PENDING");
+RemoveStatus(_Boss, "AMP_FULLMOON_BLUDGEONING");
+RemoveStatus(_Boss, "AMP_FULLMOON_PIERCING");
+RemoveStatus(_Boss, "AMP_FULLMOON_SLASHING");
+RemoveStatus(_Boss, "AMP_FULLMOON_ACID");
+RemoveStatus(_Boss, "AMP_FULLMOON_COLD");
+RemoveStatus(_Boss, "AMP_FULLMOON_FIRE");
+RemoveStatus(_Boss, "AMP_FULLMOON_FORCE");
+RemoveStatus(_Boss, "AMP_FULLMOON_LIGHTNING");
+RemoveStatus(_Boss, "AMP_FULLMOON_NECROTIC");
+RemoveStatus(_Boss, "AMP_FULLMOON_POISON");
+RemoveStatus(_Boss, "AMP_FULLMOON_PSYCHIC");
+RemoveStatus(_Boss, "AMP_FULLMOON_RADIANT");
+RemoveStatus(_Boss, "AMP_FULLMOON_THUNDER");
+RemoveStatus(_Boss, "AMP_FULLMOON_WATCH");
+RemoveStatus(_Boss, "AMP_ECLIPSE");
+RemoveStatus(_Boss, "AMP_PLUS_ECLIPSE_SPENT");
+PROC_AMP_Eclipse_RemoveInfo(_Boss);
+NOT DB_AMP_MirrorSupport_Fired(_Boss);
+RealtimeObjectTimerLaunch(_Boss, "AMP_Plus_FullMoon_PhaseRearm", 2000);
+
+// wave has two locks, boss and fight, neither opens here
+PROC
+PROC_AMP_Plus_FullMoon_PhaseReset((CHARACTER)_Boss)
+AND
+CombatGetGuidFor(_Boss, (GUIDSTRING)_CombatId)
+THEN
+NOT DB_AMP_Plus_MirrorFiredCombat(_CombatId);
+
+// leave and return in one frame keeps the spent gate
+IF
+ObjectTimerFinished((CHARACTER)_Boss, "AMP_Plus_FullMoon_PhaseRearm")
+THEN
+PROC_AMP_Plus_FullMoon_PhaseRearm(_Boss);
+
+PROC
+PROC_AMP_Plus_FullMoon_PhaseRearm((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_FullMoonRearmEclipse(_Boss)
+THEN
+NOT DB_AMP_Plus_FullMoonRearmEclipse(_Boss);
+PROC_AMP_Eclipse_ApplyInfo(_Boss);
+
+PROC
+PROC_AMP_Plus_FullMoon_PhaseRearm((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_FullMoonWatch(_Boss)
+AND
+NOT DB_AMP_Plus_FullMoon_Disabled(1)
+THEN
+ApplyStatus(_Boss, "AMP_FULLMOON_WATCH", -1.0, 1, _Boss);
+
+EXITSECTION
+ENDEXITSECTION

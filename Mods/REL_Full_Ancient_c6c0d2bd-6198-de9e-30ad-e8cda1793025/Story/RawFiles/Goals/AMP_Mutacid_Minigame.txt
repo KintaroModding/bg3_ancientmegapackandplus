@@ -1,0 +1,391 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// draft registry: idx 0..7 -> (shout, unlock status, mutation status)
+DB_AMP_Mutacid_Draft(0, "Shout_AMP_Mutacid_Draft_Spikes", "AMP_MUTACID_DRAFTUNLOCK_SPIKES", "AMP_MUTACID_MUT_SPIKES");
+DB_AMP_Mutacid_Draft(1, "Shout_AMP_Mutacid_Draft_Carapax", "AMP_MUTACID_DRAFTUNLOCK_CARAPAX", "AMP_MUTACID_MUT_CARAPAX");
+DB_AMP_Mutacid_Draft(2, "Shout_AMP_Mutacid_Draft_Hypertrophia", "AMP_MUTACID_DRAFTUNLOCK_HYPERTROPHIA", "AMP_MUTACID_MUT_HYPERTROPHIA");
+DB_AMP_Mutacid_Draft(3, "Shout_AMP_Mutacid_Draft_Pseudopodia", "AMP_MUTACID_DRAFTUNLOCK_PSEUDOPODIA", "AMP_MUTACID_MUT_PSEUDOPODIA");
+DB_AMP_Mutacid_Draft(4, "Shout_AMP_Mutacid_Draft_Hyperphagia", "AMP_MUTACID_DRAFTUNLOCK_HYPERPHAGIA", "AMP_MUTACID_MUT_HYPERPHAGIA");
+DB_AMP_Mutacid_Draft(5, "Shout_AMP_Mutacid_Draft_Cutis", "AMP_MUTACID_DRAFTUNLOCK_CUTIS", "AMP_MUTACID_MUT_CUTIS");
+DB_AMP_Mutacid_Draft(6, "Shout_AMP_Mutacid_Draft_Acuitas", "AMP_MUTACID_DRAFTUNLOCK_ACUITAS", "AMP_MUTACID_MUT_ACUITAS");
+DB_AMP_Mutacid_Draft(7, "Shout_AMP_Mutacid_Draft_Mandibulae", "AMP_MUTACID_DRAFTUNLOCK_MANDIBULAE", "AMP_MUTACID_MUT_MANDIBULAE");
+
+// mutation -> category (def/off/mob) for the archetype classifier
+DB_AMP_Mutacid_MutCat("AMP_MUTACID_MUT_SPIKES", "OFF");
+DB_AMP_Mutacid_MutCat("AMP_MUTACID_MUT_CARAPAX", "DEF");
+DB_AMP_Mutacid_MutCat("AMP_MUTACID_MUT_HYPERTROPHIA", "DEF");
+DB_AMP_Mutacid_MutCat("AMP_MUTACID_MUT_PSEUDOPODIA", "MOB");
+DB_AMP_Mutacid_MutCat("AMP_MUTACID_MUT_HYPERPHAGIA", "OFF");
+DB_AMP_Mutacid_MutCat("AMP_MUTACID_MUT_CUTIS", "DEF");
+DB_AMP_Mutacid_MutCat("AMP_MUTACID_MUT_ACUITAS", "OFF");
+DB_AMP_Mutacid_MutCat("AMP_MUTACID_MUT_MANDIBULAE", "OFF");
+
+// point-source weights
+DB_AMP_Mutacid_PtWeight("AMP_MUTACID_PT_BATHE", 1);
+DB_AMP_Mutacid_PtWeight("AMP_MUTACID_PT_KILL", 3);
+
+// archetype templates by (archetype, grade) -> RT
+DB_AMP_Mutacid_ArchTemplate("Tank", 2, AMP_AcidSlime_Tank_T2_fdab51a0-62bb-4d02-9c43-6b83fd100d5f);
+DB_AMP_Mutacid_ArchTemplate("Tank", 3, AMP_AcidSlime_Tank_T3_22d71559-432a-4974-8266-d6893c72b173);
+DB_AMP_Mutacid_ArchTemplate("Bruiser", 2, AMP_AcidSlime_Bruiser_T2_f31064e4-3fd1-4969-8fcf-2581bf142523);
+DB_AMP_Mutacid_ArchTemplate("Bruiser", 3, AMP_AcidSlime_Bruiser_T3_af1a4ef7-e614-4a35-ae32-b5ec59acae84);
+DB_AMP_Mutacid_ArchTemplate("Skirmisher", 2, AMP_AcidSlime_Skirmisher_T2_0065a108-89cb-4bf6-a0ad-0d1a25296c8b);
+DB_AMP_Mutacid_ArchTemplate("Skirmisher", 3, AMP_AcidSlime_Skirmisher_T3_60d227c4-182c-4a38-a92e-1034508e24a2);
+DB_AMP_Mutacid_ArchTemplate("Spitter", 2, AMP_AcidSlime_Spitter_T2_286fa709-cea6-4c11-9d2b-64a01269ace2);
+DB_AMP_Mutacid_ArchTemplate("Spitter", 3, AMP_AcidSlime_Spitter_T3_374854e1-70f7-4d74-a009-f4f14f97c2fd);
+DB_AMP_Mutacid_ArchTemplate("Hybrid", 2, AMP_AcidSlime_Hybrid_T2_2cef15eb-aaf9-4898-bd1a-00ed610a7e6f);
+DB_AMP_Mutacid_ArchTemplate("Hybrid", 3, AMP_AcidSlime_Hybrid_T3_2e055300-5e09-4845-8174-54b99e4a9922);
+
+KBSECTION
+
+// points (q_orb gated): source marker on player -> add weighted points
+IF
+StatusApplied((CHARACTER)_Host, (STRING)_M, _, _)
+AND
+DB_AMP_Mutacid_PtWeight(_M, (INTEGER)_W)
+AND
+DB_Players(_Host)
+AND
+IsInCombat(_Host, 1)
+AND
+HasActiveStatus(_Host, "AMP_MUTACID_Q_ORB", 1)
+THEN
+PROC_AMP_Mutacid_AddPoints(_Host, _W);
+
+// add to existing total
+PROC
+PROC_AMP_Mutacid_AddPoints((CHARACTER)_Host, (INTEGER)_D)
+AND
+DB_AMP_Mutacid_Points(_Host, (INTEGER)_Old)
+AND
+IntegerSum(_Old, _D, (INTEGER)_New)
+THEN
+NOT DB_AMP_Mutacid_Points(_Host, _Old);
+DB_AMP_Mutacid_Points(_Host, _New);
+PROC_AMP_Mutacid_CheckDraft(_Host, _New);
+
+// first point of combat -> init points + threshold
+PROC
+PROC_AMP_Mutacid_AddPoints((CHARACTER)_Host, (INTEGER)_D)
+AND
+NOT DB_AMP_Mutacid_Points(_Host, _)
+THEN
+DB_AMP_Mutacid_Points(_Host, _D);
+DB_AMP_Mutacid_Threshold(_Host, 5);
+PROC_AMP_Mutacid_CheckDraft(_Host, _D);
+
+// threshold hit -> fire draft, subtract, escalate (+3)
+PROC
+PROC_AMP_Mutacid_CheckDraft((CHARACTER)_Host, (INTEGER)_Cur)
+AND
+DB_AMP_Mutacid_Threshold(_Host, (INTEGER)_T)
+AND
+_Cur >= _T
+AND
+IntegerSubtract(_Cur, _T, (INTEGER)_Rem)
+AND
+IntegerSum(_T, 3, (INTEGER)_Tn)
+THEN
+PROC_AMP_Mutacid_FireDraft(_Host);
+NOT DB_AMP_Mutacid_Points(_Host, _Cur);
+DB_AMP_Mutacid_Points(_Host, _Rem);
+NOT DB_AMP_Mutacid_Threshold(_Host, _T);
+DB_AMP_Mutacid_Threshold(_Host, _Tn);
+
+// draft: clear old offer, grant 2 distinct temp spells
+PROC
+PROC_AMP_Mutacid_FireDraft((CHARACTER)_Owner)
+AND
+Random(8, (INTEGER)_A)
+THEN
+PROC_AMP_Mutacid_ClearOffered(_Owner);
+PROC_AMP_Mutacid_Grant(_Owner, _A);
+PROC_AMP_Mutacid_Second(_Owner, _A);
+
+PROC
+PROC_AMP_Mutacid_Second((CHARACTER)_Owner, (INTEGER)_A)
+AND
+Random(8, (INTEGER)_B)
+AND
+_B != _A
+THEN
+PROC_AMP_Mutacid_Grant(_Owner, _B);
+
+PROC
+PROC_AMP_Mutacid_Second((CHARACTER)_Owner, (INTEGER)_A)
+AND
+Random(8, (INTEGER)_B)
+AND
+_B == _A
+THEN
+PROC_AMP_Mutacid_Second(_Owner, _A);
+
+PROC
+PROC_AMP_Mutacid_Grant((CHARACTER)_Owner, (INTEGER)_Idx)
+AND
+DB_AMP_Mutacid_Draft(_Idx, _, (STRING)_Unlock, _)
+THEN
+ApplyStatus(_Owner, _Unlock, -1.0, 1, _Owner);
+DB_AMP_Mutacid_DraftOffered(_Owner, _Unlock);
+
+PROC
+PROC_AMP_Mutacid_ClearOffered((CHARACTER)_Owner)
+AND
+DB_AMP_Mutacid_DraftOffered(_Owner, (STRING)_U)
+THEN
+RemoveStatus(_Owner, _U, _Owner);
+NOT DB_AMP_Mutacid_DraftOffered(_Owner, _U);
+
+// cast draft spell -> mutate newest slime (drafttarget), tally, clear offer
+IF
+CastedSpell((CHARACTER)_Owner, (STRING)_Spell, _, _, _)
+AND
+DB_AMP_Mutacid_Draft(_, _Spell, _, (STRING)_Mut)
+AND
+DB_AMP_Mutacid_DraftTarget(_Owner, (CHARACTER)_Slime)
+THEN
+ApplyStatus(_Slime, _Mut, -1.0, 1, _Owner);
+PROC_AMP_Mutacid_OnMutApplied(_Owner, _Mut);
+PROC_AMP_Mutacid_ClearOffered(_Owner);
+
+// tally + picks + tier-up trigger
+PROC
+PROC_AMP_Mutacid_OnMutApplied((CHARACTER)_Owner, (STRING)_Mut)
+AND
+DB_AMP_Mutacid_MutCat(_Mut, (STRING)_Cat)
+THEN
+PROC_AMP_Mutacid_IncTally(_Owner, _Cat);
+PROC_AMP_Mutacid_IncPicks(_Owner);
+
+PROC
+PROC_AMP_Mutacid_IncTally((CHARACTER)_O, (STRING)_C)
+AND
+DB_AMP_Mutacid_Tally(_O, _C, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_M)
+THEN
+NOT DB_AMP_Mutacid_Tally(_O, _C, _N);
+DB_AMP_Mutacid_Tally(_O, _C, _M);
+
+PROC
+PROC_AMP_Mutacid_IncPicks((CHARACTER)_O)
+AND
+DB_AMP_Mutacid_PicksSinceTier(_O, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_M)
+THEN
+NOT DB_AMP_Mutacid_PicksSinceTier(_O, _N);
+DB_AMP_Mutacid_PicksSinceTier(_O, _M);
+PROC_AMP_Mutacid_CheckTierUp(_O, _M);
+
+PROC
+PROC_AMP_Mutacid_CheckTierUp((CHARACTER)_O, (INTEGER)_P)
+AND
+_P >= 3
+AND
+DB_AMP_Mutacid_BroodCount(_O, (INTEGER)_B)
+AND
+_B < 3
+THEN
+PROC_AMP_Mutacid_TierUp(_O, _B);
+
+// classifier: dominant category -> archetype, spawn next-grade slime.
+// branches are mutually exclusive (hybrid unused in v1)
+PROC
+PROC_AMP_Mutacid_TierUp((CHARACTER)_O, (INTEGER)_B)
+AND
+DB_AMP_Mutacid_Tally(_O, "DEF", (INTEGER)_D)
+AND
+DB_AMP_Mutacid_Tally(_O, "OFF", (INTEGER)_OF)
+AND
+DB_AMP_Mutacid_Tally(_O, "MOB", (INTEGER)_MO)
+AND
+IntegerSum(_B, 1, (INTEGER)_G)
+AND
+_D > _OF
+AND
+_D >= _MO
+AND
+DB_AMP_Mutacid_ArchTemplate("Tank", _G, (GUIDSTRING)_T)
+THEN
+PROC_AMP_Mutacid_SpawnArch(_O, _T);
+
+PROC
+PROC_AMP_Mutacid_TierUp((CHARACTER)_O, (INTEGER)_B)
+AND
+DB_AMP_Mutacid_Tally(_O, "DEF", (INTEGER)_D)
+AND
+DB_AMP_Mutacid_Tally(_O, "OFF", (INTEGER)_OF)
+AND
+DB_AMP_Mutacid_Tally(_O, "MOB", (INTEGER)_MO)
+AND
+IntegerSum(_B, 1, (INTEGER)_G)
+AND
+_OF >= _D
+AND
+_OF >= _MO
+AND
+_MO == 0
+AND
+DB_AMP_Mutacid_ArchTemplate("Bruiser", _G, (GUIDSTRING)_T)
+THEN
+PROC_AMP_Mutacid_SpawnArch(_O, _T);
+
+PROC
+PROC_AMP_Mutacid_TierUp((CHARACTER)_O, (INTEGER)_B)
+AND
+DB_AMP_Mutacid_Tally(_O, "DEF", (INTEGER)_D)
+AND
+DB_AMP_Mutacid_Tally(_O, "OFF", (INTEGER)_OF)
+AND
+DB_AMP_Mutacid_Tally(_O, "MOB", (INTEGER)_MO)
+AND
+IntegerSum(_B, 1, (INTEGER)_G)
+AND
+_OF >= _D
+AND
+_OF >= _MO
+AND
+_MO >= 1
+AND
+_OF >= 2
+AND
+DB_AMP_Mutacid_ArchTemplate("Spitter", _G, (GUIDSTRING)_T)
+THEN
+PROC_AMP_Mutacid_SpawnArch(_O, _T);
+
+PROC
+PROC_AMP_Mutacid_TierUp((CHARACTER)_O, (INTEGER)_B)
+AND
+DB_AMP_Mutacid_Tally(_O, "DEF", (INTEGER)_D)
+AND
+DB_AMP_Mutacid_Tally(_O, "OFF", (INTEGER)_OF)
+AND
+DB_AMP_Mutacid_Tally(_O, "MOB", (INTEGER)_MO)
+AND
+IntegerSum(_B, 1, (INTEGER)_G)
+AND
+_MO > _D
+AND
+_MO > _OF
+AND
+DB_AMP_Mutacid_ArchTemplate("Skirmisher", _G, (GUIDSTRING)_T)
+THEN
+PROC_AMP_Mutacid_SpawnArch(_O, _T);
+
+// hybrid: perfect 1-1-1 split, no dominant
+PROC
+PROC_AMP_Mutacid_TierUp((CHARACTER)_O, (INTEGER)_B)
+AND
+DB_AMP_Mutacid_Tally(_O, "DEF", (INTEGER)_D)
+AND
+DB_AMP_Mutacid_Tally(_O, "OFF", (INTEGER)_OF)
+AND
+DB_AMP_Mutacid_Tally(_O, "MOB", (INTEGER)_MO)
+AND
+IntegerSum(_B, 1, (INTEGER)_G)
+AND
+_D == 1
+AND
+_OF == 1
+AND
+_MO == 1
+AND
+DB_AMP_Mutacid_ArchTemplate("Hybrid", _G, (GUIDSTRING)_T)
+THEN
+PROC_AMP_Mutacid_SpawnArch(_O, _T);
+
+// spawn archetype slime near owner, reuse core procs, retarget draft
+PROC
+PROC_AMP_Mutacid_SpawnArch((CHARACTER)_Owner, (GUIDSTRING)_Template)
+AND
+GetPosition(_Owner, (REAL)_X, (REAL)_Y, (REAL)_Z)
+AND
+DB_AMP_Mutacid_DraftTarget(_Owner, (CHARACTER)_OldTgt)
+AND
+CreateAt(_Template, _X, _Y, _Z, 0, 1, "", (GUIDSTRING)_Slime)
+THEN
+DB_AMP_Mutacid_SlimeOwner((CHARACTER)_Slime, _Owner);
+ApplyStatus(_Slime, "AMP_ACIDSLIME_PARTY_ALLY", -1.0, 1, _Owner);
+ApplyStatus(_Slime, "AMP_AcidSlime_Control", -1.0, 1, _Owner);
+EnterCombat(_Slime, _Owner);
+PROC_AMP_Mutacid_ScaleSlime((CHARACTER)_Slime, _Owner);
+PROC_AMP_Mutacid_SyncQToSlime(_Owner, (CHARACTER)_Slime);
+NOT DB_AMP_Mutacid_DraftTarget(_Owner, _OldTgt);
+DB_AMP_Mutacid_DraftTarget(_Owner, (CHARACTER)_Slime);
+PROC_AMP_Mutacid_IncBrood(_Owner);
+PROC_AMP_Mutacid_ResetTally(_Owner);
+
+PROC
+PROC_AMP_Mutacid_IncBrood((CHARACTER)_O)
+AND
+DB_AMP_Mutacid_BroodCount(_O, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_M)
+THEN
+NOT DB_AMP_Mutacid_BroodCount(_O, _N);
+DB_AMP_Mutacid_BroodCount(_O, _M);
+
+PROC
+PROC_AMP_Mutacid_ResetTally((CHARACTER)_O)
+AND
+DB_AMP_Mutacid_Tally(_O, "DEF", (INTEGER)_D)
+AND
+DB_AMP_Mutacid_Tally(_O, "OFF", (INTEGER)_OF)
+AND
+DB_AMP_Mutacid_Tally(_O, "MOB", (INTEGER)_MO)
+AND
+DB_AMP_Mutacid_PicksSinceTier(_O, (INTEGER)_P)
+THEN
+NOT DB_AMP_Mutacid_Tally(_O, "DEF", _D);
+DB_AMP_Mutacid_Tally(_O, "DEF", 0);
+NOT DB_AMP_Mutacid_Tally(_O, "OFF", _OF);
+DB_AMP_Mutacid_Tally(_O, "OFF", 0);
+NOT DB_AMP_Mutacid_Tally(_O, "MOB", _MO);
+DB_AMP_Mutacid_Tally(_O, "MOB", 0);
+NOT DB_AMP_Mutacid_PicksSinceTier(_O, _P);
+DB_AMP_Mutacid_PicksSinceTier(_O, 0);
+
+// cleanup on combat end: clear per-owner mini-game state
+IF
+LeftCombat((CHARACTER)_O, _)
+AND
+DB_AMP_Mutacid_BroodCount(_O, (INTEGER)_B)
+AND
+DB_AMP_Mutacid_DraftTarget(_O, (CHARACTER)_DT)
+AND
+DB_AMP_Mutacid_Tally(_O, "DEF", (INTEGER)_D)
+AND
+DB_AMP_Mutacid_Tally(_O, "OFF", (INTEGER)_OF)
+AND
+DB_AMP_Mutacid_Tally(_O, "MOB", (INTEGER)_MO)
+AND
+DB_AMP_Mutacid_PicksSinceTier(_O, (INTEGER)_P)
+THEN
+NOT DB_AMP_Mutacid_BroodCount(_O, _B);
+NOT DB_AMP_Mutacid_DraftTarget(_O, _DT);
+NOT DB_AMP_Mutacid_Tally(_O, "DEF", _D);
+NOT DB_AMP_Mutacid_Tally(_O, "OFF", _OF);
+NOT DB_AMP_Mutacid_Tally(_O, "MOB", _MO);
+NOT DB_AMP_Mutacid_PicksSinceTier(_O, _P);
+PROC_AMP_Mutacid_ClearOffered(_O);
+
+// points/threshold only exist if orb was worn -> separate cleanup
+IF
+LeftCombat((CHARACTER)_O, _)
+AND
+DB_AMP_Mutacid_Points(_O, (INTEGER)_Pts)
+THEN
+NOT DB_AMP_Mutacid_Points(_O, _Pts);
+
+IF
+LeftCombat((CHARACTER)_O, _)
+AND
+DB_AMP_Mutacid_Threshold(_O, (INTEGER)_T)
+THEN
+NOT DB_AMP_Mutacid_Threshold(_O, _T);
+
+EXITSECTION
+ENDEXITSECTION

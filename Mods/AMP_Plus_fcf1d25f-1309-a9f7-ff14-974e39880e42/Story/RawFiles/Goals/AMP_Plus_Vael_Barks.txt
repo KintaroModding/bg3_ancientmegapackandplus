@@ -1,0 +1,30 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// template stops matching once he takes a party member's form, arm from the chase record
+
+IF
+StatusApplied((CHARACTER)_Mob, "AMP_MIRROR_INFORM", _, _)
+AND
+DB_AMP_Plus_Chase(_Mob, AMP_ULTRA_Summon_05_f8560efd-1d3c-4dcc-8b4e-b36f2cc79684)
+AND
+NOT DB_AMP_Vael_Ready(_Mob)
+THEN
+DB_AMP_Vael_Ready(_Mob);
+SetTag(_Mob, (TAG)AMP_TAG_BARK_VAEL_433de06d-19be-4486-98ce-5a982c55a0f3);
+
+IF
+StatusApplied((CHARACTER)_Mob, "AMP_MIRROR_INFORM", _, _)
+AND
+DB_AMP_Plus_ChaseActive(_Mob, AMP_ULTRA_Summon_05_f8560efd-1d3c-4dcc-8b4e-b36f2cc79684)
+AND
+NOT DB_AMP_Vael_Ready(_Mob)
+THEN
+DB_AMP_Vael_Ready(_Mob);
+SetTag(_Mob, (TAG)AMP_TAG_BARK_VAEL_433de06d-19be-4486-98ce-5a982c55a0f3);
+
+EXITSECTION
+ENDEXITSECTION

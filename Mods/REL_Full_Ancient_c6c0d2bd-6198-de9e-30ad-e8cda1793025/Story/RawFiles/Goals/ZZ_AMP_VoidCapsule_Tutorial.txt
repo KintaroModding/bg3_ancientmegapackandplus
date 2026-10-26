@@ -1,0 +1,64 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+// void capsule one-time hints. gated by qry_amp_shouldshowhint(2) (master toggle),
+// shown-flag is per player. messagebox keys live in generated_books.lsx.
+
+// first capsule received
+IF
+AddedTo((ITEM)_Capsule, (CHARACTER)_Player, _)
+AND
+GetTemplate(_Capsule, (ITEMROOT)_T)
+AND
+DB_AMP_VoidCapsule_Container(_T, _)
+AND
+DB_Players(_Player)
+AND
+NOT DB_AMP_Tutorial_Shown(_Player, "VoidCapsuleFirst")
+AND
+QRY_AMP_ShouldShowHint(2)
+THEN
+DB_AMP_Tutorial_Shown(_Player, "VoidCapsuleFirst");
+OpenMessageBox(_Player, "AMP_Settings015");
+
+// first planar coin received
+IF
+AddedTo((ITEM)_Coin, (CHARACTER)_Player, _)
+AND
+GetTemplate(_Coin, (ITEMROOT)_T)
+AND
+DB_AMP_VoidCapsule_Coin(_T, _)
+AND
+DB_Players(_Player)
+AND
+NOT DB_AMP_Tutorial_Shown(_Player, "PlanarCoinFirst")
+AND
+QRY_AMP_ShouldShowHint(2)
+THEN
+DB_AMP_Tutorial_Shown(_Player, "PlanarCoinFirst");
+OpenMessageBox(_Player, "AMP_Settings014");
+
+// first reroll hint: player pulled item from reward container
+IF
+RemovedFrom((ITEM)_Item, (ITEM)_Container)
+AND
+DB_AMP_Reroll_ContainerInfo(_Container, _, _)
+AND
+GetFirstInventoryOwnerCharacter(_Item, (CHARACTER)_Player)
+AND
+DB_Players(_Player)
+AND
+NOT DB_AMP_Tutorial_Shown(_Player, "RerollHint")
+AND
+QRY_AMP_ShouldShowHint(2)
+THEN
+DB_AMP_Tutorial_Shown(_Player, "RerollHint");
+OpenMessageBox(_Player, "AMP_Settings017");
+
+// no hints yet for salvage/shardtocoin - would need a trigger-db from those modules.
+
+EXITSECTION
+ENDEXITSECTION
+

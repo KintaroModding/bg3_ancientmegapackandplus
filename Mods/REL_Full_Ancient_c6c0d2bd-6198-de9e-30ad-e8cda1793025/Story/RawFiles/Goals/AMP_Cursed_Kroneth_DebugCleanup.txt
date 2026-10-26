@@ -1,0 +1,79 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// debug wipe of kroneth state, also sweeps the tracking dbs to catch ex-party members
+IF
+TextEvent("amp_kroneth_cleanup")
+THEN
+PROC_AMP_Kroneth_DebugCleanupAll();
+
+// strip kroneth statuses + death-lock tag + kill timer per player
+PROC
+PROC_AMP_Kroneth_DebugCleanupAll()
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+RemoveStatus(_Player, "AMP_KRONETH_TECHNICAL", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_KRONETH_CURSE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_KRONETH_JUDGEMENT", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_KRONETH_AUTOCRIT", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_KRONETH_CRITMISS", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_HUMBLED_KRONETH", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_INCARNATE_KRONETH", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_DAMNED_KRONETH", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_KRONETH_TURBULENCE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_KRONETH_OBLIGATION_DEVOTION", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_KRONETH_OBLIGATION_SILENCE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_KRONETH_OBLIGATION_SLAUGHTER", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_KRONETH_OBLIGATION_ENDURANCE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_KRONETH_OBLIGATION_THEATRICS", NULL_00000000-0000-0000-0000-000000000000);
+ClearTag(_Player, (TAG)BLOCK_RESURRECTION_22a75dbb-1588-407e-b559-5aa4e6d4e6a6);
+ObjectTimerCancel(_Player, "AMP_Kroneth_DamnationDeath");
+
+// death-lock: clear blacklist + tag + timer for any blacklisted char,
+// covers ex-party members the db_players sweep misses
+PROC
+PROC_AMP_Kroneth_DebugCleanupAll()
+AND
+DB_AMP_Kroneth_DeathBlacklist((CHARACTER)_Char)
+THEN
+NOT DB_AMP_Kroneth_DeathBlacklist(_Char);
+ClearTag(_Char, (TAG)BLOCK_RESURRECTION_22a75dbb-1588-407e-b559-5aa4e6d4e6a6);
+ObjectTimerCancel(_Char, "AMP_Kroneth_DamnationDeath");
+
+// servitude tracking dbs
+PROC
+PROC_AMP_Kroneth_DebugCleanupAll()
+AND
+DB_AMP_Kroneth_ActiveObligation((CHARACTER)_Char, (STRING)_Ob)
+THEN
+NOT DB_AMP_Kroneth_ActiveObligation(_Char, _Ob);
+
+PROC
+PROC_AMP_Kroneth_DebugCleanupAll()
+AND
+DB_AMP_Kroneth_Counter((CHARACTER)_Char, (INTEGER)_Count)
+THEN
+NOT DB_AMP_Kroneth_Counter(_Char, _Count);
+
+PROC
+PROC_AMP_Kroneth_DebugCleanupAll()
+AND
+DB_AMP_Kroneth_VowBroken((CHARACTER)_Char)
+THEN
+NOT DB_AMP_Kroneth_VowBroken(_Char);
+
+PROC
+PROC_AMP_Kroneth_DebugCleanupAll()
+AND
+DB_AMP_Kroneth_LastAttacker((CHARACTER)_Def, (CHARACTER)_Att)
+THEN
+NOT DB_AMP_Kroneth_LastAttacker(_Def, _Att);
+
+EXITSECTION
+ENDEXITSECTION
+</content>
+</invoke>

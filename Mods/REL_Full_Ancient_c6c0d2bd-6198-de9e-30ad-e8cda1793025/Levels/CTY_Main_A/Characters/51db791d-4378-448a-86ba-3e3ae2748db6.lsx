@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="51db791d-4378-448a-86ba-3e3ae2748db6" />
+					<attribute id="Name" type="LSString" value="S_LOW_SteelWatcher_Prototype" />
+					<attribute id="LevelName" type="FixedString" value="CTY_Main_A" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="TemplateName" type="FixedString" value="26fa3fe9-608c-4113-99a6-727781351ea4" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="Icon" type="FixedString" value="2b079223-b098-e4ca-a17e-09642e97abba-EQP_SteelWatcher_Greatsword_(Icon_SteelWatcher_Quadruped)" />
+					<attribute id="LevelOverride" type="int32" value="14" />
+					<attribute id="IsLootable" type="bool" value="True" />
+					<attribute id="ActivationGroupId" type="FixedString" value="LOW_SteelWatchFoundry_BrainRoom_SteelWatchers" />
+					<attribute id="Faction" type="guid" value="f3f25a05-66e4-4499-9d8d-e5963e78795f" />
+					<attribute id="Archetype" type="FixedString" value="act3_LOW_SteelWatcher_Titan" />
+					<attribute id="IsBoss" type="bool" value="True" />
+					<attribute id="CombatGroupID" type="FixedString" value="c22694d9-920e-49f3-a593-a8c99c1c46da" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="-1943.2152 -5.173594 205.54878" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0.7071068 0 0.70710677" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="CTY_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="57e10301-831b-f6cf-1258-a93ddbdfa8a0" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="3ae4bb7b-9902-2392-751a-07b539842e20" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="04c2dcff-fb1a-58a5-543f-25c2a514e925" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="be008109-5695-c4fe-2771-0acb27949fb8" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="StatusList">
+							<children>
+								<node id="Status">
+									<attribute id="Object" type="FixedString" value="STEELWATCHER_OVERRIDE_MHA_QUADRUPED" />
+								</node>
+							</children>
+						</node>
+						<node id="Treasures">
+							<children>
+								<node id="TreasureItem">
+									<attribute id="Object" type="FixedString" value="LOW_SteelwatcherTitan_Legendary_Bow_Treasure" />
+								</node>
+								<node id="TreasureItem">
+									<attribute id="Object" type="FixedString" value="LOW_SteelwatcherTitan_Extra" />
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

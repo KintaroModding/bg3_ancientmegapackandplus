@@ -1,0 +1,139 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// pool and support mobs are excluded, so a batch cannot re-trigger off its own members
+
+KBSECTION
+
+// never reset on LeftCombat: reshuffles re-fire EnteredCombat and a reset would call a long kill quick
+IF
+EnteredCombat((CHARACTER)_Boss, _)
+AND
+DB_AMP_Ultra_Active(1)
+AND
+IsBoss(_Boss, 1)
+AND
+IsPlayer(_Boss, 0)
+AND
+IsDead(_Boss, 0)
+AND
+NOT DB_AMP_MirrorChase_Mob(_Boss, _)
+AND
+NOT DB_AMP_Plus_UltraMob(_Boss, _)
+AND
+NOT DB_AMP_Plus_QuickKill_Turns(_Boss, _)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_Boss, _Host, 1)
+THEN
+DB_AMP_Plus_QuickKill_Turns(_Boss, 0);
+
+IF
+TurnStarted((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_QuickKill_Turns(_Boss, (INTEGER)_N)
+AND
+IntegerSum(_N, 1, (INTEGER)_N2)
+THEN
+NOT DB_AMP_Plus_QuickKill_Turns(_Boss, _N);
+DB_AMP_Plus_QuickKill_Turns(_Boss, _N2);
+
+// no combat guid in the conditions: a solo boss oneshot ends the fight before Died resolves
+// support-mob records mean the mirror mechanic engaged. short guard gives a multi-boss wipe one batch
+IF
+Died((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_QuickKill_Turns(_Boss, (INTEGER)_N)
+AND
+DB_AMP_Plus_SpawnIntensity_Freq((INTEGER)_Tier)
+AND
+DB_AMP_Plus_QuickWindowByTier(_Tier, (INTEGER)_Window)
+AND
+_N <= _Window
+AND
+DB_AMP_Ultra_Active(1)
+AND
+NOT DB_AMP_Plus_UltraMob(_, _Boss)
+AND
+NOT DB_AMP_Plus_UltraAlly(_Boss)
+AND
+IsPlayer(_Boss, 0)
+AND
+NOT DB_PartOfTheTeam(_Boss)
+AND
+NOT DB_AMP_Plus_QuickKill_Guard(1)
+AND
+DB_AMP_MirrorPool_Size((INTEGER)_Size)
+AND
+_Size > 0
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsDead(_Host, 0)
+AND
+GetPosition(_Host, (REAL)_HX, (REAL)_HY, (REAL)_HZ)
+THEN
+DB_AMP_Plus_QuickKill_Guard(1);
+RealtimeObjectTimerLaunch(_Host, "AMP_Plus_QuickKillGuard", 10000);
+PROC_AMP_Plus_UltraSpawnSized(_Host, _HX, _HY, _HZ);
+
+// a boss on the party's side must drop the counter or a scripted death pays out a batch
+IF
+DB_PartOfTheTeam((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_QuickKill_Turns(_Boss, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_QuickKill_Turns(_Boss, _N);
+
+IF
+DB_AMP_Plus_UltraAlly((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_QuickKill_Turns(_Boss, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_QuickKill_Turns(_Boss, _N);
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_AMP_Plus_QuickKillDrainNeutral();
+
+PROC
+PROC_AMP_Plus_QuickKillDrainNeutral()
+AND
+DB_AMP_Plus_QuickKill_Turns((CHARACTER)_Boss, (INTEGER)_N)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_Boss, _Host, 0)
+THEN
+NOT DB_AMP_Plus_QuickKill_Turns(_Boss, _N);
+PROC_AMP_Plus_QuickKillDrainNeutral();
+
+IF
+Died((CHARACTER)_Boss)
+AND
+DB_AMP_Plus_QuickKill_Turns(_Boss, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_QuickKill_Turns(_Boss, _N);
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_Plus_QuickKillGuard")
+AND
+DB_AMP_Plus_QuickKill_Guard(1)
+THEN
+NOT DB_AMP_Plus_QuickKill_Guard(1);
+
+// a save inside the guard window loses the realtime timer, which would leave the guard stuck
+IF
+SavegameLoaded()
+AND
+DB_AMP_Plus_QuickKill_Guard(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+RealtimeObjectTimerLaunch(_Host, "AMP_Plus_QuickKillGuard", 10000);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,688 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+// Amulet
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Amulet_32_5bfc768e-e933-4a90-840d-465c8d9dc7fb, "Amulet", "AMP_SHARD_APPLY_AMULET_32", "Amulet", "AMP_SHARD_AMULET_REPRIEVE");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_REPRIEVE", "AMP_SHARD_CHAR_REPRIEVE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_REPRIEVE", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_32_5bfc768e-e933-4a90-840d-465c8d9dc7fb);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_32_5bfc768e-e933-4a90-840d-465c8d9dc7fb, "SHARDS_1");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_59_349e7dfb-a89b-45dd-8440-2b8e8b71f40d, "Amulet", "AMP_SHARD_APPLY_AMULET_59", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_HOUSEBREAKER", "AMP_SHARD_CHAR_HOUSEBREAKER");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_HOUSEBREAKER", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_59_349e7dfb-a89b-45dd-8440-2b8e8b71f40d);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_59_349e7dfb-a89b-45dd-8440-2b8e8b71f40d, "SHARDS_2");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Amulet_73_ba54395f-aab4-496a-a32a-eba7d93f621b, "Amulet", "AMP_SHARD_APPLY_AMULET_73", "Amulet", "AMP_SHARD_AMULET_INSOLENCE");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_INSOLENCE", "AMP_SHARD_CHAR_INSOLENCE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_INSOLENCE", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_73_ba54395f-aab4-496a-a32a-eba7d93f621b);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_73_ba54395f-aab4-496a-a32a-eba7d93f621b, "SHARDS_2");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_60_aedad3a6-e2c5-45fa-af4c-544109b09f9a, "Amulet", "AMP_SHARD_APPLY_AMULET_60", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_STORMPALM", "AMP_SHARD_CHAR_STORMPALM");
+DB_AMP_Shard_ExternalStatus("AMP_SHARD_CHAR_STORMPALM", "MAG_CHARGED_LIGHTNING");
+DB_AMP_Shard_ExternalStatus("AMP_SHARD_CHAR_STORMPALM", "MAG_CHARGED_LIGHTNING_DURATION_TECHNICAL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_STORMPALM", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_60_aedad3a6-e2c5-45fa-af4c-544109b09f9a);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_60_aedad3a6-e2c5-45fa-af4c-544109b09f9a, "SHARDS_20");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Amulet_51_50030a52-8ff6-449a-bc51-b31da18c9c55, "Amulet", "AMP_SHARD_APPLY_AMULET_51", "Amulet", "AMP_SHARD_AMULET_SWIFTCURRENT");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_SWIFTCURRENT", "AMP_SHARD_CHAR_SWIFTCURRENT");
+DB_AMP_Shard_ExternalStatus("AMP_SHARD_CHAR_SWIFTCURRENT", "MAG_CHARGED_LIGHTNING");
+DB_AMP_Shard_ExternalStatus("AMP_SHARD_CHAR_SWIFTCURRENT", "MAG_CHARGED_LIGHTNING_DURATION_TECHNICAL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_SWIFTCURRENT", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_51_50030a52-8ff6-449a-bc51-b31da18c9c55);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_51_50030a52-8ff6-449a-bc51-b31da18c9c55, "SHARDS_20");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_61_bfc64a94-1288-40a0-9e0d-98e20f2effaa, "Amulet", "AMP_SHARD_APPLY_AMULET_61", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_IMPETUS", "AMP_SHARD_CHAR_IMPETUS");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_IMPETUS", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_61_bfc64a94-1288-40a0-9e0d-98e20f2effaa);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_61_bfc64a94-1288-40a0-9e0d-98e20f2effaa, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Amulet_38_a08b8a12-ce7b-4115-a16f-3ab8b3c1e976, "Amulet", "AMP_SHARD_APPLY_AMULET_38", "Amulet", "AMP_SHARD_AMULET_IMPOSTOR");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_IMPOSTOR", "AMP_SHARD_CHAR_IMPOSTOR_AMULET");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_IMPOSTOR", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_38_a08b8a12-ce7b-4115-a16f-3ab8b3c1e976);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_38_a08b8a12-ce7b-4115-a16f-3ab8b3c1e976, "SHARDS_1");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_39_7b1d6005-7b28-4fea-8985-c240c42fc70d, "Amulet", "AMP_SHARD_APPLY_AMULET_39", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_SCION", "AMP_SHARD_CHAR_SCION");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_SCION", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_39_7b1d6005-7b28-4fea-8985-c240c42fc70d);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_39_7b1d6005-7b28-4fea-8985-c240c42fc70d, "SHARDS_20");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_62_c26293f5-84d1-4f91-b10e-733747116b32, "Amulet", "AMP_SHARD_APPLY_AMULET_62", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_WAKE", "AMP_SHARD_CHAR_WAKE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_WAKE", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_62_c26293f5-84d1-4f91-b10e-733747116b32);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_62_c26293f5-84d1-4f91-b10e-733747116b32, "SHARDS_6");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_63_09ecc044-f700-40cc-a2e1-0ade2292f7ae, "Amulet", "AMP_SHARD_APPLY_AMULET_63", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_ETCHANT", "AMP_SHARD_CHAR_ETCHANT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_ETCHANT", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_63_09ecc044-f700-40cc-a2e1-0ade2292f7ae);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_63_09ecc044-f700-40cc-a2e1-0ade2292f7ae, "SHARDS_6");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_41_41b045a5-a84d-45c3-98b7-0dae62e3fc24, "Amulet", "AMP_SHARD_APPLY_AMULET_41", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_FERMENT", "AMP_SHARD_CHAR_FERMENT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_FERMENT", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_41_41b045a5-a84d-45c3-98b7-0dae62e3fc24);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_41_41b045a5-a84d-45c3-98b7-0dae62e3fc24, "SHARDS_6");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_64_a9ac163b-a090-4240-bc9e-e9b9d3bbc4ea, "Amulet", "AMP_SHARD_APPLY_AMULET_64", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_INOCULUM", "AMP_SHARD_CHAR_INOCULUM");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_INOCULUM", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_64_a9ac163b-a090-4240-bc9e-e9b9d3bbc4ea);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_64_a9ac163b-a090-4240-bc9e-e9b9d3bbc4ea, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Amulet_42_32b057c9-8903-4b39-84e0-0af031381ed7, "Amulet", "AMP_SHARD_APPLY_AMULET_42", "Amulet", "AMP_SHARD_AMULET_LITANY");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_LITANY", "AMP_SHARD_CHAR_LITANY");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_LITANY", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_42_32b057c9-8903-4b39-84e0-0af031381ed7);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_42_32b057c9-8903-4b39-84e0-0af031381ed7, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Amulet_43_7bd27d14-0542-4326-ba50-d7b269c48f94, "Amulet", "AMP_SHARD_APPLY_AMULET_43", "Amulet", "AMP_SHARD_AMULET_CONGREGATION");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_CONGREGATION", "AMP_SHARD_CHAR_CONGREGATION");
+DB_AMP_Shard_ExternalStatus("AMP_SHARD_CHAR_CONGREGATION", "RING64_2");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_CONGREGATION", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_43_7bd27d14-0542-4326-ba50-d7b269c48f94);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_43_7bd27d14-0542-4326-ba50-d7b269c48f94, "SHARDS_6");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_44_2303b39c-c9e7-42eb-bd27-13e118d883ba, "Amulet", "AMP_SHARD_APPLY_AMULET_44", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_QUITRENT", "AMP_SHARD_CHAR_QUITRENT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_QUITRENT", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_44_2303b39c-c9e7-42eb-bd27-13e118d883ba);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_44_2303b39c-c9e7-42eb-bd27-13e118d883ba, "SHARDS_2");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_65_7831a80d-e650-4406-8d1d-04d34dc6d079, "Amulet", "AMP_SHARD_APPLY_AMULET_65", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_VIM", "AMP_SHARD_CHAR_VIM");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_VIM", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_65_7831a80d-e650-4406-8d1d-04d34dc6d079);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_65_7831a80d-e650-4406-8d1d-04d34dc6d079, "SHARDS_2");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_66_516c2ab9-88b1-4feb-b180-53796a18b023, "Amulet", "AMP_SHARD_APPLY_AMULET_66", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_FILAMENT", "AMP_SHARD_CHAR_FILAMENT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_FILAMENT", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_66_516c2ab9-88b1-4feb-b180-53796a18b023);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_66_516c2ab9-88b1-4feb-b180-53796a18b023, "SHARDS_20");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_67_82996da5-df5a-44a4-8b96-cf8c4c861ed1, "Amulet", "AMP_SHARD_APPLY_AMULET_67", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_ELECTROLYTE", "AMP_SHARD_CHAR_ELECTROLYTE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_ELECTROLYTE", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_67_82996da5-df5a-44a4-8b96-cf8c4c861ed1);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_67_82996da5-df5a-44a4-8b96-cf8c4c861ed1, "SHARDS_20");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_74_2e001fc9-1041-4879-8441-266e523d6b87, "Amulet", "AMP_SHARD_APPLY_AMULET_74", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_OSMOSIS", "AMP_SHARD_CHAR_OSMOSIS");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_OSMOSIS", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_74_2e001fc9-1041-4879-8441-266e523d6b87);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_74_2e001fc9-1041-4879-8441-266e523d6b87, "SHARDS_2");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_68_9e5263ed-2fde-4047-a996-10d1ac71ada8, "Amulet", "AMP_SHARD_APPLY_AMULET_68", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_BOILER", "AMP_SHARD_CHAR_BOILER");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_BOILER", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_68_9e5263ed-2fde-4047-a996-10d1ac71ada8);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_68_9e5263ed-2fde-4047-a996-10d1ac71ada8, "SHARDS_6");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_45_5fd0af4e-9427-470a-a7e4-f29c2977e9e6, "Amulet", "AMP_SHARD_APPLY_AMULET_45", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_SUNDEW", "AMP_SHARD_CHAR_SUNDEW");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_SUNDEW", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_45_5fd0af4e-9427-470a-a7e4-f29c2977e9e6);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_45_5fd0af4e-9427-470a-a7e4-f29c2977e9e6, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Amulet_46_1609bfa7-b424-460b-ac29-d6de9ffb86bb, "Amulet", "AMP_SHARD_APPLY_AMULET_46", "Amulet", "AMP_SHARD_AMULET_GAMUT");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_GAMUT", "AMP_SHARD_CHAR_GAMUT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_GAMUT", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_46_1609bfa7-b424-460b-ac29-d6de9ffb86bb);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_46_1609bfa7-b424-460b-ac29-d6de9ffb86bb, "SHARDS_2");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Amulet_52_0e4bfe7a-50aa-4389-a3ab-054478def9ec, "Amulet", "AMP_SHARD_APPLY_AMULET_52", "Amulet", "AMP_SHARD_AMULET_THURIBLE");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_THURIBLE", "AMP_SHARD_CHAR_THURIBLE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_THURIBLE", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_52_0e4bfe7a-50aa-4389-a3ab-054478def9ec);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_52_0e4bfe7a-50aa-4389-a3ab-054478def9ec, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Amulet_53_49ebddd4-ebb0-4200-886c-89b3bbb7902a, "Amulet", "AMP_SHARD_APPLY_AMULET_53", "Amulet", "AMP_SHARD_AMULET_SCAB");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_SCAB", "AMP_SHARD_CHAR_SCAB");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_SCAB", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_53_49ebddd4-ebb0-4200-886c-89b3bbb7902a);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_53_49ebddd4-ebb0-4200-886c-89b3bbb7902a, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Amulet_54_a2ddb323-57f3-4696-8c14-f7e4c86fb221, "Amulet", "AMP_SHARD_APPLY_AMULET_54", "Amulet", "AMP_SHARD_AMULET_CONCRETION");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_CONCRETION", "AMP_SHARD_CHAR_CONCRETION");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_CONCRETION", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_54_a2ddb323-57f3-4696-8c14-f7e4c86fb221);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_54_a2ddb323-57f3-4696-8c14-f7e4c86fb221, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Amulet_55_a0da0025-2a0f-4941-a23f-9ee2a75d7154, "Amulet", "AMP_SHARD_APPLY_AMULET_55", "Amulet", "AMP_SHARD_AMULET_AFTERIMAGE");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_AFTERIMAGE", "AMP_SHARD_CHAR_AFTERIMAGE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_AFTERIMAGE", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_55_a0da0025-2a0f-4941-a23f-9ee2a75d7154);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_55_a0da0025-2a0f-4941-a23f-9ee2a75d7154, "SHARDS_2");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_56_d8b87712-24ab-4897-ac1d-f064d64658eb, "Amulet", "AMP_SHARD_APPLY_AMULET_56", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_CLOT", "AMP_SHARD_CHAR_CLOT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_CLOT", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_56_d8b87712-24ab-4897-ac1d-f064d64658eb);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_56_d8b87712-24ab-4897-ac1d-f064d64658eb, "SHARDS_6");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_57_6e653975-8a81-49dc-8c35-9e3e0f2e9998, "Amulet", "AMP_SHARD_APPLY_AMULET_57", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_RECOIL", "AMP_SHARD_CHAR_RECOIL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_RECOIL", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_57_6e653975-8a81-49dc-8c35-9e3e0f2e9998);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_57_6e653975-8a81-49dc-8c35-9e3e0f2e9998, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Amulet_58_c2681788-75e6-41d2-a64a-687111636494, "Amulet", "AMP_SHARD_APPLY_AMULET_58", "Amulet", "AMP_SHARD_AMULET_CONVULSION");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_CONVULSION", "AMP_SHARD_CHAR_CONVULSION");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_CONVULSION", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_58_c2681788-75e6-41d2-a64a-687111636494);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_58_c2681788-75e6-41d2-a64a-687111636494, "SHARDS_6");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_47_8c61bfd1-2bdc-4c1b-8c40-4d584e788789, "Amulet", "AMP_SHARD_APPLY_AMULET_47", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_ESCHEAT", "AMP_SHARD_CHAR_ESCHEAT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_ESCHEAT", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_47_8c61bfd1-2bdc-4c1b-8c40-4d584e788789);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_47_8c61bfd1-2bdc-4c1b-8c40-4d584e788789, "SHARDS_2");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_69_fc21f3b6-a3b1-4c45-bc1c-d8ac5b487972, "Amulet", "AMP_SHARD_APPLY_AMULET_69", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_IMMOLATION", "AMP_SHARD_CHAR_IMMOLATION");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_IMMOLATION", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_69_fc21f3b6-a3b1-4c45-bc1c-d8ac5b487972);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_69_fc21f3b6-a3b1-4c45-bc1c-d8ac5b487972, "SHARDS_2");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_75_79a07894-c1c4-44db-88ce-904934096f90, "Amulet", "AMP_SHARD_APPLY_AMULET_75", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_BLINDFOLD", "AMP_SHARD_CHAR_BLINDFOLD");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_BLINDFOLD", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_75_79a07894-c1c4-44db-88ce-904934096f90);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_75_79a07894-c1c4-44db-88ce-904934096f90, "SHARDS_6");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_48_3ca5594a-2414-4e23-bab6-05ebf30401c7, "Amulet", "AMP_SHARD_APPLY_AMULET_48", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_GLOSSOLALIA", "AMP_SHARD_CHAR_GLOSSOLALIA");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_GLOSSOLALIA", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_48_3ca5594a-2414-4e23-bab6-05ebf30401c7);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_48_3ca5594a-2414-4e23-bab6-05ebf30401c7, "SHARDS_6");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_49_b94c240b-e37c-401b-949b-e1d484a76d38, "Amulet", "AMP_SHARD_APPLY_AMULET_49", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_MATINS", "AMP_SHARD_CHAR_MATINS");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_MATINS", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_49_b94c240b-e37c-401b-949b-e1d484a76d38);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_49_b94c240b-e37c-401b-949b-e1d484a76d38, "SHARDS_2");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_70_504ad11e-75c9-4951-840d-4c2ecf826c09, "Amulet", "AMP_SHARD_APPLY_AMULET_70", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_UMBRA", "AMP_SHARD_CHAR_UMBRA");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_UMBRA", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_70_504ad11e-75c9-4951-840d-4c2ecf826c09);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_70_504ad11e-75c9-4951-840d-4c2ecf826c09, "SHARDS_2");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_71_dbdb15fd-0102-4f42-b722-3b52d0b65a2b, "Amulet", "AMP_SHARD_APPLY_AMULET_71", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_ICEFALL", "AMP_SHARD_CHAR_ICEFALL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_ICEFALL", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_71_dbdb15fd-0102-4f42-b722-3b52d0b65a2b);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_71_dbdb15fd-0102-4f42-b722-3b52d0b65a2b, "SHARDS_2");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Amulet_72_e2ed2eeb-8c29-4aed-983a-3078bd49897c, "Amulet", "AMP_SHARD_APPLY_AMULET_72", "Amulet");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_VERGLAS", "AMP_SHARD_CHAR_VERGLAS");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_VERGLAS", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_72_e2ed2eeb-8c29-4aed-983a-3078bd49897c);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_72_e2ed2eeb-8c29-4aed-983a-3078bd49897c, "SHARDS_2");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Amulet_50_fc4f2bf6-b08f-4236-b574-2fee222863e8, "Amulet", "AMP_SHARD_APPLY_AMULET_50", "Amulet", "AMP_SHARD_AMULET_MIRAGE");
+DB_AMP_Shard_Transfer("AMP_SHARD_AMULET_MIRAGE", "AMP_SHARD_CHAR_MIRAGE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_AMULET_MIRAGE", (ITEMROOT)AMP_Arcanizer_Shard_Amulet_50_fc4f2bf6-b08f-4236-b574-2fee222863e8);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Amulet_50_fc4f2bf6-b08f-4236-b574-2fee222863e8, "SHARDS_2");
+
+// Armour
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_40_f88332fb-f5d4-4908-8cfb-c7bace75e8a3, "Armor", "AMP_SHARD_APPLY_ARMOR_40", "Armor", "AMP_SHARD_ARMOR_ABLUTION");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_ABLUTION", "AMP_SHARD_CHAR_ABLUTION");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_ABLUTION", (ITEMROOT)AMP_Arcanizer_Shard_Armor_40_f88332fb-f5d4-4908-8cfb-c7bace75e8a3);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_40_f88332fb-f5d4-4908-8cfb-c7bace75e8a3, "SHARDS_2");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_41_51a5d787-431f-4c2a-9d9f-1415c35c2821, "Armor", "AMP_SHARD_APPLY_ARMOR_41", "Armor", "AMP_SHARD_ARMOR_ADHERENCE");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_ADHERENCE", "AMP_SHARD_CHAR_ADHERENCE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_ADHERENCE", (ITEMROOT)AMP_Arcanizer_Shard_Armor_41_51a5d787-431f-4c2a-9d9f-1415c35c2821);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_41_51a5d787-431f-4c2a-9d9f-1415c35c2821, "SHARDS_2");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Armor_42_99e3a103-1658-4949-9d46-dbc73843d558, "Armor", "AMP_SHARD_APPLY_ARMOR_42", "Armor");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_BLOODGROOVE", "AMP_SHARD_CHAR_BLOODGROOVE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_BLOODGROOVE", (ITEMROOT)AMP_Arcanizer_Shard_Armor_42_99e3a103-1658-4949-9d46-dbc73843d558);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_42_99e3a103-1658-4949-9d46-dbc73843d558, "SHARDS_2");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Armor_43_536da7ed-6809-4a03-98b1-a92148792cf6, "Armor", "AMP_SHARD_APPLY_ARMOR_43", "Armor", "AMP_SHARD_ARMOR_IMPOSTOR");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_IMPOSTOR", "AMP_SHARD_CHAR_IMPOSTOR_ARMOR");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_IMPOSTOR", (ITEMROOT)AMP_Arcanizer_Shard_Armor_43_536da7ed-6809-4a03-98b1-a92148792cf6);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_43_536da7ed-6809-4a03-98b1-a92148792cf6, "SHARDS_1");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Armor_51_52a3927c-2811-4566-9325-36da84945309, "Armor", "AMP_SHARD_APPLY_ARMOR_51", "Armor");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_BACKDRAFT", "AMP_SHARD_CHAR_BACKDRAFT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_BACKDRAFT", (ITEMROOT)AMP_Arcanizer_Shard_Armor_51_52a3927c-2811-4566-9325-36da84945309);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_51_52a3927c-2811-4566-9325-36da84945309, "SHARDS_2");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Armor_52_d9d43641-ac86-472b-840b-45a42cfb184d, "Armor", "AMP_SHARD_APPLY_ARMOR_52", "Armor");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_SIDESTEP", "AMP_SHARD_CHAR_SIDESTEP");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_ARMOR_SIDESTEP", (ITEMROOT)AMP_Arcanizer_Shard_Armor_52_d9d43641-ac86-472b-840b-45a42cfb184d);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Armor_52_d9d43641-ac86-472b-840b-45a42cfb184d, "SHARDS_1");
+
+// Boots
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Boots_27_db6fe543-3017-4dfe-bd29-155b24d76459, "Boots", "AMP_SHARD_APPLY_BOOTS_27", "Boots");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_STORMPOOL", "AMP_SHARD_CHAR_STORMPOOL");
+DB_AMP_Shard_ExternalStatus("AMP_SHARD_CHAR_STORMPOOL", "MAG_CHARGED_LIGHTNING");
+DB_AMP_Shard_ExternalStatus("AMP_SHARD_CHAR_STORMPOOL", "MAG_CHARGED_LIGHTNING_DURATION_TECHNICAL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_BOOTS_STORMPOOL", (ITEMROOT)AMP_Arcanizer_Shard_Boots_27_db6fe543-3017-4dfe-bd29-155b24d76459);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_27_db6fe543-3017-4dfe-bd29-155b24d76459, "SHARDS_6");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Boots_28_39c70ba3-e4b2-4bcd-b359-4fb0350c0c9c, "Boots", "AMP_SHARD_APPLY_BOOTS_28", "Boots");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_BRAMBLE", "AMP_SHARD_CHAR_BRAMBLE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_BOOTS_BRAMBLE", (ITEMROOT)AMP_Arcanizer_Shard_Boots_28_39c70ba3-e4b2-4bcd-b359-4fb0350c0c9c);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_28_39c70ba3-e4b2-4bcd-b359-4fb0350c0c9c, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Boots_31_d278105c-6b1b-472d-b404-bf2740d3e857, "Boots", "AMP_SHARD_APPLY_BOOTS_31", "Boots", "AMP_SHARD_BOOTS_IMPOSTOR");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_IMPOSTOR", "AMP_SHARD_CHAR_IMPOSTOR_BOOTS");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_BOOTS_IMPOSTOR", (ITEMROOT)AMP_Arcanizer_Shard_Boots_31_d278105c-6b1b-472d-b404-bf2740d3e857);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_31_d278105c-6b1b-472d-b404-bf2740d3e857, "SHARDS_1");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Boots_32_52a71834-f6b1-401c-85b8-fe4440acf736, "Boots", "AMP_SHARD_APPLY_BOOTS_32", "Boots", "AMP_SHARD_BOOTS_EMPLACEMENT");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_EMPLACEMENT", "AMP_SHARD_CHAR_EMPLACEMENT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_BOOTS_EMPLACEMENT", (ITEMROOT)AMP_Arcanizer_Shard_Boots_32_52a71834-f6b1-401c-85b8-fe4440acf736);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_32_52a71834-f6b1-401c-85b8-fe4440acf736, "SHARDS_20");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Boots_33_1ae6f66f-1bdd-4937-b1ef-b5a353e2c651, "Boots", "AMP_SHARD_APPLY_BOOTS_33", "Boots", "AMP_SHARD_BOOTS_THRESHOLD");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_THRESHOLD", "AMP_SHARD_CHAR_THRESHOLD");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_BOOTS_THRESHOLD", (ITEMROOT)AMP_Arcanizer_Shard_Boots_33_1ae6f66f-1bdd-4937-b1ef-b5a353e2c651);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_33_1ae6f66f-1bdd-4937-b1ef-b5a353e2c651, "SHARDS_20");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Boots_34_5e2b7480-fd4d-407b-8cb4-120eacc4b9c8, "Boots", "AMP_SHARD_APPLY_BOOTS_34", "Boots", "AMP_SHARD_BOOTS_WILDFIRE");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_WILDFIRE", "AMP_SHARD_CHAR_WILDFIRE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_BOOTS_WILDFIRE", (ITEMROOT)AMP_Arcanizer_Shard_Boots_34_5e2b7480-fd4d-407b-8cb4-120eacc4b9c8);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_34_5e2b7480-fd4d-407b-8cb4-120eacc4b9c8, "SHARDS_6");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Boots_52_24c98339-7563-4a77-81bb-f159d460a43e, "Boots", "AMP_SHARD_APPLY_BOOTS_52", "Boots");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_ABSOLUTION", "AMP_SHARD_CHAR_ABSOLUTION");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_BOOTS_ABSOLUTION", (ITEMROOT)AMP_Arcanizer_Shard_Boots_52_24c98339-7563-4a77-81bb-f159d460a43e);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_52_24c98339-7563-4a77-81bb-f159d460a43e, "SHARDS_2");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Boots_44_7cd0a11a-fa65-4506-a437-68ada575ad4f, "Boots", "AMP_SHARD_APPLY_BOOTS_44", "Boots");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_TEMENOS", "AMP_SHARD_CHAR_TEMENOS");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_BOOTS_TEMENOS", (ITEMROOT)AMP_Arcanizer_Shard_Boots_44_7cd0a11a-fa65-4506-a437-68ada575ad4f);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_44_7cd0a11a-fa65-4506-a437-68ada575ad4f, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Boots_53_97bbed95-492d-4fd3-99b8-a037e392db41, "Boots", "AMP_SHARD_APPLY_BOOTS_53", "Boots", "AMP_SHARD_BOOTS_DYNAMO");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_DYNAMO", "AMP_SHARD_CHAR_DYNAMO");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_BOOTS_DYNAMO", (ITEMROOT)AMP_Arcanizer_Shard_Boots_53_97bbed95-492d-4fd3-99b8-a037e392db41);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_53_97bbed95-492d-4fd3-99b8-a037e392db41, "SHARDS_2");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Boots_50_cd2d2595-9b42-4430-bdea-86414fb82a5a, "Boots", "AMP_SHARD_APPLY_BOOTS_50", "Boots");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_COCOON", "AMP_SHARD_CHAR_COCOON");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_BOOTS_COCOON", (ITEMROOT)AMP_Arcanizer_Shard_Boots_50_cd2d2595-9b42-4430-bdea-86414fb82a5a);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_50_cd2d2595-9b42-4430-bdea-86414fb82a5a, "SHARDS_20");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Boots_51_ddf51862-3a98-4628-a24b-986572cccfa7, "Boots", "AMP_SHARD_APPLY_BOOTS_51", "Boots");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_LIBATION", "AMP_SHARD_CHAR_LIBATION");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_BOOTS_LIBATION", (ITEMROOT)AMP_Arcanizer_Shard_Boots_51_ddf51862-3a98-4628-a24b-986572cccfa7);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Boots_51_ddf51862-3a98-4628-a24b-986572cccfa7, "SHARDS_2");
+
+// Cloak
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Cloak_55_e367e47f-8d3c-4603-b92f-302629c8a381, "Cloak", "AMP_SHARD_APPLY_CLOAK_55", "Cloak", "AMP_SHARD_CLOAK_RATTLEBONE");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_RATTLEBONE", "AMP_SHARD_CHAR_RATTLEBONE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_RATTLEBONE", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_55_e367e47f-8d3c-4603-b92f-302629c8a381);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_55_e367e47f-8d3c-4603-b92f-302629c8a381, "SHARDS_20");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Cloak_23_59d6e3a5-a243-408c-b977-0c3aae6784af, "Cloak", "AMP_SHARD_APPLY_CLOAK_23", "Cloak");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_LIGHTNINGROD", "AMP_SHARD_CHAR_LIGHTNINGROD");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_LIGHTNINGROD", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_23_59d6e3a5-a243-408c-b977-0c3aae6784af);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_23_59d6e3a5-a243-408c-b977-0c3aae6784af, "SHARDS_2");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Cloak_25_7def41ee-33de-48bb-8b2f-fae4e8816ad8, "Cloak", "AMP_SHARD_APPLY_CLOAK_25", "Cloak");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_REQUITAL", "AMP_SHARD_CHAR_REQUITAL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_REQUITAL", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_25_7def41ee-33de-48bb-8b2f-fae4e8816ad8);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_25_7def41ee-33de-48bb-8b2f-fae4e8816ad8, "SHARDS_2");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Cloak_30_73b52d5c-f9c9-493a-8e2a-71f5f7e288ea, "Cloak", "AMP_SHARD_APPLY_CLOAK_30", "Cloak", "AMP_SHARD_CLOAK_AMBUSCADE");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_AMBUSCADE", "AMP_SHARD_CHAR_AMBUSCADE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_AMBUSCADE", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_30_73b52d5c-f9c9-493a-8e2a-71f5f7e288ea);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_30_73b52d5c-f9c9-493a-8e2a-71f5f7e288ea, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Cloak_32_96a6997c-0b34-4c7f-989c-ee175cfa7338, "Cloak", "AMP_SHARD_APPLY_CLOAK_32", "Cloak", "AMP_SHARD_CLOAK_IMPOSTOR");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_IMPOSTOR", "AMP_SHARD_CHAR_IMPOSTOR_CLOAK");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_IMPOSTOR", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_32_96a6997c-0b34-4c7f-989c-ee175cfa7338);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_32_96a6997c-0b34-4c7f-989c-ee175cfa7338, "SHARDS_1");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Cloak_52_d814470a-223f-4714-92da-70e0d39ee6d2, "Cloak", "AMP_SHARD_APPLY_CLOAK_52", "Cloak", "AMP_SHARD_CLOAK_STEAMSKIN");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_STEAMSKIN", "AMP_SHARD_CHAR_STEAMSKIN");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_STEAMSKIN", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_52_d814470a-223f-4714-92da-70e0d39ee6d2);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_52_d814470a-223f-4714-92da-70e0d39ee6d2, "SHARDS_20");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Cloak_53_3b214d7f-4659-44b4-bba1-c1d1e62cd07f, "Cloak", "AMP_SHARD_APPLY_CLOAK_53", "Cloak");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_PUSTULE", "AMP_SHARD_CHAR_PUSTULE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_PUSTULE", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_53_3b214d7f-4659-44b4-bba1-c1d1e62cd07f);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_53_3b214d7f-4659-44b4-bba1-c1d1e62cd07f, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Cloak_57_25e7f31e-c1f1-4ef7-994f-62ea5734d963, "Cloak", "AMP_SHARD_APPLY_CLOAK_57", "Cloak", "AMP_SHARD_CLOAK_CEREMENT");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_CEREMENT", "AMP_SHARD_CHAR_CEREMENT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_CEREMENT", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_57_25e7f31e-c1f1-4ef7-994f-62ea5734d963);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_57_25e7f31e-c1f1-4ef7-994f-62ea5734d963, "SHARDS_2");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Cloak_39_64e64f67-2832-48ee-bf2f-d8a6f1f3c778, "Cloak", "AMP_SHARD_APPLY_CLOAK_39", "Cloak");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_INDUCTION", "AMP_SHARD_CHAR_INDUCTION");
+DB_AMP_Shard_ExternalStatus("AMP_SHARD_CHAR_INDUCTION", "MAG_CHARGED_LIGHTNING");
+DB_AMP_Shard_ExternalStatus("AMP_SHARD_CHAR_INDUCTION", "MAG_CHARGED_LIGHTNING_DURATION_TECHNICAL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_INDUCTION", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_39_64e64f67-2832-48ee-bf2f-d8a6f1f3c778);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_39_64e64f67-2832-48ee-bf2f-d8a6f1f3c778, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Cloak_56_1b908096-ae48-451f-8789-c667797743f5, "Cloak", "AMP_SHARD_APPLY_CLOAK_56", "Cloak", "AMP_SHARD_CLOAK_VIGIL");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_VIGIL", "AMP_SHARD_CHAR_NIGHTVIGIL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_VIGIL", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_56_1b908096-ae48-451f-8789-c667797743f5);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_56_1b908096-ae48-451f-8789-c667797743f5, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Cloak_54_3c86d3ea-500f-455f-8a82-1c2378fab6c7, "Cloak", "AMP_SHARD_APPLY_CLOAK_54", "Cloak", "AMP_SHARD_CLOAK_BELLOWS");
+DB_AMP_Shard_Transfer("AMP_SHARD_CLOAK_BELLOWS", "AMP_SHARD_CHAR_BELLOWS");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_CLOAK_BELLOWS", (ITEMROOT)AMP_Arcanizer_Shard_Cloak_54_3c86d3ea-500f-455f-8a82-1c2378fab6c7);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Cloak_54_3c86d3ea-500f-455f-8a82-1c2378fab6c7, "SHARDS_2");
+
+// Gloves
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Gloves_29_5bf8f464-3152-4e19-b989-c4117f185002, "Gloves", "AMP_SHARD_APPLY_GLOVES_29", "Gloves");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_AFTERSHOCK", "AMP_SHARD_CHAR_AFTERSHOCK");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_AFTERSHOCK", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_29_5bf8f464-3152-4e19-b989-c4117f185002);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_29_5bf8f464-3152-4e19-b989-c4117f185002, "SHARDS_6");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Gloves_51_698db403-45fc-4e08-9b33-a7f6a73242dc, "Gloves", "AMP_SHARD_APPLY_GLOVES_51", "Gloves");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_REQUIEM", "AMP_SHARD_CHAR_REQUIEM");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_REQUIEM", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_51_698db403-45fc-4e08-9b33-a7f6a73242dc);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_51_698db403-45fc-4e08-9b33-a7f6a73242dc, "SHARDS_6");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Gloves_65_9d90ce29-898a-4466-824b-93bdc734bbb7, "Gloves", "AMP_SHARD_APPLY_GLOVES_65", "Gloves");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_FIXATION", "AMP_SHARD_CHAR_FIXATION");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_FIXATION", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_65_9d90ce29-898a-4466-824b-93bdc734bbb7);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_65_9d90ce29-898a-4466-824b-93bdc734bbb7, "SHARDS_2");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_57_1b6fc487-92e2-4c9e-b57a-c14127f09610, "Gloves", "AMP_SHARD_APPLY_GLOVES_57", "Gloves", "AMP_SHARD_GLOVES_ANATHEMA");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_ANATHEMA", "AMP_SHARD_CHAR_ANATHEMA");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_ANATHEMA", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_57_1b6fc487-92e2-4c9e-b57a-c14127f09610);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_57_1b6fc487-92e2-4c9e-b57a-c14127f09610, "SHARDS_20");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_58_ff7dacdf-c1a2-4694-a4ac-2f8ad635c21c, "Gloves", "AMP_SHARD_APPLY_GLOVES_58", "Gloves", "AMP_SHARD_GLOVES_INTERDICT");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_INTERDICT", "AMP_SHARD_CHAR_INTERDICT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_INTERDICT", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_58_ff7dacdf-c1a2-4694-a4ac-2f8ad635c21c);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_58_ff7dacdf-c1a2-4694-a4ac-2f8ad635c21c, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_59_8b80abd0-895a-4c57-a717-9e43732bb209, "Gloves", "AMP_SHARD_APPLY_GLOVES_59", "Gloves", "AMP_SHARD_GLOVES_APOSTASY");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_APOSTASY", "AMP_SHARD_CHAR_APOSTASY");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_APOSTASY", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_59_8b80abd0-895a-4c57-a717-9e43732bb209);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_59_8b80abd0-895a-4c57-a717-9e43732bb209, "SHARDS_2");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_60_801e550b-ebc6-4e8a-ad78-5ca3793ad1c5, "Gloves", "AMP_SHARD_APPLY_GLOVES_60", "Gloves", "AMP_SHARD_GLOVES_HERESIARCH");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_HERESIARCH", "AMP_SHARD_CHAR_HERESIARCH");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_HERESIARCH", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_60_801e550b-ebc6-4e8a-ad78-5ca3793ad1c5);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_60_801e550b-ebc6-4e8a-ad78-5ca3793ad1c5, "SHARDS_1");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Gloves_52_6e503b02-102e-43aa-bdbf-cae21ff4a861, "Gloves", "AMP_SHARD_APPLY_GLOVES_52", "Gloves");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_USURY", "AMP_SHARD_CHAR_USURY");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_USURY", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_52_6e503b02-102e-43aa-bdbf-cae21ff4a861);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_52_6e503b02-102e-43aa-bdbf-cae21ff4a861, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_53_e6bafaf6-ced1-4a34-9077-a947784de165, "Gloves", "AMP_SHARD_APPLY_GLOVES_53", "Gloves", "AMP_SHARD_GLOVES_CANNONADE");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_CANNONADE", "AMP_SHARD_CHAR_CANNONADE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_CANNONADE", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_53_e6bafaf6-ced1-4a34-9077-a947784de165);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_53_e6bafaf6-ced1-4a34-9077-a947784de165, "SHARDS_2");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_34_26f3b861-70c0-405d-a219-8082482997be, "Gloves", "AMP_SHARD_APPLY_GLOVES_34", "Gloves", "AMP_SHARD_GLOVES_IMPOSTOR");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_IMPOSTOR", "AMP_SHARD_CHAR_IMPOSTOR_GLOVES");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_IMPOSTOR", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_34_26f3b861-70c0-405d-a219-8082482997be);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_34_26f3b861-70c0-405d-a219-8082482997be, "SHARDS_1");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_61_ceaed7d8-7411-41e9-82e3-a6df5a907f63, "Gloves", "AMP_SHARD_APPLY_GLOVES_61", "Gloves", "AMP_SHARD_GLOVES_FISSURE");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_FISSURE", "AMP_SHARD_CHAR_FISSURE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_FISSURE", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_61_ceaed7d8-7411-41e9-82e3-a6df5a907f63);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_61_ceaed7d8-7411-41e9-82e3-a6df5a907f63, "SHARDS_2");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Gloves_62_8c47c4cf-dbde-4ad0-8e98-a01ccf0f8394, "Gloves", "AMP_SHARD_APPLY_GLOVES_62", "Gloves");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_TOPPLING", "AMP_SHARD_CHAR_TOPPLING");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_TOPPLING", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_62_8c47c4cf-dbde-4ad0-8e98-a01ccf0f8394);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_62_8c47c4cf-dbde-4ad0-8e98-a01ccf0f8394, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_66_8dea41d3-3144-41f2-bbba-0b7f3b72f4e6, "Gloves", "AMP_SHARD_APPLY_GLOVES_66", "Gloves", "AMP_SHARD_GLOVES_SIGHTING");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_SIGHTING", "AMP_SHARD_CHAR_SIGHTING");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_SIGHTING", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_66_8dea41d3-3144-41f2-bbba-0b7f3b72f4e6);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_66_8dea41d3-3144-41f2-bbba-0b7f3b72f4e6, "SHARDS_6");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Gloves_40_cae04b6a-0207-45aa-b333-c63b5f2159dc, "Gloves", "AMP_SHARD_APPLY_GLOVES_40", "Gloves");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_MIASMA", "AMP_SHARD_CHAR_MIASMA");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_MIASMA", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_40_cae04b6a-0207-45aa-b333-c63b5f2159dc);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_40_cae04b6a-0207-45aa-b333-c63b5f2159dc, "SHARDS_6");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Gloves_67_820cdd03-70fb-44be-a201-be7258d8eb94, "Gloves", "AMP_SHARD_APPLY_GLOVES_67", "Gloves");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_DELIRIUM", "AMP_SHARD_CHAR_DELIRIUM");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_DELIRIUM", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_67_820cdd03-70fb-44be-a201-be7258d8eb94);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_67_820cdd03-70fb-44be-a201-be7258d8eb94, "SHARDS_6");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Gloves_54_c29d573a-68ab-47e6-bb9f-04ac253ec343, "Gloves", "AMP_SHARD_APPLY_GLOVES_54", "Gloves");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_FIRSTBLOOD", "AMP_SHARD_CHAR_FIRSTBLOOD");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_FIRSTBLOOD", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_54_c29d573a-68ab-47e6-bb9f-04ac253ec343);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_54_c29d573a-68ab-47e6-bb9f-04ac253ec343, "SHARDS_20");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Gloves_63_3aa75833-a259-423e-8be3-aa1866d06873, "Gloves", "AMP_SHARD_APPLY_GLOVES_63", "Gloves");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_ZENITH", "AMP_SHARD_CHAR_ZENITH");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_ZENITH", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_63_3aa75833-a259-423e-8be3-aa1866d06873);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_63_3aa75833-a259-423e-8be3-aa1866d06873, "SHARDS_2");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_64_6a91dadd-2dd8-4990-b2f9-7a0677577af7, "Gloves", "AMP_SHARD_APPLY_GLOVES_64", "Gloves", "AMP_SHARD_GLOVES_BODKIN");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_BODKIN", "AMP_SHARD_CHAR_BODKIN");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_BODKIN", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_64_6a91dadd-2dd8-4990-b2f9-7a0677577af7);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_64_6a91dadd-2dd8-4990-b2f9-7a0677577af7, "SHARDS_1");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Gloves_44_ba5aed68-cbf7-4ef6-a064-d2a9f401323d, "Gloves", "AMP_SHARD_APPLY_GLOVES_44", "Gloves");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_GLASSING", "AMP_SHARD_CHAR_GLASSING");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_GLASSING", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_44_ba5aed68-cbf7-4ef6-a064-d2a9f401323d);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_44_ba5aed68-cbf7-4ef6-a064-d2a9f401323d, "SHARDS_20");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_55_5eb67382-179e-42bc-906f-23cb132b9a8c, "Gloves", "AMP_SHARD_APPLY_GLOVES_55", "Gloves", "AMP_SHARD_GLOVES_EARTHING");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_EARTHING", "AMP_SHARD_CHAR_EARTHING");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_EARTHING", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_55_5eb67382-179e-42bc-906f-23cb132b9a8c);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_55_5eb67382-179e-42bc-906f-23cb132b9a8c, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_56_6be08649-3691-4450-a984-4cb7828ca928, "Gloves", "AMP_SHARD_APPLY_GLOVES_56", "Gloves", "AMP_SHARD_GLOVES_PYROLYSIS");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_PYROLYSIS", "AMP_SHARD_CHAR_PYROLYSIS");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_PYROLYSIS", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_56_6be08649-3691-4450-a984-4cb7828ca928);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_56_6be08649-3691-4450-a984-4cb7828ca928, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_68_77115f43-3464-4b07-8601-1f2769507587, "Gloves", "AMP_SHARD_APPLY_GLOVES_68", "Gloves", "AMP_SHARD_GLOVES_CAUTERY");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_CAUTERY", "AMP_SHARD_CHAR_CAUTERY");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_GLOVES_CAUTERY", (ITEMROOT)AMP_Arcanizer_Shard_Gloves_68_77115f43-3464-4b07-8601-1f2769507587);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Gloves_68_77115f43-3464-4b07-8601-1f2769507587, "SHARDS_6");
+
+// Headwear
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_51_c6602c25-a7d0-4665-84db-09fab22f0b87, "Helmet", "AMP_SHARD_APPLY_HEAD_51", "Helmet", "AMP_SHARD_HEAD_COMMUTATION");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_COMMUTATION", "AMP_SHARD_CHAR_COMMUTATION");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_COMMUTATION", (ITEMROOT)AMP_Arcanizer_Shard_Head_51_c6602c25-a7d0-4665-84db-09fab22f0b87);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_51_c6602c25-a7d0-4665-84db-09fab22f0b87, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_55_cb931903-fa54-4661-b0f2-5f07792a8195, "Helmet", "AMP_SHARD_APPLY_HEAD_55", "Helmet", "AMP_SHARD_HEAD_RECURRENCE");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_RECURRENCE", "AMP_SHARD_CHAR_RECURRENCE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_RECURRENCE", (ITEMROOT)AMP_Arcanizer_Shard_Head_55_cb931903-fa54-4661-b0f2-5f07792a8195);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_55_cb931903-fa54-4661-b0f2-5f07792a8195, "SHARDS_20");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_52_ccbd8cec-faa7-4718-80ce-16a379a54b07, "Helmet", "AMP_SHARD_APPLY_HEAD_52", "Helmet", "AMP_SHARD_HEAD_PROFLIGACY");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_PROFLIGACY", "AMP_SHARD_CHAR_PROFLIGACY");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_PROFLIGACY", (ITEMROOT)AMP_Arcanizer_Shard_Head_52_ccbd8cec-faa7-4718-80ce-16a379a54b07);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_52_ccbd8cec-faa7-4718-80ce-16a379a54b07, "SHARDS_6");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Head_56_f043708c-91fb-4506-bd6c-0ef9dd15e8c9, "Helmet", "AMP_SHARD_APPLY_HEAD_56", "Helmet");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_REPOSE", "AMP_SHARD_CHAR_REPOSE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_REPOSE", (ITEMROOT)AMP_Arcanizer_Shard_Head_56_f043708c-91fb-4506-bd6c-0ef9dd15e8c9);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_56_f043708c-91fb-4506-bd6c-0ef9dd15e8c9, "SHARDS_2");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Head_41_e1be25a4-3da0-4f32-927b-a0bfe11033cd, "Helmet", "AMP_SHARD_APPLY_HEAD_41", "Helmet");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_TINDER", "AMP_SHARD_CHAR_TINDER");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_TINDER", (ITEMROOT)AMP_Arcanizer_Shard_Head_41_e1be25a4-3da0-4f32-927b-a0bfe11033cd);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_41_e1be25a4-3da0-4f32-927b-a0bfe11033cd, "SHARDS_20");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_42_dda0aa1c-08b4-4730-b86c-2f354caca246, "Helmet", "AMP_SHARD_APPLY_HEAD_42", "Helmet", "AMP_SHARD_HEAD_IMPOSTOR");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_IMPOSTOR", "AMP_SHARD_CHAR_IMPOSTOR_HEAD");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_IMPOSTOR", (ITEMROOT)AMP_Arcanizer_Shard_Head_42_dda0aa1c-08b4-4730-b86c-2f354caca246);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_42_dda0aa1c-08b4-4730-b86c-2f354caca246, "SHARDS_1");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_53_a1e5a7d9-c2cb-4710-8a5a-961c4d2209e4, "Helmet", "AMP_SHARD_APPLY_HEAD_53", "Helmet", "AMP_SHARD_HEAD_TYPHLOS");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_TYPHLOS", "AMP_SHARD_CHAR_TYPHLOS");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_TYPHLOS", (ITEMROOT)AMP_Arcanizer_Shard_Head_53_a1e5a7d9-c2cb-4710-8a5a-961c4d2209e4);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_53_a1e5a7d9-c2cb-4710-8a5a-961c4d2209e4, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_48_ab1a45f0-44f9-4e1b-997f-9e4c2699cb9d, "Helmet", "AMP_SHARD_APPLY_HEAD_48", "Helmet", "AMP_SHARD_HEAD_SCOTOMA");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_SCOTOMA", "AMP_SHARD_CHAR_SCOTOMA");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_SCOTOMA", (ITEMROOT)AMP_Arcanizer_Shard_Head_48_ab1a45f0-44f9-4e1b-997f-9e4c2699cb9d);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_48_ab1a45f0-44f9-4e1b-997f-9e4c2699cb9d, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_57_ab62ac94-63b0-4938-a2b7-270cd0832ab4, "Helmet", "AMP_SHARD_APPLY_HEAD_57", "Helmet", "AMP_SHARD_HEAD_TREPANATION");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_TREPANATION", "AMP_SHARD_CHAR_TREPANATION");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_TREPANATION", (ITEMROOT)AMP_Arcanizer_Shard_Head_57_ab62ac94-63b0-4938-a2b7-270cd0832ab4);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_57_ab62ac94-63b0-4938-a2b7-270cd0832ab4, "SHARDS_2");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Head_54_c99c8cbc-7de5-4129-95e4-01232bea268c, "Helmet", "AMP_SHARD_APPLY_HEAD_54", "Helmet");
+DB_AMP_Shard_Transfer("AMP_SHARD_HEAD_ADAGIO", "AMP_SHARD_CHAR_ADAGIO");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_HEAD_ADAGIO", (ITEMROOT)AMP_Arcanizer_Shard_Head_54_c99c8cbc-7de5-4129-95e4-01232bea268c);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Head_54_c99c8cbc-7de5-4129-95e4-01232bea268c, "SHARDS_20");
+
+// Ring
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_65_db3ac7be-c227-4f0f-abfa-e2a77597a0b5, "Ring", "AMP_SHARD_APPLY_RING_65", "Ring", "AMP_SHARD_RING_OSSUARY");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_OSSUARY", "AMP_SHARD_CHAR_OSSUARY");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_OSSUARY", (ITEMROOT)AMP_Arcanizer_Shard_Ring_65_db3ac7be-c227-4f0f-abfa-e2a77597a0b5);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_65_db3ac7be-c227-4f0f-abfa-e2a77597a0b5, "SHARDS_20");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_66_249d960c-eec0-4b3f-a32d-8a0f3386527c, "Ring", "AMP_SHARD_APPLY_RING_66", "Ring", "AMP_SHARD_RING_SEPULCHRE");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_SEPULCHRE", "AMP_SHARD_CHAR_SEPULCHRE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_SEPULCHRE", (ITEMROOT)AMP_Arcanizer_Shard_Ring_66_249d960c-eec0-4b3f-a32d-8a0f3386527c);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_66_249d960c-eec0-4b3f-a32d-8a0f3386527c, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_67_d6c7def1-a66d-4a40-87d2-c5c8c0037d08, "Ring", "AMP_SHARD_APPLY_RING_67", "Ring", "AMP_SHARD_RING_WIGHT");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_WIGHT", "AMP_SHARD_CHAR_WIGHT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_WIGHT", (ITEMROOT)AMP_Arcanizer_Shard_Ring_67_d6c7def1-a66d-4a40-87d2-c5c8c0037d08);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_67_d6c7def1-a66d-4a40-87d2-c5c8c0037d08, "SHARDS_2");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_68_88ea8f4a-577d-4b20-a9a2-d10e9f12663f, "Ring", "AMP_SHARD_APPLY_RING_68", "Ring", "AMP_SHARD_RING_REVENANT");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_REVENANT", "AMP_SHARD_CHAR_REVENANT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_REVENANT", (ITEMROOT)AMP_Arcanizer_Shard_Ring_68_88ea8f4a-577d-4b20-a9a2-d10e9f12663f);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_68_88ea8f4a-577d-4b20-a9a2-d10e9f12663f, "SHARDS_1");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_84_b4da4fad-7ad4-4980-aff8-07872e884479, "Ring", "AMP_SHARD_APPLY_RING_84", "Ring", "AMP_SHARD_RING_MITHRIDATE");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_MITHRIDATE", "AMP_SHARD_CHAR_MITHRIDATE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_MITHRIDATE", (ITEMROOT)AMP_Arcanizer_Shard_Ring_84_b4da4fad-7ad4-4980-aff8-07872e884479);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_84_b4da4fad-7ad4-4980-aff8-07872e884479, "SHARDS_20");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_69_a0cb5a8a-df99-4d17-a9d1-0bd6d693992e, "Ring", "AMP_SHARD_APPLY_RING_69", "Ring");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_GOAD", "AMP_SHARD_CHAR_GOAD");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_GOAD", (ITEMROOT)AMP_Arcanizer_Shard_Ring_69_a0cb5a8a-df99-4d17-a9d1-0bd6d693992e);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_69_a0cb5a8a-df99-4d17-a9d1-0bd6d693992e, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_62_655c77ba-660d-4958-b22d-19aa68389261, "Ring", "AMP_SHARD_APPLY_RING_62", "Ring", "AMP_SHARD_RING_IMPOSTOR");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_IMPOSTOR", "AMP_SHARD_CHAR_IMPOSTOR_RING");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_IMPOSTOR", (ITEMROOT)AMP_Arcanizer_Shard_Ring_62_655c77ba-660d-4958-b22d-19aa68389261);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_62_655c77ba-660d-4958-b22d-19aa68389261, "SHARDS_1");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_85_898e1966-bd4a-4775-abfa-2763f42a1757, "Ring", "AMP_SHARD_APPLY_RING_85", "Ring");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_CONTACT", "AMP_SHARD_CHAR_CONTACT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_CONTACT", (ITEMROOT)AMP_Arcanizer_Shard_Ring_85_898e1966-bd4a-4775-abfa-2763f42a1757);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_85_898e1966-bd4a-4775-abfa-2763f42a1757, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_79_b0c1cfc7-8b1b-49e1-a90b-e90518c297b2, "Ring", "AMP_SHARD_APPLY_RING_79", "Ring", "AMP_SHARD_RING_FIREBRAND");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_FIREBRAND", "AMP_SHARD_CHAR_FIREBRAND");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_FIREBRAND", (ITEMROOT)AMP_Arcanizer_Shard_Ring_79_b0c1cfc7-8b1b-49e1-a90b-e90518c297b2);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_79_b0c1cfc7-8b1b-49e1-a90b-e90518c297b2, "SHARDS_6");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_80_0d946edd-e220-4d12-b98f-73f734c17a2b, "Ring", "AMP_SHARD_APPLY_RING_80", "Ring");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_WHITEFROST", "AMP_SHARD_CHAR_WHITEFROST");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_WHITEFROST", (ITEMROOT)AMP_Arcanizer_Shard_Ring_80_0d946edd-e220-4d12-b98f-73f734c17a2b);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_80_0d946edd-e220-4d12-b98f-73f734c17a2b, "SHARDS_6");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_81_421fa73d-bc60-497d-981e-cfd30fce75e0, "Ring", "AMP_SHARD_APPLY_RING_81", "Ring");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_FRACTURE", "AMP_SHARD_CHAR_FRACTURE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_FRACTURE", (ITEMROOT)AMP_Arcanizer_Shard_Ring_81_421fa73d-bc60-497d-981e-cfd30fce75e0);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_81_421fa73d-bc60-497d-981e-cfd30fce75e0, "SHARDS_2");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_70_56fc5aec-8967-4438-83dd-f1031dd430d2, "Ring", "AMP_SHARD_APPLY_RING_70", "Ring", "AMP_SHARD_RING_SUNBURN");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_SUNBURN", "AMP_SHARD_CHAR_SUNBURN");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_SUNBURN", (ITEMROOT)AMP_Arcanizer_Shard_Ring_70_56fc5aec-8967-4438-83dd-f1031dd430d2);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_70_56fc5aec-8967-4438-83dd-f1031dd430d2, "SHARDS_20");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_71_820795b5-732a-4df8-b4ab-ec846c147a49, "Ring", "AMP_SHARD_APPLY_RING_71", "Ring", "AMP_SHARD_RING_WINDCHILL");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_WINDCHILL", "AMP_SHARD_CHAR_WINDCHILL");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_WINDCHILL", (ITEMROOT)AMP_Arcanizer_Shard_Ring_71_820795b5-732a-4df8-b4ab-ec846c147a49);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_71_820795b5-732a-4df8-b4ab-ec846c147a49, "SHARDS_2");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_72_b3f0a3a7-8916-4bbb-bc31-3ada638c3ef7, "Ring", "AMP_SHARD_APPLY_RING_72", "Ring", "AMP_SHARD_RING_CONDUCTOR");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_CONDUCTOR", "AMP_SHARD_CHAR_CONDUCTOR");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_CONDUCTOR", (ITEMROOT)AMP_Arcanizer_Shard_Ring_72_b3f0a3a7-8916-4bbb-bc31-3ada638c3ef7);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_72_b3f0a3a7-8916-4bbb-bc31-3ada638c3ef7, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_82_978198b3-2729-4ef1-b5ef-401434a57316, "Ring", "AMP_SHARD_APPLY_RING_82", "Ring", "AMP_SHARD_RING_CRAZING");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_CRAZING", "AMP_SHARD_CHAR_CRAZING");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_CRAZING", (ITEMROOT)AMP_Arcanizer_Shard_Ring_82_978198b3-2729-4ef1-b5ef-401434a57316);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_82_978198b3-2729-4ef1-b5ef-401434a57316, "SHARDS_1");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_83_1a34be91-8f19-4beb-b665-5e182519abaa, "Ring", "AMP_SHARD_APPLY_RING_83", "Ring");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_SEPSIS", "AMP_SHARD_CHAR_SEPSIS");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_SEPSIS", (ITEMROOT)AMP_Arcanizer_Shard_Ring_83_1a34be91-8f19-4beb-b665-5e182519abaa);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_83_1a34be91-8f19-4beb-b665-5e182519abaa, "SHARDS_6");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_86_bbeeba6f-5809-497c-bb24-7ac0c419b380, "Ring", "AMP_SHARD_APPLY_RING_86", "Ring");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_BROOM", "AMP_SHARD_CHAR_BROOM");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_BROOM", (ITEMROOT)AMP_Arcanizer_Shard_Ring_86_bbeeba6f-5809-497c-bb24-7ac0c419b380);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_86_bbeeba6f-5809-497c-bb24-7ac0c419b380, "SHARDS_20");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_73_27fee995-1736-4d12-bf0d-067de35ec7ac, "Ring", "AMP_SHARD_APPLY_RING_73", "Ring", "AMP_SHARD_RING_CALDERA");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_CALDERA", "AMP_SHARD_CHAR_CALDERA");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_CALDERA", (ITEMROOT)AMP_Arcanizer_Shard_Ring_73_27fee995-1736-4d12-bf0d-067de35ec7ac);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_73_27fee995-1736-4d12-bf0d-067de35ec7ac, "SHARDS_2");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_74_0ac106d0-019d-40ca-8258-46f598374f8f, "Ring", "AMP_SHARD_APPLY_RING_74", "Ring", "AMP_SHARD_RING_FLOE");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_FLOE", "AMP_SHARD_CHAR_FLOE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_FLOE", (ITEMROOT)AMP_Arcanizer_Shard_Ring_74_0ac106d0-019d-40ca-8258-46f598374f8f);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_74_0ac106d0-019d-40ca-8258-46f598374f8f, "SHARDS_2");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_75_adf01503-32e0-4eaa-a5f9-396e8930f8bf, "Ring", "AMP_SHARD_APPLY_RING_75", "Ring", "AMP_SHARD_RING_MORTAR");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_MORTAR", "AMP_SHARD_CHAR_MORTAR");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_MORTAR", (ITEMROOT)AMP_Arcanizer_Shard_Ring_75_adf01503-32e0-4eaa-a5f9-396e8930f8bf);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_75_adf01503-32e0-4eaa-a5f9-396e8930f8bf, "SHARDS_2");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_87_39e58c01-14d3-44c8-bcd5-0aa0a27b1d6a, "Ring", "AMP_SHARD_APPLY_RING_87", "Ring", "AMP_SHARD_RING_TENEBRAE");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_TENEBRAE", "AMP_SHARD_CHAR_TENEBRAE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_TENEBRAE", (ITEMROOT)AMP_Arcanizer_Shard_Ring_87_39e58c01-14d3-44c8-bcd5-0aa0a27b1d6a);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_87_39e58c01-14d3-44c8-bcd5-0aa0a27b1d6a, "SHARDS_2");
+
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Ring_76_4396ec90-bcaf-4c23-a92a-63b59c107a7d, "Ring", "AMP_SHARD_APPLY_RING_76", "Ring");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_AMBER", "AMP_SHARD_CHAR_AMBER");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_AMBER", (ITEMROOT)AMP_Arcanizer_Shard_Ring_76_4396ec90-bcaf-4c23-a92a-63b59c107a7d);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_76_4396ec90-bcaf-4c23-a92a-63b59c107a7d, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_77_e98b0d5b-7fe3-4e62-ad7c-ec0fcfaee488, "Ring", "AMP_SHARD_APPLY_RING_77", "Ring", "AMP_SHARD_RING_EFFLUVIUM");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_EFFLUVIUM", "AMP_SHARD_CHAR_EFFLUVIUM");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_EFFLUVIUM", (ITEMROOT)AMP_Arcanizer_Shard_Ring_77_e98b0d5b-7fe3-4e62-ad7c-ec0fcfaee488);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_77_e98b0d5b-7fe3-4e62-ad7c-ec0fcfaee488, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_78_21e5e312-258a-479e-aed9-1e49bbb84d42, "Ring", "AMP_SHARD_APPLY_RING_78", "Ring", "AMP_SHARD_RING_FRESHET");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_FRESHET", "AMP_SHARD_CHAR_FRESHET");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_FRESHET", (ITEMROOT)AMP_Arcanizer_Shard_Ring_78_21e5e312-258a-479e-aed9-1e49bbb84d42);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_78_21e5e312-258a-479e-aed9-1e49bbb84d42, "SHARDS_6");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_63_b6344dd6-5b72-479d-8d85-5ddfec22f8fb, "Ring", "AMP_SHARD_APPLY_RING_63", "Ring", "AMP_SHARD_RING_CALCINATION");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_CALCINATION", "AMP_SHARD_CHAR_CALCINATION");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_CALCINATION", (ITEMROOT)AMP_Arcanizer_Shard_Ring_63_b6344dd6-5b72-479d-8d85-5ddfec22f8fb);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_63_b6344dd6-5b72-479d-8d85-5ddfec22f8fb, "SHARDS_2");
+
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_64_73380b64-3946-43ad-8a91-643d1bb71137, "Ring", "AMP_SHARD_APPLY_RING_64", "Ring", "AMP_SHARD_RING_CASCADE");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_CASCADE", "AMP_SHARD_CHAR_CASCADE");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_RING_CASCADE", (ITEMROOT)AMP_Arcanizer_Shard_Ring_64_73380b64-3946-43ad-8a91-643d1bb71137);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Ring_64_73380b64-3946-43ad-8a91-643d1bb71137, "SHARDS_2");
+
+// Weapon
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_104_e67b25ce-9074-4783-ae82-50dbabd4e1f8, "AMP_SHARD_APPLY_MELEE_SACRAMENT", "AMP_SHARD_APPLY_RANGED_SACRAMENT", "AMP_SHARD_WEAPON_SACRAMENT");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_SACRAMENT");
+DB_AMP_Shard_Transfer("AMP_SHARD_WEAPON_SACRAMENT", "AMP_SHARD_CHAR_SACRAMENT");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_SACRAMENT", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_104_e67b25ce-9074-4783-ae82-50dbabd4e1f8);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_104_e67b25ce-9074-4783-ae82-50dbabd4e1f8, "SHARDS_20");
+
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_105_0da4563c-f953-4f13-aedb-b3be0bd2ec34, "AMP_SHARD_APPLY_MELEE_OBLATION", "AMP_SHARD_APPLY_RANGED_OBLATION", "AMP_SHARD_WEAPON_OBLATION");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_OBLATION");
+DB_AMP_Shard_Transfer("AMP_SHARD_WEAPON_OBLATION", "AMP_SHARD_CHAR_OBLATION");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_OBLATION", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_105_0da4563c-f953-4f13-aedb-b3be0bd2ec34);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_105_0da4563c-f953-4f13-aedb-b3be0bd2ec34, "SHARDS_6");
+
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_106_c53687ff-e213-40e8-b01f-0f64d6aeed42, "AMP_SHARD_APPLY_MELEE_HECATOMB", "AMP_SHARD_APPLY_RANGED_HECATOMB", "AMP_SHARD_WEAPON_HECATOMB");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_HECATOMB");
+DB_AMP_Shard_Transfer("AMP_SHARD_WEAPON_HECATOMB", "AMP_SHARD_CHAR_HECATOMB");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_HECATOMB", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_106_c53687ff-e213-40e8-b01f-0f64d6aeed42);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_106_c53687ff-e213-40e8-b01f-0f64d6aeed42, "SHARDS_2");
+
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_107_23cb4692-a42b-48a9-81aa-0d2e264d3990, "AMP_SHARD_APPLY_MELEE_CONSUMMATION", "AMP_SHARD_APPLY_RANGED_CONSUMMATION", "AMP_SHARD_WEAPON_CONSUMMATION");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_CONSUMMATION");
+DB_AMP_Shard_Transfer("AMP_SHARD_WEAPON_CONSUMMATION", "AMP_SHARD_CHAR_CONSUMMATION");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_CONSUMMATION", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_107_23cb4692-a42b-48a9-81aa-0d2e264d3990);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_107_23cb4692-a42b-48a9-81aa-0d2e264d3990, "SHARDS_1");
+
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Weapon_108_90414282-ba77-48ef-accb-94f0e3667dcc, "AMP_SHARD_APPLY_MELEE_BESTIARY", "AMP_SHARD_APPLY_RANGED_BESTIARY");
+DB_AMP_Shard_WeaponStackable("AMP_SHARD_WEAPON_BESTIARY");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_BESTIARY");
+DB_AMP_Shard_Transfer("AMP_SHARD_WEAPON_BESTIARY", "AMP_SHARD_CHAR_BESTIARY");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_BESTIARY", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_108_90414282-ba77-48ef-accb-94f0e3667dcc);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_108_90414282-ba77-48ef-accb-94f0e3667dcc, "SHARDS_6");
+
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_109_63354d1f-cc70-4209-91ed-8e17d6a1c224, "AMP_SHARD_APPLY_MELEE_ATTRITION", "AMP_SHARD_APPLY_RANGED_ATTRITION", "AMP_SHARD_WEAPON_ATTRITION");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_ATTRITION");
+DB_AMP_Shard_Transfer("AMP_SHARD_WEAPON_ATTRITION", "AMP_SHARD_CHAR_ATTRITION");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_ATTRITION", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_109_63354d1f-cc70-4209-91ed-8e17d6a1c224);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_109_63354d1f-cc70-4209-91ed-8e17d6a1c224, "SHARDS_2");
+
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_110_780b1440-c604-47b6-8616-f43509127153, "AMP_SHARD_APPLY_MELEE_IMPOSTOR_WEAPON", "AMP_SHARD_APPLY_RANGED_IMPOSTOR_WEAPON", "AMP_SHARD_WEAPON_IMPOSTOR");
+DB_AMP_Shard_WeaponMarker("AMP_SHARD_WEAPON_IMPOSTOR");
+DB_AMP_Shard_Transfer("AMP_SHARD_WEAPON_IMPOSTOR", "AMP_SHARD_CHAR_IMPOSTOR_WEAPON");
+DB_AMP_Shard_RecoveryMap("AMP_SHARD_WEAPON_IMPOSTOR", (ITEMROOT)AMP_Arcanizer_Shard_Weapon_110_780b1440-c604-47b6-8616-f43509127153);
+DB_ToT_ShardReg((ITEMROOT)AMP_Arcanizer_Shard_Weapon_110_780b1440-c604-47b6-8616-f43509127153, "SHARDS_1");
+
+KBSECTION
+
+EXITSECTION
+ENDEXITSECTION

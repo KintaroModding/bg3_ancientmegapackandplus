@@ -1,0 +1,69 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// arcanizer shards batch 02
+
+// armor 12: tempering (equip stackable, no stackid)
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Armor_12_3e16c21b-b1d1-4b99-9548-03f28d4deac3, "Armor", "AMP_SHARD_APPLY_ARMOR_TEMPERING", "Breast");
+DB_AMP_Shard_Transfer("AMP_SHARD_ARMOR_TEMPERING", "AMP_SHARD_CHAR_TEMPERING");
+
+// mweapon 3: discharge (weapon nonstack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_MWeapon_3_9bdcaf61-e9b7-41f6-bfd6-f93ba7cccb53, "AMP_SHARD_APPLY_MELEE_DISCHARGE", "AMP_SHARD_APPLY_RANGED_DISCHARGE", "AMP_SHARD_WEAPON_DISCHARGE");
+DB_AMP_Shard_Transfer("AMP_SHARD_WEAPON_DISCHARGE", "AMP_SHARD_CHAR_DISCHARGE");
+
+// mweapon 4: ultimate bargain (weapon stackable, no stackid)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_MWeapon_4_229d92f6-9cda-472a-9b75-642dbdc959fc, "AMP_SHARD_APPLY_MELEE_BARGAIN", "AMP_SHARD_APPLY_RANGED_BARGAIN");
+DB_AMP_Shard_Transfer("AMP_SHARD_WEAPON_BARGAIN", "AMP_SHARD_CHAR_BARGAIN");
+
+// mweapon 5: life draining (weapon stackable, no stackid)
+DB_AMP_Shard_Weapon_Stackable((ITEMROOT)AMP_Arcanizer_Shard_MWeapon_5_da01b87a-d417-4fd0-a65d-818f5e89abd7, "AMP_SHARD_APPLY_MELEE_LIFEDRAIN", "AMP_SHARD_APPLY_RANGED_LIFEDRAIN");
+DB_AMP_Shard_Transfer("AMP_SHARD_WEAPON_LIFEDRAIN", "AMP_SHARD_CHAR_LIFEDRAIN");
+
+// weapon 6: bloodletter (weapon nonstack)
+DB_AMP_Shard_Weapon_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Weapon_6_230ecf40-633c-4907-8ea0-2f3a6be1905f, "AMP_SHARD_APPLY_MELEE_BLOODLETTER", "AMP_SHARD_APPLY_RANGED_BLOODLETTER", "AMP_SHARD_WEAPON_BLOODLETTER");
+
+// ring 6: phlegethos (equip nonstack)
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_6_4b27b7f5-a190-42a4-9d50-6046c67c89e9, "Ring", "AMP_SHARD_APPLY_RING_PHLEGETHOS", "Ring", "AMP_SHARD_RING_PHLEGETHOS");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_PHLEGETHOS", "AMP_SHARD_CHAR_PHLEGETHOS");
+
+// gloves 8: shockmaster (equip nonstack, legendary as veryrare)
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Gloves_8_b95d53db-8ef1-4acc-9383-79ee526ff58d, "Gloves", "AMP_SHARD_APPLY_GLOVES_SHOCKMASTER", "Gloves", "AMP_SHARD_GLOVES_SHOCKMASTER");
+DB_AMP_Shard_Transfer("AMP_SHARD_GLOVES_SHOCKMASTER", "AMP_SHARD_CHAR_SHOCKMASTER");
+
+// head 6: farcast (equip stackable, no stackid)
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Head_6_f4205ae3-db2c-40d5-a6e2-c6ca7f52916e, "Helmet", "AMP_SHARD_APPLY_HELMET_FARCAST", "Helmet");
+DB_AMP_Shard_Transfer("AMP_SHARD_HELMET_FARCAST", "AMP_SHARD_CHAR_FARCAST");
+
+// boots 11: elemental harmony (equip stackable, no stackid)
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Boots_11_53b04fe1-71bf-4381-a4bf-10001d9d316a, "Boots", "AMP_SHARD_APPLY_BOOTS_HARMONY", "Boots");
+DB_AMP_Shard_Transfer("AMP_SHARD_BOOTS_HARMONY", "AMP_SHARD_CHAR_HARMONY");
+
+// ring 7: lathander's flame (equip nonstack)
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_7_de38fa95-fa74-4e21-9a53-32dbfeace67e, "Ring", "AMP_SHARD_APPLY_RING_HOLYFIRE", "Ring", "AMP_SHARD_RING_HOLYFIRE");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_HOLYFIRE", "AMP_SHARD_CHAR_HOLYFIRE");
+
+// head 7: arcane acuity (equip stackable, no stackid)
+DB_AMP_Shard_Equip_Stackable((ITEMROOT)AMP_Arcanizer_Shard_Head_7_4fb212b6-4cb5-4038-8601-1daf340ed616, "Helmet", "AMP_SHARD_APPLY_HELMET_ACUITY", "Helmet");
+DB_AMP_Shard_Transfer("AMP_SHARD_HELMET_ACUITY", "AMP_SHARD_CHAR_ACUITY");
+
+// ring 8: frostmist (equip nonstack)
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_8_ad1880b3-d94d-47b8-94eb-3706448b85b6, "Ring", "AMP_SHARD_APPLY_RING_FROSTMIST", "Ring", "AMP_SHARD_RING_FROSTMIST");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_FROSTMIST", "AMP_SHARD_CHAR_FROSTMIST");
+
+// head 8: astral ward (equip nonstack, legendary as veryrare)
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_8_0da0f666-1dd2-449f-a1c5-06806fbbf43d, "Helmet", "AMP_SHARD_APPLY_HELMET_ASTRAL", "Helmet", "AMP_SHARD_HELMET_ASTRAL");
+DB_AMP_Shard_Transfer("AMP_SHARD_HELMET_ASTRAL", "AMP_SHARD_CHAR_ASTRAL");
+
+// head 9: vigil (equip nonstack)
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Head_9_a41b5ee1-c9ec-4210-95a4-105297a81d47, "Helmet", "AMP_SHARD_APPLY_HELMET_VIGIL", "Helmet", "AMP_SHARD_HELMET_VIGIL");
+DB_AMP_Shard_Transfer("AMP_SHARD_HELMET_VIGIL", "AMP_SHARD_CHAR_VIGIL");
+
+// ring 9: stoneguard (equip nonstack)
+DB_AMP_Shard_Equip_NonStack((ITEMROOT)AMP_Arcanizer_Shard_Ring_9_ee67e3ff-042b-41ed-9995-2e493597a6ff, "Ring", "AMP_SHARD_APPLY_RING_STONEGUARD", "Ring", "AMP_SHARD_RING_STONEGUARD");
+DB_AMP_Shard_Transfer("AMP_SHARD_RING_STONEGUARD", "AMP_SHARD_CHAR_STONEGUARD");
+
+KBSECTION
+
+EXITSECTION
+
+ENDEXITSECTION

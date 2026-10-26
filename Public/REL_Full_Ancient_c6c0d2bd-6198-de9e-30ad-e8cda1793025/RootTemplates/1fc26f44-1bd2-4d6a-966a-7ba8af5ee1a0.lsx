@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="200" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="1fc26f44-1bd2-4d6a-966a-7ba8af5ee1a0" />
+					<attribute id="Name" type="LSString" value="Cadence_LongSword_1" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="344ac552-11ff-4150-8bb4-7eed8fb78588" />
+					<attribute id="VisualTemplate" type="FixedString" value="0771b2c1-ff5a-267b-5b94-95d39ba134c3" />
+					<attribute id="PhysicsTemplate" type="FixedString" value="c7c67380-25fe-6814-78fa-2ed1cb511dab" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h9a0f33e3g0712g9b26gdc1agd68629fcaa0f" version="1" />
+					<attribute id="CoverAmount" type="uint8" value="0" />
+					<attribute id="CanClimbOn" type="bool" value="False" />
+					<attribute id="CanShootThrough" type="bool" value="False" />
+					<attribute id="ShootThroughType" type="int8" value="6" />
+					<attribute id="CanClickThrough" type="bool" value="False" />
+					<attribute id="WalkThrough" type="bool" value="True" />
+					<attribute id="WalkOn" type="bool" value="False" />
+					<attribute id="Wadable" type="bool" value="False" />
+					<attribute id="LoopSound" type="FixedString" value="" />
+					<attribute id="SoundInitEvent" type="FixedString" value="" />
+					<attribute id="SoundAttenuation" type="int16" value="-1" />
+					<attribute id="IsPointerBlocker" type="bool" value="False" />
+					<attribute id="Icon" type="FixedString" value="Item_WPN_GTY_Longsword_A_GLOW" />
+					<attribute id="Stats" type="FixedString" value="Cadence_LongSword_1" />
+					<attribute id="Description" type="TranslatedString" handle="he06a808cg25dbgb270g623eg3551dee64436" version="1" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="abadcad5-9229-4999-8c7a-cd557ff2c95c" />
+								</node>
+							</children>
+						</node>
+						<node id="Equipment">
+							<children>
+								<node id="ShortHair" />
+								<node id="LongHair" />
+								<node id="WavyShortHair" />
+								<node id="WavyLongHair" />
+								<node id="CurlyShortHair" />
+								<node id="CurlyLongHair" />
+								<node id="DreadShortHair" />
+								<node id="DreadLongHair" />
+								<node id="AfroShortHair" />
+								<node id="AfroLongHair" />
+								<node id="Visuals" />
+								<node id="ParentRace" />
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

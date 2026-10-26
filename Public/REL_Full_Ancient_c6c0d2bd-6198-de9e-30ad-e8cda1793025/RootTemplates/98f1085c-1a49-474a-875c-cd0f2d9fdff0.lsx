@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="400" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="98f1085c-1a49-474a-875c-cd0f2d9fdff0" />
+					<attribute id="Name" type="LSString" value="Enchant_Crystal3" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="d9e2e790-ef5d-4b97-a553-275d70e0df93" />
+					<attribute id="VisualTemplate" type="FixedString" value="b7b40325-a6f4-6192-df81-16ac8b6bbf1c" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h0f12538eg654fg48bfgb2a7g65edcf54351c" version="1" />
+					<attribute id="Icon" type="FixedString" value="Enchant_Crystal3" />
+					<attribute id="Stats" type="FixedString" value="Enchant_Crystal3" />
+					<attribute id="maxStackAmount" type="int32" value="1" />
+					<attribute id="Description" type="TranslatedString" handle="h7329f19cgc841g48c7g89b5g0fec80eb4031" version="1" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="bd349698-3353-46bf-90cd-345d9930d12b" />
+								</node>
+							</children>
+						</node>
+						<node id="OnUsePeaceActions" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

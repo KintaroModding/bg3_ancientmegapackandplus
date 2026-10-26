@@ -1,0 +1,88 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_AffixDef(12, _, _, _, _, _)
+THEN
+DB_AMP_Plus_AffixDef(12, "PLANARCHESTS", "AMP_Plus_Affix_PlanarChests_Ask", 1, 1, 1);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_ChestCfg("CASUAL", "WLD_Main_A", _, _)
+THEN
+DB_AMP_Plus_ChestCfg("CASUAL", "WLD_Main_A", 10, 14);
+DB_AMP_Plus_ChestCfg("CASUAL", "SCL_Main_A", 12, 16);
+DB_AMP_Plus_ChestCfg("CASUAL", "CTY_Main_A", 12, 16);
+DB_AMP_Plus_ChestCfg("CASUAL", "BGO_Main_A", 10, 14);
+DB_AMP_Plus_ChestCfg("CASUAL", "CRE_Main_A", 2, 4);
+DB_AMP_Plus_ChestCfg("CASUAL", "END_Main_A", 2, 3);
+DB_AMP_Plus_ChestCfg("CASUAL", "INT_Main_A", 1, 2);
+DB_AMP_Plus_ChestCfg("CASUAL", "IRN_Main_A", 1, 2);
+DB_AMP_Plus_ChestCfg("NORMAL", "WLD_Main_A", 4, 8);
+DB_AMP_Plus_ChestCfg("NORMAL", "SCL_Main_A", 5, 9);
+DB_AMP_Plus_ChestCfg("NORMAL", "CTY_Main_A", 5, 10);
+DB_AMP_Plus_ChestCfg("NORMAL", "BGO_Main_A", 4, 8);
+DB_AMP_Plus_ChestCfg("NORMAL", "CRE_Main_A", 1, 2);
+DB_AMP_Plus_ChestCfg("NORMAL", "END_Main_A", 1, 2);
+DB_AMP_Plus_ChestCfg("NORMAL", "INT_Main_A", 0, 2);
+DB_AMP_Plus_ChestCfg("NORMAL", "IRN_Main_A", 0, 1);
+DB_AMP_Plus_ChestCfg("HARD", "WLD_Main_A", 1, 6);
+DB_AMP_Plus_ChestCfg("HARD", "SCL_Main_A", 1, 8);
+DB_AMP_Plus_ChestCfg("HARD", "CTY_Main_A", 1, 10);
+DB_AMP_Plus_ChestCfg("HARD", "BGO_Main_A", 1, 6);
+DB_AMP_Plus_ChestCfg("HARD", "CRE_Main_A", 0, 2);
+DB_AMP_Plus_ChestCfg("HARD", "END_Main_A", 0, 2);
+DB_AMP_Plus_ChestCfg("HARD", "INT_Main_A", 0, 2);
+DB_AMP_Plus_ChestCfg("HARD", "IRN_Main_A", 0, 1);
+
+PROC
+PROC_AMP_Plus_Chests_Apply()
+AND
+QRY_AMP_Plus_Affix_On("PLANARCHESTS")
+AND
+DB_AMP_GameMode((STRING)_Mode)
+AND
+DB_AMP_Plus_ChestCfg(_Mode, (STRING)_Level, (INTEGER)_Min, (INTEGER)_Max)
+THEN
+PROC_AMP_Lootbox_SetConfig(_Level, _Min, _Max);
+
+// off stops new spawns only. STOCK is never zeroed, its economy keeps the base counts
+
+PROC
+PROC_AMP_Plus_Chests_Apply()
+AND
+NOT QRY_AMP_Plus_Affix_On("PLANARCHESTS")
+AND
+NOT DB_AMP_GameMode("STOCK")
+AND
+DB_AMP_Plus_ChestCfg("NORMAL", (STRING)_Level, _, _)
+THEN
+PROC_AMP_Lootbox_SetConfig(_Level, 0, 0);
+
+// base re-asserts its table from the same mode write, level start reapplies after it
+
+IF
+DB_AMP_GameMode(_)
+THEN
+PROC_AMP_Plus_Chests_Apply();
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_AMP_Plus_Chests_Apply();
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "PLANARCHESTS"
+THEN
+PROC_AMP_Plus_Chests_Apply();
+
+EXITSECTION
+ENDEXITSECTION

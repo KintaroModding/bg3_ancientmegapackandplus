@@ -1,0 +1,344 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// hints settings via the training ring
+
+// hints mode 0-5
+DB_AMP_Hints_Mode(1);  // default: periodic always, one-time once
+
+DB_AMP_Settings_Spell("Shout_AMP_Settings_Hints");
+
+KBSECTION
+// give host the settings ring on new game
+
+IF
+LevelGameplayStarted("TUT_Avernus_C", _)
+AND
+NOT DB_AMP_TrainingRing_Given(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+DB_AMP_TrainingRing_Given(1);
+TemplateAddTo((ITEMROOT)Para_TrainingRing_b7d00002-878e-4d08-aaba-37ad74ae7c4e, _Host, 1, 0);
+
+// open settings menu on spell, start at first option
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_Settings_Hints", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+THEN
+SysClear("DB_AMP_Settings_CurrentPlayer", 1);
+DB_AMP_Settings_CurrentPlayer(_Caster);
+SysClear("DB_AMP_Settings_CurrentChoice", 2);
+DB_AMP_Settings_CurrentChoice(_Caster, 0);
+OpenMessageBoxYesNo(_Caster, "AMP_Settings001");
+
+// yes = apply this setting
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings001", 1)
+AND
+DB_AMP_Settings_CurrentPlayer(_Player)
+THEN
+PROC_AMP_ApplyHintsMode(_Player, 0);
+PROC_AMP_CleanupSettings(_Player);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings002", 1)
+AND
+DB_AMP_Settings_CurrentPlayer(_Player)
+THEN
+PROC_AMP_ApplyHintsMode(_Player, 1);
+PROC_AMP_CleanupSettings(_Player);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings003", 1)
+AND
+DB_AMP_Settings_CurrentPlayer(_Player)
+THEN
+PROC_AMP_ApplyHintsMode(_Player, 2);
+PROC_AMP_CleanupSettings(_Player);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings004", 1)
+AND
+DB_AMP_Settings_CurrentPlayer(_Player)
+THEN
+PROC_AMP_ApplyHintsMode(_Player, 3);
+PROC_AMP_CleanupSettings(_Player);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings005", 1)
+AND
+DB_AMP_Settings_CurrentPlayer(_Player)
+THEN
+PROC_AMP_ApplyHintsMode(_Player, 4);
+PROC_AMP_CleanupSettings(_Player);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings006", 1)
+AND
+DB_AMP_Settings_CurrentPlayer(_Player)
+THEN
+PROC_AMP_ApplyHintsMode(_Player, 5);
+PROC_AMP_CleanupSettings(_Player);
+
+// no = next option
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings001", 0)
+AND
+DB_AMP_Settings_CurrentPlayer(_Player)
+THEN
+OpenMessageBoxYesNo(_Player, "AMP_Settings002");
+NOT DB_AMP_Settings_CurrentChoice(_Player, 0);
+DB_AMP_Settings_CurrentChoice(_Player, 1);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings002", 0)
+AND
+DB_AMP_Settings_CurrentPlayer(_Player)
+THEN
+OpenMessageBoxYesNo(_Player, "AMP_Settings003");
+NOT DB_AMP_Settings_CurrentChoice(_Player, 1);
+DB_AMP_Settings_CurrentChoice(_Player, 2);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings003", 0)
+AND
+DB_AMP_Settings_CurrentPlayer(_Player)
+THEN
+OpenMessageBoxYesNo(_Player, "AMP_Settings004");
+NOT DB_AMP_Settings_CurrentChoice(_Player, 2);
+DB_AMP_Settings_CurrentChoice(_Player, 3);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings004", 0)
+AND
+DB_AMP_Settings_CurrentPlayer(_Player)
+THEN
+OpenMessageBoxYesNo(_Player, "AMP_Settings005");
+NOT DB_AMP_Settings_CurrentChoice(_Player, 3);
+DB_AMP_Settings_CurrentChoice(_Player, 4);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings005", 0)
+AND
+DB_AMP_Settings_CurrentPlayer(_Player)
+THEN
+OpenMessageBoxYesNo(_Player, "AMP_Settings006");
+NOT DB_AMP_Settings_CurrentChoice(_Player, 4);
+DB_AMP_Settings_CurrentChoice(_Player, 5);
+
+// last option wraps back to first
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, "AMP_Settings006", 0)
+AND
+DB_AMP_Settings_CurrentPlayer(_Player)
+THEN
+OpenMessageBoxYesNo(_Player, "AMP_Settings001");
+NOT DB_AMP_Settings_CurrentChoice(_Player, 5);
+DB_AMP_Settings_CurrentChoice(_Player, 0);
+
+// apply selected hints mode
+PROC
+PROC_AMP_ApplyHintsMode((CHARACTER)_Player, (INTEGER)_Mode)
+AND
+DB_AMP_Hints_Mode(_OldMode)
+THEN
+NOT DB_AMP_Hints_Mode(_OldMode);
+DB_AMP_Hints_Mode(_Mode);
+PROC_AMP_ResetTutorials(_Player, _Mode);
+// disabled: old arcanizer intros, replaced by voidcapsule
+// PROC_AMP_ShowArcanizerIntroduction(_Player);
+// PROC_AMP_ShowCampEntryTutorial(_Player);
+PlayEffect(_Player, VFX_Script_SCL_MagicCircle_CombineSuccess_01_3fd32122-a4e0-a6eb-291b-60e42e7ad710);
+
+// clear temp menu data
+PROC
+PROC_AMP_CleanupSettings((CHARACTER)_Player)
+THEN
+NOT DB_AMP_Settings_CurrentPlayer(_Player);
+SysClear("DB_AMP_Settings_CurrentChoice", 2);
+
+// clear stale menu state on save load
+IF
+SavegameLoaded()
+AND
+DB_AMP_Settings_CurrentPlayer(_Player)
+THEN
+PROC_AMP_CleanupSettings(_Player);
+
+// mode 0: clear all tutorial flags so they repeat
+PROC
+PROC_AMP_ResetTutorials((CHARACTER)_Player, (INTEGER)_Mode)
+AND
+_Mode == 0
+THEN
+NOT DB_AMP_Tutorial_Shown(_Player, "RewardContainer");
+NOT DB_AMP_Tutorial_Shown(_Player, "SalvageStation");
+NOT DB_AMP_Tutorial_Shown(_Player, "GenerationStation");
+NOT DB_AMP_Tutorial_Shown(_Player, "AstrumArcanum");
+NOT DB_AMP_Tutorial_Shown(_Player, "AstrumEmpyreum");
+NOT DB_AMP_Tutorial_Shown(_Player, "AstrumOpus");
+NOT DB_AMP_Tutorial_Shown(_Player, "AstrumImmortalis");
+NOT DB_AMP_Tutorial_Shown(_Player, "ArcanizerIntroduction");
+NOT DB_AMP_Tutorial_Shown(_Player, "ArcanizerCampEntry");
+NOT DB_AMP_Tutorial_Shown(_Player, "VoidCapsuleFirst");
+NOT DB_AMP_Tutorial_Shown(_Player, "PlanarCoinFirst");
+NOT DB_AMP_Tutorial_Shown(_Player, "RerollHint");
+NOT DB_AMP_Tutorial_Shown(_Player, "ToTShop");
+NOT DB_AMP_Tutorial_Shown(_Player, "CoinVendorFirst");
+NOT DB_AMP_Altar_Tutorial_Shown(1);
+DB_AMP_Altar_Tutorial_Shown(0);
+NOT DB_AMP_Cheat_Settings_Asked(1);
+DB_AMP_Cheat_Settings_Asked(0);
+
+// mode 1 (default): same flag clear
+PROC
+PROC_AMP_ResetTutorials((CHARACTER)_Player, (INTEGER)_Mode)
+AND
+_Mode == 1
+THEN
+NOT DB_AMP_Tutorial_Shown(_Player, "RewardContainer");
+NOT DB_AMP_Tutorial_Shown(_Player, "SalvageStation");
+NOT DB_AMP_Tutorial_Shown(_Player, "GenerationStation");
+NOT DB_AMP_Tutorial_Shown(_Player, "AstrumArcanum");
+NOT DB_AMP_Tutorial_Shown(_Player, "AstrumEmpyreum");
+NOT DB_AMP_Tutorial_Shown(_Player, "AstrumOpus");
+NOT DB_AMP_Tutorial_Shown(_Player, "AstrumImmortalis");
+NOT DB_AMP_Tutorial_Shown(_Player, "ArcanizerIntroduction");
+NOT DB_AMP_Tutorial_Shown(_Player, "ArcanizerCampEntry");
+NOT DB_AMP_Tutorial_Shown(_Player, "VoidCapsuleFirst");
+NOT DB_AMP_Tutorial_Shown(_Player, "PlanarCoinFirst");
+NOT DB_AMP_Tutorial_Shown(_Player, "RerollHint");
+NOT DB_AMP_Tutorial_Shown(_Player, "ToTShop");
+NOT DB_AMP_Tutorial_Shown(_Player, "CoinVendorFirst");
+NOT DB_AMP_Altar_Tutorial_Shown(1);
+DB_AMP_Altar_Tutorial_Shown(0);
+NOT DB_AMP_Cheat_Settings_Asked(1);
+DB_AMP_Cheat_Settings_Asked(0);
+
+// mode 3: clear periodic tracking so they show once more
+PROC
+PROC_AMP_ResetTutorials((CHARACTER)_Player, (INTEGER)_Mode)
+AND
+_Mode == 3
+THEN
+SysClear("DB_AMP_Periodic_Hint_Shown", 1);
+
+// mode 2: keep existing flags
+PROC
+PROC_AMP_ResetTutorials((CHARACTER)_Player, (INTEGER)_Mode)
+AND
+_Mode == 2
+THEN
+DB_NOOP(1);
+
+// mode 4: keep existing flags
+PROC
+PROC_AMP_ResetTutorials((CHARACTER)_Player, (INTEGER)_Mode)
+AND
+_Mode == 4
+THEN
+DB_NOOP(1);
+
+// mode 5: keep existing flags
+PROC
+PROC_AMP_ResetTutorials((CHARACTER)_Player, (INTEGER)_Mode)
+AND
+_Mode == 5
+THEN
+DB_NOOP(1);
+
+// QRY_AMP_ShouldShowHint api: hint type 1 = periodic matrix hints, 2 = one-time tutorials
+
+// type 1 - periodic matrix hints
+
+// mode 0: full hints, always show
+QRY
+QRY_AMP_ShouldShowHint((INTEGER)_HintType)
+AND
+DB_AMP_Hints_Mode(0)
+THEN
+DB_NOOP(1);
+
+// mode 1 (default): periodic always, tutorials one-time
+QRY
+QRY_AMP_ShouldShowHint((INTEGER)_HintType)
+AND
+DB_AMP_Hints_Mode(1)
+AND
+_HintType == 1
+THEN
+DB_NOOP(1);
+
+// mode 2: periodic always, tutorials never
+QRY
+QRY_AMP_ShouldShowHint((INTEGER)_HintType)
+AND
+DB_AMP_Hints_Mode(2)
+AND
+_HintType == 1
+THEN
+DB_NOOP(1);
+
+// mode 3: everything once, tracked
+QRY
+QRY_AMP_ShouldShowHint((INTEGER)_HintType)
+AND
+DB_AMP_Hints_Mode(3)
+AND
+_HintType == 1
+AND
+NOT DB_AMP_Periodic_Hint_Shown(_HintType)
+THEN
+DB_AMP_Periodic_Hint_Shown(_HintType);
+
+// modes 4 and 5: periodic off - no query variant means false
+
+// type 2 - one-time tutorial hints
+
+// mode 0: show tutorials (repeat via flag reset)
+QRY
+QRY_AMP_ShouldShowHint((INTEGER)_HintType)
+AND
+DB_AMP_Hints_Mode(0)
+AND
+_HintType == 2
+THEN
+DB_NOOP(1);
+
+// mode 1: show tutorials once
+QRY
+QRY_AMP_ShouldShowHint((INTEGER)_HintType)
+AND
+DB_AMP_Hints_Mode(1)
+AND
+_HintType == 2
+THEN
+DB_NOOP(1);
+
+// mode 3: show tutorials once
+QRY
+QRY_AMP_ShouldShowHint((INTEGER)_HintType)
+AND
+DB_AMP_Hints_Mode(3)
+AND
+_HintType == 2
+THEN
+DB_NOOP(1);
+
+// mode 4: show tutorials once
+QRY
+QRY_AMP_ShouldShowHint((INTEGER)_HintType)
+AND
+DB_AMP_Hints_Mode(4)
+AND
+_HintType == 2
+THEN
+DB_NOOP(1);
+
+// modes 2 and 5: tutorials off - no query variant means false
+
+EXITSECTION
+
+ENDEXITSECTION

@@ -1,0 +1,303 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_LegitDiffVer(2)
+THEN
+PROC_AMP_Plus_LegitDiffReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_LegitDiffVer(2)
+THEN
+PROC_AMP_Plus_LegitDiffReseed();
+
+PROC
+PROC_AMP_Plus_LegitDiffReseed()
+AND
+DB_AMP_Plus_LegitDiffVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_LegitDiffVer(_Old);
+
+PROC
+PROC_AMP_Plus_LegitDiffReseed()
+THEN
+PROC_AMP_Plus_LegitDiffDrainModes();
+
+PROC
+PROC_AMP_Plus_LegitDiffReseed()
+THEN
+DB_AMP_Plus_LegitDiffVer(2);
+DB_AMP_Plus_LegitDifficulty("NORMAL");
+DB_AMP_Plus_LegitDifficulty("HARD");
+
+PROC
+PROC_AMP_Plus_LegitDiffDrainModes()
+AND
+DB_AMP_Plus_LegitDifficulty((STRING)_A)
+THEN
+NOT DB_AMP_Plus_LegitDifficulty(_A);
+PROC_AMP_Plus_LegitDiffDrainModes();
+
+// affixes go through the deviation table against the mode default, not on or off
+// gold, unlock-everything and capsule knobs have no default, so own lines
+
+QRY
+QRY_AMP_Plus_IsLegitConfig()
+AND
+NOT DB_AMP_Plus_Illegit_Permanent(1)
+AND
+DB_AMP_GameMode(_Mode)
+AND
+DB_AMP_Plus_LegitDifficulty(_Mode)
+AND
+NOT DB_AMP_Plus_GoldMode_Enabled(1)
+AND
+NOT DB_AMP_Plus_StorySkip_UnlockAllActive(1)
+AND
+NOT DB_AMP_Plus_CapEcon_Charges(_)
+AND
+NOT DB_AMP_Plus_CapEcon_Window(_)
+AND
+NOT DB_AMP_Plus_CapEcon_Cost(_)
+AND
+NOT DB_AMP_Plus_AffixDeviation(_)
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Plus_IsLegitConfig()
+AND
+NOT DB_AMP_Plus_Illegit_Permanent(1)
+AND
+NOT DB_AMP_GameMode(_)
+AND
+NOT DB_AMP_Plus_GoldMode_Enabled(1)
+AND
+NOT DB_AMP_Plus_StorySkip_UnlockAllActive(1)
+AND
+NOT DB_AMP_Plus_CapEcon_Charges(_)
+AND
+NOT DB_AMP_Plus_CapEcon_Window(_)
+AND
+NOT DB_AMP_Plus_CapEcon_Cost(_)
+AND
+NOT DB_AMP_Plus_AffixDeviation(_)
+THEN
+DB_NOOP(1);
+
+// settings come from other goals and removal fires no rule, hence the delayed re-read
+
+QRY
+QRY_AMP_Plus_LegitBadge_Allowed()
+AND
+DB_AMP_GameMode(_)
+AND
+QRY_AMP_Plus_IsLegitConfig()
+THEN
+DB_NOOP(1);
+
+QRY
+QRY_AMP_Plus_LegitBadge_Allowed()
+AND
+NOT DB_AMP_GameMode(_)
+AND
+NOT DB_CurrentLevel("TUT_Avernus_C")
+AND
+QRY_AMP_Plus_IsLegitConfig()
+THEN
+DB_NOOP(1);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+RealtimeObjectTimerLaunch(_Host, "AMP_Plus_LegitBadge_Refresh", 500);
+
+IF
+SavegameLoaded()
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+RealtimeObjectTimerLaunch(_Host, "AMP_Plus_LegitBadge_Refresh", 500);
+
+IF
+DB_AMP_GameMode(_)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+RealtimeObjectTimerLaunch(_Host, "AMP_Plus_LegitBadge_Refresh", 500);
+
+IF
+UsingSpell((CHARACTER)_Caster, _, _, _, _)
+AND
+DB_Players(_Caster)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+RealtimeObjectTimerLaunch(_Host, "AMP_Plus_LegitBadge_Refresh", 500);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Player, _, _)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+RealtimeObjectTimerLaunch(_Host, "AMP_Plus_LegitBadge_Refresh", 500);
+
+IF
+MessageBoxClosed((CHARACTER)_Player, _)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+RealtimeObjectTimerLaunch(_Host, "AMP_Plus_LegitBadge_Refresh", 500);
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_Plus_LegitBadge_Refresh")
+THEN
+PROC_AMP_Plus_LegitBadge_Refresh(_Host);
+
+// only touched on a real change, a badge dragged off the hotbar stays off
+PROC
+PROC_AMP_Plus_LegitBadge_Refresh((CHARACTER)_Host)
+AND
+QRY_AMP_Plus_LegitBadge_Allowed()
+AND
+HasActiveStatus(_Host, "AMP_PLUS_LEGIT_BADGE", 0)
+THEN
+ApplyStatus(_Host, "AMP_PLUS_LEGIT_BADGE", -1.0, 1, _Host);
+
+PROC
+PROC_AMP_Plus_LegitBadge_Refresh((CHARACTER)_Host)
+AND
+NOT QRY_AMP_Plus_LegitBadge_Allowed()
+AND
+HasActiveStatus(_Host, "AMP_PLUS_LEGIT_BADGE", 1)
+THEN
+RemoveStatus(_Host, "AMP_PLUS_LEGIT_BADGE", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+UsingSpell((CHARACTER)_C, "Shout_AMP_TrainingRing_ResetCooldowns", _, _, _)
+AND
+NOT DB_AMP_Plus_Illegit_Permanent(1)
+THEN
+DB_AMP_Plus_Illegit_Permanent(1);
+
+IF
+UsingSpell((CHARACTER)_C, "Shout_AMP_Tutorial_Chest", _, _, _)
+AND
+NOT DB_AMP_Plus_Illegit_Permanent(1)
+THEN
+DB_AMP_Plus_Illegit_Permanent(1);
+
+IF
+UsingSpell((CHARACTER)_C, "Shout_AMP_CB_ChestPicker", _, _, _)
+AND
+NOT DB_AMP_Plus_Illegit_Permanent(1)
+THEN
+DB_AMP_Plus_Illegit_Permanent(1);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_H, "AMP_Plus_StorySkip_SnakeCourt_AskFree", 1)
+AND
+NOT DB_AMP_Plus_Illegit_Permanent(1)
+THEN
+DB_AMP_Plus_Illegit_Permanent(1);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_H, "AMP_Plus_StorySkip_SnakeCourt_AskDie", 1)
+AND
+NOT DB_AMP_Plus_Illegit_Permanent(1)
+THEN
+DB_AMP_Plus_Illegit_Permanent(1);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_H, "AMP_Plus_StorySkip_Presses_Ask", 1)
+AND
+NOT DB_AMP_Plus_Illegit_Permanent(1)
+THEN
+DB_AMP_Plus_Illegit_Permanent(1);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_H, "AMP_Plus_StorySkip_Murders_AskPeace", 1)
+AND
+NOT DB_AMP_Plus_Illegit_Permanent(1)
+THEN
+DB_AMP_Plus_Illegit_Permanent(1);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_H, "AMP_Plus_StorySkip_Murders_AskKill", 1)
+AND
+NOT DB_AMP_Plus_Illegit_Permanent(1)
+THEN
+DB_AMP_Plus_Illegit_Permanent(1);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_H, "AMP_Plus_StorySkip_DevilsFee_Ask", 1)
+AND
+NOT DB_AMP_Plus_Illegit_Permanent(1)
+THEN
+DB_AMP_Plus_Illegit_Permanent(1);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_H, "AMP_Plus_StorySkip_Dribbles_Ask", 1)
+AND
+NOT DB_AMP_Plus_Illegit_Permanent(1)
+THEN
+DB_AMP_Plus_Illegit_Permanent(1);
+
+// every ending converges here, show the box after the credits
+PROC
+PROC_END_GodsAndMonsters_RollCredits("END_GodsAndMonsters_GameFinished")
+AND
+NOT DB_AMP_Plus_LegitEnd_Reached(1)
+THEN
+DB_AMP_Plus_LegitEnd_Reached(1);
+
+IF
+CreditsEnded()
+AND
+DB_AMP_Plus_LegitEnd_Reached(1)
+THEN
+PROC_AMP_Plus_LegitEnd_Show();
+
+IF
+SavegameLoaded()
+AND
+DB_AMP_Plus_LegitEnd_Reached(1)
+THEN
+PROC_AMP_Plus_LegitEnd_Show();
+
+// OnlyOnce goes last, spent only when the box opens
+PROC
+PROC_AMP_Plus_LegitEnd_Show()
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+QRY_AMP_Plus_IsLegitConfig()
+AND
+QRY_OnlyOnce("AMP_Plus_LegitEnd_Clean")
+THEN
+NOT DB_AMP_Plus_LegitEnd_Reached(1);
+OpenMessageBox(_Host, "AMP_Plus_Legit_EndLegit");
+
+PROC
+PROC_AMP_Plus_LegitEnd_Show()
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+NOT QRY_AMP_Plus_IsLegitConfig()
+AND
+QRY_OnlyOnce("AMP_Plus_LegitEnd_Dirty")
+THEN
+NOT DB_AMP_Plus_LegitEnd_Reached(1);
+OpenMessageBox(_Host, "AMP_Plus_Legit_EndIllegit");
+
+EXITSECTION
+ENDEXITSECTION

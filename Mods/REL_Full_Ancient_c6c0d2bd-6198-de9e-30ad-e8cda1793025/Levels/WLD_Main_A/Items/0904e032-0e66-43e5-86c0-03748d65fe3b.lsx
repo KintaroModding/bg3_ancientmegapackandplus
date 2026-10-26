@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="0904e032-0e66-43e5-86c0-03748d65fe3b" />
+					<attribute id="Name" type="LSString" value="S_UND_MonkAmulet_DummySkelly_000" />
+					<attribute id="LevelName" type="FixedString" value="WLD_Main_A" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="TemplateName" type="FixedString" value="53634787-0d44-48cb-9478-95a4242c1657" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="GroupID" type="uint32" value="39689" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1.25" />
+							<attribute id="Position" type="fvec3" value="-646.13635 -8.259875 221.96043" />
+							<attribute id="RotationQuat" type="fvec4" value="-0.034744002 -0.0051657828 0.053466894 0.9979517" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="WLD_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="53403475-3141-4317-fa26-9f114ae0c2d9" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="1186705f-c239-e022-e3de-26132f651a17" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="d1c0bf67-870e-baf1-6f88-2044b0230263" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="GEN_Skeleton_Generic" />
+								</node>
+								<node id="InventoryItem">
+									<attribute id="Object" type="FixedString" value="AMP_Mold_Gar" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="EffectBank">
+		<node id="EffectBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="17036026-3923-adf0-5728-c79a9d91140f" />
+					<attribute id="Name" type="LSString" value="Water_Ball" />
+					<attribute id="SourceFile" type="LSString" value="Public/REL_Full_Ancient_c6c0d2bd-6198-de9e-30ad-e8cda1793025/Assets/Effects/Effects_Banks/Water_Ball.lsfx" />
+					<attribute id="EffectName" type="FixedString" value="Water_Ball" />
+					<attribute id="BoundsMin" type="fvec3" value="-4 -4 -4" />
+					<attribute id="BoundsMax" type="fvec3" value="4 4 4" />
+					<attribute id="CullingDistance" type="float" value="0" />
+					<attribute id="Duration" type="float" value="3" />
+					<attribute id="Looping" type="bool" value="True" />
+					<attribute id="InterruptionMode" type="uint32" value="2" />
+					<children>
+						<node id="Dependencies">
+							<children>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="b5751e1e-1a40-9411-7cb7-2deb90128d66" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="d16c2f6f-0142-8ebe-f904-c703133cf163" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="5874a588-b4ad-4a78-a823-8f5f739555be" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="b4c92036-3733-5b15-f86d-1a02855d0144" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="22bdf834-9c45-8876-b4e6-bb56d31fdac1" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="9c15f129-f070-7a2b-e66d-d728aaea2383" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="2c51664b-268e-386d-8eea-94a9f5833c61" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="4d21a9be-2f8d-3641-0f10-cbf5e926bdee" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="8e7c1c30-fee0-460c-a4c9-e7c507fbabe1" />
+								</node>
+								<node id="DependentResource">
+									<attribute id="Object" type="FixedString" value="e3ab1d51-dbdb-ad56-8c94-adaa4af158fb" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

@@ -1,0 +1,24 @@
+// echo heals re-trigger the cloak passive, the fan-out then ping-pongs between allies until the game crashes
+// one wave per round per wearer, same shape as AMP_Plus_H93_ReentryCD
+
+new entry "AMP_PLUS_ILMATER_ECHO_LOCK"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_PLUS_ILMATER_ECHO_LOCK"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator;IgnoreResting"
+
+new entry "AMP_Ilmater_EchoOfLitany_Passive_2"
+type "PassiveData"
+using "AMP_Ilmater_EchoOfLitany_Passive_2"
+data "Conditions" "IsSpell() and Ally() and HasAnyAMPIlmaterStigma(context.Target) and not HasStatus('AMP_PLUS_ILMATER_ECHO_LOCK',context.Source)"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_PLUS_ILMATER_ECHO_LOCK,100,1);ApplyStatus(AMP_ILMATER_LITANY_HEAL_MARKER_T2,100,0)"
+
+new entry "AMP_Ilmater_EchoOfLitany_Passive_3"
+type "PassiveData"
+using "AMP_Ilmater_EchoOfLitany_Passive_3"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_PLUS_ILMATER_ECHO_LOCK,100,1);ApplyStatus(AMP_ILMATER_LITANY_HEAL_MARKER_T3,100,0)"
+
+new entry "AMP_Ilmater_EchoOfLitany_Passive_4"
+type "PassiveData"
+using "AMP_Ilmater_EchoOfLitany_Passive_4"
+data "StatsFunctors" "ApplyStatus(SELF,AMP_PLUS_ILMATER_ECHO_LOCK,100,1);ApplyStatus(AMP_ILMATER_LITANY_HEAL_MARKER_T4,100,0)"

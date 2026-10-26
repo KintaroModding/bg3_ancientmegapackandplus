@@ -1,0 +1,17 @@
+// base applies AMP_BATTLE_INSTINCT by name, so each mode's die needs its own carrier
+
+new entry "AMP_Plus_BI_STANDARD"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_BATTLE_INSTINCT"
+data "StackId" "AMP_BATTLE_INSTINCT"
+data "DescriptionParams" "1d6"
+data "Boosts" "Resistance(All, Resistant);RollBonus(SavingThrow, 1d6);CriticalHit(AttackTarget,Success,Never)"
+
+new entry "AMP_Plus_BI_CASUAL"
+type "StatusData"
+data "StatusType" "BOOST"
+using "AMP_BATTLE_INSTINCT"
+data "StackId" "AMP_BATTLE_INSTINCT"
+data "DescriptionParams" "1d4"
+data "Boosts" "Resistance(All, Resistant);RollBonus(SavingThrow, 1d4);CriticalHit(AttackTarget,Success,Never)"

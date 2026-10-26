@@ -1,0 +1,7 @@
+// a second data Boosts line replaces the first, so both boosts sit in one
+// darkness and fog cut line of sight, only IgnoreSurfaceCover lifts it
+
+new entry "AMP_DARKNESS_FIX"
+type "StatusData"
+using "AMP_DARKNESS_FIX"
+data "Boosts" "Tag(IGNORE_DANGEROUS_SURFACES);AiArchetypeOverride(amp_darkness_response,98);IgnoreSurfaceCover(SurfaceDarknessCloud);IgnoreSurfaceCover(SurfaceFogCloud)"

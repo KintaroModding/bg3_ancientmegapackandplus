@@ -1,0 +1,23 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// heal ethel to full after transform - amp diff buff timing leaves her at half hp
+
+IF
+FlagSet((FLAG)GLO_Hag_State_Transformed_c4c1bbcb-28d2-d607-2658-a06f1cf89d95, _, _)
+AND
+NOT DB_AMP_GameMode("STOCK")
+THEN
+ObjectTimerLaunch((GUIDSTRING)S_HAG_Hag_c457d064-83fb-4ec6-b74d-1f30dfafd12d, "AMP_HagFullHeal", 1500, 0);
+
+IF
+ObjectTimerFinished(_Hag, "AMP_HagFullHeal")
+THEN
+SetHitpointsPercentage(_Hag, 100.0);
+
+EXITSECTION
+
+ENDEXITSECTION

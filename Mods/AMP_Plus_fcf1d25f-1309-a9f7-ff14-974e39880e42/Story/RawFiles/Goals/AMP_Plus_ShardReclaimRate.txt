@@ -1,0 +1,46 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// both the mode table and the cached ReclamationChanceActive are rewritten
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_AMP_Plus_ShardReclaimRate_DrainByMode();
+
+// rewritten row stops matching, ending the walk
+PROC
+PROC_AMP_Plus_ShardReclaimRate_DrainByMode()
+AND
+DB_AMP_VoidCapsule_ReclamationChanceByMode((STRING)_Mode, (INTEGER)_V)
+AND
+_V != 20
+THEN
+NOT DB_AMP_VoidCapsule_ReclamationChanceByMode(_Mode, _V);
+DB_AMP_VoidCapsule_ReclamationChanceByMode(_Mode, 20);
+PROC_AMP_Plus_ShardReclaimRate_DrainByMode();
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_VoidCapsule_ReclamationChanceActive((INTEGER)_Cur)
+AND
+_Cur != 20
+THEN
+NOT DB_AMP_VoidCapsule_ReclamationChanceActive(_Cur);
+DB_AMP_VoidCapsule_ReclamationChanceActive(20);
+
+IF
+DB_AMP_VoidCapsule_ReclamationChanceActive((INTEGER)_Cur)
+AND
+_Cur != 20
+THEN
+NOT DB_AMP_VoidCapsule_ReclamationChanceActive(_Cur);
+DB_AMP_VoidCapsule_ReclamationChanceActive(20);
+
+EXITSECTION
+
+ENDEXITSECTION

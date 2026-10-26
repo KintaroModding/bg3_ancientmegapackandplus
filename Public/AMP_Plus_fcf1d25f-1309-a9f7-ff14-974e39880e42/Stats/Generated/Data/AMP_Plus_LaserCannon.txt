@@ -1,0 +1,10 @@
+new entry "Target_LaserCannon_Volley"
+type "SpellData"
+data "SpellType" "Projectile"
+using "Target_LaserCannon_Volley"
+data "UseCosts" "BonusActionPoint:1"
+
+new entry "MAG_LaserCannon"
+type "Weapon"
+using "MAG_LaserCannon"
+data "Boosts" "ActionResource(AMP_LaserCellCharge,2,0)"

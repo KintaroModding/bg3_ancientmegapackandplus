@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="672bd2e0-c9a5-436d-88d4-69c064075210" />
+					<attribute id="Name" type="LSString" value="Camera_Capture_StormshoreHagSurvivors_001" />
+					<attribute id="LevelName" type="FixedString" value="CTY_Main_A" />
+					<attribute id="Type" type="FixedString" value="trigger" />
+					<attribute id="TemplateName" type="FixedString" value="7f4a742a-b1ab-4195-b04b-9320244592ca" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="FOV" type="float" value="45" />
+					<attribute id="Speed" type="float" value="5" />
+					<attribute id="DOFFocalDistance" type="float" value="10" />
+					<attribute id="DOFAperature" type="float" value="2.8" />
+					<attribute id="DOFNearOnly" type="float" value="0" />
+					<attribute id="DOFFarOnly" type="float" value="0" />
+					<attribute id="DOFNearSharpDistance" type="float" value="0" />
+					<attribute id="DOFFarSharpDistance" type="float" value="0" />
+					<attribute id="UseDOF" type="bool" value="False" />
+					<attribute id="Lerp" type="bool" value="True" />
+					<attribute id="EventSendingMode" type="uint8" value="0" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="-64.594 25.362408 -150.12013" />
+							<attribute id="RotationQuat" type="fvec4" value="0.079576 0.86469537 -0.14508827 0.4742562" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="CTY_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="b73d1834-9aef-d62c-fc93-362525ac68e9" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="a4052c19-f4c8-4b28-6e77-389325f6da15" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="fc0e782c-edc0-0657-e137-5a01d5d81215" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="FadeChildren" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

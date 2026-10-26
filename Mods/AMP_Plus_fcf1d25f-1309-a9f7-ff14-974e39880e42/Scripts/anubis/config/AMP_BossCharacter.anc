@@ -1,0 +1,17 @@
+game.configs.AMP_BossCharacter = Config{
+    params={
+        TurnTimeout = {
+            type = EParamType.Number,
+            required = false,
+            default = 30.0
+        },
+    },
+    root=StateRef{game.roots.DefaultCharacter,
+        combat = StateRef{game.states.AMP_BossCombat,
+            TurnTimeout = params.TurnTimeout,
+        },
+        combatCowerState = StateRef{game.states.CombatCower},
+        genericBehaviours = StateRef{game.states.CrimesHumanoid},
+        idle = StateRef{game.states.AMP_BossIdle},
+    }
+}

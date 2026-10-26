@@ -1,0 +1,708 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+// curves are written into the base chance tables, which it reads at roll time. Foreign writes get put back
+// clock is armed by play only, statuses are not restored when load events fire
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_CapOddsVer(1)
+THEN
+PROC_AMP_Plus_CapOdds_Reseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_CapOddsVer(1)
+THEN
+PROC_AMP_Plus_CapOdds_Reseed();
+
+PROC
+PROC_AMP_Plus_CapOdds_Reseed()
+AND
+DB_AMP_Plus_CapOddsVer((INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_CapOddsVer(_Old);
+
+PROC
+PROC_AMP_Plus_CapOdds_Reseed()
+THEN
+PROC_AMP_Plus_CapOdds_DrainCurve();
+
+PROC
+PROC_AMP_Plus_CapOdds_Reseed()
+AND
+DB_AMP_Plus_CapOdds_HeatCap((INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_CapOdds_HeatCap(_N);
+
+PROC
+PROC_AMP_Plus_CapOdds_Reseed()
+THEN
+DB_AMP_Plus_CapOddsVer(1);
+DB_AMP_Plus_CapOdds_HeatCap(40);
+DB_AMP_Plus_CapOdds_Clock("SALVAGE", "AMP_PLUS_CAPODDS_COOL_SALVAGE");
+DB_AMP_Plus_CapOdds_Clock("DUST", "AMP_PLUS_CAPODDS_COOL_DUST");
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 0, 100);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 1, 100);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 2, 100);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 3, 100);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 4, 97);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 5, 94);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 6, 92);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 7, 89);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 8, 87);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 9, 84);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 10, 82);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 11, 80);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 12, 79);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 13, 77);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 14, 75);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 15, 74);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 16, 72);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 17, 71);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 18, 70);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 19, 69);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 20, 67);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 21, 66);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 22, 65);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 23, 65);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 24, 64);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 25, 63);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 26, 62);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 27, 61);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 28, 61);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 29, 60);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 30, 59);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 31, 59);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 32, 58);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 33, 58);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 34, 57);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 35, 57);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 36, 56);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 37, 56);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 38, 56);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 39, 55);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Uncommon", 40, 55);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 0, 100);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 1, 100);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 2, 100);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 3, 90);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 4, 81);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 5, 73);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 6, 67);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 7, 61);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 8, 56);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 9, 52);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 10, 49);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 11, 46);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 12, 44);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 13, 42);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 14, 40);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 15, 38);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 16, 37);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 17, 36);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 18, 35);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 19, 34);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 20, 34);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 21, 33);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 22, 33);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 23, 32);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 24, 32);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 25, 32);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 26, 31);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 27, 31);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 28, 31);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 29, 31);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 30, 31);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 31, 31);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 32, 31);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 33, 30);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 34, 30);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 35, 30);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 36, 30);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 37, 30);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 38, 30);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 39, 30);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Rare", 40, 30);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 0, 100);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 1, 100);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 2, 76);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 3, 59);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 4, 47);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 5, 38);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 6, 31);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 7, 27);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 8, 24);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 9, 21);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 10, 19);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 11, 18);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 12, 17);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 13, 17);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 14, 16);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 15, 16);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 16, 16);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 17, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 18, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 19, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 20, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 21, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 22, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 23, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 24, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 25, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 26, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 27, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 28, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 29, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 30, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 31, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 32, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 33, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 34, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 35, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 36, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 37, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 38, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 39, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "VeryRare", 40, 15);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 0, 100);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 1, 52);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 2, 29);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 3, 17);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 4, 11);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 5, 8);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 6, 6);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 7, 6);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 8, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 9, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 10, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 11, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 12, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 13, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 14, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 15, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 16, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 17, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 18, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 19, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 20, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 21, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 22, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 23, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 24, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 25, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 26, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 27, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 28, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 29, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 30, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 31, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 32, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 33, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 34, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 35, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 36, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 37, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 38, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 39, 5);
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", "Legendary", 40, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 0, 100);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 1, 100);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 2, 52);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 3, 29);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 4, 17);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 5, 11);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 6, 8);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 7, 6);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 8, 6);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 9, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 10, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 11, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 12, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 13, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 14, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 15, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 16, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 17, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 18, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 19, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 20, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 21, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 22, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 23, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 24, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 25, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 26, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 27, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 28, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 29, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 30, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 31, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 32, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 33, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 34, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 35, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 36, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 37, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 38, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 39, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", 40, 5);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 0, 100);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 1, 100);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 2, 78);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 3, 61);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 4, 50);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 5, 41);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 6, 35);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 7, 31);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 8, 28);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 9, 26);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 10, 24);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 11, 23);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 12, 22);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 13, 22);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 14, 21);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 15, 21);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 16, 21);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 17, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 18, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 19, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 20, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 21, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 22, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 23, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 24, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 25, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 26, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 27, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 28, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 29, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 30, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 31, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 32, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 33, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 34, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 35, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 36, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 37, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 38, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 39, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_6", 40, 20);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 0, 100);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 1, 100);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 2, 100);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 3, 92);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 4, 85);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 5, 79);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 6, 74);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 7, 69);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 8, 66);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 9, 63);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 10, 60);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 11, 58);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 12, 56);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 13, 54);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 14, 53);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 15, 52);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 16, 51);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 17, 50);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 18, 49);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 19, 48);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 20, 48);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 21, 48);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 22, 47);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 23, 47);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 24, 47);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 25, 46);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 26, 46);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 27, 46);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 28, 46);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 29, 46);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 30, 46);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 31, 45);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 32, 45);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 33, 45);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 34, 45);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 35, 45);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 36, 45);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 37, 45);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 38, 45);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 39, 45);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_2", 40, 45);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 0, 100);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 1, 100);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 2, 100);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 3, 100);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 4, 98);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 5, 97);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 6, 96);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 7, 95);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 8, 93);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 9, 92);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 10, 91);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 11, 90);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 12, 89);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 13, 88);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 14, 88);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 15, 87);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 16, 86);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 17, 86);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 18, 85);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 19, 84);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 20, 84);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 21, 83);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 22, 83);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 23, 82);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 24, 82);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 25, 81);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 26, 81);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 27, 81);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 28, 80);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 29, 80);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 30, 80);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 31, 79);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 32, 79);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 33, 79);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 34, 79);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 35, 78);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 36, 78);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 37, 78);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 38, 78);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 39, 78);
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_1", 40, 78);
+
+PROC
+PROC_AMP_Plus_CapOdds_DrainCurve()
+AND
+DB_AMP_Plus_CapOdds_Curve((STRING)_K, (STRING)_R, (INTEGER)_H, (INTEGER)_C)
+THEN
+NOT DB_AMP_Plus_CapOdds_Curve(_K, _R, _H, _C);
+PROC_AMP_Plus_CapOdds_DrainCurve();
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_CapOdds_Heat("SALVAGE", _)
+THEN
+DB_AMP_Plus_CapOdds_Heat("SALVAGE", 0);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_CapOdds_Heat("DUST", _)
+THEN
+DB_AMP_Plus_CapOdds_Heat("DUST", 0);
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_CapOdds_Heat("SALVAGE", _)
+THEN
+DB_AMP_Plus_CapOdds_Heat("SALVAGE", 0);
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_CapOdds_Heat("DUST", _)
+THEN
+DB_AMP_Plus_CapOdds_Heat("DUST", 0);
+
+// base rebuilds its table at level start and again half a second later for stock
+IF
+LevelGameplayStarted(_, _)
+THEN
+TimerLaunch("AMP_Plus_CapOdds_Stamp", 100);
+
+IF
+SavegameLoaded()
+THEN
+TimerLaunch("AMP_Plus_CapOdds_Stamp", 100);
+
+IF
+TimerFinished("AMP_Plus_CapOdds_Stamp")
+THEN
+PROC_AMP_Plus_CapOdds_Stamp();
+
+PROC
+PROC_AMP_VoidCapsule_SalvageApply((ITEM)_Item, (ITEM)_Capsule, (CHARACTER)_Owner, (INTEGER)_Roll, (INTEGER)_Chance, (STRING)_Rarity)
+THEN
+PROC_AMP_Plus_CapOdds_Bump("SALVAGE");
+
+PROC
+PROC_AMP_VoidCapsule_ShardApply((ITEM)_Shard, (ITEM)_Capsule, (CHARACTER)_Owner, (INTEGER)_Roll, (INTEGER)_Chance)
+THEN
+PROC_AMP_Plus_CapOdds_Bump("DUST");
+
+PROC
+PROC_AMP_Plus_CapOdds_Bump((STRING)_Kind)
+AND
+DB_AMP_Plus_CapOdds_Heat(_Kind, (INTEGER)_H)
+AND
+DB_AMP_Plus_CapOdds_HeatCap((INTEGER)_Cap)
+AND
+_H < _Cap
+AND
+IntegerSum(_H, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Plus_CapOdds_Heat(_Kind, _H);
+DB_AMP_Plus_CapOdds_Heat(_Kind, _Next);
+
+PROC
+PROC_AMP_Plus_CapOdds_Bump((STRING)_Kind)
+AND
+NOT DB_AMP_Plus_CapOdds_Heat(_Kind, _)
+THEN
+DB_AMP_Plus_CapOdds_Heat(_Kind, 1);
+
+PROC
+PROC_AMP_Plus_CapOdds_Bump((STRING)_Kind)
+THEN
+PROC_AMP_Plus_CapOdds_Arm(_Kind);
+TimerLaunch("AMP_Plus_CapOdds_Stamp", 50);
+
+// one recorded carrier, the host follows whoever is controlled and would grow a clock on every character
+PROC
+PROC_AMP_Plus_CapOdds_Arm((STRING)_Kind)
+AND
+DB_AMP_Plus_CapOdds_Carrier(_Kind, (CHARACTER)_Char)
+AND
+DB_AMP_Plus_CapOdds_Clock(_Kind, (STRING)_Status)
+AND
+NOT DB_Players(_Char)
+THEN
+NOT DB_AMP_Plus_CapOdds_Carrier(_Kind, _Char);
+RemoveStatus(_Char, _Status);
+
+PROC
+PROC_AMP_Plus_CapOdds_Arm((STRING)_Kind)
+AND
+DB_AMP_Plus_CapOdds_Carrier(_Kind, (CHARACTER)_Char)
+AND
+DB_AMP_Plus_CapOdds_Clock(_Kind, (STRING)_Status)
+AND
+HasAppliedStatus(_Char, _Status, 0)
+THEN
+NOT DB_AMP_Plus_CapOdds_Carrier(_Kind, _Char);
+
+PROC
+PROC_AMP_Plus_CapOdds_Arm((STRING)_Kind)
+AND
+NOT DB_AMP_Plus_CapOdds_Carrier(_Kind, _)
+AND
+DB_AMP_Plus_CapOdds_Clock(_Kind, (STRING)_Status)
+AND
+DB_AMP_Plus_CapOdds_Heat(_Kind, (INTEGER)_H)
+AND
+_H > 0
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+DB_AMP_Plus_CapOdds_Carrier(_Kind, _Host);
+ApplyStatus(_Host, _Status, 90.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+// re-arm waits, the status still reads as applied inside its own removal event
+IF
+StatusRemoved((CHARACTER)_Char, (STRING)_Status, _, _)
+AND
+DB_AMP_Plus_CapOdds_Clock((STRING)_Kind, _Status)
+AND
+DB_AMP_Plus_CapOdds_Carrier(_Kind, _Char)
+THEN
+NOT DB_AMP_Plus_CapOdds_Carrier(_Kind, _Char);
+PROC_AMP_Plus_CapOdds_Cool(_Kind);
+TimerLaunch("AMP_Plus_CapOdds_Rearm", 200);
+TimerLaunch("AMP_Plus_CapOdds_Stamp", 50);
+
+PROC
+PROC_AMP_Plus_CapOdds_Cool((STRING)_Kind)
+AND
+DB_AMP_Plus_CapOdds_Heat(_Kind, (INTEGER)_H)
+AND
+_H > 0
+AND
+IntegerSubtract(_H, 1, (INTEGER)_Next)
+THEN
+NOT DB_AMP_Plus_CapOdds_Heat(_Kind, _H);
+DB_AMP_Plus_CapOdds_Heat(_Kind, _Next);
+
+IF
+TimerFinished("AMP_Plus_CapOdds_Rearm")
+THEN
+PROC_AMP_Plus_CapOdds_Arm("SALVAGE");
+PROC_AMP_Plus_CapOdds_Arm("DUST");
+
+PROC
+PROC_AMP_Plus_CapOdds_Stamp()
+AND
+DB_AMP_Plus_CapOdds_Heat("SALVAGE", (INTEGER)_H)
+AND
+DB_AMP_Plus_CapOdds_Curve("SALVAGE", (STRING)_Rarity, _H, (INTEGER)_C)
+THEN
+PROC_AMP_Plus_CapOdds_SetSalvage(_Rarity, _C);
+
+PROC
+PROC_AMP_Plus_CapOdds_Stamp()
+AND
+DB_AMP_Plus_CapOdds_Heat("DUST", (INTEGER)_H)
+AND
+DB_AMP_Plus_CapOdds_Curve("DUST", (STRING)_Tier, _H, (INTEGER)_C)
+THEN
+PROC_AMP_Plus_CapOdds_SetDust(_Tier, _C);
+
+PROC
+PROC_AMP_Plus_CapOdds_Stamp()
+AND
+DB_AMP_Plus_CapOdds_Heat("DUST", (INTEGER)_H)
+AND
+DB_AMP_Plus_CapOdds_Curve("DUST", "SHARDS_20", _H, (INTEGER)_C)
+THEN
+PROC_AMP_Plus_CapOdds_SetFallback(_C);
+
+// new row goes in before the old ones come out, a roll never sees the table empty or doubled
+PROC
+PROC_AMP_Plus_CapOdds_SetSalvage((STRING)_Rarity, (INTEGER)_C)
+AND
+DB_AMP_Plus_CapOdds_Want("SALVAGE", _Rarity, (INTEGER)_Old)
+AND
+_Old != _C
+THEN
+NOT DB_AMP_Plus_CapOdds_Want("SALVAGE", _Rarity, _Old);
+
+PROC
+PROC_AMP_Plus_CapOdds_SetSalvage((STRING)_Rarity, (INTEGER)_C)
+AND
+NOT DB_AMP_Plus_CapOdds_Want("SALVAGE", _Rarity, _C)
+THEN
+DB_AMP_Plus_CapOdds_Want("SALVAGE", _Rarity, _C);
+
+PROC
+PROC_AMP_Plus_CapOdds_SetSalvage((STRING)_Rarity, (INTEGER)_C)
+AND
+NOT DB_AMP_VoidCapsule_SalvageChanceActive(_Rarity, _C)
+THEN
+DB_AMP_VoidCapsule_SalvageChanceActive(_Rarity, _C);
+
+PROC
+PROC_AMP_Plus_CapOdds_SetSalvage((STRING)_Rarity, (INTEGER)_C)
+THEN
+PROC_AMP_Plus_CapOdds_DropSalvage(_Rarity, _C);
+
+PROC
+PROC_AMP_Plus_CapOdds_DropSalvage((STRING)_Rarity, (INTEGER)_C)
+AND
+DB_AMP_VoidCapsule_SalvageChanceActive(_Rarity, (INTEGER)_V)
+AND
+_V != _C
+THEN
+NOT DB_AMP_VoidCapsule_SalvageChanceActive(_Rarity, _V);
+PROC_AMP_Plus_CapOdds_DropSalvage(_Rarity, _C);
+
+PROC
+PROC_AMP_Plus_CapOdds_SetDust((STRING)_Tier, (INTEGER)_C)
+AND
+DB_AMP_Plus_CapOdds_Want("DUST", _Tier, (INTEGER)_Old)
+AND
+_Old != _C
+THEN
+NOT DB_AMP_Plus_CapOdds_Want("DUST", _Tier, _Old);
+
+PROC
+PROC_AMP_Plus_CapOdds_SetDust((STRING)_Tier, (INTEGER)_C)
+AND
+NOT DB_AMP_Plus_CapOdds_Want("DUST", _Tier, _C)
+THEN
+DB_AMP_Plus_CapOdds_Want("DUST", _Tier, _C);
+
+PROC
+PROC_AMP_Plus_CapOdds_SetDust((STRING)_Tier, (INTEGER)_C)
+AND
+NOT DB_AMP_VoidCapsule_ShardCoinChanceByTier(_Tier, _C)
+THEN
+DB_AMP_VoidCapsule_ShardCoinChanceByTier(_Tier, _C);
+
+PROC
+PROC_AMP_Plus_CapOdds_SetDust((STRING)_Tier, (INTEGER)_C)
+THEN
+PROC_AMP_Plus_CapOdds_DropDust(_Tier, _C);
+
+PROC
+PROC_AMP_Plus_CapOdds_DropDust((STRING)_Tier, (INTEGER)_C)
+AND
+DB_AMP_VoidCapsule_ShardCoinChanceByTier(_Tier, (INTEGER)_V)
+AND
+_V != _C
+THEN
+NOT DB_AMP_VoidCapsule_ShardCoinChanceByTier(_Tier, _V);
+PROC_AMP_Plus_CapOdds_DropDust(_Tier, _C);
+
+// fallback row never goes missing, ZZZ_AMP_VoidCapsule_ShardChanceFix.txt rewrites the whole tier table when it does
+PROC
+PROC_AMP_Plus_CapOdds_SetFallback((INTEGER)_C)
+AND
+DB_AMP_Plus_CapOdds_Want("FALLBACK", "SHARDS_20", (INTEGER)_Old)
+AND
+_Old != _C
+THEN
+NOT DB_AMP_Plus_CapOdds_Want("FALLBACK", "SHARDS_20", _Old);
+
+PROC
+PROC_AMP_Plus_CapOdds_SetFallback((INTEGER)_C)
+AND
+NOT DB_AMP_Plus_CapOdds_Want("FALLBACK", "SHARDS_20", _C)
+THEN
+DB_AMP_Plus_CapOdds_Want("FALLBACK", "SHARDS_20", _C);
+
+PROC
+PROC_AMP_Plus_CapOdds_SetFallback((INTEGER)_C)
+AND
+NOT DB_AMP_VoidCapsule_ShardCoinChanceFallback(_C)
+THEN
+DB_AMP_VoidCapsule_ShardCoinChanceFallback(_C);
+
+PROC
+PROC_AMP_Plus_CapOdds_SetFallback((INTEGER)_C)
+THEN
+PROC_AMP_Plus_CapOdds_DropFallback(_C);
+
+PROC
+PROC_AMP_Plus_CapOdds_DropFallback((INTEGER)_C)
+AND
+DB_AMP_VoidCapsule_ShardCoinChanceFallback((INTEGER)_V)
+AND
+_V != _C
+THEN
+NOT DB_AMP_VoidCapsule_ShardCoinChanceFallback(_V);
+PROC_AMP_Plus_CapOdds_DropFallback(_C);
+
+IF
+DB_AMP_VoidCapsule_SalvageChanceActive((STRING)_Rarity, (INTEGER)_V)
+AND
+DB_AMP_Plus_CapOdds_Want("SALVAGE", _Rarity, (INTEGER)_W)
+AND
+_V != _W
+THEN
+TimerLaunch("AMP_Plus_CapOdds_Stamp", 50);
+
+IF
+DB_AMP_VoidCapsule_ShardCoinChanceByTier((STRING)_Tier, (INTEGER)_V)
+AND
+DB_AMP_Plus_CapOdds_Want("DUST", _Tier, (INTEGER)_W)
+AND
+_V != _W
+THEN
+TimerLaunch("AMP_Plus_CapOdds_Stamp", 50);
+
+IF
+DB_AMP_VoidCapsule_ShardCoinChanceFallback((INTEGER)_V)
+AND
+DB_AMP_Plus_CapOdds_Want("FALLBACK", "SHARDS_20", (INTEGER)_W)
+AND
+_V != _W
+THEN
+TimerLaunch("AMP_Plus_CapOdds_Stamp", 50);
+
+EXITSECTION
+ENDEXITSECTION

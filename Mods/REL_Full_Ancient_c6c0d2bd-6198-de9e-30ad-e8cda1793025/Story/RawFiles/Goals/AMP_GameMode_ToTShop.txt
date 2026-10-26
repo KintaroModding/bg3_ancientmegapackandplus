@@ -1,0 +1,72 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// sell percent per mode. _OldPct != target guard avoids re-trigger loop
+
+IF
+DB_AMP_GameMode("CASUAL")
+AND
+DB_ToT_Shop_SellPercent((INTEGER)_OldPct)
+AND
+_OldPct != 30
+THEN
+NOT DB_ToT_Shop_SellPercent(_OldPct);
+DB_ToT_Shop_SellPercent(30);
+
+IF
+DB_AMP_GameMode("NORMAL")
+AND
+DB_ToT_Shop_SellPercent((INTEGER)_OldPct)
+AND
+_OldPct != 60
+THEN
+NOT DB_ToT_Shop_SellPercent(_OldPct);
+DB_ToT_Shop_SellPercent(60);
+
+IF
+DB_AMP_GameMode("HARD")
+AND
+DB_ToT_Shop_SellPercent((INTEGER)_OldPct)
+AND
+_OldPct != 80
+THEN
+NOT DB_ToT_Shop_SellPercent(_OldPct);
+DB_ToT_Shop_SellPercent(80);
+
+// max stock per mode. same guard against re-trigger loop
+
+IF
+DB_AMP_GameMode("CASUAL")
+AND
+DB_ToT_Shop_MaxStock("GENERAL", (INTEGER)_OldMax)
+AND
+_OldMax != 5
+THEN
+NOT DB_ToT_Shop_MaxStock("GENERAL", _OldMax);
+DB_ToT_Shop_MaxStock("GENERAL", 5);
+
+IF
+DB_AMP_GameMode("NORMAL")
+AND
+DB_ToT_Shop_MaxStock("GENERAL", (INTEGER)_OldMax)
+AND
+_OldMax != 8
+THEN
+NOT DB_ToT_Shop_MaxStock("GENERAL", _OldMax);
+DB_ToT_Shop_MaxStock("GENERAL", 8);
+
+IF
+DB_AMP_GameMode("HARD")
+AND
+DB_ToT_Shop_MaxStock("GENERAL", (INTEGER)_OldMax)
+AND
+_OldMax != 12
+THEN
+NOT DB_ToT_Shop_MaxStock("GENERAL", _OldMax);
+DB_ToT_Shop_MaxStock("GENERAL", 12);
+
+EXITSECTION
+ENDEXITSECTION

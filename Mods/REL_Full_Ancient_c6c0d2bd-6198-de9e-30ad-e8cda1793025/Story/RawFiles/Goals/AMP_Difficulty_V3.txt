@@ -1,0 +1,972 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// difficulty: per-npc tiering off average party level.
+// efflvl = (npc_lvl + avgparty*2) / 3. tiers: t0 <3, t1 3-4, t2 5-8, t3 9-11, t4 12-15, t5 16+.
+
+// mode + tier -> npc status
+DB_AMP_DiffV3_TierMap("IMPOSSIBLE", 0, "AMP_NPC_IMPOSSIBLE_T0_V4");
+DB_AMP_DiffV3_TierMap("IMPOSSIBLE", 1, "AMP_NPC_IMPOSSIBLE_T1_V4");
+DB_AMP_DiffV3_TierMap("IMPOSSIBLE", 2, "AMP_NPC_IMPOSSIBLE_T2_V4");
+DB_AMP_DiffV3_TierMap("IMPOSSIBLE", 3, "AMP_NPC_IMPOSSIBLE_T3_V4");
+DB_AMP_DiffV3_TierMap("IMPOSSIBLE", 4, "AMP_NPC_IMPOSSIBLE_T4_V4");
+DB_AMP_DiffV3_TierMap("IMPOSSIBLE", 5, "AMP_NPC_IMPOSSIBLE_T5_V4");
+
+// mode + tier -> boss status
+DB_AMP_DiffV3_BossTierMap("IMPOSSIBLE", 0, "AMP_BOSS_IMPOSSIBLE_T0_V4");
+DB_AMP_DiffV3_BossTierMap("IMPOSSIBLE", 1, "AMP_BOSS_IMPOSSIBLE_T1_V4");
+DB_AMP_DiffV3_BossTierMap("IMPOSSIBLE", 2, "AMP_BOSS_IMPOSSIBLE_T2_V4");
+DB_AMP_DiffV3_BossTierMap("IMPOSSIBLE", 3, "AMP_BOSS_IMPOSSIBLE_T3_V4");
+DB_AMP_DiffV3_BossTierMap("IMPOSSIBLE", 4, "AMP_BOSS_IMPOSSIBLE_T4_V4");
+DB_AMP_DiffV3_BossTierMap("IMPOSSIBLE", 5, "AMP_BOSS_IMPOSSIBLE_T5_V4");
+
+// player debuff mapping
+DB_AMP_DiffV3_PlayerDebuff("IMPOSSIBLE", "AMP_DIFFICULTY_PLAYER_IMPOSSIBLE");
+
+// all npc statuses, for cleanup iteration
+DB_AMP_DiffV3_AllTargets("AMP_NPC_IMPOSSIBLE_T0_V4");
+DB_AMP_DiffV3_AllTargets("AMP_NPC_IMPOSSIBLE_T1_V4");
+DB_AMP_DiffV3_AllTargets("AMP_NPC_IMPOSSIBLE_T2_V4");
+DB_AMP_DiffV3_AllTargets("AMP_NPC_IMPOSSIBLE_T3_V4");
+DB_AMP_DiffV3_AllTargets("AMP_NPC_IMPOSSIBLE_T4_V4");
+DB_AMP_DiffV3_AllTargets("AMP_NPC_IMPOSSIBLE_T5_V4");
+
+// all boss statuses, for cleanup iteration
+DB_AMP_DiffV3_AllBosses("AMP_BOSS_IMPOSSIBLE_T0_V4");
+DB_AMP_DiffV3_AllBosses("AMP_BOSS_IMPOSSIBLE_T1_V4");
+DB_AMP_DiffV3_AllBosses("AMP_BOSS_IMPOSSIBLE_T2_V4");
+DB_AMP_DiffV3_AllBosses("AMP_BOSS_IMPOSSIBLE_T3_V4");
+DB_AMP_DiffV3_AllBosses("AMP_BOSS_IMPOSSIBLE_T4_V4");
+DB_AMP_DiffV3_AllBosses("AMP_BOSS_IMPOSSIBLE_T5_V4");
+
+// defaults
+DB_AMP_CurrentTier(0);
+DB_AMP_AvgPartyLevel(1);
+DB_AMP_PartyLvl_Acc(0, 0);
+
+// impossible boss-progression statuses, per tier
+DB_AMP_BossProgression_EnemyNPCTierStatus("IMPOSSIBLE", 0, "AMP_PROG_NPC_IMPOSSIBLE_T0_V5");
+DB_AMP_BossProgression_EnemyNPCTierStatus("IMPOSSIBLE", 1, "AMP_PROG_NPC_IMPOSSIBLE_T1_V5");
+DB_AMP_BossProgression_EnemyNPCTierStatus("IMPOSSIBLE", 2, "AMP_PROG_NPC_IMPOSSIBLE_T2_V5");
+DB_AMP_BossProgression_EnemyNPCTierStatus("IMPOSSIBLE", 3, "AMP_PROG_NPC_IMPOSSIBLE_T3_V5");
+DB_AMP_BossProgression_EnemyNPCTierStatus("IMPOSSIBLE", 4, "AMP_PROG_NPC_IMPOSSIBLE_T4_V5");
+DB_AMP_BossProgression_EnemyNPCTierStatus("IMPOSSIBLE", 5, "AMP_PROG_NPC_IMPOSSIBLE_T5_V5");
+DB_AMP_BossProgression_EnemyBossTierStatus("IMPOSSIBLE", 0, "AMP_PROG_BOSS_IMPOSSIBLE_T0_V5");
+DB_AMP_BossProgression_EnemyBossTierStatus("IMPOSSIBLE", 1, "AMP_PROG_BOSS_IMPOSSIBLE_T1_V5");
+DB_AMP_BossProgression_EnemyBossTierStatus("IMPOSSIBLE", 2, "AMP_PROG_BOSS_IMPOSSIBLE_T2_V5");
+DB_AMP_BossProgression_EnemyBossTierStatus("IMPOSSIBLE", 3, "AMP_PROG_BOSS_IMPOSSIBLE_T3_V5");
+DB_AMP_BossProgression_EnemyBossTierStatus("IMPOSSIBLE", 4, "AMP_PROG_BOSS_IMPOSSIBLE_T4_V5");
+DB_AMP_BossProgression_EnemyBossTierStatus("IMPOSSIBLE", 5, "AMP_PROG_BOSS_IMPOSSIBLE_T5_V5");
+
+KBSECTION
+// average party level (accumulator pattern)
+
+// iterate players, sum levels + count
+PROC
+PROC_AMP_CalcAvgPartyLevel_Iterate()
+AND
+DB_Players((CHARACTER)_Player)
+AND
+GetLevel(_Player, (INTEGER)_Lvl)
+AND
+DB_AMP_PartyLvl_Acc((INTEGER)_Count, (INTEGER)_Sum)
+AND
+IntegerSum(_Count, 1, (INTEGER)_NewCount)
+AND
+IntegerSum(_Sum, _Lvl, (INTEGER)_NewSum)
+THEN
+NOT DB_AMP_PartyLvl_Acc(_Count, _Sum);
+DB_AMP_PartyLvl_Acc(_NewCount, _NewSum);
+
+// reset acc, iterate, store result
+PROC
+PROC_AMP_UpdateAvgPartyLevel()
+AND
+DB_AMP_PartyLvl_Acc((INTEGER)_Old1, (INTEGER)_Old2)
+THEN
+NOT DB_AMP_PartyLvl_Acc(_Old1, _Old2);
+
+PROC
+PROC_AMP_UpdateAvgPartyLevel()
+THEN
+DB_AMP_PartyLvl_Acc(0, 0);
+PROC_AMP_CalcAvgPartyLevel_Iterate();
+
+// clear old avg
+PROC
+PROC_AMP_UpdateAvgPartyLevel()
+AND
+DB_AMP_PartyLvl_Acc((INTEGER)_Count, (INTEGER)_Sum)
+AND
+_Count > 0
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_OldAvg)
+THEN
+NOT DB_AMP_AvgPartyLevel(_OldAvg);
+
+// set new avg
+PROC
+PROC_AMP_UpdateAvgPartyLevel()
+AND
+DB_AMP_PartyLvl_Acc((INTEGER)_Count, (INTEGER)_Sum)
+AND
+_Count > 0
+AND
+IntegerDivide(_Sum, _Count, (INTEGER)_AvgLvl)
+THEN
+DB_AMP_AvgPartyLevel(_AvgLvl);
+
+// current tier from avg party level (feeds bossprogression kill-tier)
+
+// clear old tier
+PROC
+PROC_AMP_UpdateCurrentTier()
+AND
+DB_AMP_CurrentTier((INTEGER)_OldTier)
+THEN
+NOT DB_AMP_CurrentTier(_OldTier);
+
+// t0: <3
+PROC
+PROC_AMP_UpdateCurrentTier()
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+_Lvl < 3
+THEN
+DB_AMP_CurrentTier(0);
+
+// t1: 3-4
+PROC
+PROC_AMP_UpdateCurrentTier()
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+_Lvl >= 3
+AND
+_Lvl < 5
+THEN
+DB_AMP_CurrentTier(1);
+
+// t2: 5-8
+PROC
+PROC_AMP_UpdateCurrentTier()
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+_Lvl >= 5
+AND
+_Lvl < 9
+THEN
+DB_AMP_CurrentTier(2);
+
+// t3: 9-11
+PROC
+PROC_AMP_UpdateCurrentTier()
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+_Lvl >= 9
+AND
+_Lvl < 12
+THEN
+DB_AMP_CurrentTier(3);
+
+// t4: 12-15
+PROC
+PROC_AMP_UpdateCurrentTier()
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+_Lvl >= 12
+AND
+_Lvl < 16
+THEN
+DB_AMP_CurrentTier(4);
+
+// t5: 16+
+PROC
+PROC_AMP_UpdateCurrentTier()
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_Lvl)
+AND
+_Lvl >= 16
+THEN
+DB_AMP_CurrentTier(5);
+
+// t5 back-compat: the init dbs don't re-seed on old saves, so add them once on level load
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_DiffV3_TierMap("IMPOSSIBLE", 5, _)
+THEN
+DB_AMP_DiffV3_TierMap("IMPOSSIBLE", 5, "AMP_NPC_IMPOSSIBLE_T5_V4");
+DB_AMP_DiffV3_BossTierMap("IMPOSSIBLE", 5, "AMP_BOSS_IMPOSSIBLE_T5_V4");
+DB_AMP_DiffV3_AllTargets("AMP_NPC_IMPOSSIBLE_T5_V4");
+DB_AMP_DiffV3_AllBosses("AMP_BOSS_IMPOSSIBLE_T5_V4");
+DB_AMP_BossProgression_EnemyNPCTierStatus("IMPOSSIBLE", 5, "AMP_PROG_NPC_IMPOSSIBLE_T5_V5");
+DB_AMP_BossProgression_EnemyBossTierStatus("IMPOSSIBLE", 5, "AMP_PROG_BOSS_IMPOSSIBLE_T5_V5");
+
+// recalc triggers: level load, level up, party change
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+PROC_AMP_UpdateAvgPartyLevel();
+PROC_AMP_UpdateCurrentTier();
+
+// retier everything tracked on level load, so party-level changes propagate
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+_Mode != "NONE"
+THEN
+PROC_AMP_DiffV3_RetierAll_Collect();
+PROC_AMP_DiffV3_RetierAll_Strip();
+PROC_AMP_DiffV3_RetierAll_Reapply();
+
+IF
+LeveledUp((CHARACTER)_Player)
+AND
+DB_Players(_Player)
+THEN
+PROC_AMP_UpdateAvgPartyLevel();
+PROC_AMP_UpdateCurrentTier();
+PROC_AMP_DiffV3_RetierAll_Collect();
+PROC_AMP_DiffV3_RetierAll_Strip();
+PROC_AMP_DiffV3_RetierAll_Reapply();
+
+// new party member - recalc + retier if difficulty is on
+IF
+DB_Players((CHARACTER)_Player)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+_Mode != "NONE"
+THEN
+PROC_AMP_UpdateAvgPartyLevel();
+PROC_AMP_UpdateCurrentTier();
+PROC_AMP_DiffV3_RetierAll_Collect();
+PROC_AMP_DiffV3_RetierAll_Strip();
+PROC_AMP_DiffV3_RetierAll_Reapply();
+
+// retier procs
+
+// collect tracked into temp
+PROC
+PROC_AMP_DiffV3_RetierAll_Collect()
+AND
+DB_AMP_DiffV3_Tracked((CHARACTER)_Creature, (STRING)_OldStatus)
+THEN
+DB_AMP_DiffV3_RetierTemp(_Creature);
+
+// strip old statuses + untrack
+PROC
+PROC_AMP_DiffV3_RetierAll_Strip()
+AND
+DB_AMP_DiffV3_RetierTemp((CHARACTER)_Creature)
+THEN
+PROC_AMP_DiffV3_UntrackCreature(_Creature);
+PROC_AMP_DiffV3_RemoveFromCreature(_Creature);
+PROC_AMP_DiffV3_RemoveProgression(_Creature);
+
+// reapply with per-npc tier
+PROC
+PROC_AMP_DiffV3_RetierAll_Reapply()
+AND
+DB_AMP_DiffV3_RetierTemp((CHARACTER)_Creature)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+_Mode != "NONE"
+AND
+IsDead(_Creature, 0)
+THEN
+NOT DB_AMP_DiffV3_RetierTemp(_Creature);
+PROC_AMP_DiffV3_ApplyToCreature(_Creature, _Mode);
+
+// clear temp for dead creatures
+PROC
+PROC_AMP_DiffV3_RetierAll_Reapply()
+AND
+DB_AMP_DiffV3_RetierTemp((CHARACTER)_Creature)
+THEN
+NOT DB_AMP_DiffV3_RetierTemp(_Creature);
+
+// level load - apply player debuffs
+
+IF
+LevelGameplayStarted(_, _)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+_Mode != "NONE"
+THEN
+PROC_AMP_DiffV3_ApplyPlayerDebuffs(_Mode);
+
+// enteredlevel - track + apply if active
+
+IF
+EnteredLevel((CHARACTER)_Creature, _, _)
+AND
+QRY_AMP_DiffV3_ShouldBuff(_Creature)
+THEN
+DB_AMP_DiffV3_Known(_Creature);
+PROC_AMP_DiffV3_ApplyIfActive(_Creature);
+
+// wentonstage - catches spawns/appearances
+
+IF
+WentOnStage((CHARACTER)_Creature, 1)
+AND
+QRY_AMP_DiffV3_ShouldBuff(_Creature)
+AND
+NOT DB_AMP_DiffV3_Known(_Creature)
+THEN
+DB_AMP_DiffV3_Known(_Creature);
+PROC_AMP_DiffV3_ApplyIfActive(_Creature);
+
+// resurrected - catches die->resurrect bosses like ansur
+
+IF
+Resurrected((CHARACTER)_Creature)
+AND
+QRY_AMP_DiffV3_ShouldBuff(_Creature)
+THEN
+DB_AMP_DiffV3_Known(_Creature);
+PROC_AMP_DiffV3_ApplyIfActive(_Creature);
+
+// form change strips boost statuses (orin slayer etc lose their buffs).
+// the tracking record survives in the db, so untrack + re-apply fresh.
+
+IF
+ObjectTransformed((CHARACTER)_Creature, _)
+THEN
+PROC_AMP_DiffV3_OnFormChange(_Creature);
+
+IF
+ShapeshiftChanged((CHARACTER)_Creature, _, _, _)
+THEN
+PROC_AMP_DiffV3_OnFormChange(_Creature);
+
+PROC
+PROC_AMP_DiffV3_OnFormChange((CHARACTER)_Creature)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+_Mode != "NONE"
+AND
+QRY_AMP_DiffV3_ShouldBuff(_Creature)
+THEN
+PROC_AMP_DiffV3_UntrackCreature(_Creature);
+PROC_AMP_DiffV3_RemoveFromCreature(_Creature);
+PROC_AMP_DiffV3_RemoveProgression(_Creature);
+DB_AMP_DiffV3_Known(_Creature);
+PROC_AMP_DiffV3_ApplyToCreature(_Creature, _Mode);
+
+// enteredcombat safety net
+
+// untracked creature enters combat
+IF
+EnteredCombat((CHARACTER)_Creature, _)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+_Mode != "NONE"
+AND
+NOT DB_AMP_DiffV3_Tracked(_Creature, _)
+AND
+QRY_AMP_DiffV3_ShouldBuff(_Creature)
+THEN
+PROC_AMP_DiffV3_ApplyToCreature(_Creature, _Mode);
+
+// tracked under the wrong mode - re-apply
+IF
+EnteredCombat((CHARACTER)_Creature, _)
+AND
+DB_AMP_DiffV3_Tracked(_Creature, (STRING)_CurrentStatus)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+_Mode != "NONE"
+AND
+NOT DB_AMP_DiffV3_TierMap(_Mode, _, _CurrentStatus)
+AND
+NOT DB_AMP_DiffV3_BossTierMap(_Mode, _, _CurrentStatus)
+THEN
+PROC_AMP_DiffV3_UntrackCreature(_Creature);
+PROC_AMP_DiffV3_RemoveFromCreature(_Creature);
+PROC_AMP_DiffV3_RemoveProgression(_Creature);
+PROC_AMP_DiffV3_ApplyToCreature(_Creature, _Mode);
+
+// filter: who gets buffs
+
+// non-summon enemy creature
+QRY
+QRY_AMP_DiffV3_ShouldBuff((CHARACTER)_Creature)
+AND
+NOT DB_Players(_Creature)
+AND
+NOT DB_PartOfTheTeam(_Creature)
+AND
+NOT DB_AMP_Difficulty_Excluded(_Creature)
+AND
+IsPlayer(_Creature, 0)
+AND
+IsSummon(_Creature, 0)
+AND
+IsDead(_Creature, 0)
+THEN
+DB_NOOP(1);
+
+// enemy summon - owner isn't a player/companion
+QRY
+QRY_AMP_DiffV3_ShouldBuff((CHARACTER)_Creature)
+AND
+IsSummon(_Creature, 1)
+AND
+CharacterGetOwner(_Creature, (CHARACTER)_Owner)
+AND
+NOT DB_Players(_Owner)
+AND
+NOT DB_PartOfTheTeam(_Owner)
+AND
+NOT DB_AMP_Difficulty_Excluded(_Creature)
+AND
+IsPlayer(_Creature, 0)
+AND
+IsDead(_Creature, 0)
+THEN
+DB_NOOP(1);
+
+// apply only if difficulty is active
+
+PROC
+PROC_AMP_DiffV3_ApplyIfActive((CHARACTER)_Creature)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+_Mode != "NONE"
+AND
+NOT DB_AMP_DiffV3_Tracked(_Creature, _)
+THEN
+PROC_AMP_DiffV3_ApplyToCreature(_Creature, _Mode);
+
+// per-npc tier calc + apply. efflvl = (npc_lvl + avgparty*2) / 3
+
+// entry: compute efflvl, hand off to the ally-aware dispatch
+PROC
+PROC_AMP_DiffV3_ApplyToCreature((CHARACTER)_Creature, (STRING)_Mode)
+AND
+GetLevel(_Creature, (INTEGER)_NpcLvl)
+AND
+DB_AMP_AvgPartyLevel((INTEGER)_PartyLvl)
+AND
+IntegerProduct(_PartyLvl, 2, (INTEGER)_Weighted)
+AND
+IntegerSum(_NpcLvl, _Weighted, (INTEGER)_Sum)
+AND
+IntegerDivide(_Sum, 3, (INTEGER)_EffLvl)
+THEN
+PROC_AMP_DiffV3_DispatchAllyAware(_Creature, _Mode, _EffLvl);
+
+// ally-aware dispatch: hostiles get full tier, allies/neutrals drop one tier (min t0)
+// by pushing efflvl to the top of the next-lower bracket
+
+// hostile to host -> full tier
+PROC
+PROC_AMP_DiffV3_DispatchAllyAware((CHARACTER)_Creature, (STRING)_Mode, (INTEGER)_EffLvl)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_Creature, _Host, 1)
+THEN
+PROC_AMP_DiffV3_ApplyByEffLevel(_Creature, _Mode, _EffLvl);
+
+// non-hostile t5 -> t4
+PROC
+PROC_AMP_DiffV3_DispatchAllyAware((CHARACTER)_Creature, (STRING)_Mode, (INTEGER)_EffLvl)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_Creature, _Host, 0)
+AND
+_EffLvl >= 16
+THEN
+PROC_AMP_DiffV3_ApplyByEffLevel(_Creature, _Mode, 15);
+
+// non-hostile t4 -> t3
+PROC
+PROC_AMP_DiffV3_DispatchAllyAware((CHARACTER)_Creature, (STRING)_Mode, (INTEGER)_EffLvl)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_Creature, _Host, 0)
+AND
+_EffLvl >= 12
+AND
+_EffLvl < 16
+THEN
+PROC_AMP_DiffV3_ApplyByEffLevel(_Creature, _Mode, 11);
+
+// non-hostile t3 -> t2
+PROC
+PROC_AMP_DiffV3_DispatchAllyAware((CHARACTER)_Creature, (STRING)_Mode, (INTEGER)_EffLvl)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_Creature, _Host, 0)
+AND
+_EffLvl >= 9
+AND
+_EffLvl < 12
+THEN
+PROC_AMP_DiffV3_ApplyByEffLevel(_Creature, _Mode, 8);
+
+// non-hostile t2 -> t1
+PROC
+PROC_AMP_DiffV3_DispatchAllyAware((CHARACTER)_Creature, (STRING)_Mode, (INTEGER)_EffLvl)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_Creature, _Host, 0)
+AND
+_EffLvl >= 5
+AND
+_EffLvl < 9
+THEN
+PROC_AMP_DiffV3_ApplyByEffLevel(_Creature, _Mode, 4);
+
+// non-hostile t1 -> t0
+PROC
+PROC_AMP_DiffV3_DispatchAllyAware((CHARACTER)_Creature, (STRING)_Mode, (INTEGER)_EffLvl)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_Creature, _Host, 0)
+AND
+_EffLvl >= 3
+AND
+_EffLvl < 5
+THEN
+PROC_AMP_DiffV3_ApplyByEffLevel(_Creature, _Mode, 2);
+
+// non-hostile t0 stays t0
+PROC
+PROC_AMP_DiffV3_DispatchAllyAware((CHARACTER)_Creature, (STRING)_Mode, (INTEGER)_EffLvl)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_Creature, _Host, 0)
+AND
+_EffLvl < 3
+THEN
+PROC_AMP_DiffV3_ApplyByEffLevel(_Creature, _Mode, _EffLvl);
+
+// t0: efflvl < 3
+
+PROC
+PROC_AMP_DiffV3_ApplyByEffLevel((CHARACTER)_Creature, (STRING)_Mode, (INTEGER)_EffLvl)
+AND
+_EffLvl < 3
+AND
+IsBoss(_Creature, 0)
+AND
+DB_AMP_DiffV3_TierMap(_Mode, 0, (STRING)_Status)
+AND
+HasActiveStatus(_Creature, _Status, 0)
+THEN
+PROC_AMP_DiffV3_RemoveFromCreature(_Creature);
+ApplyStatus(_Creature, _Status, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_DiffV3_Tracked(_Creature, _Status);
+PROC_AMP_BossProgression_BuffNPC(_Creature);
+
+PROC
+PROC_AMP_DiffV3_ApplyByEffLevel((CHARACTER)_Creature, (STRING)_Mode, (INTEGER)_EffLvl)
+AND
+_EffLvl < 3
+AND
+IsBoss(_Creature, 1)
+AND
+DB_AMP_DiffV3_BossTierMap(_Mode, 0, (STRING)_Status)
+AND
+HasActiveStatus(_Creature, _Status, 0)
+THEN
+PROC_AMP_DiffV3_RemoveFromCreature(_Creature);
+ApplyStatus(_Creature, _Status, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_DiffV3_Tracked(_Creature, _Status);
+PROC_AMP_BossProgression_BuffBoss(_Creature);
+
+// t1: efflvl 3-4
+
+PROC
+PROC_AMP_DiffV3_ApplyByEffLevel((CHARACTER)_Creature, (STRING)_Mode, (INTEGER)_EffLvl)
+AND
+_EffLvl >= 3
+AND
+_EffLvl < 5
+AND
+IsBoss(_Creature, 0)
+AND
+DB_AMP_DiffV3_TierMap(_Mode, 1, (STRING)_Status)
+AND
+HasActiveStatus(_Creature, _Status, 0)
+THEN
+PROC_AMP_DiffV3_RemoveFromCreature(_Creature);
+ApplyStatus(_Creature, _Status, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_DiffV3_Tracked(_Creature, _Status);
+PROC_AMP_BossProgression_BuffNPC(_Creature);
+
+PROC
+PROC_AMP_DiffV3_ApplyByEffLevel((CHARACTER)_Creature, (STRING)_Mode, (INTEGER)_EffLvl)
+AND
+_EffLvl >= 3
+AND
+_EffLvl < 5
+AND
+IsBoss(_Creature, 1)
+AND
+DB_AMP_DiffV3_BossTierMap(_Mode, 1, (STRING)_Status)
+AND
+HasActiveStatus(_Creature, _Status, 0)
+THEN
+PROC_AMP_DiffV3_RemoveFromCreature(_Creature);
+ApplyStatus(_Creature, _Status, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_DiffV3_Tracked(_Creature, _Status);
+PROC_AMP_BossProgression_BuffBoss(_Creature);
+
+// t2: efflvl 5-8
+
+PROC
+PROC_AMP_DiffV3_ApplyByEffLevel((CHARACTER)_Creature, (STRING)_Mode, (INTEGER)_EffLvl)
+AND
+_EffLvl >= 5
+AND
+_EffLvl < 9
+AND
+IsBoss(_Creature, 0)
+AND
+DB_AMP_DiffV3_TierMap(_Mode, 2, (STRING)_Status)
+AND
+HasActiveStatus(_Creature, _Status, 0)
+THEN
+PROC_AMP_DiffV3_RemoveFromCreature(_Creature);
+ApplyStatus(_Creature, _Status, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_DiffV3_Tracked(_Creature, _Status);
+PROC_AMP_BossProgression_BuffNPC(_Creature);
+
+PROC
+PROC_AMP_DiffV3_ApplyByEffLevel((CHARACTER)_Creature, (STRING)_Mode, (INTEGER)_EffLvl)
+AND
+_EffLvl >= 5
+AND
+_EffLvl < 9
+AND
+IsBoss(_Creature, 1)
+AND
+DB_AMP_DiffV3_BossTierMap(_Mode, 2, (STRING)_Status)
+AND
+HasActiveStatus(_Creature, _Status, 0)
+THEN
+PROC_AMP_DiffV3_RemoveFromCreature(_Creature);
+ApplyStatus(_Creature, _Status, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_DiffV3_Tracked(_Creature, _Status);
+PROC_AMP_BossProgression_BuffBoss(_Creature);
+
+// t3: efflvl 9-11
+
+PROC
+PROC_AMP_DiffV3_ApplyByEffLevel((CHARACTER)_Creature, (STRING)_Mode, (INTEGER)_EffLvl)
+AND
+_EffLvl >= 9
+AND
+_EffLvl < 12
+AND
+IsBoss(_Creature, 0)
+AND
+DB_AMP_DiffV3_TierMap(_Mode, 3, (STRING)_Status)
+AND
+HasActiveStatus(_Creature, _Status, 0)
+THEN
+PROC_AMP_DiffV3_RemoveFromCreature(_Creature);
+ApplyStatus(_Creature, _Status, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_DiffV3_Tracked(_Creature, _Status);
+PROC_AMP_BossProgression_BuffNPC(_Creature);
+
+PROC
+PROC_AMP_DiffV3_ApplyByEffLevel((CHARACTER)_Creature, (STRING)_Mode, (INTEGER)_EffLvl)
+AND
+_EffLvl >= 9
+AND
+_EffLvl < 12
+AND
+IsBoss(_Creature, 1)
+AND
+DB_AMP_DiffV3_BossTierMap(_Mode, 3, (STRING)_Status)
+AND
+HasActiveStatus(_Creature, _Status, 0)
+THEN
+PROC_AMP_DiffV3_RemoveFromCreature(_Creature);
+ApplyStatus(_Creature, _Status, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_DiffV3_Tracked(_Creature, _Status);
+PROC_AMP_BossProgression_BuffBoss(_Creature);
+
+// t4: efflvl 12-15
+
+PROC
+PROC_AMP_DiffV3_ApplyByEffLevel((CHARACTER)_Creature, (STRING)_Mode, (INTEGER)_EffLvl)
+AND
+_EffLvl >= 12
+AND
+_EffLvl < 16
+AND
+IsBoss(_Creature, 0)
+AND
+DB_AMP_DiffV3_TierMap(_Mode, 4, (STRING)_Status)
+AND
+HasActiveStatus(_Creature, _Status, 0)
+THEN
+PROC_AMP_DiffV3_RemoveFromCreature(_Creature);
+ApplyStatus(_Creature, _Status, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_DiffV3_Tracked(_Creature, _Status);
+PROC_AMP_BossProgression_BuffNPC(_Creature);
+
+PROC
+PROC_AMP_DiffV3_ApplyByEffLevel((CHARACTER)_Creature, (STRING)_Mode, (INTEGER)_EffLvl)
+AND
+_EffLvl >= 12
+AND
+_EffLvl < 16
+AND
+IsBoss(_Creature, 1)
+AND
+DB_AMP_DiffV3_BossTierMap(_Mode, 4, (STRING)_Status)
+AND
+HasActiveStatus(_Creature, _Status, 0)
+THEN
+PROC_AMP_DiffV3_RemoveFromCreature(_Creature);
+ApplyStatus(_Creature, _Status, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_DiffV3_Tracked(_Creature, _Status);
+PROC_AMP_BossProgression_BuffBoss(_Creature);
+
+// t5: efflvl 16+
+
+PROC
+PROC_AMP_DiffV3_ApplyByEffLevel((CHARACTER)_Creature, (STRING)_Mode, (INTEGER)_EffLvl)
+AND
+_EffLvl >= 16
+AND
+IsBoss(_Creature, 0)
+AND
+DB_AMP_DiffV3_TierMap(_Mode, 5, (STRING)_Status)
+AND
+HasActiveStatus(_Creature, _Status, 0)
+THEN
+PROC_AMP_DiffV3_RemoveFromCreature(_Creature);
+ApplyStatus(_Creature, _Status, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_DiffV3_Tracked(_Creature, _Status);
+PROC_AMP_BossProgression_BuffNPC(_Creature);
+
+PROC
+PROC_AMP_DiffV3_ApplyByEffLevel((CHARACTER)_Creature, (STRING)_Mode, (INTEGER)_EffLvl)
+AND
+_EffLvl >= 16
+AND
+IsBoss(_Creature, 1)
+AND
+DB_AMP_DiffV3_BossTierMap(_Mode, 5, (STRING)_Status)
+AND
+HasActiveStatus(_Creature, _Status, 0)
+THEN
+PROC_AMP_DiffV3_RemoveFromCreature(_Creature);
+ApplyStatus(_Creature, _Status, -1.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+DB_AMP_DiffV3_Tracked(_Creature, _Status);
+PROC_AMP_BossProgression_BuffBoss(_Creature);
+
+// companion recruited - strip difficulty
+
+IF
+DB_PartOfTheTeam((CHARACTER)_Char)
+AND
+DB_AMP_DiffV3_Known(_Char)
+THEN
+NOT DB_AMP_DiffV3_Known(_Char);
+
+IF
+DB_PartOfTheTeam((CHARACTER)_Char)
+AND
+DB_AMP_DiffV3_Tracked(_Char, (STRING)_Status)
+THEN
+NOT DB_AMP_DiffV3_Tracked(_Char, _Status);
+PROC_AMP_DiffV3_RemoveFromCreature(_Char);
+PROC_AMP_DiffV3_RemoveProgression(_Char);
+
+// difficulty mode changed - react to the mode db insert
+
+IF
+DB_AMP_Difficulty_Mode((STRING)_NewMode)
+THEN
+PROC_AMP_UpdateAvgPartyLevel();
+PROC_AMP_UpdateCurrentTier();
+PROC_AMP_DiffV3_RemovePlayerDebuffs();
+PROC_AMP_DiffV3_OnModeChanged_Collect(_NewMode);
+PROC_AMP_DiffV3_OnModeChanged_Strip(_NewMode);
+PROC_AMP_DiffV3_OnModeChanged_Reapply(_NewMode);
+PROC_AMP_DiffV3_ApplyToKnown(_NewMode);
+PROC_AMP_DiffV3_ApplyPlayerDebuffs(_NewMode);
+
+// collect tracked -> temp
+PROC
+PROC_AMP_DiffV3_OnModeChanged_Collect((STRING)_NewMode)
+AND
+DB_AMP_DiffV3_Tracked((CHARACTER)_Creature, (STRING)_OldStatus)
+THEN
+DB_AMP_DiffV3_Temp(_Creature);
+
+// strip: iterate temp, clear tracked + statuses + progression
+PROC
+PROC_AMP_DiffV3_OnModeChanged_Strip((STRING)_NewMode)
+AND
+DB_AMP_DiffV3_Temp((CHARACTER)_Creature)
+THEN
+PROC_AMP_DiffV3_UntrackCreature(_Creature);
+PROC_AMP_DiffV3_RemoveFromCreature(_Creature);
+PROC_AMP_DiffV3_RemoveProgression(_Creature);
+
+// clear tracked entry for a creature
+PROC
+PROC_AMP_DiffV3_UntrackCreature((CHARACTER)_Creature)
+AND
+DB_AMP_DiffV3_Tracked(_Creature, (STRING)_Status)
+THEN
+NOT DB_AMP_DiffV3_Tracked(_Creature, _Status);
+
+// reapply: iterate temp, apply new mode, clear temp entry
+PROC
+PROC_AMP_DiffV3_OnModeChanged_Reapply((STRING)_NewMode)
+AND
+_NewMode != "NONE"
+AND
+DB_AMP_DiffV3_Temp((CHARACTER)_Creature)
+AND
+IsDead(_Creature, 0)
+THEN
+NOT DB_AMP_DiffV3_Temp(_Creature);
+PROC_AMP_DiffV3_ApplyToCreature(_Creature, _NewMode);
+
+// mode is none - just clear temp
+PROC
+PROC_AMP_DiffV3_OnModeChanged_Reapply((STRING)_NewMode)
+AND
+_NewMode == "NONE"
+AND
+DB_AMP_DiffV3_Temp((CHARACTER)_Creature)
+THEN
+NOT DB_AMP_DiffV3_Temp(_Creature);
+
+// apply to known-but-untracked creatures
+PROC
+PROC_AMP_DiffV3_ApplyToKnown((STRING)_NewMode)
+AND
+_NewMode != "NONE"
+AND
+DB_AMP_DiffV3_Known((CHARACTER)_Creature)
+AND
+NOT DB_AMP_DiffV3_Tracked(_Creature, _)
+AND
+QRY_AMP_DiffV3_ShouldBuff(_Creature)
+THEN
+PROC_AMP_DiffV3_ApplyToCreature(_Creature, _NewMode);
+
+// player debuffs
+
+PROC
+PROC_AMP_DiffV3_ApplyPlayerDebuffs((STRING)_Mode)
+AND
+DB_AMP_DiffV3_PlayerDebuff(_Mode, (STRING)_DebuffStatus)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+HasActiveStatus(_Player, _DebuffStatus, 0)
+THEN
+ApplyStatus(_Player, _DebuffStatus, -1.0, 1, _Player);
+
+PROC
+PROC_AMP_DiffV3_RemovePlayerDebuffs()
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+RemoveStatus(_Player, "AMP_DIFFICULTY_PLAYER_IMPOSSIBLE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Player, "AMP_DIFFICULTY_PLAYER_STANDARD", NULL_00000000-0000-0000-0000-000000000000);
+
+// new player joined - give debuff
+IF
+DB_Players((CHARACTER)_Player)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+_Mode != "NONE"
+AND
+DB_AMP_DiffV3_PlayerDebuff(_Mode, (STRING)_DebuffStatus)
+AND
+HasActiveStatus(_Player, _DebuffStatus, 0)
+THEN
+ApplyStatus(_Player, _DebuffStatus, -1.0, 1, _Player);
+
+// cleanup procs
+
+// remove all npc base statuses
+PROC
+PROC_AMP_DiffV3_RemoveFromCreature((CHARACTER)_Creature)
+AND
+DB_AMP_DiffV3_AllTargets((STRING)_Status)
+AND
+HasActiveStatus(_Creature, _Status, 1)
+THEN
+RemoveStatus(_Creature, _Status, NULL_00000000-0000-0000-0000-000000000000);
+
+// remove all boss base statuses
+PROC
+PROC_AMP_DiffV3_RemoveFromCreature((CHARACTER)_Creature)
+AND
+DB_AMP_DiffV3_AllBosses((STRING)_Status)
+AND
+HasActiveStatus(_Creature, _Status, 1)
+THEN
+RemoveStatus(_Creature, _Status, NULL_00000000-0000-0000-0000-000000000000);
+
+// remove all progression statuses
+PROC
+PROC_AMP_DiffV3_RemoveProgression((CHARACTER)_Creature)
+THEN
+// npc standard
+RemoveStatus(_Creature, "AMP_PROG_NPC_STANDARD_T0_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Creature, "AMP_PROG_NPC_STANDARD_T1_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Creature, "AMP_PROG_NPC_STANDARD_T2_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Creature, "AMP_PROG_NPC_STANDARD_T3_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Creature, "AMP_PROG_NPC_STANDARD_T4_V5", NULL_00000000-0000-0000-0000-000000000000);
+// npc impossible
+RemoveStatus(_Creature, "AMP_PROG_NPC_IMPOSSIBLE_T0_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Creature, "AMP_PROG_NPC_IMPOSSIBLE_T1_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Creature, "AMP_PROG_NPC_IMPOSSIBLE_T2_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Creature, "AMP_PROG_NPC_IMPOSSIBLE_T3_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Creature, "AMP_PROG_NPC_IMPOSSIBLE_T4_V5", NULL_00000000-0000-0000-0000-000000000000);
+// boss standard
+RemoveStatus(_Creature, "AMP_PROG_BOSS_STANDARD_T0_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Creature, "AMP_PROG_BOSS_STANDARD_T1_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Creature, "AMP_PROG_BOSS_STANDARD_T2_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Creature, "AMP_PROG_BOSS_STANDARD_T3_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Creature, "AMP_PROG_BOSS_STANDARD_T4_V5", NULL_00000000-0000-0000-0000-000000000000);
+// boss impossible
+RemoveStatus(_Creature, "AMP_PROG_BOSS_IMPOSSIBLE_T0_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Creature, "AMP_PROG_BOSS_IMPOSSIBLE_T1_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Creature, "AMP_PROG_BOSS_IMPOSSIBLE_T2_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Creature, "AMP_PROG_BOSS_IMPOSSIBLE_T3_V5", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Creature, "AMP_PROG_BOSS_IMPOSSIBLE_T4_V5", NULL_00000000-0000-0000-0000-000000000000);
+
+EXITSECTION
+
+ENDEXITSECTION

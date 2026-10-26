@@ -1,0 +1,73 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// LevelChangeCooldownFix still relaunches a 30-min cooldown on level load on saves where its rules run
+// cancels the pending cdrestore, clears the cooldown on long rest, resets the reroll counter
+
+// cancel lccfix cdrestore on level load. 1500ms so we run after its 500ms cdrestore + 30min setup
+IF
+LevelGameplayStarted(_, _)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+ObjectTimerLaunch(_Host, "AMP_ToTShop_RefreshHotfix_Clear", 1500, 0);
+
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_ToTShop_RefreshHotfix_Clear")
+AND
+DB_AMP_ToTShop_CDPending(_Host)
+THEN
+NOT DB_AMP_ToTShop_CDPending(_Host);
+
+// clear cooldown db after level transition
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_ToTShop_RefreshHotfix_Clear")
+AND
+DB_ToT_Shop_RestockCooldown(1)
+THEN
+NOT DB_ToT_Shop_RestockCooldown(1);
+ObjectTimerCancel(_Host, "ToT_Shop_RestockCooldown");
+ObjectTimerCancel(_Host, "AMP_ToTShop_CDRestore");
+
+// reset stuck cycle counter on old saves predating the 5-reroll cap
+IF
+ObjectTimerFinished((CHARACTER)_Host, "AMP_ToTShop_RefreshHotfix_Clear")
+AND
+DB_ToT_Shop_RerollsSinceLR((INTEGER)_Cycle)
+AND
+_Cycle >= 5
+THEN
+NOT DB_ToT_Shop_RerollsSinceLR(_Cycle);
+DB_ToT_Shop_RerollsSinceLR(0);
+
+// clear cooldown on every long rest so core marks the shop for restock
+IF
+LongRestFinished()
+AND
+DB_ToT_Shop_Enabled(1)
+AND
+DB_ToT_Shop_Activated(1)
+AND
+DB_ToT_Shop_RestockCooldown(1)
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+NOT DB_ToT_Shop_RestockCooldown(1);
+ObjectTimerCancel(_Host, "ToT_Shop_RestockCooldown");
+
+// reset cycle counter on every lr in case core's reset got blocked
+IF
+LongRestFinished()
+AND
+DB_ToT_Shop_RerollsSinceLR((INTEGER)_Cycle)
+AND
+_Cycle > 0
+THEN
+NOT DB_ToT_Shop_RerollsSinceLR(_Cycle);
+DB_ToT_Shop_RerollsSinceLR(0);
+
+EXITSECTION
+ENDEXITSECTION

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="8959e7cf-a9ee-42f3-9b65-ff90bb0decad" />
+					<attribute id="Name" type="LSString" value="AMP_Footman_Veteran" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h62de03b3g1b6cg4cc2g8a37g869ec11ddb0d" version="1" />
+					<attribute id="Title" type="TranslatedString" handle="h3ff32a6fga037g4799g97bfg4f3d1c206716" version="1" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="ParentTemplateId" type="FixedString" value="ebd19426-c110-47f1-9137-9fb306b719cc" />
+					<attribute id="Scale" type="float" value="0.85" />
+					<attribute id="Stats" type="FixedString" value="AMP_Footman_Veteran" />
+					<attribute id="SpellSet" type="FixedString" value="CommonNPCActions" />
+					<attribute id="Equipment" type="FixedString" value="EQP_Shortsword_ScaleMail_Shield_Fist_HelmetMetal" />
+					<attribute id="ForceLifetimeDeath" type="bool" value="True" />
+					<attribute id="DeathEffect" type="guid" value="f56585cd-1df0-47c2-95a2-74ba2fd46662" />
+					<attribute id="CharacterVisualResourceID" type="FixedString" value="1503b1a1-2c9d-6343-beaf-1f69b8a0d616" />
+					<attribute id="IsLootable" type="bool" value="False" />
+					<attribute id="IsEquipmentLootable" type="bool" value="False" />
+					<attribute id="CanBePickpocketed" type="bool" value="False" />
+					<attribute id="VFXScale" type="float" value="0.85" />
+					<attribute id="Archetype" type="FixedString" value="melee_smart" />
+					<attribute id="AnubisConfigName" type="FixedString" value="DefaultCombat" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="26c78224-a4c1-43e4-b943-75e7fa1bfa41" />
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

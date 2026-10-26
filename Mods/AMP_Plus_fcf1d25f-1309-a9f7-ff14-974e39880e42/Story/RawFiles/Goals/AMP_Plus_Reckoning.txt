@@ -1,0 +1,857 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_AffixDef(0, _, _, _, _, _)
+THEN
+DB_AMP_Plus_AffixDef(0, "RECKONING", "AMP_Plus_Reckoning_Ask", 0, 1, 1);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_Reck_TierOf("AMP_NPC_STANDARD_T0_V4", _)
+THEN
+DB_AMP_Plus_Reck_TierOf("AMP_NPC_STANDARD_T0_V4", 0);
+DB_AMP_Plus_Reck_TierOf("AMP_NPC_STANDARD_T1_V4", 1);
+DB_AMP_Plus_Reck_TierOf("AMP_NPC_STANDARD_T2_V4", 2);
+DB_AMP_Plus_Reck_TierOf("AMP_NPC_STANDARD_T3_V4", 3);
+DB_AMP_Plus_Reck_TierOf("AMP_NPC_STANDARD_T4_V4", 4);
+DB_AMP_Plus_Reck_TierOf("AMP_NPC_STANDARD_T5_V4", 5);
+DB_AMP_Plus_Reck_TierOf("AMP_NPC_IMPOSSIBLE_T0_V4", 0);
+DB_AMP_Plus_Reck_TierOf("AMP_NPC_IMPOSSIBLE_T1_V4", 1);
+DB_AMP_Plus_Reck_TierOf("AMP_NPC_IMPOSSIBLE_T2_V4", 2);
+DB_AMP_Plus_Reck_TierOf("AMP_NPC_IMPOSSIBLE_T3_V4", 3);
+DB_AMP_Plus_Reck_TierOf("AMP_NPC_IMPOSSIBLE_T4_V4", 4);
+DB_AMP_Plus_Reck_TierOf("AMP_NPC_IMPOSSIBLE_T5_V4", 5);
+DB_AMP_Plus_Reck_TierOf("AMP_BOSS_STANDARD_T0_V4", 0);
+DB_AMP_Plus_Reck_TierOf("AMP_BOSS_STANDARD_T1_V4", 1);
+DB_AMP_Plus_Reck_TierOf("AMP_BOSS_STANDARD_T2_V4", 2);
+DB_AMP_Plus_Reck_TierOf("AMP_BOSS_STANDARD_T3_V4", 3);
+DB_AMP_Plus_Reck_TierOf("AMP_BOSS_STANDARD_T4_V4", 4);
+DB_AMP_Plus_Reck_TierOf("AMP_BOSS_STANDARD_T5_V4", 5);
+DB_AMP_Plus_Reck_TierOf("AMP_BOSS_IMPOSSIBLE_T0_V4", 0);
+DB_AMP_Plus_Reck_TierOf("AMP_BOSS_IMPOSSIBLE_T1_V4", 1);
+DB_AMP_Plus_Reck_TierOf("AMP_BOSS_IMPOSSIBLE_T2_V4", 2);
+DB_AMP_Plus_Reck_TierOf("AMP_BOSS_IMPOSSIBLE_T3_V4", 3);
+DB_AMP_Plus_Reck_TierOf("AMP_BOSS_IMPOSSIBLE_T4_V4", 4);
+DB_AMP_Plus_Reck_TierOf("AMP_BOSS_IMPOSSIBLE_T5_V4", 5);
+DB_AMP_Plus_Reck_TierOf("AMP_Plus_NPC_CASUAL_T0_V4", 0);
+DB_AMP_Plus_Reck_TierOf("AMP_Plus_NPC_CASUAL_T1_V4", 1);
+DB_AMP_Plus_Reck_TierOf("AMP_Plus_NPC_CASUAL_T2_V4", 2);
+DB_AMP_Plus_Reck_TierOf("AMP_Plus_NPC_CASUAL_T3_V4", 3);
+DB_AMP_Plus_Reck_TierOf("AMP_Plus_NPC_CASUAL_T4_V4", 4);
+DB_AMP_Plus_Reck_TierOf("AMP_Plus_NPC_CASUAL_T5_V4", 5);
+DB_AMP_Plus_Reck_TierOf("AMP_Plus_BOSS_CASUAL_T0_V4", 0);
+DB_AMP_Plus_Reck_TierOf("AMP_Plus_BOSS_CASUAL_T1_V4", 1);
+DB_AMP_Plus_Reck_TierOf("AMP_Plus_BOSS_CASUAL_T2_V4", 2);
+DB_AMP_Plus_Reck_TierOf("AMP_Plus_BOSS_CASUAL_T3_V4", 3);
+DB_AMP_Plus_Reck_TierOf("AMP_Plus_BOSS_CASUAL_T4_V4", 4);
+DB_AMP_Plus_Reck_TierOf("AMP_Plus_BOSS_CASUAL_T5_V4", 5);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Plus_Reck_TuningVer(3)
+THEN
+PROC_AMP_Plus_Reck_TuningReseed();
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Plus_Reck_TuningVer(3)
+THEN
+PROC_AMP_Plus_Reck_TuningReseed();
+
+PROC
+PROC_AMP_Plus_Reck_TuningReseed()
+THEN
+PROC_AMP_Plus_Reck_PurgeTuningVer();
+PROC_AMP_Plus_Reck_PurgeDespairChance();
+PROC_AMP_Plus_Reck_PurgeMobCap();
+PROC_AMP_Plus_Reck_PurgeBossNeed();
+PROC_AMP_Plus_Reck_PurgeBossNeedLow();
+DB_AMP_Plus_Reck_TuningVer(3);
+DB_AMP_Plus_Reck_DespairChance("CASUAL", 0, 0);
+DB_AMP_Plus_Reck_DespairChance("CASUAL", 1, 0);
+DB_AMP_Plus_Reck_DespairChance("CASUAL", 2, 0);
+DB_AMP_Plus_Reck_DespairChance("CASUAL", 3, 15);
+DB_AMP_Plus_Reck_DespairChance("CASUAL", 4, 25);
+DB_AMP_Plus_Reck_DespairChance("CASUAL", 5, 35);
+DB_AMP_Plus_Reck_DespairChance("STANDARD", 0, 0);
+DB_AMP_Plus_Reck_DespairChance("STANDARD", 1, 15);
+DB_AMP_Plus_Reck_DespairChance("STANDARD", 2, 20);
+DB_AMP_Plus_Reck_DespairChance("STANDARD", 3, 30);
+DB_AMP_Plus_Reck_DespairChance("STANDARD", 4, 40);
+DB_AMP_Plus_Reck_DespairChance("STANDARD", 5, 50);
+DB_AMP_Plus_Reck_DespairChance("IMPOSSIBLE", 0, 0);
+DB_AMP_Plus_Reck_DespairChance("IMPOSSIBLE", 1, 20);
+DB_AMP_Plus_Reck_DespairChance("IMPOSSIBLE", 2, 30);
+DB_AMP_Plus_Reck_DespairChance("IMPOSSIBLE", 3, 40);
+DB_AMP_Plus_Reck_DespairChance("IMPOSSIBLE", 4, 50);
+DB_AMP_Plus_Reck_DespairChance("IMPOSSIBLE", 5, 60);
+DB_AMP_Plus_Reck_MobCap("CASUAL", 1);
+DB_AMP_Plus_Reck_MobCap("STANDARD", 1);
+DB_AMP_Plus_Reck_MobCap("IMPOSSIBLE", 2);
+DB_AMP_Plus_Reck_BossNeed("CASUAL", 0, 5);
+DB_AMP_Plus_Reck_BossNeed("CASUAL", 1, 4);
+DB_AMP_Plus_Reck_BossNeed("CASUAL", 2, 3);
+DB_AMP_Plus_Reck_BossNeed("STANDARD", 0, 4);
+DB_AMP_Plus_Reck_BossNeed("STANDARD", 1, 3);
+DB_AMP_Plus_Reck_BossNeed("STANDARD", 2, 2);
+DB_AMP_Plus_Reck_BossNeed("IMPOSSIBLE", 0, 3);
+DB_AMP_Plus_Reck_BossNeed("IMPOSSIBLE", 1, 2);
+DB_AMP_Plus_Reck_BossNeed("IMPOSSIBLE", 2, 2);
+DB_AMP_Plus_Reck_BossNeedLow("CASUAL", 0, 5);
+DB_AMP_Plus_Reck_BossNeedLow("CASUAL", 1, 5);
+DB_AMP_Plus_Reck_BossNeedLow("CASUAL", 2, 4);
+DB_AMP_Plus_Reck_BossNeedLow("STANDARD", 0, 5);
+DB_AMP_Plus_Reck_BossNeedLow("STANDARD", 1, 4);
+DB_AMP_Plus_Reck_BossNeedLow("STANDARD", 2, 3);
+DB_AMP_Plus_Reck_BossNeedLow("IMPOSSIBLE", 0, 4);
+DB_AMP_Plus_Reck_BossNeedLow("IMPOSSIBLE", 1, 3);
+DB_AMP_Plus_Reck_BossNeedLow("IMPOSSIBLE", 2, 2);
+
+PROC
+PROC_AMP_Plus_Reck_PurgeTuningVer()
+AND
+DB_AMP_Plus_Reck_TuningVer((INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_Reck_TuningVer(_V);
+PROC_AMP_Plus_Reck_PurgeTuningVer();
+
+PROC
+PROC_AMP_Plus_Reck_PurgeDespairChance()
+AND
+DB_AMP_Plus_Reck_DespairChance((STRING)_M, (INTEGER)_T, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_Reck_DespairChance(_M, _T, _V);
+PROC_AMP_Plus_Reck_PurgeDespairChance();
+
+PROC
+PROC_AMP_Plus_Reck_PurgeMobCap()
+AND
+DB_AMP_Plus_Reck_MobCap((STRING)_M, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_Reck_MobCap(_M, _V);
+PROC_AMP_Plus_Reck_PurgeMobCap();
+
+PROC
+PROC_AMP_Plus_Reck_PurgeBossNeed()
+AND
+DB_AMP_Plus_Reck_BossNeed((STRING)_M, (INTEGER)_K, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_Reck_BossNeed(_M, _K, _V);
+PROC_AMP_Plus_Reck_PurgeBossNeed();
+
+PROC
+PROC_AMP_Plus_Reck_PurgeBossNeedLow()
+AND
+DB_AMP_Plus_Reck_BossNeedLow((STRING)_M, (INTEGER)_K, (INTEGER)_V)
+THEN
+NOT DB_AMP_Plus_Reck_BossNeedLow(_M, _K, _V);
+PROC_AMP_Plus_Reck_PurgeBossNeedLow();
+
+QRY
+QRY_AMP_Plus_Reck_BossOK((CHARACTER)_B)
+AND
+IsBoss(_B, 1)
+AND
+IsDead(_B, 0)
+AND
+QRY_AMP_Plus_Affix_On("RECKONING")
+AND
+DB_AMP_DiffV3_Tracked(_B, (STRING)_Status)
+AND
+DB_AMP_Plus_Reck_TierOf(_Status, (INTEGER)_Tier)
+AND
+_Tier > 0
+THEN
+DB_NOOP(1);
+
+IF
+EnteredCombat((CHARACTER)_E, (GUIDSTRING)_C)
+AND
+GetHostCharacter((CHARACTER)_Host)
+AND
+IsEnemy(_E, _Host, 1)
+AND
+NOT DB_Players(_E)
+AND
+NOT DB_AMP_Plus_Reck_Member(_E, _C)
+THEN
+DB_AMP_Plus_Reck_Member(_E, _C);
+
+IF
+EnteredCombat((CHARACTER)_B, (GUIDSTRING)_C)
+AND
+DB_AMP_Plus_Reck_Member(_B, _C)
+AND
+QRY_AMP_Plus_Reck_BossOK(_B)
+THEN
+PROC_AMP_Plus_Reck_BossEnsure(_B);
+
+// clear everything keyed to the members before draining the members
+
+IF
+CombatEnded((GUIDSTRING)_C)
+THEN
+PROC_AMP_Plus_Reck_CombatClean(_C);
+
+PROC
+PROC_AMP_Plus_Reck_CombatClean((GUIDSTRING)_C)
+AND
+DB_AMP_Plus_Reck_Member((CHARACTER)_E, _C)
+THEN
+RemoveStatus(_E, "AMP_PLUS_RECKONING", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_E, "AMP_PLUS_RECKONING_WARN", NULL_00000000-0000-0000-0000-000000000000);
+PROC_AMP_Plus_Reck_GaugeClear(_E);
+RemoveStatus(_E, "AMP_PLUS_RECKONING_BOSS_HP75", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_E, "AMP_PLUS_RECKONING_BOSS_HP50", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_E, "AMP_PLUS_RECKONING_BOSS_HP35", NULL_00000000-0000-0000-0000-000000000000);
+PROC_AMP_Plus_Reck_BossForget(_E);
+
+PROC
+PROC_AMP_Plus_Reck_CombatClean((GUIDSTRING)_C)
+THEN
+PROC_AMP_Plus_Reck_DrainCarriers(_C);
+PROC_AMP_Plus_Reck_DrainBest(_C);
+PROC_AMP_Plus_Reck_DrainMembers(_C);
+
+PROC
+PROC_AMP_Plus_Reck_CombatClean((GUIDSTRING)_C)
+AND
+DB_AMP_Plus_Reck_CarrierN(_C, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Reck_CarrierN(_C, _N);
+
+PROC
+PROC_AMP_Plus_Reck_DrainCarriers((GUIDSTRING)_C)
+AND
+DB_AMP_Plus_Reck_Carrier((CHARACTER)_E, _C, (STRING)_St)
+THEN
+NOT DB_AMP_Plus_Reck_Carrier(_E, _C, _St);
+PROC_AMP_Plus_Reck_DrainCarriers(_C);
+
+PROC
+PROC_AMP_Plus_Reck_DrainBest((GUIDSTRING)_C)
+AND
+DB_AMP_Plus_Reck_Best(_C, (CHARACTER)_E, (REAL)_D)
+THEN
+NOT DB_AMP_Plus_Reck_Best(_C, _E, _D);
+PROC_AMP_Plus_Reck_DrainBest(_C);
+
+PROC
+PROC_AMP_Plus_Reck_DrainMembers((GUIDSTRING)_C)
+AND
+DB_AMP_Plus_Reck_Member((CHARACTER)_E, _C)
+THEN
+NOT DB_AMP_Plus_Reck_Member(_E, _C);
+PROC_AMP_Plus_Reck_DrainMembers(_C);
+
+// one row per boss in each database, a plain retract is safe
+
+PROC
+PROC_AMP_Plus_Reck_BossForget((CHARACTER)_B)
+AND
+DB_AMP_Plus_Reck_Gauge(_B, (INTEGER)_G)
+THEN
+NOT DB_AMP_Plus_Reck_Gauge(_B, _G);
+
+PROC
+PROC_AMP_Plus_Reck_BossForget((CHARACTER)_B)
+AND
+DB_AMP_Plus_Reck_BossStage(_B, (STRING)_St)
+THEN
+NOT DB_AMP_Plus_Reck_BossStage(_B, _St);
+
+PROC
+PROC_AMP_Plus_Reck_BossForget((CHARACTER)_B)
+AND
+DB_AMP_Plus_Reck_BossFiredK(_B, (INTEGER)_K)
+THEN
+NOT DB_AMP_Plus_Reck_BossFiredK(_B, _K);
+
+PROC
+PROC_AMP_Plus_Reck_BossForget((CHARACTER)_B)
+AND
+DB_AMP_Plus_Reck_BossNeedNow(_B, (INTEGER)_Need)
+THEN
+NOT DB_AMP_Plus_Reck_BossNeedNow(_B, _Need);
+
+PROC
+PROC_AMP_Plus_Reck_BossForget((CHARACTER)_B)
+AND
+DB_AMP_Plus_Reck_BossPending(_B)
+THEN
+NOT DB_AMP_Plus_Reck_BossPending(_B);
+
+IF
+TurnStarted((GUIDSTRING)_E)
+AND
+DB_AMP_Plus_Reck_Carrier((CHARACTER)_E, (GUIDSTRING)_C, "WARN")
+AND
+IsDead(_E, 0)
+THEN
+NOT DB_AMP_Plus_Reck_Carrier(_E, _C, "WARN");
+DB_AMP_Plus_Reck_Carrier(_E, _C, "ACTIVE");
+RemoveStatus(_E, "AMP_PLUS_RECKONING_WARN", NULL_00000000-0000-0000-0000-000000000000);
+ApplyStatus(_E, "AMP_PLUS_RECKONING", 6.0, 1, _E);
+
+IF
+TurnEnded((CHARACTER)_E)
+AND
+DB_AMP_Plus_Reck_Carrier(_E, (GUIDSTRING)_C, "ACTIVE")
+THEN
+NOT DB_AMP_Plus_Reck_Carrier(_E, _C, "ACTIVE");
+PROC_AMP_Plus_Reck_CarrierDec(_C);
+
+PROC
+PROC_AMP_Plus_Reck_CarrierDec((GUIDSTRING)_C)
+AND
+DB_AMP_Plus_Reck_CarrierN(_C, (INTEGER)_N)
+AND
+_N > 0
+AND
+IntegerSubtract(_N, 1, (INTEGER)_N2)
+THEN
+NOT DB_AMP_Plus_Reck_CarrierN(_C, _N);
+DB_AMP_Plus_Reck_CarrierN(_C, _N2);
+
+IF
+StatusApplied((CHARACTER)_E, "AMP_PLUS_RECKONING_DESPAIR_SIGNAL", _, _)
+AND
+DB_AMP_Plus_Reck_Member(_E, (GUIDSTRING)_C)
+AND
+IsBoss(_E, 0)
+AND
+IsDead(_E, 0)
+AND
+QRY_AMP_Plus_Affix_On("RECKONING")
+AND
+DB_AMP_DiffV3_Tracked(_E, (STRING)_Status)
+AND
+DB_AMP_Plus_Reck_TierOf(_Status, (INTEGER)_Tier)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+DB_AMP_Plus_Reck_DespairChance(_Mode, _Tier, (INTEGER)_Chance)
+AND
+_Chance > 0
+AND
+Random(100, (INTEGER)_Roll)
+AND
+_Roll < _Chance
+THEN
+PROC_AMP_Plus_Reck_MobMark(_E, _C);
+
+IF
+StatusApplied((CHARACTER)_E, "AMP_PLUS_RECKONING_DESPAIR_SIGNAL", _, _)
+THEN
+RemoveStatus(_E, "AMP_PLUS_RECKONING_DESPAIR_SIGNAL", NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Reck_MobMark((CHARACTER)_E, (GUIDSTRING)_C)
+AND
+NOT DB_AMP_Plus_Reck_CarrierN(_C, _)
+THEN
+DB_AMP_Plus_Reck_CarrierN(_C, 0);
+
+PROC
+PROC_AMP_Plus_Reck_MobMark((CHARACTER)_E, (GUIDSTRING)_C)
+AND
+NOT DB_AMP_Plus_Reck_Carrier(_E, _, _)
+AND
+IsDead(_E, 0)
+AND
+DB_AMP_Plus_Reck_CarrierN(_C, (INTEGER)_N)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+DB_AMP_Plus_Reck_MobCap(_Mode, (INTEGER)_Cap)
+AND
+_N < _Cap
+AND
+IntegerSum(_N, 1, (INTEGER)_N2)
+THEN
+NOT DB_AMP_Plus_Reck_CarrierN(_C, _N);
+DB_AMP_Plus_Reck_CarrierN(_C, _N2);
+DB_AMP_Plus_Reck_Carrier(_E, _C, "WARN");
+ApplyStatus(_E, "AMP_PLUS_RECKONING_WARN", -1.0, 1, _E);
+
+IF
+Died((CHARACTER)_E)
+AND
+DB_AMP_Plus_Reck_Carrier(_E, (GUIDSTRING)_C, (STRING)_St)
+THEN
+NOT DB_AMP_Plus_Reck_Carrier(_E, _C, _St);
+RemoveStatus(_E, "AMP_PLUS_RECKONING_WARN", NULL_00000000-0000-0000-0000-000000000000);
+PROC_AMP_Plus_Reck_CarrierDec(_C);
+PROC_AMP_Plus_Reck_MobDied(_E, _C, _St);
+
+PROC
+PROC_AMP_Plus_Reck_MobDied((CHARACTER)_E, (GUIDSTRING)_C, (STRING)_St)
+AND
+_St == "WARN"
+AND
+QRY_AMP_Plus_Affix_On("RECKONING")
+THEN
+PROC_AMP_Plus_Reck_Transfer(_E, _C);
+
+// no readable distance: first living candidate wins at a flat 0.0
+
+PROC
+PROC_AMP_Plus_Reck_Transfer((CHARACTER)_Dead, (GUIDSTRING)_C)
+THEN
+PROC_AMP_Plus_Reck_DrainBest(_C);
+
+PROC
+PROC_AMP_Plus_Reck_Transfer((CHARACTER)_Dead, (GUIDSTRING)_C)
+AND
+DB_AMP_Plus_Reck_Member((CHARACTER)_Cand, _C)
+AND
+NOT _Cand == _Dead
+AND
+IsDead(_Cand, 0)
+AND
+IsBoss(_Cand, 0)
+AND
+NOT DB_AMP_Plus_Reck_Carrier(_Cand, _, _)
+AND
+GetDistanceTo(_Dead, _Cand, (REAL)_Dist)
+THEN
+PROC_AMP_Plus_Reck_Consider(_C, _Cand, _Dist);
+
+PROC
+PROC_AMP_Plus_Reck_Transfer((CHARACTER)_Dead, (GUIDSTRING)_C)
+AND
+NOT DB_AMP_Plus_Reck_Best(_C, _, _)
+AND
+DB_AMP_Plus_Reck_Member((CHARACTER)_Cand, _C)
+AND
+NOT _Cand == _Dead
+AND
+IsDead(_Cand, 0)
+AND
+IsBoss(_Cand, 0)
+AND
+NOT DB_AMP_Plus_Reck_Carrier(_Cand, _, _)
+THEN
+PROC_AMP_Plus_Reck_Consider(_C, _Cand, 0.0);
+
+PROC
+PROC_AMP_Plus_Reck_Transfer((CHARACTER)_Dead, (GUIDSTRING)_C)
+AND
+DB_AMP_Plus_Reck_Best(_C, (CHARACTER)_Win, (REAL)_D)
+THEN
+NOT DB_AMP_Plus_Reck_Best(_C, _Win, _D);
+PROC_AMP_Plus_Reck_MobMark(_Win, _C);
+
+PROC
+PROC_AMP_Plus_Reck_Consider((GUIDSTRING)_C, (CHARACTER)_Cand, (REAL)_Dist)
+AND
+NOT DB_AMP_Plus_Reck_Best(_C, _, _)
+THEN
+DB_AMP_Plus_Reck_Best(_C, _Cand, _Dist);
+
+PROC
+PROC_AMP_Plus_Reck_Consider((GUIDSTRING)_C, (CHARACTER)_Cand, (REAL)_Dist)
+AND
+DB_AMP_Plus_Reck_Best(_C, (CHARACTER)_Old, (REAL)_OldDist)
+AND
+_Dist < _OldDist
+THEN
+NOT DB_AMP_Plus_Reck_Best(_C, _Old, _OldDist);
+DB_AMP_Plus_Reck_Best(_C, _Cand, _Dist);
+
+PROC
+PROC_AMP_Plus_Reck_BossEnsure((CHARACTER)_B)
+AND
+NOT DB_AMP_Plus_Reck_Gauge(_B, _)
+THEN
+DB_AMP_Plus_Reck_Gauge(_B, 0);
+
+PROC
+PROC_AMP_Plus_Reck_BossEnsure((CHARACTER)_B)
+AND
+NOT DB_AMP_Plus_Reck_BossFiredK(_B, _)
+THEN
+DB_AMP_Plus_Reck_BossFiredK(_B, 0);
+
+PROC
+PROC_AMP_Plus_Reck_BossEnsure((CHARACTER)_B)
+AND
+NOT DB_AMP_Plus_Reck_BossNeedNow(_B, _)
+THEN
+PROC_AMP_Plus_Reck_BossNeedCalc(_B);
+
+PROC
+PROC_AMP_Plus_Reck_BossEnsure((CHARACTER)_B)
+AND
+HasActiveStatus(_B, "AMP_PLUS_RECKONING_BOSSINFO", 0)
+THEN
+ApplyStatus(_B, "AMP_PLUS_RECKONING_BOSSINFO", -1.0, 1, _B);
+
+PROC
+PROC_AMP_Plus_Reck_BossNeedCalc((CHARACTER)_B)
+AND
+DB_AMP_Plus_Reck_BossNeedNow(_B, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Plus_Reck_BossNeedNow(_B, _Old);
+
+PROC
+PROC_AMP_Plus_Reck_BossNeedCalc((CHARACTER)_B)
+AND
+DB_AMP_Plus_Reck_BossFiredK(_B, (INTEGER)_K)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+DB_AMP_DiffV3_Tracked(_B, (STRING)_Status)
+AND
+DB_AMP_Plus_Reck_TierOf(_Status, (INTEGER)_Tier)
+AND
+_Tier >= 3
+AND
+DB_AMP_Plus_Reck_BossNeed(_Mode, _K, (INTEGER)_Need)
+AND
+NOT DB_AMP_Plus_Reck_BossNeedNow(_B, _)
+THEN
+DB_AMP_Plus_Reck_BossNeedNow(_B, _Need);
+
+PROC
+PROC_AMP_Plus_Reck_BossNeedCalc((CHARACTER)_B)
+AND
+DB_AMP_Plus_Reck_BossFiredK(_B, (INTEGER)_K)
+AND
+DB_AMP_Difficulty_Mode((STRING)_Mode)
+AND
+DB_AMP_DiffV3_Tracked(_B, (STRING)_Status)
+AND
+DB_AMP_Plus_Reck_TierOf(_Status, (INTEGER)_Tier)
+AND
+_Tier < 3
+AND
+DB_AMP_Plus_Reck_BossNeedLow(_Mode, _K, (INTEGER)_Need)
+AND
+NOT DB_AMP_Plus_Reck_BossNeedNow(_B, _)
+THEN
+DB_AMP_Plus_Reck_BossNeedNow(_B, _Need);
+
+PROC
+PROC_AMP_Plus_Reck_BossNeedCalc((CHARACTER)_B)
+AND
+NOT DB_AMP_Plus_Reck_BossNeedNow(_B, _)
+THEN
+DB_AMP_Plus_Reck_BossNeedNow(_B, 4);
+
+PROC
+PROC_AMP_Plus_Reck_BossFiredInc((CHARACTER)_B)
+AND
+DB_AMP_Plus_Reck_BossFiredK(_B, (INTEGER)_K)
+AND
+_K < 2
+AND
+IntegerSum(_K, 1, (INTEGER)_K2)
+THEN
+NOT DB_AMP_Plus_Reck_BossFiredK(_B, _K);
+DB_AMP_Plus_Reck_BossFiredK(_B, _K2);
+
+PROC
+PROC_AMP_Plus_Reck_BossFiredInc((CHARACTER)_B)
+THEN
+PROC_AMP_Plus_Reck_BossNeedCalc(_B);
+
+// full-gauge body goes first, once it raises the stage the partial one stops matching
+
+PROC
+PROC_AMP_Plus_Reck_BossCharge((CHARACTER)_B, (GUIDSTRING)_C, (INTEGER)_Add)
+THEN
+PROC_AMP_Plus_Reck_BossEnsure(_B);
+
+PROC
+PROC_AMP_Plus_Reck_BossCharge((CHARACTER)_B, (GUIDSTRING)_C, (INTEGER)_Add)
+AND
+NOT DB_AMP_Plus_Reck_BossStage(_B, _)
+AND
+DB_AMP_Plus_Reck_Gauge(_B, (INTEGER)_Old)
+AND
+IntegerSum(_Old, _Add, (INTEGER)_New)
+AND
+DB_AMP_Plus_Reck_BossNeedNow(_B, (INTEGER)_Need)
+AND
+_New >= _Need
+THEN
+NOT DB_AMP_Plus_Reck_Gauge(_B, _Old);
+DB_AMP_Plus_Reck_Gauge(_B, 0);
+PROC_AMP_Plus_Reck_GaugeClear(_B);
+DB_AMP_Plus_Reck_BossStage(_B, "WARN");
+ApplyStatus(_B, "AMP_PLUS_RECKONING_WARN", -1.0, 1, _B);
+
+PROC
+PROC_AMP_Plus_Reck_BossCharge((CHARACTER)_B, (GUIDSTRING)_C, (INTEGER)_Add)
+AND
+NOT DB_AMP_Plus_Reck_BossStage(_B, _)
+AND
+DB_AMP_Plus_Reck_Gauge(_B, (INTEGER)_Old)
+AND
+IntegerSum(_Old, _Add, (INTEGER)_New)
+AND
+DB_AMP_Plus_Reck_BossNeedNow(_B, (INTEGER)_Need)
+AND
+_New < _Need
+THEN
+NOT DB_AMP_Plus_Reck_Gauge(_B, _Old);
+DB_AMP_Plus_Reck_Gauge(_B, _New);
+PROC_AMP_Plus_Reck_GaugeShow(_B, _New);
+
+PROC
+PROC_AMP_Plus_Reck_GaugeClear((CHARACTER)_B)
+THEN
+RemoveStatus(_B, "AMP_PLUS_RECKONING_GAUGE_1", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_B, "AMP_PLUS_RECKONING_GAUGE_2", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_B, "AMP_PLUS_RECKONING_GAUGE_3", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_B, "AMP_PLUS_RECKONING_GAUGE_4", NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Reck_GaugeShow((CHARACTER)_B, (INTEGER)_N)
+AND
+_N == 1
+THEN
+ApplyStatus(_B, "AMP_PLUS_RECKONING_GAUGE_1", -1.0, 1, _B);
+
+PROC
+PROC_AMP_Plus_Reck_GaugeShow((CHARACTER)_B, (INTEGER)_N)
+AND
+_N == 2
+THEN
+ApplyStatus(_B, "AMP_PLUS_RECKONING_GAUGE_2", -1.0, 1, _B);
+
+PROC
+PROC_AMP_Plus_Reck_GaugeShow((CHARACTER)_B, (INTEGER)_N)
+AND
+_N == 3
+THEN
+ApplyStatus(_B, "AMP_PLUS_RECKONING_GAUGE_3", -1.0, 1, _B);
+
+PROC
+PROC_AMP_Plus_Reck_GaugeShow((CHARACTER)_B, (INTEGER)_N)
+AND
+_N == 4
+THEN
+ApplyStatus(_B, "AMP_PLUS_RECKONING_GAUGE_4", -1.0, 1, _B);
+
+IF
+TurnStarted((GUIDSTRING)_B)
+AND
+DB_AMP_Plus_Reck_Member((CHARACTER)_B, (GUIDSTRING)_C)
+AND
+QRY_AMP_Plus_Reck_BossOK(_B)
+THEN
+PROC_AMP_Plus_Reck_BossTurn(_B, _C);
+
+PROC
+PROC_AMP_Plus_Reck_BossTurn((CHARACTER)_B, (GUIDSTRING)_C)
+AND
+DB_AMP_Plus_Reck_BossStage(_B, "WARN")
+THEN
+NOT DB_AMP_Plus_Reck_BossStage(_B, "WARN");
+DB_AMP_Plus_Reck_BossStage(_B, "ACTIVE");
+RemoveStatus(_B, "AMP_PLUS_RECKONING_WARN", NULL_00000000-0000-0000-0000-000000000000);
+ApplyStatus(_B, "AMP_PLUS_RECKONING", 6.0, 1, _B);
+PROC_AMP_Plus_Reck_BossFiredInc(_B);
+
+PROC
+PROC_AMP_Plus_Reck_BossTurn((CHARACTER)_B, (GUIDSTRING)_C)
+AND
+NOT DB_AMP_Plus_Reck_BossStage(_B, _)
+THEN
+PROC_AMP_Plus_Reck_BossCharge(_B, _C, 1);
+
+IF
+TurnEnded((CHARACTER)_B)
+AND
+DB_AMP_Plus_Reck_BossStage(_B, "ACTIVE")
+THEN
+NOT DB_AMP_Plus_Reck_BossStage(_B, "ACTIVE");
+PROC_AMP_Plus_Reck_BossAfterActive(_B);
+
+PROC
+PROC_AMP_Plus_Reck_BossAfterActive((CHARACTER)_B)
+AND
+DB_AMP_Plus_Reck_BossPending(_B)
+AND
+DB_AMP_Plus_Reck_Member(_B, (GUIDSTRING)_C)
+THEN
+NOT DB_AMP_Plus_Reck_BossPending(_B);
+PROC_AMP_Plus_Reck_BossCharge(_B, _C, 99);
+
+IF
+Died((CHARACTER)_E)
+AND
+DB_AMP_Plus_Reck_Member(_E, (GUIDSTRING)_C)
+AND
+DB_AMP_Plus_Reck_Member((CHARACTER)_B, _C)
+AND
+NOT _B == _E
+AND
+QRY_AMP_Plus_Reck_BossOK(_B)
+THEN
+PROC_AMP_Plus_Reck_BossCharge(_B, _C, 1);
+
+IF
+StatusApplied((CHARACTER)_B, "AMP_PLUS_RECKONING_BOSS_HP75", _, _)
+AND
+DB_AMP_Plus_Reck_Member(_B, (GUIDSTRING)_C)
+AND
+QRY_AMP_Plus_Reck_BossOK(_B)
+THEN
+PROC_AMP_Plus_Reck_BossCharge(_B, _C, 1);
+
+IF
+StatusApplied((CHARACTER)_B, "AMP_PLUS_RECKONING_BOSS_HP50", _, _)
+AND
+DB_AMP_Plus_Reck_Member(_B, (GUIDSTRING)_C)
+AND
+QRY_AMP_Plus_Reck_BossOK(_B)
+THEN
+PROC_AMP_Plus_Reck_BossCharge(_B, _C, 1);
+
+IF
+StatusApplied((CHARACTER)_B, "AMP_PLUS_RECKONING_BOSS_HP35", _, _)
+AND
+DB_AMP_Plus_Reck_Member(_B, (GUIDSTRING)_C)
+AND
+QRY_AMP_Plus_Reck_BossOK(_B)
+THEN
+PROC_AMP_Plus_Reck_BossLastStand(_B, _C);
+
+PROC
+PROC_AMP_Plus_Reck_BossLastStand((CHARACTER)_B, (GUIDSTRING)_C)
+AND
+DB_AMP_Plus_Reck_BossStage(_B, "ACTIVE")
+THEN
+DB_AMP_Plus_Reck_BossPending(_B);
+
+PROC
+PROC_AMP_Plus_Reck_BossLastStand((CHARACTER)_B, (GUIDSTRING)_C)
+AND
+NOT DB_AMP_Plus_Reck_BossStage(_B, _)
+THEN
+PROC_AMP_Plus_Reck_BossCharge(_B, _C, 99);
+
+IF
+DB_AMP_DiffV3_Tracked((CHARACTER)_E, (STRING)_Status)
+AND
+IsBoss(_E, 0)
+AND
+QRY_AMP_Plus_Affix_On("RECKONING")
+AND
+DB_AMP_Plus_Reck_TierOf(_Status, (INTEGER)_Tier)
+AND
+_Tier > 0
+THEN
+ApplyStatus(_E, "AMP_PLUS_RECKONING_INFO_T1", -1.0, 1, _E);
+
+IF
+DB_AMP_DiffV3_Tracked((CHARACTER)_E, (STRING)_Status)
+AND
+IsBoss(_E, 1)
+AND
+QRY_AMP_Plus_Affix_On("RECKONING")
+AND
+DB_AMP_Plus_Reck_TierOf(_Status, (INTEGER)_Tier)
+AND
+_Tier > 0
+THEN
+ApplyStatus(_E, "AMP_PLUS_RECKONING_BOSSINFO", -1.0, 1, _E);
+
+// sweep reaches loaded creatures only and carriers are permanent, so strip stragglers on joining a fight
+
+IF
+EnteredCombat((CHARACTER)_E, _)
+AND
+NOT QRY_AMP_Plus_Affix_On("RECKONING")
+AND
+DB_AMP_DiffV3_Tracked(_E, _)
+THEN
+PROC_AMP_Plus_Reck_StripCarriers(_E);
+
+IF
+StatusApplied((CHARACTER)_E, "AMP_PLUS_RECKONING", _, _)
+AND
+NOT QRY_AMP_Plus_Affix_On("RECKONING")
+THEN
+RemoveStatus(_E, "AMP_PLUS_RECKONING", NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+StatusApplied((CHARACTER)_E, "AMP_PLUS_RECKONING_WARN", _, _)
+AND
+NOT QRY_AMP_Plus_Affix_On("RECKONING")
+THEN
+RemoveStatus(_E, "AMP_PLUS_RECKONING_WARN", NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_Reck_StripCarriers((CHARACTER)_E)
+THEN
+RemoveStatus(_E, "AMP_PLUS_RECKONING_INFO_T1", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_E, "AMP_PLUS_RECKONING_INFO_T3", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_E, "AMP_PLUS_RECKONING_INFO_T4", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_E, "AMP_PLUS_RECKONING_BOSSINFO", NULL_00000000-0000-0000-0000-000000000000);
+
+// turning on is a no-op, the next tracked write or combat event applies it
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "RECKONING"
+AND
+_Val == 0
+AND
+DB_AMP_DiffV3_Tracked((CHARACTER)_E, _)
+THEN
+RemoveStatus(_E, "AMP_PLUS_RECKONING", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_E, "AMP_PLUS_RECKONING_WARN", NULL_00000000-0000-0000-0000-000000000000);
+PROC_AMP_Plus_Reck_GaugeClear(_E);
+PROC_AMP_Plus_Reck_StripCarriers(_E);
+PROC_AMP_Plus_Reck_BossForget(_E);
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "RECKONING"
+AND
+_Val == 0
+THEN
+PROC_AMP_Plus_Reck_DrainAllCarriers();
+
+PROC
+PROC_AMP_Plus_Reck_DrainAllCarriers()
+AND
+DB_AMP_Plus_Reck_Carrier((CHARACTER)_E, (GUIDSTRING)_C, (STRING)_St)
+THEN
+NOT DB_AMP_Plus_Reck_Carrier(_E, _C, _St);
+PROC_AMP_Plus_Reck_DrainAllCarriers();
+
+PROC
+PROC_AMP_Plus_Reck_DrainAllCarriers()
+AND
+DB_AMP_Plus_Reck_CarrierN((GUIDSTRING)_C, (INTEGER)_N)
+THEN
+NOT DB_AMP_Plus_Reck_CarrierN(_C, _N);
+PROC_AMP_Plus_Reck_DrainAllCarriers();
+
+PROC
+PROC_AMP_Plus_Affix_Reconcile((STRING)_Id, (INTEGER)_Val)
+AND
+_Id == "RECKONING"
+AND
+_Val == 1
+THEN
+DB_NOOP(1);
+
+EXITSECTION
+ENDEXITSECTION

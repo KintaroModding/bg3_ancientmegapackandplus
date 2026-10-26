@@ -1,0 +1,58 @@
+// Force necklace (Arcanizer)
+
+// fires per instance of force damage, the marker holds a boss to one save
+new entry "AMP_PLUS_GRAVITON_SAVED"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "AMP_PLUS_GRAVITON_SAVED"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator;IgnoreResting;ApplyToDead"
+
+new entry "N_Force_Graviton"
+type "PassiveData"
+using "N_Force_Graviton"
+data "StatsFunctors" "IF(not AMP_Plus_IsAmpBoss()):ApplyStatus(SLOW,100,2);IF(AMP_Plus_IsAmpBoss() and not HasStatus('AMP_PLUS_GRAVITON_SAVED',context.Target) and not SavingThrow(Ability.Constitution,AMP_Plus_PotencyDC())):ApplyStatus(SLOW,100,2);IF(AMP_Plus_IsAmpBoss()):ApplyStatus(AMP_PLUS_GRAVITON_SAVED,100,1);IF(not IsResistantToForceDamage(context.Source) and not IsImmuneToForceDamage(context.Source)):ApplyStatus(SELF,SLOW,100,2)"
+
+new entry "Target_N_Force3"
+type "SpellData"
+data "SpellType" "Shout"
+using "Target_N_Force3"
+data "SpellSuccess" "Force(4);DealDamage(2d4,Force,Magical);IF(not AMP_Plus_IsAmpBoss()):ApplyStatus(SLOW,100,2);IF(AMP_Plus_IsAmpBoss() and not SavingThrow(Ability.Constitution,AMP_Plus_PotencyDC())):ApplyStatus(SLOW,100,2)"
+
+new entry "Target_N_Force4"
+type "SpellData"
+data "SpellType" "Shout"
+using "Target_N_Force4"
+data "SpellSuccess" "Force(4);DealDamage(2d4,Force,Magical);IF(not AMP_Plus_IsAmpBoss()):ApplyStatus(SLOW,100,2);IF(AMP_Plus_IsAmpBoss() and not SavingThrow(Ability.Constitution,AMP_Plus_PotencyDC())):ApplyStatus(SLOW,100,2)"
+
+// Master's Cloak of Astral Ooze
+
+new entry "CLOAK43_1_OOZE_CHECK"
+type "StatusData"
+data "StatusType" "BOOST"
+using "CLOAK43_1_OOZE_CHECK"
+data "TickFunctors" "IF(not AMP_Plus_IsAmpBoss()):ApplyStatus(SLOW,100,1);IF(AMP_Plus_IsAmpBoss() and not SavingThrow(Ability.Constitution,AMP_Plus_PotencyDC())):ApplyStatus(SLOW,100,1)"
+
+new entry "CLOAK43_OOZE_CHECK"
+type "StatusData"
+data "StatusType" "BOOST"
+using "CLOAK43_OOZE_CHECK"
+data "TickFunctors" "IF(not AMP_Plus_IsAmpBoss()):ApplyStatus(SLOW,100,1);IF(AMP_Plus_IsAmpBoss() and not SavingThrow(Ability.Constitution,AMP_Plus_PotencyDC())):ApplyStatus(SLOW,100,1)"
+
+new entry "CLOAK43_3_OOZE_CHECK"
+type "StatusData"
+data "StatusType" "BOOST"
+using "CLOAK43_3_OOZE_CHECK"
+data "TickFunctors" "IF(not AMP_Plus_IsAmpBoss()):ApplyStatus(SLOW,100,2);IF(AMP_Plus_IsAmpBoss() and not SavingThrow(Ability.Constitution,AMP_Plus_PotencyDC())):ApplyStatus(SLOW,100,2)"
+
+new entry "CLOAK43_4_OOZE_CHECK"
+type "StatusData"
+data "StatusType" "BOOST"
+using "CLOAK43_4_OOZE_CHECK"
+data "TickFunctors" "IF(not AMP_Plus_IsAmpBoss()):ApplyStatus(SLOW,100,2);IF(AMP_Plus_IsAmpBoss() and not SavingThrow(Ability.Constitution,AMP_Plus_PotencyDC())):ApplyStatus(SLOW,100,2)"
+
+// Master's Cloak of the Grey Hare
+
+new entry "MAG_Cloak42_toggle"
+type "PassiveData"
+using "MAG_Cloak42_toggle"
+data "StatsFunctors" "SetStatusDuration(SELF,CLOAK42,-1,Add);IF(HasStatus('BLEEDING') and not AMP_Plus_IsAmpBoss()):ApplyStatus(CHEST_TRAUMA,100,2);IF(HasStatus('BLEEDING') and AMP_Plus_IsAmpBoss() and not SavingThrow(Ability.Constitution,AMP_Plus_PotencyDC())):ApplyStatus(CHEST_TRAUMA,100,2);IF(not AMP_Plus_IsAmpBoss()):ApplyStatus(BLEEDING,100,2);IF(AMP_Plus_IsAmpBoss() and not SavingThrow(Ability.Constitution,AMP_Plus_PotencyDC())):ApplyStatus(BLEEDING,100,2)"

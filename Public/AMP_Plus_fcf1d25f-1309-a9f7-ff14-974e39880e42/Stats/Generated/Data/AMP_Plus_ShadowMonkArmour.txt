@@ -1,0 +1,65 @@
+new entry "Target_AMP_Plus_C11_ShadowSlip"
+type "SpellData"
+data "SpellType" "Target"
+using "Target_MAG_Shadow_Shadowstep"
+data "TargetRadius" "6"
+
+new entry "Target_AMP_Plus_C11_ShadowSlip_2"
+type "SpellData"
+data "SpellType" "Target"
+using "Target_AMP_Plus_C11_ShadowSlip"
+data "TargetRadius" "8"
+
+new entry "Target_AMP_Plus_C11_ShadowSlip_3"
+type "SpellData"
+data "SpellType" "Target"
+using "Target_AMP_Plus_C11_ShadowSlip"
+data "TargetRadius" "10"
+
+new entry "Target_AMP_Plus_C11_ShadowSlip_4"
+type "SpellData"
+data "SpellType" "Target"
+using "Target_AMP_Plus_C11_ShadowSlip"
+data "TargetRadius" "12"
+
+new entry "MAG_Armour_C_11"
+type "Armor"
+using "MAG_Armour_C_11"
+data "Boosts" "Skill(Stealth, 1);UnlockSpell(Target_AMP_Plus_C11_ShadowSlip)"
+
+new entry "MAG_Armour_C_11_2"
+type "Armor"
+using "MAG_Armour_C_11_2"
+data "Boosts" "Skill(Stealth, 3);UnlockSpell(Target_AMP_Plus_C11_ShadowSlip_2)"
+
+new entry "MAG_Armour_C_11_3"
+type "Armor"
+using "MAG_Armour_C_11_3"
+data "Boosts" "Skill(Stealth, 5);UnlockSpell(Target_AMP_Plus_C11_ShadowSlip_3)"
+
+new entry "MAG_Armour_C_11_4"
+type "Armor"
+using "MAG_Armour_C_11_4"
+data "Boosts" "Skill(Stealth, 10);UnlockSpell(Target_AMP_Plus_C11_ShadowSlip_4)"
+
+// AMP_Plus_IsShadowStep is the base list plus these steps
+
+new entry "MAG_Armour_C_11_ShadowCrit"
+type "PassiveData"
+using "MAG_Armour_C_11_ShadowCrit"
+data "Conditions" "AMP_Plus_IsShadowStep()"
+
+new entry "MAG_Armour_C_11_ShadowCrit_T2"
+type "PassiveData"
+using "MAG_Armour_C_11_ShadowCrit_T2"
+data "Conditions" "AMP_Plus_IsShadowStep()"
+
+new entry "MAG_Armour_C_11_ShadowCrit_T3"
+type "PassiveData"
+using "MAG_Armour_C_11_ShadowCrit_T3"
+data "Conditions" "AMP_Plus_IsShadowStep()"
+
+new entry "MAG_Armour_C_11_ShadowCrit_T4"
+type "PassiveData"
+using "MAG_Armour_C_11_ShadowCrit_T4"
+data "Conditions" "AMP_Plus_IsShadowStep()"

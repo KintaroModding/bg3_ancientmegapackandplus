@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="9c3c318b-bd51-49e7-af1e-598d3467bfcd" />
+					<attribute id="Name" type="LSString" value="Orb_Diamond" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="item" />
+					<attribute id="ParentTemplateId" type="FixedString" value="b085e96d-e199-467f-b6a8-5d9d44e3cb21" />
+					<attribute id="ReadinessFlags" type="uint32" value="128" />
+					<attribute id="Flag" type="uint8" value="0" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h029c4007g7483g479bga966gbb7c0dc5c480" version="2" />
+					<attribute id="Icon" type="FixedString" value="Orb_Diamond" />
+					<attribute id="Stats" type="FixedString" value="AMP_Orb_Diamond_Ring_T4" />
+					<attribute id="maxStackAmount" type="int32" value="1" />
+					<attribute id="Description" type="TranslatedString" handle="hfaf90deag9388g4390gaf90g18bc86f78f7a" version="2" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="bd349698-3353-46bf-90cd-345d9930d12b" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

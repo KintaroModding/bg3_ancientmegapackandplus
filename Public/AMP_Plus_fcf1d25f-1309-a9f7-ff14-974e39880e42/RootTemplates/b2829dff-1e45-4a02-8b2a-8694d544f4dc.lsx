@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="b2829dff-1e45-4a02-8b2a-8694d544f4dc" />
+					<attribute id="Name" type="LSString" value="AMP_ULTRA_Summon_12_Crab" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="ParentTemplateId" type="FixedString" value="a7f7ff8d-1edf-4ba5-b9f8-09d3d46e8979" />
+					<attribute id="Scale" type="float" value="4" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h82baff6eg9a50g46a5g8ce3gee38181d681e" version="3" />
+					<attribute id="Icon" type="FixedString" value="AMP_Crab" />
+					<attribute id="Stats" type="FixedString" value="AMP_ULTRA_Summon_12_Crab" />
+					<attribute id="ForceLifetimeDeath" type="bool" value="True" />
+					<attribute id="DeathEffect" type="guid" value="4534a5ba-076e-4ec9-a494-548b3e2e06f9" />
+					<attribute id="BloodSurfaceType" type="FixedString" value="SurfaceWyvernPoison" />
+					<attribute id="CharacterVisualResourceID" type="FixedString" value="6bd8335d-0452-e11f-32f3-96f5463e26f3" />
+					<attribute id="VFXScale" type="float" value="4" />
+					<attribute id="Title" type="TranslatedString" handle="h69f649ecg9561g4af5g9a61g280de9100321" version="3" />
+					<attribute id="Faction" type="guid" value="64321d50-d516-b1b2-cfac-2eb773de1ff6" />
+					<attribute id="Archetype" type="FixedString" value="amp_undying_crab" />
+					<attribute id="AnubisConfigName" type="FixedString" value="AMP_BossCharacter" />
+					<attribute id="CanFight" type="bool" value="True" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="37125b8e-6856-47b0-b233-26e285b8f49e" />
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

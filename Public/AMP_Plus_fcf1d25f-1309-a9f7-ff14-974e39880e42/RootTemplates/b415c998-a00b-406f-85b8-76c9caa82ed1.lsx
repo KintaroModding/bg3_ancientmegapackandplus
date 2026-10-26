@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="500" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="b415c998-a00b-406f-85b8-76c9caa82ed1" />
+					<attribute id="Name" type="LSString" value="AMP_ULTRA_Summon_12" />
+					<attribute id="LevelName" type="FixedString" value="" />
+					<attribute id="Type" type="FixedString" value="character" />
+					<attribute id="ParentTemplateId" type="FixedString" value="acd7060a-43bd-4dc9-b050-9d9b2cf7b7df" />
+					<attribute id="DisplayName" type="TranslatedString" handle="h272f30c7g9d92g49f3g8520gdcb3e4db4df8" version="2" />
+					<attribute id="Icon" type="FixedString" value="AMP_Samurai" />
+					<attribute id="Stats" type="FixedString" value="AMP_ULTRA_Summon_12" />
+					<attribute id="AnubisConfigName" type="FixedString" value="AMP_BossCharacter" />
+					<attribute id="Equipment" type="FixedString" value="EQP_AMP_Undying" />
+					<attribute id="BloodType" type="FixedString" value="Black" />
+					<attribute id="ForceLifetimeDeath" type="bool" value="True" />
+					<attribute id="DeathEffect" type="guid" value="4534a5ba-076e-4ec9-a494-548b3e2e06f9" />
+					<attribute id="BloodSurfaceType" type="FixedString" value="SurfaceBlackTentacles" />
+					<attribute id="CanWalkThroughDoors" type="bool" value="True" />
+					<attribute id="CharacterVisualResourceID" type="FixedString" value="96194e2a-d813-8222-6fbb-a7048e3a3ee9" />
+					<attribute id="IsLootable" type="bool" value="True" />
+					<attribute id="IsEquipmentLootable" type="bool" value="True" />
+					<attribute id="Title" type="TranslatedString" handle="h3801086fgb7e1g4ccdg8fa3g3e414615ea32" version="2" />
+					<attribute id="Faction" type="guid" value="64321d50-d516-b1b2-cfac-2eb773de1ff6" />
+					<attribute id="Archetype" type="FixedString" value="amp_undying" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" type="guid" value="e9f1716e-6c55-4823-84f0-dca9b063a62b" />
+								</node>
+							</children>
+						</node>
+						<node id="ItemList">
+							<children>
+								<node id="Item">
+									<attribute id="ScoreModifier" type="float" value="0.5" />
+									<attribute id="StartRound" type="int32" value="0" />
+									<attribute id="FallbackStartRound" type="int32" value="-1" />
+									<attribute id="MinimumImpact" type="int32" value="0" />
+									<attribute id="OnlyCastOnSelf" type="bool" value="False" />
+									<attribute id="AIFlags" type="uint16" value="0" />
+									<attribute id="ItemName" type="LSString" value="CONS_Potion_Healing_A_Supreme" />
+									<attribute id="LevelName" type="LSString" value="" />
+									<attribute id="UUID" type="FixedString" value="" />
+									<attribute id="TemplateID" type="FixedString" value="7d78f227-e8d4-486d-8121-25cf0bee751d" />
+									<attribute id="Amount" type="int32" value="1" />
+									<attribute id="IsTradable" type="uint8" value="2" />
+									<attribute id="Type" type="uint8" value="1" />
+									<attribute id="CanBePickpocketed" type="bool" value="False" />
+									<attribute id="IsDroppedOnDeath" type="bool" value="False" />
+									<attribute id="DisplayName" type="LSString" value="Potion of Supreme Healing" />
+									<children>
+										<node id="SourceConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="70" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+										<node id="TargetConditions">
+											<attribute id="MinimumHealthPercentage" type="int32" value="0" />
+											<attribute id="MaximumHealthPercentage" type="int32" value="100" />
+											<children>
+												<node id="Tags" />
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="LocomotionParams">
+							<attribute id="MovementAcceleration" type="float" value="30" />
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

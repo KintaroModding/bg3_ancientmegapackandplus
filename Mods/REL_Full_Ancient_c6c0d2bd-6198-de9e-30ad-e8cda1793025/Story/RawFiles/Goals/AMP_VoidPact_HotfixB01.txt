@@ -1,0 +1,22 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// catch refusal of the offer on existing saves where the broken core rule still ships state(3) for no
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_VoidPact_Offer", 0)
+THEN
+DB_AMP_VoidPact_Refused(1);
+
+// if the broken core rule applies the curse despite refusal, strip it immediately
+IF
+StatusApplied((CHARACTER)_Player, "AMP_VOIDPACT_HP_CURSE", _, _)
+AND
+DB_AMP_VoidPact_Refused(1)
+THEN
+RemoveStatus(_Player, "AMP_VOIDPACT_HP_CURSE", _Player);
+
+EXITSECTION
+ENDEXITSECTION

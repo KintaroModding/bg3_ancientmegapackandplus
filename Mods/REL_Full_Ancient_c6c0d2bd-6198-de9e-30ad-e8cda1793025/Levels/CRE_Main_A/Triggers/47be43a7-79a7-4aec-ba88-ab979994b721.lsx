@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="8" revision="0" build="10" lslib_meta="v1,bswap_guids" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" type="FixedString" value="47be43a7-79a7-4aec-ba88-ab979994b721" />
+					<attribute id="Name" type="LSString" value="S_CRE_Autosave_MonasteryEntrance" />
+					<attribute id="LevelName" type="FixedString" value="CRE_Main_A" />
+					<attribute id="Type" type="FixedString" value="trigger" />
+					<attribute id="TemplateName" type="FixedString" value="987b8a4d-2208-4bae-a92d-706db0e593e8" />
+					<attribute id="Flag" type="uint8" value="1" />
+					<attribute id="Extents" type="fvec3" value="3.85 5.6000023 3.0999987" />
+					<attribute id="EventSendingMode" type="uint8" value="0" />
+					<children>
+						<node id="Transform">
+							<attribute id="Scale" type="float" value="1" />
+							<attribute id="Position" type="fvec3" value="44.35189 19.346588 11.867336" />
+							<attribute id="RotationQuat" type="fvec4" value="0 0 0 1" />
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers">
+									<children>
+										<node id="Object" key="MapKey">
+											<attribute id="MapKey" type="FixedString" value="CRE_Main_A" />
+											<children>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="0cdf52f2-9453-df63-13c3-cfad8fbdbd2a" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="384cefc7-c793-0ef6-7f8a-7d47946d212e" />
+												</node>
+												<node id="Layer">
+													<attribute id="Object" type="guid" value="af973c2b-315f-940d-29f6-35f83ff358d8" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="FadeChildren" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

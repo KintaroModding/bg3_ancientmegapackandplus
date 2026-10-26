@@ -1,0 +1,53 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// base arms DB_AMP_Eclipse_Active in Hard on every load without reading the switch
+// sweep is timed to land after the base rules, and works both ways
+
+IF
+LevelGameplayStarted(_, _)
+THEN
+TimerLaunch("AMP_Plus_EclipseAffixSweep", 3000);
+
+IF
+SavegameLoaded()
+THEN
+TimerLaunch("AMP_Plus_EclipseAffixSweep", 3000);
+
+// defaults and the base Hard branch land in either order on a mode switch
+
+IF
+DB_AMP_GameMode(_)
+THEN
+TimerLaunch("AMP_Plus_EclipseAffixSweep", 1000);
+
+IF
+TimerFinished("AMP_Plus_EclipseAffixSweep")
+THEN
+PROC_AMP_Plus_EclipseAffixSweep();
+
+PROC
+PROC_AMP_Plus_EclipseAffixSweep()
+AND
+NOT QRY_AMP_Plus_Affix_On("ECLIPSE")
+AND
+DB_AMP_Eclipse_Active(1)
+THEN
+NOT DB_AMP_Eclipse_Active(1);
+PROC_AMP_Eclipse_CleanupAllBosses();
+
+PROC
+PROC_AMP_Plus_EclipseAffixSweep()
+AND
+QRY_AMP_Plus_Affix_On("ECLIPSE")
+AND
+NOT DB_AMP_Eclipse_Active(1)
+THEN
+DB_AMP_Eclipse_Active(1);
+PROC_AMP_Eclipse_ApplyToAllBosses();
+
+EXITSECTION
+ENDEXITSECTION

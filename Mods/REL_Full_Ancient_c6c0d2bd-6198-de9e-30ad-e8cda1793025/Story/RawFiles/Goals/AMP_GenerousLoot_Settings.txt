@@ -1,0 +1,71 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+// master toggle for all generous-loot features (boss rewards, merchant injection, planar-coin drop).
+// default off, flipped in the wizard or settings ring
+DB_AMP_GenerousLoot_Enabled(0);
+KBSECTION
+
+// manual access: settings ring spell + text event
+
+IF
+UsingSpell((CHARACTER)_Caster, "Shout_AMP_GenerousLoot", _, _, _)
+AND
+IsPlayer(_Caster, 1)
+AND
+GetHostCharacter(_Caster)
+THEN
+PROC_AMP_GenerousLoot_ShowToggle(_Caster);
+
+IF
+TextEvent("ampgen")
+AND
+GetHostCharacter((CHARACTER)_Host)
+THEN
+PROC_AMP_GenerousLoot_ShowToggle(_Host);
+
+// show toggle: ask-to-disable when on, ask-to-enable when off
+
+PROC
+PROC_AMP_GenerousLoot_ShowToggle((CHARACTER)_Host)
+AND
+DB_AMP_GenerousLoot_Enabled(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_GenerousLoot_AskDisable");
+
+PROC
+PROC_AMP_GenerousLoot_ShowToggle((CHARACTER)_Host)
+AND
+NOT DB_AMP_GenerousLoot_Enabled(1)
+THEN
+OpenMessageBoxYesNo(_Host, "AMP_GenerousLoot_AskEnable");
+
+// handlers
+// currently on: yes = keep on, no = turn off
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_GenerousLoot_AskDisable", 1)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_GenerousLoot_AskDisable", 0)
+THEN
+NOT DB_AMP_GenerousLoot_Enabled(1);
+DB_AMP_GenerousLoot_Enabled(0);
+PROC_AMP_PlayModeEffect(_Host);
+
+// currently off: yes = turn on, no = keep off
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_GenerousLoot_AskEnable", 1)
+THEN
+NOT DB_AMP_GenerousLoot_Enabled(0);
+DB_AMP_GenerousLoot_Enabled(1);
+PROC_AMP_PlayModeEffect(_Host);
+
+IF
+MessageBoxYesNoClosed((CHARACTER)_Host, "AMP_GenerousLoot_AskEnable", 0)
+THEN
+PROC_AMP_PlayModeEffect(_Host);
+
+EXITSECTION
+ENDEXITSECTION

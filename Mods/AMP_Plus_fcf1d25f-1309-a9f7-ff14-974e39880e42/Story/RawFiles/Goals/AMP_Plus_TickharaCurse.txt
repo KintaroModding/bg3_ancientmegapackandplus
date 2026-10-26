@@ -1,0 +1,173 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// placed per fight, a 50m aura would burn every hostile bystander
+
+// recognised by the carrier status her spawn passive applies
+
+IF
+CombatRoundStarted((GUIDSTRING)_CombatID, _)
+AND
+DB_Is_InCombat(_Tickhara, _CombatID)
+AND
+HasActiveStatus(_Tickhara, "AMP_TICKHARA_SUNAURA", 1)
+AND
+DB_Is_InCombat(_Victim, _CombatID)
+AND
+IsEnemy((CHARACTER)_Tickhara, (CHARACTER)_Victim, 1)
+AND
+IsDead((CHARACTER)_Victim, 0)
+THEN
+PROC_AMP_Plus_TickharaCurse_Apply(_Tickhara, _Victim);
+
+IF
+EnteredCombat((GUIDSTRING)_Victim, (GUIDSTRING)_CombatID)
+AND
+DB_Is_InCombat(_Tickhara, _CombatID)
+AND
+HasActiveStatus(_Tickhara, "AMP_TICKHARA_SUNAURA", 1)
+AND
+IsEnemy((CHARACTER)_Tickhara, (CHARACTER)_Victim, 1)
+AND
+IsDead((CHARACTER)_Victim, 0)
+THEN
+PROC_AMP_Plus_TickharaCurse_Apply(_Tickhara, _Victim);
+
+IF
+EnteredCombat((GUIDSTRING)_Tickhara, (GUIDSTRING)_CombatID)
+AND
+HasActiveStatus(_Tickhara, "AMP_TICKHARA_SUNAURA", 1)
+AND
+DB_Is_InCombat(_Victim, _CombatID)
+AND
+IsEnemy((CHARACTER)_Tickhara, (CHARACTER)_Victim, 1)
+AND
+IsDead((CHARACTER)_Victim, 0)
+THEN
+PROC_AMP_Plus_TickharaCurse_Apply(_Tickhara, _Victim);
+
+PROC
+PROC_AMP_Plus_TickharaCurse_Apply((GUIDSTRING)_Tickhara, (GUIDSTRING)_Victim)
+THEN
+ApplyStatus(_Victim, "AMP_TICKHARA_SUNCURSE", -1.0, 1, _Tickhara);
+ApplyStatus(_Victim, "AMP_TICKHARA_FARCURSE", -1.0, 1, _Tickhara);
+
+PROC
+PROC_AMP_Plus_TickharaCurse_Apply((GUIDSTRING)_Tickhara, (GUIDSTRING)_Victim)
+AND
+NOT DB_AMP_Plus_TickharaCursed(_Victim, _Tickhara)
+THEN
+DB_AMP_Plus_TickharaCursed(_Victim, _Tickhara);
+PROC_AMP_Plus_TickharaCurse_Watch(_Tickhara);
+
+// ending combat or stealthing does not lift the curse, only distance does
+
+PROC
+PROC_AMP_Plus_TickharaCurse_Watch((GUIDSTRING)_Tickhara)
+AND
+NOT DB_AMP_Plus_TickharaWatch(_Tickhara)
+THEN
+DB_AMP_Plus_TickharaWatch(_Tickhara);
+RealtimeObjectTimerLaunch(_Tickhara, "AMP_Plus_TickharaCurseWatch", 3000);
+
+IF
+ObjectTimerFinished((GUIDSTRING)_Tickhara, "AMP_Plus_TickharaCurseWatch")
+AND
+DB_AMP_Plus_TickharaWatch(_Tickhara)
+THEN
+NOT DB_AMP_Plus_TickharaWatch(_Tickhara);
+PROC_AMP_Plus_TickharaCurse_Sweep(_Tickhara);
+
+PROC
+PROC_AMP_Plus_TickharaCurse_Sweep((GUIDSTRING)_Tickhara)
+THEN
+PROC_AMP_Plus_TickharaCurse_DrainFriendly(_Tickhara);
+
+PROC
+PROC_AMP_Plus_TickharaCurse_Sweep((GUIDSTRING)_Tickhara)
+THEN
+PROC_AMP_Plus_TickharaCurse_DrainFar(_Tickhara);
+
+PROC
+PROC_AMP_Plus_TickharaCurse_Sweep((GUIDSTRING)_Tickhara)
+AND
+DB_AMP_Plus_TickharaCursed(_, _Tickhara)
+THEN
+PROC_AMP_Plus_TickharaCurse_Watch(_Tickhara);
+
+IF
+ObjectTimerFinished((GUIDSTRING)_Tickhara, "AMP_Plus_TickharaCurseWatch")
+THEN
+PROC_AMP_Plus_TickharaCurse_DrainDead(_Tickhara);
+
+IF
+Died((CHARACTER)_Tickhara)
+THEN
+PROC_AMP_Plus_TickharaCurse_DrainAll(_Tickhara);
+
+IF
+Died((CHARACTER)_Victim)
+THEN
+PROC_AMP_Plus_TickharaCurse_DrainVictim(_Victim);
+
+PROC
+PROC_AMP_Plus_TickharaCurse_Clear((GUIDSTRING)_Victim, (GUIDSTRING)_Tickhara)
+THEN
+NOT DB_AMP_Plus_TickharaCursed(_Victim, _Tickhara);
+RemoveStatus(_Victim, "AMP_TICKHARA_SUNCURSE", NULL_00000000-0000-0000-0000-000000000000);
+RemoveStatus(_Victim, "AMP_TICKHARA_FARCURSE", NULL_00000000-0000-0000-0000-000000000000);
+
+PROC
+PROC_AMP_Plus_TickharaCurse_DrainFriendly((GUIDSTRING)_Tickhara)
+AND
+DB_AMP_Plus_TickharaCursed((GUIDSTRING)_Victim, _Tickhara)
+AND
+IsEnemy((CHARACTER)_Tickhara, (CHARACTER)_Victim, 0)
+THEN
+PROC_AMP_Plus_TickharaCurse_Clear(_Victim, _Tickhara);
+PROC_AMP_Plus_TickharaCurse_DrainFriendly(_Tickhara);
+
+PROC
+PROC_AMP_Plus_TickharaCurse_DrainFar((GUIDSTRING)_Tickhara)
+AND
+DB_AMP_Plus_TickharaCursed((GUIDSTRING)_Victim, _Tickhara)
+AND
+GetDistanceTo(_Victim, _Tickhara, (REAL)_Dist)
+AND
+_Dist > 50.0
+THEN
+PROC_AMP_Plus_TickharaCurse_Clear(_Victim, _Tickhara);
+PROC_AMP_Plus_TickharaCurse_DrainFar(_Tickhara);
+
+PROC
+PROC_AMP_Plus_TickharaCurse_DrainDead((GUIDSTRING)_Tickhara)
+AND
+DB_AMP_Plus_TickharaCursed((GUIDSTRING)_Victim, _Tickhara)
+AND
+IsDead((CHARACTER)_Tickhara, 1)
+THEN
+PROC_AMP_Plus_TickharaCurse_Clear(_Victim, _Tickhara);
+PROC_AMP_Plus_TickharaCurse_DrainDead(_Tickhara);
+
+PROC
+PROC_AMP_Plus_TickharaCurse_DrainAll((GUIDSTRING)_Tickhara)
+AND
+DB_AMP_Plus_TickharaCursed((GUIDSTRING)_Victim, _Tickhara)
+THEN
+PROC_AMP_Plus_TickharaCurse_Clear(_Victim, _Tickhara);
+PROC_AMP_Plus_TickharaCurse_DrainAll(_Tickhara);
+
+PROC
+PROC_AMP_Plus_TickharaCurse_DrainVictim((GUIDSTRING)_Victim)
+AND
+DB_AMP_Plus_TickharaCursed(_Victim, (GUIDSTRING)_Tickhara)
+THEN
+PROC_AMP_Plus_TickharaCurse_Clear(_Victim, _Tickhara);
+PROC_AMP_Plus_TickharaCurse_DrainVictim(_Victim);
+
+EXITSECTION
+
+ENDEXITSECTION

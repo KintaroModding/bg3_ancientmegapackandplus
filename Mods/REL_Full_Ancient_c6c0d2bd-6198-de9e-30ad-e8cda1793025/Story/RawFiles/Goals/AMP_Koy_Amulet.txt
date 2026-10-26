@@ -1,0 +1,31 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+// koy amulet: steel watcher form tag cleanup
+
+// delayed check on watcher transform exit
+IF
+StatusRemoved(_Character, "AMP_KOY_TRANSFORM", _, _)
+AND
+DB_Players((CHARACTER)_Character)
+THEN
+ObjectTimerLaunch((GUIDSTRING)_Character, "AMP_KoyAmulet_TransformExit_Check", 1000, 0);
+
+// transform truly gone -> clear watcher tag + detach dialogue
+IF
+ObjectTimerFinished(_Character, "AMP_KoyAmulet_TransformExit_Check")
+AND
+DB_Players((CHARACTER)_Character)
+AND
+HasActiveStatus(_Character, "AMP_KOY_TRANSFORM", 0)
+THEN
+ClearTag((GUIDSTRING)_Character, (TAG)STEEL_WATCHER_bc09a589-e076-4b2d-8b86-f8cccbb64449);
+NOT DB_GLO_SteelWatchers((CHARACTER)_Character);
+PROC_RemoveDialog(_Character);
+
+EXITSECTION
+
+ENDEXITSECTION

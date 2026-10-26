@@ -1,0 +1,97 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_AMULET");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_AMULET_1");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_AMULET_2");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_AMULET_3");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_AMULET_4");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_RING");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_DIADEM");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_DIADEM_1");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_DIADEM_2");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_DIADEM_3");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_DIADEM_4");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_ROBE");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_CLOAK");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_GLOVES");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_BOOTS");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_HELMET");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_HELMET_1");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_HELMET_2");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_HELMET_3");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_HELMET_4");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_MEDIUMARMOR");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_MEDIUMARMOR_1");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_MEDIUMARMOR_2");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_MEDIUMARMOR_3");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_MEDIUMARMOR_4");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_HEAVYARMOR");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_HEAVYARMOR_1");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_HEAVYARMOR_2");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_HEAVYARMOR_3");
+DB_AMP_Ilmater_StigmaType("AMP_STIGMA_HEAVYARMOR_4");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_AMULET_1");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_AMULET_2");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_AMULET_3");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_AMULET_4");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_RING");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_DIADEM_1");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_DIADEM_2");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_DIADEM_3");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_DIADEM_4");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_ROBE");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_HELMET_1");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_HELMET_2");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_HELMET_3");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_HELMET_4");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_MEDIUMARMOR_1");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_MEDIUMARMOR_2");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_MEDIUMARMOR_3");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_MEDIUMARMOR_4");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_HEAVYARMOR_1");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_HEAVYARMOR_2");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_HEAVYARMOR_3");
+DB_AMP_Ilmater_SingleTargetStigma("AMP_STIGMA_HEAVYARMOR_4");
+KBSECTION
+
+// record caster -> target -> stigma on any ilmater stigma apply
+IF
+StatusApplied((CHARACTER)_Target, _StigmaType, (CHARACTER)_Caster, _)
+AND
+DB_AMP_Ilmater_StigmaType(_StigmaType)
+THEN
+DB_AMP_Ilmater_StigmaLink(_Caster, _Target, _StigmaType);
+
+// drop the link when the stigma expires or is removed
+IF
+StatusRemoved((CHARACTER)_Target, _StigmaType, _, _)
+AND
+DB_AMP_Ilmater_StigmaType(_StigmaType)
+AND
+DB_AMP_Ilmater_StigmaLink(_Caster, _Target, _StigmaType)
+THEN
+NOT DB_AMP_Ilmater_StigmaLink(_Caster, _Target, _StigmaType);
+
+// single-target stigmas: applying to a new target removes the caster's previous one of the same type
+IF
+StatusApplied((CHARACTER)_NewTarget, _StigmaType, (CHARACTER)_Caster, _)
+AND
+DB_AMP_Ilmater_SingleTargetStigma(_StigmaType)
+AND
+DB_AMP_Ilmater_StigmaLink(_Caster, _OldTarget, _StigmaType)
+AND
+_OldTarget != _NewTarget
+THEN
+RemoveStatus(_OldTarget, _StigmaType, _Caster);
+
+// clear links when the target dies
+IF
+Died((CHARACTER)_Target)
+AND
+DB_AMP_Ilmater_StigmaLink(_Caster, _Target, _StigmaType)
+THEN
+NOT DB_AMP_Ilmater_StigmaLink(_Caster, _Target, _StigmaType);
+
+EXITSECTION
+ENDEXITSECTION

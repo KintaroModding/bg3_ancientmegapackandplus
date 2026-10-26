@@ -1,0 +1,422 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+DB_AMP_Feral_Active(0);
+DB_AMP_Feral_OPStacks(0);
+DB_AMP_Feral_NoIntensity(0);
+DB_AMP_Feral_WeakCombats(0);
+DB_AMP_Feral_Toggles(0);
+
+KBSECTION
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Feral_OPStacks(_)
+THEN
+DB_AMP_Feral_OPStacks(0);
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Feral_OPStacks(_)
+THEN
+DB_AMP_Feral_OPStacks(0);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Feral_NoIntensity(_)
+THEN
+DB_AMP_Feral_NoIntensity(0);
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Feral_NoIntensity(_)
+THEN
+DB_AMP_Feral_NoIntensity(0);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Feral_WeakCombats(_)
+THEN
+DB_AMP_Feral_WeakCombats(0);
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Feral_WeakCombats(_)
+THEN
+DB_AMP_Feral_WeakCombats(0);
+
+IF
+LevelGameplayStarted(_, _)
+AND
+NOT DB_AMP_Feral_Toggles(_)
+THEN
+DB_AMP_Feral_Toggles(0);
+
+IF
+SavegameLoaded()
+AND
+NOT DB_AMP_Feral_Toggles(_)
+THEN
+DB_AMP_Feral_Toggles(0);
+
+// hidden escalation, hard mode only
+
+IF
+LevelGameplayStarted(_LevelName, _IsEditorMode)
+AND
+NOT DB_AMP_Feral_Active(_)
+THEN
+DB_AMP_Feral_Active(0);
+DB_AMP_Feral_OPStacks(0);
+DB_AMP_Feral_NoIntensity(0);
+DB_AMP_Feral_WeakCombats(0);
+DB_AMP_Feral_Toggles(0);
+
+// forced off on every load
+IF
+LevelGameplayStarted(_HibLvl, _HibEditor)
+AND
+DB_AMP_Feral_Active((INTEGER)_HibA)
+THEN
+DB_AMP_Feral_Disabled(1);
+NOT DB_AMP_Feral_Active(_HibA);
+DB_AMP_Feral_Active(0);
+PROC_AMP_Plus_Feral_Regrade();
+
+// the leave-hard rule misses a plain reload, no mode assert
+IF
+LevelGameplayStarted(_LvlName, _EditorMode)
+AND
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+_M != "IMPOSSIBLE"
+AND
+DB_AMP_Feral_Active(1)
+AND
+DB_AMP_Feral_WeakCombats((INTEGER)_W)
+THEN
+NOT DB_AMP_Feral_Active(1);
+DB_AMP_Feral_Active(0);
+NOT DB_AMP_Feral_WeakCombats(_W);
+DB_AMP_Feral_WeakCombats(0);
+PROC_AMP_Plus_Feral_Regrade();
+
+IF
+TextEvent("amp_feral_off")
+AND
+DB_AMP_Feral_Active((INTEGER)_A)
+AND
+DB_AMP_Feral_OPStacks((INTEGER)_S)
+AND
+DB_AMP_Feral_NoIntensity((INTEGER)_NI)
+AND
+DB_AMP_Feral_WeakCombats((INTEGER)_W)
+THEN
+DB_AMP_Feral_Disabled(1);
+NOT DB_AMP_Feral_Locked(1);
+NOT DB_AMP_Feral_Active(_A);
+DB_AMP_Feral_Active(0);
+NOT DB_AMP_Feral_OPStacks(_S);
+DB_AMP_Feral_OPStacks(0);
+NOT DB_AMP_Feral_NoIntensity(_NI);
+DB_AMP_Feral_NoIntensity(0);
+NOT DB_AMP_Feral_WeakCombats(_W);
+DB_AMP_Feral_WeakCombats(0);
+PROC_AMP_Plus_Feral_Regrade();
+
+IF
+CombatStarted((GUIDSTRING)_C)
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+THEN
+DB_AMP_Feral_Kills(_C, 0);
+DB_AMP_Feral_Round(_C, 1);
+
+IF
+EnteredCombat((CHARACTER)_E, (GUIDSTRING)_C)
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+AND
+NOT DB_Players(_E)
+THEN
+DB_AMP_Feral_Member(_E, _C);
+
+IF
+CombatRoundStarted((GUIDSTRING)_C, (INTEGER)_R)
+AND
+DB_AMP_Feral_Round(_C, (INTEGER)_Old)
+THEN
+NOT DB_AMP_Feral_Round(_C, _Old);
+DB_AMP_Feral_Round(_C, _R);
+
+IF
+Died((CHARACTER)_E)
+AND
+DB_AMP_Feral_Member(_E, (GUIDSTRING)_C)
+AND
+DB_AMP_Feral_Kills(_C, (INTEGER)_K)
+AND
+IntegerSum(_K, 1, (INTEGER)_K2)
+THEN
+NOT DB_AMP_Feral_Kills(_C, _K);
+DB_AMP_Feral_Kills(_C, _K2);
+
+IF
+CombatEnded((GUIDSTRING)_C)
+AND
+DB_AMP_Feral_Active(0)
+AND
+DB_AMP_Feral_Kills(_C, (INTEGER)_K)
+AND
+DB_AMP_Feral_Round(_C, (INTEGER)_R)
+AND
+_K > 5
+AND
+_R < 3
+AND
+DB_AMP_Feral_OPStacks((INTEGER)_S)
+AND
+IntegerSum(_S, 1, (INTEGER)_S2)
+AND
+DB_AMP_Feral_NoIntensity((INTEGER)_NI)
+THEN
+NOT DB_AMP_Feral_Kills(_C, _K);
+NOT DB_AMP_Feral_Round(_C, _R);
+NOT DB_AMP_Feral_OPStacks(_S);
+DB_AMP_Feral_OPStacks(_S2);
+NOT DB_AMP_Feral_NoIntensity(_NI);
+DB_AMP_Feral_NoIntensity(0);
+
+IF
+CombatEnded((GUIDSTRING)_C)
+AND
+DB_AMP_Feral_Active(0)
+AND
+DB_AMP_Feral_Kills(_C, (INTEGER)_K)
+AND
+DB_AMP_Feral_Round(_C, (INTEGER)_R)
+AND
+_R >= 3
+AND
+DB_AMP_Feral_NoIntensity((INTEGER)_NI)
+AND
+IntegerSum(_NI, 1, (INTEGER)_NI2)
+THEN
+NOT DB_AMP_Feral_Kills(_C, _K);
+NOT DB_AMP_Feral_Round(_C, _R);
+NOT DB_AMP_Feral_NoIntensity(_NI);
+DB_AMP_Feral_NoIntensity(_NI2);
+
+IF
+CombatEnded((GUIDSTRING)_C)
+AND
+DB_AMP_Feral_Active(0)
+AND
+DB_AMP_Feral_Kills(_C, (INTEGER)_K)
+AND
+DB_AMP_Feral_Round(_C, (INTEGER)_R)
+AND
+_R < 3
+AND
+_K <= 5
+AND
+DB_AMP_Feral_NoIntensity((INTEGER)_NI)
+AND
+IntegerSum(_NI, 1, (INTEGER)_NI2)
+THEN
+NOT DB_AMP_Feral_Kills(_C, _K);
+NOT DB_AMP_Feral_Round(_C, _R);
+NOT DB_AMP_Feral_NoIntensity(_NI);
+DB_AMP_Feral_NoIntensity(_NI2);
+
+IF
+CombatEnded((GUIDSTRING)_C)
+AND
+DB_AMP_Feral_Active(1)
+AND
+DB_AMP_Feral_Kills(_C, (INTEGER)_K)
+AND
+DB_AMP_Feral_Round(_C, (INTEGER)_R)
+AND
+IntegerProduct(_R, 2, (INTEGER)_Need)
+AND
+_K < _Need
+AND
+DB_AMP_Feral_WeakCombats((INTEGER)_W)
+AND
+IntegerSum(_W, 1, (INTEGER)_W2)
+THEN
+NOT DB_AMP_Feral_Kills(_C, _K);
+NOT DB_AMP_Feral_Round(_C, _R);
+NOT DB_AMP_Feral_WeakCombats(_W);
+DB_AMP_Feral_WeakCombats(_W2);
+
+// weak marks need not be consecutive
+IF
+CombatEnded((GUIDSTRING)_C)
+AND
+DB_AMP_Feral_Active(1)
+AND
+DB_AMP_Feral_Kills(_C, (INTEGER)_K)
+AND
+DB_AMP_Feral_Round(_C, (INTEGER)_R)
+AND
+IntegerProduct(_R, 2, (INTEGER)_Need)
+AND
+_K >= _Need
+THEN
+NOT DB_AMP_Feral_Kills(_C, _K);
+NOT DB_AMP_Feral_Round(_C, _R);
+
+IF
+CombatEnded((GUIDSTRING)_C)
+THEN
+PROC_AMP_Plus_Feral_DrainMembers(_C);
+
+PROC
+PROC_AMP_Plus_Feral_DrainMembers((GUIDSTRING)_C)
+AND
+DB_AMP_Feral_Member((CHARACTER)_E, _C)
+THEN
+NOT DB_AMP_Feral_Member(_E, _C);
+PROC_AMP_Plus_Feral_DrainMembers(_C);
+
+IF
+DB_AMP_Feral_NoIntensity((INTEGER)_NI)
+AND
+_NI >= 2
+AND
+DB_AMP_Feral_Active(0)
+AND
+DB_AMP_Feral_OPStacks((INTEGER)_S)
+THEN
+NOT DB_AMP_Feral_NoIntensity(_NI);
+DB_AMP_Feral_NoIntensity(0);
+NOT DB_AMP_Feral_OPStacks(_S);
+DB_AMP_Feral_OPStacks(0);
+
+IF
+DB_AMP_Feral_OPStacks((INTEGER)_S)
+AND
+_S >= 5
+AND
+DB_AMP_Feral_Active(0)
+AND
+NOT DB_AMP_Feral_Locked(1)
+AND
+NOT DB_AMP_Feral_Disabled(1)
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+AND
+DB_AMP_Feral_NoIntensity((INTEGER)_NI)
+AND
+DB_AMP_Feral_Toggles((INTEGER)_T)
+AND
+IntegerSum(_T, 1, (INTEGER)_T2)
+THEN
+NOT DB_AMP_Feral_Active(0);
+DB_AMP_Feral_Active(1);
+NOT DB_AMP_Feral_OPStacks(_S);
+DB_AMP_Feral_OPStacks(0);
+NOT DB_AMP_Feral_NoIntensity(_NI);
+DB_AMP_Feral_NoIntensity(0);
+NOT DB_AMP_Feral_Toggles(_T);
+DB_AMP_Feral_Toggles(_T2);
+
+IF
+DB_AMP_Feral_WeakCombats((INTEGER)_W)
+AND
+_W >= 5
+AND
+DB_AMP_Feral_Active(1)
+AND
+NOT DB_AMP_Feral_Locked(1)
+THEN
+NOT DB_AMP_Feral_Active(1);
+DB_AMP_Feral_Active(0);
+NOT DB_AMP_Feral_WeakCombats(_W);
+DB_AMP_Feral_WeakCombats(0);
+PROC_AMP_Plus_Feral_Regrade();
+
+IF
+DB_AMP_Feral_Toggles((INTEGER)_T)
+AND
+_T > 10
+AND
+NOT DB_AMP_Feral_Locked(1)
+THEN
+DB_AMP_Feral_Locked(1);
+
+IF
+DB_AMP_Feral_Locked(1)
+AND
+DB_AMP_Feral_Active(0)
+AND
+NOT DB_AMP_Feral_Disabled(1)
+AND
+DB_AMP_Difficulty_Mode("IMPOSSIBLE")
+THEN
+NOT DB_AMP_Feral_Active(0);
+DB_AMP_Feral_Active(1);
+
+IF
+DB_AMP_Difficulty_Mode((STRING)_M)
+AND
+_M != "IMPOSSIBLE"
+AND
+DB_AMP_Feral_Active(1)
+AND
+DB_AMP_Feral_WeakCombats((INTEGER)_W)
+THEN
+NOT DB_AMP_Feral_Active(1);
+DB_AMP_Feral_Active(0);
+NOT DB_AMP_Feral_WeakCombats(_W);
+DB_AMP_Feral_WeakCombats(0);
+PROC_AMP_Plus_Feral_Regrade();
+
+// resolver cannot revert a bump, so off means strip and recompute
+PROC
+PROC_AMP_Plus_Feral_Regrade()
+THEN
+PROC_AMP_Plus_Feral_ClearBumpMarkers();
+PROC_AMP_UpdateAvgPartyLevel();
+PROC_AMP_UpdateCurrentTier();
+PROC_AMP_DiffV3_RetierAll_Collect();
+PROC_AMP_DiffV3_RetierAll_Strip();
+PROC_AMP_DiffV3_RetierAll_Reapply();
+
+PROC
+PROC_AMP_Plus_Feral_ClearBumpMarkers()
+THEN
+PROC_AMP_Plus_Feral_DrainTierBump();
+
+PROC
+PROC_AMP_Plus_Feral_ClearBumpMarkers()
+THEN
+PROC_AMP_Plus_Feral_DrainAvariceBumped();
+
+// single pass, the opener re-adds retracted markers
+PROC
+PROC_AMP_Plus_Feral_DrainTierBump()
+AND
+DB_AMP_Plus_TierBump((CHARACTER)_C, (STRING)_B, (STRING)_Ap)
+THEN
+NOT DB_AMP_Plus_TierBump(_C, _B, _Ap);
+
+PROC
+PROC_AMP_Plus_Feral_DrainAvariceBumped()
+AND
+DB_AMP_Plus_AvariceBumped((CHARACTER)_C, (STRING)_O, (STRING)_Bp)
+THEN
+NOT DB_AMP_Plus_AvariceBumped(_C, _O, _Bp);
+PROC_AMP_Plus_Feral_DrainAvariceBumped();
+
+EXITSECTION
+ENDEXITSECTION

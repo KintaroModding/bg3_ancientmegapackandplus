@@ -1,0 +1,44 @@
+name: Mirror mod.io releases
+
+# Every hour: merges the author's new commits into main, and puts the author's newest mod.io
+# packages into a GitHub release when one of the two mods has a new version (see FORK.md).
+on:
+  schedule:
+    - cron: "23 * * * *"
+  workflow_dispatch:
+
+concurrency: mirror
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Merge the author's new commits
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/$GITHUB_REPOSITORY/merge-upstream" -f branch=main --jq '"\(.merge_type): \(.message)"'
+
+  mirror:
+    needs: sync
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          sparse-checkout: .github
+      - name: Release the newest mod.io packages
+        env:
+          MODIO_API_KEY: ${{ secrets.MODIO_API_KEY }}
+          GH_TOKEN: ${{ github.token }}
+        run: bash .github/scripts/mirror-modio.sh
+      # GitHub turns off a schedule after 60 days without commits, and the author may not push for
+      # that long while the mod.io updates go on. Enabling the workflow again keeps it running.
+      - name: Keep the schedule on
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X PUT "repos/$GITHUB_REPOSITORY/actions/workflows/mirror-modio.yml/enable"
